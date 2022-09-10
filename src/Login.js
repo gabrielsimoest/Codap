@@ -75,7 +75,7 @@ export default function Login({ navigation }) {
                         (tx, results) => {
                             var len = results.rows.length;
                             if (len > 0) {
-                                navigation.navigate('Home');
+                                navigation.navigate('Home', { screen: 'Aulas'});
                             } else {
                                 Alert.alert('Alerta!', 'Senha ou Email incorretos')
                             }
