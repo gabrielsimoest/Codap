@@ -7,7 +7,6 @@ import {
     Keyboard,
     Image
 } from 'react-native';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default function Home({ navigation }) {
@@ -71,10 +70,13 @@ const styles = StyleSheet.create({
     },
     logoHeader: {
         backgroundColor: "rgba(5, 5, 5, 0.95)",
-        height: '15%',
+        height: '16%',
         width: '45%',
         marginTop: -20,
         borderRadius: 100,
+        borderWidth: 2,
+        borderColor: "#939393",
         alignItems: 'center',
+
    } 
 })

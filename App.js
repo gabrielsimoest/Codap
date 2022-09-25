@@ -40,7 +40,7 @@ function HomeTabs() {
         component={Perfil}
         options={{
           tabBarLabel: 'Perfil',
-          tabBarIcon: ({ color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account" color={color} size={35} />
           ),
         }}
@@ -50,7 +50,7 @@ function HomeTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Aulas',
-          tabBarIcon: ({ color}) => (
+          tabBarIcon: ({ color }) => (
             <Ionicons name="book-sharp" color={color} size={30} />
           ),
         }}
@@ -60,7 +60,7 @@ function HomeTabs() {
         component={Config}
         options={{
           tabBarLabel: 'Configuração',
-          tabBarIcon: ({ color}) => (
+          tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="cog" color={color} size={30} />
           ),
         }}
