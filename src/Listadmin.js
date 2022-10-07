@@ -5,7 +5,7 @@ import {
     StyleSheet,
     TextInput
 } from 'react-native';
-import CustomButton from './CustomButton';
+import CustomButton from './Helpers/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 
 const db = SQLite.openDatabase(
@@ -36,12 +36,14 @@ export default function Home({ navigation }) {
                     (tx, results) => {
                         var len = results.rows.length;
                         if (len > 0) {
-                            var userName = results.rows.item(0).Name;
-                            var userSenha = results.rows.item(0).Senha;
-                            var userEmail = results.rows.item(0).Email;
-                            setName(userName);
-                            setSenha(userSenha);
-                            setEmail(userEmail);
+                            for(i=0;i<results.rows.length;i++){
+                                var userName = results.rows.item(i).Name;
+                                var userSenha = results.rows.item(i).Senha;
+                                var userEmail = results.rows.item(i).Email;
+                                setName(userName);
+                                setSenha(userSenha);
+                                setEmail(userEmail);
+                            }
                         }
                     }
                 )

@@ -49,7 +49,7 @@ export default function Perfil() {
     }
 
     return (
-        <ImageBackground source={require('../assets/background.jpg')} resizeMode="cover" style={styles.body}>
+        <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.body}>
             <View style={styles.header}>
                 <View style={styles.placeholder} />
                 <View style={styles.headerLabels}>
