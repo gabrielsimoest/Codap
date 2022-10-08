@@ -1,38 +1,33 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
 import Icons from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Fontisto';
+import Icon from 'react-native-vector-icons/Octicons';
 import { white } from 'react-native-paper/lib/typescript/styles/colors';
 
-const AppHeader = ({
+const HeaderShop = ({
   style,
 }) => {
-  const LeftView = () => (
-    <View style={styles.view}>
-      <Icons name="keyboard-arrow-down" size={30} color="white" />
-    </View>
-  );
   const TitleView = () => (
     <View style={styles.titleView}>
-      <Title style={{ color: 'white',fontFamily: 'Roboto'  }}>CSS</Title>
+      <Title style={{ color: 'white',fontFamily: 'Roboto' }}>      Market</Title>
     </View>
   );
   const RightView = () => (
     <View style={[styles.view, styles.rightView]}>
-      <Icon name="css3" size={25} color="#637aff" />
+      <Text style={{ color: 'white',fontFamily: 'Roboto', fontSize:19 }}>20  </Text>
+      <Icon name="dependabot" size={25} color="#fff" />
     </View>
   );
   return (
     <Surface style={[styles.header, style, { backgroundColor: '#141f29', }]}>
-      <LeftView />
       <TitleView />
       <RightView />
     </Surface>
   );
 };
 
-export default AppHeader;
+export default HeaderShop;
 
 const styles = StyleSheet.create({
   header: {
@@ -62,7 +57,6 @@ const styles = StyleSheet.create({
   },
   titleView: {
     color: 'white',
-    flex: 1,
   },
   rightView: {
     justifyContent: 'flex-end',

@@ -9,11 +9,11 @@ import * as Animatable from 'react-native-animatable';
 
 import Login from './Login/Login';
 import Register from './Login/Register';
-import Home from './Aulas/Home';
+import Class from './Aulas/Class';
 //import List from './src/Listadmin';
 import Config from './Config/Config';
 import Perfil from './Users/Perfil';
-import Header from './Shared/header';
+import Store from './Market/Store';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,23 +26,23 @@ const TabArr = [
     type: Icons.Ionicons,
     activeIcon: 'grid',
     inActiveIcon: 'grid-outline',
-    component: Home,
+    component: Class,
   },
-  {
-    route: 'Like',
-    label: 'Like',
+  /*{
+    route: 'Chat',
+    label: 'Chat',
     type: Icons.MaterialCommunityIcons,
     activeIcon: 'chat',
     inActiveIcon: 'chat-outline',
     component: Config,
-  },
+  },*/
   {
-    route: 'Search',
-    label: 'Search',
+    route: 'Store',
+    label: 'Store',
     type: Icons.MaterialCommunityIcons,
     activeIcon: 'store-settings',
     inActiveIcon: 'store-settings-outline',
-    component: Header,
+    component: Store,
   },
   {
     route: 'Account',
@@ -101,7 +101,7 @@ function HomeTabs() {
           right: 16,
           left: 16,
           borderRadius: 16,
-          backgroundColor: '#141f20'
+          backgroundColor: '#141f29'
         },
       }}>
       {TabArr.map((item, index) => {
@@ -215,7 +215,7 @@ function App() {
       >
         <Stack.Screen
           name="Login"
-          component={Login}
+          component={HomeTabs}
         />
         <Stack.Screen
           name="Register"
@@ -223,7 +223,7 @@ function App() {
         />
         <Stack.Screen
           name="Home"
-          component={HomeTabs}
+          component={Login}
         />
 
       </Stack.Navigator>
