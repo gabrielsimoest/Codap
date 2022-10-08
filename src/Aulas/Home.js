@@ -8,21 +8,20 @@ import {
     Image
 } from 'react-native';
 
+import AppHeader from '../components/MyHeader';
+
 export default function Home({ navigation }) {
 
     return (
         <View styles={styles.body}>
-            <Text>TESTE</Text>
+            <AppHeader/>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     body: {
-        backgroundColor:'#353437',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#141f20'
     },
     
 })
