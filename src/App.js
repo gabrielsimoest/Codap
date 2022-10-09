@@ -14,8 +14,6 @@ import Register from './Login/Register';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
-import Html from './Aulas/Html';
-import Javascript from './Aulas/Javascript';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,8 +21,8 @@ const Tab = createBottomTabNavigator();
 
 const TabArr = [
   {
-    route: 'Home',
-    label: 'Home',
+    route: 'Class',
+    label: 'Class',
     type: Icons.Ionicons,
     activeIcon: 'grid',
     inActiveIcon: 'grid-outline',
@@ -154,14 +152,6 @@ function App() {
         <Stack.Screen
           name="Css"
           component={Class}
-        />
-        <Stack.Screen
-          name="Html"
-          component={Html}
-        />
-        <Stack.Screen
-          name="Javascript"
-          component={Javascript}
         />
         
 

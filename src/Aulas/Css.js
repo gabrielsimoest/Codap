@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, ScrollView, Image, StyleSheet } from 'react-native';
 
-export default function Javascript() {
+export default function Css() {
     return (
         <ScrollView style={styles.scroller} >
             <TouchableOpacity
@@ -10,7 +10,7 @@ export default function Javascript() {
                 onPress={() => { }}
             >
                 <Text style={styles.title}>Aula 1</Text>
-                <Text style={styles.text}>Conceitos basicos de JS</Text>
+                <Text style={styles.text}>Conceitos basicos de CSS</Text>
                 <Image style={styles.tinyLogo} source={require('../../assets/Astronauta.png')} />
             </TouchableOpacity>
 
