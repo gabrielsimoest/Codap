@@ -10,7 +10,6 @@ import {
     Alert,
     Keyboard
 } from 'react-native';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import CustomButton from '../Helpers/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';

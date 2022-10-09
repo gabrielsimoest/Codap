@@ -1,23 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Modal, Text, SafeAreaView, TouchableWithoutFeedback, ScrollView, Image } from 'react-native';
 import AppHeader from '../components/MyHeader';
 import Icon from 'react-native-vector-icons/Fontisto';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-
-
-
-
-
-
-export default function Class({ navigation }) {
+export default function Javascript({ navigation }) {
     const [visibleModal, setVisibleModal] = useState(false)
-
-    const onPressHandler = () => {
-        navigation.navigate('Html')
-    }
 
     return (
         <View style={styles.container}>
@@ -39,7 +27,7 @@ export default function Class({ navigation }) {
                         <View style={styles.contant}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={onPressHandler}
+                                onPress={() => { }}
                             >
                                 <Icon name="html5" size={30} color="#637aff">
                                     <Text style={styles.actionText}>    HTML</Text>

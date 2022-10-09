@@ -1,23 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Modal, Text, SafeAreaView, TouchableWithoutFeedback, ScrollView, Image } from 'react-native';
 import AppHeader from '../components/MyHeader';
 import Icon from 'react-native-vector-icons/Fontisto';
 import Icons from 'react-native-vector-icons/Ionicons';
 
-
-
-
-
-
-
-export default function Class({ navigation }) {
+export default function Html({ navigation }) {
     const [visibleModal, setVisibleModal] = useState(false)
-
-    const onPressHandler = () => {
-        navigation.navigate('Html')
-    }
 
     return (
         <View style={styles.container}>
@@ -39,7 +27,7 @@ export default function Class({ navigation }) {
                         <View style={styles.contant}>
                             <TouchableOpacity
                                 style={styles.button}
-                                onPress={onPressHandler}
+                                onPress={() => { }}
                             >
                                 <Icon name="html5" size={30} color="#637aff">
                                     <Text style={styles.actionText}>    HTML</Text>
@@ -65,7 +53,7 @@ export default function Class({ navigation }) {
                         onPress={() => { }}
                     >
                         <Text style={styles.title}>Aula 1</Text>
-                        <Text style={styles.text}>Conceitos basicos</Text>
+                        <Text style={styles.text}>Conceitos basicos HTML</Text>
                         <Image style={styles.tinyLogo} source={require('../../assets/Astronauta.png')} />
                     </TouchableOpacity>
 

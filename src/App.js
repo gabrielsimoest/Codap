@@ -9,11 +9,13 @@ import * as Animatable from 'react-native-animatable';
 
 import Login from './Login/Login';
 import Register from './Login/Register';
-import Class from './Aulas/Class';
 //import List from './src/Listadmin';
-import Config from './Config/Config';
+//import Config from './Config/Config';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
+import Class from './Aulas/Class';
+import Html from './Aulas/Html';
+import Javascript from './Aulas/Javascript';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -129,82 +131,6 @@ const styles = StyleSheet.create({
   },
 });
 
-
-
-
-
-
-
-
-
-
-/*
-function HomeTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#7977FD',
-        tabBarInactiveTintColor: 'white',
-        tabBarActiveBackgroundColor: '#141f25',
-        tabBarInactiveBackgroundColor: '#141f25',
-        tabBarHideOnKeyboard: true,
-        tabBarLabelStyle: {
-          fontSize: 13,
-          display: 'none',
-        },
-        tabBarStyle: { 
-          position: 'absolute',
-          overflow: 'hidden',
-          bottom: 70,
-          left: 30,
-          right: 30,
-          elevation: 0,
-          height: 50,
-          borderRadius: 15,
-        },
-      }}
-      initialRouteName="Aulas"
-      backBehavior='initialRoute'
-    >
-      <Tab.Screen
-        name="Perfil"
-        component={Perfil}
-        options={{
-          header: () => null,
-          tabBarLabel: 'Perfil',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons style={{marginTop: 4}} name="account-circle-outline" color={color} size={30} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Aulas"
-        component={Home}
-        options={{
-          headerTitle: () => <Header/>,
-          tabBarLabel: 'Aulas',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="code-tags" color={color} size={50} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="AnimTab1"
-        component={AnimTab1}
-        options={{
-          header: () => null,
-          tabBarLabel: 'Configuração',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons style={{marginTop: 4}} name="cog" color={color} size={30} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  )
-}
-
-*/
-
 function App() {
   return (
     <NavigationContainer>
@@ -214,17 +140,30 @@ function App() {
         }}
       >
         <Stack.Screen
-          name="Login"
+          name="Home"
           component={HomeTabs}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
         />
         <Stack.Screen
           name="Register"
           component={Register}
         />
         <Stack.Screen
-          name="Home"
-          component={Login}
+          name="Css"
+          component={Class}
         />
+        <Stack.Screen
+          name="Html"
+          component={Html}
+        />
+        <Stack.Screen
+          name="Javascript"
+          component={Javascript}
+        />
+        
 
       </Stack.Navigator>
     </NavigationContainer>
