@@ -38,7 +38,7 @@ export function ScreenJourney(props) {
 export default function Class({ navigation }) {
     const [visibleModal, setVisibleModal] = useState(false)
     const [journey, setJourney] = useState("Css")
-    const [icon, setIcon] = useState("css3")
+    const [icon, setIcon] = useState("logo-css3")
 
     const onPressCss = () => {
         setJourney("Css")
