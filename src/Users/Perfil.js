@@ -3,10 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    ImageBackground,
-    TouchableOpacity
+    ScrollView,
 } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
+import DefaultHeader from '../components/DefaultHeader';
+import OpButton from '../Helpers/OpButton';
+import Icon, { Icons } from '../components/Icons';
 
 const db = SQLite.openDatabase(
     {
@@ -35,8 +37,8 @@ export default function Perfil() {
                     (tx, results) => {
                         var len = results.rows.length;
                         if (len > 0) {
-                            var userName = results.rows.item(1).Name;
-                            var userEmail = results.rows.item(1).Email;
+                            var userName = results.rows.item(0).Name;
+                            var userEmail = results.rows.item(0).Email;
                             setName(userName);
                             setEmail(userEmail);
                         }
@@ -49,121 +51,96 @@ export default function Perfil() {
     }
 
     return (
-        <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.body}>
-            <View style={styles.header}>
-                <View style={styles.placeholder} />
-                <View style={styles.headerLabels}>
-                    <Text style={styles.textName}>Nome: </Text>
-                    <Text style={styles.name}>{name} </Text>
-                    <Text style={styles.textEmail}>Email: </Text>
-                    <Text style={styles.email}>{email} </Text>
+        <View style={styles.container}>
+            <DefaultHeader title='      Perfil' />
+            <View style={styles.direction}>
+
+                <Icon type={Icons.FontAwesome}
+                    name='user-circle'
+                    color={"#233648"}
+                    size={150}
+                    style={styles.account} />
+                <View style={styles.components}>
+                    <Text style={styles.text}>Nome: </Text>
+                    <Text style={styles.text2}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={3}
+                    >{name}</Text>
+                    <Text style={styles.text}>Email: </Text>
+                    <Text style={styles.text2}
+                        adjustsFontSizeToFit={true}
+                        numberOfLines={3}
+                    >{email}</Text>
                 </View>
             </View>
-            <View style={styles.buttonOptions}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Alterar senha  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Editar perfil  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Conquistas  </Text>
-                </TouchableOpacity>
-            </View>
-        </ImageBackground>
+            <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
+                <OpButton theme='primaryButton' title='Editar perfil' onPressFunction={() => console.log("perfil")} />
+                <OpButton theme='primaryButton' title='Alterar senha' onPressFunction={() => console.log("senha")} />
+                <OpButton theme='primaryButton' title='Alterar foto' onPressFunction={() => console.log("foto")} />
+                <OpButton theme='primaryButton' title='Conquistas' onPressFunction={() => console.log("conquista")} />
+                <OpButton theme='primaryButton' title='Sair' onPressFunction={() => console.log("sair")}
+                    iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={"white"} iconSize={25} />
+            </ScrollView>
+        </View>
+
     )
 }
 
 const styles = StyleSheet.create({
 
-    body: {
-        flex: 1,
-        flexDirection: "column"
+    container: {
+        backgroundColor: '#141f29',
+        height: "100%",
     },
-    header: {
-        backgroundColor: "#343434",
-        borderBottomStartRadius: 20,
-        borderBottomEndRadius: 20,
+    scroller: {
+        width: '90%',
+        marginLeft: '5%',
+        marginBottom: '18%',
+    },
+    direction: {
         flexDirection: "row",
-        flex: 1,
-        width: "96%",
-        maxHeight: "35%",
-        left: "1%",
-    },
-    headerLabels: {
-        flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-start",
-        alignContent: "center"
-    },
-    textEmail: {
-        color: "#9D9D9D",
-        fontSize: 19,
-        flex: 1,
-        left: "10%",
-        top: "5%",
-    },
-    email: {
-        color: "#ADADAD",
-        flex: 1,
-        fontSize: 20,
-        left: "10%",
-        bottom: "5%",
-    },
-    textName: {
-        color: "#9D9D9D",
-        fontSize: 20,
-        flex: 1,
-        top: "15%",
-        left: "10%",
-    },
-    name: {
-        color: "#ADADAD",
-        flex: 1,
-        fontSize: 19,
-        left: "10%",
-        top: "5%",
-    },
-    buttonOptions: {
-        backgroundColor: "#343434",
-        borderTopStartRadius: 20,
-        borderTopEndRadius: 20,
-        flex: 2,
-        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-evenly",
-        width: "96%",
-        maxHeight: "55%",
-        left: "2%",
-        top: "1%",
-        bottom: "10%"
+        height: "30%",
+        marginBottom: 15,
+        backgroundColor: '#141f29',
+        borderTopWidth: 2,
+        borderTopColor: 'rgba(0,0,0, 0.2)',
+        shadowColor: "#637aff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 7.00,
+        elevation: 7,
     },
-    button: {
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "space-evenly",
-        flex: -1,
-        borderColor: "#9D9D9D",
-        borderWidth: 1,
-        borderRadius: 10,
-        width: "90%",
-        height: "25%",
-
-    },
-    buttonText: {
-        flex: -1,
-        color: "#ADADAD",
-        fontSize: 22,
-    },
-    placeholder: {
-        backgroundColor: "gray",
-        flex: -1,
-        width: 150,
-        height: 150,
-        borderRadius: 75,
-        top: "7%",
+    account: {
         left: "5%",
-
-    }
+        borderRadius: 75,
+        backgroundColor: "#33526E",
+        shadowColor: "#637aff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 7.00,
+        elevation: 20,
+    },
+    components: {
+        flexDirection: "column",
+        width: "48%",
+        marginLeft: '10%',
+    },
+    text: {
+        color: "#E5E5E5",
+        fontSize: 20,
+        marginTop: 20,
+    },
+    text2: {
+        color: "#5469D3",
+        fontSize: 19,
+        marginBottom: 20,
+    },
 })
 
