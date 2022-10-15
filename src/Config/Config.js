@@ -1,27 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    SafeAreaView,
+    View,
     Text,
     StyleSheet,
+    ScrollView,
 } from 'react-native';
+import DefaultHeader from '../components/DefaultHeader';
+import OpButton from '../Helpers/OpButton';
+import Icon, { Icons } from '../components/Icons';
 
 
-export default function Config () {
+export default function Config({navigation}) {
+
     return (
-        <SafeAreaView>
-            <Text styles={styles.body}>Teste config</Text>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <DefaultHeader title='      Configurações' />
+            <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
+                <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
+                    <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
+                    <Text style={styles.text}>Sistema</Text><View style={styles.line} />
+                </View>
+                <OpButton theme='secundaryButton' textStyle='text2' title='Idioma' onPressFunction={() => navigation.navigate('Teste')} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Fonte' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Temas' onPressFunction={() => console.log("teste")} />
+                <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
+                    <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
+                    <Text style={styles.text}>Notificação</Text><View style={styles.line} />
+                </View>
+                <OpButton theme='secundaryButton' textStyle='text2' title='Notificação' onPressFunction={() => console.log("teste")} />
+                <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
+                    <Icon type={Icons.MaterialCommunityIcons} name="information-outline" style={styles.icon} size={25} color={"#5469D3"} />
+                    <Text style={styles.text}>Informações</Text><View style={styles.line} />
+                </View>
+                <OpButton theme='secundaryButton' textStyle='text2' title='Atualizações' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Versão do aplicativo' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Sobre' onPressFunction={() => console.log("teste")} />
+            </ScrollView>
+        </View>
+
     )
 }
 
 const styles = StyleSheet.create({
-    body: {
-        color: "black", 
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+
+    container: {
+        backgroundColor: '#141f29',
+        height: "100%",
+    },
+    scroller: {
+        width: '90%',
+        marginLeft: '5%',
+        marginBottom: '18%',
+    },
+    direction: {
+        flexDirection: "row",
+        alignItems: "center",
+        height: "30%",
+        marginBottom: 15,
+        backgroundColor: '#141f29',
+        borderTopWidth: 2,
+        borderTopColor: 'rgba(0,0,0, 0.2)',
+        shadowColor: "#637aff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 7.00,
+        elevation: 7,
+    },
+    account: {
+        left: "5%",
+        borderRadius: 75,
+        backgroundColor: "#33526E",
+        shadowColor: "#637aff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 7.00,
+        elevation: 20,
+    },
+    components: {
+        flexDirection: "column",
+        width: "48%",
+        marginLeft: '10%',
     },
     text: {
-        fontSize: 30,
+        color: "#5469D3",
+        fontSize: 25,
+        marginTop: 20,
+        marginRight: 10,
+    },
+    text2: {
+        color: "#5469D3",
+        fontSize: 19,
+        marginBottom: 20,
+    },
+    line: {
+        height: 1,
+        marginTop: 25,
+        marginRight: 10,
+        backgroundColor: 'white',
+        flexGrow: 1,
+    },
+    icon: {
+        marginTop: 20,
+        marginRight: 10,
     }
 })

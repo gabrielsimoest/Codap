@@ -10,10 +10,11 @@ import * as Animatable from 'react-native-animatable';
 import Login from './Login/Login';
 import Register from './Login/Register';
 //import List from './src/Listadmin';
-//import Config from './Config/Config';
+import Config from './Config/Config';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
+import Testes from './Teste';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -51,6 +52,14 @@ const TabArr = [
     activeIcon: 'user-circle',
     inActiveIcon: 'user-circle-o',
     component: Perfil,
+  },
+  {
+    route: 'Settings',
+    label: 'Settings',
+    type: Icons.Ionicons,
+    activeIcon: 'settings',
+    inActiveIcon: 'settings-outline',
+    component: Config,
   },
 ];
 
@@ -153,6 +162,10 @@ function App() {
         <Stack.Screen
           name="Css"
           component={Class}
+        />
+        <Stack.Screen
+          name='Teste'
+          component={Testes}
         />
         
 
