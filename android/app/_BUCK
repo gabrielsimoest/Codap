@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.mainp",
+    package = "com.codap02",
 )
 
 android_resource(
     name = "res",
-    package = "com.mainp",
+    package = "com.codap02",
     res = "src/main/res",
 )
 

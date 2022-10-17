@@ -30,10 +30,11 @@ build/
 local.properties
 *.iml
 *.hprof
+.cxx/
 
 # node.js
 #
-
+node_modules/
 npm-debug.log
 yarn-error.log
 
@@ -61,3 +62,5 @@ buck-out/
 # Ruby / CocoaPods
 /ios/Pods/
 /vendor/bundle/
+node_modules
+node_modules
