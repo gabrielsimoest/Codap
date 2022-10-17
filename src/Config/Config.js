@@ -20,8 +20,8 @@ export default function Config({navigation}) {
                     <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
                     <Text style={styles.text}>Sistema</Text><View style={styles.line} />
                 </View>
-                <OpButton theme='secundaryButton' textStyle='text2' title='Idioma' onPressFunction={() => navigation.navigate('Teste')} />
-                <OpButton theme='secundaryButton' textStyle='text2' title='Fonte' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Idioma' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title='Fonte' onPressFunction={() => navigation.navigate('Teste2')} />
                 <OpButton theme='secundaryButton' textStyle='text2' title='Temas' onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />

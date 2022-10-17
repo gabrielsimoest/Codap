@@ -14,7 +14,9 @@ import Config from './Config/Config';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
-import Testes from './Teste';
+//import Testes from './Teste';
+import Testes2 from './Teste2';
+import { Basic1_html, Basic2_html, Basic3_html } from './Aulas/ClassContent/Html/Basic_html';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -164,8 +166,20 @@ function App() {
           component={Class}
         />
         <Stack.Screen
-          name='Teste'
-          component={Testes}
+          name='Basic1_html'
+          component={Basic1_html}
+        />
+        <Stack.Screen
+          name='Basic2_html'
+          component={Basic2_html}
+        />
+        <Stack.Screen
+          name='Basic3_html'
+          component={Basic3_html}
+        />
+        <Stack.Screen
+          name='Teste2'
+          component={Testes2}
         />
         
 
