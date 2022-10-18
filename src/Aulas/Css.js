@@ -65,11 +65,11 @@ export default function Css() {
 
 const styles = StyleSheet.create({
     color: {
-        backgroundColor: '#141f20',
+        backgroundColor: '#0E151C',
 
     },
     container: {
-        backgroundColor: '#141f29',
+        backgroundColor: '#0E151C',
         height: 1000
     },
     contant: {

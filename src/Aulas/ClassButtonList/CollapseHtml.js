@@ -48,46 +48,18 @@ export default function CollapseHtml () {
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed1}>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
-   
                         <OpButton theme={"classButton"} title="Estrutura básica" onPressFunction={() => navigation.navigate('Basic1_html')} />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
+                        <OpButton theme={"classButton"} title="Estruturas" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
+                    </View>
+                    <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Elementos" onPressFunction={() => navigation.navigate('Basic2_html')}/>
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="<header> e <h1>" onPressFunction={() => navigation.navigate('Basic3_html')}/>
                     </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
+                    <View style={styles.line}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded2}
@@ -99,33 +71,12 @@ export default function CollapseHtml () {
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed2}>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                 </Collapsible>
@@ -139,23 +90,9 @@ export default function CollapseHtml () {
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed3}>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                 </Collapsible>
@@ -169,13 +106,6 @@ export default function CollapseHtml () {
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed4}>
                     <View style={{ flexDirection: "row" }} >
-                        <Icon
-                            type={Icons.Ionicons}
-                            name="ios-caret-forward-outline"
-                            color={"#33526E"}
-                            size={60}
-                            style={styles.icon}
-                        />
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
                 </Collapsible>
@@ -192,17 +122,10 @@ const styles = StyleSheet.create({
         height: 140,
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 10,
+        marginTop: 15,
         marginBottom: 15,
-        backgroundColor: '#141f29',
+        backgroundColor: '#1B2B39',
         borderRadius: 20,
-        shadowColor: "#637aff",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.28,
-        shadowRadius: 7.00,
         elevation: 7,
     },
     title: {
@@ -244,4 +167,11 @@ const styles = StyleSheet.create({
         marginRight: 20,
         top: 20,
     },
+    line: {
+        borderBottomWidth: 2,
+        borderColor: '#1B2B39',
+        margin: 20,
+        marginLeft: 15,
+        marginRight: 15
+    }
 });

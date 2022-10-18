@@ -15,7 +15,7 @@ const HeaderShop = ({
   );
   const RightView = () => (
     <View style={[styles.view, styles.rightView]}>
-      <Text style={{ color: 'white',fontFamily: 'Roboto', fontSize:19 }}>20  </Text>
+      <Text style={{ color: 'white',fontFamily: 'Roboto', fontSize:19, fontWeight: 'bold',}}>20  </Text>
       <Icon name="dependabot" size={25} color="#fff" />
     </View>
   );
