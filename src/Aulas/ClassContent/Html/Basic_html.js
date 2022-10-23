@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, ScrollView, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, Image, StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
 import DefaultHeader from '../../../components/DefaultHeader';
 import Icon, { Icons } from '../../../components/Icons';
 import OpButton from '../../../Helpers/OpButton';
@@ -34,6 +34,18 @@ export function BasicPrat1_html({ navigation }) {
         setSelect3('OptionButton')
         setSelect('OptionButton')
     }
+    const Verificar = () => {
+        if (Select == 'OptionButtonTrue')
+            alert("Certo")
+        else if (Select2 == 'OptionButtonTrue')
+            alert("Errado")
+        else if (Select3 == 'OptionButtonTrue')
+            alert("Errado")
+        else if (Select4 == 'OptionButtonTrue')
+            alert("Errado")
+        else
+            alert("Selecione uma opção")
+    }
 
     return (
         <View style={styles.container}>
@@ -57,7 +69,7 @@ export function BasicPrat1_html({ navigation }) {
                     <OpButton theme={Select4} title="<header> Esse é um título <header>" onPressFunction={() => SelectTrue4()} />
                 </View>
             </View>
-            <OpButton theme={"nextButton"} title="Verificar"></OpButton>
+            <OpButton theme={"nextButton"} title="Verificar" onPressFunction={() => Verificar()} />
         </View>
     )
 }
@@ -147,7 +159,7 @@ export function Basic3_html({ navigation }) {
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <View style={{ alignItems: 'center', margin: 10, marginBottom: 100}}>
+                <View style={{ alignItems: 'center', margin: 10, marginBottom: 100 }}>
                     <Text style={styles.text}>
                         Agora sem mais enrolação, os primeiros elementos que veremos é o &#10094;header&#10095; e o &#10094;h1&#10095;.
                         O header é o elemento utilizado para separar o cabeçalho do resto do corpo de seu documento. Nele pode ser
