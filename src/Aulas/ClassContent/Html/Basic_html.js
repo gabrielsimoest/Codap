@@ -9,14 +9,18 @@ export function BasicPrat1_html({ navigation }) {
     return (
         <OptionView
             navigation={navigation}
-            adicionaltxt="none"
+            //BARRA DE PROGRESSO
             progresso="0%"
+            //TEXTO ADICIONAL CABEÇARIO
+            adicionaltxt="none"
+            //PERGUNTA
             pergunta="Como é feito o Titulo de uma pagina?"
             opt1="<h1> Esse é um título <h1>"
             opt2="<Title> Esse é um título <Title>"
             opt3="<h6> Esse é um título <h6>"
             opt4="<header> Esse é um título <header>"
             optCerta="opt1"
+            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BasicPrat2_html"
         />
     )
@@ -26,14 +30,18 @@ export function BasicPrat2_html({ navigation }) {
     return (
         <OptionView
             navigation={navigation}
+            //BARRA DE PROGRESSO
             progresso="25%"
+            //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="Testo teste"
+            //PERGUNTA
             pergunta="Teste?"
             opt1="<h1> Esse é um Teste <h1>"
             opt2="<Title> Esse é um Teste <Title>"
             opt3="<h6> Esse é um Teste <h6>"
             opt4="<header> Esse é um Teste <header>"
             optCerta="opt1"
+            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BasicPrat3_html"
         />
     )
@@ -48,7 +56,14 @@ export function BasicPrat3_html({ navigation }) {
             opt1="<h1>"
             opt2="Texto"
             opt3="</h1>"    
-            opt4="<h2>"
+            opt4="</h2>"
+            opt5="none" //Opcional
+            opt6="none" //Opcional
+            opt7="none" //Opcional
+            opt8="none" //Opcional
+            //TEXTO CERTO COM UM ESPAÇO SEPARANDO ENTRE AS OPÇÕES
+            txtCerto="<h1>Texto</h1>"
+            navegar="BasicPrat4_html"
         />
         )
 }
