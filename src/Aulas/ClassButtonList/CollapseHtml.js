@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
     Image,
-    ScrollView,
     StyleSheet,
     Text,
     View,
@@ -79,6 +78,7 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
+                    <View style={styles.line}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded3}
@@ -95,6 +95,7 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
+                    <View style={styles.line}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded4}
@@ -108,6 +109,7 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
+                    <View style={styles.line}></View>
                 </Collapsible>
             </View>
         )

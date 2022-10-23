@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 
-function OpButton({ theme, textStyle = 'text', title, onPressFunction, iconType, iconName, iconColor, iconSize }) {
+function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor="white" }) {
 
     return (
         <TouchableOpacity style={styles[theme]} onPress={onPressFunction}>
@@ -15,7 +15,7 @@ function OpButton({ theme, textStyle = 'text', title, onPressFunction, iconType,
                 color={iconColor}
                 size={iconSize}
                 style={styles.icon} />
-            <Text style={[styles.text]}>{title}</Text>
+            <Text style={[styles.text, {color: textColor}]}>{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -140,6 +140,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'green',
         borderRadius: 20,
         elevation: 10,
+    },
+    settingsButton: {
+        flexDirection: 'row',
+        flexShrink: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 50,
+        width: '90%',
+        margin: 15,
+        marginBottom: 1,
+        backgroundColor: '#1B2B39',
+        borderRadius: 10,
+        elevation: 2,
     },
     text: {
         //position: 'absolute',

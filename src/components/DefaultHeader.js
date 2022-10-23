@@ -9,7 +9,7 @@ function DefaultHeader ({title}) {
 
   return (
     <View style={styles.header}>
-      <Title style={{ color: 'white',fontFamily: 'Roboto' }}>{title}</Title>
+      <Title style={{ color: 'white', fontFamily: 'Roboto', marginLeft: 30}}>{title}</Title>
     </View>
   )
 }

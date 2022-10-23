@@ -8,33 +8,39 @@ import {
 import DefaultHeader from '../components/DefaultHeader';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
+import TranslateComponet from './TranslateComponent';
+import FontComponent from './FontComponent';
+import { useTranslation } from 'react-i18next';
 
 
-export default function Config({navigation}) {
+export default function Config({ navigation }) {
+
+    const { t, i18n } = useTranslation();
 
     return (
         <View style={styles.container}>
-            <DefaultHeader title='      Configurações' />
+            <DefaultHeader title={t("settings")}/>
+
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>Sistema</Text><View style={styles.line} />
+                    <Text style={styles.text}>{t("system")}</Text><View style={styles.line} />
                 </View>
-                <OpButton theme='secundaryButton' textStyle='text2' title='Idioma' onPressFunction={() => console.log("teste")} />
-                <OpButton theme='secundaryButton' textStyle='text2' title='Fonte' onPressFunction={() => navigation.navigate('Teste2')} />
-                <OpButton theme='secundaryButton' textStyle='text2' title='Temas' onPressFunction={() => console.log("teste")} />
+                <TranslateComponet/>
+                <FontComponent/>
+                <OpButton theme='secundaryButton' textStyle='text2' title={t("theme")} onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>Notificação</Text><View style={styles.line} />
+                    <Text style={styles.text}>{t("notification")}</Text><View style={styles.line} />
                 </View>
-                <OpButton theme='secundaryButton' textStyle='text2' title='Notificação' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title={t("notifications")} onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="information-outline" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>Informações</Text><View style={styles.line} />
+                    <Text style={styles.text}>{t("informations")}</Text><View style={styles.line} />
                 </View>
-                <OpButton theme='secundaryButton' textStyle='text2' title='Atualizações' onPressFunction={() => console.log("teste")} />
-                <OpButton theme='secundaryButton' textStyle='text2' title='Versão do aplicativo' onPressFunction={() => console.log("teste")} />
-                <OpButton theme='secundaryButton' textStyle='text2' title='Sobre' onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title={t("update")} onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title={t("version")} onPressFunction={() => console.log("teste")} />
+                <OpButton theme='secundaryButton' textStyle='text2' title={t("about")} onPressFunction={() => console.log("teste")} />
             </ScrollView>
         </View>
 

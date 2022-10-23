@@ -52,7 +52,7 @@ export default function Perfil() {
 
     return (
         <View style={styles.container}>
-            <DefaultHeader title='      Perfil' />
+            <DefaultHeader title='Perfil' />
             <View style={styles.direction}>
 
                 <Icon type={Icons.FontAwesome}
