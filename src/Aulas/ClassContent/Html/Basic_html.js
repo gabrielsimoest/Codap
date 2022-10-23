@@ -1,78 +1,71 @@
 import React, { useState } from 'react';
-import { Text, ScrollView, Image, StyleSheet, View, TouchableOpacity, Alert } from 'react-native';
-import DefaultHeader from '../../../components/DefaultHeader';
+import { Text, ScrollView, Image, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Icon, { Icons } from '../../../components/Icons';
 import OpButton from '../../../Helpers/OpButton';
+import OptionView from '../../../Helpers/OptionView';
+import SelectView from '../../../Helpers/SelectView';
 
 export function BasicPrat1_html({ navigation }) {
-    const [Select, setSelect] = useState('OptionButton')
-    const [Select2, setSelect2] = useState('OptionButton')
-    const [Select3, setSelect3] = useState('OptionButton')
-    const [Select4, setSelect4] = useState('OptionButton')
-
-    const SelectTrue = () => {
-        setSelect('OptionButtonTrue')
-        setSelect2('OptionButton')
-        setSelect3('OptionButton')
-        setSelect4('OptionButton')
-    }
-    const SelectTrue2 = () => {
-        setSelect2('OptionButtonTrue')
-        setSelect('OptionButton')
-        setSelect3('OptionButton')
-        setSelect4('OptionButton')
-    }
-    const SelectTrue3 = () => {
-        setSelect3('OptionButtonTrue')
-        setSelect2('OptionButton')
-        setSelect('OptionButton')
-        setSelect4('OptionButton')
-    }
-    const SelectTrue4 = () => {
-        setSelect4('OptionButtonTrue')
-        setSelect2('OptionButton')
-        setSelect3('OptionButton')
-        setSelect('OptionButton')
-    }
-    const Verificar = () => {
-        if (Select == 'OptionButtonTrue')
-            alert("Certo")
-        else if (Select2 == 'OptionButtonTrue')
-            alert("Errado")
-        else if (Select3 == 'OptionButtonTrue')
-            alert("Errado")
-        else if (Select4 == 'OptionButtonTrue')
-            alert("Errado")
-        else
-            alert("Selecione uma opção")
-    }
-
     return (
-        <View style={styles.container}>
-            <View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("Home")}
-                >
-                    <Icon
-                        type={Icons.Ionicons}
-                        name="ios-close-outline"
-                        color={"#33526E"}
-                        size={60}
-                        style={styles.icon}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.text}>Como é feito o Titulo de uma pagina?</Text>
-                <View>
-                    <OpButton theme={Select} title="<h1> Esse é um título <h1>" onPressFunction={() => SelectTrue()} />
-                    <OpButton theme={Select2} title="<Title> Esse é um título <Title>" onPressFunction={() => SelectTrue2()} />
-                    <OpButton theme={Select3} title="<h6> Esse é um título <h6>" onPressFunction={() => SelectTrue3()} />
-                    <OpButton theme={Select4} title="<header> Esse é um título <header>" onPressFunction={() => SelectTrue4()} />
-                </View>
-            </View>
-            <OpButton theme={"nextButton"} title="Verificar" onPressFunction={() => Verificar()} />
-        </View>
+        <OptionView
+            navigation={navigation}
+            adicionaltxt="none"
+            progresso="0%"
+            pergunta="Como é feito o Titulo de uma pagina?"
+            opt1="<h1> Esse é um título <h1>"
+            opt2="<Title> Esse é um título <Title>"
+            opt3="<h6> Esse é um título <h6>"
+            opt4="<header> Esse é um título <header>"
+            optCerta="opt1"
+            navegar="BasicPrat2_html"
+        />
     )
 }
+
+export function BasicPrat2_html({ navigation }) {
+    return (
+        <OptionView
+            navigation={navigation}
+            progresso="25%"
+            adicionaltxt="Testo teste"
+            pergunta="Teste?"
+            opt1="<h1> Esse é um Teste <h1>"
+            opt2="<Title> Esse é um Teste <Title>"
+            opt3="<h6> Esse é um Teste <h6>"
+            opt4="<header> Esse é um Teste <header>"
+            optCerta="opt1"
+            navegar="BasicPrat3_html"
+        />
+    )
+}
+export function BasicPrat3_html({ navigation }) {
+    return (
+        <SelectView
+            navigation={navigation}
+            progresso="50%"
+            adicionaltxt="none"
+            pergunta="Select?"
+            opt1="<h1>"
+            opt2="Texto"
+            opt3="</h1>"    
+            opt4="<h2>"
+        />
+        )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export function Basic1_html({ navigation }) {
     return (
@@ -227,5 +220,37 @@ const styles = StyleSheet.create({
         marginRight: 20,
         top: 10,
     },
+    contant: {
+        marginTop: 600,
+        marginBottom: 50,
+        marginVertical: 20,
+        zIndex: 99,
+        padding: 20,
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0, 0.2)',
+        backgroundColor: '#0E151C',
+
+        shadowColor: 'rgba(0,0,0, 0.3)',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 5,
+        shadowOpacity: 0.28,
+        shadowRadius: 4,
+    },
+    actionText: {
+        fontFamily: 'Roboto',
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    textModal: {
+        flexGrow: 1,
+        fontFamily: 'Roboto',
+        color: 'white',
+        fontSize: 23,
+        fontWeight: "bold"
+    }
 
 })
