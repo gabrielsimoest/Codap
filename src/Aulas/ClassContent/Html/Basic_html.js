@@ -4,6 +4,7 @@ import Icon, { Icons } from '../../../components/Icons';
 import OpButton from '../../../Helpers/OpButton';
 import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
+import TextView from '../../../Helpers/TextView';
 
 export function BasicPrat1_html({ navigation }) {
     return (
@@ -33,14 +34,14 @@ export function BasicPrat2_html({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="25%"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="Testo teste"
+            adicionaltxt="Paragrafos são geralmente utilizados para separar textos"
             //PERGUNTA
-            pergunta="Teste?"
-            opt1="<h1> Esse é um Teste <h1>"
-            opt2="<Title> Esse é um Teste <Title>"
-            opt3="<h6> Esse é um Teste <h6>"
-            opt4="<header> Esse é um Teste <header>"
-            optCerta="opt1"
+            pergunta="Qual desses textos está em um paragrafo?"
+            opt1="<Paragrafo> Esse é um parágrafo <parágrafo>"
+            opt2="<Title> Esse é um parágrafo <Title>"
+            opt3="<p> Esse é um parágrafo <p>"
+            opt4="<header> Esse é um parágrafo <header>"
+            optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BasicPrat3_html"
         />
@@ -52,23 +53,43 @@ export function BasicPrat3_html({ navigation }) {
             navigation={navigation}
             progresso="50%"
             adicionaltxt="none"
-            pergunta="Select?"
+            pergunta="Codifique um titulo escrito Codap é Legal"
             opt1="<h1>"
             opt2="Texto"
-            opt3="</h1>"    
-            opt4="</h2>"
-            opt5="none" //Opcional
-            opt6="none" //Opcional
+            opt3="Codap é Legal"    
+            opt4="</h1>"
+            opt5="<titulo>" //Opcional
+            opt6="</titulo>" //Opcional
             opt7="none" //Opcional
             opt8="none" //Opcional
-            //TEXTO CERTO COM UM ESPAÇO SEPARANDO ENTRE AS OPÇÕES
-            txtCerto="<h1>Texto</h1>"
+            //TEXTO RESPOSTA
+            txtCerto="<h1>Codap é Legal</h1>"
             navegar="BasicPrat4_html"
         />
         )
 }
 
-
+export function BasicPrat4_html({ navigation }) {
+    return (
+        <TextView
+            navigation={navigation}
+            //BARRA DE PROGRESSO
+            progresso="100%"
+            //TEXTO ADICIONAL CABEÇARIO
+            adicionaltxt="Botões geralmente são usados para executar ações dentro dos sites"
+            //PERGUNTA
+            pergunta="Codifique um Botão escrito CODAP"
+            txtantes="<button>"
+            txtdepois="</button>"
+            txtCerto1="CODAP"
+            txtCerto2="codap"
+            txtCerto3=""
+            tamanhoInput="46%"
+            //NOME ADICIONADO NO STACK NAVIGATOR
+            navegar=""
+        />
+    )
+}
 
 
 

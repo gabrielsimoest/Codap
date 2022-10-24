@@ -187,7 +187,7 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                 <SafeAreaView>
                     <View style={styles.contant}>
                         <Text style={styles.textModal}>Parabéns, Você está certo!</Text>
-                        {<OpButton theme={"modalButton"} title="Continuar" onPressFunction={() => [/*navigation.navigate(navegar),*/ setVisibleModal(false)]} />}
+                        {<OpButton theme={"modalButton"} title="Continuar" onPressFunction={() => navigation.navigate(navegar)} />}
                     </View>
                 </SafeAreaView>
             </Modal>

@@ -17,7 +17,7 @@ import Class from './Aulas/Class';
 import OptionView from './Helpers/OptionView';
 //import Testes from './Teste';
 import Testes2 from './Teste2';
-import { Basic1_html, Basic2_html, Basic3_html, BasicPrat1_html, BasicPrat2_html, BasicPrat3_html} from './Aulas/ClassContent/Html/Basic_html';
+import { Basic1_html, Basic2_html, Basic3_html, BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html} from './Aulas/ClassContent/Html/Basic_html';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -198,6 +198,10 @@ function App() {
         <Stack.Screen
           name='BasicPrat3_html'
           component={BasicPrat3_html}
+        />
+        <Stack.Screen
+          name='BasicPrat4_html'
+          component={BasicPrat4_html}
         />
 
       </Stack.Navigator>
