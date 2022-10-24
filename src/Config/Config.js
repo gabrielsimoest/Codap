@@ -11,7 +11,10 @@ import Icon, { Icons } from '../components/Icons';
 import TranslateComponet from './TranslateComponent';
 import FontComponent from './FontComponent';
 import { useTranslation } from 'react-i18next';
+import AText from '../Helpers/AText';
 
+const TextSize1 = 25;
+const TextSize2 = 19;
 
 export default function Config({ navigation }) {
 
@@ -24,19 +27,19 @@ export default function Config({ navigation }) {
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>{t("system")}</Text><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("system")}</AText><View style={styles.line} />
                 </View>
                 <TranslateComponet/>
                 <FontComponent/>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("theme")} onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>{t("notification")}</Text><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText><View style={styles.line} />
                 </View>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("notifications")} onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="information-outline" style={styles.icon} size={25} color={"#5469D3"} />
-                    <Text style={styles.text}>{t("informations")}</Text><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("informations")}</AText><View style={styles.line} />
                 </View>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("update")} onPressFunction={() => console.log("teste")} />
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("version")} onPressFunction={() => console.log("teste")} />

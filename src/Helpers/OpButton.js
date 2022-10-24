@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
+import AText from './AText';
 
 function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor="white" }) {
 
@@ -15,7 +16,7 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
                 color={iconColor}
                 size={iconSize}
                 style={styles.icon} />
-            <Text style={[styles.text, {color: textColor}]}>{title}</Text>
+            <AText style={[styles.text, {color: textColor}]} defaultSize={20}>{title}</AText>
         </TouchableOpacity>
     )
 }
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        height: 50,
+        height: 60,
         padding: 10,
         marginLeft: 5,
         marginRight: 5,

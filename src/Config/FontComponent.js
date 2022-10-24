@@ -3,16 +3,14 @@ import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 import OpButton from "../Helpers/OpButton";
 import Icon, { Icons } from "../components/Icons";
 import { useTranslation } from 'react-i18next';
-import { AdjustSize, Size} from "./AdjustSize";
+import AdjustSizeButton from "./AdjustSizeButton";
+import AText from "../Helpers/AText";
+
 
 const FontComponent = () => {
     const [modalVisible, setModalVisible] = useState(false);
 
     const { t, i18n } = useTranslation();
-
-    console.log(Size);
-
-   // const [textSize, setSize] = useState(0);
 
     return (
         <View>
@@ -33,12 +31,8 @@ const FontComponent = () => {
                         >
                             <Icon type={Icons.Ionicons} name="close-circle" color={"#5469D3"}/>
                         </Pressable>
-                        <Text style={styles.modalText}>Selecione o tamanho da fonte:</Text>
-                        <View style={{marginTop: 5}}>
-                            <OpButton theme={"settingsButton"} title="Pequena" onPressFunction={()=> AdjustSize({setSize: 1})}/>
-                            <OpButton theme={"settingsButton"} title="Média" onPressFunction={()=> AdjustSize({setSize: 2})}/>
-                            <OpButton theme={"settingsButton"} title="Grande" onPressFunction={()=> AdjustSize({setSize: 3})}/>                            
-                        </View>
+                        <AText style={styles.modalText} defaultSize={20}>{t("Change font size")}</AText>
+                        <AdjustSizeButton/>
                     </View>
                 </View>
             </Modal>
@@ -46,6 +40,14 @@ const FontComponent = () => {
         </View>
     );
 };
+
+/*
+<View style={{marginTop: 5}}>
+                            <OpButton theme={"settingsButton"} title="Pequena" onPressFunction={()=> AdjustSize({setSize: 1})}/>
+                            <OpButton theme={"settingsButton"} title="Média" onPressFunction={()=> AdjustSize({setSize: 2})}/>
+                            <OpButton theme={"settingsButton"} title="Grande" onPressFunction={()=> AdjustSize({setSize: 3})}/>                            
+                        </View>
+*/
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginBottom: 15,
         marginLeft: 10,
-        fontSize: 20 + Size,
+        fontSize: 20,
     },
 });
 
