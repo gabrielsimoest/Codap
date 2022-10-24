@@ -50,13 +50,13 @@ export default function CollapseHtml () {
                         <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('BasicPrat2_html')} />
+                        <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('Basic1_html')} />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('BasicPrat3_html')}/>
+                        <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('Basic2_html')}/>
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('BasicPrat4_html')}/>
+                        <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')}/>
                     </View>
                     <View style={styles.line}></View>
                 </Collapsible>

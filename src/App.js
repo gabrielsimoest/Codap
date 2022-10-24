@@ -11,6 +11,7 @@ import Login from './Login/Login';
 import Register from './Login/Register';
 //import List from './src/Listadmin';
 import Config from './Config/Config';
+import CongratsView from './Helpers/CongratsView';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
@@ -203,6 +204,11 @@ function App() {
           name='BasicPrat4_html'
           component={BasicPrat4_html}
         />
+        <Stack.Screen
+          name='CongratsView'
+          component={CongratsView}
+        />
+        
 
       </Stack.Navigator>
     </NavigationContainer>

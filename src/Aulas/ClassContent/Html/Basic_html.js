@@ -32,7 +32,7 @@ export function BasicPrat2_html({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="25%"
+            progresso="35%"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="Paragrafos são geralmente utilizados para separar textos"
             //PERGUNTA
@@ -51,7 +51,7 @@ export function BasicPrat3_html({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="50%"
+            progresso="70%"
             adicionaltxt="none"
             pergunta="Codifique um titulo escrito Codap é Legal"
             opt1="<h1>"
@@ -86,7 +86,7 @@ export function BasicPrat4_html({ navigation }) {
             txtCerto3=""
             tamanhoInput="46%"
             //NOME ADICIONADO NO STACK NAVIGATOR
-            navegar=""
+            navegar="CongratsView"
         />
     )
 }
