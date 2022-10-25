@@ -150,15 +150,14 @@ function App() {
           header: () => null
         }}
       >
-        
-        <Stack.Screen
-          name="Home"
-          component={HomeTabs}
-        />
         <Stack.Screen
           name="Login"
           component={Login}
         />
+        <Stack.Screen
+          name="Home"
+          component={HomeTabs}
+        />  
         <Stack.Screen
           name="Register"
           component={Register}

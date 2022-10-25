@@ -1,18 +1,29 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, } from 'react-native';
 import HeaderShop from '../components/HeaderShop';
-import Icon from 'react-native-vector-icons/Fontisto';
-import Icons from 'react-native-vector-icons/Ionicons';
+import SQLite from 'react-native-sqlite-storage';
 import OpButton from '../Helpers/OpButton';
-
-//MOEDA DE TROCA: BOTS
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Store() {
-    const [visibleModal, setVisibleModal] = useState(false)
+    const [getData, setgetData] = useState(false);
+    const [Dependa, setDependa] = useState('');
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUser();
+        }, [])
+    );
+
+    const getUser = async () => {
+        const storageDependa = await AsyncStorage.getItem('DependaBots');
+        setDependa(storageDependa);
+    }
 
     return (
         <View style={styles.container}>
-            <HeaderShop />
+            <HeaderShop dependa={Dependa}/>
             <Text style={styles.headert}>COMPRE COM DEPENDABOTS</Text>
             <View style={styles.list}>
                 <Image style={styles.tinyLogo} source={require('../../assets/potion.png')} />

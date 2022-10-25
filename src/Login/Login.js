@@ -13,10 +13,11 @@ import {
 import CustomButton from '../Helpers/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const db = SQLite.openDatabase(
     {
-        name: 'MainDB',
+        name: 'Users.db',
         location: 'default',
     },
     () => { },
@@ -29,8 +30,7 @@ export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
 
     useEffect(() => {
-        createTable();
-        getData();
+        createTable()
     }, []);
 
     const createTable = () => {
@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT);"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT);"
             )
         })
     }
@@ -69,11 +69,13 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "SELECT Senha, Email FROM Users WHERE Senha=? and Email=?",
+                        "SELECT ID, Senha, DependaBots, Email FROM Users WHERE Senha=? and Email=?",
                         [senha, email],
-                        (tx, results) => {
+                        async (tx, results) => {
                             var len = results.rows.length;
                             if (len > 0) {
+                                await AsyncStorage.setItem('IdUser', JSON.stringify(results.rows.item(0).ID));
+                                await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
                                 navigation.navigate('Home', { screen: 'Aulas'});
                             } else {
                                 Alert.alert('Alerta!', 'Senha ou Email incorretos')

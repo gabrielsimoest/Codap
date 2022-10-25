@@ -17,7 +17,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const db = SQLite.openDatabase(
     {
-        name: 'MainDB',
+        name: 'Users.db',
         location: 'default',
     },
     () => { },
@@ -35,12 +35,22 @@ export default function Login({ navigation }) {
         getData();
     }, []);
 
+    const deleteDB = () => {
+        SQLite.deleteDatabase(
+            { name: 'Users.db', location: 'default' },
+            () => { console.log('Users db deleted'); },
+            error => {
+                console.log("ERROR: " + error);
+            }
+        );
+    }
+
     const createTable = () => {
         db.transaction((tx) => {
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT);"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, );"
             )
         })
     }
@@ -80,8 +90,8 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "INSERT INTO Users (Name, Senha, Email) VALUES (?,?,?)",
-                        [name, senha, email]
+                        "INSERT INTO Users (Name, Senha, Email, DependaBots) VALUES (?,?,?,?)",
+                        [name, senha, email, 0]
                     );
                 })
                 Alert.alert('Aviso!', 'Cadastro Realizado.')

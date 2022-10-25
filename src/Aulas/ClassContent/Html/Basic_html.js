@@ -83,7 +83,7 @@ export function BasicPrat4_html({ navigation }) {
             txtdepois="</button>"
             txtCerto1="CODAP"
             txtCerto2="codap"
-            txtCerto3=""
+            txtCerto3="Codap"
             tamanhoInput="46%"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
