@@ -1,32 +1,94 @@
-import React, { useState, useEffect,} from 'react';
+import React, { useState, useEffect, useReducer, } from 'react';
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import SQLite from 'react-native-sqlite-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
-export default function CongratsView({ navigation, progresso}) {
+const db = SQLite.openDatabase(
+    {
+        name: 'Users.db',
+        location: 'default',
+    },
+    () => { },
+    error => { console.log(error) }
+);
+
+export default function CongratsView({ navigation, progresso }) {
     const [number, setNumber] = React.useState(1);
     const [talk, setTalk] = useState('');
+    const [Dependa, setDependa] = useState('');
+    const [UserId, setUserId] = useState('');
+    const [CView, setCoins] = useState(0);
+    const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
+    var Coins = 0
 
-    useEffect(() => {
-        const randomNumber = Math.floor(Math.random() * 3) + 1;
-        setNumber(randomNumber);
+    useFocusEffect(
+        React.useCallback(() => {
+            var randomNumber = Math.floor(Math.random() * 3) + 1;
 
-        if(number == 1){
-            setTalk('Parábens, Você foi feito para isso!')
-        }
-        if(number == 2){
-            setTalk('Continue Assim!') 
-        }
-        if(number == 3){
-            setTalk('Você foi incrivel!') 
-        }
-    }, [])
+            if (randomNumber == 1) {
+                setTalk('Parábens, Você foi feito para isso!')
+                Coins = 10
+            }
+            else if (randomNumber == 2) {
+                setTalk('Continue Assim!')
+                Coins = 15
+            }
+            else if (randomNumber == 3) {
+                setTalk('Você foi incrivel!')
+                Coins = 20
+            }
+            getUser();
+        }, [])
+    );
+
+    const getUser = async () => {
+        setCoins(Coins)
+        const storageUser = await AsyncStorage.getItem('IdUser');
+        const storageDependa = await AsyncStorage.getItem('DependaBots');
+        setUserId(storageUser);
+        setDependa(parseInt(storageDependa) + Coins);
+    }
+
+    // const getData = () => {
+    //     try {
+    //         db.transaction((tx) => {
+    //             tx.executeSql(
+    //                 "SELECT ID, DependaBots FROM Users WHERE ID = ?",
+    //                 [UserId],
+    //                 (tx, results) => {
+    //                     var len = results.rows.length;
+    //                     if (len > 0) {
+    //                         var dependaBots = results.rows.item(0).DependaBots;
+    //                         setDependa(dependaBots);
+    //                     }
+    //                 }
+    //             )
+    //         })
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    const setData = async () => {
+        await db.transaction(async (tx) => {
+            await tx.executeSql(
+                "UPDATE Users SET DependaBots=? WHERE ID = ?;",
+                [Dependa, UserId]
+            );
+            await AsyncStorage.setItem('DependaBots', JSON.stringify(Dependa));
+            forceUpdate()
+            navigation.navigate('Home');
+        })
+    }
 
     return (
         <View style={styles.container}>
             <View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("Home")}
+                    onPress={() => setData()}
                 >
                     <Icon
                         type={Icons.Ionicons}
@@ -38,10 +100,11 @@ export default function CongratsView({ navigation, progresso}) {
                 </TouchableOpacity>
                 <View>
                     <Text style={styles.text}>{talk}</Text>
+                    <Text style={styles.text}>+{CView} DependaBots</Text>
                 </View>
             </View>
-            <OpButton theme={"nextButton"} title="Voltar à Tela Inicial" onPressFunction={() => navigation.navigate("Home")} />
-            
+            <OpButton theme={"nextButton"} title="Voltar à Tela Inicial" onPressFunction={() => setData()} />
+
         </View>
     )
 }
@@ -135,10 +198,10 @@ const styles = StyleSheet.create({
         display: 'none'
     },
     progressBar: {
-        top:-2,
+        top: -2,
         height: 8,
         width: '100%',
         backgroundColor: 'white',
-      },
+    },
 
 })

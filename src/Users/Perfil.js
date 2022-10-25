@@ -12,7 +12,7 @@ import Icon, { Icons } from '../components/Icons';
 
 const db = SQLite.openDatabase(
     {
-        name: 'MainDB',
+        name: 'Users.db',
         location: 'Documents',
     },
     () => { },

@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Surface, Title } from 'react-native-paper';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Octicons';
-import { white } from 'react-native-paper/lib/typescript/styles/colors';
+import SQLite from 'react-native-sqlite-storage';
 
-const HeaderShop = ({
-  style,
-}) => {
+const db = SQLite.openDatabase(
+  {
+    name: 'Users.db',
+    location: 'default',
+  },
+  () => { },
+  error => { console.log(error) }
+);
+
+const HeaderShop = ({style, dependa}) => {
+  
   const TitleView = () => (
     <View style={styles.titleView}>
-      <Title style={{ color: 'white',fontFamily: 'Roboto' }}>      Market</Title>
+      <Title style={{ color: 'white', fontFamily: 'Roboto' }}>      Market</Title>
     </View>
   );
   const RightView = () => (
     <View style={[styles.view, styles.rightView]}>
-      <Text style={{ color: 'white',fontFamily: 'Roboto', fontSize:19, fontWeight: 'bold',}}>20  </Text>
+      <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 19, fontWeight: 'bold', }}>{dependa}  </Text>
       <Icon name="dependabot" size={25} color="#fff" />
     </View>
   );

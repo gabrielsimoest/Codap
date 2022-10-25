@@ -50,7 +50,7 @@ export default function CollapseHtml () {
                         <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
                     </View>
                     <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('Basic1_html')} />
+                        <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('CongratsView')} />
                     </View>
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('Basic2_html')}/>
