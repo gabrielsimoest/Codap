@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, cardStyleInterpolator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
@@ -142,6 +142,12 @@ const styles = StyleSheet.create({
   },
 });
 
+const forFade = ({ current }) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+});
+
 function App() {
   return (
     <NavigationContainer>
@@ -154,59 +160,73 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeTabs}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name="Css"
           component={Class}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='Basic1_html'
           component={Basic1_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='Basic2_html'
           component={Basic2_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='Basic3_html'
           component={Basic3_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='Teste2'
           component={Testes2}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='BasicPrat1_html'
           component={BasicPrat1_html}
+          options={{ cardStyleInterpolator: forFade }}
           
         />
         <Stack.Screen
           name='OptionView'
           component={OptionView}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='BasicPrat2_html'
           component={BasicPrat2_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='BasicPrat3_html'
           component={BasicPrat3_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='BasicPrat4_html'
           component={BasicPrat4_html}
+          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name='CongratsView'
           component={CongratsView}
+          options={{ cardStyleInterpolator: forFade }}
         />
         
 
