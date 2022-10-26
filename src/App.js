@@ -18,7 +18,8 @@ import Class from './Aulas/Class';
 import OptionView from './Helpers/OptionView';
 //import Testes from './Teste';
 import Testes2 from './Teste2';
-import { Basic1_html, Basic2_html, Basic3_html, BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html} from './Aulas/ClassContent/Html/Basic_html';
+import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html} from './Aulas/ClassContent/Html/Basic_html';
+import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();

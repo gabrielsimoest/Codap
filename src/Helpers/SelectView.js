@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -33,18 +34,39 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
     const [Texto, setText] = useState('')
 
 
-    useEffect(() => {
-        if (adicionaltxt != "none")
-            setTextadd('text')
-        if (opt5 != "none")
-            setTextopt5('display')
-        if (opt6 != "none")
-            setTextopt6('display')
-        if (opt7 != "none")
-            setTextopt7('display')
-        if (opt8 != "none")
-            setTextopt8('display')
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+            if (adicionaltxt != "none")
+                setTextadd('text')
+            if (opt5 != "none")
+                setTextopt5('display')
+            if (opt6 != "none")
+                setTextopt6('display')
+            if (opt7 != "none")
+                setTextopt7('display')
+            if (opt8 != "none")
+                setTextopt8('display')
+
+            text = ""
+            setText(text)
+            disable = false
+            disable2 = false
+            disable3 = false
+            disable4 = false
+            disable5 = false
+            disable6 = false
+            disable7 = false
+            disable8 = false
+            disableopt = 'opt'
+            disableopt2 = 'opt'
+            disableopt3 = 'opt'
+            disableopt4 = 'opt'
+            disableopt5 = 'opt'
+            disableopt6 = 'opt'
+            disableopt7 = 'opt'
+            disableopt8 = 'opt'
+        }, [])
+    );
 
     function Erase() {
         text = ""
