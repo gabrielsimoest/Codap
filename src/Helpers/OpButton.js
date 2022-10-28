@@ -1,16 +1,48 @@
 import React from 'react';
 import {
-    Text,
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 import AText from './AText';
+import { useTheme } from '@react-navigation/native';
 
-function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor="white" }) {
+function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor="white", themeColorEnable = true }) {
+
+    //Variaveis e constantes para gerenciamento de cores
+    const {colors} = useTheme();
+
+    var myColor = colors.background
+
+    //themeColorEnable = true por padrão. Se false, textColor é "white" por padrão
+    if (themeColorEnable) {
+        textColor = colors.text
+    }
+
+    /*Verificação do tema do botão*/
+    //Casos em que fundo é o primary dos temas (dak e light) e são alteraveis
+    if(theme === "classButton" || theme === "nextButton" || theme === "settingsButton") {
+        myColor = colors.primary;
+    }
+    //Casos em que fundo é verde independente do tema
+     else if (theme === "modalButton" || theme === "OptionButtonTrue" ) {
+        myColor = "green";
+    } 
+    //Casos em que fundo é vermelho independente do tema
+    else if (theme === "modalButtonE") {
+        myColor = "red";
+    }
+    //Casos em que fundo é roxo independente do tema
+    else if (theme === "marketButton" || theme === "marketButton2") {
+        myColor = "#637aff";
+    } 
+    //Casos em que fundo é o background dos temas (dak e light) e são alteraveis
+    else {
+        myColor = colors.background
+    }
 
     return (
-        <TouchableOpacity style={styles[theme]} onPress={onPressFunction}>
+        <TouchableOpacity style={[styles[theme], {backgroundColor: myColor}]} onPress={onPressFunction}>
             <Icon type={Icons[iconType]}
                 name={iconName}
                 color={iconColor}
@@ -32,7 +64,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         marginBottom: 15,
-        backgroundColor: '#141f29',
+      //  backgroundColor: '#141f29',
         borderRadius: 20,
         shadowColor: "#637aff",
         shadowOffset: {
@@ -53,7 +85,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginTop: 10,
         marginBottom: 15,
-        backgroundColor: '#141f29',
+      //  backgroundColor: '#141f29',
         borderRadius: 10,
         shadowColor: "#637aff",
         shadowOffset: {
@@ -147,7 +179,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 5,
         marginBottom: 7,
-        backgroundColor: '#141f29',
+     //   backgroundColor: '#141f29',
         borderRadius: 20,
         elevation: 10,
     },

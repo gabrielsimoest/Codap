@@ -4,8 +4,12 @@ import OpButton from "../Helpers/OpButton";
 import Icon, { Icons } from "../components/Icons";
 import '../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
+import { useTheme } from "@react-navigation/native";
 
 const TranslateComponet = () => {
+
+    const {colors} = useTheme(); //Variavel de cor do tema
+
     const [modalVisible, setModalVisible] = useState(false);
 
     const { t, i18n } = useTranslation();
@@ -31,7 +35,7 @@ const TranslateComponet = () => {
                 }}
             >
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
+                    <View style={[styles.modalView, {backgroundColor: colors.background}]}>
                         <Pressable
                             style={styles.button}
                             onPress={() => setModalVisible(!modalVisible)}
@@ -40,8 +44,8 @@ const TranslateComponet = () => {
                         </Pressable>
                         <Text style={styles.modalText}>{t("select the language:")}</Text>
                         <ScrollView style={{marginBottom: 5}}>
-                            <OpButton theme={"settingsButton"} title="PORTUGUÊS" textColor={currentLanguage === 'pt' ? '#5469D3' : 'white'} onPressFunction={() => changeLanguage('pt')}/>
-                            <OpButton theme={"settingsButton"} title="ENGLISH" textColor={currentLanguage === 'en' ? '#5469D3' : 'white'} onPressFunction={() => changeLanguage('en')}/>
+                            <OpButton theme={"settingsButton"} title="PORTUGUÊS" themeColorEnable={false} textColor={currentLanguage === 'pt' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('pt')}/>
+                            <OpButton theme={"settingsButton"} title="ENGLISH" themeColorEnable={false} textColor={currentLanguage === 'en' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('en')}/>
                         </ScrollView>
                     </View>
                 </View>
@@ -54,7 +58,7 @@ const TranslateComponet = () => {
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        backgroundColor: "rgba(0, 0, 0, 0.85)",
         justifyContent: "center",
         alignItems: "center",
     },

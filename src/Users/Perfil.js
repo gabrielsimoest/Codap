@@ -9,9 +9,14 @@ import SQLite from 'react-native-sqlite-storage';
 import HeaderUser from '../components/HeaderUser';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
+<<<<<<< Updated upstream
 import { useFocusEffect } from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+=======
+import { useTheme } from '@react-navigation/native';
+
+>>>>>>> Stashed changes
 
 const db = SQLite.openDatabase(
     {
@@ -23,6 +28,8 @@ const db = SQLite.openDatabase(
 );
 
 export default function Perfil() {
+
+    const {colors} = useTheme(); //Variavel de cores do tema
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -63,22 +70,28 @@ export default function Perfil() {
     }
 
     return (
+<<<<<<< Updated upstream
         <View style={styles.container}>
             <HeaderUser title='Perfil' XP={XP}/>
             <View style={styles.direction}>
+=======
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
+            <DefaultHeader title='Perfil' />
+            <View style={[styles.direction, {backgroundColor: colors.background}]}>
+>>>>>>> Stashed changes
 
                 <Icon type={Icons.FontAwesome}
                     name='user-circle'
-                    color={"#233648"}
+                    color={colors.border}
                     size={150}
-                    style={styles.account} />
+                    style={[styles.account, {backgroundColor: colors.notification}]} />
                 <View style={styles.components}>
-                    <Text style={styles.text}>Nome: </Text>
+                    <Text style={[styles.text, {color: colors.text}]}>Nome: </Text>
                     <Text style={styles.text2}
                         adjustsFontSizeToFit={true}
                         numberOfLines={2}
                     >{name}</Text>
-                    <Text style={styles.text}>Email: </Text>
+                    <Text style={[styles.text, {color: colors.text}]}>Email: </Text>
                     <Text style={styles.text2}
                         adjustsFontSizeToFit={true}
                         numberOfLines={3}
@@ -91,7 +104,7 @@ export default function Perfil() {
                 <OpButton theme='primaryButton' title='Alterar foto' onPressFunction={() => console.log("foto")} />
                 <OpButton theme='primaryButton' title='Conquistas' onPressFunction={() => console.log("conquista")} />
                 <OpButton theme='primaryButton' title='Sair' onPressFunction={() => console.log("sair")}
-                    iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={"white"} iconSize={25} />
+                    iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />
             </ScrollView>
         </View>
 

@@ -5,8 +5,16 @@ import SQLite from 'react-native-sqlite-storage';
 import OpButton from '../Helpers/OpButton';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTheme } from "@react-navigation/native"
 
 export default function Store() {
+<<<<<<< Updated upstream
+=======
+
+    const {colors} = useTheme(); //Variavel de cor do tema
+
+    const [getData, setgetData] = useState(false);
+>>>>>>> Stashed changes
     const [Dependa, setDependa] = useState('');
     const [XP, setXP] = useState('');
 
@@ -24,24 +32,24 @@ export default function Store() {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
             <HeaderShop dependa={Dependa}/>
-            <Text style={styles.headert}>COMPRE COM DEPENDABOTS</Text>
-            <View style={styles.list}>
+            <Text style={[styles.headert, {color: colors.text}]}>COMPRE COM DEPENDABOTS</Text>
+            <View style={[styles.list, {backgroundColor: colors.primary}]}>
                 <Image style={styles.tinyLogo} source={require('../../assets/potion.png')} />
-                <Text style={styles.textL}>Dobro de Experiencia</Text>
+                <Text style={[styles.textL, {color: colors.text}]}>Dobro de Experiencia</Text>
                 <View style={styles.button}>
                     <OpButton theme={"marketButton"} title="COMPRAR" />
                 </View>
             </View>
-            <View style={styles.list}>
-                <Text style={styles.textL2}>Baú Surpresa</Text>
+            <View style={[styles.list, {backgroundColor: colors.primary}]}>
+                <Text style={[styles.textL2, {color: colors.text}]}>Baú Surpresa</Text>
                 <Image style={styles.tinyLogo2} source={require('../../assets/CaixaSurpresa.png')} />
                 <OpButton theme={"marketButton2"} title="COMPRAR" />
             </View>
-            <View style={styles.list}>
+            <View style={[styles.list, {backgroundColor: colors.primary}]}>
                 <Image style={styles.tinyLogo3} source={require('../../assets/Time.png')} />
-                <Text style={styles.textL3}>Dobro de Tempo</Text>
+                <Text style={[styles.textL, {color: colors.text}]}>Dobro de Tempo</Text>
                 <View style={styles.button}>
                     <OpButton theme={"marketButton"} title="COMPRAR" />
                 </View>

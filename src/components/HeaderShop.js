@@ -4,6 +4,7 @@ import { Surface, Title } from 'react-native-paper';
 import Icons from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Octicons';
 import SQLite from 'react-native-sqlite-storage';
+import { useTheme } from '@react-navigation/native';
 
 const db = SQLite.openDatabase(
   {
@@ -15,20 +16,22 @@ const db = SQLite.openDatabase(
 );
 
 const HeaderShop = ({style, dependa}) => {
+
+  const {colors} = useTheme();
   
   const TitleView = () => (
     <View style={styles.titleView}>
-      <Title style={{ color: 'white', fontFamily: 'Roboto' }}>      Market</Title>
+      <Title style={{ color: colors.text, fontFamily: 'Roboto' }}>      Market</Title>
     </View>
   );
   const RightView = () => (
     <View style={[styles.view, styles.rightView]}>
-      <Text style={{ color: 'white', fontFamily: 'Roboto', fontSize: 19, fontWeight: 'bold', }}>{dependa}  </Text>
-      <Icon name="dependabot" size={25} color="#fff" />
+      <Text style={{ color: colors.text, fontFamily: 'Roboto', fontSize: 19, fontWeight: 'bold', }}>{dependa}  </Text>
+      <Icon name="dependabot" size={25} color={colors.text} />
     </View>
   );
   return (
-    <Surface style={[styles.header, style, { backgroundColor: '#141f29', }]}>
+    <Surface style={[styles.header, style, { backgroundColor: colors.background }]}>
       <TitleView />
       <RightView />
     </Surface>

@@ -1,12 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, useTheme } from '@react-navigation/native';
 import { createStackNavigator, cardStyleInterpolator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, {useEffect, useRef} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Icon, {Icons} from './components/Icons';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
 
+import './ReduxRoot/Store/configureStore';
 import Login from './Login/Login';
 import Register from './Login/Register';
 //import List from './src/Listadmin';
@@ -18,8 +19,9 @@ import Class from './Aulas/Class';
 import OptionView from './Helpers/OptionView';
 //import Testes from './Teste';
 import Testes2 from './Teste2';
-import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html} from './Aulas/ClassContent/Html/Basic_html';
+import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,20 +71,20 @@ const TabArr = [
 ];
 
 const TabButton = props => {
-  const {item, onPress, accessibilityState} = props;
+  const { item, onPress, accessibilityState } = props;
   const focused = accessibilityState.selected;
   const viewRef = useRef(null);
 
   useEffect(() => {
     if (focused) {
       viewRef.current.animate({
-        0: {scale: 0.5, rotate: '0deg'},
-        1: {scale: 1.5, rotate: '360deg'},
+        0: { scale: 0.5, rotate: '0deg' },
+        1: { scale: 1.5, rotate: '360deg' },
       });
     } else {
       viewRef.current.animate({
-        0: {scale: 1.5, rotate: '360deg'},
-        1: {scale: 1, rotate: '0deg'},
+        0: { scale: 1.5, rotate: '360deg' },
+        1: { scale: 1, rotate: '0deg' },
       });
     }
   }, [focused]);
@@ -103,7 +105,10 @@ const TabButton = props => {
   );
 };
 
+//Função bottom tab
 function HomeTabs() {
+  const {colors} = useTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -115,7 +120,7 @@ function HomeTabs() {
           right: 16,
           left: 16,
           borderRadius: 16,
-          backgroundColor: '#141f29'
+          backgroundColor: colors.background
         },
       }}>
       {TabArr.map((item, index) => {
@@ -135,6 +140,7 @@ function HomeTabs() {
   );
 }
 
+//Componente style do botton tab
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -143,24 +149,62 @@ const styles = StyleSheet.create({
   },
 });
 
+//Animação stack navigation
 const forFade = ({ current }) => ({
   cardStyle: {
     opacity: current.progress,
   },
 });
 
+/* vvv Gerenciamento dos temas vvv */
+
+//Dark mode
+const CustomDarkMode = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    //Definir as cores
+    background: "#141f29",
+    text: "#FFFF",
+    primary: "#1B2B39",
+    card: '#0E151C',
+    border: "#233648",
+    notification: "#33526E"
+  }
+}
+
+//Light mode
+const CustomLightMode = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    //Definir as cores
+    background: "#FFFF",
+    text: "#000",
+    primary: "#F1F1F1",
+    card: '#DEDFE1',
+    border: "#E5E5E5",
+    notification: "#F5F5F5"
+  }
+}
+
+/* ^^^ Gerenciamento dos temas ^^^ */
+
+//APP
 function App() {
+
+  //Variavel para seleção de tema
+  let currentTheme = useSelector(state=>{
+    return state.myDarkMode
+  })
+
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={currentTheme? CustomDarkMode:CustomLightMode}>
       <Stack.Navigator
         screenOptions={{
           header: () => null
         }}
       >
-        <Stack.Screen
-          name="Login"
-          component={Login}
-        />
         <Stack.Screen
           name="Home"
           component={HomeTabs}
@@ -198,7 +242,7 @@ function App() {
           name='BasicPrat1_html'
           component={BasicPrat1_html}
           options={{ cardStyleInterpolator: forFade }}
-          
+
         />
         <Stack.Screen
           name='OptionView'
@@ -225,7 +269,7 @@ function App() {
           component={CongratsView}
           options={{ cardStyleInterpolator: forFade }}
         />
-        
+
 
       </Stack.Navigator>
     </NavigationContainer>

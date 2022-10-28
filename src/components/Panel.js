@@ -1,6 +1,8 @@
 import React,{Component} from 'react'; //Step 1
 import {StyleSheet,Text,View,Image,TouchableHighlight,Animated} from 'react-native';
 import IconM from 'react-native-vector-icons/MaterialIcons';
+import {useTheme} from '@react-navigation/native'
+
 
 class Panel extends Component{
     constructor(props){
@@ -21,8 +23,9 @@ class Panel extends Component{
         
     }
 
-
     render(){
+        
+
         let icon = this.icons['down'];
 
         if(this.state.expanded){
@@ -31,7 +34,7 @@ class Panel extends Component{
 
         //Step 5
         return ( 
-            <View style={styles.container} >
+            <View style={[styles.container]} >
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>{this.state.title}</Text>
                     <TouchableHighlight 

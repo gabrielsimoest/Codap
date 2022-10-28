@@ -8,13 +8,13 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
-import Icon, { Icons } from '../../components/Icons';
-import { useNavigation } from '@react-navigation/native';
-
+import { useNavigation, useTheme } from '@react-navigation/native';
 
 const Linguagem = 'HTML'
 
 export default function CollapseHtml () {
+
+    const {colors} = useTheme(); //Cores do tema
 
     const navigation = useNavigation();
 
@@ -36,13 +36,13 @@ export default function CollapseHtml () {
         setState4(collapsed4= !collapsed4);
     };
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, {backgroundColor: colors.background}]}>
                 <TouchableOpacity
                     onPress={toggleExpanded}
-                    style={styles.class}
+                    style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={styles.title}>Módulo 1</Text>
-                    <Text style={styles.text}>Conceitos básicos de {Linguagem}</Text>
+                    <Text style={[styles.title, {color: colors.text}]}>Módulo 1</Text>
+                    <Text style={[styles.text, {color: colors.text}]}>Conceitos básicos de {Linguagem}</Text>
                     <Image style={styles.figure} source={require('../../../assets/Robo_basics.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed1}>
@@ -58,14 +58,14 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')}/>
                     </View>
-                    <View style={styles.line}></View>
+                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded2}
-                    style={styles.class}
+                    style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={styles.title}>Módulo 2</Text>
-                    <Text style={styles.text}>{Linguagem} intermediário</Text>
+                    <Text style={[styles.title, {color: colors.text}]}>Módulo 2</Text>
+                    <Text style={[styles.text, {color: colors.text}]}>{Linguagem} intermediário</Text>
                     <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed2}>
@@ -78,14 +78,14 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
-                    <View style={styles.line}></View>
+                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded3}
-                    style={styles.class}
+                    style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={styles.title}>Módulo 3</Text>
-                    <Text style={styles.text}>{Linguagem} avançado</Text>
+                    <Text style={[styles.title, {color: colors.text}]}>Módulo 3</Text>
+                    <Text style={[styles.text, {color: colors.text}]}>{Linguagem} avançado</Text>
                     <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed3}>
@@ -95,21 +95,21 @@ export default function CollapseHtml () {
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
-                    <View style={styles.line}></View>
+                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
                 </Collapsible>
                 <TouchableOpacity
                     onPress={toggleExpanded4}
-                    style={styles.class}
+                    style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={styles.title}>Módulo 4</Text>
-                    <Text style={styles.text}>Maestria em {Linguagem}</Text>
+                    <Text style={[styles.title, {color: colors.text}]}>Módulo 4</Text>
+                    <Text style={[styles.text, {color: colors.text}]}>Maestria em {Linguagem}</Text>
                     <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed4}>
                     <View style={{ flexDirection: "row" }} >
                         <OpButton theme={"classButton"} title="Teste" />
                     </View>
-                    <View style={styles.line}></View>
+                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
                 </Collapsible>
             </View>
         )

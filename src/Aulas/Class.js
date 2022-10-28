@@ -4,6 +4,7 @@ import { Surface, Title } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Fontisto';
 import Icons from 'react-native-vector-icons/Ionicons';
 import IconM from 'react-native-vector-icons/MaterialIcons';
+import {useTheme} from '@react-navigation/native'
 
 import Css from './Css';
 import Html from './Html'
@@ -11,13 +12,16 @@ import Javascript from './Javascript';
 
 
 export function AppHeader(props,{ style }) {
+    
+    const {colors} = useTheme(); //Variavel de cor do tema
+
     return (
-        <Surface style={[styles.header, style, { backgroundColor: '#141f29', }]}>
-            <View style={styles.view}>
-                <IconM name="keyboard-arrow-down" size={30} color="white" />
+        <Surface style={[styles.header, style, { backgroundColor: colors.background }]}>
+            <View style={[styles.view, { backgroundColor: colors.background }]}>
+                <IconM name="keyboard-arrow-down" size={30} color={colors.text} />
             </View>
-            <View style={styles.titleView}>
-                <Title style={{ color: 'white', fontFamily: 'Roboto' }}>{props.tela}</Title>
+            <View style={[styles.titleView, { color: colors.background }]}>
+                <Title style={{ color: colors.text, fontFamily: 'Roboto' }}>{props.tela}</Title>
             </View>
             <View style={[styles.view, styles.rightView]}>
                 <Icons name={props.icone} size={25} color="#637aff" />
@@ -36,6 +40,9 @@ export function ScreenJourney(props) {
 }
 
 export default function Class({ navigation }) {
+
+    const {colors} = useTheme(); //Variavel de cor do tema
+
     const [visibleModal, setVisibleModal] = useState(false)
     const [journey, setJourney] = useState("Html")
     const [icon, setIcon] = useState("logo-html5")
@@ -56,7 +63,7 @@ export default function Class({ navigation }) {
         setIcon("logo-html5")
     }
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
             <TouchableOpacity onPress={() => setVisibleModal(true)} ><AppHeader tela={journey} icone={icon} /></TouchableOpacity>
 
             <Modal
@@ -73,28 +80,28 @@ export default function Class({ navigation }) {
                     >
                         <View style={styles.contant}>
                             <TouchableOpacity
-                                style={styles.button}
+                                style={[styles.button, { backgroundColor: colors.card}]}
                                 onPress={onPressHtml}
                             >
                                 <Icon name="html5" size={30} color="#637aff">
-                                    <Text style={styles.actionText}>    HTML</Text>
+                                    <Text style={[styles.actionText, {color: colors.text}]}>    HTML</Text>
                                 </Icon>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                style={styles.button}
+                                style={[styles.button, { backgroundColor: colors.card}]}
                                 onPress={onPressCss}
                             >
                                 <Icon name="css3" size={30} color="#637aff">
-                                    <Text style={styles.actionText}>    CSS</Text>
+                                    <Text style={[styles.actionText, {color: colors.text}]}>    CSS</Text>
                                 </Icon>
                             </TouchableOpacity>
 
                             <TouchableOpacity
-                                style={styles.button}
+                                style={[styles.button, { backgroundColor: colors.card}]}
                                 onPress={onPressJavascript}
                             >
                                 <Icons name="logo-javascript" size={30} color="#637aff">
-                                    <Text style={styles.actionText}>    JavaScript</Text>
+                                    <Text style={[styles.actionText, {color: colors.text}]}>    JavaScript</Text>
                                 </Icons>
                             </TouchableOpacity>
                         </View>

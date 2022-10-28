@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     ScrollView,
 } from 'react-native';
@@ -12,34 +11,37 @@ import TranslateComponet from './TranslateComponent';
 import FontComponent from './FontComponent';
 import { useTranslation } from 'react-i18next';
 import AText from '../Helpers/AText';
+import ThemeComponent from './ThemeComponent';
+import { useTheme } from '@react-navigation/native';
 
 const TextSize1 = 25;
-const TextSize2 = 19;
 
 export default function Config({ navigation }) {
+
+    const {colors} = useTheme(); //Variavel de cor do tema
 
     const { t, i18n } = useTranslation();
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
             <DefaultHeader title={t("settings")}/>
 
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("system")}</AText><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("system")}</AText><View style={[styles.line, {backgroundColor: colors.text}]} />
                 </View>
                 <TranslateComponet/>
                 <FontComponent/>
-                <OpButton theme='secundaryButton' textStyle='text2' title={t("theme")} onPressFunction={() => console.log("teste")} />
+                <ThemeComponent/>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText><View style={[styles.line, {backgroundColor: colors.text}]} />
                 </View>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("notifications")} onPressFunction={() => console.log("teste")} />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="information-outline" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("informations")}</AText><View style={styles.line} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("informations")}</AText><View style={[styles.line, {backgroundColor: colors.text}]}/>
                 </View>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("update")} onPressFunction={() => console.log("teste")} />
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("version")} onPressFunction={() => console.log("teste")} />
@@ -50,10 +52,11 @@ export default function Config({ navigation }) {
     )
 }
 
+
 const styles = StyleSheet.create({
 
     container: {
-        backgroundColor: '#141f29',
+        //backgroundColor: '#141f29',
         height: "100%",
     },
     scroller: {

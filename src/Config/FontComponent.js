@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { Alert, Modal, StyleSheet, Pressable, View } from "react-native";
 import OpButton from "../Helpers/OpButton";
 import Icon, { Icons } from "../components/Icons";
 import { useTranslation } from 'react-i18next';
 import AdjustSizeButton from "./AdjustSizeButton";
 import AText from "../Helpers/AText";
+import { useTheme } from "@react-navigation/native";
 
 
 const FontComponent = () => {
+
+    const {colors} = useTheme(); //Variavel de cor do tema
+
     const [modalVisible, setModalVisible] = useState(false);
 
     const { t, i18n } = useTranslation();
@@ -24,7 +28,7 @@ const FontComponent = () => {
                 }}
             >
                 <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
+                    <View style={[styles.modalView, {backgroundColor: colors.background}]}>
                         <Pressable
                             style={styles.button}
                             onPress={() => setModalVisible(!modalVisible)}
@@ -41,18 +45,10 @@ const FontComponent = () => {
     );
 };
 
-/*
-<View style={{marginTop: 5}}>
-                            <OpButton theme={"settingsButton"} title="Pequena" onPressFunction={()=> AdjustSize({setSize: 1})}/>
-                            <OpButton theme={"settingsButton"} title="Média" onPressFunction={()=> AdjustSize({setSize: 2})}/>
-                            <OpButton theme={"settingsButton"} title="Grande" onPressFunction={()=> AdjustSize({setSize: 3})}/>                            
-                        </View>
-*/
-
 const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
+        backgroundColor: "rgba(0, 0, 0, 0.85)",
         justifyContent: "center",
         alignItems: "center",
     },

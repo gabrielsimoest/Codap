@@ -1,12 +1,20 @@
 import React from 'react';
+<<<<<<< Updated upstream
 import { View, StyleSheet, Text } from 'react-native';
 import { Title } from 'react-native-paper';
+=======
+import { View, StyleSheet} from 'react-native';
+import { Title } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
+>>>>>>> Stashed changes
 
 function DefaultHeader ({title}) {
 
+  const {colors} = useTheme();
+
   return (
-    <View style={styles.header}>
-      <Title style={{ color: 'white', fontFamily: 'Roboto', marginLeft: 30}}>{title}</Title>
+    <View style={[styles.header, {backgroundColor: colors.background}]}>
+      <Title style={{ color: colors.text, fontFamily: 'Roboto', marginLeft: 30}}>{title}</Title>
     </View>
   )
 }
