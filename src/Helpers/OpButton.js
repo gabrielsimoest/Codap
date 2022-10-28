@@ -6,11 +6,15 @@ import {
 import Icon, { Icons } from '../components/Icons';
 import AText from './AText';
 import { useTheme } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
-function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor="white", themeColorEnable = true }) {
+function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true }) {
+
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
 
     //Variaveis e constantes para gerenciamento de cores
-    const {colors} = useTheme();
+    const { colors } = useTheme();
 
     var myColor = colors.background
 
@@ -19,15 +23,15 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
         textColor = colors.text
     }
 
-    /*Verificação do tema do botão*/
+    /*******Verificação do tema do botão*******/
     //Casos em que fundo é o primary dos temas (dak e light) e são alteraveis
-    if(theme === "classButton" || theme === "nextButton" || theme === "settingsButton") {
+    if (theme === "classButton" || theme === "nextButton" || theme === "settingsButton") {
         myColor = colors.primary;
     }
     //Casos em que fundo é verde independente do tema
-     else if (theme === "modalButton" || theme === "OptionButtonTrue" ) {
+    else if (theme === "modalButton" || theme === "OptionButtonTrue") {
         myColor = "green";
-    } 
+    }
     //Casos em que fundo é vermelho independente do tema
     else if (theme === "modalButtonE") {
         myColor = "red";
@@ -35,20 +39,29 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
     //Casos em que fundo é roxo independente do tema
     else if (theme === "marketButton" || theme === "marketButton2") {
         myColor = "#637aff";
-    } 
+    }
     //Casos em que fundo é o background dos temas (dak e light) e são alteraveis
     else {
         myColor = colors.background
     }
 
+    /*******Correção da tradução em class component*******/
+    if (title === "Aumentar fonte") {
+        title = t("increase")
+    } else if (title === "Diminuir fonte") {
+        title = t("decrease")
+    } else {
+        title = title
+    }
+
     return (
-        <TouchableOpacity style={[styles[theme], {backgroundColor: myColor}]} onPress={onPressFunction}>
+        <TouchableOpacity style={[styles[theme], { backgroundColor: myColor }]} onPress={onPressFunction}>
             <Icon type={Icons[iconType]}
                 name={iconName}
                 color={iconColor}
                 size={iconSize}
                 style={styles.icon} />
-            <AText style={[styles.text, {color: textColor}]} defaultSize={20}>{title}</AText>
+            <AText style={[styles.text, { color: textColor }]} defaultSize={20}>{title}</AText>
         </TouchableOpacity>
     )
 }
@@ -64,7 +77,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 10,
         marginBottom: 15,
-      //  backgroundColor: '#141f29',
+        //  backgroundColor: '#141f29',
         borderRadius: 20,
         shadowColor: "#637aff",
         shadowOffset: {
@@ -85,7 +98,7 @@ const styles = StyleSheet.create({
         marginRight: 5,
         marginTop: 10,
         marginBottom: 15,
-      //  backgroundColor: '#141f29',
+        //  backgroundColor: '#141f29',
         borderRadius: 10,
         shadowColor: "#637aff",
         shadowOffset: {
@@ -101,10 +114,10 @@ const styles = StyleSheet.create({
         flexShrink: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        height: 60,
+        height: 63,
         width: '100%',
         marginLeft: 45,
-        marginRight:45,
+        marginRight: 45,
         marginBottom: 15,
         backgroundColor: '#1B2B39',
         borderRadius: 10,
@@ -115,30 +128,30 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:'92%',
+        width: '92%',
         left: 16,
         height: 50,
-        bottom:30,
+        bottom: 30,
         backgroundColor: '#1B2B39',
         borderRadius: 20,
     },
-    modalButton:{
+    modalButton: {
         flexDirection: 'row',
-        marginTop:20,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'92%',
+        width: '92%',
         left: 16,
         height: 50,
         backgroundColor: 'green',
         borderRadius: 20,
     },
-    modalButtonE:{
+    modalButtonE: {
         flexDirection: 'row',
-        marginTop:20,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'92%',
+        width: '92%',
         left: 16,
         height: 50,
         backgroundColor: 'red',
@@ -149,10 +162,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:'42%',
+        width: '42%',
         right: 56,
         height: 50,
-        bottom:30,
+        bottom: 30,
         elevation: 20,
         backgroundColor: '#637aff',
         borderRadius: 20,
@@ -162,10 +175,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width:'42%',
+        width: '42%',
         left: 30,
         height: 50,
-        bottom:30,
+        bottom: 30,
         elevation: 20,
         backgroundColor: '#637aff',
         borderRadius: 20,
@@ -179,7 +192,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginTop: 5,
         marginBottom: 7,
-     //   backgroundColor: '#141f29',
+        //   backgroundColor: '#141f29',
         borderRadius: 20,
         elevation: 10,
     },

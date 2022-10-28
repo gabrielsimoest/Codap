@@ -210,6 +210,10 @@ function App() {
           component={HomeTabs}
         />
         <Stack.Screen
+          name="Login"
+          component={Login}
+        />
+        <Stack.Screen
           name="Register"
           component={Register}
         />

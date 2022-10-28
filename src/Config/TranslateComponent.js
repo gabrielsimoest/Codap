@@ -5,6 +5,9 @@ import Icon, { Icons } from "../components/Icons";
 import '../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from "@react-navigation/native";
+import AText from "../Helpers/AText";
+
+const textSize = 20;
 
 const TranslateComponet = () => {
 
@@ -42,7 +45,7 @@ const TranslateComponet = () => {
                         >
                             <Icon type={Icons.Ionicons} name="close-circle" color={"#5469D3"}/>
                         </Pressable>
-                        <Text style={styles.modalText}>{t("select the language:")}</Text>
+                        <AText style={styles.modalText} defaultSize={textSize}>{t("select the language:")}</AText>
                         <ScrollView style={{marginBottom: 5}}>
                             <OpButton theme={"settingsButton"} title="PORTUGUÊS" themeColorEnable={false} textColor={currentLanguage === 'pt' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('pt')}/>
                             <OpButton theme={"settingsButton"} title="ENGLISH" themeColorEnable={false} textColor={currentLanguage === 'en' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('en')}/>
@@ -81,18 +84,6 @@ const styles = StyleSheet.create({
     },
     button: {
         margin: 10,
-    },
-    buttonOpen: {
-        backgroundColor: "#F194FF",
-    },
-    buttonClose: {
-        backgroundColor: "#2196F3",
-    },
-    textStyle: {
-        fontSize: 18,
-        marginLeft: 30,
-        marginTop: 10,
-        color: "white",
     },
     modalText: {
         color: "#5469D3",

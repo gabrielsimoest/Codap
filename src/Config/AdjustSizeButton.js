@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, Button } from "react-native";
+import { StyleSheet, View} from "react-native";
 import OpButton from "../Helpers/OpButton";
-import Icon, { Icons } from "../components/Icons";
-import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeCount } from '../ReduxRoot/Actions/counts'
@@ -19,7 +17,7 @@ class AdjustSizeButton extends Component {
   }
   incrementCount() {
     let { count, actions } = this.props;
-    if (count !== 10) {
+    if (count !== 5) {
       count++;
     } else {
       count = count;
@@ -30,8 +28,8 @@ class AdjustSizeButton extends Component {
     //const { count } = this.props;
     return (
       <View styles={styles.container}>
-        <OpButton theme={"settingsButton"} title= "Aumentar fonte" onPressFunction={() => this.incrementCount()}/>
-        <OpButton theme={"settingsButton"} title= "Diminuir fonte" onPressFunction={() => this.decrementCount()}/>
+        <OpButton theme={"settingsButton"} title="Aumentar fonte" onPressFunction={() => this.incrementCount()} />
+        <OpButton theme={"settingsButton"} title="Diminuir fonte" onPressFunction={() => this.decrementCount()} />
       </View>
     );
   }

@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {StyleSheet} from 'react-native';
 import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
 import TextView from '../../../Helpers/TextView';
 
 export function BasicPrat1_html({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
@@ -13,11 +16,11 @@ export function BasicPrat1_html({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Como é feito o Titulo de uma pagina?"
-            opt1="<h1> Esse é um título <h1>"
-            opt2="<Title> Esse é um título <Title>"
-            opt3="<h6> Esse é um título <h6>"
-            opt4="<header> Esse é um título <header>"
+            pergunta={t("how is the title of a page made")}
+            opt1={t("title1")}
+            opt2={t("title2")}
+            opt3={t("title3")}
+            opt4={t("title4")}
             optCerta="opt1"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BasicPrat2_html"
@@ -26,19 +29,21 @@ export function BasicPrat1_html({ navigation }) {
 }
 
 export function BasicPrat2_html({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="35%"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="Paragrafos são geralmente utilizados para separar textos" //Opcional
+            adicionaltxt={t("paragraphs are often used to separate text")} //Opcional
             //PERGUNTA
-            pergunta="Qual desses textos está em um paragrafo?"
-            opt1="<Paragrafo> Esse é um parágrafo <parágrafo>"
-            opt2="<Title> Esse é um parágrafo <Title>"
-            opt3="<p> Esse é um parágrafo <p>"
-            opt4="<header> Esse é um parágrafo <header>"
+            pergunta={t("which of these texts is in a paragraph")}
+            opt1={t("paragraph1")}
+            opt2={t("paragraph2")}
+            opt3={t("paragraph3")}
+            opt4={t("paragraph4")}
             optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BasicPrat3_html"
@@ -46,37 +51,41 @@ export function BasicPrat2_html({ navigation }) {
     )
 }
 export function BasicPrat3_html({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
     return (
         <SelectView
             navigation={navigation}
             progresso="70%"
             adicionaltxt="none" //Opcional
-            pergunta="Codifique um titulo escrito Codap é Legal"
+            pergunta={t("code a title written Codap is awesome")}
             opt1="<h1>"
-            opt2="Texto"
-            opt3="Codap é Legal"    
+            opt2={t("text")}
+            opt3={t("codap is awesome")}    
             opt4="</h1>"
-            opt5="<titulo>" //Opcional
-            opt6="</titulo>" //Opcional
+            opt5="<p>" //Opcional
+            opt6="</p>" //Opcional
             opt7="none" //Opcional
             opt8="none" //Opcional
             //TEXTO RESPOSTA
-            txtCerto="<h1>Codap é Legal</h1>"
+            txtCerto={t("answer")} 
             navegar="BasicPrat4_html"
         />
         )
 }
 
 export function BasicPrat4_html({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
     return (
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="100%"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="Botões geralmente são usados para executar ações dentro dos sites" //Opcional
+            adicionaltxt={t("buttons are often used to perform actions within websites")} //Opcional
             //PERGUNTA
-            pergunta="Codifique um Botão escrito CODAP"
+            pergunta={t("code a button written CODAP")}
             txtantes="<button>"
             txtdepois="</button>"
             txtCerto1="CODAP"

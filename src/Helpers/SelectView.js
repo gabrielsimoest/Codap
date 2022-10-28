@@ -1,9 +1,14 @@
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
+import AText from './AText';
+
+const textSize = 23;
+const optSize = 15;
 
 var text = ""
 var disable = false
@@ -24,6 +29,11 @@ var disableopt7 = 'opt'
 var disableopt8 = 'opt'
 
 export default function SelectView({ navigation, progresso, adicionaltxt, pergunta, opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8, txtCerto, navegar }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
+
+    const { colors } = useTheme(); //Variavel de cor do tema
+    
     const [visibleModal, setVisibleModal] = useState('false')
     const [visibleModalE, setVisibleModalE] = useState('false')
     const [Textadd, setTextadd] = useState('Textadd')
@@ -144,7 +154,7 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.card}]}>
             <View>
                 <View style={styles.progressBar}><View style={[StyleSheet.absoluteFill, { backgroundColor: "#637aff", width: progresso }]} /></View>
                 <TouchableOpacity
@@ -158,10 +168,10 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <Text style={[styles[Textadd]]}>{adicionaltxt}</Text>
-                <Text style={styles.text}>{pergunta}</Text>
-                <View style={styles.code}>
-                    <View><Text style={styles.textcode}>{Texto}</Text></View>
+                <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
+                <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
+                <View style={[styles.code, {backgroundColor: colors.background}]}>
+                    <View><AText style={[styles.textcode, {color: colors.text}]} defaultSize={optSize}>{Texto}</AText></View>
                 </View>
                 <TouchableOpacity
                     onPress={() => Erase()}
@@ -176,7 +186,7 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                 </TouchableOpacity>
             </View>
 
-            <View style={styles.options}>
+            <View style={[styles.options, {backgroundColor: colors.background}]}>
                 <TouchableOpacity onPress={() => ShowText(1)} disabled={disable}>
                     <View style={styles[disableopt]}><Text style={styles.textopt}>{opt1}</Text></View>
                 </TouchableOpacity>
@@ -207,9 +217,9 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={styles.contant}>
-                        <Text style={styles.textModal}>Parabéns, Você está certo!</Text>
-                        {<OpButton theme={"modalButton"} title="Continuar" onPressFunction={() => navigation.navigate(navegar)} />}
+                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("congrats")}</AText>
+                        {<OpButton theme={"modalButton"} title={t("continue")} onPressFunction={() => navigation.navigate(navegar)} />}
                     </View>
                 </SafeAreaView>
             </Modal>
@@ -218,15 +228,15 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={styles.contant}>
-                        <Text style={styles.textModal}>Ahh não, Você errou!</Text>
-                        <OpButton theme={"modalButtonE"} title="Tentar Novamente" onPressFunction={() => setVisibleModalE(false)} />
+                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("oh no")}</AText>
+                        <OpButton theme={"modalButtonE"} title={t("try again")} onPressFunction={() => setVisibleModalE(false)} />
                     </View>
                 </SafeAreaView>
             </Modal>
-            <View style={styles.background}>
+            <View style={[styles.background, {backgroundColor: colors.background}]}>
             </View>
-            <OpButton theme={"nextButton"} title="Verificar" onPressFunction={() => Verificar()} />
+            <OpButton theme={"nextButton"} title={t("verify")} onPressFunction={() => Verificar()} />
         </View>
     )
 }

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     View,
     StyleSheet,
     ScrollView,
+    TouchableOpacity,
 } from 'react-native';
+import { Switch } from 'react-native-paper';
 import DefaultHeader from '../components/DefaultHeader';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
@@ -17,31 +19,41 @@ import { useTheme } from '@react-navigation/native';
 const TextSize1 = 25;
 
 export default function Config({ navigation }) {
-
-    const {colors} = useTheme(); //Variavel de cor do tema
-
+    //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
+    
+    const { colors } = useTheme(); //Variavel de cor do tema
+
+    //Switch
+    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+
+    const onToggleSwitch = () => {
+        setIsSwitchOn(!isSwitchOn)
+    };
 
     return (
-        <View style={[styles.container, {backgroundColor: colors.background}]}>
-            <DefaultHeader title={t("settings")}/>
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
+            <DefaultHeader title={t("settings")} />
 
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="cellphone-cog" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("system")}</AText><View style={[styles.line, {backgroundColor: colors.text}]} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("system")}</AText><View style={[styles.line, { backgroundColor: colors.text }]} />
                 </View>
-                <TranslateComponet/>
-                <FontComponent/>
-                <ThemeComponent/>
+                <TranslateComponet />
+                <FontComponent />
+                <ThemeComponent />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText><View style={[styles.line, {backgroundColor: colors.text}]} />
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText><View style={[styles.line, { backgroundColor: colors.text }]} />
                 </View>
-                <OpButton theme='secundaryButton' textStyle='text2' title={t("notifications")} onPressFunction={() => console.log("teste")} />
+                <TouchableOpacity style={[styles.button, { backgroundColor: colors.background }]} onPress={() => onToggleSwitch()}>
+                    <AText style={[styles.text3, { color: colors.text }]} defaultSize={20}>{t("notifications")}</AText>
+                    <Switch style={{ marginTop: 5 }} value={isSwitchOn} onValueChange={onToggleSwitch} color={'#5469D3'} />
+                </TouchableOpacity>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.MaterialCommunityIcons} name="information-outline" style={styles.icon} size={25} color={"#5469D3"} />
-                    <AText style={styles.text} defaultSize={TextSize1}>{t("informations")}</AText><View style={[styles.line, {backgroundColor: colors.text}]}/>
+                    <AText style={styles.text} defaultSize={TextSize1}>{t("informations")}</AText><View style={[styles.line, { backgroundColor: colors.text }]} />
                 </View>
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("update")} onPressFunction={() => console.log("teste")} />
                 <OpButton theme='secundaryButton' textStyle='text2' title={t("version")} onPressFunction={() => console.log("teste")} />
@@ -120,5 +132,29 @@ const styles = StyleSheet.create({
     icon: {
         marginTop: 20,
         marginRight: 10,
-    }
+    },
+    button: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: "space-between",
+        height: 60,
+        padding: 10,
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 10,
+        marginBottom: 15,
+        backgroundColor: '#141f29',
+        borderRadius: 10,
+        shadowColor: "#637aff",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.28,
+        shadowRadius: 7.00,
+        elevation: 7,
+    },
+    text3: {
+        color: "white",
+    },
 })

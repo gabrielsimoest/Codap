@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, Image, } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 import HeaderShop from '../components/HeaderShop';
 import SQLite from 'react-native-sqlite-storage';
 import OpButton from '../Helpers/OpButton';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from "@react-navigation/native"
+import AText from '../Helpers/AText';
+import { useTranslation } from 'react-i18next';
+
+const headerTextSize = 25;
+const textSize = 20;
 
 export default function Store() {
+
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
 
     const {colors} = useTheme(); //Variavel de cor do tema
 
@@ -30,24 +38,24 @@ export default function Store() {
     return (
         <View style={[styles.container, {backgroundColor: colors.background}]}>
             <HeaderShop dependa={Dependa}/>
-            <Text style={[styles.headert, {color: colors.text}]}>COMPRE COM DEPENDABOTS</Text>
+            <Text style={[styles.headert, {color: colors.text}]}>{t("buy using dependabots")}</Text>
             <View style={[styles.list, {backgroundColor: colors.primary}]}>
                 <Image style={styles.tinyLogo} source={require('../../assets/potion.png')} />
-                <Text style={[styles.textL, {color: colors.text}]}>Dobro de Experiencia</Text>
+                <AText style={[styles.textL, {color: colors.text}]} defaultSize={textSize}>{t("double experience")}</AText>
                 <View style={styles.button}>
-                    <OpButton theme={"marketButton"} title="COMPRAR" />
+                    <OpButton theme={"marketButton"} title={t("buy")} />
                 </View>
             </View>
             <View style={[styles.list, {backgroundColor: colors.primary}]}>
-                <Text style={[styles.textL2, {color: colors.text}]}>Baú Surpresa</Text>
+                <AText style={[styles.textL2, {color: colors.text}]} defaultSize={textSize}>{t("surprise chest")}</AText>
                 <Image style={styles.tinyLogo2} source={require('../../assets/CaixaSurpresa.png')} />
-                <OpButton theme={"marketButton2"} title="COMPRAR" />
+                <OpButton theme={"marketButton2"} title={t("buy")} />
             </View>
             <View style={[styles.list, {backgroundColor: colors.primary}]}>
                 <Image style={styles.tinyLogo3} source={require('../../assets/Time.png')} />
-                <Text style={[styles.textL, {color: colors.text}]}>Dobro de Tempo</Text>
+                <AText style={[styles.textL3, {color: colors.text}]} defaultSize={textSize}>{t("double time")}</AText>
                 <View style={styles.button}>
-                    <OpButton theme={"marketButton"} title="COMPRAR" />
+                    <OpButton theme={"marketButton"} title={t("buy")} />
                 </View>
             </View>
         </View>

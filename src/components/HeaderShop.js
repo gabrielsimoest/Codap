@@ -5,6 +5,7 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/Octicons';
 import SQLite from 'react-native-sqlite-storage';
 import { useTheme } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 const db = SQLite.openDatabase(
   {
@@ -17,11 +18,14 @@ const db = SQLite.openDatabase(
 
 const HeaderShop = ({style, dependa}) => {
 
-  const {colors} = useTheme();
+  //Constante de tradução, usar {t("CHAVE")} para tradução
+  const { t, i18n } = useTranslation();
+
+  const {colors} = useTheme(); //Variavel de cor do tema
   
   const TitleView = () => (
     <View style={styles.titleView}>
-      <Title style={{ color: colors.text, fontFamily: 'Roboto' }}>      Market</Title>
+      <Title style={{ color: colors.text, fontFamily: 'Roboto', marginLeft: 30 }}>{t("market")}</Title>
     </View>
   );
   const RightView = () => (

@@ -9,10 +9,16 @@ import {
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
 import { useNavigation, useTheme } from '@react-navigation/native';
+import AText from '../../Helpers/AText';
+import { useTranslation } from 'react-i18next';
 
-const Linguagem = 'HTML'
+const TitleTextSize = 23;
+const textSize = 15;
 
 export default function CollapseHtml () {
+
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
 
     const {colors} = useTheme(); //Cores do tema
 
@@ -41,8 +47,8 @@ export default function CollapseHtml () {
                     onPress={toggleExpanded}
                     style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={[styles.title, {color: colors.text}]}>Módulo 1</Text>
-                    <Text style={[styles.text, {color: colors.text}]}>Conceitos básicos de {Linguagem}</Text>
+                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module1h")}</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("concepts of html")}</AText>
                     <Image style={styles.figure} source={require('../../../assets/Robo_basics.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed1}>
@@ -64,8 +70,8 @@ export default function CollapseHtml () {
                     onPress={toggleExpanded2}
                     style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={[styles.title, {color: colors.text}]}>Módulo 2</Text>
-                    <Text style={[styles.text, {color: colors.text}]}>{Linguagem} intermediário</Text>
+                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module2h")}</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("intermediate html")}</AText>
                     <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed2}>
@@ -84,8 +90,8 @@ export default function CollapseHtml () {
                     onPress={toggleExpanded3}
                     style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={[styles.title, {color: colors.text}]}>Módulo 3</Text>
-                    <Text style={[styles.text, {color: colors.text}]}>{Linguagem} avançado</Text>
+                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module3h")}</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("advanced html")}</AText>
                     <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed3}>
@@ -101,8 +107,8 @@ export default function CollapseHtml () {
                     onPress={toggleExpanded4}
                     style={[styles.class, {backgroundColor: colors.primary}]}
                 >
-                    <Text style={[styles.title, {color: colors.text}]}>Módulo 4</Text>
-                    <Text style={[styles.text, {color: colors.text}]}>Maestria em {Linguagem}</Text>
+                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module4h")}</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("mastery in html")}</AText>
                     <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
                 </TouchableOpacity>
                 <Collapsible collapsed={collapsed4}>

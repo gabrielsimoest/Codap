@@ -10,8 +10,11 @@ import HeaderUser from '../components/HeaderUser';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
-
+import AText from '../Helpers/AText';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
+
+const TextSize1 = 20; // Tamanho padrão da fonte
 
 const db = SQLite.openDatabase(
     {
@@ -25,6 +28,9 @@ const db = SQLite.openDatabase(
 export default function Perfil() {
 
     const {colors} = useTheme(); //Variavel de cores do tema
+
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -66,7 +72,7 @@ export default function Perfil() {
 
     return (
         <View style={[styles.container, {backgroundColor: colors.background}]}>
-            <HeaderUser title='Perfil' XP={XP}/>
+            <HeaderUser title={t("account")} XP={XP}/>
             <View style={[styles.direction, {backgroundColor: colors.background}]}>
 
                 <Icon type={Icons.FontAwesome}
@@ -75,12 +81,12 @@ export default function Perfil() {
                     size={150}
                     style={[styles.account, {backgroundColor: colors.notification}]} />
                 <View style={styles.components}>
-                    <Text style={[styles.text, {color: colors.text}]}>Nome: </Text>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={TextSize1}>{t("name")}</AText>
                     <Text style={styles.text2}
                         adjustsFontSizeToFit={true}
                         numberOfLines={2}
                     >{name}</Text>
-                    <Text style={[styles.text, {color: colors.text}]}>Email: </Text>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={TextSize1}>{t("email")}</AText>
                     <Text style={styles.text2}
                         adjustsFontSizeToFit={true}
                         numberOfLines={3}
@@ -88,11 +94,11 @@ export default function Perfil() {
                 </View>
             </View>
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
-                <OpButton theme='primaryButton' title='Editar perfil' onPressFunction={() => console.log("perfil")} />
-                <OpButton theme='primaryButton' title='Alterar senha' onPressFunction={() => console.log("senha")} />
-                <OpButton theme='primaryButton' title='Alterar foto' onPressFunction={() => console.log("foto")} />
-                <OpButton theme='primaryButton' title='Conquistas' onPressFunction={() => console.log("conquista")} />
-                <OpButton theme='primaryButton' title='Sair' onPressFunction={() => console.log("sair")}
+                <OpButton theme='primaryButton' title={t("edit account")} onPressFunction={() => console.log("perfil")} />
+                <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => console.log("senha")} />
+                <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} />
+                <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => console.log("conquista")} />
+                <OpButton theme='primaryButton' title={t("exit")} onPressFunction={() => console.log("sair")}
                     iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />
             </ScrollView>
         </View>

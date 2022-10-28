@@ -4,7 +4,11 @@ import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import SQLite from 'react-native-sqlite-storage';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
+import AText from './AText';
+
+const textSize = 30;
 
 const db = SQLite.openDatabase(
     {
@@ -16,6 +20,12 @@ const db = SQLite.openDatabase(
 );
 
 export default function CongratsView({ navigation, progresso }) {
+
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
+
+    const {colors} = useTheme(); //Cores do tema
+
     const [talk, setTalk] = useState('');
     const [Dependa, setDependa] = useState('');
     const [UserId, setUserId] = useState('');
@@ -29,15 +39,15 @@ export default function CongratsView({ navigation, progresso }) {
             var randomNumber = Math.floor(Math.random() * 3) + 1;
 
             if (randomNumber == 1) {
-                setTalk('Parábens, Você foi feito para isso!')
+                setTalk(t("congratulations"))
                 Coins = 10
             }
             else if (randomNumber == 2) {
-                setTalk('Continue Assim!')
+                setTalk(t("keep it up"))
                 Coins = 15
             }
             else if (randomNumber == 3) {
-                setTalk('Você foi incrivel!')
+                setTalk(t("you were amazing"))
                 Coins = 20
             }
             getUser();
@@ -88,7 +98,7 @@ export default function CongratsView({ navigation, progresso }) {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, {backgroundColor: colors.background}]}>
             <View>
                 <TouchableOpacity
                     onPress={() => setData()}
@@ -102,12 +112,12 @@ export default function CongratsView({ navigation, progresso }) {
                     />
                 </TouchableOpacity>
                 <View>
-                    <Text style={styles.text}>{talk}</Text>
-                    <Text style={styles.text}>+{CView} DependaBots</Text>
-                    <Text style={styles.text}>+20 XP</Text>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{talk}</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>+{CView} DependaBots</AText>
+                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>+20 XP</AText>
                 </View>
             </View>
-            <OpButton theme={"nextButton"} title="Voltar à Tela Inicial" onPressFunction={() => setData()} />
+            <OpButton theme={"nextButton"} title={t("back")} onPressFunction={() => setData()} />
 
         </View>
     )
