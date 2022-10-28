@@ -8,13 +8,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTheme } from "@react-navigation/native"
 
 export default function Store() {
-<<<<<<< Updated upstream
-=======
 
     const {colors} = useTheme(); //Variavel de cor do tema
 
-    const [getData, setgetData] = useState(false);
->>>>>>> Stashed changes
     const [Dependa, setDependa] = useState('');
     const [XP, setXP] = useState('');
 

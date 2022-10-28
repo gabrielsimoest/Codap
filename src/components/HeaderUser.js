@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Title } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
+import { color } from 'react-native-reanimated';
 
 function HeaderUser ({title , XP}) {
 
+  const {colors} = useTheme();
+
   return (
-    <View style={styles.header}>
-      <Title style={{ color: 'white', fontFamily: 'Roboto', marginLeft: 30}}>{title}</Title>
+    <View style={[styles.header, {backgroundColor: colors.background}]}>
+      <Title style={{ color: colors.text, fontFamily: 'Roboto', marginLeft: 30}}>{title}</Title>
       <View style={styles.xpStyle}>
-                    <Text style={styles.textXP}
+                    <Text style={[styles.textXP, {color: colors.text}]}
                         adjustsFontSizeToFit={true}
                         numberOfLines={3}   
                     >XP: {XP}</Text>

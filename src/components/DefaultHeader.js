@@ -1,12 +1,7 @@
 import React from 'react';
-<<<<<<< Updated upstream
-import { View, StyleSheet, Text } from 'react-native';
-import { Title } from 'react-native-paper';
-=======
 import { View, StyleSheet} from 'react-native';
 import { Title } from 'react-native-paper';
 import { useTheme } from '@react-navigation/native';
->>>>>>> Stashed changes
 
 function DefaultHeader ({title}) {
 

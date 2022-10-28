@@ -9,14 +9,9 @@ import SQLite from 'react-native-sqlite-storage';
 import HeaderUser from '../components/HeaderUser';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
-<<<<<<< Updated upstream
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-=======
-import { useTheme } from '@react-navigation/native';
-
->>>>>>> Stashed changes
 
 const db = SQLite.openDatabase(
     {
@@ -70,15 +65,9 @@ export default function Perfil() {
     }
 
     return (
-<<<<<<< Updated upstream
-        <View style={styles.container}>
-            <HeaderUser title='Perfil' XP={XP}/>
-            <View style={styles.direction}>
-=======
         <View style={[styles.container, {backgroundColor: colors.background}]}>
-            <DefaultHeader title='Perfil' />
+            <HeaderUser title='Perfil' XP={XP}/>
             <View style={[styles.direction, {backgroundColor: colors.background}]}>
->>>>>>> Stashed changes
 
                 <Icon type={Icons.FontAwesome}
                     name='user-circle'
