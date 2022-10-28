@@ -7,8 +7,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Store() {
-    const [getData, setgetData] = useState(false);
     const [Dependa, setDependa] = useState('');
+    const [XP, setXP] = useState('');
 
     useFocusEffect(
         React.useCallback(() => {
@@ -18,6 +18,8 @@ export default function Store() {
 
     const getUser = async () => {
         const storageDependa = await AsyncStorage.getItem('DependaBots');
+        const storageXP = await AsyncStorage.getItem('XP');
+        setXP(storageXP);
         setDependa(storageDependa);
     }
 

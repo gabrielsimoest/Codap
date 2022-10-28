@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT);"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT , XP LONG);"
             )
         })
     }
@@ -69,13 +69,14 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "SELECT ID, Senha, DependaBots, Email FROM Users WHERE Senha=? and Email=?",
+                        "SELECT ID, Senha, DependaBots, XP, Email FROM Users WHERE Senha=? and Email=?",
                         [senha, email],
                         async (tx, results) => {
                             var len = results.rows.length;
                             if (len > 0) {
                                 await AsyncStorage.setItem('IdUser', JSON.stringify(results.rows.item(0).ID));
                                 await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
+                                await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
                                 navigation.navigate('Home', { screen: 'Aulas'});
                             } else {
                                 Alert.alert('Alerta!', 'Senha ou Email incorretos')

@@ -16,10 +16,10 @@ const db = SQLite.openDatabase(
 );
 
 export default function CongratsView({ navigation, progresso }) {
-    const [number, setNumber] = React.useState(1);
     const [talk, setTalk] = useState('');
     const [Dependa, setDependa] = useState('');
     const [UserId, setUserId] = useState('');
+    const [XP, setXP] = useState('');
     const [CView, setCoins] = useState(0);
     const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
     var Coins = 0
@@ -48,6 +48,8 @@ export default function CongratsView({ navigation, progresso }) {
         setCoins(Coins)
         const storageUser = await AsyncStorage.getItem('IdUser');
         const storageDependa = await AsyncStorage.getItem('DependaBots');
+        const storageXP = await AsyncStorage.getItem('XP');
+        setXP(parseInt(storageXP) + 20) ;
         setUserId(storageUser);
         setDependa(parseInt(storageDependa) + Coins);
     }
@@ -75,10 +77,11 @@ export default function CongratsView({ navigation, progresso }) {
     const setData = async () => {
         await db.transaction(async (tx) => {
             await tx.executeSql(
-                "UPDATE Users SET DependaBots=? WHERE ID = ?;",
-                [Dependa, UserId]
+                "UPDATE Users SET DependaBots=?, XP=? WHERE ID = ?;",
+                [Dependa,XP, UserId]
             );
             await AsyncStorage.setItem('DependaBots', JSON.stringify(Dependa));
+            await AsyncStorage.setItem('XP', JSON.stringify(XP));
             forceUpdate()
             navigation.navigate('Home');
         })
@@ -101,6 +104,7 @@ export default function CongratsView({ navigation, progresso }) {
                 <View>
                     <Text style={styles.text}>{talk}</Text>
                     <Text style={styles.text}>+{CView} DependaBots</Text>
+                    <Text style={styles.text}>+20 XP</Text>
                 </View>
             </View>
             <OpButton theme={"nextButton"} title="Voltar à Tela Inicial" onPressFunction={() => setData()} />

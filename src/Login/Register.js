@@ -32,7 +32,6 @@ export default function Login({ navigation }) {
 
     useEffect(() => {
         createTable();
-        getData();
     }, []);
 
     const deleteDB = () => {
@@ -50,34 +49,9 @@ export default function Login({ navigation }) {
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, );"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, XP LONG);"
             )
         })
-    }
-
-    const getData = () => {
-        try {
-            // AsyncStorage.getItem('UserData')
-            //     .then(value => {
-            //         if (value != null) {
-            //             navigation.navigate('Home');
-            //         }
-            //     })
-            db.transaction((tx) => {
-                tx.executeSql(
-                    "SELECT Name, Senha, Email FROM Users",
-                    [],
-                    (tx, results) => {
-                        var len = results.rows.length;
-                        if (len > 0) {
-
-                        }
-                    }
-                )
-            })
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const setData = async () => {
@@ -90,8 +64,8 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "INSERT INTO Users (Name, Senha, Email, DependaBots) VALUES (?,?,?,?)",
-                        [name, senha, email, 0]
+                        "INSERT INTO Users (Name, Senha, Email, DependaBots, XP) VALUES (?,?,?,?,?)",
+                        [name, senha, email, 0, 0]
                     );
                 })
                 Alert.alert('Aviso!', 'Cadastro Realizado.')

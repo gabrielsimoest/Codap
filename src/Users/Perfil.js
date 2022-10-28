@@ -6,9 +6,12 @@ import {
     ScrollView,
 } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
-import DefaultHeader from '../components/DefaultHeader';
+import HeaderUser from '../components/HeaderUser';
 import OpButton from '../Helpers/OpButton';
 import Icon, { Icons } from '../components/Icons';
+import { useFocusEffect } from '@react-navigation/native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const db = SQLite.openDatabase(
     {
@@ -23,10 +26,14 @@ export default function Perfil() {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [XP, setXP] = useState('');
 
-    useEffect(() => {
-        getData();
-    }, []);
+    useFocusEffect(
+        React.useCallback(() => {
+            getData();
+            getUser();
+        }, [])
+    );
 
     const getData = () => {
         try {
@@ -50,9 +57,14 @@ export default function Perfil() {
         }
     }
 
+    const getUser = async () => {
+        const storageXP = await AsyncStorage.getItem('XP');
+        setXP(storageXP);
+    }
+
     return (
         <View style={styles.container}>
-            <DefaultHeader title='Perfil' />
+            <HeaderUser title='Perfil' XP={XP}/>
             <View style={styles.direction}>
 
                 <Icon type={Icons.FontAwesome}
@@ -64,7 +76,7 @@ export default function Perfil() {
                     <Text style={styles.text}>Nome: </Text>
                     <Text style={styles.text2}
                         adjustsFontSizeToFit={true}
-                        numberOfLines={3}
+                        numberOfLines={2}
                     >{name}</Text>
                     <Text style={styles.text}>Email: </Text>
                     <Text style={styles.text2}
@@ -132,13 +144,15 @@ const styles = StyleSheet.create({
         width: "48%",
         marginLeft: '10%',
     },
-    text: {
+    text: { 
         color: "#E5E5E5",
         fontSize: 20,
+        fontWeight: 'bold',
         marginTop: 20,
     },
     text2: {
         color: "#5469D3",
+        fontWeight: 'bold',
         fontSize: 19,
         marginBottom: 20,
     },

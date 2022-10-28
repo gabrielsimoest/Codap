@@ -164,17 +164,10 @@ function App() {
         <Stack.Screen
           name="Home"
           component={HomeTabs}
-          options={{ cardStyleInterpolator: forFade }}
-        />
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
           name="Css"
