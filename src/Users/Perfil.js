@@ -13,8 +13,12 @@ import { useFocusEffect, useTheme } from '@react-navigation/native';
 import AText from '../Helpers/AText';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
+import { Modal } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 const TextSize1 = 20; // Tamanho padrão da fonte
+
 
 const db = SQLite.openDatabase(
     {
@@ -25,51 +29,78 @@ const db = SQLite.openDatabase(
     error => { console.log(error) }
 );
 
-export default function Perfil() {
+export default function Perfil({navigation}) {
 
-    const {colors} = useTheme(); //Variavel de cores do tema
+    const { colors } = useTheme(); //Variavel de cores do tema
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
+    const [visibleModal, setVisibleModal] = useState(false)
+    const [visibleModal2, setVisibleModal2] = useState(false)
+    const [visibleModal3, setVisibleModal3] = useState(false)
+    const [Senha, setSenha] = useState(false)
+    const [SenhaAtual, setSenhaAtual] = useState(false)
+    const [NovaSenha, setNovaSenha] = useState(false)
+    const [ConfirmarSenha, setConfirmarSenha] = useState(false)
+    const [NewName, setNewName] = useState(false)
+    const [UserId, setUserId] = useState(0);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [XP, setXP] = useState('');
 
     useFocusEffect(
         React.useCallback(() => {
-            getData();
             getUser();
         }, [])
     );
 
-    const getData = () => {
-        try {
-            db.transaction((tx) => {
-                tx.executeSql(
-                    "SELECT Name, Email FROM Users",
-                    [],
-                    (tx, results) => {
-                        var len = results.rows.length;
-                        if (len > 0) {
-                            var userName = results.rows.item(0).Name;
-                            var userEmail = results.rows.item(0).Email;
-                            setName(userName);
-                            setEmail(userEmail);
-                        }
-                    }
-                )
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     const getUser = async () => {
         const storageXP = await AsyncStorage.getItem('XP');
+        const storageUser = await AsyncStorage.getItem('IdUser');
+        const storageName = await AsyncStorage.getItem('Name');
+        const storageEmail = await AsyncStorage.getItem('Email');
+        const storageSenha = await AsyncStorage.getItem('Senha');
+        setUserId(storageUser);
         setXP(storageXP);
+        setName(storageName);
+        setEmail(storageEmail);
+        setSenha(storageSenha);
     }
 
+    const setNamef = async () => {
+        await db.transaction(async (tx) => {
+            await tx.executeSql(
+                "UPDATE Users SET Name=? WHERE ID = ?;",
+                [NewName, UserId]
+            );
+            setName(NewName);
+            setVisibleModal(false);
+            setVisibleModal3(true);
+        })
+    }
+
+    const setPassf = async () => {
+        if(Senha == SenhaAtual && NovaSenha == ConfirmarSenha){
+            await db.transaction(async (tx) => {
+                await tx.executeSql(
+                    "UPDATE Users SET Senha=? WHERE ID = ?;",
+                    [NovaSenha, UserId]
+                );
+                setName(NewName);
+                setVisibleModal2(false);
+                setVisibleModal3(true);
+            })
+        }else{
+            if(Senha != SenhaAtual){
+                alert('Senha Atual Incorreta')
+            }
+            if(NovaSenha != ConfirmarSenha){
+                alert('A nova senha inserida não está difente do campo Confirmar')
+            }
+        }
+    }
+    
     return (
         <View style={[styles.container, {backgroundColor: colors.background}]}>
             <HeaderUser title={t("account")} XP={XP}/>
@@ -79,7 +110,7 @@ export default function Perfil() {
                     name='user-circle'
                     color={colors.border}
                     size={150}
-                    style={[styles.account, {backgroundColor: colors.notification}]} />
+                    style={[styles.account, { backgroundColor: colors.notification }]} />
                 <View style={styles.components}>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={TextSize1}>{t("name")}</AText>
                     <Text style={styles.text2}
@@ -94,13 +125,96 @@ export default function Perfil() {
                 </View>
             </View>
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
-                <OpButton theme='primaryButton' title={t("edit account")} onPressFunction={() => console.log("perfil")} />
-                <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => console.log("senha")} />
+                <OpButton theme='primaryButton' title={t("edit account")} onPressFunction={() => setVisibleModal(true)} />
+                <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => setVisibleModal2(true)} />
                 <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} />
                 <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => console.log("conquista")} />
-                <OpButton theme='primaryButton' title={t("exit")} onPressFunction={() => console.log("sair")}
+                <OpButton theme='primaryButton' title={t("exit")} onPressFunction={() => navigation.navigate('Login')}
                     iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />
             </ScrollView>
+
+            <Modal
+                visible={visibleModal}
+                transparent={true}
+            >
+                <SafeAreaView>
+                    <View style={styles.contant}>
+                        <Text style={styles.textModal2}>Alterar Perfil</Text>
+                        <TouchableOpacity
+                            onPress={() => setVisibleModal(false)}
+                        >
+                            <Icon
+                                type={Icons.Ionicons}
+                                name="ios-close-outline"
+                                color={"#33526E"}
+                                size={60}
+                                style={styles.icon}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.textModal}>Novo Nome:</Text>
+                        <TextInput style={styles.input}
+                        onChangeText={(value) => setNewName(value)}
+                        ></TextInput>
+                        <OpButton theme={"modalButtonUser"} title="Alterar" onPressFunction={() => setNamef()} />
+                    </View>
+                </SafeAreaView>
+            </Modal>
+            <Modal
+                visible={visibleModal2}
+                transparent={true}
+            >
+                <SafeAreaView>
+                    <View style={styles.contant}>
+                        <Text style={styles.textModal2}>Alterar Senha</Text>
+                        <TouchableOpacity
+                            onPress={() => setVisibleModal2(false)}
+                        >
+                            <Icon
+                                type={Icons.Ionicons}
+                                name="ios-close-outline"
+                                color={"#33526E"}
+                                size={60}
+                                style={styles.icon}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.textModal}>Senha Atual:</Text>
+                        <TextInput style={styles.input}
+                        onChangeText={(value) => setSenhaAtual(JSON.stringify(value))}
+                        ></TextInput>
+                        <Text style={styles.textModal}>Nova Senha:</Text>
+                        <TextInput style={styles.input}
+                        onChangeText={(value) => setNovaSenha(value)}
+                        ></TextInput>
+                        <Text style={styles.textModal}>Confirmar Senha:</Text>
+                        <TextInput style={styles.input}
+                        onChangeText={(value) => setConfirmarSenha(value)}
+                        ></TextInput>
+                        <OpButton theme={"modalButtonUser"} title="Alterar" onPressFunction={() => setPassf()} />
+                    </View>
+                </SafeAreaView>
+            </Modal>
+            <Modal
+                visible={visibleModal3}
+                transparent={true}
+            >
+                <SafeAreaView>
+                    <View style={styles.contant}>
+                        <TouchableOpacity
+                            onPress={() => setVisibleModal3(false)}
+                        >
+                            <Icon
+                                type={Icons.Ionicons}
+                                name="ios-close-outline"
+                                color={"#33526E"}
+                                size={60}
+                                style={styles.icon}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.textModal}>Alterado Com Sucesso</Text>
+                        <OpButton theme={"modalButtonUser"} title="Fechar" onPressFunction={() => setVisibleModal3(false)} />
+                    </View>
+                </SafeAreaView>
+            </Modal>
         </View>
 
     )
@@ -152,7 +266,7 @@ const styles = StyleSheet.create({
         width: "48%",
         marginLeft: '10%',
     },
-    text: { 
+    text: {
         color: "#E5E5E5",
         fontSize: 20,
         fontWeight: 'bold',
@@ -163,6 +277,56 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 19,
         marginBottom: 20,
+    },
+    textModal: {
+        flexGrow: 1,
+        margin: 10,
+        fontFamily: 'Roboto',
+        color: 'white',
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+    textModal2: {
+        position: 'absolute',
+        left: 10,
+        margin: 10,
+        fontFamily: 'Roboto',
+        color: 'white',
+        fontSize: 26,
+        fontWeight: "bold",
+    },
+    input: {
+        opacity: 0.93,
+        backgroundColor: "#5469D3",
+        borderRadius: 10,
+        height: 40,
+        color: '#fff',
+        marginLeft: 10,
+        marginRight: 10,
+        padding: 10,
+    },
+    contant: {
+        opacity: 0.93,
+        margin: 20,
+        marginTop: -100,
+        zIndex: 99,
+        padding: 20,
+        borderRadius: 30,
+        borderColor: 'rgba(0,0,0, 0.2)',
+        backgroundColor: '#141f29',
+
+        shadowColor: 'rgba(0,0,0, 0.3)',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        elevation: 5,
+        shadowOpacity: 0.28,
+        shadowRadius: 4,
+    },
+    icon: {
+        marginLeft: 260,
+        top: -15,
     },
 })
 

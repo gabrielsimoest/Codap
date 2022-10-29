@@ -49,7 +49,7 @@ export default function Login({ navigation }) {
             tx.executeSql(
                 "CREATE TABLE IF NOT EXISTS "
                 + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, XP LONG);"
+                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, XP LONG,Double INT);"
             )
         })
     }
@@ -64,8 +64,8 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "INSERT INTO Users (Name, Senha, Email, DependaBots, XP) VALUES (?,?,?,?,?)",
-                        [name, senha, email, 0, 0]
+                        "INSERT INTO Users (Name, Senha, Email, DependaBots, XP, Double) VALUES (?,?,?,?,?,?)",
+                        [name, senha, email, 0, 0,0]
                     );
                 })
                 Alert.alert('Aviso!', 'Cadastro Realizado.')

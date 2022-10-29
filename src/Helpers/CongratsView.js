@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, } from 'react';
-import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Modal, Image, StyleSheet } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -29,7 +29,8 @@ export default function CongratsView({ navigation, progresso }) {
     const [talk, setTalk] = useState('');
     const [Dependa, setDependa] = useState('');
     const [UserId, setUserId] = useState('');
-    const [XP, setXP] = useState('');
+    const [XP, setXP] = useState(0);
+    const [Double, setDouble] = useState(0);
     const [CView, setCoins] = useState(0);
     const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
     var Coins = 0
@@ -59,38 +60,25 @@ export default function CongratsView({ navigation, progresso }) {
         const storageUser = await AsyncStorage.getItem('IdUser');
         const storageDependa = await AsyncStorage.getItem('DependaBots');
         const storageXP = await AsyncStorage.getItem('XP');
-        setXP(parseInt(storageXP) + 20) ;
+        const storageTimeDouble = await AsyncStorage.getItem('Double');
+        const storageXPDouble = await AsyncStorage.getItem('XPDouble');
+        let multiplicador = 1
+        if (storageXPDouble == '1')
+            multiplicador = 2
+        setXP(parseInt(storageXP) + (20 * multiplicador));
         setUserId(storageUser);
         setDependa(parseInt(storageDependa) + Coins);
-    }
 
-    // const getData = () => {
-    //     try {
-    //         db.transaction((tx) => {
-    //             tx.executeSql(
-    //                 "SELECT ID, DependaBots FROM Users WHERE ID = ?",
-    //                 [UserId],
-    //                 (tx, results) => {
-    //                     var len = results.rows.length;
-    //                     if (len > 0) {
-    //                         var dependaBots = results.rows.item(0).DependaBots;
-    //                         setDependa(dependaBots);
-    //                     }
-    //                 }
-    //             )
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    }
 
     const setData = async () => {
         await db.transaction(async (tx) => {
             await tx.executeSql(
                 "UPDATE Users SET DependaBots=?, XP=? WHERE ID = ?;",
-                [Dependa,XP, UserId]
+                [Dependa, XP, UserId]
             );
             await AsyncStorage.setItem('DependaBots', JSON.stringify(Dependa));
+            await AsyncStorage.setItem('Double', JSON.stringify(Double));
             await AsyncStorage.setItem('XP', JSON.stringify(XP));
             forceUpdate()
             navigation.navigate('Home');
@@ -113,9 +101,10 @@ export default function CongratsView({ navigation, progresso }) {
                 </TouchableOpacity>
                 <View>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{talk}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>+{CView} DependaBots</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>+20 XP</AText>
+                    <AText style={[styles.text2, {color: colors.text}]} defaultSize={textSize}>+{CView} DependaBots</AText>
+                    <AText style={[styles.text2, {color: colors.text}]} defaultSize={textSize}>+{XP} XP</AText>
                 </View>
+                <Image style={styles.figure} source={require('../../assets/Robo_advanced.png')} />
             </View>
             <OpButton theme={"nextButton"} title={t("back")} onPressFunction={() => setData()} />
 
@@ -216,6 +205,20 @@ const styles = StyleSheet.create({
         height: 8,
         width: '100%',
         backgroundColor: 'white',
+    },
+    text2: {
+        marginLeft: 20,
+        flexGrow: 1,
+        fontFamily: 'Roboto',
+        color: '#637aff',
+        fontSize: 25,
+        fontWeight: "bold"
+    },
+    figure: {
+        top: -130,
+        left: -180,
+        width: 720,
+        height: 720,
     },
 
 })

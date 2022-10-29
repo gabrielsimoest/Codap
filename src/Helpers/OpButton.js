@@ -37,7 +37,7 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
         myColor = "red";
     }
     //Casos em que fundo é roxo independente do tema
-    else if (theme === "marketButton" || theme === "marketButton2") {
+    else if (theme === "marketButton" || theme === "marketButton2"|| theme === "modalButtonStore" || theme === "modalButtonUser") {
         myColor = "#637aff";
     }
     //Casos em que fundo é o background dos temas (dak e light) e são alteraveis
@@ -155,6 +155,27 @@ const styles = StyleSheet.create({
         left: 16,
         height: 50,
         backgroundColor: 'red',
+        borderRadius: 20,
+    },
+    modalButtonStore:{
+        flexDirection: 'row',
+        marginTop:20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:'92%',
+        left: 16,
+        height: 50,
+        borderRadius: 20,
+    },
+    modalButtonUser:{
+        flexDirection: 'row',
+        marginTop:30,
+        marginBottom:20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width:'92%',
+        left: 16,
+        height: 50,
         borderRadius: 20,
     },
     marketButton: {

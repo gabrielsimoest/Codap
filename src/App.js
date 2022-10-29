@@ -169,7 +169,7 @@ const CustomDarkMode = {
     primary: "#1B2B39",
     card: '#0E151C',
     border: "#233648",
-    notification: "#33526E"
+    notification: "#33526E",
   }
 }
 
@@ -216,6 +216,10 @@ function App() {
         <Stack.Screen
           name="Register"
           component={Register}
+        />
+        <Stack.Screen
+          name="Perfil"
+          component={Perfil}
         />
         <Stack.Screen
           name="Css"
