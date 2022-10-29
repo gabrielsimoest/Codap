@@ -113,6 +113,7 @@ function HomeTabs() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
+        tabBarHideOnKeyboard: false,
         tabBarStyle: {
           height: 60,
           position: 'absolute',
