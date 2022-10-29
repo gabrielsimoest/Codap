@@ -5,6 +5,7 @@ import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
 import TextView from '../../../Helpers/TextView';
 
+
 export function BasicPrat1_html({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
@@ -13,6 +14,8 @@ export function BasicPrat1_html({ navigation }) {
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="0%"
+            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
+            sec="10"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
@@ -36,6 +39,8 @@ export function BasicPrat2_html({ navigation }) {
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="35%"
+            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt={t("paragraphs are often used to separate text")} //Opcional
             //PERGUNTA
@@ -57,6 +62,8 @@ export function BasicPrat3_html({ navigation }) {
         <SelectView
             navigation={navigation}
             progresso="70%"
+            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
+            sec="10"
             adicionaltxt="none" //Opcional
             pergunta={t("code a title written Codap is awesome")}
             opt1="<h1>"
@@ -82,6 +89,8 @@ export function BasicPrat4_html({ navigation }) {
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="100%"
+            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
+            sec="10"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt={t("buttons are often used to perform actions within websites")} //Opcional
             //PERGUNTA

@@ -5,13 +5,14 @@ import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet, Keyboard
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { TextInput } from 'react-native-paper';
 import Icon, { Icons } from '../components/Icons';
+import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';
 
 const textSize = 23;
 const optSize = 20;
 
-export default function TextView({ navigation, progresso, adicionaltxt, pergunta, txtantes, txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar }) {
+export default function TextView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     
@@ -54,6 +55,7 @@ export default function TextView({ navigation, progresso, adicionaltxt, pergunta
                             style={styles.icon}
                         />
                     </TouchableOpacity>
+                    <Timer navigation={navigation} seconds={sec}/>
                     <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
                     <View style={[styles.txtarea, {backgroundColor: colors.primary}]}>

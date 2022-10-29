@@ -13,15 +13,20 @@ import Register from './Login/Register';
 //import List from './src/Listadmin';
 import Config from './Config/Config';
 import CongratsView from './Helpers/CongratsView';
+import OptionView from './Helpers/OptionView';
+import SorryView from './Helpers/SorryView';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
-import OptionView from './Helpers/OptionView';
 //import Testes from './Teste';
 import Testes2 from './Teste2';
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 import { useSelector } from 'react-redux';
+
+//Ignorar Warning Do navigator no Timer
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: Cannot update a component (`ForwardRef(BaseNavigationContainer)`)']);
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -257,6 +262,10 @@ function App() {
           name='OptionView'
           component={OptionView}
           options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name="SorryView"
+          component={SorryView}
         />
         <Stack.Screen
           name='BasicPrat2_html'

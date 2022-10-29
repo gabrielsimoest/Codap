@@ -5,10 +5,11 @@ import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'r
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AText from './AText';
+import Timer from './Timer';
 
 const textSize = 23;
 
-export default function OptionView({ navigation, progresso, adicionaltxt, pergunta, opt1, opt2, opt3, opt4, optCerta, navegar }) {
+export default function OptionView({ navigation, progresso, sec,  adicionaltxt, pergunta, opt1, opt2, opt3, opt4, optCerta, navegar }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -101,6 +102,7 @@ export default function OptionView({ navigation, progresso, adicionaltxt, pergun
                         style={styles.icon}
                     />
                 </TouchableOpacity>
+                <Timer navigation={navigation} seconds={sec}/>
                 <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
                 <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
                 <View>

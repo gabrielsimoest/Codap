@@ -30,7 +30,6 @@ export default function CongratsView({ navigation, progresso }) {
     const [Dependa, setDependa] = useState('');
     const [UserId, setUserId] = useState('');
     const [XP, setXP] = useState(0);
-    const [Double, setDouble] = useState(0);
     const [CView, setCoins] = useState(0);
     const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
     var Coins = 0
@@ -78,7 +77,6 @@ export default function CongratsView({ navigation, progresso }) {
                 [Dependa, XP, UserId]
             );
             await AsyncStorage.setItem('DependaBots', JSON.stringify(Dependa));
-            await AsyncStorage.setItem('Double', JSON.stringify(Double));
             await AsyncStorage.setItem('XP', JSON.stringify(XP));
             forceUpdate()
             navigation.navigate('Home');

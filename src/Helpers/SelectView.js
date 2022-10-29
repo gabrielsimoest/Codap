@@ -5,6 +5,7 @@ import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'r
 import { Button } from 'react-native-paper';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
+import Timer from './Timer';
 import AText from './AText';
 
 const textSize = 23;
@@ -28,7 +29,7 @@ var disableopt6 = 'opt'
 var disableopt7 = 'opt'
 var disableopt8 = 'opt'
 
-export default function SelectView({ navigation, progresso, adicionaltxt, pergunta, opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8, txtCerto, navegar }) {
+export default function SelectView({ navigation, progresso, sec, adicionaltxt, pergunta, opt1, opt2, opt3, opt4, opt5, opt6, opt7, opt8, txtCerto, navegar }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -168,6 +169,7 @@ export default function SelectView({ navigation, progresso, adicionaltxt, pergun
                         style={styles.icon}
                     />
                 </TouchableOpacity>
+                <Timer navigation={navigation} seconds={sec}/>
                 <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
                 <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
                 <View style={[styles.code, {backgroundColor: colors.background}]}>
