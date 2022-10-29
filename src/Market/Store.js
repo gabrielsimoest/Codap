@@ -95,7 +95,7 @@ export default function Store() {
             setTimeout(forceUpdate, 2000);
             setTimeout(async function () {
                 await AsyncStorage.setItem('XPDouble', '0');
-                alert("Desativado");
+                alert("Dobro de Experiencia Desativado");
                 setXpAtivo('Inativo')
                 setTimeout(forceUpdate, 2000);
             }, 300000);
