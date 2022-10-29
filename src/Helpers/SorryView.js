@@ -142,10 +142,10 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     figure: {
-        top: -130,
+        top: 40,
         left: -180,
         width: 720,
-        height: 720,
+        height: 460,
     },
 
 })

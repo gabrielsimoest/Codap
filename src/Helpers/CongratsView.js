@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useReducer, } from 'react';
-import { Text, View, TouchableOpacity, Modal, Image, StyleSheet } from 'react-native';
+import React, { useState, useReducer } from 'react';
+import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -31,6 +31,7 @@ export default function CongratsView({ navigation, progresso }) {
     const [UserId, setUserId] = useState('');
     const [XP, setXP] = useState(0);
     const [CView, setCoins] = useState(0);
+    const [XPganho, setXPganho] = useState(0);
     const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
     var Coins = 0
 
@@ -64,6 +65,7 @@ export default function CongratsView({ navigation, progresso }) {
         let multiplicador = 1
         if (storageXPDouble == '1')
             multiplicador = 2
+        setXPganho(20*multiplicador)
         setXP(parseInt(storageXP) + (20 * multiplicador));
         setUserId(storageUser);
         setDependa(parseInt(storageDependa) + Coins);
@@ -100,7 +102,7 @@ export default function CongratsView({ navigation, progresso }) {
                 <View>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{talk}</AText>
                     <AText style={[styles.text2, {color: colors.text}]} defaultSize={textSize}>+{CView} DependaBots</AText>
-                    <AText style={[styles.text2, {color: colors.text}]} defaultSize={textSize}>+{XP} XP</AText>
+                    <AText style={[styles.text2, {color: colors.text}]} defaultSize={textSize}>+{XPganho} XP</AText>
                 </View>
                 <Image style={styles.figure} source={require('../../assets/Robo_advanced.png')} />
             </View>

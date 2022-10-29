@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
@@ -75,6 +75,7 @@ export default function Perfil({navigation}) {
                 [NewName, UserId]
             );
             setName(NewName);
+            await AsyncStorage.setItem('Name', NewName);
             setVisibleModal(false);
             setVisibleModal3(true);
         })
@@ -87,7 +88,6 @@ export default function Perfil({navigation}) {
                     "UPDATE Users SET Senha=? WHERE ID = ?;",
                     [NovaSenha, UserId]
                 );
-                setName(NewName);
                 setVisibleModal2(false);
                 setVisibleModal3(true);
             })
