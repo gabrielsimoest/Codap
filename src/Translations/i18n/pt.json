@@ -1,5 +1,21 @@
 {
     "translation": {
+      "_comment info":"*********INFORMAÇÕES DO APP*********",
+      "changes":"- Aplicativo criado",
+      "dev":"Desenvolvedores:",
+      "GTS":"Gabriel Terra Simões - Estudante de engenharia da computação, UNAERP",
+      "GRP":"Gabriel Reverso Pereira - Estudante de engenharia da computação, UNAERP",
+      "dev_note":"Nota dos desenvolvedores:",
+      "dev_note2":"Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estariniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o NOME DO MASCOTE, o nosso fiel ajudante. ",
+      "special thanks":"Agradecimentos especiais",
+      "names":"Thainá - pela criação do mascote \n BETA TESTER \n BETA TESTER \n BETA TESTER \n . \n . \n . \n ",
+      "declaration":"Declaração de uso de imagens:",
+      "pictures":"Algumas imagens utilizadas no aplicativo não são de nossa autoria e foram obtidas pelo site do freepick",
+
+      "_common*********": "*********COMUNS*********",
+      "close": "Fechar",
+      "change": "Alterar",
+
       "_comment*********":"*********CONFIGURAÇÕES*********",
       "settings": "Configurações",
       "system": "Sistema",
@@ -10,8 +26,8 @@
       "theme": "Modo escuro",
       "notifications": "Notificações",
       "informations": "informações",
-      "update": "Atualização",
-      "version": "Vesão do aplicativo",
+      "update": "Atualização mais recente",
+      "version": "Versão do aplicativo",
       "about": "Sobre",
       "select the language:": "Selecione o idioma:", 
       "Change font size": "Mude o tamanho da fonte:",
@@ -27,6 +43,11 @@
       "change picture": "Alterar foto",
       "achievements": "Conquistas",
       "exit": "Sair",
+      "new name": "Novo nome",
+      "current password": "Senha atual",
+      "new password": "Nova senha",
+      "confirm password": "Confirmar senha",
+      "successfully changed": "Alterado com sucesso",
 
       "_comment3*********": "*********MARKET*********",
       "market": "Mercado",
@@ -35,6 +56,11 @@
       "surprise chest": "Baú Surpresa",
       "double time": "Dobro de Tempo",
       "buy": "COMPRAR",
+      "buy double experience": "Você deseja realmente comprar o Dobro de Experiência por 5 Minutos?",
+      "buy surprise chest": "Você deseja realmente comprar o Baú Surpresa?",
+      "buy double time": "Você deseja realmente comprar o Dobro de Tempo para sua proxima aula?",
+      "you have double experience": "Você ganhou o Dobro de XP por 5 Minutos!",
+      "you have double time": "Você ganhou o Dobro de Tempo para a Proxima aula!",
 
       "_comment4*********": "*********HOME*********",
 

@@ -18,7 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 
 const TextSize1 = 20; // Tamanho padrão da fonte
-
+const TextSize2 = 26; // Tamanho padrão da fonte
 
 const db = SQLite.openDatabase(
     {
@@ -138,8 +138,8 @@ export default function Perfil({navigation}) {
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={styles.contant}>
-                        <Text style={styles.textModal2}>Alterar Perfil</Text>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
+                        <AText style={[styles.textModal2, {color: colors.text}]} defaultSize={TextSize2}>{t("edit account")}</AText>
                         <TouchableOpacity
                             onPress={() => setVisibleModal(false)}
                         >
@@ -151,11 +151,11 @@ export default function Perfil({navigation}) {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Novo Nome:</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={TextSize1}>{t("new name")}:</AText>
                         <TextInput style={styles.input}
                         onChangeText={(value) => setNewName(value)}
                         ></TextInput>
-                        <OpButton theme={"modalButtonUser"} title="Alterar" onPressFunction={() => setNamef()} />
+                        <OpButton theme={"modalButtonUser"} title={t("change")} onPressFunction={() => setNamef()} />
                     </View>
                 </SafeAreaView>
             </Modal>
@@ -164,8 +164,8 @@ export default function Perfil({navigation}) {
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={styles.contant}>
-                        <Text style={styles.textModal2}>Alterar Senha</Text>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
+                        <AText style={[styles.textModal2, {color: colors.text}]} defaultSize={TextSize2}>{t("change password")}</AText>
                         <TouchableOpacity
                             onPress={() => setVisibleModal2(false)}
                         >
@@ -177,19 +177,19 @@ export default function Perfil({navigation}) {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Senha Atual:</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={TextSize1}>{t("current password")}:</AText>
                         <TextInput style={styles.input}
                         onChangeText={(value) => setSenhaAtual(JSON.stringify(value))}
                         ></TextInput>
-                        <Text style={styles.textModal}>Nova Senha:</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={TextSize1}>{t("new password")}:</AText>
                         <TextInput style={styles.input}
                         onChangeText={(value) => setNovaSenha(value)}
                         ></TextInput>
-                        <Text style={styles.textModal}>Confirmar Senha:</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={TextSize1}>{t("confirm password")}:</AText>
                         <TextInput style={styles.input}
                         onChangeText={(value) => setConfirmarSenha(value)}
                         ></TextInput>
-                        <OpButton theme={"modalButtonUser"} title="Alterar" onPressFunction={() => setPassf()} />
+                        <OpButton theme={"modalButtonUser"} title={t("change")} onPressFunction={() => setPassf()} />
                     </View>
                 </SafeAreaView>
             </Modal>
@@ -198,7 +198,7 @@ export default function Perfil({navigation}) {
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={styles.contant}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal3(false)}
                         >
@@ -210,8 +210,8 @@ export default function Perfil({navigation}) {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Alterado Com Sucesso</Text>
-                        <OpButton theme={"modalButtonUser"} title="Fechar" onPressFunction={() => setVisibleModal3(false)} />
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={TextSize1}>{t("successfully changed")}</AText>
+                        <OpButton theme={"modalButtonUser"} title={t("close")} onPressFunction={() => setVisibleModal3(false)} />
                     </View>
                 </SafeAreaView>
             </Modal>
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     contant: {
-        opacity: 0.93,
+        opacity: 0.99,
         margin: 20,
         marginTop: -100,
         zIndex: 99,

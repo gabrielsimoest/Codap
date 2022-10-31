@@ -11,8 +11,9 @@ import { useTheme } from "@react-navigation/native"
 import AText from '../Helpers/AText';
 import { useTranslation } from 'react-i18next';
 
-const headerTextSize = 25;
-const textSize = 20;
+const size1 = 20;
+const size2 = 23;
+const size3 = 30;
 
 const db = SQLite.openDatabase(
     {
@@ -160,34 +161,35 @@ export default function Store() {
             <View style={[styles.list, { backgroundColor: colors.primary }]}>
                 <Text style={[styles.Double, { color: colors.text }]}>{XpAtivo}</Text>
                 <Image style={styles.tinyLogo} source={require('../../assets/potion.png')} />
-                <Text style={[styles.textL, { color: colors.text }]}>{t("double experience")}</Text>
-                <Text style={[styles.textLD, { color: colors.text }]}>200 <Iconis name="dependabot" size={21} color={colors.text} /></Text>
+                <AText style={[styles.textL, { color: colors.text, }]} defaultSize={size1}>{t("double experience")}</AText>
+                <AText style={[styles.textLD, { color: colors.text }]} defaultSize={size1}>200 <Iconis name="dependabot" size={21} color={colors.text} /></AText>
                 <View style={styles.button}>
-                    <OpButton theme={"marketButton"} title="COMPRAR" onPressFunction={() => setVisibleModal(true)} />
+                    <OpButton theme={"marketButton"} title={t("buy")} onPressFunction={() => setVisibleModal(true)} />
                 </View>
             </View>
             <View style={[styles.list, { backgroundColor: colors.primary }]}>
-                <Text style={[styles.textL2, { color: colors.text }]}>{t("surprise chest")}</Text>
-                <Text style={[styles.textLD2, { color: colors.text }]}><Iconis name="dependabot" size={21} color={colors.text} /> 500</Text>
+                <AText style={[styles.textL2, { color: colors.text }]} defaultSize={size1}>{t("surprise chest")}</AText>
+                <AText style={[styles.textLD2, { color: colors.text }]} defaultSize={size1}><Iconis name="dependabot" size={21} color={colors.text} /> 500</AText>
                 <Image style={styles.tinyLogo2} source={require('../../assets/CaixaSurpresa.png')} />
-                <OpButton theme={"marketButton2"} title="COMPRAR" onPressFunction={() => setVisibleModal2(true)} />
+                <OpButton theme={"marketButton2"} title={t("buy")} onPressFunction={() => setVisibleModal2(true)} />
             </View>
             <View style={[styles.list, { backgroundColor: colors.primary }]}>
                 <Text style={[styles.Double, { color: colors.text }]}>{Double - 1}</Text>
                 <Image style={styles.tinyLogo3} source={require('../../assets/Time.png')} />
-                <Text style={[styles.textL, { color: colors.text }]}>{t("double time")}</Text>
-                <Text style={[styles.textLD3, { color: colors.text }]}>300 <Iconis name="dependabot" size={21} color={colors.text} /></Text>
+                <AText style={[styles.textL, { color: colors.text }]} defaultSize={size1}>{t("double time")}</AText>
+                <AText style={[styles.textLD3, { color: colors.text }]} defaultSize={size1}>300 <Iconis name="dependabot" size={21} color={colors.text} /></AText>
                 <View style={styles.button}>
                     <OpButton theme={"marketButton"} title={t("buy")} onPressFunction={() => setVisibleModal3(true)} />
                 </View>
             </View>
 
             <Modal
+                animationType="fade"
                 visible={visibleModal}
                 transparent={true}
             >
-                <SafeAreaView>
-                    <View style={styles.contant}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal(false)}
                         >
@@ -199,19 +201,20 @@ export default function Store() {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Você deseja realmente comprar o Dobro de Experiência por 5 Minutos?</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={size2}>{t("buy double experience")}</AText>
                         <Image style={styles.tinyModalLogo} source={require('../../assets/potion.png')} />
-                        <Text style={[styles.text, { color: colors.text }]}>200 <Iconis name="dependabot" size={30} color={colors.text} /></Text>
-                        <OpButton theme={"modalButtonStore"} title="Comprar" onPressFunction={() => sendXP()} />
+                        <AText style={[styles.text, { color: colors.text }]} defaultSize={size3}>200 <Iconis name="dependabot" size={30} color={colors.text} /></AText>
+                        <OpButton theme={"modalButtonStore"} title={t("buy")} onPressFunction={() => sendXP()} />
                     </View>
                 </SafeAreaView>
             </Modal>
             <Modal
+                animationType="fade"
                 visible={visibleModal2}
                 transparent={true}
             >
-                <SafeAreaView>
-                    <View style={styles.contant}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal2(false)}
                         >
@@ -223,19 +226,20 @@ export default function Store() {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Você deseja realmente comprar o Baú Supresa?</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={size2}>{t("buy surprise chest")}</AText>
                         <Image style={styles.tinyModalLogo2} source={require('../../assets/CaixaSurpresa.png')} />
-                        <Text style={[styles.text, { color: colors.text }]}>500 <Iconis name="dependabot" size={30} color={colors.text} /></Text>
-                        <OpButton theme={"modalButtonStore"} title="Comprar" onPressFunction={() => sendChest()} />
+                        <AText style={[styles.text, { color: colors.text }]} defaultSize={size3}>500 <Iconis name="dependabot" size={30} color={colors.text} /></AText>
+                        <OpButton theme={"modalButtonStore"} title={t("buy")} onPressFunction={() => sendChest()} />
                     </View>
                 </SafeAreaView>
             </Modal>
             <Modal
+                animationType="fade"
                 visible={visibleModal3}
                 transparent={true}
             >
-                <SafeAreaView>
-                    <View style={styles.contant}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal3(false)}
                         >
@@ -247,20 +251,21 @@ export default function Store() {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Você deseja realmente comprar o Dobro de Tempo para sua proxima aula?</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={size2}>{t("buy double time")}</AText>
                         <Image style={styles.tinyModalLogo3} source={require('../../assets/Time.png')} />
-                        <Text style={[styles.text, { color: colors.text }]}>300 <Iconis name="dependabot" size={30} color={colors.text} /></Text>
-                        <OpButton theme={"modalButtonStore"} title="Comprar" onPressFunction={() => sendDouble()} />
+                        <AText style={[styles.text, { color: colors.text }]} defaultSize={size3}>300 <Iconis name="dependabot" size={30} color={colors.text} /></AText>
+                        <OpButton theme={"modalButtonStore"} title={t("buy")} onPressFunction={() => sendDouble()} />
                     </View>
                 </SafeAreaView>
             </Modal>
 
             <Modal
+                animationType="fade"
                 visible={visibleModal4}
                 transparent={true}
             >
-                <SafeAreaView>
-                    <View style={styles.contant}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal4(false)}
                         >
@@ -272,19 +277,20 @@ export default function Store() {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Você ganhou o Dobro de XP por 5 Minutos!</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={size2}>{t("you have double experience")}</AText>
                         <Image style={styles.tinyModalLogo} source={require('../../assets/potion.png')} />
-                        <OpButton theme={"modalButtonStore"} title="Fechar" onPressFunction={() => setVisibleModal4(false)} />
+                        <OpButton theme={"modalButtonStore"} title={t("close")} onPressFunction={() => setVisibleModal4(false)} />
                     </View>
                 </SafeAreaView>
             </Modal>
 
             <Modal
+                animationType="fade"
                 visible={visibleModal5}
                 transparent={true}
             >
-                <SafeAreaView>
-                    <View style={styles.contant}>
+                <SafeAreaView style={styles.centeredView}>
+                    <View style={[styles.contant, {backgroundColor: colors.background}]}>
                         <TouchableOpacity
                             onPress={() => setVisibleModal5(false)}
                         >
@@ -296,9 +302,9 @@ export default function Store() {
                                 style={styles.icon}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.textModal}>Você ganhou o Dobro de Tempo para a Proxima aula!</Text>
+                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={size2}>{t("you have double time")}</AText>
                         <Image style={styles.tinyModalLogo3} source={require('../../assets/Time.png')} />
-                        <OpButton theme={"modalButtonStore"} title="Fechar" onPressFunction={() => setVisibleModal5(false)} />
+                        <OpButton theme={"modalButtonStore"} title={t("close")} onPressFunction={() => setVisibleModal5(false)} />
                     </View>
                 </SafeAreaView>
             </Modal>
@@ -365,7 +371,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         fontFamily: 'Roboto',
-        right: 40,
+        right: 37,
         top: 10,
     },
     textL2: {
@@ -414,7 +420,7 @@ const styles = StyleSheet.create({
         top: 38
     },
     contant: {
-        opacity: 0.93,
+        opacity: 0.99,
         margin: 20,
         marginTop: 130,
         zIndex: 99,
@@ -490,5 +496,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 5,
         left: 7
+    },
+    centeredView: {
+        flex: 1,
+        backgroundColor: "rgba(0, 0, 0, 0.85)",
     },
 })

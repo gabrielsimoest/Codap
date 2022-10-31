@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Modal, StyleSheet, Text, Pressable, View, ScrollView } from "react-native";
+import { Alert, Modal, StyleSheet, Pressable, View, ScrollView } from "react-native";
 import OpButton from "../Helpers/OpButton";
 import Icon, { Icons } from "../components/Icons";
 import '../Translations/i18n/i18n';

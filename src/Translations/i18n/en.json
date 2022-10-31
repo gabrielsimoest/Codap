@@ -1,5 +1,20 @@
   {
     "translation": {
+      "_comment info":"*********INFORMAÇÕES DO APP*********",
+      "changes":"- Aplicativo criado",
+      "dev":"Desenvolvedores:",
+      "GTS":"Gabriel Terra Simões - Computer Engineering Student, UNAERP",
+      "GRP":"Gabriel Reverso Pereira - Computer Engineering Student, UNAERP",
+      "dev_note":"Developers Note:",
+      "dev_note2":"Codap was made by two computer engineering students from the University of Ribeirão Preto - UNAERP. Our intention with Codap is to expand the horizon of knowledge and, at the same time, bring a part of what can be done with WEB development to people who are curious or who want to be starting as a WEB developer. We hope you can have a good journey of knowledge with NAME OF THE MASCOT, our faithful helper.",
+      "special thanks":"Special thanks:",
+      "names":"Thainá - for creating the mascot \n BETA TESTER \n BETA TESTER \n BETA TESTER \n . \n . \n . \n",
+      "declaration":"Declaration of use of images:",
+      "pictures":"Some images used in the application are not our own and were obtained from the freepick website",
+
+      "_common*********": "*********COMUNS*********",
+      "close": "Close",
+      "change": "Change",
 
       "_comment*********": "*********CONFIGURAÇÃO*********",
       "settings": "Settings",
@@ -10,8 +25,8 @@
       "font": "Font",
       "theme": "Dark mode",
       "notifications": "Notifications",
-      "informations": "informations",
-      "update": "Updates",
+      "informations": "Informations",
+      "update": "Most recent update",
       "version": "App version",
       "about": "About",
       "select the language:": "Select the language:",
@@ -28,6 +43,11 @@
       "change picture": "Change picture",
       "achievements": "Achievements",
       "exit": "Exit",
+      "new name": "New name",
+      "current password": "Current password",
+      "new password": "new password",
+      "confirm password": "confirm password",
+      "successfully changed": "Successfully changed",
 
       "_comment3*********": "*********MARKET*********",
       "market": "Market",
@@ -36,6 +56,11 @@
       "surprise chest": "Surprise Chest",
       "double time": "Double Time",
       "buy": "BUY",
+      "buy double experience": "Do you really want to buy Double Experience for 5 Minutes?",
+      "buy surprise chest": "Do you really want to buy the Surprise Chest?",
+      "buy double time": "Do you really want to buy Double Time for your next class?",
+      "you have double experience": "You've earned Double XP for 5 Minutes!",
+      "you have double time": "You won Double Time for the Next Class!",
 
       "_comment4*********": "*********HOME*********",
 

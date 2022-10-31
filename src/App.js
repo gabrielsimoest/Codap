@@ -1,8 +1,8 @@
 import { NavigationContainer, DefaultTheme, useTheme } from '@react-navigation/native';
-import { createStackNavigator, cardStyleInterpolator } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
@@ -18,8 +18,6 @@ import SorryView from './Helpers/SorryView';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
-//import Testes from './Teste';
-import Testes2 from './Teste2';
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 import { useSelector } from 'react-redux';
@@ -112,7 +110,7 @@ const TabButton = props => {
 
 //Função bottom tab
 function HomeTabs() {
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
   return (
     <Tab.Navigator
@@ -171,7 +169,7 @@ const CustomDarkMode = {
     ...DefaultTheme.colors,
     //Definir as cores
     background: "#141f29",
-    text: "#FFFF",
+    text: "#F1F1F1",
     primary: "#1B2B39",
     card: '#0E151C',
     border: "#233648",
@@ -200,12 +198,12 @@ const CustomLightMode = {
 function App() {
 
   //Variavel para seleção de tema
-  let currentTheme = useSelector(state=>{
+  let currentTheme = useSelector(state => {
     return state.myDarkMode
   })
 
   return (
-    <NavigationContainer theme={currentTheme? CustomDarkMode:CustomLightMode}>
+    <NavigationContainer theme={currentTheme ? CustomDarkMode : CustomLightMode}>
       <Stack.Navigator
         screenOptions={{
           header: () => null
@@ -245,11 +243,6 @@ function App() {
         <Stack.Screen
           name='Basic3_html'
           component={Basic3_html}
-          options={{ cardStyleInterpolator: forFade }}
-        />
-        <Stack.Screen
-          name='Teste2'
-          component={Testes2}
           options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
