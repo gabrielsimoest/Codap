@@ -15,12 +15,12 @@ import { useTranslation } from 'react-i18next';
 const TitleTextSize = 23;
 const textSize = 15;
 
-export default function CollapseHtml () {
+export default function CollapseHtml() {
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
-    const {colors} = useTheme(); //Cores do tema
+    const { colors } = useTheme(); //Cores do tema
 
     const navigation = useNavigation();
 
@@ -29,96 +29,99 @@ export default function CollapseHtml () {
     var [collapsed3, setState3] = useState(true);
     var [collapsed4, setState4] = useState(true);
 
-   var toggleExpanded = () => {
-        setState(collapsed1 = !collapsed1 );
+    var toggleExpanded = () => {
+        setState(collapsed1 = !collapsed1);
     };
-   var toggleExpanded2 = () => {
-        setState2(collapsed2= !collapsed2 );
+    var toggleExpanded2 = () => {
+        setState2(collapsed2 = !collapsed2);
     };
-   var toggleExpanded3 = () => {
-        setState3(collapsed3= !collapsed3);
+    var toggleExpanded3 = () => {
+        setState3(collapsed3 = !collapsed3);
     };
-   var toggleExpanded4 = () => {
-        setState4(collapsed4= !collapsed4);
+    var toggleExpanded4 = () => {
+        setState4(collapsed4 = !collapsed4);
     };
-        return (
-            <View style={[styles.container, {backgroundColor: colors.background}]}>
-                <TouchableOpacity
-                    onPress={toggleExpanded}
-                    style={[styles.class, {backgroundColor: colors.primary}]}
-                >
-                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module1h")}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("concepts of html")}</AText>
-                    <Image style={styles.figure} source={require('../../../assets/Robo_basics.png')} />
-                </TouchableOpacity>
-                <Collapsible collapsed={collapsed1}>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('CongratsView')} />
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('Basic2_html')}/>
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')}/>
-                    </View>
-                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
-                </Collapsible>
-                <TouchableOpacity
-                    onPress={toggleExpanded2}
-                    style={[styles.class, {backgroundColor: colors.primary}]}
-                >
-                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module2h")}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("intermediate html")}</AText>
-                    <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
-                </TouchableOpacity>
-                <Collapsible collapsed={collapsed2}>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
-                </Collapsible>
-                <TouchableOpacity
-                    onPress={toggleExpanded3}
-                    style={[styles.class, {backgroundColor: colors.primary}]}
-                >
-                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module3h")}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("advanced html")}</AText>
-                    <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
-                </TouchableOpacity>
-                <Collapsible collapsed={collapsed3}>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
-                </Collapsible>
-                <TouchableOpacity
-                    onPress={toggleExpanded4}
-                    style={[styles.class, {backgroundColor: colors.primary}]}
-                >
-                    <AText style={[styles.title, {color: colors.text}]} defaultSize={TitleTextSize}>{t("module4h")}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{t("mastery in html")}</AText>
-                    <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
-                </TouchableOpacity>
-                <Collapsible collapsed={collapsed4}>
-                    <View style={{ flexDirection: "row" }} >
-                        <OpButton theme={"classButton"} title="Teste" />
-                    </View>
-                    <View style={[styles.line, {borderColor: colors.primary}]}></View>
-                </Collapsible>
-            </View>
-        )
+    return (
+        <View style={[styles.container, { backgroundColor: colors.background }]}>
+            <TouchableOpacity
+                onPress={toggleExpanded}
+                style={[styles.class, { backgroundColor: colors.primary }]}
+            >
+                <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module1h")}</AText>
+                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("concepts of html")}</AText>
+                <Image style={styles.figure} source={require('../../../assets/Robo_basics.png')} />
+            </TouchableOpacity>
+            <Collapsible collapsed={collapsed1}>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('Estrutura')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('Header')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('CongratsView')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')} />
+                </View>
+                <View style={[styles.line, { borderColor: colors.primary }]}></View>
+            </Collapsible>
+            <TouchableOpacity
+                onPress={toggleExpanded2}
+                style={[styles.class, { backgroundColor: colors.primary }]}
+            >
+                <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module2h")}</AText>
+                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("intermediate html")}</AText>
+                <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
+            </TouchableOpacity>
+            <Collapsible collapsed={collapsed2}>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={[styles.line, { borderColor: colors.primary }]}></View>
+            </Collapsible>
+            <TouchableOpacity
+                onPress={toggleExpanded3}
+                style={[styles.class, { backgroundColor: colors.primary }]}
+            >
+                <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module3h")}</AText>
+                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("advanced html")}</AText>
+                <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
+            </TouchableOpacity>
+            <Collapsible collapsed={collapsed3}>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={[styles.line, { borderColor: colors.primary }]}></View>
+            </Collapsible>
+            <TouchableOpacity
+                onPress={toggleExpanded4}
+                style={[styles.class, { backgroundColor: colors.primary }]}
+            >
+                <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module4h")}</AText>
+                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("mastery in html")}</AText>
+                <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
+            </TouchableOpacity>
+            <Collapsible collapsed={collapsed4}>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Teste" />
+                </View>
+                <View style={[styles.line, { borderColor: colors.primary }]}></View>
+            </Collapsible>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

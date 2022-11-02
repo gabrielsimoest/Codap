@@ -6,8 +6,9 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
-
+import { useSelector } from 'react-redux';
 import './ReduxRoot/Store/configureStore';
+
 import Login from './Login/Login';
 import Register from './Login/Register';
 //import List from './src/Listadmin';
@@ -18,9 +19,11 @@ import SorryView from './Helpers/SorryView';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
+//AULAS
+import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, TagsElements } from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
+import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 } from './Aulas/ClassContent/Html/EstrutandoTextos';
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
-import { useSelector } from 'react-redux';
 
 //Ignorar Warning Do navigator no Timer
 import { LogBox } from 'react-native';
@@ -278,6 +281,71 @@ function App() {
         <Stack.Screen
           name='CongratsView'
           component={CongratsView}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Estrutura'
+          component={Estrutura}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TagsElementos'
+          component={TagsElements}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HtmlStartEx1'
+          component={HtmlStartEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HtmlStartEx2'
+          component={HtmlStartEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HtmlStartEx3'
+          component={HtmlStartEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HtmlStartEx4'
+          component={HtmlStartEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Header'
+          component={H1h6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx1'
+          component={HeaderEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx2'
+          component={HeaderEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx3'
+          component={HeaderEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx4'
+          component={HeaderEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx5'
+          component={HeaderEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeaderEx6'
+          component={HeaderEx6}
           options={{ cardStyleInterpolator: forFade }}
         />
 

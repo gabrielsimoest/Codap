@@ -88,11 +88,11 @@ export const AboutComponent = () => {
                                 {t("GRP")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={17}>{t("dev_note")}</AText>
-                            <AText style={[styles.modalText, { color: colors.text, marginLeft: 2 }]} defaultSize={16}>
+                            <AText style={[styles.modalText, { color: colors.text, marginLeft: 8, marginRight: 8  }]} defaultSize={16}>
                                 {t("dev_note2")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={18}>{t("special thanks")}</AText>
-                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={16}>
+                            <AText style={[styles.modalText, { color: colors.text}]} defaultSize={16}>
                                 {t("names")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={18}>{t("declaration")}</AText>

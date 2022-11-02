@@ -116,6 +116,7 @@
       "code a button written CODAP": "Code a Button written CODAP",
 
       "_comment components": "*********COMPONENTS*********",
+      "next": "Next",
       "verify": "Verify",
       "congrats": "Congrats, you're right!",
       "continue": "Continue",

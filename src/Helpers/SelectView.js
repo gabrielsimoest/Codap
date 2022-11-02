@@ -1,8 +1,7 @@
 import { useFocusEffect, useTheme } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import Timer from './Timer';
