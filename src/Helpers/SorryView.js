@@ -31,7 +31,7 @@ export default function SorryView({ navigation }) {
                 <View>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>Você melhora na próxima!</AText>
                 </View>
-                <Image style={styles.figure} source={require('../../assets/Robo_inter.png')} />
+                <Image style={styles.figure} source={require('../../assets/Robo_triste.png')} />
             </View>
             <OpButton theme={"nextButton"} title={t("back")} onPressFunction={() => navigation.navigate('Home')} />
 
@@ -142,8 +142,8 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     figure: {
-        top: 40,
-        left: -180,
+        top: "9%",
+        left: "-41.5%",
         width: 720,
         height: 460,
     },

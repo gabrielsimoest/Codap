@@ -66,7 +66,7 @@ export function HeaderEx2({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
@@ -117,7 +117,7 @@ export function HeaderEx4({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
@@ -142,7 +142,7 @@ export function HeaderEx5({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
@@ -167,7 +167,7 @@ export function HeaderEx6({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="20"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA

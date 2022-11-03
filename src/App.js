@@ -20,8 +20,10 @@ import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
 //AULAS
-import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, TagsElements } from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
-import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 } from './Aulas/ClassContent/Html/EstrutandoTextos';
+import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, HtmlStartEx5,TagsElements } from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
+import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 } from './Aulas/ClassContent/Html/EstrutandoTitulos';
+import { P, FraseEx1, FraseEx2, FraseEx3, FraseEx4, FraseEx5, FraseEx6 } from './Aulas/ClassContent/Html/CriandoFrases';
+import { ButtonHtml, ButtonEx1, ButtonEx2, ButtonEx3, ButtonEx4, ButtonEx5, ButtonEx6} from './Aulas/ClassContent/Html/ConstruindoBotões';
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 
@@ -314,6 +316,11 @@ function App() {
           options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
+          name='HtmlStartEx5'
+          component={HtmlStartEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
           name='Header'
           component={H1h6}
           options={{ cardStyleInterpolator: forFade }}
@@ -348,7 +355,76 @@ function App() {
           component={HeaderEx6}
           options={{ cardStyleInterpolator: forFade }}
         />
-
+        <Stack.Screen
+          name='Frases'
+          component={P}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx1'
+          component={FraseEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx2'
+          component={FraseEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx3'
+          component={FraseEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx4'
+          component={FraseEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx5'
+          component={FraseEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FraseEx6'
+          component={FraseEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonHtml'
+          component={ButtonHtml}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx1'
+          component={ButtonEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx2'
+          component={ButtonEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx3'
+          component={ButtonEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx4'
+          component={ButtonEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx5'
+          component={ButtonEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ButtonEx6'
+          component={ButtonEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

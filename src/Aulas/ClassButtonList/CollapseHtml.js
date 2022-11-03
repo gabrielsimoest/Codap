@@ -56,16 +56,19 @@ export default function CollapseHtml() {
                     <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('Estrutura')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('Header')} />
+                    <OpButton theme={"classButton"} title="Estruturando Títulos" onPressFunction={() => navigation.navigate('Header')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Estruturando Textos" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
+                    <OpButton theme={"classButton"} title="Criando frases" onPressFunction={() => navigation.navigate('Frases')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Construindo Botoes" onPressFunction={() => navigation.navigate('CongratsView')} />
+                    <OpButton theme={"classButton"} title="Construindo Botões" onPressFunction={() => navigation.navigate('ButtonHtml')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
                     <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="DEMO" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

@@ -40,8 +40,9 @@ export function TagsElements({ navigation }) {
             //Texto principal
             txt="Agora que vimos a estrutura, vamos entender melhor o que está nela."
             //Textos opcionais
-            adicionaltxt="Você deve ter notado que há uma sequência de códigos que se parecem com isso <código>. Essas são as tags, e são fechadas assim: </código>."
-            adicionaltxt2="O que fica dentro das setinhas das tags é o nome do elemento. E o que fica entre as tags é o que chamamos de conteúdo."
+            adicionaltxt="A estrutura é formada por tags de abertura e fechamento, que são indicadas por essas setas <>. Dentro delas vai o nome do elemento."
+            adicionaltxt2="none"
+            adicionaltxt3="none"
             //Imagem principal
             img={require("../../../../assets/Estrutura.png")}
             //Imagens opcionais
@@ -63,16 +64,16 @@ export function HtmlStartEx1({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="Qual é o nome do elemento do código a seguir?" //Opcional
+            adicionaltxt="A maioria das tags possuem uma abertura e um fechamento. Entre elas fica o conteúdo." //Opcional
             //PERGUNTA
-            pergunta="<h1>CODAP</h1>"
-            opt1="<>"
-            opt2="CODAP"
-            opt3="h1"
-            opt4="</>"
-            optCerta="opt3"
+            pergunta="<html> representa uma tag de abertura, como seria uma tag de fechamento?"
+            opt1="<html>"
+            opt2="<end html>"
+            opt3=">html<"
+            opt4="</html>"
+            optCerta="opt4"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx2"
         />
@@ -87,16 +88,16 @@ export function HtmlStartEx2({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
+            adicionaltxt="Qual é o nome do elemento do código a seguir?" //Opcional
             //PERGUNTA
-            pergunta="O que indica uma tag?"
-            opt1="< >"
-            opt2="//"
-            opt3="TAG="
-            opt4="{ }"
-            optCerta="opt1"
+            pergunta="<h1>CODAP</h1>"
+            opt1="<>"
+            opt2="CODAP"
+            opt3="h1"
+            opt4="</>"
+            optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx3"
         />
@@ -111,16 +112,16 @@ export function HtmlStartEx3({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Qual das opções está certa?"
-            opt1="'h1'texto'/h1'"
-            opt2="|h1|texto|/h1|"
-            opt3="h1 texto /h1"
-            opt4="<h1>texto</h1>"
-            optCerta="opt4"
+            pergunta="O que indica uma tag?"
+            opt1="< >"
+            opt2="//"
+            opt3="TAG="
+            opt4="{ }"
+            optCerta="opt1"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx4"
         />
@@ -135,7 +136,31 @@ export function HtmlStartEx4({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="15"
+            sec="9999"
+            //TEXTO ADICIONAL CABEÇARIO
+            adicionaltxt="none" //Opcional
+            //PERGUNTA
+            pergunta="Qual das opções está certa?"
+            opt1="'h1'texto'/h1'"
+            opt2="|h1|texto|/h1|"
+            opt3="h1 texto /h1"
+            opt4="<h1>texto</h1>"
+            optCerta="opt4"
+            //NOME ADICIONADO NO STACK NAVIGATOR
+            navegar="HtmlStartEx5"
+        />
+    )
+}
+export function HtmlStartEx5({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
+    return (
+        <OptionView
+            navigation={navigation}
+            //BARRA DE PROGRESSO
+            progresso="0%"
+            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
+            sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
