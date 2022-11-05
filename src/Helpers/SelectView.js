@@ -1,7 +1,7 @@
 import { useFocusEffect, useTheme } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import Timer from './Timer';
@@ -33,7 +33,7 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
     const { t, i18n } = useTranslation();
 
     const { colors } = useTheme(); //Variavel de cor do tema
-    
+
     const [visibleModal, setVisibleModal] = useState('false')
     const [visibleModalE, setVisibleModalE] = useState('false')
     const [Textadd, setTextadd] = useState('Textadd')
@@ -154,7 +154,8 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
     }
 
     return (
-        <View style={[styles.container, {backgroundColor: colors.card}]}>
+        <View style={[styles.container, { backgroundColor: colors.card }]}>
+
             <View>
                 <View style={styles.progressBar}><View style={[StyleSheet.absoluteFill, { backgroundColor: "#637aff", width: progresso }]} /></View>
                 <TouchableOpacity
@@ -168,11 +169,11 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <Timer navigation={navigation} seconds={sec}/>
-                <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
-                <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
-                <View style={[styles.code, {backgroundColor: colors.background}]}>
-                    <View><AText style={[styles.textcode, {color: colors.text}]} defaultSize={optSize}>{Texto}</AText></View>
+                <Timer navigation={navigation} seconds={sec} />
+                <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
+                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{pergunta}</AText>
+                <View style={[styles.code, { backgroundColor: colors.background }]}>
+                    <View><AText style={[styles.textcode, { color: colors.text }]} defaultSize={optSize}>{Texto}</AText></View>
                 </View>
                 <TouchableOpacity
                     onPress={() => Erase()}
@@ -186,8 +187,8 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                     />
                 </TouchableOpacity>
             </View>
-
-            <View style={[styles.options, {backgroundColor: colors.background}]}>
+            
+            <View style={[styles.options, { backgroundColor: colors.background }]}>
                 <TouchableOpacity onPress={() => ShowText(1)} disabled={disable}>
                     <View style={styles[disableopt]}><Text style={styles.textopt}>{opt1}</Text></View>
                 </TouchableOpacity>
@@ -218,8 +219,8 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("congrats")}</AText>
+                    <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                        <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("congrats")}</AText>
                         {<OpButton theme={"modalButton"} title={t("continue")} onPressFunction={() => navigation.navigate(navegar)} />}
                     </View>
                 </SafeAreaView>
@@ -229,13 +230,13 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("oh no")}</AText>
+                    <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                        <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("oh no")}</AText>
                         <OpButton theme={"modalButtonE"} title={t("try again")} onPressFunction={() => setVisibleModalE(false)} />
                     </View>
                 </SafeAreaView>
             </Modal>
-            <View style={[styles.background, {backgroundColor: colors.background}]}>
+            <View style={[styles.background, { backgroundColor: colors.background }]}>
             </View>
             <OpButton theme={"nextButton"} title={t("verify")} onPressFunction={() => Verificar()} />
         </View>

@@ -65,10 +65,7 @@ export default function CollapseHtml() {
                     <OpButton theme={"classButton"} title="Construindo Botões" onPressFunction={() => navigation.navigate('ButtonHtml')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Criando Links" onPressFunction={() => navigation.navigate('Basic3_html')} />
-                </View>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="DEMO" onPressFunction={() => navigation.navigate('BasicPrat1_html')} />
+                    <OpButton theme={"classButton"} title="Adicionando imagens" onPressFunction={() => navigation.navigate('ImgTeoric')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -82,13 +79,16 @@ export default function CollapseHtml() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton theme={"classButton"} title="Elementos de dados" onPressFunction={() => navigation.navigate('Head')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton theme={"classButton"} title="Definindo um corpo" onPressFunction={() => navigation.navigate('Body')}/>
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton theme={"classButton"} title="Criando listas" onPressFunction={() => navigation.navigate('Listas')}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Criando links" onPressFunction={() => navigation.navigate('Links')}/>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

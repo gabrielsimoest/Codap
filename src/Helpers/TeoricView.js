@@ -19,6 +19,7 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
     const [Textadd3, setTextadd3] = useState('Textadd')
     const [Imgadd, setImgadd] = useState('Imgadd')
     const [Imgadd2, setImgadd2] = useState('Imgadd')
+    const [Imgadd3, setImgadd3] = useState('Imgadd')
 
     useEffect(() => {
         if (adicionaltxt != 'none')
@@ -31,6 +32,8 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
             setImgadd('figure')
         if (opt_img2 != 'none')
             setImgadd2('figure')
+        if (img != 'none')
+            setImgadd3('figure')
     }, [])
 
     return (
@@ -53,7 +56,7 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
                     <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
                     <AText style={[styles[Textadd2], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt2}</AText>
                     <View style={{ alignItems: "center" }}>
-                        <Image style={styles.figure} source={img} />
+                        <Image style={styles[Imgadd3]} source={img} />
                         <Image style={styles[Imgadd]} source={opt_img} />
                         <Image style={styles[Imgadd2]} source={opt_img2} />
                     </View>
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     figure: {
-       margin: 10,
+        margin: 10,
         width: 230,
         height: 203,
     },

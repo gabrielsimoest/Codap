@@ -24,6 +24,11 @@ import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, Html
 import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 } from './Aulas/ClassContent/Html/EstrutandoTitulos';
 import { P, FraseEx1, FraseEx2, FraseEx3, FraseEx4, FraseEx5, FraseEx6 } from './Aulas/ClassContent/Html/CriandoFrases';
 import { ButtonHtml, ButtonEx1, ButtonEx2, ButtonEx3, ButtonEx4, ButtonEx5, ButtonEx6} from './Aulas/ClassContent/Html/ConstruindoBotões';
+import { ImgTeoric, Img1, Img2, Img3, Img4, Img5, Img6 } from './Aulas/ClassContent/Html/AdicionandoImagens';
+import { Head, HeadEx1, HeadEx2, HeadEx3, HeadEx4, HeadEx5, HeadEx6 } from './Aulas/ClassContent/Html/Head';
+import { Body, BodyEx1, BodyEx2, BodyEx3, BodyEx4, BodyEx5, BodyEx6 } from './Aulas/ClassContent/Html/DefinindoBody';
+import { Listas, ListaEx1,  ListaEx2, ListaEx3, ListaEx4, ListaEx5, ListaEx6 } from './Aulas/ClassContent/Html/CriandoListas';
+import { Links, LinksEx1,  LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } from './Aulas/ClassContent/Html/CriandoLinks';
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 
@@ -425,6 +430,182 @@ function App() {
           component={ButtonEx6}
           options={{ cardStyleInterpolator: forFade }}
         />
+        <Stack.Screen
+          name='ImgTeoric'
+          component={ImgTeoric}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img1'
+          component={Img1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img2'
+          component={Img2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img3'
+          component={Img3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img4'
+          component={Img4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img5'
+          component={Img5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Img6'
+          component={Img6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Head'
+          component={Head}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx1'
+          component={HeadEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx2'
+          component={HeadEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx3'
+          component={HeadEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx4'
+          component={HeadEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx5'
+          component={HeadEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='HeadEx6'
+          component={HeadEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Body'
+          component={Body}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx1'
+          component={BodyEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx2'
+          component={BodyEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx3'
+          component={BodyEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx4'
+          component={BodyEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx5'
+          component={BodyEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BodyEx6'
+          component={BodyEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Listas'
+          component={Listas}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx1'
+          component={ListaEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx2'
+          component={ListaEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx3'
+          component={ListaEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx4'
+          component={ListaEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx5'
+          component={ListaEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ListaEx6'
+          component={ListaEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Links'
+          component={Links}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx1'
+          component={LinksEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx2'
+          component={LinksEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx3'
+          component={LinksEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx4'
+          component={LinksEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx5'
+          component={LinksEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LinksEx6'
+          component={LinksEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        
 
       </Stack.Navigator>
     </NavigationContainer>
