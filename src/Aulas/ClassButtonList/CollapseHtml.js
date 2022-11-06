@@ -67,6 +67,9 @@ export default function CollapseHtml() {
                 <View style={{ flexDirection: "row" }} >
                     <OpButton theme={"classButton"} title="Adicionando imagens" onPressFunction={() => navigation.navigate('ImgTeoric')} />
                 </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Adicionando comentários" onPressFunction={() => navigation.navigate('Comentario')} />
+                </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
             <TouchableOpacity
@@ -89,6 +92,9 @@ export default function CollapseHtml() {
                 </View>
                 <View style={{ flexDirection: "row" }} >
                     <OpButton theme={"classButton"} title="Criando links" onPressFunction={() => navigation.navigate('Links')}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title="Seção genérica, linhas e espaços" onPressFunction={() => navigation.navigate('Div')}/>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

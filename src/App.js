@@ -8,7 +8,7 @@ import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
 import { useSelector } from 'react-redux';
 import './ReduxRoot/Store/configureStore';
-
+//COMPONENTES
 import Login from './Login/Login';
 import Register from './Login/Register';
 //import List from './src/Listadmin';
@@ -25,10 +25,14 @@ import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 
 import { P, FraseEx1, FraseEx2, FraseEx3, FraseEx4, FraseEx5, FraseEx6 } from './Aulas/ClassContent/Html/CriandoFrases';
 import { ButtonHtml, ButtonEx1, ButtonEx2, ButtonEx3, ButtonEx4, ButtonEx5, ButtonEx6} from './Aulas/ClassContent/Html/ConstruindoBotões';
 import { ImgTeoric, Img1, Img2, Img3, Img4, Img5, Img6 } from './Aulas/ClassContent/Html/AdicionandoImagens';
+import { Comentario, ComentarioEx1, ComentarioEx2, ComentarioEx3, ComentarioEx4, ComentarioEx5, ComentarioEx6 } from './Aulas/ClassContent/Html/CriandoComentarios';
 import { Head, HeadEx1, HeadEx2, HeadEx3, HeadEx4, HeadEx5, HeadEx6 } from './Aulas/ClassContent/Html/Head';
 import { Body, BodyEx1, BodyEx2, BodyEx3, BodyEx4, BodyEx5, BodyEx6 } from './Aulas/ClassContent/Html/DefinindoBody';
 import { Listas, ListaEx1,  ListaEx2, ListaEx3, ListaEx4, ListaEx5, ListaEx6 } from './Aulas/ClassContent/Html/CriandoListas';
 import { Links, LinksEx1,  LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } from './Aulas/ClassContent/Html/CriandoLinks';
+import { Div, DivEx1, DivEx2, LineBreak, LineBreakEx1, LineBreakEx2, LineBreakEx3 } from './Aulas/ClassContent/Html/DivLinhaEspaço';
+
+//TESTES
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
 import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Html/Text';
 
@@ -39,7 +43,7 @@ LogBox.ignoreLogs(['Warning: Cannot update a component (`ForwardRef(BaseNavigati
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-
+//TAB ARRAY
 const TabArr = [
   {
     route: 'Class',
@@ -466,6 +470,41 @@ function App() {
           options={{ cardStyleInterpolator: forFade }}
         />
         <Stack.Screen
+          name='Comentario'
+          component={Comentario}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx1'
+          component={ComentarioEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx2'
+          component={ComentarioEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx3'
+          component={ComentarioEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx4'
+          component={ComentarioEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx5'
+          component={ComentarioEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComentarioEx6'
+          component={ComentarioEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
           name='Head'
           component={Head}
           options={{ cardStyleInterpolator: forFade }}
@@ -603,6 +642,41 @@ function App() {
         <Stack.Screen
           name='LinksEx6'
           component={LinksEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Div'
+          component={Div}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='DivEx1'
+          component={DivEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='DivEx2'
+          component={DivEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LineBreak'
+          component={LineBreak}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LineBreakEx1'
+          component={LineBreakEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LineBreakEx2'
+          component={LineBreakEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='LineBreakEx3'
+          component={LineBreakEx3}
           options={{ cardStyleInterpolator: forFade }}
         />
         
