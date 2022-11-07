@@ -8,11 +8,13 @@ import Icon, { Icons } from '../components/Icons';
 import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';
+import SaveClass from './SaveClass';
 
 const textSize = 23;
 const optSize = 20;
 
-export default function TextView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar }) {
+export default function TextView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, 
+    txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar, aulaSalvar, Salvar}) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     
@@ -26,7 +28,7 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
 
     useEffect(() => {
         if (adicionaltxt != 'none')
-            setTextadd('text')
+            setTextadd('text')   
     }, [])
 
     const Verificar = () => {
@@ -55,6 +57,7 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
                             style={styles.icon}
                         />
                     </TouchableOpacity>
+                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
                     <Timer navigation={navigation} seconds={sec}/>
                     <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>

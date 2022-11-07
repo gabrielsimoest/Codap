@@ -1,15 +1,17 @@
 import { useTheme } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Modal, SafeAreaView, StyleSheet } from 'react-native';
 import Icon, { Icons } from '../components/Icons';
+import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import AText from './AText';
 import Timer from './Timer';
 
 const textSize = 23;
 
-export default function OptionView({ navigation, progresso, sec,  adicionaltxt, pergunta, opt1, opt2, opt3, opt4, optCerta, navegar }) {
+export default function OptionView({ navigation, progresso, sec,  adicionaltxt, pergunta, opt1, 
+    opt2, opt3, opt4, optCerta, navegar, aulaSalvar, Salvar }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -103,6 +105,7 @@ export default function OptionView({ navigation, progresso, sec,  adicionaltxt, 
                     />
                 </TouchableOpacity>
                 <Timer navigation={navigation} seconds={sec}/>
+                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
                 <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
                 <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
                 <View>

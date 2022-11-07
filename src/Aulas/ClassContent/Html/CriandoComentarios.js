@@ -181,6 +181,8 @@ export function ComentarioEx6({ navigation }) {
             txtCerto2='!--Codap--'
             txtCerto3='!--codap--'
             tamanhoInput="80%"
+            aulaSalvar="ADICIONANDOCOMENTARIOS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

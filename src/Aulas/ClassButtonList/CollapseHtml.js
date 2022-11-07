@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AText from '../../Helpers/AText';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,19 @@ const TitleTextSize = 23;
 const textSize = 15;
 
 export default function CollapseHtml() {
+
+    const [AulasSalvas, setAulasSalvas] = useState('');
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUser();
+        }, [])
+    );
+
+    const getUser = async () => {
+        const storageAulasSalvas = await AsyncStorage.getItem('Aulas');
+        setAulasSalvas(storageAulasSalvas);
+    }
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
@@ -53,22 +67,22 @@ export default function CollapseHtml() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('Estrutura')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"HTMLETAGS"} theme={"classButton"} title="Descobrindo HTML e Tags" onPressFunction={() => navigation.navigate('Estrutura')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Estruturando Títulos" onPressFunction={() => navigation.navigate('Header')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ESTRUTURANDOTITULOS"} theme={"classButton"} title="Estruturando Títulos" onPressFunction={() => navigation.navigate('Header')} />
+                </View> 
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CRIANDOFRASES"} theme={"classButton"} title="Criando frases" onPressFunction={() => navigation.navigate('Frases')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Criando frases" onPressFunction={() => navigation.navigate('Frases')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CONSTRUINDOBOTOES"} theme={"classButton"} title="Construindo Botões" onPressFunction={() => navigation.navigate('ButtonHtml')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Construindo Botões" onPressFunction={() => navigation.navigate('ButtonHtml')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOIMAGENS"} theme={"classButton"} title="Adicionando imagens" onPressFunction={() => navigation.navigate('ImgTeoric')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Adicionando imagens" onPressFunction={() => navigation.navigate('ImgTeoric')} />
-                </View>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Adicionando comentários" onPressFunction={() => navigation.navigate('Comentario')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOCOMENTARIOS"} theme={"classButton"} title="Adicionando comentários" onPressFunction={() => navigation.navigate('Comentario')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -85,16 +99,16 @@ export default function CollapseHtml() {
                     <OpButton theme={"classButton"} title="Elementos de dados" onPressFunction={() => navigation.navigate('Head')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Definindo um corpo" onPressFunction={() => navigation.navigate('Body')}/>
+                    <OpButton theme={"classButton"} title="Definindo um corpo" onPressFunction={() => navigation.navigate('Body')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Criando listas" onPressFunction={() => navigation.navigate('Listas')}/>
+                    <OpButton theme={"classButton"} title="Criando listas" onPressFunction={() => navigation.navigate('Listas')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Criando links" onPressFunction={() => navigation.navigate('Links')}/>
+                    <OpButton theme={"classButton"} title="Criando links" onPressFunction={() => navigation.navigate('Links')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Seção genérica, linhas e espaços" onPressFunction={() => navigation.navigate('Div')}/>
+                    <OpButton theme={"classButton"} title="Seção genérica, linhas e espaços" onPressFunction={() => navigation.navigate('Div')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -108,10 +122,10 @@ export default function CollapseHtml() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton theme={"classButton"} title="Identificando Elementos" onPressFunction={() => navigation.navigate('IndentTeoric')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton theme={"classButton"} title="Introdução à Tabelas" onPressFunction={() => navigation.navigate('ITableTeoric')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

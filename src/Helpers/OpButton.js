@@ -7,8 +7,26 @@ import Icon, { Icons } from '../components/Icons';
 import AText from './AText';
 import { useTheme } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
+import SQLite from 'react-native-sqlite-storage';
 
-function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true }) {
+const db = SQLite.openDatabase(
+    {
+        name: 'Users.db',
+        location: 'default',
+    },
+    () => { },
+    error => { console.log(error) }
+);
+
+function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true, AulasSalvarOp, Verify }) {
+
+    let iconCheckColor = "gray"
+    let iconCheckName = "checkmark-circle-outline"
+    let text = JSON.stringify({AulasSalvarOp})
+    if (text.includes(Verify)) {
+        iconCheckColor = "green"
+        iconCheckName = "checkmark-circle-sharp"
+    }
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
@@ -22,6 +40,12 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
     if (themeColorEnable) {
         textColor = colors.text
     }
+
+    var iconCheckHide;
+    if (AulasSalvarOp == "" || AulasSalvarOp == null)
+        iconCheckHide = "hide"
+    else
+        iconCheckHide = "check"
 
     /*******Verificação do tema do botão*******/
     //Casos em que fundo é o primary dos temas (dak e light) e são alteraveis
@@ -37,7 +61,7 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
         myColor = "red";
     }
     //Casos em que fundo é roxo independente do tema
-    else if (theme === "marketButton" || theme === "marketButton2"|| theme === "modalButtonStore" || theme === "modalButtonUser") {
+    else if (theme === "marketButton" || theme === "marketButton2" || theme === "modalButtonStore" || theme === "modalButtonUser") {
         myColor = "#637aff";
     }
     //Casos em que fundo é o background dos temas (dak e light) e são alteraveis
@@ -62,6 +86,13 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
                 size={iconSize}
                 style={styles.icon} />
             <AText style={[styles.text, { color: textColor }]} defaultSize={20}>{title}</AText>
+            <Icon
+                type={Icons.Ionicons}
+                name={iconCheckName}
+                color={iconCheckColor}
+                size={30}
+                style={styles[iconCheckHide]}
+            />
         </TouchableOpacity>
     )
 }
@@ -157,23 +188,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'red',
         borderRadius: 20,
     },
-    modalButtonStore:{
+    modalButtonStore: {
         flexDirection: 'row',
-        marginTop:20,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'92%',
+        width: '92%',
         left: 16,
         height: 50,
         borderRadius: 20,
     },
-    modalButtonUser:{
+    modalButtonUser: {
         flexDirection: 'row',
-        marginTop:30,
-        marginBottom:20,
+        marginTop: 30,
+        marginBottom: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width:'92%',
+        width: '92%',
         left: 16,
         height: 50,
         borderRadius: 20,
@@ -256,6 +287,13 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 10,
+    },
+    check: {
+        position: 'absolute',
+        left: -40
+    },
+    hide: {
+        display: 'none'
     }
 
 })

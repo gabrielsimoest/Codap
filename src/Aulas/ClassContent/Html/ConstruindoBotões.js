@@ -180,6 +180,8 @@ export function ButtonEx6({ navigation }) {
             opt8="EXIT" //Opcional
             //TEXTO RESPOSTA
             txtCerto="<button>LOGIN</button>"
+            aulaSalvar="CONSTRUINDOBOTOES"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

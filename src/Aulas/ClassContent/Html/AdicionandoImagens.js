@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import TeoricView from '../../../Helpers/TeoricView';
 import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
-import TextView from '../../../Helpers/TextView';
 
 export function ImgTeoric({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -183,6 +182,8 @@ export function Img6({ navigation }) {
             opt3='<img>src="https://LINK"</img>'
             opt4='<img src="https://LINK"/>'
             optCerta="opt4"
+            aulaSalvar="ADICIONANDOIMAGENS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

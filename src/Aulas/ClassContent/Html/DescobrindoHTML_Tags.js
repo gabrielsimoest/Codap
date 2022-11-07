@@ -23,6 +23,7 @@ export function Estrutura({ navigation }) {
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis."
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="TagsElementos"
         />
@@ -50,6 +51,7 @@ export function TagsElements({ navigation }) {
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Lembre-se, a estrutura DEVE estar entre as tags <html> </html>. Se não seu site não vai funcionar!"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx1"
         />
@@ -74,6 +76,7 @@ export function HtmlStartEx1({ navigation }) {
             opt3=">html<"
             opt4="</html>"
             optCerta="opt4"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx2"
         />
@@ -98,6 +101,7 @@ export function HtmlStartEx2({ navigation }) {
             opt3="h1"
             opt4="</>"
             optCerta="opt3"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx3"
         />
@@ -122,6 +126,7 @@ export function HtmlStartEx3({ navigation }) {
             opt3="TAG="
             opt4="{ }"
             optCerta="opt1"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx4"
         />
@@ -146,6 +151,7 @@ export function HtmlStartEx4({ navigation }) {
             opt3="h1 texto /h1"
             opt4="<h1>texto</h1>"
             optCerta="opt4"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HtmlStartEx5"
         />
@@ -170,6 +176,8 @@ export function HtmlStartEx5({ navigation }) {
             opt3="O site funciona normalmente"
             opt4="O site fica com o desempenho melhorado"
             optCerta="opt1"
+            aulaSalvar="HTMLETAGS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

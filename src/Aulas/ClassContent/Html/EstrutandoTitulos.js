@@ -178,6 +178,8 @@ export function HeaderEx6({ navigation }) {
             txtCerto2="codap"
             txtCerto3="Codap"
             tamanhoInput="46%"
+            aulaSalvar="ESTRUTURANDOTITULOS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

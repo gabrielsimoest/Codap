@@ -5,10 +5,12 @@ import { View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-nat
 import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AText from './AText';
+import SaveClass from './SaveClass';
 
 const textSize = 20;
 
-export default function TeoricView({ navigation, progresso, txt, adicionaltxt, adicionaltxt2, adicionaltxt_end, img, opt_img, opt_img2, navegar }) {
+export default function TeoricView({ navigation, progresso, txt, adicionaltxt, adicionaltxt2, 
+    adicionaltxt_end, img, opt_img, opt_img2, navegar, aulaSalvar, Salvar}) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -51,6 +53,7 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
                         style={styles.icon}
                     />
                 </TouchableOpacity>
+                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
                 <View style={{ alignItems: "stretch" }}>
                     <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{txt}</AText>
                     <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>

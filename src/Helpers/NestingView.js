@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View, TouchableOpacity, Modal, SafeAreaView, StyleSheet, Keyboard } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import SaveClass from './SaveClass';
 import { TextInput } from 'react-native-paper';
 import Icon, { Icons } from '../components/Icons';
 import Timer from './Timer';
@@ -12,7 +13,9 @@ import AText from './AText';
 const textSize = 23;
 const optSize = 20;
 
-export default function NestingView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, txtantes2, txtantes3, txtdepois, txtdepois2, txtdepois3, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar, layer = 1, qtdop = 1 }) {
+export default function NestingView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, 
+    txtantes2, txtantes3, txtdepois, txtdepois2, txtdepois3, txtCerto1, txtCerto2, txtCerto3, 
+    tamanhoInput, navegar, layer = 1, qtdop = 1, aulaSalvar, Salvar}) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -30,6 +33,8 @@ export default function NestingView({ navigation, progresso, sec, adicionaltxt, 
     const [VisibleLayer3, setLayer3] = useState("selectLayer")
     const [VisibleInput, setInput] = useState("removeInput")
     const [VisibleInput2, setInput2] = useState("removeInput")
+
+    
 
     useEffect(() => {
         if (adicionaltxt != 'none')
@@ -107,35 +112,38 @@ export default function NestingView({ navigation, progresso, sec, adicionaltxt, 
                         />
                     </TouchableOpacity>
                     <Timer navigation={navigation} seconds={sec} />
-                    <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
-                    <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{pergunta}</AText>
-                    <View style={[styles[VisibleLayer], { backgroundColor: colors.primary }]}>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
-                        <TextInput style={[styles.input, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
-                        <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
-                        <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
-                    </View>
-                    <View style={[styles[VisibleLayer2], { backgroundColor: colors.primary }]}>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
-                        <Text style={[styles.textopt2, { color: colors.text }]}>{txtantes2}</Text>
-                        <TextInput style={[styles.input2, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
-                        <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
-                        <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
-                        <Text style={[styles.textopt2, { color: colors.text }]}>{txtdepois2}</Text>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
-                    </View>
-                    <View style={[styles[VisibleLayer3], { backgroundColor: colors.primary }]}>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
-                        <Text style={[styles.textopt2, { color: colors.text }]}>{txtantes2}</Text>
-                        <Text style={[styles.textopt3, { color: colors.text }]}>{txtantes3}</Text>
-                        <TextInput style={[styles.input3, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
-                        <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
-                        <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
-                        <Text style={[styles.textopt3, { color: colors.text }]}>{txtdepois3}</Text>
-                        <Text style={[styles.textopt2, { color: colors.text }]}>{txtdepois2}</Text>
-                        <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
-                    </View>
+                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
+                    <SafeAreaView style={styles.zIndex}>
+                        <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
+                        <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{pergunta}</AText>
+                        <View style={[styles[VisibleLayer], { backgroundColor: colors.primary }]}>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
+                            <TextInput style={[styles.input, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
+                            <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
+                            <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
+                        </View>
+                        <View style={[styles[VisibleLayer2], { backgroundColor: colors.primary }]}>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
+                            <Text style={[styles.textopt2, { color: colors.text }]}>{txtantes2}</Text>
+                            <TextInput style={[styles.input2, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
+                            <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
+                            <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
+                            <Text style={[styles.textopt2, { color: colors.text }]}>{txtdepois2}</Text>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
+                        </View>
+                        <View style={[styles[VisibleLayer3], { backgroundColor: colors.primary }]}>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
+                            <Text style={[styles.textopt2, { color: colors.text }]}>{txtantes2}</Text>
+                            <Text style={[styles.textopt3, { color: colors.text }]}>{txtantes3}</Text>
+                            <TextInput style={[styles.input3, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
+                            <TextInput style={[styles[VisibleInput], { width: tamanhoInput }]} onChangeText={(value2) => setInputText2(value2)}></TextInput>
+                            <TextInput style={[styles[VisibleInput2], { width: tamanhoInput }]} onChangeText={(value3) => setInputText3(value3)}></TextInput>
+                            <Text style={[styles.textopt3, { color: colors.text }]}>{txtdepois3}</Text>
+                            <Text style={[styles.textopt2, { color: colors.text }]}>{txtdepois2}</Text>
+                            <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
+                        </View>
+                    </SafeAreaView>
                 </View>
                 <OpButton theme={"nextButton"} title={t("verify")} onPressFunction={() => Verificar()} />
 
@@ -316,6 +324,9 @@ const styles = StyleSheet.create({
     },
     selectLayer: {
         display: 'none'
+    },
+    zIndex:{
+        zIndex:999
     }
 
 })

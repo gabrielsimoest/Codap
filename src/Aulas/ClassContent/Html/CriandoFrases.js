@@ -25,6 +25,7 @@ export function P({ navigation }) {
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="FraseEx1"
         />
@@ -50,6 +51,7 @@ export function FraseEx1({ navigation }) {
             opt3="<t>CODAP</t>"
             opt4="<p>CODAP</p>"
             optCerta="opt4"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="FraseEx2"
         />
@@ -75,6 +77,7 @@ export function FraseEx2({ navigation }) {
             opt3="O <p> facilita a leitura do código e de mecanismos de busca"
             opt4="O <p> coloca efeitos visuais na frase"
             optCerta="opt3"
+            aulaSalvar="none"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="FraseEx3"
         />
@@ -102,6 +105,7 @@ export function FraseEx3({ navigation }) {
             opt8="none" //Opcional
             //TEXTO RESPOSTA
             txtCerto="<p>Codificar é legal</p>"
+            aulaSalvar="none"
             navegar="FraseEx4"
         />
     )
@@ -128,6 +132,7 @@ export function FraseEx4({ navigation }) {
             txtCerto3="hello world"
             tamanhoInput="46%"
             //NOME ADICIONADO NO STACK NAVIGATOR
+            aulaSalvar="none"
             navegar="FraseEx5"
         />
     )
@@ -153,6 +158,7 @@ export function FraseEx5({ navigation }) {
             opt4="p=texto"
             optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR
+            aulaSalvar="none"
             navegar="FraseEx6"
         />
     )
@@ -178,6 +184,8 @@ export function FraseEx6({ navigation }) {
             txtCerto2="codap"
             txtCerto3="Codap"
             tamanhoInput="46%"
+            aulaSalvar="CRIANDOFRASES"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

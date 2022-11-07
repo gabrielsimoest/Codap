@@ -31,6 +31,8 @@ import { Body, BodyEx1, BodyEx2, BodyEx3, BodyEx4, BodyEx5, BodyEx6 } from './Au
 import { Listas, ListaEx1,  ListaEx2, ListaEx3, ListaEx4, ListaEx5, ListaEx6 } from './Aulas/ClassContent/Html/CriandoListas';
 import { Links, LinksEx1,  LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } from './Aulas/ClassContent/Html/CriandoLinks';
 import { Div, DivEx1, DivEx2, LineBreak, LineBreakEx1, LineBreakEx2, LineBreakEx3 } from './Aulas/ClassContent/Html/DivLinhaEspaço';
+import { IndentTeoric, Indent1, Indent2, Indent3, Indent4, Indent5, Indent6 } from './Aulas/ClassContent/Html/Avancado/IdentificandoElementos';
+import { ITableTeoric, ITable1, ITable2, ITable3, ITable4, ITable5} from './Aulas/ClassContent/Html/Avancado/IntroducaoaTabelas';
 
 //TESTES
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
@@ -224,12 +226,12 @@ function App() {
         }}
       >
         <Stack.Screen
-          name="Home"
-          component={HomeTabs}
-        />
-        <Stack.Screen
           name="Login"
           component={Login}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomeTabs}
         />
         <Stack.Screen
           name="Register"
@@ -679,8 +681,71 @@ function App() {
           component={LineBreakEx3}
           options={{ cardStyleInterpolator: forFade }}
         />
-        
-
+        <Stack.Screen
+          name='IndentTeoric'
+          component={IndentTeoric}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent1'
+          component={Indent1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent2'
+          component={Indent2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent3'
+          component={Indent3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent4'
+          component={Indent4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent5'
+          component={Indent5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Indent6'
+          component={Indent6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITableTeoric'
+          component={ITableTeoric}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITable1'
+          component={ITable1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITable2'
+          component={ITable2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITable3'
+          component={ITable3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITable4'
+          component={ITable4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ITable5'
+          component={ITable5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
