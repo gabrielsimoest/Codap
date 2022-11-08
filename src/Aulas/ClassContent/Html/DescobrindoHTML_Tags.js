@@ -10,7 +10,7 @@ export function Estrutura({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="50%"
+            progresso="14%"
             //Texto principal
             txt="Olá, aqui é o NOME. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web."
             //Textos opcionais
@@ -37,7 +37,7 @@ export function TagsElements({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="28%"
             //Texto principal
             txt="Agora que vimos a estrutura, vamos entender melhor o que está nela."
             //Textos opcionais
@@ -64,7 +64,7 @@ export function HtmlStartEx1({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -89,7 +89,7 @@ export function HtmlStartEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -114,7 +114,7 @@ export function HtmlStartEx3({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -139,7 +139,7 @@ export function HtmlStartEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -164,7 +164,7 @@ export function HtmlStartEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

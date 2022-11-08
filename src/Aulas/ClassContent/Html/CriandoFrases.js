@@ -12,7 +12,7 @@ export function P({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Embora o <h*> possa escrever textos, o ideal para frases é o <p>."
             //Textos opcionais
@@ -39,7 +39,7 @@ export function FraseEx1({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -65,7 +65,7 @@ export function FraseEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -90,7 +90,7 @@ export function FraseEx3({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none" //Opcional
@@ -118,7 +118,7 @@ export function FraseEx4({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -145,7 +145,7 @@ export function FraseEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -158,7 +158,6 @@ export function FraseEx5({ navigation }) {
             opt4="p=texto"
             optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR
-            aulaSalvar="none"
             navegar="FraseEx6"
         />
     )
@@ -171,7 +170,7 @@ export function FraseEx6({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -191,7 +190,3 @@ export function FraseEx6({ navigation }) {
         />
     )
 }
-
-
-
-

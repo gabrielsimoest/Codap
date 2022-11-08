@@ -12,7 +12,7 @@ export function H1h6({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Os textos principais podem ser escritos usando a tag <h1>, em que o numero ao lado do 'h' indica o tamanho do texto"
             //Textos opcionais
@@ -37,7 +37,7 @@ export function HeaderEx1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="Normalmente o <h1> é utilizado para criação de títulos da sua página" //Opcional
@@ -64,7 +64,7 @@ export function HeaderEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -88,7 +88,7 @@ export function HeaderEx3({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="O <h2> pode ser utilizado para escrever subtítulos" //Opcional
@@ -115,7 +115,7 @@ export function HeaderEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -140,7 +140,7 @@ export function HeaderEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -165,7 +165,7 @@ export function HeaderEx6({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

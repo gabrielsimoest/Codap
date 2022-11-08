@@ -13,7 +13,7 @@ export function Links({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Vamos fazer um site dinâmico com links?"
             //Textos opcionais
@@ -39,7 +39,7 @@ export function LinksEx1({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -64,7 +64,7 @@ export function LinksEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -102,7 +102,7 @@ export function LinksEx3({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -141,7 +141,7 @@ export function LinksEx4({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -167,7 +167,7 @@ export function LinksEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -192,7 +192,7 @@ export function LinksEx6({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -204,6 +204,8 @@ export function LinksEx6({ navigation }) {
             opt3='<h3><a href="#codap">CODAP</a></h3>'
             opt4="<h3><a href=>#codap>CODAP</a></h3>"
             optCerta="opt3"
+            aulaSalvar="CRIANDOLINKS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

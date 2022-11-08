@@ -13,7 +13,7 @@ export function Comentario({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Vamos colocar um comentário no seu documento HTML?"
             //Textos opcionais
@@ -38,7 +38,7 @@ export function ComentarioEx1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none" //Opcional
@@ -66,7 +66,7 @@ export function ComentarioEx2({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -92,7 +92,7 @@ export function ComentarioEx3({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -118,7 +118,7 @@ export function ComentarioEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -143,7 +143,7 @@ export function ComentarioEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -168,7 +168,7 @@ export function ComentarioEx6({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
 import AText from '../../Helpers/AText';
 import { useTranslation } from 'react-i18next';
 
@@ -16,6 +17,20 @@ const TitleTextSize = 23;
 const textSize = 15;
 
 export default function CollapseCSS() {
+
+    //Salvar aulas
+    const [AulasSalvas, setAulasSalvas] = useState('');
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUser();
+        }, [])
+    );
+
+    const getUser = async () => {
+        const storageAulasSalvas = await AsyncStorage.getItem('Aulas');
+        setAulasSalvas(storageAulasSalvas);
+    }
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
@@ -70,13 +85,13 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOBORDAS"} theme={"classButton"} title="Adicionando Bordas" onPressFunction={() => navigation.navigate('AdicionandoBordas')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOCANDOMARGIN"} theme={"classButton"} title="Colocando Margin" onPressFunction={() => navigation.navigate('ColocandoMargin')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOPADDING"} theme={"classButton"} title="Adicionando Padding" onPressFunction={() => navigation.navigate('AdicionandoPadding')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -89,11 +104,8 @@ export default function CollapseCSS() {
                 <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
-                </View>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                <View>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -106,8 +118,8 @@ export default function CollapseCSS() {
                 <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed4}>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                <View>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

@@ -13,7 +13,7 @@ export function Listas({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Você pode criar listas em seu site, para isso usamos o <ul> ou <ol> juntamente com o <li>."
             //Textos opcionais
@@ -39,7 +39,7 @@ export function ListaEx1({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -64,7 +64,7 @@ export function ListaEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -102,7 +102,7 @@ export function ListaEx3({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -141,7 +141,7 @@ export function ListaEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -166,7 +166,7 @@ export function ListaEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -191,7 +191,7 @@ export function ListaEx6({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -204,6 +204,8 @@ export function ListaEx6({ navigation }) {
             txtCerto2="li>codap</li"
             txtCerto3="li>Codap</li"
             tamanhoInput="80%"
+            aulaSalvar="CRIANDOLISTAS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

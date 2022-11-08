@@ -11,7 +11,7 @@ export function ImgTeoric({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Existem elementos que podem fechar na mesma tag, mas eles precisam de atributos junto com o nome para funcionar corretamente."
             //Textos opcionais
@@ -36,7 +36,7 @@ export function Img1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none"
@@ -62,7 +62,7 @@ export function Img2({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="Você pode adicionar atributos para aumentar ou diminuir a altura e a largura da imagem de maneira proporcional."
@@ -88,7 +88,7 @@ export function Img3({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none"
@@ -115,7 +115,7 @@ export function Img4({ navigation }) {
         <SelectView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -145,7 +145,7 @@ export function Img5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -170,7 +170,7 @@ export function Img6({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="96%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

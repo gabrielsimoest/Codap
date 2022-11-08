@@ -4,6 +4,7 @@ import TeoricView from '../../../Helpers/TeoricView';
 import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
 import TextView from '../../../Helpers/TextView';
+import NestingView from '../../../Helpers/NestingView';
 
 export function ButtonHtml({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -12,7 +13,7 @@ export function ButtonHtml({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Botões são elementos interativos usados para várias funções."
             //Textos opcionais
@@ -37,7 +38,7 @@ export function ButtonEx1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none" //Opcional
@@ -64,7 +65,7 @@ export function ButtonEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -89,7 +90,7 @@ export function ButtonEx3({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -115,7 +116,7 @@ export function ButtonEx4({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -141,7 +142,7 @@ export function ButtonEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -165,7 +166,7 @@ export function ButtonEx6({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="96%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="none" //Opcional

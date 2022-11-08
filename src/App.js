@@ -33,6 +33,13 @@ import { Links, LinksEx1, LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } fro
 import { Div, DivEx1, DivEx2, LineBreak, LineBreakEx1, LineBreakEx2, LineBreakEx3 } from './Aulas/ClassContent/Html/DivLinhaEspaço';
 import { IndentTeoric, Indent1, Indent2, Indent3, Indent4, Indent5, Indent6 } from './Aulas/ClassContent/Html/Avancado/IdentificandoElementos';
 import { ITableTeoric, ITable1, ITable2, ITable3, ITable4, ITable5 } from './Aulas/ClassContent/Html/Avancado/IntroducaoaTabelas';
+import { CriandoDados, CriandoDados2, CriandoDados3, CriandoDados4, CriandoDados5 } from './Aulas/ClassContent/Html/Avancado/CriandoDados';
+import { AdicionandoLinhas, AdicionandoLinhas2, AdicionandoLinhas3, AdicionandoLinhas4, AdicionandoLinhas5, AdicionandoLinhas6 } from './Aulas/ClassContent/Html/Avancado/AdicionandoLinhas';
+import { AdicionandoDados, AdicionandoDados2, AdicionandoDados3, AdicionandoDados4, AdicionandoDados5, AdicionandoDados6 } from './Aulas/ClassContent/Html/Maestria/AdicionandoDados';
+import { TiposDeDados, TiposDeDados2, TiposDeDados3, TiposDeDados4, TiposDeDados5 } from './Aulas/ClassContent/Html/Maestria/TiposDeDados';
+import { SelecionandoDados, SelecionandoDados2, SelecionandoDados3, SelecionandoDados4, SelecionandoDados5, SelecionandoDados6 } from './Aulas/ClassContent/Html/Maestria/SelecionandoDados';
+import { MostrandoVideos, MostrandoVideos2, MostrandoVideos3, MostrandoVideos4, MostrandoVideos5 } from './Aulas/ClassContent/Html/Maestria/MostrandoVideos';
+
 
 //AULAS JS
 import { ConhecendoJS, JSEx1, JSEx2, JSEx3, JSEx4, JSEx5 } from './Aulas/ClassContent/JavaScript/1.Basico/ConhecendoJS';
@@ -44,6 +51,12 @@ import { Operadores, OperadoresEx1, OperadoresEx2, OperadoresEx3, OperadoresEx4,
 import { Comparação, ComparaçãoEx1, ComparaçãoEx2, ComparaçãoEx3, ComparaçãoEx4, ComparaçãoEx5 } from './Aulas/ClassContent/JavaScript/2.Intermediário/Comparações';
 import { IfElse, IfElseEx1, IfElseEx2, IfElseEx3, IfElseEx4, IfElseEx5, OperadorTernario, OperadorTernarioEx1 } from './Aulas/ClassContent/JavaScript/2.Intermediário/OperadoresLogicos';
 import { WhileFor, WhileForEx1, WhileForEx2, WhileForEx3, WhileForEx4, WhileForEx5 } from './Aulas/ClassContent/JavaScript/2.Intermediário/Laços';
+
+//AULAS CSS
+
+import { AdicionandoBordas, AdicionandoBordas2, AdicionandoBordas3, AdicionandoBordas4, AdicionandoBordas5, AdicionandoBordas6, AdicionandoBordas7 } from './Aulas/ClassContent/CSS/2.Intermediario/AdicionandoBordas';
+import { ColocandoMargin, ColocandoMargin2, ColocandoMargin3, ColocandoMargin4, ColocandoMargin5, ColocandoMargin6 } from './Aulas/ClassContent/CSS/2.Intermediario/ColocandoMargin';
+import { AdicionandoPadding, AdicionandoPadding2, AdicionandoPadding3, AdicionandoPadding4, AdicionandoPadding5, AdicionandoPadding6 } from './Aulas/ClassContent/CSS/2.Intermediario/AdicionandoPadding';
 
 //TESTES
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
@@ -757,10 +770,6 @@ function App() {
           component={ITable5}
           options={{ cardStyleInterpolator: forFade }}
         />
-
-
-
-
         <Stack.Screen
           name='ConhecendoJS'
           component={ConhecendoJS}
@@ -1049,6 +1058,266 @@ function App() {
         <Stack.Screen
           name='WhileForEx5'
           component={WhileForEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CriandoDados'
+          component={CriandoDados}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CriandoDados2'
+          component={CriandoDados2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CriandoDados3'
+          component={CriandoDados3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CriandoDados4'
+          component={CriandoDados4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CriandoDados5'
+          component={CriandoDados5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas'
+          component={AdicionandoLinhas}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas2'
+          component={AdicionandoLinhas2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas3'
+          component={AdicionandoLinhas3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas4'
+          component={AdicionandoLinhas4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas5'
+          component={AdicionandoLinhas5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoLinhas6'
+          component={AdicionandoLinhas6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados'
+          component={AdicionandoDados}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados2'
+          component={AdicionandoDados2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados3'
+          component={AdicionandoDados3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados4'
+          component={AdicionandoDados4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados5'
+          component={AdicionandoDados5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoDados6'
+          component={AdicionandoDados6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDeDados'
+          component={TiposDeDados}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDeDados2'
+          component={TiposDeDados2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDeDados3'
+          component={TiposDeDados3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDeDados4'
+          component={TiposDeDados4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDeDados5'
+          component={TiposDeDados5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados'
+          component={SelecionandoDados}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados2'
+          component={SelecionandoDados2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados3'
+          component={SelecionandoDados3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados4'
+          component={SelecionandoDados4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados5'
+          component={SelecionandoDados5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='SelecionandoDados6'
+          component={SelecionandoDados6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='MostrandoVideos'
+          component={MostrandoVideos}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='MostrandoVideos2'
+          component={MostrandoVideos2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='MostrandoVideos3'
+          component={MostrandoVideos3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='MostrandoVideos4'
+          component={MostrandoVideos4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='MostrandoVideos5'
+          component={MostrandoVideos5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas'
+          component={AdicionandoBordas}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas2'
+          component={AdicionandoBordas2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas3'
+          component={AdicionandoBordas3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas4'
+          component={AdicionandoBordas4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas5'
+          component={AdicionandoBordas5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas6'
+          component={AdicionandoBordas6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoBordas7'
+          component={AdicionandoBordas7}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin'
+          component={ColocandoMargin}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin2'
+          component={ColocandoMargin2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin3'
+          component={ColocandoMargin3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin4'
+          component={ColocandoMargin4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin5'
+          component={ColocandoMargin5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColocandoMargin6'
+          component={ColocandoMargin6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding'
+          component={AdicionandoPadding}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding2'
+          component={AdicionandoPadding2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding3'
+          component={AdicionandoPadding3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding4'
+          component={AdicionandoPadding4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding5'
+          component={AdicionandoPadding5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='AdicionandoPadding6'
+          component={AdicionandoPadding6}
           options={{ cardStyleInterpolator: forFade }}
         />
       </Stack.Navigator>

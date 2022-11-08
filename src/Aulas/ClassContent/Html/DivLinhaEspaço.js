@@ -13,7 +13,7 @@ export function Div({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="O <div> serve para definir uma seção genérica de conteúdos."
             //Textos opcionais
@@ -38,7 +38,7 @@ export function DivEx1({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -76,7 +76,7 @@ export function DivEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -115,7 +115,7 @@ export function LineBreak({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="56%"
             //Texto principal
             txt="Você pode adicionar linhas e espaços de maneira automática ao seu site para melhorar a estética."
             //Textos opcionais
@@ -141,7 +141,7 @@ export function LineBreakEx1({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -166,7 +166,7 @@ export function LineBreakEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -190,7 +190,7 @@ export function LineBreakEx3({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -216,6 +216,8 @@ export function LineBreakEx3({ navigation }) {
 
             //Tamanho do input
             tamanhoInput="50%"
+            aulaSalvar="SECAOGENERICA"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

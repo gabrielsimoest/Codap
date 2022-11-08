@@ -127,7 +127,7 @@ export default function Perfil({navigation}) {
             <ScrollView style={styles.scroller} showsVerticalScrollIndicator={false}>
                 <OpButton theme='primaryButton' title={t("edit account")} onPressFunction={() => setVisibleModal(true)} />
                 <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => setVisibleModal2(true)} />
-                <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} />
+                {/* <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} /> */}
                 <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => console.log("conquista")} />
                 <OpButton theme='primaryButton' title={t("exit")} onPressFunction={() => navigation.navigate('Login')}
                     iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />

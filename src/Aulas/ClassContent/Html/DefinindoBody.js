@@ -11,7 +11,7 @@ export function Body({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="O <body> é utilizado para definir o corpo de seu projeto."
             //Textos opcionais
@@ -36,7 +36,7 @@ export function BodyEx1({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -74,7 +74,7 @@ export function BodyEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -112,7 +112,7 @@ export function BodyEx3({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -151,7 +151,7 @@ export function BodyEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -176,7 +176,7 @@ export function BodyEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -201,7 +201,7 @@ export function BodyEx6({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -213,6 +213,8 @@ export function BodyEx6({ navigation }) {
             opt3="1"
             opt4="2"
             optCerta="opt3"
+            aulaSalvar="DEFINDOUMCORPO"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

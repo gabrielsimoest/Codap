@@ -12,7 +12,7 @@ export function Head({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="14%"
             //Texto principal
             txt="Parabéns por chegar no nível intermediário! Agora veremos mais a fundo sobre como organizar melhor o código."
             //Textos opcionais
@@ -37,7 +37,7 @@ export function HeadEx1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="28%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="O <title> define um título ao seu projeto. Ele não é visível no site, mostrando apenas na aba ou na barra de título do navegador." //Opcional
@@ -64,7 +64,7 @@ export function HeadEx2({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="42%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -88,7 +88,7 @@ export function HeadEx3({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso="0%"
+            progresso="56%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             adicionaltxt="O <meta> utiliza atributos para definir dados sobre o site, mas por hora usaremos ele para definir o conjunto de caracteres usado." //Opcional
@@ -115,7 +115,7 @@ export function HeadEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="70%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -140,7 +140,7 @@ export function HeadEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="84%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -165,7 +165,7 @@ export function HeadEx6({ navigation }) {
         <TextView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="100%"
+            progresso="95%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -178,6 +178,8 @@ export function HeadEx6({ navigation }) {
             txtCerto2="codap"
             txtCerto3="Codap"
             tamanhoInput="46%"
+            aulaSalvar="ELEMENTOSDEDADOS"
+            Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />
