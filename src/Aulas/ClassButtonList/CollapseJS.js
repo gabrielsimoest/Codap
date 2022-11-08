@@ -117,7 +117,7 @@ export default function CollapseJS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
                 <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -131,7 +131,7 @@ export default function CollapseJS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed4}>
                 <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

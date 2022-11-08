@@ -38,7 +38,7 @@ export function WhileForEx1({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"20%"}
             sec={9999}
             adicionaltxt='Começaremos com o while, como o nome já diz, ele continua repetindo o código dentro dele enquanto a condição for verdade.'
             pergunta='Coloque a condição X < 3 no while. Nesse caso, quando X >= 3, o código interno não será executado.'
@@ -59,7 +59,7 @@ export function WhileForEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="40%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -98,7 +98,7 @@ export function WhileForEx3({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="60%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -123,7 +123,7 @@ export function WhileForEx4({ navigation }) {
         <SelectView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="80%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -152,7 +152,7 @@ export function WhileForEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

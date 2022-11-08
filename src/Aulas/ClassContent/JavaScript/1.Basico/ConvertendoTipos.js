@@ -38,7 +38,7 @@ export function ConvertendoTiposEx1({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"20%"}
             sec={9999}
             adicionaltxt='Podemos transformar booleanas e números em strings usando a função string.'
             pergunta='Use a função String para converter let CODAP = 20 em uma string'
@@ -59,7 +59,7 @@ export function ConvertendoTiposEx2({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"40%"}
             sec={9999}
             adicionaltxt='Podemos fazer o mesmo ao tranfromar booleanas e strings em números, mas se uma string conter caracteres não numéricos aparecerá NaN representando uma falha na conversão.'
             pergunta='Uma boolean true é convertida como 1 e false como 0. Sabendo disso converta let CODAP = false em número usando a função Number.'
@@ -82,7 +82,7 @@ export function ConvertendoTiposEx3({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="60%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -106,7 +106,7 @@ export function ConvertendoTiposEx4({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"80%"}
             sec={9999}
             adicionaltxt='Para a função Boolean, qualquer valor será considerado true. Já 0, null, undefined, NaN, " " será false.'
             pergunta='Use a função Boolean para converter let CODAP = null em uma booleana'
@@ -129,7 +129,7 @@ export function ConvertendoTiposEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

@@ -6,7 +6,7 @@ import SelectView from '../../../../Helpers/SelectView';
 import TextView from '../../../../Helpers/TextView';
 import NestingView from '../../../../Helpers/NestingView';
 
-export function ConhecendoJS({ navigation }) {
+export function ConhecendoCSS({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
@@ -25,21 +25,21 @@ export function ConhecendoJS({ navigation }) {
             opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="No caso do p dentro do <style> no exemplo, todos os elementos <p> receberão aquele estilo. "
+            adicionaltxt_end="O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome do seletor receberão aquele estilo. "
             //NOME ADICIONADO NO STACK NAVIGATOR
-            navegar="JSEx1"
+            navegar="CSSEx1"
         />
     )
 }
 
-export function JSEx1({ navigation }) {
+export function CSSEx1({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="33%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -51,111 +51,61 @@ export function JSEx1({ navigation }) {
             opt3='Adicionar notificações'
             opt4="Adicionar traduções "
             optCerta="opt1"
-            navegar="JSEx2"
+            navegar="CSSEx2"
         />
     )
 }
 
-export function JSEx2({ navigation }) {
+export function CSSEx2({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="66%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta=""
-            opt1="alert(=>CODAP)"
-            opt2="alert=CODAP"
-            opt3='alert("CODAP")'
-            opt4="alert{CODAP}"
+            pergunta="O que o seletor h1 indica?"
+            opt1="Indica que todo elemento h1 será excluido"
+            opt2="Indica que todo elemento h1 substituido por h2"
+            opt3='Indica que todo elemento h1 obterá os estilos'
+            opt4="Indica que todo elemento h1 será executado como JS"
             optCerta="opt3"
             //NOME ADICIONADO NO STACK NAVIGATOR 
-            navegar="JSEx3"
+            navegar="CSSEx3"
         />
     )
 }
 
-export function JSEx3({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
-    return (
-        <OptionView
-            navigation={navigation}
-            //BARRA DE PROGRESSO
-            progresso="0%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="9999"
-            //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
-            //PERGUNTA
-            pergunta="Qual das opções abaixo representa o uso correto do alert?"
-            opt1="alert(=>CODAP)"
-            opt2="alert=CODAP"
-            opt3='alert("CODAP")'
-            opt4="alert{CODAP}"
-            optCerta="opt3"
-            //NOME ADICIONADO NO STACK NAVIGATOR
-            navegar="JSEx4"
-        />
-    )
-}
-
-export function JSEx4({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
-    return (
-        <OptionView
-            navigation={navigation}
-            //BARRA DE PROGRESSO
-            progresso="0%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-            sec="9999"
-            //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt='Para fazermos o código funcionar de uma maneira moderna, adicionamos o "use strict" logo no começo.' //Opcional
-            //PERGUNTA
-            pergunta="O que deve ser colocado para o JavaScript funcionar?"
-            opt1="<script>"
-            opt2="<JavaScript>"
-            opt3="<code>"
-            opt4="<js>"
-            optCerta="opt1"
-            //NOME ADICIONADO NO STACK NAVIGATOR
-            navegar="JSEx5"
-        />
-    )
-}
-
-export function JSEx5({ navigation }) {
+export function CSSEx3({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <SelectView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Crie um alert"
-            opt1='alert'
-            opt2=')'
-            opt3='"CODAP"'
-            opt4='('
-            opt5=';'
-            opt6='none'
+            pergunta="Crie um estilo de cor azul para o h1"
+            opt1='<h1 '
+            opt2='style='
+            opt3='"color:blue"'
+            opt4='>'
+            opt5='CODAP'
+            opt6='</h1>'
             opt7='none'
             opt8='none'
-            txtCerto='alert("CODAP");'
+            txtCerto='<h1 style="color:blue">CODAP</h1>'
             Salvar={"true"}
-            aulaSalvar="CONHECENDOJS"
+            aulaSalvar="CONHECENDOCSS"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

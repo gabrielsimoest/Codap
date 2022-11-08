@@ -57,6 +57,11 @@ import { WhileFor, WhileForEx1, WhileForEx2, WhileForEx3, WhileForEx4, WhileForE
 import { AdicionandoBordas, AdicionandoBordas2, AdicionandoBordas3, AdicionandoBordas4, AdicionandoBordas5, AdicionandoBordas6, AdicionandoBordas7 } from './Aulas/ClassContent/CSS/2.Intermediario/AdicionandoBordas';
 import { ColocandoMargin, ColocandoMargin2, ColocandoMargin3, ColocandoMargin4, ColocandoMargin5, ColocandoMargin6 } from './Aulas/ClassContent/CSS/2.Intermediario/ColocandoMargin';
 import { AdicionandoPadding, AdicionandoPadding2, AdicionandoPadding3, AdicionandoPadding4, AdicionandoPadding5, AdicionandoPadding6 } from './Aulas/ClassContent/CSS/2.Intermediario/AdicionandoPadding';
+import { ConhecendoCSS, CSSEx1, CSSEx2, CSSEx3 } from './Aulas/ClassContent/CSS/1.Basico/ConhecendoCss';
+import { ColorCSS, ColorEx1, ColorEx2, ColorEx3 } from './Aulas/ClassContent/CSS/1.Basico/ColorCSS';
+import { BackgroungColorCSS, BackgroungColorEx1, BackgroungColorEx2 } from './Aulas/ClassContent/CSS/1.Basico/BackgroundColorCSS';
+import { FontSizeCSS, FontSizeEx1, FontSizeEx2 } from './Aulas/ClassContent/CSS/1.Basico/FontSizeCSS';
+import { FontFamilyCSS, FontFamilyEx1, FontFamilyEx2 } from './Aulas/ClassContent/CSS/1.Basico/FontFamily';
 
 //TESTES
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
@@ -1318,6 +1323,86 @@ function App() {
         <Stack.Screen
           name='AdicionandoPadding6'
           component={AdicionandoPadding6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConhecendoCSS'
+          component={ConhecendoCSS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CSSEx1'
+          component={CSSEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CSSEx2'
+          component={CSSEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='CSSEx3'
+          component={CSSEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColorCSS'
+          component={ColorCSS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColorEx1'
+          component={ColorEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ColorEx2'
+          component={ColorEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BackgroundColorCSS'
+          component={BackgroungColorCSS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BackgroungColorEx1'
+          component={BackgroungColorEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='BackgroungColorEx2'
+          component={BackgroungColorEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontSizeCSS'
+          component={FontSizeCSS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontSizeEx1'
+          component={FontSizeEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontSizeEx2'
+          component={FontSizeEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontFamilyCSS'
+          component={FontFamilyCSS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontFamilyEx1'
+          component={FontFamilyEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='FontFamilyEx2'
+          component={FontFamilyEx2}
           options={{ cardStyleInterpolator: forFade }}
         />
       </Stack.Navigator>

@@ -38,7 +38,7 @@ export function JSEx1({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"20%"}
             sec={9999}
             adicionaltxt='Vamos começar escrevendo seu primeiro HELLO WORLD?'
             pergunta='Complete a função alert a seguir com "HELLO WORLD", mas não esqueça as áspas para identificar como uma string.'
@@ -59,7 +59,7 @@ export function JSEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="40%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -98,7 +98,7 @@ export function JSEx3({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="60%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -123,7 +123,7 @@ export function JSEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="80%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -148,7 +148,7 @@ export function JSEx5({ navigation }) {
         <SelectView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO

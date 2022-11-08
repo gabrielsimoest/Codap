@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AText from '../../Helpers/AText';
 import { useTranslation } from 'react-i18next';
 
@@ -68,10 +68,19 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CONHECENDOCSS"} theme={"classButton"} title={t("Discovering CSS")} onPressFunction={() => navigation.navigate("ConhecendoCSS")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOR"} theme={"classButton"} title={t("Using colors")} onPressFunction={() => navigation.navigate("ColorCSS")} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"BACKGROUNDCOLOR"} theme={"classButton"} title={t("Adding background color")} onPressFunction={() => navigation.navigate("BackgroundColorCSS")} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"FONTSIZE"} theme={"classButton"} title={t("Adjusting font size")} onPressFunction={() => navigation.navigate("FontSizeCSS")} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"FONTFAMILY"} theme={"classButton"} title={t("Changing font family")} onPressFunction={() => navigation.navigate("FontFamilyCSS")} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -85,13 +94,13 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOBORDAS"} theme={"classButton"} title="Adicionando Bordas" onPressFunction={() => navigation.navigate('AdicionandoBordas')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOBORDAS"} theme={"classButton"} title={t("Adding borders")} onPressFunction={() => navigation.navigate('AdicionandoBordas')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOCANDOMARGIN"} theme={"classButton"} title="Colocando Margin" onPressFunction={() => navigation.navigate('ColocandoMargin')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOCANDOMARGIN"} theme={"classButton"} title={t("Putting margin")} onPressFunction={() => navigation.navigate('ColocandoMargin')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOPADDING"} theme={"classButton"} title="Adicionando Padding" onPressFunction={() => navigation.navigate('AdicionandoPadding')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOPADDING"} theme={"classButton"} title={t("Adding padding")} onPressFunction={() => navigation.navigate('AdicionandoPadding')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -105,7 +114,7 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
                 <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -119,7 +128,7 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed4}>
                 <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>Opss, Ainda não foram encontradas aulas para esse módulo</Text>
+                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

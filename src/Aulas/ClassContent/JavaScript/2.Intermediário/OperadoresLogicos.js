@@ -38,7 +38,7 @@ export function IfElseEx1({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"15%"}
             sec={9999}
             adicionaltxt='Para fazer a função if funcionar será necessário uma condição seguindo esse exemplo if(CONDIÇÃO), nesse caso, se a condição for verdadeira, ele executa um comando.'
             pergunta='Escreva uma condição X > Y.'
@@ -59,7 +59,7 @@ export function IfElseEx2({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="30%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -98,7 +98,7 @@ export function IfElseEx3({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="45%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -137,7 +137,7 @@ export function IfElseEx4({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="60%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -162,7 +162,7 @@ export function IfElseEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="75%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
@@ -187,7 +187,7 @@ export function OperadorTernario({ navigation }) {
         <TeoricView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="90%"
             //Texto principal
             txt="Agora veremos os operadores ternários."
             //Textos opcionais
@@ -212,7 +212,7 @@ export function OperadorTernarioEx1({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"100%"}
             sec={9999}
             adicionaltxt='none'
             pergunta='Escreva uma condição X > Y.'

@@ -38,7 +38,7 @@ export function VariaveisEx1({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"20%"}
             sec={9999}
             adicionaltxt='Var e let possuem a mesma função, mas hoje em dia prefira usar o let.'
             pergunta='Crie uma variavel CODAP e atribua 5 a ele'
@@ -62,7 +62,7 @@ export function VariaveisEx2({ navigation }) {
     return (
         <TextView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"40%"}
             sec={9999}
             adicionaltxt='Você pode alterar o valor da variável atribuída anteriormente, basta escrever o nome e atribuir um novo valor. Faça isso e altere o valor para 10.'
             pergunta='let CODAP = 5'
@@ -83,7 +83,7 @@ export function VariaveisEx3({ navigation }) {
     return (
         <SelectView
             navigation={navigation}
-            progresso={"0%"}
+            progresso={"60%"}
             sec={9999}
             adicionaltxt='Const é um valor fixo, ao tentar trocar seu valor aparecerá um erro. Use-a quando tiver certeza que o valor não mudará ao longo do código.'
             pergunta='Crie uma constante CODAP e atribua "HELLO WORLD" a ele.'
@@ -107,7 +107,7 @@ export function VariaveisEx4({ navigation }) {
     return (
         <NestingView
             navigation={navigation}
-            progresso="0%"
+            progresso="80%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //Quantidade de opções (1-3)
@@ -146,7 +146,7 @@ export function VariaveisEx5({ navigation }) {
         <OptionView
             navigation={navigation}
             //BARRA DE PROGRESSO
-            progresso="0%"
+            progresso="100%"
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
