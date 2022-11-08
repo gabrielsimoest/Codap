@@ -19,20 +19,31 @@ import SorryView from './Helpers/SorryView';
 import Perfil from './Users/Perfil';
 import Store from './Market/Store';
 import Class from './Aulas/Class';
-//AULAS
-import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, HtmlStartEx5,TagsElements } from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
+//AULAS HTML
+import { Estrutura, HtmlStartEx1, HtmlStartEx2, HtmlStartEx3, HtmlStartEx4, HtmlStartEx5, TagsElements } from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
 import { H1h6, HeaderEx1, HeaderEx2, HeaderEx3, HeaderEx4, HeaderEx5, HeaderEx6 } from './Aulas/ClassContent/Html/EstrutandoTitulos';
 import { P, FraseEx1, FraseEx2, FraseEx3, FraseEx4, FraseEx5, FraseEx6 } from './Aulas/ClassContent/Html/CriandoFrases';
-import { ButtonHtml, ButtonEx1, ButtonEx2, ButtonEx3, ButtonEx4, ButtonEx5, ButtonEx6} from './Aulas/ClassContent/Html/ConstruindoBotões';
+import { ButtonHtml, ButtonEx1, ButtonEx2, ButtonEx3, ButtonEx4, ButtonEx5, ButtonEx6 } from './Aulas/ClassContent/Html/ConstruindoBotões';
 import { ImgTeoric, Img1, Img2, Img3, Img4, Img5, Img6 } from './Aulas/ClassContent/Html/AdicionandoImagens';
 import { Comentario, ComentarioEx1, ComentarioEx2, ComentarioEx3, ComentarioEx4, ComentarioEx5, ComentarioEx6 } from './Aulas/ClassContent/Html/CriandoComentarios';
 import { Head, HeadEx1, HeadEx2, HeadEx3, HeadEx4, HeadEx5, HeadEx6 } from './Aulas/ClassContent/Html/Head';
 import { Body, BodyEx1, BodyEx2, BodyEx3, BodyEx4, BodyEx5, BodyEx6 } from './Aulas/ClassContent/Html/DefinindoBody';
-import { Listas, ListaEx1,  ListaEx2, ListaEx3, ListaEx4, ListaEx5, ListaEx6 } from './Aulas/ClassContent/Html/CriandoListas';
-import { Links, LinksEx1,  LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } from './Aulas/ClassContent/Html/CriandoLinks';
+import { Listas, ListaEx1, ListaEx2, ListaEx3, ListaEx4, ListaEx5, ListaEx6 } from './Aulas/ClassContent/Html/CriandoListas';
+import { Links, LinksEx1, LinksEx2, LinksEx3, LinksEx4, LinksEx5, LinksEx6 } from './Aulas/ClassContent/Html/CriandoLinks';
 import { Div, DivEx1, DivEx2, LineBreak, LineBreakEx1, LineBreakEx2, LineBreakEx3 } from './Aulas/ClassContent/Html/DivLinhaEspaço';
 import { IndentTeoric, Indent1, Indent2, Indent3, Indent4, Indent5, Indent6 } from './Aulas/ClassContent/Html/Avancado/IdentificandoElementos';
-import { ITableTeoric, ITable1, ITable2, ITable3, ITable4, ITable5} from './Aulas/ClassContent/Html/Avancado/IntroducaoaTabelas';
+import { ITableTeoric, ITable1, ITable2, ITable3, ITable4, ITable5 } from './Aulas/ClassContent/Html/Avancado/IntroducaoaTabelas';
+
+//AULAS JS
+import { ConhecendoJS, JSEx1, JSEx2, JSEx3, JSEx4, JSEx5 } from './Aulas/ClassContent/JavaScript/1.Basico/ConhecendoJS';
+import { Variaveis, VariaveisEx1, VariaveisEx2, VariaveisEx3, VariaveisEx4, VariaveisEx5 } from './Aulas/ClassContent/JavaScript/1.Basico/Variaveis';
+import { TiposDados, TiposDadosEx2, TiposDadosEx3, TiposDadosEx4, TiposDados2, TiposDadosEx1 } from './Aulas/ClassContent/JavaScript/1.Basico/TiposDados';
+import { Interações, InteraçõesEx1, InteraçõesEx2, InteraçõesEx3, InteraçõesEx4, InteraçõesEx5 } from './Aulas/ClassContent/JavaScript/1.Basico/AdicionandoInterações';
+import { ConvertendoTipos, ConvertendoTiposEx1, ConvertendoTiposEx2, ConvertendoTiposEx3, ConvertendoTiposEx4, ConvertendoTiposEx5 } from './Aulas/ClassContent/JavaScript/1.Basico/ConvertendoTipos';
+import { Operadores, OperadoresEx1, OperadoresEx2, OperadoresEx3, OperadoresEx4, OperadoresEx5, OperadoresEx6, OperadoresEx7 } from './Aulas/ClassContent/JavaScript/2.Intermediário/CalculosOperadores';
+import { Comparação, ComparaçãoEx1, ComparaçãoEx2, ComparaçãoEx3, ComparaçãoEx4, ComparaçãoEx5 } from './Aulas/ClassContent/JavaScript/2.Intermediário/Comparações';
+import { IfElse, IfElseEx1, IfElseEx2, IfElseEx3, IfElseEx4, IfElseEx5, OperadorTernario, OperadorTernarioEx1 } from './Aulas/ClassContent/JavaScript/2.Intermediário/OperadoresLogicos';
+import { WhileFor, WhileForEx1, WhileForEx2, WhileForEx3, WhileForEx4, WhileForEx5 } from './Aulas/ClassContent/JavaScript/2.Intermediário/Laços';
 
 //TESTES
 import { BasicPrat1_html, BasicPrat2_html, BasicPrat3_html, BasicPrat4_html } from './Aulas/ClassContent/Html/Basic_html';
@@ -226,12 +237,12 @@ function App() {
         }}
       >
         <Stack.Screen
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
           name="Home"
           component={HomeTabs}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
         />
         <Stack.Screen
           name="Register"
@@ -744,6 +755,300 @@ function App() {
         <Stack.Screen
           name='ITable5'
           component={ITable5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+
+
+
+
+        <Stack.Screen
+          name='ConhecendoJS'
+          component={ConhecendoJS}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='JSEx1'
+          component={JSEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='JSEx2'
+          component={JSEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='JSEx3'
+          component={JSEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='JSEx4'
+          component={JSEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='JSEx5'
+          component={JSEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Variaveis'
+          component={Variaveis}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='VariaveisEx1'
+          component={VariaveisEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='VariaveisEx2'
+          component={VariaveisEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='VariaveisEx3'
+          component={VariaveisEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='VariaveisEx4'
+          component={VariaveisEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='VariaveisEx5'
+          component={VariaveisEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDados'
+          component={TiposDados}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDadosEx1'
+          component={TiposDadosEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDadosEx2'
+          component={TiposDadosEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDadosEx3'
+          component={TiposDadosEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDadosEx4'
+          component={TiposDadosEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TiposDados2'
+          component={TiposDados2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Interações'
+          component={Interações}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='InteraçõesEx1'
+          component={InteraçõesEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='InteraçõesEx2'
+          component={InteraçõesEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='InteraçõesEx3'
+          component={InteraçõesEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='InteraçõesEx4'
+          component={InteraçõesEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='InteraçõesEx5'
+          component={InteraçõesEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTipos'
+          component={ConvertendoTipos}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTiposEx1'
+          component={ConvertendoTiposEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTiposEx2'
+          component={ConvertendoTiposEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTiposEx3'
+          component={ConvertendoTiposEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTiposEx4'
+          component={ConvertendoTiposEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ConvertendoTiposEx5'
+          component={ConvertendoTiposEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Operadores'
+          component={Operadores}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx1'
+          component={OperadoresEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx2'
+          component={OperadoresEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx3'
+          component={OperadoresEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx4'
+          component={OperadoresEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx5'
+          component={OperadoresEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx6'
+          component={OperadoresEx6}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadoresEx7'
+          component={OperadoresEx7}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='Comparação'
+          component={Comparação}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComparaçãoEx1'
+          component={ComparaçãoEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComparaçãoEx2'
+          component={ComparaçãoEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComparaçãoEx3'
+          component={ComparaçãoEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComparaçãoEx4'
+          component={ComparaçãoEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='ComparaçãoEx5'
+          component={ComparaçãoEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElse'
+          component={IfElse}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElseEx1'
+          component={IfElseEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElseEx2'
+          component={IfElseEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElseEx3'
+          component={IfElseEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElseEx4'
+          component={IfElseEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='IfElseEx5'
+          component={IfElseEx5}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadorTernario'
+          component={OperadorTernario}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='OperadorTernarioEx1'
+          component={OperadorTernarioEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileFor'
+          component={WhileFor}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileForEx1'
+          component={WhileForEx1}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileForEx2'
+          component={WhileForEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileForEx3'
+          component={WhileForEx3}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileForEx4'
+          component={WhileForEx4}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='WhileForEx5'
+          component={WhileForEx5}
           options={{ cardStyleInterpolator: forFade }}
         />
       </Stack.Navigator>

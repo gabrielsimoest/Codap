@@ -18,6 +18,7 @@ const textSize = 15;
 
 export default function CollapseHtml() {
 
+    //Salvar aulas
     const [AulasSalvas, setAulasSalvas] = useState('');
 
     useFocusEffect(

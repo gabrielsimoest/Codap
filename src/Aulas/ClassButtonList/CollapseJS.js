@@ -8,14 +8,29 @@ import {
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../Helpers/OpButton';
-import { useNavigation, useTheme } from '@react-navigation/native';
+import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
 import AText from '../../Helpers/AText';
 import { useTranslation } from 'react-i18next';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TitleTextSize = 23;
 const textSize = 15;
 
 export default function CollapseJS() {
+
+    //Salvar aulas
+    const [AulasSalvas, setAulasSalvas] = useState('');
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getUser();
+        }, [])
+    );
+
+    const getUser = async () => {
+        const storageAulasSalvas = await AsyncStorage.getItem('Aulas');
+        setAulasSalvas(storageAulasSalvas);
+    }
 
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
@@ -53,10 +68,19 @@ export default function CollapseJS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CONHECENDOJS"} theme={"classButton"} title={t("Discovering JavaScript")} onPressFunction={()=> navigation.navigate("ConhecendoJS")}/>
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"VARIAVEIS"} theme={"classButton"} title={t("JavaScript variables")} onPressFunction={()=> navigation.navigate("Variaveis")}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"TIPOSDADOS"} theme={"classButton"} title={t("Data types")} onPressFunction={()=> navigation.navigate("TiposDados")}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"INTERAÇÕES"} theme={"classButton"} title={t("Adding interactions")} onPressFunction={()=> navigation.navigate("Interações")}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CONVERTENDOTIPOS"} theme={"classButton"} title={t("Converting types")} onPressFunction={()=> navigation.navigate("ConvertendoTipos")}/>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -69,14 +93,17 @@ export default function CollapseJS() {
                 <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
-                <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+            <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"OPERADORES"} theme={"classButton"} title={t("Basic operators and maths")} onPressFunction={()=> navigation.navigate("Operadores")}/>
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COMPARAÇÃO"} theme={"classButton"} title={t("Comparisons")} onPressFunction={()=> navigation.navigate("Comparação")}/>
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton theme={"classButton"} title="Teste" />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"IFELSETERNARIO"} theme={"classButton"} title={t("Logic functions")} onPressFunction={()=> navigation.navigate("IfElse")}/>
+                </View>
+                <View style={{ flexDirection: "row" }} >
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"WHILEFOR"} theme={"classButton"} title={t("Creating loops")} onPressFunction={()=> navigation.navigate("WhileFor")}/>
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
