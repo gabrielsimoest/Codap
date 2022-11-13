@@ -9,13 +9,14 @@ import Icon, { Icons } from '../components/Icons';
 import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';
+import AHighlighter from './AHighlighter';
 
 const textSize = 23;
 const optSize = 20;
 
-export default function NestingView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, 
-    txtantes2, txtantes3, txtdepois, txtdepois2, txtdepois3, txtCerto1, txtCerto2, txtCerto3, 
-    tamanhoInput, navegar, layer = 1, qtdop = 1, aulaSalvar, Salvar}) {
+export default function NestingView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes,
+    txtantes2, txtantes3, txtdepois, txtdepois2, txtdepois3, txtCerto1, txtCerto2, txtCerto3,
+    tamanhoInput, navegar, layer = 1, qtdop = 1, aulaSalvar, Salvar, txtToHighlight=[""] }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -34,7 +35,7 @@ export default function NestingView({ navigation, progresso, sec, adicionaltxt, 
     const [VisibleInput, setInput] = useState("removeInput")
     const [VisibleInput2, setInput2] = useState("removeInput")
 
-    
+
 
     useEffect(() => {
         if (adicionaltxt != 'none')
@@ -112,10 +113,22 @@ export default function NestingView({ navigation, progresso, sec, adicionaltxt, 
                         />
                     </TouchableOpacity>
                     <Timer navigation={navigation} seconds={sec} />
-                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
+                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
                     <SafeAreaView style={styles.zIndex}>
-                        <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
-                        <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{pergunta}</AText>
+                        <AHighlighter
+                            style={[styles[Textadd], { color: colors.text }]}
+                            highlight={{ color: "#637aff" }}
+                            wordHighlight={txtToHighlight}
+                            text={adicionaltxt}
+                            defaultSize={textSize}
+                        />
+                        <AHighlighter
+                            style={[styles.text, { color: colors.text }]}
+                            highlight={{ color: "#637aff" }}
+                            wordHighlight={txtToHighlight}
+                            text={pergunta}
+                            defaultSize={textSize}
+                        />
                         <View style={[styles[VisibleLayer], { backgroundColor: colors.primary }]}>
                             <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
                             <TextInput style={[styles.input, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
@@ -325,8 +338,8 @@ const styles = StyleSheet.create({
     selectLayer: {
         display: 'none'
     },
-    zIndex:{
-        zIndex:999
+    zIndex: {
+        zIndex: 999
     }
 
 })

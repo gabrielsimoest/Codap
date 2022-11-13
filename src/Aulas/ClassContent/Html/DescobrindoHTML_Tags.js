@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import TeoricView from '../../../Helpers/TeoricView';
 import OptionView from '../../../Helpers/OptionView';
+import { View } from 'react-native';
 
 export function Estrutura({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -24,6 +25,8 @@ export function Estrutura({ navigation }) {
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis."
             aulaSalvar="none"
+            //Palavras que receberão o highlight, array
+            txtToHighlight={["HTML", "NOME", "Web"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="TagsElementos"
         />

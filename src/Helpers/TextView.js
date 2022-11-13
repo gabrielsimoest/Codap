@@ -9,17 +9,18 @@ import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';
 import SaveClass from './SaveClass';
+import AHighlighter from './AHighlighter';
 
 const textSize = 23;
 const optSize = 20;
 
-export default function TextView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes, 
-    txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar, aulaSalvar, Salvar}) {
+export default function TextView({ navigation, progresso, sec, adicionaltxt, pergunta, txtantes,
+    txtdepois, txtCerto1, txtCerto2, txtCerto3, tamanhoInput, navegar, aulaSalvar, Salvar, txtToHighlight=[""] }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
-    
+
     const { colors } = useTheme(); //Variavel de cor do tema
-    
+
     const [visibleModal, setVisibleModal] = useState('false')
     const [visibleModalE, setVisibleModalE] = useState('false')
     const [Textadd, setTextadd] = useState('Textadd')
@@ -28,12 +29,12 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
 
     useEffect(() => {
         if (adicionaltxt != 'none')
-            setTextadd('text')   
+            setTextadd('text')
     }, [])
 
     const Verificar = () => {
         setTEXTO(InputText)
-        if(InputText == txtCerto1 || InputText == txtCerto2 || InputText == txtCerto3)
+        if (InputText == txtCerto1 || InputText == txtCerto2 || InputText == txtCerto3)
             setVisibleModal(true)
         else
             setVisibleModalE(true)
@@ -43,7 +44,7 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss} accessible={false}
         >
-            <View style={[styles.container, {backgroundColor: colors.card}]}>
+            <View style={[styles.container, { backgroundColor: colors.card }]}>
                 <View>
                     <View style={styles.progressBar}><View style={[StyleSheet.absoluteFill, { backgroundColor: "#637aff", width: progresso }]} /></View>
                     <TouchableOpacity
@@ -57,14 +58,26 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
                             style={styles.icon}
                         />
                     </TouchableOpacity>
-                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
-                    <Timer navigation={navigation} seconds={sec}/>
-                    <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
-                    <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
-                    <View style={[styles.txtarea, {backgroundColor: colors.primary}]}>
-                        <Text style={[styles.textopt, {color: colors.text}]}>{txtantes}</Text>
-                        <TextInput style={[styles.input, {width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
-                        <Text style={[styles.textopt, {color: colors.text}]}>{txtdepois}</Text>
+                    <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+                    <Timer navigation={navigation} seconds={sec} />
+                    <AHighlighter
+                        style={[styles[Textadd], { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={adicionaltxt}
+                        defaultSize={textSize}
+                    />
+                    <AHighlighter
+                        style={[styles.text, { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={pergunta}
+                        defaultSize={textSize}
+                    />
+                    <View style={[styles.txtarea, { backgroundColor: colors.primary }]}>
+                        <Text style={[styles.textopt, { color: colors.text }]}>{txtantes}</Text>
+                        <TextInput style={[styles.input, { width: tamanhoInput }]} onChangeText={(value) => setInputText(value)}></TextInput>
+                        <Text style={[styles.textopt, { color: colors.text }]}>{txtdepois}</Text>
                     </View>
                 </View>
                 <OpButton theme={"nextButton"} title={t("verify")} onPressFunction={() => Verificar()} />
@@ -74,8 +87,8 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
                     transparent={true}
                 >
                     <SafeAreaView>
-                        <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                            <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("congrats")}</AText>
+                        <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                            <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("congrats")}</AText>
                             <OpButton theme={"modalButton"} title={t("continue")} onPressFunction={() => navigation.navigate(navegar)} />
                         </View>
                     </SafeAreaView>
@@ -85,12 +98,12 @@ export default function TextView({ navigation, progresso, sec, adicionaltxt, per
                     transparent={true}
                 >
                     <SafeAreaView>
-                        <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                            <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("oh no")}</AText>
+                        <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                            <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("oh no")}</AText>
                             <OpButton theme={"modalButtonE"} title={t("try again")} onPressFunction={() => setVisibleModalE(false)} />
                         </View>
                     </SafeAreaView>
-                </Modal>    
+                </Modal>
             </View>
         </TouchableWithoutFeedback>
     )

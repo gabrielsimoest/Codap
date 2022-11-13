@@ -15,7 +15,7 @@ export function Listas({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="Você pode criar listas em seu site, para isso usamos o <ul> ou <ol> juntamente com o <li>."
+            txt="Você pode criar listas em seu site, para isso usamos o < ul > ou < ol > juntamente com o < li >."
             //Textos opcionais
             adicionaltxt="<ul> é usado para listas não ordenadas."
             adicionaltxt2="<ol> é usado para listas ordenadas."
@@ -26,6 +26,9 @@ export function Listas({ navigation }) {
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"
+
+            //HIGHLIGHT
+            txtToHighlight={["ul", "ol", " li "]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="ListaEx1"
         />
@@ -45,13 +48,15 @@ export function ListaEx1({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Use o <li> para criar um item com o nome de CODAP"
+            pergunta="Use o < li > para criar um item com o nome de CODAP"
             txtantes="<li>"
             txtdepois="</li>"
             txtCerto1="CODAP"
             txtCerto2="codap"
             txtCerto3="Codap"
             tamanhoInput="60%"
+
+            txtToHighlight={["CODAP", " li "]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="ListaEx2"
         />
@@ -72,7 +77,7 @@ export function ListaEx2({ navigation }) {
             //Nível de aninhamento (1-3)
             layer={1}
             //Texto adicional
-            adicionaltxt="Vamos criar uma lista ordenada? Para isso você deve usar o <li> dentro de um <ol>."
+            adicionaltxt="Vamos criar uma lista ordenada? Para isso você deve usar o < li > dentro de um < ol >."
             //pergunta/texto principal
             pergunta="Crie uma lista de 3 itens nessa ordem: Ouro, Prata, Bronze"
             //Elementos da estrutura (1-3) de acordo com as layers
@@ -87,6 +92,8 @@ export function ListaEx2({ navigation }) {
             txtCerto1="<li>Ouro</li>" //Primeira opção certa
             txtCerto2="<li>Prata</li>" //Segunda opção certa
             txtCerto3="<li>Bronze</li>" //terceira opção certa
+
+            txtToHighlight={[" li ", "ol"]}
 
             //Tamanho do input
             tamanhoInput="46%"
@@ -126,6 +133,7 @@ export function ListaEx3({ navigation }) {
             txtCerto2="<li>World</li>" //Segunda opção certa
             //txtCerto3="" //terceira opção certa
 
+            
             //Tamanho do input
             tamanhoInput="46%"
             //NOME ADICIONADO NO STACK NAVIGATOR 

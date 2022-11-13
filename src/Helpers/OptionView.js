@@ -7,11 +7,12 @@ import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import AText from './AText';
 import Timer from './Timer';
+import AHighlighter from './AHighlighter';
 
 const textSize = 23;
 
-export default function OptionView({ navigation, progresso, sec,  adicionaltxt, pergunta, opt1, 
-    opt2, opt3, opt4, optCerta, navegar, aulaSalvar, Salvar }) {
+export default function OptionView({ navigation, progresso, sec, adicionaltxt, pergunta, opt1,
+    opt2, opt3, opt4, optCerta, navegar, aulaSalvar, Salvar, txtToHighlight=[""] }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -90,9 +91,9 @@ export default function OptionView({ navigation, progresso, sec,  adicionaltxt, 
     }
 
     return (
-        <View style={[styles.container, {backgroundColor: colors.card}]}>
+        <View style={[styles.container, { backgroundColor: colors.card }]}>
             <View>
-            <View style={styles.progressBar}><View style={[StyleSheet.absoluteFill, {backgroundColor: "#637aff", width: progresso}]}/></View>
+                <View style={styles.progressBar}><View style={[StyleSheet.absoluteFill, { backgroundColor: "#637aff", width: progresso }]} /></View>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("Home")}
                 >
@@ -104,10 +105,22 @@ export default function OptionView({ navigation, progresso, sec,  adicionaltxt, 
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <Timer navigation={navigation} seconds={sec}/>
-                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
-                <AText style={[styles[Textadd], {color: colors.text}]} defaultSize={textSize}>{adicionaltxt}</AText>
-                <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>{pergunta}</AText>
+                <Timer navigation={navigation} seconds={sec} />
+                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+                <AHighlighter
+                    style={[styles[Textadd], { color: colors.text }]}
+                    highlight={{ color: "#637aff" }}
+                    wordHighlight={txtToHighlight}
+                    text={adicionaltxt}
+                    defaultSize={textSize}
+                />
+                <AHighlighter
+                    style={[styles.text, { color: colors.text }]}
+                    highlight={{ color: "#637aff" }}
+                    wordHighlight={txtToHighlight}
+                    text={pergunta}
+                    defaultSize={textSize}
+                />
                 <View>
                     <OpButton theme={Select} title={opt1} onPressFunction={() => SelectTrue()} />
                     <OpButton theme={Select2} title={opt2} onPressFunction={() => SelectTrue2()} />
@@ -122,8 +135,8 @@ export default function OptionView({ navigation, progresso, sec,  adicionaltxt, 
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("congrats")}</AText>
+                    <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                        <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("congrats")}</AText>
                         <OpButton theme={"modalButton"} title={t("continue")} onPressFunction={() => navigation.navigate(navegar)} />
                     </View>
                 </SafeAreaView>
@@ -133,8 +146,8 @@ export default function OptionView({ navigation, progresso, sec,  adicionaltxt, 
                 transparent={true}
             >
                 <SafeAreaView>
-                    <View style={[styles.contant, {backgroundColor: colors.card}]}>
-                        <AText style={[styles.textModal, {color: colors.text}]} defaultSize={textSize}>{t("oh no")}</AText>
+                    <View style={[styles.contant, { backgroundColor: colors.card }]}>
+                        <AText style={[styles.textModal, { color: colors.text }]} defaultSize={textSize}>{t("oh no")}</AText>
                         <OpButton theme={"modalButtonE"} title={t("try again")} onPressFunction={() => setVisibleModalE(false)} />
                     </View>
                 </SafeAreaView>
@@ -232,10 +245,10 @@ const styles = StyleSheet.create({
         display: 'none'
     },
     progressBar: {
-        top:-2,
+        top: -2,
         height: 8,
         width: '100%',
         backgroundColor: 'white',
-      },
+    },
 
 })

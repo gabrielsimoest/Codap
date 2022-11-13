@@ -6,11 +6,12 @@ import Icon, { Icons } from '../components/Icons';
 import OpButton from './OpButton';
 import AText from './AText';
 import SaveClass from './SaveClass';
+import AHighlighter from './AHighlighter';
 
 const textSize = 20;
 
-export default function TeoricView({ navigation, progresso, txt, adicionaltxt, adicionaltxt2, 
-    adicionaltxt_end, img, opt_img, opt_img2, navegar, aulaSalvar, Salvar}) {
+export default function TeoricView({ navigation, progresso, txt, adicionaltxt, adicionaltxt2,
+    adicionaltxt_end, img, opt_img, opt_img2, navegar, aulaSalvar, Salvar, txtToHighlight=[""] }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -52,18 +53,43 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
                         size={60}
                         style={styles.icon}
                     />
+                    
                 </TouchableOpacity>
-                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
+                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
                 <View style={{ alignItems: "stretch" }}>
-                    <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{txt}</AText>
-                    <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
-                    <AText style={[styles[Textadd2], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt2}</AText>
+                    <AHighlighter
+                        style={[styles.text, { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={txt}
+                        defaultSize={textSize}
+                    />
+                    <AHighlighter
+                        style={[styles[Textadd], { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={adicionaltxt}
+                        defaultSize={textSize}
+                    />
+                    <AHighlighter
+                        style={[styles[Textadd2], { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={adicionaltxt2}
+                        defaultSize={textSize}
+                    />
                     <View style={{ alignItems: "center" }}>
                         <Image style={styles[Imgadd3]} source={img} />
                         <Image style={styles[Imgadd]} source={opt_img} />
                         <Image style={styles[Imgadd2]} source={opt_img2} />
                     </View>
-                    <AText style={[styles[Textadd3], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt_end}</AText>
+                    <AHighlighter
+                        style={[styles[Textadd3], { color: colors.text }]}
+                        highlight={{ color: "#637aff" }}
+                        wordHighlight={txtToHighlight}
+                        text={adicionaltxt_end}
+                        defaultSize={textSize}
+                    />
                 </View>
             </ScrollView>
             <OpButton theme={"nextButton"} title={t("next")} onPressFunction={() => navigation.navigate(navegar)} />

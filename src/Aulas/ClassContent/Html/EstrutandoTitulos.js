@@ -25,6 +25,7 @@ export function H1h6({ navigation }) {
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Quanto menor for o número, maior será a fonte do texto. Indicando seu nível de importância."
+            txtToHighlight={["h1"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HeaderEx1"
         />

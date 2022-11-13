@@ -7,6 +7,7 @@ import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import Timer from './Timer';
 import AText from './AText';
+import AHighlighter from './AHighlighter';
 
 const textSize = 23;
 const optSize = 15;
@@ -29,8 +30,8 @@ var disableopt6 = 'opt'
 var disableopt7 = 'opt'
 var disableopt8 = 'opt'
 
-export default function SelectView({ navigation, progresso, sec, adicionaltxt, pergunta, opt1, opt2, 
-    opt3, opt4, opt5, opt6, opt7, opt8, txtCerto, navegar, aulaSalvar, Salvar }) {
+export default function SelectView({ navigation, progresso, sec, adicionaltxt, pergunta, opt1, opt2,
+    opt3, opt4, opt5, opt6, opt7, opt8, txtCerto, navegar, aulaSalvar, Salvar, txtToHighlight = [""] }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
 
@@ -171,10 +172,22 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                         style={styles.icon}
                     />
                 </TouchableOpacity>
-                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar}/>
+                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
                 <Timer navigation={navigation} seconds={sec} />
-                <AText style={[styles[Textadd], { color: colors.text }]} defaultSize={textSize}>{adicionaltxt}</AText>
-                <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{pergunta}</AText>
+                <AHighlighter
+                    style={[styles[Textadd], { color: colors.text }]}
+                    highlight={{ color: "#637aff" }}
+                    wordHighlight={txtToHighlight}
+                    text={adicionaltxt}
+                    defaultSize={textSize}
+                />
+                <AHighlighter
+                    style={[styles.text, { color: colors.text }]}
+                    highlight={{ color: "#637aff" }}
+                    wordHighlight={txtToHighlight}
+                    text={pergunta}
+                    defaultSize={textSize}
+                />
                 <View style={[styles.code, { backgroundColor: colors.background }]}>
                     <View><AText style={[styles.textcode, { color: colors.text }]} defaultSize={optSize}>{Texto}</AText></View>
                 </View>
@@ -190,7 +203,7 @@ export default function SelectView({ navigation, progresso, sec, adicionaltxt, p
                     />
                 </TouchableOpacity>
             </View>
-            
+
             <View style={[styles.options, { backgroundColor: colors.background }]}>
                 <TouchableOpacity onPress={() => ShowText(1)} disabled={disable}>
                     <View style={styles[disableopt]}><Text style={styles.textopt}>{opt1}</Text></View>
