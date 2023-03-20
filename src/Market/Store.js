@@ -315,7 +315,7 @@ export default function Store() {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#141f29',
-        height: 1000
+        height: "100%"
     },
     headert: {
         margin: 10,

@@ -13,8 +13,7 @@ export default function Css() {
 const styles = StyleSheet.create({
     scroller: {
         marginHorizontal: 10,
-        height: 630,
-        paddingBottom: 500
+        height: "83.3%"
     },
 
 })

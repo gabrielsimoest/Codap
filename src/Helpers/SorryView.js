@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     figure: {
-        top: "9%",
+        top: "3%",
         left: "-41.5%",
         width: 720,
         height: 460,

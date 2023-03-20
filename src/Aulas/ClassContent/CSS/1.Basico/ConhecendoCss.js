@@ -15,9 +15,9 @@ export function ConhecendoCSS({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //Texto principal
-            txt="Olá, aqui é o NOME, vamos aprender CSS? O CSS é um mecanismo para adicionar estilos a um documento web."
+            txt={t("lets learn CSS")}
             //Textos opcionais
-            adicionaltxt=" O código CSS pode ser aplicado diretamente nas tags html ou ficar contido dentro das tags <style> "
+            adicionaltxt={t("CSS code can be applied directly to html tags or contained within <style> tags")}
             adicionaltxt2="none"
             //Imagem principal
             img="none"
@@ -25,7 +25,9 @@ export function ConhecendoCSS({ navigation }) {
             opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome do seletor receberão aquele estilo. "
+            adicionaltxt_end={t("CSS example")}
+            
+            txtToHighlight={["CSS", "style"]}   
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CSSEx1"
         />
@@ -45,12 +47,15 @@ export function CSSEx1({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Qual a função do CSS?"
-            opt1="Adicionar estilos"
-            opt2="Adicionar novas mecânicas"
-            opt3='Adicionar notificações'
-            opt4="Adicionar traduções "
+            pergunta={t("what is the role of CSS?")}
+            opt1={t("add styles")}
+            opt2={t("add new mechanics")}
+            opt3={t("add notifications")}
+            opt4={t("add translations")}
             optCerta="opt1"
+
+            txtToHighlight={["CSS"]}
+
             navegar="CSSEx2"
         />
     )
@@ -69,12 +74,14 @@ export function CSSEx2({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="O que o seletor h1 indica?"
-            opt1="Indica que todo elemento h1 será excluido"
-            opt2="Indica que todo elemento h1 substituido por h2"
-            opt3='Indica que todo elemento h1 obterá os estilos'
-            opt4="Indica que todo elemento h1 será executado como JS"
+            pergunta={t("what does the h1 selector indicate?")}
+            opt1={t("indicates that every h1 element will be deleted")}
+            opt2={t("indicates that every h1 element will be replaced by h2")}
+            opt3={t("indicates that every h1 element will obtain styles")}
+            opt4={t("indicates that every h1 element will be executede as js")}
             optCerta="opt3"
+
+            txtToHighlight={["h1"]}
             //NOME ADICIONADO NO STACK NAVIGATOR 
             navegar="CSSEx3"
         />
@@ -94,7 +101,7 @@ export function CSSEx3({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Crie um estilo de cor azul para o h1"
+            pergunta={t("create blue color style for h1")}
             opt1='<h1 '
             opt2='style='
             opt3='"color:blue"'
@@ -106,6 +113,8 @@ export function CSSEx3({ navigation }) {
             txtCerto='<h1 style="color:blue">CODAP</h1>'
             Salvar={"true"}
             aulaSalvar="CONHECENDOCSS"
+
+            txtToHighlight={["blue", "h1"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

@@ -1,10 +1,35 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { View, StyleSheet } from 'react-native';
 import TeoricView from '../../../Helpers/TeoricView';
 import OptionView from '../../../Helpers/OptionView';
 import SelectView from '../../../Helpers/SelectView';
 import TextView from '../../../Helpers/TextView';
 import NestingView from '../../../Helpers/NestingView';
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import { irBlack } from 'react-syntax-highlighter/styles/hljs';
+
+
+export function test({ navigation }) {
+    //Constante de tradução, usar {t("CHAVE")} para tradução
+    const { t, i18n } = useTranslation();
+    return (
+        <View>
+            <SyntaxHighlighter language="HTML" style={irBlack} fontSize={12}>
+                {`<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minha página</title>
+  </head>
+  <body>
+    <h1>Minha página</h1>
+    <p>Esta é a minha primeira página HTML!</p>
+  </body>
+</html>`}
+            </SyntaxHighlighter>
+        </View>
+    )
+}
 
 export function ButtonHtml({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -188,6 +213,13 @@ export function ButtonEx6({ navigation }) {
         />
     )
 }
+
+const styles = StyleSheet.create({
+    code: {
+        fontSize:400,
+    }
+
+})
 
 
 

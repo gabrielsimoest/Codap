@@ -71,6 +71,10 @@ import { Basic1_html, Basic2_html, Basic3_html, } from './Aulas/ClassContent/Htm
 import { LogBox } from 'react-native';
 LogBox.ignoreLogs(['Warning: Cannot update a component (`ForwardRef(BaseNavigationContainer)`)']);
 
+///////////////////////////////////
+import { TestSintax } from './Test';
+///////////////////////////////////
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -1403,6 +1407,11 @@ function App() {
         <Stack.Screen
           name='FontFamilyEx2'
           component={FontFamilyEx2}
+          options={{ cardStyleInterpolator: forFade }}
+        />
+        <Stack.Screen
+          name='TEST'
+          component={TestSintax}
           options={{ cardStyleInterpolator: forFade }}
         />
       </Stack.Navigator>

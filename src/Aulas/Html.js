@@ -12,10 +12,14 @@ export default function Html() {
 }
 
 const styles = StyleSheet.create({
-    scroller: {
+  /*  scroller: {
         marginHorizontal: 10,
         height: 630,
         paddingBottom: 500
+    }, */
+    scroller: {
+        marginHorizontal: 10,
+        height: "83.3%"
     },
 
 })

@@ -68,6 +68,9 @@ export default function CollapseHtml() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
+                    <OpButton theme={"classButton"} title={t("TEST")} onPressFunction={() => navigation.navigate('TEST')} />
+                </View>
+                <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={"HTMLETAGS"} theme={"classButton"} title={t("Discovering HTML and Tags")} onPressFunction={() => navigation.navigate('Estrutura')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
@@ -152,7 +155,7 @@ export default function CollapseHtml() {
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={"TIPOSDEDADOS"} theme={"classButton"} title={t("Data types2")} onPressFunction={() => navigation.navigate('TiposDeDados')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"SELECIONANDODADOS"} theme={"classButton"} title={t("Selecting data")} onPressFunction={() => navigation.navigate('SelecionandoDados')}/>
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"SELECIONANDODADOS"} theme={"classButton"} title={t("Selecting data")} onPressFunction={() => navigation.navigate('SelecionandoDados')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={"MOSTRANDOVIDEOS"} theme={"classButton"} title={t("Showing videos")} onPressFunction={() => navigation.navigate('MostrandoVideos')} />

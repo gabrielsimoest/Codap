@@ -116,6 +116,22 @@
       "buttons are often used to perform actions within websites": "Buttons are often used to perform actions within websites",
       "code a button written CODAP": "Code a Button written CODAP",
 
+      "_comment class CSS*********": "*********CSS*********",
+      "lets learn CSS":"Hello, this is NAME, let's learn CSS? CSS is a mechanism for adding styles to a web document.",
+      "CSS code can be applied directly to html tags or contained within <style> tags":"CSS code can be applied directly to html tags or contained within <style> tags",
+      "CSS example":"The 'p' inside the <style> in the example is a selector, this represents that all elements with the same name as the selector will receive that style.",
+      "what is the role of CSS?":"What is the role of CSS?",
+      "add styles":"Add styles",
+      "add new mechanics":"Add new mechanics",
+      "add notifications":"Add notifications",
+      "add translations":"Add translations",
+      "what does the h1 selector indicate?":"What does the h1 selector indicate?",
+      "indicates that every h1 element will be deleted":"Indicates that every h1 element will be deleted",
+      "indicates that every h1 element will be replaced by h2":"Indicates that every h1 element will be replaced by h2",
+      "indicates that every h1 element will obtain styles":"Indicates that every h1 element will obtain styles",
+      "indicates that every h1 element will be executede as js":"Indicates that every h1 element will be executede as js",
+      "create blue color style for h1":"Create a blue color style for h1",
+
       "_comment6*********": "*********BOTÕES*********",
 
       "_comment button HTML*********": "*********HTML*********",
