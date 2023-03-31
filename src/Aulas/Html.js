@@ -1,14 +1,19 @@
-
-import React, { useState } from 'react';
-import { TouchableOpacity, Text, ScrollView, Image, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  Image,
+  StyleSheet,
+} from 'react-native';
 import CollapseHtml from './ClassButtonList/CollapseHtml';
 
 export default function Html() {
-    return (
-        <ScrollView style={styles.scroller} >
-            <CollapseHtml/>
-        </ScrollView>
-    )
+  return (
+    <ScrollView style={styles.scroller}>
+      <CollapseHtml />
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -17,9 +22,8 @@ const styles = StyleSheet.create({
         height: 630,
         paddingBottom: 500
     }, */
-    scroller: {
-        marginHorizontal: 10,
-        height: "83.3%"
-    },
-
-})
+  scroller: {
+    marginHorizontal: 10,
+    height: '81%',
+  },
+});
