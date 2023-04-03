@@ -17,6 +17,7 @@ import {atomOneLight, atomOneDark} from 'react-syntax-highlighter/styles/hljs';
 import SaveClass from './SaveClass';
 import AHighlighter from './AHighlighter';
 import {useSelector} from 'react-redux';
+import WebView from 'react-native-webview';
 
 const textSize = 20;
 
@@ -32,6 +33,25 @@ export default function TestTheory({navigation}) {
   const toggleContent = () => {
     setIndexVisible(!isIndexVisible);
   };
+
+  const [highlighterHeight, setHighlighterHeight] = useState(100);
+
+  const onHighlighterLayout = event => {
+    const {height} = event.nativeEvent.layout;
+    setHighlighterHeight(height);
+  };
+
+  const html = `
+  <html>
+  <head>
+    <title>Minha página</title>
+  </head>
+  <body>
+    <h1>Minha página</h1>
+    <p>Esta é a minha primeira página HTML!</p>
+  </body>
+</html>
+  `;
 
   return (
     <View style={[styles.container, {backgroundColor: colors.card}]}>
@@ -96,10 +116,15 @@ export default function TestTheory({navigation}) {
                   <Text style={styles.text}>Web</Text>
                 </Pressable>
               </View>
-              <View style={{backgroundColor: 'white'}}>
+              <View
+                style={
+                  {
+                    /*backgroundColor: 'white'*/
+                  }
+                }>
                 {/*Start code view*/}
                 {isIndexVisible ? (
-                  <View style={{width: '96%', marginLeft: '2%'}}>
+                  <View style={{width: '100%'}} onLayout={onHighlighterLayout}>
                     <ASyntaxHighlighter
                       language="HTML"
                       style={currentTheme ? atomOneDark : atomOneLight}
@@ -116,23 +141,15 @@ export default function TestTheory({navigation}) {
                     />
                   </View>
                 ) : (
-                  <View>
-                    <ASyntaxHighlighter
-                      language="HTML"
-                      style={currentTheme ? atomOneDark : atomOneLight}
-                      code={`<!DOCTYPE html>
-<html>
-  <head>
-    <title>Minha página</title>
-  </head>
-  <body>
-    <h1>Minha página</h1>
-    <p>Esta é a minha primeira página HTML!</p>
-    <p>Esta é a minha primeira página HTML!</p>
-    <p>Esta é a minha primeira página HTML!</p>
-    <p>Esta é a minha primeira página HTML!</p>
-  </body>
-</html>`}
+                  <View style={{width: '100%', height: highlighterHeight}}>
+                    <WebView
+                      source={{html: html}}
+                      containerStyle={{
+                        flex: 0,
+                        height: highlighterHeight,
+                      }}
+                      textZoom={200}
+                      nestedScrollEnabled={true}
                     />
                   </View>
                 )}
