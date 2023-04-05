@@ -96,32 +96,41 @@ export default function TestTheory({navigation}) {
             </View>
           ) : (
             <View>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'row', marginTop: '3%'}}>
                 <Pressable
                   style={
                     isIndexVisible
-                      ? styles.button
-                      : [styles.button, {backgroundColor: 'green'}]
+                      ? currentTheme
+                        ? styles.buttonIndex
+                        : styles.LightButtonIndex
+                      : currentTheme
+                      ? styles.buttonIndex_deselected
+                      : styles.LightButtonIndex_deselected
                   }
                   onPress={toggleContent}>
-                  <Text style={styles.text}>Index</Text>
+                  <Text style={[styles.text, {color: colors.text}]}>Index</Text>
                 </Pressable>
                 <Pressable
                   style={
                     isIndexVisible
-                      ? [styles.button, {backgroundColor: 'green'}]
-                      : styles.button
+                      ? currentTheme
+                        ? styles.buttonWeb_deselected
+                        : styles.LightButtonWeb_deselected
+                      : currentTheme
+                      ? styles.buttonWeb
+                      : styles.LightButtonWeb
                   }
                   onPress={toggleContent}>
-                  <Text style={styles.text}>Web</Text>
+                  <Text style={[styles.text, {color: colors.text}]}>Web</Text>
                 </Pressable>
               </View>
               <View
-                style={
+                style={[
+                  currentTheme ? styles.codeArea : styles.codeAreaLight,
                   {
                     /*backgroundColor: 'white'*/
-                  }
-                }>
+                  },
+                ]}>
                 {/*Start code view*/}
                 {isIndexVisible ? (
                   <View style={{width: '100%'}} onLayout={onHighlighterLayout}>
@@ -196,18 +205,114 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'white',
   },
-  button: {
+  buttonIndex: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
+    backgroundColor: '#304D66',
     width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    zIndex: 99,
   },
+  buttonIndex_deselected: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1B2B39',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    zIndex: 1,
+  },
+  buttonWeb: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#304D66',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    right: '55%',
+    zIndex: 99,
+  },
+  buttonWeb_deselected: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#1B2B39',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    right: '55%',
+    zIndex: 1,
+  },
+  //Light button
+
+  LightButtonIndex: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#A5A5A5',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    zIndex: 99,
+  },
+  LightButtonIndex_deselected: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#757575',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    zIndex: 1,
+  },
+  LightButtonWeb: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#A5A5A5',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    right: '55%',
+    zIndex: 99,
+  },
+  LightButtonWeb_deselected: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#757575',
+    width: '20%',
+    borderTopStartRadius: 5,
+    borderTopEndRadius: 30,
+    right: '55%',
+    zIndex: 1,
+  },
+
   figure: {
     margin: 10,
     width: 230,
     height: 203,
   },
   codeArea: {
-    width: '96%',
+    borderWidth: 5,
+    borderColor: '#304D66',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 8,
+    marginBottom: '3%',
+  },
+  codeAreaLight: {
+    borderWidth: 5,
+    borderColor: '#A5A5A5',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 8,
+    marginBottom: '3%',
   },
 });
