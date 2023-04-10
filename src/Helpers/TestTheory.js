@@ -1,11 +1,10 @@
 import {useTheme} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Image,
   ScrollView,
   Pressable,
   Text,
@@ -16,42 +15,75 @@ import ASyntaxHighlighter from './ASyntaxHighlight';
 import {atomOneLight, atomOneDark} from 'react-syntax-highlighter/styles/hljs';
 import SaveClass from './SaveClass';
 import AHighlighter from './AHighlighter';
+import AText from './AText';
 import {useSelector} from 'react-redux';
 import WebView from 'react-native-webview';
 
 const textSize = 20;
 
-export default function TestTheory({navigation}) {
+export default function TestTheory({
+  mainText = 'Teste main',
+  secondText = '2',
+  thirdText = '3',
+  endText = '4',
+  highlight = [''],
+  codeLanguage = 'HTML',
+  code = `<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Minha página</title>
+    </head>
+    <body>
+      <h1>Minha página</h1>
+      <p>Esta é a minha primeira página HTML!</p>
+    </body>
+  </html>`,
+  onlyCode = false,
+  navigation,
+}) {
+  //Constante de tradução, usar {t("CHAVE")} para tradução
+  const {t, i18n} = useTranslation();
+
   const {colors} = useTheme(); //Variavel de cor do tema
 
+  //Definir tema usando currentTheme (padrão true)
   let currentTheme = useSelector(state => {
     return state.myDarkMode;
   });
 
-  const [OnlyCodeVisible, setCodeOnly] = useState(false);
+  //Troca entre as abas do seletor
   const [isIndexVisible, setIndexVisible] = useState(true);
   const toggleContent = () => {
     setIndexVisible(!isIndexVisible);
   };
 
-  const [highlighterHeight, setHighlighterHeight] = useState(100);
+  //Define que apenas o código é visível
+  const [OnlyCodeVisible, setCodeOnly] = useState(onlyCode ? true : false);
 
+  //Define os textos opcionais visiveis
+  const [SecondTextVisible, setSecondTextVisible] = useState(
+    secondText != null ? true : false,
+  );
+  const [ThirdTextVisible, setThirdTextVisible] = useState(
+    thirdText != null ? true : false,
+  );
+  const [EndTextVisible, setEndTextVisible] = useState(
+    endText != null ? true : false,
+  );
+
+  //Obtem o tamanho do sintax highlight para aplicar no webView
+  const [highlighterHeight, setHighlighterHeight] = useState(100);
   const onHighlighterLayout = event => {
     const {height} = event.nativeEvent.layout;
     setHighlighterHeight(height);
   };
 
-  const html = `
-  <html>
-  <head>
-    <title>Minha página</title>
-  </head>
-  <body>
-    <h1>Minha página</h1>
-    <p>Esta é a minha primeira página HTML!</p>
-  </body>
-</html>
-  `;
+  const txtToHighlight = highlight;
+
+  const txt = `Lorem Ipsum is simply dummy text of the printing and typesetting
+  industry. Lorem Ipsum has been the industry's standard dummy text
+  ever since the 1500s, when an unknown printer took a galley of type
+  and scrambled it to make a type specimen book.`;
 
   return (
     <View style={[styles.container, {backgroundColor: colors.card}]}>
@@ -75,24 +107,48 @@ export default function TestTheory({navigation}) {
               style={styles.icon}
             />
           </TouchableOpacity>
-          <Text style={[styles.text, {color: colors.text}]}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Text>
-          <Text style={[styles.text, {color: colors.text}]}>TESTE</Text>
-          <Text style={[styles.text, {color: colors.text}]}>TESTE</Text>
+          <AHighlighter
+            style={[styles.text, {color: colors.text}]}
+            highlight={{color: '#637aff'}}
+            wordHighlight={txtToHighlight}
+            text={mainText}
+            defaultSize={textSize}
+          />
+          {SecondTextVisible ? (
+            <AHighlighter
+              style={[styles.text, {color: colors.text}]}
+              highlight={{color: '#637aff'}}
+              wordHighlight={txtToHighlight}
+              text={secondText}
+              defaultSize={textSize}
+            />
+          ) : (
+            <View style={{display: 'none'}} />
+          )}
+          {ThirdTextVisible ? (
+            <AHighlighter
+              style={[styles.text, {color: colors.text}]}
+              highlight={{color: '#637aff'}}
+              wordHighlight={txtToHighlight}
+              text={thirdText}
+              defaultSize={textSize}
+            />
+          ) : (
+            <View style={{display: 'none'}} />
+          )}
 
           {/*CODE SECTION*/}
           {OnlyCodeVisible ? (
-            <View>
-              <Text>OI</Text>
+            <View
+              style={[
+                currentTheme ? styles.codeArea : styles.codeAreaLight,
+                {width: '100%'},
+              ]}>
+              <ASyntaxHighlighter
+                language={codeLanguage}
+                style={currentTheme ? atomOneDark : atomOneLight}
+                code={code}
+              />
             </View>
           ) : (
             <View>
@@ -108,7 +164,13 @@ export default function TestTheory({navigation}) {
                       : styles.LightButtonIndex_deselected
                   }
                   onPress={toggleContent}>
-                  <Text style={[styles.text, {color: colors.text}]}>Index</Text>
+                  <Text
+                    style={[
+                      styles.textButton,
+                      {color: colors.text, right: '6%'},
+                    ]}>
+                    Index
+                  </Text>
                 </Pressable>
                 <Pressable
                   style={
@@ -121,43 +183,31 @@ export default function TestTheory({navigation}) {
                       : styles.LightButtonWeb
                   }
                   onPress={toggleContent}>
-                  <Text style={[styles.text, {color: colors.text}]}>Web</Text>
+                  <Text style={[styles.textButton, {color: colors.text}]}>
+                    Web
+                  </Text>
                 </Pressable>
               </View>
               <View
-                style={[
-                  currentTheme ? styles.codeArea : styles.codeAreaLight,
-                  {
-                    /*backgroundColor: 'white'*/
-                  },
-                ]}>
+                style={currentTheme ? styles.codeArea : styles.codeAreaLight}>
                 {/*Start code view*/}
                 {isIndexVisible ? (
                   <View style={{width: '100%'}} onLayout={onHighlighterLayout}>
                     <ASyntaxHighlighter
-                      language="HTML"
+                      language={codeLanguage}
                       style={currentTheme ? atomOneDark : atomOneLight}
-                      code={`<!DOCTYPE html>
-<html>
-  <head>
-    <title>Minha página</title>
-  </head>
-  <body>
-    <h1>Minha página</h1>
-    <p>Esta é a minha primeira página HTML!</p>
-  </body>
-</html>`}
+                      code={code}
                     />
                   </View>
                 ) : (
                   <View style={{width: '100%', height: highlighterHeight}}>
                     <WebView
-                      source={{html: html}}
+                      source={{html: code}}
                       containerStyle={{
                         flex: 0,
                         height: highlighterHeight,
                       }}
-                      textZoom={200}
+                      textZoom={220}
                       nestedScrollEnabled={true}
                     />
                   </View>
@@ -167,22 +217,22 @@ export default function TestTheory({navigation}) {
             </View>
           )}
 
-          <Text style={[styles.text, {color: colors.text}]}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-          </Text>
+          {EndTextVisible ? (
+            <AHighlighter
+              style={[styles.text, {color: colors.text}]}
+              highlight={{color: '#637aff'}}
+              wordHighlight={txtToHighlight}
+              text={endText}
+              defaultSize={textSize}
+            />
+          ) : (
+            <View style={{display: 'none'}} />
+          )}
         </ScrollView>
         <View>
           <OpButton
             theme={'nextButton'}
-            title={'next'}
+            title={t('next')}
             onPressFunction={() => navigation.navigate('Home')}
           />
         </View>
@@ -195,16 +245,25 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
   },
-  text: {
-    fontSize: 18,
-    fontFamily: 'Roboto',
-  },
   progressBar: {
     top: -2,
     height: 8,
     width: '100%',
     backgroundColor: 'white',
   },
+  text: {
+    fontSize: 18,
+    fontFamily: 'Roboto',
+    marginLeft: '1%',
+    marginRight: '1%',
+  },
+  textButton: {
+    fontSize: 18,
+    fontFamily: 'Roboto',
+  },
+
+  //Dark button
+
   buttonIndex: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -243,6 +302,7 @@ const styles = StyleSheet.create({
     right: '55%',
     zIndex: 1,
   },
+
   //Light button
 
   LightButtonIndex: {
@@ -284,11 +344,8 @@ const styles = StyleSheet.create({
     zIndex: 1,
   },
 
-  figure: {
-    margin: 10,
-    width: 230,
-    height: 203,
-  },
+  //Code area dark
+
   codeArea: {
     borderWidth: 5,
     borderColor: '#304D66',
@@ -302,6 +359,9 @@ const styles = StyleSheet.create({
     elevation: 8,
     marginBottom: '3%',
   },
+
+  //Code area light
+
   codeAreaLight: {
     borderWidth: 5,
     borderColor: '#A5A5A5',
