@@ -77,13 +77,6 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             theme={'classButton'}
-            title={t('TEST')}
-            onPressFunction={() => navigation.navigate('TEST')}
-          />
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <OpButton
-            theme={'classButton'}
             title={t('TEST CODE')}
             onPressFunction={() => navigation.navigate('TestCode')}
           />
@@ -91,15 +84,15 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             theme={'classButton'}
-            title={t('TEST Theory')}
+            title={t('TEST THEORY')}
             onPressFunction={() => navigation.navigate('TheoryView')}
           />
         </View>
         <View style={{flexDirection: 'row'}}>
           <OpButton
             theme={'classButton'}
-            title={t('Theory')}
-            onPressFunction={() => navigation.navigate('TestTheory')}
+            title={t('TestCarousel')}
+            onPressFunction={() => navigation.navigate('TestCarousel')}
           />
         </View>
         <View style={{flexDirection: 'row'}}>

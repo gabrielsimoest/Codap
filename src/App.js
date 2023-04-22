@@ -339,10 +339,9 @@ LogBox.ignoreLogs([
 ]);
 
 ///////////////////////////////////
-import {TestSintax} from './Test';
 import TesteCode from './TesteCode';
 import TheoryView from './Helpers/TheoryView';
-import TestTheory from './Helpers/TestTheory';
+import TestCarousel from './TestCarousel';
 ///////////////////////////////////
 
 const Stack = createStackNavigator();
@@ -1663,11 +1662,6 @@ function App() {
           options={{cardStyleInterpolator: forFade}}
         />
         <Stack.Screen
-          name="TEST"
-          component={TestSintax}
-          options={{cardStyleInterpolator: forFade}}
-        />
-        <Stack.Screen
           name="TestCode"
           component={TesteCode}
           options={{cardStyleInterpolator: forFade}}
@@ -1678,8 +1672,8 @@ function App() {
           options={{cardStyleInterpolator: forFade}}
         />
         <Stack.Screen
-          name="TestTheory"
-          component={TestTheory}
+          name="TestCarousel"
+          component={TestCarousel}
           options={{cardStyleInterpolator: forFade}}
         />
       </Stack.Navigator>
