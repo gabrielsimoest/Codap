@@ -1,41 +1,51 @@
 import React from 'react';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import TeoricView from '../../../Helpers/TeoricView';
 import OptionView from '../../../Helpers/OptionView';
-import {View} from 'react-native';
+import TheoryView from '../../../Helpers/TheoryView';
 
-export function Estrutura({navigation}) {
+export function Estrutura({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
-    <TeoricView
+    <TheoryView
       navigation={navigation}
       //BARRA DE PROGRESSO
       progresso="14%"
       //Texto principal
-      txt="Olá, aqui é o NOME. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web."
+      mainText="Olá, aqui é o NOME. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web."
       //Textos opcionais
-      adicionaltxt="Primeiramente estarei mostrando um exemplo bem básico de estrutura para você já ir tendo uma ideia de como o HTML se parece."
-      adicionaltxt2="none"
-      //Imagem principal
-      img={require('../../../../assets/Estrutura.png')}
-      //Imagens opcionais
-      opt_img={require('../../../../assets/Estrutura2.png')}
-      opt_img2="none"
+      secondText="Primeiramente estarei mostrando um exemplo bem básico de estrutura para você já ir tendo uma ideia de como o HTML se parece."
+      thirdText={null}
+      //Código
+      codeLanguage='HTML'
+      code={`<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Minha página</title>
+    </head>
+    <body>
+      <h1>Minha página</h1>
+      <p>Esta é a minha primeira página HTML!</p>
+    </body>
+  </html>`}
+      //Auxiliares
+      onlyCode={false}
+      tutorialVisible={true}
       //Textos final opcional (aparece após as imagens)
-      adicionaltxt_end="Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis."
+      endText="Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis."
       aulaSalvar="none"
       //Palavras que receberão o highlight, array
-      txtToHighlight={['HTML', 'NOME', 'Web']}
+      highlight={['HTML', 'NOME', 'Web']}
       //NOME ADICIONADO NO STACK NAVIGATOR
       navegar="TagsElementos"
     />
   );
 }
 
-export function TagsElements({navigation}) {
+export function TagsElements({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <TeoricView
       navigation={navigation}
@@ -60,16 +70,16 @@ export function TagsElements({navigation}) {
     />
   );
 }
-export function HtmlStartEx1({navigation}) {
+export function HtmlStartEx1({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <OptionView
       navigation={navigation}
       //BARRA DE PROGRESSO
       progresso="42%"
       //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
-      sec="999"
+      sec="9999"
       //TEXTO ADICIONAL CABEÇARIO
       adicionaltxt="A maioria das tags possuem uma abertura e um fechamento. Entre elas fica o conteúdo." //Opcional
       //PERGUNTA
@@ -80,14 +90,16 @@ export function HtmlStartEx1({navigation}) {
       opt4="</html>"
       optCerta="opt4"
       aulaSalvar="none"
+      //Auxiliar
+      tutorialVisible={true}
       //NOME ADICIONADO NO STACK NAVIGATOR
       navegar="HtmlStartEx2"
     />
   );
 }
-export function HtmlStartEx2({navigation}) {
+export function HtmlStartEx2({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <OptionView
       navigation={navigation}
@@ -110,9 +122,9 @@ export function HtmlStartEx2({navigation}) {
     />
   );
 }
-export function HtmlStartEx3({navigation}) {
+export function HtmlStartEx3({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <OptionView
       navigation={navigation}
@@ -135,9 +147,9 @@ export function HtmlStartEx3({navigation}) {
     />
   );
 }
-export function HtmlStartEx4({navigation}) {
+export function HtmlStartEx4({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <OptionView
       navigation={navigation}
@@ -160,9 +172,9 @@ export function HtmlStartEx4({navigation}) {
     />
   );
 }
-export function HtmlStartEx5({navigation}) {
+export function HtmlStartEx5({ navigation }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
   return (
     <OptionView
       navigation={navigation}

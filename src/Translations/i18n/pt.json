@@ -187,6 +187,28 @@
       "back": "Voltar à Tela Inicial",
       "congratulations": "Parábens, Você foi feito para isso!",
       "keep it up":"Continue Assim!",
-      "you were amazing":"Você foi incrivel!"
+      "you were amazing":"Você foi incrivel!",
+
+      "_comment7*********": "*********TUTORIAIS*********",
+      
+      "tutorial title end":"Aproveite a aula!",
+      "tutorial end":"Se precisar de ajuda, basta clicar no botão de ponto de interrogação no topo da tela. Agora, feche este tutorial e aproveite a aula!",
+
+      "tutorial title timer":"Seja rápido!",
+      "tutorial timer":"As vezes você terá um temporizador no topo da tela nas aulas avançadas. Seja rápido, eu sei do que você é capaz!",
+
+      "tutorial title theory 1":"Aula teórica",
+      "tutorial theory 1":"Estou aqui para ajudá-lo, esta é sua aula teórica. Aqui você terá uma breve explicação do que vai aprender neste tópico e um exemplo de código.",
+    
+      "tutorial title theory 2":"Janela de código",
+      "tutorial theory 2":"Observe que aqui você terá uma janela com um exemplo de código. Se não puder ver todo o código, arraste-o para o lado, conforme mostrado acima.",
+    
+      "tutorial title theory 3":"Alternar entre index/web",
+      "tutorial theory 3":"Na maioria dos tópicos, você verá os botões 'index' e 'web' acima do código, pressione-os para alternar entre o código de amostra e o site que ele gera.",
+    
+      "tutorial title theory 4":"Janela do site",
+      "tutorial theory 4":"Na janela 'web', você pode arrastar para todos os lados (vertical e horizontal), além de poder dar um duplo toque para ampliar ligeiramente a janela."
+    
+    
     }
   }

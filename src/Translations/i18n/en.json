@@ -186,6 +186,26 @@
       "back": "Back to Home Screen",
       "congratulations": "Congratulations, you were made for this!",
       "keep it up":"Keep it up!",
-      "you were amazing":"You were amazing!"
+      "you were amazing":"You were amazing!",
+
+      "_comment7*********": "*********TUTORIAIS*********",
+      
+      "tutorial title end":"Enjoy the class!",
+      "tutorial end":"If you need help, just click the question mark button at the top of the screen. Now close this tutorial and enjoy the class!",
+
+      "tutorial title timer":"Be fast!",
+      "tutorial timer":"Sometimes you will have a timer at the top of the screen on advanced topics. Be fast, I know you can do it!",
+
+      "tutorial title theory 1":"Theoretical class",
+      "tutorial theory 1":"I'm here to help you, this is your theoretical class. In it you will have a brief explanation of what you will learn in this topic and an example code.",
+
+      "tutorial title theory 2":"Code window",
+      "tutorial theory 2":"Note that here you will have a window with an example code. If you can't see all the code, drag it to the side as shown above.",
+
+      "tutorial title theory 3":"Swich between index/web",
+      "tutorial theory 3":"In most topics you will see the 'index' and 'web' buttons above the code, press them to switch between the sample code and the website it generates.",
+
+      "tutorial title theory 4":"Web window",
+      "tutorial theory 4":"In the 'web' window, you can drag to all sides (vertical and horizontal), in addition to being able to double tap for a slight zoom in the window."
     }
   }

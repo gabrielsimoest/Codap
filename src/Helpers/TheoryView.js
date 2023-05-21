@@ -15,17 +15,17 @@ import ASyntaxHighlighter from './ASyntaxHighlight';
 import {atomOneLight, atomOneDark} from 'react-syntax-highlighter/styles/hljs';
 import SaveClass from './SaveClass';
 import AHighlighter from './AHighlighter';
-import AText from './AText';
 import {useSelector} from 'react-redux';
 import WebView from 'react-native-webview';
+import { TutorialTheory } from './Tutorials';
 
 const textSize = 20;
 
 export default function TheoryView({
   mainText = 'Teste main',
-  secondText = '2',
-  thirdText = '3',
-  endText = '4',
+  secondText,
+  thirdText,
+  endText,
   highlight = [''],
   codeLanguage = 'HTML',
   code = `<!DOCTYPE html>
@@ -39,7 +39,12 @@ export default function TheoryView({
     </body>
   </html>`,
   onlyCode = false,
+  tutorialVisible = false,
   navigation,
+  navegar= "Home",
+  aulaSalvar, 
+  Salvar,
+  progresso = "0%",
 }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
   const {t, i18n} = useTranslation();
@@ -59,6 +64,9 @@ export default function TheoryView({
 
   //Define que apenas o código é visível
   const [OnlyCodeVisible, setCodeOnly] = useState(onlyCode);
+
+  //Define tutorial visivel
+  const [TutorialVisible, setTutorialVisible] = useState(tutorialVisible);
 
   //Define os textos opcionais visiveis
   const [SecondTextVisible, setSecondTextVisible] = useState(
@@ -80,24 +88,20 @@ export default function TheoryView({
 
   const txtToHighlight = highlight;
 
-  const txt = `Lorem Ipsum is simply dummy text of the printing and typesetting
-  industry. Lorem Ipsum has been the industry's standard dummy text
-  ever since the 1500s, when an unknown printer took a galley of type
-  and scrambled it to make a type specimen book.`;
-
   return (
     <View style={[styles.container, {backgroundColor: colors.card}]}>
       <View style={styles.progressBar} /*Progress Bar*/>
         <View
           style={[
             StyleSheet.absoluteFill,
-            {backgroundColor: '#637aff', width: '100%'},
+            {backgroundColor: '#637aff', width: progresso},
           ]}
         />
       </View>
       {/*BODY*/}
       <View style={[styles.container, {backgroundColor: colors.card}]}>
         <ScrollView style={{marginBottom: '20%'}}>
+          {/*BUTTON*/}
           <View style={{flexDirection: 'row'}}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Home')}
@@ -110,7 +114,7 @@ export default function TheoryView({
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => setTutorialVisible(!TutorialVisible)}
               style={{width: 50, top: 8, marginLeft: '72%'}}>
               <Icon
                 type={Icons.Ionicons}
@@ -120,6 +124,9 @@ export default function TheoryView({
               />
             </TouchableOpacity>
           </View>
+          {/*BUTTON_END*/}
+          <TutorialTheory visible={TutorialVisible} setModalVisible={setTutorialVisible}/>
+          <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
           <AHighlighter
             style={[styles.text, {color: colors.text}]}
             highlight={{color: '#637aff'}}
@@ -155,7 +162,7 @@ export default function TheoryView({
             <View
               style={[
                 currentTheme ? styles.codeArea : styles.codeAreaLight,
-                {width: '100%'},
+                {width: '100%', marginVertical: 20},
               ]}>
               <ASyntaxHighlighter
                 language={codeLanguage}
@@ -246,7 +253,7 @@ export default function TheoryView({
           <OpButton
             theme={'nextButton'}
             title={t('next')}
-            onPressFunction={() => navigation.navigate('Home')}
+            onPressFunction={() => navigation.navigate(navegar)}
           />
         </View>
       </View>

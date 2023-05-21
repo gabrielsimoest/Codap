@@ -15,6 +15,7 @@ import OpButton from './OpButton';
 import AText from './AText';
 import Timer from './Timer';
 import AHighlighter from './AHighlighter';
+import { TutorialOption } from './Tutorials';
 
 const textSize = 23;
 
@@ -33,11 +34,15 @@ export default function OptionView({
   aulaSalvar,
   Salvar,
   txtToHighlight = [''],
+  tutorialVisible = false,
 }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
   const {t, i18n} = useTranslation();
 
   const {colors} = useTheme(); //Variavel de cor do tema
+
+  //Define tutorial visivel
+  const [TutorialVisible, setTutorialVisible] = useState(tutorialVisible);
 
   const [Select, setSelect] = useState('OptionButton');
   const [Select2, setSelect2] = useState('OptionButton');
@@ -121,7 +126,7 @@ export default function OptionView({
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => setTutorialVisible(!TutorialVisible)}
             style={{width: 50, top: 8, marginLeft: '72%'}}>
             <Icon
               type={Icons.Ionicons}
@@ -131,6 +136,7 @@ export default function OptionView({
             />
           </TouchableOpacity>
         </View>
+        <TutorialOption visible={TutorialVisible} setModalVisible={setTutorialVisible}/>
         <Timer navigation={navigation} seconds={sec} />
         <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
         <AHighlighter
