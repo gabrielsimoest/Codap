@@ -167,8 +167,8 @@ export default function Store() {
         <View style={[styles.list, {backgroundColor: colors.primary}]}>
           <Text style={[styles.Double, {color: colors.text}]}>{XpAtivo}</Text>
           <Image
-            style={styles.tinyLogo}
-            source={require('../../assets/potion.png')}
+            style={styles.xpImage}
+            source={require('../../assets/Dobro_XP.png')}
           />
           <AText
             style={[styles.textL, {color: colors.text}]}
@@ -200,8 +200,8 @@ export default function Store() {
             <Iconis name="dependabot" size={21} color={colors.text} /> 500
           </AText>
           <Image
-            style={styles.tinyLogo2}
-            source={require('../../assets/CaixaSurpresa.png')}
+            style={styles.chestImage}
+            source={require('../../assets/Bau_surpresa.png')}
           />
           <OpButton
             theme={'marketButton2'}
@@ -214,7 +214,7 @@ export default function Store() {
             {Double - 1}
           </Text>
           <Image
-            style={styles.tinyLogo3}
+            style={styles.timeImage}
             source={require('../../assets/Time.png')}
           />
           <AText
@@ -255,8 +255,8 @@ export default function Store() {
                 {t('buy double experience')}
               </AText>
               <Image
-                style={styles.tinyModalLogo}
-                source={require('../../assets/potion.png')}
+                style={styles.xpImageModal}
+                source={require('../../assets/Dobro_XP.png')}
               />
               <AText
                 style={[styles.text, {color: colors.text}]}
@@ -290,8 +290,8 @@ export default function Store() {
                 {t('buy surprise chest')}
               </AText>
               <Image
-                style={styles.tinyModalLogo2}
-                source={require('../../assets/CaixaSurpresa.png')}
+                style={styles.chestImageModal}
+                source={require('../../assets/Bau_surpresa.png')}
               />
               <AText
                 style={[styles.text, {color: colors.text}]}
@@ -325,7 +325,7 @@ export default function Store() {
                 {t('buy double time')}
               </AText>
               <Image
-                style={styles.tinyModalLogo3}
+                style={styles.timeImageModal}
                 source={require('../../assets/Time.png')}
               />
               <AText
@@ -361,8 +361,8 @@ export default function Store() {
                 {t('you have double experience')}
               </AText>
               <Image
-                style={styles.tinyModalLogo}
-                source={require('../../assets/potion.png')}
+                style={styles.xpImageModal}
+                source={require('../../assets/Dobro_XP.png')}
               />
               <OpButton
                 theme={'modalButtonStore'}
@@ -392,7 +392,7 @@ export default function Store() {
                 {t('you have double time')}
               </AText>
               <Image
-                style={styles.tinyModalLogo3}
+                style={styles.timeImageModal}
                 source={require('../../assets/Time.png')}
               />
               <OpButton
@@ -428,38 +428,27 @@ const styles = StyleSheet.create({
     margin: 10,
     elevation: 7,
   },
-  tinyLogo: {
-    margin: 10,
-    width: 108,
-    height: 153,
-    shadowColor: '#637aff',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.28,
-    shadowRadius: 7.0,
-    elevation: 20,
+  button : {
+    left: "8%",
+    top: "25%"
   },
-  tinyLogo2: {
+  xpImage: {
+    top: 30,
+    margin: 5,
+    width: 150,
+    height: 120,
+  },
+  chestImage: {
     position: 'absolute',
-    right: 20,
-    top: 20,
-    width: 120,
-    height: 133,
+    right: -5,
+    bottom: 0,
+    width: 180,
+    height: 180,
   },
-  tinyLogo3: {
+  timeImage: {
     margin: 10,
     width: 120,
     height: 137,
-    shadowColor: '#637aff',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.28,
-    shadowRadius: 7.0,
-    elevation: 20,
   },
   textL: {
     color: '#fff',
@@ -542,39 +531,24 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: -40,
   },
-  tinyModalLogo: {
+  xpImageModal: {
+    right: 70,
     margin: 10,
-    width: 108,
-    height: 153,
-    marginLeft: '28%',
-    shadowColor: '#637aff',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.28,
-    shadowRadius: 7.0,
-    elevation: 20,
-  },
-  tinyModalLogo2: {
-    width: 120,
-    height: 133,
-    margin: 10,
+    width: 260,
+    height: 220,
     marginLeft: '28%',
   },
-  tinyModalLogo3: {
+  chestImageModal: {
+    right: 30,
+    width: 350,
+    height: 350,
+    margin: 10,
+  },
+  timeImageModal: {
     margin: 10,
     marginLeft: '28%',
     width: 120,
     height: 137,
-    shadowColor: '#637aff',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.28,
-    shadowRadius: 7.0,
-    elevation: 20,
   },
   icon: {
     marginLeft: 260,
