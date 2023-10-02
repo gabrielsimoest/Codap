@@ -6,7 +6,7 @@ import {
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {useEffect, useRef} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon, {Icons} from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
@@ -338,10 +338,13 @@ LogBox.ignoreLogs([
   'Warning: Cannot update a component (`ForwardRef(BaseNavigationContainer)`)',
 ]);
 
+import SplashScreen from 'react-native-splash-screen';
+
 ///////////////////////////////////
 import TesteCode from './TesteCode';
 import TheoryView from './Helpers/TheoryView';
 import TestCarousel from './TestCarousel';
+import { use } from 'i18next';
 ///////////////////////////////////
 
 const Stack = createStackNavigator();
@@ -518,6 +521,10 @@ function App() {
   let currentTheme = useSelector(state => {
     return state.myDarkMode;
   });
+
+  useEffect (() => {
+    if(Platform.OS === 'android') SplashScreen.hide();
+  }, [])
 
   return (
     <NavigationContainer
