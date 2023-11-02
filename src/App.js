@@ -32,7 +32,7 @@ import {
   HtmlStartEx4,
   HtmlStartEx5,
   TagsElements,
-} from './Aulas/ClassContent/Html/DescobrindoHTML_Tags';
+} from './Aulas/ClassContent/Html/1.Basico/DescobrindoHTML_Tags';
 import {
   H1h6,
   HeaderEx1,
@@ -41,7 +41,7 @@ import {
   HeaderEx4,
   HeaderEx5,
   HeaderEx6,
-} from './Aulas/ClassContent/Html/EstrutandoTitulos';
+} from './Aulas/ClassContent/Html/1.Basico/EstrutandoTitulos';
 import {
   P,
   FraseEx1,
@@ -50,7 +50,7 @@ import {
   FraseEx4,
   FraseEx5,
   FraseEx6,
-} from './Aulas/ClassContent/Html/CriandoFrases';
+} from './Aulas/ClassContent/Html/1.Basico/CriandoFrases';
 import {
   ButtonHtml,
   ButtonEx1,
@@ -59,7 +59,7 @@ import {
   ButtonEx4,
   ButtonEx5,
   ButtonEx6,
-} from './Aulas/ClassContent/Html/ConstruindoBotões';
+} from './Aulas/ClassContent/Html/1.Basico/ConstruindoBotões';
 import {
   ImgTeoric,
   Img1,
@@ -68,7 +68,7 @@ import {
   Img4,
   Img5,
   Img6,
-} from './Aulas/ClassContent/Html/AdicionandoImagens';
+} from './Aulas/ClassContent/Html/1.Basico/AdicionandoImagens';
 import {
   Comentario,
   ComentarioEx1,
@@ -77,7 +77,7 @@ import {
   ComentarioEx4,
   ComentarioEx5,
   ComentarioEx6,
-} from './Aulas/ClassContent/Html/CriandoComentarios';
+} from './Aulas/ClassContent/Html/1.Basico/CriandoComentarios';
 import {
   Head,
   HeadEx1,
@@ -104,7 +104,7 @@ import {
   ListaEx4,
   ListaEx5,
   ListaEx6,
-} from './Aulas/ClassContent/Html/CriandoListas';
+} from './Aulas/ClassContent/Html/2.Intermediario/CriandoListas';
 import {
   Links,
   LinksEx1,

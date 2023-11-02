@@ -221,14 +221,14 @@ export default function SelectView({
         {/*TEXT*/}
         <View>
           <AHighlighter
-            style={[styles.text, {color: colors.text}]}
+            style={[styles[Textadd], {color: colors.text}]}
             highlight={{color: '#637aff'}}
             wordHighlight={txtToHighlight}
             text={adicionaltxt}
             defaultSize={textSize}
           />
           <AHighlighter
-            style={[styles[Textadd], {color: colors.text}]}
+            style={[styles.text, {color: colors.text}]}
             highlight={{color: '#637aff'}}
             wordHighlight={txtToHighlight}
             text={pergunta}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../Helpers/TeoricView';
-import OptionView from '../../../Helpers/OptionView';
-import SelectView from '../../../Helpers/SelectView';
-import TextView from '../../../Helpers/TextView';
-import NestingView from '../../../Helpers/NestingView';
+import TeoricView from '../../../../Helpers/TeoricView';
+import OptionView from '../../../../Helpers/OptionView';
+import SelectView from '../../../../Helpers/SelectView';
+import TextView from '../../../../Helpers/TextView';
+import NestingView from '../../../../Helpers/NestingView';
 
 export function Listas({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -20,9 +20,9 @@ export function Listas({ navigation }) {
             adicionaltxt="<ul> é usado para listas não ordenadas."
             adicionaltxt2="<ol> é usado para listas ordenadas."
             //Imagem principal
-            img={require("../../../../assets/H1to6.png")}
+            img={require("../../../../../assets/H1to6.png")}
             //Imagens opcionais
-            opt_img={require("../../../../assets/H1to6_2.png")}
+            opt_img={require("../../../../../assets/H1to6_2.png")}
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"

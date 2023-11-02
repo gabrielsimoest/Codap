@@ -15,6 +15,7 @@ import AText from '../Helpers/AText';
 import ThemeComponent from './ThemeComponent';
 import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';
+//import NotificationService from './NotificationService';
 
 const TextSize1 = 25;
 
@@ -29,6 +30,15 @@ export default function Config({ navigation }) {
 
     const onToggleSwitch = () => {
         setIsSwitchOn(!isSwitchOn)
+
+      /*   if (isSwitchOn) {
+            // The switch is being turned on, schedule the notification
+            NotificationService.scheduleNotif();
+        } else {
+            // The switch is being turned off, cancel the notification
+            NotificationService.cancelAll();
+        } */
+
     };
 
     return (

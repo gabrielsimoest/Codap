@@ -42,7 +42,7 @@ export default function TheoryView({
   tutorialVisible = false,
   navigation,
   navegar= "Home",
-  aulaSalvar, 
+  aulaSalvar="none", 
   Salvar,
   progresso = "0%",
 }) {
@@ -70,13 +70,13 @@ export default function TheoryView({
 
   //Define os textos opcionais visiveis
   const [SecondTextVisible, setSecondTextVisible] = useState(
-    secondText != null ? true : false,
+    secondText != "none"? true : false,
   );
   const [ThirdTextVisible, setThirdTextVisible] = useState(
-    thirdText != null ? true : false,
+    thirdText != "none" ? true : false,
   );
   const [EndTextVisible, setEndTextVisible] = useState(
-    endText != null ? true : false,
+    endText != "none"? true : false,
   );
 
   //Obtem o tamanho do sintax highlight para aplicar no webView
