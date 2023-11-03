@@ -11,9 +11,9 @@ export function ImgTeoric({ navigation }) {
         <TheoryView
             navigation={navigation}
             progresso="14%"
-            mainText={t("ImgTeoric_mainText")}            
-            secondText={t("ImgTeoric_secondText")}
-            thirdText={t("ImgTeoric_thirdText")}
+            mainText={t("html.basic.images.ImgTeoric_mainText")}            
+            secondText={t("html.basic.images.ImgTeoric_secondText")}
+            thirdText={t("html.basic.images.ImgTeoric_thirdText")}
             codeLanguage='HTML'
             code={`<!DOCTYPE html>
   <html>
@@ -24,7 +24,7 @@ export function ImgTeoric({ navigation }) {
     </body>
   </html>`} 
             //Textos final opcional (aparece após as imagens)
-            endText={t("ImgTeoric_endText")}
+            endText={t("html.basic.images.ImgTeoric_endText")}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="Img1"
         />
@@ -41,16 +41,16 @@ export function Img1({ navigation }) {
             progresso="28%"
             sec="9999"
             adicionaltxt="none"
-            pergunta={t("Img1_pergunta")}
-            opt1={t("Img1_opt1")}
-            opt2={t("Img1_opt2")}
-            opt3={t("Img1_opt3")}
-            opt4={t("Img1_opt4")}
-            opt5={t("Img1_opt5")}
+            pergunta={t("html.basic.images.Img1_pergunta")}
+            opt1={t("html.basic.images.Img1_opt1")}
+            opt2={t("html.basic.images.Img1_opt2")}
+            opt3={t("html.basic.images.Img1_opt3")}
+            opt4={t("html.basic.images.Img1_opt4")}
+            opt5={t("html.basic.images.Img1_opt5")}
             opt6="none"
             opt7="none"
             opt8="none"
-            txtCerto={t("Img1_txtCerto")}
+            txtCerto={t("html.basic.images.Img1_txtCerto")}
             navegar="Img2"
         />
     )
@@ -63,17 +63,17 @@ export function Img2({ navigation }) {
             navigation={navigation}
             progresso="42%"
             sec="9999"
-            adicionaltxt={t("Img2_adicionaltxt")}
-            pergunta={t("Img2_pergunta")}
-            opt1={t("Img2_opt1")}
-            opt2={t("Img2_opt2")}
-            opt3={t("Img2_opt3")}
-            opt4={t("Img2_opt4")}
-            opt5={t("Img2_opt5")}
-            opt6={t("Img2_opt6")}
-            opt7={t("Img2_opt7")}
+            adicionaltxt={t("html.basic.images.Img2_adicionaltxt")}
+            pergunta={t("html.basic.images.Img2_pergunta")}
+            opt1={t("html.basic.images.Img2_opt1")}
+            opt2={t("html.basic.images.Img2_opt2")}
+            opt3={t("html.basic.images.Img2_opt3")}
+            opt4={t("html.basic.images.Img2_opt4")}
+            opt5={t("html.basic.images.Img2_opt5")}
+            opt6={t("html.basic.images.Img2_opt6")}
+            opt7={t("html.basic.images.Img2_opt7")}
             opt8="none"
-            txtCerto={t("Img2_txtCerto")}
+            txtCerto={t("html.basic.images.Img2_txtCerto")}
             navegar="Img3"
         />
     )
@@ -87,16 +87,16 @@ export function Img3({ navigation }) {
             progresso="56%" 
             sec="9999"
             adicionaltxt="none"
-            pergunta={t("Img3_pergunta")}
-            opt1={t("Img3_opt1")}
-            opt2={t("Img3_opt2")}
-            opt3={t("Img3_opt3")}
-            opt4={t("Img3_opt4")}
-            opt5={t("Img3_opt5")}
-            opt6={t("Img3_opt6")}
-            opt7={t("Img3_opt7")}
+            pergunta={t("html.basic.images.Img3_pergunta")}
+            opt1={t("html.basic.images.Img3_opt1")}
+            opt2={t("html.basic.images.Img3_opt2")}
+            opt3={t("html.basic.images.Img3_opt3")}
+            opt4={t("html.basic.images.Img3_opt4")}
+            opt5={t("html.basic.images.Img3_opt5")}
+            opt6={t("html.basic.images.Img3_opt6")}
+            opt7={t("html.basic.images.Img3_opt7")}
             opt8="none"
-            txtCerto={t("Img3_txtCerto")}
+            txtCerto={t("html.basic.images.Img3_txtCerto")}
             navegar="Img4"
         />
     )
@@ -109,17 +109,17 @@ export function Img4({ navigation }) {
             navigation={navigation}
             progresso="70%"
             sec="9999"
-            adicionaltxt={t("Img4_adicionaltxt")}
-            pergunta={t("Img4_pergunta")}
-            opt1={t("Img4_opt1")}
-            opt2={t("Img4_opt2")}
-            opt3={t("Img4_opt3")}
-            opt4={t("Img4_opt4")}
-            opt5={t("Img4_opt5")}
-            opt6={t("Img4_opt6")}
-            opt7={t("Img4_opt7")}
+            adicionaltxt={t("html.basic.images.Img4_adicionaltxt")}
+            pergunta={t("html.basic.images.Img4_pergunta")}
+            opt1={t("html.basic.images.Img4_opt1")}
+            opt2={t("html.basic.images.Img4_opt2")}
+            opt3={t("html.basic.images.Img4_opt3")}
+            opt4={t("html.basic.images.Img4_opt4")}
+            opt5={t("html.basic.images.Img4_opt5")}
+            opt6={t("html.basic.images.Img4_opt6")}
+            opt7={t("html.basic.images.Img4_opt7")}
             opt8="none"
-            txtCerto={t("Img4_txtCerto")}
+            txtCerto={t("html.basic.images.Img4_txtCerto")}
             navegar="Img5"
         />
     )
@@ -132,12 +132,12 @@ export function Img5({ navigation }) {
             navigation={navigation}
             progresso="84%"
             sec="9999"
-            adicionaltxt={t("Img5_adicionaltxt")}
-            pergunta={t("Img5_pergunta")}
-            opt1={t("Img5_opt1")}
-            opt2={t("Img5_opt2")}
-            opt3={t("Img5_opt3")}
-            opt4={t("Img5_opt4")}
+            adicionaltxt={t("html.basic.images.Img5_adicionaltxt")}
+            pergunta={t("html.basic.images.Img5_pergunta")}
+            opt1={t("html.basic.images.Img5_opt1")}
+            opt2={t("html.basic.images.Img5_opt2")}
+            opt3={t("html.basic.images.Img5_opt3")}
+            opt4={t("html.basic.images.Img5_opt4")}
             optCerta="opt2"
             navegar="Img6"
         />
@@ -152,11 +152,11 @@ export function Img6({ navigation }) {
             progresso="96%"
             sec="9999"
             adicionaltxt="none"
-            pergunta={t("Img6_pergunta")}
-            opt1={t("Img6_opt1")}
-            opt2={t("Img6_opt2")}
-            opt3={t("Img6_opt3")}
-            opt4={t("Img6_opt4")}
+            pergunta={t("html.basic.images.Img6_pergunta")}
+            opt1={t("html.basic.images.Img6_opt1")}
+            opt2={t("html.basic.images.Img6_opt2")}
+            opt3={t("html.basic.images.Img6_opt3")}
+            opt4={t("html.basic.images.Img6_opt4")}
             optCerta="opt4"
             aulaSalvar="ADICIONANDOIMAGENS"
             Salvar="true"

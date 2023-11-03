@@ -6,6 +6,7 @@ import '../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from "@react-navigation/native";
 import AText from "../Helpers/AText";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const textSize = 20;
 
@@ -19,10 +20,25 @@ const TranslateComponet = () => {
 
     const [currentLanguage, setLanguage] = useState('pt');
 
+    React.useEffect(() => {
+        AsyncStorage.getItem('@language_key')
+            .then(value => {
+                if (value !== null) {
+                    setLanguage(value);
+                }
+            })
+            .catch(error => {
+                console.error('Error retrieving language:', error);
+            });
+    }, []);
+
     const changeLanguage = value => {
         i18n
             .changeLanguage(value)
-            .then(() => setLanguage(value))
+            .then(() => {
+                setLanguage(value);
+                AsyncStorage.setItem('@language_key', value);
+            })
             .catch(err => console.log(err));
     };
 

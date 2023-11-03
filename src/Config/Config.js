@@ -15,7 +15,8 @@ import AText from '../Helpers/AText';
 import ThemeComponent from './ThemeComponent';
 import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';
-//import NotificationService from './NotificationService';
+import NotificationService from './NotificationService';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TextSize1 = 25;
 
@@ -26,18 +27,34 @@ export default function Config({ navigation }) {
     const { colors } = useTheme(); //Variavel de cor do tema
 
     //Switch
-    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+
+    React.useEffect(() => {
+        AsyncStorage.getItem('@notification_key')
+            .then(value => {
+                if (value !== null) {
+                    setIsSwitchOn(value === 'true');
+                }
+            })
+            .catch(error => {
+                console.error('Error retrieving switch state:', error);
+            });
+    }, []);
 
     const onToggleSwitch = () => {
-        setIsSwitchOn(!isSwitchOn)
+        const newState = !isSwitchOn;
+        setIsSwitchOn(newState);
 
-      /*   if (isSwitchOn) {
+        // Salve o novo estado do switch
+        AsyncStorage.setItem('@notification_key', newState.toString());
+
+        if (newState) {
             // The switch is being turned on, schedule the notification
             NotificationService.scheduleNotif();
         } else {
             // The switch is being turned off, cancel the notification
             NotificationService.cancelAll();
-        } */
+        }
 
     };
 

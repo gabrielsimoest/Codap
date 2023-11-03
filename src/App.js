@@ -10,8 +10,9 @@ import {Platform, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon, {Icons} from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import './ReduxRoot/Store/configureStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 //COMPONENTES
 import Login from './Login/Login';
 import Register from './Login/Register';
@@ -345,6 +346,7 @@ import TesteCode from './TesteCode';
 import TheoryView from './Helpers/TheoryView';
 import TestCarousel from './TestCarousel';
 import { use } from 'i18next';
+import { useTranslation } from 'react-i18next';
 ///////////////////////////////////
 
 const Stack = createStackNavigator();
@@ -521,6 +523,33 @@ function App() {
   let currentTheme = useSelector(state => {
     return state.myDarkMode;
   });
+
+  const { t, i18n } = useTranslation();
+
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    //Aplicar tema
+    AsyncStorage.getItem('@theme_key')
+      .then(value => {
+        if (value !== null) {
+          dispatch({ type: "change_theme", payload: value === 'true' });
+        }
+      })
+      .catch(error => {
+        console.error('Error retrieving theme state:', error);
+      });
+      //Aplicar idioma
+      AsyncStorage.getItem('@language_key')
+        .then(value => {
+            if (value !== null) {
+                i18n.changeLanguage(value);
+            }
+        })
+        .catch(error => {
+            console.error('Error retrieving language:', error);
+        });
+  }, []);
 
   useEffect (() => {
     if(Platform.OS === 'android') SplashScreen.hide();

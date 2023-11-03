@@ -6,6 +6,7 @@ import { Switch } from 'react-native-paper';
 import AText from "../Helpers/AText";
 import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
@@ -20,9 +21,25 @@ const ThemeComponent = () => {
 
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
 
+    React.useEffect(() => {
+        AsyncStorage.getItem('@theme_key')
+            .then(value => {
+                if (value !== null) {
+                    setIsSwitchOn(value === 'true');
+                }
+            })
+            .catch(error => {
+                console.error('Error retrieving theme state:', error);
+            });
+    }, []);
+
     const onToggleSwitch = () => {
-        setIsSwitchOn(!isSwitchOn),
-            dispatch({ type: "change_theme", payload: !currentTheme })
+        const newState = !isSwitchOn;
+        setIsSwitchOn(newState);
+        dispatch({ type: "change_theme", payload: !currentTheme });
+
+        // Salve o novo estado do switch
+        AsyncStorage.setItem('@theme_key', newState.toString());
     };
 
     return (

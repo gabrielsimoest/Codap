@@ -51,8 +51,8 @@ export const TutorialTheory = ({ visible, setModalVisible }) => {
       content: "gif",
     },
     {
-      title: 'tutorial title end',
-      text: 'tutorial end',
+      title: 'tutorial.tutorial title end',
+      text: 'tutorial.tutorial end',
       image: require('../../assets/Robo_feliz_centralizado.png'),
       content: "image",
     },
