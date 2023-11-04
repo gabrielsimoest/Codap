@@ -22,4 +22,8 @@ https://reactnative.dev/docs/environment-setup
 
 a- %LOCALAPPDATA%\Android\Sdk
 
-b- %LOCALAPPDATA%\Android\Sdk\platform-tools
+6. instalar dependencias
+Utilize: npm install
+
+7. Executar emulador
+Utilize: npx react-native run-android
