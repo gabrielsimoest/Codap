@@ -1,10 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../Helpers/TeoricView';
-import OptionView from '../../../Helpers/OptionView';
-import SelectView from '../../../Helpers/SelectView';
-import TextView from '../../../Helpers/TextView';
-import NestingView from '../../../Helpers/NestingView';
+import TeoricView from '../../../../Helpers/TeoricView';
+import OptionView from '../../../../Helpers/OptionView';
+import SelectView from '../../../../Helpers/SelectView';
+import TextView from '../../../../Helpers/TextView';
+import NestingView from '../../../../Helpers/NestingView';
 
 export function Div({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -20,9 +20,9 @@ export function Div({ navigation }) {
             adicionaltxt="Você pode usá-lo como subdivisão de um <main>, <footer> ou <header>"
             adicionaltxt2="none"
             //Imagem principal
-            img={require("../../../../assets/H1to6.png")}
+            img="none"
             //Imagens opcionais
-            opt_img={require("../../../../assets/H1to6_2.png")}
+            opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"
@@ -122,9 +122,9 @@ export function LineBreak({ navigation }) {
             adicionaltxt="Para isso você usa o <hr/> e o <br/> respectivamente."
             adicionaltxt2="none"
             //Imagem principal
-            img={require("../../../../assets/H1to6.png")}
+            img="none"
             //Imagens opcionais
-            opt_img={require("../../../../assets/H1to6_2.png")}
+            opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"

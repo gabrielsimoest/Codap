@@ -76,27 +76,6 @@ export default function CollapseHtml() {
       <Collapsible collapsed={collapsed1}>
         <View style={{flexDirection: 'row'}}>
           <OpButton
-            theme={'classButton'}
-            title={t('TEST CODE')}
-            onPressFunction={() => navigation.navigate('TestCode')}
-          />
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <OpButton
-            theme={'classButton'}
-            title={t('TEST THEORY')}
-            onPressFunction={() => navigation.navigate('TheoryView')}
-          />
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <OpButton
-            theme={'classButton'}
-            title={t('TestCarousel')}
-            onPressFunction={() => navigation.navigate('TestCarousel')}
-          />
-        </View>
-        <View style={{flexDirection: 'row'}}>
-          <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={'HTMLETAGS'}
             theme={'classButton'}

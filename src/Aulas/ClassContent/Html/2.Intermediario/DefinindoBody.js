@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../Helpers/TeoricView';
-import OptionView from '../../../Helpers/OptionView';
-import NestingView from '../../../Helpers/NestingView';
+import TeoricView from '../../../../Helpers/TeoricView';
+import OptionView from '../../../../Helpers/OptionView';
+import NestingView from '../../../../Helpers/NestingView';
 
 export function Body({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -18,9 +18,9 @@ export function Body({ navigation }) {
             adicionaltxt="Dentro dele ficam os elementos <header>, <main> e <footer>"
             adicionaltxt2="none"
             //Imagem principal
-            img={require("../../../../assets/H1to6.png")}
+            img="none"
             //Imagens opcionais
-            opt_img={require("../../../../assets/H1to6_2.png")}
+            opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Só pode haver um único <body> no projeto"

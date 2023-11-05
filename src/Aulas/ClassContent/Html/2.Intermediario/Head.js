@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../Helpers/TeoricView';
-import OptionView from '../../../Helpers/OptionView';
-import SelectView from '../../../Helpers/SelectView';
-import TextView from '../../../Helpers/TextView';
+import TeoricView from '../../../../Helpers/TeoricView';
+import OptionView from '../../../../Helpers/OptionView';
+import SelectView from '../../../../Helpers/SelectView';
+import TextView from '../../../../Helpers/TextView';
 
 export function Head({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
@@ -19,9 +19,9 @@ export function Head({ navigation }) {
             adicionaltxt="O primeiro que veremos é o <head>"
             adicionaltxt2="Esse é um elemento que determina uma seção de elementos que definem dados que não são visíveis ao usuário."
             //Imagem principal
-            img={require("../../../../assets/H1to6.png")}
+            img="none"
             //Imagens opcionais
-            opt_img={require("../../../../assets/H1to6_2.png")}
+            opt_img="none"
             opt_img2="none"
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="none"

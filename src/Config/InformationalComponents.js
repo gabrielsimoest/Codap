@@ -4,14 +4,28 @@ import OpButton from "../Helpers/OpButton";
 import Icon, { Icons } from "../components/Icons";
 import { useTranslation } from 'react-i18next';
 import AText from "../Helpers/AText";
-import { useTheme } from "@react-navigation/native";
+import { useNavigation, useTheme } from "@react-navigation/native";
 
 
 export const VersionComponent = () => {
 
     const { colors } = useTheme(); //Variavel de cor do tema
 
+    const navigation = useNavigation();
+
     const [modalVisible, setModalVisible] = useState(false);
+
+    var pressCounter = 0;
+
+    const onPressHandler = () => {
+        //setPressCounter(pressCounter++);
+        pressCounter++;
+        if(pressCounter >= 5) {
+            pressCounter = 0;
+            setModalVisible(!modalVisible);
+            navigation.navigate("Tester");
+        }
+    }
 
     const { t, i18n } = useTranslation();
 
@@ -22,7 +36,7 @@ export const VersionComponent = () => {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
+                    pressCounter = 0;
                     setModalVisible(!modalVisible);
                 }}
             >
@@ -30,16 +44,21 @@ export const VersionComponent = () => {
                     <View style={[styles.modalView, { backgroundColor: colors.background }]}>
                         <Pressable
                             style={styles.button}
-                            onPress={() => setModalVisible(!modalVisible)}
+                            onPress={() => {
+                                pressCounter =0; 
+                                setModalVisible(!modalVisible)
+                            }}
                         >
                             <Icon type={Icons.Ionicons} name="close-circle" color={"#5469D3"} />
                         </Pressable>
                         <ScrollView style={{ marginBottom: 5 }}>
-                            <AText style={styles.modalText} defaultSize={20}>{t("version")}:</AText>
-                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={20}>0.0.0</AText>
+                            <Pressable onPress={onPressHandler}  >
+                                <AText style={styles.modalText} defaultSize={20}>{t("version")}:</AText>
+                            </Pressable>
+                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={20}>1.0.0</AText>
                             <View style={[styles.line, { borderColor: colors.primary }]}></View>
                             <AText style={[styles.modalText, { marginTop: "5%" }]} defaultSize={20}>{t("update")}:</AText>
-                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={20}>0.0.0:</AText>
+                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={20}>1.0.0:</AText>
                             <AText style={[styles.modalText, { color: colors.text }]} defaultSize={18}>{t("changes")}</AText>
                             <View style={[styles.line, { borderColor: colors.primary }]}></View>
                         </ScrollView>
@@ -88,11 +107,11 @@ export const AboutComponent = () => {
                                 {t("GRP")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={17}>{t("dev_note")}</AText>
-                            <AText style={[styles.modalText, { color: colors.text, marginLeft: 8, marginRight: 8  }]} defaultSize={16}>
+                            <AText style={[styles.modalText, { color: colors.text, marginLeft: 8, marginRight: 8 }]} defaultSize={16}>
                                 {t("dev_note2")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={18}>{t("special thanks")}</AText>
-                            <AText style={[styles.modalText, { color: colors.text}]} defaultSize={16}>
+                            <AText style={[styles.modalText, { color: colors.text }]} defaultSize={16}>
                                 {t("names")}
                             </AText>
                             <AText style={styles.modalText} defaultSize={18}>{t("declaration")}</AText>
