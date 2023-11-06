@@ -344,9 +344,9 @@ import SplashScreen from 'react-native-splash-screen';
 
 ///////////////////////////////////
 import ComponentTester from './Tests/ComponentTest';
-import TesteCode from './TesteCode';
+import TesteCode from './Tests/TesteCode';
 import TheoryView from './Helpers/TheoryView';
-import TestCarousel from './TestCarousel';
+import TestCarousel from './Tests/TestCarousel';
 ///////////////////////////////////
 
 const Stack = createStackNavigator();

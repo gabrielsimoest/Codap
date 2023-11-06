@@ -303,7 +303,7 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import Icon, {Icons} from './components/Icons';
+import Icon, {Icons} from '../components/Icons';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useTheme} from '@react-navigation/native';
 
@@ -320,27 +320,27 @@ const TutorialCarousel = ({visible = true}) => {
     {
       title: 'Página 1',
       text: 'Texto da página 1',
-      image: require('../assets/Robo_advanced.png'),
+      image: require('../../assets/Robo_advanced.png'),
     },
     {
       title: 'Página 2',
       text: 'Texto da página 2',
-      image: require('../assets/Robo_master.png'),
+      image: require('../../assets/Robo_master.png'),
     },
     {
       title: 'Página 3',
       text: 'Texto da página 3',
-      image: require('../assets/Robo_master.png'),
+      image: require('../../assets/Robo_master.png'),
     },
     {
       title: 'Página 4',
       text: 'Texto da página 4',
-      image: require('../assets/Robo_master.png'),
+      image: require('../../assets/Robo_master.png'),
     },
     {
       title: 'Página 5',
       text: 'Texto da página 5',
-      image: require('../assets/Robo_master.png'),
+      image: require('../../assets/Robo_master.png'),
     },
   ];
 

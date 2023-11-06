@@ -44,15 +44,16 @@ export function HeaderEx1({ navigation }) {
             adicionaltxt={t("html.basic.title.HeaderEx1_adicionaltxt")}
             pergunta={t("html.basic.title.HeaderEx1_pergunta")}
             opt1={t("html.basic.title.HeaderEx1_opt1")}
-            opt2={t("html.basic.title.text")}
-            opt3={t("html.basic.title.codap is awesome")}
+            opt2={t("html.basic.title.HeaderEx1_opt2")}
+            opt3={t("html.basic.title.HeaderEx1_opt3")}
             opt4={t("html.basic.title.HeaderEx1_opt4")}
             opt5={t("html.basic.title.HeaderEx1_opt5")}
             opt6={t("html.basic.title.HeaderEx1_opt6")}
             opt7="none"
             opt8="none"
-            txtCerto={t("html.basic.title.answer")}
+            txtCerto={t("html.basic.title.HeaderEx1_txtCerto")}
             navegar="HeaderEx2"
+            tutorialVisible = {true}
         />
     )
 }
@@ -66,10 +67,10 @@ export function HeaderEx2({ navigation }) {
             sec="9999"
             adicionaltxt="none"
             pergunta={t("html.basic.title.HeaderEx2_pergunta")}
-            opt1={t("html.basic.title.title1")}
-            opt2={t("html.basic.title.title2")}
-            opt3={t("html.basic.title.title3")}
-            opt4={t("html.basic.title.title4")}
+            opt1={t("html.basic.title.HeaderEx2_opt1")}
+            opt2={t("html.basic.title.HeaderEx2_opt2")}
+            opt3={t("html.basic.title.HeaderEx2_opt3")}
+            opt4={t("html.basic.title.HeaderEx2_opt4")}
             optCerta="opt1"
             navegar="HeaderEx3"
         />

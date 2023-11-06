@@ -125,9 +125,12 @@
             "HeaderEx1_adicionaltxt": "Normally the <h1> is used for creating titles on your page",
             "HeaderEx1_pergunta": "code a title written Codap is awesome",
             "HeaderEx1_opt1": "<h1>",
+            "HeaderEx1_opt2": "TEXT",
+            "HeaderEx1_opt3": "CODAP is awesome",
             "HeaderEx1_opt4": "</h1>",
             "HeaderEx1_opt5": "<p>",
             "HeaderEx1_opt6": "</p>",
+            "HeaderEx1_txtCerto": "<h1>CODAP is awesome</h1>",
             "HeaderEx2_pergunta": "how is the title of a page made",
             "HeaderEx3_adicionaltxt": "The <h2> can be used to write subtitles",
             "HeaderEx3_pergunta": "Write a subtitle that appears CODAP",
@@ -430,28 +433,55 @@
       "_comment7*********": "*********TUTORIAIS*********",
 
       "tutorial" : {
-        "tutorial title end" :"aaaaaaaaaaaAproveite a aula!",
-        "tutorial end" : "Se precisar de ajuda, basta clicar no botão de ponto de interrogação no topo da tela. Agora, feche este tutorial e aproveite a aula!"
+        "common": {
+          "tutorial title end":"Enjoy the class!",
+          "tutorial end":"If you need help, just click the question mark button at the top of the screen. Now close this tutorial and enjoy the class!",
+          
+          "tutorial title timer":"Be fast!",
+          "tutorial timer":"Sometimes you will have a timer at the top of the screen on advanced topics. Be fast, I know you can do it!"    
+        },
+        "theory": {
+          "tutorial title theory 1":"Theoretical class",
+          "tutorial theory 1":"I'm here to help you, this is your theoretical class. In it you will have a brief explanation of what you will learn in this topic and an example code.",
+          
+          "tutorial title theory 2":"Code window",
+          "tutorial theory 2":"Note that here you will have a window with an example code. If you can't see all the code, drag it to the side as shown above.",
+          
+          "tutorial title theory 3":"Swich between index/web",
+          "tutorial theory 3":"In most topics you will see the 'index' and 'web' buttons above the code, press them to switch between the sample code and the website it generates.",
+          
+          "tutorial title theory 4":"Web window",
+          "tutorial theory 4":"In the 'web' window, you can drag to all sides (vertical and horizontal), in addition to being able to double tap for a slight zoom in the window."    
+        },
+        "option_exercise": {
+          "option title 1" : "Option exercise",
+          "option 1": "In this exercise you will test what you have learned from theory, whether a concept or a review of a certain code.",
+          
+          "option title 2": "Choose and check",
+          "option 2": "You should choose one of the options to answer the question and click the button to check if you got it right.",
+          
+          "option title 3": "Hits and misses",
+          "option 3" : "If you got it right, you will be redirected to the next exercise. But if you got it wrong, don't worry, read the question again or go back to the theory and try again, don't give up! "
+        },
+        "select_exercise": {
+          "select title 1" : "Construction exercise",
+          "select 1" : "In this exercise you should click on the blocks to build a code from the options provided.",
+          
+          "select title 2" : "Building",
+          "select 2": "Click on the blocks to build the code and check if you got it right. Remember, not all options need to be used!",
+          
+          "select title 3" : "Deleting",
+          "select 3": "If you have placed an incorrect option, use the arrow on the side to delete the content and redo it."
+        },
+        "text_exercise": {
+          "text title 1" : "Text exercise",
+          "text 1" : "This exercise is simple, in it you should write what is proposed by the exercise. Without error, you can do it!",
+          
+          "text title 2" : "Tip!",
+          "text 2": "A useful tip is to try to write exactly as it was asked. Spaces or uppercase/lowercase letters in the wrong places can confuse our friend when evaluating your performance. So be careful with accidental spaces."
+        }
       },
       
-      "tutorial title end":"Enjoy the class!",
-      "tutorial end":"If you need help, just click the question mark button at the top of the screen. Now close this tutorial and enjoy the class!",
-
-      "tutorial title timer":"Be fast!",
-      "tutorial timer":"Sometimes you will have a timer at the top of the screen on advanced topics. Be fast, I know you can do it!",
-
-      "tutorial title theory 1":"Theoretical class",
-      "tutorial theory 1":"I'm here to help you, this is your theoretical class. In it you will have a brief explanation of what you will learn in this topic and an example code.",
-
-      "tutorial title theory 2":"Code window",
-      "tutorial theory 2":"Note that here you will have a window with an example code. If you can't see all the code, drag it to the side as shown above.",
-
-      "tutorial title theory 3":"Swich between index/web",
-      "tutorial theory 3":"In most topics you will see the 'index' and 'web' buttons above the code, press them to switch between the sample code and the website it generates.",
-
-      "tutorial title theory 4":"Web window",
-      "tutorial theory 4":"In the 'web' window, you can drag to all sides (vertical and horizontal), in addition to being able to double tap for a slight zoom in the window.",
-    
       "notificationService" : {
         "title": "Reminder",
         "message": "Come take more classes with CODAP, we miss you!"

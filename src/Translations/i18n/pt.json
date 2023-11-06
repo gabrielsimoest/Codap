@@ -123,11 +123,14 @@
             "H1h6_txt": "Os textos principais podem ser escritos usando a tag <h1>, em que o numero ao lado do 'h' indica o tamanho do texto",
             "H1h6_adicionaltxt_end": "Quanto menor for o número, maior será a fonte do texto. Indicando seu nível de importância.",
             "HeaderEx1_adicionaltxt": "Normalmente o <h1> é utilizado para criação de títulos da sua página",
-            "HeaderEx1_pergunta": "code a title written Codap is awesome",
+            "HeaderEx1_pergunta": "Code um título escrito CODAP é incrível",
             "HeaderEx1_opt1": "<h1>",
+            "HeaderEx1_opt2": "TEXTO",
+            "HeaderEx1_opt3": "CODAP é incrível",
             "HeaderEx1_opt4": "</h1>",
             "HeaderEx1_opt5": "<p>",
             "HeaderEx1_opt6": "</p>",
+            "HeaderEx1_txtCerto": "<h1>CODAP é incrível</h1>",
             "HeaderEx2_pergunta": "how is the title of a page made",
             "HeaderEx3_adicionaltxt": "O <h2> pode ser utilizado para escrever subtítulos",
             "HeaderEx3_pergunta": "Escreva um subtítulo que apareça CODAP",
@@ -434,28 +437,57 @@
       "_comment7*********": "*********TUTORIAIS*********",
 
       "tutorial" : {
-        "tutorial title end" :"Aproveite a aula!",
-        "tutorial end" : "Se precisar de ajuda, basta clicar no botão de ponto de interrogação no topo da tela. Agora, feche este tutorial e aproveite a aula!"
+        "common": {
+          "tutorial title end" :"Aproveite a aula!",
+          "tutorial end" : "Se precisar de ajuda, basta clicar no botão de ponto de interrogação no topo da tela. Agora, feche este tutorial e aproveite a aula!",
+        
+          "tutorial title timer":"Seja rápido!",
+          "tutorial timer":"As vezes você terá um temporizador no topo da tela nas aulas avançadas. Seja rápido, eu sei do que você é capaz!"
+        },
+        "theory": {
+          "tutorial title theory 1":"Aula teórica",
+          "tutorial theory 1":"Estou aqui para ajudá-lo, esta é sua aula teórica. Aqui você terá uma breve explicação do que vai aprender neste tópico e um exemplo de código.",
+        
+          "tutorial title theory 2":"Janela de código",
+          "tutorial theory 2":"Observe que aqui você terá uma janela com um exemplo de código. Se não puder ver todo o código, arraste-o para o lado, conforme mostrado acima.",
+        
+          "tutorial title theory 3":"Alternar entre index/web",
+          "tutorial theory 3":"Na maioria dos tópicos, você verá os botões 'index' e 'web' acima do código, pressione-os para alternar entre o código de amostra e o site que ele gera.",
+        
+          "tutorial title theory 4":"Janela do site",
+          "tutorial theory 4":"Na janela 'web', você pode arrastar para todos os lados (vertical e horizontal), além de poder dar um duplo toque para ampliar ligeiramente a janela."
+        },
+        "option_exercise": {
+          "option title 1" : "Exercício de opção",
+          "option 1": "Nesse exercício você testará o que você aprendeu de teoria, seja um conceito ou uma revisão de um determinado código.",
+
+          "option title 2": "Escolha e verifique",
+          "option 2": "Você deve escolher uma das opções para responder a pergunta e clicar no botão para verificar se acertou.",
+
+          "option title 3": "Acertos e erros",
+          "option 3" : "Se você acertou, você será redirecionado para o próximo exercício. Mas se errou, não se preocupe, leia a pergunta novamente ou volte para a teoria e tente de novo, não desita! "
+        },
+        "select_exercise": {
+          "select title 1" : "Exercício de construção",
+          "select 1" : "Nesse exercício você deve clicar nos blocos para construir um código a partir das opções fornecidas.",
+
+          "select title 2" : "Construindo",
+          "select 2": "Clique nos blocos para construir o código e verifique se acertou. Lembre-se, nem sempre todas as opções precisam ser usadas!",
+
+          "select title 3" : "Apagando",
+          "select 3": "Caso tenha colocado alguma opção incorreta, use a seta na lateral para apagar o conteúdo e refazer ele."
+        },
+        "text_exercise": {
+          "text title 1" : "Exercício de texto",
+          "text 1" : "Esse exercício é simples, nele você deve escrever o que for proposto pelo exercício. Sem erro, você consegue!",
+
+          "text title 2" : "Dica!",
+          "text 2": "Uma dica útil é tentar escrever exatamente da forma que foi pedido. Espaços ou letras maiúsculas/minúsculas nos lugares errados podem confundir nosso amigo na hora de avaliar seu desempenho. Então cuidado com os espaços acidentais."
+        }
       },
+
+
       
-      "tutorial title end":"Aproveite a aula!",
-      "tutorial end":"Se precisar de ajuda, basta clicar no botão de ponto de interrogação no topo da tela. Agora, feche este tutorial e aproveite a aula!",
-
-      "tutorial title timer":"Seja rápido!",
-      "tutorial timer":"As vezes você terá um temporizador no topo da tela nas aulas avançadas. Seja rápido, eu sei do que você é capaz!",
-
-      "tutorial title theory 1":"Aula teórica",
-      "tutorial theory 1":"Estou aqui para ajudá-lo, esta é sua aula teórica. Aqui você terá uma breve explicação do que vai aprender neste tópico e um exemplo de código.",
-    
-      "tutorial title theory 2":"Janela de código",
-      "tutorial theory 2":"Observe que aqui você terá uma janela com um exemplo de código. Se não puder ver todo o código, arraste-o para o lado, conforme mostrado acima.",
-    
-      "tutorial title theory 3":"Alternar entre index/web",
-      "tutorial theory 3":"Na maioria dos tópicos, você verá os botões 'index' e 'web' acima do código, pressione-os para alternar entre o código de amostra e o site que ele gera.",
-    
-      "tutorial title theory 4":"Janela do site",
-      "tutorial theory 4":"Na janela 'web', você pode arrastar para todos os lados (vertical e horizontal), além de poder dar um duplo toque para ampliar ligeiramente a janela.",
-    
       "notificationService" : {
         "title": "Lembrete",
         "message": "Venha realizar mais aulas com o CODAP, sentimos sua falta!"

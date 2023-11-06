@@ -114,6 +114,7 @@ export function FraseEx4({ navigation }) {
             tamanhoInput="46%"
             aulaSalvar="none"
             navegar="FraseEx5"
+            tutorialVisible = {true}
         />
     )
 }
