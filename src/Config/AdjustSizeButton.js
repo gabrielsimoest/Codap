@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, View} from "react-native";
 import OpButton from "../Helpers/OpButton";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changeCount } from '../ReduxRoot/Actions/counts'
 
 class AdjustSizeButton extends Component {
+
   decrementCount() {
     let { count, actions } = this.props;
     if (count !== 0) {
@@ -15,6 +13,7 @@ class AdjustSizeButton extends Component {
     }
     actions.changeCount(count);
   }
+
   incrementCount() {
     let { count, actions } = this.props;
     if (count !== 5) {
@@ -23,7 +22,8 @@ class AdjustSizeButton extends Component {
       count = count;
     }
     actions.changeCount(count);
-  }
+  } 
+
   render() {
     //const { count } = this.props;
     return (
@@ -45,16 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  count: state.count.count,
-});
-
-const ActionCreators = Object.assign(
-  {},
-  { changeCount },
-);
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdjustSizeButton)
+export default AdjustSizeButton

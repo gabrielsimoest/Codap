@@ -69,7 +69,7 @@ export default function Config({ navigation }) {
                 </View>
                 <TranslateComponet />
                 <FontComponent />
-                <ThemeComponent />
+                <ThemeComponent/>
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
                     <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText>

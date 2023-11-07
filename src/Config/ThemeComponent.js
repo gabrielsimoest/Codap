@@ -1,45 +1,38 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useRef } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, TouchableOpacity, } from "react-native";
 import '../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { Switch } from 'react-native-paper';
 import AText from "../Helpers/AText";
-import { useDispatch, useSelector } from "react-redux";
-import { useTheme } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTheme, DefaultTheme } from '@react-navigation/native';
+import { useThemeApp } from '../App';
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
-
-    const dispatch = useDispatch();
-    const currentTheme = useSelector(state => {
-
-        return state.myDarkMode
-    })
-
     const { t, i18n } = useTranslation();
-
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+    const { currentAppThemeRead } = useState(global.currentAppTheme);
+    const { toggleTheme } = useThemeApp();
+    const navigationContainer = useRef(null);
 
     React.useEffect(() => {
-        AsyncStorage.getItem('@theme_key')
-            .then(value => {
-                if (value !== null) {
-                    setIsSwitchOn(value === 'true');
-                }
-            })
-            .catch(error => {
-                console.error('Error retrieving theme state:', error);
-            });
+        setIsSwitchOn(currentAppThemeRead);
     }, []);
 
     const onToggleSwitch = () => {
         const newState = !isSwitchOn;
         setIsSwitchOn(newState);
-        dispatch({ type: "change_theme", payload: !currentTheme });
+        global.currentAppTheme = newState;
 
         // Salve o novo estado do switch
-        AsyncStorage.setItem('@theme_key', newState.toString());
+        AsyncStorage.setItem('@currentAppTheme', newState.toString());
+
+        // Chame a função para alternar o tema
+        toggleTheme(newState);
+
+        // Faça o refresh do NavigationContainer
+        navigationContainer.current?.refresh();
     };
 
     return (

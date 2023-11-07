@@ -5,13 +5,11 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
-import { useSelector, useDispatch } from 'react-redux';
-import './ReduxRoot/Store/configureStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { use } from 'i18next';
 import { useTranslation } from 'react-i18next';
@@ -516,29 +514,28 @@ const CustomLightMode = {
 };
 
 /* ^^^ Gerenciamento dos temas ^^^ */
+const navigationContainer = useRef(null);
+
+export function useThemeApp() {
+  const [theme, setTheme] = useState(CustomLightMode);
+
+  const toggleTheme = (isDarkMode) => {
+    setTheme(isDarkMode ? CustomLightMode : CustomDarkMode);
+    console.log(theme);
+  };
+
+  return { theme, setTheme, toggleTheme };
+}
 
 //APP
 function App() {
   //Variavel para seleção de tema
-  let currentTheme = useSelector(state => {
-    return state.myDarkMode;
-  });
 
   const { t, i18n } = useTranslation();
-
-  const dispatch = useDispatch();
+  const { theme } = useThemeApp();
+  const navigationContainer = useRef(null);
 
   React.useEffect(() => {
-    //Aplicar tema
-    AsyncStorage.getItem('@theme_key')
-      .then(value => {
-        if (value !== null) {
-          dispatch({ type: "change_theme", payload: value === 'true' });
-        }
-      })
-      .catch(error => {
-        console.error('Error retrieving theme state:', error);
-      });
     //Aplicar idioma
     AsyncStorage.getItem('@language_key')
       .then(value => {
@@ -549,15 +546,12 @@ function App() {
       .catch(error => {
         console.error('Error retrieving language:', error);
       });
-  }, []);
-
-  useEffect(() => {
     if (Platform.OS === 'android') SplashScreen.hide();
   }, [])
 
   return (
     <NavigationContainer
-      theme={currentTheme ? CustomDarkMode : CustomLightMode}>
+      theme={theme}>
       <Stack.Navigator
         screenOptions={{
           header: () => null,
