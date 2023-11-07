@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleSheet, TouchableOpacity, } from "react-native";
 import '../Translations/i18n/i18n';
@@ -6,15 +6,15 @@ import { useTranslation } from 'react-i18next';
 import { Switch } from 'react-native-paper';
 import AText from "../Helpers/AText";
 import { useTheme, DefaultTheme } from '@react-navigation/native';
-import { useThemeApp } from '../App';
+import { AppContext } from '../common/contexts/AppContext';
+
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
     const { t, i18n } = useTranslation();
     const [isSwitchOn, setIsSwitchOn] = React.useState(true);
     const { currentAppThemeRead } = useState(global.currentAppTheme);
-    const { toggleTheme } = useThemeApp();
-    const navigationContainer = useRef(null);
+    const { theme, toggleTheme } = useContext(AppContext);
 
     React.useEffect(() => {
         setIsSwitchOn(currentAppThemeRead);
@@ -30,9 +30,8 @@ const ThemeComponent = () => {
 
         // Chame a função para alternar o tema
         toggleTheme(newState);
+        console.log(newState);
 
-        // Faça o refresh do NavigationContainer
-        navigationContainer.current?.refresh();
     };
 
     return (
