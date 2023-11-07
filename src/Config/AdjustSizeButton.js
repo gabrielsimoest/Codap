@@ -1,28 +1,33 @@
-import React, { Component } from "react";
-import { StyleSheet, View} from "react-native";
+import React, { Component, useContext } from "react";
+import { StyleSheet, View } from "react-native";
 import OpButton from "../Helpers/OpButton";
+import { AppContext } from '../common/Contexts/AppContext';
 
 class AdjustSizeButton extends Component {
 
+
   decrementCount() {
+    const { setTextAppSize } = useContext(AppContext);
     let { count, actions } = this.props;
+
     if (count !== 0) {
       count--;
     } else {
       count = count;
     }
-    actions.changeCount(count);
+    setTextAppSize(count);
   }
 
   incrementCount() {
+    const { setTextAppSize } = useContext(AppContext);
     let { count, actions } = this.props;
     if (count !== 5) {
       count++;
     } else {
       count = count;
     }
-    actions.changeCount(count);
-  } 
+    setTextAppSize(count);
+  }
 
   render() {
     //const { count } = this.props;

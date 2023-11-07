@@ -6,33 +6,27 @@ import { useTranslation } from 'react-i18next';
 import { Switch } from 'react-native-paper';
 import AText from "../Helpers/AText";
 import { useTheme, DefaultTheme } from '@react-navigation/native';
-import { AppContext } from '../common/contexts/AppContext';
+import { AppContext } from '../common/Contexts/AppContext';
 
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
     const { t, i18n } = useTranslation();
-    const [isSwitchOn, setIsSwitchOn] = React.useState(true);
-    const { currentAppThemeRead } = useState(global.currentAppTheme);
+    const [isSwitchOn, setIsSwitchOn] = useState(false);
     const { theme, toggleTheme } = useContext(AppContext);
 
     React.useEffect(() => {
-        setIsSwitchOn(currentAppThemeRead);
+        // setIsSwitchOn(currentAppThemeRead);
     }, []);
 
     const onToggleSwitch = () => {
-        const newState = !isSwitchOn;
-        setIsSwitchOn(newState);
-        global.currentAppTheme = newState;
-
-        // Salve o novo estado do switch
-        AsyncStorage.setItem('@currentAppTheme', newState.toString());
-
-        // Chame a função para alternar o tema
-        toggleTheme(newState);
-        console.log(newState);
-
+        const newSwitchState = !isSwitchOn; // Calcula o novo estado do switch
+        setIsSwitchOn(newSwitchState); // Atualiza o estado do switch
+    
+        // Chame a função para alternar o tema com o novo estado
+        toggleTheme(!newSwitchState);
     };
+    
 
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: colors.background }]} onPress={() => onToggleSwitch()}>

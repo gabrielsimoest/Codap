@@ -1,17 +1,16 @@
 import {
   NavigationContainer,
-  DefaultTheme,
   useTheme,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AppContext } from './common/contexts/AppContext';
+import { AppContext } from './common/Contexts/AppContext';
 import { useTranslation } from 'react-i18next';
 //COMPONENTES
 import Login from './Login/Login';
@@ -481,56 +480,11 @@ const forFade = ({ current }) => ({
   },
 });
 
-/* vvv Gerenciamento dos temas vvv */
-
-//Dark mode
-const CustomDarkMode = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    //Definir as cores
-    background: '#141f29',
-    text: '#F1F1F1',
-    primary: '#1B2B39',
-    card: '#0E151C',
-    border: '#233648',
-    notification: '#33526E',
-  },
-};
-
-//Light mode
-const CustomLightMode = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    //Definir as cores
-    background: '#FFFF',
-    text: '#000',
-    primary: '#F1F1F1',
-    card: '#DEDFE1',
-    border: '#E5E5E5',
-    notification: '#F5F5F5',
-  },
-};
-
-/* ^^^ Gerenciamento dos temas ^^^ */
-
-export function useThemeApp() {
-  const [theme, setTheme] = useState(CustomLightMode);
-
-  const toggleTheme = (isDarkMode) => {
-    setTheme(isDarkMode ? CustomLightMode : CustomDarkMode);
-    console.log(theme);
-  };
-
-  return { theme, setTheme, toggleTheme };
-}
-
 //APP
 function App() {
   //Variavel para seleção de tema
   const { t, i18n } = useTranslation();
-  const { theme, toggleTheme } = useThemeApp(); 
+  const { theme, toggleTheme } = useContext(AppContext);
 
   React.useEffect(() => {
     //Aplicar idioma
@@ -548,7 +502,6 @@ function App() {
 
 
   return (
-    <AppContext.Provider value={{ theme, toggleTheme }}>
       <NavigationContainer
         theme={theme}>
         <Stack.Navigator
@@ -1712,7 +1665,6 @@ function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
-    </AppContext.Provider>
   );
 }
 

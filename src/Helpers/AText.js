@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { Text } from "react-native";
+import { AppContext } from '../common/Contexts/AppContext';
 
-class AText extends Component {
-    render() {
-        const { font, defaultSize } = this.props;
-        return (
-            <Text style={[this.props.style, { fontSize: textAppSize }]}>{this.props.children}</Text>
-        );
-    }
-};
+function AText(props) {
+    const { textAppSize } = useContext(AppContext);
+
+    return (
+        <Text style={[props.style, { fontSize: textAppSize }]}>{props.children}</Text>
+    );
+}
 
 export default AText;
