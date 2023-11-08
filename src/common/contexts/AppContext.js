@@ -8,12 +8,18 @@ const AppProvider = ({ children }) => {
     const [theme, setTheme] = useState(CustomLightMode);
     const [textAppSize, setTextAppSize] = useState(20);
 
-    const toggleTheme = (isDarkMode) => {
-        setTheme(isDarkMode ? CustomLightMode : CustomDarkMode);
+    const ToggleTheme = (isSwitchOn) => {
+        const newSwitchState = !isSwitchOn; // Calcula o novo estado do switch
+    
+        // Use um operador ternário para alternar entre os temas com base no tema atual
+        const newTheme = theme === CustomLightMode ? CustomDarkMode : CustomLightMode;
+    
+        setTheme(newTheme); // Define o novo tema
+        return newSwitchState; // Atualiza o estado do switch
     };
 
     return (
-        <AppContext.Provider value={{ theme, setTheme ,toggleTheme, textAppSize, setTextAppSize}}>
+        <AppContext.Provider value={{ theme, ToggleTheme, textAppSize, setTextAppSize }}>
             {children}
         </AppContext.Provider>
     );
