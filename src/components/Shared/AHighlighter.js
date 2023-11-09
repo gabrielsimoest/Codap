@@ -2,7 +2,7 @@ import HighlightText from "@sanar/react-native-highlight-text";
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeCount } from '../ReduxRoot/Actions/counts'
+import { changeCount } from '../../ReduxRoot/Actions/counts'
 
 class AHighlighter extends Component {
     render() {

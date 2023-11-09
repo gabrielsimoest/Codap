@@ -2,7 +2,7 @@ import { useTheme } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
-import Icon, { Icons } from '../components/Icons';
+import Icon, { Icons } from '../Icons';
 import OpButton from './OpButton';
 import AText from './AText';
 import SaveClass from './SaveClass';

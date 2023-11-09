@@ -7,10 +7,10 @@ import Icon, { Icons } from '../../components/Icons';
 import Colors from '../../constants/Colors';
 import * as Animatable from 'react-native-animatable';
 //COMPONENTES
-import Config from '../../Config/Config';
-import Store from '../../Market/Store';
+import Config from '../Views/Config/Config';
+import Store from '../Views/Market/Store';
 import Class from '../../Aulas/Class';
-import Perfil from '../../Users/Perfil';
+import Perfil from '../Views/Users/Perfil';
 
 const Tab = createBottomTabNavigator();
 

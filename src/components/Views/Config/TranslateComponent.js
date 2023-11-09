@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Pressable, View, ScrollView } from "react-native";
-import OpButton from "../Helpers/OpButton";
-import Icon, { Icons } from "../components/Icons";
-import '../Translations/i18n/i18n';
+import OpButton from "../../Shared/OpButton";
+import Icon, { Icons } from "../../Icons";
+import '../../../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from "@react-navigation/native";
-import AText from "../Helpers/AText";
+import AText from "../../Shared/AText";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const textSize = 20;

@@ -9,7 +9,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../Icons';
 import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import AText from './AText';

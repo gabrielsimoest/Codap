@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../Helpers/TeoricView';
-import OptionView from '../../../../Helpers/OptionView';
-import NestingView from '../../../../Helpers/NestingView';
+import TeoricView from '../../../../components/Shared/TeoricView';
+import OptionView from '../../../../components/Shared/OptionView';
+import NestingView from '../../../../components/Shared/NestingView';
 
 export function TiposDeDados({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução

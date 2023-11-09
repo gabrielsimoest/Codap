@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../Helpers/TeoricView';
-import OptionView from '../../../../Helpers/OptionView';
-import SelectView from '../../../../Helpers/SelectView';
+import TeoricView from '../../../../components/Shared/TeoricView';
+import OptionView from '../../../../components/Shared/OptionView';
+import SelectView from '../../../../components/Shared/SelectView';
 
 export function IndentTeoric({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução

@@ -11,7 +11,7 @@ import {
     Keyboard
 } from 'react-native';
 const validator = require('validator');
-import CustomButton from '../Helpers/CustomButton';
+import CustomButton from '../../Shared/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
@@ -83,13 +83,13 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <ImageBackground source={require('../../assets/background.jpg')} resizeMode="cover" style={styles.container}>
+        <ImageBackground source={require('../../../../assets/background.jpg')} resizeMode="cover" style={styles.container}>
             <TouchableWithoutFeedback
                 onPress={Keyboard.dismiss} accessible={false}
             >
                 <View style={styles.box}>
                     <View style={styles.header}>
-                        <Image style={styles.tinyLogo} source={require('../../assets/code.png')} />
+                        <Image style={styles.tinyLogo} source={require('../../../../assets/code.png')} />
                         <Text style={styles.title}>Codap</Text>
                     </View>
                     <View style={styles.inputs}>

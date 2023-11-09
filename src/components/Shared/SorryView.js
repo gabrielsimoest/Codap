@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Modal, Image, StyleSheet } from 'react-native';
-import Icon, { Icons } from '../components/Icons';
+import Icon, { Icons } from '../Icons';
 import OpButton from './OpButton';
 import { useTheme } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
@@ -31,7 +31,7 @@ export default function SorryView({ navigation }) {
                 <View>
                     <AText style={[styles.text, {color: colors.text}]} defaultSize={textSize}>Você melhora na próxima!</AText>
                 </View>
-                <Image style={styles.figure} source={require('../../assets/Robo_triste.png')} />
+                <Image style={styles.figure} source={require('../../../assets/Robo_triste.png')} />
             </View>
             <OpButton theme={"nextButton"} title={t("back")} onPressFunction={() => navigation.navigate('Home')} />
 

@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react';
 import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../Icons';
 import OpButton from './OpButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SQLite from 'react-native-sqlite-storage';
@@ -113,7 +113,7 @@ export default function CongratsView({navigation, progresso}) {
         </View>
         <Image
           style={styles.figure}
-          source={require('../../assets/Robo_advanced.png')}
+          source={require('../../../assets/Robo_advanced.png')}
         />
       </View>
       <OpButton

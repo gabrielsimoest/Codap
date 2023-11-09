@@ -28,22 +28,23 @@ function App() {
   //Variavel para seleção de tema
   const { theme } = useContext(AppContext);
 
+  //TODO: Concertar Tradução
   //Variavel para tradução
-  const { t, i18n } = useTranslation();
+  // const { t, i18n } = useTranslation();
 
-  React.useEffect(() => {
-    //Aplicar idioma
-    AsyncStorage.getItem('@language_key')
-      .then(value => {
-        if (value !== null) {
-          i18n.changeLanguage(value);
-        }
-      })
-      .catch(error => {
-        console.error('Error retrieving language:', error);
-      });
-    if (Platform.OS === 'android') SplashScreen.hide();
-  }, [])
+  // React.useEffect(() => {
+  //   //Aplicar idioma
+  //   AsyncStorage.getItem('@language_key')
+  //     .then(value => {
+  //       if (value !== null) {
+  //         i18n.changeLanguage(value);
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error retrieving language:', error);
+  //     });
+  //   if (Platform.OS === 'android') SplashScreen.hide();
+  // }, [])
 
   const DefaultstackScreens = DefaultScreens.map((screen) => (
     <Stack.Screen

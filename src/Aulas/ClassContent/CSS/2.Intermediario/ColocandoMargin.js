@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../Helpers/TeoricView';
-import SelectView from '../../../../Helpers/SelectView';
-import OptionView from '../../../../Helpers/OptionView';
-import NestingView from '../../../../Helpers/NestingView';
+import TeoricView from '../../../../components/Shared/TeoricView';
+import SelectView from '../../../../components/Shared/SelectView';
+import OptionView from '../../../../components/Shared/OptionView';
+import NestingView from '../../../../components/Shared/NestingView';
 
 export function ColocandoMargin({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução

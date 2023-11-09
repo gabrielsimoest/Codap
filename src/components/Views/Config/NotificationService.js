@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 import PushNotification from 'react-native-push-notification';
-import i18n from '../Translations/i18n/i18n';
+import i18n from '../../../Translations/i18n/i18n';
 
 class NotifService {
     constructor(onRegister, onNotification) {

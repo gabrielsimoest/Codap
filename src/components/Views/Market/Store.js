@@ -9,15 +9,15 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import HeaderShop from '../components/HeaderShop';
-import OpButton from '../Helpers/OpButton';
+import HeaderShop from '../../HeaderShop';
+import OpButton from '../../Shared/OpButton';
 import {useFocusEffect} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Iconis from 'react-native-vector-icons/Octicons';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../../Icons';
 import SQLite from 'react-native-sqlite-storage';
 import {useTheme} from '@react-navigation/native';
-import AText from '../Helpers/AText';
+import AText from '../../Shared/AText';
 import {useTranslation} from 'react-i18next';
 
 const size1 = 20;
@@ -168,7 +168,7 @@ export default function Store() {
           <Text style={[styles.Double, {color: colors.text}]}>{XpAtivo}</Text>
           <Image
             style={styles.xpImage}
-            source={require('../../assets/Dobro_XP.png')}
+            source={require('../../../../assets/Dobro_XP.png')}
           />
           <AText
             style={[styles.textL, {color: colors.text}]}
@@ -201,7 +201,7 @@ export default function Store() {
           </AText>
           <Image
             style={styles.chestImage}
-            source={require('../../assets/Bau_surpresa.png')}
+            source={require('../../../../assets/Bau_surpresa.png')}
           />
           <OpButton
             theme={'marketButton2'}
@@ -215,7 +215,7 @@ export default function Store() {
           </Text>
           <Image
             style={styles.timeImage}
-            source={require('../../assets/Time.png')}
+            source={require('../../../../assets/Time.png')}
           />
           <AText
             style={[styles.textL, {color: colors.text}]}
@@ -256,7 +256,7 @@ export default function Store() {
               </AText>
               <Image
                 style={styles.xpImageModal}
-                source={require('../../assets/Dobro_XP.png')}
+                source={require('../../../../assets/Dobro_XP.png')}
               />
               <AText
                 style={[styles.text, {color: colors.text}]}
@@ -291,7 +291,7 @@ export default function Store() {
               </AText>
               <Image
                 style={styles.chestImageModal}
-                source={require('../../assets/Bau_surpresa.png')}
+                source={require('../../../../assets/Bau_surpresa.png')}
               />
               <AText
                 style={[styles.text, {color: colors.text}]}
@@ -326,7 +326,7 @@ export default function Store() {
               </AText>
               <Image
                 style={styles.timeImageModal}
-                source={require('../../assets/Time.png')}
+                source={require('../../../../assets/Time.png')}
               />
               <AText
                 style={[styles.text, {color: colors.text}]}
@@ -362,7 +362,7 @@ export default function Store() {
               </AText>
               <Image
                 style={styles.xpImageModal}
-                source={require('../../assets/Dobro_XP.png')}
+                source={require('../../../../assets/Dobro_XP.png')}
               />
               <OpButton
                 theme={'modalButtonStore'}
@@ -393,7 +393,7 @@ export default function Store() {
               </AText>
               <Image
                 style={styles.timeImageModal}
-                source={require('../../assets/Time.png')}
+                source={require('../../../../assets/Time.png')}
               />
               <OpButton
                 theme={'modalButtonStore'}

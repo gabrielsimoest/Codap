@@ -9,7 +9,7 @@ import {
   Pressable,
   Text,
 } from 'react-native';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../Icons';
 import OpButton from './OpButton';
 import ASyntaxHighlighter from './ASyntaxHighlight';
 import {atomOneLight, atomOneDark} from 'react-syntax-highlighter/styles/hljs';

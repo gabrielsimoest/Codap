@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {StyleSheet} from 'react-native';
-import OptionView from '../../../Helpers/OptionView';
-import SelectView from '../../../Helpers/SelectView';
-import TextView from '../../../Helpers/TextView';
+import OptionView from '../../../components/Shared/OptionView';
+import SelectView from '../../../components/Shared/SelectView';
+import TextView from '../../../components/Shared/TextView';
 
 
 export function BasicPrat1_html({ navigation }) {

@@ -1,16 +1,16 @@
 import { TabNavigator } from './components/Layout/TabNavigator';
-import Login from './Login/Login';
-import Register from './Login/Register';
-import Perfil from './Users/Perfil';
+import Login from './components/Views/Login/Login';
+import Register from './components/Views/Login/Register';
+import Perfil from './components/Views/Users/Perfil';
 import * as imports from './imports'
 
 import ComponentTester from './Tests/ComponentTest';
 import TesteCode from './Tests/TesteCode';
-import TheoryView from './Helpers/TheoryView';
+import TheoryView from './components/Shared/TeoricView';
 import TestCarousel from './Tests/TestCarousel';
-import CongratsView from './Helpers/CongratsView';
-import OptionView from './Helpers/OptionView';
-import SorryView from './Helpers/SorryView';
+import CongratsView from './components/Shared/CongratsView';
+import OptionView from './components/Shared/OptionView';
+import SorryView from './components/Shared/SorryView';
 import Class from './Aulas/Class';
 
 export const DefaultScreens = [

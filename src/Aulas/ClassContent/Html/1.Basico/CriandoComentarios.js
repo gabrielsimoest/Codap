@@ -1,11 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../Helpers/TeoricView';
-import TheoryView from '../../../../Helpers/TheoryView';
-import OptionView from '../../../../Helpers/OptionView';
-import SelectView from '../../../../Helpers/SelectView';
-import TextView from '../../../../Helpers/TextView';
-import NestingView from '../../../../Helpers/NestingView';
+import TeoricView from '../../../../components/Shared/TeoricView';
+import TheoryView from '../../../../components/Shared/TheoryView';
+import OptionView from '../../../../components/Shared/OptionView';
+import SelectView from '../../../../components/Shared/SelectView';
+import TextView from '../../../../components/Shared/TextView';
+import NestingView from '../../../../components/Shared/NestingView';
 
 export function Comentario({ navigation }) {
     const { t, i18n } = useTranslation();

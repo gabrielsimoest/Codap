@@ -6,12 +6,12 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { Switch } from 'react-native-paper';
-import DefaultHeader from '../components/DefaultHeader';
-import Icon, { Icons } from '../components/Icons';
+import DefaultHeader from '../../DefaultHeader';
+import Icon, { Icons } from '../../Icons';
 import TranslateComponet from './TranslateComponent';
 import FontComponent from './FontComponent';
 import { useTranslation } from 'react-i18next';
-import AText from '../Helpers/AText';
+import AText from '../../Shared/AText';
 import ThemeComponent from './ThemeComponent';
 import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';

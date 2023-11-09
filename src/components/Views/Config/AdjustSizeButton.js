@@ -1,7 +1,7 @@
 import React, { Component, useContext } from "react";
 import { StyleSheet, View } from "react-native";
-import OpButton from "../Helpers/OpButton";
-import { AppContext } from '../common/Contexts/AppContext';
+import OpButton from "../../Shared/OpButton";
+import { AppContext } from '../../../common/Contexts/AppContext';
 
 class AdjustSizeButton extends Component {
 

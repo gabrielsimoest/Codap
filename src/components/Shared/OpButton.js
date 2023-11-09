@@ -3,7 +3,7 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
-import Icon, { Icons } from '../components/Icons';
+import Icon, { Icons } from '../Icons';
 import AText from './AText';
 import { useTheme } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';

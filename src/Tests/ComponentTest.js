@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import OpButton from '../Helpers/OpButton';
+import OpButton from '../components/Shared/OpButton';
 import {
     useNavigation,
     useTheme,
 } from '@react-navigation/native';
-import AText from '../Helpers/AText';
+import AText from '../components/Shared/AText';
 
 const TitleTextSize = 23;
 const textSize = 15;

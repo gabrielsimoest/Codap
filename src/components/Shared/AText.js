@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Text } from "react-native";
-import { AppContext } from '../common/Contexts/AppContext';
+import { AppContext } from '../../common/Contexts/AppContext';
 
 function AText(props) {
     const { textAppSize } = useContext(AppContext);

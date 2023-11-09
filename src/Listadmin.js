@@ -5,7 +5,7 @@ import {
     StyleSheet,
     TextInput
 } from 'react-native';
-import CustomButton from './Helpers/CustomButton';
+import CustomButton from './components/Shared/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 
 const db = SQLite.openDatabase(

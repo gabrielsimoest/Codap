@@ -7,10 +7,10 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
-import OpButton from '../../Helpers/OpButton';
+import OpButton from '../../components/Shared/OpButton';
 import { useFocusEffect, useNavigation, useTheme } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AText from '../../Helpers/AText';
+import AText from '../../components/Shared/AText';
 import { useTranslation } from 'react-i18next';
 
 const TitleTextSize = 23;

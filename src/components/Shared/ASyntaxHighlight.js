@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {changeCount} from '../ReduxRoot/Actions/counts';
+import {changeCount} from '../../ReduxRoot/Actions/counts';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 
 class ASyntaxHighlighter extends Component {

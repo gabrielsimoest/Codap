@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TheoryView from '../../../../Helpers/TheoryView';
-import OptionView from '../../../../Helpers/OptionView';
-import SelectView from '../../../../Helpers/SelectView';
-import TextView from '../../../../Helpers/TextView';
+import TheoryView from '../../../../components/Shared/TheoryView';
+import OptionView from '../../../../components/Shared/OptionView';
+import SelectView from '../../../../components/Shared/SelectView';
+import TextView from '../../../../components/Shared/TextView';
 
 export function H1h6({ navigation }) {
     const { t, i18n } = useTranslation();

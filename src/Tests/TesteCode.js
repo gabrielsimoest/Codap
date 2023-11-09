@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icon, {Icons} from '../components/Icons';
-import OpButton from '../Helpers/OpButton';
-import AText from '../Helpers/AText';
-import AHighlighter from '../Helpers/AHighlighter';
+import OpButton from '../components/Shared/OpButton';
+import AText from '../components/Shared/AText';
+import AHighlighter from '../components/Shared/AHighlighter';
 import CodeEditor, {
   CodeEditorSyntaxStyles,
 } from '@rivascva/react-native-code-editor';

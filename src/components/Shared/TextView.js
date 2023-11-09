@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {TextInput} from 'react-native-paper';
-import Icon, {Icons} from '../components/Icons';
+import Icon, {Icons} from '../Icons';
 import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TheoryView from '../../../../Helpers/TheoryView';
-import OptionView from '../../../../Helpers/OptionView';
-import SelectView from '../../../../Helpers/SelectView';
+import TheoryView from '../../../../components/Shared/TheoryView';
+import OptionView from '../../../../components/Shared/OptionView';
+import SelectView from '../../../../components/Shared/SelectView';
 
 export function ImgTeoric({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução

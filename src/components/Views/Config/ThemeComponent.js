@@ -1,12 +1,11 @@
 import React, { useState, useCallback, useContext } from "react";
 import { StyleSheet, TouchableOpacity, Button } from "react-native";
-import '../Translations/i18n/i18n';
+import '../../../Translations/i18n/i18n';
 import { useTranslation } from 'react-i18next';
 import { Switch } from 'react-native-paper';
-import AText from "../Helpers/AText";
+import AText from "../../Shared/AText";
 import { useTheme } from '@react-navigation/native';
-import { CustomDarkMode, CustomLightMode } from '../common/Themes/DefaultThemes';
-import { AppContext } from "../common/Contexts/AppContext";
+import { AppContext } from "../../../common/Contexts/AppContext";
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
@@ -15,8 +14,8 @@ const ThemeComponent = () => {
     const { toggleTheme } = useContext(AppContext);
 
     const ChangeTheme = () => {
-        toggleTheme();
         setIsSwitchOn(!isSwitchOn);
+        toggleTheme();
     };
 
     return (

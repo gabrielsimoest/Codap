@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import OptionView from '../../../../Helpers/OptionView';
-import SelectView from '../../../../Helpers/SelectView';
-import NestingView from '../../../../Helpers/NestingView';
+import OptionView from '../../../../components/Shared/OptionView';
+import SelectView from '../../../../components/Shared/SelectView';
+import NestingView from '../../../../components/Shared/NestingView';
 
 export function CriandoDados({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução

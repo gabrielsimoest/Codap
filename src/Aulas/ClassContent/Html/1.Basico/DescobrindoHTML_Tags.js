@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import OptionView from '../../../../Helpers/OptionView';
-import TheoryView from '../../../../Helpers/TheoryView';
+import OptionView from '../../../../components/Shared/OptionView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Estrutura({ navigation }) {
   const { t, i18n } = useTranslation();

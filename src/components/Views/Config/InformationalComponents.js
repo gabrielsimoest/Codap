@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Pressable, View, ScrollView } from "react-native";
-import OpButton from "../Helpers/OpButton";
-import Icon, { Icons } from "../components/Icons";
+import OpButton from "../../Shared/OpButton";
+import Icon, { Icons } from "../../Icons";
 import { useTranslation } from 'react-i18next';
-import AText from "../Helpers/AText";
+import AText from "../../Shared/AText";
 import { useNavigation, useTheme } from "@react-navigation/native";
 
 

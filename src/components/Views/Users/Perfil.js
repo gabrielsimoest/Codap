@@ -6,11 +6,11 @@ import {
     ScrollView,
 } from 'react-native';
 import SQLite from 'react-native-sqlite-storage';
-import HeaderUser from '../components/HeaderUser';
-import OpButton from '../Helpers/OpButton';
-import Icon, { Icons } from '../components/Icons';
+import HeaderUser from '../../HeaderUser';
+import OpButton from '../../Shared/OpButton';
+import Icon, { Icons } from '../../Icons';
 import { useFocusEffect, useTheme } from '@react-navigation/native';
-import AText from '../Helpers/AText';
+import AText from '../../Shared/AText';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-native-paper';
