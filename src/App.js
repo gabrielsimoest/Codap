@@ -4,12 +4,13 @@ import {
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import React, { useEffect, useRef, useState, useContext } from 'react';
+import React, { useEffect, useRef, useState, useContext, createContext } from 'react';
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon, { Icons } from './components/Icons';
 import Colors from './constants/Colors';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CustomDarkMode, CustomLightMode } from './common/Themes/DefaultThemes';
 import { AppContext } from './common/Contexts/AppContext';
 import { useTranslation } from 'react-i18next';
 //COMPONENTES
@@ -428,10 +429,11 @@ const TabButton = props => {
   );
 };
 
+
 //Função bottom tab
 function HomeTabs() {
   const { colors } = useTheme();
-
+  
   return (
     <Tab.Navigator
       screenOptions={{
@@ -457,9 +459,9 @@ function HomeTabs() {
               tabBarShowLabel: false,
               tabBarButton: props => <TabButton {...props} item={item} />,
             }}
-          />
-        );
-      })}
+            />
+            );
+          })}
     </Tab.Navigator>
   );
 }
@@ -484,7 +486,7 @@ const forFade = ({ current }) => ({
 function App() {
   //Variavel para seleção de tema
   const { t, i18n } = useTranslation();
-  const { theme, toggleTheme } = useContext(AppContext);
+  const { theme } = useContext(AppContext);
 
   React.useEffect(() => {
     //Aplicar idioma
@@ -500,6 +502,9 @@ function App() {
     if (Platform.OS === 'android') SplashScreen.hide();
   }, [])
 
+  function setTextAppSize(n){
+    console.log('setTextAppSize', n)
+  }
 
   return (
       <NavigationContainer
@@ -1662,7 +1667,7 @@ function App() {
             name="Tester"
             component={ComponentTester}
             options={{ cardStyleInterpolator: forFade }}
-          />
+          /> 
         </Stack.Navigator>
       </NavigationContainer>
   );

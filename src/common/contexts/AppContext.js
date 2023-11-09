@@ -1,25 +1,17 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import { CustomDarkMode, CustomLightMode } from '../Themes/DefaultThemes';
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-
     const [theme, setTheme] = useState(CustomLightMode);
-    const [textAppSize, setTextAppSize] = useState(20);
 
-    const ToggleTheme = (isSwitchOn) => {
-        const newSwitchState = !isSwitchOn; // Calcula o novo estado do switch
-    
-        // Use um operador ternário para alternar entre os temas com base no tema atual
-        const newTheme = theme === CustomLightMode ? CustomDarkMode : CustomLightMode;
-    
-        setTheme(newTheme); // Define o novo tema
-        return newSwitchState; // Atualiza o estado do switch
+    const toggleTheme = () => {
+        setTheme(oldTheme => (oldTheme === CustomDarkMode ? CustomLightMode : CustomDarkMode));
     };
 
     return (
-        <AppContext.Provider value={{ theme, ToggleTheme, textAppSize, setTextAppSize }}>
+        <AppContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </AppContext.Provider>
     );

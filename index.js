@@ -4,9 +4,9 @@ import { AppProvider } from './src/common/Contexts/AppContext';
 import App from './src/App';
 
 const AppWithContext = () => (
-    <AppProvider>
-        <App />
-    </AppProvider>
+        <AppProvider>
+                <App />
+        </AppProvider>
 )
 
 

@@ -1,12 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../Helpers/TeoricView';
 import OptionView from '../../../../Helpers/OptionView';
 import SelectView from '../../../../Helpers/SelectView';
 import NestingView from '../../../../Helpers/NestingView';
-
-//Constante de tradução, usar {t("CHAVE")} para tradução
-const { t, i18n } = useTranslation();
 
 export function CriandoDados({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
