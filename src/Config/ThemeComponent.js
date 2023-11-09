@@ -10,9 +10,9 @@ import { AppContext } from "../common/Contexts/AppContext";
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [isSwitchOn, setIsSwitchOn] = useState(false);
-    const { theme, toggleTheme } = useContext(AppContext);
+    const { toggleTheme } = useContext(AppContext);
 
     const ChangeTheme = () => {
         toggleTheme();
