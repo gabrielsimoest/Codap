@@ -6,22 +6,28 @@ import { Switch } from 'react-native-paper';
 import AText from "../../Shared/AText";
 import { useTheme } from '@react-navigation/native';
 import { AppContext } from "../../../common/Contexts/AppContext";
+import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
 
 const ThemeComponent = () => {
     const { colors } = useTheme();
     const { t } = useTranslation();
     const [isSwitchOn, setIsSwitchOn] = useState(false);
-    const { toggleTheme } = useContext(AppContext);
+    const { theme, toggleTheme } = useContext(AppContext);
 
     const ChangeTheme = () => {
         setIsSwitchOn(!isSwitchOn);
         toggleTheme();
     };
 
+    React.useEffect(() => {
+        if (theme == CustomDarkMode)
+            setIsSwitchOn(!isSwitchOn);
+    }, [])
+
     return (
         <TouchableOpacity style={[styles.button, { backgroundColor: colors.background }]} onPress={ChangeTheme}>
             <AText style={[styles.text, { color: colors.text }]} defaultSize={20}>{t("theme")}</AText>
-            <Switch style={{ marginTop: 5 }} value={isSwitchOn}color={'#5469D3'} onChange={ChangeTheme} />
+            <Switch style={{ marginTop: 5 }} value={isSwitchOn} color={'#5469D3'} onChange={ChangeTheme} />
         </TouchableOpacity>
     );
 };

@@ -29,8 +29,21 @@ export default function Login({ navigation }) {
     const [senha, setSenha] = useState('');
     const [email, setEmail] = useState('');
 
+    const getUserFromStorage = async () => {
+        try {
+          const IdUserOnStorage = await AsyncStorage.getItem('IdUser');
+    
+          if (IdUserOnStorage != 0)
+            navigation.navigate('Home', { screen: 'Aulas' });
+    
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
     useEffect(() => {
-        createTable()
+        getUserFromStorage();
+        createTable();
     }, []);
 
     const createTable = () => {

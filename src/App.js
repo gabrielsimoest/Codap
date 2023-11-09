@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppContext } from './common/Contexts/AppContext';
 import { useTranslation } from 'react-i18next';
 import { LogBox } from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
 import { DefaultScreens, ClassesScreens } from './routes'
 
 const Stack = createStackNavigator();
@@ -26,25 +25,38 @@ const forFade = ({ current }) => ({
 //APP
 function App() {
   //Variavel para seleção de tema
-  const { theme } = useContext(AppContext);
-
+  const { theme, toggleTheme } = useContext(AppContext);
   //TODO: Concertar Tradução
   //Variavel para tradução
   // const { t, i18n } = useTranslation();
 
-  // React.useEffect(() => {
-  //   //Aplicar idioma
-  //   AsyncStorage.getItem('@language_key')
-  //     .then(value => {
-  //       if (value !== null) {
-  //         i18n.changeLanguage(value);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error retrieving language:', error);
-  //     });
-  //   if (Platform.OS === 'android') SplashScreen.hide();
-  // }, [])
+  const getThemeFromStorage = async () => {
+    try {
+      const themeOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentTheme"))
+
+      if (themeOnStorage == true)
+        toggleTheme();
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getThemeFromStorage();
+    
+    //Aplicar idioma
+    // AsyncStorage.getItem('@language_key')
+    //   .then(value => {
+    //     if (value !== null) {
+    //       i18n.changeLanguage(value);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error('Error retrieving language:', error);
+    //   });
+    // if (Platform.OS === 'android') SplashScreen.hide();
+  }, [])
 
   const DefaultstackScreens = DefaultScreens.map((screen) => (
     <Stack.Screen
