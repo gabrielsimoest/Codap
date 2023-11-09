@@ -100,6 +100,11 @@ export default function Perfil({navigation}) {
             }
         }
     }
+
+    const logout = async () => {
+        await AsyncStorage.setItem('IdUser', JSON.stringify(0));
+        navigation.navigate('Login')
+    }
     
     return (
         <View style={[styles.container, {backgroundColor: colors.background}]}>
@@ -129,7 +134,7 @@ export default function Perfil({navigation}) {
                 <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => setVisibleModal2(true)} />
                 {/* <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} /> */}
                 <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => console.log("conquista")} />
-                <OpButton theme='primaryButton' title={t("exit")} onPressFunction={() => navigation.navigate('Login')}
+                <OpButton theme='primaryButton' title={t("exit")} onPressFunction={logout}
                     iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />
             </ScrollView>
 

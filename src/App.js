@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppContext } from './common/Contexts/AppContext';
+import SplashScreen from 'react-native-splash-screen';
 import { useTranslation } from 'react-i18next';
 import { LogBox } from 'react-native';
 import { DefaultScreens, ClassesScreens } from './routes'
@@ -26,7 +27,7 @@ const forFade = ({ current }) => ({
 function App() {
   //Variavel para seleção de tema
   const { theme, toggleTheme } = useContext(AppContext);
-  //TODO: Concertar Tradução
+  //TODO: Consertar Tradução
   //Variavel para tradução
   // const { t, i18n } = useTranslation();
 
@@ -43,6 +44,8 @@ function App() {
   };
 
   React.useEffect(() => {
+    if (Platform.OS === 'android') SplashScreen.hide();
+
     getThemeFromStorage();
     
     //Aplicar idioma
@@ -55,7 +58,6 @@ function App() {
     //   .catch(error => {
     //     console.error('Error retrieving language:', error);
     //   });
-    // if (Platform.OS === 'android') SplashScreen.hide();
   }, [])
 
   const DefaultstackScreens = DefaultScreens.map((screen) => (
