@@ -1,21 +1,14 @@
-/**
- * @format
- */
-
-import {AppRegistry} from 'react-native';
+import { name as appName } from './app.json';
+import { AppRegistry } from 'react-native';
+import { AppProvider } from './src/common/Contexts/AppContext';
 import App from './src/App';
-import React from 'react';
-import {name as appName} from './app.json';
-import { Provider } from 'react-redux';
 
-import configureStore from './src/ReduxRoot/Store/configureStore';
-
-const store = configureStore()
-
-const RNRedux = () => (
-  <Provider store = { store }>
-    <App />
-  </Provider>
+const AppWithContext = () => (
+        <AppProvider>
+                <App />
+        </AppProvider>
 )
 
-AppRegistry.registerComponent(appName, () => RNRedux);
+
+AppRegistry.registerComponent(appName, () => AppWithContext);
+

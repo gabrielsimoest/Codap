@@ -1,29 +1,34 @@
-import React, { Component } from "react";
-import { StyleSheet, View} from "react-native";
+import React, { Component, useContext } from "react";
+import { StyleSheet, View } from "react-native";
 import OpButton from "../Helpers/OpButton";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changeCount } from '../ReduxRoot/Actions/counts'
+import { AppContext } from '../common/Contexts/AppContext';
 
 class AdjustSizeButton extends Component {
+
+
   decrementCount() {
+    const { setTextAppSize } = useContext(AppContext);
     let { count, actions } = this.props;
+
     if (count !== 0) {
       count--;
     } else {
       count = count;
     }
-    actions.changeCount(count);
+    setTextAppSize(count);
   }
+
   incrementCount() {
+    const { setTextAppSize } = useContext(AppContext);
     let { count, actions } = this.props;
     if (count !== 5) {
       count++;
     } else {
       count = count;
     }
-    actions.changeCount(count);
+    setTextAppSize(count);
   }
+
   render() {
     //const { count } = this.props;
     return (
@@ -45,16 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => ({
-  count: state.count.count,
-});
-
-const ActionCreators = Object.assign(
-  {},
-  { changeCount },
-);
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(ActionCreators, dispatch),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AdjustSizeButton)
+export default AdjustSizeButton

@@ -1,27 +1,13 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import { Text } from "react-native";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changeCount } from '../ReduxRoot/Actions/counts'
+import { AppContext } from '../common/Contexts/AppContext';
 
-class AText extends Component {
-    render() {
-        const { font, defaultSize } = this.props;
-        return (
-            <Text style={[this.props.style, { fontSize: font + defaultSize }]}>{this.props.children}</Text>
-        );
-    }
-};
+function AText(props) {
+    const { textAppSize } = useContext(AppContext);
 
-const mapStateToProps = state => ({
-    font: state.count.count,
-});
-const ActionCreators = Object.assign(
-    {},
-    { changeCount },
-);
-const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(ActionCreators, dispatch),
-});
+    return (
+        <Text style={[props.style, { fontSize: textAppSize }]}>{props.children}</Text>
+    );
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AText)
+export default AText;
