@@ -1,46 +1,38 @@
-import React, { Component, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import OpButton from "../../Shared/OpButton";
 import { AppContext } from '../../../common/Contexts/AppContext';
 
-class AdjustSizeButton extends Component {
+const AdjustSizeButton = () => {
+  const { FontSize, toggleFont } = useContext(AppContext);
 
+  const decrementCount = () => {
+    let count  = FontSize;
 
-  decrementCount() {
-    const { setTextAppSize } = useContext(AppContext);
-    let { count, actions } = this.props;
-
-    if (count !== 0) {
+    if (count !== 15) {
       count--;
-    } else {
-      count = count;
     }
-    setTextAppSize(count);
-  }
 
-  incrementCount() {
-    const { setTextAppSize } = useContext(AppContext);
-    let { count, actions } = this.props;
-    if (count !== 5) {
+    toggleFont(count);
+  };
+
+  const incrementCount = () => {
+    let count = FontSize;
+    
+    if (count !== 25) {
       count++;
-    } else {
-      count = count;
     }
-    setTextAppSize(count);
-  }
 
-  render() {
-    //const { count } = this.props;
-    return (
-      <View styles={styles.container}>
-        <OpButton theme={"settingsButton"} title="Aumentar fonte" onPressFunction={() => this.incrementCount()} />
-        <OpButton theme={"settingsButton"} title="Diminuir fonte" onPressFunction={() => this.decrementCount()} />
-      </View>
-    );
-  }
+    toggleFont(count);
+  };
+
+  return (
+    <View styles={styles.container}>
+      <OpButton theme={"settingsButton"} title="Aumentar fonte" onPressFunction={incrementCount} />
+      <OpButton theme={"settingsButton"} title="Diminuir fonte" onPressFunction={decrementCount} />
+    </View>
+  );
 };
-
-// <Text style={{ fontSize: 20 + count, color: "white" }}>{count}</Text>
 
 const styles = StyleSheet.create({
   container: {
@@ -50,4 +42,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AdjustSizeButton
+export default AdjustSizeButton;

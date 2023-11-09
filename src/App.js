@@ -26,10 +26,24 @@ const forFade = ({ current }) => ({
 //APP
 function App() {
   //Variavel para seleção de tema
-  const { theme, toggleTheme } = useContext(AppContext);
+  const { theme, toggleTheme, FontSize, toggleFont } = useContext(AppContext);
   //TODO: Consertar Tradução
   //Variavel para tradução
   // const { t, i18n } = useTranslation();
+
+  const getFontFromStorage = async () => {
+    try {
+      const FontOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentFontSize"))
+
+      console.log(FontOnStorage)
+
+      if (FontSize != FontOnStorage)
+        toggleFont(FontOnStorage);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getThemeFromStorage = async () => {
     try {
@@ -47,7 +61,8 @@ function App() {
     if (Platform.OS === 'android') SplashScreen.hide();
 
     getThemeFromStorage();
-    
+    getFontFromStorage();
+
     //Aplicar idioma
     // AsyncStorage.getItem('@language_key')
     //   .then(value => {
