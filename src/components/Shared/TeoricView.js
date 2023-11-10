@@ -37,7 +37,7 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
             setImgadd2('figure')
         if (img != 'none')
             setImgadd3('figure')
-    }, [])
+    }, [adicionaltxt, adicionaltxt2, opt_img, opt_img2, img, adicionaltxt_end]);
 
     return (
         <View style={[styles.container, { backgroundColor: colors.card }]}>

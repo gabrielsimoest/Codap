@@ -18,6 +18,9 @@ import AHighlighter from './AHighlighter';
 import {useSelector} from 'react-redux';
 import WebView from 'react-native-webview';
 import { TutorialTheory } from './Tutorials';
+import { useContext } from 'react';
+import { AppContext } from '../../common/Contexts/AppContext';
+import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
 
 const textSize = 20;
 
@@ -51,10 +54,12 @@ export default function TheoryView({
 
   const {colors} = useTheme(); //Variavel de cor do tema
 
-  //Definir tema usando currentTheme (padrão true)
+  const { theme, toggleTheme } = useContext(AppContext);
+
+  /* //Definir tema usando currentTheme (padrão true)
   let currentTheme = useSelector(state => {
     return state.myDarkMode;
-  });
+  }); */
 
   //Troca entre as abas do seletor
   const [isIndexVisible, setIndexVisible] = useState(true);
@@ -161,12 +166,12 @@ export default function TheoryView({
           {OnlyCodeVisible ? (
             <View
               style={[
-                currentTheme ? styles.codeArea : styles.codeAreaLight,
+                theme == CustomDarkMode ? styles.codeArea : styles.codeAreaLight,
                 {width: '100%', marginVertical: 20},
               ]}>
               <ASyntaxHighlighter
                 language={codeLanguage}
-                style={currentTheme ? atomOneDark : atomOneLight}
+                style={theme == CustomDarkMode ? atomOneDark : atomOneLight}
                 code={code}
               />
             </View>
@@ -176,10 +181,10 @@ export default function TheoryView({
                 <Pressable
                   style={
                     isIndexVisible
-                      ? currentTheme
+                      ? theme == CustomDarkMode
                         ? styles.buttonIndex
                         : styles.LightButtonIndex
-                      : currentTheme
+                      : theme == CustomDarkMode
                       ? styles.buttonIndex_deselected
                       : styles.LightButtonIndex_deselected
                   }
@@ -195,10 +200,10 @@ export default function TheoryView({
                 <Pressable
                   style={
                     isIndexVisible
-                      ? currentTheme
+                      ? theme == CustomDarkMode
                         ? styles.buttonWeb_deselected
                         : styles.LightButtonWeb_deselected
-                      : currentTheme
+                      : theme == CustomDarkMode
                       ? styles.buttonWeb
                       : styles.LightButtonWeb
                   }
@@ -209,13 +214,13 @@ export default function TheoryView({
                 </Pressable>
               </View>
               <View
-                style={currentTheme ? styles.codeArea : styles.codeAreaLight}>
+                style={theme == CustomDarkMode ? styles.codeArea : styles.codeAreaLight}>
                 {/*Start code view*/}
                 {isIndexVisible ? (
                   <View style={{width: '100%'}} onLayout={onHighlighterLayout}>
                     <ASyntaxHighlighter
                       language={codeLanguage}
-                      style={currentTheme ? atomOneDark : atomOneLight}
+                      style={theme == CustomDarkMode ? atomOneDark : atomOneLight}
                       code={code}
                     />
                   </View>
@@ -269,13 +274,14 @@ const styles = StyleSheet.create({
     top: -2,
     height: 8,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#273f55',
   },
   text: {
     fontSize: 18,
     fontFamily: 'Roboto',
     marginLeft: '1%',
     marginRight: '1%',
+    textAlign: "justify"
   },
   textButton: {
     fontSize: 18,

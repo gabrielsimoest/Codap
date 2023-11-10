@@ -1,15 +1,13 @@
+import React, { useContext } from "react";
 import HighlightText from "@sanar/react-native-highlight-text";
-import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { changeCount } from '../../ReduxRoot/Actions/counts'
+import { AppContext } from '../../common/Contexts/AppContext';
 
-class AHighlighter extends Component {
+/* class AHighlighter extends Component {
     render() {
-        const { font, defaultSize=20, highlight, wordHighlight, text, style } = this.props;
+        const { font, defaultSize = 20, highlight, wordHighlight, text, style } = this.props;
         return (
             <HighlightText
-                style={[ style ,{ fontSize: font + defaultSize }]}
+                style={[style, { fontSize: font + defaultSize }]}
                 highlightStyle={highlight}
                 searchWords={wordHighlight}
                 textToHighlight={text}
@@ -29,5 +27,19 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(ActionCreators, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AHighlighter)
+export default connect(mapStateToProps, mapDispatchToProps)(AHighlighter) */
 
+function AHighlighter(props, {defaultSize = 20}) {
+    const { FontSize } = useContext(AppContext);
+
+    return (
+        <HighlightText
+            style={[props.style, { fontSize: FontSize + defaultSize }]}
+            highlightStyle={props.highlight}
+            searchWords={props.wordHighlight}
+            textToHighlight={props.text}
+        />
+    );
+}
+
+export default AHighlighter;

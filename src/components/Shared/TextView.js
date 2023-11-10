@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Keyboard,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {TextInput} from 'react-native-paper';
@@ -23,6 +24,8 @@ import { TutorialText } from './Tutorials';
 
 const textSize = 23;
 const optSize = 20;
+
+const windowHeight = Dimensions.get('window').height;
 
 export default function TextView({
   navigation,
@@ -58,7 +61,7 @@ export default function TextView({
 
   useEffect(() => {
     if (adicionaltxt != 'none') setTextadd('text');
-  }, []);
+  }, [adicionaltxt]);
 
   const Verificar = () => {
     setTEXTO(InputText);
@@ -201,7 +204,9 @@ const styles = StyleSheet.create({
     zIndex: 99,
     padding: 20,
     justifyContent: 'center',
-    marginTop: '124%',
+    position: "absolute",
+    width: "100%",
+    top: windowHeight * (80/100),
     borderWidth: 1,
     borderColor: 'rgba(0,0,0, 0.2)',
     backgroundColor: '#0E151C',
@@ -229,7 +234,7 @@ const styles = StyleSheet.create({
     top: -2,
     height: 8,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#273f55',
   },
   txtarea: {
     backgroundColor: '#141f29',

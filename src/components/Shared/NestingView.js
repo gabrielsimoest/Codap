@@ -10,6 +10,7 @@ import {
   StyleSheet,
   Keyboard,
   ScrollView,
+  Dimensions,
 } from 'react-native';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import SaveClass from './SaveClass';
@@ -22,6 +23,8 @@ import AHighlighter from './AHighlighter';
 
 const textSize = 23;
 const optSize = 20;
+
+const windowHeight = Dimensions.get('window').height;
 
 export default function NestingView({
   navigation,
@@ -96,7 +99,7 @@ export default function NestingView({
         setInput2('input3');
       }
     }
-  }, []);
+  }, [adicionaltxt, layer, qtdop]);
 
   const Verificar = () => {
     setTEXTO(InputText);
@@ -306,7 +309,9 @@ const styles = StyleSheet.create({
     zIndex: 99,
     padding: 20,
     justifyContent: 'center',
-    marginTop: '124%',
+    position: "absolute",
+    width: "100%",
+    top: windowHeight * (80/100),
     borderWidth: 1,
     borderColor: 'rgba(0,0,0, 0.2)',
     backgroundColor: '#0E151C',

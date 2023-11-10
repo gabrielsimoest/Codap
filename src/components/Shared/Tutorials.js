@@ -113,7 +113,7 @@ export const TutorialTheory = ({ visible, setModalVisible }) => {
                 </AText>
                 <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
-                {t(item.text)}
+                  {t(item.text)}
                 </AText>
               </View>
             ))}
@@ -234,7 +234,7 @@ export const TutorialOption = ({ visible, setModalVisible }) => {
                 </AText>
                 <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
-                {t(item.text)}
+                  {t(item.text)}
                 </AText>
               </View>
             ))}
@@ -349,7 +349,7 @@ export const TutorialText = ({ visible, setModalVisible }) => {
                 </AText>
                 <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
-                {t(item.text)}
+                  {t(item.text)}
                 </AText>
               </View>
             ))}
@@ -470,7 +470,7 @@ export const TutorialSelect = ({ visible, setModalVisible }) => {
                 </AText>
                 <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
-                {t(item.text)}
+                  {t(item.text)}
                 </AText>
               </View>
             ))}

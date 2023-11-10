@@ -6,7 +6,8 @@ import * as imports from './imports'
 
 import ComponentTester from './Tests/ComponentTest';
 import TesteCode from './Tests/TesteCode';
-import TheoryView from './components/Shared/TeoricView';
+import NewLoginTest from './Tests/NewLoginTest';
+import NewRegisterTest from './Tests/NewRegisterTest';
 import TestCarousel from './Tests/TestCarousel';
 import CongratsView from './components/Shared/CongratsView';
 import OptionView from './components/Shared/OptionView';
@@ -25,10 +26,11 @@ export const ClassesScreens = [
     { name: "SorryView", component: SorryView },
     { name: "OptionView", component: OptionView },
     { name: "Css", component: Class },
-    { name: "TestCode", component: TesteCode },
-    { name: "TheoryView", component: TheoryView },
-    { name: "TestCarousel", component: TestCarousel },
     { name: "Tester", component: ComponentTester },
+    { name: "TestCode", component: TesteCode },
+    { name: "TestLogin", component: NewLoginTest },
+    { name: "TestRegister", component: NewRegisterTest },
+    { name: "TestCarousel", component: TestCarousel },
 
     //FROM IMPORTS
     { name: "Basic1_html", component: imports.Basic1_html },

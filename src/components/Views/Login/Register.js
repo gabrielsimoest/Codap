@@ -14,6 +14,12 @@ const validator = require('validator');
 import CustomButton from '../../Shared/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AText from '../../Shared/AText';
+import CustomAlert from '../../Shared/CustomAlert';
+import { AppContext } from '../../../common/Contexts/AppContext';
+import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
+import { useTheme } from '@react-navigation/native';
+import { useContext } from 'react';
 
 const db = SQLite.openDatabase(
     {
@@ -26,9 +32,18 @@ const db = SQLite.openDatabase(
 
 export default function Login({ navigation }) {
 
+    const { theme } = useContext(AppContext);
+    const { colors } = useTheme(); //Variavel de cor do tema
+
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [alertTitle, setAlertTitle] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
     const [name, setName] = useState('');
     const [senha, setSenha] = useState('');
     const [email, setEmail] = useState('');
+    const [passwordMatch, setPasswordMatch] = useState(true);
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     useEffect(() => {
         createTable();
@@ -56,9 +71,13 @@ export default function Login({ navigation }) {
 
     const setData = async () => {
         if (name.length == 0 || senha.length == 0 || email.length == 0) {
-            Alert.alert('Aviso!', 'Por favor insira os dados.')
+            setAlertTitle('Aviso!');
+            setAlertMessage('Por favor insira os dados.');
+            setAlertVisible(true);
         } else if (validator.isEmail(email) == false) {
-            Alert.alert('Aviso!', 'Insira um Email valido.')
+            setAlertTitle('Aviso!');
+            setAlertMessage('Insira um Email valido.');
+            setAlertVisible(true);
         }
         else {
             try {
@@ -68,7 +87,9 @@ export default function Login({ navigation }) {
                         [name, senha, email, 0, 0, 0, 'aulas:']
                     );
                 })
-                Alert.alert('Aviso!', 'Cadastro Realizado.')
+                setAlertTitle('Sucesso!');
+                setAlertMessage('Cadastro Realizado.');
+                setAlertVisible(true);
                 navigation.navigate('Login');
             } catch (error) {
                 console.log(error);
@@ -76,63 +97,121 @@ export default function Login({ navigation }) {
         }
     }
 
+    const onChangePassword = (value) => {
+        setPassword(value);
+    }
 
+    const onChangeConfirmPassword = (value) => {
+        setConfirmPassword(value);
+        if (value != password) {
+            setPasswordMatch(false)
+        } else {
+            setPasswordMatch(true)
+            setSenha(value)
+        }
+    }
+
+    const register = () => {
+        if (!passwordMatch) {
+            setAlertTitle('Aviso!');
+            setAlertMessage('A senha de confirmação não corresponde à senha original. Por favor, verifique e tente novamente.');
+            setAlertVisible(true);
+        } else {
+            setData()
+        }
+    }
 
     const onPressHandler = () => {
         navigation.navigate('Login')
     }
 
     return (
-        <ImageBackground source={require('../../../../assets/background.jpg')} resizeMode="cover" style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme == CustomDarkMode ? '#0b1016' : '#b2b1b1' }]}>
             <TouchableWithoutFeedback
                 onPress={Keyboard.dismiss} accessible={false}
             >
-                <View style={styles.box}>
-                    <View style={styles.header}>
-                        <Image style={styles.tinyLogo} source={require('../../../../assets/code.png')} />
-                        <Text style={styles.title}>Codap</Text>
-                    </View>
-                    <View style={styles.inputs}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Nome"
-                            onChangeText={(value) => setName(value)}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Email"
-                            onChangeText={(value) => setEmail(value)}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Senha"
-                            onChangeText={(value) => setSenha(value)}
-                            secureTextEntry={true}
-                        />
-                        <CustomButton
-                            title='Registrar'
-                            color="#7977FD"
-                            onPressFunction={setData}
-                        />
-                        <TouchableOpacity onPress={onPressHandler}><Text style={styles.register}>Clique aqui voltar ao Login</Text></TouchableOpacity>
+                <View style={styles.shade}>
+                    <View style={[styles.box, , { backgroundColor: theme == CustomDarkMode ? "#141f29" : '#f2f2f2' }]}>
+                        <View style={styles.header}>
+                            <Image style={styles.tinyLogo} source={require('../../../../assets/code.png')} />
+                            <Text style={styles.title}>Codap</Text>
+                        </View>
+                        <View>
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
+                                placeholder="Nome"
+                                placeholderTextColor={"#7977FD"}
+                                onChangeText={(value) => setName(value)}
+                            />
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
+                                placeholder="Email"
+                                placeholderTextColor={"#7977FD"}
+                                onChangeText={(value) => setEmail(value)}
+                            />
+                            {/* <AText defaultSize={20} style={styles.text}>Senha</AText> */}
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
+                                placeholder="Senha"
+                                placeholderTextColor={"#7977FD"}
+                                onChangeText={(value) => onChangePassword(value)}
+                                secureTextEntry={true}
+                            />
+                            <AText defaultSize={20} style={[styles.text, { color: passwordMatch ? colors.text : "red" }]}>Confirmar senha</AText>
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[
+                                    styles.input,
+                                    {
+                                        backgroundColor: colors.background, borderColor: passwordMatch ? "#7977FD" : "red",
+                                        color: passwordMatch ? colors.text : "red"
+                                    }
+                                ]}
+                                placeholder={passwordMatch ? "Senha" : "Senha incorreta"}
+                                placeholderTextColor={passwordMatch ? "#7977FD" : "red"}
+                                onChangeText={(value) => onChangeConfirmPassword(value)}
+                                secureTextEntry={true}
+                                value={confirmPassword}
+                            />
+                            <CustomButton
+                                title='Registrar'
+                                color="#7977FD"
+                                onPressFunction={register}
+                            />
+                            {/* <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} /> */}
+                            <TouchableOpacity onPress={onPressHandler} style={{ alignItems: "center" }}>
+                                <Text style={[styles.register, { color: colors.text }]}>Clique aqui para retornar ao login</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
+                <CustomAlert
+                    visible={alertVisible}
+                    onDismiss={() => setAlertVisible(false)}
+                    title={alertTitle}
+                    message={alertMessage}
+                    buttonText="OK"
+                />
             </TouchableWithoutFeedback>
-        </ImageBackground>
+        </View>
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#0b1016',
         alignItems: 'center',
         justifyContent: 'center',
     },
     register: {
         color: 'white',
-        marginLeft: 55,
-        marginTop: 5,
+        textAlign: 'center',
+        marginTop: 30,
         fontSize: 17,
     },
     button: {
@@ -149,14 +228,28 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     input: {
-        backgroundColor: "#7977FD",
+        borderColor: "#7977FD",
+        backgroundColor: "#141f29",
         borderRadius: 10,
         height: 50,
         color: '#fff',
         width: 300,
         margin: 12,
-        borderWidth: 1,
+        borderWidth: 1.5,
         padding: 10,
+        fontSize: 20
+    },
+    inputError: {
+        borderColor: "red",
+        backgroundColor: "#141f29",
+        borderRadius: 10,
+        height: 50,
+        color: 'red',
+        width: 300,
+        margin: 12,
+        borderWidth: 1.5,
+        padding: 10,
+        fontSize: 20
     },
     header: {
         marginTop: 20,
@@ -166,21 +259,38 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     tinyLogo: {
-        width: 60,
-        height: 60,
+        width: 70,
+        height: 70,
     },
     title: {
         marginLeft: 10,
         marginTop: 3,
-        fontSize: 37,
+        fontSize: 50,
         fontWeight: 'bold',
         color: "#7977FD"
     },
     box: {
-        backgroundColor: "rgba(10, 10, 10, 0.7)",
-        borderRadius: 20,
-        height: 500,
+        backgroundColor: "#141f29",
+        borderRadius: 25,
+        height: 710,
         width: 370,
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 2,
+    },
+    shade: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        borderRadius: 25,
+        height: 713,
+        width: 373,
+    },
+    image: {
+        height: 250,
+        width: 150,
+        left: 80,
+    },
+    text: {
+        color: "white",
+        left: "4%",
+    },
 })

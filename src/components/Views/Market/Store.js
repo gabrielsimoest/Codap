@@ -62,7 +62,7 @@ export default function Store() {
   useEffect(() => {
     if (XpDoubleBool == '0' || XpDoubleBool == null) setXpAtivo('Inativo');
     if (XpDoubleBool == '1') setXpAtivo('Ativo');
-  });
+  }, [XpDoubleBool]);
 
   const getUser = async () => {
     const storageDependa = await AsyncStorage.getItem('DependaBots');

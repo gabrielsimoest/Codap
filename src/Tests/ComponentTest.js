@@ -54,8 +54,8 @@ export default function ComponentTester() {
                 <View style={{ flexDirection: 'row' }}>
                     <OpButton
                         theme={'classButton'}
-                        title="Teste da teoria"
-                        onPressFunction={() => navigation.navigate('TheoryView')}
+                        title="Teste de login"
+                        onPressFunction={() => navigation.navigate('TestLogin')}
                     />
                 </View>
                 <View style={{ flexDirection: 'row' }}>

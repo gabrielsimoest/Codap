@@ -5,9 +5,9 @@ import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppContext } from './common/Contexts/AppContext';
 import SplashScreen from 'react-native-splash-screen';
-import { useTranslation } from 'react-i18next';
 import { LogBox } from 'react-native';
 import { DefaultScreens, ClassesScreens } from './routes'
+import i18n from './Translations/i18n/i18n';
 
 const Stack = createStackNavigator();
 
@@ -58,21 +58,22 @@ function App() {
   };
 
   React.useEffect(() => {
-    if (Platform.OS === 'android') SplashScreen.hide();
 
     getThemeFromStorage();
     getFontFromStorage();
 
+    if (Platform.OS === 'android') SplashScreen.hide();
+
     //Aplicar idioma
-    // AsyncStorage.getItem('@language_key')
-    //   .then(value => {
-    //     if (value !== null) {
-    //       i18n.changeLanguage(value);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error('Error retrieving language:', error);
-    //   });
+    AsyncStorage.getItem('@language_key')
+      .then(value => {
+        if (value !== null) {
+          i18n.changeLanguage(value);
+        }
+      })
+      .catch(error => {
+        console.error('Error retrieving language:', error);
+      });
   }, [])
 
   const DefaultstackScreens = DefaultScreens.map((screen) => (

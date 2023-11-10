@@ -6,14 +6,17 @@ import {
     Image,
     TextInput,
     TouchableOpacity,
-    ImageBackground,
-    Alert,
     Keyboard
 } from 'react-native';
 import CustomButton from '../../Shared/CustomButton';
 import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useContext } from 'react';
+import { AppContext } from '../../../common/Contexts/AppContext';
+import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
+import { useTheme } from '@react-navigation/native';
+import CustomAlert from '../../Shared/CustomAlert';
 
 const db = SQLite.openDatabase(
     {
@@ -26,20 +29,26 @@ const db = SQLite.openDatabase(
 
 export default function Login({ navigation }) {
 
+    const { theme } = useContext(AppContext);
+    const { colors } = useTheme(); //Variavel de cor do tema
+
+    const [alertVisible, setAlertVisible] = useState(false);
+    const [alertTitle, setAlertTitle] = useState('');
+    const [alertMessage, setAlertMessage] = useState('');
     const [senha, setSenha] = useState('');
     const [email, setEmail] = useState('');
 
     const getUserFromStorage = async () => {
         try {
-          const IdUserOnStorage = await AsyncStorage.getItem('IdUser');
-    
-          if (IdUserOnStorage != 0)
-            navigation.navigate('Home', { screen: 'Aulas' });
-    
+            const IdUserOnStorage = await AsyncStorage.getItem('IdUser');
+
+            if (IdUserOnStorage != 0)
+                navigation.navigate('Home', { screen: 'Aulas' });
+
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      };
+    };
 
     useEffect(() => {
         getUserFromStorage();
@@ -77,7 +86,10 @@ export default function Login({ navigation }) {
 
     const setData = async () => {
         if (email.length == 0 || senha.length == 0) {
-            Alert.alert('Alerta!', 'Por favor preencha todos os campos.')
+            //Alert.alert('Alerta!', 'Por favor preencha todos os campos.')
+            setAlertTitle("Campos não preenchidos!")
+            setAlertMessage("Por favor, preencha todos os campos para prosseguir.")
+            setAlertVisible(true)
         } else {
             try {
                 await db.transaction(async (tx) => {
@@ -96,9 +108,12 @@ export default function Login({ navigation }) {
                                 await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
                                 await AsyncStorage.setItem('Aulas', results.rows.item(0).Aulas);
                                 await AsyncStorage.setItem('XPDouble', '0');
-                                navigation.navigate('Home', { screen: 'Aulas'});
+                                navigation.navigate('Home', { screen: 'Aulas' });
                             } else {
-                                Alert.alert('Alerta!', 'Senha ou Email incorretos')
+                                //Alert.alert('Alerta!', 'Senha ou Email incorretos')
+                                setAlertTitle("Dados inválidos!")
+                                setAlertMessage("Senha ou Email incorretos, verifique os dados navamente.")
+                                setAlertVisible(true)
                             }
                         }
                     )
@@ -114,37 +129,55 @@ export default function Login({ navigation }) {
     }
 
     return (
-        <ImageBackground source={require('../../../../assets/background.jpg')} resizeMode="cover" style={styles.container}>
+        <View style={[styles.container, { backgroundColor: theme == CustomDarkMode ? '#0b1016' : '#b2b1b1' }]}>
             <TouchableWithoutFeedback
                 onPress={Keyboard.dismiss} accessible={false}
             >
-                <View style={styles.box}>
-                    <View style={styles.header}>
-                        <Image style={styles.tinyLogo} source={require('../../../../assets/code.png')} />
-                        <Text style={styles.title}>Codap</Text>
-                    </View>
-                    <View style={styles.inputs}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Email"
-                            onChangeText={(value) => setEmail(value)}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Senha"
-                            onChangeText={(value) => setSenha(value)}
-                            secureTextEntry={true}
-                        />
-                        <CustomButton
-                            title='Login'
-                            color="#7977FD"
-                            onPressFunction={setData}
-                        />
-                        <TouchableOpacity onPress={onPressHandler}><Text style={styles.register}>Clique aqui para se registrar</Text></TouchableOpacity>
+                <View style={styles.shade}>
+                    <View style={[styles.box, , { backgroundColor: theme == CustomDarkMode ? "#141f29" : '#f2f2f2' }]}>
+                        <View style={styles.header}>
+                            <Image style={styles.tinyLogo} source={require('../../../../assets/code.png')} />
+                            <Text style={styles.title}>Codap</Text>
+                        </View>
+                        <View>
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[styles.input, {backgroundColor: colors.background, color: colors.text}]}
+                                placeholder="Email"
+                                placeholderTextColor={"#7977FD"}
+                                onChangeText={(value) => setEmail(value)}
+                                value={email}
+                            />
+                            <TextInput
+                                autoCapitalize='none'
+                                style={[styles.input, {backgroundColor: colors.background, color: colors.text}]}
+                                placeholder="Senha"
+                                placeholderTextColor={"#7977FD"}
+                                onChangeText={(value) => setSenha(value)}
+                                secureTextEntry={true}
+                                value={senha}
+                            />
+                            <CustomButton
+                                title='Login'
+                                color="#7977FD"
+                                onPressFunction={setData}
+                            />
+                            <Image style={styles.image} source={require('../../../../assets/Robo_feliz_centralizado.png')} />
+                            <TouchableOpacity onPress={onPressHandler}>
+                                <Text style={[styles.register, { color: colors.text }]}>Clique aqui para se registrar</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
+                <CustomAlert
+                    visible={alertVisible}
+                    onDismiss={() => setAlertVisible(false)}
+                    title={alertTitle}
+                    message={alertMessage}
+                    buttonText="OK"
+                />
             </TouchableWithoutFeedback>
-        </ImageBackground>
+        </View>
 
     )
 }
@@ -152,14 +185,14 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'black',
+        backgroundColor: '#0b1016',
         alignItems: 'center',
         justifyContent: 'center',
     },
     register: {
         color: 'white',
-        marginLeft: 50,
-        marginTop: 30,
+        textAlign: 'center',
+        marginTop: 10,
         fontSize: 17,
     },
     button: {
@@ -176,14 +209,16 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     input: {
-        backgroundColor: "#7977FD",
+        borderColor: "#7977FD",
+        backgroundColor: "#141f29",
         borderRadius: 10,
         height: 50,
         color: '#fff',
         width: 300,
         margin: 12,
-        borderWidth: 1,
+        borderWidth: 1.5,
         padding: 10,
+        fontSize: 20
     },
     header: {
         marginTop: 20,
@@ -193,21 +228,34 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     tinyLogo: {
-        width: 60,
-        height: 60,
+        width: 70,
+        height: 70,
     },
     title: {
         marginLeft: 10,
         marginTop: 3,
-        fontSize: 37,
+        fontSize: 50,
         fontWeight: 'bold',
         color: "#7977FD"
     },
     box: {
-        backgroundColor: "rgba(10, 10, 10, 0.7)",
-        borderRadius: 20,
-        height: 500,
+        backgroundColor: "#141f29",
+        borderRadius: 25,
+        height: 710,
         width: 370,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 2,
+    },
+    shade: {
+        backgroundColor: "rgba(0, 0, 0, 0.3)",
+        borderRadius: 25,
+        height: 713,
+        width: 373,
+    },
+    image: {
+        height: 250,
+        width: 150,
+        left: 80,
     }
 })

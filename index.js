@@ -11,4 +11,3 @@ const AppWithContext = () => (
 
 
 AppRegistry.registerComponent(appName, () => AppWithContext);
-

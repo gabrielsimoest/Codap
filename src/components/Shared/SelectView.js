@@ -22,6 +22,8 @@ import { TutorialSelect } from './Tutorials';
 const textSize = 23;
 const optSize = 15;
 
+const windowHeight = Dimensions.get('window').height;
+
 var text = '';
 var disable = false;
 var disable2 = false;
@@ -104,7 +106,7 @@ export default function SelectView({
       disableopt6 = 'opt';
       disableopt7 = 'opt';
       disableopt8 = 'opt';
-    }, []),
+    }, [adicionaltxt, opt5, opt6, opt7, opt8]),
   );
 
   function Erase() {
@@ -389,7 +391,9 @@ const styles = StyleSheet.create({
     zIndex: 99,
     padding: 20,
     justifyContent: 'center',
-    marginTop: '124%',
+    position: "absolute",
+    width: "100%",
+    top: windowHeight * (80/100),
     borderWidth: 1,
     borderColor: 'rgba(0,0,0, 0.2)',
     backgroundColor: '#0E151C',
@@ -417,7 +421,7 @@ const styles = StyleSheet.create({
     top: -2,
     height: 8,
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#273f55',
   },
   code: {
     width: '100%',

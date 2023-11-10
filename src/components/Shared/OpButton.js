@@ -20,11 +20,11 @@ const db = SQLite.openDatabase(
 
 function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true, AulasSalvarOp, Verify }) {
 
-    let iconCheckColor = "gray"
+    let iconCheckColor = '#233648'//"gray"
     let iconCheckName = "checkmark-circle-outline"
     let text = JSON.stringify({AulasSalvarOp})
     if (text.includes(Verify)) {
-        iconCheckColor = "green"
+        iconCheckColor = "#637aff" //"green"
         iconCheckName = "checkmark-circle-sharp"
     }
 
@@ -90,7 +90,7 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
                 type={Icons.Ionicons}
                 name={iconCheckName}
                 color={iconCheckColor}
-                size={30}
+                size={32}
                 style={styles[iconCheckHide]}
             />
         </TouchableOpacity>
@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '92%',
-        left: 16,
+        width: '100%',
+        //left: 16,
         height: 50,
         backgroundColor: 'green',
         borderRadius: 20,
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        width: '92%',
-        left: 16,
+        width: '100%',
+        //left: 16,
         height: 50,
         backgroundColor: 'red',
         borderRadius: 20,

@@ -6,7 +6,7 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
     const [theme, setTheme] = useState(CustomLightMode);
-    const [FontSize, setFontSize] = useState(20);
+    const [FontSize, setFontSize] = useState(0);
 
     const storeFont = async (value) => {
         try {
@@ -17,7 +17,7 @@ const AppProvider = ({ children }) => {
     };
 
     const toggleFont = (value) => {
-        console.log(value)
+        //console.log(value)
         setFontSize(value);
         storeFont(value);
     };
