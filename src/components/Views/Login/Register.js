@@ -20,6 +20,7 @@ import { AppContext } from '../../../common/Contexts/AppContext';
 import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
 import { useTheme } from '@react-navigation/native';
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const db = SQLite.openDatabase(
     {
@@ -34,6 +35,7 @@ export default function Login({ navigation }) {
 
     const { theme } = useContext(AppContext);
     const { colors } = useTheme(); //Variavel de cor do tema
+    const { t, i18n } = useTranslation();
 
     const [alertVisible, setAlertVisible] = useState(false);
     const [alertTitle, setAlertTitle] = useState('');
@@ -71,12 +73,12 @@ export default function Login({ navigation }) {
 
     const setData = async () => {
         if (name.length == 0 || senha.length == 0 || email.length == 0) {
-            setAlertTitle('Aviso!');
-            setAlertMessage('Por favor insira os dados.');
+            setAlertTitle(t("register.alert.empty.title"));
+            setAlertMessage(t("register.alert.empty.message"));
             setAlertVisible(true);
         } else if (validator.isEmail(email) == false) {
-            setAlertTitle('Aviso!');
-            setAlertMessage('Insira um Email valido.');
+            setAlertTitle(t("register.alert.invalid.title"));
+            setAlertMessage(t("register.alert.invalid.message"));
             setAlertVisible(true);
         }
         else {
@@ -87,8 +89,8 @@ export default function Login({ navigation }) {
                         [name, senha, email, 0, 0, 0, 'aulas:']
                     );
                 })
-                setAlertTitle('Sucesso!');
-                setAlertMessage('Cadastro Realizado.');
+                setAlertTitle(t("register.alert.success.title"));
+                setAlertMessage(t("register.alert.success.message"));
                 setAlertVisible(true);
                 navigation.navigate('Login');
             } catch (error) {
@@ -113,8 +115,8 @@ export default function Login({ navigation }) {
 
     const register = () => {
         if (!passwordMatch) {
-            setAlertTitle('Aviso!');
-            setAlertMessage('A senha de confirmação não corresponde à senha original. Por favor, verifique e tente novamente.');
+            setAlertTitle(t("register.alert.not match.title"));
+            setAlertMessage(t("register.alert.not match.message"));
             setAlertVisible(true);
         } else {
             setData()
@@ -140,7 +142,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 autoCapitalize='none'
                                 style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
-                                placeholder="Nome"
+                                placeholder={t("register.name")}
                                 placeholderTextColor={"#7977FD"}
                                 onChangeText={(value) => setName(value)}
                             />
@@ -155,12 +157,12 @@ export default function Login({ navigation }) {
                             <TextInput
                                 autoCapitalize='none'
                                 style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
-                                placeholder="Senha"
+                                placeholder={t("register.password")}
                                 placeholderTextColor={"#7977FD"}
                                 onChangeText={(value) => onChangePassword(value)}
                                 secureTextEntry={true}
                             />
-                            <AText defaultSize={20} style={[styles.text, { color: passwordMatch ? colors.text : "red" }]}>Confirmar senha</AText>
+                            <AText defaultSize={20} style={[styles.text, { color: passwordMatch ? colors.text : "red" }]}>{t("register.confirm password")}</AText>
                             <TextInput
                                 autoCapitalize='none'
                                 style={[
@@ -170,20 +172,20 @@ export default function Login({ navigation }) {
                                         color: passwordMatch ? colors.text : "red"
                                     }
                                 ]}
-                                placeholder={passwordMatch ? "Senha" : "Senha incorreta"}
+                                placeholder={passwordMatch ? t("register.password") : t("register.invalid password")}
                                 placeholderTextColor={passwordMatch ? "#7977FD" : "red"}
                                 onChangeText={(value) => onChangeConfirmPassword(value)}
                                 secureTextEntry={true}
                                 value={confirmPassword}
                             />
                             <CustomButton
-                                title='Registrar'
+                                title={t("register.register")}
                                 color="#7977FD"
                                 onPressFunction={register}
                             />
                             {/* <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} /> */}
                             <TouchableOpacity onPress={onPressHandler} style={{ alignItems: "center" }}>
-                                <Text style={[styles.register, { color: colors.text }]}>Clique aqui para retornar ao login</Text>
+                                <Text style={[styles.register, { color: colors.text }]}>{t("register.login")}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

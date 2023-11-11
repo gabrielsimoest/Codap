@@ -490,7 +490,47 @@
         }
       },
 
+      "login": {
+        "alert": {
+          "empty" : {
+            "title" : "Campos não preenchidos!",
+            "message": "Por favor, preencha todos os campos para prosseguir."
+          },
+          "invalid" : {
+            "title" : "Dados inválidos!",
+            "message": "Senha ou Email incorretos, verifique os dados navamente."
+          }
+        },
+        "password" : "Senha",
+        "register" : "Clique aqui para se registrar"
+      },
 
+      "register": {
+        "alert": {
+          "empty" : {
+            "title" : "Aviso!",
+            "message": "Por favor insira os dados."
+          },
+          "invalid" : {
+            "title" : "Aviso!",
+            "message": "Insira um Email valido."
+          },
+          "success" : {
+            "title" : "Sucesso!",
+            "message" : "Cadastro Realizado."
+          },
+          "not match" : {
+            "title" : "Aviso!",
+            "message" : "A senha de confirmação não corresponde à senha original. Por favor, verifique e tente novamente."
+          }
+        },
+        "name" : "Nome",
+        "confirm password" : "Confirmar senha",
+        "password" : "Senha",
+        "invalid password": "Senha incorreta",
+        "register" : "Registrar",
+        "login" : "Clique aqui para retornar ao login"
+      },
       
       "notificationService" : {
         "title": "Lembrete",

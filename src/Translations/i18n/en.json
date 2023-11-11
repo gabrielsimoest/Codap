@@ -485,6 +485,49 @@
           "text 2": "A useful tip is to try to write exactly as it was asked. Spaces or uppercase/lowercase letters in the wrong places can confuse our friend when evaluating your performance. So be careful with accidental spaces."
         }
       },
+
+      
+      "login": {
+        "alert": {
+          "empty": {
+            "title": "Fields not filled!",
+            "message": "Please fill in all fields to proceed."
+          },
+          "invalid": {
+            "title": "Invalid data!",
+            "message": "Incorrect password or email, please check the data again."
+          }
+        },
+        "password": "Password",
+        "register": "Click here to register"
+      },
+    
+      "register": {
+        "alert": {
+          "empty": {
+            "title": "Warning!",
+            "message": "Please enter the data."
+          },
+          "invalid": {
+            "title": "Warning!",
+            "message": "Enter a valid email."
+          },
+          "success": {
+            "title": "Success!",
+            "message": "Registration completed."
+          },
+          "not match": {
+            "title": "Warning!",
+            "message": "The confirmation password does not match the original password. Please check and try again."
+          }
+        },
+        "name": "Name",
+        "confirm password": "Confirm password",
+        "password": "Password",
+        "invalid password": "Incorrect password",
+        "register": "Register",
+        "login": "Click here to return to login"
+      },
       
       "notificationService" : {
         "title": "Reminder",

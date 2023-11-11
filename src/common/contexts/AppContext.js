@@ -1,12 +1,13 @@
-import React, { useState, createContext } from 'react';
+// AppContext.js
+import React, { useState, createContext, useEffect } from 'react';
 import { CustomDarkMode, CustomLightMode } from '../Themes/DefaultThemes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-    const [theme, setTheme] = useState(CustomLightMode);
-    const [FontSize, setFontSize] = useState(0);
+    const [theme, setTheme] = useState(null);
+    const [FontSize, setFontSize] = useState(null);
 
     const storeFont = async (value) => {
         try {
@@ -17,7 +18,6 @@ const AppProvider = ({ children }) => {
     };
 
     const toggleFont = (value) => {
-        //console.log(value)
         setFontSize(value);
         storeFont(value);
     };
@@ -39,6 +39,34 @@ const AppProvider = ({ children }) => {
         if (theme == CustomLightMode)
             storeTheme(true);
     };
+
+    const getThemeFromStorage = async () => {
+        try {
+            const themeOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentTheme"))
+            const initialTheme = themeOnStorage ? CustomDarkMode : CustomLightMode;
+            setTheme(initialTheme);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const getFontFromStorage = async () => {
+        try {
+            const FontOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentFontSize"))
+            setFontSize(FontOnStorage);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getThemeFromStorage();
+        getFontFromStorage();
+    }, []);
+
+    if (!theme || FontSize === null) {
+        return null; // ou sua tela de carregamento personalizada
+    }
 
     return (
         <AppContext.Provider value={{ theme, toggleTheme, FontSize, toggleFont }}>

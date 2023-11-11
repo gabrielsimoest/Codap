@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppContext } from './common/Contexts/AppContext';
@@ -23,58 +23,29 @@ const forFade = ({ current }) => ({
   },
 });
 
-//APP
 function App() {
-  //Variavel para seleção de tema
   const { theme, toggleTheme, FontSize, toggleFont } = useContext(AppContext);
-  //TODO: Consertar Tradução
-  //Variavel para tradução
-  // const { t, i18n } = useTranslation();
+  const [currentLanguage, setLanguage] = useState(null);
 
-  const getFontFromStorage = async () => {
-    try {
-      const FontOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentFontSize"))
-
-      console.log(FontOnStorage)
-
-      if (FontSize != FontOnStorage)
-        toggleFont(FontOnStorage);
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getThemeFromStorage = async () => {
-    try {
-      const themeOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentTheme"))
-
-      if (themeOnStorage == true)
-        toggleTheme();
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  React.useEffect(() => {
-
-    getThemeFromStorage();
-    getFontFromStorage();
-
-    if (Platform.OS === 'android') SplashScreen.hide();
-
-    //Aplicar idioma
+  useEffect(() => {
     AsyncStorage.getItem('@language_key')
       .then(value => {
         if (value !== null) {
+          setLanguage(value);
           i18n.changeLanguage(value);
+        } else {
+          setLanguage('pt'); // idioma padrão
         }
       })
       .catch(error => {
         console.error('Error retrieving language:', error);
       });
-  }, [])
+  }, []);
+
+  //Dar hide apenas quando tudo estiver perfeitamente selecionado
+  useEffect(() => {
+    if (Platform.OS === 'android' && theme && FontSize !== null && currentLanguage) SplashScreen.hide();
+  }, [theme, FontSize, currentLanguage])
 
   const DefaultstackScreens = DefaultScreens.map((screen) => (
     <Stack.Screen
@@ -91,6 +62,10 @@ function App() {
       component={screen.component}
     />
   ));
+
+  if (!theme || FontSize === null || !currentLanguage) {
+    return null; // ou tela de carregamento
+  }
 
   return (
     <NavigationContainer

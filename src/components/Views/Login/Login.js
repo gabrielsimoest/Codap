@@ -17,6 +17,7 @@ import { AppContext } from '../../../common/Contexts/AppContext';
 import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
 import { useTheme } from '@react-navigation/native';
 import CustomAlert from '../../Shared/CustomAlert';
+import { useTranslation } from 'react-i18next';
 
 const db = SQLite.openDatabase(
     {
@@ -31,6 +32,7 @@ export default function Login({ navigation }) {
 
     const { theme } = useContext(AppContext);
     const { colors } = useTheme(); //Variavel de cor do tema
+    const { t, i18n } = useTranslation();
 
     const [alertVisible, setAlertVisible] = useState(false);
     const [alertTitle, setAlertTitle] = useState('');
@@ -87,8 +89,8 @@ export default function Login({ navigation }) {
     const setData = async () => {
         if (email.length == 0 || senha.length == 0) {
             //Alert.alert('Alerta!', 'Por favor preencha todos os campos.')
-            setAlertTitle("Campos não preenchidos!")
-            setAlertMessage("Por favor, preencha todos os campos para prosseguir.")
+            setAlertTitle(t("login.alert.empty.title"))
+            setAlertMessage(t("login.alert.empty.message"))
             setAlertVisible(true)
         } else {
             try {
@@ -111,8 +113,8 @@ export default function Login({ navigation }) {
                                 navigation.navigate('Home', { screen: 'Aulas' });
                             } else {
                                 //Alert.alert('Alerta!', 'Senha ou Email incorretos')
-                                setAlertTitle("Dados inválidos!")
-                                setAlertMessage("Senha ou Email incorretos, verifique os dados navamente.")
+                                setAlertTitle(t("login.alert.invalid.title"))
+                                setAlertMessage(t("login.alert.invalid.message"))
                                 setAlertVisible(true)
                             }
                         }
@@ -151,7 +153,7 @@ export default function Login({ navigation }) {
                             <TextInput
                                 autoCapitalize='none'
                                 style={[styles.input, {backgroundColor: colors.background, color: colors.text}]}
-                                placeholder="Senha"
+                                placeholder={t("login.password")}
                                 placeholderTextColor={"#7977FD"}
                                 onChangeText={(value) => setSenha(value)}
                                 secureTextEntry={true}
@@ -164,7 +166,7 @@ export default function Login({ navigation }) {
                             />
                             <Image style={styles.image} source={require('../../../../assets/Robo_feliz_centralizado.png')} />
                             <TouchableOpacity onPress={onPressHandler}>
-                                <Text style={[styles.register, { color: colors.text }]}>Clique aqui para se registrar</Text>
+                                <Text style={[styles.register, { color: colors.text }]}>{t("login.register")}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

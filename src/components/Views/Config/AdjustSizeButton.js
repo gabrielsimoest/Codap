@@ -9,7 +9,7 @@ const AdjustSizeButton = () => {
   const decrementCount = () => {
     let count  = FontSize;
 
-    if (count !== 0) {
+    if (count > 0) {
       count--;
     }
 
@@ -19,7 +19,7 @@ const AdjustSizeButton = () => {
   const incrementCount = () => {
     let count = FontSize;
     
-    if (count !== 5) {
+    if (count < 5) {
       count++;
     }
 

@@ -12,19 +12,21 @@ const textSize = 20;
 
 const TranslateComponet = () => {
 
-    const {colors} = useTheme(); //Variavel de cor do tema
+    const { colors } = useTheme(); //Variavel de cor do tema
 
     const [modalVisible, setModalVisible] = useState(false);
 
     const { t, i18n } = useTranslation();
 
-    const [currentLanguage, setLanguage] = useState('pt');
+    const [currentLanguage, setLanguage] = useState(null);
 
     React.useEffect(() => {
         AsyncStorage.getItem('@language_key')
             .then(value => {
                 if (value !== null) {
                     setLanguage(value);
+                } else {
+                    setLanguage('pt'); // idioma padrão
                 }
             })
             .catch(error => {
@@ -42,6 +44,10 @@ const TranslateComponet = () => {
             .catch(err => console.log(err));
     };
 
+    if (currentLanguage === null) {
+        return null; // ou tela de carregamento
+    }
+
     return (
         <View>
             <Modal
@@ -54,17 +60,17 @@ const TranslateComponet = () => {
                 }}
             >
                 <View style={styles.centeredView}>
-                    <View style={[styles.modalView, {backgroundColor: colors.background}]}>
+                    <View style={[styles.modalView, { backgroundColor: colors.background }]}>
                         <Pressable
                             style={styles.button}
                             onPress={() => setModalVisible(!modalVisible)}
                         >
-                            <Icon type={Icons.Ionicons} name="close-circle" color={"#5469D3"}/>
+                            <Icon type={Icons.Ionicons} name="close-circle" color={"#5469D3"} />
                         </Pressable>
                         <AText style={styles.modalText} defaultSize={textSize}>{t("select the language:")}</AText>
-                        <ScrollView style={{marginBottom: 5}}>
-                            <OpButton theme={"settingsButton"} title="PORTUGUÊS" themeColorEnable={false} textColor={currentLanguage === 'pt' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('pt')}/>
-                            <OpButton theme={"settingsButton"} title="ENGLISH" themeColorEnable={false} textColor={currentLanguage === 'en' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('en')}/>
+                        <ScrollView style={{ marginBottom: 5 }}>
+                            <OpButton theme={"settingsButton"} title="PORTUGUÊS" themeColorEnable={false} textColor={currentLanguage === 'pt' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('pt')} />
+                            <OpButton theme={"settingsButton"} title="ENGLISH" themeColorEnable={false} textColor={currentLanguage === 'en' ? '#5469D3' : colors.text} onPressFunction={() => changeLanguage('en')} />
                         </ScrollView>
                     </View>
                 </View>
