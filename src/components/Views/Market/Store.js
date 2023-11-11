@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -11,14 +11,14 @@ import {
 } from 'react-native';
 import HeaderShop from '../../HeaderShop';
 import OpButton from '../../Shared/OpButton';
-import {useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Iconis from 'react-native-vector-icons/Octicons';
-import Icon, {Icons} from '../../Icons';
+import Icon, { Icons } from '../../Icons';
 import SQLite from 'react-native-sqlite-storage';
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import AText from '../../Shared/AText';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const size1 = 20;
 const size2 = 23;
@@ -37,9 +37,9 @@ const db = SQLite.openDatabase(
 
 export default function Store() {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const {colors} = useTheme(); //Variavel de cor do tema
+  const { colors } = useTheme(); //Variavel de cor do tema
 
   const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
   const [visibleModal, setVisibleModal] = useState(false);
@@ -158,25 +158,25 @@ export default function Store() {
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       <HeaderShop dependa={Dependa} />
-      <Text style={[styles.headert, {color: colors.text}]}>
+      <Text style={[styles.headert, { color: colors.text }]}>
         {t('buy using dependabots')}
       </Text>
-      <ScrollView style={{marginBottom: '18.2%'}}>
-        <View style={[styles.list, {backgroundColor: colors.primary}]}>
-          <Text style={[styles.Double, {color: colors.text}]}>{XpAtivo}</Text>
+      <ScrollView style={{ marginBottom: '18.2%' }}>
+        <View style={[styles.list, { backgroundColor: colors.primary }]}>
+          <Text style={[styles.Double, { color: colors.text }]}>{XpAtivo}</Text>
           <Image
             style={styles.xpImage}
             source={require('../../../../assets/Dobro_XP.png')}
           />
           <AText
-            style={[styles.textL, {color: colors.text}]}
+            style={[styles.textL, { color: colors.text }]}
             defaultSize={size1}>
             {t('double experience')}
           </AText>
           <AText
-            style={[styles.textLD, {color: colors.text}]}
+            style={[styles.textLD, { color: colors.text }]}
             defaultSize={size1}>
             200 <Iconis name="dependabot" size={21} color={colors.text} />
           </AText>
@@ -188,14 +188,14 @@ export default function Store() {
             />
           </View>
         </View>
-        <View style={[styles.list, {backgroundColor: colors.primary}]}>
+        <View style={[styles.list, { backgroundColor: colors.primary }]}>
           <AText
-            style={[styles.textL2, {color: colors.text}]}
+            style={[styles.textL2, { color: colors.text }]}
             defaultSize={size1}>
             {t('surprise chest')}
           </AText>
           <AText
-            style={[styles.textLD2, {color: colors.text}]}
+            style={[styles.textLD2, { color: colors.text }]}
             defaultSize={size1}>
             <Iconis name="dependabot" size={21} color={colors.text} /> 500
           </AText>
@@ -209,21 +209,21 @@ export default function Store() {
             onPressFunction={() => setVisibleModal2(true)}
           />
         </View>
-        <View style={[styles.list, {backgroundColor: colors.primary}]}>
-          <Text style={[styles.Double, {color: colors.text}]}>
+        <View style={[styles.list, { backgroundColor: colors.primary }]}>
+          <Text style={[styles.Double, { color: colors.text }]}>
             {Double - 1}
           </Text>
           <Image
             style={styles.timeImage}
-            source={require('../../../../assets/Time.png')}
+            source={require('../../../../assets/Dobro_Tempo.png')}
           />
           <AText
-            style={[styles.textL, {color: colors.text}]}
+            style={[styles.textL, { color: colors.text }]}
             defaultSize={size1}>
             {t('double time')}
           </AText>
           <AText
-            style={[styles.textLD3, {color: colors.text}]}
+            style={[styles.textLD3, { color: colors.text }]}
             defaultSize={size1}>
             300 <Iconis name="dependabot" size={21} color={colors.text} />
           </AText>
@@ -239,7 +239,7 @@ export default function Store() {
         <Modal animationType="fade" visible={visibleModal} transparent={true}>
           <SafeAreaView style={styles.centeredView}>
             <View
-              style={[styles.contant, {backgroundColor: colors.background}]}>
+              style={[styles.contant, { backgroundColor: colors.background }]}>
               <TouchableOpacity onPress={() => setVisibleModal(false)}>
                 <Icon
                   type={Icons.Ionicons}
@@ -250,7 +250,7 @@ export default function Store() {
                 />
               </TouchableOpacity>
               <AText
-                style={[styles.textModal, {color: colors.text}]}
+                style={[styles.textModal, { color: colors.text }]}
                 defaultSize={size2}>
                 {t('buy double experience')}
               </AText>
@@ -259,7 +259,7 @@ export default function Store() {
                 source={require('../../../../assets/Dobro_XP.png')}
               />
               <AText
-                style={[styles.text, {color: colors.text}]}
+                style={[styles.text, { color: colors.text }]}
                 defaultSize={size3}>
                 200 <Iconis name="dependabot" size={30} color={colors.text} />
               </AText>
@@ -274,7 +274,7 @@ export default function Store() {
         <Modal animationType="fade" visible={visibleModal2} transparent={true}>
           <SafeAreaView style={styles.centeredView}>
             <View
-              style={[styles.contant, {backgroundColor: colors.background}]}>
+              style={[styles.contant, { backgroundColor: colors.background }]}>
               <TouchableOpacity onPress={() => setVisibleModal2(false)}>
                 <Icon
                   type={Icons.Ionicons}
@@ -285,7 +285,7 @@ export default function Store() {
                 />
               </TouchableOpacity>
               <AText
-                style={[styles.textModal, {color: colors.text}]}
+                style={[styles.textModal, { color: colors.text }]}
                 defaultSize={size2}>
                 {t('buy surprise chest')}
               </AText>
@@ -294,7 +294,7 @@ export default function Store() {
                 source={require('../../../../assets/Bau_surpresa.png')}
               />
               <AText
-                style={[styles.text, {color: colors.text}]}
+                style={[styles.text, { color: colors.text }]}
                 defaultSize={size3}>
                 500 <Iconis name="dependabot" size={30} color={colors.text} />
               </AText>
@@ -309,7 +309,7 @@ export default function Store() {
         <Modal animationType="fade" visible={visibleModal3} transparent={true}>
           <SafeAreaView style={styles.centeredView}>
             <View
-              style={[styles.contant, {backgroundColor: colors.background}]}>
+              style={[styles.contant, { backgroundColor: colors.background }]}>
               <TouchableOpacity onPress={() => setVisibleModal3(false)}>
                 <Icon
                   type={Icons.Ionicons}
@@ -320,16 +320,16 @@ export default function Store() {
                 />
               </TouchableOpacity>
               <AText
-                style={[styles.textModal, {color: colors.text}]}
+                style={[styles.textModal, { color: colors.text }]}
                 defaultSize={size2}>
                 {t('buy double time')}
               </AText>
               <Image
                 style={styles.timeImageModal}
-                source={require('../../../../assets/Time.png')}
+                source={require('../../../../assets/Dobro_Tempo.png')}
               />
               <AText
-                style={[styles.text, {color: colors.text}]}
+                style={[styles.text, { color: colors.text }]}
                 defaultSize={size3}>
                 300 <Iconis name="dependabot" size={30} color={colors.text} />
               </AText>
@@ -345,7 +345,7 @@ export default function Store() {
         <Modal animationType="fade" visible={visibleModal4} transparent={true}>
           <SafeAreaView style={styles.centeredView}>
             <View
-              style={[styles.contant, {backgroundColor: colors.background}]}>
+              style={[styles.contant, { backgroundColor: colors.background }]}>
               <TouchableOpacity onPress={() => setVisibleModal4(false)}>
                 <Icon
                   type={Icons.Ionicons}
@@ -356,7 +356,7 @@ export default function Store() {
                 />
               </TouchableOpacity>
               <AText
-                style={[styles.textModal, {color: colors.text}]}
+                style={[styles.textModal, { color: colors.text }]}
                 defaultSize={size2}>
                 {t('you have double experience')}
               </AText>
@@ -376,7 +376,7 @@ export default function Store() {
         <Modal animationType="fade" visible={visibleModal5} transparent={true}>
           <SafeAreaView style={styles.centeredView}>
             <View
-              style={[styles.contant, {backgroundColor: colors.background}]}>
+              style={[styles.contant, { backgroundColor: colors.background }]}>
               <TouchableOpacity onPress={() => setVisibleModal5(false)}>
                 <Icon
                   type={Icons.Ionicons}
@@ -387,13 +387,13 @@ export default function Store() {
                 />
               </TouchableOpacity>
               <AText
-                style={[styles.textModal, {color: colors.text}]}
+                style={[styles.textModal, { color: colors.text }]}
                 defaultSize={size2}>
                 {t('you have double time')}
               </AText>
               <Image
                 style={styles.timeImageModal}
-                source={require('../../../../assets/Time.png')}
+                source={require('../../../../assets/Dobro_Tempo.png')}
               />
               <OpButton
                 theme={'modalButtonStore'}
@@ -428,9 +428,9 @@ const styles = StyleSheet.create({
     margin: 10,
     elevation: 7,
   },
-  button : {
-    left: "8%",
-    top: "25%"
+  button: {
+    left: '8%',
+    top: '25%',
   },
   xpImage: {
     top: 30,
@@ -446,9 +446,10 @@ const styles = StyleSheet.create({
     height: 180,
   },
   timeImage: {
-    margin: 10,
-    width: 120,
-    height: 137,
+    top: 15,
+    margin: 5,
+    width: 160,
+    height: 130,
   },
   textL: {
     color: '#fff',
@@ -534,7 +535,7 @@ const styles = StyleSheet.create({
   xpImageModal: {
     right: 70,
     margin: 10,
-    width: 260,
+    width: 265,
     height: 220,
     marginLeft: '28%',
   },
@@ -545,10 +546,11 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   timeImageModal: {
+    right: 70,
     margin: 10,
+    width: 265,
+    height: 220,
     marginLeft: '28%',
-    width: 120,
-    height: 137,
   },
   icon: {
     marginLeft: 260,
