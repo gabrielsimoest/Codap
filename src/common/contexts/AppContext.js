@@ -6,8 +6,33 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
+
     const [theme, setTheme] = useState(null);
     const [FontSize, setFontSize] = useState(null);
+
+    useEffect(() => {
+        const getThemeFromStorage = async () => {
+            try {
+                const themeFromStorage = await AsyncStorage.getItem("CurrentTheme");
+                const initialTheme = themeFromStorage ? JSON.parse(themeFromStorage) ? CustomDarkMode : CustomLightMode : CustomLightMode;
+                setTheme(initialTheme);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        const getFontSizeFromStorage = async () => {
+            try {
+                const fontSizeFromStorage = await AsyncStorage.getItem("CurrentFontSize");
+                setFontSize(fontSizeFromStorage ? JSON.parse(fontSizeFromStorage) : 0);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        getThemeFromStorage();
+        getFontSizeFromStorage();
+    }, []);
 
     const storeFont = async (value) => {
         try {
@@ -40,32 +65,36 @@ const AppProvider = ({ children }) => {
             storeTheme(true);
     };
 
-    const getThemeFromStorage = async () => {
-        try {
-            const themeOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentTheme"))
-            const initialTheme = themeOnStorage ? CustomDarkMode : CustomLightMode;
-            setTheme(initialTheme);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    const getFontFromStorage = async () => {
-        try {
-            const FontOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentFontSize"))
-            setFontSize(FontOnStorage);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-    useEffect(() => {
-        getThemeFromStorage();
-        getFontFromStorage();
-    }, []);
+    /*     const getThemeFromStorage = async () => {
+            try {
+                const themeOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentTheme"))
+                const initialTheme = themeOnStorage ? CustomDarkMode : CustomLightMode;
+                setTheme(initialTheme);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+    
+        const getFontFromStorage = async () => {
+            try {
+                const FontOnStorage = JSON.parse(await AsyncStorage.getItem("CurrentFontSize"))
+                setFontSize(FontOnStorage);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+    
+        useEffect(() => {
+            getThemeFromStorage();
+            getFontFromStorage();
+        }, []); */
 
     if (!theme || FontSize === null) {
-        return null; // ou sua tela de carregamento personalizada
+        /* 
+        setTheme(CustomLightMode);
+        setFontSize(0)
+        */
+        return null; // ou sua tela de carregamento personalizada */
     }
 
     return (

@@ -89,7 +89,7 @@ export default function Login({ navigation }) {
                 setAlertTitle(t("register.alert.success.title"));
                 setAlertMessage(t("register.alert.success.message"));
                 setAlertVisible(true);
-                navigation.navigate('Login');
+                //navigation.navigate('Login');
             } catch (error) {
                 console.log(error);
             }
@@ -122,6 +122,13 @@ export default function Login({ navigation }) {
 
     const onPressHandler = () => {
         navigation.navigate('Login')
+    }
+
+    const onPressAlertHandler = () => {
+        setAlertVisible(false);
+        if(alertTitle === t("register.alert.success.title")) {
+            navigation.navigate('Login');
+        }
     }
 
     return (
@@ -189,7 +196,7 @@ export default function Login({ navigation }) {
                 </View>
                 <CustomAlert
                     visible={alertVisible}
-                    onDismiss={() => setAlertVisible(false)}
+                    onDismiss={onPressAlertHandler}
                     title={alertTitle}
                     message={alertMessage}
                     buttonText="OK"
