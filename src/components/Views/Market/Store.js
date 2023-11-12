@@ -52,7 +52,7 @@ export default function Store() {
   const [XP, setXP] = useState('');
   const [Double, setDouble] = useState('');
   const [XpDoubleBool, setXpDoubleBool] = useState('0');
-  const [XpAtivo, setXpAtivo] = useState('Inativo');
+  const [XpAtivo, setXpAtivo] = useState(t("inactive"));
 
   useFocusEffect(
     React.useCallback(() => {
@@ -60,9 +60,9 @@ export default function Store() {
     }, [reducerValue]),
   );
   useEffect(() => {
-    if (XpDoubleBool == '0' || XpDoubleBool == null) setXpAtivo('Inativo');
-    if (XpDoubleBool == '1') setXpAtivo('Ativo');
-  }, [XpDoubleBool]);
+    if (XpDoubleBool == '0' || XpDoubleBool == null) setXpAtivo(t("inactive"));
+    if (XpDoubleBool == '1') setXpAtivo(t("active"));
+  }, [XpDoubleBool, t]);
 
   const getUser = async () => {
     const storageDependa = await AsyncStorage.getItem('DependaBots');
@@ -102,8 +102,8 @@ export default function Store() {
       setTimeout(forceUpdate, 2000);
       setTimeout(async function () {
         await AsyncStorage.setItem('XPDouble', '0');
-        alert('Dobro de Experiencia Desativado');
-        setXpAtivo('Inativo');
+        alert('Dobro de Experiencia Desativado');/////////////////////////////
+        setXpAtivo(t('inactive'));
         setTimeout(forceUpdate, 2000);
       }, 300000);
     });
@@ -114,7 +114,7 @@ export default function Store() {
       DoubleCoins = DoubleCoins - 200;
       DoubleX();
     } else {
-      alert('DependaBots Insuficientes');
+      alert('DependaBots Insuficientes');/////////////////////////////
     }
   };
 
@@ -144,7 +144,7 @@ export default function Store() {
         forceUpdate();
       });
     } else {
-      alert('DependaBots Insuficientes');
+      alert('DependaBots Insuficientes');/////////////////////////////
     }
   };
 
@@ -153,7 +153,7 @@ export default function Store() {
       DoubleCoins = DoubleCoins - 300;
       DoubleF();
     } else {
-      alert('DependaBots Insuficientes');
+      alert('DependaBots Insuficientes');/////////////////////////////
     }
   };
 
@@ -566,8 +566,8 @@ const styles = StyleSheet.create({
   },
   Double: {
     position: 'absolute',
-    top: 5,
-    left: 7,
+    top: '3%',
+    left: '4%',
   },
   centeredView: {
     flex: 1,

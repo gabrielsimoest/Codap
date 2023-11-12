@@ -11,10 +11,10 @@ import i18n from './Translations/i18n/i18n';
 
 const Stack = createStackNavigator();
 
-//Ignorar Warning Do navigator no Timer
+/* //Ignorar Warning Do navigator no Timer
 LogBox.ignoreLogs([
   'Warning: Cannot update a component (`ForwardRef(BaseNavigationContainer)`)',
-]);
+]); */
 
 //Animação stack navigation
 const forFade = ({ current }) => ({

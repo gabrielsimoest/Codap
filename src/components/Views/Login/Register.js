@@ -1,26 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import { useTheme } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
-    View,
-    Text,
-    StyleSheet,
     Image,
+    Keyboard,
+    StyleSheet,
+    Text,
     TextInput,
     TouchableOpacity,
-    ImageBackground,
-    Alert,
-    Keyboard
+    View
 } from 'react-native';
-const validator = require('validator');
-import CustomButton from '../../Shared/CustomButton';
-import SQLite from 'react-native-sqlite-storage';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import AText from '../../Shared/AText';
-import CustomAlert from '../../Shared/CustomAlert';
+import SQLite from 'react-native-sqlite-storage';
 import { AppContext } from '../../../common/Contexts/AppContext';
 import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
-import { useTheme } from '@react-navigation/native';
-import { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import AText from '../../Shared/AText';
+import CustomAlert from '../../Shared/CustomAlert';
+import CustomButton from '../../Shared/CustomButton';
+const validator = require('validator');
 
 const db = SQLite.openDatabase(
     {
