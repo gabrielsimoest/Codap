@@ -36,7 +36,7 @@ function AHighlighter({defaultSize = 20, ...props}) {
         <HighlightText
             style={[props.style, { fontSize: FontSize + defaultSize }]}
             highlightStyle={props.highlight}
-            searchWords={props.wordHighlight}
+            searchWords={props.wordHighlight.map(word => `\\b${word}\\b|(?<=<)${word}(?=>)`)}
             textToHighlight={props.text}
         />
     );

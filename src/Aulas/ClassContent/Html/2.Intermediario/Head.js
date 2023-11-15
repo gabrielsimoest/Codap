@@ -4,27 +4,38 @@ import TeoricView from '../../../../components/Shared/TeoricView';
 import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Head({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="Parabéns por chegar no nível intermediário! Agora veremos mais a fundo sobre como organizar melhor o código."
+            mainText="Parabéns por chegar no nível intermediário! Agora veremos mais a fundo sobre como organizar melhor o código."
             //Textos opcionais
-            adicionaltxt="O primeiro que veremos é o <head>"
-            adicionaltxt2="Esse é um elemento que determina uma seção de elementos que definem dados que não são visíveis ao usuário."
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText="O primeiro que veremos é o <head> que  é um elemento que determina uma seção de elementos que definem dados que não são visíveis ao usuário."
+            thirdText="Ele é utilizado também para carregar scripts JS e e estilos CSS como mostrado no exemplo abaixo. Mas não serão nosso foco agora."
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Título da Página</title>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="styles.css">
+            <script src="script.js"></script>
+        </head>
+        <body>
+            <h1>Lorem Ipsum</h1>
+            <p>Lorem Ipsum</p>
+        </body>
+    </html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="none"
+            endText="Como pode ver, nada no <head> é mostrado no site."
+            highlight={["JS", "CSS", "head"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="HeadEx1"
         />

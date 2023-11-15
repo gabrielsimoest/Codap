@@ -5,28 +5,55 @@ import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
 import NestingView from '../../../../components/Shared/NestingView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Links({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="Vamos fazer um site dinâmico com links?"
+            mainText="Vamos fazer um site dinâmico utilizando os links?"
             //Textos opcionais
-            adicionaltxt="Para fazer isso você precisará definir um atributo de referência para o link e um id para o elemento que deseja navegar."
-            adicionaltxt2="Você cria links usando o <a>"
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText="Para fazer isso você precisará definir um atributo de referência para o link e um id para o elemento que deseja navegar."
+            thirdText="Você pode criar links usando a tag <a> tanto para redirecionar para elementos usando o ID do elemento ou para outros sites usando a url."
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="none"
+            endText="Como viu nesse exemplo, ao clicar no link você é redirecionado para o elemento com aquela ID do link."
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <body>
+            
+            <p><a href="#section1">Ir para a Seção 1</a></p>
+            <p><a href="#section2">Ir para a Seção 2</a></p>
+
+            <h1 id="section1">Seção 1</h1>
+            <h2>Este é o conteúdo da Seção 1.</h2>
+            
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+            </p>
+
+            <h1 id="section2">Seção 2</h1>
+            <h2>Este é o conteúdo da Seção 2.</h2>
+            
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc et elementum cursus, sem diam aliquet nisl, in faucibus mi nisl a ligula. Sed auctor, nisl id congue porta, erat orci efficitur diam, non finibus sem nisl a ligula.
+            </p>
+            
+        </body>
+    </html>`}
             //NOME ADICIONADO NO STACK NAVIGATOR
+            highlight={["link", "links"]}
             navegar="LinksEx1"
         />
     )
@@ -171,13 +198,13 @@ export function LinksEx5({ navigation }) {
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="Toda vez que clicar no link, você vai ser direcionado até o elemento que conter a referência do link." //Opcional
+            adicionaltxt="Como mencionado anteriormente, você pode crirar links para outros sites." //Opcional
             //PERGUNTA
-            pergunta="O que usamos para criar um link?"
-            opt1="<h3>"
-            opt2="<a>"
-            opt3="<li>"
-            opt4="<link>"
+            pergunta="Como poderia ser um link para o o Google?"
+            opt1="<h3 LINK: >'https://www.google.com'</h3>"
+            opt2="<p><a href='https://www.google.com'>Google</a></p>"
+            opt3="<li>'https://www.google.com'</li>"
+            opt4="<link>'https://www.google.com'</link>"
             optCerta="opt2"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="LinksEx6"
@@ -198,7 +225,7 @@ export function LinksEx6({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Qual das oções está certo?"
+            pergunta="Qual das opções está criando um link para o ID codap?"
             opt1="<h3><a href=codap>CODAP</a></h3>"
             opt2="<h3><a href=#codap>CODAP</a></h3>"
             opt3='<h3><a href="#codap">CODAP</a></h3>'

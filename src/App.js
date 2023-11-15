@@ -5,16 +5,10 @@ import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AppContext } from './common/Contexts/AppContext';
 import SplashScreen from 'react-native-splash-screen';
-import { LogBox } from 'react-native';
 import { DefaultScreens, ClassesScreens } from './routes'
 import i18n from './Translations/i18n/i18n';
 
 const Stack = createStackNavigator();
-
-/* //Ignorar Warning Do navigator no Timer
-LogBox.ignoreLogs([
-  'Warning: Cannot update a component (`ForwardRef(BaseNavigationContainer)`)',
-]); */
 
 //Animação stack navigation
 const forFade = ({ current }) => ({

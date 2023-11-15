@@ -3,27 +3,44 @@ import { useTranslation } from 'react-i18next';
 import TeoricView from '../../../../components/Shared/TeoricView';
 import OptionView from '../../../../components/Shared/OptionView';
 import NestingView from '../../../../components/Shared/NestingView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Body({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="O <body> é utilizado para definir o corpo de seu projeto."
+            mainText="O <body> é utilizado para definir o corpo de seu projeto. Nele é onde ficam os conteúdos que serão mostrados ao usuário."
             //Textos opcionais
-            adicionaltxt="Dentro dele ficam os elementos <header>, <main> e <footer>"
-            adicionaltxt2="none"
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText="Dentro dele podem ficam os elementos <header>, <main> e <footer>"
+            thirdText="none"
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Lorem Ipsum</title>
+        </head>
+        <body>
+            <header>
+                <h1>Lorem Ipsum</h1>
+            </header>
+
+            <main>
+                <p>Lorem Ipsum</p>
+            </main>
+
+            <footer>
+                <p>Lorem Ipsum</p>
+            </footer>
+        </body>
+    </html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="Só pode haver um único <body> no projeto"
+            endText="Só pode haver um único <body> no projeto."
+            highlight={["body","header", "main", "footer"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BodyEx1"
         />
@@ -157,7 +174,7 @@ export function BodyEx4({ navigation }) {
             //TEXTO ADICIONAL CABEÇARIO
             adicionaltxt="none" //Opcional
             //PERGUNTA
-            pergunta="Qual desses elementos não ficam no <body>?"
+            pergunta="Qual desses elementos não podem ficar no <body>?"
             opt1="<header>"
             opt2="<head>"
             opt3="<main>"

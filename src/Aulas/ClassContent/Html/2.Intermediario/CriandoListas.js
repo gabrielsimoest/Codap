@@ -5,30 +5,46 @@ import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
 import NestingView from '../../../../components/Shared/NestingView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Listas({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="Você pode criar listas em seu site, para isso usamos o < ul > ou < ol > juntamente com o < li >."
+            mainText="Você pode criar listas em seu site. Para isso usamos as tags <ul> ou <ol> juntamente com o <li>."
             //Textos opcionais
-            adicionaltxt="<ul> é usado para listas não ordenadas."
-            adicionaltxt2="<ol> é usado para listas ordenadas."
-            //Imagem principal
-            img={require("../../../../../assets/H1to6.png")}
-            //Imagens opcionais
-            opt_img={require("../../../../../assets/H1to6_2.png")}
-            opt_img2="none"
+            secondText="<ul> é usado para listas não ordenadas."
+            thirdText="<ol> é usado para listas ordenadas."
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <body>
+            
+            <h2>Lista Não Ordenada:</h2>
+            <ul>
+                <li>Café</li>
+                <li>Chá</li>
+                <li>Leite</li>
+            </ul>
+            
+            <h2>Lista Ordenada:</h2>
+            <ol>
+                <li>Café</li>
+                <li>Chá</li>
+                <li>Leite</li>
+            </ol>
+            
+        </body>
+    </html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="none"
-
+            endText="Para lembrar mais facilmente, ul significa 'unordered list' e ol 'ordered list'."
             //HIGHLIGHT
-            txtToHighlight={["ul", "ol", " li "]}
+            highlight={["ul", "ol", "li"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="ListaEx1"
         />

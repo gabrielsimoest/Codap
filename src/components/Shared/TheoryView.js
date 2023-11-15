@@ -279,8 +279,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontFamily: 'Roboto',
-    marginLeft: '1%',
-    marginRight: '1%',
+    margin: "2%",
+    marginTop: "1%",
+    marginBottom: "2%",
     textAlign: "justify"
   },
   textButton: {

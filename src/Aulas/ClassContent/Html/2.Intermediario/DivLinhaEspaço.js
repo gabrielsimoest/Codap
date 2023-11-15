@@ -5,27 +5,38 @@ import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
 import NestingView from '../../../../components/Shared/NestingView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Div({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="14%"
             //Texto principal
-            txt="O <div> serve para definir uma seção genérica de conteúdos."
+            mainText="O <div> serve para definir uma seção genérica de conteúdos, podendo também aplicar estilos CSS como qualquer outra tag.."
             //Textos opcionais
-            adicionaltxt="Você pode usá-lo como subdivisão de um <main>, <footer> ou <header>"
-            adicionaltxt2="none"
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText="Você pode usá-lo como subdivisões do seu body e de outras tags, podendo até mesmo substituir o <header>, <main> e o <footer>, porém isso dificulta a legibilidade do código."
+            thirdText="Embora ele funcione pra qualquer coisa, por ser muito genérica, você deve optar por usar tags mais específicas para facilitar a leitura do código."
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <body>
+
+            <h1>Lorem Ipsum</h1>
+
+            <div style="background-color:lightblue">
+                <h2>Lorem Ipsum</h2>
+                <p>Lorem Ipsum</p>
+            </div>
+
+        </body>
+    </html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="none"
+            endText="Futuramente você verá mais tags que possam substituir o <div> e aprenderá a adição de estilos para seu site."
+            highlight={["div", "main", "footer", "header", "CSS"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="DivEx1"
         />
@@ -112,22 +123,35 @@ export function LineBreak({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="56%"
             //Texto principal
-            txt="Você pode adicionar linhas e espaços de maneira automática ao seu site para melhorar a estética."
+            mainText="Você pode adicionar linhas horizontais e quebras de maneira automática ao seu site para melhorar a estética."
             //Textos opcionais
-            adicionaltxt="Para isso você usa o <hr/> e o <br/> respectivamente."
-            adicionaltxt2="none"
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText="Para isso você usa o <hr/> e o <br/> respectivamente."
+            thirdText="none"
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+    <html>
+        <body>
+
+            <h2>Lorem Ipsum</h2>
+
+            <p>Lorem Ipsum</p>
+
+            <hr>
+
+            <p>Lorem Ipsum</p>
+
+            <p>Lorem<br>Ipsum</p>
+
+        </body>
+    </html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end="none"
+            endText="Observe como Lorem Ipsum é quebrada em duas linhas usando o <br> ."
+            highlight={["br", "hr", " Lorem Ipsum "]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="LineBreakEx1"
         />
