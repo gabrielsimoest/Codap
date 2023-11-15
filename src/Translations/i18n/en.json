@@ -530,6 +530,16 @@
         "register": "Register",
         "login": "Click here to return to login"
       },
+
+      "alert": {
+        "market": {
+          "title": "Warning!",
+          "message": {
+            "dependabots": "Insufficient DependaBots.",
+            "doubleXP": "Double Experience Disabled."
+          }
+        }
+      },
       
       "notificationService" : {
         "title": "Reminder",

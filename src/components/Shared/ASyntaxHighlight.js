@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(ASyntaxHighlighter); */
 
-function ASyntaxHighlighter(props, {defaultSize = 15}) {
+function ASyntaxHighlighter({defaultSize = 15, ...props}) {
   const { FontSize } = useContext(AppContext);
 
   return (

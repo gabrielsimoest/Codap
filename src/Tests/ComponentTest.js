@@ -65,6 +65,13 @@ export default function ComponentTester() {
                         onPressFunction={() => navigation.navigate('TestCarousel')}
                     />
                 </View>
+                <View style={{ flexDirection: 'row' }}>
+                    <OpButton
+                        theme={'classButton'}
+                        title="dependabots"
+                        onPressFunction={() => navigation.navigate('getDependabots')}
+                    />
+                </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
         </View>

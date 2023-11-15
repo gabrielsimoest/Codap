@@ -533,6 +533,16 @@
         "register" : "Registrar",
         "login" : "Clique aqui para retornar ao login"
       },
+
+      "alert" : {
+        "market" : {
+          "title" : "Aviso!",
+          "message" : {
+            "dependabots" : "DependaBots Insuficientes.",
+            "doubleXP": "Dobro de Experiencia Desativado."
+          }
+        }
+      },
       
       "notificationService" : {
         "title": "Lembrete",

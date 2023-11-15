@@ -1,6 +1,6 @@
-import {useTheme} from '@react-navigation/native';
-import React, {useState, useEffect} from 'react';
-import {useTranslation} from 'react-i18next';
+import { useTheme } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   View,
   TouchableOpacity,
@@ -10,13 +10,16 @@ import {
   ScrollView,
   Dimensions
 } from 'react-native';
-import Icon, {Icons} from '../Icons';
+import Icon, { Icons } from '../Icons';
 import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import AText from './AText';
 import Timer from './Timer';
 import AHighlighter from './AHighlighter';
 import { TutorialOption } from './Tutorials';
+import { useContext } from 'react';
+import { AppContext } from '../../common/Contexts/AppContext';
+import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
 
 const textSize = 23;
 
@@ -40,9 +43,11 @@ export default function OptionView({
   tutorialVisible = false,
 }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const {colors} = useTheme(); //Variavel de cor do tema
+  const { colors } = useTheme(); //Variavel de cor do tema
+
+  const { theme } = useContext(AppContext);
 
   //Define tutorial visivel
   const [TutorialVisible, setTutorialVisible] = useState(tutorialVisible);
@@ -107,20 +112,20 @@ export default function OptionView({
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.card}]}>
+    <View style={[styles.container, { backgroundColor: colors.card }]}>
       <ScrollView style={styles.scroller}>
-        <View style={styles.progressBar}>
+        <View style={[styles.progressBar, { backgroundColor: theme == CustomDarkMode ? '#273f55' : '#c1c1c1' }]} /*Progress Bar*/>
           <View
             style={[
               StyleSheet.absoluteFill,
-              {backgroundColor: '#637aff', width: progresso},
+              { backgroundColor: '#637aff', width: progresso },
             ]}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
-            style={{width: 60}}>
+            style={{ width: 60 }}>
             <Icon
               type={Icons.Ionicons}
               name="ios-close-outline"
@@ -130,7 +135,7 @@ export default function OptionView({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setTutorialVisible(!TutorialVisible)}
-            style={{width: 50, top: 8, marginLeft: '72%'}}>
+            style={{ width: 50, top: 8, marginLeft: '72%' }}>
             <Icon
               type={Icons.Ionicons}
               name="help-circle-outline"
@@ -139,19 +144,19 @@ export default function OptionView({
             />
           </TouchableOpacity>
         </View>
-        <TutorialOption visible={TutorialVisible} setModalVisible={setTutorialVisible}/>
+        <TutorialOption visible={TutorialVisible} setModalVisible={setTutorialVisible} />
         <Timer navigation={navigation} seconds={sec} />
         <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
         <AHighlighter
-          style={[styles[Textadd], {color: colors.text}]}
-          highlight={{color: '#637aff'}}
+          style={[styles[Textadd], { color: colors.text }]}
+          highlight={{ color: '#637aff' }}
           wordHighlight={txtToHighlight}
           text={adicionaltxt}
           defaultSize={textSize}
         />
         <AHighlighter
-          style={[styles.text, {color: colors.text}]}
-          highlight={{color: '#637aff'}}
+          style={[styles.text, { color: colors.text }]}
+          highlight={{ color: '#637aff' }}
           wordHighlight={txtToHighlight}
           text={pergunta}
           defaultSize={textSize}
@@ -187,9 +192,9 @@ export default function OptionView({
 
       <Modal visible={visibleModal} transparent={true}>
         <SafeAreaView>
-          <View style={[styles.modalPopup, {backgroundColor: colors.card}]}>
+          <View style={[styles.modalPopup, { backgroundColor: colors.card }]}>
             <AText
-              style={[styles.textModal, {color: colors.text}]}
+              style={[styles.textModal, { color: colors.text }]}
               defaultSize={textSize}>
               {t('congrats')}
             </AText>
@@ -203,9 +208,9 @@ export default function OptionView({
       </Modal>
       <Modal visible={visibleModalE} transparent={true}>
         <SafeAreaView>
-          <View style={[styles.modalPopup, {backgroundColor: colors.card}]}>
+          <View style={[styles.modalPopup, { backgroundColor: colors.card }]}>
             <AText
-              style={[styles.textModal, {color: colors.text}]}
+              style={[styles.textModal, { color: colors.text }]}
               defaultSize={textSize}>
               {t('oh no')}
             </AText>
@@ -247,7 +252,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: "absolute",
     width: "100%",
-    top: windowHeight * (80/100),
+    top: windowHeight * (80 / 100),
     //marginTop: '124%',
     borderWidth: 1,
     borderColor: 'rgba(0,0,0, 0.2)',

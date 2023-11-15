@@ -54,7 +54,7 @@ export default function TheoryView({
 
   const {colors} = useTheme(); //Variavel de cor do tema
 
-  const { theme, toggleTheme } = useContext(AppContext);
+  const { theme } = useContext(AppContext);
 
   /* //Definir tema usando currentTheme (padrão true)
   let currentTheme = useSelector(state => {
@@ -95,7 +95,7 @@ export default function TheoryView({
 
   return (
     <View style={[styles.container, {backgroundColor: colors.card}]}>
-      <View style={styles.progressBar} /*Progress Bar*/>
+      <View style={[styles.progressBar, {backgroundColor: theme == CustomDarkMode? '#273f55' : '#c1c1c1'}]} /*Progress Bar*/>
         <View
           style={[
             StyleSheet.absoluteFill,

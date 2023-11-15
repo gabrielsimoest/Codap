@@ -20,6 +20,9 @@ import Timer from './Timer';
 import OpButton from './OpButton';
 import AText from './AText';
 import AHighlighter from './AHighlighter';
+import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
+import { useContext } from 'react';
+import { AppContext } from '../../common/Contexts/AppContext';
 
 const textSize = 23;
 const optSize = 20;
@@ -53,6 +56,8 @@ export default function NestingView({
   const {t, i18n} = useTranslation();
 
   const {colors} = useTheme(); //Variavel de cor do tema
+
+  const { theme } = useContext(AppContext);
 
   const [visibleModal, setVisibleModal] = useState('false');
   const [visibleModalE, setVisibleModalE] = useState('false');
@@ -127,7 +132,7 @@ export default function NestingView({
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View style={[styles.container, {backgroundColor: colors.card}]}>
         <ScrollView style={styles.scroller}>
-          <View style={styles.progressBar}>
+        <View style={[styles.progressBar, { backgroundColor: theme == CustomDarkMode ? '#273f55' : '#c1c1c1' }]} /*Progress Bar*/>
             <View
               style={[
                 StyleSheet.absoluteFill,

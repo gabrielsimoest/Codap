@@ -13,6 +13,7 @@ import CongratsView from './components/Shared/CongratsView';
 import OptionView from './components/Shared/OptionView';
 import SorryView from './components/Shared/SorryView';
 import Class from './Aulas/Class';
+import DependaTest from './Tests/DependaTest';
 
 export const DefaultScreens = [
     { name: "Login", component: Login },
@@ -31,6 +32,7 @@ export const ClassesScreens = [
     { name: "TestLogin", component: NewLoginTest },
     { name: "TestRegister", component: NewRegisterTest },
     { name: "TestCarousel", component: TestCarousel },
+    { name: "getDependabots", component: DependaTest},
 
     //FROM IMPORTS
     { name: "Basic1_html", component: imports.Basic1_html },

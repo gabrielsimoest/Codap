@@ -8,7 +8,6 @@ import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
 const CustomAlert = ({ visible, onDismiss, title, message, buttonText }) => {
 
     const { theme } = useContext(AppContext);
-    const {colors} = useTheme(); //Variavel de cor do tema
 
     return (
         <Modal
@@ -19,8 +18,8 @@ const CustomAlert = ({ visible, onDismiss, title, message, buttonText }) => {
         >
             <View style={styles.centeredView}>
                 <View style={[styles.modalView, {backgroundColor: theme == CustomDarkMode ? "#141f29":'#E5E5E5'}]}>
-                    <Text style={[styles.title, {color: colors.text}]}>{title}</Text>
-                    <Text style={[styles.message, {color: colors.text}]}>{message}</Text>
+                    <Text style={[styles.title, {color: theme == CustomDarkMode ? "#F1F1F1":'#000'}]}>{title}</Text>
+                    <Text style={[styles.message, {color: theme == CustomDarkMode ? "#F1F1F1":'#000'}]}>{message}</Text>
 
                     <TouchableOpacity
                         style={styles.button}
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginTop: 22,
-        backgroundColor: "rgba(0,0,0,0.85)"
+        backgroundColor: "rgba(0,0,0,0.9)"
     },
     modalView: {
         margin: 20,

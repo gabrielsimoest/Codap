@@ -1,6 +1,6 @@
-import {useFocusEffect, useTheme} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
+import { useFocusEffect, useTheme } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Text,
   View,
@@ -11,13 +11,16 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
-import Icon, {Icons} from '../Icons';
+import Icon, { Icons } from '../Icons';
 import SaveClass from './SaveClass';
 import OpButton from './OpButton';
 import Timer from './Timer';
 import AText from './AText';
 import AHighlighter from './AHighlighter';
 import { TutorialSelect } from './Tutorials';
+import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
+import { useContext } from 'react';
+import { AppContext } from '../../common/Contexts/AppContext';
 
 const textSize = 23;
 const optSize = 15;
@@ -64,9 +67,11 @@ export default function SelectView({
   tutorialVisible = false,
 }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const {colors} = useTheme(); //Variavel de cor do tema
+  const { colors } = useTheme(); //Variavel de cor do tema
+
+  const { theme } = useContext(AppContext);
 
   //Define tutorial visivel
   const [TutorialVisible, setTutorialVisible] = useState(tutorialVisible);
@@ -182,22 +187,22 @@ export default function SelectView({
   };
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.card}]}>
-      <View style={styles.progressBar}>
+    <View style={[styles.container, { backgroundColor: colors.card }]}>
+      <View style={[styles.progressBar, { backgroundColor: theme == CustomDarkMode ? '#273f55' : '#c1c1c1' }]} /*Progress Bar*/>
         <View
           style={[
             StyleSheet.absoluteFill,
-            {backgroundColor: '#637aff', width: progresso},
+            { backgroundColor: '#637aff', width: progresso },
           ]}
         />
       </View>
 
       {/********************MAIN*****************************/}
       <ScrollView style={[styles.scroller]}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
-            style={{width: 60}}>
+            style={{ width: 60 }}>
             <Icon
               type={Icons.Ionicons}
               name="ios-close-outline"
@@ -207,7 +212,7 @@ export default function SelectView({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => setTutorialVisible(!TutorialVisible)}
-            style={{width: 50, top: 8, marginLeft: '72%'}}>
+            style={{ width: 50, top: 8, marginLeft: '72%' }}>
             <Icon
               type={Icons.Ionicons}
               name="help-circle-outline"
@@ -216,22 +221,22 @@ export default function SelectView({
             />
           </TouchableOpacity>
         </View>
-        <TutorialSelect visible={TutorialVisible} setModalVisible={setTutorialVisible}/>
+        <TutorialSelect visible={TutorialVisible} setModalVisible={setTutorialVisible} />
         <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
         <Timer navigation={navigation} seconds={sec} />
 
         {/*TEXT*/}
         <View>
           <AHighlighter
-            style={[styles[Textadd], {color: colors.text}]}
-            highlight={{color: '#637aff'}}
+            style={[styles[Textadd], { color: colors.text }]}
+            highlight={{ color: '#637aff' }}
             wordHighlight={txtToHighlight}
             text={adicionaltxt}
             defaultSize={textSize}
           />
           <AHighlighter
-            style={[styles.text, {color: colors.text}]}
-            highlight={{color: '#637aff'}}
+            style={[styles.text, { color: colors.text }]}
+            highlight={{ color: '#637aff' }}
             wordHighlight={txtToHighlight}
             text={pergunta}
             defaultSize={textSize}
@@ -239,9 +244,9 @@ export default function SelectView({
         </View>
 
         {/*CODE VIEW*/}
-        <View style={[styles.code, {backgroundColor: colors.background}]}>
+        <View style={[styles.code, { backgroundColor: colors.background }]}>
           <AText
-            style={[styles.textcode, {color: colors.text}]}
+            style={[styles.textcode, { color: colors.text }]}
             defaultSize={optSize}>
             {Texto}
           </AText>
@@ -261,7 +266,7 @@ export default function SelectView({
         </View>
 
         {/*OPTIONS*/}
-        <View style={[styles.options, {backgroundColor: colors.background}]}>
+        <View style={[styles.options, { backgroundColor: colors.background }]}>
           <TouchableOpacity onPress={() => ShowText(1)} disabled={disable}>
             <View style={styles[disableopt]}>
               <Text style={styles.textopt}>{opt1}</Text>
@@ -321,9 +326,9 @@ export default function SelectView({
 
       <Modal visible={visibleModal} transparent={true}>
         <SafeAreaView>
-          <View style={[styles.modalPopup, {backgroundColor: colors.card}]}>
+          <View style={[styles.modalPopup, { backgroundColor: colors.card }]}>
             <AText
-              style={[styles.textModal, {color: colors.text}]}
+              style={[styles.textModal, { color: colors.text }]}
               defaultSize={textSize}>
               {t('congrats')}
             </AText>
@@ -339,9 +344,9 @@ export default function SelectView({
       </Modal>
       <Modal visible={visibleModalE} transparent={true}>
         <SafeAreaView>
-          <View style={[styles.modalPopup, {backgroundColor: colors.card}]}>
+          <View style={[styles.modalPopup, { backgroundColor: colors.card }]}>
             <AText
-              style={[styles.textModal, {color: colors.text}]}
+              style={[styles.textModal, { color: colors.text }]}
               defaultSize={textSize}>
               {t('oh no')}
             </AText>
@@ -393,7 +398,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: "absolute",
     width: "100%",
-    top: windowHeight * (80/100),
+    top: windowHeight * (80 / 100),
     borderWidth: 1,
     borderColor: 'rgba(0,0,0, 0.2)',
     backgroundColor: '#0E151C',

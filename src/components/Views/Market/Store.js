@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -19,6 +19,7 @@ import SQLite from 'react-native-sqlite-storage';
 import { useTheme } from '@react-navigation/native';
 import AText from '../../Shared/AText';
 import { useTranslation } from 'react-i18next';
+import { AppContext } from '../../../common/Contexts/AppContext';
 
 const size1 = 20;
 const size2 = 23;
@@ -40,6 +41,8 @@ export default function Store() {
   const { t, i18n } = useTranslation();
 
   const { colors } = useTheme(); //Variavel de cor do tema
+
+  const { showAlert } = useContext(AppContext);
 
   const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
   const [visibleModal, setVisibleModal] = useState(false);
@@ -102,7 +105,7 @@ export default function Store() {
       setTimeout(forceUpdate, 2000);
       setTimeout(async function () {
         await AsyncStorage.setItem('XPDouble', '0');
-        alert('Dobro de Experiencia Desativado');/////////////////////////////
+        showAlert(t('alert.market.title'),t('alert.market.message.doubleXP'));
         setXpAtivo(t('inactive'));
         setTimeout(forceUpdate, 2000);
       }, 300000);
@@ -114,7 +117,7 @@ export default function Store() {
       DoubleCoins = DoubleCoins - 200;
       DoubleX();
     } else {
-      alert('DependaBots Insuficientes');/////////////////////////////
+      showAlert(t('alert.market.title'), t('alert.market.message.dependabots'));
     }
   };
 
@@ -144,7 +147,7 @@ export default function Store() {
         forceUpdate();
       });
     } else {
-      alert('DependaBots Insuficientes');/////////////////////////////
+      showAlert(t('alert.market.title'), t('alert.market.message.dependabots'));
     }
   };
 
@@ -153,7 +156,7 @@ export default function Store() {
       DoubleCoins = DoubleCoins - 300;
       DoubleF();
     } else {
-      alert('DependaBots Insuficientes');/////////////////////////////
+      showAlert(t('alert.market.title'), t('alert.market.message.dependabots'));
     }
   };
 

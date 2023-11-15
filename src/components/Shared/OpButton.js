@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     StyleSheet,
     TouchableOpacity,
@@ -8,6 +8,8 @@ import AText from './AText';
 import { useTheme } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import SQLite from 'react-native-sqlite-storage';
+import { AppContext } from '../../common/Contexts/AppContext';
+import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
 
 const db = SQLite.openDatabase(
     {
@@ -19,8 +21,10 @@ const db = SQLite.openDatabase(
 );
 
 function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true, AulasSalvarOp, Verify }) {
+    
+    const { theme: appTheme } = useContext(AppContext);
 
-    let iconCheckColor = '#233648'//"gray"
+    let iconCheckColor = appTheme === CustomDarkMode? '#233648' : '#c1c1c1' //"gray"
     let iconCheckName = "checkmark-circle-outline"
     let text = JSON.stringify({AulasSalvarOp})
     if (text.includes(Verify)) {
