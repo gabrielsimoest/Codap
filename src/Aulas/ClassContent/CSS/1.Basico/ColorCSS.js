@@ -124,7 +124,7 @@ export function ColorEx3({ navigation }) {
             tamanhoInput="40%"
 
             Salvar={"true"}
-            aulaSalvar="COLOR"
+            aulaSalvar={2}
             navegar="CongratsView"
         />
     )

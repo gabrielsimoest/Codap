@@ -61,11 +61,15 @@ export default function Login({ navigation }) {
     const createTable = () => {
         db.transaction((tx) => {
             tx.executeSql(
-                "CREATE TABLE IF NOT EXISTS "
-                + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT, XP LONG,Double INT,Aulas TEXT);"
-            )
-        })
+                "CREATE TABLE IF NOT EXISTS Users " +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha TEXT, Email TEXT, DependaBots INT, XP LONG, Double INT);"
+            );
+            tx.executeSql(
+                "CREATE TABLE IF NOT EXISTS Aulas " +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, UserID INTEGER, TipoAula INT, " +
+                "FOREIGN KEY(UserID) REFERENCES Users(ID));"
+            );
+        });
     }
 
     const setData = async () => {
@@ -82,8 +86,8 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "INSERT INTO Users (Name, Senha, Email, DependaBots, XP, Double, Aulas) VALUES (?,?,?,?,?,?,?)",
-                        [name, senha, email, 0, 0, 0, 'aulas:']
+                        "INSERT INTO Users (Name, Senha, Email, DependaBots, XP, Double) VALUES (?,?,?,?,?,?)",
+                        [name, senha, email, 0, 0, 0]
                     );
                 })
                 setAlertTitle(t("register.alert.success.title"));

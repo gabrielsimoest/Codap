@@ -148,7 +148,7 @@ export function MostrandoVideos5({ navigation }) {
             txtCerto3='<embed src="./codap.mp4">' //terceira opção certa
             //Tamanho do input
             tamanhoInput="70%"
-            aulaSalvar="MOSTRANDOVIDEOS"
+            aulaSalvar={25}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

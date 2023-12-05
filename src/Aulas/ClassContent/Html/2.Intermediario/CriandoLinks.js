@@ -231,7 +231,7 @@ export function LinksEx6({ navigation }) {
             opt3='<h3><a href="#codap">CODAP</a></h3>'
             opt4="<h3><a href=>#codap>CODAP</a></h3>"
             optCerta="opt3"
-            aulaSalvar="CRIANDOLINKS"
+            aulaSalvar={14}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

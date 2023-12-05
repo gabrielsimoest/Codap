@@ -160,7 +160,7 @@ export function TiposDeDados5({ navigation }) {
             txtCerto3='<input type="checkbox">' //terceira opção certa
             //Tamanho do input
             tamanhoInput="46%"
-            aulaSalvar="TIPOSDEDADOS"
+            aulaSalvar={27}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

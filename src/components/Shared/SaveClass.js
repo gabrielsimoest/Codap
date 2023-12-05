@@ -1,6 +1,5 @@
-import { useFocusEffect} from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
-import { useState } from 'react';   
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SQLite from 'react-native-sqlite-storage';
 import { View } from 'react-native-animatable';
@@ -14,9 +13,7 @@ const db = SQLite.openDatabase(
     error => { console.log(error) }
 );
 
-export default function SaveClass({aulaSalvar, Salvar}) {
-    const [UserId, setUserId] = useState(0);
-
+export default function SaveClass({ AulaId, Salvar }) {
     useFocusEffect(
         React.useCallback(() => {
             if (Salvar == 'true') {
@@ -26,20 +23,48 @@ export default function SaveClass({aulaSalvar, Salvar}) {
     );
 
     const getUser = async () => {
-        const storageAulasSalvas = await AsyncStorage.getItem('Aulas');
         const storageUser = await AsyncStorage.getItem('IdUser');
-        let AulasSalvas= storageAulasSalvas + aulaSalvar;
 
         await db.transaction(async (tx) => {
-            await tx.executeSql(
-                "UPDATE Users SET Aulas=? WHERE ID = ?;",
-                [AulasSalvas, storageUser]
+            tx.executeSql(
+                "SELECT TipoAula FROM Aulas WHERE UserID = ? AND TipoAula = ?",
+                [storageUser, AulaId],
+                async (tx, results) => {
+                    const rows = results.rows;
+                    if (rows.length === 0) {
+                        // Se não existir, então inserir
+                        await tx.executeSql(
+                            "INSERT INTO Aulas (UserID, TipoAula) VALUES (?, ?)",
+                            [storageUser, AulaId]
+                        );
+                    }
+                },
+                (tx, error) => {
+                    console.log('Error checking TipoAula:', error);
+                }
             );
-            await AsyncStorage.setItem('Aulas', AulasSalvas);
+
+            await tx.executeSql(
+                "SELECT TipoAula FROM Aulas WHERE UserID = ?",
+                [storageUser],
+                async (tx, results) => {
+                    const rows = results.rows;
+                    const aulaTypes = [];
+
+                    for (let i = 0; i < rows.length; i++) {
+                        aulaTypes.push(rows.item(i).TipoAula);
+                    }
+
+                    await AsyncStorage.setItem('Aulas', aulaTypes.join(', '));
+                },
+                (tx, error) => {
+                    console.log('Error fetching Aulas:', error);
+                }
+            );
         })
-    }
+    };
 
     return (
-        <View/>
+        <View />
     )
 }

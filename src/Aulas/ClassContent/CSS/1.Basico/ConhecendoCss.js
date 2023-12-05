@@ -112,7 +112,7 @@ export function CSSEx3({ navigation }) {
             opt8='none'
             txtCerto='<h1 style="color:blue">CODAP</h1>'
             Salvar={"true"}
-            aulaSalvar="CONHECENDOCSS"
+            aulaSalvar={3}
 
             txtToHighlight={["blue", "h1"]}
             //NOME ADICIONADO NO STACK NAVIGATOR

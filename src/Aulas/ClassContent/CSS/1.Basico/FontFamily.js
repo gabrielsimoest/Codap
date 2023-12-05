@@ -95,7 +95,7 @@ export function FontFamilyEx2({ navigation }) {
             tamanhoInput="40%"
 
             Salvar={"true"}
-            aulaSalvar="FONTFAMILY"
+            aulaSalvar={4}
             navegar="CongratsView"
         />
     )

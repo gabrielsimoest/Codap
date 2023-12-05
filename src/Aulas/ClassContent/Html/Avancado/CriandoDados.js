@@ -151,7 +151,7 @@ export function CriandoDados5({ navigation }) {
             opt3="Para iniciar uma Tabela"
             opt4="Para definir uma linha"
             optCerta="opt2"
-            aulaSalvar="CRIANDODADOS"
+            aulaSalvar={20}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

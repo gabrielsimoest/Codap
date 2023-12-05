@@ -240,7 +240,7 @@ export function LineBreakEx3({ navigation }) {
 
             //Tamanho do input
             tamanhoInput="50%"
-            aulaSalvar="SECAOGENERICA"
+            aulaSalvar={17}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

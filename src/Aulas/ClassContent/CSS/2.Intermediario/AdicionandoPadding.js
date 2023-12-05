@@ -186,7 +186,7 @@ export function AdicionandoPadding6({ navigation }) {
             txtCerto2='padding-left: 8px;' //Segunda opção certa
             //Tamanho do input
             tamanhoInput="50%"
-            aulaSalvar="ADICIONANDOPADDING"
+            aulaSalvar={7}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

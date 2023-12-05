@@ -95,7 +95,7 @@ export function BackgroungColorEx2({ navigation }) {
             tamanhoInput="40%"
 
             Salvar={"true"}
-            aulaSalvar="BACKGROUNDCOLOR"
+            aulaSalvar={1}
             navegar="CongratsView"
         />
     )

@@ -230,7 +230,7 @@ export function BodyEx6({ navigation }) {
             opt3="1"
             opt4="2"
             optCerta="opt3"
-            aulaSalvar="DEFINDOUMCORPO"
+            aulaSalvar={16}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

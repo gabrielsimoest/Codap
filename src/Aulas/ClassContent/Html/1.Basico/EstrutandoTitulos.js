@@ -153,7 +153,7 @@ export function HeaderEx6({ navigation }) {
             txtCerto2={t("html.basic.title.HeaderEx6_txtCerto2")}
             txtCerto3={t("html.basic.title.HeaderEx6_txtCerto3")}
             tamanhoInput="46%"
-            aulaSalvar="ESTRUTURANDOTITULOS"
+            aulaSalvar={14}
             Salvar="true"
             navegar="CongratsView"
         />

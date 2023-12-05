@@ -228,7 +228,7 @@ export function ListaEx6({ navigation }) {
             txtCerto2="li>codap</li"
             txtCerto3="li>Codap</li"
             tamanhoInput="80%"
-            aulaSalvar="CRIANDOLISTAS"
+            aulaSalvar={15}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

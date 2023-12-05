@@ -153,7 +153,7 @@ export function FraseEx6({ navigation }) {
             txtCerto2={t("html.basic.phrase.FraseEx6_txtCerto2")}
             txtCerto3={t("html.basic.phrase.FraseEx6_txtCerto3")}
             tamanhoInput="46%"
-            aulaSalvar="CRIANDOFRASES"
+            aulaSalvar={12}
             Salvar="true"
             navegar="CongratsView"
         />

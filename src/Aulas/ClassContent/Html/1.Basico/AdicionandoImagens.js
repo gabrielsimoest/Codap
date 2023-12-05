@@ -158,7 +158,7 @@ export function Img6({ navigation }) {
             opt3={t("html.basic.images.Img6_opt3")}
             opt4={t("html.basic.images.Img6_opt4")}
             optCerta="opt4"
-            aulaSalvar="ADICIONANDOIMAGENS"
+            aulaSalvar={9}
             Salvar="true"
             navegar="CongratsView"
         />

@@ -151,7 +151,7 @@ export function TiposDados2({ navigation }) {
             //Textos final opcional (aparece após as imagens)
             adicionaltxt_end="Mas estes não veremos agora."
             Salvar={"true"}
-            aulaSalvar="TIPOSDADOS"
+            aulaSalvar={31}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

@@ -165,7 +165,7 @@ export function AdicionandoDados6({ navigation }) {
             txtCerto3='<input type="password">' //terceira opção certa
             //Tamanho do input
             tamanhoInput="46%"
-            aulaSalvar="ADCDADOS"
+            aulaSalvar={24}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

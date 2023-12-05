@@ -68,19 +68,19 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"CONHECENDOCSS"} theme={"classButton"} title={t("Discovering CSS")} onPressFunction={() => navigation.navigate("ConhecendoCSS")} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={3} theme={"classButton"} title={t("Discovering CSS")} onPressFunction={() => navigation.navigate("ConhecendoCSS")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOR"} theme={"classButton"} title={t("Using colors")} onPressFunction={() => navigation.navigate("ColorCSS")} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={2} theme={"classButton"} title={t("Using colors")} onPressFunction={() => navigation.navigate("ColorCSS")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"BACKGROUNDCOLOR"} theme={"classButton"} title={t("Adding background color")} onPressFunction={() => navigation.navigate("BackgroundColorCSS")} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={1} theme={"classButton"} title={t("Adding background color")} onPressFunction={() => navigation.navigate("BackgroundColorCSS")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"FONTSIZE"} theme={"classButton"} title={t("Adjusting font size")} onPressFunction={() => navigation.navigate("FontSizeCSS")} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={5} theme={"classButton"} title={t("Adjusting font size")} onPressFunction={() => navigation.navigate("FontSizeCSS")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"FONTFAMILY"} theme={"classButton"} title={t("Changing font family")} onPressFunction={() => navigation.navigate("FontFamilyCSS")} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={4} theme={"classButton"} title={t("Changing font family")} onPressFunction={() => navigation.navigate("FontFamilyCSS")} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -94,13 +94,13 @@ export default function CollapseCSS() {
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOBORDAS"} theme={"classButton"} title={t("Adding borders")} onPressFunction={() => navigation.navigate('AdicionandoBordas')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={6} theme={"classButton"} title={t("Adding borders")} onPressFunction={() => navigation.navigate('AdicionandoBordas')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"COLOCANDOMARGIN"} theme={"classButton"} title={t("Putting margin")} onPressFunction={() => navigation.navigate('ColocandoMargin')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={8} theme={"classButton"} title={t("Putting margin")} onPressFunction={() => navigation.navigate('ColocandoMargin')} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
-                    <OpButton AulasSalvarOp={AulasSalvas} Verify={"ADICIONANDOPADDING"} theme={"classButton"} title={t("Adding padding")} onPressFunction={() => navigation.navigate('AdicionandoPadding')} />
+                    <OpButton AulasSalvarOp={AulasSalvas} Verify={7} theme={"classButton"} title={t("Adding padding")} onPressFunction={() => navigation.navigate('AdicionandoPadding')} />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>

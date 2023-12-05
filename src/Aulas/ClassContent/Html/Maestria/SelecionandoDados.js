@@ -173,7 +173,7 @@ export function SelecionandoDados6({ navigation }) {
             txtCerto3='</select>' //terceira opção certa
             //Tamanho do input
             tamanhoInput="70%"
-            aulaSalvar="SELECIONANDODADOS"
+            aulaSalvar={26}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

@@ -60,11 +60,15 @@ export default function Login({ navigation }) {
     const createTable = () => {
         db.transaction((tx) => {
             tx.executeSql(
-                "CREATE TABLE IF NOT EXISTS "
-                + "Users "
-                + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha Text, Email TEXT, DependaBots INT , XP LONG,Double INT, Aulas TEXT);"
-            )
-        })
+                "CREATE TABLE IF NOT EXISTS Users " +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha TEXT, Email TEXT, DependaBots INT, XP LONG, Double INT);"
+            );
+            tx.executeSql(
+                "CREATE TABLE IF NOT EXISTS Aulas " +
+                "(ID INTEGER PRIMARY KEY AUTOINCREMENT, UserID INTEGER, TipoAula INT, " +
+                "FOREIGN KEY(UserID) REFERENCES Users(ID));"
+            );
+        });
     }
 
     const getData = () => {
@@ -96,7 +100,7 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "SELECT ID, Senha, DependaBots, XP, Double, Aulas, Email, Name FROM Users WHERE Senha=? and Email=?",
+                        "SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Senha=? and Email=?",
                         [senha, email],
                         async (tx, results) => {
                             var len = results.rows.length;
@@ -108,7 +112,7 @@ export default function Login({ navigation }) {
                                 await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
                                 await AsyncStorage.setItem('Double', JSON.stringify(results.rows.item(0).Double));
                                 await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
-                                await AsyncStorage.setItem('Aulas', results.rows.item(0).Aulas);
+                                // await AsyncStorage.setItem('Aulas', results.rows.item(0).Aulas);
                                 await AsyncStorage.setItem('XPDouble', '0');
                                 navigation.navigate('Home', { screen: 'Aulas' });
                             } else {

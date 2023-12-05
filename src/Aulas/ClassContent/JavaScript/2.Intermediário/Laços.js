@@ -165,7 +165,7 @@ export function WhileForEx5({ navigation }) {
             opt4="6"
             optCerta="opt4"
             Salvar={"true"}
-            aulaSalvar="WHILEFOR"
+            aulaSalvar={35}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

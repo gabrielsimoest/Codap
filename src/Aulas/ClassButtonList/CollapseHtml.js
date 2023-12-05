@@ -77,7 +77,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'HTMLETAGS'}
+            Verify={13}
             theme={'classButton'}
             title={t('Discovering HTML and Tags')}
             onPressFunction={() => navigation.navigate('Estrutura')}
@@ -86,7 +86,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ESTRUTURANDOTITULOS'}
+            Verify={14}
             theme={'classButton'}
             title={t('Estructuring titles')}
             onPressFunction={() => navigation.navigate('Header')}
@@ -95,7 +95,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'CRIANDOFRASES'}
+            Verify={12}
             theme={'classButton'}
             title={t('Creating phrases')}
             onPressFunction={() => navigation.navigate('Frases')}
@@ -104,7 +104,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'CONSTRUINDOBOTOES'}
+            Verify={10}
             theme={'classButton'}
             title={t('Creating buttons')}
             onPressFunction={() => navigation.navigate('ButtonHtml')}
@@ -113,7 +113,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ADICIONANDOIMAGENS'}
+            Verify={9}
             theme={'classButton'}
             title={t('Adding image')}
             onPressFunction={() => navigation.navigate('ImgTeoric')}
@@ -122,7 +122,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ADICIONANDOCOMENTARIOS'}
+            Verify={11}
             theme={'classButton'}
             title={t('Adding comment')}
             onPressFunction={() => navigation.navigate('Comentario')}
@@ -152,7 +152,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ELEMENTOSDEDADOS'}
+            Verify={18}
             theme={'classButton'}
             title={t('Data elements')}
             onPressFunction={() => navigation.navigate('Head')}
@@ -161,7 +161,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'DEFINDOUMCORPO'}
+            Verify={16}
             theme={'classButton'}
             title={t('Making a body')}
             onPressFunction={() => navigation.navigate('Body')}
@@ -170,7 +170,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'CRIANDOLISTAS'}
+            Verify={15}
             theme={'classButton'}
             title={t('Making lists')}
             onPressFunction={() => navigation.navigate('Listas')}
@@ -179,7 +179,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'CRIANDOLINKS'}
+            Verify={14}
             theme={'classButton'}
             title={t('Making links')}
             onPressFunction={() => navigation.navigate('Links')}
@@ -188,7 +188,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'SECAOGENERICA'}
+            Verify={17}
             theme={'classButton'}
             title={t('Generic sections, lines and space')}
             onPressFunction={() => navigation.navigate('Div')}
@@ -218,7 +218,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'IDENTIFICANDOELEMENTOS'}
+            Verify={21}
             theme={'classButton'}
             title={t('Identifying elements')}
             onPressFunction={() => navigation.navigate('IndentTeoric')}
@@ -227,7 +227,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'INTATABELAS'}
+            Verify={22}
             theme={'classButton'}
             title={t('Table introduction')}
             onPressFunction={() => navigation.navigate('ITableTeoric')}
@@ -236,7 +236,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'CRIANDODADOS'}
+            Verify={20}
             theme={'classButton'}
             title={t('Creating data')}
             onPressFunction={() => navigation.navigate('CriandoDados')}
@@ -245,7 +245,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ADICIONANDOLINHAS'}
+            Verify={19}
             theme={'classButton'}
             title={t('Adding line')}
             onPressFunction={() => navigation.navigate('AdicionandoLinhas')}
@@ -275,7 +275,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'ADCDADOS'}
+            Verify={24}
             theme={'classButton'}
             title={t('Adding data')}
             onPressFunction={() => navigation.navigate('AdicionandoDados')}
@@ -284,7 +284,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'TIPOSDEDADOS'}
+            Verify={27}
             theme={'classButton'}
             title={t('Data types2')}
             onPressFunction={() => navigation.navigate('TiposDeDados')}
@@ -293,7 +293,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'SELECIONANDODADOS'}
+            Verify={26}
             theme={'classButton'}
             title={t('Selecting data')}
             onPressFunction={() => navigation.navigate('SelecionandoDados')}
@@ -302,7 +302,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={'MOSTRANDOVIDEOS'}
+            Verify={25}
             theme={'classButton'}
             title={t('Showing videos')}
             onPressFunction={() => navigation.navigate('MostrandoVideos')}

@@ -163,7 +163,7 @@ export function ITable5({ navigation }) {
 
             //Tamanho do input
             tamanhoInput="46%"
-            aulaSalvar="INTATABELAS"
+            aulaSalvar={22}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

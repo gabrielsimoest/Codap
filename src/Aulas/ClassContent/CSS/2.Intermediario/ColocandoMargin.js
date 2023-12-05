@@ -186,7 +186,7 @@ export function ColocandoMargin6({ navigation }) {
             txtCerto2='margin-left: 10px;' //Segunda opção certa
             //Tamanho do input
             tamanhoInput="50%"
-            aulaSalvar="COLOCANDOMARGIN"
+            aulaSalvar={8}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"

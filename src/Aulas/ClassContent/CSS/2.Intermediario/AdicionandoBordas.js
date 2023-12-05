@@ -223,7 +223,7 @@ export function AdicionandoBordas7({ navigation }) {
             txtCerto3='25px' //terceira opção certa
             //Tamanho do input
             tamanhoInput="40%"
-            aulaSalvar="ADICIONANDOBORDAS"
+            aulaSalvar={6}
             Salvar="true"
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
