@@ -55,7 +55,7 @@ export default function TeoricView({ navigation, progresso, txt, adicionaltxt, a
                     />
                     
                 </TouchableOpacity>
-                <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+                 aulaSalvar={aulaSalvar} Salvar={Salvar} />
                 <View style={{ alignItems: "stretch" }}>
                     <AHighlighter
                         style={[styles.text, { color: colors.text }]}

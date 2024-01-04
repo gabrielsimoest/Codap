@@ -179,7 +179,7 @@ export default function CollapseHtml() {
         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
-            Verify={14}
+            Verify={23}
             theme={'classButton'}
             title={t('Making links')}
             onPressFunction={() => navigation.navigate('Links')}

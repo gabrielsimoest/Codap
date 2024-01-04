@@ -163,7 +163,7 @@ export default function NestingView({
             </TouchableOpacity>
           </View>
           <Timer navigation={navigation} seconds={sec} />
-          <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+          <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
           <SafeAreaView>
             <AHighlighter
               style={[styles[Textadd], {color: colors.text}]}

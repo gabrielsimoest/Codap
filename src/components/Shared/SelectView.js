@@ -222,7 +222,7 @@ export default function SelectView({
           </TouchableOpacity>
         </View>
         <TutorialSelect visible={TutorialVisible} setModalVisible={setTutorialVisible} />
-        <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+        <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
         <Timer navigation={navigation} seconds={sec} />
 
         {/*TEXT*/}
@@ -685,7 +685,7 @@ export default function SelectView({
               style={styles.icon}
             />
           </TouchableOpacity>
-          <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+          <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
           <Timer navigation={navigation} seconds={sec} />
           <View>
             <AHighlighter

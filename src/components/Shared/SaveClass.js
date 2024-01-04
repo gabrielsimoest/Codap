@@ -25,6 +25,7 @@ export default function SaveClass({ AulaId, Salvar }) {
     const getUser = async () => {
         const storageUser = await AsyncStorage.getItem('IdUser');
 
+        console.log("class:" + AulaId + " user:" + storageUser)
         await db.transaction(async (tx) => {
             tx.executeSql(
                 "SELECT TipoAula FROM Aulas WHERE UserID = ? AND TipoAula = ?",
@@ -44,23 +45,28 @@ export default function SaveClass({ AulaId, Salvar }) {
                 }
             );
 
-            await tx.executeSql(
-                "SELECT TipoAula FROM Aulas WHERE UserID = ?",
-                [storageUser],
-                async (tx, results) => {
-                    const rows = results.rows;
-                    const aulaTypes = [];
+            db.transaction(async (tx2) => {
+                await tx2.executeSql(
+                    "SELECT TipoAula FROM Aulas WHERE UserID = ?",
+                    [userId],
+                    async (tx2, results2) => {
+                        const rows = results2.rows;
+                        const aulaTypes = [];
 
-                    for (let i = 0; i < rows.length; i++) {
-                        aulaTypes.push(rows.item(i).TipoAula);
+                        for (let i = 0; i < rows.length; i++) {
+                            aulaTypes.push(rows.item(i).TipoAula);
+                        }
+
+                        const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ').slice(2) : '';
+
+                        // console.log(aulasString)
+                        await AsyncStorage.setItem('Aulas', aulasString);
+                    },
+                    (tx, error) => {
+                        console.log('Error fetching Aulas:', error);
                     }
-
-                    await AsyncStorage.setItem('Aulas', aulaTypes.join(', '));
-                },
-                (tx, error) => {
-                    console.log('Error fetching Aulas:', error);
-                }
-            );
+                );
+            });
         })
     };
 

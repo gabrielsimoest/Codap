@@ -131,7 +131,7 @@ export default function TheoryView({
           </View>
           {/*BUTTON_END*/}
           <TutorialTheory visible={TutorialVisible} setModalVisible={setTutorialVisible}/>
-          <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+          <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
           <AHighlighter
             style={[styles.text, {color: colors.text}]}
             highlight={{color: '#637aff'}}

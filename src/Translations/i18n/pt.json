@@ -286,7 +286,7 @@
             "Img4_opt5": "'https://LINK'",
             "Img4_opt6": " width='30'",
             "Img4_opt7": " height='50'",
-            "Img4_txtCerto": "<img src=1https://LINK1 height=1501 width=1301/>",
+            "Img4_txtCerto": "<img src='https://LINK' height='50' width='30'/>",
             "Img5_adicionaltxt": "O que vai aparecer com o código a seguir?",
             "Img5_pergunta": "<img src='https://LINK' width='30'1/>",
             "Img5_opt1": "https://LINK",

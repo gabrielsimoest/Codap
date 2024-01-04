@@ -114,7 +114,7 @@ export default function TextView({
             </TouchableOpacity>
           </View>
           <TutorialText visible={TutorialVisible} setModalVisible={setTutorialVisible} />
-          <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+          <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
           <Timer navigation={navigation} seconds={sec} />
           <AHighlighter
             style={[styles[Textadd], { color: colors.text }]}

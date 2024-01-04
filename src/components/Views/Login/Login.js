@@ -100,20 +100,45 @@ export default function Login({ navigation }) {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Senha=? and Email=?",
+                        "SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Senha=? and Email=? LIMIT 1",
                         [senha, email],
                         async (tx, results) => {
                             var len = results.rows.length;
                             if (len > 0) {
-                                await AsyncStorage.setItem('IdUser', JSON.stringify(results.rows.item(0).ID));
+                                const userId = results.rows.item(0).ID;
+
+                                await AsyncStorage.setItem('IdUser', JSON.stringify(userId));
                                 await AsyncStorage.setItem('Email', results.rows.item(0).Email);
                                 await AsyncStorage.setItem('Name', results.rows.item(0).Name);
                                 await AsyncStorage.setItem('Senha', JSON.stringify(results.rows.item(0).Senha));
                                 await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
                                 await AsyncStorage.setItem('Double', JSON.stringify(results.rows.item(0).Double));
                                 await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
-                                // await AsyncStorage.setItem('Aulas', results.rows.item(0).Aulas);
                                 await AsyncStorage.setItem('XPDouble', '0');
+
+                                db.transaction(async (tx2) => {
+                                    await tx2.executeSql(
+                                        "SELECT TipoAula FROM Aulas WHERE UserID = ?",
+                                        [userId],
+                                        async (tx2, results2) => {
+                                            const rows = results2.rows;
+                                            const aulaTypes = [];
+
+                                            for (let i = 0; i < rows.length; i++) {
+                                                aulaTypes.push(rows.item(i).TipoAula);
+                                            }
+
+                                            const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ').slice(2) : '';
+
+                                            console.log(aulasString)
+                                            await AsyncStorage.setItem('Aulas', aulasString);
+                                        },
+                                        (tx, error) => {
+                                            console.log('Error fetching Aulas:', error);
+                                        }
+                                    );
+                                });
+
                                 navigation.navigate('Home', { screen: 'Aulas' });
                             } else {
                                 //Alert.alert('Alerta!', 'Senha ou Email incorretos')
@@ -148,7 +173,7 @@ export default function Login({ navigation }) {
                         <View>
                             <TextInput
                                 autoCapitalize='none'
-                                style={[styles.input, {backgroundColor: colors.background, color: colors.text}]}
+                                style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
                                 placeholder="Email"
                                 placeholderTextColor={"#7977FD"}
                                 onChangeText={(value) => setEmail(value)}
@@ -156,7 +181,7 @@ export default function Login({ navigation }) {
                             />
                             <TextInput
                                 autoCapitalize='none'
-                                style={[styles.input, {backgroundColor: colors.background, color: colors.text}]}
+                                style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
                                 placeholder={t("login.password")}
                                 placeholderTextColor={"#7977FD"}
                                 onChangeText={(value) => setSenha(value)}

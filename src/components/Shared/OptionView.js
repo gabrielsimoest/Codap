@@ -146,7 +146,7 @@ export default function OptionView({
         </View>
         <TutorialOption visible={TutorialVisible} setModalVisible={setTutorialVisible} />
         <Timer navigation={navigation} seconds={sec} />
-        <SaveClass aulaSalvar={aulaSalvar} Salvar={Salvar} />
+        <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
         <AHighlighter
           style={[styles[Textadd], { color: colors.text }]}
           highlight={{ color: '#637aff' }}
