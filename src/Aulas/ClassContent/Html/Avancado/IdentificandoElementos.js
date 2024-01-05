@@ -178,7 +178,7 @@ export function Indent6({ navigation }) {
             opt4='<img id="imagem1"/>'
             optCerta="opt3"
             aulaSalvar={21}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

@@ -152,7 +152,7 @@ export function ButtonEx6({ navigation }) {
             opt8={t("html.basic.buttons.ButtonEx6_opt8")}
             txtCerto={t("html.basic.buttons.ButtonEx6_txtCerto")}
             aulaSalvar={10}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

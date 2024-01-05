@@ -94,7 +94,7 @@ export function BackgroungColorEx2({ navigation }) {
             //Tamanho do input
             tamanhoInput="40%"
 
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={1}
             navegar="CongratsView"
         />

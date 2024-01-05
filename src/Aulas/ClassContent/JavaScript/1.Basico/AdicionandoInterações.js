@@ -172,7 +172,7 @@ export function InteraçõesEx5({ navigation }) {
             opt4="0"
             optCerta="opt3"
             aulaSalvar={28}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

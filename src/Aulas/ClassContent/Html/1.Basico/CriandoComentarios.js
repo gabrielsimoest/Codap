@@ -152,7 +152,7 @@ export function ComentarioEx6({ navigation }) {
             txtCerto3={t("html.basic.comments.ComentarioEx6_txtCerto3")}
             tamanhoInput="80%"
             aulaSalvar={11}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

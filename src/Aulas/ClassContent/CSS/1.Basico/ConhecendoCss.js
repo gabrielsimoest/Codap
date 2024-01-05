@@ -111,7 +111,7 @@ export function CSSEx3({ navigation }) {
             opt7='none'
             opt8='none'
             txtCerto='<h1 style="color:blue">CODAP</h1>'
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={3}
 
             txtToHighlight={["blue", "h1"]}

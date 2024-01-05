@@ -154,7 +154,7 @@ export function ComparaçãoEx5({ navigation }) {
             opt3="ab == aa"
             opt4="ab > aa"
             optCerta="opt4"
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={34}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

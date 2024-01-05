@@ -123,7 +123,7 @@ export function ColorEx3({ navigation }) {
             //Tamanho do input
             tamanhoInput="40%"
 
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={2}
             navegar="CongratsView"
         />

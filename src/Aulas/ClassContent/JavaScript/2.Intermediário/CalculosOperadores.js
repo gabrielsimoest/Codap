@@ -213,7 +213,7 @@ export function OperadoresEx7({ navigation }) {
             opt8='none'
             txtCerto='alert(X++)'
             aulaSalvar={33}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

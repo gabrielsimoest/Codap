@@ -161,7 +161,7 @@ export function TiposDeDados5({ navigation }) {
             //Tamanho do input
             tamanhoInput="46%"
             aulaSalvar={27}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
         />

@@ -46,6 +46,7 @@ export default function Login({ navigation }) {
 
     useEffect(() => {
         createTable();
+        // deleteDB();
     }, []);
 
     const deleteDB = () => {

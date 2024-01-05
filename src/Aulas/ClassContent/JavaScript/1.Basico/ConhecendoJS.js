@@ -164,7 +164,7 @@ export function JSEx5({ navigation }) {
             opt7='none'
             opt8='none'
             txtCerto='alert("CODAP");'
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={29}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"

@@ -159,7 +159,7 @@ export function Img6({ navigation }) {
             opt4={t("html.basic.images.Img6_opt4")}
             optCerta="opt4"
             aulaSalvar={9}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

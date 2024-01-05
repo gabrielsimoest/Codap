@@ -16,58 +16,61 @@ const db = SQLite.openDatabase(
 export default function SaveClass({ AulaId, Salvar }) {
     useFocusEffect(
         React.useCallback(() => {
-            if (Salvar == 'true') {
+            console.log(AulaId + "/" + Salvar) ;
+
+            if (Salvar == true) {
                 getUser();
             }
         }, [])
     );
 
     const getUser = async () => {
-        const storageUser = await AsyncStorage.getItem('IdUser');
+        if (AulaId != null) {
+            const storageUser = await AsyncStorage.getItem('IdUser');
 
-        console.log("class:" + AulaId + " user:" + storageUser)
-        await db.transaction(async (tx) => {
-            tx.executeSql(
-                "SELECT TipoAula FROM Aulas WHERE UserID = ? AND TipoAula = ?",
-                [storageUser, AulaId],
-                async (tx, results) => {
-                    const rows = results.rows;
-                    if (rows.length === 0) {
-                        // Se não existir, então inserir
-                        await tx.executeSql(
-                            "INSERT INTO Aulas (UserID, TipoAula) VALUES (?, ?)",
-                            [storageUser, AulaId]
-                        );
-                    }
-                },
-                (tx, error) => {
-                    console.log('Error checking TipoAula:', error);
-                }
-            );
-
-            db.transaction(async (tx2) => {
-                await tx2.executeSql(
-                    "SELECT TipoAula FROM Aulas WHERE UserID = ?",
-                    [userId],
-                    async (tx2, results2) => {
-                        const rows = results2.rows;
-                        const aulaTypes = [];
-
-                        for (let i = 0; i < rows.length; i++) {
-                            aulaTypes.push(rows.item(i).TipoAula);
+            await db.transaction(async (tx) => {
+                tx.executeSql(
+                    "SELECT TipoAula FROM Aulas WHERE UserID = ? AND TipoAula = ?",
+                    [storageUser, AulaId],
+                    async (tx, results) => {
+                        const rows = results.rows;
+                        if (rows.length === 0) {
+                            // Se não existir, então inserir
+                            await tx.executeSql(
+                                "INSERT INTO Aulas (UserID, TipoAula) VALUES (?, ?)",
+                                [storageUser, AulaId]
+                            );
                         }
-
-                        const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ').slice(2) : '';
-
-                        // console.log(aulasString)
-                        await AsyncStorage.setItem('Aulas', aulasString);
                     },
                     (tx, error) => {
-                        console.log('Error fetching Aulas:', error);
+                        console.log('Error checking TipoAula:', error);
                     }
                 );
-            });
-        })
+
+                db.transaction(async (tx2) => {
+                    await tx2.executeSql(
+                        "SELECT TipoAula FROM Aulas WHERE UserID = ?",
+                        [storageUser],
+                        async (tx2, results2) => {
+                            const rows = results2.rows;
+                            const aulaTypes = [];
+
+                            for (let i = 0; i < rows.length; i++) {
+                                aulaTypes.push(rows.item(i).TipoAula);
+                            }
+
+                            const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ') : '';
+
+                            // console.log(aulasString)
+                            await AsyncStorage.setItem('Aulas', aulasString);
+                        },
+                        (tx, error) => {
+                            console.log('Error fetching Aulas:', error);
+                        }
+                    );
+                });
+            })
+        }
     };
 
     return (

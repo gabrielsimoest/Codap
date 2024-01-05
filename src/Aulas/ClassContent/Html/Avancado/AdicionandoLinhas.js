@@ -153,7 +153,7 @@ export function AdicionandoLinhas6({ navigation }) {
             txtCerto3="<hr>"
             tamanhoInput="80%"
             aulaSalvar={19}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

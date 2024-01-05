@@ -154,7 +154,7 @@ export function FraseEx6({ navigation }) {
             txtCerto3={t("html.basic.phrase.FraseEx6_txtCerto3")}
             tamanhoInput="46%"
             aulaSalvar={12}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

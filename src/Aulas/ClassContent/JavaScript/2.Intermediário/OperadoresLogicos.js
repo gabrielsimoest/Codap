@@ -223,7 +223,7 @@ export function OperadorTernarioEx1({ navigation }) {
             txtCerto3='x > y'
             tamanhoInput="30%"
             aulaSalvar={36}
-            Salvar="true"
+            Salvar={true}
             navegar="CongratsView"
         />
     )

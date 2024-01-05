@@ -142,7 +142,7 @@ export function ConvertendoTiposEx5({ navigation }) {
             opt4="NaN"
             optCerta="opt1"
             aulaSalvar={30}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

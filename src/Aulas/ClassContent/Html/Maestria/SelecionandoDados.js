@@ -174,7 +174,7 @@ export function SelecionandoDados6({ navigation }) {
             //Tamanho do input
             tamanhoInput="70%"
             aulaSalvar={26}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
         />

@@ -127,10 +127,8 @@ export default function Login({ navigation }) {
                                             for (let i = 0; i < rows.length; i++) {
                                                 aulaTypes.push(rows.item(i).TipoAula);
                                             }
+                                            const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ') : '';
 
-                                            const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ').slice(2) : '';
-
-                                            console.log(aulasString)
                                             await AsyncStorage.setItem('Aulas', aulasString);
                                         },
                                         (tx, error) => {

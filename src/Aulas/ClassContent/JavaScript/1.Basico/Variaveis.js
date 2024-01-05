@@ -157,9 +157,9 @@ export function VariaveisEx5({ navigation }) {
             opt2="9"
             opt3='10'
             opt4="1"
-            optCerta="op3"
+            optCerta="opt3"
             aulaSalvar={32}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

@@ -149,7 +149,7 @@ export function MostrandoVideos5({ navigation }) {
             //Tamanho do input
             tamanhoInput="70%"
             aulaSalvar={25}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
         />

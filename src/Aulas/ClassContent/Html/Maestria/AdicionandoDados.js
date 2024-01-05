@@ -166,7 +166,7 @@ export function AdicionandoDados6({ navigation }) {
             //Tamanho do input
             tamanhoInput="46%"
             aulaSalvar={24}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
         />

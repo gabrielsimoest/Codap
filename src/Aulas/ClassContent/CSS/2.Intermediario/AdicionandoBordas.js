@@ -224,7 +224,7 @@ export function AdicionandoBordas7({ navigation }) {
             //Tamanho do input
             tamanhoInput="40%"
             aulaSalvar={6}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR  
             navegar="CongratsView"
         />

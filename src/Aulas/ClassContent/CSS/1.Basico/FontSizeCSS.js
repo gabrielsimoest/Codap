@@ -94,7 +94,7 @@ export function FontSizeEx2({ navigation }) {
             //Tamanho do input
             tamanhoInput="40%"
 
-            Salvar={"true"}
+            Salvar={true}
             aulaSalvar={5}
             navegar="CongratsView"
         />

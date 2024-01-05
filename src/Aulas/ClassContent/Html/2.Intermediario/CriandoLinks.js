@@ -232,7 +232,7 @@ export function LinksEx6({ navigation }) {
             opt4="<h3><a href=>#codap>CODAP</a></h3>"
             optCerta="opt3"
             aulaSalvar={14}
-            Salvar="true"
+            Salvar={true}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

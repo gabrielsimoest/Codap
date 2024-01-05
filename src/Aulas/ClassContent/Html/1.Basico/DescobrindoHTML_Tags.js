@@ -157,7 +157,7 @@ export function HtmlStartEx5({ navigation }) {
       opt4={t("html.basic.conhecendo html.HtmlStartEx5_opt4")}
       optCerta="opt1"
       aulaSalvar={13}
-      Salvar="true"
+      Salvar={true}
       navegar="CongratsView"
     />
   );
