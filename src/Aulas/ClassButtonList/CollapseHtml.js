@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Image, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../components/Shared/OpButton';
 import {
@@ -9,7 +9,7 @@ import {
 } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AText from '../../components/Shared/AText';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 const TitleTextSize = 23;
 const textSize = 15;
@@ -30,9 +30,9 @@ export default function CollapseHtml() {
   };
 
   //Constante de tradução, usar {t("CHAVE")} para tradução
-  const {t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const {colors} = useTheme(); //Cores do tema
+  const { colors } = useTheme(); //Cores do tema
 
   const navigation = useNavigation();
 
@@ -54,17 +54,18 @@ export default function CollapseHtml() {
     setState4((collapsed4 = !collapsed4));
   };
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]}>
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
+      {/*******************BASIC***********************/}
       <TouchableOpacity
         onPress={toggleExpanded}
-        style={[styles.class, {backgroundColor: colors.primary}]}>
+        style={[styles.class, { backgroundColor: colors.primary }]}>
         <AText
-          style={[styles.title, {color: colors.text}]}
+          style={[styles.title, { color: colors.text }]}
           defaultSize={TitleTextSize}>
           {t('module1h')}
         </AText>
         <AText
-          style={[styles.text, {color: colors.text}]}
+          style={[styles.text, { color: colors.text }]}
           defaultSize={textSize}>
           {t('concepts of html')}
         </AText>
@@ -74,7 +75,7 @@ export default function CollapseHtml() {
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed1}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={13}
@@ -83,7 +84,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Estrutura')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={14}
@@ -92,7 +93,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Header')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={12}
@@ -101,7 +102,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Frases')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={10}
@@ -110,7 +111,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('ButtonHtml')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={9}
@@ -119,7 +120,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('ImgTeoric')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={11}
@@ -128,18 +129,19 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Comentario')}
           />
         </View>
-        <View style={[styles.line, {borderColor: colors.primary}]}></View>
+        <View style={[styles.line, { borderColor: colors.primary }]}></View>
       </Collapsible>
+      {/*******************INTER***********************/}
       <TouchableOpacity
         onPress={toggleExpanded2}
-        style={[styles.class, {backgroundColor: colors.primary}]}>
+        style={[styles.class, { backgroundColor: colors.primary }]}>
         <AText
-          style={[styles.title, {color: colors.text}]}
+          style={[styles.title, { color: colors.text }]}
           defaultSize={TitleTextSize}>
           {t('module2h')}
         </AText>
         <AText
-          style={[styles.text, {color: colors.text}]}
+          style={[styles.text, { color: colors.text }]}
           defaultSize={textSize}>
           {t('intermediate html')}
         </AText>
@@ -149,7 +151,7 @@ export default function CollapseHtml() {
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed2}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={18}
@@ -158,7 +160,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Head')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={16}
@@ -167,7 +169,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Body')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={15}
@@ -176,7 +178,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Listas')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={23}
@@ -185,7 +187,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Links')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={17}
@@ -194,18 +196,19 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('Div')}
           />
         </View>
-        <View style={[styles.line, {borderColor: colors.primary}]}></View>
+        <View style={[styles.line, { borderColor: colors.primary }]}></View>
       </Collapsible>
+      {/*******************ADVANCED***********************/}
       <TouchableOpacity
         onPress={toggleExpanded3}
-        style={[styles.class, {backgroundColor: colors.primary}]}>
+        style={[styles.class, { backgroundColor: colors.primary }]}>
         <AText
-          style={[styles.title, {color: colors.text}]}
+          style={[styles.title, { color: colors.text }]}
           defaultSize={TitleTextSize}>
           {t('module3h')}
         </AText>
         <AText
-          style={[styles.text, {color: colors.text}]}
+          style={[styles.text, { color: colors.text }]}
           defaultSize={textSize}>
           {t('advanced html')}
         </AText>
@@ -215,7 +218,7 @@ export default function CollapseHtml() {
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed3}>
-        <View style={{flexDirection: 'row'}}>
+        {/*         <View style={{flexDirection: 'row'}}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={21}
@@ -251,18 +254,27 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('AdicionandoLinhas')}
           />
         </View>
-        <View style={[styles.line, {borderColor: colors.primary}]}></View>
+        <View style={[styles.line, {borderColor: colors.primary}]}></View> */}
+        <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            style={styles.figure4}
+            source={require('../../../assets/Robo_triste_centralizado.png')}
+          />
+        </View>
+        <View style={[styles.line, { borderColor: colors.primary }]}></View>
       </Collapsible>
+      {/*******************MASTERY***********************/}
       <TouchableOpacity
         onPress={toggleExpanded4}
-        style={[styles.class, {backgroundColor: colors.primary}]}>
+        style={[styles.class, { backgroundColor: colors.primary }]}>
         <AText
-          style={[styles.title, {color: colors.text}]}
+          style={[styles.title, { color: colors.text }]}
           defaultSize={TitleTextSize}>
           {t('module4h')}
         </AText>
         <AText
-          style={[styles.text, {color: colors.text}]}
+          style={[styles.text, { color: colors.text }]}
           defaultSize={textSize}>
           {t('mastery in html')}
         </AText>
@@ -272,7 +284,7 @@ export default function CollapseHtml() {
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed4}>
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={24}
@@ -281,7 +293,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('AdicionandoDados')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={27}
@@ -290,7 +302,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('TiposDeDados')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={26}
@@ -299,7 +311,7 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('SelecionandoDados')}
           />
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{ flexDirection: 'row' }}>
           <OpButton
             AulasSalvarOp={AulasSalvas}
             Verify={25}
@@ -308,7 +320,15 @@ export default function CollapseHtml() {
             onPressFunction={() => navigation.navigate('MostrandoVideos')}
           />
         </View>
-        <View style={[styles.line, {borderColor: colors.primary}]}></View>
+        <View style={[styles.line, { borderColor: colors.primary }]}></View> */}
+        <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            style={styles.figure4}
+            source={require('../../../assets/Robo_triste_centralizado.png')}
+          />
+        </View>
+        <View style={[styles.line, { borderColor: colors.primary }]}></View>
       </Collapsible>
     </View>
   );
@@ -362,6 +382,10 @@ const styles = StyleSheet.create({
     left: -60,
     width: 240,
     height: 240,
+  },
+  figure4: {
+    width: 100,
+    height: 200,
   },
   icon: {
     left: 25,

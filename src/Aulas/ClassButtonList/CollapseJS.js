@@ -58,6 +58,7 @@ export default function CollapseJS() {
     };
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
+            {/*******************BASIC***********************/}
             <TouchableOpacity
                 onPress={toggleExpanded}
                 style={[styles.class, { backgroundColor: colors.primary }]}
@@ -84,6 +85,7 @@ export default function CollapseJS() {
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
+            {/*******************INTER***********************/}
             <TouchableOpacity
                 onPress={toggleExpanded2}
                 style={[styles.class, { backgroundColor: colors.primary }]}
@@ -105,8 +107,9 @@ export default function CollapseJS() {
                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={35} theme={"classButton"} title={t("Creating loops")} onPressFunction={() => navigation.navigate("WhileFor")} />
                 </View>
-                <View style={[styles.line, { borderColor: colors.primary }]}></View>
+                <View style={[styles.line, { borderColor: colors.primary }]}></View> 
             </Collapsible>
+            {/*******************ADVANCED***********************/}
             <TouchableOpacity
                 onPress={toggleExpanded3}
                 style={[styles.class, { backgroundColor: colors.primary }]}
@@ -116,11 +119,16 @@ export default function CollapseJS() {
                 <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
-                <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
+                <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Image
+                        style={styles.figure4}
+                        source={require('../../../assets/Robo_triste_centralizado.png')}
+                    />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
+            {/*******************MASTERY***********************/}
             <TouchableOpacity
                 onPress={toggleExpanded4}
                 style={[styles.class, { backgroundColor: colors.primary }]}
@@ -130,8 +138,12 @@ export default function CollapseJS() {
                 <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed4}>
-                <View>
-                    <Text style={[{ color: colors.text, fontSize: 20, margin: 20 }]}>{t("Oops")}</Text>
+                <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Image
+                        style={styles.figure4}
+                        source={require('../../../assets/Robo_triste_centralizado.png')}
+                    />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
@@ -187,6 +199,10 @@ const styles = StyleSheet.create({
         left: -60,
         width: 240,
         height: 240,
+    },
+    figure4: {
+        width: 100,
+        height: 200,
     },
     icon: {
         left: 25,

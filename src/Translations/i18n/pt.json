@@ -15,7 +15,7 @@
       "_common*********": "*********COMUNS*********",
       "close": "Fechar",
       "change": "Alterar",
-      "Oops": "Opss, Ainda não foram encontradas aulas para esse módulo",
+      "Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
 
       "_comment*********":"*********CONFIGURAÇÕES*********",
       "settings": "Configurações",
@@ -393,11 +393,11 @@
       "Creating buttons":"Criando botões",
       "Adding image":"Adicionando imagens",
       "Adding comment":"Adicionando comentários",
-      "Data elements":"Elementos dos dados",
-      "Making a body":"Definindo um corpo",
+      "Data elements":"Definindo um head",
+      "Making a body":"Definindo um body",
       "Making lists":"Fazendo uma lista",
       "Making links":"Fazendo links",
-      "Generic sections, lines and space":"Seções genéricas, linhas e espaços",
+      "Generic sections, lines and space":"Div, linhas e espaços",
       "Identifying elements":"identificando elementos",
       "Table introduction":"introdução a tabela",
       "Creating data":"Criando dados",
@@ -542,6 +542,11 @@
             "doubleXP": "Dobro de Experiencia Desativado."
           }
         }
+      },
+      
+      "comingSoon" : {
+        "title": "EM BREVE!",
+        "message": "No momento esse recurso está em desenvolvimento. Fique de olho em futuras atualizações do CODAP!"
       },
       
       "notificationService" : {

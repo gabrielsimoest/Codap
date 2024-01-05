@@ -20,6 +20,7 @@ import { useTheme } from '@react-navigation/native';
 import AText from '../../Shared/AText';
 import { useTranslation } from 'react-i18next';
 import { AppContext } from '../../../common/Contexts/AppContext';
+import ComingSoonComponent from '../../Shared/ComingSoon';
 
 const size1 = 20;
 const size2 = 23;
@@ -44,6 +45,7 @@ export default function Store() {
 
   const { showAlert } = useContext(AppContext);
 
+  const [visibleCommingSoon, setVisibleCommingSoon] = useState(false);
   const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
   const [visibleModal, setVisibleModal] = useState(false);
   const [visibleModal2, setVisibleModal2] = useState(false);
@@ -121,6 +123,7 @@ export default function Store() {
     }
   };
 
+  //Função do baú, habilitar novamente quando for feito uma funcionalidade bacana
   const sendChest = async () => {
     if (Dependa > 500) {
       DoubleCoins = DoubleCoins - 500;
@@ -303,8 +306,9 @@ export default function Store() {
               </AText>
               <OpButton
                 theme={'modalButtonStore'}
-                title={t('buy')}
-                onPressFunction={() => sendChest()}
+                //title={t('buy')}
+                title={t('comingSoon.title')}
+                onPressFunction={() => setVisibleCommingSoon(true) /* sendChest() */ }
               />
             </View>
           </SafeAreaView>
@@ -407,6 +411,7 @@ export default function Store() {
           </SafeAreaView>
         </Modal>
       </ScrollView>
+        <ComingSoonComponent visible={visibleCommingSoon} onDismiss={() => setVisibleCommingSoon(!visibleCommingSoon)}/>
     </View>
   );
 }

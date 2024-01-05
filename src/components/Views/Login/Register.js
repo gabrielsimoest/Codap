@@ -2,6 +2,7 @@ import { useTheme } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+    Dimensions,
     Image,
     Keyboard,
     StyleSheet,
@@ -18,6 +19,9 @@ import AText from '../../Shared/AText';
 import CustomAlert from '../../Shared/CustomAlert';
 import CustomButton from '../../Shared/CustomButton';
 const validator = require('validator');
+
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 const db = SQLite.openDatabase(
     {
@@ -283,8 +287,8 @@ const styles = StyleSheet.create({
     box: {
         backgroundColor: "#141f29",
         borderRadius: 25,
-        height: 710,
-        width: 370,
+        height: windowHeight*0.945, //710
+        width: windowWidth*0.942, //370
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 2,
@@ -292,8 +296,8 @@ const styles = StyleSheet.create({
     shade: {
         backgroundColor: "rgba(0, 0, 0, 0.3)",
         borderRadius: 25,
-        height: 713,
-        width: 373,
+        height: windowHeight*0.95, //713
+        width: windowWidth*0.95, //373
     },
     image: {
         height: 250,

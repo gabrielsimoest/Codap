@@ -15,7 +15,7 @@
       "_common*********": "*********COMUNS*********",
       "close": "Close",
       "change": "Change",
-      "Oops": "Opss, I couldn't find any classes in this module",
+      "Oops": "There are no classes for this module yet. We will bring new, better and more interactive classes soon!",
 
       "_comment*********": "*********CONFIGURAÇÃO*********",
       "settings": "Settings",
@@ -389,11 +389,11 @@
       "Creating buttons":"Creating buttons",
       "Adding image":"Adding image",
       "Adding comment":"Adding comment",
-      "Data elements":"Data elements",
+      "Data elements":"Making a head",
       "Making a body":"Making a body",
       "Making lists":"Making lists",
       "Making links":"Making links",
-      "Generic sections, lines and space":"Generic sections, lines and space",
+      "Generic sections, lines and space":"Div, lines and space",
       "Identifying elements":"Identifying elements",
       "Table introduction":"Table introduction",
       "Creating data":"Creating data",
@@ -541,6 +541,11 @@
         }
       },
       
+      "comingSoon" : {
+        "title": "COMING SOON!",
+        "message": "This feature is currently under development. Keep an eye out for future CODAP updates!"
+      },
+
       "notificationService" : {
         "title": "Reminder",
         "message": "Come take more classes with CODAP, we miss you!"

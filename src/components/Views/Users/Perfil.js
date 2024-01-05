@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import ComingSoonComponent from '../../Shared/ComingSoon';
 
 const TextSize1 = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -39,6 +40,7 @@ export default function Perfil({navigation}) {
     const [visibleModal, setVisibleModal] = useState(false)
     const [visibleModal2, setVisibleModal2] = useState(false)
     const [visibleModal3, setVisibleModal3] = useState(false)
+    const [visibleComingSoon, setVisibleComingSoon] = useState(false)
     const [Senha, setSenha] = useState(false)
     const [SenhaAtual, setSenhaAtual] = useState(false)
     const [NovaSenha, setNovaSenha] = useState(false)
@@ -133,11 +135,14 @@ export default function Perfil({navigation}) {
                 <OpButton theme='primaryButton' title={t("edit account")} onPressFunction={() => setVisibleModal(true)} />
                 <OpButton theme='primaryButton' title={t("change password")} onPressFunction={() => setVisibleModal2(true)} />
                 {/* <OpButton theme='primaryButton' title={t("change picture")} onPressFunction={() => console.log("foto")} /> */}
-                <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => console.log("conquista")} />
+                <OpButton theme='primaryButton' title={t("achievements")} onPressFunction={() => setVisibleComingSoon(!visibleComingSoon)} />
                 <OpButton theme='primaryButton' title={t("exit")} onPressFunction={logout}
                     iconType='MaterialCommunityIcons' iconName={"logout"} iconColor={colors.text} iconSize={25} />
             </ScrollView>
-
+            <ComingSoonComponent
+                visible={visibleComingSoon}
+                onDismiss={() => setVisibleComingSoon(!visibleComingSoon)}
+            />
             <Modal
                 visible={visibleModal}
                 transparent={true}
