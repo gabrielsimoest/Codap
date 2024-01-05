@@ -21,58 +21,40 @@ Para executar o Projeto:
 
 1. Instalação do chocolatey
 
-https://chocolatey.org/
+    https://chocolatey.org/
 
 2. Instalação do Java JDK
-
-choco install -y nodejs-lts microsoft-openjdk11
+    ```bash
+    choco install -y nodejs-lts microsoft-openjdk11
+    ```
 
 3. Download do Android Studio 
 
-https://developer.android.com/
+    https://developer.android.com/
 
 4. Criação do Ambiete Android Studio
 
-Fazer o download R no SDK Manager
-Criar um ambiente android com a versão mais recente pedida no site do react native
-https://reactnative.dev/docs/environment-setup
+    a- Fazer o download R no SDK Manager
+    b- Criar um ambiente android com a versão mais recente pedida no site do react native
+    https://reactnative.dev/docs/environment-setup
 
 5. Variaveis de Ambiente ao PATH
 
-a- %LOCALAPPDATA%\Android\Sdk
+    a- %LOCALAPPDATA%\Android\Sdk
 
 6. Clone o repositório: git clone https://github.com/GtsSim0es/Codap.git
 
 7. Navegue até o diretório do projeto: cd Codap
 
-8. Instale as dependências: npm install ou yarn install
+8. Instale as dependências:
+    ```bash
+    npm install ou yarn install
+    ```
 
 9. Executar emulador
-```bash
-npx react-native run-android
-```
-
-## Estrutura de Diretórios Principais
-
-Codap/
-├── assets/
-├── src/
-│   ├── Aulas/
-│   ├── common/
-│   ├── components/
-│   ├── constants/
-│   ├── ReduxRoot/
-│   ├── screen/
-│   ├── Tests/
-│   ├── Translations/
-│   ├── App.js
-│   ├── imports.js
-│   ├── Listadmin.js
-│
-├── index.js
-├── ...
-└── readme.md
-
+    ```bash
+    npx react-native run-android
+    ```
 
 ## Contribuição
 
@@ -85,27 +67,30 @@ Se você tem ideias para melhorar o aplicativo, adicionar novos recursos ou apri
 ### Enviando Pull Requests
 Contribuições são bem-vindas! Se você deseja implementar alguma melhoria ou corrigir um problema existente, siga estes passos:
 
-Fork o repositório para sua conta pessoal.
-Crie uma branch com um nome descritivo para a alteração que você está fazendo.
-Faça as alterações necessárias no código, mantendo um estilo consistente com o projeto.
-Teste suas mudanças para garantir que tudo funcione conforme o esperado.
-Envie um Pull Request (PR) explicando suas alterações. Inclua informações detalhadas sobre o que foi modificado e porquê.
-Participe da discussão. Esteja aberto para responder perguntas ou fazer ajustes conforme necessário.
-Lembre-se de seguir as diretrizes de código e estilo do projeto, se existirem, para garantir que as contribuições se encaixem adequadamente no projeto.
+1. Fork o repositório para sua conta pessoal.
+2. Crie uma branch com um nome descritivo para a alteração que você está fazendo.
+3. Faça as alterações necessárias no código, mantendo um estilo consistente com o projeto.
+4. Teste suas mudanças para garantir que tudo funcione conforme o esperado.
+5. Envie um Pull Request (PR) explicando suas alterações. Inclua informações detalhadas sobre o que foi modificado e porquê.
+6. Participe da discussão. Esteja aberto para responder perguntas ou fazer ajustes conforme necessário.
+7. Lembre-se de seguir as diretrizes de código e estilo do projeto, se existirem, para garantir que as contribuições se encaixem adequadamente no projeto.
 
 Agradecemos antecipadamente por suas contribuições e pelo interesse em melhorar este projeto!
 
 ## Autores
 
-Gabriel Simões
-Desenvolvedor
+- [Gabriel Simões](https://gabrielsimoesdeveloper.com.br/)
 
-Gabriel Reverso
-Desenvolvedor
+  > _Desenvolvedor_
 
-Thainá
-Criação de artes e do mascote Cody
+- [Gabriel Reverso](https://github.com/GabrielReverso)
+
+  > _Desenvolvedor_
+
+- Thainá
+
+  > _Criação de artes e do mascote Cody_
 
 ## Licença
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[GNU General Public License](https://choosealicense.com/licenses/gpl-3.0/)
