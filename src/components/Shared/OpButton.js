@@ -26,10 +26,20 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
 
     let iconCheckColor = appTheme === CustomDarkMode? '#233648' : '#c1c1c1' //"gray"
     let iconCheckName = "checkmark-circle-outline"
-    let text = JSON.stringify({AulasSalvarOp})
-    if (text.includes(Verify)) {
-        iconCheckColor = "#637aff" //"green"
-        iconCheckName = "checkmark-circle-sharp"
+    
+    let ClassesString = JSON.stringify({ AulasSalvarOp });
+
+    // Transforma a string em uma array
+    let ClassesArray = [];
+    if (ClassesString && ClassesString.match(/\d+/g)) {
+        // Transforma a string em uma array
+        ClassesArray = ClassesString.match(/\d+/g).map(Number);
+    }
+
+    // Verifica se um número específico está na array
+    if (ClassesArray.includes(Verify)) {
+        iconCheckColor = '#637aff'; //"green"
+        iconCheckName = "checkmark-circle-sharp";
     }
 
     //Constante de tradução, usar {t("CHAVE")} para tradução

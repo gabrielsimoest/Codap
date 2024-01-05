@@ -6,9 +6,9 @@
       "GTS":"Gabriel Terra Simões - Estudante de engenharia da computação, UNAERP",
       "GRP":"Gabriel Reverso Pereira - Estudante de engenharia da computação, UNAERP",
       "dev_note":"Nota dos desenvolvedores:",
-      "dev_note2":"Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estariniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o NOME DO MASCOTE, o nosso fiel ajudante. ",
+      "dev_note2":"Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estariniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o Cody DO MASCOTE, o nosso fiel ajudante. ",
       "special thanks":"Agradecimentos especiais",
-      "names":"Thainá - pela criação do mascote \n BETA TESTER \n BETA TESTER \n BETA TESTER \n . \n . \n . \n ",
+      "names":"Thainá - pela criação do mascote",
       "declaration":"Declaração de uso de imagens:",
       "pictures":"Algumas imagens utilizadas no aplicativo não são de nossa autoria e foram obtidas pelo site do freepick",
 
@@ -103,7 +103,7 @@
       "html" : {
         "basic" : {
           "conhecendo html" : {
-            "Estrutura_mainText": "Olá, aqui é o NOME. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web.",
+            "Estrutura_mainText": "Olá, aqui é o Cody. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web.",
             "Estrutura_secondText": "Primeiramente estarei mostrando um exemplo bem básico de estrutura para você já ir tendo uma ideia de como o HTML se parece.",
             "Estrutura_endText": "Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis.",
             "TagsElements_txt": "Agora que vimos a estrutura, vamos entender melhor o que está nela.",
@@ -368,7 +368,7 @@
       "css" : {
 
       },
-      "lets learn CSS":"Olá, aqui é o NOME, vamos aprender CSS? O CSS é um mecanismo para adicionar estilos a um documento web.",
+      "lets learn CSS":"Olá, aqui é o Cody, vamos aprender CSS? O CSS é um mecanismo para adicionar estilos a um documento web.",
       "CSS code can be applied directly to html tags or contained within <style> tags":"O código CSS pode ser aplicado diretamente nas tags html ou ficar contido dentro das tags <style>",
       "CSS example":"O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome do seletor receberão aquele estilo.",
       "what is the role of CSS?":"Qual a função do CSS?",

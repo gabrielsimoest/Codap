@@ -15,7 +15,7 @@ export function ConhecendoJS({ navigation }) {
             //BARRA DE PROGRESSO
             progresso="0%"
             //Texto principal
-            txt="Olá, aqui é o NOME, vamos aprender JavaScript? Essa é uma linguagem de programação utilizada junto com o HTML para criação de funcionalidades que o HTML não proporciona. "
+            txt="Olá, aqui é o Cody, vamos aprender JavaScript? Essa é uma linguagem de programação utilizada junto com o HTML para criação de funcionalidades que o HTML não proporciona. "
             //Textos opcionais
             adicionaltxt="JavaScript tem outros usos, mas estaremos vendo para criação de sites."
             adicionaltxt2="Para usar ele, devemos abrir uma tag <script> em seu documento HTML para estar codificando."

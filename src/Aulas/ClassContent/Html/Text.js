@@ -16,7 +16,7 @@ export function Basic1_html({ navigation }) {
                     </TouchableOpacity>
                     <View style={{ alignItems: 'center', margin: 10, marginBottom: 100 }}>
                         <Text style={styles.text}>
-                            Olá, aqui é o NOME, fui instruído por meus criadores a ensinar diversas linguagens de programação diferentes. Vamos aprender sobre HTML?
+                            Olá, aqui é o Cody, fui instruído por meus criadores a ensinar diversas linguagens de programação diferentes. Vamos aprender sobre HTML?
                             Essa é uma linguagem muito usada para desenvolvimento Web, então é uma linguagem amplamente usada no mercado de trabalho.
                             Antes da nossa primeira aula, este é um exemplo de estrutura HTML:
                         </Text>
