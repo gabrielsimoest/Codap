@@ -34,14 +34,13 @@ export const ClassesScreens = [
     { name: "TestCarousel", component: TestCarousel },
     { name: "getDependabots", component: DependaTest},
 
-    //FROM IMPORTS
-    { name: "Basic1_html", component: imports.Basic1_html },
-    { name: "Basic2_html", component: imports.Basic2_html },
-    { name: "Basic3_html", component: imports.Basic3_html },
+    //VERIFICAR REMOÇÃO
     { name: "BasicPrat1_html", component: imports.BasicPrat1_html },
     { name: "BasicPrat2_html", component: imports.BasicPrat2_html },
     { name: "BasicPrat3_html", component: imports.BasicPrat3_html },
     { name: "BasicPrat4_html", component: imports.BasicPrat4_html },
+
+    //FROM IMPORTS
     { name: "Estrutura", component: imports.Estrutura },
     { name: "TagsElementos", component: imports.TagsElements },
     { name: "HtmlStartEx1", component: imports.HtmlStartEx1 },

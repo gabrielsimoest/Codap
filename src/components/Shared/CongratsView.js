@@ -113,7 +113,7 @@ export default function CongratsView({navigation, progresso}) {
         </View>
         <Image
           style={styles.figure}
-          source={require('../../../assets/Robo_advanced.png')}
+          source={require('../../../assets/Robo_feliz.png')}
         />
       </View>
       <OpButton
@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   figure: {
-    top: -130,
-    left: -180,
-    width: 720,
-    height: 720,
+    top: '5%',
+    left: '21%',
+    width: '55%',
+    height: '55%',
   },
 });

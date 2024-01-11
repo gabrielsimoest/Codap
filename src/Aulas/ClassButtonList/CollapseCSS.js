@@ -5,6 +5,7 @@ import {
     Text,
     View,
     TouchableOpacity,
+    Dimensions,
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../components/Shared/OpButton';
@@ -15,6 +16,8 @@ import { useTranslation } from 'react-i18next';
 
 const TitleTextSize = 23;
 const textSize = 15;
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 export default function CollapseCSS() {
 
@@ -65,7 +68,7 @@ export default function CollapseCSS() {
             >
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module1c")}</AText>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("concepts of CSS")}</AText>
-                <Image style={styles.figure} source={require('../../../assets/Robo_basics.png')} />
+                <Image style={styles.basicImg} source={require('../../../assets/Robo_basics.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: "row" }} >
@@ -92,7 +95,7 @@ export default function CollapseCSS() {
             >
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module2c")}</AText>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("intermediate CSS")}</AText>
-                <Image style={styles.figure2} source={require('../../../assets/Robo_inter.png')} />
+                <Image style={styles.commonImg} source={require('../../../assets/Robo_pensativo.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
                 <View style={{ flexDirection: "row" }} >
@@ -113,14 +116,14 @@ export default function CollapseCSS() {
             >
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module3c")}</AText>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("advanced CSS")}</AText>
-                <Image style={styles.figure3} source={require('../../../assets/Robo_advanced.png')} />
+                <Image style={styles.commonImg} source={require('../../../assets/Robo_feliz.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed3}>
                 <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
-                        style={styles.figure4}
-                        source={require('../../../assets/Robo_triste_centralizado.png')}
+                        style={styles.comingSoonImg}
+                        source={require('../../../assets/Robo_triste.png')}
                     />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -132,14 +135,14 @@ export default function CollapseCSS() {
             >
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={TitleTextSize}>{t("module4c")}</AText>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={textSize}>{t("mastery in CSS")}</AText>
-                <Image style={styles.figure3} source={require('../../../assets/Robo_master.png')} />
+                <Image style={styles.masterImg} source={require('../../../assets/Robo_master.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed4}>
                 <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
-                        style={styles.figure4}
-                        source={require('../../../assets/Robo_triste_centralizado.png')}
+                        style={styles.comingSoonImg}
+                        source={require('../../../assets/Robo_triste.png')}
                     />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -179,27 +182,26 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
     },
-    figure: {
-        top: -70,
-        left: -50,
-        width: 240,
-        height: 240,
+    basicImg: {
+        top: 0,
+        left: windowWidth * 0.065,
+        width: windowWidth * 0.185,
+        height: windowHeight * 0.185,
     },
-    figure2: {
-        top: -70,
-        left: -35,
-        width: 240,
-        height: 240,
+    commonImg: {
+        left: windowWidth * 0.065,
+        width: windowWidth * 0.189,
+        height: windowHeight * 0.189,
     },
-    figure3: {
-        top: -45,
-        left: -60,
-        width: 240,
-        height: 240,
+    masterImg: {
+        left: windowWidth * 0.04,
+        width: windowWidth * 0.25,
+        height: windowHeight * 0.18,
     },
-    figure4: {
-        width: 100,
-        height: 200,
+    comingSoonImg: {
+        width: windowWidth * 0.25,
+        height: windowHeight * 0.25,
+        right: windowWidth * 0.01,
     },
     icon: {
         left: 25,

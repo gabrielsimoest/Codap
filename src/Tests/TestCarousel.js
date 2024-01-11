@@ -320,7 +320,7 @@ const TutorialCarousel = ({visible = true}) => {
     {
       title: 'Página 1',
       text: 'Texto da página 1',
-      image: require('../../assets/Robo_advanced.png'),
+      image: require('../../assets/Robo_feliz.png'),
     },
     {
       title: 'Página 2',

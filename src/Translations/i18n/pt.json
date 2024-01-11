@@ -6,7 +6,7 @@
       "GTS":"Gabriel Terra Simões - Estudante de engenharia da computação, UNAERP",
       "GRP":"Gabriel Reverso Pereira - Estudante de engenharia da computação, UNAERP",
       "dev_note":"Nota dos desenvolvedores:",
-      "dev_note2":"Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estariniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o Cody DO MASCOTE, o nosso fiel ajudante. ",
+      "dev_note2":"Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP - sendo o vencedor do 14º desafio da computação na universidade. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estar iniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o Cody, o nosso fiel ajudante.",
       "special thanks":"Agradecimentos especiais",
       "names":"Thainá - pela criação do mascote",
       "declaration":"Declaração de uso de imagens:",
@@ -433,12 +433,13 @@
       "verify": "Verificar",
       "congrats": "Parabéns, você está certo!",
       "continue": "Continuar",
-      "oh no": "Aah não, você errou!",
+      "oh no": "Ah não, você errou!",
       "try again": "Tentar novamente",
       "back": "Voltar à Tela Inicial",
       "congratulations": "Parábens, Você foi feito para isso!",
       "keep it up":"Continue Assim!",
       "you were amazing":"Você foi incrivel!",
+      "you'll do better next time!":"Você melhora na próxima!",
 
       "_comment7*********": "*********TUTORIAIS*********",
 

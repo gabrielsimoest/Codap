@@ -29,7 +29,7 @@ export const TutorialTheory = ({ visible, setModalVisible }) => {
     {
       title: 'tutorial.theory.tutorial title theory 1',
       text: 'tutorial.theory.tutorial theory 1',
-      image: require('../../../assets/Robo_pensativo_centralizado.png'),
+      image: require('../../../assets/Robo_pensativo.png'),
       content: "image",
     },
     {
@@ -47,13 +47,13 @@ export const TutorialTheory = ({ visible, setModalVisible }) => {
     {
       title: 'tutorial.theory.tutorial title theory 4',
       text: 'tutorial.theory.tutorial theory 4',
-      image: require('../../../assets/Tutorial_indexWeb.gif'), //TODO:CORRIGIR Tutorial_web.gif //IMAGEM CERTA
+      image: require('../../../assets/Tutorial_web.gif'),
       content: "gif",
     },
     {
       title: 'tutorial.common.tutorial title end',
       text: 'tutorial.common.tutorial end',
-      image: require('../../../assets/Robo_feliz_centralizado.png'),
+      image: require('../../../assets/Robo_feliz.png'),
       content: "image",
     },
   ];
@@ -150,31 +150,31 @@ export const TutorialOption = ({ visible, setModalVisible }) => {
     {
       title: 'tutorial.option_exercise.option title 1',
       text: 'tutorial.option_exercise.option 1',
-      image: require('../../../assets/Robo_pensativo_centralizado.png'),
+      image: require('../../../assets/Robo_pensativo.png'),
       content: "image",
     },
     {
       title: 'tutorial.option_exercise.option title 2',
       text: 'tutorial.option_exercise.option 2',
-      image: require('../../../assets/Tutorial_code.gif'),
+      image: require('../../../assets/Tutorial_option1.gif'),
       content: "gif",
     },
     {
       title: 'tutorial.option_exercise.option title 3',
       text: 'tutorial.option_exercise.option 3',
-      image: require('../../../assets/Tutorial_indexWeb.gif'),
+      image: require('../../../assets/Tutorial_option2.gif'),
       content: "gif",
     },
     {
       title: 'tutorial.common.tutorial title timer',
       text: 'tutorial.common.tutorial timer',
-      image: require('../../../assets/Tutorial_indexWeb.gif'), //TODO:CORRIGIR Tutorial_web.gif //IMAGEM CERTA
-      content: "gif",
+      image: require('../../../assets/Robo_pensativo.png'),
+      content: "image",
     },
     {
       title: 'tutorial.common.tutorial title end',
       text: 'tutorial.common.tutorial end',
-      image: require('../../../assets/Robo_feliz_centralizado.png'),
+      image: require('../../../assets/Robo_feliz.png'),
       content: "image",
     },
   ];
@@ -232,7 +232,7 @@ export const TutorialOption = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
+                <UniversalPicture content={item.content} source={item.image} style={styles.image2}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -271,25 +271,25 @@ export const TutorialText = ({ visible, setModalVisible }) => {
     {
       title: 'tutorial.text_exercise.text title 1',
       text: 'tutorial.text_exercise.text 1',
-      image: require('../../../assets/Tutorial_indexWeb.gif'), //TODO:CORRIGIR Tutorial_web.gif //IMAGEM CERTA
+      image: require('../../../assets/Tutorial_text.gif'), 
       content: "gif",
     },
     {
       title: 'tutorial.text_exercise.text title 2',
       text: 'tutorial.text_exercise.text 2',
-      image: require('../../../assets/Robo_pensativo_centralizado.png'),
+      image: require('../../../assets/Robo_pensativo.png'),
       content: "image",
     },
     {
       title: 'tutorial.common.tutorial title timer',
       text: 'tutorial.common.tutorial timer',
-      image: require('../../../assets/Tutorial_indexWeb.gif'), //TODO:CORRIGIR Tutorial_web.gif //IMAGEM CERTA
-      content: "gif",
+      image: require('../../../assets/Robo_pensativo.png'),
+      content: "image",
     },
     {
       title: 'tutorial.common.tutorial title end',
       text: 'tutorial.common.tutorial end',
-      image: require('../../../assets/Robo_feliz_centralizado.png'),
+      image: require('../../../assets/Robo_feliz.png'),
       content: "image",
     },
   ];
@@ -347,7 +347,7 @@ export const TutorialText = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
+                <UniversalPicture content={item.content} source={item.image} style={styles.image2}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -386,31 +386,31 @@ export const TutorialSelect = ({ visible, setModalVisible }) => {
     {
       title: 'tutorial.select_exercise.select title 1',
       text: 'tutorial.select_exercise.select 1',
-      image: require('../../../assets/Robo_pensativo_centralizado.png'),
+      image: require('../../../assets/Robo_pensativo.png'),
       content: "image",
     },
     {
       title: 'tutorial.select_exercise.select title 2',
       text: 'tutorial.select_exercise.select 2',
-      image: require('../../../assets/Tutorial_code.gif'),
+      image: require('../../../assets/Tutorial_select1.gif'),
       content: "gif",
     },
     {
       title: 'tutorial.select_exercise.select title 3',
       text: 'tutorial.select_exercise.select 3',
-      image: require('../../../assets/Tutorial_indexWeb.gif'),
+      image: require('../../../assets/Tutorial_select2.gif'),
       content: "gif",
     },
     {
       title: 'tutorial.common.tutorial title timer',
       text: 'tutorial.common.tutorial timer',
-      image: require('../../../assets/Tutorial_indexWeb.gif'), //TODO:CORRIGIR Tutorial_web.gif //IMAGEM CERTA
-      content: "gif",
+      image: require('../../../assets/Robo_pensativo.png'),
+      content: "image",
     },
     {
       title: 'tutorial.common.tutorial title end',
       text: 'tutorial.common.tutorial end',
-      image: require('../../../assets/Robo_feliz_centralizado.png'),
+      image: require('../../../assets/Robo_feliz.png'),
       content: "image",
     },
   ];
@@ -468,7 +468,7 @@ export const TutorialSelect = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
+                <UniversalPicture content={item.content} source={item.image} style={styles.image3}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -538,6 +538,18 @@ const styles = StyleSheet.create({
   image: {
     width: screenWidth * 0.75,
     height: screenWidth * 0.75,
+    resizeMode: 'contain',
+    marginVertical: 10,
+  },
+  image2: {
+    width: screenWidth * 0.6,
+    height: screenHeight * 0.4,
+    resizeMode: 'contain',
+    marginVertical: 10,
+  },
+  image3: {
+    width: screenWidth * 0.7,
+    height: screenHeight * 0.5,
     resizeMode: 'contain',
     marginVertical: 10,
   },

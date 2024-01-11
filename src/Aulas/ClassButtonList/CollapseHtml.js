@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, TouchableOpacity, Dimensions } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../../components/Shared/OpButton';
 import {
@@ -13,6 +13,8 @@ import { useTranslation } from 'react-i18next';
 
 const TitleTextSize = 23;
 const textSize = 15;
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 export default function CollapseHtml() {
   //Salvar aulas
@@ -70,7 +72,7 @@ export default function CollapseHtml() {
           {t('concepts of html')}
         </AText>
         <Image
-          style={styles.figure}
+          style={styles.basicImg}
           source={require('../../../assets/Robo_basics.png')}
         />
       </TouchableOpacity>
@@ -146,8 +148,8 @@ export default function CollapseHtml() {
           {t('intermediate html')}
         </AText>
         <Image
-          style={styles.figure2}
-          source={require('../../../assets/Robo_inter.png')}
+          style={styles.commonImg}
+          source={require('../../../assets/Robo_pensativo.png')}
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed2}>
@@ -213,8 +215,8 @@ export default function CollapseHtml() {
           {t('advanced html')}
         </AText>
         <Image
-          style={styles.figure3}
-          source={require('../../../assets/Robo_advanced.png')}
+          style={styles.commonImg}
+          source={require('../../../assets/Robo_feliz.png')}
         />
       </TouchableOpacity>
       <Collapsible collapsed={collapsed3}>
@@ -258,8 +260,8 @@ export default function CollapseHtml() {
         <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            style={styles.figure4}
-            source={require('../../../assets/Robo_triste_centralizado.png')}
+            style={styles.comingSoonImg}
+            source={require('../../../assets/Robo_triste.png')}
           />
         </View>
         <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -279,7 +281,7 @@ export default function CollapseHtml() {
           {t('mastery in html')}
         </AText>
         <Image
-          style={styles.figure3}
+          style={styles.masterImg}
           source={require('../../../assets/Robo_master.png')}
         />
       </TouchableOpacity>
@@ -324,8 +326,8 @@ export default function CollapseHtml() {
         <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
           <Image
-            style={styles.figure4}
-            source={require('../../../assets/Robo_triste_centralizado.png')}
+            style={styles.comingSoonImg}
+            source={require('../../../assets/Robo_triste.png')}
           />
         </View>
         <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -365,27 +367,26 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
   },
-  figure: {
-    top: -70,
-    left: -50,
-    width: 240,
-    height: 240,
+  basicImg: {
+    top: 0,
+    left: windowWidth * 0.065,
+    width: windowWidth * 0.185,
+    height: windowHeight * 0.185,
   },
-  figure2: {
-    top: -70,
-    left: -35,
-    width: 240,
-    height: 240,
+  commonImg: {
+    left: windowWidth * 0.065,
+    width: windowWidth * 0.189,
+    height: windowHeight * 0.189,
   },
-  figure3: {
-    top: -45,
-    left: -60,
-    width: 240,
-    height: 240,
+  masterImg: {
+    left: windowWidth * 0.04,
+    width: windowWidth * 0.25,
+    height: windowHeight * 0.18,
   },
-  figure4: {
-    width: 100,
-    height: 200,
+  comingSoonImg: {
+    width: windowWidth * 0.25,
+    height: windowHeight * 0.25,
+    right: windowWidth * 0.01,
   },
   icon: {
     left: 25,

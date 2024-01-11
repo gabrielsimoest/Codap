@@ -48,7 +48,7 @@ export default function Login({ navigation }) {
         try {
             const IdUserOnStorage = await AsyncStorage.getItem('IdUser');
 
-            if (IdUserOnStorage != 0)
+            if (IdUserOnStorage != null && IdUserOnStorage != 0)
                 navigation.navigate('Home', { screen: 'Aulas' });
 
         } catch (error) {
@@ -195,7 +195,7 @@ export default function Login({ navigation }) {
                                 color="#7977FD"
                                 onPressFunction={setData}
                             />
-                            <Image style={styles.image} source={require('../../../../assets/Robo_feliz_centralizado.png')} />
+                            <Image style={styles.image} source={require('../../../../assets/Robo_feliz.png')} />
                             <TouchableOpacity onPress={onPressHandler}>
                                 <Text style={[styles.register, { color: colors.text }]}>{t("login.register")}</Text>
                             </TouchableOpacity>

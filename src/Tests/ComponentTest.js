@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import OpButton from '../components/Shared/OpButton';
 import {
@@ -10,6 +10,8 @@ import AText from '../components/Shared/AText';
 
 const TitleTextSize = 23;
 const textSize = 15;
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 export default function ComponentTester() {
     //Salvar aulas
@@ -40,7 +42,7 @@ export default function ComponentTester() {
                 </AText>
                 <Image
                     style={styles.figure2}
-                    source={require('../../assets/Robo_inter.png')}
+                    source={require('../../assets/Robo_pensativo.png')}
                 />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
@@ -110,22 +112,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     figure: {
-        top: -70,
-        left: -50,
-        width: 240,
-        height: 240,
-    },
-    figure2: {
-        top: -70,
-        left: -35,
-        width: 240,
-        height: 240,
-    },
-    figure3: {
-        top: -45,
-        left: -60,
-        width: 240,
-        height: 240,
+        left: windowWidth * 0.065,
+        width: windowWidth * 0.189,
+        height: windowHeight * 0.189,
     },
     icon: {
         left: 25,

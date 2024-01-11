@@ -20,7 +20,7 @@ const db = SQLite.openDatabase(
     error => { console.log(error) }
 );
 
-function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true, AulasSalvarOp, Verify }) {
+function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor, iconSize, textColor = "white", themeColorEnable = true, AulasSalvarOp, Verify = 0 }) {
     
     const { theme: appTheme } = useContext(AppContext);
 
@@ -56,7 +56,7 @@ function OpButton({ theme, title, onPressFunction, iconType, iconName, iconColor
     }
 
     var iconCheckHide;
-    if (AulasSalvarOp == "" || AulasSalvarOp == null)
+    if (Verify === 0)
         iconCheckHide = "hide"
     else
         iconCheckHide = "check"

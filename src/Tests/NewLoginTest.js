@@ -54,7 +54,7 @@ export default function NewLoginTest({ navigation }) {
                                 color="#7977FD"
                             //onPressFunction={setData}
                             />
-                            <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} />
+                            <Image style={styles.image} source={require('../../assets/Robo_feliz.png')} />
                             <TouchableOpacity onPress={onPressHandler}><Text style={styles.register}>Clique aqui para se registrar</Text></TouchableOpacity>
                         </View>
                     </View>

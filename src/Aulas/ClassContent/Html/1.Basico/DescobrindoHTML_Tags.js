@@ -27,7 +27,7 @@ export function Estrutura({ navigation }) {
       tutorialVisible={true}
       endText={t("html.basic.conhecendo html.Estrutura_endText")}
       aulaSalvar="none"
-      highlight={['HTML', 'NOME', 'Web']}
+      highlight={['HTML', 'Cody', 'Web']}
       navegar="TagsElementos"
     />
   );
@@ -57,6 +57,7 @@ export function TagsElements({ navigation }) {
       tutorialVisible={false}
       endText={t("html.basic.conhecendo html.TagsElements_adicionaltxt_end")}
       aulaSalvar="none"
+      highlight={["html", "DEVE"]}
       navegar="HtmlStartEx1"
     />
   );
@@ -78,6 +79,7 @@ export function HtmlStartEx1({ navigation }) {
       optCerta="opt4"
       aulaSalvar="none"
       tutorialVisible={true}
+      txtToHighlight={["html"]}
       navegar="HtmlStartEx2"
     />
   );
@@ -98,6 +100,7 @@ export function HtmlStartEx2({ navigation }) {
       opt4="</>"
       optCerta="opt3"
       aulaSalvar="none"
+      txtToHighlight={["h1"]}
       navegar="HtmlStartEx3"
     />
   );
@@ -118,6 +121,7 @@ export function HtmlStartEx3({ navigation }) {
       opt4="{ }"
       optCerta="opt1"
       aulaSalvar="none"
+      txtToHighlight={["tag"]}
       navegar="HtmlStartEx4"
     />
   );
@@ -158,6 +162,7 @@ export function HtmlStartEx5({ navigation }) {
       optCerta="opt1"
       aulaSalvar={13}
       Salvar={true}
+      txtToHighlight={["html", "não"]}
       navegar="CongratsView"
     />
   );

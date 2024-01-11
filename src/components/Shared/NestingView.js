@@ -23,6 +23,7 @@ import AHighlighter from './AHighlighter';
 import { CustomDarkMode } from '../../common/Themes/DefaultThemes';
 import { useContext } from 'react';
 import { AppContext } from '../../common/Contexts/AppContext';
+import { TutorialText } from './Tutorials';
 
 const textSize = 23;
 const optSize = 20;
@@ -51,6 +52,7 @@ export default function NestingView({
   aulaSalvar,
   Salvar,
   txtToHighlight = [''],
+  tutorialVisible = false,
 }) {
   //Constante de tradução, usar {t("CHAVE")} para tradução
   const {t, i18n} = useTranslation();
@@ -58,6 +60,9 @@ export default function NestingView({
   const {colors} = useTheme(); //Variavel de cor do tema
 
   const { theme } = useContext(AppContext);
+
+  //Define tutorial visivel
+  const [TutorialVisible, setTutorialVisible] = useState(tutorialVisible);
 
   const [visibleModal, setVisibleModal] = useState('false');
   const [visibleModalE, setVisibleModalE] = useState('false');
@@ -152,7 +157,7 @@ export default function NestingView({
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => setTutorialVisible(!TutorialVisible)}
               style={{width: 50, top: 8, marginLeft: '72%'}}>
               <Icon
                 type={Icons.Ionicons}
@@ -162,6 +167,7 @@ export default function NestingView({
               />
             </TouchableOpacity>
           </View>
+          <TutorialText visible={TutorialVisible} setModalVisible={setTutorialVisible} />
           <Timer navigation={navigation} seconds={sec} />
           <SaveClass AulaId={aulaSalvar} Salvar={Salvar} />
           <SafeAreaView>

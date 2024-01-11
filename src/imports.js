@@ -333,10 +333,3 @@ export {
     BasicPrat3_html,
     BasicPrat4_html,
 } from './Aulas/ClassContent/Html/Basic_html';
-
-export {
-    Basic1_html,
-    Basic2_html,
-    Basic3_html,
-} from './Aulas/ClassContent/Html/Text';
-
