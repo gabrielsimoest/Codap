@@ -694,7 +694,7 @@
           },
           "invalid" : {
             "title" : "Dados inválidos!",
-            "message": "Senha ou Email incorretos, verifique os dados navamente."
+            "message": "Senha ou Email incorretos. Verifique os dados novamente!."
           }
         },
         "password" : "Senha",

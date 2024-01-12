@@ -19,6 +19,13 @@ import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
 import { useTheme } from '@react-navigation/native';
 import CustomAlert from '../../Shared/CustomAlert';
 import { useTranslation } from 'react-i18next';
+import 'react-native-get-random-values';
+import { setRandomFallback } from 'bcryptjs';
+import { getRandomValues } from 'react-native-get-random-values';
+
+setRandomFallback(getRandomValues);
+
+import bcrypt from 'bcryptjs';
 
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
@@ -94,65 +101,72 @@ export default function Login({ navigation }) {
         }
     }
 
+    const showAlert = (title, message) => {
+        setAlertTitle(title);
+        setAlertMessage(message);
+        setAlertVisible(true);
+    };
+
     const setData = async () => {
         if (email.length == 0 || senha.length == 0) {
-            //Alert.alert('Alerta!', 'Por favor preencha todos os campos.')
-            setAlertTitle(t("login.alert.empty.title"))
-            setAlertMessage(t("login.alert.empty.message"))
-            setAlertVisible(true)
+            showAlert(t("login.alert.invalid.title"), t("login.alert.invalid.message"));
         } else {
             try {
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
-                        "SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Senha=? and Email=? LIMIT 1",
-                        [senha, email],
+                        "SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Email=? LIMIT 1",
+                        [email],
                         async (tx, results) => {
                             var len = results.rows.length;
                             if (len > 0) {
                                 const userId = results.rows.item(0).ID;
+                                const hash = results.rows.item(0).Senha;
 
-                                await AsyncStorage.setItem('IdUser', JSON.stringify(userId));
-                                await AsyncStorage.setItem('Email', results.rows.item(0).Email);
-                                await AsyncStorage.setItem('Name', results.rows.item(0).Name);
-                                await AsyncStorage.setItem('Senha', JSON.stringify(results.rows.item(0).Senha));
-                                await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
-                                await AsyncStorage.setItem('Double', JSON.stringify(results.rows.item(0).Double));
-                                await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
-                                await AsyncStorage.setItem('XPDouble', '0');
+                                const isPasswordValid = bcrypt.compareSync(senha, hash);
 
-                                db.transaction(async (tx2) => {
-                                    await tx2.executeSql(
-                                        "SELECT TipoAula FROM Aulas WHERE UserID = ?",
-                                        [userId],
-                                        async (tx2, results2) => {
-                                            const rows = results2.rows;
-                                            const aulaTypes = [];
+                                if (isPasswordValid) {
+                                    await AsyncStorage.setItem('IdUser', JSON.stringify(userId));
+                                    await AsyncStorage.setItem('Email', results.rows.item(0).Email);
+                                    await AsyncStorage.setItem('Name', results.rows.item(0).Name);
+                                    await AsyncStorage.setItem('Senha', JSON.stringify(hash));
+                                    await AsyncStorage.setItem('DependaBots', JSON.stringify(results.rows.item(0).DependaBots));
+                                    await AsyncStorage.setItem('Double', JSON.stringify(results.rows.item(0).Double));
+                                    await AsyncStorage.setItem('XP', JSON.stringify(results.rows.item(0).XP));
+                                    await AsyncStorage.setItem('XPDouble', '0');
 
-                                            for (let i = 0; i < rows.length; i++) {
-                                                aulaTypes.push(rows.item(i).TipoAula);
+                                    db.transaction(async (tx2) => {
+                                        await tx2.executeSql(
+                                            "SELECT TipoAula FROM Aulas WHERE UserID = ?",
+                                            [userId],
+                                            async (tx2, results2) => {
+                                                const rows = results2.rows;
+                                                const aulaTypes = [];
+
+                                                for (let i = 0; i < rows.length; i++) {
+                                                    aulaTypes.push(rows.item(i).TipoAula);
+                                                }
+                                                const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ') : '';
+
+                                                await AsyncStorage.setItem('Aulas', aulasString);
+                                            },
+                                            (tx, error) => {
+                                                console.log('Error fetching Aulas:', error);
                                             }
-                                            const aulasString = aulaTypes.length > 0 ? aulaTypes.join(', ') : '';
+                                        );
+                                    });
 
-                                            await AsyncStorage.setItem('Aulas', aulasString);
-                                        },
-                                        (tx, error) => {
-                                            console.log('Error fetching Aulas:', error);
-                                        }
-                                    );
-                                });
-
-                                navigation.navigate('Home', { screen: 'Aulas' });
+                                    navigation.navigate('Home', { screen: 'Aulas' });
+                                } else {
+                                    showAlert(t("login.alert.invalid.title"), t("login.alert.invalid.message"));
+                                }
                             } else {
-                                //Alert.alert('Alerta!', 'Senha ou Email incorretos')
-                                setAlertTitle(t("login.alert.invalid.title"))
-                                setAlertMessage(t("login.alert.invalid.message"))
-                                setAlertVisible(true)
+                                showAlert(t("login.alert.invalid.title"), t("login.alert.invalid.message"));
                             }
                         }
                     )
                 })
             } catch (error) {
-                console.log(error);
+                showAlert(t("login.alert.invalid.title"), t("login.alert.invalid.message"));
             }
         }
     }
@@ -274,8 +288,8 @@ const styles = StyleSheet.create({
     box: {
         backgroundColor: "#141f29",
         borderRadius: 25,
-        height: windowHeight*0.945, //710
-        width: windowWidth*0.942, //370
+        height: windowHeight * 0.945, //710
+        width: windowWidth * 0.942, //370
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 2,
@@ -283,8 +297,8 @@ const styles = StyleSheet.create({
     shade: {
         backgroundColor: "rgba(0, 0, 0, 0.3)",
         borderRadius: 25,
-        height: windowHeight*0.95, //713
-        width: windowWidth*0.95, //373
+        height: windowHeight * 0.95, //713
+        width: windowWidth * 0.95, //373
     },
     image: {
         height: 250,

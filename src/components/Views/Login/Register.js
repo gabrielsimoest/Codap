@@ -18,6 +18,14 @@ import { CustomDarkMode } from '../../../common/Themes/DefaultThemes';
 import AText from '../../Shared/AText';
 import CustomAlert from '../../Shared/CustomAlert';
 import CustomButton from '../../Shared/CustomButton';
+import { setRandomFallback } from 'bcryptjs';
+import { getRandomValues } from 'react-native-get-random-values';
+
+setRandomFallback(getRandomValues);
+
+import bcrypt from 'bcryptjs';
+var salt = bcrypt.genSaltSync(10);
+
 const validator = require('validator');
 
 const windowHeight = Dimensions.get('window').height;
@@ -89,16 +97,20 @@ export default function Login({ navigation }) {
         }
         else {
             try {
+                var hashedPassword = bcrypt.hashSync(senha, salt);
+
                 await db.transaction(async (tx) => {
                     await tx.executeSql(
                         "INSERT INTO Users (Name, Senha, Email, DependaBots, XP, Double) VALUES (?,?,?,?,?,?)",
-                        [name, senha, email, 0, 0, 0]
+                        [name, hashedPassword, email, 0, 0, 0]
                     );
                 })
+
                 setAlertTitle(t("register.alert.success.title"));
                 setAlertMessage(t("register.alert.success.message"));
                 setAlertVisible(true);
-                //navigation.navigate('Login');
+
+                // navigation.navigate('Login');
             } catch (error) {
                 console.log(error);
             }
