@@ -25,7 +25,7 @@ export function ImgTeoric({ navigation }) {
   </html>`} 
             //Textos final opcional (aparece após as imagens)
             endText={t("html.basic.images.ImgTeoric_endText")}
-            //NOME ADICIONADO NO STACK NAVIGATOR
+            highlight={["img", "link", "src"]}
             navegar="Img1"
         />
     )
@@ -50,6 +50,7 @@ export function Img1({ navigation }) {
             opt6="none"
             opt7="none"
             opt8="none"
+            txtToHighlight={["image", "imagem"]}
             txtCerto={t("html.basic.images.Img1_txtCerto")}
             navegar="Img2"
         />
@@ -74,6 +75,7 @@ export function Img2({ navigation }) {
             opt7={t("html.basic.images.Img2_opt7")}
             opt8="none"
             txtCerto={t("html.basic.images.Img2_txtCerto")}
+            txtToHighlight={["height"]}
             navegar="Img3"
         />
     )
@@ -97,6 +99,7 @@ export function Img3({ navigation }) {
             opt7={t("html.basic.images.Img3_opt7")}
             opt8="none"
             txtCerto={t("html.basic.images.Img3_txtCerto")}
+            txtToHighlight={["width"]}
             navegar="Img4"
         />
     )
@@ -120,6 +123,7 @@ export function Img4({ navigation }) {
             opt7={t("html.basic.images.Img4_opt7")}
             opt8="none"
             txtCerto={t("html.basic.images.Img4_txtCerto")}
+            txtToHighlight={["50", "altura", "height", "30", "largura", "width"]}
             navegar="Img5"
         />
     )
@@ -139,6 +143,7 @@ export function Img5({ navigation }) {
             opt3={t("html.basic.images.Img5_opt3")}
             opt4={t("html.basic.images.Img5_opt4")}
             optCerta="opt2"
+            txtToHighlight={["img src='https://LINK' width='30"]}
             navegar="Img6"
         />
     )
@@ -159,6 +164,7 @@ export function Img6({ navigation }) {
             opt4={t("html.basic.images.Img6_opt4")}
             optCerta="opt4"
             aulaSalvar={9}
+            txtToHighlight={["img"]}
             Salvar={true}
             navegar="CongratsView"
         />

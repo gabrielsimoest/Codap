@@ -103,7 +103,7 @@
       "html" : {
         "basic" : {
           "conhecendo html" : {
-            "Estrutura_mainText": "Hello, this is NAME. Shall we learn HTML? HTML is a markup language widely used in building web pages.",
+            "Estrutura_mainText": "Hello, this is Cody. Shall we learn HTML? HTML is a markup language widely used in building web pages.",
             "Estrutura_secondText": "First, I will show a very basic structure so you can get an idea of what HTML looks like.",
             "Estrutura_endText": "As you can see, it's quite simple, but there are many other elements that can be added to this structure to create amazing websites.",
             "TagsElements_txt": "Now that we've seen the structure, let's better understand what's in it.",
@@ -341,6 +341,80 @@
             "ComentarioEx6_txtCerto2": "!--Codap--",
             "ComentarioEx6_txtCerto3": "!--codap--"
           }
+        },
+        "inter": {
+          "links": {
+            "dynamicSiteQuestion": "Let's create a dynamic website using links?",
+            "dynamicSiteExplanation": "To do this, you will need to define a reference attribute for the link and an id for the element you want to navigate to.",
+            "dynamicSiteTagUsage": "You can create links using the <a> tag both to redirect to elements using the element's ID or to other websites using the URL.",
+            "dynamicSiteExample": "As you saw in this example, when you click on the link, you are redirected to the element with that link ID.",
+            "createLinkHeader": "Let's create a link!",
+            "createLinkQuestion": "Firstly, add the href=\"#codap\" attribute as the link reference, don't forget the quotes!",
+            "transformElementHeader": "Now let's turn another element into a link (we will use <h3> as an example). Follow the example below to create a link with the name CODAP and href=\"#codap\".",
+            "transformElementQuestion": "<h3><a href=\"#REF\">LINK NAME</a></h3>",
+            "unorderedListHeader": "Now that you have learned how to create a link, let's create an unordered list of links using <li> instead of <h3>.",
+            "unorderedListQuestion": "The list should have 1 item with the name CODAP and href=\"#codap\"",
+            "createIdHeader": "Now create an <h1> element with the attribute id=\"codap\" to assign to the link created previously (the id must be identical to the href).",
+            "linkToOtherSitesHeader": "As mentioned earlier, you can create links to other websites.",
+            "linkToGoogleQuestion": "How could a link to Google be?",
+            "linkToIdQuestion": "Which of the options is creating a link to the ID codap?"
+          },
+          "lists" : {
+            "createListsIntroduction": "You can create lists on your website. To do this, we use the <ul> or <ol> tags along with the <li>.",
+            "unorderedListExplanation": "<ul> is used for unordered lists.",
+            "orderedListExplanation": "<ol> is used for ordered lists.",
+            "listRememberTip": "To remember more easily, ul means 'unordered list' and ol 'ordered list'.",
+            "createListItemQuestion": "Use the <li> to create an item named CODAP",
+            "createOrderedListInstruction": "Let's create an ordered list? To do this, you should use the <li> within an <ol>.",
+            "createOrderedListQuestion": "Create a list of 3 items in this order: Gold, Silver, Bronze",
+            "createUnorderedListInstruction": "What about creating an unordered now? Use what you learned inside the <ul>.",
+            "createUnorderedListQuestion": "Create a list of 2 items in this order: Hello, World",
+            "unorderedListElementQuestion": "Which element creates an unordered list?",
+            "orderedListElementQuestion": "Which element creates an ordered list?",
+            "codeListItemCODAPQuestion": "Code an item written CODAP"
+          },
+          "body": {
+            "bodyContentDefinition": "The <body> is used to define the body of your project. It contains the content that will be shown to the user.",
+            "bodyElementsExplanation": "Inside it, you can have elements like <header>, <main>, and <footer>",
+            "singleBodyTagReminder": "There can only be one single <body> in the project.",
+            "headerSectionExplanation": "The <header> is used to determine the header section of the site. It can contain elements seen previously.",
+            "createHeaderWithCODAP": "Create a <header> with a title and a subtitle written CODAP",
+            "mainElementExplanation": "The <main> indicates the main part of the HTML document body",
+            "createMainWithCODAP": "Create a <main> with a paragraph written CODAP",
+            "footerElementExplanation": "The <footer> indicates the footer of your HTML document. It can contain information about the site's author and contact addresses.",
+            "createFooterWithCODAP": "Create a <footer> with three paragraphs written CODAP",
+            "whichElementsNotInBody": "Which of these elements cannot be in the <body>?",
+            "footerPurposeQuestion": "What is the purpose of the <footer>?",
+            "howManyBodyTagsQuestion": "How many <body> tags can exist in the HTML document?"
+          },
+          "div": {
+            "divContentDefinition": "The <div> is used to define a generic section of content and can also apply CSS styles like any other tag.",
+            "divUsageExplanation": "You can use it as subdivisions of your body and other tags, and it can even replace <header>, <main>, and <footer>, but this makes the code less readable.",
+            "divGenericTagNote": "Although it works for anything, because it is very generic, you should opt for using more specific tags to facilitate code reading.",
+            "divFutureReplacementNote": "In the future, you will see more tags that can replace the <div> and learn how to add styles to your site.",
+            "placeTitleSubtitleInDiv": "Place a title and a subtitle written CODAP inside the <div>",
+            "createOrderedListInDiv": "Create an ordered list, inside the <div>, with 3 elements written: Gold, Silver, Bronze",
+            "lineBreakAestheticImprovement": "You can add horizontal lines and breaks automatically to your site to improve aesthetics.",
+            "lineBreakUsage": "For this, you use <hr/> and <br/> respectively.",
+            "lineBreakExampleNote": "Observe how Lorem Ipsum is broken into two lines using <br>.",
+            "whatCreatesLine": "What do we use to create a line?",
+            "whatCreatesSpace": "What do we use to create a space?",
+            "addTitleSpaceLineInDiv": "Add a title written CODAP, a space, and a line inside the <div>"
+          }, 
+          "head" : {
+            "headIntermediateLevel": "Congratulations on reaching the intermediate level! Now we will delve deeper into how to better organize the code.",
+            "headElementExplanation": "The first thing we will see is the <head>, which is an element that determines a section of elements that define data that is not visible to the user.",
+            "headElementUsage": "It is also used to load JS scripts and CSS styles as shown in the example below. But they will not be our focus right now.",
+            "headElementNotShown": "As you can see, nothing in the <head> is shown on the site.",
+            "titleElementExplanation": "The <title> defines a title for your project. It is not visible on the site, showing only in the tab or title bar of the browser.",
+            "defineTitleCODAP": "Define a title written CODAP",
+            "whyTitleNotVisible": "Why is the <title> not visible?",
+            "metaElementExplanation": "The <meta> uses attributes to define data about the site, but for now, we will use it to define the character set used.",
+            "constructMetaCharset": "Use the options below to construct a <meta> with a charset=\"UTF-8\" attribute",
+            "whichElementInsideHead": "Which of the following elements can go inside the <head>?",
+            "purposeOfTitle": "What is the purpose of the <title>?",
+            "defineCODAPAsTitle": "Define CODAP as a title for your project"
+          }
         }
       },
 
@@ -362,9 +436,129 @@
       "buttons are often used to perform actions within websites": "Buttons are often used to perform actions within websites",
       "code a button written CODAP": "Code a Button written CODAP",
       
-      
+      "_comment class JS*********": "*********JS*********",
+      "js" : {
+        "basic" : {
+          "intro" : {
+            "helloCodyLetsLearnJS": "Hello, this is Cody, shall we learn JavaScript? This is a programming language used along with HTML to create functionalities that HTML does not provide.",
+            "jsForWebsites": "JavaScript has other uses, but we will be looking at it for website creation.",
+            "usingScriptTag": "To use it, we must open a <script> tag in your HTML document to be coding.",
+            "startWithHelloWorld": "Let's start by writing your first HELLO WORLD?",
+            "completeAlertWithString": "Complete the following alert function with \"HELLO WORLD\", but don't forget the quotes to identify it as a string.",
+            "semicolonUsageInJS": "In JavaScript, in most cases where there is a line break, the use of a semicolon is not necessary. One of the exceptions is before [ ].",
+            "createTwoAlertsNoSemicolon": "Create 2 alerts: \"HELLO WORLD\" and \"CODAP\". Without a semicolon.",
+            "correctUseOfAlert": "Which of the options below represents the correct use of alert?",
+            "modernJSCodeUsage": "To make the code work in a modern way, we add \"use strict\" at the beginning.",
+            "whatToAddForJSFunction": "What should be placed for JavaScript to function?",
+            "createAnAlert": "Create an alert"
+          },
+          "interactions" : {
+            "learningInteractions": "Now we will learn about some types of interactions.",
+            "interactionsPopupExplanation": "The alert, prompt, and confirm cause pop-ups that allow interaction.",
+            "createAlertTrue": "You have seen the alert before, so create one that shows the boolean value true.",
+            "promptVariableExplanation": "The prompt can be assigned to a variable to receive a value written by the user.",
+            "createPromptCODAP": "prompt(title, default), where ' ' omits the default. Create a variable CODAP that receives the value of the prompt.",
+            "confirmReturnExplanation": "The confirm returns true or false depending on the option the user clicks, being them: OK and cancel.",
+            "createConfirmBOOLEAN": "confirm(question). Create a variable BOOLEAN that receives the value of the confirm.",
+            "defaultValueAssignedToAGE": "What value will be assigned to AGE if the user does not change the default text?",
+            "valueAssignedToANSWER": "What value will be assigned to ANSWER if the user clicks OK?"
+          },
+          "types" : {
+            "jsTypeConversionIntro": "In JavaScript, we can convert types into others, for this we use the functions String(), Boolean(), and Number()",
+            "transformingToAString": "We can transform booleans and numbers into strings using the String function.",
+            "convertCODAPToString": "Use the String function to convert let CODAP = 20 into a string",
+            "transformingToANumber": "We can do the same by transforming booleans and strings into numbers, but if a string contains non-numeric characters, NaN will appear representing a conversion failure.",
+            "convertCODAPToNumber": "A boolean true is converted as 1 and false as 0. Knowing this, convert let CODAP = false into a number using the Number function.",
+            "nonNumericStringToNumber": "What appears if you try to convert a non-numeric string into a number?",
+            "usingBooleanFunction": "For the Boolean function, any value will be considered true. Already 0, null, undefined, NaN, \" \" will be false.",
+            "convertCODAPToBoolean": "Use the Boolean function to convert let CODAP = null into a boolean",
+            "stringToBooleanConversion": "Knowing that in the case of a string, if there is at least one character the Boolean conversion is true, answer:"
+          },
+          "data" : {
+            "dataTypesIntroduction": "There are 8 data types that you will see in the example and exercises. Among them are: numbers, strings, objects, booleans, and others.",
+            "numbersVarietyExplanation": "Numbers range from negative numbers to even decimal numbers, and do not need to be enclosed in quotes.",
+            "whichOptionIsNumber": "Which of the options below represents a number?",
+            "stringsRepresentationExplanation": "Strings can be represented by 3 types of quotes, containing 0 or more characters.",
+            "whichOptionIsNotString": "Which of the options below does not represent a string?",
+            "bigIntExplanation": "Numbers above (2^53-1) and below -(2^53-1) need to be declared as BigInt. For this, we add a 'n' character at the end of the number.",
+            "whichOptionIsBigInt": "Which of the options below represents a BigInt?",
+            "booleansExplanation": "Booleans represent only two values, true or false.",
+            "whichOneIsBoolean": "Which of these represents a boolean?",
+            "specialDataTypes": "There are special types: null, undefined, symbols, and objects.",
+            "specialDataTypesNotCoveredNow": "But we will not cover these now."
+          },
+          "variables" : {
+            "variablesAndConstantsInJS": "We will see about variables and constants in JavaScript. They can store numbers, strings, and objects.",
+            "twoTypesOfVariables": "There are 2 types of variables: let and var.",
+            "oneTypeOfConstant": "And one constant: const.",
+            "preferLetOverVar": "Var and let have the same function, but nowadays prefer to use let.",
+            "createVariableCODAPWithValue": "Create a variable CODAP and assign 5 to it",
+            "changeVariableValue": "You can change the value of the previously assigned variable, just write the name and assign a new value. Do this and change the value to 10.",
+            "constIsFixedValue": "Const is a fixed value, trying to change its value will result in an error. Use it when you are sure that the value will not change throughout the code.",
+            "createConstantCODAPWithHelloWorld": "Create a constant CODAP and assign \"HELLO WORLD\" to it.",
+            "displayVariableValueInAlert": "You can display the value of a variable using its name inside the alert.",
+            "createVariableCODAPWithHelloAndAlert": "Create a variable CODAP = \"HELLO\", then create an alert(CODAP) to display the message.",
+            "whatWillAlertDisplay": "Given the following code, what will appear in the alert?"
+          }
+        }
+      },
 
       "_comment class CSS*********": "*********CSS*********",
+      "css" : {
+        "basic" : {
+          "intro" : {
+            "learnCSS": "Hello, this is Cody, let's learn CSS? CSS is a mechanism for adding styles to a web document.",
+            "cssDirectOrStyleTags": "CSS code can be applied directly to html tags or contained within <style> tags",
+            "cssExample": "The 'p' inside the <style> in the example is a selector, this represents that all elements with the same name as the selector will receive that style.",
+            "roleOfCSS": "What is the role of CSS?",
+            "addStyles": "Add styles",
+            "addNewMechanics": "Add new mechanics",
+            "addNotifications": "Add notifications",
+            "addTranslations": "Add translations",
+            "h1SelectorIndication": "What does the h1 selector indicate?",
+            "h1ElementDeleted": "Indicates that every h1 element will be deleted",
+            "h1ElementReplacedByH2": "Indicates that every h1 element will be replaced by h2",
+            "h1ElementObtainStyles": "Indicates that every h1 element will obtain styles",
+            "h1ElementExecutedAsJS": "Indicates that every h1 element will be executed as js",
+            "createBlueColorStyleForH1": "Create a blue color style for h1"
+          },
+          "background" : {
+            "backgroundColorCSS_description": "A completely white website is not always pleasant, we can assign a color to a section of your HTML document.",
+            "backgroundColorCSS_usage": "For this, we will use the background-color, which works just like color but only for backgrounds.",
+            "createBlueStyleForBody_question": "Create a blue color style for the <body>",
+            "defineColorAndBackgroundForP_question": "Define color: black and a background-color: hsl(200, 50%, 50%) for the p selector"
+          },
+          "color" : {
+            "colorPropertyUsage": "You can add colors to your text elements using the color property.",
+            "acceptedColorValues": "The accepted colors range from HEX, RGB, HSL, RGBA, HSLA values to predefined color names.",
+            "createRGBColorStyleForH1": "Create an rgb(255, 99, 71) color style for the h1",
+            "opacityWithRGBA": "You can tweak the opacity using RGBA, where the last value represents the opacity (0 to 1)",
+            "createRGBAColorStyleForH1": "Create an rgb(20, 99, 71, 0.7) color style for the h1",
+            "addColorForSelectorP": "Add a color: #00ffff for the p selector"
+          },
+          "font" : {
+            "FontFamilyCSS_mainText": "It is also possible to adjust the font of your text to better match your website.",
+            "FontFamilyCSS_additionalText": "This is done through the font-family.",
+            "FontFamilyEx1_question": "Set the font-family to Arial in <h2>",
+            "FontFamilyEx1_option1": "CODAP",
+            "FontFamilyEx1_option5": "font-family: Arial",
+            "FontFamilyEx2_question": "Set color: black and a font-family: consolas for the h3 selector",
+            "FontFamilyEx2_correctOption1": "color: black",
+            "FontFamilyEx2_correctOption2": "font-family: consolas"
+          },
+          "fontSize" : {
+            "FontSizeCSS_mainText": "We can change the size of the texts in your HTML document.",
+            "FontSizeCSS_additionalText": "For this, we will use font-size, where you specify the amount of pixels for the size.",
+            "FontSizeEx1_question": "Add a font size of 20 pixels to the <p>",
+            "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
+            "FontSizeEx2_question": "Define color: black and a background-color: blue and a font-size: 20px for the p selector",
+            "FontSizeEx2_correctOption1": "color: black",
+            "FontSizeEx2_correctOption2": "background-color: blue",
+            "FontSizeEx2_correctOption3": "font-size: 20px"
+          }
+        }
+      },
+
       "lets learn CSS":"Hello, this is NAME, let's learn CSS? CSS is a mechanism for adding styles to a web document.",
       "CSS code can be applied directly to html tags or contained within <style> tags":"CSS code can be applied directly to html tags or contained within <style> tags",
       "CSS example":"The 'p' inside the <style> in the example is a selector, this represents that all elements with the same name as the selector will receive that style.",

@@ -31,6 +31,7 @@ export function Comentario({ navigation }) {
   </html>`} 
             endText={t("html.basic.comments.Comentario_endText")}
             navegar="ComentarioEx1"
+            highlight={["comment", "comentário", "HTML"]}
         />
     )
 }
@@ -54,6 +55,7 @@ export function ComentarioEx1({ navigation }) {
             opt8="none"
             txtCerto={t("html.basic.comments.ComentarioEx1_txtCerto")}
             navegar="ComentarioEx2"
+            txtToHighlight={["comentário", "comment"]}
         />
     )
 }
@@ -73,6 +75,7 @@ export function ComentarioEx2({ navigation }) {
             txtCerto2={t("html.basic.comments.ComentarioEx2_txtCerto2")}
             txtCerto3={t("html.basic.comments.ComentarioEx2_txtCerto3")}
             tamanhoInput="75%"
+            txtToHighlight={["outros elementos", "elements"]}
             navegar="ComentarioEx3"
         />
     )
@@ -93,6 +96,7 @@ export function ComentarioEx3({ navigation }) {
             txtCerto2={t("html.basic.comments.ComentarioEx3_txtCerto2")}
             txtCerto3={t("html.basic.comments.ComentarioEx3_txtCerto3")}
             tamanhoInput="75%"
+            txtToHighlight={["HELLO WORLD"]}
             navegar="ComentarioEx4"
         />
     )
@@ -153,6 +157,7 @@ export function ComentarioEx6({ navigation }) {
             tamanhoInput="80%"
             aulaSalvar={11}
             Salvar={true}
+            txtToHighlight={["comentário", "comment", "CODAP"]}
             navegar="CongratsView"
         />
     )

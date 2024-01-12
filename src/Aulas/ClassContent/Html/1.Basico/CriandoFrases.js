@@ -27,6 +27,7 @@ export function P({ navigation }) {
     </body>
   </html>`}
             endText="none"
+            highlight={["h*", "p"]}
             aulaSalvar="none"
             navegar="FraseEx1"
         />
@@ -48,6 +49,7 @@ export function FraseEx1({ navigation }) {
             opt4={t("html.basic.phrase.FraseEx1_opt4")}
             optCerta="opt4"
             aulaSalvar="none"
+            txtToHighlight={["CODAP", "phrase", "frase"]}
             navegar="FraseEx2"
         />
     )
@@ -68,6 +70,7 @@ export function FraseEx2({ navigation }) {
             opt4={t("html.basic.phrase.FraseEx2_opt4")}
             optCerta="opt3"
             aulaSalvar="none"
+            txtToHighlight={["p", "h*"]}
             navegar="FraseEx3"
         />
     )
@@ -92,6 +95,7 @@ export function FraseEx3({ navigation }) {
             opt8="none"
             txtCerto={t("html.basic.phrase.FraseEx3_txtCerto")}
             aulaSalvar="none"
+            txtToHighlight={["phrase", "frase", "Codificar é legal", "Codign is cool"]}
             navegar="FraseEx4"
         />
     )
@@ -114,6 +118,7 @@ export function FraseEx4({ navigation }) {
             tamanhoInput="46%"
             aulaSalvar="none"
             navegar="FraseEx5"
+            txtToHighlight={["HELLO WORLD"]}
             tutorialVisible = {true}
         />
     )
@@ -155,6 +160,7 @@ export function FraseEx6({ navigation }) {
             tamanhoInput="46%"
             aulaSalvar={12}
             Salvar={true}
+            txtToHighlight={["frase", "phrase", "CODAP"]}
             navegar="CongratsView"
         />
     )

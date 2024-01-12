@@ -50,6 +50,7 @@ export function ButtonEx1({ navigation }) {
             opt7="none"
             opt8="none"
             txtCerto={t("html.basic.buttons.ButtonEx1_txtCerto")}
+            txtToHighlight={["button", "botão", "CODAP"]}
             navegar="ButtonEx2"
         />
     )
@@ -69,6 +70,7 @@ export function ButtonEx2({ navigation }) {
             opt3={t("html.basic.buttons.ButtonEx2_opt3")}
             opt4={t("html.basic.buttons.ButtonEx2_opt4")}
             optCerta="opt3"
+            txtToHighlight={["button"]}
             navegar="ButtonEx3"
         />
     )
@@ -89,6 +91,7 @@ export function ButtonEx3({ navigation }) {
             txtCerto2={t("html.basic.buttons.ButtonEx3_txtCerto2")}
             txtCerto3={t("html.basic.buttons.ButtonEx3_txtCerto3")}
             tamanhoInput="46%"
+            txtToHighlight={["botão", "button", "CODAP"]}
             navegar="ButtonEx4"
         />
     )
@@ -109,6 +112,7 @@ export function ButtonEx4({ navigation }) {
             txtCerto2={t("html.basic.buttons.ButtonEx4_txtCerto2")}
             txtCerto3={t("html.basic.buttons.ButtonEx4_txtCerto3")}
             tamanhoInput="60%"
+            txtToHighlight={["botão", "button", "CODAP"]}
             navegar="ButtonEx5"
         />
     )
@@ -153,6 +157,7 @@ export function ButtonEx6({ navigation }) {
             txtCerto={t("html.basic.buttons.ButtonEx6_txtCerto")}
             aulaSalvar={10}
             Salvar={true}
+            txtToHighlight={["LOGIN"]}
             navegar="CongratsView"
         />
     )

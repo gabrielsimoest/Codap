@@ -288,7 +288,7 @@
             "Img4_opt7": " height='50'",
             "Img4_txtCerto": "<img src='https://LINK' height='50' width='30'/>",
             "Img5_adicionaltxt": "O que vai aparecer com o código a seguir?",
-            "Img5_pergunta": "<img src='https://LINK' width='30'1/>",
+            "Img5_pergunta": "<img src='https://LINK' width='30'/>",
             "Img5_opt1": "https://LINK",
             "Img5_opt2": "Imagem de 30 pixels de largura",
             "Img5_opt3": "<img src='https://LINK' width='30'/>",
@@ -311,7 +311,7 @@
             "ComentarioEx1_opt5": "CODAP",
             "ComentarioEx1_opt6": "--",
             "ComentarioEx1_txtCerto": "<!--CODAP-->",
-            "ComentarioEx2_adicionaltxt": "Você pode colocar inclusive elementos no comentário, mas é claro que eles não serão mostrados.",
+            "ComentarioEx2_adicionaltxt": "Você pode colocar inclusive outros elementos no comentário, mas é claro que eles não serão mostrados.",
             "ComentarioEx2_pergunta": "Transforme <p>CODAP</p> em um comentário:",
             "ComentarioEx2_txtantes": "<!--",
             "ComentarioEx2_txtdepois": "-->",
@@ -341,8 +341,83 @@
             "ComentarioEx6_txtCerto2": "!--Codap--",
             "ComentarioEx6_txtCerto3": "!--codap--"
           }
+        },
+        "inter": {
+          "links": {
+            "dynamicSiteQuestion": "Vamos fazer um site dinâmico utilizando os links?",
+            "dynamicSiteExplanation": "Para fazer isso você precisará definir um atributo de referência para o link e um id para o elemento que deseja navegar.",
+            "dynamicSiteTagUsage": "Você pode criar links usando a tag <a> tanto para redirecionar para elementos usando o ID do elemento ou para outros sites usando a url.",
+            "dynamicSiteExample": "Como viu nesse exemplo, ao clicar no link você é redirecionado para o elemento com aquela ID do link.",
+            "createLinkHeader": "Vamos criar um link!",
+            "createLinkQuestion": "Primeiramente adicione o atributo href=\"#codap\" como referência do link, não esqueça as áspas!",
+            "transformElementHeader": "Agora vamos transformar outro elemento em link (usaremos o <h3> como exemplo). Siga o exemplo abaixo para criar um link com o nome de CODAP e href=\"#codap\".",
+            "transformElementQuestion": "<h3><a href=\"#REF\">NOME DO LINK</a></h3>",
+            "unorderedListHeader": "Agora que você aprendeu a fazer um link, vamos fazer uma lista não ordenada de links usando <li> no lugar de <h3>.",
+            "unorderedListQuestion": "A lista deve ter 1 item com nome de CODAP e href=\"#codap\"",
+            "createIdHeader": "Agora crie um elemento <h1> com o atributo id=\"codap\" para atribuir ao link criado anteriomente (o id precisa ser idêntico ao href).",
+            "linkToOtherSitesHeader": "Como mencionado anteriormente, você pode crirar links para outros sites.",
+            "linkToGoogleQuestion": "Como poderia ser um link para o o Google?",
+            "linkToIdQuestion": "Qual das opções está criando um link para o ID codap?"
+          },
+          "lists" : {
+            "createListsIntroduction": "Você pode criar listas em seu site. Para isso, usamos as tags <ul> ou <ol> juntamente com o <li>.",
+            "unorderedListExplanation": "<ul> é usado para listas não ordenadas.",
+            "orderedListExplanation": "<ol> é usado para listas ordenadas.",
+            "listRememberTip": "Para se lembrar mais facilmente, ul significa 'lista não ordenada' e ol 'lista ordenada'.",
+            "createListItemQuestion": "Use o <li> para criar um item chamado CODAP",
+            "createOrderedListInstruction": "Vamos criar uma lista ordenada? Para isso, você deve usar o <li> dentro de um <ol>.",
+            "createOrderedListQuestion": "Crie uma lista de 3 itens nesta ordem: Ouro, Prata, Bronze",
+            "createUnorderedListInstruction": "E o que acha de fazermos uma não ordenada agora? Use o que você aprendeu dentro do <ul>.",
+            "createUnorderedListQuestion": "Crie uma lista de 2 itens nesta ordem: Olá, Mundo",
+            "unorderedListElementQuestion": "Qual elemento cria uma lista não ordenada?",
+            "orderedListElementQuestion": "Qual elemento cria uma lista ordenada?",
+            "codeListItemCODAPQuestion": "Codifique um item escrito CODAP"
+          },
+          "body": {
+            "bodyContentDefinition": "O <body> é utilizado para definir o corpo de seu projeto. Nele é onde ficam os conteúdos que serão mostrados ao usuário.",
+            "bodyElementsExplanation": "Dentro dele podem ficar os elementos <header>, <main> e <footer>",
+            "singleBodyTagReminder": "Só pode haver um único <body> no projeto.",
+            "headerSectionExplanation": "O <header> serve para determinar a seção do cabeçalho do site. Nele podem entrar elementos vistos anteriormente.",
+            "createHeaderWithCODAP": "Crie um <header> com um título e um subtítulo escrito CODAP",
+            "mainElementExplanation": "O <main> indica a parte principal do corpo do documento HTML",
+            "createMainWithCODAP": "Crie um <main> com um parágrafo escrito CODAP",
+            "footerElementExplanation": "O <footer> indica o rodapé do seu documento HTML. Nele podem ir informações sobre o autor do site e endereços de contato.",
+            "createFooterWithCODAP": "Crie um <footer> com três parágrafos escritos CODAP",
+            "whichElementsNotInBody": "Qual desses elementos não podem ficar no <body>?",
+            "footerPurposeQuestion": "Qual a finalidade do <footer>?",
+            "howManyBodyTagsQuestion": "Quantos <body> podem existir no documento HTML?"
+          },
+          "div": {
+            "divContentDefinition": "O <div> serve para definir uma seção genérica de conteúdos, podendo também aplicar estilos CSS como qualquer outra tag.",
+            "divUsageExplanation": "Você pode usá-lo como subdivisões do seu body e de outras tags, podendo até mesmo substituir o <header>, <main> e o <footer>, porém isso dificulta a legibilidade do código.",
+            "divGenericTagNote": "Embora ele funcione pra qualquer coisa, por ser muito genérica, você deve optar por usar tags mais específicas para facilitar a leitura do código.",
+            "divFutureReplacementNote": "Futuramente você verá mais tags que possam substituir o <div> e aprenderá a adição de estilos para seu site.",
+            "placeTitleSubtitleInDiv": "Coloque um título e um subtítulo escrito CODAP dentro do <div>",
+            "createOrderedListInDiv": "Crie uma lista ordenada, dentro do <div>, com 3 elementos escritos: Ouro, Prata, Bronze",
+            "lineBreakAestheticImprovement": "Você pode adicionar linhas horizontais e quebras de maneira automática ao seu site para melhorar a estética.",
+            "lineBreakUsage": "Para isso você usa o <hr/> e o <br/> respectivamente.",
+            "lineBreakExampleNote": "Observe como Lorem Ipsum é quebrada em duas linhas usando o <br>.",
+            "whatCreatesLine": "O que utilizamos para criar uma linha?",
+            "whatCreatesSpace": "O que usamos para colocar um espaço?",
+            "addTitleSpaceLineInDiv": "Adicione um título escrito CODAP, um espaço e uma linha dentro do <div>"
+          },
+          "head" : {
+            "headIntermediateLevel": "Parabéns por chegar no nível intermediário! Agora veremos mais a fundo sobre como organizar melhor o código.",
+            "headElementExplanation": "O primeiro que veremos é o <head> que é um elemento que determina uma seção de elementos que definem dados que não são visíveis ao usuário.",
+            "headElementUsage": "Ele é utilizado também para carregar scripts JS e estilos CSS como mostrado no exemplo abaixo. Mas não serão nosso foco agora.",
+            "headElementNotShown": "Como pode ver, nada no <head> é mostrado no site.",
+            "titleElementExplanation": "O <title> define um título ao seu projeto. Ele não é visível no site, mostrando apenas na aba ou na barra de título do navegador.",
+            "defineTitleCODAP": "Defina um título escrito CODAP",
+            "whyTitleNotVisible": "Por que o <title> não é visível?",
+            "metaElementExplanation": "O <meta> utiliza atributos para definir dados sobre o site, mas por hora usaremos ele para definir o conjunto de caracteres usado.",
+            "constructMetaCharset": "Utilize as opções abaixo para construir um <meta> com um atributo charset=\"UTF-8\"",
+            "whichElementInsideHead": "Qual dos elementos a seguir pode ir dentro do <head>?",
+            "purposeOfTitle": "Qual a finalidade do <title>?",
+            "defineCODAPAsTitle": "Defina CODAP como um título do seu projeto"
+          }
         }
       },
+
       
       "how is the title of a page made": "Como é feito o Titulo de uma pagina?",
       "title1": "<h1> Esse é um título </h1>",
@@ -363,11 +438,129 @@
       "code a button written CODAP": "Codifique um Botão escrito CODAP",
       
       
-
+      "_comment class JS*********": "*********JS*********",
+      "js" : {
+        "basic" : {
+          "intro" : {
+            "helloCodyLetsLearnJS": "Olá, aqui é o Cody, vamos aprender JavaScript? Essa é uma linguagem de programação utilizada junto com o HTML para criação de funcionalidades que o HTML não proporciona.",
+            "jsForWebsites": "JavaScript tem outros usos, mas estaremos vendo para criação de sites.",
+            "usingScriptTag": "Para usar ele, devemos abrir uma tag <script> em seu documento HTML para estar codificando.",
+            "startWithHelloWorld": "Vamos começar escrevendo seu primeiro HELLO WORLD?",
+            "completeAlertWithString": "Complete a função alert a seguir com \"HELLO WORLD\", mas não esqueça as áspas para identificar como uma string.",
+            "semicolonUsageInJS": "Em JavaScript, a maioria dos casos que há uma quebra de linha não é necessário o uso de ponto e vírgula. Uma das exceções é antes de [ ].",
+            "createTwoAlertsNoSemicolon": "Crie 2 alerts: \"HELLO WORLD\" e \"CODAP\". Sem ponto e vírgula.",
+            "correctUseOfAlert": "Qual das opções abaixo representa o uso correto do alert?",
+            "modernJSCodeUsage": "Para fazermos o código funcionar de uma maneira moderna, adicionamos o \"use strict\" logo no começo.",
+            "whatToAddForJSFunction": "O que deve ser colocado para o JavaScript funcionar?",
+            "createAnAlert": "Crie um alert"
+          },
+          "interactions" : {
+            "learningInteractions": "Agora aprenderemos alguns tipos de interações.",
+            "interactionsPopupExplanation": "O alert, prompt e confirm fazem surgir pop-ups que permitem interação.",
+            "createAlertTrue": "Você já viu o alert antes, então crie que mostre o valor buleano true.",
+            "promptVariableExplanation": "O prompt pode ser atribuido a uma variavel para receber um valor escrito pelo usuário.",
+            "createPromptCODAP": "prompt(titulo, padrão), onde ' ' omite o padrão. Crie uma variável CODAP que recebe o valor do prompt.",
+            "confirmReturnExplanation": "O confirm retorna true ou false dependendo da opção que o usuário clicar, sendo elas: OK e cancelar.",
+            "createConfirmBOOLEAN": "confirm(pergunta). Crie uma variável BOOLEAN que recebe o valor do confirm.",
+            "defaultValueAssignedToAGE": "Qual valor será atribuido a IDADE se o usuário não mudar o texto padrão?",
+            "valueAssignedToANSWER": "Qual valor será atribuido a RESPOSTA se o usuário clicar em OK?"
+          },
+          "types" : {
+            "jsTypeConversionIntro": "Em JavaScript podemos converter tipos em outros, para isso utilizamos a função String(), Boolean() e Number()",
+            "transformingToAString": "Podemos transformar booleanas e números em strings usando a função string.",
+            "convertCODAPToString": "Use a função String para converter let CODAP = 20 em uma string",
+            "transformingToANumber": "Podemos fazer o mesmo ao transformar booleanas e strings em números, mas se uma string conter caracteres não numéricos aparecerá NaN representando uma falha na conversão.",
+            "convertCODAPToNumber": "Uma boolean true é convertida como 1 e false como 0. Sabendo disso converta let CODAP = false em número usando a função Number.",
+            "nonNumericStringToNumber": "O que aparece se tentar converter uma string não numérica em um número?",
+            "usingBooleanFunction": "Para a função Boolean, qualquer valor será considerado true. Já 0, null, undefined, NaN, \" \" será false.",
+            "convertCODAPToBoolean": "Use a função Boolean para converter let CODAP = null em uma booleana",
+            "stringToBooleanConversion": "Sabendo que no caso de uma string, se houver ao menos um caractere a conversão Boolean é true, responda:"
+          },
+          "data" : {
+            "dataTypesIntroduction": "Existem 8 tipos de dados que você verá no exemplo e nos exercícios. Entre eles estão: números, strings, objetos, booleanas e outros.",
+            "numbersVarietyExplanation": "Os números variam desde números negativos para até mesmo números decimais, e não precisam estar entre áspas.",
+            "whichOptionIsNumber": "Qual das opções abaixo representa um número?",
+            "stringsRepresentationExplanation": "As strings podem ser representadas pelos 3 tipos de áspas, contendo 0 ou mais caracteres.",
+            "whichOptionIsNotString": "Qual das opções abaixo não representa uma string?",
+            "bigIntExplanation": "Números acima de (2^53-1) e abaixo de -(2^53-1) precisam ser declarados como BigInt. Para isso adicionamos um caractere 'n' no final do número.",
+            "whichOptionIsBigInt": "Qual das opções abaixo representa um BigInt?",
+            "booleansExplanation": "As booleanas representam dois valores apenas, true ou false.",
+            "whichOneIsBoolean": "Qual desses representa uma booleana?",
+            "specialDataTypes": "Existem os tipos especiais: null, undefined, símbolos e objetos.",
+            "specialDataTypesNotCoveredNow": "Mas estes não veremos agora."
+          },
+          "variables" : {
+            "variablesAndConstantsInJS": "Veremos sobre as variáveis e constantes do JavaScript. Elas podem armazenar números, strings e objetos.",
+            "twoTypesOfVariables": "Existem 2 tipos de variáveis: let e var.",
+            "oneTypeOfConstant": "E uma constante: const.",
+            "preferLetOverVar": "Var e let possuem a mesma função, mas hoje em dia prefira usar o let.",
+            "createVariableCODAPWithValue": "Crie uma variável CODAP e atribua 5 a ela",
+            "changeVariableValue": "Você pode alterar o valor da variável atribuída anteriormente, basta escrever o nome e atribuir um novo valor. Faça isso e altere o valor para 10.",
+            "constIsFixedValue": "Const é um valor fixo, ao tentar trocar seu valor aparecerá um erro. Use-a quando tiver certeza que o valor não mudará ao longo do código.",
+            "createConstantCODAPWithHelloWorld": "Crie uma constante CODAP e atribua \"HELLO WORLD\" a ele.",
+            "displayVariableValueInAlert": "Você pode mostrar o valor de uma variável usando o nome dela dentro do alert.",
+            "createVariableCODAPWithHelloAndAlert": "Crie uma variável CODAP = \"HELLO\", depois crie um alert(CODAP) para mostrar a mensagem.",
+            "whatWillAlertDisplay": "Dado o código a seguir, o que vai aparecer no alert?"
+          }
+        }
+      },
+      
       "_comment class CSS*********": "*********CSS*********",
       "css" : {
-
+        "basic" : {
+          "intro" : {
+            "learnCSS": "Olá, aqui é o Cody, vamos aprender CSS? CSS é um mecanismo para adicionar estilos a um documento web.",
+            "cssDirectOrStyleTags": "O código CSS pode ser aplicado diretamente às tags html ou contido dentro de tags <style>",
+            "cssExample": "O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome que o seletor receberão esse estilo.",
+            "roleOfCSS": "Qual é o papel do CSS?",
+            "addStyles": "Adicionar estilos",
+            "addNewMechanics": "Adicionar novas mecânicas",
+            "addNotifications": "Adicionar notificações",
+            "addTranslations": "Adicionar traduções",
+            "h1SelectorIndication": "O que o seletor h1 indica?",
+            "h1ElementDeleted": "Indica que todo elemento h1 será deletado",
+            "h1ElementReplacedByH2": "Indica que todo elemento h1 será substituído por h2",
+            "h1ElementObtainStyles": "Indica que todo elemento h1 obterá estilos",
+            "h1ElementExecutedAsJS": "Indica que todo elemento h1 será executado como js",
+            "createBlueColorStyleForH1": "Crie um estilo de cor azul para h1"
+          },
+          "background" : {
+            "backgroundColorCSS_description": "Um site todo branco nem sempre é agradável, podemos atribuir uma cor a uma seção do seu documento HTML.",
+            "backgroundColorCSS_usage": "Para isso utilizaremos o background-color, que funciona igual ao color mas apenas para fundos.",
+            "createBlueStyleForBody_question": "Crie um estilo de cor azul para o <body>",
+            "defineColorAndBackgroundForP_question": "Defina color: black e um background-color: hsl(200, 50%, 50%) para o seletor p"
+          },
+          "color" : {
+            "colorPropertyUsage": "Você pode adicionar cores aos seus elementos de texto usando a propriedade color.",
+            "acceptedColorValues": "As cores aceitas variam de valores HEX, RGB, HSL, RGBA, HSLA até nomes de cores predefinidos.",
+            "createRGBColorStyleForH1": "Crie um estilo de cor rgb(255, 99, 71) para o h1",
+            "opacityWithRGBA": "Você pode ajustar a opacidade usando RGBA, onde o último valor representa a opacidade (de 0 a 1)",
+            "createRGBAColorStyleForH1": "Crie um estilo de cor rgb(20, 99, 71, 0.7) para o h1",
+            "addColorForSelectorP": "Adicione uma cor: #00ffff para o seletor p"
+          },
+          "font" : {
+            "FontFamilyCSS_mainText": "Também é possivel ajustar a fonte do seu texto pra combinar melhor com seu site.",
+            "FontFamilyCSS_additionalText": "Isso é feito através do font-family.",
+            "FontFamilyEx1_question": "Defina a font-family para Arial no <h2>",
+            "FontFamilyEx1_option1": "CODAP",
+            "FontFamilyEx1_option5": "font-family: Arial",
+            "FontFamilyEx2_question": "Defina color: black e um font-family: consolas para o seletor h3",
+            "FontFamilyEx2_correctOption1": "color: black",
+            "FontFamilyEx2_correctOption2": "font-family: consolas"
+          },
+          "fontSize" : {
+            "FontSizeCSS_mainText": "Podemos alterar o tamanho dos textos de seu documento HTML.",
+            "FontSizeCSS_additionalText": "Para isso utilizaremos o font-size, em que você especifica a quantia de pixels para o tamanho.",
+            "FontSizeEx1_question": "Adicione um tamanho de fonte de 20 pixels para o <p>",
+            "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
+            "FontSizeEx2_question": "Defina color: black e um background-color: blue e um font-size: 20px para o seletor p",
+            "FontSizeEx2_correctOption1": "color: black",
+            "FontSizeEx2_correctOption2": "background-color: blue",
+            "FontSizeEx2_correctOption3": "font-size: 20px"
+          }
+        }
       },
+
       "lets learn CSS":"Olá, aqui é o Cody, vamos aprender CSS? O CSS é um mecanismo para adicionar estilos a um documento web.",
       "CSS code can be applied directly to html tags or contained within <style> tags":"O código CSS pode ser aplicado diretamente nas tags html ou ficar contido dentro das tags <style>",
       "CSS example":"O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome do seletor receberão aquele estilo.",

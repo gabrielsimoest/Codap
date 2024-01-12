@@ -53,6 +53,7 @@ export function HeaderEx1({ navigation }) {
             opt8="none"
             txtCerto={t("html.basic.title.HeaderEx1_txtCerto")}
             navegar="HeaderEx2"
+            txtToHighlight={["h1", "CODAP é incrível", "CODAP is awesome"]}
             tutorialVisible = {true}
         />
     )
@@ -72,6 +73,7 @@ export function HeaderEx2({ navigation }) {
             opt3={t("html.basic.title.HeaderEx2_opt3")}
             opt4={t("html.basic.title.HeaderEx2_opt4")}
             optCerta="opt1"
+            txtToHighlight={["Titulo", "title", "Title"]}
             navegar="HeaderEx3"
         />
     )
@@ -95,6 +97,7 @@ export function HeaderEx3({ navigation }) {
             opt7={t("html.basic.title.HeaderEx3_opt7")}
             opt8="none"
             txtCerto={t("html.basic.title.HeaderEx3_txtCerto")}
+            txtToHighlight={["h2", "CODAP", "subtítulos", "subtitle"]}
             navegar="HeaderEx4"
         />
     )
@@ -133,6 +136,7 @@ export function HeaderEx5({ navigation }) {
             opt3={t("html.basic.title.HeaderEx5_opt3")}
             opt4={t("html.basic.title.HeaderEx5_opt4")}
             optCerta="opt1"
+            txtToHighlight={["subtítulo","subtitle"]}
             navegar="HeaderEx6"
         />
     )
@@ -155,6 +159,7 @@ export function HeaderEx6({ navigation }) {
             tamanhoInput="46%"
             aulaSalvar={14}
             Salvar={true}
+            txtToHighlight={["título", "title", "CODAP"]}
             navegar="CongratsView"
         />
     )

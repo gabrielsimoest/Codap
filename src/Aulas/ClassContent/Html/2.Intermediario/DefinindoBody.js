@@ -6,18 +6,14 @@ import NestingView from '../../../../components/Shared/NestingView';
 import TheoryView from '../../../../components/Shared/TheoryView';
 
 export function Body({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <TheoryView
             navigation={navigation}
-            //BARRA DE PROGRESSO
             progresso="14%"
-            //Texto principal
-            mainText="O <body> é utilizado para definir o corpo de seu projeto. Nele é onde ficam os conteúdos que serão mostrados ao usuário."
-            //Textos opcionais
-            secondText="Dentro dele podem ficam os elementos <header>, <main> e <footer>"
-            thirdText="none"
+            mainText={t("html.inter.body.bodyContentDefinition")}
+            secondText={t("html.inter.body.bodyElementsExplanation")}
+            endText={t("html.inter.body.singleBodyTagReminder")}
             codeLanguage='HTML'
             code={`<!DOCTYPE html>
     <html>
@@ -38,193 +34,119 @@ export function Body({ navigation }) {
             </footer>
         </body>
     </html>`}
-            //Textos final opcional (aparece após as imagens)
-            endText="Só pode haver um único <body> no projeto."
-            highlight={["body","header", "main", "footer"]}
-            //NOME ADICIONADO NO STACK NAVIGATOR
+            highlight={["body", "header", "main", "footer"]}
             navegar="BodyEx1"
         />
     )
 }
 
 export function BodyEx1({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <NestingView
             navigation={navigation}
             progresso="28%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //Quantidade de opções (1-3)
             qtdop={2}
-            //Nível de aninhamento (1-3)
             layer={2}
-            //Texto adicional
-            adicionaltxt="O <header> serve para determinar a seção do cabeçalho do site. Nele podem entrar elementos vistos anteriormente."
-            //pergunta/texto principal
-            pergunta="Crie um <header> com um título e um subtítulo escrito CODAP"
-            //Elementos da estrutura (1-3) de acordo com as layers
-            txtantes="<body>" //Abertura primeiro elemento
-            txtdepois="</body>" //Fechamento primeiro elemento
-            txtantes2="<header>" //Abertura segundo elemento
-            txtdepois2="</header>" //Fechamento segundo elemento
-            //txtantes3="" //Abertura terceiro elemento
-            //txtdepois3="" //Fechamento terceiro elemento
-
-            //Resposta (1-3) de acordo com a quantidade de opções
-            txtCerto1="<h1>CODAP</h1>" //Primeira opção certa
-            txtCerto2="<h2>CODAP</h2>" //Segunda opção certa
-            //txtCerto3="" //terceira opção certa
-
-            //Tamanho do input
+            adicionaltxt={t("html.inter.body.headerSectionExplanation")}
+            pergunta={t("html.inter.body.createHeaderWithCODAP")}
+            txtantes="<body>"
+            txtdepois="</body>"
+            txtantes2="<header>"
+            txtdepois2="</header>"
             tamanhoInput="46%"
-            //NOME ADICIONADO NO STACK NAVIGATOR         
             navegar="BodyEx2"
         />
     )
 }
 
 export function BodyEx2({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <NestingView
             navigation={navigation}
             progresso="42%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //Quantidade de opções (1-3)
             qtdop={1}
-            //Nível de aninhamento (1-3)
             layer={2}
-            //Texto adicional
-            adicionaltxt="O <main> indica a parte principal do corpo do documento HTML" //Opcional
-            //pergunta/texto principal
-            pergunta='Crie um <main> com um parágrafo escrito CODAP'
-            //Elementos da estrutura (1-3) de acordo com as layers
-            txtantes="<body>" //Abertura primeiro elemento
-            txtdepois="</body>" //Fechamento primeiro elemento
-            txtantes2="<main>" //Abertura segundo elemento
-            txtdepois2="</main>" //Fechamento segundo elemento
-            //txtantes3="" //Abertura terceiro elemento
-            //txtdepois3="" //Fechamento terceiro elemento
-
-            //Resposta (1-3) de acordo com a quantidade de opções
-            txtCerto1="<p>CODAP</p>" //Primeira opção certa
-            //txtCerto2="" //Segunda opção certa
-            //txtCerto3="" //terceira opção certa
-
-            //Tamanho do input
+            adicionaltxt={t("html.inter.body.mainElementExplanation")}
+            pergunta={t("html.inter.body.createMainWithCODAP")}
+            txtantes="<body>"
+            txtdepois="</body>"
+            txtantes2="<main>"
+            txtdepois2="</main>"
             tamanhoInput="46%"
-            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BodyEx3"
         />
     )
 }
 
 export function BodyEx3({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <NestingView
             navigation={navigation}
             progresso="56%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //Quantidade de opções (1-3)
             qtdop={3}
-            //Nível de aninhamento (1-3)
             layer={2}
-            //Texto adicional
-            adicionaltxt="O <footer> indica o rodapé do seu documento HTML. Nele podem ir informações sobre o autor do site e endereços de contato." //Opcional
-            //pergunta/texto principal
-            pergunta='Crie um <footer> com três parágrafos escritos CODAP'
-            //Elementos da estrutura (1-3) de acordo com as layers
-            txtantes="<body>" //Abertura primeiro elemento
-            txtdepois="</body>" //Fechamento primeiro elemento
-            txtantes2="<footer>" //Abertura segundo elemento
-            txtdepois2="</footer>" //Fechamento segundo elemento
-            //txtantes3="" //Abertura terceiro elemento
-            //txtdepois3="" //Fechamento terceiro elemento
-
-            //Resposta (1-3) de acordo com a quantidade de opções
-            txtCerto1="<p>CODAP</p>" //Primeira opção certa
-            txtCerto2="<p>CODAP</p>" //Segunda opção certa
-            txtCerto3="<p>CODAP</p>" //terceira opção certa
-
-            //Tamanho do input
+            adicionaltxt={t("html.inter.body.footerElementExplanation")}
+            pergunta={t("html.inter.body.createFooterWithCODAP")}
+            txtantes="<body>"
+            txtdepois="</body>"
+            txtantes2="<footer>"
+            txtdepois2="</footer>"
             tamanhoInput="46%"
-            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BodyEx4"
         />
     )
 }
 
 export function BodyEx4({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
-            //BARRA DE PROGRESSO
             progresso="70%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
-            //PERGUNTA
-            pergunta="Qual desses elementos não podem ficar no <body>?"
+            pergunta={t("html.inter.body.whichElementsNotInBody")}
             opt1="<header>"
             opt2="<head>"
             opt3="<main>"
             opt4="<footer>"
             optCerta="opt2"
-            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BodyEx5"
         />
     )
 }
 
 export function BodyEx5({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
-            //BARRA DE PROGRESSO
             progresso="84%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
-            //PERGUNTA
-            pergunta="Qual a finalidade do <footer>?"
+            pergunta={t("html.inter.body.footerPurposeQuestion")}
             opt1="Definir uma seção de rodapé"
             opt2="Definir uma seção de imagens"
             opt3="Definir o conteúdo principal"
             opt4="Definir o texto principal"
             optCerta="opt1"
-            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="BodyEx6"
         />
     )
 }
 
 export function BodyEx6({ navigation }) {
-    //Constante de tradução, usar {t("CHAVE")} para tradução
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <OptionView
             navigation={navigation}
-            //BARRA DE PROGRESSO
             progresso="95%"
-            //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
-            //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
-            //PERGUNTA
-            pergunta="Quantos <body> podem existir no documento HTML?"
+            pergunta={t("html.inter.body.howManyBodyTagsQuestion")}
             opt1="3"
             opt2="5"
             opt3="1"
@@ -232,12 +154,7 @@ export function BodyEx6({ navigation }) {
             optCerta="opt3"
             aulaSalvar={16}
             Salvar={true}
-            //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />
     )
 }
-
-
-
-

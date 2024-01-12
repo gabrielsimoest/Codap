@@ -57,7 +57,7 @@ export function TagsElements({ navigation }) {
       tutorialVisible={false}
       endText={t("html.basic.conhecendo html.TagsElements_adicionaltxt_end")}
       aulaSalvar="none"
-      highlight={["html", "DEVE"]}
+      highlight={["html", "DEVE", "MUST"]}
       navegar="HtmlStartEx1"
     />
   );

@@ -98,7 +98,7 @@ export default function CollapseJS() {
                 <Image style={styles.commonImg} source={require('../../../assets/Robo_pensativo.png')} />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed2}>
-                <View style={{ flexDirection: "row" }} >
+                {/*                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={33} theme={"classButton"} title={t("Basic operators and maths")} onPressFunction={() => navigation.navigate("Operadores")} />
                 </View>
                 <View style={{ flexDirection: "row" }} >
@@ -109,8 +109,15 @@ export default function CollapseJS() {
                 </View>
                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={35} theme={"classButton"} title={t("Creating loops")} onPressFunction={() => navigation.navigate("WhileFor")} />
+                </View> */}
+                <Text style={[{ color: colors.text, fontSize: 20, margin: 20, textAlign: "center" }]}>{t("Oops")}</Text>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <Image
+                        style={styles.comingSoonImg}
+                        source={require('../../../assets/Robo_triste.png')}
+                    />
                 </View>
-                <View style={[styles.line, { borderColor: colors.primary }]}></View> 
+                <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
             {/*******************ADVANCED***********************/}
             <TouchableOpacity
