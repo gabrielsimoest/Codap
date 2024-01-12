@@ -87,7 +87,7 @@ Agradecemos antecipadamente por suas contribuições e pelo interesse em melhora
 
   > _Desenvolvedor_
 
-- Thainá
+- [Thainá Cristina Covas](mailto:thainacristina.covas@gmail.com)
 
   > _Criação de artes e do mascote Cody_
 
