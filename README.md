@@ -2,6 +2,9 @@
 
 Este aplicativo foi desenvolvido com React Native com o objetivo de oferecer um ambiente interativo para ensinar os fundamentos do HTML, CSS e JavaScript.
 
+## Visite nosso site
+[codap.gabrielsimoesdeveloper.com.br](https://codap.gabrielsimoesdeveloper.com.br)
+
 ## Funcionalidades Principais
 
 - *Lições Interativas:* Módulos de aprendizado divididos por tópicos para HTML, CSS e JavaScript.
