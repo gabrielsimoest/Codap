@@ -22,6 +22,7 @@ import { useTranslation } from 'react-i18next';
 import 'react-native-get-random-values';
 import { setRandomFallback } from 'bcryptjs';
 import { getRandomValues } from 'react-native-get-random-values';
+import PushNotification from 'react-native-push-notification';
 
 setRandomFallback(getRandomValues);
 
@@ -66,7 +67,15 @@ export default function Login({ navigation }) {
     useEffect(() => {
         getUserFromStorage();
         createTable();
+        createChannel();
     }, []);
+
+    const createChannel = () => {
+        PushNotification.createChannel({
+            channelId: "notif-channel",
+            channelName: "Notification Channel"
+        })
+    }
 
     const createTable = () => {
         db.transaction((tx) => {

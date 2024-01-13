@@ -137,6 +137,7 @@ export const ClassesScreens = [
     { name: "JSEx3", component: imports.JSEx3 },
     { name: "JSEx4", component: imports.JSEx4 },
     { name: "JSEx5", component: imports.JSEx5 },
+    { name: "JSEx6", component: imports.JSEx6},
     { name: "Variaveis", component: imports.Variaveis },
     { name: "VariaveisEx1", component: imports.VariaveisEx1 },
     { name: "VariaveisEx2", component: imports.VariaveisEx2 },

@@ -443,16 +443,19 @@
         "basic" : {
           "intro" : {
             "helloCodyLetsLearnJS": "Olá, aqui é o Cody, vamos aprender JavaScript? Essa é uma linguagem de programação utilizada junto com o HTML para criação de funcionalidades que o HTML não proporciona.",
-            "jsForWebsites": "JavaScript tem outros usos, mas estaremos vendo para criação de sites.",
+            "jsForWebsites": "JavaScript possui outros usos, mas estaremos vendo especificamente para criação de sites.",
             "usingScriptTag": "Para usar ele, devemos abrir uma tag <script> em seu documento HTML para estar codificando.",
+            "outsideScriptTag": "Para códigos JS mais complexos e maiores, é possível e é recomendado utilizar um arquivo separado e carregar ele usando a tag <script>, mas veremos isso mais para frente.",
             "startWithHelloWorld": "Vamos começar escrevendo seu primeiro HELLO WORLD?",
             "completeAlertWithString": "Complete a função alert a seguir com \"HELLO WORLD\", mas não esqueça as áspas para identificar como uma string.",
-            "semicolonUsageInJS": "Em JavaScript, a maioria dos casos que há uma quebra de linha não é necessário o uso de ponto e vírgula. Uma das exceções é antes de [ ].",
-            "createTwoAlertsNoSemicolon": "Crie 2 alerts: \"HELLO WORLD\" e \"CODAP\". Sem ponto e vírgula.",
+            "semicolonUsageInJS": "Em JavaScript, a maioria dos casos que há uma quebra de linha não é necessário o uso de ponto e vírgula. As exceções são: Antes de ( , [ , e `. De qualquer forma é um bom costume sempre colocar o ponto e vírgula.",
+            "createTwoAlertsNoSemicolon": "Crie 2 alerts: \"HELLO WORLD\" e \"CODAP\". Não esqueça o ponto e vírgula.",
             "correctUseOfAlert": "Qual das opções abaixo representa o uso correto do alert?",
-            "modernJSCodeUsage": "Para fazermos o código funcionar de uma maneira moderna, adicionamos o \"use strict\" logo no começo.",
             "whatToAddForJSFunction": "O que deve ser colocado para o JavaScript funcionar?",
-            "createAnAlert": "Crie um alert"
+            "createAnAlert": "Crie um alert",
+            "modernJSCodeUsage": "Para fazermos o código funcionar de uma maneira moderna e segura, adicionamos o \"use strict\" logo após abrir a tag <script>.",
+            "useStrict": "O \"use strict\"; é uma diretiva em JavaScript que ativa o modo estrito, uma forma mais rigorosa de executar o código que ajuda a evitar erros comuns, impõe melhores práticas e melhora a performance ao restringir certas ações que são consideradas inseguras ou propensas a erros.",
+            "example": "Você pode ver um exemplo de como fazer para ativar o modo estrito em todo seu script. Ele pode ser usado no topo do seu arquivo JS também."
           },
           "interactions" : {
             "learningInteractions": "Agora aprenderemos alguns tipos de interações.",
@@ -492,8 +495,9 @@
           "variables" : {
             "variablesAndConstantsInJS": "Veremos sobre as variáveis e constantes do JavaScript. Elas podem armazenar números, strings e objetos.",
             "twoTypesOfVariables": "Existem 2 tipos de variáveis: let e var.",
-            "oneTypeOfConstant": "E uma constante: const.",
-            "preferLetOverVar": "Var e let possuem a mesma função, mas hoje em dia prefira usar o let.",
+            "oneTypeOfConstant": "E 1 tipo de constante: const.",
+            "explanation" : "As variáveis let e var podem ser alteradas e lidas ao longo de seu código, porém a constante const não pode ser alterada, por isso é uma constante.",
+            "preferLetOverVar": "Var e let possuem praticamente a mesma função, mas hoje em dia prefira usar o let.",
             "createVariableCODAPWithValue": "Crie uma variável CODAP e atribua 5 a ela",
             "changeVariableValue": "Você pode alterar o valor da variável atribuída anteriormente, basta escrever o nome e atribuir um novo valor. Faça isso e altere o valor para 10.",
             "constIsFixedValue": "Const é um valor fixo, ao tentar trocar seu valor aparecerá um erro. Use-a quando tiver certeza que o valor não mudará ao longo do código.",

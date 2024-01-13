@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#141f29',
   },
   class: {
-    height: 140,
+    height: windowHeight * 0.19,
     marginLeft: 20,
     marginRight: 20,
     marginTop: 15,
@@ -368,17 +368,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   basicImg: {
-    top: 0,
+    top: windowHeight * 0.002,
     left: windowWidth * 0.065,
     width: windowWidth * 0.185,
     height: windowHeight * 0.185,
   },
   commonImg: {
+    top: windowHeight * 0.002,
     left: windowWidth * 0.065,
     width: windowWidth * 0.189,
     height: windowHeight * 0.189,
   },
   masterImg: {
+    top: windowHeight * 0.003,
     left: windowWidth * 0.04,
     width: windowWidth * 0.25,
     height: windowHeight * 0.18,

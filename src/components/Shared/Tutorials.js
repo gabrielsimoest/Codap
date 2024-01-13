@@ -7,7 +7,7 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import UniversalPicture from './UniversalPicture'
+import UniversalImage from './UniversalImage'
 import Icon, { Icons } from '../Icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useTheme } from '@react-navigation/native';
@@ -111,7 +111,7 @@ export const TutorialTheory = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image}/>
+                <UniversalImage content={item.content} source={item.image} style={styles.image}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -232,7 +232,7 @@ export const TutorialOption = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image2}/>
+                <UniversalImage content={item.content} source={item.image} style={styles.image2}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -347,7 +347,7 @@ export const TutorialText = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image2}/>
+                <UniversalImage content={item.content} source={item.image} style={styles.image2}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>
@@ -468,7 +468,7 @@ export const TutorialSelect = ({ visible, setModalVisible }) => {
                 <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>
                   {t(item.title)}
                 </AText>
-                <UniversalPicture content={item.content} source={item.image} style={styles.image3}/>
+                <UniversalImage content={item.content} source={item.image} style={styles.image3}/>
                 <AText style={[styles.text, { color: colors.text }]} defaultSize={18}>
                   {t(item.text)}
                 </AText>

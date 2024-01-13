@@ -187,6 +187,7 @@ export {
     JSEx3,
     JSEx4,
     JSEx5,
+    JSEx6,
 } from './Aulas/ClassContent/JavaScript/1.Basico/ConhecendoJS';
 
 export {

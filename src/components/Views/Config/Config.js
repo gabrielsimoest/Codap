@@ -15,8 +15,8 @@ import AText from '../../Shared/AText';
 import ThemeComponent from './ThemeComponent';
 import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';
-import NotificationService from './NotificationService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from 'react-native-push-notification';
 const TextSize1 = 25;
 
 export default function Config({ navigation }) {
@@ -48,13 +48,22 @@ export default function Config({ navigation }) {
         AsyncStorage.setItem('@notification_key', newState.toString());
 
         if (newState) {
-            // The switch is being turned on, schedule the notification
-            NotificationService.scheduleNotif();
+            PushNotification.localNotificationSchedule({
+                channelId: "notif-channel",
+                date: new Date(Date.now() + (3600 * 1000)), // 1 hour later
+                id: 1,
+                title: i18n.t("notificationService.title"),
+                message: i18n.t("notificationService.message"),
+                vibrate: false,
+                //vibration: false,
+                playSound: false,
+                //soundName: 'default',
+                repeatType: 'day', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
+                repeatTime: 4,
+            });
         } else {
-            // The switch is being turned off, cancel the notification
-            NotificationService.cancelAll();
+            PushNotification.cancelAllLocalNotifications();
         }
-
     };
 
     return (

@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#141f29',
     },
     class: {
-        height: 140,
+        height: windowHeight * 0.19,
         marginLeft: 20,
         marginRight: 20,
         marginTop: 15,

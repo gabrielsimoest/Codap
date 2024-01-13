@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../components/Shared/TeoricView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
@@ -9,10 +9,27 @@ import NestingView from '../../../../components/Shared/NestingView';
 export function ConvertendoTipos({ navigation }) {
     const { t } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             progresso="0%"
-            txt={t("js.basic.types.jsTypeConversionIntro")}
+            mainText={t("js.basic.types.jsTypeConversionIntro")}
+            onlyCode = {true}
+            codeLanguage='JavaScript'
+            code = {`let num = 10; // Number
+            let str = num.toString(); // Convert Number to String
+            console.log(typeof str); // Outputs: string
+            
+            let str2 = "10"; // String
+            let num2 = Number(str2); // Convert String to Number
+            console.log(typeof num2); // Outputs: number
+            
+            let bool = true; // Boolean
+            let str3 = bool.toString(); // Convert Boolean to String
+            console.log(typeof str3); // Outputs: string
+            
+            let str4 = "true"; // String
+            let bool2 = JSON.parse(str4); // Convert String to Boolean
+            console.log(typeof bool2); // Outputs: boolean`}
             navegar="ConvertendoTiposEx1"
         />
     )

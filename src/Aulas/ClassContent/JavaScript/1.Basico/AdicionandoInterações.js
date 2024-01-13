@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../components/Shared/TeoricView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
@@ -9,11 +9,27 @@ import NestingView from '../../../../components/Shared/NestingView';
 export function Interações({ navigation }) {
     const { t } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             progresso="0%"
-            txt={t("js.basic.interactions.learningInteractions")}
-            adicionaltxt={t("js.basic.interactions.interactionsPopupExplanation")}
+            mainText={t("js.basic.interactions.learningInteractions")}
+            secondText={t("js.basic.interactions.interactionsPopupExplanation")}
+            codeLanguage='HTML'
+            code = {`<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Interaction Example</title>
+    </head>
+    <body>
+        <button onclick="displayAlert()">Click me</button>
+            
+        <script>
+            function displayAlert() {
+                alert("Hello, this is a simple interaction!");
+            }
+        </script>
+    </body>
+</html>`}
             navegar="InteraçõesEx1"
         />
     )
