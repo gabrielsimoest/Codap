@@ -58,7 +58,7 @@ export default function Config({ navigation }) {
                 //vibration: false,
                 playSound: false,
                 //soundName: 'default',
-                repeatType: 'day', // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
+                repeatType: 'day',
                 repeatTime: 4,
             });
         } else {
