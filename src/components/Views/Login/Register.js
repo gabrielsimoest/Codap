@@ -165,7 +165,7 @@ export default function Login({ navigation }) {
                         </View>
                         <View>
                             <TextInput
-                                autoCapitalize='none'
+                                autoCapitalize='words'
                                 style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
                                 placeholder={t("register.name")}
                                 placeholderTextColor={"#7977FD"}
@@ -173,6 +173,7 @@ export default function Login({ navigation }) {
                             />
                             <TextInput
                                 autoCapitalize='none'
+                                keyboardType='email-address'
                                 style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
                                 placeholder="Email"
                                 placeholderTextColor={"#7977FD"}

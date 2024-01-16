@@ -18,8 +18,8 @@ const forFade = ({ current }) => ({
 });
 
 function App() {
-  const { theme, toggleTheme, FontSize, toggleFont } = useContext(AppContext);
-  const [currentLanguage, setLanguage] = useState(null);
+  const { theme, FontSize, currentLanguage } = useContext(AppContext);
+/*   const [currentLanguage, setLanguage] = useState(null);
 
   useEffect(() => {
     AsyncStorage.getItem('@language_key')
@@ -34,7 +34,7 @@ function App() {
       .catch(error => {
         console.error('Error retrieving language:', error);
       });
-  }, []);
+  }, []); */
 
   //Dar hide apenas quando tudo estiver perfeitamente selecionado
   useEffect(() => {

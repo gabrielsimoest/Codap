@@ -67,15 +67,7 @@ export default function Login({ navigation }) {
     useEffect(() => {
         getUserFromStorage();
         createTable();
-        createChannel();
     }, []);
-
-    const createChannel = () => {
-        PushNotification.createChannel({
-            channelId: "notif-channel",
-            channelName: "Notification Channel"
-        })
-    }
 
     const createTable = () => {
         db.transaction((tx) => {
@@ -198,6 +190,7 @@ export default function Login({ navigation }) {
                         <View>
                             <TextInput
                                 autoCapitalize='none'
+                                keyboardType='email-address'
                                 style={[styles.input, { backgroundColor: colors.background, color: colors.text }]}
                                 placeholder="Email"
                                 placeholderTextColor={"#7977FD"}

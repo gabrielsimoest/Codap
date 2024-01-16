@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
     View,
     StyleSheet,
@@ -17,6 +17,7 @@ import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from 'react-native-push-notification';
+import { AppContext } from '../../../common/Contexts/AppContext';
 const TextSize1 = 25;
 
 export default function Config({ navigation }) {
@@ -25,10 +26,12 @@ export default function Config({ navigation }) {
 
     const { colors } = useTheme(); //Variavel de cor do tema
 
-    //Switch
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    const { notificationState, toggleNotification } = useContext(AppContext);
 
-    React.useEffect(() => {
+    //Switch
+    const [isSwitchOn, setIsSwitchOn] = React.useState(notificationState);
+
+/*     React.useEffect(() => {
         AsyncStorage.getItem('@notification_key')
             .then(value => {
                 if (value !== null) {
@@ -38,19 +41,20 @@ export default function Config({ navigation }) {
             .catch(error => {
                 console.error('Error retrieving switch state:', error);
             });
-    }, []);
+    }, []); */
 
     const onToggleSwitch = () => {
         const newState = !isSwitchOn;
         setIsSwitchOn(newState);
+        toggleNotification(newState);
 
         // Salve o novo estado do switch
-        AsyncStorage.setItem('@notification_key', newState.toString());
+        //AsyncStorage.setItem('@notification_key', newState.toString());
 
-        if (newState) {
+/*         if (newState) {
             PushNotification.localNotificationSchedule({
                 channelId: "notif-channel",
-                date: new Date(Date.now() + (3600 * 1000)), // 1 hour later
+                date: new Date(Date.now() + (1 * 1000)), // 1 hour later
                 id: 1,
                 title: i18n.t("notificationService.title"),
                 message: i18n.t("notificationService.message"),
@@ -58,12 +62,12 @@ export default function Config({ navigation }) {
                 //vibration: false,
                 playSound: false,
                 //soundName: 'default',
-                repeatType: 'day',
+                repeatType: 'minute',
                 repeatTime: 4,
             });
         } else {
             PushNotification.cancelAllLocalNotifications();
-        }
+        } */
     };
 
     return (
