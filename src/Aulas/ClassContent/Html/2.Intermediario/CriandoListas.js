@@ -56,6 +56,9 @@ export function ListaEx1({ navigation }) {
             txtdepois="</li>"
             tamanhoInput="60%"
             txtToHighlight={["CODAP", " li "]}
+            txtCerto1="CODAP"
+            txtCerto2="codap"
+            txtCerto3="Codap"
             navegar="ListaEx2"
         />
     )

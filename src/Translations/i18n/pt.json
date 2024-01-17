@@ -368,10 +368,10 @@
             "createOrderedListInstruction": "Vamos criar uma lista ordenada? Para isso, você deve usar o <li> dentro de um <ol>.",
             "createOrderedListQuestion": "Crie uma lista de 3 itens nesta ordem: Ouro, Prata, Bronze",
             "createUnorderedListInstruction": "E o que acha de fazermos uma não ordenada agora? Use o que você aprendeu dentro do <ul>.",
-            "createUnorderedListQuestion": "Crie uma lista de 2 itens nesta ordem: Olá, Mundo",
+            "createUnorderedListQuestion": "Crie uma lista de 2 itens nesta ordem: Hello, World",
             "unorderedListElementQuestion": "Qual elemento cria uma lista não ordenada?",
             "orderedListElementQuestion": "Qual elemento cria uma lista ordenada?",
-            "codeListItemCODAPQuestion": "Codifique um item escrito CODAP"
+            "codeListItemCODAPQuestion": "Codifique um item da lista escrito CODAP"
           },
           "body": {
             "bodyContentDefinition": "O <body> é utilizado para definir o corpo de seu projeto. Nele é onde ficam os conteúdos que serão mostrados ao usuário.",

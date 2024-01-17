@@ -147,6 +147,9 @@ export function HeadEx6({ navigation }) {
             txtantes="<title>"
             txtdepois="</title>"
             tamanhoInput="46%"
+            txtCerto1="CODAP"
+            txtCerto2="codap"
+            txtCerto3="Codap"
             aulaSalvar={18}
             Salvar={true}
             navegar="CongratsView"

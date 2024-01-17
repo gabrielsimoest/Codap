@@ -51,6 +51,8 @@ export function BodyEx1({ navigation }) {
             layer={2}
             adicionaltxt={t("html.inter.body.headerSectionExplanation")}
             pergunta={t("html.inter.body.createHeaderWithCODAP")}
+            txtCerto1="<h1>CODAP</h1>"
+            txtCerto2="<h2>CODAP</h2>"
             txtantes="<body>"
             txtdepois="</body>"
             txtantes2="<header>"
@@ -77,6 +79,7 @@ export function BodyEx2({ navigation }) {
             txtantes2="<main>"
             txtdepois2="</main>"
             tamanhoInput="46%"
+            txtCerto1="<p>CODAP</p>"
             navegar="BodyEx3"
         />
     )
@@ -97,6 +100,9 @@ export function BodyEx3({ navigation }) {
             txtdepois="</body>"
             txtantes2="<footer>"
             txtdepois2="</footer>"
+            txtCerto1="<p>CODAP</p>"
+            txtCerto2="<p>CODAP</p>"
+            txtCerto3="<p>CODAP</p>"
             tamanhoInput="46%"
             navegar="BodyEx4"
         />
