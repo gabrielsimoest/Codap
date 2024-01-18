@@ -38,10 +38,10 @@ export function FontFamilyEx1({ navigation }) {
             opt3='</h2>'
             opt4='>'
             opt5='<h2 '
-            opt6={t('css.basic.font.FontFamilyEx1_option5')}
+            opt6='"font-family: Arial"'
             opt7='none'
             opt8='none'
-            txtCerto={t('css.basic.font.FontFamilyEx1_option1') + t('css.basic.font.FontFamilyEx1_option5')}
+            txtCerto='<h2 style="font-family: Arial">CODAP</h2>'
             navegar="FontFamilyEx2"
         />
     )

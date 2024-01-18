@@ -85,7 +85,8 @@ export function ColorEx3({ navigation }) {
             txtdepois="</style>"
             txtantes2="p {"
             txtdepois2="}"
-            txtCerto1='color: #00ffff'
+            txtCerto1='color: #00ffff;'
+            txtCerto2='color: #00ffff'
             tamanhoInput="40%"
             Salvar={true}
             aulaSalvar={2}

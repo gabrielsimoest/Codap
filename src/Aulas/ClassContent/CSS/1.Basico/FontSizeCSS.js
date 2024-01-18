@@ -41,7 +41,7 @@ export function FontSizeEx1({ navigation }) {
             opt6='"font-size:20px"'
             opt7='none'
             opt8='none'
-            txtCerto={t('css.basic.fontSize.FontSizeEx1_correctAnswer')}
+            txtCerto='<p style="font-size:20px">CODAP</p>' 
             navegar="FontSizeEx2"
         />
     )
@@ -62,9 +62,9 @@ export function FontSizeEx2({ navigation }) {
             txtdepois="</style>"
             txtantes2="p {"
             txtdepois2="}"
-            txtCerto1={t('css.basic.fontSize.FontSizeEx2_correctOption1')}
-            txtCerto2={t('css.basic.fontSize.FontSizeEx2_correctOption2')}
-            txtCerto3={t('css.basic.fontSize.FontSizeEx2_correctOption3')}
+            txtCerto1='color: black;'
+            txtCerto2='background-color: blue;'
+            txtCerto3='font-size: 20px;'
             tamanhoInput="40%"
             Salvar={true}
             aulaSalvar={5}

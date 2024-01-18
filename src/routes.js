@@ -249,6 +249,7 @@ export const ClassesScreens = [
     { name: "ColorCSS", component: imports.ColorCSS },
     { name: "ColorEx1", component: imports.ColorEx1 },
     { name: "ColorEx2", component: imports.ColorEx2 },
+    { name: "ColorEx3", component: imports.ColorEx3 },
     { name: "BackgroundColorCSS", component: imports.BackgroungColorCSS },
     { name: "BackgroungColorEx1", component: imports.BackgroungColorEx1 },
     { name: "BackgroungColorEx2", component: imports.BackgroungColorEx2 },

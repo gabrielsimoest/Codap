@@ -62,8 +62,8 @@ export function BackgroungColorEx2({ navigation }) {
             txtdepois="</style>"
             txtantes2="p {"
             txtdepois2="}"
-            txtCerto1='color: black'
-            txtCerto2='background-color: hsl(200, 50%, 50%)'
+            txtCerto1='color: black;'
+            txtCerto2='background-color: hsl(200, 50%, 50%);'
             tamanhoInput="40%"
             Salvar={true}
             aulaSalvar={1}

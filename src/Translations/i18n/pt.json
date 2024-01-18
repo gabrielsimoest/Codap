@@ -355,7 +355,7 @@
             "unorderedListHeader": "Agora que você aprendeu a fazer um link, vamos fazer uma lista não ordenada de links usando <li> no lugar de <h3>.",
             "unorderedListQuestion": "A lista deve ter 1 item com nome de CODAP e href=\"#codap\"",
             "createIdHeader": "Agora crie um elemento <h1> com o atributo id=\"codap\" para atribuir ao link criado anteriomente (o id precisa ser idêntico ao href).",
-            "linkToOtherSitesHeader": "Como mencionado anteriormente, você pode crirar links para outros sites.",
+            "linkToOtherSitesHeader": "Como mencionado anteriormente, você pode criar links para outros sites.",
             "linkToGoogleQuestion": "Como poderia ser um link para o o Google?",
             "linkToIdQuestion": "Qual das opções está criando um link para o ID codap?"
           },
@@ -558,8 +558,8 @@
             "FontFamilyEx1_option1": "CODAP",
             "FontFamilyEx1_option5": "font-family: Arial",
             "FontFamilyEx2_question": "Defina color: black e um font-family: consolas para o seletor h3",
-            "FontFamilyEx2_correctOption1": "color: black",
-            "FontFamilyEx2_correctOption2": "font-family: consolas"
+            "FontFamilyEx2_correctOption1": "color: black;",
+            "FontFamilyEx2_correctOption2": "font-family: consolas;"
           },
           "fontSize" : {
             "FontSizeCSS_mainText": "Podemos alterar o tamanho dos textos de seu documento HTML.",

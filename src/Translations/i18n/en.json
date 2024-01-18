@@ -556,8 +556,8 @@
             "FontFamilyEx1_option1": "CODAP",
             "FontFamilyEx1_option5": "font-family: Arial",
             "FontFamilyEx2_question": "Set color: black and a font-family: consolas for the h3 selector",
-            "FontFamilyEx2_correctOption1": "color: black",
-            "FontFamilyEx2_correctOption2": "font-family: consolas"
+            "FontFamilyEx2_correctOption1": "color: black;",
+            "FontFamilyEx2_correctOption2": "font-family: consolas;"
           },
           "fontSize" : {
             "FontSizeCSS_mainText": "We can change the size of the texts in your HTML document.",

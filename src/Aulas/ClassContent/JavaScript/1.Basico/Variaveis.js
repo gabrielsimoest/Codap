@@ -114,8 +114,8 @@ export function VariaveisEx4({ navigation }) {
             pergunta={t("js.basic.variables.createVariableCODAPWithHelloAndAlert")}
             txtantes="<script>"
             txtdepois="</script>"
-            txtCerto1='let CODAP = "HELLO"'
-            txtCerto2='alert(CODAP)'
+            txtCerto1='let CODAP = "HELLO";'
+            txtCerto2='alert(CODAP);'
             tamanhoInput="50%"
             txtToHighlight={["var", "let", "CODAP"]}
             navegar="VariaveisEx5"
