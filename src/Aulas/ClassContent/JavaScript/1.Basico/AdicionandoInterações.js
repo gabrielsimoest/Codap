@@ -14,22 +14,27 @@ export function Interações({ navigation }) {
             progresso="0%"
             mainText={t("js.basic.interactions.learningInteractions")}
             secondText={t("js.basic.interactions.interactionsPopupExplanation")}
+            thirdText={t("js.basic.interactions.interactionExample")}
             codeLanguage='HTML'
             code = {`<!DOCTYPE html>
 <html>
     <head>
-        <title>Simple Interaction Example</title>
+        <title>Interaction Example</title>
     </head>
     <body>
-        <button onclick="displayAlert()">Click me</button>
-            
+        <button onclick="displayAll()">Click me</button>
+
         <script>
-            function displayAlert() {
-                alert("Hello, this is a simple interaction!");
+            function displayAll() {
+                alert("Hello, this is an alert!");
+                let name = prompt("What's your name?", "Insert here");
+                let confirmation = confirm("Are you sure you want to proceed?");
             }
         </script>
     </body>
 </html>`}
+            endText={t("js.basic.interactions.deviceDifference")}
+            highlight={["JavaScript", "interactions", "interações", "alert", "prompt", "confirm", "pop-up", "pop-ups", "alerta", "confirmação"]}
             navegar="InteraçõesEx1"
         />
     )
@@ -44,11 +49,14 @@ export function InteraçõesEx1({ navigation }) {
             sec="9999"
             qtdop={1}
             layer={1}
+            adicionaltxt={t("js.basic.interactions.alert")}
             pergunta={t("js.basic.interactions.createAlertTrue")}
             txtantes="<script>"
             txtdepois="</script>"
-            txtCerto1='alert(true)'
+            txtCerto1='alert(true);'
+            txtCerto2='alert(true)'
             tamanhoInput="40%"
+            txtToHighlight={["alert", "true"]}
             navegar="InteraçõesEx2"
         />
     )
@@ -72,6 +80,7 @@ export function InteraçõesEx2({ navigation }) {
             opt7=')'
             opt8='" "'
             txtCerto='let CODAP = prompt("DIGITE O VALOR" , " ")'
+            txtToHighlight={["prompt", "CODAP", "title", "título", "padrão", "default"]}
             navegar="InteraçõesEx3"
         />
     )
@@ -91,9 +100,10 @@ export function InteraçõesEx3({ navigation }) {
             opt3='BOOLEAN'
             opt4='confirm'
             opt5=' = '
-            opt6='"Ativar notificações?"'
-            opt7=')'
-            txtCerto='let BOOLEAN = confirm("Ativar notificações?")'
+            opt6={t("js.basic.interactions.activateNotification")}
+            opt7=');'
+            txtCerto={t("js.basic.interactions.answare")}
+            txtToHighlight={["confirm", "BOOLEAN", "OK", "cancelar", "cancel", "pergunta", "question"]}
             navegar="InteraçõesEx4"
         />
     )
@@ -113,6 +123,7 @@ export function InteraçõesEx4({ navigation }) {
             opt3="null"
             opt4="10"
             optCerta="opt4"
+            txtToHighlight={["IDADE", "AGE", "Digite a idade", "Enter the age", "10", "prompt"]}
             navegar="InteraçõesEx5"
         />
     )
@@ -132,6 +143,7 @@ export function InteraçõesEx5({ navigation }) {
             opt3="true"
             opt4="0"
             optCerta="opt3"
+            txtToHighlight={["RESPOSTA", "ANSWARE", "confirm", "OK", "Ativar notificações?", "Activate notifications?"]}
             aulaSalvar={28}
             Salvar={true}
             navegar="CongratsView"

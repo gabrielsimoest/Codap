@@ -19,23 +19,7 @@ const forFade = ({ current }) => ({
 
 function App() {
   const { theme, FontSize, currentLanguage } = useContext(AppContext);
-/*   const [currentLanguage, setLanguage] = useState(null);
-
-  useEffect(() => {
-    AsyncStorage.getItem('@language_key')
-      .then(value => {
-        if (value !== null) {
-          setLanguage(value);
-          i18n.changeLanguage(value);
-        } else {
-          setLanguage('pt'); // idioma padrão
-        }
-      })
-      .catch(error => {
-        console.error('Error retrieving language:', error);
-      });
-  }, []); */
-
+  
   //Dar hide apenas quando tudo estiver perfeitamente selecionado
   useEffect(() => {
     if (Platform.OS === 'android' && theme && FontSize !== null && currentLanguage) SplashScreen.hide();

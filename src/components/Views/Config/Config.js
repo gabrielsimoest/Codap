@@ -4,6 +4,7 @@ import {
     StyleSheet,
     ScrollView,
     TouchableOpacity,
+    Platform,
 } from 'react-native';
 import { Switch } from 'react-native-paper';
 import DefaultHeader from '../../DefaultHeader';
@@ -15,9 +16,8 @@ import AText from '../../Shared/AText';
 import ThemeComponent from './ThemeComponent';
 import { useTheme } from '@react-navigation/native';
 import { VersionComponent, AboutComponent } from './InformationalComponents';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import PushNotification from 'react-native-push-notification';
 import { AppContext } from '../../../common/Contexts/AppContext';
+import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 const TextSize1 = 25;
 
 export default function Config({ navigation }) {
@@ -26,48 +26,37 @@ export default function Config({ navigation }) {
 
     const { colors } = useTheme(); //Variavel de cor do tema
 
-    const { notificationState, toggleNotification } = useContext(AppContext);
+    const { notificationState, toggleNotification, showAlert } = useContext(AppContext);
 
     //Switch
     const [isSwitchOn, setIsSwitchOn] = React.useState(notificationState);
-
-/*     React.useEffect(() => {
-        AsyncStorage.getItem('@notification_key')
-            .then(value => {
-                if (value !== null) {
-                    setIsSwitchOn(value === 'true');
-                }
-            })
-            .catch(error => {
-                console.error('Error retrieving switch state:', error);
-            });
-    }, []); */
 
     const onToggleSwitch = () => {
         const newState = !isSwitchOn;
         setIsSwitchOn(newState);
         toggleNotification(newState);
-
-        // Salve o novo estado do switch
-        //AsyncStorage.setItem('@notification_key', newState.toString());
-
-/*         if (newState) {
-            PushNotification.localNotificationSchedule({
-                channelId: "notif-channel",
-                date: new Date(Date.now() + (1 * 1000)), // 1 hour later
-                id: 1,
-                title: i18n.t("notificationService.title"),
-                message: i18n.t("notificationService.message"),
-                vibrate: false,
-                //vibration: false,
-                playSound: false,
-                //soundName: 'default',
-                repeatType: 'minute',
-                repeatTime: 4,
-            });
-        } else {
-            PushNotification.cancelAllLocalNotifications();
-        } */
+        if (newState) {
+            check(PERMISSIONS.ANDROID.POST_NOTIFICATIONS)
+                .then((result) => {
+                    switch (result) {
+                        case RESULTS.UNAVAILABLE:
+                            console.log('This feature is not available (on this device / in this context)');
+                            break;
+                        case RESULTS.DENIED:
+                            console.log('The permission has not been requested / is denied but requestable');
+                            setIsSwitchOn(false);
+                            toggleNotification(false);
+                            showAlert(t("alert.notification.title"), t("alert.notification.message"));
+                            break;
+                        case RESULTS.GRANTED:
+                            console.log('The permission is granted');
+                            break;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        };
     };
 
     return (
@@ -81,7 +70,7 @@ export default function Config({ navigation }) {
                 </View>
                 <TranslateComponet />
                 <FontComponent />
-                <ThemeComponent/>
+                <ThemeComponent />
                 <View style={[{ flexDirection: "row" }, { alignItems: "center" }]}>
                     <Icon type={Icons.Ionicons} name="notifications" style={styles.icon} size={25} color={"#5469D3"} />
                     <AText style={styles.text} defaultSize={TextSize1}>{t("notification")}</AText>

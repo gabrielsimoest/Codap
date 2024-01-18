@@ -456,13 +456,18 @@
             "example": "You can see an example of how to activate strict mode throughout your script. It can also be used at the top of your JS file."
           },
           "interactions" : {
-            "learningInteractions": "Now we will learn about some types of interactions.",
-            "interactionsPopupExplanation": "The alert, prompt, and confirm cause pop-ups that allow interaction.",
-            "createAlertTrue": "You have seen the alert before, so create one that shows the boolean value true.",
-            "promptVariableExplanation": "The prompt can be assigned to a variable to receive a value written by the user.",
-            "createPromptCODAP": "prompt(title, default), where ' ' omits the default. Create a variable CODAP that receives the value of the prompt.",
-            "confirmReturnExplanation": "The confirm returns true or false depending on the option the user clicks, being them: OK and cancel.",
-            "createConfirmBOOLEAN": "confirm(question). Create a variable BOOLEAN that receives the value of the confirm.",
+            "learningInteractions": "Now that we've seen a bit about JavaScript, we will learn some types of interactions to add to your website.",
+            "interactionsPopupExplanation": "In this lesson, we will see the functions alert(), prompt(), and confirm(). They trigger pop-ups that allow user interaction.",
+            "interactionExample": "Below you will see an example containing the 3 mentioned functions. When you press the button, an alert will appear, then a prompt for the user to enter their name, and finally a confirmation asking whether they wish to proceed or not.",
+            "deviceDifference": "Depending on the device and browser used, the appearance of these pop-ups can vary, but in the future, you will see how to make customized interactive pop-ups.",
+            "alert": "The alert() function is used to display a warning to the user where the user's interaction will not cause any effect.",
+            "createAlertTrue": "You have seen this function before, so create one that displays the value true.",
+            "promptVariableExplanation": "The prompt() can be assigned to a variable to receive a value entered by the user. It can be written as: prompt(title, default); where default represents the placeholder text in your prompt, use empty quotes (\" \") to omit the default text.",
+            "createPromptCODAP": "Create a variable CODAP that receives the value from the prompt.",
+            "confirmReturnExplanation": "The confirm() returns true or false depending on the option the user clicks, being them: OK and cancel. It can be written as: confirm(question)",
+            "createConfirmBOOLEAN": "Create a variable BOOLEAN that receives the value of the confirm.",
+            "activateNotification": "'Activate notifications?'",
+            "answare" : "let BOOLEAN = confirm('Activate notifications?');",
             "defaultValueAssignedToAGE": "What value will be assigned to AGE if the user does not change the default text?",
             "valueAssignedToANSWER": "What value will be assigned to ANSWER if the user clicks OK?"
           },
@@ -478,17 +483,21 @@
             "stringToBooleanConversion": "Knowing that in the case of a string, if there is at least one character the Boolean conversion is true, answer:"
           },
           "data" : {
-            "dataTypesIntroduction": "There are 8 data types that you will see in the example and exercises. Among them are: numbers, strings, objects, booleans, and others.",
+            "dataTypesIntroduction": "In JavaScript there are 8 data types, 7 of them are considered primitive and only 1 is considered an object.",
+            "dataTypes": "These 8 data types are: Number, String, Boolean, BigInt, Symbol, Undeflned, Null, Object. But for now, we will see the first 4.",
+            "dataExample": "In the example below are the types that we will cover in this lesson, you can use the console.log() function along with the \"typeof\" operator to see the data type of a variable through the terminal.",
             "numbersVarietyExplanation": "Numbers range from negative numbers to even decimal numbers, and do not need to be enclosed in quotes.",
             "whichOptionIsNumber": "Which of the options below represents a number?",
             "stringsRepresentationExplanation": "Strings can be represented by 3 types of quotes, containing 0 or more characters.",
             "whichOptionIsNotString": "Which of the options below does not represent a string?",
-            "bigIntExplanation": "Numbers above (2^53-1) and below -(2^53-1) need to be declared as BigInt. For this, we add a 'n' character at the end of the number.",
+            "bigIntExplanation": "Numbers above (2^53-1) and below -(2^53-1) need to be declared as BigInt. For this, we can add a 'n' character at the end of the number.",
             "whichOptionIsBigInt": "Which of the options below represents a BigInt?",
             "booleansExplanation": "Booleans represent only two values, true or false.",
             "whichOneIsBoolean": "Which of these represents a boolean?",
-            "specialDataTypes": "There are special types: null, undefined, symbols, and objects.",
-            "specialDataTypesNotCoveredNow": "But we will not cover these now."
+            "specialDataTypes": "The remaining 4 types are: Null, Symbol, Undefined, and Object.",
+            "nullUndefExplanation": "Null and Undefined represent an 'absence' of value, but in different ways. Null is intentionally assigned to indicate that a variable does not have a specific valid value at the moment. Undefined appears when a variable is declared but no value has been associated with it.",
+            "symbolObject": "Symbol and Object are more complex and will be addressed in the future, so don't worry about them for now.",
+            "NaN": "You may encounter NaN, but it is not a data type, rather a special value of the Number type. It stands for 'Not a Number' and appears when you try to perform an invalid mathematical operation, for example, 0 divided by 0."
           },
           "variables" : {
             "variablesAndConstantsInJS": "We will see about variables and constants in JavaScript. They can store numbers, strings, and objects.",
@@ -737,6 +746,10 @@
             "dependabots": "Insufficient DependaBots.",
             "doubleXP": "Double Experience Disabled."
           }
+        },
+        "notification" : {
+          "title" : "Notification Permission Denied",
+          "message" : "Please enable notifications to receive reminders. You can enable them in your device's settings."
         }
       },
       

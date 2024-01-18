@@ -458,13 +458,18 @@
             "example": "Você pode ver um exemplo de como fazer para ativar o modo estrito em todo seu script. Ele pode ser usado no topo do seu arquivo JS também."
           },
           "interactions" : {
-            "learningInteractions": "Agora aprenderemos alguns tipos de interações.",
-            "interactionsPopupExplanation": "O alert, prompt e confirm fazem surgir pop-ups que permitem interação.",
-            "createAlertTrue": "Você já viu o alert antes, então crie que mostre o valor buleano true.",
-            "promptVariableExplanation": "O prompt pode ser atribuido a uma variavel para receber um valor escrito pelo usuário.",
-            "createPromptCODAP": "prompt(titulo, padrão), onde ' ' omite o padrão. Crie uma variável CODAP que recebe o valor do prompt.",
-            "confirmReturnExplanation": "O confirm retorna true ou false dependendo da opção que o usuário clicar, sendo elas: OK e cancelar.",
-            "createConfirmBOOLEAN": "confirm(pergunta). Crie uma variável BOOLEAN que recebe o valor do confirm.",
+            "learningInteractions": "Agora que vimos um pouco sobre JavaScript aprenderemos alguns tipos de interações para adicionar em seu site.",
+            "interactionsPopupExplanation": "Nesta aula veremos as funções alert(), prompt() e confirm(). Elas fazem aparecer pop-ups que permitem a interação do usuário.",
+            "interactionExample": "Abaixo você verá um exemplo contendo as 3 funções mencionadas. Ao apertar o botão aparecerá um alerta, depois aparecerá um prompt para o usuário inserir o nome e por fim uma confirmação perguntando se deseja prosseguir ou não.",
+            "deviceDifference" : "Dependendo do dispositivo e navegador utilizado, a aparência desses pop-ups podem variar, mas futuramente você verá como fazer pop-ups interativos customizados.",
+            "alert": "O alert() serve para mostrar um aviso para o usuário em que a interação do usuário não causará nenhum efeito.",
+            "createAlertTrue": "Você já viu essa função antes, então crie uma que mostre o valor true.",
+            "promptVariableExplanation": "O prompt() pode ser atribuido a uma variavel para receber um valor escrito pelo usuário. Ele pode ser escrito assim: prompt(título, padrão); onde padrão representa o texto placeholder no seu prompt, use áspas vazias (\" \") para omitir o texto padrão.",
+            "createPromptCODAP": "Crie uma variável CODAP que recebe o valor do prompt.",
+            "confirmReturnExplanation": "O confirm() retorna true ou false dependendo da opção que o usuário clicar, sendo elas: OK e cancelar. Ele pode ser escrito assim: confirm(pergunta).",
+            "createConfirmBOOLEAN": "Crie uma variável BOOLEAN que recebe o valor do confirm.",
+            "activateNotification": "'Ativar notificações?'",
+            "answare" : "let BOOLEAN = confirm('Ativar notificações?');",
             "defaultValueAssignedToAGE": "Qual valor será atribuido a IDADE se o usuário não mudar o texto padrão?",
             "valueAssignedToANSWER": "Qual valor será atribuido a RESPOSTA se o usuário clicar em OK?"
           },
@@ -480,17 +485,21 @@
             "stringToBooleanConversion": "Sabendo que no caso de uma string, se houver ao menos um caractere a conversão Boolean é true, responda:"
           },
           "data" : {
-            "dataTypesIntroduction": "Existem 8 tipos de dados que você verá no exemplo e nos exercícios. Entre eles estão: números, strings, objetos, booleanas e outros.",
+            "dataTypesIntroduction": "Em JavaScript existem 8 tipos de dados, sendo 7 deles considerados primitivos e apenas 1 considerado como objeto.",
+            "dataTypes": "Esses 8 tipos de dados são: Number, String, Boolean, BigInt, Symbol,  Undeflned , Null, Object. Mas por hora veremos os 4 primeiros.",
+            "dataExample": "No exemplo abaixo estão os tipos que abordaremos nessa aula, você pode usar a função console.log() junto do operador \"typeof\" para ver o tipo de dado de uma variável pelo terminal.",
             "numbersVarietyExplanation": "Os números variam desde números negativos para até mesmo números decimais, e não precisam estar entre áspas.",
             "whichOptionIsNumber": "Qual das opções abaixo representa um número?",
             "stringsRepresentationExplanation": "As strings podem ser representadas pelos 3 tipos de áspas, contendo 0 ou mais caracteres.",
             "whichOptionIsNotString": "Qual das opções abaixo não representa uma string?",
-            "bigIntExplanation": "Números acima de (2^53-1) e abaixo de -(2^53-1) precisam ser declarados como BigInt. Para isso adicionamos um caractere 'n' no final do número.",
+            "bigIntExplanation": "Números acima de (2^53-1) e abaixo de -(2^53-1) precisam ser declarados como BigInt. Uma das formas para isso é adicionar um caractere 'n' no final do número.",
             "whichOptionIsBigInt": "Qual das opções abaixo representa um BigInt?",
             "booleansExplanation": "As booleanas representam dois valores apenas, true ou false.",
             "whichOneIsBoolean": "Qual desses representa uma booleana?",
-            "specialDataTypes": "Existem os tipos especiais: null, undefined, símbolos e objetos.",
-            "specialDataTypesNotCoveredNow": "Mas estes não veremos agora."
+            "specialDataTypes": "Os 4 tipos restantes são: Null, Symbol, Undeflned e Object.",
+            "nullUndefExplanation": "Null e Undeflned representam uma \"ausência\" de valor, porém de formas diferentes. o null é intencionalmente atribuido para dizer que uma variável não possui valor específico válido no momento. Já undeflned aparece quando uma variável é iniciada mas sem nenhum valor associado a ela.",
+            "symbolObject" : "Symbol e object são mais complexos e serão abordados futuramente, então não se preocupe com eles no momento.",
+            "NaN": "Você pode acabar se deparando com NaN, mas esse não é um tipo de dado, mas sim um valor especial do tipo Number. Ele significa \"Not a Number\" e aparece quando você tenta fazer uma operação matemática inválida, por exemplo 0 dividido por 0."
           },
           "variables" : {
             "variablesAndConstantsInJS": "Veremos sobre as variáveis e constantes do JavaScript. Elas podem armazenar números, strings e objetos.",
@@ -739,6 +748,10 @@
             "dependabots" : "DependaBots Insuficientes.",
             "doubleXP": "Dobro de Experiencia Desativado."
           }
+        },
+        "notification" : {
+          "title" : "Permissão de Notificação Negada",
+          "message" : "Por favor, ative as notificações para receber lembretes. Você pode ativá-las nas configurações do seu dispositivo."
         }
       },
       

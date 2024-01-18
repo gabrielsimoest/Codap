@@ -35,7 +35,7 @@ export function ConhecendoCSS({ navigation }) {
 }
 
 export function CSSEx1({ navigation }) {
-    //Constante de tradução, usar {t("css.basic.intro.CHAVE")} para tradução
+    //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <OptionView
@@ -62,7 +62,7 @@ export function CSSEx1({ navigation }) {
 }
 
 export function CSSEx2({ navigation }) {
-    //Constante de tradução, usar {t("css.basic.intro.CHAVE")} para tradução
+    //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <OptionView
@@ -89,7 +89,7 @@ export function CSSEx2({ navigation }) {
 }
 
 export function CSSEx3({ navigation }) {
-    //Constante de tradução, usar {t("css.basic.intro.CHAVE")} para tradução
+    //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
         <SelectView

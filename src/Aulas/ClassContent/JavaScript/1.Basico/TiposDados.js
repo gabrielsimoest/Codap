@@ -13,6 +13,8 @@ export function TiposDados({ navigation }) {
             navigation={navigation}
             progresso="0%"
             mainText={t("js.basic.data.dataTypesIntroduction")}
+            secondText={t("js.basic.data.dataTypes")}
+            thirdText={t("js.basic.data.dataExample")}
             onlyCode = {true}
             codeLanguage='JavaScript'
             code = {`let num = 10; // Number
@@ -26,6 +28,7 @@ console.log(typeof str); // Outputs: string
 console.log(typeof bool); // Outputs: boolean
 console.log(typeof bigInt); // Outputs: bigint
 console.log(typeof bigInt2); // Outputs: bigint`}
+            highlight={["JavaScript", "typeof", "Number", "String", "Boolean", "Object", "Symbol", "Null", "BigInt", "Undeflned", "console.log()"]}
             navegar="TiposDadosEx1"
         />
     )
@@ -45,6 +48,7 @@ export function TiposDadosEx1({ navigation }) {
             opt3='let CODAP = "-10"'
             opt4="let CODAP = null"
             optCerta="opt2"
+            txtToHighlight={["negative", "negativos", "decimal", "decimais"]}
             navegar="TiposDadosEx2"
         />
     )
@@ -64,6 +68,7 @@ export function TiposDadosEx2({ navigation }) {
             opt3='let CODAP = `HELLO`'
             opt4='let CODAP = HELLO'
             optCerta="opt4"
+            txtToHighlight={["strings", "3", "0", "mais", "more", "string"]}
             navegar="TiposDadosEx3"
         />
     )
@@ -83,6 +88,7 @@ export function TiposDadosEx3({ navigation }) {
             opt3="let CODAP = '1234567890123456789012345678901234567890'"
             opt4="let CODAP {BigInt} = 1234567890123456789012345678901234567890"
             optCerta="opt1"
+            txtToHighlight={["BigInt"]}
             navegar="TiposDadosEx4"
         />
     )
@@ -102,6 +108,7 @@ export function TiposDadosEx4({ navigation }) {
             opt3='let CODAP = wrong'
             opt4='let CODAP = true'
             optCerta="opt4"
+            txtToHighlight={["booleanas", "booleans", "boolean", "true", "false", "booleana"]}
             navegar="TiposDados2"
         />
     )
@@ -114,6 +121,8 @@ export function TiposDados2({ navigation }) {
             navigation={navigation}
             progresso="100%"
             mainText={t("js.basic.data.specialDataTypes")}
+            secondText={t("js.basic.data.nullUndefExplanation")}
+            thirdText={t("js.basic.data.symbolObject")}
             onlyCode = {true}
             codeLanguage='JavaScript'
             code = {`let arr = [1, 2, 3]; // Array
@@ -125,10 +134,10 @@ let nul = null; // Null
 console.log(typeof arr); // Outputs: object
 console.log(typeof obj); // Outputs: object
 console.log(typeof sym); // Outputs: symbol
-console.log(typeof bigInt); // Outputs: bigint
 console.log(typeof undef); // Outputs: undefined
 console.log(typeof nul); // Outputs: object`}
-            endText={t("js.basic.data.specialDataTypesNotCoveredNow")}
+            endText={t("js.basic.data.NaN")}
+            highlight={["Not a Number","Number","Object", "Symbol", "Null", "Undeflned", "NaN", "null", "undeflned"]}
             Salvar={true}
             aulaSalvar={31}
             navegar="CongratsView"

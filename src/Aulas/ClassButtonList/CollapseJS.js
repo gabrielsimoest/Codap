@@ -83,9 +83,9 @@ export default function CollapseJS() {
                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={28} theme={"classButton"} title={t("Adding interactions")} onPressFunction={() => navigation.navigate("Interações")} />
                 </View>
-                <View style={{ flexDirection: "row" }} >
+                {/*                 <View style={{ flexDirection: "row" }} >
                     <OpButton AulasSalvarOp={AulasSalvas} Verify={30} theme={"classButton"} title={t("Converting types")} onPressFunction={() => navigation.navigate("ConvertendoTipos")} />
-                </View>
+                </View> */}
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
             {/*******************INTER***********************/}

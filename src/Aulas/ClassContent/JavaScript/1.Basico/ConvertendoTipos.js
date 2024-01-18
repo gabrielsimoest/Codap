@@ -16,20 +16,20 @@ export function ConvertendoTipos({ navigation }) {
             onlyCode = {true}
             codeLanguage='JavaScript'
             code = {`let num = 10; // Number
-            let str = num.toString(); // Convert Number to String
-            console.log(typeof str); // Outputs: string
+let str = num.toString(); // Convert Number to String
+console.log(typeof str); // Outputs: string
             
-            let str2 = "10"; // String
-            let num2 = Number(str2); // Convert String to Number
-            console.log(typeof num2); // Outputs: number
+let str2 = "10"; // String
+let num2 = Number(str2); // Convert String to Number
+console.log(typeof num2); // Outputs: number
             
-            let bool = true; // Boolean
-            let str3 = bool.toString(); // Convert Boolean to String
-            console.log(typeof str3); // Outputs: string
+let bool = true; // Boolean
+let str3 = bool.toString(); // Convert Boolean to String
+console.log(typeof str3); // Outputs: string
             
-            let str4 = "true"; // String
-            let bool2 = JSON.parse(str4); // Convert String to Boolean
-            console.log(typeof bool2); // Outputs: boolean`}
+let str4 = "true"; // String
+let bool2 = JSON.parse(str4); // Convert String to Boolean
+console.log(typeof bool2); // Outputs: boolean`}
             navegar="ConvertendoTiposEx1"
         />
     )
