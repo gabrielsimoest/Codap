@@ -62,6 +62,7 @@ export function LinksEx1({ navigation }) {
             pergunta={t("html.inter.links.createLinkQuestion")}
             txtantes="<a "
             txtdepois=">CODAP</a>"
+            txtCerto1='href="#codap"'
             tamanhoInput="50%"
             navegar="LinksEx2"
         />
@@ -81,6 +82,7 @@ export function LinksEx2({ navigation }) {
             pergunta={t("html.inter.links.transformElementQuestion")}
             txtantes="<main>"
             txtdepois="</main>"
+            txtCerto1='<h3><a href="#codap">CODAP</a></h3>'
             tamanhoInput="80%"
             navegar="LinksEx3"
         />
@@ -102,6 +104,7 @@ export function LinksEx3({ navigation }) {
             txtdepois="</main>"
             txtantes2="<ul>"
             txtdepois2="</ul>"
+            txtCerto1='<li><a href="#codap">CODAP</a></li>'
             tamanhoInput="75%"
             navegar="LinksEx4"
         />
@@ -118,6 +121,7 @@ export function LinksEx4({ navigation }) {
             pergunta={t("html.inter.links.createIdHeader")}
             txtantes="<h1"
             txtdepois=">CODAP</h1>"
+            txtCerto1='Id="codap"'
             tamanhoInput="40%"
             navegar="LinksEx5"
         />
@@ -156,7 +160,7 @@ export function LinksEx6({ navigation }) {
             opt3='<h3><a href="#codap">CODAP</a></h3>'
             opt4="<h3><a href=>#codap>CODAP</a></h3>"
             optCerta="opt3"
-            aulaSalvar={14}
+            aulaSalvar={23}
             Salvar={true}
             navegar="CongratsView"
         />

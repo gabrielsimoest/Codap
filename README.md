@@ -59,6 +59,11 @@ Para executar o Projeto:
     npx react-native run-android
     ```
 
+Em casos de erros tente:
+    ```bash
+    npx react-native doctor
+    ```
+
 ## Contribuição
 
 ### Issues

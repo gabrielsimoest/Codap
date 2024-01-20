@@ -49,6 +49,8 @@ export function DivEx1({ navigation }) {
             txtdepois="</header>"
             txtantes2="<div>"
             txtdepois2="</div>"
+            txtCerto1='<h1>CODAP</h1>'
+            txtCerto2='<h2>CODAP</h2>'
             tamanhoInput="40%"
             navegar="DivEx2"
         />
@@ -72,6 +74,9 @@ export function DivEx2({ navigation }) {
             txtantes3="<ol>"
             txtdepois3="</ol>"
             tamanhoInput="40%"
+            txtCerto1='<li>Ouro</li>'
+            txtCerto2='<li>Prata</li>'
+            txtCerto3='<li>Bronze</li>'
             navegar="LineBreak"
         />
     )
@@ -160,6 +165,9 @@ export function LineBreakEx3({ navigation }) {
             txtantes2="<div>"
             txtdepois2="</div>"
             tamanhoInput="50%"
+            txtCerto1='<h1>CODAP</h1>'
+            txtCerto2='<br/>'
+            txtCerto3='<hr/>'
             aulaSalvar={17}
             Salvar={true}
             navegar="CongratsView"
