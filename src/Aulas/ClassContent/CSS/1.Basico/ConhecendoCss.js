@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../components/Shared/TeoricView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
@@ -10,24 +10,46 @@ export function ConhecendoCSS({ navigation }) {
     //Constante de tradução, usar {t("CHAVE")} para tradução
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             //BARRA DE PROGRESSO
             progresso="0%"
             //Texto principal
-            txt={t("css.basic.intro.learnCSS")}
+            mainText={t("css.basic.intro.learnCSS")}
             //Textos opcionais
-            adicionaltxt={t("css.basic.intro.cssDirectOrStyleTags")}
-            adicionaltxt2="none"
-            //Imagem principal
-            img="none"
-            //Imagens opcionais
-            opt_img="none"
-            opt_img2="none"
+            secondText={t("css.basic.intro.cssDirectOrStyleTags")}
+            thirdText={t("css.basic.intro.inlineStyle")}
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-color: #b6b6b6; /* Background color for the body */
+            }
+            .container {
+                background-color: #714b2f; /* Background color for the container class */
+                width: 90%;
+                margin: auto;
+                padding: 20px;
+                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Soft shadow */
+            }
+            p {
+                font-size: 17px; /* Font-size */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" style="border-radius: 15px"> <!-- CSS inline to add round borders -->
+            <h1 style="text-align: center">Bem-vindo ao Meu Site</h1> <!-- CSS inline to center -->
+            <p>Este é um exemplo de como usar CSS para um site mais elegante.</p>
+        </div>
+    </body>
+</html>`}
             //Textos final opcional (aparece após as imagens)
-            adicionaltxt_end={t("css.basic.intro.cssExample")}
+            endText={t("css.basic.intro.cssExample")}
             
-            txtToHighlight={["CSS", "style"]}   
+            highlight={["CSS", "style", "Cody", "link", "p", "body", "container", "seletores", "selectors", "inline", "seletor de classe", "class selector"]}   
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CSSEx1"
         />
@@ -99,7 +121,7 @@ export function CSSEx3({ navigation }) {
             //SEGUNDOS NO CRONOMETRO // OPCIONAL == 9999
             sec="9999"
             //TEXTO ADICIONAL CABEÇARIO
-            adicionaltxt="none" //Opcional
+            adicionaltxt={t("css.basic.intro.cssInsideTag")} //Opcional
             //PERGUNTA
             pergunta={t("css.basic.intro.createBlueColorStyleForH1")}
             opt1='<h1 '
@@ -114,7 +136,7 @@ export function CSSEx3({ navigation }) {
             Salvar={true}
             aulaSalvar={3}
 
-            txtToHighlight={["blue", "h1"]}
+            txtToHighlight={["blue", "h1", "azul", "style", "diretamente", "directly", "tag-name", "nome-tag", "seu-estilo", "your-style"]}
             //NOME ADICIONADO NO STACK NAVIGATOR
             navegar="CongratsView"
         />

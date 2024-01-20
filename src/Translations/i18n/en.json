@@ -520,9 +520,10 @@
       "css" : {
         "basic" : {
           "intro" : {
-            "learnCSS": "Hello, this is Cody, let's learn CSS? CSS is a mechanism for adding styles to a web document.",
-            "cssDirectOrStyleTags": "CSS code can be applied directly to html tags or contained within <style> tags",
-            "cssExample": "The 'p' inside the <style> in the example is a selector, this represents that all elements with the same name as the selector will receive that style.",
+            "learnCSS": "Hello, this is Cody, shall we learn CSS? CSS is a mechanism for adding styles to a web document to improve the appearance of your site.",
+            "cssDirectOrStyleTags": "CSS code can be applied directly to html tags (inline), contained within <style> tags, or through a separate style file that can be loaded with a <link> tag, but we'll explore the latter option later on.",
+            "inlineStyle": "This example contains both the use of the <style> tag as well as inline styling.",
+            "cssExample": "The 'p' and 'body' within the <style> in the example are selectors, which means that all elements with the same name as the selector will receive that style. Meanwhile, '.container' is a class selector, used to style a specific tag with the given class.",
             "roleOfCSS": "What is the role of CSS?",
             "addStyles": "Add styles",
             "addNewMechanics": "Add new mechanics",
@@ -533,35 +534,43 @@
             "h1ElementReplacedByH2": "Indicates that every h1 element will be replaced by h2",
             "h1ElementObtainStyles": "Indicates that every h1 element will obtain styles",
             "h1ElementExecutedAsJS": "Indicates that every h1 element will be executed as js",
-            "createBlueColorStyleForH1": "Create a blue color style for h1"
+            "cssInsideTag": "As mentioned before, one way to add styles is by applying them directly to html tags, but for larger codebases, opt for using <style> tags or even a separate file to make it more readable.",
+            "createBlueColorStyleForH1": "Create a blue color style for h1 with the options below following the example: \n\n<tag-name style='your-style'>"
           },
           "background" : {
             "backgroundColorCSS_description": "A completely white website is not always pleasant, we can assign a color to a section of your HTML document.",
-            "backgroundColorCSS_usage": "For this, we will use the background-color, which works just like color but only for backgrounds.",
+            "backgroundColorCSS_usage": "For this, we will use the background-color. It works just like the color style seen in the previous lesson, but this one is only for backgrounds.",
+            "backgroundColorTags": "You can use this style for various tags that define a section, such as: <body>, <div>, <header>, and others. Be creative!",
             "createBlueStyleForBody_question": "Create a blue color style for the <body>",
             "defineColorAndBackgroundForP_question": "Define color: black and a background-color: hsl(200, 50%, 50%) for the p selector"
           },
           "color" : {
-            "colorPropertyUsage": "You can add colors to your text elements using the color property.",
-            "acceptedColorValues": "The accepted colors range from HEX, RGB, HSL, RGBA, HSLA values to predefined color names.",
-            "createRGBColorStyleForH1": "Create an rgb(255, 99, 71) color style for the h1",
-            "opacityWithRGBA": "You can tweak the opacity using RGBA, where the last value represents the opacity (0 to 1)",
-            "createRGBAColorStyleForH1": "Create an rgb(20, 99, 71, 0.7) color style for the h1",
-            "addColorForSelectorP": "Add a color: #00ffff for the p selector"
+            "colorPropertyUsage": "You can add colors to your text elements using the color property. This example will show the inline use of this style, ensuring that each tag has its own separate style. In other lessons, you will learn to use class to do the same with <style> tags.",
+            "acceptedColorValues": "The accepted color values range from HEX, RGB, HSL, RGBA, HSLA to even predefined color names.",
+            "rgbaHsla": "In case you didn't know, it's worth mentioning that the difference between RGB and RGBA is the addition of a fourth opacity value that ranges from 0 (transparent) to 1 (opaque), the same applies to HSL and HSLA.",
+            "createRGBColorStyleForH1": "Create an inline rgb(255, 99, 71) color style for the <h1> tag.",
+            "opacityWithRGBA": "You can tweak the opacity using RGBA, where the last value represents the opacity (0 to 1).",
+            "createRGBAColorStyleForH1": "Create an rgba(20, 99, 71, 0.7) color style for the <h1>",
+            "styleTag": "Now add color to all <p> tags in a document using <style> and the p selector. Remember that you don't need the quotes inside the <style> tag.",
+            "addColorForSelectorP": "Add the color: #00ffff."
           },
           "font" : {
-            "FontFamilyCSS_mainText": "It is also possible to adjust the font of your text to better match your website.",
-            "FontFamilyCSS_additionalText": "This is done through the font-family.",
+            "FontFamilyCSS_mainText": "It is also possible to adjust the font of your text to better match your site. This is done using font-family.",
+            "FontFamilyCSS_additionalText": "There are various fonts that CSS allows you to add to your site, however, some fonts need to be installed by the user to work, so avoid using many different fonts on your site and opt for using font categories considered safe for use.",
+            "FontFamilyCSS_thirdText": "A good practice is to add fallback fonts, in case the primary font is not available on the system, it will try to use the second provided font, or the third, the fourth, and so on. As in the example below, the first <p> has the Times New Roman font, but if it is not available, the system will use any serif font.",
+            "FontFamilyCSS_endText": "All the fonts used in the example are safe to use and are standard on almost all systems. The safe font categories are: Serif, Sans-serif, Monospace, Fantasy, and Cursive.",
             "FontFamilyEx1_question": "Set the font-family to Arial in <h2>",
             "FontFamilyEx1_option1": "CODAP",
             "FontFamilyEx1_option5": "font-family: Arial",
             "FontFamilyEx2_question": "Set color: black and a font-family: consolas for the h3 selector",
             "FontFamilyEx2_correctOption1": "color: black",
-            "FontFamilyEx2_correctOption2": "font-family: consolas"
+            "FontFamilyEx2_correctOption2": "font-family: consolas",
+            "FontFamilyEx3_question": "Define a consolas font with 2 more fallback fonts for <h1>."
           },
           "fontSize" : {
-            "FontSizeCSS_mainText": "We can change the size of the texts in your HTML document.",
-            "FontSizeCSS_additionalText": "For this, we will use font-size, where you specify the amount of pixels for the size.",
+            "FontSizeCSS_mainText": "We can change the size of the text in an HTML document using font-size.",
+            "FontSizeCSS_additionalText": "It has several different types of values. You can use: 'px' (pixels), 'pt' (points, which is equivalent to 1/72 of an inch), 'x%' (relative to the parent element), 'em' (times relative to the parent element), 'rem' (times relative to the root element), and 'vw', 'vh', 'vmin', 'vmax' (these four are relative to the width and height of the viewport).",
+            "fontSizeCSS_usage": "As you have seen, there are various measures to use. px and pt are fixed and do not depend on other values, but on larger and smaller screens your site may have text sizes different from what is expected, so evaluate which is best to use in your project.",
             "FontSizeEx1_question": "Add a font size of 20 pixels to the <p>",
             "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
             "FontSizeEx2_question": "Define color: black and a background-color: blue and a font-size: 20px for the p selector",

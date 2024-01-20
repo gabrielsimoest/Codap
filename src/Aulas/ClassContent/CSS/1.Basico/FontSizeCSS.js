@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import TeoricView from '../../../../components/Shared/TeoricView';
+import TheoryView from '../../../../components/Shared/TheoryView';
 import OptionView from '../../../../components/Shared/OptionView';
 import SelectView from '../../../../components/Shared/SelectView';
 import TextView from '../../../../components/Shared/TextView';
@@ -9,16 +9,28 @@ import NestingView from '../../../../components/Shared/NestingView';
 export function FontSizeCSS({ navigation }) {
     const { t, i18n } = useTranslation();
     return (
-        <TeoricView
+        <TheoryView
             navigation={navigation}
             progresso="0%"
-            txt={t('css.basic.fontSize.FontSizeCSS_mainText')}
-            adicionaltxt={t('css.basic.fontSize.FontSizeCSS_additionalText')}
-            adicionaltxt2="none"
-            img="none"
-            opt_img="none"
-            opt_img2="none"
-            adicionaltxt_end="none"
+            mainText={t('css.basic.fontSize.FontSizeCSS_mainText')}
+            secondText={t('css.basic.fontSize.FontSizeCSS_additionalText')}
+            codeLanguage='HTML'
+            code={`<!DOCTYPE html>
+<html>
+    <body>
+        <p style="font-size: 32px">Hello World!</p> <!-- 32 pixels -->
+        <p style="font-size: 16pt">Hello World!</p> <!-- 16 points -->
+        <p style="font-size: 50%">Hello World!</p> <!-- 50% of fathher size -->
+        <p style="font-size: 1em">Hello World!</p> <!-- 1 times the father size -->
+        <p style="font-size: 2rem">Hello World!</p>  <!-- 2 times the root element size -->
+        <p style="font-size: 5vw">Hello World!</p> <!-- 5% screen widith -->
+        <p style="font-size: 5vh">Hello World!</p> <!-- 5% screen heigth -->
+        <p style="font-size: 5vmin">Hello World!</p> <!-- 5% of the minimum value between screen height and widith -->
+        <p style="font-size: 5vmax">Hello World!</p> <!-- 5% of the maximum value between screen height and widith -->
+    </body>
+</html>`}
+            endText={t('css.basic.fontSize.fontSizeCSS_usage')}
+            highlight={["px", "rem", "vw", "vh", "vmin", "vmax", "x", "pt", "HTML", "font-size"]}
             navegar="FontSizeEx1"
         />
     )
@@ -41,7 +53,8 @@ export function FontSizeEx1({ navigation }) {
             opt6='"font-size:20px"'
             opt7='none'
             opt8='none'
-            txtCerto={t('css.basic.fontSize.FontSizeEx1_correctAnswer')}
+            txtCerto='<p style="font-size:20px">CODAP</p>'
+            txtToHighlight={["20", "pixels", "p"]}
             navegar="FontSizeEx2"
         />
     )
@@ -65,6 +78,7 @@ export function FontSizeEx2({ navigation }) {
             txtCerto1={t('css.basic.fontSize.FontSizeEx2_correctOption1')}
             txtCerto2={t('css.basic.fontSize.FontSizeEx2_correctOption2')}
             txtCerto3={t('css.basic.fontSize.FontSizeEx2_correctOption3')}
+            txtToHighlight={["color", "black", "background-color", "blue", "font-size", "20px", "p"]}
             tamanhoInput="40%"
             Salvar={true}
             aulaSalvar={5}

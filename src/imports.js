@@ -325,6 +325,7 @@ export {
     FontFamilyCSS,
     FontFamilyEx1,
     FontFamilyEx2,
+    FontFamilyEx3,
 } from './Aulas/ClassContent/CSS/1.Basico/FontFamily';
 
 //TESTES

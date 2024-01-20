@@ -16,7 +16,7 @@ const db = SQLite.openDatabase(
 export default function SaveClass({ AulaId, Salvar }) {
     useFocusEffect(
         React.useCallback(() => {
-            console.log(AulaId + "/" + Salvar) ;
+            //console.log(AulaId + "/" + Salvar) ;
 
             if (Salvar == true) {
                 getUser();

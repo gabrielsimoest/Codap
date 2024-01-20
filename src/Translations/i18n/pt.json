@@ -522,9 +522,10 @@
       "css" : {
         "basic" : {
           "intro" : {
-            "learnCSS": "Olá, aqui é o Cody, vamos aprender CSS? CSS é um mecanismo para adicionar estilos a um documento web.",
-            "cssDirectOrStyleTags": "O código CSS pode ser aplicado diretamente às tags html ou contido dentro de tags <style>",
-            "cssExample": "O 'p' dentro do <style> no exemplo é um seletor, isso representa que todos os elementos com o mesmo nome que o seletor receberão esse estilo.",
+            "learnCSS": "Olá, aqui é o Cody, vamos aprender CSS? CSS é um mecanismo para adicionar estilos a um documento web para melhorar a aparência do seu site.",
+            "cssDirectOrStyleTags": "O código CSS pode ser aplicado diretamente às tags html (inline), contido dentro de tags <style> ou através de um arquivo de estilos separado que pode ser carregado com a tag <link>, mas esse último veremos mais pra frente.",
+            "inlineStyle": "Esse exemplo contém tanto o uso da tag <style> como a escrita inline.",
+            "cssExample": "O 'p' e 'body' dentro do <style> no exemplo são seletores, isso representa que todos os elementos com o mesmo nome que o seletor receberão esse estilo. Já '.container' é um seletor de classe, ele seve para estilizar uma tag específica com a classe determinada.",
             "roleOfCSS": "Qual é o papel do CSS?",
             "addStyles": "Adicionar estilos",
             "addNewMechanics": "Adicionar novas mecânicas",
@@ -535,35 +536,43 @@
             "h1ElementReplacedByH2": "Indica que todo elemento h1 será substituído por h2",
             "h1ElementObtainStyles": "Indica que todo elemento h1 obterá estilos",
             "h1ElementExecutedAsJS": "Indica que todo elemento h1 será executado como js",
-            "createBlueColorStyleForH1": "Crie um estilo de cor azul para h1"
+            "cssInsideTag": "Como dito anteriormente, uma das formas de adicionar estilos é aplicando eles diretamente nas tags html, mas para códigos maiores opte por usar as tags <style> ou até mesmo um arquivo separado para deixar mais legível.",
+            "createBlueColorStyleForH1": "Crie um estilo de cor azul para h1 com as opções abaixo seguindo o exemplo: \n\n<nome-tag style='seu-estilo'>"
           },
           "background" : {
             "backgroundColorCSS_description": "Um site todo branco nem sempre é agradável, podemos atribuir uma cor a uma seção do seu documento HTML.",
-            "backgroundColorCSS_usage": "Para isso utilizaremos o background-color, que funciona igual ao color mas apenas para fundos.",
+            "backgroundColorCSS_usage": "Para isso utilizaremos o background-color. Ele funciona igual ao estilo color que foi visto na aula anterior mas esse é apenas para fundos.",
+            "backgroundColorTags": "Você pode usar esse estilo para várias tags que determinam uma seção, podendo ser: <body>, <div>, <header> e entre outros. Seja criativo!",
             "createBlueStyleForBody_question": "Crie um estilo de cor azul para o <body>",
             "defineColorAndBackgroundForP_question": "Defina color: black e um background-color: hsl(200, 50%, 50%) para o seletor p"
           },
           "color" : {
-            "colorPropertyUsage": "Você pode adicionar cores aos seus elementos de texto usando a propriedade color.",
-            "acceptedColorValues": "As cores aceitas variam de valores HEX, RGB, HSL, RGBA, HSLA até nomes de cores predefinidos.",
-            "createRGBColorStyleForH1": "Crie um estilo de cor rgb(255, 99, 71) para o h1",
-            "opacityWithRGBA": "Você pode ajustar a opacidade usando RGBA, onde o último valor representa a opacidade (de 0 a 1)",
-            "createRGBAColorStyleForH1": "Crie um estilo de cor rgb(20, 99, 71, 0.7) para o h1",
-            "addColorForSelectorP": "Adicione uma cor: #00ffff para o seletor p"
+            "colorPropertyUsage": "Você pode adicionar cores aos seus elementos de texto usando o color. Esse exemplo mostrará o uso inline desse estilo, isso garante que cada tag possua seu estilo separadamente. Em outras aulas você aprenderá a usar as classes para fazer o mesmo com as tags <style>.",
+            "acceptedColorValues": "As cores aceitas variam de valores HEX, RGB, HSL, RGBA, HSLA e até nomes de cores predefinidos.",
+            "rgbaHsla": "Caso não saiba, vale mencionar que a diferença de RGB e RGBA é a adição de um quarto valor, a opacidade, que vai de 0 (transparente) a 1 (opaco), o mesmo vale para HSL e HSLA.",
+            "createRGBColorStyleForH1": "Crie um estilo de cor inline rgb(255, 99, 71) para a tag <h1>:",
+            "opacityWithRGBA": "Você pode ajustar a opacidade usando RGBA, onde o último valor representa a opacidade (de 0 a 1).",
+            "createRGBAColorStyleForH1": "Crie um estilo de cor rgba(20, 99, 71, 0.7) para <h1>.",
+            "styleTag": "Agora adicione a cor para todas as tags <p> de um documento usando <style> e o seletor p. lembre-se que não precisa de áspas dentro da tag <style>.",
+            "addColorForSelectorP": "Adicione a cor: #00ffff."
           },
           "font" : {
-            "FontFamilyCSS_mainText": "Também é possivel ajustar a fonte do seu texto pra combinar melhor com seu site.",
-            "FontFamilyCSS_additionalText": "Isso é feito através do font-family.",
+            "FontFamilyCSS_mainText": "Também é possivel ajustar a fonte do seu texto pra combinar melhor com seu site. Isso é feito usando font-family.",
+            "FontFamilyCSS_additionalText": "Existem várias fontes que o CSS permite adicionar ao seu site, porém algumas fontes precisam ser instaladas pelo usuário para que funcionem, por isso evite usar muitas fontes diferentes em seu site e opte por usar categorias de fontes consideradas seguras para uso.",
+            "FontFamilyCSS_thirdText": "Uma boa prática é adicionar fontes de fallback. Caso a fonte principal não esteja disponível no sistema, ele tentará usar a segunda fonte fornecida, ou a terceira e por aí vai. Como no exemplo abaixo: o primeiro <p> possui a fonte Times New Roman, mas caso não esteja disponível o sistema usará uma fonte serif qualquer.",
+            "FontFamilyCSS_endText": "Todas as fontes usadas no exemplo são seguras de usar e são padrões em quase todos os sistemas. As categorias de fontes seguras são: Serif, Sans-serif, Monospace, Fantasy e Cursive.",
             "FontFamilyEx1_question": "Defina a font-family para Arial no <h2>",
             "FontFamilyEx1_option1": "CODAP",
             "FontFamilyEx1_option5": "font-family: Arial",
             "FontFamilyEx2_question": "Defina color: black e um font-family: consolas para o seletor h3",
             "FontFamilyEx2_correctOption1": "color: black",
-            "FontFamilyEx2_correctOption2": "font-family: consolas"
+            "FontFamilyEx2_correctOption2": "font-family: consolas",
+            "FontFamilyEx3_question": "Defina uma fonte consolas com mais 2 fontes fallback para <h1>."
           },
           "fontSize" : {
-            "FontSizeCSS_mainText": "Podemos alterar o tamanho dos textos de seu documento HTML.",
-            "FontSizeCSS_additionalText": "Para isso utilizaremos o font-size, em que você especifica a quantia de pixels para o tamanho.",
+            "FontSizeCSS_mainText": "Podemos alterar o tamanho dos textos de um documento HTML usando o font-size.",
+            "FontSizeCSS_additionalText": "Ele possui vários tipos de valores diferentes. Você pode utilizar: 'px' (pixels), 'pt' (pontos, que equivale a 1/72 de polegada), 'x%' (em relação ao elemento pai), 'em' (vezes em relação ao elemento pai), 'rem' (vezes em relação ao elemento raiz) e 'vw', 'vh', 'vmin', 'vmax' (esses 4 são relativos à largura e altura da tela). ",
+            "fontSizeCSS_usage":"Como você viu, há várias medidas para se usar. px e pt são fixos e não dependem de outros valores, porém em telas maiores e menores seu site pode ter textos de tamanhos diferentes do esperado, então avalie qual o melhor para ser usado em seu projeto.",
             "FontSizeEx1_question": "Adicione um tamanho de fonte de 20 pixels para o <p>",
             "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
             "FontSizeEx2_question": "Defina color: black e um background-color: blue e um font-size: 20px para o seletor p",
