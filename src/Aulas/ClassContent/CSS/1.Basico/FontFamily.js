@@ -56,7 +56,6 @@ export function FontFamilyEx1({ navigation }) {
             opt4='>'
             opt5='<h2 '
             opt6='"font-family: Arial"'
-            opt6='"font-family: Arial"'
             opt7='none'
             opt8='none'
             txtCerto='<h2 style="font-family: Arial">CODAP</h2>'
