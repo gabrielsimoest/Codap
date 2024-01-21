@@ -53,10 +53,10 @@ export function BackgroungColorEx1({ navigation }) {
             opt3='</body>'
             opt4='>'
             opt5='CODAP'
-            opt6='"background-color:blue"'
+            opt6='"background-color:blue;"'
             opt7='none'
             opt8='none'
-            txtCerto='<body style="background-color:blue">CODAP</body>'
+            txtCerto='<body style="background-color:blue;">CODAP</body>'
             txtToHighlight={["body", "blue", "azul"]}
             navegar="BackgroungColorEx2"
         />

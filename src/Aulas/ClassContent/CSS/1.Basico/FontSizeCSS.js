@@ -50,10 +50,10 @@ export function FontSizeEx1({ navigation }) {
             opt3='>'
             opt4='</p>'
             opt5='CODAP'
-            opt6='"font-size:20px"'
+            opt6='"font-size:20px;"'
             opt7='none'
             opt8='none'
-            txtCerto='<p style="font-size:20px">CODAP</p>'
+            txtCerto='<p style="font-size:20px;">CODAP</p>'
             txtToHighlight={["20", "pixels", "p"]}
             navegar="FontSizeEx2"
         />

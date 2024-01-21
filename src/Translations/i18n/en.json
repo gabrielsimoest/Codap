@@ -561,9 +561,9 @@
             "FontFamilyCSS_endText": "All the fonts used in the example are safe to use and are standard on almost all systems. The safe font categories are: Serif, Sans-serif, Monospace, Fantasy, and Cursive.",
             "FontFamilyEx1_question": "Set the font-family to Arial in <h2>",
             "FontFamilyEx1_option1": "CODAP",
-            "FontFamilyEx1_option5": "font-family: Arial",
-            "FontFamilyEx2_question": "Set color: black and a font-family: consolas for the h3 selector",
-            "FontFamilyEx2_correctOption1": "color: black",
+            "FontFamilyEx1_option5": "font-family: Arial;",
+            "FontFamilyEx2_question": "Set color: black; and a font-family: consolas; for the h3 selector",
+            "FontFamilyEx2_correctOption1": "color: black;",
             "FontFamilyEx2_correctOption2": "font-family: consolas",
             "FontFamilyEx3_question": "Define a consolas font with 2 more fallback fonts for <h1>."
           },
@@ -573,10 +573,10 @@
             "fontSizeCSS_usage": "As you have seen, there are various measures to use. px and pt are fixed and do not depend on other values, but on larger and smaller screens your site may have text sizes different from what is expected, so evaluate which is best to use in your project.",
             "FontSizeEx1_question": "Add a font size of 20 pixels to the <p>",
             "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
-            "FontSizeEx2_question": "Define color: black and a background-color: blue and a font-size: 20px for the p selector",
-            "FontSizeEx2_correctOption1": "color: black",
-            "FontSizeEx2_correctOption2": "background-color: blue",
-            "FontSizeEx2_correctOption3": "font-size: 20px"
+            "FontSizeEx2_question": "Define color: black; and a background-color: blue; and a font-size: 20px; for the p selector",
+            "FontSizeEx2_correctOption1": "color: black;",
+            "FontSizeEx2_correctOption2": "background-color: blue;",
+            "FontSizeEx2_correctOption3": "font-size: 20px;"
           }
         }
       },

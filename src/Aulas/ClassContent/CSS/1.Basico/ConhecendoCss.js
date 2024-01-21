@@ -126,13 +126,13 @@ export function CSSEx3({ navigation }) {
             pergunta={t("css.basic.intro.createBlueColorStyleForH1")}
             opt1='<h1 '
             opt2='style='
-            opt3='"color:blue"'
+            opt3='"color:blue;"'
             opt4='>'
             opt5='CODAP'
             opt6='</h1>'
             opt7='none'
             opt8='none'
-            txtCerto='<h1 style="color:blue">CODAP</h1>'
+            txtCerto='<h1 style="color:blue;">CODAP</h1>'
             Salvar={true}
             aulaSalvar={3}
 

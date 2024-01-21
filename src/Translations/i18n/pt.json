@@ -537,7 +537,7 @@
             "h1ElementObtainStyles": "Indica que todo elemento h1 obterá estilos",
             "h1ElementExecutedAsJS": "Indica que todo elemento h1 será executado como js",
             "cssInsideTag": "Como dito anteriormente, uma das formas de adicionar estilos é aplicando eles diretamente nas tags html, mas para códigos maiores opte por usar as tags <style> ou até mesmo um arquivo separado para deixar mais legível.",
-            "createBlueColorStyleForH1": "Crie um estilo de cor azul para h1 com as opções abaixo seguindo o exemplo: \n\n<nome-tag style='seu-estilo'>"
+            "createBlueColorStyleForH1": "Crie um estilo de cor azul para h1 com as opções abaixo seguindo o exemplo: \n\n<nome-tag style='seu-estilo;'>"
           },
           "background" : {
             "backgroundColorCSS_description": "Um site todo branco nem sempre é agradável, podemos atribuir uma cor a uma seção do seu documento HTML.",
@@ -563,10 +563,10 @@
             "FontFamilyCSS_endText": "Todas as fontes usadas no exemplo são seguras de usar e são padrões em quase todos os sistemas. As categorias de fontes seguras são: Serif, Sans-serif, Monospace, Fantasy e Cursive.",
             "FontFamilyEx1_question": "Defina a font-family para Arial no <h2>",
             "FontFamilyEx1_option1": "CODAP",
-            "FontFamilyEx1_option5": "font-family: Arial",
-            "FontFamilyEx2_question": "Defina color: black e um font-family: consolas para o seletor h3",
-            "FontFamilyEx2_correctOption1": "color: black",
-            "FontFamilyEx2_correctOption2": "font-family: consolas",
+            "FontFamilyEx1_option5": "font-family: Arial;",
+            "FontFamilyEx2_question": "Defina color: black; e um font-family: consolas; para o seletor h3",
+            "FontFamilyEx2_correctOption1": "color: black;",
+            "FontFamilyEx2_correctOption2": "font-family: consolas;",
             "FontFamilyEx3_question": "Defina uma fonte consolas com mais 2 fontes fallback para <h1>."
           },
           "fontSize" : {
@@ -575,10 +575,10 @@
             "fontSizeCSS_usage":"Como você viu, há várias medidas para se usar. px e pt são fixos e não dependem de outros valores, porém em telas maiores e menores seu site pode ter textos de tamanhos diferentes do esperado, então avalie qual o melhor para ser usado em seu projeto.",
             "FontSizeEx1_question": "Adicione um tamanho de fonte de 20 pixels para o <p>",
             "FontSizeEx1_correctAnswer": "<body style='font-size:20px'>CODAP</body>",
-            "FontSizeEx2_question": "Defina color: black e um background-color: blue e um font-size: 20px para o seletor p",
-            "FontSizeEx2_correctOption1": "color: black",
-            "FontSizeEx2_correctOption2": "background-color: blue",
-            "FontSizeEx2_correctOption3": "font-size: 20px"
+            "FontSizeEx2_question": "Defina color: black; e um background-color: blue; e um font-size: 20px; para o seletor p",
+            "FontSizeEx2_correctOption1": "color: black;",
+            "FontSizeEx2_correctOption2": "background-color: blue;",
+            "FontSizeEx2_correctOption3": "font-size: 20px;"
           }
         }
       },

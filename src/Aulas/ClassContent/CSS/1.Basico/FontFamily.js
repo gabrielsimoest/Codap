@@ -55,10 +55,10 @@ export function FontFamilyEx1({ navigation }) {
             opt3='</h2>'
             opt4='>'
             opt5='<h2 '
-            opt6='"font-family: Arial"'
+            opt6='"font-family: Arial;"'
             opt7='none'
             opt8='none'
-            txtCerto='<h2 style="font-family: Arial">CODAP</h2>'
+            txtCerto='<h2 style="font-family: Arial;">CODAP</h2>'
             txtToHighlight={["h2", "Arial", "font-family"]}
             navegar="FontFamilyEx2"
         />
@@ -105,8 +105,8 @@ export function FontFamilyEx3({ navigation }) {
             opt5='<h1 '
             opt6='"font-family: Consolas, '
             opt7='Courier New, '
-            opt8='monospace"'
-            txtCerto='<h1 style="font-family: Consolas, Courier New, monospace">CODAP</h1>'
+            opt8='monospace;"'
+            txtCerto='<h1 style="font-family: Consolas, Courier New, monospace;">CODAP</h1>'
             txtToHighlight={["h1", "fallback", "consolas"]}
             Salvar={true}
             aulaSalvar={4}

@@ -50,10 +50,10 @@ export function ColorEx1({ navigation }) {
             opt3='</h1>'
             opt4='>'
             opt5='CODAP'
-            opt6='"color:rgb(255, 99, 71)"'
+            opt6='"color:rgb(255, 99, 71);"'
             opt7='none'
             opt8='none'
-            txtCerto='<h1 style="color:rgb(255, 99, 71)">CODAP</h1>'
+            txtCerto='<h1 style="color:rgb(255, 99, 71);">CODAP</h1>'
             txtToHighlight={["rgb", "255", "99", "71", "h1"]}
             navegar="ColorEx2"
         />
@@ -74,10 +74,10 @@ export function ColorEx2({ navigation }) {
             opt3='</h1>'
             opt4='>'
             opt5='CODAP'
-            opt6='"color:rgba(20, 99, 71, 0.7)"'
+            opt6='"color:rgba(20, 99, 71, 0.7);"'
             opt7='none'
             opt8='none'
-            txtCerto='<h1 style="color:rgba(20, 99, 71, 0.7)">CODAP</h1>'
+            txtCerto='<h1 style="color:rgba(20, 99, 71, 0.7);">CODAP</h1>'
             txtToHighlight={["rgba", "20", "99", "71", "0.7", "h1", "RGBA", "0", "1"]}
             navegar="ColorEx3"
         />
@@ -99,8 +99,8 @@ export function ColorEx3({ navigation }) {
             txtdepois="</style>"
             txtantes2="p {"
             txtdepois2="}"
-            txtCerto1='color: #00ffff'
-            txtCerto2='color:#00ffff'
+            txtCerto1='color: #00ffff;'
+            txtCerto2='color:#00ffff;'
             tamanhoInput="40%"
             Salvar={true}
             aulaSalvar={2}
