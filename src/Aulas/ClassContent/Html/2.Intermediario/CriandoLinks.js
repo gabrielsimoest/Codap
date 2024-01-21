@@ -63,6 +63,7 @@ export function LinksEx1({ navigation }) {
             txtantes="<a "
             txtdepois=">CODAP</a>"
             txtCerto1='href="#codap"'
+            txtToHighlight={["href", "codap"]}
             tamanhoInput="50%"
             navegar="LinksEx2"
         />
@@ -81,6 +82,7 @@ export function LinksEx2({ navigation }) {
             adicionaltxt={t("html.inter.links.transformElementHeader")}
             pergunta={t("html.inter.links.transformElementQuestion")}
             txtantes="<main>"
+            txtToHighlight={["h3", "CODAP", "href", "codap", "a"]}
             txtdepois="</main>"
             txtCerto1='<h3><a href="#codap">CODAP</a></h3>'
             tamanhoInput="80%"
@@ -103,6 +105,7 @@ export function LinksEx3({ navigation }) {
             txtantes="<main>"
             txtdepois="</main>"
             txtantes2="<ul>"
+            txtToHighlight={["h3", "li", "href", "codap"]}
             txtdepois2="</ul>"
             txtCerto1='<li><a href="#codap">CODAP</a></li>'
             tamanhoInput="75%"
@@ -121,6 +124,7 @@ export function LinksEx4({ navigation }) {
             pergunta={t("html.inter.links.createIdHeader")}
             txtantes="<h1"
             txtdepois=">CODAP</h1>"
+            txtToHighlight={["h1", "href", "codap"]}
             txtCerto1='Id="codap"'
             tamanhoInput="40%"
             navegar="LinksEx5"
@@ -141,6 +145,7 @@ export function LinksEx5({ navigation }) {
             opt2="<p><a href='https://www.google.com'>Google</a></p>"
             opt3="<li>'https://www.google.com'</li>"
             opt4="<link>'https://www.google.com'</link>"
+            txtToHighlight={["links", "Google"]}
             optCerta="opt2"
             navegar="LinksEx6"
         />
@@ -161,6 +166,7 @@ export function LinksEx6({ navigation }) {
             opt4="<h3><a href=>#codap>CODAP</a></h3>"
             optCerta="opt3"
             aulaSalvar={23}
+            txtToHighlight={["link", "codap"]}
             Salvar={true}
             navegar="CongratsView"
         />

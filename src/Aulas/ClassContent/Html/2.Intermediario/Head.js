@@ -53,6 +53,7 @@ export function HeadEx1({ navigation }) {
             opt6="<" //Opcional
             opt7=">" //Opcional
             opt8="title" //Opcional
+            txtToHighlight={["title", "CODAP"]}
             txtCerto="<title>CODAP</title>"
             navegar="HeadEx2"
         />
@@ -72,6 +73,7 @@ export function HeadEx2({ navigation }) {
             opt3="Porque ele serve apenas para dados"
             opt4="Porque ele é muito pequeno"
             optCerta="opt3"
+            txtToHighlight={["title"]}
             navegar="HeadEx3"
         />
     )
@@ -95,6 +97,7 @@ export function HeadEx3({ navigation }) {
             opt7="none" //Opcional
             opt8="none" //Opcional
             txtCerto='<meta charset="UTF-8"/>'
+            txtToHighlight={["meta", "charset", "UTF-8"]}
             navegar="HeadEx4"
         />
     )
@@ -113,6 +116,7 @@ export function HeadEx4({ navigation }) {
             opt3="<p>"
             opt4="<title>"
             optCerta="opt4"
+            txtToHighlight={["head"]}
             navegar="HeadEx5"
         />
     )
@@ -131,6 +135,7 @@ export function HeadEx5({ navigation }) {
             opt3="Gerar um link para o site"
             opt4="Colocar uma imagem no site"
             optCerta="opt1"
+            txtToHighlight={["title"]}
             navegar="HeadEx6"
         />
     )
@@ -152,6 +157,7 @@ export function HeadEx6({ navigation }) {
             txtCerto3="Codap"
             aulaSalvar={18}
             Salvar={true}
+            txtToHighlight={["CODAP"]}
             navegar="CongratsView"
         />
     )

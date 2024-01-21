@@ -55,7 +55,7 @@ export function ListaEx1({ navigation }) {
             txtantes="<li>"
             txtdepois="</li>"
             tamanhoInput="60%"
-            txtToHighlight={["CODAP", " li "]}
+            txtToHighlight={["CODAP", "li"]}
             txtCerto1="CODAP"
             txtCerto2="codap"
             txtCerto3="Codap"
@@ -80,7 +80,7 @@ export function ListaEx2({ navigation }) {
             txtCerto1="<li>Ouro</li>"
             txtCerto2="<li>Prata</li>"
             txtCerto3="<li>Bronze</li>"
-            txtToHighlight={[" li ", "ol"]}
+            txtToHighlight={["li", "ol", "Ouro", "Prata", "Bronze"]}
             tamanhoInput="46%"
             navegar="ListaEx3"
         />
@@ -102,6 +102,7 @@ export function ListaEx3({ navigation }) {
             txtdepois="</ul>"
             txtCerto1="<li>Hello</li>"
             txtCerto2="<li>World</li>"
+            txtToHighlight={[ "ul", "Hello", "World"]}
             tamanhoInput="46%"
             navegar="ListaEx4"
         />
@@ -120,6 +121,7 @@ export function ListaEx4({ navigation }) {
             opt2="<br>"
             opt3="<div>"
             opt4="<ul>"
+            txtToHighlight={["lista"]}
             optCerta="opt4"
             navegar="ListaEx5"
         />
@@ -139,6 +141,7 @@ export function ListaEx5({ navigation }) {
             opt3="<h1>"
             opt4="<ul>"
             optCerta="opt1"
+            txtToHighlight={["lista"]}
             navegar="ListaEx6"
         />
     )
@@ -158,6 +161,7 @@ export function ListaEx6({ navigation }) {
             txtCerto2="li>codap</li"
             txtCerto3="li>Codap</li"
             tamanhoInput="80%"
+            txtToHighlight={["lista", "CODAP"]}
             aulaSalvar={15}
             Salvar={true}
             navegar="CongratsView"

@@ -51,7 +51,8 @@ export function DivEx1({ navigation }) {
             txtdepois2="</div>"
             txtCerto1='<h1>CODAP</h1>'
             txtCerto2='<h2>CODAP</h2>'
-            tamanhoInput="40%"
+            tamanhoInput="40%"            
+            txtToHighlight={["título", "subtítulo", "CODAP"]}
             navegar="DivEx2"
         />
     )
@@ -77,6 +78,7 @@ export function DivEx2({ navigation }) {
             txtCerto1='<li>Ouro</li>'
             txtCerto2='<li>Prata</li>'
             txtCerto3='<li>Bronze</li>'
+            txtToHighlight={["div", "Ouro", "Prata", "Bronze"]}
             navegar="LineBreak"
         />
     )
@@ -126,6 +128,7 @@ export function LineBreakEx1({ navigation }) {
             opt2="<li/>"
             opt3="<br/>"
             opt4="<h6/>"
+            txtToHighlight={["linha"]}
             optCerta="opt1"
             navegar="LineBreakEx2"
         />
@@ -144,6 +147,7 @@ export function LineBreakEx2({ navigation }) {
             opt2="<li/>"
             opt3="<br/>"
             opt4="<h6/>"
+            txtToHighlight={["espaço"]}
             optCerta="opt3"
             navegar="LineBreakEx3"
         />
@@ -168,6 +172,7 @@ export function LineBreakEx3({ navigation }) {
             txtCerto1='<h1>CODAP</h1>'
             txtCerto2='<br/>'
             txtCerto3='<hr/>'
+            txtToHighlight={["CODAP", "espaço", "linha", "div"]}
             aulaSalvar={17}
             Salvar={true}
             navegar="CongratsView"

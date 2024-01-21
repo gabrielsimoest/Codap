@@ -58,6 +58,7 @@ export function BodyEx1({ navigation }) {
             txtantes2="<header>"
             txtdepois2="</header>"
             tamanhoInput="46%"
+            txtToHighlight={["header", "CODAP"]}
             navegar="BodyEx2"
         />
     )
@@ -80,6 +81,7 @@ export function BodyEx2({ navigation }) {
             txtdepois2="</main>"
             tamanhoInput="46%"
             txtCerto1="<p>CODAP</p>"
+            txtToHighlight={["main", "HTML", "CODAP"]}
             navegar="BodyEx3"
         />
     )
@@ -103,6 +105,7 @@ export function BodyEx3({ navigation }) {
             txtCerto1="<p>CODAP</p>"
             txtCerto2="<p>CODAP</p>"
             txtCerto3="<p>CODAP</p>"
+            txtToHighlight={["footer", "HTML", "CODAP"]}
             tamanhoInput="46%"
             navegar="BodyEx4"
         />
@@ -122,6 +125,7 @@ export function BodyEx4({ navigation }) {
             opt3="<main>"
             opt4="<footer>"
             optCerta="opt2"
+            txtToHighlight={["body"]}
             navegar="BodyEx5"
         />
     )
@@ -140,6 +144,7 @@ export function BodyEx5({ navigation }) {
             opt3="Definir o conteúdo principal"
             opt4="Definir o texto principal"
             optCerta="opt1"
+            txtToHighlight={["footer"]}
             navegar="BodyEx6"
         />
     )
@@ -159,6 +164,7 @@ export function BodyEx6({ navigation }) {
             opt4="2"
             optCerta="opt3"
             aulaSalvar={16}
+            txtToHighlight={["body", "HTML"]}
             Salvar={true}
             navegar="CongratsView"
         />
