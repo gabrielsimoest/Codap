@@ -34,13 +34,13 @@ export default function TextView({
   navigation,
   progresso,
   sec,
-  adicionaltxt,
+  adicionaltxt = "none",
   pergunta,
   txtantes,
   txtdepois,
-  txtCerto1,
-  txtCerto2,
-  txtCerto3,
+  txtCerto1 = "none",
+  txtCerto2 = "none",
+  txtCerto3 = "none",
   tamanhoInput,
   navegar,
   aulaSalvar,
@@ -62,18 +62,20 @@ export default function TextView({
   const [visibleModalE, setVisibleModalE] = useState('false');
   const [Textadd, setTextadd] = useState('Textadd');
   const [InputText, setInputText] = useState('');
-  const [TEXTO, setTEXTO] = useState('');
 
   useEffect(() => {
     if (adicionaltxt != 'none') setTextadd('text');
   }, [adicionaltxt]);
 
   const Verificar = () => {
-    setTEXTO(InputText);
+    let upperInput = InputText.toUpperCase().trim();
+    let upperAnsware = txtCerto1.toUpperCase().trim();
+    let upperAnsware2 = txtCerto2.toUpperCase().trim();
+    let upperAnsware3 = txtCerto3.toUpperCase().trim();
     if (
-      InputText == txtCerto1 ||
-      InputText == txtCerto2 ||
-      InputText == txtCerto3
+      upperInput == upperAnsware ||
+      upperInput == upperAnsware2 ||
+      upperInput == upperAnsware3
     )
       setVisibleModal(true);
     else setVisibleModalE(true);
@@ -135,6 +137,7 @@ export default function TextView({
               {txtantes}
             </Text>
             <TextInput
+              autoCapitalize='none'
               style={[styles.input, { width: tamanhoInput }]}
               onChangeText={value => setInputText(value)}></TextInput>
             <Text style={[styles.textopt, { color: colors.text }]}>

@@ -29,7 +29,7 @@ export default function OptionView({
   navigation,
   progresso,
   sec,
-  adicionaltxt,
+  adicionaltxt = "none",
   pergunta,
   opt1,
   opt2,

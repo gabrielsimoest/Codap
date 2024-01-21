@@ -50,7 +50,7 @@ export default function SelectView({
   progresso,
   sec,
   pergunta,
-  adicionaltxt,
+  adicionaltxt = "none",
   opt1,
   opt2,
   opt3,

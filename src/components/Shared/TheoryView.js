@@ -26,9 +26,9 @@ const textSize = 20;
 
 export default function TheoryView({
   mainText = 'Teste main',
-  secondText,
-  thirdText,
-  endText,
+  secondText = null,
+  thirdText = null,
+  endText = null,
   highlight = [''],
   codeLanguage = 'HTML',
   code = `<!DOCTYPE html>
@@ -75,13 +75,13 @@ export default function TheoryView({
 
   //Define os textos opcionais visiveis
   const [SecondTextVisible, setSecondTextVisible] = useState(
-    secondText != "none"? true : false,
+    secondText !== null? secondText !== "none"? true : false : false,
   );
   const [ThirdTextVisible, setThirdTextVisible] = useState(
-    thirdText != "none" ? true : false,
+    thirdText !== null? thirdText !== "none" ? true : false : false,
   );
   const [EndTextVisible, setEndTextVisible] = useState(
-    endText != "none"? true : false,
+    endText !== null? endText !== "none"? true : false : false,
   );
 
   //Obtem o tamanho do sintax highlight para aplicar no webView

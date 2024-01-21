@@ -148,7 +148,7 @@ const AppProvider = ({ children }) => {
         const scheduleNotification = () => {
             PushNotification.localNotificationSchedule({
                 channelId: "notif-channel",
-                date: new Date(Date.now() + (10 * 1000)), // 1 hour later
+                date: new Date(Date.now() + (3600 * 1000)), // 1 hour later
                 id: 1,
                 title: translate.t("notificationService.title"),
                 message: translate.t("notificationService.message"),
