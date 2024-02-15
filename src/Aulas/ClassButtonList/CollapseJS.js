@@ -114,7 +114,7 @@ export default function CollapseJS() {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                         style={styles.comingSoonImg}
-                        source={require('../../../assets/Robo_triste.png')}
+                        source={require('../../../assets/Robo_construcao.png')}
                     />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -133,7 +133,7 @@ export default function CollapseJS() {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                         style={styles.comingSoonImg}
-                        source={require('../../../assets/Robo_triste.png')}
+                        source={require('../../../assets/Robo_construcao.png')}
                     />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
@@ -152,7 +152,7 @@ export default function CollapseJS() {
                 <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                     <Image
                         style={styles.comingSoonImg}
-                        source={require('../../../assets/Robo_triste.png')}
+                        source={require('../../../assets/Robo_construcao.png')}
                     />
                 </View>
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>

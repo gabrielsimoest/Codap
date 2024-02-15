@@ -35,7 +35,7 @@ const ComingSoonComponent = ({ visible, onDismiss }) => {
                         <AText style={[styles.title, { color: colors.text }]} defaultSize={24}>{t("comingSoon.title")}</AText>
                         <AText style={[styles.message, { color: colors.text }]} defaultSize={19}>{t("comingSoon.message")}</AText>
                     </View>
-                    <Image style={styles.figure} source={require('../../../assets/Robo_triste.png')} />
+                    <Image style={styles.figure} source={require('../../../assets/Robo_construcao.png')} />
                 </View>
             </View>
         </Modal>
