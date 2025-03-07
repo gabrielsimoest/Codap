@@ -7,6 +7,7 @@ import {
     useTheme,
 } from '@react-navigation/native';
 import AText from '../components/Shared/AText';
+import RenderClassTest from './RenderClassTest';
 
 const TitleTextSize = 23;
 const textSize = 15;
@@ -40,10 +41,6 @@ export default function ComponentTester() {
                     defaultSize={textSize}>
                     Teste de componentes
                 </AText>
-                <Image
-                    style={styles.figure2}
-                    source={require('../../assets/Robo_pensativo.png')}
-                />
             </TouchableOpacity>
             <Collapsible collapsed={collapsed1}>
                 <View style={{ flexDirection: 'row' }}>
@@ -74,6 +71,7 @@ export default function ComponentTester() {
                         onPressFunction={() => navigation.navigate('getDependabots')}
                     />
                 </View>
+                <RenderClassTest />
                 <View style={[styles.line, { borderColor: colors.primary }]}></View>
             </Collapsible>
         </View>
