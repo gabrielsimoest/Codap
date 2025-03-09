@@ -87,6 +87,7 @@ export default function Login() {
 						doneClasses.length > 0 ? doneClasses.join(", ") : "";
 					console.log("Aulas feitas: " + joinedClasses);
 					await AsyncStorage.setItem("Classes", joinedClasses);
+					navigation.navigate("Home");
 				} else {
 					console.log("Usuário ou senhas incorretos");
 					showAlert(
