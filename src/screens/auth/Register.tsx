@@ -16,17 +16,25 @@ import DarkMode from "../../theme/DarkMode";
 import AuthButton from "../../components/AuthButton";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
+import * as SQLite from "expo-sqlite";
+import DatabaseClient from "../../services/DatabaseClient";
+import isValidEmail from "../../utils/isValidEmail";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
 export default function Register() {
+	const database = new DatabaseClient();
+
 	const theme = useTheme(); //Variavel de cor do tema
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	const navigation = useNavigate();
 
+	const [alertVisible, setAlertVisible] = useState(false);
+	const [alertTitle, setAlertTitle] = useState("");
+	const [alertMessage, setAlertMessage] = useState("");
 	const [name, setName] = useState("");
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
@@ -34,8 +42,97 @@ export default function Register() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
+	useEffect(() => {
+		createTable();
+		// deleteDB();
+		return () => closeDatabase();
+	}, []);
+
+	const closeDatabase = () => {
+		try {
+			database.close();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const createTable = () => {
+		/* db.transaction((tx) => {
+			tx.executeSql(
+				"CREATE TABLE IF NOT EXISTS Users " +
+					"(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha TEXT, Email TEXT, DependaBots INT, XP LONG, Double INT);"
+			);
+			tx.executeSql(
+				"CREATE TABLE IF NOT EXISTS Aulas " +
+					"(ID INTEGER PRIMARY KEY AUTOINCREMENT, UserID INTEGER, TipoAula INT, " +
+					"FOREIGN KEY(UserID) REFERENCES Users(ID));"
+			);
+		}); */
+		try {
+			database.initDefaultTables();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const setData = async () => {
+		if (name.length == 0 || senha.length == 0 || email.length == 0) {
+			setAlertTitle(t("register.alert.empty.title"));
+			setAlertMessage(t("register.alert.empty.message"));
+			setAlertVisible(true);
+		} else if (!isValidEmail(email)) {
+			setAlertTitle(t("register.alert.invalid.title"));
+			setAlertMessage(t("register.alert.invalid.message"));
+			setAlertVisible(true);
+		} else {
+			try {
+				database.registerUser({
+					name: name,
+					email: email,
+					password: password,
+				});
+				setAlertTitle(t("register.alert.success.title"));
+				setAlertMessage(t("register.alert.success.message"));
+				setAlertVisible(true);
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	};
+
+	const onChangePassword = (value: string) => {
+		setPassword(value);
+	};
+
+	const onChangeConfirmPassword = (value: string) => {
+		setConfirmPassword(value);
+		if (value != password) {
+			setPasswordMatch(false);
+		} else {
+			setPasswordMatch(true);
+			setSenha(value);
+		}
+	};
+
+	const register = () => {
+		if (!passwordMatch) {
+			setAlertTitle(t("register.alert.not match.title"));
+			setAlertMessage(t("register.alert.not match.message"));
+			setAlertVisible(true);
+		} else {
+			setData();
+		}
+	};
+
 	const navigationHandler = () => {
 		navigation.navigate("Login");
+	};
+
+	const onPressAlertHandler = () => {
+		setAlertVisible(false);
+		if (alertTitle === t("register.alert.success.title")) {
+			navigation.navigate("Login");
+		}
 	};
 
 	return (
@@ -117,8 +214,7 @@ export default function Register() {
 								placeholder={t("register.password")}
 								placeholderTextColor={"#7977FD"}
 								onChangeText={(value) =>
-									/* onChangePassword(value) */
-									console.log("oi")
+									onChangePassword(value)
 								}
 								secureTextEntry={true}
 							/>
@@ -159,8 +255,7 @@ export default function Register() {
 									passwordMatch ? "#7977FD" : "red"
 								}
 								onChangeText={(value) =>
-									/* onChangeConfirmPassword(value) */
-									console.log("oi")
+									onChangeConfirmPassword(value)
 								}
 								secureTextEntry={true}
 								value={confirmPassword}
@@ -168,7 +263,7 @@ export default function Register() {
 							<AuthButton
 								title={t("register.register")}
 								color="#7977FD"
-								onPress={/* register */ () => console.log("oi")}
+								onPress={register}
 							/>
 							{/* <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} /> */}
 							<TouchableOpacity
@@ -187,13 +282,13 @@ export default function Register() {
 						</View>
 					</View>
 				</View>
-				{/* <ThemedAlert
+				<ThemedAlert
 					visible={alertVisible}
 					onDismiss={onPressAlertHandler}
 					title={alertTitle}
 					message={alertMessage}
 					buttonText="OK"
-				/> */}
+				/>
 			</TouchableWithoutFeedback>
 		</View>
 	);

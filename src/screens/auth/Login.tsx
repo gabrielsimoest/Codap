@@ -12,28 +12,100 @@ import {
 } from "react-native";
 
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { useNavigation, useTheme } from "@react-navigation/native";
+import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import DarkMode from "../../theme/DarkMode";
 import AuthButton from "../../components/AuthButton";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
+import * as FileSystem from "expo-file-system";
+import DatabaseClient from "../../services/DatabaseClient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import isValidEmail from "../../utils/isValidEmail";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
 export default function Login() {
+	/* console.log(FileSystem.documentDirectory); */
+
+	const database = new DatabaseClient();
+
 	const theme = useTheme();
 	const { t } = useTranslation();
 
 	const navigation = useNavigate();
 
+	const [alertVisible, setAlertVisible] = useState(false);
+	const [alertTitle, setAlertTitle] = useState("");
+	const [alertMessage, setAlertMessage] = useState("");
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
 
+	useEffect(() => {
+		createTable();
+		return () => closeDatabase();
+	}, []);
+
+	const closeDatabase = () => {
+		try {
+			database.close();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const createTable = () => {
+		try {
+			database.initDefaultTables();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	const showAlert = (title: string, message: string) => {
+		setAlertTitle(title);
+		setAlertMessage(message);
+		setAlertVisible(true);
+	};
+
+	const setData = async () => {
+		if (email.length == 0 || senha.length == 0 || !isValidEmail(email)) {
+			showAlert(
+				t("login.alert.invalid.title"),
+				t("login.alert.invalid.message")
+			);
+		} else {
+			try {
+				const user = database.validateUser(email, senha);
+				if (user !== null) {
+					console.log("Usuário encontrado: " + user.Name);
+					await AsyncStorage.setItem("User", JSON.stringify(user));
+					const doneClasses = database.getClasses(user.ID);
+					const joinedClasses =
+						doneClasses.length > 0 ? doneClasses.join(", ") : "";
+					console.log("Aulas feitas: " + joinedClasses);
+					await AsyncStorage.setItem("Classes", joinedClasses);
+				} else {
+					console.log("Usuário ou senhas incorretos");
+					showAlert(
+						t("login.alert.invalid.title"),
+						t("login.alert.invalid.message")
+					);
+				}
+			} catch (error) {
+				console.error(error);
+				showAlert(
+					t("login.alert.invalid.title"),
+					t("login.alert.invalid.message")
+				);
+			}
+		}
+	};
+
 	const onSubmit = () => {
-		console.log("oi");
+		setData();
 	};
 
 	const navigationHandler = () => {
@@ -124,13 +196,13 @@ export default function Login() {
 						</View>
 					</View>
 				</View>
-				{/*                 <ThemedAlert
-                    visible={alertVisible}
-                    onDismiss={() => setAlertVisible(false)}
-                    title={alertTitle}
-                    message={alertMessage}
-                    buttonText="OK"
-                /> */}
+				<ThemedAlert
+					visible={alertVisible}
+					onDismiss={() => setAlertVisible(false)}
+					title={alertTitle}
+					message={alertMessage}
+					buttonText="OK"
+				/>
 			</TouchableWithoutFeedback>
 		</View>
 	);
