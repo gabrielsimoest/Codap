@@ -12,7 +12,7 @@ import {
 import { View } from "react-native-animatable";
 import Icon from "../components/Icon";
 import { useTheme } from "@react-navigation/native";
-import Classes from "../screens/Classes";
+import Classes from "../screens/classes/Classes";
 
 const Tab = createBottomTabNavigator();
 
