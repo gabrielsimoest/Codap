@@ -7,6 +7,7 @@ import ConfigHeader from "./components/ConfigHeader";
 import Icon from "../../components/Icon";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import FontSizeChanger from "./components/FontSizeChanger";
+import LanguageSelector from "./components/LanguageSelector";
 /* import { AppContext } from '../../../common/Contexts/AppContext';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions'; */
 const TextSize1 = 25;
@@ -78,6 +79,7 @@ export default function Config() {
                 <FontComponent />
                 <ThemeComponent /> */}
 				<ThemeSwitcher />
+				<LanguageSelector />
 				<FontSizeChanger />
 				<View
 					style={[{ flexDirection: "row" }, { alignItems: "center" }]}

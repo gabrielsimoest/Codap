@@ -23,6 +23,7 @@ import * as FileSystem from "expo-file-system";
 import DatabaseClient from "../../services/DatabaseClient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import isValidEmail from "../../utils/isValidEmail";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -44,7 +45,18 @@ export default function Login() {
 	const [email, setEmail] = useState("");
 
 	useEffect(() => {
-		createTable();
+		useLoggedUser({
+			onLoggedCallback(user) {
+				console.log(user);
+				navigation.navigate("Home");
+			},
+			onNotLoggedCallback(error) {
+				if (error) {
+					console.error(error);
+				}
+				createTable();
+			},
+		});
 		return () => closeDatabase();
 	}, []);
 
@@ -83,10 +95,14 @@ export default function Login() {
 					console.log("Usuário encontrado: " + user.Name);
 					await AsyncStorage.setItem("User", JSON.stringify(user));
 					const doneClasses = database.getClasses(user.ID);
-					const joinedClasses =
+					/* const joinedClasses =
 						doneClasses.length > 0 ? doneClasses.join(", ") : "";
-					console.log("Aulas feitas: " + joinedClasses);
-					await AsyncStorage.setItem("Classes", joinedClasses);
+					console.log("Aulas feitas: " + joinedClasses); */
+					console.log(doneClasses);
+					await AsyncStorage.setItem(
+						"Classes",
+						JSON.stringify(doneClasses)
+					);
 					navigation.navigate("Home");
 				} else {
 					console.log("Usuário ou senhas incorretos");

@@ -194,13 +194,6 @@ export default function Register() {
 								placeholderTextColor={"#7977FD"}
 								onChangeText={(value) => setEmail(value)}
 							/>
-							{
-								<Text
-									/* defaultSize={20} */ style={styles.text}
-								>
-									Senha
-								</Text>
-							}
 							<TextInput
 								autoCapitalize="none"
 								style={[

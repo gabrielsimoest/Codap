@@ -1,22 +1,7 @@
 import * as SQLite from "expo-sqlite";
+import { Aula, User } from "../entities";
 
 /** TODO: Change tables atribute names */
-
-interface User {
-	ID: number;
-	Name: string;
-	Senha: string;
-	Email: string;
-	DependaBots: number;
-	XP: number;
-	Double: number;
-}
-
-interface Aula {
-	ID: number;
-	UserID: number;
-	TipoAula: number;
-}
 
 export default class DatabaseClient {
 	private database: SQLite.SQLiteDatabase;

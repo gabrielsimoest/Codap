@@ -6,6 +6,7 @@ import useThemeStore from "./src/stores/ThemeStore";
 import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import useFontSizeStore from "./src/stores/FontSizeStore";
+import useLanguageStore from "./src/stores/LanguageStore";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -16,6 +17,7 @@ export default function App() {
 
 	const setTheme = useThemeStore((s) => s.setTheme);
 	const setFontSize = useFontSizeStore((s) => s.setFontSize);
+	const setLanguage = useLanguageStore((s) => s.setLanguage);
 
 	useEffect(() => {
 		if (
@@ -25,6 +27,7 @@ export default function App() {
 		) {
 			setTheme(theme);
 			setFontSize(fontSize);
+			setLanguage(language);
 			SplashScreen.hide();
 		}
 	}, [theme, fontSize, language]);
