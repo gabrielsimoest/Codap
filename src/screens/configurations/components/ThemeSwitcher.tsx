@@ -42,18 +42,22 @@ const ThemeSwitcher = () => {
 	}, []);
 
 	return (
-		<TouchableOpacity onPress={ChangeTheme}>
-			<ThemedView style={styles.button}>
-				<RowView align="center" justify="space-between">
-					<ResizableText defaultSize={20}>{t("theme")}</ResizableText>
-					<Switch
-						style={{ marginTop: 5 }}
-						value={isSwitchOn}
-						color={"#5469D3"}
-						onChange={ChangeTheme}
-					/>
-				</RowView>
-			</ThemedView>
+		<TouchableOpacity
+			style={[
+				styles.button,
+				{ backgroundColor: theme.colors.background },
+			]}
+			onPress={ChangeTheme}
+		>
+			<RowView align="center" justify="space-between">
+				<ResizableText defaultSize={20}>{t("theme")}</ResizableText>
+				<Switch
+					style={{ marginTop: 5 }}
+					value={isSwitchOn}
+					color={"#5469D3"}
+					onChange={ChangeTheme}
+				/>
+			</RowView>
 		</TouchableOpacity>
 	);
 };

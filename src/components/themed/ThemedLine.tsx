@@ -21,8 +21,8 @@ export default function ThemedLine({ style = {} }: Props) {
 
 const styles = StyleSheet.create({
 	line: {
-		marginTop: 1.5,
-		height: 1.5,
+		marginTop: 1,
+		height: 1,
 		flexGrow: 1,
 	},
 });
