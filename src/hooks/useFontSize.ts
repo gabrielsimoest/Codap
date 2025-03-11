@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const useFontSize = () => {
-	const [fontSize, setFontSize] = useState<number>(0);
+	const [fontSize, setFontSize] = useState<number>();
 
 	useEffect(() => {
 		const getFontSizeFromStorage = async () => {
@@ -10,10 +10,8 @@ const useFontSize = () => {
 				const fontSizeFromStorage = await AsyncStorage.getItem(
 					"CurrentFontSize"
 				);
-				setFontSize((prevFontSize) =>
-					fontSizeFromStorage
-						? JSON.parse(fontSizeFromStorage)
-						: prevFontSize
+				setFontSize(
+					fontSizeFromStorage ? JSON.parse(fontSizeFromStorage) : 0
 				);
 			} catch (error) {
 				console.log(error);

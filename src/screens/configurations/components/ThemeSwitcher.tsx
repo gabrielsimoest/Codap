@@ -21,7 +21,6 @@ const ThemeSwitcher = () => {
 
 	const persistTheme = async (theme: Theme) => {
 		try {
-			console.log(theme === DarkMode ? "Dark" : "Light");
 			await AsyncStorage.setItem(
 				"CurrentTheme",
 				theme === DarkMode ? "dark" : "light"
