@@ -19,7 +19,7 @@ const ThemeSwitcher = () => {
 		toggleTheme();
 	};
 
-	const setThemeToStorage = async (theme: Theme) => {
+	const persistTheme = async (theme: Theme) => {
 		try {
 			console.log(theme === DarkMode ? "Dark" : "Light");
 			await AsyncStorage.setItem(
@@ -32,7 +32,7 @@ const ThemeSwitcher = () => {
 	};
 
 	useEffect(() => {
-		setThemeToStorage(theme);
+		persistTheme(theme);
 	}, [theme]);
 
 	useEffect(() => {

@@ -4,6 +4,9 @@ import useFontSize from "./src/hooks/useFontSize";
 import MainNavigation from "./src/routes/MainNavigation";
 import useThemeStore from "./src/stores/ThemeStore";
 import { useEffect } from "react";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 	const theme = useCustomTheme();
@@ -13,7 +16,10 @@ export default function App() {
 	const setTheme = useThemeStore((s) => s.setTheme);
 
 	useEffect(() => {
-		setTheme(theme);
+		if (theme) {
+			setTheme(theme);
+			SplashScreen.hide();
+		}
 	}, [theme]);
 
 	return <MainNavigation />;

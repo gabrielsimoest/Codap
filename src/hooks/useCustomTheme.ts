@@ -5,7 +5,7 @@ import LightMode from "../theme/LightMode";
 import { Theme } from "@react-navigation/native";
 
 const useCustomTheme = () => {
-	const [currentTheme, setCurrentTheme] = useState<Theme>(LightMode);
+	const [currentTheme, setCurrentTheme] = useState<Theme>();
 
 	useEffect(() => {
 		const getThemeFromStorage = async () => {
