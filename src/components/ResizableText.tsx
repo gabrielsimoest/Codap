@@ -12,21 +12,22 @@ interface Props {
 export default function ResizableText({
 	children,
 	style,
-	useCustomColor = true,
+	useCustomColor = false,
 	defaultSize = 25,
 }: Props) {
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 
-	if (!useCustomColor)
+	if (useCustomColor) {
+		return (
+			<Text style={[style, { fontSize: defaultSize + fontSize }]}>
+				{children}
+			</Text>
+		);
+	} else {
 		return (
 			<ThemedText style={[style, { fontSize: defaultSize + fontSize }]}>
 				{children}
 			</ThemedText>
 		);
-
-	return (
-		<Text style={[style, { fontSize: defaultSize + fontSize }]}>
-			{children}
-		</Text>
-	);
+	}
 }

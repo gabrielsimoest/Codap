@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import DarkMode from "../../theme/DarkMode";
-import AuthButton from "../../components/AuthButton";
+import AuthButton from "./components/AuthButton";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
 import * as SQLite from "expo-sqlite";

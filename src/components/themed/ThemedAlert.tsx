@@ -2,6 +2,7 @@ import React from "react";
 import { Modal, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import DarkMode from "../../theme/DarkMode";
+import CenterView from "../layout/CenterView";
 
 interface Props {
 	visible: boolean;
@@ -27,7 +28,10 @@ const ThemedAlert = ({
 			visible={visible}
 			onRequestClose={onDismiss}
 		>
-			<View style={styles.centeredView}>
+			<CenterView
+				direction={"column"}
+				style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+			>
 				<View
 					style={[
 						styles.modalView,
@@ -58,19 +62,12 @@ const ThemedAlert = ({
 						<Text style={styles.buttonText}>{buttonText}</Text>
 					</TouchableOpacity>
 				</View>
-			</View>
+			</CenterView>
 		</Modal>
 	);
 };
 
 const styles = StyleSheet.create({
-	centeredView: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		//marginTop: 22,
-		backgroundColor: "rgba(0,0,0,0.9)",
-	},
 	modalView: {
 		margin: 20,
 		backgroundColor: "#141f29",

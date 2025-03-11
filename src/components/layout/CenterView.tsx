@@ -1,22 +1,29 @@
 import { ReactNode } from "react";
-import { View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 
 interface Props {
 	children: ReactNode;
-	direction: "column" | "row";
+	direction?: "column" | "row";
+	style?: StyleProp<ViewStyle>;
 }
 
-export default function ColumnView({ children, direction }: Props) {
+export default function CenterView({
+	children,
+	direction = "column",
+	style = {},
+}: Props) {
 	return (
 		<View
-			style={{
-				display: "flex",
-				flexDirection: direction,
-				height: "auto",
-				width: "auto",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
+			style={[
+				style,
+				{
+					display: "flex",
+					flexDirection: direction,
+					flex: 1,
+					justifyContent: "center",
+					alignItems: "center",
+				},
+			]}
 		>
 			{children}
 		</View>

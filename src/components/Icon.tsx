@@ -11,7 +11,7 @@ import {
 	Octicons,
 	SimpleLineIcons,
 } from "@expo/vector-icons";
-import { StyleProp, View } from "react-native";
+import { StyleProp, View, ViewStyle } from "react-native";
 
 const iconMap = {
 	materialCommunity: MaterialCommunityIcons,
@@ -27,7 +27,7 @@ const iconMap = {
 	foundation: Foundation,
 };
 
-type IconType =
+export type IconType =
 	| "materialCommunity"
 	| "material"
 	| "ionicon"
@@ -45,7 +45,7 @@ interface Props {
 	name: string;
 	color: string;
 	size?: number;
-	style?: StyleProp<any>;
+	style?: StyleProp<ViewStyle>;
 }
 
 const Icon = ({ type, name, color, size = 24, style }: Props) => {

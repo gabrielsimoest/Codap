@@ -1,17 +1,14 @@
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
-import {
-	Button,
-	Modal,
-	Pressable,
-	ScrollView,
-	StyleSheet,
-	View,
-} from "react-native";
+import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import ResizableText from "../../../components/ResizableText";
 import useLanguageStore from "../../../stores/LanguageStore";
 import { useTranslation } from "react-i18next";
 import Icon from "../../../components/Icon";
+import ButtonSecondary from "../../../components/themed/ButtonSecondary";
+import SettingsButton from "./SettingsButton";
+import CenterView from "../../../components/layout/CenterView";
+import ThemedView from "../../../components/themed/ThemedView";
 
 const textSize = 20;
 
@@ -34,13 +31,8 @@ export default function LanguageSelector() {
 					setModalVisible(!modalVisible);
 				}}
 			>
-				<View style={styles.centeredView}>
-					<View
-						style={[
-							styles.modalView,
-							{ backgroundColor: colors.background },
-						]}
-					>
+				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
+					<ThemedView style={styles.modalView}>
 						<Pressable
 							style={styles.button}
 							onPress={() => setModalVisible(!modalVisible)}
@@ -52,25 +44,40 @@ export default function LanguageSelector() {
 							/>
 						</Pressable>
 						<ResizableText
+							useCustomColor
 							style={styles.modalText}
 							defaultSize={textSize}
 						>
 							{t("select the language:")}
 						</ResizableText>
 						<ScrollView style={{ marginBottom: 5 }}>
-							<Button
+							<SettingsButton
 								title="PORTUGUÊS"
+								textStyle={{
+									color:
+										language === "pt"
+											? "#5469D3"
+											: colors.text,
+								}}
+								disabled={language === "pt"}
 								onPress={() => setLanguage("pt")}
 							/>
-							<Button
+							<SettingsButton
 								title="ENGLISH"
+								textStyle={{
+									color:
+										language === "en"
+											? "#5469D3"
+											: colors.text,
+								}}
+								disabled={language === "en"}
 								onPress={() => setLanguage("en")}
 							/>
 						</ScrollView>
-					</View>
-				</View>
+					</ThemedView>
+				</CenterView>
 			</Modal>
-			<Button
+			<ButtonSecondary
 				title={t("language")}
 				onPress={() => setModalVisible(true)}
 			/>
@@ -79,28 +86,13 @@ export default function LanguageSelector() {
 }
 
 const styles = StyleSheet.create({
-	centeredView: {
-		flex: 1,
-		backgroundColor: "rgba(0, 0, 0, 0.85)",
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	modalView: {
 		margin: 20,
-		backgroundColor: "#141f29",
 		borderColor: "#637aff",
 		borderWidth: 1,
 		borderRadius: 20,
 		height: "50%",
 		width: "90%",
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 4,
-		elevation: 8,
 	},
 	button: {
 		margin: 10,
