@@ -13,6 +13,7 @@ import { View } from "react-native-animatable";
 import Icon from "../components/Icon";
 import { useTheme } from "@react-navigation/native";
 import Classes from "../screens/classes/Classes";
+import Config from "../screens/configurations/Config";
 
 const Tab = createBottomTabNavigator();
 
@@ -48,14 +49,6 @@ const TabArr: TabItem[] = [
 		inActiveIcon: "grid-outline",
 		component: Classes,
 	},
-	{
-		route: "Class2",
-		label: "Class",
-		type: "ionicon",
-		activeIcon: "grid",
-		inActiveIcon: "grid-outline",
-		component: Classes,
-	},
 	/*{
       route: 'Chat',
       label: 'Chat',
@@ -80,14 +73,15 @@ const TabArr: TabItem[] = [
         inActiveIcon: 'user-circle-o',
         component: Perfil,
     },
-    {
-        route: 'Settings',
-        label: 'Settings',
-        type: Icons.Ionicons,
-        activeIcon: 'settings',
-        inActiveIcon: 'settings-outline',
-        component: Config,
-    }, */
+	*/
+	{
+		route: "Settings",
+		label: "Settings",
+		type: "ionicon",
+		activeIcon: "settings",
+		inActiveIcon: "settings-outline",
+		component: Config,
+	},
 ];
 
 type TabButtonProps = { item: TabItem } & BottomTabBarButtonProps;

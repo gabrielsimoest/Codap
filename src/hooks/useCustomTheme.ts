@@ -14,9 +14,8 @@ const useCustomTheme = () => {
 					"CurrentTheme"
 				);
 				if (themeFromStorage) {
-					const parsedTheme = JSON.parse(themeFromStorage);
 					setCurrentTheme(
-						parsedTheme === DarkMode ? DarkMode : LightMode
+						themeFromStorage === "dark" ? DarkMode : LightMode
 					);
 				}
 			} catch (error) {

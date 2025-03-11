@@ -9,9 +9,9 @@ import {
 	TouchableWithoutFeedback,
 	View,
 } from "react-native";
-import Header from "./components/Header";
 import Icon from "../../components/Icon";
 import ScreenJourney from "./components/ScreenJourney";
+import ClassHeader from "./components/ClassHeader";
 
 export default function Class() {
 	const { colors } = useTheme(); //Variavel de cor do tema
@@ -40,7 +40,7 @@ export default function Class() {
 			style={[styles.container, { backgroundColor: colors.background }]}
 		>
 			<TouchableOpacity onPress={() => setVisibleModal(true)}>
-				<Header screenName={journey} iconName={icon} />
+				<ClassHeader screenName={journey} iconName={icon} />
 			</TouchableOpacity>
 
 			<Modal

@@ -45,7 +45,7 @@ interface Props {
 	name: string;
 	color: string;
 	size?: number;
-	style?: StyleProp<View>;
+	style?: StyleProp<any>;
 }
 
 const Icon = ({ type, name, color, size = 24, style }: Props) => {

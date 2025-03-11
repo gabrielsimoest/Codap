@@ -1,12 +1,15 @@
-import { NavigationContainer, Theme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "../screens/auth/Login";
 import Register from "../screens/auth/Register";
 import { TabNavigation } from "./TabNavigation";
+import useThemeStore from "../stores/ThemeStore";
 
 const Stack = createStackNavigator();
 
-export default function MainNavigation({ theme }: { theme: Theme }) {
+export default function MainNavigation() {
+	const theme = useThemeStore((s) => s.theme);
+
 	return (
 		<NavigationContainer theme={theme}>
 			<Stack.Navigator screenOptions={{ header: () => null }}>

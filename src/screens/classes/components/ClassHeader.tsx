@@ -9,7 +9,7 @@ interface Props {
 	style?: StyleProp<any>;
 }
 
-export default function Header({ screenName, iconName, style }: Props) {
+export default function ClassHeader({ screenName, iconName, style }: Props) {
 	const { colors } = useTheme();
 
 	return (
