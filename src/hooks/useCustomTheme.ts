@@ -17,6 +17,8 @@ const useCustomTheme = () => {
 					setCurrentTheme(
 						themeFromStorage === "dark" ? DarkMode : LightMode
 					);
+				} else {
+					setCurrentTheme(LightMode);
 				}
 			} catch (error) {
 				console.log(error);

@@ -18,7 +18,11 @@ export default function App() {
 	const setFontSize = useFontSizeStore((s) => s.setFontSize);
 
 	useEffect(() => {
-		if (theme && fontSize && language) {
+		if (
+			theme !== undefined &&
+			fontSize !== undefined &&
+			language !== undefined
+		) {
 			setTheme(theme);
 			setFontSize(fontSize);
 			SplashScreen.hide();
