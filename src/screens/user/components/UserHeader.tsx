@@ -11,7 +11,9 @@ function UserHeader() {
 
 	const { t } = useTranslation();
 
-	const { XP } = useUserStorage((s) => s.user);
+	const user = useUserStorage((s) => s.user);
+
+	const XP = user?.XP || 0;
 
 	return (
 		<View style={[styles.header, { backgroundColor: colors.background }]}>

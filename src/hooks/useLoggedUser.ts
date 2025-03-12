@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "../entities";
+import isValidUser from "../utils/isValidUser";
 
 interface UseLoggedUserCallback {
 	onLoggedCallback: (user: User) => void;
@@ -14,7 +15,11 @@ const useLoggedUser = async ({
 		const userFromStorage = await AsyncStorage.getItem("User");
 		if (userFromStorage) {
 			const user = JSON.parse(userFromStorage);
-			onLoggedCallback(user);
+			if (isValidUser(user)) {
+				onLoggedCallback(user);
+			} else {
+				onNotLoggedCallback();
+			}
 		} else {
 			onNotLoggedCallback();
 		}

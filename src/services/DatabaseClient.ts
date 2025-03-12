@@ -60,6 +60,13 @@ export default class DatabaseClient {
 		);
 	}
 
+	updateUserPassword(userId: number, password: string) {
+		return this.database.runSync("UPDATE Users SET Senha=? WHERE ID = ?;", [
+			password,
+			userId,
+		]);
+	}
+
 	getClasses(userId: number) {
 		return this.database.getAllSync<Aula>(
 			"SELECT TipoAula FROM Aulas WHERE UserID = ?",

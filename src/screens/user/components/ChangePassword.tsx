@@ -11,27 +11,35 @@ import useUserStorage from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 
-const TextSize1 = 20; // Tamanho padrão da fonte
+const TextSize = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
 
-export default function EditProfile() {
+export default function ChangePassword() {
 	const { t } = useTranslation();
 
 	const [visibleModal, setVisibleModal] = useState(false);
-	const [newName, setNewName] = useState<string>();
+
+	const [senhaAtual, setSenhaAtual] = useState<string>();
+	const [novaSenha, setNovaSenha] = useState<string>();
+	const [confirmarSenha, setConfirmarSenha] = useState<string>();
 
 	const { user, setUser } = useUserStorage();
 
-	const updateName = async () => {
-		if (newName !== undefined) {
-			const newUser = { ...user!, Name: newName };
-			const dbClient = new DatabaseClient();
-			const { changes } = dbClient.updateUser(newUser);
-			if (changes !== 0) {
-				setUser(newUser);
-				await AsyncStorage.setItem("User", JSON.stringify(newUser));
+	const updatePassword = async () => {
+		if (novaSenha !== undefined && confirmarSenha !== undefined) {
+			if (senhaAtual === user?.Senha && novaSenha === confirmarSenha) {
+				const newUser = { ...user!, Senha: novaSenha };
+				const dbClient = new DatabaseClient();
+				const { changes } = dbClient.updateUserPassword(
+					newUser.ID,
+					novaSenha
+				);
+				if (changes !== 0) {
+					setUser(newUser);
+					await AsyncStorage.setItem("User", JSON.stringify(newUser));
+				}
+				dbClient.close();
 			}
-			dbClient.close();
 			setVisibleModal(false);
 		}
 	};
@@ -49,7 +57,7 @@ export default function EditProfile() {
 							style={styles.textModal2}
 							defaultSize={TextSize2}
 						>
-							{t("edit account")}
+							{t("change password")}
 						</ResizableText>
 						<TouchableOpacity
 							onPress={() => setVisibleModal(false)}
@@ -64,23 +72,43 @@ export default function EditProfile() {
 						</TouchableOpacity>
 						<ResizableText
 							style={styles.textModal}
-							defaultSize={TextSize1}
+							defaultSize={TextSize}
 						>
-							{t("new name")}:
+							{t("current password")}:
 						</ResizableText>
 						<TextInput
 							style={styles.input}
-							onChangeText={(value) => setNewName(value)}
+							onChangeText={(value) => setSenhaAtual(value)}
+						/>
+						<ResizableText
+							style={styles.textModal}
+							defaultSize={TextSize}
+						>
+							{t("new password")}:
+						</ResizableText>
+						<TextInput
+							style={styles.input}
+							onChangeText={(value) => setNovaSenha(value)}
+						/>
+						<ResizableText
+							style={styles.textModal}
+							defaultSize={TextSize}
+						>
+							{t("confirm password")}:
+						</ResizableText>
+						<TextInput
+							style={styles.input}
+							onChangeText={(value) => setConfirmarSenha(value)}
 						/>
 						<ModalButtonUser
 							title={t("change")}
-							onPress={() => updateName()}
+							onPress={() => updatePassword()}
 						/>
 					</ThemedView>
 				</CenterView>
 			</Modal>
 			<UserButton
-				title={t("edit account")}
+				title={t("change password")}
 				onPress={() => setVisibleModal(true)}
 			/>
 		</>
@@ -114,7 +142,7 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 	},
 	contant: {
-		height: 300,
+		height: 450,
 		margin: 20,
 		zIndex: 99,
 		padding: 20,
