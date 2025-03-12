@@ -46,13 +46,18 @@ export default class DatabaseClient {
 			"SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Email=? LIMIT 1",
 			[email]
 		);
-		console.log(user);
-
 		if (user !== null && user.Senha === password) {
 			return user;
 		} else {
 			return null;
 		}
+	}
+
+	updateUser(user: User) {
+		return this.database.runSync(
+			"UPDATE Users SET Name=?, Email=? WHERE ID = ?;",
+			[user.Name, user.Email, user.ID]
+		);
 	}
 
 	getClasses(userId: number) {

@@ -5,7 +5,7 @@ import Icon from "../../../components/Icon";
 import useFontSizeStore from "../../../stores/FontSizeStore";
 import ResizableText from "../../../components/ResizableText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ButtonSecondary from "../../../components/themed/ButtonSecondary";
+import SecondaryButton from "./SecondaryButton";
 import SettingsButton from "./SettingsButton";
 import ColumnView from "../../../components/layout/ColumnView";
 import CenterView from "../../../components/layout/CenterView";
@@ -77,7 +77,7 @@ const FontSizeChanger = () => {
 					</ThemedView>
 				</CenterView>
 			</Modal>
-			<ButtonSecondary
+			<SecondaryButton
 				title={t("font")}
 				onPress={() => setModalVisible(true)}
 			/>

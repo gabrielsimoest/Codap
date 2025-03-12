@@ -3,17 +3,13 @@ import {
 	createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { ComponentType, useEffect, useRef } from "react";
-import {
-	StyleSheet,
-	TouchableOpacity,
-	ViewProps,
-	ViewStyle,
-} from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { View } from "react-native-animatable";
 import Icon from "../components/Icon";
 import { useTheme } from "@react-navigation/native";
 import Classes from "../screens/classes/Classes";
 import Config from "../screens/configurations/Config";
+import User from "../screens/user/User";
 
 const Tab = createBottomTabNavigator();
 
@@ -65,15 +61,15 @@ const TabArr: TabItem[] = [
         inActiveIcon: 'store-settings-outline',
         component: Store,
     },
-    {
-        route: 'Account',
-        label: 'Account',
-        type: Icons.FontAwesome,
-        activeIcon: 'user-circle',
-        inActiveIcon: 'user-circle-o',
-        component: Perfil,
-    },
 	*/
+	{
+		route: "Account",
+		label: "Account",
+		type: "fontawesome",
+		activeIcon: "user-circle",
+		inActiveIcon: "user-circle-o",
+		component: User,
+	},
 	{
 		route: "Settings",
 		label: "Settings",

@@ -1,7 +1,7 @@
 import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
-import ButtonSecondary from "../../../components/themed/ButtonSecondary";
+import SecondaryButton from "./SecondaryButton";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import ThemedLine from "../../../components/themed/ThemedLine";
@@ -95,7 +95,7 @@ const VersionInfo = () => {
 					</ThemedView>
 				</CenterView>
 			</Modal>
-			<ButtonSecondary
+			<SecondaryButton
 				title={t("version")}
 				onPress={() => setModalVisible(true)}
 			/>

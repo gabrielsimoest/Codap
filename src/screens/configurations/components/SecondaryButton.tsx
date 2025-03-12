@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import ResizableText from "../ResizableText";
+import ResizableText from "../../../components/ResizableText";
 import { useTheme } from "@react-navigation/native";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 	onPress: () => void;
 }
 
-export default function ButtonSecondary({ title, onPress }: Props) {
+export default function SecondaryButton({ title, onPress }: Props) {
 	const { colors } = useTheme();
 
 	return (
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
 		marginRight: 5,
 		marginTop: 10,
 		marginBottom: 15,
-		//  backgroundColor: '#141f29',
 		borderRadius: 10,
 		shadowColor: "#637aff",
 		shadowOffset: {

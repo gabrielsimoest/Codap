@@ -1,5 +1,5 @@
 import { Modal, Pressable, ScrollView, StyleSheet } from "react-native";
-import ButtonSecondary from "../../../components/themed/ButtonSecondary";
+import SecondaryButton from "./SecondaryButton";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
 import { useTranslation } from "react-i18next";
@@ -110,7 +110,7 @@ const AboutCodap = () => {
 					</ThemedView>
 				</CenterView>
 			</Modal>
-			<ButtonSecondary
+			<SecondaryButton
 				title={t("about")}
 				onPress={() => setModalVisible(true)}
 			/>

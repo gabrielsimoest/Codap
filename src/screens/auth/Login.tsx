@@ -25,6 +25,7 @@ import isValidEmail from "../../utils/isValidEmail";
 import useLoggedUser from "../../hooks/useLoggedUser";
 import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
+import useUserStorage from "../../stores/UserStore";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -33,6 +34,8 @@ export default function Login() {
 	/* console.log(FileSystem.documentDirectory); */
 
 	const database = new DatabaseClient();
+
+	const setUser = useUserStorage((s) => s.setUser);
 
 	const theme = useTheme();
 	const { t } = useTranslation();
@@ -48,7 +51,8 @@ export default function Login() {
 	useEffect(() => {
 		useLoggedUser({
 			onLoggedCallback(user) {
-				console.log(user);
+				/* console.log(user); */
+				setUser(user);
 				navigation.navigate("Home");
 			},
 			onNotLoggedCallback(error) {
@@ -93,13 +97,14 @@ export default function Login() {
 			try {
 				const user = database.validateUser(email, senha);
 				if (user !== null) {
-					console.log("Usuário encontrado: " + user.Name);
+					/* console.log("Usuário encontrado: " + user.Name); */
+					setUser(user);
 					await AsyncStorage.setItem("User", JSON.stringify(user));
 					const doneClasses = database.getClasses(user.ID);
 					/* const joinedClasses =
 						doneClasses.length > 0 ? doneClasses.join(", ") : "";
 					console.log("Aulas feitas: " + joinedClasses); */
-					console.log(doneClasses);
+					/* console.log(doneClasses); */
 					await AsyncStorage.setItem(
 						"Classes",
 						JSON.stringify(doneClasses)

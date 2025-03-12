@@ -11,7 +11,7 @@ import {
 	Octicons,
 	SimpleLineIcons,
 } from "@expo/vector-icons";
-import { StyleProp, View, ViewStyle } from "react-native";
+import { StyleProp, ViewStyle } from "react-native";
 
 const iconMap = {
 	materialCommunity: MaterialCommunityIcons,

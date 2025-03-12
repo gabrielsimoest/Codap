@@ -5,7 +5,7 @@ import ResizableText from "../../../components/ResizableText";
 import useLanguageStore from "../../../stores/LanguageStore";
 import { useTranslation } from "react-i18next";
 import Icon from "../../../components/Icon";
-import ButtonSecondary from "../../../components/themed/ButtonSecondary";
+import SecondaryButton from "./SecondaryButton";
 import SettingsButton from "./SettingsButton";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
@@ -77,7 +77,7 @@ export default function LanguageSelector() {
 					</ThemedView>
 				</CenterView>
 			</Modal>
-			<ButtonSecondary
+			<SecondaryButton
 				title={t("language")}
 				onPress={() => setModalVisible(true)}
 			/>
