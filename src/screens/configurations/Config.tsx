@@ -1,59 +1,18 @@
 import { StyleSheet, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
 import ConfigHeader from "./components/ConfigHeader";
-import Icon from "../../components/Icon";
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import FontSizeChanger from "./components/FontSizeChanger";
 import LanguageSelector from "./components/LanguageSelector";
-import ResizableText from "../../components/ResizableText";
 import ThemedView from "../../components/themed/ThemedView";
-import RowView from "../../components/layout/RowView";
-import ThemedLine from "../../components/themed/ThemedLine";
 import ConfigHeading from "./components/ConfigHeading";
 import NotificationSwitcher from "./components/NotificationSwitcher";
 import VersionInfo from "./components/VersionInfo";
 import AboutCodap from "./components/AboutCodap";
-/* import { AppContext } from '../../../common/Contexts/AppContext';
-import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions'; */
-const TextSize = 25;
 
 export default function Config() {
-	//Constante de tradução, usar {t("CHAVE")} para tradução
 	const { t } = useTranslation();
 
-	/* const { notificationState, toggleNotification, showAlert } = useContext(AppContext); */
-
-	//Switch
-	/* const [isSwitchOn, setIsSwitchOn] = React.useState(notificationState); */
-
-	/* const onToggleSwitch = () => {
-        const newState = !isSwitchOn;
-        setIsSwitchOn(newState);
-        toggleNotification(newState);
-        if (newState) {
-            check(PERMISSIONS.ANDROID.POST_NOTIFICATIONS)
-                .then((result) => {
-                    switch (result) {
-                        case RESULTS.UNAVAILABLE:
-                            console.log('This feature is not available (on this device / in this context)');
-                            break;
-                        case RESULTS.DENIED:
-                            console.log('The permission has not been requested / is denied but requestable');
-                            setIsSwitchOn(false);
-                            toggleNotification(false);
-                            showAlert(t("alert.notification.title"), t("alert.notification.message"));
-                            break;
-                        case RESULTS.GRANTED:
-                            console.log('The permission is granted');
-                            break;
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        };
-    };
- */
 	return (
 		<ThemedView style={{ flex: 1 }}>
 			<ConfigHeader title={t("settings")} />
