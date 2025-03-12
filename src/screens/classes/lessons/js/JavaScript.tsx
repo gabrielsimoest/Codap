@@ -16,6 +16,7 @@ import {
 	View,
 } from "react-native";
 import Collapsible from "react-native-collapsible";
+import Images from "../../../../utils/imageIndexer";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -81,7 +82,7 @@ export default function JavaScript() {
 					</Text>
 					<Image
 						style={styles.basicImg}
-						source={require("../../../../../assets/Robo_basics.png")}
+						source={Images.codyLearning}
 					/>
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed1}>
@@ -93,7 +94,7 @@ export default function JavaScript() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -113,7 +114,7 @@ export default function JavaScript() {
 					</Text>
 					<Image
 						style={styles.commonImg}
-						source={require("../../../../../assets/Robo_pensativo.png")}
+						source={Images.codyThinking}
 					/>
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed2}>
@@ -137,7 +138,7 @@ export default function JavaScript() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -155,10 +156,7 @@ export default function JavaScript() {
 					<Text style={[styles.text, { color: colors.text }]}>
 						{t("advanced JavaScript")}
 					</Text>
-					<Image
-						style={styles.commonImg}
-						source={require("../../../../../assets/Robo_feliz.png")}
-					/>
+					<Image style={styles.commonImg} source={Images.codyHappy} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed3}>
 					<Text
@@ -181,7 +179,7 @@ export default function JavaScript() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -201,7 +199,7 @@ export default function JavaScript() {
 					</Text>
 					<Image
 						style={styles.masterImg}
-						source={require("../../../../../assets/Robo_master.png")}
+						source={Images.codyMaster}
 					/>
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed4}>
@@ -225,7 +223,7 @@ export default function JavaScript() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View

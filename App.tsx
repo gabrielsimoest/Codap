@@ -28,7 +28,7 @@ export default function App() {
 			setTheme(theme);
 			setFontSize(fontSize);
 			setLanguage(language);
-			SplashScreen.hide();
+			setTimeout(() => SplashScreen.hide(), 1000);
 		}
 	}, [theme, fontSize, language]);
 

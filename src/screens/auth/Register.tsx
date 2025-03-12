@@ -1,5 +1,5 @@
 import { useTheme } from "@react-navigation/native";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
 	Dimensions,
@@ -16,9 +16,10 @@ import DarkMode from "../../theme/DarkMode";
 import AuthButton from "./components/AuthButton";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
-import * as SQLite from "expo-sqlite";
 import DatabaseClient from "../../services/DatabaseClient";
 import isValidEmail from "../../utils/isValidEmail";
+import CenterView from "../../components/layout/CenterView";
+import Images from "../../utils/imageIndexer";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -44,7 +45,6 @@ export default function Register() {
 
 	useEffect(() => {
 		createTable();
-		// deleteDB();
 		return () => closeDatabase();
 	}, []);
 
@@ -57,17 +57,6 @@ export default function Register() {
 	};
 
 	const createTable = () => {
-		/* db.transaction((tx) => {
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS Users " +
-					"(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha TEXT, Email TEXT, DependaBots INT, XP LONG, Double INT);"
-			);
-			tx.executeSql(
-				"CREATE TABLE IF NOT EXISTS Aulas " +
-					"(ID INTEGER PRIMARY KEY AUTOINCREMENT, UserID INTEGER, TipoAula INT, " +
-					"FOREIGN KEY(UserID) REFERENCES Users(ID));"
-			);
-		}); */
 		try {
 			database.initDefaultTables();
 		} catch (error) {
@@ -136,11 +125,10 @@ export default function Register() {
 	};
 
 	return (
-		<View
-			style={[
-				styles.container,
-				{ backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1" },
-			]}
+		<CenterView
+			style={{
+				backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
+			}}
 		>
 			<TouchableWithoutFeedback
 				onPress={Keyboard.dismiss}
@@ -160,7 +148,7 @@ export default function Register() {
 						<View style={styles.header}>
 							<Image
 								style={styles.tinyLogo}
-								source={require("../../../assets/code.png")}
+								source={Images.icon}
 							/>
 							<Text style={styles.title}>Codap</Text>
 						</View>
@@ -212,7 +200,6 @@ export default function Register() {
 								secureTextEntry={true}
 							/>
 							<Text
-								/* defaultSize={20} */
 								style={[
 									styles.text,
 									{
@@ -283,17 +270,11 @@ export default function Register() {
 					buttonText="OK"
 				/>
 			</TouchableWithoutFeedback>
-		</View>
+		</CenterView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#0b1016",
-		alignItems: "center",
-		justifyContent: "center",
-	},
 	register: {
 		color: "white",
 		textAlign: "center",
@@ -369,11 +350,6 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		height: windowHeight * 0.95, //713
 		width: windowWidth * 0.95, //373
-	},
-	image: {
-		height: 250,
-		width: 150,
-		left: 80,
 	},
 	text: {
 		color: "white",

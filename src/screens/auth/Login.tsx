@@ -8,7 +8,6 @@ import {
 	TouchableOpacity,
 	Keyboard,
 	Dimensions,
-	Button,
 } from "react-native";
 
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
@@ -24,6 +23,8 @@ import DatabaseClient from "../../services/DatabaseClient";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import isValidEmail from "../../utils/isValidEmail";
 import useLoggedUser from "../../hooks/useLoggedUser";
+import CenterView from "../../components/layout/CenterView";
+import Images from "../../utils/imageIndexer";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -130,11 +131,10 @@ export default function Login() {
 	};
 
 	return (
-		<View
-			style={[
-				styles.container,
-				{ backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1" },
-			]}
+		<CenterView
+			style={{
+				backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
+			}}
 		>
 			<TouchableWithoutFeedback
 				onPress={Keyboard.dismiss}
@@ -154,7 +154,7 @@ export default function Login() {
 						<View style={styles.header}>
 							<Image
 								style={styles.tinyLogo}
-								source={require("../../../assets/code.png")}
+								source={Images.icon}
 							/>
 							<Text style={styles.title}>Codap</Text>
 						</View>
@@ -198,7 +198,7 @@ export default function Login() {
 							/>
 							<Image
 								style={styles.image}
-								source={require("../../../assets/Robo_feliz.png")}
+								source={Images.codyHappy}
 							/>
 							<TouchableOpacity onPress={navigationHandler}>
 								<Text
@@ -221,17 +221,11 @@ export default function Login() {
 					buttonText="OK"
 				/>
 			</TouchableWithoutFeedback>
-		</View>
+		</CenterView>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: "#0b1016",
-		alignItems: "center",
-		justifyContent: "center",
-	},
 	register: {
 		color: "white",
 		textAlign: "center",

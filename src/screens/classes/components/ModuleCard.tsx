@@ -9,6 +9,7 @@ import {
 	View,
 } from "react-native";
 import Collapsible from "react-native-collapsible";
+import Images from "../../../utils/imageIndexer";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -47,7 +48,7 @@ export default function ModuleCard({ imagePath, title, subtitle }: Props) {
 				>
 					<Image
 						style={styles.comingSoonImg}
-						source={require("../../../../../assets/Robo_construcao.png")}
+						source={Images.codyBuilding}
 					/>
 				</View>
 				<View

@@ -16,6 +16,7 @@ import {
 	View,
 } from "react-native";
 import Collapsible from "react-native-collapsible";
+import Images from "../../../../utils/imageIndexer";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -79,10 +80,7 @@ export default function Html() {
 					<Text style={[styles.text, { color: colors.text }]}>
 						{t("concepts of html")}
 					</Text>
-					<Image
-						style={styles.basicImg}
-						source={require("../../../../../assets/Robo_basics.png")}
-					/>
+					<Image style={styles.image} source={Images.codyLearning} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed1}>
 					<View
@@ -93,7 +91,7 @@ export default function Html() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -111,10 +109,7 @@ export default function Html() {
 					<Text style={[styles.text, { color: colors.text }]}>
 						{t("intermediate html")}
 					</Text>
-					<Image
-						style={styles.commonImg}
-						source={require("../../../../../assets/Robo_pensativo.png")}
-					/>
+					<Image style={styles.image} source={Images.codyThinking} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed2}>
 					<Text
@@ -137,7 +132,7 @@ export default function Html() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -155,10 +150,7 @@ export default function Html() {
 					<Text style={[styles.text, { color: colors.text }]}>
 						{t("advanced html")}
 					</Text>
-					<Image
-						style={styles.commonImg}
-						source={require("../../../../../assets/Robo_feliz.png")}
-					/>
+					<Image style={styles.image} source={Images.codyHappy} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed3}>
 					<Text
@@ -181,7 +173,7 @@ export default function Html() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -199,10 +191,7 @@ export default function Html() {
 					<Text style={[styles.text, { color: colors.text }]}>
 						{t("mastery in html")}
 					</Text>
-					<Image
-						style={styles.masterImg}
-						source={require("../../../../../assets/Robo_master.png")}
-					/>
+					<Image style={styles.image} source={Images.codyMaster} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed4}>
 					<Text
@@ -225,7 +214,7 @@ export default function Html() {
 					>
 						<Image
 							style={styles.comingSoonImg}
-							source={require("../../../../../assets/Robo_construcao.png")}
+							source={Images.codyBuilding}
 						/>
 					</View>
 					<View
@@ -254,7 +243,7 @@ const styles = StyleSheet.create({
 		marginBottom: 15,
 		backgroundColor: "#1B2B39",
 		borderRadius: 20,
-		elevation: 7,
+		elevation: 2,
 	},
 	title: {
 		position: "absolute",
@@ -272,21 +261,11 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 15,
 	},
-	basicImg: {
-		top: 0,
-		left: windowWidth * 0.065,
-		width: windowWidth * 0.185,
-		height: windowHeight * 0.185,
-	},
-	commonImg: {
+	image: {
+		marginVertical: "auto",
 		left: windowWidth * 0.065,
 		width: windowWidth * 0.189,
-		height: windowHeight * 0.189,
-	},
-	masterImg: {
-		left: windowWidth * 0.04,
-		width: windowWidth * 0.25,
-		height: windowHeight * 0.18,
+		height: windowHeight * 0.185,
 	},
 	comingSoonImg: {
 		width: windowWidth * 0.25,
