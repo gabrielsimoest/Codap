@@ -10,6 +10,9 @@ import ThemedView from "../../components/themed/ThemedView";
 import RowView from "../../components/layout/RowView";
 import ThemedLine from "../../components/themed/ThemedLine";
 import ConfigHeading from "./components/ConfigHeading";
+import NotificationSwitcher from "./components/NotificationSwitcher";
+import VersionInfo from "./components/VersionInfo";
+import AboutCodap from "./components/AboutCodap";
 /* import { AppContext } from '../../../common/Contexts/AppContext';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions'; */
 const TextSize = 25;
@@ -71,15 +74,14 @@ export default function Config() {
 					iconName="notifications"
 					title={t("notification")}
 				/>
-				{/* <TouchableOpacity style={[styles.button, { backgroundColor: colors.background }]} onPress={() => onToggleSwitch()}>
-                    <ResizableText defaultSize={TextSize} />{t("notification")}</ResizableText>
-                    <Switch style={{ marginTop: 5 }} value={isSwitchOn} onValueChange={onToggleSwitch} color={'#5469D3'} />
-                </TouchableOpacity> */}
+				<NotificationSwitcher />
 				<ConfigHeading
 					iconType="materialCommunity"
 					iconName="information-outline"
 					title={t("informations")}
 				/>
+				<VersionInfo />
+				<AboutCodap />
 			</ScrollView>
 		</ThemedView>
 	);

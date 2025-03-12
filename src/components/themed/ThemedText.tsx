@@ -3,7 +3,7 @@ import React from "react";
 import { useTheme } from "@react-navigation/native";
 
 interface Props {
-	children: string;
+	children: string | string[];
 	style?: StyleProp<TextStyle>;
 }
 

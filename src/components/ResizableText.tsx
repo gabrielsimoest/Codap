@@ -3,7 +3,7 @@ import ThemedText from "./themed/ThemedText";
 import useFontSizeStore from "../stores/FontSizeStore";
 
 interface Props {
-	children: string;
+	children: string | string[];
 	defaultSize?: number;
 	useCustomColor?: boolean;
 	style?: StyleProp<TextStyle>;

@@ -1,44 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Switch } from "react-native-paper";
-import { Theme, useTheme } from "@react-navigation/native";
-import DarkMode from "../../../theme/DarkMode";
-import useThemeStore from "../../../stores/ThemeStore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useTheme } from "@react-navigation/native";
 import ResizableText from "../../../components/ResizableText";
 import RowView from "../../../components/layout/RowView";
 
-const ThemeSwitcher = () => {
+const NotificationSwitcher = () => {
 	const theme = useTheme();
 	const { t } = useTranslation();
 	const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-	const toggleTheme = useThemeStore((s) => s.toggleTheme);
-
-	const ChangeTheme = () => {
-		setIsSwitchOn(!isSwitchOn);
-		toggleTheme();
-	};
-
-	const persistTheme = async (theme: Theme) => {
-		try {
-			await AsyncStorage.setItem(
-				"CurrentTheme",
-				theme === DarkMode ? "dark" : "light"
-			);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	useEffect(() => {
-		persistTheme(theme);
-	}, [theme]);
-
-	useEffect(() => {
-		if (theme === DarkMode) setIsSwitchOn(true);
-	}, []);
 
 	return (
 		<TouchableOpacity
@@ -46,15 +17,17 @@ const ThemeSwitcher = () => {
 				styles.button,
 				{ backgroundColor: theme.colors.background },
 			]}
-			onPress={ChangeTheme}
+			onPress={() => setIsSwitchOn(!isSwitchOn)}
 		>
 			<RowView align="center" justify="space-between">
-				<ResizableText defaultSize={20}>{t("theme")}</ResizableText>
+				<ResizableText defaultSize={20}>
+					{t("notifications")}
+				</ResizableText>
 				<Switch
 					style={{ marginTop: 5 }}
 					value={isSwitchOn}
 					color={"#5469D3"}
-					onChange={ChangeTheme}
+					onChange={() => console.log("Notification")}
 				/>
 			</RowView>
 		</TouchableOpacity>
@@ -81,4 +54,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ThemeSwitcher;
+export default NotificationSwitcher;

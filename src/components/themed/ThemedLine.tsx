@@ -9,13 +9,22 @@ import {
 
 interface Props {
 	style?: StyleProp<ViewStyle>;
+	theme?:
+		| "primary"
+		| "background"
+		| "card"
+		| "text"
+		| "border"
+		| "notification";
 }
 
-export default function ThemedLine({ style = {} }: Props) {
+export default function ThemedLine({ style = {}, theme = "text" }: Props) {
 	const { colors } = useTheme();
 
 	return (
-		<View style={[style, styles.line, { backgroundColor: colors.text }]} />
+		<View
+			style={[style, styles.line, { backgroundColor: colors[theme] }]}
+		/>
 	);
 }
 
