@@ -1,19 +1,7 @@
-import {
-	Modal,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import UserHeader from "./components/UserHeader";
-import Icon from "../../components/Icon";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@react-navigation/native";
 import ResizableText from "../../components/ResizableText";
-import { useState } from "react";
 import UserButton from "./components/UserButton";
 import ThemedIcon from "../../components/themed/ThemedIcon";
 import ThemedView from "../../components/themed/ThemedView";
@@ -28,8 +16,6 @@ import ComingSoon from "./components/ComingSoon";
 const TextSize = 20; // Tamanho padrão da fonte
 
 export default function User() {
-	const { colors } = useTheme();
-
 	const { t } = useTranslation();
 
 	const navigation = useNavigate();
@@ -45,27 +31,18 @@ export default function User() {
 	return (
 		<ThemedView style={{ height: "100%" }}>
 			<UserHeader />
-			<View
-				style={[
-					styles.direction,
-					{ backgroundColor: colors.background },
-				]}
-			>
-				<Icon
+			<ThemedView style={styles.direction}>
+				<ThemedIcon
 					type="fontawesome"
 					name="user-circle"
-					color={colors.border}
+					theme={"border"}
+					useBackground
+					backgroundTheme="notification"
 					size={150}
-					style={[
-						styles.account,
-						{ backgroundColor: colors.notification },
-					]}
+					style={styles.account}
 				/>
 				<View style={styles.components}>
-					<ResizableText
-						style={[styles.text, { color: colors.text }]}
-						defaultSize={TextSize}
-					>
+					<ResizableText style={styles.text} defaultSize={TextSize}>
 						{t("name")}
 					</ResizableText>
 					<Text
@@ -75,10 +52,7 @@ export default function User() {
 					>
 						{user?.Name}
 					</Text>
-					<ResizableText
-						style={[styles.text, { color: colors.text }]}
-						defaultSize={TextSize}
-					>
+					<ResizableText style={styles.text} defaultSize={TextSize}>
 						{t("email")}
 					</ResizableText>
 					<Text
@@ -89,7 +63,7 @@ export default function User() {
 						{user?.Email}
 					</Text>
 				</View>
-			</View>
+			</ThemedView>
 			<ScrollView
 				style={styles.scroller}
 				showsVerticalScrollIndicator={false}
@@ -109,44 +83,6 @@ export default function User() {
 					}
 				/>
 			</ScrollView>
-			{/* <ComingSoonComponent
-				visible={visibleComingSoon}
-				onDismiss={() => setVisibleComingSoon(!visibleComingSoon)}
-			/> */}
-			{/* 
-			<Modal visible={visibleModal3} transparent={true}>
-				<SafeAreaView>
-					<View
-						style={[
-							styles.contant,
-							{ backgroundColor: colors.background },
-						]}
-					>
-						<TouchableOpacity
-							onPress={() => setVisibleModal3(false)}
-						>
-							<Icon
-								type={Icons.Ionicons}
-								name="ios-close-outline"
-								color={"#33526E"}
-								size={60}
-								style={styles.icon}
-							/>
-						</TouchableOpacity>
-						<ResizableText
-							style={[styles.textModal, { color: colors.text }]}
-							defaultSize={TextSize}
-						>
-							{t("successfully changed")}
-						</ResizableText>
-						<OpButton
-							theme={"modalButtonUser"}
-							title={t("close")}
-							onPressFunction={() => setVisibleModal3(false)}
-						/>
-					</View>
-				</SafeAreaView>
-			</Modal> */}
 		</ThemedView>
 	);
 }

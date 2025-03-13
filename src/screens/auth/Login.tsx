@@ -26,6 +26,7 @@ import useLoggedUser from "../../hooks/useLoggedUser";
 import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
 import useUserStorage from "../../stores/UserStore";
+import useAlertStore from "../../stores/AlertStore";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -42,9 +43,6 @@ export default function Login() {
 
 	const navigation = useNavigate();
 
-	const [alertVisible, setAlertVisible] = useState(false);
-	const [alertTitle, setAlertTitle] = useState("");
-	const [alertMessage, setAlertMessage] = useState("");
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
 
@@ -81,9 +79,15 @@ export default function Login() {
 		}
 	};
 
+	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
+	const setAlertVisible = useAlertStore((s) => s.setAlertVisible);
+
 	const showAlert = (title: string, message: string) => {
-		setAlertTitle(title);
-		setAlertMessage(message);
+		setAlertMessage({
+			title: title,
+			message: message,
+			buttonText: "ok",
+		});
 		setAlertVisible(true);
 	};
 
@@ -218,13 +222,6 @@ export default function Login() {
 						</View>
 					</View>
 				</View>
-				<ThemedAlert
-					visible={alertVisible}
-					onDismiss={() => setAlertVisible(false)}
-					title={alertTitle}
-					message={alertMessage}
-					buttonText="OK"
-				/>
 			</TouchableWithoutFeedback>
 		</CenterView>
 	);

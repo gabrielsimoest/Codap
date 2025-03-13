@@ -10,6 +10,7 @@ import DatabaseClient from "../../../services/DatabaseClient";
 import useUserStorage from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
+import useAlertStore from "../../../stores/AlertStore";
 
 const TextSize1 = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -22,6 +23,9 @@ export default function EditProfile() {
 
 	const { user, setUser } = useUserStorage();
 
+	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
+	const setAlertVisible = useAlertStore((s) => s.setAlertVisible);
+
 	const updateName = async () => {
 		if (newName !== undefined) {
 			const newUser = { ...user!, Name: newName };
@@ -33,6 +37,12 @@ export default function EditProfile() {
 			}
 			dbClient.close();
 			setVisibleModal(false);
+			setAlertMessage({
+				title: t("success"),
+				message: t("successfully changed"),
+				buttonText: t("close"),
+			});
+			setAlertVisible(true);
 		}
 	};
 

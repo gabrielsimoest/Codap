@@ -14,6 +14,14 @@ interface Props {
 		| "text"
 		| "border"
 		| "notification";
+	backgroundTheme?:
+		| "primary"
+		| "background"
+		| "card"
+		| "text"
+		| "border"
+		| "notification";
+	useBackground?: boolean;
 }
 
 const ThemedIcon = ({
@@ -22,6 +30,8 @@ const ThemedIcon = ({
 	size = 24,
 	style,
 	theme = "text",
+	backgroundTheme = "background",
+	useBackground = false,
 }: Props) => {
 	const { colors } = useTheme();
 
@@ -31,7 +41,12 @@ const ThemedIcon = ({
 			name={name}
 			color={colors[theme]}
 			size={size}
-			style={style}
+			style={[
+				style,
+				useBackground
+					? { backgroundColor: colors[backgroundTheme] }
+					: {},
+			]}
 		/>
 	);
 };

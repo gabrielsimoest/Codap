@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import useFontSizeStore from "./src/stores/FontSizeStore";
 import useLanguageStore from "./src/stores/LanguageStore";
+import useAlertStore from "./src/stores/AlertStore";
+import ThemedAlert from "./src/components/themed/ThemedAlert";
+import LightMode from "./src/theme/LightMode";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,6 +21,9 @@ export default function App() {
 	const setTheme = useThemeStore((s) => s.setTheme);
 	const setFontSize = useFontSizeStore((s) => s.setFontSize);
 	const setLanguage = useLanguageStore((s) => s.setLanguage);
+	const alertVisible = useAlertStore((S) => S.alertVisible);
+	const alertMessage = useAlertStore((S) => S.alertMessage);
+	const setAlertVisible = useAlertStore((S) => S.setAlertVisible);
 
 	useEffect(() => {
 		if (
@@ -32,5 +38,21 @@ export default function App() {
 		}
 	}, [theme, fontSize, language]);
 
-	return <MainNavigation />;
+	return (
+		<>
+			<MainNavigation />
+			{alertVisible && (
+				<ThemedAlert
+					theme={theme !== undefined ? theme : LightMode}
+					title={alertMessage.title}
+					message={alertMessage.message}
+					buttonText={alertMessage.buttonText}
+					visible={alertVisible}
+					onDismiss={() => {
+						setAlertVisible(false);
+					}}
+				/>
+			)}
+		</>
+	);
 }

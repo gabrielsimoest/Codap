@@ -10,6 +10,7 @@ import DatabaseClient from "../../../services/DatabaseClient";
 import useUserStorage from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
+import useAlertStore from "../../../stores/AlertStore";
 
 const TextSize = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -24,6 +25,9 @@ export default function ChangePassword() {
 	const [confirmarSenha, setConfirmarSenha] = useState<string>();
 
 	const { user, setUser } = useUserStorage();
+
+	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
+	const setAlertVisible = useAlertStore((s) => s.setAlertVisible);
 
 	const updatePassword = async () => {
 		if (novaSenha !== undefined && confirmarSenha !== undefined) {
@@ -41,6 +45,12 @@ export default function ChangePassword() {
 				dbClient.close();
 			}
 			setVisibleModal(false);
+			setAlertMessage({
+				title: t("success"),
+				message: t("successfully changed"),
+				buttonText: t("close"),
+			});
+			setAlertVisible(true);
 		}
 	};
 

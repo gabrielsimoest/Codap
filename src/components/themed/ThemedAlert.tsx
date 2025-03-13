@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { Theme } from "@react-navigation/native";
 import DarkMode from "../../theme/DarkMode";
 import CenterView from "../layout/CenterView";
 
@@ -10,6 +10,7 @@ interface Props {
 	title: string;
 	message: string;
 	buttonText: string;
+	theme: Theme;
 }
 
 const ThemedAlert = ({
@@ -18,9 +19,8 @@ const ThemedAlert = ({
 	title,
 	message,
 	buttonText,
+	theme,
 }: Props) => {
-	const theme = useTheme();
-
 	return (
 		<Modal
 			animationType="fade"
