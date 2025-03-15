@@ -36,7 +36,12 @@ export default function MarketModal({
 	const { t } = useTranslation();
 
 	return (
-		<Modal animationType="fade" visible={visible} transparent={true}>
+		<Modal
+			animationType="fade"
+			visible={visible}
+			transparent={true}
+			statusBarTranslucent
+		>
 			<CenterView
 				style={{
 					backgroundColor: "rgba(0, 0, 0, 0.85)",

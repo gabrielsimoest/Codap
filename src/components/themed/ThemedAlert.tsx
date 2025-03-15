@@ -27,6 +27,7 @@ const ThemedAlert = ({
 			transparent={true}
 			visible={visible}
 			onRequestClose={onDismiss}
+			statusBarTranslucent
 		>
 			<CenterView
 				direction={"column"}

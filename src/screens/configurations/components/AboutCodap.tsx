@@ -21,6 +21,7 @@ const AboutCodap = () => {
 				onRequestClose={() => {
 					setModalVisible(!modalVisible);
 				}}
+				statusBarTranslucent
 			>
 				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
 					<ThemedView style={styles.modalView}>

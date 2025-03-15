@@ -53,6 +53,7 @@ export default function EditProfile() {
 				visible={visibleModal}
 				transparent={true}
 				animationType="fade"
+				statusBarTranslucent
 			>
 				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
 					<ThemedView style={styles.contant}>

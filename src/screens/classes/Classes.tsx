@@ -47,6 +47,7 @@ export default function Class() {
 				visible={visibleModal}
 				transparent={true}
 				onRequestClose={() => setVisibleModal(false)}
+				statusBarTranslucent
 			>
 				<TouchableWithoutFeedback
 					onPress={() => setVisibleModal(false)}

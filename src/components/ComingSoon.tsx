@@ -23,6 +23,7 @@ const ComingSoon = ({ visible = false, onDismiss }: Props) => {
 				transparent={true}
 				visible={visible}
 				onRequestClose={onDismiss}
+				statusBarTranslucent
 			>
 				<CenterView
 					style={{
