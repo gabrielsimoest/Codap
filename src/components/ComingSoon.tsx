@@ -8,9 +8,12 @@ import ThemedView from "./themed/ThemedView";
 import UserButton from "../screens/user/components/UserButton";
 import Images from "../utils/imageIndexer";
 
-const ComingSoon = () => {
-	const [visible, setVisible] = useState(false);
+interface Props {
+	visible: boolean;
+	onDismiss: () => void;
+}
 
+const ComingSoon = ({ visible = false, onDismiss }: Props) => {
 	const { t } = useTranslation();
 
 	return (
@@ -19,7 +22,7 @@ const ComingSoon = () => {
 				animationType="fade"
 				transparent={true}
 				visible={visible}
-				onRequestClose={() => setVisible(false)}
+				onRequestClose={onDismiss}
 			>
 				<CenterView
 					style={{
@@ -29,7 +32,7 @@ const ComingSoon = () => {
 					<ThemedView style={styles.modalView}>
 						<TouchableOpacity
 							style={styles.button}
-							onPress={() => setVisible(false)}
+							onPress={onDismiss}
 						>
 							<Icon
 								type="ionicon"
@@ -60,10 +63,6 @@ const ComingSoon = () => {
 					</ThemedView>
 				</CenterView>
 			</Modal>
-			<UserButton
-				title={t("achievements")}
-				onPress={() => setVisible(true)}
-			/>
 		</>
 	);
 };

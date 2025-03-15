@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../entities";
 import ComingSoon from "../../components/ComingSoon";
+import { useState } from "react";
 
 const TextSize = 20; // Tamanho padrão da fonte
 
@@ -28,62 +29,76 @@ export default function User() {
 		navigation.navigate("Login");
 	};
 
+	const [visible, setVisible] = useState(false);
+
 	return (
-		<ThemedView style={{ height: "100%" }}>
-			<UserHeader />
-			<ThemedView style={styles.direction}>
-				<ThemedIcon
-					type="fontawesome"
-					name="user-circle"
-					theme={"border"}
-					useBackground
-					backgroundTheme="notification"
-					size={150}
-					style={styles.account}
-				/>
-				<View style={styles.components}>
-					<ResizableText style={styles.text} defaultSize={TextSize}>
-						{t("name")}
-					</ResizableText>
-					<Text
-						style={styles.text2}
-						adjustsFontSizeToFit={true}
-						numberOfLines={2}
-					>
-						{user?.Name}
-					</Text>
-					<ResizableText style={styles.text} defaultSize={TextSize}>
-						{t("email")}
-					</ResizableText>
-					<Text
-						style={styles.text2}
-						adjustsFontSizeToFit={true}
-						numberOfLines={3}
-					>
-						{user?.Email}
-					</Text>
-				</View>
+		<>
+			<ThemedView style={{ height: "100%" }}>
+				<UserHeader />
+				<ThemedView style={styles.direction}>
+					<ThemedIcon
+						type="fontawesome"
+						name="user-circle"
+						theme={"border"}
+						useBackground
+						backgroundTheme="notification"
+						size={150}
+						style={styles.account}
+					/>
+					<View style={styles.components}>
+						<ResizableText
+							style={styles.text}
+							defaultSize={TextSize}
+						>
+							{t("name")}
+						</ResizableText>
+						<Text
+							style={styles.text2}
+							adjustsFontSizeToFit={true}
+							numberOfLines={2}
+						>
+							{user?.name}
+						</Text>
+						<ResizableText
+							style={styles.text}
+							defaultSize={TextSize}
+						>
+							{t("email")}
+						</ResizableText>
+						<Text
+							style={styles.text2}
+							adjustsFontSizeToFit={true}
+							numberOfLines={3}
+						>
+							{user?.email}
+						</Text>
+					</View>
+				</ThemedView>
+				<ScrollView
+					style={styles.scroller}
+					showsVerticalScrollIndicator={false}
+				>
+					<EditProfile />
+					<ChangePassword />
+					<UserButton
+						title={t("achievements")}
+						onPress={() => setVisible(true)}
+					/>
+					<UserButton
+						title={t("exit")}
+						onPress={logout}
+						icon={
+							<ThemedIcon
+								type="materialCommunity"
+								name="logout"
+								size={25}
+							/>
+						}
+					/>
+				</ScrollView>
 			</ThemedView>
-			<ScrollView
-				style={styles.scroller}
-				showsVerticalScrollIndicator={false}
-			>
-				<EditProfile />
-				<ChangePassword />
-				<ComingSoon />
-				<UserButton
-					title={t("exit")}
-					onPress={logout}
-					icon={
-						<ThemedIcon
-							type="materialCommunity"
-							name="logout"
-							size={25}
-						/>
-					}
-				/>
-			</ScrollView>
-		</ThemedView>
+			<ComingSoon visible={visible} onDismiss={() => setVisible(false)} />
+		</>
 	);
 }
 

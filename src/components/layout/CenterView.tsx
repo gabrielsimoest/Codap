@@ -5,12 +5,14 @@ interface Props {
 	children: ReactNode;
 	direction?: "column" | "row";
 	style?: StyleProp<ViewStyle>;
+	useSize?: boolean;
 }
 
 export default function CenterView({
 	children,
 	direction = "column",
 	style = {},
+	useSize = false,
 }: Props) {
 	return (
 		<View
@@ -19,10 +21,10 @@ export default function CenterView({
 				{
 					display: "flex",
 					flexDirection: direction,
-					flex: 1,
 					justifyContent: "center",
 					alignItems: "center",
 				},
+				useSize ? {} : { flex: 1 },
 			]}
 		>
 			{children}

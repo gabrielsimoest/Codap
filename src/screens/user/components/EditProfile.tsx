@@ -11,6 +11,7 @@ import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
+import { User } from "../../../entities";
 
 const TextSize1 = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -28,7 +29,7 @@ export default function EditProfile() {
 
 	const updateName = async () => {
 		if (newName !== undefined) {
-			const newUser = { ...user!, Name: newName };
+			const newUser: User = { ...user!, name: newName };
 			const dbClient = new DatabaseClient();
 			const { changes } = dbClient.updateUser(newUser);
 			if (changes !== 0) {

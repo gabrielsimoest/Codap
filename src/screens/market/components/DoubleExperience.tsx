@@ -9,6 +9,8 @@ import Icon from "../../../components/Icon";
 import useUserStore from "../../../stores/UserStore";
 import MarketButton from "./MarketButton";
 import ColumnView from "../../../components/layout/ColumnView";
+import MarketModal from "./MarketModal";
+import { useState } from "react";
 
 const TextSize = 20;
 
@@ -17,44 +19,52 @@ export default function DoubleExperience() {
 
 	const user = useUserStore((s) => s.user);
 
+	const [visible, setVisible] = useState(false);
+
 	return (
-		<ThemedView theme="primary" style={styles.card}>
-			<ThemedText style={styles.Double}>
-				{user?.doubleXp === 1 ? "Ativo" : "Inativo"}
-			</ThemedText>
-			<RowView>
-				<Image style={styles.image} source={Images.doubleXP} />
-				<ColumnView style={{ height: "100%", padding: 5 }}>
-					<ResizableText style={styles.title} defaultSize={TextSize}>
-						{t("double experience")}
-					</ResizableText>
-					<RowView
-						align="center"
-						useSize
-						style={{ alignSelf: "flex-end", marginTop: 2 }}
-					>
-						<Text style={styles.price}>200 </Text>
-						<Icon
-							color="#637aff"
-							type={"octicons"}
-							name="dependabot"
-							size={21}
+		<>
+			<ThemedView theme="primary" style={styles.card}>
+				<ThemedText style={styles.Double}>
+					{user?.doubleXp === 1 ? "Ativo" : "Inativo"}
+				</ThemedText>
+				<RowView>
+					<Image style={styles.image} source={Images.doubleXP} />
+					<ColumnView style={{ height: "100%", padding: 5 }}>
+						<ResizableText
+							style={styles.title}
+							defaultSize={TextSize}
+						>
+							{t("double experience")}
+						</ResizableText>
+						<RowView
+							align="center"
+							useSize
+							style={{ alignSelf: "flex-end", marginTop: 2 }}
+						>
+							<Text style={styles.price}>200 </Text>
+							<Icon
+								color="#637aff"
+								type={"octicons"}
+								name="dependabot"
+								size={20}
+							/>
+						</RowView>
+						<MarketButton
+							title={t("buy")}
+							onPress={() => setVisible(true)}
 						/>
-					</RowView>
-					<MarketButton
-						title={t("buy")}
-						onPress={() => console.log("")}
-					/>
-				</ColumnView>
-			</RowView>
-			{/* <View style={styles.buttonWrapper}>
-				<OpButton
-            theme={"marketButton"}
-            title={t("buy")}
-            onPressFunction={() => setVisibleModal(true)}
-        />
-			</View> */}
-		</ThemedView>
+					</ColumnView>
+				</RowView>
+			</ThemedView>
+			<MarketModal
+				visible={visible}
+				onDismiss={() => setVisible(false)}
+				onBuy={() => console.log("")}
+				title={t("buy double experience")}
+				price={300}
+				image={Images.doubleXP}
+			/>
+		</>
 	);
 }
 

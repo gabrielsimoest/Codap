@@ -11,6 +11,7 @@ import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
+import { User } from "../../../entities";
 
 const TextSize = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -31,8 +32,8 @@ export default function ChangePassword() {
 
 	const updatePassword = async () => {
 		if (novaSenha !== undefined && confirmarSenha !== undefined) {
-			if (senhaAtual === user?.Senha && novaSenha === confirmarSenha) {
-				const newUser = { ...user!, Senha: novaSenha };
+			if (senhaAtual === user?.password && novaSenha === confirmarSenha) {
+				const newUser: User = { ...user!, password: novaSenha };
 				const dbClient = new DatabaseClient();
 				const { changes } = dbClient.updateUserPassword(
 					newUser.ID,
