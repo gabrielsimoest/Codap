@@ -5,13 +5,13 @@ import ResizableText from "../../components/ResizableText";
 import UserButton from "./components/UserButton";
 import ThemedIcon from "../../components/themed/ThemedIcon";
 import ThemedView from "../../components/themed/ThemedView";
-import useUserStorage from "../../stores/UserStore";
+import useUserStore from "../../stores/UserStore";
 import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../entities";
-import ComingSoon from "./components/ComingSoon";
+import ComingSoon from "../../components/ComingSoon";
 
 const TextSize = 20; // Tamanho padrão da fonte
 
@@ -20,7 +20,7 @@ export default function User() {
 
 	const navigation = useNavigate();
 
-	const { user, setUser } = useUserStorage();
+	const { user, setUser } = useUserStore();
 
 	const logout = async () => {
 		await AsyncStorage.setItem("User", JSON.stringify({}));

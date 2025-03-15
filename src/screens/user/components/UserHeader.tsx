@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { Title } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-import useUserStorage from "../../../stores/UserStore";
+import useUserStore from "../../../stores/UserStore";
 import ThemedText from "../../../components/themed/ThemedText";
 
 function UserHeader() {
@@ -11,7 +11,7 @@ function UserHeader() {
 
 	const { t } = useTranslation();
 
-	const user = useUserStorage((s) => s.user);
+	const user = useUserStore((s) => s.user);
 
 	const XP = user?.XP || 0;
 

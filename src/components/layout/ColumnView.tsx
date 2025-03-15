@@ -12,6 +12,7 @@ interface Props {
 		| "flex-start";
 	align?: "center" | "baseline" | "stretch" | "flex-end" | "flex-start";
 	style?: StyleProp<ViewStyle>;
+	reversed?: boolean;
 }
 
 export default function ColumnView({
@@ -19,6 +20,7 @@ export default function ColumnView({
 	justify = "flex-start",
 	align = "flex-start",
 	style = {},
+	reversed = false,
 }: Props) {
 	return (
 		<View
@@ -26,7 +28,7 @@ export default function ColumnView({
 				style,
 				{
 					display: "flex",
-					flexDirection: "column",
+					flexDirection: reversed ? "column-reverse" : "column",
 					flex: 1,
 					justifyContent: justify,
 					alignItems: align,

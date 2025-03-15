@@ -6,7 +6,7 @@ interface UserStorage {
 	setUser: (user: User) => void;
 }
 
-const useUserStorage = create<UserStorage>((set) => ({
+const useUserStore = create<UserStorage>((set) => ({
 	user: null,
 	setUser: (user) =>
 		set(() => ({
@@ -14,4 +14,4 @@ const useUserStorage = create<UserStorage>((set) => ({
 		})),
 }));
 
-export default useUserStorage;
+export default useUserStore;

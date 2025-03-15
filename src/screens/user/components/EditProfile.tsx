@@ -7,7 +7,7 @@ import { useState } from "react";
 import ThemedView from "../../../components/themed/ThemedView";
 import ModalButtonUser from "./ModalButtonUser";
 import DatabaseClient from "../../../services/DatabaseClient";
-import useUserStorage from "../../../stores/UserStore";
+import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
@@ -21,7 +21,7 @@ export default function EditProfile() {
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [newName, setNewName] = useState<string>();
 
-	const { user, setUser } = useUserStorage();
+	const { user, setUser } = useUserStore();
 
 	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
 	const setAlertVisible = useAlertStore((s) => s.setAlertVisible);

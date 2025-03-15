@@ -10,6 +10,7 @@ import { useTheme } from "@react-navigation/native";
 import Classes from "../screens/classes/Classes";
 import Config from "../screens/configurations/Config";
 import User from "../screens/user/User";
+import Market from "../screens/market/Market";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,15 +54,15 @@ const TabArr: TabItem[] = [
       inActiveIcon: 'chat-outline',
       component: Config,
     },*/
-	/*     {
-        route: 'Store',
-        label: 'Store',
-        type: Icons.MaterialCommunityIcons,
-        activeIcon: 'store-settings',
-        inActiveIcon: 'store-settings-outline',
-        component: Store,
-    },
-	*/
+	{
+		route: "Market",
+		label: "market",
+		type: "materialCommunity",
+		activeIcon: "store-settings",
+		inActiveIcon: "store-settings-outline",
+		component: Market,
+	},
+
 	{
 		route: "Account",
 		label: "Account",

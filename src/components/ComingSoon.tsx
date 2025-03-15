@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Modal, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useTranslation } from "react-i18next";
-import ResizableText from "../../../components/ResizableText";
-import Icon from "../../../components/Icon";
-import CenterView from "../../../components/layout/CenterView";
-import ThemedView from "../../../components/themed/ThemedView";
-import UserButton from "./UserButton";
-import Images from "../../../utils/imageIndexer";
+import ResizableText from "./ResizableText";
+import Icon from "./Icon";
+import CenterView from "./layout/CenterView";
+import ThemedView from "./themed/ThemedView";
+import UserButton from "../screens/user/components/UserButton";
+import Images from "../utils/imageIndexer";
 
 const ComingSoon = () => {
 	const [visible, setVisible] = useState(false);

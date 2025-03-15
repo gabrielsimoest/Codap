@@ -1,11 +1,12 @@
 export interface User {
 	ID: number;
-	Name: string;
-	Senha: string;
-	Email: string;
-	DependaBots: number;
-	XP: number;
-	Double: number;
+	name: string;
+	password: string;
+	email: string;
+	dependaBots: number;
+	xp: number;
+	doubleXp: number;
+	doubleTime: number;
 }
 
 export interface Aula {

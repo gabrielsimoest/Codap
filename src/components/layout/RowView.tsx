@@ -12,6 +12,8 @@ interface Props {
 		| "flex-start";
 	align?: "center" | "baseline" | "stretch" | "flex-end" | "flex-start";
 	style?: StyleProp<ViewStyle>;
+	reversed?: boolean;
+	useSize?: boolean;
 }
 
 export default function RowView({
@@ -19,6 +21,8 @@ export default function RowView({
 	justify = "flex-start",
 	align = "flex-start",
 	style = {},
+	reversed = false,
+	useSize = false,
 }: Props) {
 	return (
 		<View
@@ -26,11 +30,11 @@ export default function RowView({
 				style,
 				{
 					display: "flex",
-					flexDirection: "row",
-					flex: 1,
+					flexDirection: reversed ? "row-reverse" : "row",
 					justifyContent: justify,
 					alignItems: align,
 				},
+				useSize ? {} : { flex: 1 },
 			]}
 		>
 			{children}

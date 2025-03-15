@@ -17,7 +17,7 @@ export default class DatabaseClient {
 	initDefaultTables() {
 		this.database.execSync(
 			"CREATE TABLE IF NOT EXISTS Users " +
-				"(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Senha TEXT, Email TEXT, DependaBots INT, XP LONG, Double INT);"
+				"(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, password TEXT, email TEXT, dependaBots INT, xp LONG, doubleXp INT, doubleTime INT);"
 		);
 		this.database.execSync(
 			"CREATE TABLE IF NOT EXISTS Aulas " +
@@ -36,17 +36,17 @@ export default class DatabaseClient {
 		password: string;
 	}) {
 		return this.database.runSync(
-			"INSERT INTO Users (Name, Senha, Email, DependaBots, XP, Double) VALUES (?,?,?,?,?,?)",
-			[name, password, email, 0, 0, 0]
+			"INSERT INTO Users (name, password, email, dependaBots, xp, doubleXp, doubleTime) VALUES (?,?,?,?,?,?,?)",
+			[name, password, email, 0, 0, 0, 0]
 		);
 	}
 
 	validateUser(email: string, password: string): User | null {
 		const user = this.database.getFirstSync<User>(
-			"SELECT ID, Senha, DependaBots, XP, Double, Email, Name FROM Users WHERE Email=? LIMIT 1",
+			"SELECT * FROM Users WHERE email=? LIMIT 1",
 			[email]
 		);
-		if (user !== null && user.Senha === password) {
+		if (user !== null && user.password === password) {
 			return user;
 		} else {
 			return null;
@@ -55,16 +55,16 @@ export default class DatabaseClient {
 
 	updateUser(user: User) {
 		return this.database.runSync(
-			"UPDATE Users SET Name=?, Email=? WHERE ID = ?;",
-			[user.Name, user.Email, user.ID]
+			"UPDATE Users SET name=?, email=? WHERE ID = ?;",
+			[user.name, user.email, user.ID]
 		);
 	}
 
 	updateUserPassword(userId: number, password: string) {
-		return this.database.runSync("UPDATE Users SET Senha=? WHERE ID = ?;", [
-			password,
-			userId,
-		]);
+		return this.database.runSync(
+			"UPDATE Users SET password=? WHERE ID = ?;",
+			[password, userId]
+		);
 	}
 
 	getClasses(userId: number) {

@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 
 import DarkMode from "../../theme/DarkMode";
 import AuthButton from "./components/AuthButton";
-import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
 import * as FileSystem from "expo-file-system";
 import DatabaseClient from "../../services/DatabaseClient";
@@ -25,7 +24,7 @@ import isValidEmail from "../../utils/isValidEmail";
 import useLoggedUser from "../../hooks/useLoggedUser";
 import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
-import useUserStorage from "../../stores/UserStore";
+import useUserStore from "../../stores/UserStore";
 import useAlertStore from "../../stores/AlertStore";
 
 const windowHeight = Dimensions.get("window").height;
@@ -36,7 +35,7 @@ export default function Login() {
 
 	const database = new DatabaseClient();
 
-	const setUser = useUserStorage((s) => s.setUser);
+	const setUser = useUserStore((s) => s.setUser);
 
 	const theme = useTheme();
 	const { t } = useTranslation();
@@ -49,7 +48,6 @@ export default function Login() {
 	useEffect(() => {
 		useLoggedUser({
 			onLoggedCallback(user) {
-				/* console.log(user); */
 				setUser(user);
 				navigation.navigate("Home");
 			},
@@ -61,6 +59,7 @@ export default function Login() {
 			},
 		});
 		return () => closeDatabase();
+		/* database.executeSQL("DROP TABLE IF EXISTS Users"); */
 	}, []);
 
 	const closeDatabase = () => {
