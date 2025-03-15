@@ -34,7 +34,9 @@ const AboutCodap = () => {
 								color={"#5469D3"}
 							/>
 						</Pressable>
-						<ScrollView style={{ marginBottom: 5 }}>
+						<ScrollView
+							style={{ marginBottom: 5, paddingHorizontal: 5 }}
+						>
 							<ResizableText
 								useCustomColor
 								style={styles.modalText}
@@ -128,17 +130,10 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		height: "65%",
 		width: "90%",
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 4,
-		elevation: 8,
 	},
 	button: {
 		margin: 10,
+		alignSelf: "flex-end",
 	},
 	modalText: {
 		color: "#5469D3",

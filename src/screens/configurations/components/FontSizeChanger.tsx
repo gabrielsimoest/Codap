@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		margin: 10,
+		alignSelf: "flex-end",
 	},
 	modalText: {
 		color: "#5469D3",

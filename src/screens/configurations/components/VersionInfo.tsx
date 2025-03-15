@@ -53,7 +53,9 @@ const VersionInfo = () => {
 								color={"#5469D3"}
 							/>
 						</Pressable>
-						<ScrollView style={{ marginBottom: 5 }}>
+						<ScrollView
+							style={{ marginBottom: 5, paddingHorizontal: 5 }}
+						>
 							{/* <Pressable onPress={onPressHandler}  >
                                 <ResizableText style={styles.modalText} defaultSize={20}>{t("version")}:</ResizableText>
                             </Pressable> */}
@@ -116,6 +118,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		margin: 10,
+		alignSelf: "flex-end",
 	},
 	modalText: {
 		color: "#5469D3",

@@ -23,8 +23,8 @@ export default function ConfigHeader({ title }: { title: string }) {
 
 const styles = StyleSheet.create({
 	header: {
-		paddingTop: 15,
-		height: 60,
+		paddingTop: 20,
+		height: 70,
 		elevation: 4,
 		justifyContent: "space-between",
 		alignItems: "center",

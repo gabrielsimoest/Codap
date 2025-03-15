@@ -13,7 +13,7 @@ function UserHeader() {
 
 	const user = useUserStore((s) => s.user);
 
-	const XP = user?.XP || 0;
+	const XP = user?.xp || 0;
 
 	return (
 		<View style={[styles.header, { backgroundColor: colors.background }]}>
@@ -39,8 +39,8 @@ export default UserHeader;
 
 const styles = StyleSheet.create({
 	header: {
-		paddingTop: 15,
-		height: 60,
+		paddingTop: 20,
+		height: 70,
 		alignItems: "center",
 		justifyContent: "space-between",
 		flexDirection: "row",
