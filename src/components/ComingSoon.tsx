@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Modal, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React from "react";
+import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useTranslation } from "react-i18next";
 import ResizableText from "./ResizableText";
 import Icon from "./Icon";
-import CenterView from "./layout/CenterView";
 import ThemedView from "./themed/ThemedView";
-import UserButton from "../screens/user/components/UserButton";
 import Images from "../utils/imageIndexer";
+import { Modal, Portal } from "react-native-paper";
 
 interface Props {
 	visible: boolean;
@@ -17,54 +16,36 @@ const ComingSoon = ({ visible = false, onDismiss }: Props) => {
 	const { t } = useTranslation();
 
 	return (
-		<>
+		<Portal>
 			<Modal
-				animationType="fade"
-				transparent={true}
 				visible={visible}
-				onRequestClose={onDismiss}
-				statusBarTranslucent
+				onDismiss={onDismiss}
+				contentContainerStyle={{ flex: 1 }}
+				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				dismissableBackButton
 			>
-				<CenterView
-					style={{
-						backgroundColor: "rgba(0,0,0,0.8)",
-					}}
-				>
-					<ThemedView style={styles.modalView}>
-						<TouchableOpacity
-							style={styles.button}
-							onPress={onDismiss}
-						>
-							<Icon
-								type="ionicon"
-								name="close-outline"
-								color={"#33526E"}
-								size={60}
-								//style={styles.icon}
-							/>
-						</TouchableOpacity>
-						<View style={{ margin: 10 }}>
-							<ResizableText
-								style={styles.title}
-								defaultSize={24}
-							>
-								{t("comingSoon.title")}
-							</ResizableText>
-							<ResizableText
-								style={styles.message}
-								defaultSize={19}
-							>
-								{t("comingSoon.message")}
-							</ResizableText>
-						</View>
-						<Image
-							style={styles.figure}
-							source={Images.codyBuilding}
+				<ThemedView style={styles.modalView}>
+					<TouchableOpacity style={styles.button} onPress={onDismiss}>
+						<Icon
+							type="ionicon"
+							name="close-outline"
+							color={"#33526E"}
+							size={60}
+							//style={styles.icon}
 						/>
-					</ThemedView>
-				</CenterView>
+					</TouchableOpacity>
+					<View style={{ margin: 10 }}>
+						<ResizableText style={styles.title} defaultSize={24}>
+							{t("comingSoon.title")}
+						</ResizableText>
+						<ResizableText style={styles.message} defaultSize={19}>
+							{t("comingSoon.message")}
+						</ResizableText>
+					</View>
+					<Image style={styles.figure} source={Images.codyBuilding} />
+				</ThemedView>
 			</Modal>
-		</>
+		</Portal>
 	);
 };
 

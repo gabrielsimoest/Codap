@@ -1,39 +1,16 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
-import {
-	View,
-	StyleSheet,
-	Text,
-	Image,
-	Modal,
-	SafeAreaView,
-	TouchableOpacity,
-	ScrollView,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { useTheme } from "@react-navigation/native";
+import React, { useReducer, useState } from "react";
+import { StyleSheet, ScrollView } from "react-native";
 import { useTranslation } from "react-i18next";
-import ComingSoon from "../../components/ComingSoon";
-import ResizableText from "../../components/ResizableText";
-import Icon from "../../components/Icon";
-import ThemedIcon from "../../components/themed/ThemedIcon";
-import RowView from "../../components/layout/RowView";
-import Images from "../../utils/imageIndexer";
 import MarketHeader from "./components/MarketHeader";
 import DoubleExperience from "./components/DoubleExperience";
 import SurpiseChest from "./components/SurpriseChest";
 import DoubleTime from "./components/DoubleTime";
-
-const size1 = 20;
-const size2 = 23;
-const size3 = 30;
+import ThemedView from "../../components/themed/ThemedView";
+import ThemedText from "../../components/themed/ThemedText";
 
 export default function Market() {
 	//Constante de tradução, usar {t("CHAVE")} para tradução
-	const { t, i18n } = useTranslation();
-
-	const { colors } = useTheme(); //Variavel de cor do tema
+	const { t } = useTranslation();
 
 	const [visibleCommingSoon, setVisibleCommingSoon] = useState(false);
 	const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -139,19 +116,17 @@ export default function Market() {
 	};
 
 	return (
-		<View
-			style={[styles.container, { backgroundColor: colors.background }]}
-		>
+		<ThemedView style={styles.container}>
 			<MarketHeader />
-			<Text style={[styles.headert, { color: colors.text }]}>
+			<ThemedText style={styles.headert}>
 				{t("buy using dependabots")}
-			</Text>
+			</ThemedText>
 			<ScrollView style={{ marginBottom: "18.2%" }}>
 				<DoubleExperience />
 				<SurpiseChest />
 				<DoubleTime />
 			</ScrollView>
-		</View>
+		</ThemedView>
 	);
 }
 

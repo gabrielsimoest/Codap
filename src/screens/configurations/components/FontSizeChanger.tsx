@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal, StyleSheet, Pressable, View } from "react-native";
+import { StyleSheet, Pressable, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import Icon from "../../../components/Icon";
 import useFontSizeStore from "../../../stores/FontSizeStore";
@@ -10,6 +10,7 @@ import SettingsButton from "./SettingsButton";
 import ColumnView from "../../../components/layout/ColumnView";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
+import { Portal, Modal } from "react-native-paper";
 
 const FontSizeChanger = () => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -36,53 +37,58 @@ const FontSizeChanger = () => {
 	}, [fontSize]);
 
 	return (
-		<View>
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					setModalVisible(!modalVisible);
-				}}
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.modalView}>
-						<Pressable
-							style={styles.button}
-							onPress={() => setModalVisible(!modalVisible)}
-						>
-							<Icon
-								type={"ionicon"}
-								name="close-circle"
-								color={"#5469D3"}
-							/>
-						</Pressable>
-						<ResizableText
-							useCustomColor
-							defaultSize={20}
-							style={styles.modalText}
-						>
-							{t("Change font size")}
-						</ResizableText>
-						<ColumnView justify={"flex-start"} align={"flex-start"}>
-							<SettingsButton
-								title={t("increase")}
-								onPress={increment}
-							/>
-							<SettingsButton
-								title={t("decrease")}
-								onPress={decrement}
-							/>
-						</ColumnView>
-					</ThemedView>
-				</CenterView>
-			</Modal>
+		<>
+			<Portal>
+				<Modal
+					visible={modalVisible}
+					onDismiss={() => setModalVisible(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					dismissableBackButton
+				>
+					<CenterView
+						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+					>
+						<ThemedView style={styles.modalView}>
+							<Pressable
+								style={styles.button}
+								onPress={() => setModalVisible(!modalVisible)}
+							>
+								<Icon
+									type={"ionicon"}
+									name="close-circle"
+									color={"#5469D3"}
+								/>
+							</Pressable>
+							<ResizableText
+								useCustomColor
+								defaultSize={20}
+								style={styles.modalText}
+							>
+								{t("Change font size")}
+							</ResizableText>
+							<ColumnView
+								justify={"flex-start"}
+								align={"flex-start"}
+							>
+								<SettingsButton
+									title={t("increase")}
+									onPress={increment}
+								/>
+								<SettingsButton
+									title={t("decrease")}
+									onPress={decrement}
+								/>
+							</ColumnView>
+						</ThemedView>
+					</CenterView>
+				</Modal>
+			</Portal>
 			<SecondaryButton
 				title={t("font")}
 				onPress={() => setModalVisible(true)}
 			/>
-		</View>
+		</>
 	);
 };
 

@@ -1,4 +1,9 @@
-import { Modal, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {
+	Dimensions,
+	StyleSheet,
+	TextInput,
+	TouchableOpacity,
+} from "react-native";
 import ResizableText from "../../../components/ResizableText";
 import Icon from "../../../components/Icon";
 import { useTranslation } from "react-i18next";
@@ -9,9 +14,11 @@ import ModalButtonUser from "./ModalButtonUser";
 import DatabaseClient from "../../../services/DatabaseClient";
 import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
 import { User } from "../../../entities";
+import { Modal, Portal } from "react-native-paper";
+
+const screen = Dimensions.get("screen");
 
 const TextSize = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -57,13 +64,16 @@ export default function ChangePassword() {
 
 	return (
 		<>
-			<Modal
-				visible={visibleModal}
-				transparent={true}
-				animationType="fade"
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
+			<Portal>
+				<Modal
+					visible={visibleModal}
+					onDismiss={() => setVisibleModal(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{
+						backgroundColor: "rgba(0,0,0,0.8)",
+					}}
+					dismissableBackButton
+				>
 					<ThemedView style={styles.contant}>
 						<ResizableText
 							style={styles.textModal2}
@@ -117,8 +127,8 @@ export default function ChangePassword() {
 							onPress={() => updatePassword()}
 						/>
 					</ThemedView>
-				</CenterView>
-			</Modal>
+				</Modal>
+			</Portal>
 			<UserButton
 				title={t("change password")}
 				onPress={() => setVisibleModal(true)}

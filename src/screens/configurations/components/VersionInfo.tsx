@@ -1,4 +1,4 @@
-import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
 import SecondaryButton from "./SecondaryButton";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import ThemedLine from "../../../components/themed/ThemedLine";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
+import { Modal, Portal } from "react-native-paper";
 
 const VersionInfo = () => {
 	/* const navigation = useNavigation(); */
@@ -29,75 +30,88 @@ const VersionInfo = () => {
 
 	return (
 		<>
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					/* pressCounter = 0; */
-					setModalVisible(!modalVisible);
-				}}
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.modalView}>
-						<Pressable
-							style={styles.button}
-							onPress={() => {
-								/* pressCounter =0;  */
-								setModalVisible(!modalVisible);
-							}}
-						>
-							<Icon
-								type="ionicon"
-								name="close-circle"
-								color={"#5469D3"}
-							/>
-						</Pressable>
-						<ScrollView
-							style={{ marginBottom: 5, paddingHorizontal: 5 }}
-						>
-							{/* <Pressable onPress={onPressHandler}  >
+			<Portal>
+				<Modal
+					visible={modalVisible}
+					onDismiss={() => setModalVisible(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					dismissableBackButton
+				>
+					<CenterView
+						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+					>
+						<ThemedView style={styles.modalView}>
+							<Pressable
+								style={styles.button}
+								onPress={() => {
+									/* pressCounter =0;  */
+									setModalVisible(!modalVisible);
+								}}
+							>
+								<Icon
+									type="ionicon"
+									name="close-circle"
+									color={"#5469D3"}
+								/>
+							</Pressable>
+							<ScrollView
+								style={{
+									marginBottom: 5,
+									paddingHorizontal: 5,
+								}}
+							>
+								{/* <Pressable onPress={onPressHandler}  >
                                 <ResizableText style={styles.modalText} defaultSize={20}>{t("version")}:</ResizableText>
                             </Pressable> */}
-							<ResizableText
-								style={styles.modalText}
-								useCustomColor
-								defaultSize={20}
-							>
-								{t("version")}:
-							</ResizableText>
-							<ResizableText
-								style={[styles.text]}
-								defaultSize={20}
-							>
-								1.0.0
-							</ResizableText>
-							<ThemedLine style={styles.line} theme={"primary"} />
-							<ResizableText
-								style={[styles.modalText, { marginTop: "5%" }]}
-								useCustomColor
-								defaultSize={20}
-							>
-								{t("update")}:
-							</ResizableText>
-							<ResizableText
-								style={[styles.text]}
-								defaultSize={20}
-							>
-								1.0.0:
-							</ResizableText>
-							<ResizableText
-								style={[styles.text]}
-								defaultSize={18}
-							>
-								{t("changes")}
-							</ResizableText>
-							<ThemedLine style={styles.line} theme={"primary"} />
-						</ScrollView>
-					</ThemedView>
-				</CenterView>
-			</Modal>
+								<ResizableText
+									style={styles.modalText}
+									useCustomColor
+									defaultSize={20}
+								>
+									{t("version")}:
+								</ResizableText>
+								<ResizableText
+									style={[styles.text]}
+									defaultSize={20}
+								>
+									1.0.0
+								</ResizableText>
+								<ThemedLine
+									style={styles.line}
+									theme={"primary"}
+								/>
+								<ResizableText
+									style={[
+										styles.modalText,
+										{ marginTop: "5%" },
+									]}
+									useCustomColor
+									defaultSize={20}
+								>
+									{t("update")}:
+								</ResizableText>
+								<ResizableText
+									style={[styles.text]}
+									defaultSize={20}
+								>
+									1.0.0:
+								</ResizableText>
+								<ResizableText
+									style={[styles.text]}
+									defaultSize={18}
+								>
+									{t("changes")}
+								</ResizableText>
+								<ThemedLine
+									style={styles.line}
+									theme={"primary"}
+								/>
+							</ScrollView>
+						</ThemedView>
+					</CenterView>
+				</Modal>
+			</Portal>
 			<SecondaryButton
 				title={t("version")}
 				onPress={() => setModalVisible(true)}

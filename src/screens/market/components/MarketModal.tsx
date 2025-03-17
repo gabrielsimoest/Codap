@@ -1,7 +1,6 @@
 import {
 	Image,
 	ImageSourcePropType,
-	Modal,
 	StyleSheet,
 	TouchableOpacity,
 } from "react-native";
@@ -13,6 +12,7 @@ import ThemedView from "../../../components/themed/ThemedView";
 import { useTranslation } from "react-i18next";
 import ThemedText from "../../../components/themed/ThemedText";
 import ThemedIcon from "../../../components/themed/ThemedIcon";
+import { Portal, Modal } from "react-native-paper";
 
 const size2 = 23;
 
@@ -36,57 +36,63 @@ export default function MarketModal({
 	const { t } = useTranslation();
 
 	return (
-		<Modal
-			animationType="fade"
-			visible={visible}
-			transparent={true}
-			statusBarTranslucent
-		>
-			<CenterView
-				style={{
-					backgroundColor: "rgba(0, 0, 0, 0.85)",
-				}}
+		<Portal>
+			<Modal
+				visible={visible}
+				onDismiss={onDismiss}
+				contentContainerStyle={{ flex: 1 }}
+				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				dismissableBackButton
 			>
-				<ThemedView style={styles.modal}>
-					<TouchableOpacity onPress={onDismiss}>
-						<Icon
-							type={"ionicon"}
-							name="close-outline"
-							color={"#33526E"}
-							size={60}
-							style={styles.icon}
-						/>
-					</TouchableOpacity>
-					<ResizableText style={styles.title} defaultSize={size2}>
-						{title}
-					</ResizableText>
-					<Image style={styles.imageModal} source={image} />
-					<RowView
-						useSize
-						align="center"
-						justify="center"
-						style={{ marginTop: 2 }}
-					>
-						<ThemedText style={styles.price}>
-							{price.toString()}{" "}
-						</ThemedText>
-						<ThemedIcon
-							type={"octicons"}
-							name="dependabot"
-							size={25}
-						/>
-					</RowView>
-					<TouchableOpacity style={[styles.button]} onPress={onBuy}>
-						<ResizableText
-							style={styles.buttonText}
-							defaultSize={20}
-						>
-							{t("buy")}
+				<CenterView
+					style={{
+						backgroundColor: "rgba(0, 0, 0, 0.85)",
+					}}
+				>
+					<ThemedView style={styles.modal}>
+						<TouchableOpacity onPress={onDismiss}>
+							<Icon
+								type={"ionicon"}
+								name="close-outline"
+								color={"#33526E"}
+								size={60}
+								style={styles.icon}
+							/>
+						</TouchableOpacity>
+						<ResizableText style={styles.title} defaultSize={size2}>
+							{title}
 						</ResizableText>
-					</TouchableOpacity>
-				</ThemedView>
-			</CenterView>
-		</Modal>
+						<Image style={styles.imageModal} source={image} />
+						<RowView
+							useSize
+							align="center"
+							justify="center"
+							style={{ marginTop: 2 }}
+						>
+							<ThemedText style={styles.price}>
+								{price.toString()}{" "}
+							</ThemedText>
+							<ThemedIcon
+								type={"octicons"}
+								name="dependabot"
+								size={25}
+							/>
+						</RowView>
+						<TouchableOpacity
+							style={[styles.button]}
+							onPress={onBuy}
+						>
+							<ResizableText
+								style={styles.buttonText}
+								defaultSize={20}
+							>
+								{t("buy")}
+							</ResizableText>
+						</TouchableOpacity>
+					</ThemedView>
+				</CenterView>
+			</Modal>
+		</Portal>
 	);
 }
 

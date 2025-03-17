@@ -1,10 +1,6 @@
-import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
 import {
-	Modal,
-	SafeAreaView,
 	StyleSheet,
-	Text,
 	TouchableOpacity,
 	TouchableWithoutFeedback,
 	View,
@@ -12,10 +8,12 @@ import {
 import Icon from "../../components/Icon";
 import ScreenJourney from "./components/ScreenJourney";
 import ClassHeader from "./components/ClassHeader";
+import { Modal, Portal } from "react-native-paper";
+import ThemedText from "../../components/themed/ThemedText";
+import ThemedView from "../../components/themed/ThemedView";
+import ThemedTouchableOpacity from "../../components/themed/ThemedTouchableOpacity";
 
 export default function Class() {
-	const { colors } = useTheme(); //Variavel de cor do tema
-
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [journey, setJourney] = useState("Html");
 	const [icon, setIcon] = useState("logo-html5");
@@ -36,31 +34,34 @@ export default function Class() {
 		setIcon("logo-html5");
 	};
 	return (
-		<View
-			style={[styles.container, { backgroundColor: colors.background }]}
-		>
+		<ThemedView style={styles.container}>
 			<TouchableOpacity onPress={() => setVisibleModal(true)}>
 				<ClassHeader screenName={journey} iconName={icon} />
 			</TouchableOpacity>
-
-			<Modal
-				visible={visibleModal}
-				transparent={true}
-				onRequestClose={() => setVisibleModal(false)}
-				statusBarTranslucent
-			>
-				<TouchableWithoutFeedback
-					onPress={() => setVisibleModal(false)}
-					style={{ flex: 1 }}
+			<Portal>
+				<Modal
+					visible={visibleModal}
+					onDismiss={() => setVisibleModal(false)}
+					dismissableBackButton
+					contentContainerStyle={{
+						marginBottom: "auto",
+						marginTop: 39,
+					}}
+					theme={{
+						colors: {
+							backdrop: "#00000050",
+						},
+					}}
 				>
-					<SafeAreaView style={{ height: 1000 }}>
-						<View style={styles.selectionList}>
-							<TouchableOpacity
-								style={[
-									styles.selector,
-									{ backgroundColor: colors.card },
-								]}
+					<TouchableWithoutFeedback
+						onPress={() => setVisibleModal(false)}
+						style={{ flex: 1 }}
+					>
+						<View>
+							<ThemedTouchableOpacity
+								style={styles.selector}
 								onPress={onPressHtml}
+								theme="card"
 							>
 								<Icon
 									type={"fontawesome"}
@@ -68,22 +69,15 @@ export default function Class() {
 									size={30}
 									color="#637aff"
 								/>
-								<Text
-									style={[
-										styles.actionText,
-										{ color: colors.text },
-									]}
-								>
+								<ThemedText style={styles.actionText}>
 									{" "}
 									HTML
-								</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								style={[
-									styles.selector,
-									{ backgroundColor: colors.card },
-								]}
+								</ThemedText>
+							</ThemedTouchableOpacity>
+							<ThemedTouchableOpacity
+								style={styles.selector}
 								onPress={onPressCss}
+								theme="card"
 							>
 								<Icon
 									type={"fontawesome5"}
@@ -91,23 +85,16 @@ export default function Class() {
 									size={30}
 									color="#637aff"
 								/>
-								<Text
-									style={[
-										styles.actionText,
-										{ color: colors.text },
-									]}
-								>
+								<ThemedText style={styles.actionText}>
 									{" "}
 									CSS
-								</Text>
-							</TouchableOpacity>
+								</ThemedText>
+							</ThemedTouchableOpacity>
 
-							<TouchableOpacity
-								style={[
-									styles.selector,
-									{ backgroundColor: colors.card },
-								]}
+							<ThemedTouchableOpacity
+								style={styles.selector}
 								onPress={onPressJavascript}
+								theme="card"
 							>
 								<Icon
 									type="ionicon"
@@ -115,24 +102,19 @@ export default function Class() {
 									size={30}
 									color="#637aff"
 								/>
-								<Text
-									style={[
-										styles.actionText,
-										{ color: colors.text },
-									]}
-								>
+								<ThemedText style={styles.actionText}>
 									{" "}
 									JavaScript
-								</Text>
-							</TouchableOpacity>
+								</ThemedText>
+							</ThemedTouchableOpacity>
 						</View>
-					</SafeAreaView>
-				</TouchableWithoutFeedback>
-			</Modal>
+					</TouchableWithoutFeedback>
+				</Modal>
+			</Portal>
 			<View>
 				<ScreenJourney screenName={journey} />
 			</View>
-		</View>
+		</ThemedView>
 	);
 }
 
@@ -140,9 +122,6 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#141f29",
 		height: "100%",
-	},
-	selectionList: {
-		marginTop: 34,
 	},
 	selector: {
 		zIndex: 99,
@@ -168,5 +147,6 @@ const styles = StyleSheet.create({
 		color: "white",
 		textAlign: "center",
 		fontSize: 20,
+		marginLeft: 5,
 	},
 });

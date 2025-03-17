@@ -1,4 +1,4 @@
-import { Modal, Pressable, ScrollView, StyleSheet } from "react-native";
+import { Pressable, ScrollView, StyleSheet } from "react-native";
 import SecondaryButton from "./SecondaryButton";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
+import { Modal, Portal } from "react-native-paper";
 
 const AboutCodap = () => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -14,105 +15,110 @@ const AboutCodap = () => {
 
 	return (
 		<>
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					setModalVisible(!modalVisible);
-				}}
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.modalView}>
-						<Pressable
-							style={styles.button}
-							onPress={() => setModalVisible(!modalVisible)}
-						>
-							<Icon
-								type="ionicon"
-								name="close-circle"
-								color={"#5469D3"}
-							/>
-						</Pressable>
-						<ScrollView
-							style={{ marginBottom: 5, paddingHorizontal: 5 }}
-						>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={20}
+			<Portal>
+				<Modal
+					visible={modalVisible}
+					onDismiss={() => setModalVisible(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					dismissableBackButton
+				>
+					<CenterView
+						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+					>
+						<ThemedView style={styles.modalView}>
+							<Pressable
+								style={styles.button}
+								onPress={() => setModalVisible(!modalVisible)}
 							>
-								{t("about")}:
-							</ResizableText>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={18}
+								<Icon
+									type="ionicon"
+									name="close-circle"
+									color={"#5469D3"}
+								/>
+							</Pressable>
+							<ScrollView
+								style={{
+									marginBottom: 5,
+									paddingHorizontal: 5,
+								}}
 							>
-								{t("dev")}
-							</ResizableText>
-							<ResizableText
-								style={[styles.modalText]}
-								defaultSize={16}
-							>
-								{t("GTS")}
-							</ResizableText>
-							<ResizableText
-								style={[styles.modalText]}
-								defaultSize={16}
-							>
-								{t("GRP")}
-							</ResizableText>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={17}
-							>
-								{t("dev_note")}
-							</ResizableText>
-							<ResizableText
-								style={[
-									styles.devText,
-									{
-										marginLeft: 8,
-										marginRight: 8,
-									},
-								]}
-								defaultSize={16}
-							>
-								{t("dev_note2")}
-							</ResizableText>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={18}
-							>
-								{t("special thanks")}
-							</ResizableText>
-							<ResizableText
-								style={[styles.thanksText]}
-								defaultSize={16}
-							>
-								{t("names")}
-							</ResizableText>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={18}
-							>
-								{t("declaration")}
-							</ResizableText>
-							<ResizableText
-								style={[styles.modalText]}
-								defaultSize={16}
-							>
-								{t("pictures")}
-							</ResizableText>
-						</ScrollView>
-					</ThemedView>
-				</CenterView>
-			</Modal>
+								<ResizableText
+									useCustomColor
+									style={styles.modalText}
+									defaultSize={20}
+								>
+									{t("about")}:
+								</ResizableText>
+								<ResizableText
+									useCustomColor
+									style={styles.modalText}
+									defaultSize={18}
+								>
+									{t("dev")}
+								</ResizableText>
+								<ResizableText
+									style={[styles.modalText]}
+									defaultSize={16}
+								>
+									{t("GTS")}
+								</ResizableText>
+								<ResizableText
+									style={[styles.modalText]}
+									defaultSize={16}
+								>
+									{t("GRP")}
+								</ResizableText>
+								<ResizableText
+									useCustomColor
+									style={styles.modalText}
+									defaultSize={17}
+								>
+									{t("dev_note")}
+								</ResizableText>
+								<ResizableText
+									style={[
+										styles.devText,
+										{
+											marginLeft: 8,
+											marginRight: 8,
+										},
+									]}
+									defaultSize={16}
+								>
+									{t("dev_note2")}
+								</ResizableText>
+								<ResizableText
+									useCustomColor
+									style={styles.modalText}
+									defaultSize={18}
+								>
+									{t("special thanks")}
+								</ResizableText>
+								<ResizableText
+									style={[styles.thanksText]}
+									defaultSize={16}
+								>
+									{t("names")}
+								</ResizableText>
+								<ResizableText
+									useCustomColor
+									style={styles.modalText}
+									defaultSize={18}
+								>
+									{t("declaration")}
+								</ResizableText>
+								<ResizableText
+									style={[styles.modalText]}
+									defaultSize={16}
+								>
+									{t("pictures")}
+								</ResizableText>
+							</ScrollView>
+						</ThemedView>
+					</CenterView>
+				</Modal>
+			</Portal>
 			<SecondaryButton
 				title={t("about")}
 				onPress={() => setModalVisible(true)}

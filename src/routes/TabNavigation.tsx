@@ -143,6 +143,7 @@ export function TabNavigation() {
 					bottom: 16,
 					borderRadius: 16,
 					backgroundColor: colors.background,
+					zIndex: 50,
 				},
 			}}
 		>

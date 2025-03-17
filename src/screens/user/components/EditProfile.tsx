@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import ResizableText from "../../../components/ResizableText";
 import Icon from "../../../components/Icon";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
 import { User } from "../../../entities";
+import { Modal, Portal } from "react-native-paper";
 
 const TextSize1 = 20; // Tamanho padrão da fonte
 const TextSize2 = 26; // Tamanho padrão da fonte
@@ -49,48 +50,53 @@ export default function EditProfile() {
 
 	return (
 		<>
-			<Modal
-				visible={visibleModal}
-				transparent={true}
-				animationType="fade"
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.contant}>
-						<ResizableText
-							style={styles.textModal2}
-							defaultSize={TextSize2}
-						>
-							{t("edit account")}
-						</ResizableText>
-						<TouchableOpacity
-							onPress={() => setVisibleModal(false)}
-						>
-							<Icon
-								type="ionicon"
-								name="close-outline"
-								color={"#33526E"}
-								size={60}
-								style={styles.icon}
+			<Portal>
+				<Modal
+					visible={visibleModal}
+					onDismiss={() => setVisibleModal(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					dismissableBackButton
+				>
+					<CenterView
+						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+					>
+						<ThemedView style={styles.contant}>
+							<ResizableText
+								style={styles.textModal2}
+								defaultSize={TextSize2}
+							>
+								{t("edit account")}
+							</ResizableText>
+							<TouchableOpacity
+								onPress={() => setVisibleModal(false)}
+							>
+								<Icon
+									type="ionicon"
+									name="close-outline"
+									color={"#33526E"}
+									size={60}
+									style={styles.icon}
+								/>
+							</TouchableOpacity>
+							<ResizableText
+								style={styles.textModal}
+								defaultSize={TextSize1}
+							>
+								{t("new name")}:
+							</ResizableText>
+							<TextInput
+								style={styles.input}
+								onChangeText={(value) => setNewName(value)}
 							/>
-						</TouchableOpacity>
-						<ResizableText
-							style={styles.textModal}
-							defaultSize={TextSize1}
-						>
-							{t("new name")}:
-						</ResizableText>
-						<TextInput
-							style={styles.input}
-							onChangeText={(value) => setNewName(value)}
-						/>
-						<ModalButtonUser
-							title={t("change")}
-							onPress={() => updateName()}
-						/>
-					</ThemedView>
-				</CenterView>
-			</Modal>
+							<ModalButtonUser
+								title={t("change")}
+								onPress={() => updateName()}
+							/>
+						</ThemedView>
+					</CenterView>
+				</Modal>
+			</Portal>
 			<UserButton
 				title={t("edit account")}
 				onPress={() => setVisibleModal(true)}

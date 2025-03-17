@@ -1,6 +1,6 @@
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
-import { Modal, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import ResizableText from "../../../components/ResizableText";
 import useLanguageStore from "../../../stores/LanguageStore";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import SecondaryButton from "./SecondaryButton";
 import SettingsButton from "./SettingsButton";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
+import { Modal, Portal } from "react-native-paper";
 
 const textSize = 20;
 
@@ -22,67 +23,69 @@ export default function LanguageSelector() {
 	const language = useLanguageStore((s) => s.language);
 
 	return (
-		<View>
-			<Modal
-				animationType="fade"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					setModalVisible(!modalVisible);
-				}}
-				statusBarTranslucent
-			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.modalView}>
-						<Pressable
-							style={styles.button}
-							onPress={() => setModalVisible(!modalVisible)}
-						>
-							<Icon
-								type={"ionicon"}
-								name="close-circle"
-								color={"#5469D3"}
-							/>
-						</Pressable>
-						<ResizableText
-							useCustomColor
-							style={styles.modalText}
-							defaultSize={textSize}
-						>
-							{t("select the language:")}
-						</ResizableText>
-						<ScrollView style={{ marginBottom: 5 }}>
-							<SettingsButton
-								title="PORTUGUÊS"
-								textStyle={{
-									color:
-										language === "pt"
-											? "#5469D3"
-											: colors.text,
-								}}
-								disabled={language === "pt"}
-								onPress={() => setLanguage("pt")}
-							/>
-							<SettingsButton
-								title="ENGLISH"
-								textStyle={{
-									color:
-										language === "en"
-											? "#5469D3"
-											: colors.text,
-								}}
-								disabled={language === "en"}
-								onPress={() => setLanguage("en")}
-							/>
-						</ScrollView>
-					</ThemedView>
-				</CenterView>
-			</Modal>
+		<>
+			<Portal>
+				<Modal
+					visible={modalVisible}
+					onDismiss={() => setModalVisible(false)}
+					contentContainerStyle={{ flex: 1 }}
+					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					dismissableBackButton
+				>
+					<CenterView
+						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+					>
+						<ThemedView style={styles.modalView}>
+							<Pressable
+								style={styles.button}
+								onPress={() => setModalVisible(!modalVisible)}
+							>
+								<Icon
+									type={"ionicon"}
+									name="close-circle"
+									color={"#5469D3"}
+								/>
+							</Pressable>
+							<ResizableText
+								useCustomColor
+								style={styles.modalText}
+								defaultSize={textSize}
+							>
+								{t("select the language:")}
+							</ResizableText>
+							<ScrollView style={{ marginBottom: 5 }}>
+								<SettingsButton
+									title="PORTUGUÊS"
+									textStyle={{
+										color:
+											language === "pt"
+												? "#5469D3"
+												: colors.text,
+									}}
+									disabled={language === "pt"}
+									onPress={() => setLanguage("pt")}
+								/>
+								<SettingsButton
+									title="ENGLISH"
+									textStyle={{
+										color:
+											language === "en"
+												? "#5469D3"
+												: colors.text,
+									}}
+									disabled={language === "en"}
+									onPress={() => setLanguage("en")}
+								/>
+							</ScrollView>
+						</ThemedView>
+					</CenterView>
+				</Modal>
+			</Portal>
 			<SecondaryButton
 				title={t("language")}
 				onPress={() => setModalVisible(true)}
 			/>
-		</View>
+		</>
 	);
 }
 

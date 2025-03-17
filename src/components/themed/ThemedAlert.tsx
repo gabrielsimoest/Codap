@@ -1,8 +1,8 @@
 import React from "react";
-import { Modal, Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Theme } from "@react-navigation/native";
-import DarkMode from "../../theme/DarkMode";
-import CenterView from "../layout/CenterView";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Modal, Portal } from "react-native-paper";
+import ThemedText from "./ThemedText";
+import ThemedView from "./ThemedView";
 
 interface Props {
 	visible: boolean;
@@ -10,7 +10,6 @@ interface Props {
 	title: string;
 	message: string;
 	buttonText: string;
-	theme: Theme;
 }
 
 const ThemedAlert = ({
@@ -19,52 +18,28 @@ const ThemedAlert = ({
 	title,
 	message,
 	buttonText,
-	theme,
 }: Props) => {
 	return (
-		<Modal
-			animationType="fade"
-			transparent={true}
-			visible={visible}
-			onRequestClose={onDismiss}
-			statusBarTranslucent
-		>
-			<CenterView
-				direction={"column"}
-				style={{ backgroundColor: "rgba(0,0,0,0.9)" }}
+		<Portal>
+			<Modal
+				visible={visible}
+				onDismiss={onDismiss}
+				contentContainerStyle={{ flex: 1 }}
+				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				dismissableBackButton
 			>
-				<View
-					style={[
-						styles.modalView,
-						{
-							backgroundColor:
-								theme == DarkMode ? "#141f29" : "#E5E5E5",
-						},
-					]}
-				>
-					<Text
-						style={[
-							styles.title,
-							{ color: theme == DarkMode ? "#F1F1F1" : "#000" },
-						]}
-					>
-						{title}
-					</Text>
-					<Text
-						style={[
-							styles.message,
-							{ color: theme == DarkMode ? "#F1F1F1" : "#000" },
-						]}
-					>
-						{message}
-					</Text>
+				<ThemedView style={styles.modalView}>
+					<Text style={styles.title}>{title}</Text>
+					<ThemedText style={styles.message}>{message}</ThemedText>
 
 					<TouchableOpacity style={styles.button} onPress={onDismiss}>
-						<Text style={styles.buttonText}>{buttonText}</Text>
+						<Text style={styles.buttonText}>
+							{buttonText.toUpperCase()}
+						</Text>
 					</TouchableOpacity>
-				</View>
-			</CenterView>
-		</Modal>
+				</ThemedView>
+			</Modal>
+		</Portal>
 	);
 };
 
@@ -89,6 +64,7 @@ const styles = StyleSheet.create({
 		color: "#7977FD",
 		marginBottom: 20,
 		textAlign: "center",
+		fontWeight: "bold",
 	},
 	message: {
 		fontSize: 19,
@@ -109,6 +85,7 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontWeight: "bold",
 		textAlign: "center",
+		fontSize: 20,
 	},
 });
 

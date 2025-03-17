@@ -16,7 +16,7 @@ interface Props {
 export default function MarketButton({
 	title,
 	onPress,
-	textStyle,
+	textStyle = { color: "#fff" },
 	reversed = false,
 }: Props) {
 	return (

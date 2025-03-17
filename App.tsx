@@ -7,9 +7,11 @@ import { useEffect } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import useFontSizeStore from "./src/stores/FontSizeStore";
 import useLanguageStore from "./src/stores/LanguageStore";
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-native-paper";
+import LightMode from "./src/theme/LightMode";
 import useAlertStore from "./src/stores/AlertStore";
 import ThemedAlert from "./src/components/themed/ThemedAlert";
-import LightMode from "./src/theme/LightMode";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -19,6 +21,7 @@ export default function App() {
 	const fontSize = useFontSize();
 
 	const setTheme = useThemeStore((s) => s.setTheme);
+	const themeStored = useThemeStore((s) => s.theme);
 	const setFontSize = useFontSizeStore((s) => s.setFontSize);
 	const setLanguage = useLanguageStore((s) => s.setLanguage);
 	const alertVisible = useAlertStore((S) => S.alertVisible);
@@ -39,20 +42,21 @@ export default function App() {
 	}, [theme, fontSize, language]);
 
 	return (
-		<>
-			<MainNavigation />
-			{alertVisible && (
-				<ThemedAlert
-					theme={theme !== undefined ? theme : LightMode}
-					title={alertMessage.title}
-					message={alertMessage.message}
-					buttonText={alertMessage.buttonText}
-					visible={alertVisible}
-					onDismiss={() => {
-						setAlertVisible(false);
-					}}
-				/>
-			)}
-		</>
+		<NavigationContainer theme={themeStored}>
+			<Provider>
+				<MainNavigation />
+				{alertVisible && (
+					<ThemedAlert
+						title={alertMessage.title}
+						message={alertMessage.message}
+						buttonText={alertMessage.buttonText}
+						visible={alertVisible}
+						onDismiss={() => {
+							setAlertVisible(false);
+						}}
+					/>
+				)}
+			</Provider>
+		</NavigationContainer>
 	);
 }
