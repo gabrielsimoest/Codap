@@ -1,4 +1,4 @@
-import { User } from "../entities";
+import { User } from "../types/entities";
 
 export default function isValidUser(obj: any): obj is User {
 	return (

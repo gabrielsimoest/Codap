@@ -9,7 +9,6 @@ import useFontSizeStore from "./src/stores/FontSizeStore";
 import useLanguageStore from "./src/stores/LanguageStore";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-native-paper";
-import LightMode from "./src/theme/LightMode";
 import useAlertStore from "./src/stores/AlertStore";
 import ThemedAlert from "./src/components/themed/ThemedAlert";
 

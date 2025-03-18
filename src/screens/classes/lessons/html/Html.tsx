@@ -17,6 +17,7 @@ import {
 } from "react-native";
 import Collapsible from "react-native-collapsible";
 import Images from "../../../../utils/imageIndexer";
+import ClassList from "../../components/ClassList";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
@@ -37,7 +38,7 @@ export default function Html() {
 	};
 
 	//Constante de tradução, usar {t("CHAVE")} para tradução
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	const { colors } = useTheme(); //Cores do tema
 
@@ -83,7 +84,7 @@ export default function Html() {
 					<Image style={styles.image} source={Images.codyLearning} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed1}>
-					<View
+					{/* <View
 						style={{
 							justifyContent: "center",
 							alignItems: "center",
@@ -93,7 +94,8 @@ export default function Html() {
 							style={styles.comingSoonImg}
 							source={Images.codyBuilding}
 						/>
-					</View>
+					</View> */}
+					<ClassList />
 					<View
 						style={[styles.line, { borderColor: colors.primary }]}
 					></View>

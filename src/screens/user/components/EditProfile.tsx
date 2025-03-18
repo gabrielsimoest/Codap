@@ -11,7 +11,7 @@ import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CenterView from "../../../components/layout/CenterView";
 import useAlertStore from "../../../stores/AlertStore";
-import { User } from "../../../entities";
+import { User } from "../../../types/entities";
 import { Modal, Portal } from "react-native-paper";
 
 const TextSize1 = 20; // Tamanho padrão da fonte

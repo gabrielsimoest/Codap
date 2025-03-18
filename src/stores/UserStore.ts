@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { User } from "../entities";
+import { User } from "../types/entities";
 
 interface UserStorage {
 	user: User | null;

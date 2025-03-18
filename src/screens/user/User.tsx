@@ -10,7 +10,7 @@ import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useNavigate from "../../hooks/useNavigate";
-import { User as UserEntity } from "../../entities";
+import { User as UserEntity } from "../../types/entities";
 import ComingSoon from "../../components/ComingSoon";
 import { useState } from "react";
 

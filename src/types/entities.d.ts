@@ -14,3 +14,18 @@ export interface Aula {
 	UserID: number;
 	TipoAula: number;
 }
+
+export type Classes = {
+	type: string;
+	lesson: string[];
+};
+
+export type LanguageContent = {
+	title: string;
+	classes: Classes[];
+};
+
+export interface ClassContent {
+	en: LanguageContent[];
+	pt: LanguageContent[];
+}

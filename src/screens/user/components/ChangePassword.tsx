@@ -15,7 +15,7 @@ import DatabaseClient from "../../../services/DatabaseClient";
 import useUserStore from "../../../stores/UserStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useAlertStore from "../../../stores/AlertStore";
-import { User } from "../../../entities";
+import { User } from "../../../types/entities";
 import { Modal, Portal } from "react-native-paper";
 
 const screen = Dimensions.get("screen");

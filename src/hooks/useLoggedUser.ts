@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { User } from "../entities";
+import { User } from "../types/entities";
 import isValidUser from "../utils/isValidUser";
 
 interface UseLoggedUserCallback {

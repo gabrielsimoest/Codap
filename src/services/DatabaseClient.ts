@@ -1,5 +1,5 @@
 import * as SQLite from "expo-sqlite";
-import { Aula, User } from "../entities";
+import { Aula, User } from "../types/entities";
 
 /** TODO: Change tables atribute names */
 
