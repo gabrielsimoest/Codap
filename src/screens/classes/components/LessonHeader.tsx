@@ -7,7 +7,6 @@ import {
 } from "react-native";
 import DarkMode from "../../../theme/DarkMode";
 import RowView from "../../../components/layout/RowView";
-import useNavigate from "../../../hooks/useNavigate";
 import Icon from "../../../components/Icon";
 
 export function Progressbar({ progress }: { progress: DimensionValue }) {
@@ -34,17 +33,14 @@ export function Progressbar({ progress }: { progress: DimensionValue }) {
 
 export function LessonHeader({
 	setTutorialVisible,
+	onClose,
 }: {
 	setTutorialVisible: () => void;
+	onClose: () => void;
 }) {
-	const navigation = useNavigate();
-
 	return (
 		<RowView>
-			<TouchableOpacity
-				onPress={() => navigation.navigate("Home")}
-				style={{ width: 60 }}
-			>
+			<TouchableOpacity onPress={onClose} style={{ width: 60 }}>
 				<Icon
 					type="ionicon"
 					name="close-outline"

@@ -15,17 +15,34 @@ export interface Aula {
 	TipoAula: number;
 }
 
-export type Classes = {
+export type Theory = {
+	type: "theory";
+	lesson: {
+		firstParagraph: string;
+		secondParagraph?: string;
+		thirdParagraph?: string;
+		endParagraph?: string;
+		highlight: string[];
+		codeLanguage: "HTML" | "CSS" | "JavaScript";
+		code: string;
+		onlyCode?: boolean;
+		tutorial?: boolean;
+	};
+};
+
+type DummyClass = {
 	type: string;
 	lesson: string[];
 };
 
-export type LanguageContent = {
+export type Classes = Theory | DummyClass;
+
+export type Content = {
 	title: string;
 	classes: Classes[];
 };
 
 export interface ClassContent {
-	en: LanguageContent[];
-	pt: LanguageContent[];
+	en: Content[];
+	pt: Content[];
 }

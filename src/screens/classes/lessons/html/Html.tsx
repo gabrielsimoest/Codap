@@ -84,18 +84,7 @@ export default function Html() {
 					<Image style={styles.image} source={Images.codyLearning} />
 				</TouchableOpacity>
 				<Collapsible collapsed={collapsed1}>
-					{/* <View
-						style={{
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Image
-							style={styles.comingSoonImg}
-							source={Images.codyBuilding}
-						/>
-					</View> */}
-					<ClassList />
+					<ClassList topic="HTML" moduleType="basic" />
 					<View
 						style={[styles.line, { borderColor: colors.primary }]}
 					></View>

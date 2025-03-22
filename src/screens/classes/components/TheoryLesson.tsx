@@ -12,15 +12,17 @@ const textSize = 20;
 
 interface Props {
 	firstParagraph: string;
-	secondParagraph: string;
-	thirdParagraph: string;
-	endParagraph: string;
+	secondParagraph?: string;
+	thirdParagraph?: string;
+	endParagraph?: string;
 	highlight: string[];
 	codeLanguage: "HTML" | "CSS" | "JavaScript";
 	code: string;
 	onlyCode?: boolean;
 	tutorial?: boolean;
 	progress: DimensionValue;
+	onProceed: () => void;
+	onClose: () => void;
 }
 
 export default function TheoryView({
@@ -43,6 +45,8 @@ export default function TheoryView({
 	onlyCode = false,
 	tutorial = false,
 	progress,
+	onProceed,
+	onClose,
 }: Props) {
 	const [isTutorialVisible, setTutorialVisible] = useState(tutorial);
 
@@ -51,8 +55,9 @@ export default function TheoryView({
 			<ThemedView theme="card" style={styles.container}>
 				<Progressbar progress={progress} />
 				<ThemedView theme="card" style={styles.container}>
-					<ScrollView style={{ marginBottom: "20%" }}>
+					<ScrollView style={{ marginBottom: "25%" }}>
 						<LessonHeader
+							onClose={onClose}
 							setTutorialVisible={() =>
 								setTutorialVisible(!isTutorialVisible)
 							}
@@ -63,7 +68,7 @@ export default function TheoryView({
 							text={firstParagraph}
 							defaultSize={textSize}
 						/>
-						{secondParagraph !== "" ? (
+						{secondParagraph !== undefined ? (
 							<ResizableHighlighter
 								style={styles.text}
 								highlight={highlight}
@@ -71,7 +76,7 @@ export default function TheoryView({
 								defaultSize={textSize}
 							/>
 						) : null}
-						{thirdParagraph !== "" ? (
+						{thirdParagraph !== undefined ? (
 							<ResizableHighlighter
 								style={styles.text}
 								highlight={highlight}
@@ -86,7 +91,7 @@ export default function TheoryView({
 							code={code}
 						/>
 
-						{endParagraph !== "" ? (
+						{endParagraph !== undefined ? (
 							<ResizableHighlighter
 								style={styles.text}
 								highlight={highlight}
@@ -95,9 +100,7 @@ export default function TheoryView({
 							/>
 						) : null}
 					</ScrollView>
-					<View>
-						<NextButton onPress={() => console.log("")} />
-					</View>
+					<NextButton onPress={onProceed} />
 				</ThemedView>
 			</ThemedView>
 			{/* <TutorialTheory
@@ -116,9 +119,8 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 18,
 		fontFamily: "Roboto",
-		margin: "2%",
-		marginTop: "1%",
-		marginBottom: "2%",
+		marginHorizontal: "3%",
+		marginVertical: "4%",
 		textAlign: "justify",
 	},
 });
