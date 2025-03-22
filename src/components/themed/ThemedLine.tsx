@@ -16,22 +16,29 @@ interface Props {
 		| "text"
 		| "border"
 		| "notification";
+	height?: number;
 }
 
-export default function ThemedLine({ style = {}, theme = "text" }: Props) {
+export default function ThemedLine({
+	style = {},
+	theme = "text",
+	height = 1,
+}: Props) {
 	const { colors } = useTheme();
 
 	return (
 		<View
-			style={[style, styles.line, { backgroundColor: colors[theme] }]}
+			style={[
+				style,
+				styles.line,
+				{ backgroundColor: colors[theme], height: height },
+			]}
 		/>
 	);
 }
 
 const styles = StyleSheet.create({
 	line: {
-		marginTop: 1,
-		height: 1,
 		flexGrow: 1,
 	},
 });

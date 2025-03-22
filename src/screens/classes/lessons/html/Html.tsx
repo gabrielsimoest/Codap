@@ -1,218 +1,89 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-	useFocusEffect,
-	useNavigation,
-	useTheme,
-} from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Dimensions,
-	Image,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
-import Collapsible from "react-native-collapsible";
+import { ScrollView, StyleSheet } from "react-native";
 import Images from "../../../../utils/imageIndexer";
 import ClassList from "../../components/ClassList";
-
-const windowHeight = Dimensions.get("window").height;
-const windowWidth = Dimensions.get("window").width;
+import ModuleCard from "../../components/ModuleCard";
+import ThemedLine from "../../../../components/themed/ThemedLine";
+import ThemedView from "../../../../components/themed/ThemedView";
+import LessonComingSoon from "../../components/LessonComingSoon";
 
 export default function Html() {
 	//Salvar aulas
-	const [AulasSalvas, setAulasSalvas] = useState("");
+	const [AulasSalvas, setAulasSalvas] = useState<string[]>([""]);
 
 	useFocusEffect(
 		React.useCallback(() => {
-			getUser();
+			getDoneLessons();
 		}, [])
 	);
 
-	const getUser = async () => {
+	const getDoneLessons = async () => {
 		const storageAulasSalvas = await AsyncStorage.getItem("Aulas");
-		setAulasSalvas(storageAulasSalvas || "");
+		if (storageAulasSalvas) setAulasSalvas(JSON.parse(storageAulasSalvas));
 	};
 
 	//Constante de tradução, usar {t("CHAVE")} para tradução
 	const { t } = useTranslation();
 
-	const { colors } = useTheme(); //Cores do tema
-
-	const navigation = useNavigation();
-
-	var [collapsed1, setState] = useState(true);
-	var [collapsed2, setState2] = useState(true);
-	var [collapsed3, setState3] = useState(true);
-	var [collapsed4, setState4] = useState(true);
-
-	var toggleExpanded = () => {
-		setState((collapsed1 = !collapsed1));
-	};
-	var toggleExpanded2 = () => {
-		setState2((collapsed2 = !collapsed2));
-	};
-	var toggleExpanded3 = () => {
-		setState3((collapsed3 = !collapsed3));
-	};
-	var toggleExpanded4 = () => {
-		setState4((collapsed4 = !collapsed4));
-	};
-
 	return (
 		<ScrollView style={styles.scroller}>
-			<View
-				style={[
-					styles.container,
-					{ backgroundColor: colors.background },
-				]}
-			>
+			<ThemedView style={styles.container}>
 				{/*******************BASIC***********************/}
-				<TouchableOpacity
-					onPress={toggleExpanded}
-					style={[styles.class, { backgroundColor: colors.primary }]}
+				<ModuleCard
+					image={Images.codyLearning}
+					title={t("module1c")}
+					subtitle={t("concepts of html")}
 				>
-					<Text style={[styles.title, { color: colors.text }]}>
-						{t("module1c")}
-					</Text>
-					<Text style={[styles.text, { color: colors.text }]}>
-						{t("concepts of html")}
-					</Text>
-					<Image style={styles.image} source={Images.codyLearning} />
-				</TouchableOpacity>
-				<Collapsible collapsed={collapsed1}>
 					<ClassList topic="HTML" moduleType="basic" />
-					<View
-						style={[styles.line, { borderColor: colors.primary }]}
-					></View>
-				</Collapsible>
+					<ThemedLine
+						height={2}
+						theme="primary"
+						style={styles.line}
+					/>
+				</ModuleCard>
 				{/*******************INTER***********************/}
-				<TouchableOpacity
-					onPress={toggleExpanded2}
-					style={[styles.class, { backgroundColor: colors.primary }]}
+				<ModuleCard
+					image={Images.codyThinking}
+					title={t("module2c")}
+					subtitle={t("intermediate html")}
 				>
-					<Text style={[styles.title, { color: colors.text }]}>
-						{t("module2c")}
-					</Text>
-					<Text style={[styles.text, { color: colors.text }]}>
-						{t("intermediate html")}
-					</Text>
-					<Image style={styles.image} source={Images.codyThinking} />
-				</TouchableOpacity>
-				<Collapsible collapsed={collapsed2}>
-					<Text
-						style={[
-							{
-								color: colors.text,
-								fontSize: 20,
-								margin: 20,
-								textAlign: "center",
-							},
-						]}
-					>
-						{t("Oops")}
-					</Text>
-					<View
-						style={{
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Image
-							style={styles.comingSoonImg}
-							source={Images.codyBuilding}
-						/>
-					</View>
-					<View
-						style={[styles.line, { borderColor: colors.primary }]}
-					></View>
-				</Collapsible>
+					<LessonComingSoon />
+					<ThemedLine
+						height={2}
+						theme="primary"
+						style={styles.line}
+					/>
+				</ModuleCard>
 				{/*******************ADVANCED***********************/}
-				<TouchableOpacity
-					onPress={toggleExpanded3}
-					style={[styles.class, { backgroundColor: colors.primary }]}
+				<ModuleCard
+					image={Images.codyHappy}
+					title={t("module3c")}
+					subtitle={t("advanced html")}
 				>
-					<Text style={[styles.title, { color: colors.text }]}>
-						{t("module3c")}
-					</Text>
-					<Text style={[styles.text, { color: colors.text }]}>
-						{t("advanced html")}
-					</Text>
-					<Image style={styles.image} source={Images.codyHappy} />
-				</TouchableOpacity>
-				<Collapsible collapsed={collapsed3}>
-					<Text
-						style={[
-							{
-								color: colors.text,
-								fontSize: 20,
-								margin: 20,
-								textAlign: "center",
-							},
-						]}
-					>
-						{t("Oops")}
-					</Text>
-					<View
-						style={{
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Image
-							style={styles.comingSoonImg}
-							source={Images.codyBuilding}
-						/>
-					</View>
-					<View
-						style={[styles.line, { borderColor: colors.primary }]}
-					></View>
-				</Collapsible>
+					<LessonComingSoon />
+					<ThemedLine
+						height={2}
+						theme="primary"
+						style={styles.line}
+					/>
+				</ModuleCard>
 				{/*******************MASTERY***********************/}
-				<TouchableOpacity
-					onPress={toggleExpanded4}
-					style={[styles.class, { backgroundColor: colors.primary }]}
+				<ModuleCard
+					image={Images.codyMaster}
+					title={t("module4c")}
+					subtitle={t("mastery in html")}
 				>
-					<Text style={[styles.title, { color: colors.text }]}>
-						{t("module4c")}
-					</Text>
-					<Text style={[styles.text, { color: colors.text }]}>
-						{t("mastery in html")}
-					</Text>
-					<Image style={styles.image} source={Images.codyMaster} />
-				</TouchableOpacity>
-				<Collapsible collapsed={collapsed4}>
-					<Text
-						style={[
-							{
-								color: colors.text,
-								fontSize: 20,
-								margin: 20,
-								textAlign: "center",
-							},
-						]}
-					>
-						{t("Oops")}
-					</Text>
-					<View
-						style={{
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Image
-							style={styles.comingSoonImg}
-							source={Images.codyBuilding}
-						/>
-					</View>
-					<View
-						style={[styles.line, { borderColor: colors.primary }]}
-					></View>
-				</Collapsible>
-			</View>
+					<LessonComingSoon />
+					<ThemedLine
+						height={2}
+						theme="primary"
+						style={styles.line}
+					/>
+				</ModuleCard>
+			</ThemedView>
 		</ScrollView>
 	);
 }
@@ -226,24 +97,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#141f29",
 	},
-	class: {
-		height: windowHeight * 0.19,
-		marginLeft: 20,
-		marginRight: 20,
-		marginTop: 15,
-		marginBottom: 15,
-		backgroundColor: "#1B2B39",
-		borderRadius: 20,
-		elevation: 2,
-	},
-	title: {
-		position: "absolute",
-		right: 30,
-		top: 55,
-		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 23,
-	},
 	text: {
 		position: "absolute",
 		right: 30,
@@ -252,27 +105,9 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 15,
 	},
-	image: {
-		marginVertical: "auto",
-		left: windowWidth * 0.065,
-		width: windowWidth * 0.189,
-		height: windowHeight * 0.185,
-	},
-	comingSoonImg: {
-		width: windowWidth * 0.25,
-		height: windowHeight * 0.25,
-		right: windowWidth * 0.01,
-	},
-	icon: {
-		left: 25,
-		marginRight: 20,
-		top: 20,
-	},
 	line: {
-		borderBottomWidth: 2,
-		borderColor: "#1B2B39",
-		margin: 20,
-		marginLeft: 15,
-		marginRight: 15,
+		marginTop: 10,
+		marginBottom: 10,
+		marginHorizontal: 15,
 	},
 });

@@ -18,6 +18,7 @@ interface Props extends TouchableOpacityProps {
 
 export default function ThemedTouchableOpacity({
 	theme = "background",
+	onPress,
 	children,
 	style = {} as StyleProp<ViewStyle>,
 	...defaultProps
@@ -27,6 +28,7 @@ export default function ThemedTouchableOpacity({
 	return (
 		<TouchableOpacity
 			style={[style, { backgroundColor: colors[theme] }]}
+			onPress={onPress}
 			{...defaultProps}
 		>
 			{children}
