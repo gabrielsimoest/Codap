@@ -35,13 +35,13 @@ export default function ClassView({ classes, title }: Props) {
 						codeLanguage="HTML"
 						code={`<!DOCTYPE html>
   <html>
-    <head>
-      <title>Minha página</title>
-    </head>
-    <body>
-      <h1>Minha página</h1>
-      <p>Esta é a minha primeira página HTML!</p>
-    </body>
+    	<head>
+      		<title>Minha página</title>
+    	</head>
+    	<body>
+      		<h1>Minha página</h1>
+      		<p>Esta é a minha primeira página HTML!</p>
+    	</body>
   </html>`}
 						progress={"50%"}
 					/>

@@ -11,7 +11,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-native-paper";
 import useAlertStore from "./src/stores/AlertStore";
 import ThemedAlert from "./src/components/themed/ThemedAlert";
+import { LogBox } from "react-native";
 
+//Enquanto não fizer um syntaxHighlight
+/* LogBox.ignoreLogs([
+	"Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead",
+]);
+ */
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {

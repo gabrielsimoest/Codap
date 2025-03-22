@@ -18,3 +18,13 @@ declare module "react-native-syntax-highlighter" {
 
 	export default class SyntaxHighlighter extends React.Component<RNSyntaxHighlighterProps> {}
 }
+
+declare module "react-syntax-highlighter/dist/esm/create-element.js" {
+	import type { CSSProperties } from "react";
+
+	export function createStyleObject(
+		classNames: string[],
+		elementStyle: CSSProperties,
+		stylesheet: Record<string, CSSProperties>
+	): CSSProperties;
+}
