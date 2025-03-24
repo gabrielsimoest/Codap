@@ -8,7 +8,6 @@ import ClassList from "../../components/ClassList";
 import ModuleCard from "../../components/ModuleCard";
 import ThemedLine from "../../../../components/themed/ThemedLine";
 import ThemedView from "../../../../components/themed/ThemedView";
-import LessonComingSoon from "../../components/LessonComingSoon";
 
 export default function Html() {
 	//Salvar aulas
@@ -50,7 +49,7 @@ export default function Html() {
 					title={t("module2c")}
 					subtitle={t("intermediate html")}
 				>
-					<LessonComingSoon />
+					<ClassList topic="HTML" moduleType="inter" />
 					<ThemedLine
 						height={2}
 						theme="primary"
@@ -63,7 +62,7 @@ export default function Html() {
 					title={t("module3c")}
 					subtitle={t("advanced html")}
 				>
-					<LessonComingSoon />
+					<ClassList topic="HTML" moduleType="advanced" />
 					<ThemedLine
 						height={2}
 						theme="primary"
@@ -76,7 +75,7 @@ export default function Html() {
 					title={t("module4c")}
 					subtitle={t("mastery in html")}
 				>
-					<LessonComingSoon />
+					<ClassList topic="HTML" moduleType="master" />
 					<ThemedLine
 						height={2}
 						theme="primary"

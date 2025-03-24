@@ -1,10 +1,11 @@
 import HtmlLessons from "../lessons/html/content";
 import useLanguageStore from "../../../stores/LanguageStore";
 import ClassView from "./ClassView";
+import LessonComingSoon from "./LessonComingSoon";
 
 interface Props {
 	topic: "HTML" | "CSS" | "JavaScript";
-	moduleType: "basic" | "advanced";
+	moduleType: "basic" | "inter" | "advanced" | "master";
 }
 
 export default function ClassList({ topic, moduleType }: Props) {
@@ -22,6 +23,10 @@ export default function ClassList({ topic, moduleType }: Props) {
 		default: {
 			lessons = HtmlLessons[moduleType];
 		}
+	}
+
+	if (lessons === undefined) {
+		return <LessonComingSoon />;
 	}
 
 	return (
