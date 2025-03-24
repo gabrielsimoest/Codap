@@ -1,10 +1,11 @@
 import { DimensionValue } from "react-native";
-import { Classes, Theory } from "../../../types/entities";
+import { Classes, Option, Theory } from "../../../types/entities";
 import { Modal, Portal } from "react-native-paper";
 import { useEffect, useState } from "react";
 import ClassButton from "./ClassButton";
 import TheoryView from "./TheoryLesson";
 import useNavigate from "../../../hooks/useNavigate";
+import OptionExercise from "./OptionExercise";
 
 interface Props {
 	classes: Classes[];
@@ -51,29 +52,38 @@ export default function ClassView({ classes, title }: Props) {
 
 		switch (currentLesson.type) {
 			case "theory": {
+				const lessonType = currentLesson as Theory;
 				return (
 					<TheoryView
-						firstParagraph={
-							(currentLesson as Theory).lesson.firstParagraph
-						}
-						secondParagraph={
-							(currentLesson as Theory).lesson.secondParagraph
-						}
-						thirdParagraph={
-							(currentLesson as Theory).lesson.thirdParagraph
-						}
-						endParagraph={
-							(currentLesson as Theory).lesson.endParagraph
-						}
-						highlight={(currentLesson as Theory).lesson.highlight}
-						codeLanguage={
-							(currentLesson as Theory).lesson.codeLanguage
-						}
-						code={(currentLesson as Theory).lesson.code}
+						firstParagraph={lessonType.lesson.firstParagraph}
+						secondParagraph={lessonType.lesson.secondParagraph}
+						thirdParagraph={lessonType.lesson.thirdParagraph}
+						endParagraph={lessonType.lesson.endParagraph}
+						highlight={lessonType.lesson.highlight}
+						codeLanguage={lessonType.lesson.codeLanguage}
+						code={lessonType.lesson.code}
+						onlyCode={lessonType.lesson.onlyCode}
+						tutorial={lessonType.lesson.tutorial}
 						progress={progressWidth as DimensionValue}
 						onProceed={changeContent}
-						tutorial={(currentLesson as Theory).lesson.tutorial}
-						onlyCode={(currentLesson as Theory).lesson.onlyCode}
+						onClose={closeLesson}
+					/>
+				);
+			}
+			case "option": {
+				const lessonType = currentLesson as Option;
+				return (
+					<OptionExercise
+						question={lessonType.lesson.question}
+						aditionalParagraph={
+							lessonType.lesson.aditionalParagraph
+						}
+						options={lessonType.lesson.options}
+						correctOption={lessonType.lesson.correctOption}
+						highlight={lessonType.lesson.highlight}
+						tutorial={lessonType.lesson.tutorial}
+						progress={progressWidth as DimensionValue}
+						onProceed={changeContent}
 						onClose={closeLesson}
 					/>
 				);

@@ -30,12 +30,24 @@ export type Theory = {
 	};
 };
 
+export type Option = {
+	type: "option";
+	lesson: {
+		question: string;
+		aditionalParagraph?: string;
+		highlight: string[];
+		tutorial?: boolean;
+		correctOption: number;
+		options: string[];
+	};
+};
+
 type DummyClass = {
 	type: string;
 	lesson: string[];
 };
 
-export type Classes = Theory | DummyClass;
+export type Classes = Theory | Option | DummyClass;
 
 export type Content = {
 	title: string;

@@ -31,17 +31,8 @@ export default function TheoryView({
 	thirdParagraph,
 	endParagraph,
 	highlight = [""],
-	codeLanguage = "HTML",
-	code = `<!DOCTYPE html>
-  <html>
-    <head>
-      <title>Minha página</title>
-    </head>
-    <body>
-      <h1>Minha página</h1>
-      <p>Esta é a minha primeira página HTML!</p>
-    </body>
-  </html>`,
+	codeLanguage,
+	code,
 	onlyCode = false,
 	tutorial = false,
 	progress,
@@ -54,54 +45,52 @@ export default function TheoryView({
 		<>
 			<ThemedView theme="card" style={styles.container}>
 				<Progressbar progress={progress} />
-				<ThemedView theme="card" style={styles.container}>
-					<ScrollView style={{ marginBottom: "25%" }}>
-						<LessonHeader
-							onClose={onClose}
-							setTutorialVisible={() =>
-								setTutorialVisible(!isTutorialVisible)
-							}
-						/>
+				<ScrollView style={{ marginBottom: "25%" }}>
+					<LessonHeader
+						onClose={onClose}
+						setTutorialVisible={() =>
+							setTutorialVisible(!isTutorialVisible)
+						}
+					/>
+					<ResizableHighlighter
+						style={styles.text}
+						highlight={highlight}
+						text={firstParagraph}
+						defaultSize={textSize}
+					/>
+					{secondParagraph !== undefined ? (
 						<ResizableHighlighter
 							style={styles.text}
 							highlight={highlight}
-							text={firstParagraph}
+							text={secondParagraph}
 							defaultSize={textSize}
 						/>
-						{secondParagraph !== undefined ? (
-							<ResizableHighlighter
-								style={styles.text}
-								highlight={highlight}
-								text={secondParagraph}
-								defaultSize={textSize}
-							/>
-						) : null}
-						{thirdParagraph !== undefined ? (
-							<ResizableHighlighter
-								style={styles.text}
-								highlight={highlight}
-								text={thirdParagraph}
-								defaultSize={textSize}
-							/>
-						) : null}
-
-						<CodeSection
-							onlyCode={onlyCode}
-							codeLanguage={codeLanguage}
-							code={code}
+					) : null}
+					{thirdParagraph !== undefined ? (
+						<ResizableHighlighter
+							style={styles.text}
+							highlight={highlight}
+							text={thirdParagraph}
+							defaultSize={textSize}
 						/>
+					) : null}
 
-						{endParagraph !== undefined ? (
-							<ResizableHighlighter
-								style={styles.text}
-								highlight={highlight}
-								text={endParagraph}
-								defaultSize={textSize}
-							/>
-						) : null}
-					</ScrollView>
-					<NextButton onPress={onProceed} />
-				</ThemedView>
+					<CodeSection
+						onlyCode={onlyCode}
+						codeLanguage={codeLanguage}
+						code={code}
+					/>
+
+					{endParagraph !== undefined ? (
+						<ResizableHighlighter
+							style={styles.text}
+							highlight={highlight}
+							text={endParagraph}
+							defaultSize={textSize}
+						/>
+					) : null}
+				</ScrollView>
+				<NextButton onPress={onProceed} />
 			</ThemedView>
 			{/* <TutorialTheory
 						visible={TutorialVisible}

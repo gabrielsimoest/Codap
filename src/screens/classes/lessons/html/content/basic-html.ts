@@ -27,7 +27,7 @@ const BasicHtmlLessons: ClassContent = {
 							"Primeiramente estarei mostrando um exemplo bem básico de estrutura para você já ir tendo uma ideia de como o HTML se parece.",
 						endParagraph:
 							"Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis.",
-						highlight: ["HTML", "Cody"],
+						highlight: ["HTML", "Cody", "Web"],
 						codeLanguage: "HTML",
 						code: codeList.structure,
 					},
@@ -44,6 +44,16 @@ const BasicHtmlLessons: ClassContent = {
 						highlight: ["HTML", "DEVE"],
 						codeLanguage: "HTML",
 						code: codeList.structure,
+					},
+				},
+				{
+					type: "option",
+					lesson: {
+						question:
+							"<html> representa uma tag de abertura, como seria uma tag de fechamento?",
+						highlight: ["HTML"],
+						options: ["<html>", "<end html>", ">html<", "</html>"],
+						correctOption: 4,
 					},
 				},
 			],
