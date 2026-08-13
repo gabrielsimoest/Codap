@@ -85,8 +85,8 @@ type TabButtonProps = { item: TabItem } & BottomTabBarButtonProps;
 
 //Tab button
 const TabButton = (props: TabButtonProps) => {
-	const { item, onPress, accessibilityState } = props;
-	const focused = accessibilityState?.selected;
+	const { item, onPress } = props;
+	const focused = props["aria-selected"];
 	const viewRef = useRef<View>(null);
 
 	useEffect(() => {

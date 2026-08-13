@@ -79,4 +79,4 @@ O repositório é um workspace pnpm unificado (ver [CLAUDE.md](../CLAUDE.md) da 
 - Rodar direto no Android: `pnpm android`
 - Rodar direto no iOS: `pnpm ios`
 - Rodar na Web: `pnpm web`
-- **Não há scripts de teste, lint ou typecheck definidos no `package.json`.** Para checar tipos manualmente é possível rodar `npx tsc --noEmit`, mas isso não é um script do projeto — confirme com o desenvolvedor antes de adotar isso como verificação padrão. Ao rodar essa checagem manual após a migração para o workspace, ela apontou 2 erros pré-existentes no código do app (`index.ts` sem export default e uma prop `theme` incompatível em `Register.tsx`), não relacionados ao workspace — não foram corrigidos por não terem sido solicitados.
+- **Não há scripts de teste, lint ou typecheck definidos no `package.json`.** Para checar tipos manualmente é possível rodar `npx tsc --noEmit`, mas isso não é um script do projeto — confirme com o desenvolvedor antes de adotar isso como verificação padrão.

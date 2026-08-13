@@ -1,23 +1,38 @@
-# Getting Started with [Fastify-CLI](https://www.npmjs.com/package/fastify-cli)
-This project was bootstrapped with Fastify-CLI.
+# Codap API
 
-## Available Scripts
+API em Fastify + TypeScript do Codap. Ainda em estágio inicial (estrutura base gerada pelo `fastify-cli`, sem rotas de negócio reais), com integração a Prisma + PostgreSQL/NeonDB em desenvolvimento.
 
-In the project directory, you can run:
+Para detalhes de arquitetura, convenções e regras de contribuição específicas da API, veja [CLAUDE.md](CLAUDE.md) (e o [CLAUDE.md](../CLAUDE.md) da raiz do monorepo).
 
-### `npm run dev`
+## Stack
 
-To start the app in dev mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Fastify 5 + TypeScript, estrutura de plugins/rotas carregada via `@fastify/autoload`
+- Pacote ESM puro (`"type": "module"`)
+- Prisma + PostgreSQL/NeonDB *(instalado, mas ainda sem models/migrations)*
+- Testes com o runner nativo `node:test` + `c8` (cobertura) + `tsx`
 
-### `npm start`
+## Instalação
 
-For production mode
+Este pacote faz parte de um workspace pnpm unificado — instale as dependências a partir da raiz do repositório, não aqui:
+```bash
+cd ..
+pnpm install
+```
 
-### `npm run test`
+## Comandos
 
-Run the test cases.
+Rode a partir de `/api`, ou a partir da raiz com `pnpm --filter codap-api <script>` (há atalhos prontos: `pnpm api:dev`, `pnpm api:build`, `pnpm api:test`).
 
-## Learn More
+| Comando | Descrição |
+| --- | --- |
+| `pnpm dev` | build + watch do TypeScript + servidor com reload automático |
+| `pnpm build:ts` | compila `src/` para `dist/` |
+| `pnpm start` | build + inicia em modo produção |
+| `pnpm test` | build + typecheck dos testes + roda a suíte completa com cobertura |
 
-To learn Fastify, check out the [Fastify documentation](https://fastify.dev/docs/latest/).
+Por padrão o servidor sobe em [http://localhost:3000](http://localhost:3000).
+
+## Saiba mais
+
+- [Documentação do Fastify](https://fastify.dev/docs/latest/)
+- [Documentação do Prisma](https://www.prisma.io/docs)

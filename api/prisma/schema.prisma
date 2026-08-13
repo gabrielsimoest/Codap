@@ -4,10 +4,189 @@
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  importFileExtension = "js"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Versionamento
+// ---------------------------------------------------------------------------
+
+model content_version {
+  id          Int      @id @default(autoincrement())
+  locale_id   Int
+  locale      locales  @relation(fields: [locale_id], references: [id])
+  version     String   @db.VarChar(5)
+  changelog   String
+  released_at DateTime @db.Date
+}
+
+model app_version {
+  id          Int      @id @default(autoincrement())
+  version     String   @db.VarChar(5)
+  changelog   String
+  need_update Boolean?
+  released_at DateTime @db.Date
+}
+
+// ---------------------------------------------------------------------------
+// Usuário e Relações
+// ---------------------------------------------------------------------------
+
+model users {
+  id                String              @id @default(uuid()) @db.Uuid
+  name              String
+  email             String              @unique
+  password          String
+  xp                Int?
+  dependabots       Int?
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  user_lessons      user_lessons[]
+  user_achievements user_achievements[]
+}
+
+model user_lessons {
+  id           Int      @id @default(autoincrement())
+  user_id      String   @db.Uuid
+  user         users    @relation(fields: [user_id], references: [id])
+  lesson_id    Int
+  lesson       lessons  @relation(fields: [lesson_id], references: [id])
+  completed_at DateTime
+}
+
+model user_achievements {
+  id             Int          @id @default(autoincrement())
+  user_id        String       @db.Uuid
+  user           users        @relation(fields: [user_id], references: [id])
+  achievement_id Int
+  achievement    achievements @relation(fields: [achievement_id], references: [id])
+  completed_at   DateTime
+}
+
+// ---------------------------------------------------------------------------
+// Gamificação
+// ---------------------------------------------------------------------------
+
+model achievements {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  description       String
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  user_achievements user_achievements[]
+}
+
+// ---------------------------------------------------------------------------
+// Estrutura Pedagógica
+// ---------------------------------------------------------------------------
+
+model areas {
+  id           Int                 @id @default(autoincrement())
+  created_at   DateTime            @default(now())
+  updated_at   DateTime            @updatedAt
+  modules      modules[]
+  translations area_translations[]
+}
+
+model modules {
+  id           Int                   @id @default(autoincrement())
+  area_id      Int
+  area         areas                 @relation(fields: [area_id], references: [id])
+  index        Int
+  created_at   DateTime              @default(now())
+  updated_at   DateTime              @updatedAt
+  lessons      lessons[]
+  translations module_translations[]
+}
+
+model lessons {
+  id           Int                   @id @default(autoincrement())
+  module_id    Int
+  module       modules               @relation(fields: [module_id], references: [id])
+  index        Int
+  created_at   DateTime              @default(now())
+  updated_at   DateTime              @updatedAt
+  activities   activities[]
+  translations lesson_translations[]
+  user_lessons user_lessons[]
+}
+
+model activities {
+  id           Int                     @id @default(autoincrement())
+  lesson_id    Int
+  lesson       lessons                 @relation(fields: [lesson_id], references: [id])
+  index        Int
+  type         String                  @db.VarChar(25)
+  created_at   DateTime                @default(now())
+  updated_at   DateTime                @updatedAt
+  translations activity_translations[]
+}
+
+// ---------------------------------------------------------------------------
+// Traduções i18n
+// ---------------------------------------------------------------------------
+
+model locales {
+  id                    Int                     @id @default(autoincrement())
+  locale                String                  @db.VarChar(8)
+  name                  String                  @db.VarChar(20)
+  content_versions      content_version[]
+  area_translations     area_translations[]
+  module_translations   module_translations[]
+  lesson_translations   lesson_translations[]
+  activity_translations activity_translations[]
+}
+
+model area_translations {
+  area_id    Int
+  area       areas    @relation(fields: [area_id], references: [id])
+  locale_id  Int
+  locale     locales  @relation(fields: [locale_id], references: [id])
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([area_id, locale_id])
+}
+
+model module_translations {
+  module_id  Int
+  module     modules  @relation(fields: [module_id], references: [id])
+  locale_id  Int
+  locale     locales  @relation(fields: [locale_id], references: [id])
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([module_id, locale_id])
+}
+
+model lesson_translations {
+  lesson_id  Int
+  lesson     lessons  @relation(fields: [lesson_id], references: [id])
+  locale_id  Int
+  locale     locales  @relation(fields: [locale_id], references: [id])
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([lesson_id, locale_id])
+}
+
+model activity_translations {
+  activity_id Int
+  activity    activities @relation(fields: [activity_id], references: [id])
+  locale_id   Int
+  locale      locales    @relation(fields: [locale_id], references: [id])
+  content     Json       @db.JsonB
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+
+  @@id([activity_id, locale_id])
 }

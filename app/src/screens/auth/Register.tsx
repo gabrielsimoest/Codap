@@ -263,7 +263,6 @@ export default function Register() {
 					</View>
 				</View>
 				<ThemedAlert
-					theme={theme}
 					visible={alertVisible}
 					onDismiss={onPressAlertHandler}
 					title={alertTitle}

@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O repositório é um **monorepo com workspace pnpm unificado** (`pnpm-workspace.yaml` na raiz), contendo dois pacotes:
 
 - **`/app`** — aplicativo mobile em Expo + React Native + TypeScript. Estado atual: funcional, com persistência local (SQLite + AsyncStorage), sem integração com nenhuma API remota. Veja [app/CLAUDE.md](app/CLAUDE.md).
-- **`/api`** — API em Fastify + TypeScript. Estado atual: ainda é o boilerplate padrão gerado pelo `fastify-cli`, sem Prisma, sem banco de dados e sem Swagger configurados. Será integrada a Prisma e NeonDB/PostgreSQL. Veja [api/CLAUDE.md](api/CLAUDE.md).
+- **`/api`** — API em Fastify + TypeScript. Estado atual: conectada a um banco NeonDB/PostgreSQL real via Prisma (migration inicial aplicada), com Swagger/OpenAPI configurado (somente em desenvolvimento) e um primeiro recurso com CRUD completo (`users`). Veja [api/CLAUDE.md](api/CLAUDE.md).
 
 O workspace foi unificado para que tipos/contratos (ex.: os tipos gerados pelo Prisma, quando adicionados) possam ser compartilhados entre `api` e `app` sem duplicação. Há um único `pnpm-lock.yaml`/`node_modules` na raiz — **instale as dependências sempre a partir da raiz** (`pnpm install`), não dentro de `api/` ou `app/` individualmente. O `package.json` da raiz expõe scripts de conveniência (`api:dev`, `api:test`, `app:start`, etc.) que usam `pnpm --filter <pacote>`; os comandos nativos de cada pacote (documentados em cada `CLAUDE.md` específico) continuam funcionando via `pnpm --filter <nome-do-pacote> <script>` a partir da raiz, ou executando `cd api`/`cd app` normalmente.
 

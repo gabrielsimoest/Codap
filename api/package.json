@@ -9,11 +9,11 @@
   },
   "scripts": {
     "test": "pnpm run build:ts && tsc -p test/tsconfig.json && c8 node --import tsx --test \"test/**/*.ts\"",
-    "start": "pnpm run build:ts && fastify start -l info dist/app.js",
+    "start": "pnpm run build:ts && cross-env NODE_ENV=production fastify start -l info dist/app.js",
     "build:ts": "tsc",
     "watch:ts": "tsc -w",
     "dev": "pnpm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
-    "dev:start": "fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js"
+    "dev:start": "cross-env NODE_ENV=development fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js"
   },
   "keywords": [],
   "author": "",
@@ -21,8 +21,11 @@
   "dependencies": {
     "@fastify/autoload": "^6.0.0",
     "@fastify/sensible": "^6.0.0",
+    "@fastify/swagger": "^9.8.1",
+    "@fastify/swagger-ui": "^6.1.1",
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "fastify": "^5.0.0",
     "fastify-cli": "^8.0.0",
@@ -34,6 +37,7 @@
     "@types/pg": "^8.21.0",
     "c8": "^11.0.0",
     "concurrently": "^9.0.0",
+    "cross-env": "^10.1.0",
     "fastify-tsconfig": "^3.0.0",
     "prisma": "^7.9.1",
     "tsx": "^4.23.11",
