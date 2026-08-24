@@ -45,9 +45,6 @@
 		"achievements": "Conquistas",
 		"exit": "Sair",
 		"new name": "Novo nome",
-		"current password": "Senha atual",
-		"new password": "Nova senha",
-		"confirm password": "Confirmar senha",
 		"successfully changed": "Alterado com sucesso",
 		"success": "Sucesso!",
 
@@ -715,10 +712,19 @@
 				"invalid": {
 					"title": "Dados inválidos!",
 					"message": "Senha ou Email incorretos. Verifique os dados novamente!."
+				},
+				"network": {
+					"title": "Erro de conexão",
+					"message": "Não foi possível conectar ao servidor. Verifique sua internet e tente novamente."
+				},
+				"unexpected": {
+					"title": "Ops, algo deu errado",
+					"message": "Não foi possível entrar. Tente novamente em instantes."
 				}
 			},
 			"password": "Senha",
-			"register": "Clique aqui para se registrar"
+			"register": "Clique aqui para se registrar",
+			"rememberMe": "Lembrar-me"
 		},
 
 		"register": {
@@ -738,6 +744,26 @@
 				"not match": {
 					"title": "Aviso!",
 					"message": "A senha de confirmação não corresponde à senha original. Por favor, verifique e tente novamente."
+				},
+				"duplicate": {
+					"title": "Aviso!",
+					"message": "Este e-mail já está cadastrado. Tente fazer login."
+				},
+				"network": {
+					"title": "Erro de conexão",
+					"message": "Não foi possível conectar ao servidor. Verifique sua internet e tente novamente."
+				},
+				"unexpected": {
+					"title": "Ops, algo deu errado",
+					"message": "Não foi possível concluir o cadastro. Tente novamente em instantes."
+				},
+				"shortPassword": {
+					"title": "Senha muito curta",
+					"message": "A senha precisa ter pelo menos 8 caracteres."
+				},
+				"serverValidation": {
+					"title": "Dados inválidos",
+					"message": "Verifique os dados informados e tente novamente."
 				}
 			},
 			"name": "Nome",

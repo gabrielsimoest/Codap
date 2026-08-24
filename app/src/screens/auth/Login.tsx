@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
 	View,
 	Text,
@@ -6,77 +7,54 @@ import {
 	Image,
 	TextInput,
 	TouchableOpacity,
+	TouchableWithoutFeedback,
 	Keyboard,
 	Dimensions,
 } from "react-native";
 
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { useTheme } from "@react-navigation/native";
+import { useTheme, useRoute } from "@react-navigation/native";
+import type { RouteProp } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { Switch } from "react-native-paper";
 
 import DarkMode from "../../theme/DarkMode";
 import AuthButton from "./components/AuthButton";
 import useNavigate from "../../hooks/useNavigate";
-import * as FileSystem from "expo-file-system";
-import DatabaseClient from "../../services/DatabaseClient";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import isValidEmail from "../../utils/isValidEmail";
-import useLoggedUser from "../../hooks/useLoggedUser";
 import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
 import useUserStore from "../../stores/UserStore";
+import useAuthStore from "../../stores/AuthStore";
 import useAlertStore from "../../stores/AlertStore";
+import useLoginMutation from "../../hooks/queries/useLoginMutation";
+import type { RootStackParamList } from "../../types/navigation";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
 export default function Login() {
-	/* console.log(FileSystem.documentDirectory); */
-
-	const database = new DatabaseClient();
-
 	const setUser = useUserStore((s) => s.setUser);
+	const setAuthSession = useAuthStore((s) => s.setSession);
 
 	const theme = useTheme();
 	const { t } = useTranslation();
+	const route = useRoute<RouteProp<RootStackParamList, "Login">>();
 
 	const navigation = useNavigate();
 
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
+	const [rememberMe, setRememberMe] = useState(false);
 
 	useEffect(() => {
-		useLoggedUser({
-			onLoggedCallback(user) {
-				setUser(user);
-				navigation.navigate("Home");
-			},
-			onNotLoggedCallback(error) {
-				if (error) {
-					console.error(error);
-				}
-				createTable();
-			},
-		});
-		return () => closeDatabase();
-		/* database.executeSQL("DROP TABLE IF EXISTS Users"); */
-	}, []);
-
-	const closeDatabase = () => {
-		try {
-			database.close();
-		} catch (error) {
-			console.error(error);
+		// Preenche o e-mail quando chega aqui vindo do registro (navigation.navigate("Login", { email })).
+		const routeEmail = route.params?.email;
+		if (routeEmail) {
+			setEmail(routeEmail);
 		}
-	};
+	}, [route.params]);
 
-	const createTable = () => {
-		try {
-			database.initDefaultTables();
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	const loginMutation = useLoginMutation();
 
 	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
 	const setAlertVisible = useAlertStore((s) => s.setAlertVisible);
@@ -90,48 +68,51 @@ export default function Login() {
 		setAlertVisible(true);
 	};
 
-	const setData = async () => {
+	const onSubmit = () => {
 		if (email.length == 0 || senha.length == 0 || !isValidEmail(email)) {
 			showAlert(
 				t("login.alert.invalid.title"),
 				t("login.alert.invalid.message")
 			);
-		} else {
-			try {
-				const user = database.validateUser(email, senha);
-				if (user !== null) {
-					/* console.log("Usuário encontrado: " + user.Name); */
-					setUser(user);
-					await AsyncStorage.setItem("User", JSON.stringify(user));
-					const doneClasses = database.getClasses(user.ID);
-					/* const joinedClasses =
-						doneClasses.length > 0 ? doneClasses.join(", ") : "";
-					console.log("Aulas feitas: " + joinedClasses); */
-					/* console.log(doneClasses); */
-					await AsyncStorage.setItem(
-						"Classes",
-						JSON.stringify(doneClasses)
-					);
-					navigation.navigate("Home");
-				} else {
-					console.log("Usuário ou senhas incorretos");
-					showAlert(
-						t("login.alert.invalid.title"),
-						t("login.alert.invalid.message")
-					);
-				}
-			} catch (error) {
-				console.error(error);
-				showAlert(
-					t("login.alert.invalid.title"),
-					t("login.alert.invalid.message")
-				);
-			}
+			return;
 		}
-	};
 
-	const onSubmit = () => {
-		setData();
+		loginMutation.mutate(
+			{ email, password: senha, rememberMe },
+			{
+				onSuccess: (user) => {
+					setUser(user);
+					setAuthSession(true);
+					navigation.navigate("Home");
+				},
+				onError: (error) => {
+					console.error("Erro ao fazer login:", error);
+					if (axios.isAxiosError(error) && !error.response) {
+						// Sem resposta nenhuma do servidor = falha de rede/conexão
+						// (API fora do ar, URL errada, sem internet), não credenciais erradas.
+						showAlert(
+							t("login.alert.network.title"),
+							t("login.alert.network.message")
+						);
+					} else if (
+						axios.isAxiosError(error) &&
+						error.response?.status === 401
+					) {
+						showAlert(
+							t("login.alert.invalid.title"),
+							t("login.alert.invalid.message")
+						);
+					} else {
+						// Erro inesperado (5xx do servidor, ou uma exceção local — ex.:
+						// no cache SQLite do perfil) — não são credenciais erradas.
+						showAlert(
+							t("login.alert.unexpected.title"),
+							t("login.alert.unexpected.message")
+						);
+					}
+				},
+			}
+		);
 	};
 
 	const navigationHandler = () => {
@@ -199,6 +180,21 @@ export default function Login() {
 								secureTextEntry={true}
 								value={senha}
 							/>
+							<View style={styles.rememberMeRow}>
+								<Switch
+									value={rememberMe}
+									onValueChange={setRememberMe}
+									color="#7977FD"
+								/>
+								<Text
+									style={[
+										styles.rememberMeText,
+										{ color: theme.colors.text },
+									]}
+								>
+									{t("login.rememberMe")}
+								</Text>
+							</View>
 							<AuthButton
 								title="Login"
 								color="#7977FD"
@@ -257,6 +253,15 @@ const styles = StyleSheet.create({
 		borderWidth: 1.5,
 		padding: 10,
 		fontSize: 20,
+	},
+	rememberMeRow: {
+		flexDirection: "row",
+		alignItems: "center",
+		marginLeft: 12,
+	},
+	rememberMeText: {
+		marginLeft: 8,
+		fontSize: 16,
 	},
 	header: {
 		marginTop: 20,

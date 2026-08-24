@@ -1,18 +1,35 @@
 export interface User {
-	ID: number;
 	name: string;
-	password: string;
 	email: string;
 	dependaBots: number;
 	xp: number;
 	doubleXp: number;
 	doubleTime: number;
+	/** UUID do usuário na API (users.id) — chave primária de Users; toda conta nasce via /auth. */
+	remoteId: string;
 }
 
-export interface Aula {
-	ID: number;
-	UserID: number;
-	TipoAula: number;
+export interface UserLesson {
+	id: number;
+	userId: string;
+	lessonId: number;
+}
+
+export type SyncEventType = "lesson_completed" | "achievement_unlocked";
+export type SyncQueueStatus = "pending" | "syncing" | "synced" | "failed";
+
+export interface SyncQueueRow {
+	id: number;
+	userId: string;
+	clientEventId: string;
+	type: SyncEventType;
+	payload: string;
+	occurredAt: string;
+	status: SyncQueueStatus;
+	attempts: number;
+	lastError: string | null;
+	createdAt: string;
+	updatedAt: string;
 }
 
 export type Theory = {

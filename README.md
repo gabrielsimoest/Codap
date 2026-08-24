@@ -2,8 +2,8 @@
 
 Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O repositório é um monorepo com workspace pnpm unificado, dividido em dois pacotes:
 
-- **`/app`** — aplicativo mobile em Expo + React Native + TypeScript.
-- **`/api`** — API em Fastify + TypeScript, com integração a Prisma/PostgreSQL (NeonDB) em desenvolvimento.
+- **`/app`** — aplicativo mobile em Expo + React Native + TypeScript, com persistência local offline-first e autenticação/sincronização de progresso integradas com a API.
+- **`/api`** — API em Fastify + TypeScript, conectada a Prisma/PostgreSQL (NeonDB), com autenticação JWT (access + refresh token) e um endpoint de sincronização em lote.
 
 Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md](app/CLAUDE.md) e [api/CLAUDE.md](api/CLAUDE.md).
 
@@ -22,11 +22,13 @@ Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md]
 **App (`/app`)**
 - Expo + React Native + TypeScript
 - Zustand (estado global)
-- SQLite (persistência local)
+- SQLite + AsyncStorage (persistência local) + `expo-secure-store` (tokens de sessão)
+- Axios + `@tanstack/react-query` (requisições à API)
 
 **API (`/api`)**
 - Fastify + TypeScript
-- Prisma + PostgreSQL/NeonDB *(em desenvolvimento)*
+- Prisma + PostgreSQL/NeonDB
+- `@fastify/jwt` + `@fastify/rate-limit` (autenticação e proteção contra abuso)
 
 ## Instalação
 

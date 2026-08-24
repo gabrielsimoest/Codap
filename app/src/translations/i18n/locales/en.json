@@ -45,9 +45,6 @@
 		"achievements": "Achievements",
 		"exit": "Exit",
 		"new name": "New name",
-		"current password": "Current password",
-		"new password": "new password",
-		"confirm password": "confirm password",
 		"successfully changed": "Successfully changed",
 		"success": "Success!",
 
@@ -715,10 +712,19 @@
 				"invalid": {
 					"title": "Invalid data!",
 					"message": "Incorrect password or email, please check the data again."
+				},
+				"network": {
+					"title": "Connection error",
+					"message": "Could not connect to the server. Check your internet connection and try again."
+				},
+				"unexpected": {
+					"title": "Oops, something went wrong",
+					"message": "Could not sign in. Please try again shortly."
 				}
 			},
 			"password": "Password",
-			"register": "Click here to register"
+			"register": "Click here to register",
+			"rememberMe": "Remember me"
 		},
 
 		"register": {
@@ -738,6 +744,26 @@
 				"not match": {
 					"title": "Warning!",
 					"message": "The confirmation password does not match the original password. Please check and try again."
+				},
+				"duplicate": {
+					"title": "Warning!",
+					"message": "This email is already registered. Try logging in instead."
+				},
+				"network": {
+					"title": "Connection error",
+					"message": "Could not connect to the server. Check your internet connection and try again."
+				},
+				"unexpected": {
+					"title": "Oops, something went wrong",
+					"message": "Could not complete the registration. Please try again shortly."
+				},
+				"shortPassword": {
+					"title": "Password too short",
+					"message": "Password must be at least 8 characters long."
+				},
+				"serverValidation": {
+					"title": "Invalid data",
+					"message": "Please check the entered data and try again."
 				}
 			},
 			"name": "Name",

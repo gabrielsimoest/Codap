@@ -1,6 +1,6 @@
 # Codap App
 
-Aplicativo mobile do Codap — Expo + React Native + TypeScript. Ambiente de aprendizado gamificado de HTML, CSS e JavaScript, com persistência local (SQLite + AsyncStorage) e ainda sem integração com a API (`/api`).
+Aplicativo mobile do Codap — Expo + React Native + TypeScript. Ambiente de aprendizado gamificado de HTML, CSS e JavaScript, offline-first, com autenticação e sincronização de progresso integradas com a API (`/api`).
 
 Para detalhes de arquitetura, convenções e regras de contribuição específicas do app, veja [CLAUDE.md](CLAUDE.md) (e o [CLAUDE.md](../CLAUDE.md) da raiz do monorepo).
 
@@ -10,7 +10,8 @@ Para detalhes de arquitetura, convenções e regras de contribuição específic
 - Navegação: `@react-navigation` (stack + bottom tabs)
 - Estado global: `zustand`
 - UI: `react-native-paper`
-- Persistência local: `expo-sqlite` + `@react-native-async-storage/async-storage`
+- Persistência local: `expo-sqlite` + `@react-native-async-storage/async-storage`; tokens de sessão em `expo-secure-store`
+- Requisições à API: `axios` + `@tanstack/react-query`
 - i18n: `i18next` (`pt`/`en`)
 
 ## Instalação
@@ -20,6 +21,8 @@ Este pacote faz parte de um workspace pnpm unificado — instale as dependência
 cd ..
 pnpm install
 ```
+
+Configure o `.env` (ver `.env.example`): `EXPO_PUBLIC_API_URL`, apontando para a API rodando localmente (`pnpm api:dev` na raiz) ou remota.
 
 ## Comandos
 

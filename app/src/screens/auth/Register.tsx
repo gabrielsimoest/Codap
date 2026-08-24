@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import {
 	Dimensions,
 	Image,
@@ -16,26 +17,27 @@ import DarkMode from "../../theme/DarkMode";
 import AuthButton from "./components/AuthButton";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
-import DatabaseClient from "../../services/DatabaseClient";
 import isValidEmail from "../../utils/isValidEmail";
 import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
+import useRegisterMutation from "../../hooks/queries/useRegisterMutation";
 
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
 export default function Register() {
-	const database = new DatabaseClient();
-
 	const theme = useTheme(); //Variavel de cor do tema
 
 	const { t } = useTranslation();
 
 	const navigation = useNavigate();
 
+	const registerMutation = useRegisterMutation();
+
 	const [alertVisible, setAlertVisible] = useState(false);
 	const [alertTitle, setAlertTitle] = useState("");
 	const [alertMessage, setAlertMessage] = useState("");
+	const [pendingLoginRedirect, setPendingLoginRedirect] = useState(false);
 	const [name, setName] = useState("");
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
@@ -43,28 +45,7 @@ export default function Register() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	useEffect(() => {
-		createTable();
-		return () => closeDatabase();
-	}, []);
-
-	const closeDatabase = () => {
-		try {
-			database.close();
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const createTable = () => {
-		try {
-			database.initDefaultTables();
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const setData = async () => {
+	const setData = () => {
 		if (name.length == 0 || senha.length == 0 || email.length == 0) {
 			setAlertTitle(t("register.alert.empty.title"));
 			setAlertMessage(t("register.alert.empty.message"));
@@ -73,19 +54,48 @@ export default function Register() {
 			setAlertTitle(t("register.alert.invalid.title"));
 			setAlertMessage(t("register.alert.invalid.message"));
 			setAlertVisible(true);
+		} else if (senha.length < 8) {
+			setAlertTitle(t("register.alert.shortPassword.title"));
+			setAlertMessage(t("register.alert.shortPassword.message"));
+			setAlertVisible(true);
 		} else {
-			try {
-				database.registerUser({
-					name: name,
-					email: email,
-					password: password,
-				});
-				setAlertTitle(t("register.alert.success.title"));
-				setAlertMessage(t("register.alert.success.message"));
-				setAlertVisible(true);
-			} catch (error) {
-				console.error(error);
-			}
+			registerMutation.mutate(
+				{ name, email, password: senha },
+				{
+					onSuccess: () => {
+						// Não faz login automático de propósito — o usuário volta para a
+						// tela de Login (com o e-mail preenchido) para escolher "lembrar-me".
+						setAlertTitle(t("register.alert.success.title"));
+						setAlertMessage(t("register.alert.success.message"));
+						setPendingLoginRedirect(true);
+						setAlertVisible(true);
+					},
+					onError: (error) => {
+						console.error("Erro ao registrar:", error);
+						if (axios.isAxiosError(error) && error.response?.status === 409) {
+							setAlertTitle(t("register.alert.duplicate.title"));
+							setAlertMessage(t("register.alert.duplicate.message"));
+						} else if (axios.isAxiosError(error) && !error.response) {
+							// Sem resposta nenhuma do servidor = falha de rede/conexão
+							// (API fora do ar, URL errada, sem internet), não um dado inválido.
+							setAlertTitle(t("register.alert.network.title"));
+							setAlertMessage(t("register.alert.network.message"));
+						} else if (axios.isAxiosError(error) && error.response?.status === 400) {
+							// Validação rejeitada pelo servidor (formato de e-mail mais
+							// estrito, nome/senha fora do padrão, etc.) — não presume que o
+							// problema é especificamente o e-mail, já que pode ser qualquer campo.
+							setAlertTitle(t("register.alert.serverValidation.title"));
+							setAlertMessage(t("register.alert.serverValidation.message"));
+						} else {
+							// Erro inesperado (5xx do servidor, ou uma exceção local — ex.:
+							// no cache SQLite do perfil) — não é um problema com os dados digitados.
+							setAlertTitle(t("register.alert.unexpected.title"));
+							setAlertMessage(t("register.alert.unexpected.message"));
+						}
+						setAlertVisible(true);
+					},
+				}
+			);
 		}
 	};
 
@@ -119,8 +129,9 @@ export default function Register() {
 
 	const onPressAlertHandler = () => {
 		setAlertVisible(false);
-		if (alertTitle === t("register.alert.success.title")) {
-			navigation.navigate("Login");
+		if (pendingLoginRedirect) {
+			setPendingLoginRedirect(false);
+			navigation.navigate("Login", { email });
 		}
 	};
 

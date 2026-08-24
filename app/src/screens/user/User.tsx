@@ -6,9 +6,10 @@ import UserButton from "./components/UserButton";
 import ThemedIcon from "../../components/themed/ThemedIcon";
 import ThemedView from "../../components/themed/ThemedView";
 import useUserStore from "../../stores/UserStore";
+import useAuthStore from "../../stores/AuthStore";
 import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import ComingSoon from "../../components/ComingSoon";
@@ -22,9 +23,11 @@ export default function User() {
 	const navigation = useNavigate();
 
 	const { user, setUser } = useUserStore();
+	const clearAuthSession = useAuthStore((s) => s.clearSession);
 
 	const logout = async () => {
-		await AsyncStorage.setItem("User", JSON.stringify({}));
+		await AuthService.logout();
+		clearAuthSession();
 		setUser({} as UserEntity);
 		navigation.navigate("Login");
 	};

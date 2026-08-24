@@ -11,8 +11,9 @@ import Classes from "../screens/classes/Classes";
 import Config from "../screens/configurations/Config";
 import User from "../screens/user/User";
 import Market from "../screens/market/Market";
+import type { MainTabParamList } from "../types/navigation";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<MainTabParamList>();
 
 type IconType =
 	| "materialCommunity"
@@ -28,7 +29,7 @@ type IconType =
 	| "foundation";
 
 interface TabItem {
-	route: string;
+	route: keyof MainTabParamList;
 	label: string;
 	type: IconType;
 	activeIcon: string;

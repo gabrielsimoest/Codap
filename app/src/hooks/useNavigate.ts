@@ -1,11 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
-
-interface NavigationProps {
-	navigate: (routeName: string) => void;
-}
+import type { StackNavigationProp } from "@react-navigation/stack";
+import type { RootStackParamList } from "../types/navigation";
 
 const useNavigate = () => {
-	return useNavigation<NavigationProps>();
+	return useNavigation<StackNavigationProp<RootStackParamList>>();
 };
 
 export default useNavigate;

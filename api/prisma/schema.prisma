@@ -49,6 +49,7 @@ model users {
   updated_at        DateTime            @updatedAt
   user_lessons      user_lessons[]
   user_achievements user_achievements[]
+  refresh_tokens    refresh_tokens[]
 }
 
 model user_lessons {
@@ -58,6 +59,8 @@ model user_lessons {
   lesson_id    Int
   lesson       lessons  @relation(fields: [lesson_id], references: [id])
   completed_at DateTime
+
+  @@unique([user_id, lesson_id])
 }
 
 model user_achievements {
@@ -67,6 +70,30 @@ model user_achievements {
   achievement_id Int
   achievement    achievements @relation(fields: [achievement_id], references: [id])
   completed_at   DateTime
+
+  @@unique([user_id, achievement_id])
+}
+
+// ---------------------------------------------------------------------------
+// Autenticação
+// ---------------------------------------------------------------------------
+
+model refresh_tokens {
+  id             String    @id @default(uuid()) @db.Uuid
+  user_id        String    @db.Uuid
+  user           users     @relation(fields: [user_id], references: [id])
+  token_hash     String    @unique @db.VarChar(64)
+  family_id      String    @db.Uuid
+  remember_me    Boolean   @default(false)
+  device_info    String?
+  created_by_ip  String?
+  created_at     DateTime  @default(now())
+  expires_at     DateTime
+  revoked_at     DateTime?
+  replaced_by_id String?   @db.Uuid
+
+  @@index([user_id])
+  @@index([family_id])
 }
 
 // ---------------------------------------------------------------------------
