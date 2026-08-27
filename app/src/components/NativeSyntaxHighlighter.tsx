@@ -477,7 +477,7 @@ function createNativeElement({
 	defaultColor,
 	fontFamily,
 	fontSize = 12,
-}: CreateNativeElementParams): JSX.Element {
+}: CreateNativeElementParams): React.JSX.Element {
 	const { properties, type, tagName: TagName, value } = node;
 	const startingStyle: TextStyle = {
 		fontFamily,

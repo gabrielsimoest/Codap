@@ -137,14 +137,16 @@ export function TabNavigation() {
 				tabBarHideOnKeyboard: false,
 				tabBarStyle: {
 					width: "90%",
-					marginLeft: "5%",
-					marginRight: "5%",
+					marginHorizontal: "5%",
 					height: 60,
 					position: "absolute",
 					bottom: 16,
 					borderRadius: 16,
 					backgroundColor: colors.background,
 					zIndex: 50,
+					overflow: "hidden",
+					alignItems: "center",
+					paddingBottom: 0
 				},
 			}}
 		>

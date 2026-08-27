@@ -5,3 +5,8 @@ allowBuilds:
   '@prisma/engines': true
   esbuild: true
   prisma: true
+publicHoistPattern:
+  - "*expo*"
+  - "*react-native*"
+  - "@react-native/*"
+  - "metro*"

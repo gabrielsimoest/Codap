@@ -4,7 +4,7 @@ Este arquivo complementa o [CLAUDE.md](../CLAUDE.md) da raiz (que contém as reg
 
 ## Stack e estado atual
 
-- **Expo `~52.0.37`**, **React Native `0.76.7`**, **React `18.3.1`**, **TypeScript `^5.3.3`** (`tsconfig.json` estende `expo/tsconfig.base` com `strict: true`).
+- **Expo `~57.0.17`**, **React Native `0.86.3`**, **React `19.2.3`**, **TypeScript `^6.0.3`** (`tsconfig.json` estende `expo/tsconfig.base` com `strict: true`). New Architecture obrigatória desde o SDK 55 (a chave `newArchEnabled` foi removida do `app.json` — não existe mais opt-out). `@types/react` é fixado em versão exata (sem `~`) no `package.json` porque um patch mais novo (`19.2.18`) quebrou a tipagem JSX de `react-native-animatable`, `react-native-webview` e `react-native-collapsible`; ao atualizar essa dependência, rode `tsc --noEmit` antes de deixá-la flutuar de novo.
 - Navegação: `@react-navigation` (`native`, `stack`, `bottom-tabs`).
 - Estado global: `zustand`.
 - UI: `react-native-paper` (o `App.tsx` envolve a árvore em `<Provider>`), `react-native-animatable`, `@expo/vector-icons`.
@@ -16,6 +16,8 @@ Este arquivo complementa o [CLAUDE.md](../CLAUDE.md) da raiz (que contém as reg
 - **Deep linking** (`expo-linking`, `scheme: "codap"` em `app.json`) — sempre ativo (não gated por `__DEV__`), tanto para testar telas via ADB sem navegar manualmente quanto para links reais (e-mail/notificação) no futuro. Ver seção "Autenticação e sincronização" abaixo (`linking` é montado em `App.tsx` e respeita o gate de login).
 - i18n: `i18next` + `react-i18next`, idiomas `en`/`pt`.
 - Sem suíte de testes automatizados e sem script de lint configurados no `package.json` atualmente.
+- **Splash screen**: configurada via plugin no `app.json` (`plugins: [["expo-splash-screen", { image, resizeMode, backgroundColor }]]`), não mais pela chave `splash` de nível raiz — essa chave foi descontinuada (o schema do Expo passou a rejeitá-la) e o `expo-splash-screen` reescreveu sua config para plugin a partir do SDK 54; o valor padrão de `backgroundColor` do plugin é `#ffffff`, então omitir essa config faz a splash aparecer branca em vez da cor do app.
+- **pnpm + Expo CLI**: `pnpm-workspace.yaml` define `publicHoistPattern` para `*expo*`, `*react-native*`, `@react-native/*` e `metro*`. Isso é necessário porque `@expo/cli` usa `metro-runtime` internamente sem declará-lo como dependência própria (só `@expo/metro` o declara) — em pnpm estrito (sem hoisting) isso quebra `expo start`/`expo run:*` com `Cannot find module 'metro-runtime/package.json'`. Não remova esse hoisting sem substituir por outra solução equivalente.
 
 ## Estrutura de diretórios
 
