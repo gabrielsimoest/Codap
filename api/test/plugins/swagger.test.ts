@@ -18,6 +18,8 @@ test('swagger docs are registered when NODE_ENV=development', async (t) => {
   assert.ok(doc.paths['/auth/refresh'], 'auth routes should be documented')
   assert.ok(doc.paths['/auth/logout'], 'auth routes should be documented')
   assert.ok(doc.paths['/sync/'], 'sync routes should be documented')
+  assert.ok(doc.paths['/areas/'], 'areas routes should be documented')
+  assert.ok(doc.paths['/modules/'], 'modules routes should be documented')
 })
 
 test('swagger docs are not registered outside of development', async (t) => {

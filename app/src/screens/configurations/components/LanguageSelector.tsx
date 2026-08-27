@@ -1,6 +1,7 @@
 import { useTheme } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import ResizableText from "../../../components/ResizableText";
 import useLanguageStore from "../../../stores/LanguageStore";
 import { useTranslation } from "react-i18next";
@@ -21,6 +22,18 @@ export default function LanguageSelector() {
 
 	const setLanguage = useLanguageStore((s) => s.setLanguage);
 	const language = useLanguageStore((s) => s.language);
+
+	const persistLanguage = async (language: string) => {
+		try {
+			await AsyncStorage.setItem("CurrentLanguage", language);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	useEffect(() => {
+		persistLanguage(language);
+	}, [language]);
 
 	return (
 		<>

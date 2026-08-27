@@ -6,7 +6,7 @@ import { build } from '../../helper'
 type App = Awaited<ReturnType<typeof build>>
 
 async function createLessonFixture (app: App) {
-  const area = await app.prisma.areas.create({ data: {} })
+  const area = await app.prisma.areas.create({ data: { name: `Sync Fixture Area ${randomUUID()}` } })
   const learningModule = await app.prisma.modules.create({ data: { area_id: area.id, index: 1 } })
   const lesson = await app.prisma.lessons.create({ data: { module_id: learningModule.id, index: 1 } })
 

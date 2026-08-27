@@ -8,6 +8,7 @@
     "api:build": "pnpm --filter codap-api build:ts",
     "api:test": "pnpm --filter codap-api test",
     "api:add": "pnpm --filter codap-api add",
+    "api:seed": "pnpm --filter codap-api seed",
     "app:start": "pnpm --filter codap start",
     "app:android": "pnpm --filter codap android",
     "app:ios": "pnpm --filter codap ios",

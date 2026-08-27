@@ -63,3 +63,22 @@ export interface SyncEventResult {
 export interface SyncResponseBody {
   results: SyncEventResult[];
 }
+
+export interface AreaResponse {
+  id: number;
+  name: string;
+}
+
+export interface LessonSummary {
+  id: number;
+  index: number;
+  name: string;
+}
+
+export interface ModuleResponse {
+  id: number;
+  areaId: number;
+  index: number;
+  name: string;
+  lessons: LessonSummary[];
+}

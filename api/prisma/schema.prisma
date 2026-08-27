@@ -113,12 +113,16 @@ model achievements {
 // Estrutura Pedagógica
 // ---------------------------------------------------------------------------
 
+// `name` fica direto aqui (sem tabela de tradução, ao contrário de
+// modules/lessons/activities): os nomes das áreas são termos técnicos em inglês
+// — HTML, CSS, JavaScript — iguais em qualquer idioma, então area_translations
+// só guardava a mesma string duplicada por locale.
 model areas {
-  id           Int                 @id @default(autoincrement())
-  created_at   DateTime            @default(now())
-  updated_at   DateTime            @updatedAt
-  modules      modules[]
-  translations area_translations[]
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  modules    modules[]
 }
 
 model modules {
@@ -164,22 +168,9 @@ model locales {
   locale                String                  @db.VarChar(8)
   name                  String                  @db.VarChar(20)
   content_versions      content_version[]
-  area_translations     area_translations[]
   module_translations   module_translations[]
   lesson_translations   lesson_translations[]
   activity_translations activity_translations[]
-}
-
-model area_translations {
-  area_id    Int
-  area       areas    @relation(fields: [area_id], references: [id])
-  locale_id  Int
-  locale     locales  @relation(fields: [locale_id], references: [id])
-  name       String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-
-  @@id([area_id, locale_id])
 }
 
 model module_translations {

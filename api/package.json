@@ -13,7 +13,8 @@
     "build:ts": "tsc",
     "watch:ts": "tsc -w",
     "dev": "pnpm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
-    "dev:start": "cross-env NODE_ENV=development fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js"
+    "dev:start": "cross-env NODE_ENV=development fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
+    "seed": "tsx prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -35,7 +36,7 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@types/node": "^25.0.3",
+    "@types/node": "^25.9.5",
     "@types/pg": "^8.21.0",
     "c8": "^11.0.0",
     "concurrently": "^9.0.0",

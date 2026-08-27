@@ -10,6 +10,9 @@ import {
 	TouchableWithoutFeedback,
 	Keyboard,
 	Dimensions,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
 } from "react-native";
 
 import { useTheme, useRoute } from "@react-navigation/native";
@@ -21,7 +24,6 @@ import DarkMode from "../../theme/DarkMode";
 import AuthButton from "./components/AuthButton";
 import useNavigate from "../../hooks/useNavigate";
 import isValidEmail from "../../utils/isValidEmail";
-import CenterView from "../../components/layout/CenterView";
 import Images from "../../utils/imageIndexer";
 import useUserStore from "../../stores/UserStore";
 import useAuthStore from "../../stores/AuthStore";
@@ -120,27 +122,39 @@ export default function Login() {
 	};
 
 	return (
-		<CenterView
-			style={{
-				backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
-			}}
+		<View
+			style={[
+				styles.outerContainer,
+				{
+					backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
+				},
+			]}
 		>
-			<TouchableWithoutFeedback
-				onPress={Keyboard.dismiss}
-				accessible={false}
+			<KeyboardAvoidingView
+				behavior={Platform.OS === "ios" ? "padding" : undefined}
+				style={styles.keyboardAvoiding}
 			>
-				<View style={styles.shade}>
+				<TouchableWithoutFeedback
+					onPress={Keyboard.dismiss}
+					accessible={false}
+				>
+					<View style={styles.shade}>
 					<View
 						style={[
 							styles.box,
-							,
 							{
 								backgroundColor:
 									theme == DarkMode ? "#141f29" : "#f2f2f2",
 							},
 						]}
 					>
-						<View style={styles.header}>
+						<ScrollView
+							style={styles.boxScroll}
+							contentContainerStyle={styles.boxContent}
+							showsVerticalScrollIndicator={false}
+							keyboardShouldPersistTaps="handled"
+						>
+							<View style={styles.header}>
 							<Image
 								style={styles.tinyLogo}
 								source={Images.icon}
@@ -215,10 +229,12 @@ export default function Login() {
 								</Text>
 							</TouchableOpacity>
 						</View>
+						</ScrollView>
 					</View>
 				</View>
 			</TouchableWithoutFeedback>
-		</CenterView>
+			</KeyboardAvoidingView>
+		</View>
 	);
 }
 
@@ -284,17 +300,39 @@ const styles = StyleSheet.create({
 	box: {
 		backgroundColor: "#141f29",
 		borderRadius: 25,
-		height: windowHeight * 0.945, //710
+		maxHeight: windowHeight * 0.945, //710
 		width: windowWidth * 0.942, //370
+		elevation: 2,
+		overflow: "hidden",
+		flex: 1,
+	},
+	boxScroll: {
+		flex: 1,
+		width: "100%",
+	},
+	boxContent: {
+		flexGrow: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		elevation: 2,
+		paddingVertical: 20,
+	},
+	outerContainer: {
+		flex: 1,
+		alignItems: "center",
+		justifyContent: "flex-start",
+		paddingTop: windowHeight * 0.025,
+	},
+	keyboardAvoiding: {
+		width: "100%",
+		alignItems: "center",
+		flex: 1,
 	},
 	shade: {
 		backgroundColor: "rgba(0, 0, 0, 0.3)",
 		borderRadius: 25,
-		height: windowHeight * 0.95, //713
+		maxHeight: windowHeight * 0.95, //713
 		width: windowWidth * 0.95, //373
+		flex: 1,
 	},
 	image: {
 		height: 250,

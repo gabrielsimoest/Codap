@@ -14,6 +14,7 @@ Este arquivo complementa o [CLAUDE.md](../CLAUDE.md) da raiz (que contém as reg
 - **CRUD de `users` implementado** (`src/routes/users/`) — primeiro recurso real da API, serve de modelo para os próximos.
 - **Autenticação via JWT implementada** (`@fastify/jwt` + `@fastify/rate-limit`) — access token de 15 min + refresh token rotativo (7 ou 60 dias, conforme "lembrar-me") persistido hasheado (SHA-256) na tabela `refresh_tokens`, com detecção de reuso. Ver seção "Autenticação" abaixo.
 - **Endpoint de sincronização em lote** (`POST /sync`, protegido por access token) — recebe eventos de progresso feitos offline pelo app (lição concluída, conquista desbloqueada) e aplica de forma idempotente via constraints únicas no Prisma. Ver seção "Sincronização" abaixo.
+- **Catálogo de conteúdo (áreas e módulos)**: `GET /areas` e `GET /modules`, servindo o que antes era hardcoded no app — ver seção "Conteúdo pedagógico (áreas e módulos)" abaixo. Lições/atividades ainda não têm endpoint (continuam hardcoded no app).
 - **`src/types/contracts.ts`** — tipos de contrato (request/response) compartilhados com o app via `codap-api: workspace:*`; tipos que representam entidades persistidas são derivados do Prisma Client gerado, não reescritos à mão.
 
 ## Estrutura de diretórios
@@ -23,6 +24,7 @@ api/
   prisma/
     schema.prisma          # models, gerador prisma-client, datasource postgresql
     migrations/             # histórico de migrations (versionado no git)
+    seed.ts                 # popula locales/areas/modules de referência — ver "Conteúdo pedagógico" abaixo
   src/
     app.ts                  # ponto de entrada: registra plugins e routes via @fastify/autoload
     generated/prisma/       # Prisma Client gerado (`prisma generate`) — NÃO editar à mão, NÃO versionado (.gitignore)
@@ -46,6 +48,10 @@ api/
         index.ts, register.ts, login.ts, refresh.ts, logout.ts, auth.schema.ts
       sync/                    # POST /sync — protegido por fastify.authenticate
         index.ts, create.ts, sync.schema.ts
+      areas/                   # GET /areas — mesmo padrão de múltiplos arquivos
+        index.ts, list.ts, areas.schema.ts
+      modules/                 # GET /modules — mesmo padrão de múltiplos arquivos
+        index.ts, list.ts, modules.schema.ts
     utils/
       password.ts              # hashPassword / comparePassword (bcryptjs)
       refreshToken.ts           # generateRefreshToken (alta entropia) / hashRefreshToken (SHA-256)
@@ -57,6 +63,8 @@ api/
     routes/users/*.test.ts       # espelha src/routes/users
     routes/auth/*.test.ts        # espelha src/routes/auth
     routes/sync/*.test.ts        # espelha src/routes/sync
+    routes/areas/*.test.ts       # espelha src/routes/areas
+    routes/modules/*.test.ts     # espelha src/routes/modules
     tsconfig.json
   .c8rc.json                  # exclui test/** e src/generated/** da cobertura
   dist/                        # saída compilada do tsc (gerada, não editar à mão)
@@ -106,6 +114,16 @@ Quando um recurso tem várias operações (CRUD completo), organize em uma pasta
 - Resposta `200` sempre que a requisição em si é válida e autenticada — é um ack em lote (`results: [{ clientEventId, status, error? }]`), não uma falha única; só `400`/`401`/`429` refletem problema na chamada como um todo.
 - Ao adicionar um novo tipo de evento sincronizável, siga esse mesmo padrão: uma função `applyXxx` dedicada, idempotência via constraint única no schema (evite introduzir uma tabela de log genérica sem necessidade real).
 
+## Conteúdo pedagógico (áreas e módulos)
+
+- `areas`/`modules`/`lessons`/`activities` (`schema.prisma`) já existiam como tabelas migradas desde o início do projeto, mas sem nenhuma API por cima — o app tinha essa estrutura toda hardcoded (3 áreas fixas, 4 módulos fixos por área). `GET /areas` e `GET /modules` migram **só áreas e módulos**; lições/atividades continuam hardcoded no app (fora de escopo deste trabalho).
+- **`GET /areas`** — lista todas as áreas (`{ id, name }`), ordenado por `id`. **Não recebe `locale`** (ver ponto sobre tradução abaixo). **`GET /modules?areaId=<id>&locale=pt|en`** — lista os módulos de uma área (`{ id, areaId, index, name, lessons: [] }`), ordenados por `index`, cada um já trazendo suas `lessons` aninhadas (hoje sempre `[]`, já que nenhuma lição foi migrada/seedada ainda — o formato já está pronto para quando isso mudar, sem precisar de outro endpoint). Uma `areaId` sem módulos retorna `[]` (não é um 404 — é uma lista filtrada, igual `GET /users` sem resultados).
+- **Áreas não são traduzidas; módulos/lições/atividades são.** `areas.name` é uma coluna da própria tabela, sem `area_translations` — os nomes de área são termos técnicos (HTML, CSS, JavaScript), idênticos em qualquer idioma, então a tabela de tradução só guardava a mesma string duplicada por locale. Ela foi removida na migration `20260827130500_move_area_name_out_of_translations`, que faz o backfill de `area_translations.name` para `areas.name` antes do `DROP TABLE`. `module_translations`/`lesson_translations`/`activity_translations` continuam existindo normalmente — cada uma com FK para sua entidade e para `locales`. Não reintroduza tradução de área sem um caso real de nome que mude por idioma.
+- Nos endpoints que ainda recebem `locale` (`GET /modules`), ele é validado por `enum: ['pt', 'en']` no schema da querystring (`400` para qualquer outro valor) — bate exatamente com os códigos que `useLanguageStore` já usa no app, sem camada de tradução de código de idioma no meio. `GET /areas` não tem schema de querystring, então um `?locale=` remanescente de uma versão antiga do app é simplesmente ignorado (não vira `400`).
+- **`areas`/`modules` não têm coluna de ícone/imagem** — só id, nome (em `areas`), timestamps e relacionamentos. Ícones e imagens de cada área/módulo são atribuídos manualmente no app (`app/src/screens/classes/areaMetadata.ts`), por **posição** no array retornado (não pelo `id`) — ver `app/CLAUDE.md`. Não adicione colunas de ícone/imagem ao schema sem pedido explícito.
+- **Seed de referência** (`prisma/seed.ts`, `pnpm seed` ou `pnpm --filter codap-api seed` a partir da raiz): cria as duas `locales` (`pt`/`en`) e, se a tabela `areas` já tiver alguma linha, **pula inteiro** (idempotente por contagem, não por upsert linha a linha — `areas`/`modules` não têm nenhuma coluna natural/única para basear um upsert). Cria sempre nesta ordem fixa — HTML, depois CSS, depois JavaScript (nome direto em `areas.name`, sem tradução) —, cada uma com 4 módulos (`index` 0 a 3, esses sim traduzidos: "Módulo 1".."Módulo 4"/"Module 1".."Module 4"). **Os `id`s gerados não são previsíveis** (autoincrement do Postgres, nunca resetado por um `DELETE`) — nunca hardcode um `id` de área/módulo em código novo; use a posição no array de `GET /areas` (a primeira é sempre HTML) como no app.
+- Reaproveita a mesma conexão de `src/plugins/prisma.ts` (`PrismaPg` + `PrismaClient`), fora do ciclo de vida do Fastify (script standalone, `$disconnect()` no final). Rodar de novo depois que já existem áreas é seguro (só loga e sai) — não duplica dados.
+
 ## Swagger / OpenAPI
 
 - `src/plugins/swagger.ts` registra `@fastify/swagger` + `@fastify/swagger-ui` **somente quando `process.env.NODE_ENV === 'development'`** — fora disso a função retorna cedo e as rotas de documentação nem chegam a existir (não é só UI escondida; em produção/teste elas não são registradas).
@@ -140,6 +158,7 @@ O repositório é um workspace pnpm unificado (ver [CLAUDE.md](../CLAUDE.md) da 
   ```
   node --import tsx --test --test-name-pattern="support works standalone" test/plugins/support.test.ts
   ```
+- Popular o catálogo de referência (áreas/módulos/locales — idempotente, ver "Conteúdo pedagógico"): `pnpm seed` (dentro de `/api`) ou `pnpm api:seed` (da raiz); wired também em `prisma.config.ts` (`migrations.seed`), então `npx prisma db seed` funciona igual.
 - Regenerar o Prisma Client após alterar o schema: `npx prisma generate` (dentro de `/api`)
 - Criar/aplicar uma migration: `npx prisma migrate dev --name <nome>` (dentro de `/api`) — em ambiente não-interativo, ver o passo a passo alternativo na seção "Banco de dados (Prisma)".
 - **`.env` precisa de `DATABASE_URL` e `JWT_ACCESS_SECRET`** (ver `.env.example`) — sem `JWT_ACCESS_SECRET` a aplicação não sobe (erro explícito no boot, em `src/plugins/jwt.ts`).

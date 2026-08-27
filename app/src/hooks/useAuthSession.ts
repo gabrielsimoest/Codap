@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import * as SecureTokenStore from "../services/SecureTokenStore";
 import { getCachedProfile, refreshAccessTokenIfNeeded } from "../services/AuthService";
 import useUserStore from "../stores/UserStore";
+import useAuthStore from "../stores/AuthStore";
 
 /**
  * Hidrata o estado de sessão a partir do SecureStore na inicialização do
@@ -15,12 +16,21 @@ import useUserStore from "../stores/UserStore";
 const useAuthSession = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 	const setUser = useUserStore((s) => s.setUser);
+	const setAuthSession = useAuthStore((s) => s.setSession);
 
 	useEffect(() => {
 		const hydrate = async () => {
 			try {
 				const session = await SecureTokenStore.getStoredSession();
-				setIsLoggedIn(session !== null);
+				const loggedIn = session !== null;
+				setIsLoggedIn(loggedIn);
+				// Sincroniza a AuthStore (reativa) aqui mesmo, no mesmo lote de
+				// atualização — não num useEffect separado em App.tsx — para que
+				// ela já nasça com o valor correto antes do NavigationContainer
+				// montar e resolver um deep link de cold start. Ela é a única
+				// fonte confiável de "logado" que reage a login/logout depois
+				// disso (useAuthSession, por design, não reage mais).
+				setAuthSession(loggedIn);
 
 				if (session !== null) {
 					const cachedProfile = await getCachedProfile();

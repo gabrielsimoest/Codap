@@ -6,38 +6,54 @@ import {
 	View,
 } from "react-native";
 import Icon from "../../components/Icon";
-import ScreenJourney from "./components/ScreenJourney";
+import AreaModules from "./components/AreaModules";
 import ClassHeader from "./components/ClassHeader";
+import ModuleListSkeleton from "./components/ModuleListSkeleton";
 import { Modal, Portal } from "react-native-paper";
+import ThemedSkeleton from "../../components/themed/ThemedSkeleton";
 import ThemedText from "../../components/themed/ThemedText";
 import ThemedView from "../../components/themed/ThemedView";
 import ThemedTouchableOpacity from "../../components/themed/ThemedTouchableOpacity";
+import useAreasQuery from "../../hooks/queries/useAreasQuery";
+import areaMetadata, { getAreaIndex } from "./areaMetadata";
 
 export default function Class() {
 	const [visibleModal, setVisibleModal] = useState(false);
-	const [journey, setJourney] = useState("Html");
-	const [icon, setIcon] = useState("logo-html5");
+	const [pickedAreaId, setPickedAreaId] = useState<number>();
 
-	const onPressCss = () => {
-		setJourney("Css");
+	const { data: areas, isPending: areasPending } = useAreasQuery();
+
+	// Área padrão = a primeira retornada por GET /areas (HTML, sempre a
+	// primeira criada pelo seeder). Derivado, não sincronizado por useEffect:
+	// com o prefetch do boot (App.tsx) as áreas normalmente já estão em cache
+	// no primeiro render, e um efeito só definiria isso um render depois.
+	// Fica `undefined` só no primeiro boot de cada instalação, enquanto
+	// GET /areas ainda está em voo — daí o ModuleListSkeleton abaixo.
+	const selectedAreaId = pickedAreaId ?? areas?.[0]?.id;
+
+	const selectedAreaIndex = getAreaIndex(areas, selectedAreaId);
+	const selectedArea =
+		selectedAreaIndex >= 0 ? areas?.[selectedAreaIndex] : undefined;
+	const selectedMetadata =
+		selectedAreaIndex >= 0 ? areaMetadata[selectedAreaIndex] : undefined;
+
+	const onSelectArea = (areaId: number) => {
+		setPickedAreaId(areaId);
 		setVisibleModal(false);
-		setIcon("logo-css3");
 	};
-	const onPressJavascript = () => {
-		setJourney("Javascript");
-		setVisibleModal(false);
-		setIcon("logo-javascript");
-	};
-	const onPressHtml = () => {
-		setJourney("Html");
-		setVisibleModal(false);
-		setIcon("logo-html5");
-	};
+
 	return (
 		<ThemedView style={styles.container}>
-			<TouchableOpacity onPress={() => setVisibleModal(true)}>
-				<ClassHeader screenName={journey} iconName={icon} />
-			</TouchableOpacity>
+			{areasPending ? (
+				<ThemedSkeleton height={70} borderRadius={0} theme="card" />
+			) : (
+				<TouchableOpacity onPress={() => setVisibleModal(true)}>
+					<ClassHeader
+						screenName={selectedArea?.name ?? ""}
+						iconName={selectedMetadata?.headerIcon ?? ""}
+					/>
+				</TouchableOpacity>
+			)}
 			<Portal>
 				<Modal
 					visible={visibleModal}
@@ -58,61 +74,40 @@ export default function Class() {
 						style={{ flex: 1 }}
 					>
 						<View>
-							<ThemedTouchableOpacity
-								style={styles.selector}
-								onPress={onPressHtml}
-								theme="card"
-							>
-								<Icon
-									type={"fontawesome"}
-									name="html5"
-									size={30}
-									color="#637aff"
-								/>
-								<ThemedText style={styles.actionText}>
-									{" "}
-									HTML
-								</ThemedText>
-							</ThemedTouchableOpacity>
-							<ThemedTouchableOpacity
-								style={styles.selector}
-								onPress={onPressCss}
-								theme="card"
-							>
-								<Icon
-									type={"fontawesome5"}
-									name="css3-alt"
-									size={30}
-									color="#637aff"
-								/>
-								<ThemedText style={styles.actionText}>
-									{" "}
-									CSS
-								</ThemedText>
-							</ThemedTouchableOpacity>
+							{areas?.map((area, index) => {
+								const metadata = areaMetadata[index];
+								if (!metadata) return null;
 
-							<ThemedTouchableOpacity
-								style={styles.selector}
-								onPress={onPressJavascript}
-								theme="card"
-							>
-								<Icon
-									type="ionicon"
-									name="logo-javascript"
-									size={30}
-									color="#637aff"
-								/>
-								<ThemedText style={styles.actionText}>
-									{" "}
-									JavaScript
-								</ThemedText>
-							</ThemedTouchableOpacity>
+								return (
+									<ThemedTouchableOpacity
+										key={area.id}
+										style={styles.selector}
+										onPress={() => onSelectArea(area.id)}
+										theme="card"
+									>
+										<Icon
+											type={metadata.icon.type}
+											name={metadata.icon.name}
+											size={30}
+											color={metadata.color}
+										/>
+										<ThemedText style={styles.actionText}>
+											{" "}
+											{area.name}
+										</ThemedText>
+									</ThemedTouchableOpacity>
+								);
+							})}
 						</View>
 					</TouchableWithoutFeedback>
 				</Modal>
 			</Portal>
 			<View>
-				<ScreenJourney screenName={journey} />
+				{selectedAreaId === undefined ? (
+					<ModuleListSkeleton />
+				) : (
+					<AreaModules areaId={selectedAreaId} />
+				)}
 			</View>
 		</ThemedView>
 	);
