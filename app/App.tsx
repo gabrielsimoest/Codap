@@ -141,7 +141,12 @@ export default function App() {
 				//       uma entrada do formato antigo não tem `activities` e a
 				//       lista de lições viria vazia para sempre. Primeiro bump
 				//       por mudança de dado, não de key (a key não mudou).
-				buster: "4",
+				//   5 — as 2 lições de teste do primeiro módulo de HTML foram
+				//       substituídas pelas 8 lições reais do módulo básico
+				//       (mesmo formato de dado, conteúdo diferente); sem o
+				//       bump, quem já tinha aberto o app ficaria preso para
+				//       sempre nas lições antigas.
+				buster: "5",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas

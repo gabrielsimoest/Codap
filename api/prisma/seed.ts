@@ -62,22 +62,10 @@ async function seedAreasAndModules (localeIds: Map<LocaleCode, number>): Promise
   console.log(`Seed concluído: ${AREA_NAMES.length} áreas, ${AREA_NAMES.length * MODULE_TRANSLATIONS.length} módulos.`)
 }
 
-// Conteúdo de exemplo do primeiro módulo de HTML. Transcrito (não importado)
-// de app/src/screens/classes/lessons/html/content/basic-html.ts: o app é outro
-// pacote do workspace e a API não depende dele. O bloco `en` de lá está em
-// português e sem o exercício — aqui o inglês é real, para o seed servir de
-// demonstração bilíngue de verdade.
-const HTML_STRUCTURE_CODE = `<!DOCTYPE html>
-  <html>
-    <head>
-      <title>Minha página</title>
-    </head>
-    <body>
-      <h1>Minha página</h1>
-      <p>Esta é a minha primeira página HTML!</p>
-    </body>
-  </html>`
-
+// Conteúdo curricular real do primeiro módulo de HTML ("HTML Básico"): 8
+// lições cobrindo os fundamentos da linguagem, cada uma com até 2 atividades
+// teóricas. Só `theory` por enquanto — a parte prática (`option`) ainda está
+// em validação e entra depois, no lugar/complemento destas mesmas lições.
 type ActivitySeed = {
   type: 'theory' | 'option';
   content: Record<LocaleCode, TheoryActivityContent | OptionActivityContent>;
@@ -88,28 +76,189 @@ type LessonSeed = {
   activities: ActivitySeed[];
 }
 
-const EXAMPLE_LESSONS: LessonSeed[] = [
+// Cada trecho de código tem uma versão por idioma: a sintaxe/tags são
+// idênticas, mas o texto visível (rótulos, títulos, parágrafos dentro do
+// próprio HTML de exemplo) é traduzido de verdade — mesmo padrão adotado nos
+// textos das lições, para quem estuda em inglês não ver português dentro do
+// próprio exemplo de código.
+const HELLO_WORLD_CODE_PT = `<h1>Olá, mundo!</h1>
+<p>Minha primeira página web.</p>`
+
+const HELLO_WORLD_CODE_EN = `<h1>Hello, world!</h1>
+<p>My first web page.</p>`
+
+const PARAGRAPH_CODE_PT = '<p>Este é um parágrafo.</p>'
+
+const PARAGRAPH_CODE_EN = '<p>This is a paragraph.</p>'
+
+const DOCUMENT_STRUCTURE_CODE_PT = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minha página</title>
+  </head>
+  <body>
+    <h1>Olá!</h1>
+  </body>
+</html>`
+
+const DOCUMENT_STRUCTURE_CODE_EN = `<!DOCTYPE html>
+<html>
+  <head>
+    <title>My page</title>
+  </head>
+  <body>
+    <h1>Hello!</h1>
+  </body>
+</html>`
+
+const HEAD_BODY_CODE_PT = `<head>
+  <title>Meu site</title>
+</head>
+
+<body>
+  <h1>Bem-vindo!</h1>
+  <p>Este conteúdo aparece na página.</p>
+</body>`
+
+const HEAD_BODY_CODE_EN = `<head>
+  <title>My site</title>
+</head>
+
+<body>
+  <h1>Welcome!</h1>
+  <p>This content appears on the page.</p>
+</body>`
+
+const HEADINGS_CODE_PT = `<h1>Título principal</h1>
+<h2>Seção</h2>
+<h3>Subseção</h3>`
+
+const HEADINGS_CODE_EN = `<h1>Main heading</h1>
+<h2>Section</h2>
+<h3>Subsection</h3>`
+
+const EMPHASIS_CODE_PT = `<p>
+  Aprender <strong>HTML</strong> é importante
+  para criar páginas web.
+</p>
+
+<p>
+  Este texto tem <em>destaque</em>.
+</p>`
+
+const EMPHASIS_CODE_EN = `<p>
+  Learning <strong>HTML</strong> is important
+  for building web pages.
+</p>
+
+<p>
+  This text has <em>emphasis</em>.
+</p>`
+
+const LINK_EXTERNAL_CODE_PT = `<a href="https://example.com">
+  Visitar o site
+</a>`
+
+const LINK_EXTERNAL_CODE_EN = `<a href="https://example.com">
+  Visit the site
+</a>`
+
+const LINK_RELATIVE_CODE_PT = `<a href="sobre.html">
+  Sobre nós
+</a>`
+
+const LINK_RELATIVE_CODE_EN = `<a href="about.html">
+  About us
+</a>`
+
+const IMAGE_CODE_PT = '<img src="imagem.jpg" alt="Uma paisagem" />'
+
+const IMAGE_CODE_EN = '<img src="image.jpg" alt="A landscape" />'
+
+const IMAGE_ALT_CODE_PT = '<img src="gato.jpg" alt="Gato sentado em uma cadeira" />'
+
+const IMAGE_ALT_CODE_EN = '<img src="cat.jpg" alt="Cat sitting on a chair" />'
+
+const LIST_UNORDERED_CODE = `<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>`
+
+const LIST_ORDERED_CODE_PT = `<ol>
+  <li>Abrir o navegador</li>
+  <li>Acessar o site</li>
+  <li>Fazer login</li>
+</ol>`
+
+const LIST_ORDERED_CODE_EN = `<ol>
+  <li>Open the browser</li>
+  <li>Go to the site</li>
+  <li>Log in</li>
+</ol>`
+
+const ATTRIBUTE_LINK_CODE_PT = `<a href="https://example.com">
+  Acessar
+</a>`
+
+const ATTRIBUTE_LINK_CODE_EN = `<a href="https://example.com">
+  Access
+</a>`
+
+const ATTRIBUTE_MULTI_CODE_PT = `<img src="gato.jpg" alt="Gato sentado" />
+
+<a href="sobre.html">
+  Sobre
+</a>`
+
+const ATTRIBUTE_MULTI_CODE_EN = `<img src="cat.jpg" alt="Cat sitting" />
+
+<a href="about.html">
+  About
+</a>`
+
+const DIV_CODE_PT = `<div>
+  <h2>Perfil</h2>
+  <p>Desenvolvedor web</p>
+</div>`
+
+const DIV_CODE_EN = `<div>
+  <h2>Profile</h2>
+  <p>Web developer</p>
+</div>`
+
+const SPAN_CODE_PT = `<p>
+  Meu nome é
+  <span>Gabriel</span>.
+</p>`
+
+const SPAN_CODE_EN = `<p>
+  My name is
+  <span>Gabriel</span>.
+</p>`
+
+const HTML_BASIC_LESSONS: LessonSeed[] = [
   {
-    name: { pt: 'Descobrindo HTML', en: 'Discovering HTML' },
+    name: { pt: 'O que é HTML?', en: 'What is HTML?' },
     activities: [
       {
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Olá, aqui é o Cody. Vamos aprender HTML? O HTML é uma linguagem de marcação muito utilizada na construção de páginas na Web.',
-            secondParagraph: 'Primeiramente estarei mostrando um exemplo bem básico de estrutura para você já ir tendo uma ideia de como o HTML se parece.',
-            endParagraph: 'Como você pôde ver ela é bem simples, mas existem vários outros elementos que podem ser adicionados nessa estrutura para termos sites incríveis.',
-            highlight: ['HTML', 'Cody', 'Web'],
+            firstParagraph: 'Olá, aqui é o Cody! HTML é a linguagem usada para estruturar o conteúdo de uma página web. Ele informa ao navegador o que cada parte da página representa, como títulos, parágrafos, imagens e links.',
+            secondParagraph: 'HTML significa HyperText Markup Language. Apesar do nome, HTML não é uma linguagem de programação: ele é uma linguagem de marcação.',
+            endParagraph: 'O HTML define a estrutura e o significado do conteúdo. A aparência será trabalhada depois, com CSS.',
+            highlight: ['Cody', 'HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
+            code: HELLO_WORLD_CODE_PT
           },
           en: {
-            firstParagraph: "Hi, it's Cody here. Shall we learn HTML? HTML is a markup language widely used to build pages on the Web.",
-            secondParagraph: 'First I will show you a very basic structure example, so you get an idea of what HTML looks like.',
-            endParagraph: 'As you can see it is quite simple, but there are many other elements that can be added to this structure to build amazing websites.',
-            highlight: ['HTML', 'Cody', 'Web'],
+            firstParagraph: "Hi, it's Cody! HTML is the language used to structure the content of a web page. It tells the browser what each part of the page represents, like headings, paragraphs, images and links.",
+            secondParagraph: 'HTML stands for HyperText Markup Language. Despite the name, HTML is not a programming language: it is a markup language.',
+            endParagraph: 'HTML defines the structure and meaning of the content. Appearance comes later, with CSS.',
+            highlight: ['Cody', 'HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
+            code: HELLO_WORLD_CODE_EN
           }
         }
       },
@@ -117,81 +266,323 @@ const EXAMPLE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Agora que vimos a estrutura, vamos entender melhor o que está nela.',
-            secondParagraph: 'A estrutura é formada por tags de abertura e fechamento, que são indicadas por essas setas <>. Dentro delas vai o nome do elemento.',
-            endParagraph: 'Lembre-se, a estrutura DEVE estar entre as tags <html> </html>. Se não seu site não vai funcionar!',
-            highlight: ['HTML', 'DEVE'],
+            firstParagraph: 'Um elemento HTML normalmente é formado por uma tag de abertura, seu conteúdo e uma tag de fechamento.',
+            secondParagraph: 'No exemplo abaixo, <p> indica o início de um parágrafo e </p> indica o fim dele.',
+            endParagraph: 'Tags informam ao navegador como interpretar cada parte do conteúdo. Combinando elementos diferentes, é possível montar uma página inteira.',
+            highlight: ['HTML', 'p'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
+            code: PARAGRAPH_CODE_PT
           },
           en: {
-            firstParagraph: 'Now that we have seen the structure, let us understand better what is inside it.',
-            secondParagraph: 'The structure is made of opening and closing tags, marked by these arrows <>. The element name goes inside them.',
-            endParagraph: 'Remember, the structure MUST sit between the <html> </html> tags. Otherwise your website will not work!',
-            highlight: ['HTML', 'MUST'],
+            firstParagraph: 'An HTML element is usually made of an opening tag, its content, and a closing tag.',
+            secondParagraph: 'In the example below, <p> marks the start of a paragraph and </p> marks its end.',
+            endParagraph: 'Tags tell the browser how to interpret each part of the content. By combining different elements, you can build an entire page.',
+            highlight: ['HTML', 'p'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: '<html> representa uma tag de abertura, como seria uma tag de fechamento?',
-            highlight: ['HTML'],
-            options: ['<html>', '<end html>', '>html<', '</html>'],
-            // 1-based: a resposta certa é a 4ª opção, não o índice 3.
-            correctOption: 4
-          },
-          en: {
-            question: '<html> is an opening tag — what would the closing tag look like?',
-            highlight: ['HTML'],
-            options: ['<html>', '<end html>', '>html<', '</html>'],
-            correctOption: 4
+            code: PARAGRAPH_CODE_EN
           }
         }
       }
     ]
   },
   {
-    name: { pt: 'Cabeçalho e corpo', en: 'Head and body' },
+    name: { pt: 'Estrutura de um documento HTML', en: 'Structure of an HTML document' },
     activities: [
       {
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Toda página HTML se divide em duas partes principais: o <head> e o <body>.',
-            secondParagraph: 'O <head> guarda informações sobre a página que a pessoa não vê diretamente, como o título que aparece na aba do navegador.',
-            endParagraph: 'Já o <body> é onde fica todo o conteúdo visível: textos, imagens, botões e tudo mais.',
-            highlight: ['head', 'body', 'HTML'],
+            firstParagraph: 'Uma página HTML tem uma estrutura básica que organiza suas informações. O navegador usa essa estrutura para interpretar o documento corretamente.',
+            endParagraph: 'Todo documento HTML começa com uma estrutura parecida com essa. Dentro dela, cada parte tem uma função específica.',
+            highlight: ['HTML'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
+            code: DOCUMENT_STRUCTURE_CODE_PT
           },
           en: {
-            firstParagraph: 'Every HTML page is split into two main parts: the <head> and the <body>.',
-            secondParagraph: 'The <head> holds information about the page that the reader does not see directly, such as the title shown on the browser tab.',
-            endParagraph: 'The <body> is where all the visible content lives: text, images, buttons and everything else.',
-            highlight: ['head', 'body', 'HTML'],
+            firstParagraph: 'An HTML page has a basic structure that organizes its information. The browser uses this structure to interpret the document correctly.',
+            endParagraph: 'Every HTML document starts with a structure like this one. Inside it, each part has a specific role.',
+            highlight: ['HTML'],
             codeLanguage: 'HTML',
-            code: HTML_STRUCTURE_CODE
+            code: DOCUMENT_STRUCTURE_CODE_EN
           }
         }
       },
       {
-        type: 'option',
+        type: 'theory',
         content: {
           pt: {
-            question: 'Em qual das tags abaixo fica o conteúdo visível da página?',
-            highlight: ['HTML'],
-            options: ['<head>', '<body>', '<title>', '<doctype>'],
-            correctOption: 2
+            firstParagraph: 'O <head> guarda informações sobre a página que não aparecem diretamente para quem visita, como o título mostrado na aba do navegador. Já o <body> reúne tudo que é exibido: textos, imagens, botões e o restante.',
+            endParagraph: 'Pense no <head> como dados sobre o documento, e no <body> como o conteúdo da página.',
+            highlight: ['head', 'body'],
+            codeLanguage: 'HTML',
+            code: HEAD_BODY_CODE_PT
           },
           en: {
-            question: 'Which of the tags below holds the visible content of the page?',
-            highlight: ['HTML'],
-            options: ['<head>', '<body>', '<title>', '<doctype>'],
-            correctOption: 2
+            firstParagraph: "The <head> holds information about the page that isn't shown directly to visitors, like the title shown on the browser tab. The <body> holds everything that's displayed: text, images, buttons, and more.",
+            endParagraph: "Think of the <head> as data about the document, and the <body> as the page's content.",
+            highlight: ['head', 'body'],
+            codeLanguage: 'HTML',
+            code: HEAD_BODY_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Texto e títulos', en: 'Text and headings' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'HTML tem seis níveis de título, de <h1> a <h6>. Eles representam diferentes níveis de importância dentro da estrutura do conteúdo.',
+            endParagraph: 'Os títulos ajudam a organizar o conteúdo em uma hierarquia. Use o nível que representa a posição daquele conteúdo na página.',
+            highlight: ['HTML', 'h1', 'h6'],
+            codeLanguage: 'HTML',
+            code: HEADINGS_CODE_PT
+          },
+          en: {
+            firstParagraph: 'HTML has six heading levels, from <h1> to <h6>. They represent different levels of importance within the structure of the content.',
+            endParagraph: "Headings help organize content into a hierarchy. Use the level that matches that content's position on the page.",
+            highlight: ['HTML', 'h1', 'h6'],
+            codeLanguage: 'HTML',
+            code: HEADINGS_CODE_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <p> representa um parágrafo. Para destacar uma informação, é possível usar elementos como <strong> e <em>.',
+            endParagraph: 'Use elementos de texto pensando no significado que você quer transmitir, e não só na aparência.',
+            highlight: ['p', 'strong'],
+            codeLanguage: 'HTML',
+            code: EMPHASIS_CODE_PT
+          },
+          en: {
+            firstParagraph: 'The <p> element represents a paragraph. To emphasize information, you can use elements like <strong> and <em>.',
+            endParagraph: 'Choose text elements based on the meaning you want to convey, not just how they look.',
+            highlight: ['p', 'strong'],
+            codeLanguage: 'HTML',
+            code: EMPHASIS_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Links', en: 'Links' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <a> cria links para outras páginas, arquivos ou endereços. O destino é definido pelo atributo href.',
+            endParagraph: 'O texto dentro do <a> é o que a pessoa vê. O atributo href informa para onde o link leva.',
+            highlight: ['href', 'link', 'links'],
+            codeLanguage: 'HTML',
+            code: LINK_EXTERNAL_CODE_PT
+          },
+          en: {
+            firstParagraph: 'The <a> element creates links to other pages, files, or addresses. The destination is set by the href attribute.',
+            endParagraph: 'The text inside the <a> is what the reader sees. The href attribute tells the browser where the link goes.',
+            highlight: ['href', 'link', 'links'],
+            codeLanguage: 'HTML',
+            code: LINK_EXTERNAL_CODE_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Nem todo link aponta para outro site. Também é possível apontar para arquivos ou páginas que fazem parte do próprio projeto.',
+            endParagraph: 'Links relativos são úteis para conectar páginas diferentes de um mesmo site. O caminho é interpretado a partir da localização do arquivo atual.',
+            highlight: ['link', 'links'],
+            codeLanguage: 'HTML',
+            code: LINK_RELATIVE_CODE_PT
+          },
+          en: {
+            firstParagraph: 'Not every link points to another site. You can also point to files or pages that are part of your own project.',
+            endParagraph: 'Relative links are useful for connecting different pages of the same site. The path is interpreted based on the location of the current file.',
+            highlight: ['link', 'links'],
+            codeLanguage: 'HTML',
+            code: LINK_RELATIVE_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Imagens', en: 'Images' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <img> permite adicionar uma imagem à página. Diferente de muitos elementos HTML, ele não tem uma tag de fechamento.',
+            endParagraph: 'O atributo src indica onde está a imagem. O navegador usa esse caminho para carregá-la.',
+            highlight: ['img', 'src', 'HTML'],
+            codeLanguage: 'HTML',
+            code: IMAGE_CODE_PT
+          },
+          en: {
+            firstParagraph: "The <img> element lets you add an image to the page. Unlike many HTML elements, it doesn't have a closing tag.",
+            endParagraph: 'The src attribute points to the image. The browser uses that path to load it.',
+            highlight: ['img', 'src', 'HTML'],
+            codeLanguage: 'HTML',
+            code: IMAGE_CODE_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O atributo alt traz uma descrição em texto da imagem. Ele é importante quando a imagem não carrega, e também para tecnologias assistivas.',
+            endParagraph: 'Escreva um alt que descreva o propósito ou o conteúdo relevante da imagem. Não deixe esse atributo de lado.',
+            highlight: ['alt'],
+            codeLanguage: 'HTML',
+            code: IMAGE_ALT_CODE_PT
+          },
+          en: {
+            firstParagraph: "The alt attribute gives a text description of the image. It matters when the image fails to load, and also for assistive technologies.",
+            endParagraph: "Write an alt that describes the image's purpose or relevant content. Don't skip this attribute.",
+            highlight: ['alt'],
+            codeLanguage: 'HTML',
+            code: IMAGE_ALT_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Listas', en: 'Lists' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Use <ul> quando a ordem dos itens não for importante. Cada item da lista é representado por <li>.',
+            endParagraph: 'A estrutura é simples: <ul> representa a lista, e cada <li> representa um item.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'HTML',
+            code: LIST_UNORDERED_CODE
+          },
+          en: {
+            firstParagraph: "Use <ul> when the order of the items doesn't matter. Each list item is represented by <li>.",
+            endParagraph: 'The structure is simple: <ul> represents the list, and each <li> represents one item.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'HTML',
+            code: LIST_UNORDERED_CODE
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando a ordem dos itens importa, é possível usar <ol>. Os itens continuam sendo representados por <li>.',
+            endParagraph: 'A escolha entre <ul> e <ol> depende do significado da lista, não só da aparência.',
+            highlight: ['ol', 'li', 'ul'],
+            codeLanguage: 'HTML',
+            code: LIST_ORDERED_CODE_PT
+          },
+          en: {
+            firstParagraph: 'When the order of the items matters, you can use <ol>. Items are still represented by <li>.',
+            endParagraph: 'The choice between <ul> and <ol> depends on the meaning of the list, not just how it looks.',
+            highlight: ['ol', 'li', 'ul'],
+            codeLanguage: 'HTML',
+            code: LIST_ORDERED_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Atributos', en: 'Attributes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Atributos trazem informações adicionais sobre um elemento HTML. Eles aparecem na tag de abertura e costumam ter um nome e um valor.',
+            secondParagraph: 'No exemplo abaixo, href é um atributo. Ele informa ao elemento <a> qual endereço deve ser aberto.',
+            endParagraph: 'Tags definem elementos. Atributos adicionam informações ou configurações a esses elementos.',
+            highlight: ['HTML', 'href'],
+            codeLanguage: 'HTML',
+            code: ATTRIBUTE_LINK_CODE_PT
+          },
+          en: {
+            firstParagraph: 'Attributes provide extra information about an HTML element. They appear in the opening tag and usually have a name and a value.',
+            secondParagraph: 'In the example below, href is an attribute. It tells the <a> element which address to open.',
+            endParagraph: 'Tags define elements. Attributes add information or settings to those elements.',
+            highlight: ['HTML', 'href'],
+            codeLanguage: 'HTML',
+            code: ATTRIBUTE_LINK_CODE_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Elementos diferentes têm atributos próprios, de acordo com sua necessidade.',
+            endParagraph: 'No <img>, src indica a imagem e alt traz uma descrição. No <a>, href indica o destino do link.',
+            highlight: ['img', 'src', 'alt', 'href'],
+            codeLanguage: 'HTML',
+            code: ATTRIBUTE_MULTI_CODE_PT
+          },
+          en: {
+            firstParagraph: 'Different elements have their own attributes, depending on what they need.',
+            endParagraph: "In <img>, src points to the image and alt provides a description. In <a>, href points to the link's destination.",
+            highlight: ['img', 'src', 'alt', 'href'],
+            codeLanguage: 'HTML',
+            code: ATTRIBUTE_MULTI_CODE_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Div e Span', en: 'Div and Span' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <div> é um contêiner genérico usado para agrupar outros elementos. Ele é útil para organizar partes da página.',
+            endParagraph: 'O <div> não indica um significado específico para o conteúdo. Ele serve, principalmente, como um contêiner.',
+            highlight: ['div'],
+            codeLanguage: 'HTML',
+            code: DIV_CODE_PT
+          },
+          en: {
+            firstParagraph: "The <div> element is a generic container used to group other elements. It's useful for organizing parts of the page.",
+            endParagraph: "The <div> doesn't carry a specific meaning for the content. It mainly works as a container.",
+            highlight: ['div'],
+            codeLanguage: 'HTML',
+            code: DIV_CODE_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O <span> também é um contêiner genérico, mas costuma ser usado para pequenos trechos de conteúdo dentro de uma linha.',
+            endParagraph: 'A diferença principal está no uso: <div> costuma agrupar blocos maiores, enquanto <span> envolve pequenos trechos de conteúdo.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            code: SPAN_CODE_PT
+          },
+          en: {
+            firstParagraph: "The <span> is also a generic container, but it's typically used for small pieces of content inside a line of text.",
+            endParagraph: 'The key difference is in the use: <div> usually groups larger blocks, while <span> wraps small pieces of content.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            code: SPAN_CODE_EN
           }
         }
       }
@@ -199,13 +590,13 @@ const EXAMPLE_LESSONS: LessonSeed[] = [
   }
 ]
 
-async function seedExampleLessons (localeIds: Map<LocaleCode, number>): Promise<void> {
+async function seedHtmlBasicLessons (localeIds: Map<LocaleCode, number>): Promise<void> {
   // A área é localizada por `name` (coluna real, escrita por este mesmo
   // seeder) e nunca por um `id` literal — ids são autoincrement e não voltam
   // atrás depois de um DELETE, então não há valor previsível para supor.
   const htmlArea = await prisma.areas.findFirst({ where: { name: 'HTML' }, orderBy: { id: 'asc' } })
   if (htmlArea === null) {
-    console.log('Área HTML não encontrada — pulando lições de exemplo.')
+    console.log('Área HTML não encontrada — pulando lições do módulo básico.')
     return
   }
 
@@ -214,7 +605,7 @@ async function seedExampleLessons (localeIds: Map<LocaleCode, number>): Promise<
     orderBy: { index: 'asc' }
   })
   if (firstModule === null) {
-    console.log('Primeiro módulo de HTML não encontrado — pulando lições de exemplo.')
+    console.log('Primeiro módulo de HTML não encontrado — pulando lições do módulo básico.')
     return
   }
 
@@ -222,15 +613,15 @@ async function seedExampleLessons (localeIds: Map<LocaleCode, number>): Promise<
   // `seedAreasAndModules` (que já está satisfeito em qualquer banco seedado,
   // e portanto nunca deixaria este bloco rodar), nem ser uma contagem global
   // de `lessons` — senão qualquer lição criada em outro módulo, no futuro,
-  // impediria este seed de exemplo de rodar.
+  // impediria este seed de rodar.
   const existingLessons = await prisma.lessons.count({ where: { module_id: firstModule.id } })
   if (existingLessons > 0) {
-    console.log(`Lições de exemplo já seedadas (${existingLessons} encontradas) — pulando.`)
+    console.log(`Lições do módulo básico já seedadas (${existingLessons} encontradas) — pulando.`)
     return
   }
 
-  for (let lessonIndex = 0; lessonIndex < EXAMPLE_LESSONS.length; lessonIndex++) {
-    const lessonSeed = EXAMPLE_LESSONS[lessonIndex]
+  for (let lessonIndex = 0; lessonIndex < HTML_BASIC_LESSONS.length; lessonIndex++) {
+    const lessonSeed = HTML_BASIC_LESSONS[lessonIndex]
     const lesson = await prisma.lessons.create({
       data: { module_id: firstModule.id, index: lessonIndex }
     })
@@ -259,14 +650,14 @@ async function seedExampleLessons (localeIds: Map<LocaleCode, number>): Promise<
     }
   }
 
-  const activityCount = EXAMPLE_LESSONS.reduce((total, lesson) => total + lesson.activities.length, 0)
-  console.log(`Seed de conteúdo concluído: ${EXAMPLE_LESSONS.length} lições, ${activityCount} atividades no primeiro módulo de HTML.`)
+  const activityCount = HTML_BASIC_LESSONS.reduce((total, lesson) => total + lesson.activities.length, 0)
+  console.log(`Seed de conteúdo concluído: ${HTML_BASIC_LESSONS.length} lições, ${activityCount} atividades no primeiro módulo de HTML.`)
 }
 
 async function main (): Promise<void> {
   const localeIds = await seedLocales()
   await seedAreasAndModules(localeIds)
-  await seedExampleLessons(localeIds)
+  await seedHtmlBasicLessons(localeIds)
 }
 
 main()
