@@ -8,7 +8,12 @@ import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
 import { Modal, Portal } from "react-native-paper";
 
-const AboutCodap = () => {
+interface Props {
+	/** Gesto escondido: segurar este botão abre a aula de teste (ver Config). */
+	onLongPress?: () => void;
+}
+
+const AboutCodap = ({ onLongPress }: Props) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const { t } = useTranslation();
@@ -122,6 +127,8 @@ const AboutCodap = () => {
 			<SecondaryButton
 				title={t("about")}
 				onPress={() => setModalVisible(true)}
+				onLongPress={onLongPress}
+				delayLongPress={5000}
 			/>
 		</>
 	);

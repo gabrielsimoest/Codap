@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
-import ClassList from "./ClassList";
+import { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import ClassButton from "./ClassButton";
 import LessonComingSoon from "./LessonComingSoon";
 import ModuleCard from "./ModuleCard";
 import ModuleListSkeleton from "./ModuleListSkeleton";
@@ -8,7 +10,10 @@ import ThemedLine from "../../../components/themed/ThemedLine";
 import ThemedView from "../../../components/themed/ThemedView";
 import useAreasQuery from "../../../hooks/queries/useAreasQuery";
 import useModulesQuery from "../../../hooks/queries/useModulesQuery";
+import useNavigate from "../../../hooks/useNavigate";
 import useLanguageStore from "../../../stores/LanguageStore";
+import useUserStore from "../../../stores/UserStore";
+import DatabaseClient from "../../../services/DatabaseClient";
 import areaMetadata, { getAreaIndex } from "../areaMetadata";
 
 interface Props {
@@ -18,18 +23,33 @@ interface Props {
 	areaId: number;
 }
 
-// Área/módulo com o conteúdo de teste hardcoded (ver ClassList) — índice 0 =
-// primeiro módulo da área HTML (índice 0 = primeira área, ver areaMetadata.ts).
-const TEST_LESSON_AREA_INDEX = 0;
-const TEST_LESSON_MODULE_INDEX = 0;
-
 export default function AreaModules({ areaId }: Props) {
 	const { t } = useTranslation();
+	const navigation = useNavigate();
 	const language = useLanguageStore((s) => s.language);
+	const user = useUserStore((s) => s.user);
 	const { data: areas } = useAreasQuery();
 	const { data: modules, isPending: modulesPending } = useModulesQuery(
 		areaId,
 		language
+	);
+
+	// Lições concluídas ficam só no SQLite local (a API não devolve progresso
+	// junto do catálogo). Relido a cada foco para o check aparecer assim que a
+	// tela de lição devolve o usuário para cá.
+	const [completed, setCompleted] = useState<number[]>([]);
+	useFocusEffect(
+		useCallback(() => {
+			const remoteId = user?.remoteId;
+			if (!remoteId) {
+				setCompleted([]);
+				return;
+			}
+			const database = new DatabaseClient();
+			setCompleted(
+				database.getClasses(remoteId).map((row) => row.lessonId)
+			);
+		}, [user?.remoteId])
 	);
 
 	const areaIndex = getAreaIndex(areas, areaId);
@@ -48,10 +68,6 @@ export default function AreaModules({ areaId }: Props) {
 					const moduleMetadata = metadata.modules[module.index];
 					if (!moduleMetadata) return null;
 
-					const isTestLesson =
-						areaIndex === TEST_LESSON_AREA_INDEX &&
-						module.index === TEST_LESSON_MODULE_INDEX;
-
 					return (
 						<ModuleCard
 							key={module.id}
@@ -59,8 +75,21 @@ export default function AreaModules({ areaId }: Props) {
 							title={module.name}
 							subtitle={t(moduleMetadata.subtitleKey)}
 						>
-							{isTestLesson ? (
-								<ClassList topic="HTML" moduleType="basic" />
+							{module.lessons.length > 0 ? (
+								module.lessons.map((lesson) => (
+									<ClassButton
+										key={lesson.id}
+										title={lesson.name}
+										checked={completed.includes(lesson.id)}
+										onPress={() =>
+											navigation.navigate("Lesson", {
+												areaId,
+												moduleId: module.id,
+												lessonId: lesson.id,
+											})
+										}
+									/>
+								))
 							) : (
 								<LessonComingSoon />
 							)}

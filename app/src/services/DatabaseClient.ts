@@ -1,16 +1,29 @@
 import * as SQLite from "expo-sqlite";
-import { nanoid } from "nanoid";
+// `expo-crypto.randomUUID()`, não `nanoid`: o `clientEventId` viaja para
+// `POST /sync`, cujo schema exige `format: 'uuid'` — um id do nanoid (21
+// caracteres) é rejeitado com 400 pela API. O `nanoid` padrão ainda por cima
+// depende de `crypto.getRandomValues`, que não existe no runtime do React
+// Native sem polyfill. `randomUUID` resolve os dois de uma vez, nativamente.
+import { randomUUID } from "expo-crypto";
 import { UserLesson, SyncQueueRow, User } from "../types/entities";
 import runMigrations from "./migrations";
 
 /** TODO: Change tables atribute names */
 
-export default class DatabaseClient {
-	private database: SQLite.SQLiteDatabase;
+// Uma única conexão, aberta no escopo do módulo e viva enquanto o app viver.
+//
+// O expo-sqlite faz pooling por nome de banco: abrir "Users.db" de novo devolve
+// **a mesma** conexão, não uma nova. Enquanto cada `new DatabaseClient()` abria
+// a sua, a classe parecia dona de uma conexão que na verdade era compartilhada
+// — e um `close()` em qualquer instância derrubava o banco para todas as
+// outras (o login fechava, e a primeira conclusão de lição depois disso
+// estourava com NullPointerException no `execSync`). Deixar o
+// compartilhamento explícito aqui, sem `close()`, é o padrão recomendado pelo
+// próprio expo-sqlite. Não reintroduza um `close()` por instância.
+const database = SQLite.openDatabaseSync("Users.db");
 
-	constructor() {
-		this.database = SQLite.openDatabaseSync("Users.db");
-	}
+export default class DatabaseClient {
+	private database = database;
 
 	executeSQL(SQL: string) {
 		return this.database.execSync(SQL);
@@ -100,7 +113,7 @@ export default class DatabaseClient {
 	 * fila de sync nunca divirjam (ver api/CLAUDE.md e app/CLAUDE.md).
 	 */
 	completeLesson(userId: string, lessonId: number) {
-		const clientEventId = nanoid();
+		const clientEventId = randomUUID();
 		const occurredAt = new Date().toISOString();
 
 		this.database.withTransactionSync(() => {
@@ -136,7 +149,7 @@ export default class DatabaseClient {
 					"INSERT INTO SyncQueue (userId, clientEventId, type, payload, occurredAt) VALUES (?, ?, ?, ?, ?);",
 					[
 						userId,
-						nanoid(),
+						randomUUID(),
 						"achievement_unlocked",
 						JSON.stringify({ achievementId }),
 						occurredAt,
@@ -191,7 +204,4 @@ export default class DatabaseClient {
 		);
 	}
 
-	close() {
-		this.database.closeSync();
-	}
 }

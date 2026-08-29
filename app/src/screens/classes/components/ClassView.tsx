@@ -1,99 +1,28 @@
-import { DimensionValue } from "react-native";
-import { Classes, Option, Theory } from "../../../types/entities";
+import { Classes } from "../../../types/entities";
 import { Modal, Portal } from "react-native-paper";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import ClassButton from "./ClassButton";
-import TheoryView from "./TheoryLesson";
-import useNavigate from "../../../hooks/useNavigate";
-import OptionExercise from "./OptionExercise";
+import ActivityPlayer, { filterPlayable } from "./ActivityPlayer";
 
 interface Props {
 	classes: Classes[];
 	title: string;
 }
 
+/**
+ * Casca de modal do conteúdo de teste hardcoded (alcançável só pelo gesto
+ * secreto em Configurações — ver SecretTestLesson). O conteúdo vindo da API usa
+ * a tela `Lesson`; os dois compartilham o mesmo `ActivityPlayer`.
+ */
 export default function ClassView({ classes, title }: Props) {
 	const [visible, setVisible] = useState(false);
-	const [contentIndex, setContentIndex] = useState(0);
-	const [progressWidth, setProgressWidth] = useState("0%");
 
-	const calculateProgressWidth = () => {
-		const totalLessons = classes.length;
-		const currentLesson = contentIndex + 1;
-		const progressPercentage = (
-			(currentLesson / totalLessons) *
-			100
-		).toFixed(0);
-		setProgressWidth(`${progressPercentage}%`);
-	};
-
-	useEffect(() => {
-		calculateProgressWidth();
-	}, [contentIndex]);
-
-	const navigation = useNavigate();
-
-	const changeContent = () => {
-		if (contentIndex + 1 > classes.length - 1) {
-			setVisible(false);
-			setContentIndex(0);
-		} else {
-			setContentIndex(contentIndex + 1);
-		}
-	};
-
-	const closeLesson = () => {
-		setVisible(false);
-		setContentIndex(0);
-	};
-
-	const renderByType = () => {
-		const currentLesson = classes[contentIndex];
-
-		switch (currentLesson.type) {
-			case "theory": {
-				const lessonType = currentLesson as Theory;
-				return (
-					<TheoryView
-						firstParagraph={lessonType.lesson.firstParagraph}
-						secondParagraph={lessonType.lesson.secondParagraph}
-						thirdParagraph={lessonType.lesson.thirdParagraph}
-						endParagraph={lessonType.lesson.endParagraph}
-						highlight={lessonType.lesson.highlight}
-						codeLanguage={lessonType.lesson.codeLanguage}
-						code={lessonType.lesson.code}
-						onlyCode={lessonType.lesson.onlyCode}
-						tutorial={lessonType.lesson.tutorial}
-						progress={progressWidth as DimensionValue}
-						onProceed={changeContent}
-						onClose={closeLesson}
-					/>
-				);
-			}
-			case "option": {
-				const lessonType = currentLesson as Option;
-				return (
-					<OptionExercise
-						question={lessonType.lesson.question}
-						aditionalParagraph={
-							lessonType.lesson.aditionalParagraph
-						}
-						options={lessonType.lesson.options}
-						correctOption={lessonType.lesson.correctOption}
-						highlight={lessonType.lesson.highlight}
-						tutorial={lessonType.lesson.tutorial}
-						progress={progressWidth as DimensionValue}
-						onProceed={changeContent}
-						onClose={closeLesson}
-					/>
-				);
-			}
-			default: {
-				console.log("Not suported");
-				return null;
-			}
-		}
-	};
+	// O conteúdo hardcoded guarda o payload em `lesson`; o da API, em `content`.
+	// O adaptador fica aqui, no caminho legado, e não na tela nova.
+	const activities = useMemo(
+		() => filterPlayable(classes.map(({ type, lesson }) => ({ type, content: lesson }))),
+		[classes]
+	);
 
 	return (
 		<>
@@ -105,7 +34,15 @@ export default function ClassView({ classes, title }: Props) {
 					dismissableBackButton={false}
 					dismissable={false}
 				>
-					{renderByType()}
+					{/* Montado só enquanto visível: fechar desmonta o player e
+					    zera o progresso sozinho, sem reset manual de índice. */}
+					{visible && (
+						<ActivityPlayer
+							activities={activities}
+							onFinish={() => setVisible(false)}
+							onClose={() => setVisible(false)}
+						/>
+					)}
 				</Modal>
 			</Portal>
 			<ClassButton title={title} onPress={() => setVisible(true)} />

@@ -9,9 +9,12 @@ import ConfigHeading from "./components/ConfigHeading";
 import NotificationSwitcher from "./components/NotificationSwitcher";
 import VersionInfo from "./components/VersionInfo";
 import AboutCodap from "./components/AboutCodap";
+import SecretTestLesson from "./components/SecretTestLesson";
+import { useState } from "react";
 
 export default function Config() {
 	const { t } = useTranslation();
+	const [testLessonVisible, setTestLessonVisible] = useState(false);
 
 	return (
 		<ThemedView style={{ flex: 1 }}>
@@ -40,8 +43,14 @@ export default function Config() {
 					title={t("informations")}
 				/>
 				<VersionInfo />
-				<AboutCodap />
+				<AboutCodap
+					onLongPress={() => setTestLessonVisible(true)}
+				/>
 			</ScrollView>
+			<SecretTestLesson
+				visible={testLessonVisible}
+				onDismiss={() => setTestLessonVisible(false)}
+			/>
 		</ThemedView>
 	);
 }

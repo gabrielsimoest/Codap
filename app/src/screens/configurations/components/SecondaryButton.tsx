@@ -5,15 +5,26 @@ import { useTheme } from "@react-navigation/native";
 interface Props {
 	title: string;
 	onPress: () => void;
+	/** O `TouchableOpacity` só dispara `onPress` no soltar se este não tiver disparado. */
+	onLongPress?: () => void;
+	/** Quanto tempo segurando até `onLongPress`. Política de quem usa, não do botão. */
+	delayLongPress?: number;
 }
 
-export default function SecondaryButton({ title, onPress }: Props) {
+export default function SecondaryButton({
+	title,
+	onPress,
+	onLongPress,
+	delayLongPress,
+}: Props) {
 	const { colors } = useTheme();
 
 	return (
 		<TouchableOpacity
 			style={[styles.button, { backgroundColor: colors.background }]}
 			onPress={onPress}
+			onLongPress={onLongPress}
+			delayLongPress={delayLongPress}
 		>
 			<ResizableText style={[styles.text]} defaultSize={20}>
 				{title}

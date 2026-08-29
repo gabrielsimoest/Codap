@@ -73,6 +73,10 @@ export default function App() {
 		() => ({
 			prefixes: [Linking.createURL("/"), "codap://"],
 			config: {
+				// Garante que Home fique embaixo de uma tela aberta direto por
+				// deep link — sem isso, fechar a lição num cold start deixaria
+				// a pilha vazia em vez de cair na aba de aulas.
+				initialRouteName: "Home" as const,
 				screens: authIsLoggedIn
 					? {
 							Home: {
@@ -82,6 +86,21 @@ export default function App() {
 									Market: "market",
 									Account: "account",
 									Settings: "settings",
+								},
+							},
+							Lesson: {
+								path: "lesson/:areaId/:moduleId/:lessonId",
+								// Obrigatório: segmentos de URL chegam como
+								// string, e um areaId string montaria a key
+								// ["modules", "3", "pt"] — uma entrada de cache
+								// diferente de ["modules", 3, "pt"], órfã para
+								// sempre (gcTime Infinity) e com uma requisição
+								// extra. Mesmo problema que useModulesQuery já
+								// evita ao exigir areaId: number.
+								parse: {
+									areaId: Number,
+									moduleId: Number,
+									lessonId: Number,
 								},
 							},
 					  }
@@ -109,15 +128,20 @@ export default function App() {
 			persistOptions={{
 				persister: queryPersister,
 				// Descarta o cache persistido inteiro quando esta string muda.
-				// **Bump obrigatório sempre que o formato de uma query key
-				// persistida mudar**: gcTime é Infinity, então uma entrada de
-				// uma key que não existe mais nunca seria coletada sozinha e
-				// ficaria para sempre no AsyncStorage de quem já tinha o app.
+				// **Bump obrigatório sempre que o formato da key OU do dado de
+				// uma query persistida mudar**: gcTime é Infinity, então uma
+				// entrada num formato que não existe mais nunca seria coletada
+				// sozinha e ficaria para sempre no AsyncStorage de quem já
+				// tinha o app.
 				//   2 — áreas deixaram de ter idioma na key (["areas", lang]
 				//       -> ["areas"]), porque GET /areas não recebe mais locale.
 				//   3 — módulos deixaram de registrar entrada com areaId
 				//       indefinido (ver useModulesQuery/ModuleListSkeleton).
-				buster: "3",
+				//   4 — GET /modules passou a devolver lessons[].activities[];
+				//       uma entrada do formato antigo não tem `activities` e a
+				//       lista de lições viria vazia para sempre. Primeiro bump
+				//       por mudança de dado, não de key (a key não mudou).
+				buster: "4",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas

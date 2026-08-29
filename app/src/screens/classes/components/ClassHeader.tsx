@@ -1,5 +1,5 @@
 import { StyleProp, StyleSheet, View } from "react-native";
-import { Surface, Title } from "react-native-paper";
+import { Surface, Text } from "react-native-paper";
 import Icon from "../../../components/Icon";
 import { useTheme } from "@react-navigation/native";
 
@@ -35,9 +35,9 @@ export default function ClassHeader({ screenName, iconName, style }: Props) {
 					},
 				]}
 			>
-				<Title style={{ color: colors.text, fontFamily: "Roboto" }}>
+				<Text variant="titleLarge" style={{ color: colors.text, fontFamily: "Roboto" }}>
 					{screenName}
-				</Title>
+				</Text>
 			</View>
 			<View style={[styles.view, styles.rightView]}>
 				<Icon name={iconName} type={"ionicon"} color="#637aff" />

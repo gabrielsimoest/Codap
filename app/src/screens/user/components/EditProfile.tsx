@@ -37,7 +37,6 @@ export default function EditProfile() {
 				setUser(newUser);
 				await AsyncStorage.setItem("User", JSON.stringify(newUser));
 			}
-			dbClient.close();
 			setVisibleModal(false);
 			setAlertMessage({
 				title: t("success"),

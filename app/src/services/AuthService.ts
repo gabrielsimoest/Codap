@@ -20,19 +20,14 @@ async function applySession(authResponse: AuthResponse): Promise<User> {
 	await SecureTokenStore.saveSession(authResponse);
 
 	const database = new DatabaseClient();
-	let localUser: User;
-	try {
-		database.initDefaultTables();
-		localUser = database.upsertLocalProfile({
-			remoteId: authResponse.user.id,
-			name: authResponse.user.name,
-			email: authResponse.user.email,
-			xp: authResponse.user.xp,
-			dependabots: authResponse.user.dependabots,
-		});
-	} finally {
-		database.close();
-	}
+	database.initDefaultTables();
+	const localUser = database.upsertLocalProfile({
+		remoteId: authResponse.user.id,
+		name: authResponse.user.name,
+		email: authResponse.user.email,
+		xp: authResponse.user.xp,
+		dependabots: authResponse.user.dependabots,
+	});
 
 	await AsyncStorage.setItem(CACHED_PROFILE_KEY, JSON.stringify(localUser));
 	return localUser;

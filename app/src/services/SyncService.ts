@@ -67,7 +67,6 @@ export async function flushQueue(): Promise<void> {
 			database.resetSyncEventsToPending(pending.map((event) => event.id));
 		}
 	} finally {
-		database.close();
 		isFlushing = false;
 	}
 }
@@ -81,11 +80,7 @@ export async function flushQueue(): Promise<void> {
  */
 export function recordLessonCompletion(userId: string, lessonId: number): void {
 	const database = new DatabaseClient();
-	try {
-		database.completeLesson(userId, lessonId);
-	} finally {
-		database.close();
-	}
+	database.completeLesson(userId, lessonId);
 	flushQueue();
 }
 
@@ -95,10 +90,6 @@ export function recordAchievementUnlock(
 	achievementId: number
 ): void {
 	const database = new DatabaseClient();
-	try {
-		database.unlockAchievement(userId, achievementId);
-	} finally {
-		database.close();
-	}
+	database.unlockAchievement(userId, achievementId);
 	flushQueue();
 }

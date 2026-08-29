@@ -9,7 +9,7 @@ interface ListQuerystring {
 const list: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get<{ Querystring: ListQuerystring }>('/', {
     schema: {
-      description: 'Lista os módulos de uma área (e as lições de cada módulo, se houver), com o nome traduzido no idioma informado.',
+      description: 'Lista os módulos de uma área, com as lições de cada módulo e as atividades de cada lição aninhadas, tudo traduzido no idioma informado. É a única chamada necessária para montar o catálogo e o conteúdo de uma área.',
       tags: ['modules'],
       querystring: listModulesQuerystringSchema,
       response: {
@@ -41,6 +41,19 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
               where: { locale: { locale } },
               select: { name: true },
               take: 1
+            },
+            activities: {
+              select: {
+                id: true,
+                index: true,
+                type: true,
+                translations: {
+                  where: { locale: { locale } },
+                  select: { content: true },
+                  take: 1
+                }
+              },
+              orderBy: { index: 'asc' }
             }
           },
           orderBy: { index: 'asc' }
@@ -57,7 +70,13 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
       lessons: module.lessons.map((lesson) => ({
         id: lesson.id,
         index: lesson.index,
-        name: lesson.translations[0]?.name ?? ''
+        name: lesson.translations[0]?.name ?? '',
+        activities: lesson.activities.map((activity) => ({
+          id: activity.id,
+          index: activity.index,
+          type: activity.type,
+          content: activity.translations[0]?.content ?? {}
+        }))
       }))
     }))
   })

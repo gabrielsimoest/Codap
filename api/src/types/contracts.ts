@@ -69,10 +69,49 @@ export interface AreaResponse {
   name: string;
 }
 
-export interface LessonSummary {
+// Formato do `content` de uma atividade `theory`. Idêntico ao que o app já
+// usa em `Theory["lesson"]` — é isso que permite despachar o `content` direto
+// para os componentes de renderização, sem camada de adaptação.
+export interface TheoryActivityContent {
+  firstParagraph: string;
+  secondParagraph?: string;
+  thirdParagraph?: string;
+  endParagraph?: string;
+  highlight: string[];
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript';
+  code: string;
+  onlyCode?: boolean;
+  tutorial?: boolean;
+}
+
+export interface OptionActivityContent {
+  question: string;
+  aditionalParagraph?: string;
+  highlight: string[];
+  tutorial?: boolean;
+  /** 1-based: a primeira opção é `1`, não `0`. */
+  correctOption: number;
+  options: string[];
+}
+
+export interface ActivityResponse {
+  id: number;
+  index: number;
+  /** String livre — `activities.type` é `VarChar(25)`, sem enum no banco. */
+  type: string;
+  /**
+   * `activity_translations.content` (JSONB) já resolvido no idioma pedido.
+   * `unknown` de propósito: o banco não valida esse blob, então quem renderiza
+   * é que precisa estreitar por `type` (ver Theory/OptionActivityContent).
+   */
+  content: unknown;
+}
+
+export interface LessonResponse {
   id: number;
   index: number;
   name: string;
+  activities: ActivityResponse[];
 }
 
 export interface ModuleResponse {
@@ -80,5 +119,5 @@ export interface ModuleResponse {
   areaId: number;
   index: number;
   name: string;
-  lessons: LessonSummary[];
+  lessons: LessonResponse[];
 }

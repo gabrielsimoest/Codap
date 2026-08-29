@@ -1,3 +1,8 @@
+import type {
+	OptionActivityContent,
+	TheoryActivityContent,
+} from "codap-api/src/types/contracts";
+
 export interface User {
 	name: string;
 	email: string;
@@ -32,31 +37,18 @@ export interface SyncQueueRow {
 	updatedAt: string;
 }
 
+// O conteúdo hardcoded (lessons/html/content/*) e o que vem da API são a mesma
+// forma, então os tipos são os mesmos: `TheoryActivityContent`/
+// `OptionActivityContent` são a fonte da verdade, e o conteúdo local não pode
+// divergir do contrato sem quebrar o build.
 export type Theory = {
 	type: "theory";
-	lesson: {
-		firstParagraph: string;
-		secondParagraph?: string;
-		thirdParagraph?: string;
-		endParagraph?: string;
-		highlight: string[];
-		codeLanguage: "HTML" | "CSS" | "JavaScript";
-		code: string;
-		onlyCode?: boolean;
-		tutorial?: boolean;
-	};
+	lesson: TheoryActivityContent;
 };
 
 export type Option = {
 	type: "option";
-	lesson: {
-		question: string;
-		aditionalParagraph?: string;
-		highlight: string[];
-		tutorial?: boolean;
-		correctOption: number;
-		options: string[];
-	};
+	lesson: OptionActivityContent;
 };
 
 type DummyClass = {
@@ -65,6 +57,16 @@ type DummyClass = {
 };
 
 export type Classes = Theory | Option | DummyClass;
+
+/**
+ * O que o `ActivityPlayer` sabe reproduzir, venha da API (`ActivityResponse`,
+ * que já tem `type`/`content`) ou do conteúdo hardcoded do modal de teste
+ * (`Classes`, adaptado de `lesson` para `content`).
+ */
+export type PlayableActivity = {
+	type: string;
+	content: unknown;
+};
 
 export type Content = {
 	title: string;
