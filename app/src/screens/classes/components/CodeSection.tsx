@@ -1,4 +1,10 @@
-import { LayoutChangeEvent, Pressable, StyleSheet, View } from "react-native";
+import {
+	LayoutChangeEvent,
+	Pressable,
+	ScrollView,
+	StyleSheet,
+	View,
+} from "react-native";
 import CustomSyntaxHighlighter from "../../../components/CustomSyntaxHighlighter";
 import ThemedText from "../../../components/themed/ThemedText";
 import RowView from "../../../components/layout/RowView";
@@ -26,7 +32,9 @@ export default function CodeSection({ onlyCode, codeLanguage, code }: Props) {
 					{ width: "100%", marginVertical: 20 },
 				]}
 			>
-				<CustomSyntaxHighlighter language={codeLanguage} code={code} />
+				<ScrollView style={{ width: "100%" }}>
+					<CustomSyntaxHighlighter language={codeLanguage} code={code} />
+				</ScrollView>
 			</View>
 		);
 
@@ -80,7 +88,7 @@ export default function CodeSection({ onlyCode, codeLanguage, code }: Props) {
 			</RowView>
 			<View style={isDarkMode ? styles.codeArea : styles.codeAreaLight}>
 				{isIndexVisible ? (
-					<View
+					<ScrollView
 						style={{ width: "100%" }}
 						onLayout={onHighlighterLayout}
 					>
@@ -88,7 +96,7 @@ export default function CodeSection({ onlyCode, codeLanguage, code }: Props) {
 							language={codeLanguage}
 							code={code}
 						/>
-					</View>
+					</ScrollView>
 				) : (
 					<View
 						style={{
@@ -149,6 +157,12 @@ const styles = StyleSheet.create({
 	//Code area dark
 
 	codeArea: {
+		height: 300,
+		// Mesmo valor de "background" do tema atomOneDark (hljs) usado no
+		// syntax highlighter — sem isso, o espaço da caixa que sobra abaixo
+		// do código mostra a cor de fundo do card por trás, criando uma
+		// emenda visível de cor diferente.
+		backgroundColor: "#282c34",
 		borderWidth: 5,
 		borderColor: "#304D66",
 		shadowColor: "#000",
@@ -165,6 +179,10 @@ const styles = StyleSheet.create({
 	//Code area light
 
 	codeAreaLight: {
+		height: 300,
+		// Mesmo valor de "background" do tema atomOneLight (hljs) — ver
+		// comentário equivalente em codeArea.
+		backgroundColor: "#fafafa",
 		borderWidth: 5,
 		borderColor: "#A5A5A5",
 		shadowColor: "#000",
