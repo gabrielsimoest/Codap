@@ -13,35 +13,58 @@ import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
 import WebView from "react-native-webview";
 
-interface Props {
-	onlyCode: boolean;
+interface CodeBlock {
 	codeLanguage: "HTML" | "CSS" | "JavaScript";
 	code: string;
 }
 
-export default function CodeSection({ onlyCode, codeLanguage, code }: Props) {
-	const theme = useTheme();
+interface Props {
+	onlyCode: boolean;
+	codeLanguage: "HTML" | "CSS" | "JavaScript";
+	code: string;
+	/** Blocos extras no mesmo trecho (ex.: HTML + CSS juntos), cada um com sua própria aba. */
+	additionalCode?: CodeBlock[];
+}
 
+// A WebView só entende HTML — o bloco CSS (se houver) vira um <style> injetado
+// antes do HTML. JavaScript não entra aqui de propósito: isto é um preview
+// estático, não um runtime de JS.
+function buildPreviewHtml(blocks: CodeBlock[]): string {
+	const html =
+		blocks.find((block) => block.codeLanguage === "HTML")?.code ?? "";
+	const css = blocks.find((block) => block.codeLanguage === "CSS")?.code ?? "";
+
+	return css ? `<style>${css}</style>${html}` : html;
+}
+
+export default function CodeSection({
+	onlyCode,
+	codeLanguage,
+	code,
+	additionalCode,
+}: Props) {
+	const theme = useTheme();
 	const isDarkMode = theme === DarkMode;
 
-	if (onlyCode)
-		return (
-			<View
-				style={[
-					isDarkMode ? styles.codeArea : styles.codeAreaLight,
-					{ width: "100%", marginVertical: 20 },
-				]}
-			>
-				<ScrollView style={{ width: "100%" }}>
-					<CustomSyntaxHighlighter language={codeLanguage} code={code} />
-				</ScrollView>
-			</View>
-		);
+	const blocks: CodeBlock[] = [
+		{ codeLanguage, code },
+		...(additionalCode ?? []),
+	];
 
-	const [isIndexVisible, setIndexVisible] = useState(true);
-	const toggleContent = () => {
-		setIndexVisible(!isIndexVisible);
-	};
+	const tabs = [
+		...blocks.map((block, index) => ({
+			id: `code-${index}`,
+			label: block.codeLanguage as string,
+		})),
+		...(onlyCode ? [] : [{ id: "web", label: "Web" }]),
+	];
+
+	const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+	// A quantidade de abas varia por atividade (1 a 4), mas o CodeSection não
+	// remonta ao trocar de atividade dentro da mesma lição (mesma posição na
+	// árvore) — sem este fallback, uma aba salva de uma atividade anterior
+	// (ex.: "code-1") poderia não existir na atividade atual e não renderizar nada.
+	const activeTab = tabs.find((tab) => tab.id === activeTabId) ?? tabs[0];
 
 	const [highlighterHeight, setHighlighterHeight] = useState(100);
 	const onHighlighterLayout = (event: LayoutChangeEvent) => {
@@ -49,72 +72,72 @@ export default function CodeSection({ onlyCode, codeLanguage, code }: Props) {
 		setHighlighterHeight(height);
 	};
 
+	const activeBlockIndex = activeTab.id.startsWith("code-")
+		? Number(activeTab.id.slice("code-".length))
+		: -1;
+
+	const content =
+		activeBlockIndex >= 0 ? (
+			<ScrollView style={{ width: "100%" }} onLayout={onHighlighterLayout}>
+				<CustomSyntaxHighlighter
+					language={blocks[activeBlockIndex].codeLanguage}
+					code={blocks[activeBlockIndex].code}
+				/>
+			</ScrollView>
+		) : (
+			<View style={{ width: "100%", height: highlighterHeight }}>
+				<WebView
+					source={{ html: buildPreviewHtml(blocks) }}
+					containerStyle={{
+						flex: 0,
+						height: highlighterHeight,
+					}}
+					textZoom={220}
+					nestedScrollEnabled={true}
+				/>
+			</View>
+		);
+
+	if (tabs.length === 1)
+		return (
+			<View
+				style={[
+					isDarkMode ? styles.codeArea : styles.codeAreaLight,
+					{ width: "100%", marginVertical: 20 },
+				]}
+			>
+				{content}
+			</View>
+		);
+
 	return (
 		<View>
 			<RowView style={{ marginTop: 10 }}>
-				<Pressable
-					style={[
-						styles.button,
-						styles[isDarkMode ? "buttonDark" : "buttonLight"],
-						isIndexVisible
-							? styles[
-									theme === DarkMode
-										? "selectedDark"
-										: "selectedLight"
-							  ]
-							: null,
-					]}
-					onPress={toggleContent}
-				>
-					<ThemedText style={styles.textButton}>Index</ThemedText>
-				</Pressable>
-				<Pressable
-					style={[
-						styles.button,
-						styles[isDarkMode ? "buttonDark" : "buttonLight"],
-						!isIndexVisible
-							? styles[
-									theme === DarkMode
-										? "selectedDark"
-										: "selectedLight"
-							  ]
-							: null,
-						{ marginLeft: -15 },
-					]}
-					onPress={toggleContent}
-				>
-					<ThemedText style={styles.textButton}>Web</ThemedText>
-				</Pressable>
+				{tabs.map((tab, index) => (
+					<Pressable
+						key={tab.id}
+						style={[
+							styles.button,
+							styles[isDarkMode ? "buttonDark" : "buttonLight"],
+							activeTab.id === tab.id
+								? styles[
+										theme === DarkMode
+											? "selectedDark"
+											: "selectedLight"
+								  ]
+								: null,
+							index > 0 ? { marginLeft: -15 } : null,
+						]}
+						onPress={() => setActiveTabId(tab.id)}
+					>
+						<ThemedText style={styles.textButton}>
+							{tab.label}
+						</ThemedText>
+					</Pressable>
+				))}
 			</RowView>
 			<View style={isDarkMode ? styles.codeArea : styles.codeAreaLight}>
-				{isIndexVisible ? (
-					<ScrollView
-						style={{ width: "100%" }}
-						onLayout={onHighlighterLayout}
-					>
-						<CustomSyntaxHighlighter
-							language={codeLanguage}
-							code={code}
-						/>
-					</ScrollView>
-				) : (
-					<View
-						style={{
-							width: "100%",
-							height: highlighterHeight,
-						}}
-					>
-						<WebView
-							source={{ html: code }}
-							containerStyle={{
-								flex: 0,
-								height: highlighterHeight,
-							}}
-							textZoom={220}
-							nestedScrollEnabled={true}
-						/>
-					</View>
-				)}
+				{content}
 			</View>
 		</View>
 	);

@@ -18,6 +18,7 @@ interface Props {
 	highlight: string[];
 	codeLanguage: "HTML" | "CSS" | "JavaScript";
 	code: string;
+	additionalCode?: { codeLanguage: "HTML" | "CSS" | "JavaScript"; code: string }[];
 	onlyCode?: boolean;
 	tutorial?: boolean;
 	progress: DimensionValue;
@@ -33,6 +34,7 @@ export default function TheoryView({
 	highlight = [""],
 	codeLanguage,
 	code,
+	additionalCode,
 	onlyCode = false,
 	tutorial = false,
 	progress,
@@ -79,6 +81,7 @@ export default function TheoryView({
 						onlyCode={onlyCode}
 						codeLanguage={codeLanguage}
 						code={code}
+						additionalCode={additionalCode}
 					/>
 
 					{endParagraph !== undefined ? (

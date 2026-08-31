@@ -80,6 +80,13 @@ export interface TheoryActivityContent {
   highlight: string[];
   codeLanguage: 'HTML' | 'CSS' | 'JavaScript';
   code: string;
+  /**
+   * Blocos de código extras no mesmo trecho (ex.: HTML + CSS juntos), cada um
+   * com sua própria aba em `CodeSection` além da aba principal (`codeLanguage`
+   * / `code`). Usado sobretudo em CSS, onde a aba "Web" precisa do HTML e do
+   * CSS juntos para renderizar a demonstração.
+   */
+  additionalCode?: { codeLanguage: 'HTML' | 'CSS' | 'JavaScript'; code: string }[];
   onlyCode?: boolean;
   tutorial?: boolean;
 }

@@ -68,6 +68,7 @@ export default function ActivityPlayer({
 					highlight={content.highlight}
 					codeLanguage={content.codeLanguage}
 					code={content.code}
+					additionalCode={content.additionalCode}
 					onlyCode={content.onlyCode}
 					tutorial={content.tutorial}
 					progress={progress}

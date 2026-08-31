@@ -146,7 +146,13 @@ export default function App() {
 				//       (mesmo formato de dado, conteúdo diferente); sem o
 				//       bump, quem já tinha aberto o app ficaria preso para
 				//       sempre nas lições antigas.
-				buster: "5",
+				//   6 — os primeiros módulos de CSS e JavaScript ganharam
+				//       lições reais (antes vinham sem nenhuma); e
+				//       TheoryActivityContent ganhou o campo opcional
+				//       `additionalCode`, usado pelas novas lições de CSS.
+				//       Sem o bump, quem já tinha aberto o app ficaria com
+				//       CSS/JavaScript sem lições para sempre.
+				buster: "6",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas
