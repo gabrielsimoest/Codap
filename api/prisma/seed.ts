@@ -1807,12 +1807,2162 @@ async function seedJsBasicLessons (localeIds: Map<LocaleCode, number>): Promise<
   console.log(`Seed de conteúdo concluído: ${JS_BASIC_LESSONS.length} lições, ${activityCount} atividades no primeiro módulo de JavaScript.`)
 }
 
+// ============================================================
+// Conteúdo curricular do segundo módulo ("Intermediário") de cada área.
+// Parte do princípio de que o aluno já concluiu o módulo básico da mesma
+// área, então nada aqui repete fundamentos já ensinados lá. Só `theory` por
+// enquanto, pelo mesmo motivo dos módulos básicos: a parte prática (`option`
+// e os tipos novos do roadmap) entra depois, complementando estas lições.
+//
+// Duas limitações do componente existente moldaram a apresentação (a
+// arquitetura foi preservada, o conteúdo é que se adaptou a ela):
+//   - `TheoryActivityContent` não tem campo de título — os títulos de tela da
+//     proposta pedagógica viram a ideia central do `firstParagraph`, não um
+//     campo novo.
+//   - `CodeSection` monta a aba "Web" com HTML + CSS apenas (`buildPreviewHtml`
+//     ignora JavaScript de propósito). Por isso toda atividade de JavaScript é
+//     `onlyCode: true`, mesmo onde a proposta pedia WebView — ver Fase 3 do
+//     roadmap em docs/roadmap-atividades-praticas.md.
+// ============================================================
+
+// --- HTML Intermediário: trechos de código ---
+
+const HTMLI1_T1_PT = `<div>
+  <div>Meu site</div>
+  <div>Conteúdo principal</div>
+</div>`
+
+const HTMLI1_T1_EN = `<div>
+  <div>My site</div>
+  <div>Main content</div>
+</div>`
+
+const HTMLI1_T2_PT = `<header>Meu site</header>
+
+<nav>Menu</nav>
+
+<main>
+  <section>
+    <h1>Notícias</h1>
+  </section>
+</main>
+
+<footer>Contato</footer>`
+
+const HTMLI1_T2_EN = `<header>My site</header>
+
+<nav>Menu</nav>
+
+<main>
+  <section>
+    <h1>News</h1>
+  </section>
+</main>
+
+<footer>Contact</footer>`
+
+const HTMLI2_T1_PT = `<header>
+  <h1>Meu site</h1>
+
+  <nav>
+    <a href="/">Início</a>
+    <a href="/sobre">Sobre</a>
+  </nav>
+</header>`
+
+const HTMLI2_T1_EN = `<header>
+  <h1>My site</h1>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>`
+
+const HTMLI2_T2_PT = `<main>
+  <section>
+    <h2>Produtos</h2>
+    <p>Confira nossos produtos.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Todos os direitos reservados.</p>
+</footer>`
+
+const HTMLI2_T2_EN = `<main>
+  <section>
+    <h2>Products</h2>
+    <p>Check out our products.</p>
+  </section>
+</main>
+
+<footer>
+  <p>All rights reserved.</p>
+</footer>`
+
+const HTMLI3_T1_PT = `<article>
+  <h2>Nova versão disponível</h2>
+  <p>
+    Uma nova versão do aplicativo foi lançada.
+  </p>
+</article>`
+
+const HTMLI3_T1_EN = `<article>
+  <h2>New version available</h2>
+  <p>
+    A new version of the app has been released.
+  </p>
+</article>`
+
+const HTMLI3_T2_PT = `<main>
+  <article>
+    <h1>Aprendendo HTML</h1>
+    <p>Conteúdo principal.</p>
+  </article>
+
+  <aside>
+    <h2>Leia também</h2>
+    <p>Outros conteúdos relacionados.</p>
+  </aside>
+</main>`
+
+const HTMLI3_T2_EN = `<main>
+  <article>
+    <h1>Learning HTML</h1>
+    <p>Main content.</p>
+  </article>
+
+  <aside>
+    <h2>Read also</h2>
+    <p>Other related content.</p>
+  </aside>
+</main>`
+
+const HTMLI4_T1_PT = `<form>
+  <label for="nome">Nome</label>
+
+  <input
+    id="nome"
+    name="nome"
+    type="text"
+  >
+
+  <button type="submit">
+    Enviar
+  </button>
+</form>`
+
+const HTMLI4_T1_EN = `<form>
+  <label for="name">Name</label>
+
+  <input
+    id="name"
+    name="name"
+    type="text"
+  >
+
+  <button type="submit">
+    Submit
+  </button>
+</form>`
+
+// Só tipos de input, sem texto visível — igual nos dois idiomas.
+const HTMLI4_T2_CODE = `<input type="text">
+<input type="email">
+<input type="number">
+<input type="date">
+<input type="checkbox">`
+
+const HTMLI5_T1_PT = `<label for="email">
+  E-mail
+</label>
+
+<input
+  id="email"
+  name="email"
+  type="email"
+>`
+
+const HTMLI5_T1_EN = `<label for="email">
+  Email
+</label>
+
+<input
+  id="email"
+  name="email"
+  type="email"
+>`
+
+const HTMLI5_T2_PT = `<input
+  type="email"
+  name="email"
+  required
+>
+
+<input
+  type="text"
+  name="nome"
+  minlength="3"
+>`
+
+const HTMLI5_T2_EN = `<input
+  type="email"
+  name="email"
+  required
+>
+
+<input
+  type="text"
+  name="name"
+  minlength="3"
+>`
+
+const HTMLI6_T1_PT = `<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Mouse</td>
+      <td>R$ 50</td>
+    </tr>
+  </tbody>
+</table>`
+
+const HTMLI6_T1_EN = `<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Mouse</td>
+      <td>$ 50</td>
+    </tr>
+  </tbody>
+</table>`
+
+const HTMLI6_T2_PT = `<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Preço</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Teclado</td>
+      <td>R$ 100</td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td>Total</td>
+      <td>R$ 100</td>
+    </tr>
+  </tfoot>
+</table>`
+
+const HTMLI6_T2_EN = `<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>Keyboard</td>
+      <td>$ 100</td>
+    </tr>
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td>Total</td>
+      <td>$ 100</td>
+    </tr>
+  </tfoot>
+</table>`
+
+const HTMLI7_T1_PT = `<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Meu site</title>
+</head>`
+
+const HTMLI7_T1_EN = `<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>My site</title>
+</head>`
+
+const HTMLI7_T2_PT = `<meta
+  name="description"
+  content="Aprenda desenvolvimento web."
+>`
+
+const HTMLI7_T2_EN = `<meta
+  name="description"
+  content="Learn web development."
+>`
+
+const HTMLI8_T1_PT = `<main>
+  <h1>Perfil</h1>
+
+  <img
+    src="perfil.jpg"
+    alt="Foto de perfil"
+  >
+
+  <button type="button">
+    Seguir
+  </button>
+</main>`
+
+const HTMLI8_T1_EN = `<main>
+  <h1>Profile</h1>
+
+  <img
+    src="profile.jpg"
+    alt="Profile photo"
+  >
+
+  <button type="button">
+    Follow
+  </button>
+</main>`
+
+const HTMLI8_T2_PT = `<h1>Curso de HTML</h1>
+
+<h2>Fundamentos</h2>
+<h3>Elementos</h3>
+
+<h2>Formulários</h2>
+<h3>Inputs</h3>`
+
+const HTMLI8_T2_EN = `<h1>HTML course</h1>
+
+<h2>Fundamentals</h2>
+<h3>Elements</h3>
+
+<h2>Forms</h2>
+<h3>Inputs</h3>`
+
+const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Por que HTML semântico?', en: 'Why semantic HTML?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'HTML semântico significa utilizar elementos que descrevem o significado do conteúdo. Em vez de usar qualquer elemento como contêiner, escolhemos aquele que representa melhor sua função.',
+            secondParagraph: 'Uma estrutura semântica ajuda navegadores, mecanismos de busca, tecnologias assistivas e outros desenvolvedores a compreenderem a página.',
+            endParagraph: 'O código funciona, mas não comunica claramente a estrutura da página. Elementos semânticos resolvem esse problema.',
+            highlight: ['HTML', 'semântico', 'semântica', 'semânticos'],
+            codeLanguage: 'HTML',
+            code: HTMLI1_T1_PT
+          },
+          en: {
+            firstParagraph: 'Semantic HTML means using elements that describe the meaning of the content. Instead of using any element as a container, we choose the one that best represents its role.',
+            secondParagraph: 'A semantic structure helps browsers, search engines, assistive technologies and other developers understand the page.',
+            endParagraph: 'The code works, but it does not clearly communicate the structure of the page. Semantic elements solve that problem.',
+            highlight: ['HTML', 'semantic'],
+            codeLanguage: 'HTML',
+            code: HTMLI1_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Elementos como <header>, <nav>, <main>, <section>, <article>, <aside> e <footer> representam partes diferentes de uma página.',
+            endParagraph: 'A semântica não serve apenas para organizar visualmente. Ela comunica a estrutura e o significado do conteúdo.',
+            highlight: ['header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'semântica'],
+            codeLanguage: 'HTML',
+            code: HTMLI1_T2_PT
+          },
+          en: {
+            firstParagraph: 'Elements like <header>, <nav>, <main>, <section>, <article>, <aside> and <footer> represent different parts of a page.',
+            endParagraph: 'Semantics is not only about visual organization. It communicates the structure and the meaning of the content.',
+            highlight: ['header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'semantics'],
+            codeLanguage: 'HTML',
+            code: HTMLI1_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Estrutura da página', en: 'Page structure' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma página pode ser dividida em regiões com diferentes responsabilidades. <header> representa uma introdução ou cabeçalho e <nav> representa uma área de navegação.',
+            endParagraph: 'Usar elementos específicos torna a estrutura mais clara do que agrupar tudo em <div>.',
+            highlight: ['header', 'nav', 'div'],
+            codeLanguage: 'HTML',
+            code: HTMLI2_T1_PT
+          },
+          en: {
+            firstParagraph: 'A page can be split into regions with different responsibilities. <header> represents an introduction or heading area, and <nav> represents a navigation area.',
+            endParagraph: 'Using specific elements makes the structure clearer than wrapping everything in <div>.',
+            highlight: ['header', 'nav', 'div'],
+            codeLanguage: 'HTML',
+            code: HTMLI2_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<main> representa o conteúdo principal da página. <section> agrupa uma seção temática e <footer> representa informações de rodapé.',
+            endParagraph: 'Uma boa estrutura semântica cria uma hierarquia que pode ser compreendida tanto por pessoas quanto por tecnologias.',
+            highlight: ['main', 'section', 'footer', 'semântica'],
+            codeLanguage: 'HTML',
+            code: HTMLI2_T2_PT
+          },
+          en: {
+            firstParagraph: '<main> represents the primary content of the page. <section> groups a thematic part of it and <footer> represents information shown at the bottom.',
+            endParagraph: 'A good semantic structure creates a hierarchy that both people and technologies can understand.',
+            highlight: ['main', 'section', 'footer', 'semantic'],
+            codeLanguage: 'HTML',
+            code: HTMLI2_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Article e aside', en: 'Article and aside' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <article> representa um conteúdo que pode fazer sentido de forma independente, como uma notícia, postagem ou comentário.',
+            endParagraph: 'Uma boa pergunta para identificar um <article> é: esse conteúdo poderia ser distribuído ou reutilizado como uma unidade independente?',
+            highlight: ['article'],
+            codeLanguage: 'HTML',
+            code: HTMLI3_T1_PT
+          },
+          en: {
+            firstParagraph: 'The <article> element represents content that can make sense on its own, like a news item, a post or a comment.',
+            endParagraph: 'A good question to identify an <article> is: could this content be distributed or reused as an independent unit?',
+            highlight: ['article'],
+            codeLanguage: 'HTML',
+            code: HTMLI3_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O <aside> representa conteúdo relacionado ao conteúdo principal, mas que não faz parte diretamente dele.',
+            endParagraph: '<article> representa conteúdo independente; <aside> representa conteúdo complementar.',
+            highlight: ['aside', 'article'],
+            codeLanguage: 'HTML',
+            code: HTMLI3_T2_PT
+          },
+          en: {
+            firstParagraph: 'The <aside> element represents content related to the primary content, but not directly part of it.',
+            endParagraph: '<article> represents independent content; <aside> represents complementary content.',
+            highlight: ['aside', 'article'],
+            codeLanguage: 'HTML',
+            code: HTMLI3_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Formulários', en: 'Forms' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Formulários permitem coletar informações fornecidas pelo usuário. O elemento <form> representa o formulário e pode conter diferentes campos de entrada.',
+            endParagraph: 'Um formulário deve deixar claro o que cada campo representa e qual ação o usuário pode realizar.',
+            highlight: ['form', 'formulário', 'Formulários'],
+            codeLanguage: 'HTML',
+            code: HTMLI4_T1_PT
+          },
+          en: {
+            firstParagraph: 'Forms let you collect information provided by the user. The <form> element represents the form and can hold different input fields.',
+            endParagraph: 'A form should make clear what each field represents and which action the user can take.',
+            highlight: ['form', 'Forms', 'input'],
+            codeLanguage: 'HTML',
+            code: HTMLI4_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <input> possui diferentes tipos para representar diferentes informações.',
+            endParagraph: 'Escolher o tipo adequado ajuda o navegador a interpretar corretamente a informação e pode melhorar a experiência do usuário.',
+            highlight: ['input'],
+            codeLanguage: 'HTML',
+            code: HTMLI4_T2_CODE
+          },
+          en: {
+            firstParagraph: 'The <input> element has different types to represent different kinds of information.',
+            endParagraph: 'Choosing the right type helps the browser interpret the information correctly and can improve the user experience.',
+            highlight: ['input'],
+            codeLanguage: 'HTML',
+            code: HTMLI4_T2_CODE
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Formulários melhores', en: 'Better forms' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          // O atributo `for` é citado no texto mas fica fora do `highlight`:
+          // "for" é palavra comum em português ("se for necessário") e em
+          // inglês, e o matching é por palavra inteira, sem contexto — mesmo
+          // cuidado já adotado com `<em>` nas lições básicas.
+          pt: {
+            firstParagraph: 'O <label> identifica um campo do formulário. O atributo for deve corresponder ao id do campo relacionado.',
+            endParagraph: 'Relacionar corretamente o label ao campo melhora a usabilidade e a acessibilidade do formulário.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: HTMLI5_T1_PT
+          },
+          en: {
+            firstParagraph: 'The <label> element identifies a form field. Its for attribute must match the id of the related field.',
+            endParagraph: 'Linking the label to the field correctly improves the usability and the accessibility of the form.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: HTMLI5_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Alguns atributos permitem indicar regras básicas para os campos antes que o formulário seja enviado.',
+            secondParagraph: 'required indica que o campo é obrigatório. minlength define um tamanho mínimo para o texto.',
+            endParagraph: 'Esses recursos oferecem uma primeira camada de validação diretamente no HTML.',
+            highlight: ['required', 'minlength', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLI5_T2_PT
+          },
+          en: {
+            firstParagraph: 'Some attributes let you define basic rules for the fields before the form is submitted.',
+            secondParagraph: 'required marks the field as mandatory. minlength sets a minimum length for the text.',
+            endParagraph: 'These features provide a first layer of validation directly in HTML.',
+            highlight: ['required', 'minlength', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLI5_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tabelas', en: 'Tables' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tabelas são utilizadas para representar dados organizados em linhas e colunas.',
+            endParagraph: '<table> representa a tabela, <tr> uma linha, <th> uma célula de cabeçalho e <td> uma célula de dados.',
+            highlight: ['table', 'tr', 'th', 'td'],
+            codeLanguage: 'HTML',
+            code: HTMLI6_T1_PT
+          },
+          en: {
+            firstParagraph: 'Tables are used to represent data organized into rows and columns.',
+            endParagraph: '<table> represents the table, <tr> a row, <th> a header cell and <td> a data cell.',
+            highlight: ['table', 'tr', 'th', 'td'],
+            codeLanguage: 'HTML',
+            code: HTMLI6_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tabelas podem ser divididas semanticamente em <thead>, <tbody> e <tfoot>.',
+            endParagraph: 'Separar as partes da tabela melhora sua organização e deixa sua estrutura mais compreensível.',
+            highlight: ['thead', 'tbody', 'tfoot'],
+            codeLanguage: 'HTML',
+            code: HTMLI6_T2_PT
+          },
+          en: {
+            firstParagraph: 'Tables can be split semantically into <thead>, <tbody> and <tfoot>.',
+            endParagraph: 'Splitting a table into parts improves its organization and makes its structure easier to understand.',
+            highlight: ['thead', 'tbody', 'tfoot'],
+            codeLanguage: 'HTML',
+            code: HTMLI6_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Metadados', en: 'Metadata' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Metadados são informações sobre o documento que não aparecem diretamente como conteúdo da página.',
+            endParagraph: 'O <head> concentra informações importantes para o navegador interpretar e apresentar corretamente o documento.',
+            highlight: ['Metadados', 'head'],
+            codeLanguage: 'HTML',
+            code: HTMLI7_T1_PT,
+            // Conteúdo de <head> não produz nada visível na WebView — só a aba
+            // de código faz sentido aqui.
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Metadata is information about the document that does not appear directly as page content.',
+            endParagraph: 'The <head> gathers information the browser needs to interpret and present the document correctly.',
+            highlight: ['Metadata', 'head'],
+            codeLanguage: 'HTML',
+            code: HTMLI7_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A meta tag description fornece uma descrição do conteúdo da página.',
+            endParagraph: 'Metadados não são apenas detalhes técnicos. Eles ajudam diferentes ferramentas a compreenderem a página.',
+            highlight: ['meta', 'description', 'Metadados'],
+            codeLanguage: 'HTML',
+            code: HTMLI7_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The description meta tag provides a description of the page content.',
+            endParagraph: 'Metadata is not just a technical detail. It helps different tools understand the page.',
+            highlight: ['meta', 'description', 'Metadata'],
+            codeLanguage: 'HTML',
+            code: HTMLI7_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Acessibilidade', en: 'Accessibility' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Acessibilidade significa construir páginas que possam ser utilizadas por pessoas com diferentes necessidades e formas de interação.',
+            secondParagraph: 'HTML semântico, textos alternativos e formulários corretamente identificados são exemplos de práticas que melhoram a acessibilidade.',
+            endParagraph: 'Antes de procurar soluções complexas, utilize corretamente os recursos semânticos que o próprio HTML oferece.',
+            highlight: ['Acessibilidade', 'acessibilidade', 'HTML', 'semântico', 'semânticos'],
+            codeLanguage: 'HTML',
+            code: HTMLI8_T1_PT
+          },
+          en: {
+            firstParagraph: 'Accessibility means building pages that can be used by people with different needs and ways of interacting.',
+            secondParagraph: 'Semantic HTML, alternative text and properly labeled form fields are examples of practices that improve accessibility.',
+            endParagraph: 'Before looking for complex solutions, use the semantic resources HTML already offers.',
+            highlight: ['Accessibility', 'accessibility', 'HTML', 'semantic'],
+            codeLanguage: 'HTML',
+            code: HTMLI8_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Os títulos devem representar a hierarquia do conteúdo. Um <h2> representa uma seção dentro de um contexto, enquanto <h3> representa uma subseção.',
+            endParagraph: 'A hierarquia de títulos ajuda usuários e tecnologias assistivas a entenderem a organização do conteúdo.',
+            highlight: ['h2', 'h3', 'hierarquia'],
+            codeLanguage: 'HTML',
+            code: HTMLI8_T2_PT
+          },
+          en: {
+            firstParagraph: 'Headings should represent the hierarchy of the content. An <h2> represents a section inside a context, while <h3> represents a subsection.',
+            endParagraph: 'A heading hierarchy helps users and assistive technologies understand how the content is organized.',
+            highlight: ['h2', 'h3', 'hierarchy'],
+            codeLanguage: 'HTML',
+            code: HTMLI8_T2_EN
+          }
+        }
+      }
+    ]
+  }
+]
+
+// --- CSS Intermediário: trechos de código ---
+// Onde a aba "Web" agrega (Flexbox, Grid, posicionamento, pseudo-elementos),
+// o HTML mínimo que a demonstração precisa vai em `additionalCode` — mesmo
+// padrão já usado no módulo básico de CSS. As telas conceituais (escolher
+// entre Flexbox e Grid, reutilização de variáveis, fechamento do módulo) e as
+// que dependem de interação indisponível no toque (`:hover`) ficam
+// `onlyCode: true`.
+
+const CSSI1_T1_CSS = `.container {
+  display: flex;
+}`
+
+const CSSI1_T1_HTML = `<div class="container">
+  <div>A</div>
+  <div>B</div>
+  <div>C</div>
+</div>`
+
+const CSSI1_T2_CSS = `.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}`
+
+const CSSI2_T1_CSS = `.menu {
+  display: flex;
+  gap: 16px;
+}`
+
+const CSSI2_T1_HTML_PT = `<div class="menu">
+  <div>Início</div>
+  <div>Sobre</div>
+  <div>Contato</div>
+</div>`
+
+const CSSI2_T1_HTML_EN = `<div class="menu">
+  <div>Home</div>
+  <div>About</div>
+  <div>Contact</div>
+</div>`
+
+const CSSI2_T2_CSS = `.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}`
+
+const CSSI3_T1_CSS = `.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}`
+
+const CSSI3_T1_HTML = `<div class="container">
+  <div>A</div>
+  <div>B</div>
+  <div>C</div>
+  <div>D</div>
+</div>`
+
+const CSSI3_T2_CSS = `.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}`
+
+const CSSI3_T2_HTML = `<div class="container">
+  <div>A</div>
+  <div>B</div>
+  <div>C</div>
+  <div>D</div>
+  <div>E</div>
+  <div>F</div>
+</div>`
+
+const CSSI4_T1_CSS = `.card {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}`
+
+const CSSI4_T1_HTML_PT = `<div class="card">
+  <p>Produto</p>
+  <span class="badge">Novo</span>
+</div>`
+
+const CSSI4_T1_HTML_EN = `<div class="card">
+  <p>Product</p>
+  <span class="badge">New</span>
+</div>`
+
+const CSSI4_T2_CSS = `.header {
+  position: sticky;
+  top: 0;
+}`
+
+const CSSI5_T1_CSS = `button:hover {
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: 2px solid black;
+}`
+
+const CSSI5_T2_CSS = `li:first-child {
+  font-weight: bold;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}`
+
+const CSSI5_T2_HTML_PT = `<ul>
+  <li>Início</li>
+  <li>Sobre</li>
+  <li>Contato</li>
+</ul>`
+
+const CSSI5_T2_HTML_EN = `<ul>
+  <li>Home</li>
+  <li>About</li>
+  <li>Contact</li>
+</ul>`
+
+const CSSI6_T1_CSS = `.title::before {
+  content: "→ ";
+}`
+
+const CSSI6_T1_HTML_PT = '<h2 class="title">Novidades</h2>'
+
+const CSSI6_T1_HTML_EN = '<h2 class="title">News</h2>'
+
+const CSSI6_T2_CSS = `.card::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: black;
+}`
+
+const CSSI6_T2_HTML_PT = '<div class="card">Produto</div>'
+
+const CSSI6_T2_HTML_EN = '<div class="card">Product</div>'
+
+const CSSI7_T1_CSS_PT = `:root {
+  --cor-principal: #2563eb;
+}
+
+button {
+  background-color: var(--cor-principal);
+}`
+
+const CSSI7_T1_CSS_EN = `:root {
+  --main-color: #2563eb;
+}
+
+button {
+  background-color: var(--main-color);
+}`
+
+const CSSI7_T1_HTML_PT = '<button>Enviar</button>'
+
+const CSSI7_T1_HTML_EN = '<button>Submit</button>'
+
+const CSSI7_T2_CSS_PT = `:root {
+  --espacamento: 16px;
+}
+
+.card {
+  padding: var(--espacamento);
+}
+
+.menu {
+  gap: var(--espacamento);
+}`
+
+const CSSI7_T2_CSS_EN = `:root {
+  --spacing: 16px;
+}
+
+.card {
+  padding: var(--spacing);
+}
+
+.menu {
+  gap: var(--spacing);
+}`
+
+const CSSI8_T1_CSS = `.menu {
+  display: flex;
+  justify-content: space-between;
+}`
+
+const CSSI8_T2_CSS = `.products {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}`
+
+const CSSI9_T1_CSS = `.page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}`
+
+// A proposta fecha o módulo sem trecho de código, mas `TheoryActivityContent`
+// exige `code` — mesma situação da última tela do módulo básico de CSS, que já
+// resolve isso com um trecho curto de consolidação e `onlyCode: true`.
+const CSSI9_T2_CSS_PT = `:root {
+  --espacamento: 20px;
+}
+
+.page {
+  display: grid;
+  gap: var(--espacamento);
+}
+
+.card {
+  position: relative;
+  display: flex;
+}`
+
+const CSSI9_T2_CSS_EN = `:root {
+  --spacing: 20px;
+}
+
+.page {
+  display: grid;
+  gap: var(--spacing);
+}
+
+.card {
+  position: relative;
+  display: flex;
+}`
+
+const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Flexbox', en: 'Flexbox' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Flexbox é um modelo de layout criado para organizar elementos em uma dimensão. Ele facilita o alinhamento e a distribuição dos itens dentro de um contêiner.',
+            endParagraph: 'Ao utilizar display: flex, o elemento se torna um flex container e seus filhos passam a ser flex items.',
+            highlight: ['Flexbox', 'flex', 'display', 'container'],
+            codeLanguage: 'CSS',
+            code: CSSI1_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI1_T1_HTML }]
+          },
+          en: {
+            firstParagraph: 'Flexbox is a layout model created to organize elements along one dimension. It makes it easier to align and distribute items inside a container.',
+            endParagraph: 'When you use display: flex, the element becomes a flex container and its children become flex items.',
+            highlight: ['Flexbox', 'flex', 'display', 'container'],
+            codeLanguage: 'CSS',
+            code: CSSI1_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI1_T1_HTML }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'flex-direction define a direção dos itens. justify-content e align-items controlam o alinhamento em diferentes eixos.',
+            endParagraph: 'Essas propriedades formam a base do Flexbox e permitem criar muitos layouts sem depender de posicionamento manual.',
+            highlight: ['flex-direction', 'justify-content', 'align-items', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI1_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'flex-direction defines the direction of the items. justify-content and align-items control alignment along different axes.',
+            endParagraph: 'These properties are the base of Flexbox and let you build many layouts without manual positioning.',
+            highlight: ['flex-direction', 'justify-content', 'align-items', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI1_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Flexbox na prática', en: 'Flexbox in practice' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A propriedade gap define o espaço entre os itens de um flex container.',
+            endParagraph: 'gap é uma forma simples de controlar o espaço entre itens sem precisar adicionar margens individualmente.',
+            highlight: ['gap', 'flex'],
+            codeLanguage: 'CSS',
+            code: CSSI2_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI2_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'The gap property defines the space between the items of a flex container.',
+            endParagraph: 'gap is a simple way to control the space between items without adding individual margins.',
+            highlight: ['gap', 'flex'],
+            codeLanguage: 'CSS',
+            code: CSSI2_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI2_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Por padrão, os itens podem permanecer na mesma linha. flex-wrap permite que eles ocupem novas linhas quando necessário.',
+            endParagraph: 'Combinar flex-wrap com gap é útil para criar grupos de elementos que precisam se adaptar ao espaço disponível.',
+            highlight: ['flex-wrap', 'gap'],
+            codeLanguage: 'CSS',
+            code: CSSI2_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'By default, the items can stay on the same line. flex-wrap lets them move to new lines when needed.',
+            endParagraph: 'Combining flex-wrap with gap is useful for groups of elements that need to adapt to the available space.',
+            highlight: ['flex-wrap', 'gap'],
+            codeLanguage: 'CSS',
+            code: CSSI2_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'CSS Grid', en: 'CSS Grid' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'CSS Grid é um modelo de layout que permite organizar elementos em linhas e colunas.',
+            endParagraph: 'Enquanto Flexbox é especialmente útil para uma dimensão, Grid facilita a organização simultânea de linhas e colunas.',
+            highlight: ['CSS', 'Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI3_T1_HTML }]
+          },
+          en: {
+            firstParagraph: 'CSS Grid is a layout model that lets you organize elements into rows and columns.',
+            endParagraph: 'While Flexbox is especially useful for one dimension, Grid makes it easier to organize rows and columns at the same time.',
+            highlight: ['CSS', 'Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI3_T1_HTML }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A função repeat() permite repetir uma definição de coluna ou linha sem escrever a mesma regra várias vezes.',
+            endParagraph: 'Grid permite criar estruturas organizadas com poucas regras, tornando-se uma ferramenta importante para layouts modernos.',
+            highlight: ['repeat', 'Grid'],
+            codeLanguage: 'CSS',
+            code: CSSI3_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI3_T2_HTML }]
+          },
+          en: {
+            firstParagraph: 'The repeat() function lets you repeat a column or row definition without writing the same rule several times.',
+            endParagraph: 'Grid lets you build organized structures with few rules, which makes it an important tool for modern layouts.',
+            highlight: ['repeat', 'Grid'],
+            codeLanguage: 'CSS',
+            code: CSSI3_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI3_T2_HTML }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Posicionamento', en: 'Positioning' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A propriedade position altera a forma como um elemento é posicionado. relative cria um contexto de posicionamento, enquanto absolute permite posicionar um elemento em relação a esse contexto.',
+            endParagraph: 'Um uso comum de absolute é posicionar pequenos elementos dentro de um contêiner relative.',
+            highlight: ['position', 'relative', 'absolute'],
+            codeLanguage: 'CSS',
+            code: CSSI4_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI4_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'The position property changes how an element is placed. relative creates a positioning context, while absolute lets you place an element in relation to that context.',
+            endParagraph: 'A common use of absolute is placing small elements inside a relative container.',
+            highlight: ['position', 'relative', 'absolute'],
+            codeLanguage: 'CSS',
+            code: CSSI4_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI4_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'fixed posiciona um elemento em relação à janela de visualização. sticky combina características do posicionamento normal com um comportamento de fixação durante a rolagem.',
+            endParagraph: 'Esses valores são úteis em elementos como cabeçalhos, barras de navegação e controles que precisam permanecer visíveis.',
+            highlight: ['fixed', 'sticky'],
+            codeLanguage: 'CSS',
+            code: CSSI4_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'fixed places an element in relation to the viewport. sticky combines normal positioning with a pinning behavior during scrolling.',
+            endParagraph: 'These values are useful for headers, navigation bars and controls that need to stay visible.',
+            highlight: ['fixed', 'sticky'],
+            codeLanguage: 'CSS',
+            code: CSSI4_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Pseudo-classes', en: 'Pseudo-classes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          // `:hover` depende de cursor — não há como demonstrar no toque, então
+          // esta tela fica só no código.
+          pt: {
+            firstParagraph: 'Pseudo-classes permitem aplicar estilos de acordo com um estado ou condição do elemento.',
+            endParagraph: ':hover representa o estado de passar o cursor sobre o elemento. :focus representa um elemento que recebeu foco.',
+            highlight: ['Pseudo-classes', 'hover', 'focus'],
+            codeLanguage: 'CSS',
+            code: CSSI5_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Pseudo-classes let you apply styles based on a state or condition of the element.',
+            endParagraph: ':hover represents the state of moving the cursor over the element. :focus represents an element that received focus.',
+            highlight: ['Pseudo-classes', 'hover', 'focus'],
+            codeLanguage: 'CSS',
+            code: CSSI5_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Algumas pseudo-classes permitem selecionar elementos com base em sua posição ou relação com outros elementos.',
+            secondParagraph: 'first-child seleciona o primeiro elemento de um grupo e last-child seleciona o último.',
+            endParagraph: 'Pseudo-classes permitem criar regras mais específicas sem precisar adicionar uma classe para cada situação.',
+            highlight: ['Pseudo-classes', 'pseudo-classes', 'first-child', 'last-child'],
+            codeLanguage: 'CSS',
+            code: CSSI5_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI5_T2_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'A few pseudo-classes let you select elements based on their position or their relation to other elements.',
+            secondParagraph: 'first-child selects the first element of a group and last-child selects the last one.',
+            endParagraph: 'Pseudo-classes let you write more specific rules without adding a class for every situation.',
+            highlight: ['Pseudo-classes', 'pseudo-classes', 'first-child', 'last-child'],
+            codeLanguage: 'CSS',
+            code: CSSI5_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI5_T2_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Pseudo-elementos', en: 'Pseudo-elements' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Pseudo-elementos permitem estilizar uma parte específica de um elemento ou criar conteúdo visual relacionado a ele.',
+            endParagraph: '::before cria conteúdo antes do conteúdo do elemento e ::after cria conteúdo depois dele.',
+            highlight: ['Pseudo-elementos', 'before', 'after'],
+            codeLanguage: 'CSS',
+            code: CSSI6_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI6_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'Pseudo-elements let you style a specific part of an element or create visual content related to it.',
+            // Redigido para que "before"/"after" apareçam só como nome do
+            // pseudo-elemento: em inglês são preposições comuns, e o highlight
+            // é por palavra inteira, sem contexto.
+            endParagraph: '::before creates content placed ahead of the element own content, and ::after creates content placed at the end of it.',
+            highlight: ['Pseudo-elements', 'before', 'after'],
+            codeLanguage: 'CSS',
+            code: CSSI6_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI6_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Pseudo-elementos também podem ser utilizados para criar detalhes visuais sem adicionar elementos extras ao HTML.',
+            endParagraph: 'Esse recurso é muito utilizado para criar detalhes decorativos e componentes visuais.',
+            highlight: ['Pseudo-elementos', 'HTML'],
+            codeLanguage: 'CSS',
+            code: CSSI6_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI6_T2_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'Pseudo-elements can also be used to create visual details without adding extra elements to the HTML.',
+            endParagraph: 'This resource is widely used to create decorative details and visual components.',
+            highlight: ['Pseudo-elements', 'HTML'],
+            codeLanguage: 'CSS',
+            code: CSSI6_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI6_T2_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Variáveis CSS', en: 'CSS variables' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Variáveis CSS, também chamadas de custom properties, permitem armazenar valores para reutilizá-los em diferentes regras.',
+            endParagraph: 'Uma variável pode centralizar valores que aparecem em diferentes partes da interface.',
+            highlight: ['CSS', 'Variáveis', 'variável', 'custom properties'],
+            codeLanguage: 'CSS',
+            code: CSSI7_T1_CSS_PT,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI7_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'CSS variables, also called custom properties, let you store values to reuse them in different rules.',
+            endParagraph: 'A variable can centralize values that appear in different parts of the interface.',
+            highlight: ['CSS', 'variables', 'variable', 'custom properties'],
+            codeLanguage: 'CSS',
+            code: CSSI7_T1_CSS_EN,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSI7_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando várias regras utilizam a mesma variável, alterar seu valor pode atualizar todos esses pontos.',
+            endParagraph: 'Variáveis tornam estilos mais consistentes e facilitam alterações futuras.',
+            highlight: ['Variáveis', 'variável'],
+            codeLanguage: 'CSS',
+            code: CSSI7_T2_CSS_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When several rules use the same variable, changing its value can update all of those places.',
+            endParagraph: 'Variables make styles more consistent and make future changes easier.',
+            highlight: ['Variables', 'variable'],
+            codeLanguage: 'CSS',
+            code: CSSI7_T2_CSS_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Flexbox ou Grid?', en: 'Flexbox or Grid?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Flexbox é especialmente adequado quando precisamos organizar elementos em uma única direção: uma linha ou uma coluna.',
+            endParagraph: 'Menus, grupos de botões e alinhamentos em linha são exemplos comuns de situações em que Flexbox funciona muito bem.',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI8_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Flexbox is especially suited for organizing elements in a single direction: a row or a column.',
+            endParagraph: 'Menus, button groups and inline alignments are common examples where Flexbox works very well.',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI8_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Grid é especialmente útil quando o layout precisa controlar linhas e colunas ao mesmo tempo.',
+            endParagraph: 'Flexbox e Grid não competem entre si. Eles podem ser combinados para construir layouts mais completos.',
+            highlight: ['Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI8_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Grid is especially useful when the layout needs to control rows and columns at the same time.',
+            endParagraph: 'Flexbox and Grid do not compete with each other. They can be combined to build more complete layouts.',
+            highlight: ['Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI8_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Construindo um layout', en: 'Building a layout' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Layouts reais normalmente combinam diferentes recursos do CSS. Um contêiner pode utilizar Grid enquanto um componente interno utiliza Flexbox.',
+            endParagraph: 'Não existe uma única ferramenta para todos os layouts. A escolha depende da estrutura que queremos construir.',
+            highlight: ['CSS', 'Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI9_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Real layouts usually combine different CSS resources. A container can use Grid while an inner component uses Flexbox.',
+            endParagraph: 'There is no single tool for every layout. The choice depends on the structure we want to build.',
+            highlight: ['CSS', 'Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: CSSI9_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Agora você já conhece ferramentas importantes para construir layouts modernos. O próximo nível será adaptar interfaces a diferentes telas e explorar recursos mais avançados do CSS.',
+            endParagraph: 'Flexbox, Grid, posicionamento, pseudo-classes, pseudo-elementos e variáveis formam uma base sólida para interfaces mais completas.',
+            highlight: ['CSS', 'Flexbox', 'Grid', 'pseudo-classes', 'pseudo-elementos', 'variáveis'],
+            codeLanguage: 'CSS',
+            code: CSSI9_T2_CSS_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'You now know important tools for building modern layouts. The next level will be adapting interfaces to different screens and exploring more advanced CSS resources.',
+            endParagraph: 'Flexbox, Grid, positioning, pseudo-classes, pseudo-elements and variables form a solid base for more complete interfaces.',
+            highlight: ['CSS', 'Flexbox', 'Grid', 'pseudo-classes', 'pseudo-elements', 'variables'],
+            codeLanguage: 'CSS',
+            code: CSSI9_T2_CSS_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+// --- JavaScript Intermediário: trechos de código ---
+// Todas as telas são `onlyCode: true`: a aba "Web" do `CodeSection` monta o
+// preview só com HTML + CSS (`buildPreviewHtml` ignora JavaScript de
+// propósito), então não há como demonstrar DOM, eventos ou `fetch` rodando —
+// ver Fase 3 do roadmap em docs/roadmap-atividades-praticas.md.
+
+const JSI1_T1_PT = 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);'
+const JSI1_T1_EN = 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);'
+
+const JSI1_T2_PT = 'const numeros = [2, 4, 6, 8];\n\nconst encontrado = numeros.find(\n  numero => numero > 5\n);\n\nconst existeImpar = numeros.some(\n  numero => numero % 2 !== 0\n);\n\nconst todosPares = numeros.every(\n  numero => numero % 2 === 0\n);'
+const JSI1_T2_EN = 'const numbers = [2, 4, 6, 8];\n\nconst found = numbers.find(\n  number => number > 5\n);\n\nconst hasOdd = numbers.some(\n  number => number % 2 !== 0\n);\n\nconst allEven = numbers.every(\n  number => number % 2 === 0\n);'
+
+const JSI2_T1_PT = 'const numeros = [10, 20, 30];\n\nconst total = numeros.reduce(\n  (soma, numero) => soma + numero,\n  0\n);\n\nconsole.log(total);'
+const JSI2_T1_EN = 'const numbers = [10, 20, 30];\n\nconst total = numbers.reduce(\n  (sum, number) => sum + number,\n  0\n);\n\nconsole.log(total);'
+
+const JSI2_T2_PT = 'const produtos = [\n  { nome: "Mouse", preco: 50 },\n  { nome: "Teclado", preco: 100 }\n];\n\nconst nomes = produtos.map(\n  produto => produto.nome\n);\n\nconst caros = produtos.filter(\n  produto => produto.preco > 60\n);'
+const JSI2_T2_EN = 'const products = [\n  { name: "Mouse", price: 50 },\n  { name: "Keyboard", price: 100 }\n];\n\nconst names = products.map(\n  product => product.name\n);\n\nconst expensive = products.filter(\n  product => product.price > 60\n);'
+
+const JSI3_T1_PT = 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { nome, idade } = pessoa;'
+const JSI3_T1_EN = 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { name, age } = person;'
+
+const JSI3_T2_PT = 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [primeira, segunda] = cores;'
+const JSI3_T2_EN = 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [first, second] = colors;'
+
+const JSI4_T1_PT = 'const frutas = ["maçã", "banana"];\n\nconst novasFrutas = [\n  ...frutas,\n  "laranja"\n];'
+const JSI4_T1_EN = 'const fruits = ["apple", "banana"];\n\nconst newFruits = [\n  ...fruits,\n  "orange"\n];'
+
+const JSI4_T2_PT = 'function somar(...numeros) {\n  return numeros.reduce(\n    (total, numero) => total + numero,\n    0\n  );\n}\n\nconsole.log(somar(1, 2, 3));'
+const JSI4_T2_EN = 'function add(...numbers) {\n  return numbers.reduce(\n    (total, number) => total + number,\n    0\n  );\n}\n\nconsole.log(add(1, 2, 3));'
+
+const JSI5_T1_PT = 'const nome = "Ana";\nconst idade = 20;\n\nconst mensagem =\n  `Olá, ${nome}! Você tem ${idade} anos.`;'
+const JSI5_T1_EN = 'const name = "Ana";\nconst age = 20;\n\nconst message =\n  `Hello, ${name}! You are ${age} years old.`;'
+
+const JSI5_T2_PT = 'const usuario = {};\n\nconst cidade =\n  usuario.endereco?.cidade ?? "Não informada";'
+const JSI5_T2_EN = 'const user = {};\n\nconst city =\n  user.address?.city ?? "Not provided";'
+
+const JSI6_T1_PT = 'export function somar(a, b) {\n  return a + b;\n}'
+const JSI6_T1_EN = 'export function add(a, b) {\n  return a + b;\n}'
+
+const JSI6_T2_PT = 'import { somar } from "./math.js";\n\nconst resultado = somar(2, 3);\n\nconsole.log(resultado);'
+const JSI6_T2_EN = 'import { add } from "./math.js";\n\nconst result = add(2, 3);\n\nconsole.log(result);'
+
+const JSI7_T1_HTML_PT = '<h1 id="titulo">\n  Olá!\n</h1>'
+const JSI7_T1_HTML_EN = '<h1 id="title">\n  Hello!\n</h1>'
+const JSI7_T1_JS_PT = 'const titulo =\n  document.querySelector("#titulo");\n\ntitulo.textContent = "Olá, JavaScript!";'
+const JSI7_T1_JS_EN = 'const title =\n  document.querySelector("#title");\n\ntitle.textContent = "Hello, JavaScript!";'
+
+// Sem texto visível traduzível — o único literal é o nome da linguagem.
+const JSI7_T2_CODE = 'const item =\n  document.createElement("li");\n\nitem.textContent = "JavaScript";\n\ndocument\n  .querySelector("ul")\n  .appendChild(item);'
+
+const JSI8_T1_PT = 'const card =\n  document.querySelector(".card");\n\ncard.classList.add("active");\n\ncard.setAttribute(\n  "aria-label",\n  "Cartão ativo"\n);'
+const JSI8_T1_EN = 'const card =\n  document.querySelector(".card");\n\ncard.classList.add("active");\n\ncard.setAttribute(\n  "aria-label",\n  "Active card"\n);'
+
+const JSI8_T2_PT = 'const button =\n  document.querySelector("button");\n\nbutton.addEventListener(\n  "click",\n  () => {\n    console.log("Clicou!");\n  }\n);'
+const JSI8_T2_EN = 'const button =\n  document.querySelector("button");\n\nbutton.addEventListener(\n  "click",\n  () => {\n    console.log("Clicked!");\n  }\n);'
+
+const JSI9_T1_PT = 'localStorage.setItem(\n  "nome",\n  "Ana"\n);\n\nconst nome =\n  localStorage.getItem("nome");'
+const JSI9_T1_EN = 'localStorage.setItem(\n  "name",\n  "Ana"\n);\n\nconst name =\n  localStorage.getItem("name");'
+
+const JSI9_T2_PT = 'const usuario = {\n  nome: "Ana",\n  idade: 20\n};\n\nlocalStorage.setItem(\n  "usuario",\n  JSON.stringify(usuario)\n);\n\nconst salvo =\n  JSON.parse(\n    localStorage.getItem("usuario")\n  );'
+const JSI9_T2_EN = 'const user = {\n  name: "Ana",\n  age: 20\n};\n\nlocalStorage.setItem(\n  "user",\n  JSON.stringify(user)\n);\n\nconst saved =\n  JSON.parse(\n    localStorage.getItem("user")\n  );'
+
+const JSI10_T1_CODE = 'fetch("/api/users");'
+
+const JSI10_T2_CODE = 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });'
+
+const JSI11_T1_PT = 'const promessa = fetch(\n  "/api/users"\n);\n\npromessa.then(response => {\n  console.log("Resposta recebida");\n});'
+const JSI11_T1_EN = 'const promise = fetch(\n  "/api/users"\n);\n\npromise.then(response => {\n  console.log("Response received");\n});'
+
+const JSI11_T2_CODE = 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  })\n  .catch(error => {\n    console.error(error);\n  });'
+
+const JSI12_T1_PT = 'async function carregarUsuarios() {\n  const response =\n    await fetch("/api/users");\n\n  const users =\n    await response.json();\n\n  console.log(users);\n}'
+const JSI12_T1_EN = 'async function loadUsers() {\n  const response =\n    await fetch("/api/users");\n\n  const users =\n    await response.json();\n\n  console.log(users);\n}'
+
+const JSI12_T2_PT = 'async function carregarUsuarios() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}'
+const JSI12_T2_EN = 'async function loadUsers() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}'
+
+const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Métodos de arrays', en: 'Array methods' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Métodos de array permitem realizar operações comuns sem precisar escrever manualmente todos os loops.',
+            endParagraph: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição.',
+            highlight: ['map', 'filter', 'array'],
+            codeLanguage: 'JavaScript',
+            code: JSI1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Array methods let you perform common operations without writing all the loops by hand.',
+            endParagraph: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition.',
+            highlight: ['map', 'filter', 'array', 'Array'],
+            codeLanguage: 'JavaScript',
+            code: JSI1_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          // Em inglês, "some"/"every"/"find" são palavras comuns: os textos
+          // foram redigidos para que apareçam só como nome do método, já que o
+          // highlight casa por palavra inteira, sem contexto.
+          pt: {
+            firstParagraph: 'Alguns métodos permitem procurar elementos ou verificar condições em uma lista.',
+            endParagraph: 'find procura um elemento, some verifica se pelo menos um atende à condição e every verifica se todos atendem.',
+            highlight: ['find', 'some', 'every'],
+            codeLanguage: 'JavaScript',
+            code: JSI1_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A few methods let you search for elements or check conditions in a list.',
+            endParagraph: 'find looks for an element, some checks whether at least one matches the condition, and every checks whether all of them match.',
+            highlight: ['find', 'some', 'every'],
+            codeLanguage: 'JavaScript',
+            code: JSI1_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Reduce', en: 'Reduce' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'reduce percorre um array e combina seus elementos para produzir um único resultado.',
+            endParagraph: 'O valor acumulado passa de uma iteração para outra até que todos os elementos tenham sido processados.',
+            highlight: ['reduce', 'array'],
+            codeLanguage: 'JavaScript',
+            code: JSI2_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'reduce goes through an array and combines its elements to produce a single result.',
+            endParagraph: 'The accumulated value is passed from one iteration to the next until all the elements have been processed.',
+            highlight: ['reduce', 'array'],
+            codeLanguage: 'JavaScript',
+            code: JSI2_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Cada método possui uma finalidade. map transforma, filter seleciona, find procura e reduce combina valores.',
+            endParagraph: 'Escolher o método adequado deixa o código mais expressivo e diminui a necessidade de loops manuais.',
+            highlight: ['map', 'filter', 'find', 'reduce'],
+            codeLanguage: 'JavaScript',
+            code: JSI2_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Each method has its own purpose. map transforms, filter selects, find searches and reduce combines values.',
+            endParagraph: 'Choosing the right method makes the code more expressive and cuts down the need for manual loops.',
+            highlight: ['map', 'filter', 'find', 'reduce'],
+            codeLanguage: 'JavaScript',
+            code: JSI2_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Destructuring', en: 'Destructuring' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Destructuring permite extrair valores de objetos diretamente para variáveis.',
+            endParagraph: 'Em vez de acessar cada propriedade separadamente, podemos extrair os valores que precisamos de forma direta.',
+            highlight: ['Destructuring'],
+            codeLanguage: 'JavaScript',
+            code: JSI3_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Destructuring lets you extract values from objects directly into variables.',
+            endParagraph: 'Instead of accessing each property separately, we can pull out the values we need in one step.',
+            highlight: ['Destructuring'],
+            codeLanguage: 'JavaScript',
+            code: JSI3_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Também podemos utilizar destructuring com arrays.',
+            endParagraph: 'No array, a posição determina qual valor será extraído. No objeto, utilizamos o nome da propriedade.',
+            highlight: ['destructuring', 'array', 'arrays'],
+            codeLanguage: 'JavaScript',
+            code: JSI3_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can also use destructuring with arrays.',
+            endParagraph: 'In an array, the position determines which value is extracted. In an object, we use the property name.',
+            highlight: ['destructuring', 'array', 'arrays'],
+            codeLanguage: 'JavaScript',
+            code: JSI3_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Spread e rest', en: 'Spread and rest' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O spread operator ... permite expandir os elementos de um array ou as propriedades de um objeto.',
+            endParagraph: 'Spread é muito utilizado para criar novas estruturas a partir de valores existentes sem modificar diretamente a estrutura original.',
+            highlight: ['spread', 'Spread', 'array'],
+            codeLanguage: 'JavaScript',
+            code: JSI4_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The spread operator ... lets you expand the elements of an array or the properties of an object.',
+            endParagraph: 'Spread is widely used to create new structures from existing values without changing the original structure.',
+            highlight: ['spread', 'Spread', 'array'],
+            codeLanguage: 'JavaScript',
+            code: JSI4_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Em determinados contextos, ... pode ser utilizado para reunir vários valores em uma única estrutura. Nesse caso, ele é chamado de rest.',
+            endParagraph: 'Spread expande valores; rest reúne valores. A mesma sintaxe pode ter funções diferentes dependendo do contexto.',
+            highlight: ['rest', 'Spread'],
+            codeLanguage: 'JavaScript',
+            code: JSI4_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In certain contexts, ... can be used to gather several values into a single structure. In that case, it is called rest.',
+            endParagraph: 'Spread expands values; rest gathers values. The same syntax can play different roles depending on the context.',
+            highlight: ['rest', 'Spread'],
+            codeLanguage: 'JavaScript',
+            code: JSI4_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Template literals e sintaxe moderna', en: 'Template literals and modern syntax' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Template literals permitem criar strings utilizando crases e inserir expressões diretamente no texto.',
+            endParagraph: 'Eles tornam a criação de textos dinâmicos mais simples e legível.',
+            highlight: ['Template literals', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI5_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Template literals let you create strings using backticks and insert expressions directly into the text.',
+            endParagraph: 'They make building dynamic text simpler and easier to read.',
+            highlight: ['Template literals', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI5_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          // `?.` e `??` ficam fora do `highlight`: `?` é quantificador de
+          // regex, e o highlight monta um padrão por palavra — os operadores
+          // são citados pelo nome no texto.
+          pt: {
+            firstParagraph: 'Optional chaining permite acessar propriedades sem gerar um erro quando uma parte do caminho não existe.',
+            secondParagraph: 'O nullish coalescing fornece um valor alternativo quando o resultado é null ou undefined.',
+            endParagraph: 'Esses recursos ajudam a escrever código mais seguro ao trabalhar com dados que podem estar incompletos.',
+            highlight: ['Optional chaining', 'nullish coalescing', 'null', 'undefined'],
+            codeLanguage: 'JavaScript',
+            code: JSI5_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Optional chaining lets you access properties without raising an error when part of the path does not exist.',
+            secondParagraph: 'Nullish coalescing provides an alternative value when the result is null or undefined.',
+            endParagraph: 'These features help you write safer code when working with data that may be incomplete.',
+            highlight: ['Optional chaining', 'Nullish coalescing', 'null', 'undefined'],
+            codeLanguage: 'JavaScript',
+            code: JSI5_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Módulos', en: 'Modules' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Módulos permitem dividir o código em arquivos menores e reutilizáveis. Para disponibilizar uma função, podemos utilizar export.',
+            endParagraph: 'Separar responsabilidades em arquivos diferentes ajuda a organizar aplicações maiores.',
+            highlight: ['Módulos', 'export'],
+            codeLanguage: 'JavaScript',
+            code: JSI6_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.',
+            endParagraph: 'Splitting responsibilities across different files helps organize larger applications.',
+            highlight: ['Modules', 'export'],
+            codeLanguage: 'JavaScript',
+            code: JSI6_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'import permite utilizar código exportado por outro módulo.',
+            endParagraph: 'Com import e export, diferentes partes de uma aplicação podem compartilhar funcionalidades de maneira organizada.',
+            highlight: ['import', 'export', 'módulo'],
+            codeLanguage: 'JavaScript',
+            code: JSI6_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'import lets you use code exported by another module.',
+            endParagraph: 'With import and export, different parts of an application can share features in an organized way.',
+            highlight: ['import', 'export', 'module'],
+            codeLanguage: 'JavaScript',
+            code: JSI6_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'DOM', en: 'DOM' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O DOM representa a estrutura da página como objetos que podem ser acessados e modificados por JavaScript.',
+            endParagraph: 'O DOM permite que JavaScript interaja com elementos que foram definidos no HTML.',
+            highlight: ['DOM', 'JavaScript', 'HTML'],
+            codeLanguage: 'HTML',
+            code: JSI7_T1_HTML_PT,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_PT }],
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript.',
+            endParagraph: 'The DOM lets JavaScript interact with elements that were defined in the HTML.',
+            highlight: ['DOM', 'JavaScript', 'HTML'],
+            codeLanguage: 'HTML',
+            code: JSI7_T1_HTML_EN,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_EN }],
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JavaScript também pode criar novos elementos e adicioná-los ao documento.',
+            endParagraph: 'Com o DOM, uma página pode ser atualizada dinamicamente enquanto o usuário interage com ela.',
+            highlight: ['JavaScript', 'DOM'],
+            codeLanguage: 'JavaScript',
+            code: JSI7_T2_CODE,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JavaScript can also create new elements and add them to the document.',
+            endParagraph: 'With the DOM, a page can be updated dynamically while the user interacts with it.',
+            highlight: ['JavaScript', 'DOM'],
+            codeLanguage: 'JavaScript',
+            code: JSI7_T2_CODE,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Classes, atributos e eventos', en: 'Classes, attributes and events' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JavaScript pode modificar classes e atributos de elementos existentes no DOM.',
+            endParagraph: 'Esses recursos permitem que o comportamento do programa altere a interface conforme necessário.',
+            highlight: ['JavaScript', 'DOM', 'classes', 'atributos'],
+            codeLanguage: 'JavaScript',
+            code: JSI8_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JavaScript can change classes and attributes of elements that already exist in the DOM.',
+            endParagraph: 'These resources let the behavior of the program change the interface as needed.',
+            highlight: ['JavaScript', 'DOM', 'classes', 'attributes'],
+            codeLanguage: 'JavaScript',
+            code: JSI8_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Eventos representam acontecimentos como cliques, teclas pressionadas ou alterações em campos. addEventListener permite executar uma função quando um evento acontece.',
+            endParagraph: 'Eventos conectam as ações do usuário ao comportamento definido pelo JavaScript.',
+            highlight: ['Eventos', 'evento', 'addEventListener', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSI8_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Events represent things that happen, like clicks, key presses or changes in fields. addEventListener lets you run a function when an event happens.',
+            endParagraph: 'Events connect the actions of the user to the behavior defined by JavaScript.',
+            highlight: ['Events', 'event', 'addEventListener', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSI8_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'LocalStorage e JSON', en: 'LocalStorage and JSON' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'localStorage permite armazenar pequenos valores no navegador para que possam ser recuperados posteriormente.',
+            endParagraph: 'Os valores armazenados no localStorage são strings. Para estruturas maiores, precisamos trabalhar com JSON.',
+            highlight: ['localStorage', 'JSON', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI9_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'localStorage lets you store small values in the browser so they can be retrieved later.',
+            endParagraph: 'The values stored in localStorage are strings. For larger structures, we need to work with JSON.',
+            highlight: ['localStorage', 'JSON', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI9_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JSON permite transformar objetos JavaScript em strings e depois reconstruí-los.',
+            endParagraph: 'JSON.stringify() transforma um valor em JSON. JSON.parse() faz o caminho inverso.',
+            highlight: ['JSON', 'JavaScript', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI9_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JSON lets you turn JavaScript objects into strings and then rebuild them.',
+            endParagraph: 'JSON.stringify() turns a value into JSON. JSON.parse() does the opposite.',
+            highlight: ['JSON', 'JavaScript', 'strings'],
+            codeLanguage: 'JavaScript',
+            code: JSI9_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'HTTP e fetch', en: 'HTTP and fetch' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Aplicações web frequentemente precisam buscar ou enviar dados para um servidor. HTTP é um protocolo utilizado para essa comunicação.',
+            secondParagraph: 'Uma requisição possui informações como método e endereço. O servidor devolve uma resposta contendo dados ou informações sobre o resultado da operação.',
+            endParagraph: 'JavaScript oferece fetch() para realizar requisições HTTP de forma programática.',
+            highlight: ['HTTP', 'fetch', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSI10_T1_CODE,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.',
+            secondParagraph: 'A request carries information such as a method and an address. The server returns a response with data or information about the result of the operation.',
+            endParagraph: 'JavaScript provides fetch() to make HTTP requests programmatically.',
+            highlight: ['HTTP', 'fetch', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSI10_T1_CODE,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma resposta HTTP pode conter dados que precisamos transformar em JavaScript para utilizar na aplicação.',
+            endParagraph: 'O resultado de uma requisição é assíncrono. Por isso, precisamos entender como o JavaScript trabalha com operações que terminam posteriormente.',
+            highlight: ['HTTP', 'JavaScript', 'assíncrono'],
+            codeLanguage: 'JavaScript',
+            code: JSI10_T2_CODE,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'An HTTP response can carry data that we need to turn into JavaScript values to use in the application.',
+            endParagraph: 'The result of a request is asynchronous. That is why we need to understand how JavaScript deals with operations that finish later.',
+            highlight: ['HTTP', 'JavaScript', 'asynchronous'],
+            codeLanguage: 'JavaScript',
+            code: JSI10_T2_CODE,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Promises', en: 'Promises' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Algumas operações não produzem um resultado imediatamente. Uma Promise representa uma operação que poderá ser concluída ou falhar no futuro.',
+            endParagraph: 'Uma Promise pode representar uma operação pendente, concluída com sucesso ou concluída com erro.',
+            highlight: ['Promise'],
+            codeLanguage: 'JavaScript',
+            code: JSI11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Some operations do not produce a result immediately. A Promise represents an operation that may be completed or fail in the future.',
+            endParagraph: 'A Promise can represent a pending operation, one completed successfully, or one completed with an error.',
+            highlight: ['Promise'],
+            codeLanguage: 'JavaScript',
+            code: JSI11_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos encadear .then() para tratar o resultado e .catch() para lidar com erros.',
+            endParagraph: 'Operações assíncronas precisam considerar tanto o resultado esperado quanto possíveis falhas.',
+            highlight: ['then', 'catch', 'assíncronas'],
+            codeLanguage: 'JavaScript',
+            code: JSI11_T2_CODE,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can chain .then() to handle the result and .catch() to deal with errors.',
+            endParagraph: 'Asynchronous operations need to account for both the expected result and possible failures.',
+            highlight: ['then', 'catch', 'Asynchronous'],
+            codeLanguage: 'JavaScript',
+            code: JSI11_T2_CODE,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Async e await', en: 'Async and await' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'async/await permite escrever código assíncrono com uma estrutura semelhante à de código sequencial.',
+            endParagraph: 'await espera a conclusão de uma Promise dentro de uma função async.',
+            highlight: ['async', 'await', 'Promise', 'assíncrono'],
+            codeLanguage: 'JavaScript',
+            code: JSI12_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'async/await lets you write asynchronous code with a structure similar to sequential code.',
+            endParagraph: 'await waits for a Promise to settle inside an async function.',
+            highlight: ['async', 'await', 'Promise', 'asynchronous'],
+            codeLanguage: 'JavaScript',
+            code: JSI12_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos utilizar try/catch para tratar erros durante uma operação assíncrona.',
+            endParagraph: 'async/await e try/catch formam uma combinação comum para trabalhar com operações assíncronas de maneira clara.',
+            highlight: ['try', 'catch', 'async', 'await'],
+            codeLanguage: 'JavaScript',
+            code: JSI12_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can use try/catch to handle errors during an asynchronous operation.',
+            endParagraph: 'async/await and try/catch are a common combination for working with asynchronous operations clearly.',
+            highlight: ['try', 'catch', 'async', 'await'],
+            codeLanguage: 'JavaScript',
+            code: JSI12_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+/**
+ * Lições de um módulo específico de uma área. Os módulos básicos têm uma
+ * função dedicada cada um (`seedHtmlBasicLessons` e companhia, acima); daqui
+ * em diante o mesmo procedimento é parametrizado, já que a única coisa que
+ * muda entre as áreas é a área, o índice do módulo e o array de lições.
+ */
+type ModuleLessonsSeed = {
+  /** Coluna `areas.name` — nunca um `id` literal (autoincrement, imprevisível). */
+  areaName: string;
+  /** `modules.index`: 0 é o módulo básico, 1 o intermediário. */
+  moduleIndex: number;
+  lessons: LessonSeed[];
+}
+
+const INTERMEDIATE_MODULES: ModuleLessonsSeed[] = [
+  { areaName: 'HTML', moduleIndex: 1, lessons: HTML_INTERMEDIATE_LESSONS },
+  { areaName: 'CSS', moduleIndex: 1, lessons: CSS_INTERMEDIATE_LESSONS },
+  { areaName: 'JavaScript', moduleIndex: 1, lessons: JS_INTERMEDIATE_LESSONS }
+]
+
+async function seedModuleLessons (
+  localeIds: Map<LocaleCode, number>,
+  { areaName, moduleIndex, lessons }: ModuleLessonsSeed
+): Promise<void> {
+  const area = await prisma.areas.findFirst({ where: { name: areaName }, orderBy: { id: 'asc' } })
+  if (area === null) {
+    console.log(`Área ${areaName} não encontrada — pulando lições do módulo ${moduleIndex}.`)
+    return
+  }
+
+  const module = await prisma.modules.findFirst({
+    where: { area_id: area.id, index: moduleIndex }
+  })
+  if (module === null) {
+    console.log(`Módulo ${moduleIndex} de ${areaName} não encontrado — pulando suas lições.`)
+    return
+  }
+
+  // Guarda escopada a este módulo, pelo mesmo motivo das funções dos módulos
+  // básicos: o guard de `seedAreasAndModules` já está satisfeito em qualquer
+  // banco seedado, e uma contagem global de `lessons` faria o conteúdo de uma
+  // área bloquear o das outras.
+  const existingLessons = await prisma.lessons.count({ where: { module_id: module.id } })
+  if (existingLessons > 0) {
+    console.log(`Lições do módulo ${moduleIndex} de ${areaName} já seedadas (${existingLessons} encontradas) — pulando.`)
+    return
+  }
+
+  for (let lessonIndex = 0; lessonIndex < lessons.length; lessonIndex++) {
+    const lessonSeed = lessons[lessonIndex]
+    const lesson = await prisma.lessons.create({
+      data: { module_id: module.id, index: lessonIndex }
+    })
+
+    await prisma.lesson_translations.createMany({
+      data: LOCALES.map(({ code }) => ({
+        lesson_id: lesson.id,
+        locale_id: localeIds.get(code)!,
+        name: lessonSeed.name[code]
+      }))
+    })
+
+    for (let activityIndex = 0; activityIndex < lessonSeed.activities.length; activityIndex++) {
+      const activitySeed = lessonSeed.activities[activityIndex]
+      const activity = await prisma.activities.create({
+        data: { lesson_id: lesson.id, index: activityIndex, type: activitySeed.type }
+      })
+
+      await prisma.activity_translations.createMany({
+        data: LOCALES.map(({ code }) => ({
+          activity_id: activity.id,
+          locale_id: localeIds.get(code)!,
+          content: activitySeed.content[code]
+        }))
+      })
+    }
+  }
+
+  const activityCount = lessons.reduce((total, lesson) => total + lesson.activities.length, 0)
+  console.log(`Seed de conteúdo concluído: ${lessons.length} lições, ${activityCount} atividades no módulo ${moduleIndex} de ${areaName}.`)
+}
+
+async function seedIntermediateLessons (localeIds: Map<LocaleCode, number>): Promise<void> {
+  for (const moduleSeed of INTERMEDIATE_MODULES) {
+    await seedModuleLessons(localeIds, moduleSeed)
+  }
+}
+
 async function main (): Promise<void> {
   const localeIds = await seedLocales()
   await seedAreasAndModules(localeIds)
   await seedHtmlBasicLessons(localeIds)
   await seedCssBasicLessons(localeIds)
   await seedJsBasicLessons(localeIds)
+  await seedIntermediateLessons(localeIds)
 }
 
 main()

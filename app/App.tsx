@@ -152,7 +152,12 @@ export default function App() {
 				//       `additionalCode`, usado pelas novas lições de CSS.
 				//       Sem o bump, quem já tinha aberto o app ficaria com
 				//       CSS/JavaScript sem lições para sempre.
-				buster: "6",
+				//   7 — os segundos módulos (intermediário) de HTML, CSS e
+				//       JavaScript ganharam lições reais (antes vinham sem
+				//       nenhuma). Mesmo motivo do bump 5/6: mesma key, mesmo
+				//       formato, conteúdo novo — sem o bump, quem já tinha
+				//       aberto o app ficaria com o módulo 2 vazio para sempre.
+				buster: "7",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas
