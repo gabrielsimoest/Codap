@@ -14,13 +14,13 @@ import { useState } from "react";
 import WebView from "react-native-webview";
 
 interface CodeBlock {
-	codeLanguage: "HTML" | "CSS" | "JavaScript";
+	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
 	code: string;
 }
 
 interface Props {
 	onlyCode: boolean;
-	codeLanguage: "HTML" | "CSS" | "JavaScript";
+	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
 	code: string;
 	/** Blocos extras no mesmo trecho (ex.: HTML + CSS juntos), cada um com sua própria aba. */
 	additionalCode?: CodeBlock[];

@@ -59,7 +59,11 @@ export const moduleResponseSchema = {
     areaId: { type: 'integer' },
     index: { type: 'integer' },
     name: { type: 'string' },
+    subtitle: {
+      type: 'string',
+      description: "Nome descritivo do módulo (`module_translations.subtitle`) — ex.: 'Além do JavaScript'. `name` continua o genérico 'Módulo N'."
+    },
     lessons: { type: 'array', items: lessonResponseSchema }
   },
-  required: ['id', 'areaId', 'index', 'name', 'lessons']
+  required: ['id', 'areaId', 'index', 'name', 'subtitle', 'lessons']
 }

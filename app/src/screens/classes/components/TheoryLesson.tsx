@@ -16,9 +16,9 @@ interface Props {
 	thirdParagraph?: string;
 	endParagraph?: string;
 	highlight: string[];
-	codeLanguage: "HTML" | "CSS" | "JavaScript";
+	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
 	code: string;
-	additionalCode?: { codeLanguage: "HTML" | "CSS" | "JavaScript"; code: string }[];
+	additionalCode?: { codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript"; code: string }[];
 	onlyCode?: boolean;
 	tutorial?: boolean;
 	progress: DimensionValue;

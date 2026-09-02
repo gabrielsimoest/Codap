@@ -157,7 +157,37 @@ export default function App() {
 				//       nenhuma). Mesmo motivo do bump 5/6: mesma key, mesmo
 				//       formato, conteúdo novo — sem o bump, quem já tinha
 				//       aberto o app ficaria com o módulo 2 vazio para sempre.
-				buster: "7",
+				//   8 — os terceiros módulos (avançado) de HTML, CSS e
+				//       JavaScript ganharam lições reais (antes vinham sem
+				//       nenhuma); e `codeLanguage`/`additionalCode[].codeLanguage`
+				//       ganharam `'TypeScript'` como valor aceito. Mesmo motivo
+				//       do bump 7 — sem ele, quem já tinha aberto o app ficaria
+				//       com o módulo 3 vazio para sempre.
+				//   9 — o conteúdo do módulo 3 (avançado) das três áreas foi
+				//       reescrito do zero por seguir uma proposta curricular
+				//       errada na primeira versão (JavaScript incluía Node.js/
+				//       Express, que a proposta correta reserva para um módulo
+				//       futuro; HTML e CSS ganharam bem mais lições). Mesmo
+				//       motivo do bump 5: mesma key, mesmo formato, conteúdo
+				//       diferente — sem o bump, quem já tinha aberto o app
+				//       ficaria preso no conteúdo errado do módulo 3.
+				//   10 — o quarto módulo de JavaScript ("Além do JavaScript:
+				//        Node.js e Express") ganhou lições reais (antes vinha
+				//        com `lessons: []`). O `name` do módulo em si continua
+				//        genérico ("Módulo 4"/"Module 4", igual HTML/CSS, que
+				//        ainda não têm conteúdo nesse módulo). Mesmo motivo do
+				//        bump 5/7 — sem o bump, quem já tinha aberto o app
+				//        ficaria com o módulo 4 de JavaScript vazio para
+				//        sempre.
+				//   11 — `ModuleResponse` ganhou o campo `subtitle` (payload
+				//        muda, mesma key) — o nome descritivo de cada módulo
+				//        ("Além do JavaScript", "HTML avançado" etc.), que
+				//        antes vinha hardcoded no app (`areaMetadata.ts` +
+				//        i18n, por posição), agora vem de
+				//        `module_translations.subtitle`. Sem o bump, quem já
+				//        tinha aberto o app ficaria com o subtítulo de todo
+				//        módulo em branco (`?? ''` no backend) para sempre.
+				buster: "11",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas

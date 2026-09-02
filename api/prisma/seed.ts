@@ -24,6 +24,34 @@ const MODULE_TRANSLATIONS: Record<LocaleCode, string>[] = [
   { pt: 'Módulo 4', en: 'Module 4' }
 ]
 
+// Subtítulo descritivo de cada módulo (`module_translations.subtitle`), por
+// área — diferente do `name` genérico acima ("Módulo N"), que é igual nas
+// três áreas. Antes vivia hardcoded no app (`areaMetadata.ts` + i18n, por
+// posição); ver api/CLAUDE.md, "Conteúdo pedagógico", sobre por que isso
+// virou dado da API. `null` = módulo ainda sem conteúdo/nome definitivo (só
+// os módulos 1-3 de HTML/CSS têm conteúdo por enquanto; o 4º módulo delas
+// mantém o texto de "maestria" como placeholder, igual já era no app).
+const MODULE_SUBTITLES: Record<string, Array<Record<LocaleCode, string>>> = {
+  HTML: [
+    { pt: 'Conceitos de HTML', en: 'Concepts of HTML' },
+    { pt: 'HTML intermediário', en: 'Intermediate HTML' },
+    { pt: 'HTML avançado', en: 'Advanced HTML' },
+    { pt: 'Maestria em HTML', en: 'Mastery in HTML' }
+  ],
+  CSS: [
+    { pt: 'Conceitos de CSS', en: 'Concepts of CSS' },
+    { pt: 'CSS intermediário', en: 'Intermediate CSS' },
+    { pt: 'CSS avançado', en: 'Advanced CSS' },
+    { pt: 'Maestria em CSS', en: 'Mastery in CSS' }
+  ],
+  JavaScript: [
+    { pt: 'Conceitos de JavaScript', en: 'Concepts of JavaScript' },
+    { pt: 'JavaScript intermediário', en: 'Intermediate JavaScript' },
+    { pt: 'JavaScript avançado', en: 'Advanced JavaScript' },
+    { pt: 'Além do JavaScript', en: 'Beyond JavaScript' }
+  ]
+}
+
 async function seedLocales (): Promise<Map<LocaleCode, number>> {
   const localeIds = new Map<LocaleCode, number>()
 
@@ -60,6 +88,36 @@ async function seedAreasAndModules (localeIds: Map<LocaleCode, number>): Promise
   }
 
   console.log(`Seed concluído: ${AREA_NAMES.length} áreas, ${AREA_NAMES.length * MODULE_TRANSLATIONS.length} módulos.`)
+}
+
+// Roda sempre (sem guard de contagem), diferente de `seedAreasAndModules`:
+// como `subtitle` é uma coluna nova, um banco que já tinha `areas`/`modules`
+// seedados antes dela existir nunca passaria pelo bloco de criação acima de
+// novo, e o subtítulo ficaria `null` para sempre. `update` sobre uma linha
+// que já existe (sempre existe, por causa de `seedAreasAndModules`) é
+// idempotente — reescrever o mesmo valor de novo é inofensivo.
+async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise<void> {
+  for (const areaName of AREA_NAMES) {
+    const area = await prisma.areas.findFirst({ where: { name: areaName }, orderBy: { id: 'asc' } })
+    if (area === null) continue
+
+    const modules = await prisma.modules.findMany({ where: { area_id: area.id } })
+    const subtitles = MODULE_SUBTITLES[areaName]
+
+    for (const module of modules) {
+      const subtitle = subtitles[module.index]
+      if (subtitle === undefined) continue
+
+      for (const { code } of LOCALES) {
+        await prisma.module_translations.update({
+          where: { module_id_locale_id: { module_id: module.id, locale_id: localeIds.get(code)! } },
+          data: { subtitle: subtitle[code] }
+        })
+      }
+    }
+  }
+
+  console.log('Subtítulos de módulo atualizados.')
 }
 
 // Conteúdo curricular real do primeiro módulo de HTML ("HTML Básico"): 8
@@ -3868,6 +3926,3448 @@ const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   }
 ]
 
+// ============================================================
+// Conteúdo curricular do terceiro módulo ("Avançado") de cada área. Parte do
+// princípio de que o aluno já concluiu os módulos Básico e Intermediário da
+// mesma área — nada aqui repete fundamentos. O foco é apresentar recursos
+// mais avançados e menos usados no dia a dia, preparando terreno para o
+// módulo "Além de" (React/Tailwind/Node+Express), que ainda não foi seedado.
+// Só `theory` por enquanto, pelo mesmo motivo dos módulos anteriores.
+//
+// Este conteúdo segue a segunda versão da proposta curricular recebida do
+// desenvolvedor — mais detalhada e, em JavaScript, com foco totalmente
+// diferente da primeira versão (que chegou a ser seedada e foi substituída):
+// aprofundamento da própria linguagem (closures, this, prototypes, event
+// loop, cópia por valor/referência...) seguido de uma trilha completa de
+// TypeScript, sem nenhum conteúdo de Node.js/Express — esses ficam
+// reservados para um módulo futuro ("Além do JavaScript"), fora de escopo
+// aqui.
+//
+// Decisões técnicas que moldaram a apresentação, sem alterar a arquitetura:
+//   - `TheoryActivityContent.codeLanguage`/`additionalCode[].codeLanguage`
+//     aceitam `'TypeScript'` (extensão aditiva, refletida em
+//     `CodeSection.tsx`/`TheoryLesson.tsx` no app) — usado pela trilha de
+//     TypeScript. `highlight.js` já registra `typescript` nativamente, sem
+//     dependência nova.
+//   - `:hover`/`:focus` não são demonstráveis no toque, e um breakpoint
+//     `min-width: 768px` nunca é atingido pela largura real do
+//     `CodeSection` num celular — por isso a maior parte das lições de CSS
+//     que dependem desses recursos é `onlyCode: true`. Onde o efeito não
+//     depende de interação (cascata, especificidade, seletores estruturais
+//     como `:has()`, `aspect-ratio`, uma animação aplicada via `animation`
+//     que roda sozinha ao carregar a página, `clamp()` reagindo a `vw`), a
+//     aba "Web" continua ligada, porque a demonstração é genuína.
+//   - Termos de destaque (`highlight`) nunca incluem palavras curtas e
+//     comuns em prosa (pt: "a", "em"; en: "this", "any", "is", "has",
+//     "where", "not" — todas usadas neste módulo como parte da explicação
+//     de JavaScript/TypeScript/CSS, mas nunca como termo de destaque) nem
+//     pseudo-classes com `:` (ex.: `:not()`, `:has()`, `:focus`) — o
+//     matching de `ThemedHighlighter` é `\bpalavra\b`, e uma palavra que
+//     começa com um caractere não alfanumérico só casa se vier colada a uma
+//     letra antes dela, o que nunca acontece em prosa normal. Nesses casos,
+//     o destaque de palavra fica mais esparso (ou ausente) de propósito; o
+//     Syntax Highlighting do bloco de código continua correto.
+// ============================================================
+
+// --- HTML Avançado: trechos de código ---
+
+const HTMLA1_T1_PT = `<p>
+  A <abbr title="Application Programming Interface">
+    API
+  </abbr>
+  permite a comunicação entre sistemas.
+</p>
+
+<p>
+  <cite>O Pequeno Príncipe</cite>
+  é uma obra conhecida mundialmente.
+</p>`
+
+const HTMLA1_T1_EN = `<p>
+  The <abbr title="Application Programming Interface">
+    API
+  </abbr>
+  allows communication between systems.
+</p>
+
+<p>
+  <cite>The Little Prince</cite>
+  is a world-famous work.
+</p>`
+
+const HTMLA1_T2_PT = `<p>
+  Como dizia um antigo provérbio:
+  <q>Conhecimento é poder.</q>
+</p>
+
+<blockquote>
+  Uma citação longa pode ser representada
+  usando este elemento.
+</blockquote>`
+
+const HTMLA1_T2_EN = `<p>
+  As an old proverb says:
+  <q>Knowledge is power.</q>
+</p>
+
+<blockquote>
+  A long quotation can be represented
+  using this element.
+</blockquote>`
+
+const HTMLA2_T1_PT = `<p>Use a função <code>console.log()</code>.</p>
+
+<pre><code>
+const nome = "Ana";
+
+console.log(nome);
+</code></pre>`
+
+const HTMLA2_T1_EN = `<p>Use the <code>console.log()</code> function.</p>
+
+<pre><code>
+const name = "Ana";
+
+console.log(name);
+</code></pre>`
+
+const HTMLA2_T2_PT = `<p>
+  Pressione <kbd>Ctrl</kbd> + <kbd>S</kbd>
+  para salvar.
+</p>
+
+<p>
+  Resultado:
+  <samp>Arquivo salvo.</samp>
+</p>`
+
+const HTMLA2_T2_EN = `<p>
+  Press <kbd>Ctrl</kbd> + <kbd>S</kbd>
+  to save.
+</p>
+
+<p>
+  Result:
+  <samp>File saved.</samp>
+</p>`
+
+const HTMLA3_T1_PT = `<p>
+  O prazo termina em
+  <mark>3 dias</mark>.
+</p>
+
+<p>
+  <small>Termos sujeitos a alteração.</small>
+</p>`
+
+const HTMLA3_T1_EN = `<p>
+  The deadline ends in
+  <mark>3 days</mark>.
+</p>
+
+<p>
+  <small>Terms subject to change.</small>
+</p>`
+
+const HTMLA3_T2_PT = `<p>
+  De <del>R$ 100</del>
+  <ins>R$ 80</ins>
+</p>
+
+<p>
+  H<sub>2</sub>O e 10<sup>2</sup>
+</p>`
+
+const HTMLA3_T2_EN = `<p>
+  From <del>$100</del>
+  <ins>$80</ins>
+</p>
+
+<p>
+  H<sub>2</sub>O and 10<sup>2</sup>
+</p>`
+
+const HTMLA4_T1_PT = `<p>
+  Publicado em
+  <time datetime="2026-09-10">
+    10 de setembro
+  </time>
+</p>`
+
+const HTMLA4_T1_EN = `<p>
+  Published on
+  <time datetime="2026-09-10">
+    September 10th
+  </time>
+</p>`
+
+const HTMLA4_T2_PT = `<p>
+  <data value="42">
+    Produto #42
+  </data>
+</p>`
+
+const HTMLA4_T2_EN = `<p>
+  <data value="42">
+    Product #42
+  </data>
+</p>`
+
+const HTMLA5_T1 = `<video controls width="320">
+  <source
+    src="video.mp4"
+    type="video/mp4"
+  >
+</video>
+
+<audio controls>
+  <source
+    src="audio.mp3"
+    type="audio/mpeg"
+  >
+</audio>`
+
+const HTMLA6_T1_PT = `<iframe
+  src="https://example.com"
+  width="300"
+  height="200"
+  title="Página incorporada"
+>
+</iframe>`
+
+const HTMLA6_T1_EN = `<iframe
+  src="https://example.com"
+  width="300"
+  height="200"
+  title="Embedded page"
+>
+</iframe>`
+
+const HTMLA6_T2 = `<iframe
+  src="https://example.com"
+  sandbox="allow-scripts"
+>
+</iframe>`
+
+const HTMLA7_T1 = `<svg
+  width="120"
+  height="80"
+  viewBox="0 0 120 80"
+>
+  <circle
+    cx="40"
+    cy="40"
+    r="30"
+    fill="black"
+  />
+</svg>`
+
+const HTMLA7_T2_HTML = `<canvas
+  id="canvas"
+  width="200"
+  height="100"
+></canvas>`
+
+const HTMLA7_T2_JS = 'const canvas =\n  document.querySelector("#canvas");\n\nconst ctx =\n  canvas.getContext("2d");\n\nctx.fillRect(20, 20, 80, 50);'
+
+const HTMLA8_T1_PT = `<details>
+  <summary>
+    O que é HTML?
+  </summary>
+
+  <p>
+    HTML define a estrutura
+    de uma página web.
+  </p>
+</details>`
+
+const HTMLA8_T1_EN = `<details>
+  <summary>
+    What is HTML?
+  </summary>
+
+  <p>
+    HTML defines the structure
+    of a web page.
+  </p>
+</details>`
+
+const HTMLA8_T2_PT = `<dialog open>
+  <h2>Olá!</h2>
+  <p>Esta é uma caixa de diálogo.</p>
+
+  <button>Fechar</button>
+</dialog>`
+
+const HTMLA8_T2_EN = `<dialog open>
+  <h2>Hello!</h2>
+  <p>This is a dialog box.</p>
+
+  <button>Close</button>
+</dialog>`
+
+const HTMLA9_T1_PT = `<p>Este texto aparece normalmente.</p>
+
+<p hidden>Este texto fica escondido.</p>`
+
+const HTMLA9_T1_EN = `<p>This text shows up normally.</p>
+
+<p hidden>This text stays hidden.</p>`
+
+const HTMLA9_T2_PT = `<p lang="en">
+  This paragraph is in English.
+</p>
+
+<p dir="rtl">
+  نص باللغة العربية
+</p>`
+
+const HTMLA9_T2_EN = `<p lang="pt">
+  Este parágrafo está em português.
+</p>
+
+<p dir="rtl">
+  نص باللغة العربية
+</p>`
+
+const HTMLA10_T1_PT = `<button
+  data-product-id="42"
+  data-category="books"
+>
+  Comprar
+</button>`
+
+const HTMLA10_T1_EN = `<button
+  data-product-id="42"
+  data-category="books"
+>
+  Buy
+</button>`
+
+const HTMLA10_T2_PT = 'const botao =\n  document.querySelector("button");\n\nconsole.log(\n  botao.dataset.productId\n);'
+const HTMLA10_T2_EN = 'const button =\n  document.querySelector("button");\n\nconsole.log(\n  button.dataset.productId\n);'
+
+const HTMLA11_T1_PT = `<p contenteditable="true">
+  Clique e edite este texto.
+</p>
+
+<div draggable="true">
+  Arraste este elemento.
+</div>`
+
+const HTMLA11_T1_EN = `<p contenteditable="true">
+  Tap and edit this text.
+</p>
+
+<div draggable="true">
+  Drag this element.
+</div>`
+
+const HTMLA11_T2 = `<template id="cartao">
+  <li>Novo item</li>
+</template>`
+
+const HTMLA12_T1_PT = `<button>Comprar</button>
+<a href="/perfil">Perfil</a>
+<input type="text" />`
+
+const HTMLA12_T1_EN = `<button>Buy</button>
+<a href="/profile">Profile</a>
+<input type="text" />`
+
+const HTMLA12_T2_PT = `<div tabindex="0">
+  Este div agora recebe foco.
+</div>
+
+<button tabindex="-1">
+  Este botão foi removido da navegação.
+</button>`
+
+const HTMLA12_T2_EN = `<div tabindex="0">
+  This div now receives focus.
+</div>
+
+<button tabindex="-1">
+  This button was removed from navigation.
+</button>`
+
+const HTMLA13_T1 = `<header>...</header>
+<nav>...</nav>
+<main>...</main>`
+
+const HTMLA13_T2_PT = `<label for="email">E-mail</label>
+<input id="email" type="email" />`
+
+const HTMLA13_T2_EN = `<label for="email">Email</label>
+<input id="email" type="email" />`
+
+const HTMLA14_T1_PT = `<button
+  aria-label="Fechar janela"
+>
+  ×
+</button>`
+
+const HTMLA14_T1_EN = `<button
+  aria-label="Close window"
+>
+  ×
+</button>`
+
+const HTMLA14_T2_PT = `<!-- Preferível -->
+<button>
+  Salvar
+</button>
+
+<!-- Evite quando não há necessidade -->
+<div role="button">
+  Salvar
+</div>`
+
+const HTMLA14_T2_EN = `<!-- Preferable -->
+<button>
+  Save
+</button>
+
+<!-- Avoid when there is no need -->
+<div role="button">
+  Save
+</div>`
+
+const HTML_ADVANCED_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Texto com significado', en: 'Text with meaning' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O HTML possui elementos específicos para representar diferentes tipos de informação textual. <abbr> representa uma abreviação e <cite> identifica o título de uma obra ou referência.',
+            endParagraph: 'Elementos semânticos não mudam necessariamente a aparência do texto, mas acrescentam significado à estrutura do documento.',
+            highlight: ['HTML', 'abbr', 'cite'],
+            codeLanguage: 'HTML',
+            code: HTMLA1_T1_PT
+          },
+          en: {
+            firstParagraph: 'HTML has specific elements to represent different kinds of textual information. <abbr> represents an abbreviation and <cite> identifies the title of a work or reference.',
+            endParagraph: 'Semantic elements do not necessarily change how the text looks, but they add meaning to the structure of the document.',
+            highlight: ['HTML', 'abbr', 'cite'],
+            codeLanguage: 'HTML',
+            code: HTMLA1_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<q> representa uma pequena citação incorporada ao texto. <blockquote> representa uma citação mais extensa.',
+            endParagraph: 'Quando o conteúdo possui um significado específico, utilizar o elemento apropriado é melhor do que tentar representar tudo com <div> ou <span>.',
+            highlight: ['q', 'blockquote', 'div', 'span'],
+            codeLanguage: 'HTML',
+            code: HTMLA1_T2_PT
+          },
+          en: {
+            firstParagraph: '<q> represents a short quotation embedded in the text. <blockquote> represents a longer quotation.',
+            endParagraph: 'When content has a specific meaning, using the appropriate element is better than trying to represent everything with <div> or <span>.',
+            highlight: ['q', 'blockquote', 'div', 'span'],
+            codeLanguage: 'HTML',
+            code: HTMLA1_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Conteúdo técnico', en: 'Technical content' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O HTML possui elementos próprios para representar código e conteúdo relacionado à programação.',
+            endParagraph: '<code> representa um trecho de código. <pre> preserva espaços e quebras de linha, sendo útil para blocos de código.',
+            highlight: ['code', 'pre'],
+            codeLanguage: 'HTML',
+            code: HTMLA2_T1_PT
+          },
+          en: {
+            firstParagraph: 'HTML has its own elements to represent code and content related to programming.',
+            endParagraph: '<code> represents a piece of code. <pre> preserves spaces and line breaks, which is useful for code blocks.',
+            highlight: ['code', 'pre'],
+            codeLanguage: 'HTML',
+            code: HTMLA2_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<kbd> representa uma entrada fornecida pelo usuário, como uma tecla. <samp> representa uma saída produzida por um programa.',
+            endParagraph: 'Esses elementos são pouco utilizados em páginas comuns, mas permitem representar informações técnicas com significado apropriado.',
+            highlight: ['kbd', 'samp'],
+            codeLanguage: 'HTML',
+            code: HTMLA2_T2_PT
+          },
+          en: {
+            firstParagraph: '<kbd> represents input provided by the user, such as a key. <samp> represents output produced by a program.',
+            endParagraph: 'These elements are rarely used on common pages, but they let you represent technical information with the appropriate meaning.',
+            highlight: ['kbd', 'samp'],
+            codeLanguage: 'HTML',
+            code: HTMLA2_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Texto especializado', en: 'Specialized text' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<mark> destaca um trecho relevante do texto. <small> representa um texto secundário, como um aviso legal ou uma nota de rodapé.',
+            endParagraph: 'Esses elementos mudam o significado do texto, não só a aparência — mesmo que o navegador também aplique um estilo padrão a eles.',
+            highlight: ['mark', 'small'],
+            codeLanguage: 'HTML',
+            code: HTMLA3_T1_PT
+          },
+          en: {
+            firstParagraph: '<mark> highlights a relevant part of the text. <small> represents secondary text, such as a legal notice or a footnote.',
+            endParagraph: 'These elements change the meaning of the text, not just its appearance — even though the browser also applies a default style to them.',
+            highlight: ['mark', 'small'],
+            codeLanguage: 'HTML',
+            code: HTMLA3_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<del> indica um trecho removido e <ins> indica um trecho inserido, geralmente usados juntos para mostrar uma edição.',
+            secondParagraph: '<sub> e <sup> deslocam o texto para baixo ou para cima, úteis em fórmulas e notações.',
+            endParagraph: 'Cada um desses elementos comunica uma intenção específica que vai além do estilo visual.',
+            highlight: ['del', 'ins', 'sub', 'sup'],
+            codeLanguage: 'HTML',
+            code: HTMLA3_T2_PT
+          },
+          en: {
+            firstParagraph: '<del> marks removed content and <ins> marks inserted content, usually shown together to represent an edit.',
+            secondParagraph: '<sub> and <sup> shift text below or above the baseline, useful for formulas and notations.',
+            endParagraph: 'Each of these elements communicates a specific intent that goes beyond visual styling.',
+            highlight: ['del', 'ins', 'sub', 'sup'],
+            codeLanguage: 'HTML',
+            code: HTMLA3_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Datas e dados', en: 'Dates and data' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<time> representa um horário de forma que máquinas também conseguem interpretar, por meio do atributo datetime.',
+            endParagraph: 'O texto exibido pode ser amigável para pessoas, enquanto o atributo datetime guarda um valor estruturado para máquinas.',
+            highlight: ['time', 'datetime'],
+            codeLanguage: 'HTML',
+            code: HTMLA4_T1_PT
+          },
+          en: {
+            firstParagraph: '<time> represents a moment in a way machines can also interpret, through the datetime attribute.',
+            endParagraph: 'The displayed text can be friendly for people, while the datetime attribute holds a structured value for machines.',
+            highlight: ['time', 'datetime'],
+            codeLanguage: 'HTML',
+            code: HTMLA4_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <data> funciona de forma parecida com <time>, mas serve para qualquer tipo de valor, não só para quando algo aconteceu.',
+            endParagraph: 'Assim como datetime em <time>, o atributo value em <data> não muda o que aparece na tela — só o que outros sistemas conseguem ler.',
+            highlight: ['data', 'time', 'value'],
+            codeLanguage: 'HTML',
+            code: HTMLA4_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The <data> element works similarly to <time>, but it fits any kind of value, not only a moment in time.',
+            endParagraph: "Just like datetime on <time>, the value attribute on <data> doesn't change what appears on screen — only what other systems can read.",
+            highlight: ['data', 'time', 'value'],
+            codeLanguage: 'HTML',
+            code: HTMLA4_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Áudio e vídeo', en: 'Audio and video' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'HTML possui os elementos <video> e <audio> nativos para incorporar mídia, sem depender de componentes externos.',
+            endParagraph: 'Esses elementos fornecem controles e uma estrutura semântica diretamente no HTML.',
+            highlight: ['video', 'audio', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA5_T1
+          },
+          en: {
+            firstParagraph: 'HTML has native <video> and <audio> elements to embed media, without depending on external components.',
+            endParagraph: 'These elements provide controls and a semantic structure directly in HTML.',
+            highlight: ['video', 'audio', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA5_T1
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Conteúdo incorporado', en: 'Embedded content' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<iframe> incorpora outra página dentro da página atual, como um documento dentro do documento.',
+            endParagraph: 'O atributo title é importante para acessibilidade: ele descreve o conteúdo incorporado para quem usa leitor de tela.',
+            highlight: ['iframe', 'title'],
+            codeLanguage: 'HTML',
+            code: HTMLA6_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: '<iframe> embeds another page inside the current page, like a document within the document.',
+            endParagraph: 'The title attribute matters for accessibility: it describes the embedded content for someone using a screen reader.',
+            highlight: ['iframe', 'title'],
+            codeLanguage: 'HTML',
+            code: HTMLA6_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Excesso de iframes pode deixar a página mais lenta e trazer riscos de segurança, já que o conteúdo vem de outra origem.',
+            secondParagraph: 'O atributo sandbox permite restringir o que o conteúdo incorporado pode fazer.',
+            endParagraph: 'Use iframe apenas quando for realmente necessário incorporar conteúdo externo.',
+            highlight: ['iframe', 'sandbox'],
+            codeLanguage: 'HTML',
+            code: HTMLA6_T2,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Too many iframes can slow the page down and bring security risks, since the content comes from another origin.',
+            secondParagraph: 'The sandbox attribute lets you restrict what the embedded content is allowed to do.',
+            endParagraph: 'Use iframe only when embedding external content is really necessary.',
+            highlight: ['iframe', 'sandbox'],
+            codeLanguage: 'HTML',
+            code: HTMLA6_T2,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'SVG e Canvas', en: 'SVG and Canvas' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'SVG permite representar gráficos vetoriais diretamente no documento HTML. Diferentemente de uma imagem comum, seus elementos podem ser manipulados individualmente.',
+            endParagraph: 'SVG é especialmente útil para ícones, ilustrações e gráficos que precisam manter sua qualidade em diferentes tamanhos.',
+            highlight: ['SVG', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA7_T1
+          },
+          en: {
+            firstParagraph: 'SVG lets you represent vector graphics directly in the HTML document. Unlike a regular image, its elements can be manipulated individually.',
+            endParagraph: 'SVG is especially useful for icons, illustrations and graphics that need to keep their quality at different sizes.',
+            highlight: ['SVG', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA7_T1
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<canvas> fornece uma área de desenho que pode ser manipulada principalmente por JavaScript.',
+            endParagraph: 'SVG descreve elementos vetoriais. Canvas fornece uma área de desenho controlada por código.',
+            highlight: ['canvas', 'SVG', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA7_T2_HTML,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: HTMLA7_T2_JS }],
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: '<canvas> provides a drawing area that can be manipulated mainly through JavaScript.',
+            endParagraph: 'SVG describes vector elements. Canvas provides a drawing area controlled by code.',
+            highlight: ['canvas', 'SVG', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA7_T2_HTML,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: HTMLA7_T2_JS }],
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Interatividade nativa', en: 'Native interactivity' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<details> cria uma seção que pode ser expandida ou recolhida. <summary> define o título que o usuário toca para abrir essa seção.',
+            endParagraph: 'Esse recurso cria uma interface expansível usando só HTML, sem precisar implementar toda a interação manualmente com JavaScript.',
+            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA8_T1_PT
+          },
+          en: {
+            firstParagraph: '<details> creates a section that can be expanded or collapsed. <summary> defines the title the user taps to open that section.',
+            endParagraph: 'This feature builds an expandable interface using only HTML, without having to implement the whole interaction manually with JavaScript.',
+            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA8_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O elemento <dialog> representa uma caixa de diálogo nativa do HTML.',
+            endParagraph: 'Antes de implementar um componente complexo manualmente, vale verificar se o HTML já oferece um elemento nativo adequado — reduz código e costuma melhorar a acessibilidade.',
+            highlight: ['dialog', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA8_T2_PT
+          },
+          en: {
+            firstParagraph: 'The <dialog> element represents a native HTML dialog box.',
+            endParagraph: 'Before building a complex component manually, it is worth checking whether HTML already offers a suitable native element — it reduces code and tends to improve accessibility.',
+            highlight: ['dialog', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA8_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Atributos globais', en: 'Global attributes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Atributos globais podem ser usados em praticamente qualquer elemento HTML. hidden esconde um elemento completamente, como se ele não existisse na página.',
+            endParagraph: 'hidden é diferente de só estilizar com CSS: o elemento realmente some da apresentação e da leitura por tecnologias assistivas.',
+            highlight: ['hidden', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA9_T1_PT
+          },
+          en: {
+            firstParagraph: 'Global attributes can be used on practically any HTML element. hidden hides an element completely, as if it did not exist on the page.',
+            endParagraph: 'hidden is different from just styling with CSS: the element really disappears from the presentation and from assistive technology.',
+            highlight: ['hidden', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA9_T1_EN
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'lang identifica o idioma do conteúdo, e dir identifica a direção do texto — da esquerda para a direita ou o contrário.',
+            endParagraph: 'Esses atributos ajudam navegadores e leitores de tela a apresentar o conteúdo corretamente.',
+            highlight: ['lang', 'dir'],
+            codeLanguage: 'HTML',
+            code: HTMLA9_T2_PT
+          },
+          en: {
+            firstParagraph: 'lang identifies the language of the content, and dir identifies the text direction — left-to-right or the other way around.',
+            endParagraph: 'These attributes help browsers and screen readers present the content correctly.',
+            highlight: ['lang', 'dir'],
+            codeLanguage: 'HTML',
+            code: HTMLA9_T2_EN
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Dados personalizados', en: 'Custom data' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Atributos data-* permitem associar informações personalizadas a elementos HTML sem criar atributos próprios.',
+            endParagraph: 'Esses dados podem ser utilizados posteriormente por JavaScript ou outras ferramentas que processem o documento.',
+            highlight: ['HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA10_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'data-* attributes let you attach custom information to HTML elements without creating attributes of your own.',
+            endParagraph: 'That data can later be used by JavaScript or other tools that process the document.',
+            highlight: ['HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA10_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JavaScript pode acessar esses atributos por meio da propriedade dataset.',
+            endParagraph: 'data-* é útil quando precisamos associar pequenas informações personalizadas a elementos da página.',
+            highlight: ['JavaScript', 'dataset'],
+            codeLanguage: 'JavaScript',
+            code: HTMLA10_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JavaScript can access those attributes through the dataset property.',
+            endParagraph: 'data-* is useful whenever we need to attach small pieces of custom information to elements on the page.',
+            highlight: ['JavaScript', 'dataset'],
+            codeLanguage: 'JavaScript',
+            code: HTMLA10_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Conteúdo e interação', en: 'Content and interaction' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'contenteditable permite que o usuário edite o conteúdo de um elemento diretamente na página. draggable indica que um elemento pode ser arrastado.',
+            endParagraph: 'Esses atributos criam comportamentos interativos sem precisar de JavaScript para o comportamento básico.',
+            highlight: ['contenteditable', 'draggable'],
+            codeLanguage: 'HTML',
+            code: HTMLA11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'contenteditable lets the user edit the content of an element directly on the page. draggable marks an element as something that can be dragged.',
+            endParagraph: 'These attributes create interactive behavior without needing JavaScript for the basic behavior.',
+            highlight: ['contenteditable', 'draggable'],
+            codeLanguage: 'HTML',
+            code: HTMLA11_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<template> guarda um trecho de HTML que não é exibido diretamente. Esse conteúdo só aparece quando é clonado e inserido na página, geralmente por JavaScript.',
+            endParagraph: 'template é útil para preparar pedaços de HTML reutilizáveis sem precisar montá-los inteiramente via código.',
+            highlight: ['template', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA11_T2,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: '<template> holds a piece of HTML that is not displayed directly. That content only shows up once it is cloned and inserted into the page, usually by JavaScript.',
+            endParagraph: 'template is useful for preparing reusable pieces of HTML without having to assemble them entirely through code.',
+            highlight: ['template', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: HTMLA11_T2,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Navegação por teclado', en: 'Keyboard navigation' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Nem todo mundo usa mouse ou toque. Uma interface acessível precisa funcionar também pelo teclado, navegando entre elementos com Tab.',
+            secondParagraph: 'Elementos como links, botões e campos de formulário já recebem foco pelo teclado automaticamente.',
+            endParagraph: 'Um elemento genérico como div ou span não recebe foco pelo teclado, a menos que isso seja adicionado manualmente.',
+            highlight: ['Tab', 'div', 'span'],
+            codeLanguage: 'HTML',
+            code: HTMLA12_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Not everyone uses a mouse or touch. An accessible interface also needs to work by keyboard, moving between elements with Tab.',
+            secondParagraph: 'Elements like links, buttons and form fields already receive keyboard focus automatically.',
+            endParagraph: 'A generic element like div or span does not receive keyboard focus, unless that is added manually.',
+            highlight: ['Tab', 'div', 'span'],
+            codeLanguage: 'HTML',
+            code: HTMLA12_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O atributo tabindex controla se e quando um elemento entra na navegação por teclado.',
+            endParagraph: 'tabindex="0" adiciona um elemento à ordem natural de navegação. Valores maiores que zero raramente são uma boa ideia, porque bagunçam essa ordem.',
+            highlight: ['tabindex'],
+            codeLanguage: 'HTML',
+            code: HTMLA12_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The tabindex attribute controls whether and when an element enters keyboard navigation.',
+            endParagraph: 'tabindex="0" adds an element to the natural navigation order. Values greater than zero are rarely a good idea, because they mess up that order.',
+            highlight: ['tabindex'],
+            codeLanguage: 'HTML',
+            code: HTMLA12_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Landmarks e formulários', en: 'Landmarks and forms' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Elementos como header, nav e main não organizam só visualmente — eles funcionam como landmarks, pontos de navegação rápida para quem usa leitor de tela.',
+            endParagraph: 'Um leitor de tela pode pular direto para o main, por exemplo, sem precisar passar por todo o cabeçalho.',
+            highlight: ['header', 'nav', 'main'],
+            codeLanguage: 'HTML',
+            code: HTMLA13_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Elements like header, nav and main are not only visual organization — they work as landmarks, quick navigation points for someone using a screen reader.',
+            endParagraph: 'A screen reader can jump straight to main, for example, without going through the whole header first.',
+            highlight: ['header', 'nav', 'main'],
+            codeLanguage: 'HTML',
+            code: HTMLA13_T1,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um formulário acessível associa corretamente cada label ao seu campo, usando for e id.',
+            endParagraph: 'Essa associação permite que tecnologias assistivas anunciem o propósito de cada campo corretamente.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: HTMLA13_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: "An accessible form correctly links each label to its field, using for and id.",
+            endParagraph: 'That link lets assistive technology announce the purpose of each field correctly.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: HTMLA13_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'ARIA', en: 'ARIA' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'ARIA fornece atributos que ajudam tecnologias assistivas a compreenderem interfaces que não podem ser descritas adequadamente apenas com HTML semântico.',
+            endParagraph: 'ARIA é uma ferramenta complementar. A primeira escolha deve ser sempre utilizar o elemento HTML semântico apropriado.',
+            highlight: ['ARIA', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA14_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'ARIA provides attributes that help assistive technologies understand interfaces that cannot be adequately described with semantic HTML alone.',
+            endParagraph: 'ARIA is a complementary tool. The first choice should always be to use the appropriate semantic HTML element.',
+            highlight: ['ARIA', 'HTML'],
+            codeLanguage: 'HTML',
+            code: HTMLA14_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Não devemos substituir elementos HTML nativos por elementos genéricos com ARIA quando o HTML já possui uma solução adequada.',
+            endParagraph: 'Acessibilidade começa com uma estrutura HTML correta. ARIA deve complementar essa estrutura, não substituí-la.',
+            highlight: ['HTML', 'ARIA'],
+            codeLanguage: 'HTML',
+            code: HTMLA14_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We should not replace native HTML elements with generic elements plus ARIA when HTML already has an adequate solution.',
+            endParagraph: 'Accessibility starts with a correct HTML structure. ARIA should complement that structure, not replace it.',
+            highlight: ['HTML', 'ARIA'],
+            codeLanguage: 'HTML',
+            code: HTMLA14_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+// --- CSS Avançado: trechos de código ---
+
+const CSSA1_T1_CSS = `.card {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .card {
+    width: 50%;
+  }
+}`
+
+const CSSA2_T1_CSS = `.container {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+}`
+
+const CSSA2_T2_CSS = `@media (min-width: 480px) {
+  /* tablet pequeno */
+}
+
+@media (min-width: 768px) {
+  /* tablet */
+}
+
+@media (min-width: 1024px) {
+  /* desktop */
+}`
+
+const CSSA3_T1_CSS = `h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}`
+
+const CSSA3_T1_HTML_PT = `<h1>Título</h1>`
+const CSSA3_T1_HTML_EN = `<h1>Title</h1>`
+
+const CSSA4_T1_CSS = `.button {
+  transition:
+    transform 0.2s;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}`
+
+const CSSA5_T1_CSS = `.card:hover {
+  transform:
+    translateY(-4px)
+    scale(1.02);
+}`
+
+const CSSA5_T2_CSS = `.icon:hover {
+  transform:
+    rotate(10deg)
+    scale(1.1);
+}`
+
+const CSSA6_T1_CSS_PT = `@keyframes aparecer {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}`
+
+const CSSA6_T1_CSS_EN = `@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}`
+
+const CSSA6_T2_CSS_PT = `.card {
+  animation:
+    aparecer 0.5s ease;
+}`
+
+const CSSA6_T2_CSS_EN = `.card {
+  animation:
+    appear 0.5s ease;
+}`
+
+const CSSA6_T2_HTML_PT = `<div class="card">Cartão</div>`
+const CSSA6_T2_HTML_EN = `<div class="card">Card</div>`
+
+const CSSA7_T1_CSS_PT = `@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}`
+
+const CSSA7_T1_CSS_EN = `@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}`
+
+const CSSA7_T2_CSS_PT = `.box {
+  animation:
+    entrar 0.6s ease;
+}`
+
+const CSSA7_T2_CSS_EN = `.box {
+  animation:
+    enter 0.6s ease;
+}`
+
+const CSSA7_T2_HTML_PT = `<div class="box">Caixa</div>`
+const CSSA7_T2_HTML_EN = `<div class="box">Box</div>`
+
+const CSSA8_T1_CSS = `.sidebar {
+  width: calc(100% - 240px);
+}`
+
+const CSSA8_T2_CSS = `.box {
+  width: min(90%, 400px);
+}`
+
+const CSSA9_T1_CSS = `p:not(.destaque) {
+  color: gray;
+}
+
+:is(h1, h2, h3) {
+  font-weight: bold;
+}`
+
+const CSSA9_T1_HTML_PT = `<p>Um parágrafo comum.</p>
+<p class="destaque">Um parágrafo em destaque.</p>
+<h2>Um subtítulo</h2>`
+
+const CSSA9_T1_HTML_EN = `<p>A regular paragraph.</p>
+<p class="destaque">A highlighted paragraph.</p>
+<h2>A subtitle</h2>`
+
+const CSSA9_T2_CSS = `.card:has(img) {
+  border: 1px solid gray;
+}`
+
+const CSSA9_T2_HTML_PT = `<div class="card">
+  <img src="foto.jpg" />
+</div>
+
+<div class="card">
+  Sem imagem
+</div>`
+
+const CSSA9_T2_HTML_EN = `<div class="card">
+  <img src="photo.jpg" />
+</div>
+
+<div class="card">
+  No image
+</div>`
+
+const CSSA10_T1_CSS = `p {
+  color: black;
+}
+
+p {
+  color: blue;
+}`
+
+const CSSA10_T1_HTML_PT = `<p>Texto</p>`
+const CSSA10_T1_HTML_EN = `<p>Text</p>`
+
+const CSSA11_T1_CSS = `p {
+  color: black;
+}
+
+.destaque {
+  color: blue;
+}`
+
+const CSSA11_T1_HTML_PT = `<p class="destaque">Texto</p>`
+const CSSA11_T1_HTML_EN = `<p class="destaque">Text</p>`
+
+const CSSA11_T2_CSS = `.container {
+  color: blue !important;
+}`
+
+const CSSA12_T1_CSS = `.card-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 300px) {
+  .card {
+    display: flex;
+  }
+}`
+
+const CSSA13_T1_CSS = `.thumb {
+  width: 200px;
+  aspect-ratio: 16 / 9;
+  background: gray;
+}`
+
+const CSSA13_T1_HTML = `<div class="thumb"></div>`
+
+const CSSA13_T2_CSS = `img {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+}`
+
+const CSSA14_T1_CSS = `html {
+  scroll-behavior: smooth;
+}
+
+input[type="checkbox"] {
+  accent-color: blue;
+}`
+
+const CSSA14_T2_CSS = `.painel {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+}`
+
+const CSSA15_T1_CSS = `/* Evite isto sem um substituto */
+button:focus {
+  outline: none;
+}`
+
+const CSSA16_T1_CSS = `@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
+}`
+
+const CSSA16_T2_CSS = `body {
+  background: white;
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: black;
+    color: white;
+  }
+}`
+
+const CSSA17_T1_CSS = `/* Bom contraste: texto escuro em fundo claro */
+.texto {
+  color: #222;
+  background: #fff;
+}`
+
+const CSS_ADVANCED_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Media queries', en: 'Media queries' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Media queries permitem aplicar regras CSS apenas quando certas condições são atendidas, como a largura da tela.',
+            endParagraph: 'Elas são a base para criar interfaces que se adaptam a diferentes tamanhos de tela.',
+            highlight: ['media queries', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA1_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Media queries let you apply CSS rules only when certain conditions are met, like the width of the screen.',
+            endParagraph: 'They are the foundation for building interfaces that adapt to different screen sizes.',
+            highlight: ['media queries', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA1_T1_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Mobile-first e breakpoints', en: 'Mobile-first and breakpoints' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'No desenvolvimento mobile-first, começamos criando a interface para telas menores e adicionamos ajustes para telas maiores.',
+            endParagraph: 'A abordagem mobile-first começa com uma experiência simples e amplia o layout conforme existe mais espaço disponível.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            code: CSSA2_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In mobile-first development, we start by building the interface for smaller screens and add adjustments for larger screens.',
+            endParagraph: 'The mobile-first approach starts with a simple experience and expands the layout as more space becomes available.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            code: CSSA2_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Breakpoints são os pontos em que o layout muda de comportamento. Projetos costumam definir alguns breakpoints padrão, como celular, tablet e desktop.',
+            endParagraph: 'Não é preciso um breakpoint para cada tamanho possível — só para os pontos em que o layout realmente precisa mudar.',
+            highlight: ['breakpoints'],
+            codeLanguage: 'CSS',
+            code: CSSA2_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Breakpoints are the points where the layout changes behavior. Projects usually define a few standard breakpoints, like phone, tablet and desktop.',
+            endParagraph: 'You do not need a breakpoint for every possible size — only for the points where the layout really needs to change.',
+            highlight: ['breakpoints'],
+            codeLanguage: 'CSS',
+            code: CSSA2_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tipografia responsiva', en: 'Responsive typography' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'clamp() define um valor com um mínimo, um valor preferido e um máximo. É útil para texto que precisa acompanhar o tamanho da tela sem ficar pequeno ou gigante demais.',
+            endParagraph: 'O texto cresce com a tela, mas nunca passa dos limites definidos em clamp().',
+            highlight: ['clamp'],
+            codeLanguage: 'CSS',
+            code: CSSA3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA3_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'clamp() sets a value with a minimum, a preferred value and a maximum. It is useful for text that needs to follow the screen size without becoming too small or too huge.',
+            endParagraph: 'The text grows with the screen, but never crosses the limits defined in clamp().',
+            highlight: ['clamp'],
+            codeLanguage: 'CSS',
+            code: CSSA3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA3_T1_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Transições', en: 'Transitions' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'transition permite suavizar a mudança entre dois estados de uma propriedade CSS.',
+            endParagraph: 'Transições são úteis para tornar mudanças de estado mais naturais sem precisar criar uma animação completa.',
+            highlight: ['transition', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA4_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'transition lets you smooth the change between two states of a CSS property.',
+            endParagraph: 'Transitions are useful for making state changes feel more natural without having to build a full animation.',
+            highlight: ['transition', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA4_T1_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Transformações', en: 'Transforms' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A propriedade transform permite mover, girar, aumentar ou inclinar elementos visualmente.',
+            endParagraph: 'Transformações alteram a apresentação visual do elemento sem modificar sua posição original no fluxo do documento.',
+            highlight: ['transform'],
+            codeLanguage: 'CSS',
+            code: CSSA5_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The transform property lets you move, rotate, scale or skew elements visually.',
+            endParagraph: 'Transforms change how the element looks without changing its original position in the flow of the document.',
+            highlight: ['transform'],
+            codeLanguage: 'CSS',
+            code: CSSA5_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos combinar diferentes valores em transform para criar efeitos visuais variados.',
+            endParagraph: 'Transformações simples podem produzir interfaces mais interativas quando usadas com moderação.',
+            highlight: ['transform'],
+            codeLanguage: 'CSS',
+            code: CSSA5_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can combine different values in transform to create varied visual effects.',
+            endParagraph: 'Simple transforms can make interfaces feel more interactive when used with restraint.',
+            highlight: ['transform'],
+            codeLanguage: 'CSS',
+            code: CSSA5_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Keyframes', en: 'Keyframes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '@keyframes define os estados que uma animação deve percorrer ao longo do tempo.',
+            endParagraph: 'Keyframes descrevem a evolução visual de um elemento entre diferentes estados.',
+            highlight: ['keyframes'],
+            codeLanguage: 'CSS',
+            code: CSSA6_T1_CSS_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: '@keyframes defines the states an animation should move through over time.',
+            endParagraph: 'Keyframes describe how an element visually evolves between different states.',
+            highlight: ['keyframes'],
+            codeLanguage: 'CSS',
+            code: CSSA6_T1_CSS_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Depois de criar os keyframes, usamos animation para aplicar a animação a um elemento.',
+            endParagraph: '@keyframes define o que acontece. animation define como essa sequência será aplicada.',
+            highlight: ['keyframes', 'animation'],
+            codeLanguage: 'CSS',
+            code: CSSA6_T2_CSS_PT,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA6_T2_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'After creating the keyframes, we use animation to apply the animation to an element.',
+            endParagraph: '@keyframes defines what happens. animation defines how that sequence gets applied.',
+            highlight: ['keyframes', 'animation'],
+            codeLanguage: 'CSS',
+            code: CSSA6_T2_CSS_EN,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA6_T2_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Construindo uma animação', en: 'Building an animation' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos combinar várias propriedades dentro do mesmo @keyframes. Aqui, opacity e transform mudam juntos.',
+            endParagraph: 'Combinar propriedades cria animações mais ricas sem precisar de várias animações separadas.',
+            highlight: ['keyframes', 'opacity', 'transform'],
+            codeLanguage: 'CSS',
+            code: CSSA7_T1_CSS_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can combine several properties inside the same @keyframes. Here, opacity and transform change together.',
+            endParagraph: 'Combining properties creates richer animations without needing several separate animations.',
+            highlight: ['keyframes', 'opacity', 'transform'],
+            codeLanguage: 'CSS',
+            code: CSSA7_T1_CSS_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Depois de definir o @keyframes, aplicamos com animation, como em qualquer outra animação.',
+            endParagraph: 'Uma boa animação geralmente combina poucas propriedades bem escolhidas, em vez de muitos efeitos ao mesmo tempo.',
+            highlight: ['keyframes', 'animation'],
+            codeLanguage: 'CSS',
+            code: CSSA7_T2_CSS_PT,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA7_T2_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'After defining the @keyframes, we apply it with animation, just like any other animation.',
+            endParagraph: 'A good animation usually combines a few well-chosen properties, instead of many effects at once.',
+            highlight: ['keyframes', 'animation'],
+            codeLanguage: 'CSS',
+            code: CSSA7_T2_CSS_EN,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA7_T2_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Funções CSS', en: 'CSS functions' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'calc() permite combinar diferentes unidades em um único cálculo, como porcentagem com pixels.',
+            endParagraph: 'calc() é útil quando um valor fixo precisa conviver com um valor relativo na mesma conta.',
+            highlight: ['calc'],
+            codeLanguage: 'CSS',
+            code: CSSA8_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'calc() lets you combine different units in a single calculation, like a percentage with pixels.',
+            endParagraph: 'calc() is useful when a fixed value needs to coexist with a relative value in the same calculation.',
+            highlight: ['calc'],
+            codeLanguage: 'CSS',
+            code: CSSA8_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'min() escolhe o menor entre os valores informados, e max() escolhe o maior. clamp() combina os dois com um valor preferido no meio.',
+            endParagraph: 'Essas funções deixam o CSS reagir ao contexto sem precisar de uma media query para cada caso.',
+            highlight: ['min', 'max', 'clamp'],
+            codeLanguage: 'CSS',
+            code: CSSA8_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'min() picks the smallest of the given values, and max() picks the largest. clamp() combines both with a preferred value in the middle.',
+            endParagraph: 'These functions let CSS react to context without needing a media query for every case.',
+            highlight: ['min', 'max', 'clamp'],
+            codeLanguage: 'CSS',
+            code: CSSA8_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Seletores modernos', en: 'Modern selectors' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Alguns seletores modernos ajudam a escrever CSS mais direto. :not() seleciona elementos que não correspondem a um seletor. :is() e :where() agrupam vários seletores em um só, evitando repetição.',
+            endParagraph: 'A diferença entre :is() e :where() é sutil: :where() nunca aumenta a especificidade do seletor.',
+            highlight: ['seletor', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA9_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA9_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'A few modern selectors help write more direct CSS. :not() selects elements that do not match a selector. :is() and :where() group several selectors into one, avoiding repetition.',
+            endParagraph: 'The difference between :is() and :where() is subtle: :where() never adds to the specificity of the selector.',
+            highlight: ['selector', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA9_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA9_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: ':has() permite selecionar um elemento com base no que existe dentro dele — algo que o CSS não conseguia fazer antes.',
+            endParagraph: 'Esse seletor abre espaço para estilizar um componente de forma condicional, sem precisar de JavaScript.',
+            highlight: ['CSS', 'JavaScript'],
+            codeLanguage: 'CSS',
+            code: CSSA9_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA9_T2_HTML_PT }]
+          },
+          en: {
+            firstParagraph: ':has() lets you select an element based on what exists inside it — something CSS could not do before.',
+            endParagraph: 'This selector opens the door to styling a component conditionally, without needing JavaScript.',
+            highlight: ['CSS', 'JavaScript'],
+            codeLanguage: 'CSS',
+            code: CSSA9_T2_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA9_T2_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Como o CSS decide', en: 'How CSS decides' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando duas regras CSS competem pelo mesmo elemento, o navegador segue critérios para decidir qual vale — isso é a cascata.',
+            secondParagraph: 'Entre regras com a mesma especificidade, a que aparece por último no CSS vence.',
+            endParagraph: 'Nesse exemplo, o parágrafo fica azul, porque essa regra aparece depois.',
+            highlight: ['cascata', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA10_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA10_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'When two CSS rules compete for the same element, the browser follows criteria to decide which one wins — that is the cascade.',
+            secondParagraph: 'Between rules with the same specificity, the one that appears last in the CSS wins.',
+            endParagraph: 'In this example, the paragraph turns blue, because that rule appears later.',
+            highlight: ['cascade', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA10_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA10_T1_HTML_EN }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Especificidade e herança', en: 'Specificity and inheritance' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Especificidade é o peso que o navegador dá a cada seletor. Um id pesa mais que uma classe, e uma classe pesa mais que uma tag.',
+            endParagraph: 'Mesmo que a regra da tag venha depois, a classe vence porque tem mais especificidade.',
+            highlight: ['especificidade'],
+            codeLanguage: 'CSS',
+            code: CSSA11_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA11_T1_HTML_PT }]
+          },
+          en: {
+            firstParagraph: 'Specificity is the weight the browser gives to each selector. An id weighs more than a class, and a class weighs more than a tag.',
+            endParagraph: 'Even though the tag rule comes later, the class wins because it has more specificity.',
+            highlight: ['specificity'],
+            codeLanguage: 'CSS',
+            code: CSSA11_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA11_T1_HTML_EN }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Algumas propriedades, como color e font-family, são herdadas pelos elementos filhos automaticamente.',
+            secondParagraph: '!important ignora a especificidade normal e deve ser usado com cautela — costuma dificultar a manutenção do CSS.',
+            endParagraph: 'Prefira ajustar a especificidade da regra a recorrer a !important.',
+            highlight: ['herdadas', 'important'],
+            codeLanguage: 'CSS',
+            code: CSSA11_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Some properties, like color and font-family, are inherited by child elements automatically.',
+            secondParagraph: '!important ignores normal specificity and should be used with caution — it tends to make CSS harder to maintain.',
+            endParagraph: 'Prefer adjusting the specificity of the rule over reaching for !important.',
+            highlight: ['inherited', 'important'],
+            codeLanguage: 'CSS',
+            code: CSSA11_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Container queries', en: 'Container queries' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Media queries reagem ao tamanho da tela inteira. Container queries reagem ao tamanho do elemento pai, não importa o tamanho da tela.',
+            endParagraph: 'Isso é útil para um componente que precisa se adaptar dependendo de onde é usado, não só do tamanho da tela.',
+            highlight: ['container queries', 'media queries'],
+            codeLanguage: 'CSS',
+            code: CSSA12_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Media queries react to the size of the whole screen. Container queries react to the size of the parent element, no matter the screen size.',
+            endParagraph: 'This is useful for a component that needs to adapt depending on where it is used, not just the screen size.',
+            highlight: ['container queries', 'media queries'],
+            codeLanguage: 'CSS',
+            code: CSSA12_T1_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Controle de proporções e imagens', en: 'Controlling proportions and images' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'aspect-ratio define a proporção entre largura e altura de um elemento, sem precisar calcular a altura manualmente.',
+            endParagraph: 'A altura se ajusta automaticamente para manter a proporção, mesmo que a largura mude.',
+            highlight: ['aspect-ratio'],
+            codeLanguage: 'CSS',
+            code: CSSA13_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA13_T1_HTML }]
+          },
+          en: {
+            firstParagraph: 'aspect-ratio sets the proportion between the width and the height of an element, without manually calculating the height.',
+            endParagraph: 'The height adjusts automatically to keep the proportion, even if the width changes.',
+            highlight: ['aspect-ratio'],
+            codeLanguage: 'CSS',
+            code: CSSA13_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSA13_T1_HTML }]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'object-fit controla como uma imagem preenche a caixa quando a proporção da imagem não é igual à da caixa.',
+            endParagraph: 'cover preenche o espaço cortando o excesso; contain encaixa a imagem inteira, podendo deixar espaço vazio.',
+            highlight: ['object-fit', 'cover', 'contain'],
+            codeLanguage: 'CSS',
+            code: CSSA13_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'object-fit controls how an image fills the box when the proportion of the image does not match the proportion of the box.',
+            endParagraph: 'cover fills the space by cropping the excess; contain fits the whole image, which can leave empty space.',
+            highlight: ['object-fit', 'cover', 'contain'],
+            codeLanguage: 'CSS',
+            code: CSSA13_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Experiência visual', en: 'Visual experience' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'scroll-behavior: smooth transforma uma rolagem brusca em uma rolagem suave ao navegar para uma âncora da página.',
+            secondParagraph: 'accent-color muda a cor de controles nativos, como checkbox e radio, sem precisar recriar o componente do zero.',
+            endParagraph: 'São ajustes pequenos que aproveitam comportamento e componentes que o navegador já oferece.',
+            highlight: ['scroll-behavior', 'accent-color'],
+            codeLanguage: 'CSS',
+            code: CSSA14_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'scroll-behavior: smooth turns an abrupt jump into a smooth scroll when navigating to an anchor on the page.',
+            secondParagraph: 'accent-color changes the color of native controls, like checkbox and radio, without having to rebuild the component from scratch.',
+            endParagraph: 'These are small adjustments that take advantage of behavior and components the browser already offers.',
+            highlight: ['scroll-behavior', 'accent-color'],
+            codeLanguage: 'CSS',
+            code: CSSA14_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'backdrop-filter aplica um efeito visual, como desfoque, no conteúdo que fica atrás de um elemento — útil para painéis semitransparentes.',
+            endParagraph: 'O suporte a backdrop-filter varia entre navegadores, então vale sempre ter um visual razoável mesmo sem esse efeito.',
+            highlight: ['backdrop-filter'],
+            codeLanguage: 'CSS',
+            code: CSSA14_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'backdrop-filter applies a visual effect, like blur, to the content behind an element — useful for semi-transparent panels.',
+            endParagraph: 'Support for backdrop-filter varies between browsers, so it is worth always having a reasonable look even without that effect.',
+            highlight: ['backdrop-filter'],
+            codeLanguage: 'CSS',
+            code: CSSA14_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Foco', en: 'Focus' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando um elemento recebe foco pelo teclado, o navegador desenha um contorno ao redor dele por padrão — o anel de foco.',
+            secondParagraph: 'Remover esse contorno com outline: none sem colocar nada no lugar deixa quem navega pelo teclado sem saber onde está.',
+            endParagraph: 'Se for personalizar o visual do foco, troque o outline por outro indicador visível, nunca remova sem substituir.',
+            highlight: ['foco', 'outline'],
+            codeLanguage: 'CSS',
+            code: CSSA15_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When an element receives keyboard focus, the browser draws an outline around it by default — the focus ring.',
+            secondParagraph: 'Removing that outline with outline: none without putting anything in its place leaves someone navigating by keyboard without knowing where they are.',
+            endParagraph: "If you want to customize the look of focus, swap the outline for another visible indicator — never remove it without replacing it.",
+            highlight: ['focus', 'outline'],
+            codeLanguage: 'CSS',
+            code: CSSA15_T1_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Preferências do usuário', en: 'User preferences' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Algumas pessoas preferem reduzir movimentos na interface. CSS oferece a media query prefers-reduced-motion para respeitar essa preferência.',
+            endParagraph: 'Uma interface avançada também precisa considerar acessibilidade. Animações devem melhorar a experiência, não prejudicá-la.',
+            highlight: ['prefers-reduced-motion', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA16_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Some people prefer to reduce motion in the interface. CSS offers a specific media query, prefers-reduced-motion, to respect that preference.',
+            endParagraph: 'An advanced interface also needs to consider accessibility. Animations should improve the experience, not harm it.',
+            highlight: ['prefers-reduced-motion', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSA16_T1_CSS,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'prefers-color-scheme detecta se o usuário prefere um tema claro ou escuro no sistema, permitindo que o CSS reaja a essa preferência.',
+            endParagraph: 'Assim, a interface já nasce no tema que a pessoa já escolheu no sistema, sem precisar de um botão extra.',
+            highlight: ['prefers-color-scheme'],
+            codeLanguage: 'CSS',
+            code: CSSA16_T2_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: "prefers-color-scheme detects whether the user prefers a light or dark theme at the system level, letting CSS react to that preference.",
+            endParagraph: 'That way, the interface already starts in the theme the person already chose at the system level, without needing an extra toggle.',
+            highlight: ['prefers-color-scheme'],
+            codeLanguage: 'CSS',
+            code: CSSA16_T2_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Contraste e teclado', en: 'Contrast and keyboard' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Contraste suficiente entre texto e fundo, foco visível e navegação por teclado formam a base da acessibilidade em CSS.',
+            endParagraph: 'Esses três pontos resolvem boa parte dos problemas de acessibilidade sem exigir uma auditoria completa de WCAG.',
+            highlight: ['contraste', 'WCAG'],
+            codeLanguage: 'CSS',
+            code: CSSA17_T1_CSS,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Enough contrast between text and background, visible focus and keyboard navigation form the basis of accessibility in CSS.',
+            endParagraph: 'These three points solve most accessibility problems without requiring a full WCAG audit.',
+            highlight: ['contrast', 'WCAG'],
+            codeLanguage: 'CSS',
+            code: CSSA17_T1_CSS,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+// --- JavaScript/TypeScript Avançado: trechos de código ---
+// Todas as telas são `onlyCode: true`, pelo mesmo motivo dos módulos
+// anteriores (a aba "Web" não executa JavaScript nem TypeScript).
+
+const JSA1_T1_PT = 'const nome = "Ana";\n\nfunction saudacao() {\n  console.log(nome);\n}\n\nsaudacao();'
+const JSA1_T1_EN = 'const name = "Ana";\n\nfunction greet() {\n  console.log(name);\n}\n\ngreet();'
+
+const JSA2_T1_PT = 'function criarContador() {\n  let total = 0;\n\n  return function () {\n    total++;\n    return total;\n  };\n}\n\nconst contar = criarContador();\ncontar(); // 1\ncontar(); // 2'
+const JSA2_T1_EN = 'function createCounter() {\n  let total = 0;\n\n  return function () {\n    total++;\n    return total;\n  };\n}\n\nconst count = createCounter();\ncount(); // 1\ncount(); // 2'
+
+const JSA3_T1_PT = 'console.log(nome); // undefined\nvar nome = "Ana";\n\nconsole.log(idade); // erro\nlet idade = 20;'
+const JSA3_T1_EN = 'console.log(name); // undefined\nvar name = "Ana";\n\nconsole.log(age); // error\nlet age = 20;'
+
+const JSA4_T1_PT = 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"'
+const JSA4_T1_EN = 'const user = {\n  name: "Ana",\n  greet() {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // "Ana"'
+
+const JSA5_T1_PT = 'const usuario = {\n  nome: "Ana",\n  saudar: () => {\n    console.log(this.nome); // undefined\n  }\n};\n\nusuario.saudar();'
+const JSA5_T1_EN = 'const user = {\n  name: "Ana",\n  greet: () => {\n    console.log(this.name); // undefined\n  }\n};\n\nuser.greet();'
+
+const JSA6_T1_PT = 'const animal = {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n};\n\nconst cachorro = Object.create(animal);\ncachorro.emitirSom(); // "Som genérico"'
+const JSA6_T1_EN = 'const animal = {\n  makeSound() {\n    console.log("Generic sound");\n  }\n};\n\nconst dog = Object.create(animal);\ndog.makeSound(); // "Generic sound"'
+
+const JSA7_T1_PT = 'class Animal {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n}\n\nclass Cachorro extends Animal {\n  emitirSom() {\n    console.log("Au au!");\n  }\n}\n\nnew Cachorro().emitirSom();'
+const JSA7_T1_EN = 'class Animal {\n  makeSound() {\n    console.log("Generic sound");\n  }\n}\n\nclass Dog extends Animal {\n  makeSound() {\n    console.log("Woof!");\n  }\n}\n\nnew Dog().makeSound();'
+
+const JSA8_T1_PT = 'function um() {\n  console.log("um");\n}\n\nfunction dois() {\n  um();\n  console.log("dois");\n}\n\ndois();'
+const JSA8_T1_EN = 'function one() {\n  console.log("one");\n}\n\nfunction two() {\n  one();\n  console.log("two");\n}\n\ntwo();'
+
+const JSA9_T1_PT = 'console.log("1");\n\nsetTimeout(() => console.log("2"), 0);\n\nPromise.resolve().then(() => console.log("3"));\n\nconsole.log("4");\n// Ordem: 1, 4, 3, 2'
+const JSA9_T1_EN = 'console.log("1");\n\nsetTimeout(() => console.log("2"), 0);\n\nPromise.resolve().then(() => console.log("3"));\n\nconsole.log("4");\n// Order: 1, 4, 3, 2'
+
+const JSA10_T1_PT = 'Promise.resolve("ok").then((valor) => {\n  console.log(valor);\n});\n\nconsole.log("Executado primeiro");'
+const JSA10_T1_EN = 'Promise.resolve("ok").then((value) => {\n  console.log(value);\n});\n\nconsole.log("Runs first");'
+
+const JSA11_T1_PT = 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a); // 10\n\nconst obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;\nconsole.log(obj1.total); // 20'
+const JSA11_T1_EN = 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a); // 10\n\nconst obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;\nconsole.log(obj1.total); // 20'
+
+const JSA12_T1_PT = 'const original = {\n  nome: "Ana",\n  endereco: { cidade: "SP" }\n};\n\nconst copia = { ...original };\ncopia.endereco.cidade = "RJ";\n\nconsole.log(original.endereco.cidade); // "RJ"'
+const JSA12_T1_EN = 'const original = {\n  name: "Ana",\n  address: { city: "SP" }\n};\n\nconst copy = { ...original };\ncopy.address.city = "RJ";\n\nconsole.log(original.address.city); // "RJ"'
+
+const JSA13_T1_PT = 'document\n  .querySelector("ul")\n  .addEventListener("click", (evento) => {\n    console.log(evento.target.textContent);\n  });'
+const JSA13_T1_EN = 'document\n  .querySelector("ul")\n  .addEventListener("click", (event) => {\n    console.log(event.target.textContent);\n  });'
+
+const JSA14_T1_PT = 'function debounce(fn, atraso) {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), atraso);\n  };\n}'
+const JSA14_T1_EN = 'function debounce(fn, delay) {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n}'
+
+const JSA15_T1_PT = 'function somar(a: number, b: number) {\n  return a + b;\n}\n\nsomar(2, "3"); // erro detectado antes de rodar'
+const JSA15_T1_EN = 'function add(a: number, b: number) {\n  return a + b;\n}\n\nadd(2, "3"); // error caught before it runs'
+
+const JSA16_T1_PT = 'let idade: number = 20;'
+const JSA16_T1_EN = 'let age: number = 20;'
+
+const JSA17_T1_PT = 'let nome = "Ana"; // inferido como string\nlet idade = 20; // inferido como number\n\nlet cidade: string = "São Paulo"; // anotação explícita'
+const JSA17_T1_EN = 'let name = "Ana"; // inferred as string\nlet age = 20; // inferred as number\n\nlet city: string = "São Paulo"; // explicit annotation'
+
+const JSA18_T1_PT = 'interface Usuario {\n  nome: string;\n  idade: number;\n}\n\ntype Produto = {\n  nome: string;\n  preco: number;\n};'
+const JSA18_T1_EN = 'interface User {\n  name: string;\n  age: number;\n}\n\ntype Product = {\n  name: string;\n  price: number;\n};'
+
+const JSA19_T1_PT = 'let id: string | number;\n\nid = "abc123";\nid = 42;'
+const JSA19_T1_EN = 'let id: string | number;\n\nid = "abc123";\nid = 42;'
+
+const JSA20_T1_PT = 'function criar(\n  nome: string,\n  idade: number\n): { nome: string; idade: number } {\n  return { nome, idade };\n}'
+const JSA20_T1_EN = 'function create(\n  name: string,\n  age: number\n): { name: string; age: number } {\n  return { name, age };\n}'
+
+const JSA21_T1_PT = 'let valor: unknown = "texto";\n\nif (typeof valor === "string") {\n  console.log(valor.toUpperCase());\n}'
+const JSA21_T1_EN = 'let value: unknown = "text";\n\nif (typeof value === "string") {\n  console.log(value.toUpperCase());\n}'
+
+const JSA22_T1_PT = 'function primeiro<T>(\n  itens: T[]\n): T {\n  return itens[0];\n}\n\nconst numero =\n  primeiro([1, 2, 3]);\n\nconst nome =\n  primeiro(["Ana", "João"]);'
+const JSA22_T1_EN = 'function first<T>(\n  items: T[]\n): T {\n  return items[0];\n}\n\nconst number =\n  first([1, 2, 3]);\n\nconst name =\n  first(["Ana", "John"]);'
+
+const JSA23_T1_PT = 'interface A {\n  nome: string;\n}\ninterface A {\n  idade: number;\n}\n// A agora tem nome e idade\n\ntype Status = "ativo" | "inativo";'
+const JSA23_T1_EN = 'interface A {\n  name: string;\n}\ninterface A {\n  age: number;\n}\n// A now has name and age\n\ntype Status = "active" | "inactive";'
+
+const JSA24_T1 = '{\n  "compilerOptions": {\n    "target": "es2022",\n    "strict": true\n  }\n}'
+
+const JS_ADVANCED_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'Escopo e cadeia de escopos', en: 'Scope and the scope chain' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Toda variável existe dentro de um escopo. Quando o JavaScript não encontra uma variável no escopo atual, ele procura no escopo de fora, e assim por diante — isso é a scope chain.',
+            endParagraph: 'A busca sempre vai de dentro para fora, nunca o contrário — uma função externa não enxerga variáveis criadas dentro de uma função interna.',
+            highlight: ['scope chain', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Every variable exists inside a scope. When JavaScript cannot find a variable in the current scope, it looks in the scope outside it, and so on — that is the scope chain.',
+            endParagraph: 'The search always goes from inside out, never the other way around — an outer function cannot see variables created inside an inner function.',
+            highlight: ['scope chain', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA1_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Closures', en: 'Closures' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma closure acontece quando uma função guarda acesso ao escopo em que foi criada, mesmo depois que esse escopo já terminou de executar.',
+            endParagraph: 'A função retornada continua acessando total, mesmo que criarContador já tenha terminado.',
+            highlight: ['closure'],
+            codeLanguage: 'JavaScript',
+            code: JSA2_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A closure happens when a function keeps access to the scope it was created in, even after that scope has already finished running.',
+            endParagraph: 'The returned function keeps accessing total, even though createCounter has already finished.',
+            highlight: ['closure'],
+            codeLanguage: 'JavaScript',
+            code: JSA2_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Hoisting e execução', en: 'Hoisting and execution' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Antes de executar o código, o JavaScript prepara o escopo e já reserva espaço para as declarações — isso é o hoisting.',
+            endParagraph: 'var é içada e inicializada como undefined. let e const também são içadas, mas não podem ser usadas antes da linha em que são declaradas.',
+            highlight: ['hoisting', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA3_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Before running the code, JavaScript prepares the scope and already reserves space for declarations — that is hoisting.',
+            endParagraph: 'var is hoisted and initialized as undefined. let and const are also hoisted, but cannot be used before the line where they are declared.',
+            highlight: ['hoisting', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA3_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'O que é this', en: 'What this is' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O valor de this depende do contexto em que a função foi chamada, não de onde ela foi escrita.',
+            endParagraph: 'Aqui, this é usuario, porque a função foi chamada como um método de usuario.',
+            highlight: ['contexto'],
+            codeLanguage: 'JavaScript',
+            code: JSA4_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The value of this depends on the context the function was called in, not on where it was written.',
+            endParagraph: 'Here, this is user, because the function was called as a method of user.',
+            highlight: ['context'],
+            codeLanguage: 'JavaScript',
+            code: JSA4_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Arrow functions e this', en: 'Arrow functions and this' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Arrow functions não têm seu próprio this — elas usam o this do escopo onde foram criadas.',
+            endParagraph: 'Por isso, arrow functions não são uma boa escolha para métodos de objeto que dependem de this.',
+            highlight: ['arrow functions'],
+            codeLanguage: 'JavaScript',
+            code: JSA5_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Arrow functions do not have their own this — they use the this from the scope where they were created.',
+            endParagraph: 'That is why arrow functions are not a good choice for object methods that depend on this.',
+            highlight: ['arrow functions'],
+            codeLanguage: 'JavaScript',
+            code: JSA5_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Prototypes', en: 'Prototypes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Todo objeto em JavaScript tem um prototype — um outro objeto de onde ele pode herdar propriedades e métodos.',
+            endParagraph: 'Quando uma propriedade não existe no próprio objeto, o JavaScript procura no prototype — essa busca é a prototype chain.',
+            highlight: ['prototype', 'prototype chain', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA6_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Every object in JavaScript has a prototype — another object it can inherit properties and methods from.',
+            endParagraph: 'When a property does not exist on the object itself, JavaScript looks in the prototype — that search is the prototype chain.',
+            highlight: ['prototype', 'prototype chain', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JSA6_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Classes e herança', en: 'Classes and inheritance' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'class oferece uma sintaxe mais familiar para trabalhar com o mesmo sistema de prototypes por trás dos panos.',
+            endParagraph: 'extends cria herança entre classes, e o método na classe filha sobrescreve o da classe pai.',
+            highlight: ['class', 'extends', 'prototypes'],
+            codeLanguage: 'JavaScript',
+            code: JSA7_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'class offers a more familiar syntax for working with the same prototype system behind the scenes.',
+            endParagraph: 'extends creates inheritance between classes, and the method in the child class overrides the one in the parent class.',
+            highlight: ['class', 'extends', 'prototypes'],
+            codeLanguage: 'JavaScript',
+            code: JSA7_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Call stack e Event Loop', en: 'Call stack and Event Loop' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A call stack guarda as funções que estão sendo executadas, uma em cima da outra. Quando uma função termina, ela sai do topo da pilha.',
+            endParagraph: 'O event loop é quem verifica, constantemente, se a call stack está vazia para poder executar o que está esperando, como código assíncrono.',
+            highlight: ['call stack', 'event loop'],
+            codeLanguage: 'JavaScript',
+            code: JSA8_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The call stack holds the functions currently running, one on top of the other. When a function finishes, it comes off the top of the stack.',
+            endParagraph: 'The event loop is what constantly checks whether the call stack is empty, so it can run what is waiting, like asynchronous code.',
+            highlight: ['call stack', 'event loop'],
+            codeLanguage: 'JavaScript',
+            code: JSA8_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Microtasks e macrotasks', en: 'Microtasks and macrotasks' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Promises resolvidas entram numa fila de microtasks. setTimeout entra numa fila de macrotasks. As duas filas só rodam depois que a call stack esvazia.',
+            endParagraph: 'Microtasks sempre rodam antes das macrotasks, mesmo quando o setTimeout usa 0 milissegundos.',
+            highlight: ['microtasks', 'macrotasks', 'call stack'],
+            codeLanguage: 'JavaScript',
+            code: JSA9_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Resolved Promises go into a microtask queue. setTimeout goes into a macrotask queue. Both queues only run after the call stack is empty.',
+            endParagraph: 'Microtasks always run before macrotasks, even when setTimeout uses 0 milliseconds.',
+            highlight: ['microtasks', 'macrotasks', 'call stack'],
+            codeLanguage: 'JavaScript',
+            code: JSA9_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Como Promises entram nesse fluxo', en: 'How Promises fit into this flow' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando uma Promise é resolvida, seu .then() não executa na hora — ele entra na fila de microtasks e espera a call stack ficar livre.',
+            endParagraph: 'Por isso o texto síncrono aparece antes do resultado da Promise, mesmo que ela já esteja resolvida.',
+            highlight: ['Promise', 'microtasks'],
+            codeLanguage: 'JavaScript',
+            code: JSA10_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When a Promise is resolved, its .then() does not run right away — it goes into the microtask queue and waits for the call stack to be free.',
+            endParagraph: 'That is why the synchronous text shows up before the Promise result, even though it is already resolved.',
+            highlight: ['Promise', 'microtasks'],
+            codeLanguage: 'JavaScript',
+            code: JSA10_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Valor e referência', en: 'Value and reference' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tipos primitivos, como number e string, são copiados por valor. Objetos e arrays são copiados por referência.',
+            endParagraph: 'Mudar obj2 também muda obj1, porque as duas variáveis apontam para o mesmo objeto na memória.',
+            highlight: ['valor', 'referência'],
+            codeLanguage: 'JavaScript',
+            code: JSA11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Primitive types, like number and string, are copied by value. Objects and arrays are copied by reference.',
+            endParagraph: 'Changing obj2 also changes obj1, because both variables point to the same object in memory.',
+            highlight: ['value', 'reference'],
+            codeLanguage: 'JavaScript',
+            code: JSA11_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Cópias', en: 'Copies' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma shallow copy duplica só o primeiro nível de um objeto. Propriedades que são, elas mesmas, objetos continuam compartilhadas.',
+            endParagraph: 'Para copiar todos os níveis de verdade, é preciso uma deep copy, como structuredClone().',
+            highlight: ['shallow copy', 'deep copy'],
+            codeLanguage: 'JavaScript',
+            code: JSA12_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A shallow copy duplicates only the first level of an object. Properties that are themselves objects stay shared.',
+            endParagraph: 'To copy every level for real, you need a deep copy, like structuredClone().',
+            highlight: ['shallow copy', 'deep copy'],
+            codeLanguage: 'JavaScript',
+            code: JSA12_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Event delegation', en: 'Event delegation' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Em vez de adicionar um listener em cada item de uma lista, podemos adicionar um único listener no elemento pai.',
+            endParagraph: 'O evento nasce no item clicado e sobe até o pai — event delegation aproveita esse comportamento para economizar listeners.',
+            highlight: ['event delegation', 'listener'],
+            codeLanguage: 'JavaScript',
+            code: JSA13_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Instead of adding a listener to every item in a list, we can add a single listener to the parent element.',
+            endParagraph: 'The event starts at the clicked item and bubbles up to the parent — event delegation takes advantage of that behavior to save listeners.',
+            highlight: ['event delegation', 'listener'],
+            codeLanguage: 'JavaScript',
+            code: JSA13_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Debounce e throttle', en: 'Debounce and throttle' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'debounce espera o usuário parar de disparar um evento antes de executar a função. throttle executa a função no máximo uma vez a cada intervalo.',
+            endParagraph: 'debounce é comum em campos de busca; throttle é comum em eventos de scroll, que disparam com muita frequência.',
+            highlight: ['debounce', 'throttle'],
+            codeLanguage: 'JavaScript',
+            code: JSA14_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'debounce waits for the user to stop triggering an event before running the function. throttle runs the function at most once per interval.',
+            endParagraph: 'debounce is common in search fields; throttle is common in scroll events, which fire very frequently.',
+            highlight: ['debounce', 'throttle'],
+            codeLanguage: 'JavaScript',
+            code: JSA14_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Por que TypeScript?', en: 'Why TypeScript?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JavaScript é flexível, mas essa flexibilidade pode dificultar a manutenção de aplicações maiores. TypeScript adiciona recursos de tipagem ao desenvolvimento JavaScript para ajudar a detectar determinados problemas antes da execução.',
+            endParagraph: 'Esse tipo de erro só apareceria em tempo de execução no JavaScript puro — o TypeScript aponta antes.',
+            highlight: ['TypeScript', 'JavaScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA15_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JavaScript is flexible, but that flexibility can make larger applications harder to maintain. TypeScript adds typing features to JavaScript development to help catch certain problems before the code even runs.',
+            endParagraph: 'This kind of error would only show up at runtime in plain JavaScript — TypeScript points it out beforehand.',
+            highlight: ['TypeScript', 'JavaScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA15_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'JavaScript e TypeScript', en: 'JavaScript and TypeScript' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'TypeScript é um superset de JavaScript: todo código JavaScript válido também é código TypeScript válido.',
+            secondParagraph: 'O código TypeScript é convertido (transpilado) em JavaScript comum antes de rodar.',
+            endParagraph: 'Depois da transpilação, o resultado é só JavaScript — sem tipos, sem interfaces, sem nada que só existe em tempo de desenvolvimento.',
+            highlight: ['TypeScript', 'JavaScript', 'transpilado'],
+            codeLanguage: 'TypeScript',
+            code: JSA16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'TypeScript is a superset of JavaScript: every valid JavaScript code is also valid TypeScript code.',
+            secondParagraph: 'TypeScript code gets converted (transpiled) into plain JavaScript before it runs.',
+            endParagraph: 'After transpilation, the result is just JavaScript — no types, no interfaces, nothing that only exists at development time.',
+            highlight: ['TypeScript', 'JavaScript', 'transpiled'],
+            codeLanguage: 'TypeScript',
+            code: JSA16_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Navegadores sabem executar JavaScript, não TypeScript diretamente. Por isso o TypeScript precisa ser transpilado antes de chegar ao navegador.',
+            endParagraph: 'Ferramentas de build costumam fazer essa transpilação automaticamente, então o processo geralmente é invisível no dia a dia.',
+            highlight: ['JavaScript', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Browsers know how to run JavaScript, not TypeScript directly. That is why TypeScript needs to be transpiled before it reaches the browser.',
+            endParagraph: 'Build tools usually do this transpilation automatically, so the process is normally invisible day to day.',
+            highlight: ['JavaScript', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA16_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tipos e inferência', en: 'Types and inference' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'TypeScript consegue inferir o tipo de uma variável a partir do valor atribuído, sem precisar de uma anotação explícita.',
+            endParagraph: 'Anotações explícitas são úteis quando o valor inicial não deixa claro qual tipo se pretende usar.',
+            highlight: ['inferir', 'anotação', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA17_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'TypeScript can infer the type of a variable from the assigned value, without needing an explicit annotation.',
+            endParagraph: 'Explicit annotations are useful when the initial value does not make it clear which type is intended.',
+            highlight: ['infer', 'annotation', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA17_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tipos de objetos', en: 'Object types' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'interface e type descrevem a estrutura esperada de um objeto.',
+            endParagraph: 'As duas formas resolvem o mesmo problema; a diferença prática entre elas aparece mais adiante, na lição sobre type vs interface.',
+            highlight: ['interface', 'type'],
+            codeLanguage: 'TypeScript',
+            code: JSA18_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'interface and type describe the expected structure of an object.',
+            endParagraph: 'Both forms solve the same problem; the practical difference between them shows up later, in the type vs interface lesson.',
+            highlight: ['interface', 'type'],
+            codeLanguage: 'TypeScript',
+            code: JSA18_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Union types', en: 'Union types' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um union type permite que uma variável aceite mais de um tipo possível.',
+            endParagraph: 'Isso é útil quando um valor legitimamente pode vir em mais de um formato, como um id que às vezes é numérico e às vezes é um texto.',
+            highlight: ['union type'],
+            codeLanguage: 'TypeScript',
+            code: JSA19_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A union type lets a variable accept more than one possible type.',
+            endParagraph: 'This is useful when a value can legitimately come in more than one shape, like an id that is sometimes numeric and sometimes text.',
+            highlight: ['union type'],
+            codeLanguage: 'TypeScript',
+            code: JSA19_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Funções tipadas', en: 'Typed functions' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos tipar os parâmetros, o retorno e até objetos inteiros usados por uma função.',
+            endParagraph: 'Com os tipos declarados, o TypeScript avisa se a função for chamada com argumentos errados ou se o retorno não bater com o esperado.',
+            highlight: ['TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA20_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can type the parameters, the return value and even whole objects used by a function.',
+            endParagraph: 'With the types declared, TypeScript warns if the function is called with the wrong arguments or if the return does not match what is expected.',
+            highlight: ['TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA20_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'any e unknown', en: 'any and unknown' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'any desliga a verificação de tipos para aquele valor — o TypeScript deixa de ajudar ali.',
+            secondParagraph: 'unknown também aceita qualquer valor, mas exige uma verificação antes de deixar usá-lo, o que é mais seguro.',
+            endParagraph: 'Prefira unknown a any sempre que o tipo ainda não for conhecido.',
+            highlight: ['unknown', 'any', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA21_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'any turns off type checking for that value — TypeScript stops helping there.',
+            secondParagraph: 'unknown also accepts any value, but requires a check before letting you use it, which is safer.',
+            endParagraph: 'Prefer unknown over any whenever the type is not known yet.',
+            highlight: ['unknown', 'any', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA21_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Generics', en: 'Generics' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'generics permitem criar funções e estruturas reutilizáveis sem perder informações sobre os tipos utilizados.',
+            endParagraph: 'O mesmo código pode trabalhar com diferentes tipos mantendo informações sobre o tipo utilizado.',
+            highlight: ['generics'],
+            codeLanguage: 'TypeScript',
+            code: JSA22_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Generics let you create reusable functions and structures without losing information about the types used.',
+            endParagraph: 'The same code can work with different types while keeping information about the type used.',
+            highlight: ['generics'],
+            codeLanguage: 'TypeScript',
+            code: JSA22_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'type vs interface', en: 'type vs interface' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Na prática, interface e type resolvem o mesmo problema na maioria dos casos do dia a dia.',
+            secondParagraph: 'Uma diferença real: interface pode ser estendida depois no mesmo nome (declaration merging), e type pode representar union types, o que interface não consegue.',
+            endParagraph: 'Para objetos simples, a escolha costuma ser mais uma questão de convenção do time do que uma regra técnica rígida.',
+            highlight: ['interface', 'type', 'union types'],
+            codeLanguage: 'TypeScript',
+            code: JSA23_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In practice, interface and type solve the same problem in most everyday cases.',
+            secondParagraph: 'One real difference: interface can be extended later under the same name (declaration merging), and type can represent union types, which interface cannot.',
+            endParagraph: 'For simple objects, the choice is usually more a matter of team convention than a strict technical rule.',
+            highlight: ['interface', 'type', 'union types'],
+            codeLanguage: 'TypeScript',
+            code: JSA23_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'tsconfig e transpilação', en: 'tsconfig and transpilation' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'tsconfig.json configura como o TypeScript deve transpilar o projeto: para qual versão de JavaScript, quais arquivos incluir, e quão rígidas são as checagens de tipo.',
+            endParagraph: 'Não é preciso decorar todas as opções — o importante é saber que esse arquivo existe e é ele quem controla a transpilação.',
+            highlight: ['tsconfig', 'transpilação', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA24_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'tsconfig.json configures how TypeScript should transpile the project: which JavaScript version to target, which files to include, and how strict the type checks are.',
+            endParagraph: "You don't need to memorize every option — what matters is knowing this file exists and is what controls the transpilation.",
+            highlight: ['tsconfig', 'transpilation', 'TypeScript'],
+            codeLanguage: 'TypeScript',
+            code: JSA24_T1,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+// ============================================================
+// Conteúdo curricular do quarto módulo de JavaScript ("Além do JavaScript:
+// Node.js e Express"). Diferente dos módulos anteriores, este só existe para
+// a área JavaScript por enquanto — HTML e CSS ainda não têm seu próprio "Além
+// de" (React/Tailwind), então o 4º módulo delas continua com o nome genérico
+// "Módulo 4" até ganharem conteúdo. Parte do princípio de que o aluno já
+// concluiu HTML/CSS/JavaScript nos três níveis anteriores, incluindo
+// TypeScript (ensinado no módulo Avançado de JavaScript) — **TypeScript não é
+// reensinado aqui**: todo o código deste módulo é JavaScript puro, por
+// pedido explícito da proposta curricular. Só a parte teórica está seedada;
+// a atividade prática final ("API simples com Node.js e Express") fica para
+// depois, por pedido explícito também.
+//
+// Assim como no módulo Avançado, todas as telas são `onlyCode: true` — a aba
+// "Web" do `CodeSection` não executa JavaScript (só combina HTML+CSS
+// estáticos), então não há como demonstrar de verdade um servidor Node.js ou
+// uma rota Express rodando; forçar uma WebView aqui só mostraria uma página
+// em branco, o que ensinaria errado.
+//
+// A proposta original tinha alguns blocos de código em bash (`npm install
+// express`) e "diagramas" em texto puro (setas mostrando o fluxo cliente →
+// servidor → cliente). Nenhum dos dois é uma linguagem aceita por
+// `codeLanguage` (`'HTML' | 'CSS' | 'JavaScript' | 'TypeScript'`), e criar um
+// tipo novo só para uma linha de comando e dois diagramas ASCII seria
+// desproporcional. Em vez disso: o comando de instalação virou um comentário
+// JavaScript válido (`// npm install express`), e os diagramas de fluxo
+// viraram exemplos reais de código (ex.: um `fetch` de verdade para explicar
+// requisição/resposta) — o mesmo conceito, mas dentro da arquitetura já
+// existente, sem introduzir um tipo de conteúdo novo.
+
+// --- Além do JavaScript: trechos de código ---
+
+const JS4_L1_T1_PT = 'console.log("Olá, Node.js!");'
+const JS4_L1_T1_EN = 'console.log("Hello, Node.js!");'
+
+const JS4_L2_T1_PT = '// No navegador\nwindow.location.href;\n\n// No Node.js\nprocess.env;'
+const JS4_L2_T1_EN = '// In the browser\nwindow.location.href;\n\n// In Node.js\nprocess.env;'
+
+const JS4_L3_T1_PT = '// Navegador\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Executando no servidor");'
+const JS4_L3_T1_EN = '// Browser\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Running on the server");'
+
+const JS4_L4_T1_PT = '{\n  "name": "minha-api",\n  "version": "1.0.0"\n}'
+const JS4_L4_T1_EN = '{\n  "name": "my-api",\n  "version": "1.0.0"\n}'
+
+const JS4_L5_T1 = '// npm install express'
+
+const JS4_L5_T2 = '{\n  "dependencies": {\n    "express": "^5.0.0"\n  }\n}'
+
+const JS4_L6_MATH_PT = '// math.js\nexport function somar(a, b) {\n  return a + b;\n}'
+const JS4_L6_APP_PT = '// app.js\nimport { somar } from "./math.js";\n\nconsole.log(somar(2, 3));'
+const JS4_L6_MATH_EN = '// math.js\nexport function add(a, b) {\n  return a + b;\n}'
+const JS4_L6_APP_EN = '// app.js\nimport { add } from "./math.js";\n\nconsole.log(add(2, 3));'
+
+const JS4_L7_T1_PT = 'import fs from "node:fs";\n\nconst texto =\n  fs.readFileSync(\n    "arquivo.txt",\n    "utf8"\n  );\n\nconsole.log(texto);'
+const JS4_L7_T1_EN = 'import fs from "node:fs";\n\nconst text =\n  fs.readFileSync(\n    "file.txt",\n    "utf8"\n  );\n\nconsole.log(text);'
+
+const JS4_L8_T1_PT = 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "mensagem.txt",\n  "Olá!"\n);'
+const JS4_L8_T1_EN = 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "message.txt",\n  "Hello!"\n);'
+
+const JS4_L9_T1_PT = 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);'
+const JS4_L9_T1_EN = 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);'
+
+const JS4_L10_T1_PT = 'const resposta =\n  await fetch("/users");\n\nconsole.log(resposta.status); // 200'
+const JS4_L10_T1_EN = 'const response =\n  await fetch("/users");\n\nconsole.log(response.status); // 200'
+
+const JS4_L11_T1_PT = '// GET    /users     -> listar usuários\n// POST   /users     -> criar um usuário\n// PUT    /users/1   -> atualizar o usuário 1\n// DELETE /users/1   -> remover o usuário 1'
+const JS4_L11_T1_EN = '// GET    /users     -> list users\n// POST   /users     -> create a user\n// PUT    /users/1   -> update user 1\n// DELETE /users/1   -> remove user 1'
+
+const JS4_L12_T1_PT = '// 200 OK                      -> deu certo\n// 201 Created                  -> recurso criado\n// 400 Bad Request               -> requisição malformada\n// 404 Not Found                  -> recurso não existe\n// 500 Internal Server Error       -> erro no servidor'
+const JS4_L12_T1_EN = '// 200 OK                      -> worked fine\n// 201 Created                  -> resource created\n// 400 Bad Request               -> malformed request\n// 404 Not Found                  -> resource does not exist\n// 500 Internal Server Error       -> server error'
+
+const JS4_L14_T1_PT = 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);'
+const JS4_L14_T1_EN = 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);'
+
+const JS4_L15_T1_PT = 'app.get("/users", (req, res) => {\n  res.send("Lista de usuários");\n});'
+const JS4_L15_T1_EN = 'app.get("/users", (req, res) => {\n  res.send("User list");\n});'
+
+const JS4_L16_T1_PT = 'app.get("/users", (req, res) => {\n  res.send("Usuários");\n});'
+const JS4_L16_T1_EN = 'app.get("/users", (req, res) => {\n  res.send("Users");\n});'
+
+const JS4_L17_T1_PT = 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    nome: "Ana"\n  });\n});'
+const JS4_L17_T1_EN = 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    name: "Ana"\n  });\n});'
+
+const JS4_L18_T1 = 'app.get("/users/:id", (req, res) => {\n  res.json({\n    id: req.params.id\n  });\n});'
+
+const JS4_L19_T1 = 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});'
+
+const JS4_L20_T1_PT = 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);'
+const JS4_L20_T1_EN = 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);'
+
+const JS_BEYOND_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'JavaScript fora do navegador', en: 'JavaScript outside the browser' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JavaScript é muito conhecido por executar código no navegador, mas a linguagem também pode ser executada em outros ambientes. Node.js permite utilizar JavaScript fora do navegador, inclusive para criar aplicações no servidor.',
+            endParagraph: 'O código continua sendo JavaScript. O que mudou foi o ambiente em que ele está sendo executado.',
+            highlight: ['JavaScript', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JavaScript is well known for running code in the browser, but the language can also run in other environments. Node.js lets you use JavaScript outside the browser, including to build server applications.',
+            endParagraph: 'The code is still JavaScript. What changed was the environment it runs in.',
+            highlight: ['JavaScript', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L1_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Node.js é um runtime que permite executar JavaScript fora do navegador. Ele fornece recursos próprios para criar diferentes tipos de aplicações.',
+            endParagraph: 'Com Node.js, JavaScript pode ser utilizado também em ferramentas, scripts e aplicações de servidor.',
+            highlight: ['Node.js', 'runtime', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Node.js is a runtime that lets you run JavaScript outside the browser. It provides its own resources for building different kinds of applications.',
+            endParagraph: 'With Node.js, JavaScript can also be used in tools, scripts and server applications.',
+            highlight: ['Node.js', 'runtime', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L1_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Runtime', en: 'Runtime' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'runtime é o ambiente responsável por executar um programa. O navegador fornece um ambiente JavaScript voltado para a web. Node.js fornece outro ambiente, com recursos próprios.',
+            endParagraph: 'Por isso, JavaScript executado no navegador e JavaScript executado no Node.js podem ter APIs disponíveis diferentes.',
+            highlight: ['runtime', 'Node.js', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L2_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A runtime is the environment responsible for running a program. The browser provides a JavaScript environment aimed at the web. Node.js provides another environment, with its own resources.',
+            endParagraph: 'That is why JavaScript running in the browser and JavaScript running in Node.js can have different APIs available.',
+            highlight: ['runtime', 'Node.js', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L2_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Browser vs Node.js', en: 'Browser vs Node.js' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A linguagem continua sendo JavaScript, mas cada ambiente oferece recursos diferentes.',
+            endParagraph: 'document pertence às APIs do navegador. Já console está disponível também no ambiente Node.js.',
+            highlight: ['document', 'console', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L3_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The language is still JavaScript, but each environment offers different resources.',
+            endParagraph: 'document belongs to the APIs of the browser. console, on the other hand, is also available in the Node.js environment.',
+            highlight: ['document', 'console', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L3_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando trabalhamos com frontend, normalmente utilizamos APIs oferecidas pelo navegador. No backend, podemos utilizar APIs fornecidas pelo Node.js.',
+            endParagraph: 'Entender essa diferença ajuda a compreender por que um mesmo código JavaScript pode funcionar em um ambiente e não em outro.',
+            highlight: ['frontend', 'backend', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L3_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When working on the frontend, we normally use APIs offered by the browser. On the backend, we can use APIs provided by Node.js.',
+            endParagraph: 'Understanding that difference helps explain why the same JavaScript code can work in one environment and not in another.',
+            highlight: ['frontend', 'backend', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L3_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Projeto Node.js', en: 'A Node.js project' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um projeto Node.js possui arquivos e configurações que descrevem sua aplicação e suas dependências.',
+            endParagraph: 'O arquivo package.json é uma peça importante do ecossistema Node.js e será utilizado para gerenciar informações e dependências do projeto.',
+            highlight: ['package.json', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L4_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A Node.js project has files and configuration that describe its application and its dependencies.',
+            endParagraph: 'The package.json file is an important piece of the Node.js ecosystem, and it will be used to manage the project\'s information and dependencies.',
+            highlight: ['package.json', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L4_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'NPM', en: 'NPM' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'NPM é uma das principais ferramentas utilizadas para instalar e gerenciar pacotes no ecossistema JavaScript e Node.js.',
+            endParagraph: 'Com NPM, podemos adicionar bibliotecas e ferramentas prontas ao nosso projeto.',
+            highlight: ['NPM', 'JavaScript', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L5_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'NPM is one of the main tools used to install and manage packages in the JavaScript and Node.js ecosystem.',
+            endParagraph: 'With NPM, we can add ready-made libraries and tools to our project.',
+            highlight: ['NPM', 'JavaScript', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L5_T1,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando instalamos um pacote, ele passa a fazer parte das dependências do projeto.',
+            endParagraph: 'Isso permite que o projeto registre quais pacotes precisa para funcionar.',
+            highlight: ['dependências'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L5_T2,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When we install a package, it becomes part of the dependencies of the project.',
+            endParagraph: 'This lets the project record which packages it needs to work.',
+            highlight: ['dependencies'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L5_T2,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Módulos', en: 'Modules' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Assim como aplicações frontend podem ser divididas em módulos, aplicações Node.js também podem separar responsabilidades em diferentes arquivos.',
+            endParagraph: 'Módulos ajudam a organizar o código e reutilizar funcionalidades.',
+            highlight: ['módulos', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L6_MATH_PT,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JS4_L6_APP_PT }],
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Just like frontend applications can be split into modules, Node.js applications can also separate responsibilities across different files.',
+            endParagraph: 'Modules help organize code and reuse functionality.',
+            highlight: ['modules', 'Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L6_MATH_EN,
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JS4_L6_APP_EN }],
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'APIs nativas', en: 'Native APIs' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Node.js possui APIs nativas para realizar tarefas comuns, como trabalhar com arquivos, caminhos, processos e comunicação de rede.',
+            endParagraph: 'Antes de instalar um pacote, vale conhecer os recursos que o próprio Node.js oferece.',
+            highlight: ['Node.js', 'APIs nativas'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L7_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Node.js has native APIs for common tasks, like working with files, paths, processes and network communication.',
+            endParagraph: 'Before installing a package, it is worth knowing the resources Node.js itself already offers.',
+            highlight: ['Node.js', 'native APIs'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L7_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Sistema de arquivos', en: 'File system' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A API de sistema de arquivos do Node.js permite ler, criar e modificar arquivos diretamente pelo programa.',
+            endParagraph: 'Esse tipo de acesso é possível porque Node.js executa fora do ambiente restrito de uma página web.',
+            highlight: ['Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L8_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: "The Node.js file system API lets you read, create and modify files directly from the program.",
+            endParagraph: 'This kind of access is possible because Node.js runs outside the restricted environment of a web page.',
+            highlight: ['Node.js'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L8_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'HTTP com Node.js', en: 'HTTP with Node.js' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O próprio Node.js possui recursos para criar servidores HTTP. Isso permite receber requisições e enviar respostas sem utilizar um framework.',
+            endParagraph: 'É possível criar um servidor diretamente com Node.js, mas aplicações maiores podem se beneficiar de ferramentas que simplificam esse trabalho.',
+            highlight: ['Node.js', 'HTTP', 'framework'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L9_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework.',
+            endParagraph: "It's possible to create a server directly with Node.js, but larger applications can benefit from tools that simplify that work.",
+            highlight: ['Node.js', 'HTTP', 'framework'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L9_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'O que é HTTP?', en: 'What is HTTP?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'HTTP é um protocolo utilizado para comunicação entre clientes e servidores na web. O cliente envia uma requisição e o servidor devolve uma resposta.',
+            endParagraph: 'Essa troca de requisições e respostas é a base de muitas aplicações web e APIs.',
+            highlight: ['HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L10_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'HTTP is a protocol used for communication between clients and servers on the web. The client sends a request and the server sends back a response.',
+            endParagraph: 'This exchange of requests and responses is the foundation of many web applications and APIs.',
+            highlight: ['HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L10_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Métodos HTTP', en: 'HTTP methods' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Os métodos HTTP ajudam a indicar o que queremos fazer com um recurso.',
+            endParagraph: 'GET, POST, PUT e DELETE são alguns dos métodos mais comuns encontrados em APIs.',
+            highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'HTTP methods help indicate what we want to do with a resource.',
+            endParagraph: 'GET, POST, PUT and DELETE are some of the most common methods found in APIs.',
+            highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L11_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Status HTTP', en: 'HTTP status' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Além dos dados, uma resposta HTTP possui um status que indica como a requisição foi processada.',
+            endParagraph: 'Os códigos de status ajudam o cliente a entender o resultado de uma requisição.',
+            highlight: ['HTTP', 'status'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L12_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Besides the data, an HTTP response has a status that indicates how the request was processed.',
+            endParagraph: 'Status codes help the client understand the result of a request.',
+            highlight: ['HTTP', 'status'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L12_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Por que Express?', en: 'Why Express?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Node.js permite criar servidores HTTP diretamente, mas uma aplicação pode rapidamente acumular rotas, validações e outras responsabilidades. Frameworks ajudam a organizar esse trabalho.',
+            endParagraph: 'Express é uma ferramenta popular para facilitar a criação de aplicações web e APIs com Node.js.',
+            highlight: ['Node.js', 'framework', 'Express'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L9_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work.',
+            endParagraph: 'Express is a popular tool for making it easier to build web applications and APIs with Node.js.',
+            highlight: ['Node.js', 'framework', 'Express'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L9_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'O que é Express?', en: 'What is Express?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Express é um framework para Node.js utilizado para criar aplicações web e APIs HTTP de forma mais simples.',
+            endParagraph: 'Node.js fornece o ambiente de execução. Express adiciona recursos que facilitam a construção da aplicação HTTP.',
+            highlight: ['Express', 'Node.js', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L14_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Express is a framework for Node.js used to create web applications and HTTP APIs more simply.',
+            endParagraph: 'Node.js provides the runtime. Express adds resources that make it easier to build the HTTP application.',
+            highlight: ['Express', 'Node.js', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L14_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Rotas', en: 'Routes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma rota associa um método HTTP e um caminho a uma função que será executada quando aquela requisição chegar.',
+            endParagraph: 'A rota define como a aplicação responderá a uma determinada requisição.',
+            highlight: ['rota', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L15_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A route associates an HTTP method and a path with a function that runs when that request arrives.',
+            endParagraph: 'The route defines how the application will respond to a given request.',
+            highlight: ['route', 'HTTP'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L15_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Request e Response', en: 'Request and Response' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'No Express, req representa as informações da requisição recebida e res representa a resposta que será enviada ao cliente.',
+            endParagraph: 'O servidor recebe uma requisição e precisa produzir uma resposta adequada para o cliente.',
+            highlight: ['Express', 'req', 'res'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In Express, req represents the information from the incoming request, and res represents the response that will be sent to the client.',
+            endParagraph: 'The server receives a request and needs to produce a suitable response for the client.',
+            highlight: ['Express', 'req', 'res'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L16_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'JSON', en: 'JSON' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JSON é um formato muito utilizado para representar dados em APIs porque permite estruturar informações de maneira simples.',
+            endParagraph: 'APIs frequentemente utilizam JSON para transportar dados entre cliente e servidor.',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L17_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JSON is a widely used format for representing data in APIs because it lets you structure information in a simple way.',
+            endParagraph: 'APIs frequently use JSON to transport data between client and server.',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L17_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Parâmetros de rota', en: 'Route parameters' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Rotas podem possuir parâmetros. Eles permitem identificar recursos específicos a partir da própria URL.',
+            endParagraph: 'O parâmetro :id funciona como uma parte variável da rota.',
+            highlight: ['parâmetros', 'rota'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L18_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Routes can have parameters. They let you identify specific resources directly from the URL.',
+            endParagraph: 'The :id parameter works as a variable part of the route.',
+            highlight: ['parameters', 'route'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L18_T1,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Recebendo JSON', en: 'Receiving JSON' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma API também pode receber dados enviados pelo cliente. O Express possui middleware para interpretar requisições contendo JSON.',
+            endParagraph: 'Com isso, o servidor consegue receber objetos JSON enviados pelo cliente.',
+            highlight: ['Express', 'JSON', 'middleware'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L19_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'An API can also receive data sent by the client. Express has middleware to parse requests containing JSON.',
+            endParagraph: 'With that, the server can receive JSON objects sent by the client.',
+            highlight: ['Express', 'JSON', 'middleware'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L19_T1,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Construindo uma API', en: 'Building an API' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Agora podemos combinar Node.js, Express, rotas, métodos HTTP e JSON para construir uma pequena API.',
+            endParagraph: 'Essa aplicação já possui os principais elementos de uma API HTTP simples.',
+            highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Now we can combine Node.js, Express, routes, HTTP methods and JSON to build a small API.',
+            endParagraph: 'This application already has the main elements of a simple HTTP API.',
+            highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Entendendo o fluxo', en: 'Understanding the flow' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando um cliente acessa uma rota, o Express identifica o método e o caminho da requisição e executa o código correspondente.',
+            endParagraph: 'Esse fluxo é a base do funcionamento de muitas APIs utilizadas por aplicações web e mobile.',
+            highlight: ['Express', 'rota'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code.',
+            endParagraph: 'This flow is the foundation of how many APIs used by web and mobile applications work.',
+            highlight: ['Express', 'route'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'O ecossistema conectado', en: 'The connected ecosystem' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Node.js fornece o ambiente para executar JavaScript. Express simplifica a criação do servidor HTTP. HTTP define a comunicação entre cliente e servidor. JSON permite transportar dados estruturados.',
+            endParagraph: 'Cada tecnologia possui uma função diferente, mas elas podem trabalhar juntas para construir uma API.',
+            highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Node.js provides the environment to run JavaScript. Express simplifies creating the HTTP server. HTTP defines communication between client and server. JSON lets you transport structured data.',
+            endParagraph: 'Each technology has a different role, but they can work together to build an API.',
+            highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Você começou aprendendo JavaScript no navegador. Agora consegue utilizá-lo também no desenvolvimento de servidores e APIs.',
+            endParagraph: 'Esse é o objetivo do módulo: mostrar que aprender JavaScript não significa aprender apenas uma linguagem para interfaces, mas conhecer uma base que pode levar a diferentes áreas do desenvolvimento.',
+            highlight: ['JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'You started out learning JavaScript in the browser. Now you can also use it to build servers and APIs.',
+            endParagraph: "That is the goal of this module: to show that learning JavaScript does not mean learning only a language for interfaces, but gaining a foundation that can lead to different areas of development.",
+            highlight: ['JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: JS4_L20_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
 /**
  * Lições de um módulo específico de uma área. Os módulos básicos têm uma
  * função dedicada cada um (`seedHtmlBasicLessons` e companhia, acima); daqui
@@ -3956,13 +7456,48 @@ async function seedIntermediateLessons (localeIds: Map<LocaleCode, number>): Pro
   }
 }
 
+// `moduleIndex: 2` é o terceiro módulo ("Avançado") de cada área — mesmo
+// `seedModuleLessons` genérico do Intermediário, só um array novo em vez de
+// reaproveitar `INTERMEDIATE_MODULES` (nome já específico daquele nível).
+const ADVANCED_MODULES: ModuleLessonsSeed[] = [
+  { areaName: 'HTML', moduleIndex: 2, lessons: HTML_ADVANCED_LESSONS },
+  { areaName: 'CSS', moduleIndex: 2, lessons: CSS_ADVANCED_LESSONS },
+  { areaName: 'JavaScript', moduleIndex: 2, lessons: JS_ADVANCED_LESSONS }
+]
+
+async function seedAdvancedLessons (localeIds: Map<LocaleCode, number>): Promise<void> {
+  for (const moduleSeed of ADVANCED_MODULES) {
+    await seedModuleLessons(localeIds, moduleSeed)
+  }
+}
+
+// `moduleIndex: 3` é o quarto módulo de cada área. Só JavaScript tem
+// conteúdo aqui por enquanto ("Além do JavaScript: Node.js e Express") — o
+// 4º módulo de HTML/CSS continua sem lições até ganhar seu próprio conteúdo
+// "Além de" (React/Tailwind). O nome do módulo em si continua o genérico
+// "Módulo 4"/"Module 4" (mesmo padrão dos módulos 1-3): o título do card no
+// app sempre mostra o nome genérico, e é `areaMetadata.ts` (por posição, no
+// app) que define o subtítulo descritivo — aqui, "Além do JavaScript".
+const BEYOND_MODULES: ModuleLessonsSeed[] = [
+  { areaName: 'JavaScript', moduleIndex: 3, lessons: JS_BEYOND_LESSONS }
+]
+
+async function seedBeyondLessons (localeIds: Map<LocaleCode, number>): Promise<void> {
+  for (const moduleSeed of BEYOND_MODULES) {
+    await seedModuleLessons(localeIds, moduleSeed)
+  }
+}
+
 async function main (): Promise<void> {
   const localeIds = await seedLocales()
   await seedAreasAndModules(localeIds)
+  await seedModuleSubtitles(localeIds)
   await seedHtmlBasicLessons(localeIds)
   await seedCssBasicLessons(localeIds)
   await seedJsBasicLessons(localeIds)
   await seedIntermediateLessons(localeIds)
+  await seedAdvancedLessons(localeIds)
+  await seedBeyondLessons(localeIds)
 }
 
 main()

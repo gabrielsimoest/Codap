@@ -179,6 +179,7 @@ model module_translations {
   locale_id  Int
   locale     locales  @relation(fields: [locale_id], references: [id])
   name       String
+  subtitle   String?
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 

@@ -30,7 +30,7 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
         index: true,
         translations: {
           where: { locale: { locale } },
-          select: { name: true },
+          select: { name: true, subtitle: true },
           take: 1
         },
         lessons: {
@@ -67,6 +67,7 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
       areaId: module.area_id,
       index: module.index,
       name: module.translations[0]?.name ?? '',
+      subtitle: module.translations[0]?.subtitle ?? '',
       lessons: module.lessons.map((lesson) => ({
         id: lesson.id,
         index: lesson.index,

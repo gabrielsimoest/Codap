@@ -78,7 +78,7 @@ export interface TheoryActivityContent {
   thirdParagraph?: string;
   endParagraph?: string;
   highlight: string[];
-  codeLanguage: 'HTML' | 'CSS' | 'JavaScript';
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
   code: string;
   /**
    * Blocos de código extras no mesmo trecho (ex.: HTML + CSS juntos), cada um
@@ -86,7 +86,7 @@ export interface TheoryActivityContent {
    * / `code`). Usado sobretudo em CSS, onde a aba "Web" precisa do HTML e do
    * CSS juntos para renderizar a demonstração.
    */
-  additionalCode?: { codeLanguage: 'HTML' | 'CSS' | 'JavaScript'; code: string }[];
+  additionalCode?: { codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript'; code: string }[];
   onlyCode?: boolean;
   tutorial?: boolean;
 }
@@ -126,5 +126,7 @@ export interface ModuleResponse {
   areaId: number;
   index: number;
   name: string;
+  /** Nome descritivo do módulo (`module_translations.subtitle`) — ex.: "Além do JavaScript". `name` continua o genérico "Módulo N". */
+  subtitle: string;
   lessons: LessonResponse[];
 }

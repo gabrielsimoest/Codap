@@ -5,7 +5,6 @@ import { IconType } from "../../components/Icon";
 
 interface ModuleMetadata {
 	image: ImageSourcePropType;
-	subtitleKey: string;
 }
 
 interface AreaMetadata {
@@ -22,6 +21,11 @@ interface AreaMetadata {
  * (api/prisma/seed.ts) sempre cria as áreas nesta ordem — HTML, CSS,
  * JavaScript — e `GET /areas` sempre ordena por `id asc`, então a posição no
  * array é estável mesmo que os ids não sejam 1/2/3.
+ *
+ * O nome/subtítulo descritivo de cada módulo (ex.: "Além do JavaScript") NÃO
+ * mora aqui — vem de `module.subtitle`, direto da API (`module_translations`,
+ * ver api/CLAUDE.md). Só o cosmético que a API ainda não tem coluna para
+ * guardar (imagem do módulo, ícone/cor da área) continua hardcoded aqui.
  */
 const areaMetadata: AreaMetadata[] = [
 	{
@@ -30,10 +34,10 @@ const areaMetadata: AreaMetadata[] = [
 		headerIcon: "logo-html5",
 		color: "#637aff",
 		modules: [
-			{ image: Images.codyLearning, subtitleKey: "concepts of html" },
-			{ image: Images.codyThinking, subtitleKey: "intermediate html" },
-			{ image: Images.codyHappy, subtitleKey: "advanced html" },
-			{ image: Images.codyMaster, subtitleKey: "mastery in html" },
+			{ image: Images.codyLearning },
+			{ image: Images.codyThinking },
+			{ image: Images.codyHappy },
+			{ image: Images.codyMaster },
 		],
 	},
 	{
@@ -42,10 +46,10 @@ const areaMetadata: AreaMetadata[] = [
 		headerIcon: "logo-css3",
 		color: "#637aff",
 		modules: [
-			{ image: Images.codyLearning, subtitleKey: "concepts of CSS" },
-			{ image: Images.codyThinking, subtitleKey: "intermediate CSS" },
-			{ image: Images.codyHappy, subtitleKey: "advanced CSS" },
-			{ image: Images.codyMaster, subtitleKey: "mastery in CSS" },
+			{ image: Images.codyLearning },
+			{ image: Images.codyThinking },
+			{ image: Images.codyHappy },
+			{ image: Images.codyMaster },
 		],
 	},
 	{
@@ -54,10 +58,10 @@ const areaMetadata: AreaMetadata[] = [
 		headerIcon: "logo-javascript",
 		color: "#637aff",
 		modules: [
-			{ image: Images.codyLearning, subtitleKey: "concepts of JavaScript" },
-			{ image: Images.codyThinking, subtitleKey: "intermediate JavaScript" },
-			{ image: Images.codyHappy, subtitleKey: "advanced JavaScript" },
-			{ image: Images.codyMaster, subtitleKey: "mastery in JavaScript" },
+			{ image: Images.codyLearning },
+			{ image: Images.codyThinking },
+			{ image: Images.codyHappy },
+			{ image: Images.codyMaster },
 		],
 	},
 ];

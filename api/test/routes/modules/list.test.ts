@@ -49,8 +49,8 @@ async function createModuleFixture (app: Awaited<ReturnType<typeof build>>) {
   const testModule = await app.prisma.modules.create({ data: { area_id: area.id, index: 0 } })
   await app.prisma.module_translations.createMany({
     data: [
-      { module_id: testModule.id, locale_id: pt.id, name: `Módulo de Teste ${suffix}` },
-      { module_id: testModule.id, locale_id: en.id, name: `Test Module ${suffix}` }
+      { module_id: testModule.id, locale_id: pt.id, name: `Módulo de Teste ${suffix}`, subtitle: `Subtítulo de Teste ${suffix}` },
+      { module_id: testModule.id, locale_id: en.id, name: `Test Module ${suffix}`, subtitle: `Test Subtitle ${suffix}` }
     ]
   })
   const lesson = await app.prisma.lessons.create({ data: { module_id: testModule.id, index: 0 } })
@@ -106,6 +106,7 @@ test('GET /modules lists the modules, lessons and activities of the given area, 
   assert.equal(body[0].areaId, area.id)
   assert.equal(body[0].index, 0)
   assert.equal(body[0].name, `Módulo de Teste ${suffix}`)
+  assert.equal(body[0].subtitle, `Subtítulo de Teste ${suffix}`)
   assert.equal(body[0].lessons.length, 1)
   assert.equal(body[0].lessons[0].id, lesson.id)
   assert.equal(body[0].lessons[0].name, `Lição de Teste ${suffix}`)

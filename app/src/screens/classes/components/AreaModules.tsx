@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
@@ -24,7 +23,6 @@ interface Props {
 }
 
 export default function AreaModules({ areaId }: Props) {
-	const { t } = useTranslation();
 	const navigation = useNavigate();
 	const language = useLanguageStore((s) => s.language);
 	const user = useUserStore((s) => s.user);
@@ -73,7 +71,7 @@ export default function AreaModules({ areaId }: Props) {
 							key={module.id}
 							image={moduleMetadata.image}
 							title={module.name}
-							subtitle={t(moduleMetadata.subtitleKey)}
+							subtitle={module.subtitle}
 						>
 							{module.lessons.length > 0 ? (
 								module.lessons.map((lesson) => (
