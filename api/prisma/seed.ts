@@ -36,13 +36,13 @@ const MODULE_SUBTITLES: Record<string, Array<Record<LocaleCode, string>>> = {
     { pt: 'Conceitos de HTML', en: 'Concepts of HTML' },
     { pt: 'HTML intermediário', en: 'Intermediate HTML' },
     { pt: 'HTML avançado', en: 'Advanced HTML' },
-    { pt: 'Maestria em HTML', en: 'Mastery in HTML' }
+    { pt: 'Além do HTML', en: 'Beyond HTML' }
   ],
   CSS: [
     { pt: 'Conceitos de CSS', en: 'Concepts of CSS' },
     { pt: 'CSS intermediário', en: 'Intermediate CSS' },
     { pt: 'CSS avançado', en: 'Advanced CSS' },
-    { pt: 'Maestria em CSS', en: 'Mastery in CSS' }
+    { pt: 'Além do CSS', en: 'Beyond CSS' }
   ],
   JavaScript: [
     { pt: 'Conceitos de JavaScript', en: 'Concepts of JavaScript' },
@@ -7368,6 +7368,1353 @@ const JS_BEYOND_LESSONS: LessonSeed[] = [
   }
 ]
 
+// ============================================================
+// Conteúdo curricular do quarto módulo de HTML ("Além do HTML: Introdução
+// ao React"). Só a parte teórica está seedada — a prática foi deixada de
+// fora por pedido explícito, para ser adicionada depois. Parte do princípio
+// de que o aluno já concluiu HTML Básico/Intermediário/Avançado.
+//
+// Todas as telas são `onlyCode: true`, pelo mesmo motivo dos módulos de
+// JavaScript: a aba "Web" do `CodeSection` não executa JavaScript (só
+// combina HTML+CSS estáticos), e JSX não é HTML — é sintaxe JavaScript. Não
+// há como demonstrar um componente React rodando de verdade sem construir um
+// runtime próprio, o que a proposta curricular deste módulo proíbe
+// explicitamente ("Não criar infraestrutura paralela para executar React").
+// `codeLanguage: 'JavaScript'` é usado para todo o código JSX, por
+// pragmatismo — o mesmo já feito para JSON/tsconfig em módulos anteriores
+// (o schema não tem um valor `'JSX'` dedicado, e o highlight.js já
+// reconhece razoavelmente tags dentro de JavaScript).
+
+// --- Além do HTML: trechos de código ---
+
+const HTMLB1_T1_PT = 'function App() {\n  return <h1>Olá!</h1>;\n}'
+const HTMLB1_T1_EN = 'function App() {\n  return <h1>Hello!</h1>;\n}'
+
+const HTMLB1_T2_PT = 'function Titulo() {\n  return <h1>Meu site</h1>;\n}'
+const HTMLB1_T2_EN = 'function Title() {\n  return <h1>My site</h1>;\n}'
+
+const HTMLB2_T1_PT = 'function Botao() {\n  return <button>Clique aqui</button>;\n}'
+const HTMLB2_T1_EN = 'function Button() {\n  return <button>Click here</button>;\n}'
+
+const HTMLB2_T2_PT = 'function Botao() {\n  return <button>Entrar</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Botao />\n    </main>\n  );\n}'
+const HTMLB2_T2_EN = 'function Button() {\n  return <button>Sign in</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Button />\n    </main>\n  );\n}'
+
+const HTMLB3_T1_PT = 'function App() {\n  return (\n    <main>\n      <h1>Olá!</h1>\n      <p>Bem-vindo.</p>\n    </main>\n  );\n}'
+const HTMLB3_T1_EN = 'function App() {\n  return (\n    <main>\n      <h1>Hello!</h1>\n      <p>Welcome.</p>\n    </main>\n  );\n}'
+
+const HTMLB4_T1_PT = 'const nome = "Ana";\n\nfunction App() {\n  return <h1>Olá, {nome}!</h1>;\n}'
+const HTMLB4_T1_EN = 'const name = "Ana";\n\nfunction App() {\n  return <h1>Hello, {name}!</h1>;\n}'
+
+const HTMLB4_T2_PT = 'const idade = 20;\n\nfunction App() {\n  return <p>Idade: {idade}</p>;\n}'
+const HTMLB4_T2_EN = 'const age = 20;\n\nfunction App() {\n  return <p>Age: {age}</p>;\n}'
+
+const HTMLB5_T1_PT = 'function Saudacao({ nome }) {\n  return <h2>Olá, {nome}!</h2>;\n}\n\nfunction App() {\n  return <Saudacao nome="Ana" />;\n}'
+const HTMLB5_T1_EN = 'function Greeting({ name }) {\n  return <h2>Hello, {name}!</h2>;\n}\n\nfunction App() {\n  return <Greeting name="Ana" />;\n}'
+
+const HTMLB6_T1_PT = 'function Usuario({ nome }) {\n  return <p>Usuário: {nome}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Usuario nome="Ana" />\n      <Usuario nome="João" />\n    </>\n  );\n}'
+const HTMLB6_T1_EN = 'function User({ name }) {\n  return <p>User: {name}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <User name="Ana" />\n      <User name="John" />\n    </>\n  );\n}'
+
+const HTMLB7_T1_PT = 'function Botao() {\n  function clicar() {\n    console.log("Clicou!");\n  }\n\n  return (\n    <button onClick={clicar}>\n      Clique\n    </button>\n  );\n}'
+const HTMLB7_T1_EN = 'function Button() {\n  function handleClick() {\n    console.log("Clicked!");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click\n    </button>\n  );\n}'
+
+const HTMLB8_T1_PT = 'function Contador() {\n  // Precisamos lembrar quantas vezes\n  // o botão foi clicado\n}'
+const HTMLB8_T1_EN = 'function Counter() {\n  // We need to remember how many times\n  // the button was clicked\n}'
+
+const HTMLB9_T1_PT = 'const [contador, setContador] =\n  useState(0);'
+const HTMLB9_T1_EN = 'const [count, setCount] =\n  useState(0);'
+
+const HTMLB9_T2_PT = 'function Contador() {\n  const [contador, setContador] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setContador(contador + 1)\n      }\n    >\n      {contador}\n    </button>\n  );\n}'
+const HTMLB9_T2_EN = 'function Counter() {\n  const [count, setCount] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setCount(count + 1)\n      }\n    >\n      {count}\n    </button>\n  );\n}'
+
+const HTMLB10_T1_PT = 'function Contador({ titulo }) {\n  const [valor, setValor] =\n    useState(0);\n\n  return (\n    <button>\n      {titulo}: {valor}\n    </button>\n  );\n}'
+const HTMLB10_T1_EN = 'function Counter({ title }) {\n  const [value, setValue] =\n    useState(0);\n\n  return (\n    <button>\n      {title}: {value}\n    </button>\n  );\n}'
+
+const HTMLB11_T1_PT = 'function Campo() {\n  function alterar(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={alterar} />\n  );\n}'
+const HTMLB11_T1_EN = 'function Field() {\n  function handleChange(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={handleChange} />\n  );\n}'
+
+const HTMLB12_T1 = 'useState();'
+
+const HTMLB13_T1_PT = 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Renderizado");\n}, []);'
+const HTMLB13_T1_EN = 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Rendered");\n}, []);'
+
+const HTMLB13_T2_PT = 'useEffect(() => {\n  console.log(nome);\n}, [nome]);'
+const HTMLB13_T2_EN = 'useEffect(() => {\n  console.log(name);\n}, [name]);'
+
+const HTMLB14_T1 = 'import { useRef } from "react";\n\nconst inputRef = useRef(null);'
+
+const HTMLB15_T1_PT = 'function Status({ logado }) {\n  return logado\n    ? <p>Bem-vindo!</p>\n    : <p>Faça login.</p>;\n}'
+const HTMLB15_T1_EN = 'function Status({ loggedIn }) {\n  return loggedIn\n    ? <p>Welcome!</p>\n    : <p>Please log in.</p>;\n}'
+
+const HTMLB16_T1_PT = 'const nomes = ["Ana", "João"];\n\nfunction Lista() {\n  return (\n    <ul>\n      {nomes.map(nome => (\n        <li>{nome}</li>\n      ))}\n    </ul>\n  );\n}'
+const HTMLB16_T1_EN = 'const names = ["Ana", "John"];\n\nfunction List() {\n  return (\n    <ul>\n      {names.map(name => (\n        <li>{name}</li>\n      ))}\n    </ul>\n  );\n}'
+
+const HTMLB17_T1_PT = 'const usuarios = [\n  { id: 1, nome: "Ana" },\n  { id: 2, nome: "João" }\n];\n\nfunction Lista() {\n  return usuarios.map(usuario => (\n    <p key={usuario.id}>\n      {usuario.nome}\n    </p>\n  ));\n}'
+const HTMLB17_T1_EN = 'const users = [\n  { id: 1, name: "Ana" },\n  { id: 2, name: "John" }\n];\n\nfunction List() {\n  return users.map(user => (\n    <p key={user.id}>\n      {user.name}\n    </p>\n  ));\n}'
+
+const HTMLB18_T1_PT = 'function Header() {\n  return <header>Meu site</header>;\n}\n\nfunction Conteudo() {\n  return <main>Conteúdo</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Conteudo />\n    </>\n  );\n}'
+const HTMLB18_T1_EN = 'function Header() {\n  return <header>My site</header>;\n}\n\nfunction Content() {\n  return <main>Content</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Content />\n    </>\n  );\n}'
+
+const HTMLB19_T1_PT = 'function Card() {\n  return (\n    <article>\n      <h2>Produto</h2>\n      <p>Descrição</p>\n      <button>Comprar</button>\n    </article>\n  );\n}'
+const HTMLB19_T1_EN = 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}'
+
+const HTML_BEYOND_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'O que é React?', en: 'What is React?' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'React é uma biblioteca JavaScript utilizada para construir interfaces de usuário. Em vez de pensar em uma página inteira de uma vez, podemos dividir a interface em partes menores chamadas componentes.',
+            endParagraph: 'React utiliza JavaScript para descrever e controlar partes da interface.',
+            highlight: ['React', 'JavaScript', 'componentes'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'React is a JavaScript library used to build user interfaces. Instead of thinking about a whole page at once, we can split the interface into smaller pieces called components.',
+            endParagraph: 'React uses JavaScript to describe and control parts of the interface.',
+            highlight: ['React', 'JavaScript', 'components'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB1_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Os elementos utilizados na interface continuam familiares. A diferença está em como eles são organizados e utilizados dentro dos componentes React.',
+            endParagraph: 'O conhecimento de HTML continua sendo uma base importante para entender React.',
+            highlight: ['HTML', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB1_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The elements used in the interface are still familiar. The difference is in how they are organized and used inside React components.',
+            endParagraph: 'Your HTML knowledge is still an important foundation for understanding React.',
+            highlight: ['HTML', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB1_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Componentes', en: 'Components' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um componente representa uma parte da interface. Ele pode conter sua própria estrutura e ser reutilizado em diferentes partes de uma aplicação.',
+            endParagraph: 'Componentes permitem dividir interfaces grandes em partes menores.',
+            highlight: ['componente', 'componentes'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB2_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A component represents a part of the interface. It can hold its own structure and be reused in different parts of an application.',
+            endParagraph: 'Components let you split large interfaces into smaller pieces.',
+            highlight: ['component', 'components'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB2_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um componente pode utilizar outros componentes para formar uma interface maior.',
+            endParagraph: 'Essa composição é uma das ideias fundamentais do React.',
+            highlight: ['composição', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB2_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A component can use other components to form a larger interface.',
+            endParagraph: 'This composition is one of the fundamental ideas of React.',
+            highlight: ['composition', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB2_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'JSX', en: 'JSX' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'JSX permite escrever uma sintaxe parecida com HTML dentro do código JavaScript. Isso facilita a descrição da estrutura da interface.',
+            endParagraph: 'JSX se parece com HTML, mas não é HTML puro. Ele é uma sintaxe utilizada para descrever a interface dentro do código JavaScript.',
+            highlight: ['JSX', 'HTML', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB3_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'JSX lets you write a syntax similar to HTML inside JavaScript code. This makes it easier to describe the structure of the interface.',
+            endParagraph: 'JSX looks like HTML, but it is not plain HTML. It is a syntax used to describe the interface inside JavaScript code.',
+            highlight: ['JSX', 'HTML', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB3_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Expressões no JSX', en: 'Expressions in JSX' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'As chaves {} permitem inserir expressões JavaScript dentro do JSX.',
+            endParagraph: 'Essa integração permite que a interface utilize dados definidos pelo JavaScript.',
+            highlight: ['JSX', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB4_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Curly braces {} let you insert JavaScript expressions inside JSX.',
+            endParagraph: 'This integration lets the interface use data defined by JavaScript.',
+            highlight: ['JSX', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB4_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos utilizar expressões JavaScript para produzir conteúdos diferentes na interface.',
+            endParagraph: 'JSX permite aproximar os dados da estrutura visual que será exibida.',
+            highlight: ['JSX'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB4_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can use JavaScript expressions to produce different content in the interface.',
+            endParagraph: 'JSX lets you bring the data closer to the visual structure that will be shown.',
+            highlight: ['JSX'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB4_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Props', en: 'Props' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'props são informações fornecidas a um componente por quem o utiliza.',
+            endParagraph: 'props permitem que o mesmo componente trabalhe com diferentes informações.',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB5_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'props are information provided to a component by whoever uses it.',
+            endParagraph: 'props let the same component work with different information.',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB5_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Componentes reutilizáveis', en: 'Reusable components' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um componente pode ser utilizado várias vezes recebendo diferentes valores por meio de props.',
+            endParagraph: 'A estrutura do componente é reutilizada enquanto os dados podem mudar.',
+            highlight: ['componente', 'props'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB6_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A component can be used several times, receiving different values through props.',
+            endParagraph: 'The structure of the component is reused while the data can change.',
+            highlight: ['component', 'props'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB6_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Eventos', en: 'Events' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'React permite associar funções a eventos da interface, como cliques e alterações em campos.',
+            endParagraph: 'Eventos conectam as ações do usuário à lógica do componente.',
+            highlight: ['eventos', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB7_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'React lets you attach functions to interface events, like clicks and field changes.',
+            endParagraph: 'Events connect the user\'s actions to the component\'s logic.',
+            highlight: ['events', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB7_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Estado', en: 'State' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Algumas informações mudam enquanto o usuário utiliza uma aplicação. O componente precisa manter esses valores para que a interface possa acompanhar essas mudanças.',
+            endParagraph: 'No React, essas informações podem ser controladas por meio de estado.',
+            highlight: ['estado', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB8_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Some information changes while the user interacts with an application. The component needs to keep track of these values so the interface can follow those changes.',
+            endParagraph: 'In React, this information can be controlled through state.',
+            highlight: ['state', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB8_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'useState', en: 'useState' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'useState permite criar um valor de estado e uma função responsável por atualizá-lo.',
+            endParagraph: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo.',
+            highlight: ['useState', 'estado'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB9_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'useState lets you create a state value and a function responsible for updating it.',
+            endParagraph: 'The first value represents the current state. The second part is the function used to update it.',
+            highlight: ['useState', 'state'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB9_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Podemos atualizar o estado chamando a função retornada por useState com um novo valor.',
+            endParagraph: 'Quando o estado é atualizado, o React pode renderizar novamente o componente para refletir o novo valor.',
+            highlight: ['estado', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB9_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can update the state by calling the function returned by useState with a new value.',
+            endParagraph: 'When the state is updated, React can render the component again to reflect the new value.',
+            highlight: ['state', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB9_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Props e estado', en: 'Props and state' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'props são informações recebidas pelo componente. estado representa informações que o componente precisa controlar e atualizar.',
+            endParagraph: 'Pensar na origem e no comportamento de uma informação ajuda a diferenciar props de estado.',
+            highlight: ['props', 'estado'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB10_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'props are information received by the component. state represents information the component needs to control and update.',
+            endParagraph: 'Thinking about the origin and behavior of a piece of information helps tell props apart from state.',
+            highlight: ['props', 'state'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB10_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Formulários', en: 'Forms' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Eventos permitem que um componente reaja às alterações feitas pelo usuário em um campo de formulário.',
+            endParagraph: 'onChange permite acompanhar alterações realizadas em um campo.',
+            highlight: ['onChange'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Events let a component react to changes the user makes in a form field.',
+            endParagraph: 'onChange lets you track changes made to a field.',
+            highlight: ['onChange'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB11_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Hooks', en: 'Hooks' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Hooks são funções fornecidas pelo React que permitem utilizar recursos do React dentro de componentes funcionais.',
+            endParagraph: 'useState é um Hook. O React possui outros Hooks para diferentes necessidades.',
+            highlight: ['Hooks', 'useState', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB12_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Hooks are functions provided by React that let you use React features inside function components.',
+            endParagraph: 'useState is a Hook. React has other Hooks for different needs.',
+            highlight: ['Hooks', 'useState', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB12_T1,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Além de useState, existem Hooks como useEffect e useRef, que serão apresentados separadamente.',
+            endParagraph: 'Cada Hook possui uma finalidade específica. Agora vamos conhecer alguns dos mais utilizados.',
+            highlight: ['Hooks', 'useEffect', 'useRef'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB12_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Besides useState, there are Hooks like useEffect and useRef, which will be presented separately.',
+            endParagraph: 'Each Hook has a specific purpose. Now let\'s meet some of the most used ones.',
+            highlight: ['Hooks', 'useEffect', 'useRef'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB12_T1,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'useEffect', en: 'useEffect' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'useEffect permite executar código relacionado a efeitos depois da renderização de um componente.',
+            endParagraph: 'Ele é utilizado quando o componente precisa realizar alguma ação relacionada a algo externo à renderização.',
+            highlight: ['useEffect'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB13_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'useEffect lets you run code related to effects after a component renders.',
+            endParagraph: 'It is used when the component needs to perform some action related to something outside of rendering.',
+            highlight: ['useEffect'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB13_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O array de dependências indica valores que devem ser observados pelo efeito.',
+            endParagraph: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
+            highlight: ['dependências', 'useEffect'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB13_T2_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The dependency array indicates values that should be watched by the effect.',
+            endParagraph: 'In this example, the effect follows changes to name.',
+            highlight: ['dependency', 'useEffect'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB13_T2_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'useRef', en: 'useRef' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'useRef permite manter uma referência entre renderizações sem provocar uma nova renderização quando seu valor é alterado.',
+            endParagraph: 'Refs podem ser úteis quando precisamos manter uma referência que não controla diretamente a interface.',
+            highlight: ['useRef', 'Refs'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB14_T1,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'useRef lets you keep a reference between renders without causing a new render when its value changes.',
+            endParagraph: 'Refs can be useful when we need to keep a reference that does not directly control the interface.',
+            highlight: ['useRef', 'Refs'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB14_T1,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Renderização condicional', en: 'Conditional rendering' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Como JSX utiliza JavaScript, podemos utilizar condições para determinar qual conteúdo será exibido.',
+            endParagraph: 'A renderização condicional permite adaptar a interface de acordo com os dados.',
+            highlight: ['renderização condicional', 'JSX'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB15_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Since JSX uses JavaScript, we can use conditions to decide which content will be shown.',
+            endParagraph: 'Conditional rendering lets you adapt the interface based on the data.',
+            highlight: ['conditional rendering', 'JSX'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB15_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Renderização de listas', en: 'Rendering lists' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Arrays podem ser transformados em elementos de interface utilizando métodos JavaScript como map().',
+            endParagraph: 'Essa abordagem permite construir interfaces a partir de conjuntos de dados.',
+            highlight: ['map', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Arrays can be transformed into interface elements using JavaScript methods like map().',
+            endParagraph: 'This approach lets you build interfaces from sets of data.',
+            highlight: ['map', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB16_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'key', en: 'key' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando o React renderiza uma lista, cada elemento precisa possuir uma key que permita identificá-lo de maneira estável.',
+            endParagraph: 'Um identificador estável ajuda o React a acompanhar corretamente os elementos da lista.',
+            highlight: ['React', 'key'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB17_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When React renders a list, each element needs to have a key that lets it be identified in a stable way.',
+            endParagraph: 'A stable identifier helps React correctly track the elements in the list.',
+            highlight: ['React', 'key'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB17_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Composição de componentes', en: 'Component composition' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Interfaces maiores podem ser construídas combinando vários componentes menores e independentes.',
+            endParagraph: 'Interfaces podem ser construídas combinando componentes menores e independentes.',
+            highlight: ['componentes'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB18_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Larger interfaces can be built by combining several smaller, independent components.',
+            endParagraph: 'Interfaces can be built by combining smaller, independent components.',
+            highlight: ['components'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB18_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'HTML e React', en: 'HTML and React' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Ao utilizar React, continuamos trabalhando com elementos como h1, p, button, input, ul e article.',
+            endParagraph: 'React não elimina a importância do HTML. O conhecimento de estrutura e semântica continua sendo fundamental.',
+            highlight: ['HTML', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB19_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When using React, we keep working with elements like h1, p, button, input, ul and article.',
+            endParagraph: 'React does not remove the importance of HTML. Knowing structure and semantics is still fundamental.',
+            highlight: ['HTML', 'React'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB19_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A principal mudança está na forma de organizar a interface. Em React, estruturas de interface podem ser transformadas em componentes reutilizáveis e receber dados ou comportamento.',
+            endParagraph: 'Por isso, aprender HTML antes de React fornece uma base importante para compreender a construção de interfaces modernas.',
+            highlight: ['React', 'HTML', 'componentes'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB19_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The main change is in how the interface gets organized. In React, interface structures can be turned into reusable components that receive data or behavior.',
+            endParagraph: 'That is why learning HTML before React gives you an important foundation for understanding how modern interfaces are built.',
+            highlight: ['React', 'HTML', 'components'],
+            codeLanguage: 'JavaScript',
+            code: HTMLB19_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
+// ============================================================
+// Conteúdo curricular do quarto módulo de CSS ("Além do CSS: Tailwind CSS e
+// Ecossistema"). Só a parte teórica está seedada — a prática foi deixada de
+// fora por pedido explícito. Parte do princípio de que o aluno já concluiu
+// CSS Básico/Intermediário/Avançado.
+//
+// Ao contrário do módulo "Além do JavaScript"/"Além do HTML", boa parte
+// deste módulo É demonstrável de verdade na aba "Web": classes utilitárias
+// do Tailwind nada mais são do que atalhos para propriedades CSS comuns, e
+// `additionalCode` já resolve o valor real de cada classe usada no exemplo
+// (ex.: `.p-4 { padding: 1rem; }`) — não é preciso carregar o Tailwind de
+// verdade (CDN, incompatível com o app ser offline-first; motor JIT, pesado
+// demais para o device — ver docs/roadmap-atividades-praticas.md) para
+// mostrar o resultado correto de um exemplo pequeno e controlado. Fica
+// `onlyCode: true` só onde o efeito depende de largura de tela grande
+// (`md:`, mesmo problema de breakpoint das media queries em CSS Avançado),
+// de interação (`hover:`/`focus:`, não demonstrável no toque) ou de
+// preferência de sistema (`dark:`, não alternável sob demanda), e nas telas
+// puramente conceituais (panorama do ecossistema, customização/configuração
+// do Tailwind em si).
+
+// --- Além do CSS: trechos de código ---
+
+const CSSB1_T1_PT = '/* CSS tradicional */\n.botao {\n  padding: 8px 16px;\n  border-radius: 8px;\n}'
+const CSSB1_T1_EN = '/* Traditional CSS */\n.button {\n  padding: 8px 16px;\n  border-radius: 8px;\n}'
+
+const CSSB2_T1_PT = `<button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+  Comprar
+</button>`
+const CSSB2_T1_EN = `<button class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+  Buy
+</button>`
+const CSSB2_T1_CSS = `.bg-blue-600 { background-color: #2563eb; }
+.text-white { color: #ffffff; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.rounded-lg { border-radius: 0.5rem; }`
+
+const CSSB3_T1_CSS = `.card {
+  padding: 1rem;
+}`
+const CSSB3_T1_HTML_PT = `<div class="p-4 rounded-lg">
+  Conteúdo
+</div>`
+const CSSB3_T1_HTML_EN = `<div class="p-4 rounded-lg">
+  Content
+</div>`
+
+const CSSB4_T1_PT = `<p class="text-lg font-bold">
+  Olá!
+</p>`
+const CSSB4_T1_EN = `<p class="text-lg font-bold">
+  Hello!
+</p>`
+const CSSB4_T1_CSS = `.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.font-bold { font-weight: 700; }`
+
+const CSSB5_T1_PT = `<div class="p-4 mt-4">
+  Conteúdo
+</div>`
+const CSSB5_T1_EN = `<div class="p-4 mt-4">
+  Content
+</div>`
+const CSSB5_T1_CSS = `.p-4 { padding: 1rem; }
+.mt-4 { margin-top: 1rem; }`
+
+const CSSB6_T1_PT = `<button class="bg-blue-600 text-white">
+  Salvar
+</button>`
+const CSSB6_T1_EN = `<button class="bg-blue-600 text-white">
+  Save
+</button>`
+const CSSB6_T1_CSS = `.bg-blue-600 { background-color: #2563eb; }
+.text-white { color: #ffffff; }`
+
+const CSSB7_T1_PT = `<h1 class="text-2xl font-bold">
+  Título
+</h1>`
+const CSSB7_T1_EN = `<h1 class="text-2xl font-bold">
+  Title
+</h1>`
+const CSSB7_T1_CSS = `.text-2xl { font-size: 1.5rem; line-height: 2rem; }
+.font-bold { font-weight: 700; }`
+
+const CSSB8_T1_HTML = `<div class="flex items-center justify-between">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</div>`
+const CSSB8_T1_CSS = `.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }`
+
+const CSSB9_T1_HTML = `<div class="grid grid-cols-3 gap-4">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+</div>`
+const CSSB9_T1_CSS = `.grid { display: grid; }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.gap-4 { gap: 1rem; }`
+
+const CSSB10_T1_PT = `<div class="text-sm md:text-lg">
+  Texto responsivo
+</div>`
+const CSSB10_T1_EN = `<div class="text-sm md:text-lg">
+  Responsive text
+</div>`
+
+const CSSB11_T1_PT = `<button class="bg-blue-600 hover:bg-blue-700 focus:ring-2">
+  Enviar
+</button>`
+const CSSB11_T1_EN = `<button class="bg-blue-600 hover:bg-blue-700 focus:ring-2">
+  Submit
+</button>`
+
+const CSSB12_T1_PT = `<div class="bg-white text-black dark:bg-gray-900 dark:text-white">
+  Conteúdo
+</div>`
+const CSSB12_T1_EN = `<div class="bg-white text-black dark:bg-gray-900 dark:text-white">
+  Content
+</div>`
+
+const CSSB13_T1_PT = '// tailwind.config.js (conceitual)\ntheme: {\n  colors: {\n    marca: "#2563eb"\n  }\n}'
+const CSSB13_T1_EN = '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}'
+
+const CSSB15_T1_PT = `<button class="rounded-lg px-4 py-2 font-medium">
+  Salvar
+</button>`
+const CSSB15_T1_EN = `<button class="rounded-lg px-4 py-2 font-medium">
+  Save
+</button>`
+const CSSB15_T1_CSS = `.rounded-lg { border-radius: 0.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.font-medium { font-weight: 500; }`
+
+const CSSB16_T1_PT = `/* CSS tradicional */
+.card {
+  padding: 1rem;
+}
+
+/* Tailwind equivalente: class="p-4" */`
+const CSSB16_T1_EN = `/* Traditional CSS */
+.card {
+  padding: 1rem;
+}
+
+/* Tailwind equivalent: class="p-4" */`
+
+const CSS_BEYOND_LESSONS: LessonSeed[] = [
+  {
+    name: { pt: 'CSS e o ecossistema de estilização', en: 'CSS and the styling ecosystem' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'CSS continua sendo a base da estilização na web. Porém, existem ferramentas e tecnologias que ajudam a organizar, acelerar ou ampliar a forma como escrevemos estilos.',
+            secondParagraph: 'Esse ecossistema inclui CSS tradicional, Tailwind CSS, Bootstrap, Sass e PostCSS.',
+            endParagraph: 'Essas ferramentas não são todas do mesmo tipo. Cada uma possui uma proposta diferente.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'CSS is still the foundation of styling on the web. However, there are tools and technologies that help organize, speed up or extend the way we write styles.',
+            secondParagraph: 'This ecosystem includes traditional CSS, Tailwind CSS, Bootstrap, Sass and PostCSS.',
+            endParagraph: 'These tools are not all the same type. Each one has a different proposal.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB1_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Frameworks fornecem estruturas e recursos prontos para o desenvolvimento. Pré-processadores adicionam recursos à escrita de CSS. Ferramentas de processamento transformam arquivos CSS durante o desenvolvimento.',
+            endParagraph: 'Esse contexto ajuda a entender onde o Tailwind CSS se encaixa nesse ecossistema.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB1_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Frameworks provide ready-made structures and features for development. Pre-processors add features to writing CSS. Processing tools transform CSS files during development.',
+            endParagraph: 'This context helps explain where Tailwind CSS fits in this ecosystem.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB1_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tailwind CSS', en: 'Tailwind CSS' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind CSS é uma abordagem de estilização baseada em classes utilitárias. Em vez de criar uma classe própria para cada componente e escrever todas as propriedades CSS dentro dela, podemos combinar classes que representam estilos específicos.',
+            endParagraph: 'O objetivo do Tailwind é permitir a construção de interfaces combinando pequenas classes de estilo.',
+            highlight: ['Tailwind', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB2_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB2_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Tailwind CSS is a styling approach based on utility classes. Instead of creating your own class for each component and writing every CSS property inside it, we can combine classes that represent specific styles.',
+            endParagraph: 'The goal of Tailwind is to let you build interfaces by combining small style classes.',
+            highlight: ['Tailwind', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB2_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB2_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Utility-first', en: 'Utility-first' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'No modelo utility-first, cada classe representa uma pequena responsabilidade de estilo, como espaçamento, cor, tamanho ou alinhamento.',
+            endParagraph: 'Em vez de criar uma classe que representa todo o componente, o Tailwind combina utilitários para construir sua aparência.',
+            highlight: ['utility-first', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSB3_T1_HTML_PT }],
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In the utility-first model, each class represents a small styling responsibility, like spacing, color, size or alignment.',
+            endParagraph: 'Instead of creating a class that represents the whole component, Tailwind combines utilities to build its appearance.',
+            highlight: ['utility-first', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB3_T1_CSS,
+            additionalCode: [{ codeLanguage: 'HTML', code: CSSB3_T1_HTML_EN }],
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Classes utilitárias', en: 'Utility classes' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'As classes utilitárias do Tailwind representam pequenas decisões de estilo, relacionadas a espaçamento, tamanho, cor e tipografia.',
+            endParagraph: 'A combinação dessas pequenas classes permite construir estilos diretamente na marcação.',
+            highlight: ['Tailwind'],
+            codeLanguage: 'HTML',
+            code: CSSB4_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB4_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Tailwind utility classes represent small styling decisions, related to spacing, size, color and typography.',
+            endParagraph: 'Combining these small classes lets you build styles directly in the markup.',
+            highlight: ['Tailwind'],
+            codeLanguage: 'HTML',
+            code: CSSB4_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB4_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Espaçamento', en: 'Spacing' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'No Tailwind, classes utilitárias podem representar propriedades relacionadas a margin e padding.',
+            endParagraph: 'p-4 representa padding e mt-4 representa margin-top — o aluno já conhece essas propriedades do CSS.',
+            highlight: ['padding', 'margin-top', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB5_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB5_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'In Tailwind, utility classes can represent properties related to margin and padding.',
+            endParagraph: 'p-4 represents padding and mt-4 represents margin-top — you already know these properties from CSS.',
+            highlight: ['padding', 'margin-top', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB5_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB5_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Cores', en: 'Colors' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind fornece classes utilitárias para definir cores de elementos e textos.',
+            endParagraph: 'bg-* define a cor de fundo e text-* define a cor do texto — em vez de escrever uma declaração CSS para cada cor, usamos classes utilitárias.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB6_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB6_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Tailwind provides utility classes to set colors for elements and text.',
+            endParagraph: 'bg-* sets the background color and text-* sets the text color — instead of writing a CSS declaration for every color, we use utility classes.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB6_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB6_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tipografia', en: 'Typography' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Assim como no CSS, podemos controlar características como tamanho, peso e alinhamento do texto.',
+            endParagraph: 'O aluno continua trabalhando com conceitos de tipografia que já conhece do CSS.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB7_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB7_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Just like in CSS, we can control characteristics like text size, weight and alignment.',
+            endParagraph: 'You keep working with typography concepts you already know from CSS.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB7_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB7_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Flexbox com Tailwind', en: 'Flexbox with Tailwind' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind não cria um novo sistema de layout. Ele fornece classes utilitárias que representam propriedades do CSS.',
+            endParagraph: 'flex equivale a display: flex, items-center a align-items: center e justify-between a justify-content: space-between — o conhecimento de Flexbox continua diretamente útil.',
+            highlight: ['Flexbox', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB8_T1_HTML,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB8_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Tailwind does not create a new layout system. It provides utility classes that represent CSS properties.',
+            endParagraph: 'flex maps to display: flex, items-center to align-items: center and justify-between to justify-content: space-between — your Flexbox knowledge is still directly useful.',
+            highlight: ['Flexbox', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB8_T1_HTML,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB8_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Grid com Tailwind', en: 'Grid with Tailwind' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O mesmo princípio pode ser aplicado ao CSS Grid.',
+            endParagraph: 'Tailwind fornece uma forma mais direta de aplicar propriedades do Grid sem abandonar o modelo do CSS.',
+            highlight: ['Grid', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB9_T1_HTML,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB9_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'The same principle can be applied to CSS Grid.',
+            endParagraph: 'Tailwind provides a more direct way to apply Grid properties without abandoning the CSS model.',
+            highlight: ['Grid', 'CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB9_T1_HTML,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB9_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Responsividade', en: 'Responsiveness' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind permite aplicar classes diferentes de acordo com o tamanho da tela, utilizando seus breakpoints.',
+            endParagraph: 'text-sm representa o comportamento padrão, e md:text-lg entra em vigor a partir do breakpoint md — o conceito continua sendo responsividade.',
+            highlight: ['responsividade'],
+            codeLanguage: 'HTML',
+            code: CSSB10_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tailwind lets you apply different classes depending on the screen size, using its breakpoints.',
+            endParagraph: 'text-sm represents the default behavior, and md:text-lg kicks in from the md breakpoint onward — the concept is still responsiveness.',
+            highlight: ['responsiveness'],
+            codeLanguage: 'HTML',
+            code: CSSB10_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Estados: hover e focus', en: 'States: hover and focus' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind permite aplicar utilitários quando um elemento está em determinado estado, como hover ou focus.',
+            endParagraph: 'Os prefixos de estado permitem expressar comportamentos que no CSS tradicional seriam escritos com pseudo-classes.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB11_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tailwind lets you apply utilities when an element is in a certain state, like hover or focus.',
+            endParagraph: 'State prefixes let you express behavior that traditional CSS would write with pseudo-classes.',
+            highlight: ['CSS'],
+            codeLanguage: 'HTML',
+            code: CSSB11_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Dark mode', en: 'Dark mode' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind permite definir estilos específicos para o modo escuro utilizando o modificador dark:.',
+            endParagraph: 'O mesmo elemento pode possuir estilos diferentes dependendo do modo de exibição.',
+            highlight: ['modo escuro'],
+            codeLanguage: 'HTML',
+            code: CSSB12_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tailwind lets you define specific styles for dark mode using the dark: modifier.',
+            endParagraph: 'The same element can have different styles depending on the display mode.',
+            highlight: ['dark mode'],
+            codeLanguage: 'HTML',
+            code: CSSB12_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Customização', en: 'Customization' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Projetos reais podem possuir cores, espaçamentos, fontes e outros valores próprios. O Tailwind permite adaptar seu sistema às necessidades da aplicação.',
+            endParagraph: 'A ideia é utilizar o Tailwind como parte do projeto, e não ficar limitado apenas aos valores padrão.',
+            highlight: ['Tailwind'],
+            codeLanguage: 'JavaScript',
+            code: CSSB13_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Real projects can have their own colors, spacing, fonts and other values. Tailwind lets you adapt its system to the needs of the application.',
+            endParagraph: 'The idea is to use Tailwind as part of the project, instead of being limited to just the default values.',
+            highlight: ['Tailwind'],
+            codeLanguage: 'JavaScript',
+            code: CSSB13_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Configuração', en: 'Configuration' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Ferramentas como Tailwind precisam saber como o projeto será processado e quais recursos devem ser utilizados.',
+            endParagraph: 'Configuração permite integrar o Tailwind às necessidades do projeto.',
+            highlight: ['Tailwind', 'Configuração'],
+            codeLanguage: 'JavaScript',
+            code: CSSB13_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tools like Tailwind need to know how the project will be processed and which features should be used.',
+            endParagraph: 'Configuration lets you integrate Tailwind with the needs of the project.',
+            highlight: ['Tailwind', 'Configuration'],
+            codeLanguage: 'JavaScript',
+            code: CSSB13_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Componentização', en: 'Componentization' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Interfaces reais possuem elementos que aparecem várias vezes, como botões, cards e campos. Podemos combinar classes utilitárias dentro de componentes reutilizáveis.',
+            endParagraph: 'Tailwind fornece os estilos. A tecnologia da aplicação pode organizar esses estilos em componentes reutilizáveis.',
+            highlight: ['Tailwind', 'componentes'],
+            codeLanguage: 'HTML',
+            code: CSSB15_T1_PT,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB15_T1_CSS }]
+          },
+          en: {
+            firstParagraph: 'Real interfaces have elements that show up several times, like buttons, cards and fields. We can combine utility classes inside reusable components.',
+            endParagraph: 'Tailwind provides the styles. The application\'s technology can organize those styles into reusable components.',
+            highlight: ['Tailwind', 'components'],
+            codeLanguage: 'HTML',
+            code: CSSB15_T1_EN,
+            additionalCode: [{ codeLanguage: 'CSS', code: CSSB15_T1_CSS }]
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: { pt: 'Tailwind e CSS', en: 'Tailwind and CSS' },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Tailwind não elimina os conceitos fundamentais de CSS. As classes utilitárias representam propriedades e conceitos que continuam pertencendo ao CSS.',
+            endParagraph: 'Quanto melhor o conhecimento de CSS, mais fácil é compreender o que as classes utilitárias do Tailwind estão fazendo.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tailwind does not remove the fundamental concepts of CSS. Utility classes represent properties and concepts that still belong to CSS.',
+            endParagraph: 'The better your CSS knowledge, the easier it is to understand what Tailwind utility classes are doing.',
+            highlight: ['CSS', 'Tailwind'],
+            codeLanguage: 'CSS',
+            code: CSSB16_T1_EN,
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O Tailwind pode ser entendido como outra forma de aplicar conceitos que você já aprendeu em CSS.',
+            endParagraph: 'Por isso, aprender CSS antes de Tailwind continua sendo importante.',
+            highlight: ['Tailwind', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSB16_T1_PT,
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Tailwind can be understood as another way to apply concepts you already learned in CSS.',
+            endParagraph: 'That is why learning CSS before Tailwind is still important.',
+            highlight: ['Tailwind', 'CSS'],
+            codeLanguage: 'CSS',
+            code: CSSB16_T1_EN,
+            onlyCode: true
+          }
+        }
+      }
+    ]
+  }
+]
+
 /**
  * Lições de um módulo específico de uma área. Os módulos básicos têm uma
  * função dedicada cada um (`seedHtmlBasicLessons` e companhia, acima); daqui
@@ -7471,14 +8818,16 @@ async function seedAdvancedLessons (localeIds: Map<LocaleCode, number>): Promise
   }
 }
 
-// `moduleIndex: 3` é o quarto módulo de cada área. Só JavaScript tem
-// conteúdo aqui por enquanto ("Além do JavaScript: Node.js e Express") — o
-// 4º módulo de HTML/CSS continua sem lições até ganhar seu próprio conteúdo
-// "Além de" (React/Tailwind). O nome do módulo em si continua o genérico
-// "Módulo 4"/"Module 4" (mesmo padrão dos módulos 1-3): o título do card no
-// app sempre mostra o nome genérico, e é `areaMetadata.ts` (por posição, no
-// app) que define o subtítulo descritivo — aqui, "Além do JavaScript".
+// `moduleIndex: 3` é o quarto módulo de cada área — "Além do HTML"
+// (introdução ao React), "Além do CSS" (introdução ao Tailwind CSS) e "Além
+// do JavaScript" (Node.js e Express). O nome do módulo em si continua o
+// genérico "Módulo 4"/"Module 4" (mesmo padrão dos módulos 1-3): o título do
+// card no app sempre mostra o nome genérico; o subtítulo descritivo (ex.:
+// "Além do HTML") vem de `module_translations.subtitle`, populado por
+// `MODULE_SUBTITLES`/`seedModuleSubtitles()`, não daqui.
 const BEYOND_MODULES: ModuleLessonsSeed[] = [
+  { areaName: 'HTML', moduleIndex: 3, lessons: HTML_BEYOND_LESSONS },
+  { areaName: 'CSS', moduleIndex: 3, lessons: CSS_BEYOND_LESSONS },
   { areaName: 'JavaScript', moduleIndex: 3, lessons: JS_BEYOND_LESSONS }
 ]
 

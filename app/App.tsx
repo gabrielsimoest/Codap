@@ -187,7 +187,14 @@ export default function App() {
 				//        `module_translations.subtitle`. Sem o bump, quem já
 				//        tinha aberto o app ficaria com o subtítulo de todo
 				//        módulo em branco (`?? ''` no backend) para sempre.
-				buster: "11",
+				//   12 — os quartos módulos de HTML ("Além do HTML: introdução
+				//        ao React") e CSS ("Além do CSS: Tailwind CSS e
+				//        Ecossistema") ganharam lições reais (antes vinham com
+				//        `lessons: []`) — mesmo motivo do bump 10, agora para
+				//        as duas áreas que faltavam. Sem o bump, quem já tinha
+				//        aberto o app ficaria com esses dois módulos vazios
+				//        para sempre.
+				buster: "12",
 			}}
 			onSuccess={() => {
 				// Prefetch do catálogo de áreas no boot, para a tela de aulas
