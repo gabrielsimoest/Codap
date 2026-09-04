@@ -82,3 +82,6 @@ skills-lock.json
 .env
 .env.*
 !.env.example
+
+# Capturas e logs do Playwright MCP (ferramenta, nao saida do projeto)
+.playwright-mcp/

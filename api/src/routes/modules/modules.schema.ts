@@ -67,3 +67,96 @@ export const moduleResponseSchema = {
   },
   required: ['id', 'areaId', 'index', 'name', 'subtitle', 'lessons']
 }
+
+// ---------------------------------------------------------------------------
+// Escrita (dashboard) — só registrado com NODE_ENV=development
+// ---------------------------------------------------------------------------
+
+export const moduleIdParamsSchema = {
+  type: 'object',
+  required: ['id'],
+  properties: {
+    id: { type: 'integer' }
+  }
+}
+
+const moduleTranslationInputSchema = {
+  type: 'object',
+  required: ['name'],
+  additionalProperties: false,
+  properties: {
+    name: { type: 'string', minLength: 1 },
+    subtitle: {
+      type: ['string', 'null'],
+      description: "Nome descritivo do módulo — ex.: 'Além do JavaScript'. `name` continua o genérico 'Módulo N'."
+    }
+  }
+}
+
+/**
+ * Mapa de traduções por idioma, parcial de propósito: o conteúdo é escrito em
+ * português e traduzido depois, então exigir todos os idiomas travaria o fluxo
+ * real de autoria. `minProperties: 1` só impede um mapa completamente vazio.
+ */
+const moduleTranslationsSchema = {
+  type: 'object',
+  minProperties: 1,
+  additionalProperties: false,
+  properties: {
+    pt: moduleTranslationInputSchema,
+    en: moduleTranslationInputSchema
+  }
+}
+
+export const adminModuleResponseSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'integer' },
+    areaId: { type: 'integer' },
+    index: { type: 'integer' },
+    translations: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        pt: moduleTranslationInputSchema,
+        en: moduleTranslationInputSchema
+      },
+      description: 'Todas as traduções do módulo. Um idioma sem tradução simplesmente não aparece aqui — é assim que o dashboard distingue "sem tradução" de "tradução vazia", coisa que `GET /modules` não permite (resolve tudo para string vazia).'
+    }
+  },
+  required: ['id', 'areaId', 'index', 'translations']
+}
+
+export const createModuleBodySchema = {
+  type: 'object',
+  required: ['areaId', 'translations'],
+  additionalProperties: false,
+  properties: {
+    areaId: { type: 'integer' },
+    index: { type: 'integer', minimum: 0, description: 'Omitido = append no fim.' },
+    translations: moduleTranslationsSchema
+  }
+}
+
+export const updateModuleBodySchema = {
+  type: 'object',
+  required: ['translations'],
+  additionalProperties: false,
+  properties: {
+    translations: moduleTranslationsSchema
+  }
+}
+
+export const reorderModulesBodySchema = {
+  type: 'object',
+  required: ['areaId', 'orderedIds'],
+  additionalProperties: false,
+  properties: {
+    areaId: { type: 'integer' },
+    orderedIds: {
+      type: 'array',
+      items: { type: 'integer' },
+      description: 'Precisa ser exatamente o conjunto de módulos da área, na ordem desejada.'
+    }
+  }
+}

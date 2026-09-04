@@ -130,3 +130,114 @@ export interface ModuleResponse {
   subtitle: string;
   lessons: LessonResponse[];
 }
+
+// ---------------------------------------------------------------------------
+// Escrita de conteúdo (dashboard) — só existe com NODE_ENV=development
+// ---------------------------------------------------------------------------
+
+/** Idiomas do catálogo. Bate com o `enum` da querystring de `GET /modules`. */
+export type LocaleCode = 'pt' | 'en'
+
+/**
+ * Traduções de uma entidade, por código de idioma.
+ *
+ * É **parcial de propósito**: na prática o conteúdo é escrito em português e
+ * traduzido depois, então exigir todos os idiomas para salvar tornaria o
+ * dashboard inútil no meio do fluxo real de autoria. A consequência a assumir é
+ * que uma entidade sem tradução num idioma chega ao app com o campo vazio
+ * (`GET /modules` faz `?? ''`) — por isso o dashboard sinaliza o que falta.
+ */
+export type TranslationMap<T> = Partial<Record<LocaleCode, T>>
+
+export interface ModuleTranslationInput {
+  name: string;
+  subtitle?: string | null;
+}
+
+export interface LessonTranslationInput {
+  name: string;
+}
+
+export interface CreateAreaBody {
+  name: string;
+}
+
+export interface UpdateAreaBody {
+  name?: string;
+}
+
+export interface CreateModuleBody {
+  areaId: number;
+  /** Omitido = append no fim (`max(index) + 1`). */
+  index?: number;
+  translations: TranslationMap<ModuleTranslationInput>;
+}
+
+export interface UpdateModuleBody {
+  translations?: TranslationMap<ModuleTranslationInput>;
+}
+
+export interface CreateLessonBody {
+  moduleId: number;
+  index?: number;
+  translations: TranslationMap<LessonTranslationInput>;
+}
+
+export interface UpdateLessonBody {
+  translations?: TranslationMap<LessonTranslationInput>;
+}
+
+export interface CreateActivityBody {
+  lessonId: number;
+  index?: number;
+  /** `activities.type` é `VarChar(25)` livre — ver `ActivityResponse.type`. */
+  type: string;
+  content: TranslationMap<unknown>;
+}
+
+export interface UpdateActivityBody {
+  type?: string;
+  content?: TranslationMap<unknown>;
+}
+
+/**
+ * Reordenação: `orderedIds` precisa ser exatamente o conjunto de filhos do pai,
+ * na ordem desejada. O servidor renumera `index` de `0..n-1` numa transação —
+ * não há constraint única em `(pai, index)` no banco, então deixar o cliente
+ * escrever `index` avulso permitiria duplicatas e ordem não-determinística.
+ */
+export interface ReorderBody {
+  orderedIds: number[];
+}
+
+// Formas "admin": a mesma entidade com TODAS as traduções, ao contrário de
+// `ModuleResponse`/`LessonResponse`, que já vêm resolvidas num idioma só. São o
+// retorno das rotas de escrita — o dashboard edita os dois idiomas lado a lado.
+
+export interface AdminAreaResponse {
+  id: number;
+  name: string;
+}
+
+export interface AdminModuleResponse {
+  id: number;
+  areaId: number;
+  index: number;
+  translations: TranslationMap<ModuleTranslationInput>;
+}
+
+export interface AdminActivityResponse {
+  id: number;
+  lessonId: number;
+  index: number;
+  type: string;
+  content: TranslationMap<unknown>;
+}
+
+export interface AdminLessonResponse {
+  id: number;
+  moduleId: number;
+  index: number;
+  translations: TranslationMap<LessonTranslationInput>;
+  activities: AdminActivityResponse[];
+}

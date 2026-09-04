@@ -13,6 +13,10 @@
     "app:android": "pnpm --filter codap android",
     "app:ios": "pnpm --filter codap ios",
     "app:web": "pnpm --filter codap web",
-    "app:add": "pnpm --filter codap add"
+    "app:add": "pnpm --filter codap add",
+    "dash:dev": "pnpm --filter codap-dashboard dev",
+    "dash:build": "pnpm --filter codap-dashboard build",
+    "dash:verify": "pnpm --filter codap-dashboard verify:ui",
+    "dash:add": "pnpm --filter codap-dashboard add"
   }
 }

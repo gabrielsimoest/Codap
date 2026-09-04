@@ -1,0 +1,136 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/*
+ * Paleta espelhada do app (`app/src/theme/DarkMode.ts` e o `color` das áreas em
+ * `app/src/screens/classes/areaMetadata.ts`), mantida em hexadecimal para que
+ * os valores continuem reconhecíveis lado a lado com os do app.
+ *
+ * Só o tema escuro é usado hoje — `index.html` fixa `class="dark"` no <html>.
+ * O bloco `:root` (claro) existe para que ligar um alternador no futuro seja
+ * só remover essa classe, sem redesenhar a folha de estilo.
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: #ffffff;
+  --foreground: #101828;
+  --card: #f1f1f1;
+  --card-foreground: #101828;
+  --popover: #ffffff;
+  --popover-foreground: #101828;
+  --primary: #5469d3;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #101828;
+  --muted: #f5f5f5;
+  --muted-foreground: #5c6b7a;
+  --accent: #e8ebf6;
+  --accent-foreground: #1b2b39;
+  --destructive: #d64545;
+  --destructive-foreground: #ffffff;
+  --border: #e5e5e5;
+  --input: #dedfe1;
+  --ring: #637aff;
+}
+
+.dark {
+  --background: #141f29;
+  --foreground: #f1f1f1;
+  --card: #0e151c;
+  --card-foreground: #f1f1f1;
+  --popover: #0e151c;
+  --popover-foreground: #f1f1f1;
+  --primary: #637aff;
+  --primary-foreground: #0b1016;
+  --secondary: #1b2b39;
+  --secondary-foreground: #f1f1f1;
+  --muted: #1b2b39;
+  --muted-foreground: #8fa3b8;
+  --accent: #233648;
+  --accent-foreground: #f1f1f1;
+  --destructive: #f2555a;
+  --destructive-foreground: #0b1016;
+  --border: #233648;
+  --input: #233648;
+  --ring: #637aff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /*
+   * Barras de rolagem discretas: o painel de conteúdo é uma árvore longa, e a
+   * barra padrão do Chrome no Windows destoa bastante do tema escuro.
+   */
+  * {
+    scrollbar-color: var(--border) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+/*
+ * Folha de impressão da view de exportação: é assim que o PDF é gerado
+ * (`window.print()` → "Salvar como PDF"), sem nenhuma dependência de
+ * renderização. Tudo que não é o documento exportado sai da página, e as cores
+ * voltam ao claro para não gastar tinta nem escurecer o PDF.
+ */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .print-hidden {
+    display: none !important;
+  }
+
+  .print-surface {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border-color: #cccccc !important;
+  }
+
+  /* Não quebrar uma atividade ao meio entre duas páginas. */
+  .print-block {
+    break-inside: avoid;
+  }
+
+  .print-page-break {
+    break-before: page;
+  }
+}

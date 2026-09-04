@@ -1,11 +1,12 @@
 # CODAP, App de Aprendizado - HTML, CSS e JavaScript
 
-Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O repositório é um monorepo com workspace pnpm unificado, dividido em dois pacotes:
+Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O repositório é um monorepo com workspace pnpm unificado, dividido em três pacotes:
 
 - **`/app`** — aplicativo mobile em Expo + React Native + TypeScript, com persistência local offline-first e autenticação/sincronização de progresso integradas com a API.
 - **`/api`** — API em Fastify + TypeScript, conectada a Prisma/PostgreSQL (NeonDB), com autenticação JWT (access + refresh token) e um endpoint de sincronização em lote.
+- **`/dashboard`** — dashboard web local (Vite + React) para gerenciar o conteúdo pedagógico: criar, editar, reordenar e exportar áreas, módulos, lições e atividades nos dois idiomas, sem precisar de Swagger ou Postman.
 
-Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md](app/CLAUDE.md) e [api/CLAUDE.md](api/CLAUDE.md).
+Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md](app/CLAUDE.md), [api/CLAUDE.md](api/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
 
 ## Visite nosso site
 [codap.gabrielsimoesdeveloper.com.br](https://codap.gabrielsimoesdeveloper.com.br)
@@ -30,6 +31,12 @@ Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md]
 - Prisma + PostgreSQL/NeonDB
 - `@fastify/jwt` + `@fastify/rate-limit` (autenticação e proteção contra abuso)
 
+**Dashboard (`/dashboard`)**
+- Vite + React + TypeScript
+- Tailwind CSS v4 + shadcn/ui (tema escuro, com as cores do app)
+- `@tanstack/react-query` (dados) e react-hook-form + zod (formulários)
+- Playwright (validação de UI)
+
 ## Instalação
 
 Pré-requisitos: [Node.js](https://nodejs.org/) (LTS) e [pnpm](https://pnpm.io/installation).
@@ -40,7 +47,7 @@ Pré-requisitos: [Node.js](https://nodejs.org/) (LTS) e [pnpm](https://pnpm.io/i
     cd Codap
     ```
 
-2. Instale as dependências **a partir da raiz** (o workspace é unificado — não rode `pnpm install` dentro de `api/` ou `app/`):
+2. Instale as dependências **a partir da raiz** (o workspace é unificado — não rode `pnpm install` dentro de `api/`, `app/` ou `dashboard/`):
     ```bash
     pnpm install
     ```
@@ -59,7 +66,13 @@ Pré-requisitos: [Node.js](https://nodejs.org/) (LTS) e [pnpm](https://pnpm.io/i
     pnpm api:dev
     ```
 
-Mais comandos (build, testes, etc.) estão documentados em [api/CLAUDE.md](api/CLAUDE.md) e [app/CLAUDE.md](app/CLAUDE.md).
+5. Rodar o dashboard de conteúdo (opcional, precisa da API no ar):
+    ```bash
+    pnpm dash:dev      # http://localhost:5173
+    ```
+    O dashboard exige a API em modo de desenvolvimento (`pnpm api:dev`): as rotas de escrita do catálogo só existem nesse modo. Veja [dashboard/README.md](dashboard/README.md).
+
+Mais comandos (build, testes, etc.) estão documentados em [api/CLAUDE.md](api/CLAUDE.md), [app/CLAUDE.md](app/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
 
 ## Contribuição
 

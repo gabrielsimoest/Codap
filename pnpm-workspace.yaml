@@ -1,6 +1,7 @@
 packages:
   - "api"
   - "app"
+  - "dashboard"
 allowBuilds:
   '@prisma/engines': true
   esbuild: true
