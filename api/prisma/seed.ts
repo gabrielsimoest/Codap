@@ -4297,10 +4297,20 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
 ]
 
 // --- JavaScript Intermediário: trechos de código ---
-// Todas as telas são `onlyCode: true`: a aba "Web" do `CodeSection` monta o
-// preview só com HTML + CSS (`buildPreviewHtml` ignora JavaScript de
-// propósito), então não há como demonstrar DOM, eventos ou `fetch` rodando —
-// ver Fase 3 do roadmap em docs/roadmap-atividades-praticas.md.
+// Quase todas as telas são `onlyCode: true`. Quando este módulo foi escrito, a
+// aba "Web" do `CodeSection` montava o preview só com HTML + CSS e ignorava
+// JavaScript, então nenhuma tela podia demonstrar o próprio resultado. Isso
+// mudou: `buildSandboxHtmlDocument` executa o bloco JavaScript de verdade
+// (DOM e `console.log` refletidos na página).
+//
+// A primeira tela da lição "DOM" é a única que já foi revisada para usar isso
+// — tem um bloco HTML de apoio e um JS que troca o texto do `<h1>`, então a
+// aba "Web" mostra a manipulação acontecendo. As demais seguem `onlyCode:
+// true` por decisão de conteúdo, não por limitação técnica: cada uma precisa
+// ser revisada individualmente antes de ganhar a aba (uma tela cujo JS não
+// produz efeito visível nem `console.log` renderizaria um preview vazio, o que
+// ensina errado). Telas de `fetch`/`localStorage` são as que mais exigem
+// cuidado — dependem de rede e de origem, não de marcação.
 
 const JSI1_T1_PT = 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);'
 const JSI1_T1_EN = 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);'
@@ -4713,8 +4723,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['DOM', 'JavaScript', 'HTML'],
             codeLanguage: 'HTML',
             code: JSI7_T1_HTML_PT,
-            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_PT }],
-            onlyCode: true
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_PT }]
           },
           en: {
             firstParagraph: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript.',
@@ -4722,8 +4731,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['DOM', 'JavaScript', 'HTML'],
             codeLanguage: 'HTML',
             code: JSI7_T1_HTML_EN,
-            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_EN }],
-            onlyCode: true
+            additionalCode: [{ codeLanguage: 'JavaScript', code: JSI7_T1_JS_EN }]
           }
         }
       },
