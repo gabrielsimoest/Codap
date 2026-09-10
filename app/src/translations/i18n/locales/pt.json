@@ -17,6 +17,10 @@
 		"change": "Alterar",
 		"Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
 
+		"codeSection": {
+			"consoleError": "Erro"
+		},
+
 		"_comment*********": "*********CONFIGURAÇÕES*********",
 		"settings": "Configurações",
 		"system": "Sistema",

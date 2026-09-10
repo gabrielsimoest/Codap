@@ -11,7 +11,9 @@ import RowView from "../../../components/layout/RowView";
 import DarkMode from "../../../theme/DarkMode";
 import { useTheme } from "@react-navigation/native";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import WebView from "react-native-webview";
+import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 
 interface CodeBlock {
 	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
@@ -26,15 +28,17 @@ interface Props {
 	additionalCode?: CodeBlock[];
 }
 
-// A WebView só entende HTML — o bloco CSS (se houver) vira um <style> injetado
-// antes do HTML. JavaScript não entra aqui de propósito: isto é um preview
-// estático, não um runtime de JS.
-function buildPreviewHtml(blocks: CodeBlock[]): string {
-	const html =
-		blocks.find((block) => block.codeLanguage === "HTML")?.code ?? "";
-	const css = blocks.find((block) => block.codeLanguage === "CSS")?.code ?? "";
+// A aba "Web" combina o primeiro bloco HTML + o primeiro CSS e, se houver um
+// bloco JavaScript, executa ele de verdade (console.log e manipulação de DOM
+// refletidos na própria página, via buildSandboxHtmlDocument). TypeScript
+// nunca entra aqui — não há transpiler embarcado, então esses blocos
+// continuam exigindo `onlyCode: true` no conteúdo da atividade.
+function buildPreviewHtml(blocks: CodeBlock[], errorLabel: string): string {
+	const html = blocks.find((block) => block.codeLanguage === "HTML")?.code;
+	const css = blocks.find((block) => block.codeLanguage === "CSS")?.code;
+	const js = blocks.find((block) => block.codeLanguage === "JavaScript")?.code;
 
-	return css ? `<style>${css}</style>${html}` : html;
+	return buildSandboxHtmlDocument({ html, css, js, errorLabel });
 }
 
 export default function CodeSection({
@@ -45,6 +49,7 @@ export default function CodeSection({
 }: Props) {
 	const theme = useTheme();
 	const isDarkMode = theme === DarkMode;
+	const { t } = useTranslation();
 
 	const blocks: CodeBlock[] = [
 		{ codeLanguage, code },
@@ -87,7 +92,8 @@ export default function CodeSection({
 		) : (
 			<View style={{ width: "100%", height: highlighterHeight }}>
 				<WebView
-					source={{ html: buildPreviewHtml(blocks) }}
+					source={{ html: buildPreviewHtml(blocks, t("codeSection.consoleError")) }}
+					javaScriptEnabled={true}
 					containerStyle={{
 						flex: 0,
 						height: highlighterHeight,

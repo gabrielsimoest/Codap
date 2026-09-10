@@ -17,6 +17,10 @@
 		"change": "Change",
 		"Oops": "There are no classes for this module yet. We will bring new, better and more interactive classes soon!",
 
+		"codeSection": {
+			"consoleError": "Error"
+		},
+
 		"_comment*********": "*********CONFIGURAÇÃO*********",
 		"settings": "Settings",
 		"system": "System",
