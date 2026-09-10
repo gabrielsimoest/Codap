@@ -241,3 +241,30 @@ export interface AdminLessonResponse {
   translations: TranslationMap<LessonTranslationInput>;
   activities: AdminActivityResponse[];
 }
+
+// ---------------------------------------------------------------------------
+// Versionamento de conteúdo
+// ---------------------------------------------------------------------------
+
+/**
+ * Versão publicada do conteúdo de um idioma.
+ *
+ * O app guarda a versão que já baixou e rebusca o catálogo quando ela **difere**
+ * da remota — não quando é menor. Isso cobre rollback e evita comparação semver
+ * no cliente (`'0.0.10' > '0.0.9'` é falso como string).
+ */
+export interface ContentVersionResponse {
+  /** Código do idioma (`locales.locale`), ex.: `pt`. */
+  locale: string;
+  /** Três segmentos numéricos, ex.: `0.1.4`. */
+  version: string;
+  changelog: string;
+  /** `YYYY-MM-DD` — a coluna é `@db.Date`, sem hora. */
+  releasedAt: string;
+}
+
+export interface PublishContentVersionBody {
+  locale: string;
+  version: string;
+  changelog: string;
+}

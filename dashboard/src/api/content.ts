@@ -5,12 +5,14 @@ import type {
   AdminLessonResponse,
   AdminModuleResponse,
   AreaResponse,
+  ContentVersionResponse,
   CreateActivityBody,
   CreateAreaBody,
   CreateLessonBody,
   CreateModuleBody,
   LocaleCode,
   ModuleResponse,
+  PublishContentVersionBody,
   UpdateActivityBody,
   UpdateAreaBody,
   UpdateLessonBody,
@@ -60,4 +62,11 @@ export const activitiesApi = {
   remove: (id: number) => request<void>(`/activities/${id}`, { method: 'DELETE' }),
   reorder: (lessonId: number, orderedIds: number[]) =>
     request<void>('/activities/reorder', { method: 'PATCH', body: { lessonId, orderedIds } })
+}
+
+export const contentVersionApi = {
+  /** Versão vigente de cada idioma. Sem filtro: o dashboard mostra todas. */
+  list: () => request<ContentVersionResponse[]>('/content-version'),
+  publish: (body: PublishContentVersionBody) =>
+    request<ContentVersionResponse>('/content-version', { method: 'POST', body })
 }

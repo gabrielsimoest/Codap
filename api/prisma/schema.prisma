@@ -21,7 +21,7 @@ model content_version {
   id          Int      @id @default(autoincrement())
   locale_id   Int
   locale      locales  @relation(fields: [locale_id], references: [id])
-  version     String   @db.VarChar(5)
+  version     String   @db.VarChar(20)
   changelog   String
   released_at DateTime @db.Date
 }

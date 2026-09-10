@@ -19,6 +19,7 @@ import { areasQueryOptions } from "./src/hooks/queries/useAreasQuery";
 import useAlertStore from "./src/stores/AlertStore";
 import ThemedAlert from "./src/components/themed/ThemedAlert";
 import QueryDevTools from "./src/components/dev/QueryDevTools";
+import ContentVersionSync from "./src/components/ContentVersionSync";
 import { LogBox } from "react-native";
 import * as Linking from "expo-linking";
 
@@ -128,11 +129,27 @@ export default function App() {
 			persistOptions={{
 				persister: queryPersister,
 				// Descarta o cache persistido inteiro quando esta string muda.
-				// **Bump obrigatório sempre que o formato da key OU do dado de
-				// uma query persistida mudar**: gcTime é Infinity, então uma
-				// entrada num formato que não existe mais nunca seria coletada
-				// sozinha e ficaria para sempre no AsyncStorage de quem já
-				// tinha o app.
+				//
+				// ATENÇÃO — o papel disto mudou. Mudança de **conteúdo** não
+				// exige mais bump: quem invalida o cache quando uma lição muda
+				// é a tabela `content_version`, comparada no boot por
+				// `useContentVersionSync`. O conteúdo chega ao usuário sem
+				// release do app, que era exatamente o custo dos 12 bumps
+				// abaixo (cada um deles exigiu publicar uma versão).
+				//
+				// O que ainda exige bump é mudança de **formato** — da query
+				// key ou do dado persistido —, porque aí o app foi recompilado
+				// de qualquer jeito e o cache antigo tem uma forma que o código
+				// novo não sabe ler. `gcTime` é Infinity, então uma entrada num
+				// formato morto nunca seria coletada sozinha.
+				//
+				// Regra prática: mexeu no seed/dashboard, publique uma
+				// `content_version`. Mexeu num tipo de `contracts.ts` ou numa
+				// query key, bumpe aqui.
+				//
+				// O histórico abaixo é anterior a esse mecanismo e fica como
+				// registro — vários desses bumps (5, 7, 9, 10, 12) hoje seriam
+				// uma publicação de versão, não um bump.
 				//   2 — áreas deixaram de ter idioma na key (["areas", lang]
 				//       -> ["areas"]), porque GET /areas não recebe mais locale.
 				//   3 — módulos deixaram de registrar entrada com areaId
@@ -214,6 +231,14 @@ export default function App() {
 		>
 			<NavigationContainer theme={themeStored} linking={linking}>
 				<Provider>
+					{/*
+						Atualização de conteúdo sob demanda. Precisa ficar DENTRO
+						do PersistQueryClientProvider: o hook usa
+						useQueryClient/useIsRestoring, que não existem no corpo
+						de App (fora do provider), e invalidar antes da
+						restauração do cache seria corrida com ela.
+					*/}
+					<ContentVersionSync />
 					<MainNavigation isLoggedIn={isLoggedIn} />
 					{alertVisible && (
 						<ThemedAlert

@@ -119,6 +119,23 @@
     display: none !important;
   }
 
+  /*
+   * Os diálogos do Radix são renderizados num portal pendurado no
+   * `document.body`, fora da árvore do `App` — então `.print-hidden`, que está
+   * no header/aside/main, nunca os alcança. Como são `position: fixed`, o
+   * Chrome os repete em **todas** as páginas impressas, não só na primeira.
+   *
+   * Não basta fechar o diálogo antes de imprimir: a animação de saída do Radix
+   * dura 200 ms e o elemento só desmonta ao fim dela, então qualquer espera por
+   * tempo é uma corrida. Esconder na folha de impressão elimina a corrida em
+   * vez de apostar num timeout maior, e cobre qualquer diálogo que esteja
+   * aberto na hora de imprimir.
+   */
+  [data-slot='dialog-overlay'],
+  [data-slot='dialog-content'] {
+    display: none !important;
+  }
+
   .print-surface {
     background: #ffffff !important;
     color: #000000 !important;

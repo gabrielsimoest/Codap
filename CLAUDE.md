@@ -47,6 +47,7 @@ Nunca declare uma tarefa como concluída sem antes verificar o resultado. Ao fin
 - Procure inconsistências ou efeitos colaterais óbvios.
 - Execute os testes, lint, typecheck, build ou outras verificações relevantes disponíveis no projeto (ver comandos em [api/CLAUDE.md](api/CLAUDE.md), [app/CLAUDE.md](app/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md)).
 - **Alterou a interface do dashboard? Valide com Playwright** (`pnpm dash:verify`, com a API e o dev server no ar) — é regra do pacote, não opcional. Ver [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
+- **Editou conteúdo pedagógico (pelo dashboard ou pela API)? Atualize `api/prisma/seed.ts` na mesma tarefa** e confirme com `pnpm api:seed:check`. O conteúdo vive no banco, então o seeder diverge em silêncio: tudo continua funcionando, e o preço só aparece quando alguém seeda um banco novo e recebe o currículo antigo. Ver [api/CLAUDE.md](api/CLAUDE.md).
 - Confirme que a documentação continua coerente.
 - Informe claramente o que foi alterado e quais verificações foram executadas.
 

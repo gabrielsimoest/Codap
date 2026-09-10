@@ -32,6 +32,7 @@ test('swagger docs are registered when NODE_ENV=development', async (t) => {
   assert.ok(doc.paths['/activities/'], 'activities routes should be documented')
   assert.ok(doc.paths['/activities/{id}'], 'activity write routes should be documented')
   assert.ok(doc.paths['/activities/reorder'], 'activity reorder should be documented')
+  assert.ok(doc.paths['/content-version/'], 'content version routes should be documented')
 })
 
 test('swagger docs are not registered outside of development', async (t) => {

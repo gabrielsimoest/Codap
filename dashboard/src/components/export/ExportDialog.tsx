@@ -127,10 +127,15 @@ export function ExportDialog ({ areaName, modules, onPreparePrint }: ExportDialo
       return
     }
 
-    // Monta a view de impressão, fecha o diálogo (senão o overlay do Radix vai
-    // junto para o papel) e só então chama o print — o `setTimeout` dá um
-    // quadro para o React aplicar as duas mudanças antes de a janela congelar
-    // no diálogo de impressão.
+    // Monta a view de impressão, fecha o diálogo e só então chama o print — o
+    // `setTimeout` dá um quadro para o React montar o documento antes de a
+    // janela congelar no diálogo de impressão.
+    //
+    // O `setOpen(false)` aqui é só pela experiência na tela: ele **não** é o
+    // que mantém o diálogo fora do papel. A animação de saída do Radix dura
+    // 200 ms e o elemento só desmonta ao fim dela, então este `setTimeout`
+    // sempre perde essa corrida. Quem garante isso é a folha de impressão em
+    // `index.css`, que esconde o portal do diálogo — ver o comentário lá.
     onPreparePrint(doc)
     setOpen(false)
     setTimeout(() => {

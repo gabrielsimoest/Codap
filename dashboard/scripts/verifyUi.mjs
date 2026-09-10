@@ -80,10 +80,56 @@ step('o diálogo de exportação abre com recorte e idioma', async (page) => {
   await page.keyboard.press('Escape')
 })
 
+/*
+ * Regressão: o diálogo saía impresso em todas as páginas do PDF.
+ *
+ * Ele é renderizado num portal fora da árvore do `App`, então `.print-hidden`
+ * não o alcançava, e por ser `position: fixed` o Chrome o repetia em cada
+ * página. Fechá-lo antes de imprimir não resolve — a animação de saída de
+ * 200 ms sempre ganha do `setTimeout` de 150 ms. Quem resolve é a regra em
+ * `index.css`, e é ela que este passo verifica.
+ */
+step('o diálogo não vai para o papel', async (page) => {
+  await page.getByRole('button', { name: 'Exportar' }).click()
+  await page.locator('[data-slot="dialog-content"]').waitFor({ timeout: 10_000 })
+
+  await page.emulateMedia({ media: 'print' })
+  let visivel
+  try {
+    visivel = await page.locator('[data-slot="dialog-content"]').isVisible()
+  } finally {
+    // O `finally` fecha o diálogo e restaura a mídia mesmo quando o passo
+    // reprova: sem isso, uma falha aqui deixaria a página em modo impressão com
+    // o diálogo aberto e derrubaria em cascata todos os passos seguintes,
+    // escondendo qual era o defeito real.
+    await page.emulateMedia({ media: null })
+    await page.keyboard.press('Escape')
+  }
+
+  if (visivel) {
+    throw new Error('o diálogo continua visível na mídia de impressão')
+  }
+})
+
 step('o diálogo de áreas abre e lista as áreas', async (page) => {
   await page.getByRole('button', { name: 'Áreas' }).click()
   await page.getByRole('heading', { name: 'Áreas' }).waitFor({ timeout: 10_000 })
   await page.screenshot(shot('04-areas.png'))
+  await page.keyboard.press('Escape')
+})
+
+step('o diálogo de publicação mostra a versão vigente', async (page) => {
+  await page.getByRole('button', { name: 'Publicar', exact: true }).click()
+  await page.getByText('Publicar versão do conteúdo').waitFor({ timeout: 10_000 })
+  await page.getByText('Versão vigente').waitFor({ timeout: 10_000 })
+
+  // A versão precisa chegar de fato da API — um painel vazio passaria batido.
+  const versoes = await page.locator('[role="dialog"] code.font-mono').count()
+  if (versoes === 0) {
+    throw new Error('nenhuma versão vigente foi exibida')
+  }
+
+  await page.screenshot(shot('07-publicar.png'))
   await page.keyboard.press('Escape')
 })
 

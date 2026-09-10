@@ -48,6 +48,7 @@ dashboard/
       activitySchemas.ts    # schemas zod do `content` de cada tipo de atividade
       exportDocument.ts     # modelo intermediário da exportação
       exportMarkdown.ts     # renderiza o modelo em Markdown
+      contentVersion.ts     # VERSION_PATTERN, espelhado do schema da API
       highlight.ts          # réplica da regra de destaque do app
       mergeContent.ts       # junta as árvores de pt e en
       reorder.ts            # move um item e devolve a ordem completa
@@ -97,6 +98,27 @@ vazar para o app.
   Repetir isso aqui seria um defeito: o cache sobreviveria ao fechamento do
   navegador e a edição seguinte partiria de uma foto antiga do banco, sem nada
   na tela indicando isso. **Não adicione um persister a este pacote.**
+
+### Publicar versão é o que faz o conteúdo chegar ao usuário
+
+Editar conteúdo no dashboard **não basta**: o app guarda o catálogo em cache por
+tempo indeterminado e só rebusca quando a `content_version` do idioma dele muda.
+Sem publicar, quem já abriu o app continua com o conteúdo antigo — por isso o
+`ContentVersionDialog` diz isso na própria descrição, em vez de deixar a
+consequência implícita.
+
+- **A publicação é por idioma.** Um idioma com suporte parcial não deve rebuscar
+  porque outro mudou. Se a edição cobriu os dois, publique duas vezes — o
+  diálogo avisa.
+- **`VERSION_PATTERN` (`lib/contentVersion.ts`) espelha o schema da API.**
+  Mudou de um lado, mude do outro na mesma tarefa; validar só aqui apenas troca
+  um 400 da API por um erro de formulário. Escrito com `[0-9]`/`[.]` e sem barra
+  invertida, pelo mesmo motivo documentado em api/CLAUDE.md.
+- **A sugestão de próximo patch é só uma sugestão** (`suggestNextVersion`): o
+  campo continua editável, porque subir *minor* ou *major* é decisão editorial
+  que o dashboard não tem como inferir.
+- **O 409 de duplicata é mostrado com a mensagem da API**, não como "erro 409" —
+  ela diz qual é a versão vigente, que é a informação de que o autor precisa.
 
 ### A ordem só muda por endpoint de reorder
 
@@ -156,6 +178,23 @@ interface. jsPDF/pdfmake renderizariam mal justamente os blocos de código, que
 estão em quase toda atividade. Markdown e PDF partem do **mesmo**
 `ExportDocument` (`lib/exportDocument.ts`), para os dois formatos nunca
 divergirem em conteúdo.
+
+**O `@media print` precisa esconder o portal do diálogo, e isso não é
+detalhe.** Os diálogos do Radix são renderizados num portal pendurado no
+`document.body`, fora da árvore do `App` — então o `.print-hidden` que está no
+header/aside/main nunca os alcança. Como são `position: fixed`, o Chrome os
+repete em **todas** as páginas impressas, não só na primeira: o PDF saía com o
+diálogo de exportação carimbado nas 26 páginas, tapando o conteúdo.
+
+Fechar o diálogo antes de imprimir **não** resolve. `exportPdf` chama
+`setOpen(false)` e espera 150 ms, mas a animação de saída do Radix é
+`duration-200` e o elemento só desmonta ao fim dela — a corrida é perdida
+sempre, não de vez em quando. Por isso a regra vive na folha de impressão
+(`[data-slot='dialog-overlay'], [data-slot='dialog-content']`), que elimina a
+corrida em vez de apostar num timeout maior e cobre qualquer diálogo aberto na
+hora de imprimir. O passo "o diálogo não vai para o papel" em
+`scripts/verifyUi.mjs` trava isso emulando a mídia de impressão; ele foi
+conferido reprovando com a regra desativada.
 
 ## Regras de código
 
