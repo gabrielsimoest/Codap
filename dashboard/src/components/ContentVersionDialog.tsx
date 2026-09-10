@@ -104,7 +104,16 @@ export function ContentVersionDialog () {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-1 rounded-md border border-border bg-secondary/30 p-3">
+        {/*
+          `min-w-0` é obrigatório aqui, não cosmético: DialogContent é
+          `display:grid`, e um grid item tem `min-width: auto` — se recusa a
+          encolher abaixo do min-content do conteúdo. Como a linha do changelog
+          é `truncate` (white-space: nowrap), o min-content dela é o texto
+          INTEIRO, então sem isto o bloco não encolhe, o `truncate` nunca age e
+          a coluna do grid alarga junto com todos os outros itens (inclusive o
+          formulário), vazando para fora do card.
+        */}
+        <div className="min-w-0 space-y-1 rounded-md border border-border bg-secondary/30 p-3">
           <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Versão vigente
           </p>
