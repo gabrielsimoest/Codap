@@ -39,6 +39,10 @@ function buildShimScript(): string {
 // Roda por último, depois do <script> do usuário: lê window.__codapConsoleEntries
 // e injeta um painel no fim do document.body — nunca aparece se não houver
 // nenhuma entrada (uma lição sem console.log/erro não ganha um painel vazio).
+// Também repassa as mesmas entradas via postMessage, se algo estiver ouvindo
+// (o TerminalSection do CodeSection) — window.ReactNativeWebView é undefined
+// fora de uma WebView RN (ou na própria aba "Web", que não tem onMessage),
+// então isso é um no-op silencioso nesses casos; não precisa de opt-in.
 function buildConsolePanelScript(errorLabel?: string): string {
 	const labelLiteral = JSON.stringify(errorLabel ?? "Error");
 	return `
@@ -55,6 +59,9 @@ function buildConsolePanelScript(errorLabel?: string): string {
 				panel.appendChild(line);
 			});
 			document.body.appendChild(panel);
+			if (window.ReactNativeWebView && typeof window.ReactNativeWebView.postMessage === "function") {
+				window.ReactNativeWebView.postMessage(JSON.stringify({ codapTerminal: true, entries: entries }));
+			}
 		})();
 	`;
 }

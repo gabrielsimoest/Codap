@@ -18,7 +18,11 @@
 		"Oops": "There are no classes for this module yet. We will bring new, better and more interactive classes soon!",
 
 		"codeSection": {
-			"consoleError": "Error"
+			"consoleError": "Error",
+			"run": "Run",
+			"running": "Running...",
+			"noOutput": "No console output.",
+			"timeout": "This is taking longer than expected. There may be an infinite loop in the code."
 		},
 
 		"_comment*********": "*********CONFIGURAÇÃO*********",

@@ -18,7 +18,11 @@
 		"Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
 
 		"codeSection": {
-			"consoleError": "Erro"
+			"consoleError": "Erro",
+			"run": "Executar",
+			"running": "Executando...",
+			"noOutput": "Nenhuma saída de console.",
+			"timeout": "Isso está demorando mais que o esperado. Pode haver um loop infinito no código."
 		},
 
 		"_comment*********": "*********CONFIGURAÇÕES*********",

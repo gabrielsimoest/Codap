@@ -88,6 +88,16 @@ export interface TheoryActivityContent {
    */
   additionalCode?: { codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript'; code: string }[];
   onlyCode?: boolean;
+  /**
+   * Opt-out do terminal (botão "Executar" abaixo do CodeSection, ver
+   * app/CLAUDE.md) para uma atividade que mecanicamente seria elegível
+   * (`codeLanguage: 'JavaScript'`, sem bloco HTML) mas cujo código não
+   * produz nenhuma saída de console — ex.: só declarações/atribuições
+   * (destructuring, spread) ou um `export`/`fetch` que erraria ou não
+   * mostraria nada de útil dentro da sandbox. Sem isso, "Executar" mostraria
+   * sempre "Nenhuma saída de console.", o que não ensina nada.
+   */
+  noTerminal?: boolean;
   tutorial?: boolean;
 }
 

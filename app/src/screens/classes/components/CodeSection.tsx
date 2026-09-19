@@ -14,11 +14,20 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import WebView from "react-native-webview";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
+import TerminalSection from "./TerminalSection";
 
 interface CodeBlock {
 	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
 	code: string;
 }
+
+// Rótulo da aba, não a linguagem em si — CustomSyntaxHighlighter continua
+// recebendo `codeLanguage` sem abreviar. Existe porque o botão tem largura
+// fixa (25%, até 4 abas) e "JavaScript"/"TypeScript" não cabem sem cortar.
+const TAB_LABELS: Partial<Record<CodeBlock["codeLanguage"], string>> = {
+	JavaScript: "JS",
+	TypeScript: "TS",
+};
 
 interface Props {
 	onlyCode: boolean;
@@ -26,6 +35,8 @@ interface Props {
 	code: string;
 	/** Blocos extras no mesmo trecho (ex.: HTML + CSS juntos), cada um com sua própria aba. */
 	additionalCode?: CodeBlock[];
+	/** Opt-out do terminal — ver TheoryActivityContent.noTerminal em contracts.ts. */
+	noTerminal?: boolean;
 }
 
 // A aba "Web" combina o primeiro bloco HTML + o primeiro CSS e, se houver um
@@ -46,6 +57,7 @@ export default function CodeSection({
 	codeLanguage,
 	code,
 	additionalCode,
+	noTerminal,
 }: Props) {
 	const theme = useTheme();
 	const isDarkMode = theme === DarkMode;
@@ -56,10 +68,25 @@ export default function CodeSection({
 		...(additionalCode ?? []),
 	];
 
+	// Terminal (botão "Executar" + saída abaixo do visualizador): só pra
+	// código que não manipula DOM — testar "não tem bloco HTML" (em vez de
+	// reaproveitar `onlyCode`, que controla só a aba "Web") mantém as duas
+	// condições independentes e exclui TypeScript de graça, já que nenhuma
+	// lição de TS passa por codeLanguage === "JavaScript". `noTerminal`
+	// é o opt-out de conteúdo pra quando o código é elegível mecanicamente
+	// mas não produz nenhuma saída de console (só declarações/atribuições).
+	const hasHtmlBlock = blocks.some((block) => block.codeLanguage === "HTML");
+	const terminalEligible =
+		!hasHtmlBlock && codeLanguage === "JavaScript" && !noTerminal;
+	const terminalSource = blocks
+		.filter((block) => block.codeLanguage === "JavaScript")
+		.map((block) => block.code)
+		.join("\n\n");
+
 	const tabs = [
 		...blocks.map((block, index) => ({
 			id: `code-${index}`,
-			label: block.codeLanguage as string,
+			label: TAB_LABELS[block.codeLanguage] ?? block.codeLanguage,
 		})),
 		...(onlyCode ? [] : [{ id: "web", label: "Web" }]),
 	];
@@ -106,13 +133,13 @@ export default function CodeSection({
 
 	if (tabs.length === 1)
 		return (
-			<View
-				style={[
-					isDarkMode ? styles.codeArea : styles.codeAreaLight,
-					{ width: "100%", marginVertical: 20 },
-				]}
-			>
-				{content}
+			<View style={{ width: "100%", marginVertical: 20 }}>
+				<View style={isDarkMode ? styles.codeArea : styles.codeAreaLight}>
+					{content}
+				</View>
+				{terminalEligible && (
+					<TerminalSection code={terminalSource} isDarkMode={isDarkMode} />
+				)}
 			</View>
 		);
 
@@ -145,6 +172,9 @@ export default function CodeSection({
 			<View style={isDarkMode ? styles.codeArea : styles.codeAreaLight}>
 				{content}
 			</View>
+			{terminalEligible && (
+				<TerminalSection code={terminalSource} isDarkMode={isDarkMode} />
+			)}
 		</View>
 	);
 }

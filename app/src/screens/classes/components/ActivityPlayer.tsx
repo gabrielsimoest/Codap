@@ -70,6 +70,7 @@ export default function ActivityPlayer({
 					code={content.code}
 					additionalCode={content.additionalCode}
 					onlyCode={content.onlyCode}
+					noTerminal={content.noTerminal}
 					tutorial={content.tutorial}
 					progress={progress}
 					onProceed={advance}
