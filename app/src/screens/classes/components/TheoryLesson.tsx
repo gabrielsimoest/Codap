@@ -21,6 +21,7 @@ interface Props {
 	additionalCode?: { codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript"; code: string }[];
 	onlyCode?: boolean;
 	noTerminal?: boolean;
+	terminalCode?: string;
 	tutorial?: boolean;
 	progress: DimensionValue;
 	onProceed: () => void;
@@ -38,6 +39,7 @@ export default function TheoryView({
 	additionalCode,
 	onlyCode = false,
 	noTerminal = false,
+	terminalCode,
 	tutorial = false,
 	progress,
 	onProceed,
@@ -85,6 +87,7 @@ export default function TheoryView({
 						code={code}
 						additionalCode={additionalCode}
 						noTerminal={noTerminal}
+						terminalCode={terminalCode}
 					/>
 
 					{endParagraph !== undefined ? (

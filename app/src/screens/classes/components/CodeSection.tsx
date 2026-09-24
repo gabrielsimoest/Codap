@@ -37,6 +37,8 @@ interface Props {
 	additionalCode?: CodeBlock[];
 	/** Opt-out do terminal — ver TheoryActivityContent.noTerminal em contracts.ts. */
 	noTerminal?: boolean;
+	/** JS pré-transpilado pra rodar no terminal quando codeLanguage é TypeScript — ver contracts.ts. */
+	terminalCode?: string;
 }
 
 // A aba "Web" combina o primeiro bloco HTML + o primeiro CSS e, se houver um
@@ -58,6 +60,7 @@ export default function CodeSection({
 	code,
 	additionalCode,
 	noTerminal,
+	terminalCode,
 }: Props) {
 	const theme = useTheme();
 	const isDarkMode = theme === DarkMode;
@@ -71,17 +74,26 @@ export default function CodeSection({
 	// Terminal (botão "Executar" + saída abaixo do visualizador): só pra
 	// código que não manipula DOM — testar "não tem bloco HTML" (em vez de
 	// reaproveitar `onlyCode`, que controla só a aba "Web") mantém as duas
-	// condições independentes e exclui TypeScript de graça, já que nenhuma
-	// lição de TS passa por codeLanguage === "JavaScript". `noTerminal`
-	// é o opt-out de conteúdo pra quando o código é elegível mecanicamente
-	// mas não produz nenhuma saída de console (só declarações/atribuições).
+	// condições independentes. `terminalCode`, quando presente, sempre tem
+	// prioridade como fonte de execução — cobre tanto TypeScript (JS
+	// pré-transpilado, já que não há transpiler embarcado) quanto JavaScript
+	// cujo código exibido não é diretamente executável (`export` fora de
+	// módulo, uma chamada de rede simulada) sem mudar o que é ensinado na
+	// tela. Sem `terminalCode`, um bloco JavaScript puro usa `code`/
+	// `additionalCode` diretamente, a não ser que `noTerminal` (opt-out pra
+	// código que mecanicamente rodaria mas não produz saída de console)
+	// esteja marcado.
 	const hasHtmlBlock = blocks.some((block) => block.codeLanguage === "HTML");
-	const terminalEligible =
-		!hasHtmlBlock && codeLanguage === "JavaScript" && !noTerminal;
-	const terminalSource = blocks
-		.filter((block) => block.codeLanguage === "JavaScript")
-		.map((block) => block.code)
-		.join("\n\n");
+	const hasTerminalCode = terminalCode !== undefined;
+	const isPlainJsEligible =
+		!hasHtmlBlock && codeLanguage === "JavaScript" && !noTerminal && !hasTerminalCode;
+	const terminalEligible = !hasHtmlBlock && (hasTerminalCode || isPlainJsEligible);
+	const terminalSource = hasTerminalCode
+		? (terminalCode as string)
+		: blocks
+				.filter((block) => block.codeLanguage === "JavaScript")
+				.map((block) => block.code)
+				.join("\n\n");
 
 	const tabs = [
 		...blocks.map((block, index) => ({

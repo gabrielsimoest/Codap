@@ -98,6 +98,29 @@ export interface TheoryActivityContent {
    * sempre "Nenhuma saída de console.", o que não ensina nada.
    */
   noTerminal?: boolean;
+  /**
+   * JavaScript executável a rodar no terminal no lugar de `code`/
+   * `additionalCode`, para quando o que é ensinado não é diretamente
+   * executável na sandbox. Dois casos:
+   *  - `codeLanguage: 'TypeScript'`: JS pré-transpilado (`ts.transpileModule`,
+   *    sem type-check — só apaga tipos), gerado via
+   *    `api/prisma/generateTerminalCode.ts`. Sem transpiler embarcado no
+   *    app, `code` em TS nunca roda sozinho.
+   *  - `codeLanguage: 'JavaScript'`: uma versão adaptada à mão — ex. a mesma
+   *    função sem a palavra `export` (que é `SyntaxError` fora de um módulo
+   *    ES), ou um `fetch`/API simulada localmente (`setTimeout` no lugar de
+   *    uma chamada de rede de verdade, que falharia ou ficaria pendurada na
+   *    sandbox). O código **exibido** ao aluno nunca muda — só o que
+   *    executa por trás do botão "Executar" é diferente.
+   * Em ambos os casos, gerado uma vez na autoria, nunca em runtime: o
+   * conteúdo é fixo, nunca editado pelo aluno, então o resultado não muda
+   * depois de revisado. Ausente = a atividade não é elegível ao terminal
+   * (mesmo efeito de `noTerminal`, mas é o padrão natural aqui — a maioria
+   * das lições nesta situação não produz nenhuma saída de console mesmo
+   * adaptada, então só as que genuinamente valem a pena rodar ganham este
+   * campo).
+   */
+  terminalCode?: string;
   tutorial?: boolean;
 }
 

@@ -1698,7 +1698,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Prefira const quando o valor não precisar ser reatribuído e use let quando precisar alterá-lo.',
             highlight: ['let', 'const'],
             codeLanguage: 'JavaScript',
-            code: 'let idade = 20;\nidade = 21;\n\nconst nome = "Ana";',
+            code: 'let idade = 20;\nidade = 21;\n\nconst nome = "Ana";\n\nconsole.log(idade, nome);',
             onlyCode: true
           },
           en: {
@@ -1706,7 +1706,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Prefer const when the value doesn\'t need to be reassigned, and use let when you need to change it.',
             highlight: ['let', 'const'],
             codeLanguage: 'JavaScript',
-            code: 'let age = 20;\nage = 21;\n\nconst name = "Ana";',
+            code: 'let age = 20;\nage = 21;\n\nconst name = "Ana";\n\nconsole.log(age, name);',
             onlyCode: true
           }
         }
@@ -1749,7 +1749,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Identificar o tipo de dado correto ajuda o programa a trabalhar com cada informação da maneira esperada.',
             highlight: ['strings', 'numbers', 'booleans'],
             codeLanguage: 'JavaScript',
-            code: 'const nome = "Gabriel";\nconst idade = 21;\nconst aprovado = true;',
+            code: 'const nome = "Gabriel";\nconst idade = 21;\nconst aprovado = true;\n\nconsole.log(nome, idade, aprovado);',
             onlyCode: true
           },
           en: {
@@ -1758,7 +1758,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Identifying the correct data type helps the program work with each piece of information as expected.',
             highlight: ['strings', 'numbers', 'booleans'],
             codeLanguage: 'JavaScript',
-            code: 'const name = "Gabriel";\nconst age = 21;\nconst approved = true;',
+            code: 'const name = "Gabriel";\nconst age = 21;\nconst approved = true;\n\nconsole.log(name, age, approved);',
             onlyCode: true
           }
         }
@@ -1779,7 +1779,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Operadores permitem que o programa transforme e combine valores para produzir novos resultados.',
             highlight: ['operadores'],
             codeLanguage: 'JavaScript',
-            code: 'const soma = 10 + 5;\nconst subtracao = 10 - 5;\nconst multiplicacao = 10 * 5;\nconst divisao = 10 / 5;',
+            code: 'const soma = 10 + 5;\nconst subtracao = 10 - 5;\nconst multiplicacao = 10 * 5;\nconst divisao = 10 / 5;\n\nconsole.log(soma, subtracao, multiplicacao, divisao);',
             onlyCode: true
           },
           en: {
@@ -1787,7 +1787,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Operators let the program transform and combine values to produce new results.',
             highlight: ['operators'],
             codeLanguage: 'JavaScript',
-            code: 'const sum = 10 + 5;\nconst subtraction = 10 - 5;\nconst multiplication = 10 * 5;\nconst division = 10 / 5;',
+            code: 'const sum = 10 + 5;\nconst subtraction = 10 - 5;\nconst multiplication = 10 * 5;\nconst division = 10 / 5;\n\nconsole.log(sum, subtraction, multiplication, division);',
             onlyCode: true
           }
         }
@@ -2010,7 +2010,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Arrays são úteis quando precisamos trabalhar com uma coleção de valores relacionados.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
-            code: 'const frutas = [\n  "maçã",\n  "banana",\n  "laranja"\n];',
+            code: 'const frutas = [\n  "maçã",\n  "banana",\n  "laranja"\n];\n\nconsole.log(frutas);',
             onlyCode: true
           },
           en: {
@@ -2018,7 +2018,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Arrays are useful when we need to work with a collection of related values.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
-            code: 'const fruits = [\n  "apple",\n  "banana",\n  "orange"\n];',
+            code: 'const fruits = [\n  "apple",\n  "banana",\n  "orange"\n];\n\nconsole.log(fruits);',
             onlyCode: true
           }
         }
@@ -2061,7 +2061,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Objetos são muito utilizados para representar entidades e agrupar informações que pertencem umas às outras.',
             highlight: ['objeto'],
             codeLanguage: 'JavaScript',
-            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};',
+            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconsole.log(pessoa);',
             onlyCode: true
           },
           en: {
@@ -2070,7 +2070,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             endParagraph: 'Objects are widely used to represent entities and group information that belongs together.',
             highlight: ['object'],
             codeLanguage: 'JavaScript',
-            code: 'const person = {\n  name: "Ana",\n  age: 20\n};',
+            code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconsole.log(person);',
             onlyCode: true
           }
         }
@@ -3700,18 +3700,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição.',
             highlight: ['map', 'filter', 'array'],
             codeLanguage: 'JavaScript',
-            code: 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);',
+            code: 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);\n\nconsole.log(dobrados, pares);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Array methods let you perform common operations without writing all the loops by hand.',
             endParagraph: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition.',
             highlight: ['map', 'filter', 'array', 'Array'],
             codeLanguage: 'JavaScript',
-            code: 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);',
+            code: 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);\n\nconsole.log(doubled, even);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       },
@@ -3723,18 +3723,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'find procura um elemento, some verifica se pelo menos um atende à condição e every verifica se todos atendem.',
             highlight: ['find', 'some', 'every'],
             codeLanguage: 'JavaScript',
-            code: 'const numeros = [2, 4, 6, 8];\n\nconst encontrado = numeros.find(\n  numero => numero > 5\n);\n\nconst existeImpar = numeros.some(\n  numero => numero % 2 !== 0\n);\n\nconst todosPares = numeros.every(\n  numero => numero % 2 === 0\n);',
+            code: 'const numeros = [2, 4, 6, 8];\n\nconst encontrado = numeros.find(\n  numero => numero > 5\n);\n\nconst existeImpar = numeros.some(\n  numero => numero % 2 !== 0\n);\n\nconst todosPares = numeros.every(\n  numero => numero % 2 === 0\n);\n\nconsole.log(encontrado, existeImpar, todosPares);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'A few methods let you search for elements or check conditions in a list.',
             endParagraph: 'find looks for an element, some checks whether at least one matches the condition, and every checks whether all of them match.',
             highlight: ['find', 'some', 'every'],
             codeLanguage: 'JavaScript',
-            code: 'const numbers = [2, 4, 6, 8];\n\nconst found = numbers.find(\n  number => number > 5\n);\n\nconst hasOdd = numbers.some(\n  number => number % 2 !== 0\n);\n\nconst allEven = numbers.every(\n  number => number % 2 === 0\n);',
+            code: 'const numbers = [2, 4, 6, 8];\n\nconst found = numbers.find(\n  number => number > 5\n);\n\nconst hasOdd = numbers.some(\n  number => number % 2 !== 0\n);\n\nconst allEven = numbers.every(\n  number => number % 2 === 0\n);\n\nconsole.log(found, hasOdd, allEven);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       }
@@ -3775,18 +3775,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'Escolher o método adequado deixa o código mais expressivo e diminui a necessidade de loops manuais.',
             highlight: ['map', 'filter', 'find', 'reduce'],
             codeLanguage: 'JavaScript',
-            code: 'const produtos = [\n  { nome: "Mouse", preco: 50 },\n  { nome: "Teclado", preco: 100 }\n];\n\nconst nomes = produtos.map(\n  produto => produto.nome\n);\n\nconst caros = produtos.filter(\n  produto => produto.preco > 60\n);',
+            code: 'const produtos = [\n  { nome: "Mouse", preco: 50 },\n  { nome: "Teclado", preco: 100 }\n];\n\nconst nomes = produtos.map(\n  produto => produto.nome\n);\n\nconst caros = produtos.filter(\n  produto => produto.preco > 60\n);\n\nconsole.log(nomes, caros);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Each method has its own purpose. map transforms, filter selects, find searches and reduce combines values.',
             endParagraph: 'Choosing the right method makes the code more expressive and cuts down the need for manual loops.',
             highlight: ['map', 'filter', 'find', 'reduce'],
             codeLanguage: 'JavaScript',
-            code: 'const products = [\n  { name: "Mouse", price: 50 },\n  { name: "Keyboard", price: 100 }\n];\n\nconst names = products.map(\n  product => product.name\n);\n\nconst expensive = products.filter(\n  product => product.price > 60\n);',
+            code: 'const products = [\n  { name: "Mouse", price: 50 },\n  { name: "Keyboard", price: 100 }\n];\n\nconst names = products.map(\n  product => product.name\n);\n\nconst expensive = products.filter(\n  product => product.price > 60\n);\n\nconsole.log(names, expensive);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       }
@@ -3806,18 +3806,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'Em vez de acessar cada propriedade separadamente, podemos extrair os valores que precisamos de forma direta.',
             highlight: ['Destructuring'],
             codeLanguage: 'JavaScript',
-            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { nome, idade } = pessoa;',
+            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { nome, idade } = pessoa;\n\nconsole.log(nome, idade);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Destructuring lets you extract values from objects directly into variables.',
             endParagraph: 'Instead of accessing each property separately, we can pull out the values we need in one step.',
             highlight: ['Destructuring'],
             codeLanguage: 'JavaScript',
-            code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { name, age } = person;',
+            code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { name, age } = person;\n\nconsole.log(name, age);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       },
@@ -3829,18 +3829,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'No array, a posição determina qual valor será extraído. No objeto, utilizamos o nome da propriedade.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
-            code: 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [primeira, segunda] = cores;',
+            code: 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [primeira, segunda] = cores;\n\nconsole.log(primeira, segunda);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'We can also use destructuring with arrays.',
             endParagraph: 'In an array, the position determines which value is extracted. In an object, we use the property name.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
-            code: 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [first, second] = colors;',
+            code: 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [first, second] = colors;\n\nconsole.log(first, second);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       }
@@ -3860,18 +3860,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'Spread é muito utilizado para criar novas estruturas a partir de valores existentes sem modificar diretamente a estrutura original.',
             highlight: ['spread', 'Spread', 'array'],
             codeLanguage: 'JavaScript',
-            code: 'const frutas = ["maçã", "banana"];\n\nconst novasFrutas = [\n  ...frutas,\n  "laranja"\n];',
+            code: 'const frutas = ["maçã", "banana"];\n\nconst novasFrutas = [\n  ...frutas,\n  "laranja"\n];\n\nconsole.log(novasFrutas);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'The spread operator ... lets you expand the elements of an array or the properties of an object.',
             endParagraph: 'Spread is widely used to create new structures from existing values without changing the original structure.',
             highlight: ['spread', 'Spread', 'array'],
             codeLanguage: 'JavaScript',
-            code: 'const fruits = ["apple", "banana"];\n\nconst newFruits = [\n  ...fruits,\n  "orange"\n];',
+            code: 'const fruits = ["apple", "banana"];\n\nconst newFruits = [\n  ...fruits,\n  "orange"\n];\n\nconsole.log(newFruits);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       },
@@ -3912,18 +3912,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'Eles tornam a criação de textos dinâmicos mais simples e legível.',
             highlight: ['Template literals', 'strings'],
             codeLanguage: 'JavaScript',
-            code: 'const nome = "Ana";\nconst idade = 20;\n\nconst mensagem =\n  `Olá, ${nome}! Você tem ${idade} anos.`;',
+            code: 'const nome = "Ana";\nconst idade = 20;\n\nconst mensagem =\n  `Olá, ${nome}! Você tem ${idade} anos.`;\n\nconsole.log(mensagem);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Template literals let you create strings using backticks and insert expressions directly into the text.',
             endParagraph: 'They make building dynamic text simpler and easier to read.',
             highlight: ['Template literals', 'strings'],
             codeLanguage: 'JavaScript',
-            code: 'const name = "Ana";\nconst age = 20;\n\nconst message =\n  `Hello, ${name}! You are ${age} years old.`;',
+            code: 'const name = "Ana";\nconst age = 20;\n\nconst message =\n  `Hello, ${name}! You are ${age} years old.`;\n\nconsole.log(message);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       },
@@ -3936,9 +3936,9 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'Esses recursos ajudam a escrever código mais seguro ao trabalhar com dados que podem estar incompletos.',
             highlight: ['Optional chaining', 'nullish coalescing', 'null', 'undefined'],
             codeLanguage: 'JavaScript',
-            code: 'const usuario = {};\n\nconst cidade =\n  usuario.endereco?.cidade ?? "Não informada";',
+            code: 'const usuario = {};\n\nconst cidade =\n  usuario.endereco?.cidade ?? "Não informada";\n\nconsole.log(cidade);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Optional chaining lets you access properties without raising an error when part of the path does not exist.',
@@ -3946,9 +3946,9 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             endParagraph: 'These features help you write safer code when working with data that may be incomplete.',
             highlight: ['Optional chaining', 'Nullish coalescing', 'null', 'undefined'],
             codeLanguage: 'JavaScript',
-            code: 'const user = {};\n\nconst city =\n  user.address?.city ?? "Not provided";',
+            code: 'const user = {};\n\nconst city =\n  user.address?.city ?? "Not provided";\n\nconsole.log(city);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       }
@@ -3970,7 +3970,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'export function somar(a, b) {\n  return a + b;\n}',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false,
+            terminalCode: 'function somar(a, b) {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));'
           },
           en: {
             firstParagraph: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.',
@@ -3979,7 +3980,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'export function add(a, b) {\n  return a + b;\n}',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false,
+            terminalCode: 'function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3));'
           }
         }
       },
@@ -4225,7 +4227,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users");',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false,
+            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
           },
           en: {
             firstParagraph: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.',
@@ -4235,7 +4238,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users");',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false,
+            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
           }
         }
       },
@@ -6696,9 +6700,9 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             endParagraph: 'Não é uma regra da linguagem, e sim uma disciplina de escrita — o JavaScript permite os dois caminhos.',
             highlight: ['imutável', 'push', 'spread'],
             codeLanguage: 'JavaScript',
-            code: 'const original = [1, 2, 3];\n\n// Mutação: altera o array original\noriginal.push(4);\n\n// Imutabilidade: cria um array novo\nconst novo = [...original, 5];',
+            code: 'const original = [1, 2, 3];\n\n// Mutação: altera o array original\noriginal.push(4);\n\n// Imutabilidade: cria um array novo\nconst novo = [...original, 5];\n\nconsole.log(original, novo);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           },
           en: {
             firstParagraph: 'Treating a value as immutable means never changing it in place: instead, you create a new value with the change applied.',
@@ -6706,9 +6710,9 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             endParagraph: 'This is not a rule of the language but a writing discipline — JavaScript allows both paths.',
             highlight: ['immutable', 'push', 'spread'],
             codeLanguage: 'JavaScript',
-            code: 'const original = [1, 2, 3];\n\n// Mutation: changes the original array\noriginal.push(4);\n\n// Immutability: creates a new array\nconst novo = [...original, 5];',
+            code: 'const original = [1, 2, 3];\n\n// Mutation: changes the original array\noriginal.push(4);\n\n// Immutability: creates a new array\nconst novo = [...original, 5];\n\nconsole.log(original, novo);',
             onlyCode: true,
-            noTerminal: true
+            noTerminal: false
           }
         }
       },
@@ -7094,7 +7098,8 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['unknown', 'any', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let valor: unknown = "texto";\n\nif (typeof valor === "string") {\n  console.log(valor.toUpperCase());\n}',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'let valor = "texto";\nif (typeof valor === "string") {\n    console.log(valor.toUpperCase());\n}'
           },
           en: {
             firstParagraph: 'any turns off type checking for that value — TypeScript stops helping there.',
@@ -7103,7 +7108,8 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['unknown', 'any', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let value: unknown = "text";\n\nif (typeof value === "string") {\n  console.log(value.toUpperCase());\n}',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'let value = "text";\nif (typeof value === "string") {\n    console.log(value.toUpperCase());\n}'
           }
         }
       }
@@ -7341,7 +7347,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// No navegador\nwindow.location.href;\n\n// No Node.js\nprocess.env;',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'A runtime is the environment responsible for running a program. The browser provides a JavaScript environment aimed at the web. Node.js provides another environment, with its own resources.',
@@ -7349,7 +7356,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// In the browser\nwindow.location.href;\n\n// In Node.js\nprocess.env;',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7420,7 +7428,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['package.json', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '{\n  "name": "minha-api",\n  "version": "1.0.0"\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'A Node.js project has files and configuration that describe its application and its dependencies.',
@@ -7428,7 +7437,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['package.json', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '{\n  "name": "my-api",\n  "version": "1.0.0"\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7449,7 +7459,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['NPM', 'JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// npm install express',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'NPM is one of the main tools used to install and manage packages in the JavaScript and Node.js ecosystem.',
@@ -7457,7 +7468,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['NPM', 'JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// npm install express',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -7470,7 +7482,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['dependências'],
             codeLanguage: 'JavaScript',
             code: '{\n  "dependencies": {\n    "express": "^5.0.0"\n  }\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'When we install a package, it becomes part of the dependencies of the project.',
@@ -7478,7 +7491,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['dependencies'],
             codeLanguage: 'JavaScript',
             code: '{\n  "dependencies": {\n    "express": "^5.0.0"\n  }\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7505,7 +7519,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '// app.js\nimport { somar } from "./math.js";\n\nconsole.log(somar(2, 3));'
               }
             ],
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Just like frontend applications can be split into modules, Node.js applications can also separate responsibilities across different files.',
@@ -7519,7 +7534,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '// app.js\nimport { add } from "./math.js";\n\nconsole.log(add(2, 3));'
               }
             ],
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7540,7 +7556,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'APIs nativas'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nconst texto =\n  fs.readFileSync(\n    "arquivo.txt",\n    "utf8"\n  );\n\nconsole.log(texto);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Node.js has native APIs for common tasks, like working with files, paths, processes and network communication.',
@@ -7548,7 +7565,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'native APIs'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nconst text =\n  fs.readFileSync(\n    "file.txt",\n    "utf8"\n  );\n\nconsole.log(text);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7569,7 +7587,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "mensagem.txt",\n  "Olá!"\n);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'The Node.js file system API lets you read, create and modify files directly from the program.',
@@ -7577,7 +7596,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "message.txt",\n  "Hello!"\n);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7598,7 +7618,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'HTTP', 'framework'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework.',
@@ -7606,7 +7627,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'HTTP', 'framework'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7627,7 +7649,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['HTTP'],
             codeLanguage: 'JavaScript',
             code: 'const resposta =\n  await fetch("/users");\n\nconsole.log(resposta.status); // 200',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'HTTP is a protocol used for communication between clients and servers on the web. The client sends a request and the server sends back a response.',
@@ -7635,7 +7658,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['HTTP'],
             codeLanguage: 'JavaScript',
             code: 'const response =\n  await fetch("/users");\n\nconsole.log(response.status); // 200',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7656,7 +7680,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: '// GET    /users     -> listar usuários\n// POST   /users     -> criar um usuário\n// PUT    /users/1   -> atualizar o usuário 1\n// DELETE /users/1   -> remover o usuário 1',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'HTTP methods help indicate what we want to do with a resource.',
@@ -7664,7 +7689,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: '// GET    /users     -> list users\n// POST   /users     -> create a user\n// PUT    /users/1   -> update user 1\n// DELETE /users/1   -> remove user 1',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7685,7 +7711,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> deu certo\n// 201 Created                  -> recurso criado\n// 400 Bad Request               -> requisição malformada\n// 404 Not Found                  -> recurso não existe\n// 500 Internal Server Error       -> erro no servidor',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Besides the data, an HTTP response has a status that indicates how the request was processed.',
@@ -7693,7 +7720,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> worked fine\n// 201 Created                  -> resource created\n// 400 Bad Request               -> malformed request\n// 404 Not Found                  -> resource does not exist\n// 500 Internal Server Error       -> server error',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7714,7 +7742,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'frameworks', 'Express'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work.',
@@ -7722,7 +7751,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'frameworks', 'Express'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7743,7 +7773,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'Node.js', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Express is a framework for Node.js used to create web applications and HTTP APIs more simply.',
@@ -7751,7 +7782,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'Node.js', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7772,7 +7804,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['rota', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Lista de usuários");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'A route associates an HTTP method and a path with a function that runs when that request arrives.',
@@ -7780,7 +7813,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['route', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("User list");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7801,7 +7835,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'req', 'res'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Usuários");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'In Express, req represents the information from the incoming request, and res represents the response that will be sent to the client.',
@@ -7809,7 +7844,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'req', 'res'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Users");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7830,7 +7866,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    nome: "Ana"\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'JSON is a widely used format for representing data in APIs because it lets you structure information in a simple way.',
@@ -7838,7 +7875,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    name: "Ana"\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7859,7 +7897,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['parâmetros', 'rota'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users/:id", (req, res) => {\n  res.json({\n    id: req.params.id\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Routes can have parameters. They let you identify specific resources directly from the URL.',
@@ -7867,7 +7906,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['parameters', 'route'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users/:id", (req, res) => {\n  res.json({\n    id: req.params.id\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7888,7 +7928,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'JSON', 'middleware'],
             codeLanguage: 'JavaScript',
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'An API can also receive data sent by the client. Express has middleware to parse requests containing JSON.',
@@ -7896,7 +7937,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'JSON', 'middleware'],
             codeLanguage: 'JavaScript',
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7917,7 +7959,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Now we can combine Node.js, Express, routes, HTTP methods and JSON to build a small API.',
@@ -7925,7 +7968,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7946,7 +7990,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'rota'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code.',
@@ -7954,7 +7999,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'route'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
@@ -7975,7 +8021,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'Node.js provides the environment to run JavaScript. Express simplifies creating the HTTP server. HTTP defines communication between client and server. JSON lets you transport structured data.',
@@ -7983,7 +8030,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -7996,7 +8044,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             firstParagraph: 'You started out learning JavaScript in the browser. Now you can also use it to build servers and APIs.',
@@ -8004,7 +8053,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       }
