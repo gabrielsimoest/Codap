@@ -1163,14 +1163,14 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual atributo define para onde um link leva?',
+            question: 'Qual atributo do <a> define para onde o link leva?',
             highlight: ['<a>'],
             correctOption: 1,
             options: ['href', 'src', 'alt', 'link'],
             pool: 'link-href'
           },
           en: {
-            question: 'Which attribute sets where a link goes?',
+            question: 'Which attribute of the <a> sets where the link goes?',
             highlight: ['<a>'],
             correctOption: 1,
             options: ['href', 'src', 'alt', 'link'],
@@ -1338,14 +1338,14 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual href leva à seção <h2 id="faq">?',
-            highlight: ['<h2>'],
+            highlight: ['href'],
             correctOption: 1,
             options: ['href="#faq"', 'href="faq"', 'href="id=faq"', 'href="/faq.html"'],
             pool: 'link-anchor'
           },
           en: {
             question: 'Which href leads to the section <h2 id="faq">?',
-            highlight: ['<h2>'],
+            highlight: ['href'],
             correctOption: 1,
             options: ['href="#faq"', 'href="faq"', 'href="id=faq"', 'href="/faq.html"'],
             pool: 'link-anchor'
@@ -1528,14 +1528,14 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual atributo diz onde está o arquivo da imagem?',
+            question: 'Qual atributo do <img> diz onde está o arquivo da imagem?',
             highlight: ['<img>'],
             correctOption: 1,
             options: ['src', 'href', 'alt', 'file'],
             pool: 'img-tag'
           },
           en: {
-            question: 'Which attribute says where the image file is?',
+            question: 'Which attribute of the <img> says where the image file is?',
             highlight: ['<img>'],
             correctOption: 1,
             options: ['src', 'href', 'alt', 'file'],
@@ -2310,6 +2310,128 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o CSS define em uma página?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['A aparência: cores, tamanhos, fontes e espaços', 'A estrutura e o significado do conteúdo', 'Os dados guardados no servidor', 'A lógica dos cliques'],
+            pool: 'css-role'
+          },
+          en: {
+            question: 'What does CSS define on a page?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['The look: colors, sizes, fonts and spacing', 'The structure and meaning of the content', 'The data stored on the server', 'The click logic'],
+            pool: 'css-role'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O HTML fornece a estrutura, e o CSS acrescenta a apresentação visual.',
+            highlight: ['HTML', 'CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-role',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'HTML provides the structure, and CSS adds the visual presentation.',
+            highlight: ['HTML', 'CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-role',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quem organiza o conteúdo da página, com títulos e parágrafos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O HTML', 'O CSS', 'O navegador sozinho', 'A fonte escolhida'],
+            pool: 'css-role'
+          },
+          en: {
+            question: 'What organizes the page content, with headings and paragraphs?',
+            highlight: [],
+            correctOption: 1,
+            options: ['HTML', 'CSS', 'The browser alone', 'The chosen font'],
+            pool: 'css-role'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em p { color: red; }, qual parte é o seletor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['p', 'color', 'red', '{ }'],
+            pool: 'css-rule'
+          },
+          en: {
+            question: 'In p { color: red; }, which part is the selector?',
+            highlight: [],
+            correctOption: 1,
+            options: ['p', 'color', 'red', '{ }'],
+            pool: 'css-rule'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em p { color: red; }, o que é color: red;?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma declaração', 'Um seletor', 'Uma tag HTML', 'Um comentário'],
+            pool: 'css-rule'
+          },
+          en: {
+            question: 'In p { color: red; }, what is color: red;?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A declaration', 'A selector', 'An HTML tag', 'A comment'],
+            pool: 'css-rule'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma regra CSS tem um seletor e um conjunto de declarações.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-rule',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A CSS rule has a selector and a set of declarations.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-rule',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2370,6 +2492,128 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
                 code: 'p {\n  color: blue;\n}'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde fica o CSS inline?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['No atributo style do próprio elemento', 'Numa tag style no documento', 'Num arquivo .css separado', 'Dentro de um comentário'],
+            pool: 'css-ways'
+          },
+          en: {
+            question: 'Where does inline CSS go?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['In the element\'s own style attribute', 'In a style tag in the document', 'In a separate .css file', 'Inside a comment'],
+            pool: 'css-ways'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a forma mais comum de adicionar CSS em projetos reais?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['CSS externo, num arquivo separado', 'CSS inline em cada elemento', 'CSS interno em cada página', 'Não usar CSS'],
+            pool: 'css-ways'
+          },
+          en: {
+            question: 'What is the most common way to add CSS in real projects?',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['External CSS, in a separate file', 'Inline CSS on each element', 'Internal CSS on each page', 'Not using CSS'],
+            pool: 'css-ways'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Existem três formas de adicionar CSS: inline, interno e externo.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-ways',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'There are three ways to add CSS: inline, internal and external.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-ways',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual tag liga um arquivo CSS externo ao HTML?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<link rel="stylesheet" href="style.css">', '<style src="style.css">', '<css href="style.css">', '<script src="style.css">'],
+            pool: 'css-link'
+          },
+          en: {
+            question: 'Which tag links an external CSS file to the HTML?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<link rel="stylesheet" href="style.css">', '<style src="style.css">', '<css href="style.css">', '<script src="style.css">'],
+            pool: 'css-link'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um mesmo arquivo CSS externo pode ser reaproveitado por várias páginas.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-link',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The same external CSS file can be reused by several pages.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-link',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que misturar muitos estilos no HTML atrapalha?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Dificulta a manutenção da página', 'Deixa o site menos seguro', 'Impede o navegador de ler o HTML', 'Apaga os estilos externos'],
+            pool: 'css-link'
+          },
+          en: {
+            question: 'Why does mixing lots of styles into the HTML get in the way?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['It makes the page harder to maintain', 'It makes the site less secure', 'It stops the browser from reading the HTML', 'It erases the external styles'],
+            pool: 'css-link'
           }
         }
       }
@@ -2442,6 +2686,320 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa azuis todos os parágrafos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['p { color: blue; }', '.p { color: blue; }', '#p { color: blue; }', '<p> { color: blue; }'],
+            pool: 'selector-basic'
+          },
+          en: {
+            question: 'Which rule makes every paragraph blue?',
+            highlight: [],
+            correctOption: 1,
+            options: ['p { color: blue; }', '.p { color: blue; }', '#p { color: blue; }', '<p> { color: blue; }'],
+            pool: 'selector-basic'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como selecionar a classe destaque no CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.destaque', '#destaque', 'destaque', '<destaque>'],
+            pool: 'selector-basic'
+          },
+          en: {
+            question: 'How do you select the highlight class in CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.highlight', '#highlight', 'highlight', '<highlight>'],
+            pool: 'selector-basic'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como selecionar o id titulo no CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#titulo', '.titulo', 'titulo', '@titulo'],
+            pool: 'selector-basic'
+          },
+          en: {
+            question: 'How do you select the id title in CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#title', '.title', 'title', '@title'],
+            pool: 'selector-basic'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O mesmo id pode ser usado em vários elementos da página.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'class-vs-id',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The same id can be used on several elements of the page.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'class-vs-id',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um estilo de botão vai se repetir em várias partes do site. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma classe', 'Um id', 'O seletor html', 'Um comentário'],
+            pool: 'class-vs-id'
+          },
+          en: {
+            question: 'A button style will repeat across the site. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A class', 'An id', 'The html selector', 'A comment'],
+            pool: 'class-vs-id'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a diferença entre classe e id?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Classe se reutiliza; id identifica um elemento específico', 'Id se reutiliza; classe é única', 'São iguais, só muda o símbolo', 'Classe só funciona em div'],
+            pool: 'class-vs-id'
+          },
+          en: {
+            question: 'What is the difference between a class and an id?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A class is reusable; an id identifies one specific element', 'An id is reusable; a class is unique', 'They\'re the same, only the symbol changes', 'A class only works on div'],
+            pool: 'class-vs-id'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Combinando seletores',
+      en: 'Combining selectors'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando várias regras têm as mesmas declarações, podemos agrupar os seletores separando-os por vírgula.',
+            secondParagraph: 'No exemplo, h1 e h2 recebem a mesma cor com uma única regra.',
+            endParagraph: 'Agrupar evita repetir o mesmo bloco de declarações para cada seletor.',
+            highlight: ['vírgula'],
+            codeLanguage: 'CSS',
+            code: 'h1, h2 {\n  color: #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>Título</h1>\n<h2>Subtítulo</h2>\n<p>Este parágrafo não muda.</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'When several rules share the same declarations, we can group the selectors, separating them with commas.',
+            secondParagraph: 'In the example, h1 and h2 get the same color from a single rule.',
+            endParagraph: 'Grouping avoids repeating the same block of declarations for each selector.',
+            highlight: ['commas'],
+            codeLanguage: 'CSS',
+            code: 'h1, h2 {\n  color: #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>Title</h1>\n<h2>Subtitle</h2>\n<p>This paragraph doesn\'t change.</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um espaço entre dois seletores cria um seletor descendente: nav a seleciona todo link que está dentro de um nav, em qualquer nível.',
+            secondParagraph: 'Já o sinal > cria um seletor de filho: .card > p seleciona só os p que são filhos diretos do .card.',
+            endParagraph: 'Combinar seletores permite estilizar um elemento pelo lugar onde ele está, sem dar uma classe para cada um.',
+            highlight: ['descendente', 'filho'],
+            codeLanguage: 'CSS',
+            code: 'nav a {\n  color: green;\n}\n\n.card > p {\n  color: crimson;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<nav>\n  <a href="#">Link no menu</a>\n</nav>\n<a href="#">Link fora do menu</a>\n\n<div class="card">\n  <p>Filho direto</p>\n  <div>\n    <p>Neto: não muda</p>\n  </div>\n</div>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'A space between two selectors creates a descendant selector: nav a selects every link inside a nav, at any level.',
+            secondParagraph: 'The > sign creates a child selector: .card > p selects only the p elements that are direct children of .card.',
+            endParagraph: 'Combining selectors lets you style an element by where it is, without giving each one a class.',
+            highlight: ['descendant', 'child'],
+            codeLanguage: 'CSS',
+            code: 'nav a {\n  color: green;\n}\n\n.card > p {\n  color: crimson;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<nav>\n  <a href="#">Link in the menu</a>\n</nav>\n<a href="#">Link outside the menu</a>\n\n<div class="card">\n  <p>Direct child</p>\n  <div>\n    <p>Grandchild: unchanged</p>\n  </div>\n</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra aplica a mesma cor a h1 e h2?',
+            highlight: [],
+            correctOption: 1,
+            options: ['h1, h2 { color: red; }', 'h1 h2 { color: red; }', 'h1 + h2 { color: red; }', 'h1.h2 { color: red; }'],
+            pool: 'grouping'
+          },
+          en: {
+            question: 'Which rule applies the same color to h1 and h2?',
+            highlight: [],
+            correctOption: 1,
+            options: ['h1, h2 { color: red; }', 'h1 h2 { color: red; }', 'h1 + h2 { color: red; }', 'h1.h2 { color: red; }'],
+            pool: 'grouping'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Em h1, h2 { ... }, a vírgula faz a regra valer para os dois seletores.',
+            highlight: ['vírgula'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'grouping',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In h1, h2 { ... }, the comma makes the rule apply to both selectors.',
+            highlight: ['comma'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'grouping',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve agrupar seletores?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Para não repetir as mesmas declarações', 'Para aumentar a especificidade', 'Para o CSS carregar antes', 'Para selecionar só o primeiro'],
+            pool: 'grouping'
+          },
+          en: {
+            question: 'What is grouping selectors for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['To avoid repeating the same declarations', 'To increase specificity', 'To make the CSS load first', 'To select only the first one'],
+            pool: 'grouping'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o seletor nav a seleciona?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Todo link dentro de um nav, em qualquer nível', 'Só o primeiro link da página', 'O nav e o link ao mesmo tempo', 'Os links que estão fora do nav'],
+            pool: 'descendant-child'
+          },
+          en: {
+            question: 'What does the selector nav a select?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Every link inside a nav, at any level', 'Only the first link on the page', 'The nav and the link at the same time', 'Links outside the nav'],
+            pool: 'descendant-child'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega só os li filhos diretos de .lista?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.lista > li', '.lista li', '.lista, li', '.lista.li'],
+            pool: 'descendant-child'
+          },
+          en: {
+            question: 'Which selector gets only the li elements that are direct children of .list?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.list > li', '.list li', '.list, li', '.list.li'],
+            pool: 'descendant-child'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O seletor .card > p também pega um p que está dentro de outra div, dentro do .card.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'descendant-child',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The selector .card > p also matches a p inside another div inside .card.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'descendant-child',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2510,6 +3068,324 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
                 code: '<div class="card">\n  <p>My content</p>\n</div>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade muda a cor do texto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['color', 'background-color', 'font-color', 'text-color'],
+            pool: 'color-bg'
+          },
+          en: {
+            question: 'Which property changes the text color?',
+            highlight: [],
+            correctOption: 1,
+            options: ['color', 'background-color', 'font-color', 'text-color'],
+            pool: 'color-bg'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade muda a cor de fundo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['background-color', 'color', 'bg-color', 'fill'],
+            pool: 'color-bg'
+          },
+          en: {
+            question: 'Which property changes the background color?',
+            highlight: [],
+            correctOption: 1,
+            options: ['background-color', 'color', 'bg-color', 'fill'],
+            pool: 'color-bg'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A propriedade color muda a cor de fundo do elemento.',
+            highlight: ['color'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'color-bg',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The color property changes the element\'s background color.',
+            highlight: ['color'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'color-bg',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um valor de cor hexadecimal?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#333', '333px', 'rgb', '0.5em'],
+            pool: 'color-values'
+          },
+          en: {
+            question: 'Which of these is a hex color value?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#333', '333px', 'rgb', '0.5em'],
+            pool: 'color-values'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Combinar color e background-color ajuda a controlar o contraste entre texto e fundo.',
+            highlight: ['color', 'background-color'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'color-values',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Combining color and background-color helps control the contrast between text and background.',
+            highlight: ['color', 'background-color'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'color-values',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um nome de cor válido no CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['blue', 'azul', '#blue', 'blue-color'],
+            pool: 'color-values'
+          },
+          en: {
+            question: 'Which of these is a valid color name in CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['blue', 'bleu', '#blue', 'blue-color'],
+            pool: 'color-values'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Mais sobre cores',
+      en: 'More about colors'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Além de nomes e hexadecimais, uma cor pode ser escrita com rgb, informando quanto de vermelho, verde e azul ela tem, de 0 a 255.',
+            secondParagraph: 'Com rgba, um quarto valor define a transparência: 0 é invisível e 1 é totalmente opaco.',
+            endParagraph: 'Já a propriedade opacity deixa o elemento inteiro transparente, incluindo o texto e tudo o que estiver dentro dele.',
+            highlight: ['rgb', 'rgba', 'opacity'],
+            codeLanguage: 'CSS',
+            code: '.faixa {\n  background-color: rgba(74, 58, 255, 0.3);\n}\n\n.apagado {\n  opacity: 0.4;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="faixa">Fundo transparente, texto normal</div>\n<p class="apagado">Parágrafo inteiro transparente</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'Besides names and hex values, a color can be written with rgb, saying how much red, green and blue it has, from 0 to 255.',
+            secondParagraph: 'With rgba, a fourth value sets the transparency: 0 is invisible and 1 is fully opaque.',
+            endParagraph: 'The opacity property, on the other hand, makes the whole element transparent, including its text and everything inside it.',
+            highlight: ['rgb', 'rgba', 'opacity'],
+            codeLanguage: 'CSS',
+            code: '.band {\n  background-color: rgba(74, 58, 255, 0.3);\n}\n\n.faded {\n  opacity: 0.4;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="band">Transparent background, normal text</div>\n<p class="faded">Whole paragraph transparent</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um gradiente é uma transição suave entre duas ou mais cores. Com linear-gradient, essa transição acontece em linha reta.',
+            secondParagraph: 'Gradientes vão na propriedade background, e não em background-color, porque o navegador os trata como uma imagem.',
+            endParagraph: 'A direção pode ser definida no início, como to right ou 45deg.',
+            highlight: ['linear-gradient', 'background', 'background-color'],
+            codeLanguage: 'CSS',
+            code: '.banner {\n  background: linear-gradient(to right, #4a3aff, #00c2ff);\n  color: white;\n  padding: 16px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="banner">Gradiente da esquerda para a direita</div>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'A gradient is a smooth transition between two or more colors. With linear-gradient, that transition happens in a straight line.',
+            secondParagraph: 'Gradients go in the background property, not in background-color, because the browser treats them as an image.',
+            endParagraph: 'The direction can be set at the start, like to right or 45deg.',
+            highlight: ['linear-gradient', 'background', 'background-color'],
+            codeLanguage: 'CSS',
+            code: '.banner {\n  background: linear-gradient(to right, #4a3aff, #00c2ff);\n  color: white;\n  padding: 16px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="banner">Gradient from left to right</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em rgba(0, 0, 0, 0.5), o que o 0.5 define?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A transparência da cor', 'A quantidade de azul', 'O tamanho do elemento', 'O brilho do texto'],
+            pool: 'rgba-opacity'
+          },
+          en: {
+            question: 'In rgba(0, 0, 0, 0.5), what does 0.5 set?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The color\'s transparency', 'The amount of blue', 'The element\'s size', 'The text\'s brightness'],
+            pool: 'rgba-opacity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Você quer só o fundo transparente, com o texto opaco. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um background-color com rgba', 'opacity no elemento', 'color: transparent', 'display: none'],
+            pool: 'rgba-opacity'
+          },
+          en: {
+            question: 'You want only the background transparent, with opaque text. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A background-color with rgba', 'opacity on the element', 'color: transparent', 'display: none'],
+            pool: 'rgba-opacity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'opacity: 0.4 deixa transparente só o fundo do elemento.',
+            highlight: ['opacity'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'rgba-opacity',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'opacity: 0.4 makes only the element\'s background transparent.',
+            highlight: ['opacity'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'rgba-opacity',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual propriedade vai um linear-gradient?',
+            highlight: [],
+            correctOption: 1,
+            options: ['background', 'color', 'background-color', 'border-color'],
+            pool: 'gradient'
+          },
+          en: {
+            question: 'Which property takes a linear-gradient?',
+            highlight: [],
+            correctOption: 1,
+            options: ['background', 'color', 'background-color', 'border-color'],
+            pool: 'gradient'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um gradiente é uma transição suave entre duas ou mais cores.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'gradient',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A gradient is a smooth transition between two or more colors.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'gradient',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que to right indica em linear-gradient(to right, red, blue)?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A direção do gradiente', 'A cor final', 'O alinhamento do texto', 'A largura do elemento'],
+            pool: 'gradient'
+          },
+          en: {
+            question: 'What does to right mean in linear-gradient(to right, red, blue)?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The gradient\'s direction', 'The final color', 'The text alignment', 'The element\'s width'],
+            pool: 'gradient'
           }
         }
       }
@@ -2615,6 +3491,324 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define o tamanho da fonte?',
+            highlight: [],
+            correctOption: 1,
+            options: ['font-size', 'font-weight', 'text-size', 'font-family'],
+            pool: 'font-size-weight'
+          },
+          en: {
+            question: 'Which property sets the font size?',
+            highlight: [],
+            correctOption: 1,
+            options: ['font-size', 'font-weight', 'text-size', 'font-family'],
+            pool: 'font-size-weight'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que font-weight: 700 faz com o texto?',
+            highlight: ['font-weight'],
+            correctOption: 1,
+            options: ['Deixa em negrito', 'Deixa maior', 'Deixa em itálico', 'Sublinha'],
+            pool: 'font-size-weight'
+          },
+          en: {
+            question: 'What does font-weight: 700 do to the text?',
+            highlight: ['font-weight'],
+            correctOption: 1,
+            options: ['Makes it bold', 'Makes it bigger', 'Makes it italic', 'Underlines it'],
+            pool: 'font-size-weight'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'font-family define o alinhamento do texto.',
+            highlight: ['font-family'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'font-size-weight',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'font-family sets the text alignment.',
+            highlight: ['font-family'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'font-size-weight',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como centralizar o texto de um título?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-align: center;', 'align: center;', 'font-align: center;', 'text-decoration: center;'],
+            pool: 'text-align-deco'
+          },
+          en: {
+            question: 'How do you center a heading\'s text?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-align: center;', 'align: center;', 'font-align: center;', 'text-decoration: center;'],
+            pool: 'text-align-deco'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como tirar o sublinhado padrão de um link?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-decoration: none;', 'text-decoration: underline;', 'font-weight: none;', 'text-align: none;'],
+            pool: 'text-align-deco'
+          },
+          en: {
+            question: 'How do you remove a link\'s default underline?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-decoration: none;', 'text-decoration: underline;', 'font-weight: none;', 'text-align: none;'],
+            pool: 'text-align-deco'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'text-decoration: line-through; deixa o texto riscado.',
+            highlight: ['text-decoration'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'text-align-deco',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'text-decoration: line-through; strikes the text through.',
+            highlight: ['text-decoration'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'text-align-deco',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Espaçamento do texto',
+      en: 'Text spacing'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'line-height define a altura de cada linha de texto, ou seja, o espaço entre uma linha e outra.',
+            secondParagraph: 'Um valor sem unidade, como 1.5, multiplica o tamanho da fonte: com fonte de 16px, cada linha ocupa 24px.',
+            endParagraph: 'Parágrafos longos ficam bem mais fáceis de ler com um line-height entre 1.4 e 1.6.',
+            highlight: ['line-height'],
+            codeLanguage: 'CSS',
+            code: '.apertado {\n  line-height: 1;\n}\n\n.confortavel {\n  line-height: 1.6;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="apertado">Texto com as linhas bem apertadas, difícil de acompanhar quando o parágrafo fica longo.</p>\n<p class="confortavel">Texto com mais espaço entre as linhas, bem mais confortável de ler.</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'line-height sets the height of each line of text, that is, the space between one line and the next.',
+            secondParagraph: 'A unitless value, like 1.5, multiplies the font size: with a 16px font, each line takes 24px.',
+            endParagraph: 'Long paragraphs are much easier to read with a line-height between 1.4 and 1.6.',
+            highlight: ['line-height'],
+            codeLanguage: 'CSS',
+            code: '.tight {\n  line-height: 1;\n}\n\n.comfy {\n  line-height: 1.6;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="tight">Text with very tight lines, hard to follow once the paragraph gets long.</p>\n<p class="comfy">Text with more space between the lines, much more comfortable to read.</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'letter-spacing ajusta o espaço entre as letras, e text-transform muda a caixa do texto sem mexer no HTML.',
+            secondParagraph: 'Os valores mais comuns de text-transform são uppercase (tudo maiúsculo), lowercase (tudo minúsculo) e capitalize (primeira letra de cada palavra).',
+            endParagraph: 'Como a mudança é só visual, o texto escrito no HTML continua o mesmo.',
+            highlight: ['letter-spacing', 'text-transform', 'uppercase', 'lowercase', 'capitalize'],
+            codeLanguage: 'CSS',
+            code: '.rotulo {\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="rotulo">novidade</p>\n<p>novidade</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'letter-spacing adjusts the space between letters, and text-transform changes the text\'s case without touching the HTML.',
+            secondParagraph: 'The most common text-transform values are uppercase (all capitals), lowercase (all small letters) and capitalize (first letter of each word).',
+            endParagraph: 'Since the change is only visual, the text written in the HTML stays the same.',
+            highlight: ['letter-spacing', 'text-transform', 'uppercase', 'lowercase', 'capitalize'],
+            codeLanguage: 'CSS',
+            code: '.label {\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="label">new arrival</p>\n<p>new arrival</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define o espaço entre as linhas de um texto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['line-height', 'letter-spacing', 'font-size', 'margin'],
+            pool: 'line-height'
+          },
+          en: {
+            question: 'Which property sets the space between lines of text?',
+            highlight: [],
+            correctOption: 1,
+            options: ['line-height', 'letter-spacing', 'font-size', 'margin'],
+            pool: 'line-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com font-size: 16px e line-height: 1.5, qual a altura de cada linha?',
+            highlight: [],
+            correctOption: 1,
+            options: ['24px', '16px', '17.5px', '1.5px'],
+            pool: 'line-height'
+          },
+          en: {
+            question: 'With font-size: 16px and line-height: 1.5, how tall is each line?',
+            highlight: [],
+            correctOption: 1,
+            options: ['24px', '16px', '17.5px', '1.5px'],
+            pool: 'line-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um line-height maior costuma deixar parágrafos longos mais fáceis de ler.',
+            highlight: ['line-height'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'line-height',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A larger line-height usually makes long paragraphs easier to read.',
+            highlight: ['line-height'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'line-height',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração deixa o texto todo em maiúsculas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-transform: uppercase;', 'text-transform: capitalize;', 'font-weight: uppercase;', 'text-decoration: uppercase;'],
+            pool: 'letter-transform'
+          },
+          en: {
+            question: 'Which declaration makes the whole text uppercase?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-transform: uppercase;', 'text-transform: capitalize;', 'font-weight: uppercase;', 'text-decoration: uppercase;'],
+            pool: 'letter-transform'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade aumenta o espaço entre as letras?',
+            highlight: [],
+            correctOption: 1,
+            options: ['letter-spacing', 'line-height', 'word-wrap', 'font-spacing'],
+            pool: 'letter-transform'
+          },
+          en: {
+            question: 'Which property increases the space between letters?',
+            highlight: [],
+            correctOption: 1,
+            options: ['letter-spacing', 'line-height', 'word-wrap', 'font-spacing'],
+            pool: 'letter-transform'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'text-transform: uppercase muda o texto escrito no HTML.',
+            highlight: ['text-transform'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'letter-transform',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'text-transform: uppercase changes the text written in the HTML.',
+            highlight: ['text-transform'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'letter-transform',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2683,6 +3877,324 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
                 code: '<div class="card">Content</div>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quais são as partes de uma caixa no Box Model?',
+            highlight: ['Box Model'],
+            correctOption: 1,
+            options: ['Conteúdo, padding, borda e margin', 'Conteúdo, cor, fonte e fundo', 'Largura, altura, cor e borda', 'Só conteúdo e margin'],
+            pool: 'box-parts'
+          },
+          en: {
+            question: 'What are the parts of a box in the Box Model?',
+            highlight: ['Box Model'],
+            correctOption: 1,
+            options: ['Content, padding, border and margin', 'Content, color, font and background', 'Width, height, color and border', 'Only content and margin'],
+            pool: 'box-parts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No CSS, os elementos são tratados como caixas.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'box-parts',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In CSS, elements are treated as boxes.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'box-parts',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual parte fica entre o conteúdo e a borda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'border', 'width'],
+            pool: 'box-parts'
+          },
+          en: {
+            question: 'Which part sits between the content and the border?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'border', 'width'],
+            pool: 'box-parts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade cria espaço do lado de fora da borda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin', 'padding', 'border', 'width'],
+            pool: 'padding-margin'
+          },
+          en: {
+            question: 'Which property creates space outside the border?',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin', 'padding', 'border', 'width'],
+            pool: 'padding-margin'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O padding fica fora da borda, e a margin fica dentro.',
+            highlight: ['padding', 'margin'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'padding-margin',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Padding sits outside the border, and margin sits inside.',
+            highlight: ['Padding', 'margin'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'padding-margin',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Você quer afastar o texto da borda do cartão. O que aumentar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'border', 'font-size'],
+            pool: 'padding-margin'
+          },
+          en: {
+            question: 'You want to move the text away from the card\'s border. What do you increase?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'border', 'font-size'],
+            pool: 'padding-margin'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Bordas, cantos e sombras',
+      en: 'Borders, corners and shadows'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A propriedade border pode ser escrita de forma abreviada, com espessura, estilo e cor numa só declaração.',
+            secondParagraph: 'O estilo pode ser solid (linha contínua), dashed (tracejada) ou dotted (pontilhada), entre outros.',
+            endParagraph: 'Sem o estilo, a borda não aparece, mesmo com espessura e cor definidas.',
+            highlight: ['border', 'solid', 'dashed', 'dotted'],
+            codeLanguage: 'CSS',
+            code: '.cheia {\n  border: 2px solid #333;\n}\n\n.tracejada {\n  border: 2px dashed #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="cheia">Borda contínua</p>\n<p class="tracejada">Borda tracejada</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'The border property can be written in shorthand, with width, style and color in a single declaration.',
+            secondParagraph: 'The style can be solid (a continuous line), dashed or dotted, among others.',
+            endParagraph: 'Without the style, the border doesn\'t show up, even with width and color set.',
+            highlight: ['border', 'solid', 'dashed', 'dotted'],
+            codeLanguage: 'CSS',
+            code: '.full {\n  border: 2px solid #333;\n}\n\n.dashed {\n  border: 2px dashed #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="full">Solid border</p>\n<p class="dashed">Dashed border</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'border-radius arredonda os cantos de um elemento. Quanto maior o valor, mais arredondado; 50% numa caixa quadrada forma um círculo.',
+            secondParagraph: 'box-shadow adiciona uma sombra: os primeiros valores são o deslocamento horizontal e o vertical, depois vem o desfoque e, por fim, a cor.',
+            endParagraph: 'Cantos suaves e sombras discretas ajudam a destacar um cartão do fundo da página.',
+            highlight: ['border-radius', 'box-shadow'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  padding: 16px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\n}\n\n.avatar {\n  width: 60px;\n  height: 60px;\n  margin-top: 16px;\n  border-radius: 50%;\n  background-color: #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="card">Cartão com cantos e sombra</div>\n<div class="avatar"></div>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'border-radius rounds an element\'s corners. The bigger the value, the rounder; 50% on a square box makes a circle.',
+            secondParagraph: 'box-shadow adds a shadow: the first values are the horizontal and vertical offsets, then the blur and, finally, the color.',
+            endParagraph: 'Soft corners and subtle shadows help a card stand out from the page background.',
+            highlight: ['border-radius', 'box-shadow'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  padding: 16px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\n}\n\n.avatar {\n  width: 60px;\n  height: 60px;\n  margin-top: 16px;\n  border-radius: 50%;\n  background-color: #4a3aff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="card">Card with corners and shadow</div>\n<div class="avatar"></div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração cria uma borda tracejada de 2px?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border: 2px dashed blue;', 'border: 2px dotted blue;', 'border: 2px solid blue;', 'border: 2px blue;'],
+            pool: 'border-short'
+          },
+          en: {
+            question: 'Which declaration creates a 2px dashed border?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border: 2px dashed blue;', 'border: 2px dotted blue;', 'border: 2px solid blue;', 'border: 2px blue;'],
+            pool: 'border-short'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'border: 2px red; mostra uma borda vermelha, mesmo sem o estilo.',
+            highlight: ['border'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'border-short',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'border: 2px red; shows a red border, even without a style.',
+            highlight: ['border'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'border-short',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em border: 1px solid #ccc;, o que é solid?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O estilo da linha', 'A cor da borda', 'A espessura da borda', 'O arredondamento'],
+            pool: 'border-short'
+          },
+          en: {
+            question: 'In border: 1px solid #ccc;, what is solid?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The line style', 'The border color', 'The border width', 'The rounding'],
+            pool: 'border-short'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade arredonda os cantos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border-radius', 'box-shadow', 'border-style', 'corner-radius'],
+            pool: 'radius-shadow'
+          },
+          en: {
+            question: 'Which property rounds the corners?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border-radius', 'box-shadow', 'border-style', 'corner-radius'],
+            pool: 'radius-shadow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como transformar uma caixa quadrada em um círculo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border-radius: 50%;', 'border-radius: 0;', 'box-shadow: 50%;', 'border: circle;'],
+            pool: 'radius-shadow'
+          },
+          en: {
+            question: 'How do you turn a square box into a circle?',
+            highlight: [],
+            correctOption: 1,
+            options: ['border-radius: 50%;', 'border-radius: 0;', 'box-shadow: 50%;', 'border: circle;'],
+            pool: 'radius-shadow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Em box-shadow: 0 4px 12px black;, o 4px desloca a sombra para baixo.',
+            highlight: ['box-shadow'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'radius-shadow',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In box-shadow: 0 4px 12px black;, the 4px moves the shadow down.',
+            highlight: ['box-shadow'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'radius-shadow',
+            fixedOrder: true
           }
         }
       }
@@ -2759,6 +4271,128 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'width: 200px, padding: 20px e border: 5px, sem box-sizing. Quanto a caixa ocupa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['250px', '200px', '225px', '210px'],
+            pool: 'content-box'
+          },
+          en: {
+            question: 'width: 200px, padding: 20px and border: 5px, without box-sizing. How wide is the box?',
+            highlight: [],
+            correctOption: 1,
+            options: ['250px', '200px', '225px', '210px'],
+            pool: 'content-box'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Por padrão, width define só a largura do conteúdo.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'content-box',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'By default, width sets only the content\'s width.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'content-box',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como se chama o comportamento padrão do width?',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['content-box', 'border-box', 'padding-box', 'inline-box'],
+            pool: 'content-box'
+          },
+          en: {
+            question: 'What is the default width behavior called?',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['content-box', 'border-box', 'padding-box', 'inline-box'],
+            pool: 'content-box'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com box-sizing: border-box, o width passa a incluir:',
+            highlight: ['box-sizing'],
+            correctOption: 1,
+            options: ['O padding e a borda', 'Só a margin', 'A margin e o padding', 'Nada além do conteúdo'],
+            pool: 'border-box'
+          },
+          en: {
+            question: 'With box-sizing: border-box, the width now includes:',
+            highlight: ['box-sizing'],
+            correctOption: 1,
+            options: ['The padding and the border', 'Only the margin', 'The margin and the padding', 'Nothing but the content'],
+            pool: 'border-box'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com border-box, width: 200px, padding: 20px e border: 5px. Quanto a caixa ocupa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['200px', '250px', '240px', '210px'],
+            pool: 'border-box'
+          },
+          en: {
+            question: 'With border-box, width: 200px, padding: 20px and border: 5px. How wide is the box?',
+            highlight: [],
+            correctOption: 1,
+            options: ['200px', '250px', '240px', '210px'],
+            pool: 'border-box'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'border-box costuma ser aplicado a todos os elementos, porque deixa os tamanhos mais previsíveis.',
+            highlight: ['border-box'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'border-box',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'border-box is often applied to every element, because it makes sizes more predictable.',
+            highlight: ['border-box'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'border-box',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2819,6 +4453,324 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define a altura de um elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height', 'width', 'size', 'length'],
+            pool: 'width-height'
+          },
+          en: {
+            question: 'Which property sets an element\'s height?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height', 'width', 'size', 'length'],
+            pool: 'width-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'width define a largura de um elemento.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'width-height',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'width sets an element\'s width.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'width-height',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração deixa o cartão com 300 pixels de largura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
+            pool: 'width-height'
+          },
+          en: {
+            question: 'Which declaration makes the card 300 pixels wide?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
+            pool: 'width-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'width: 80% é calculado em relação a quê?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ao elemento de referência, como o pai', 'À tela inteira, sempre', 'Ao tamanho da fonte', 'A 80 pixels fixos'],
+            pool: 'px-percent'
+          },
+          en: {
+            question: 'What is width: 80% calculated against?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The reference element, like the parent', 'The whole screen, always', 'The font size', 'A fixed 80 pixels'],
+            pool: 'px-percent'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'px é uma medida em pixels, e % é uma proporção.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'px-percent',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'px is a measure in pixels, and % is a proportion.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'px-percent',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um contêiner deve ocupar 80% do espaço do pai em qualquer tela. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
+            pool: 'px-percent'
+          },
+          en: {
+            question: 'A container must take 80% of its parent\'s space on any screen. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
+            pool: 'px-percent'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Limites e centralização',
+      en: 'Limits and centering'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'max-width define uma largura máxima: o elemento pode encolher em telas pequenas, mas nunca passa desse limite em telas grandes.',
+            secondParagraph: 'Já min-width define uma largura mínima, abaixo da qual o elemento não encolhe.',
+            endParagraph: 'Uma regra muito usada em imagens é max-width: 100%, que impede a imagem de ficar maior que o espaço disponível.',
+            highlight: ['max-width', 'min-width'],
+            codeLanguage: 'CSS',
+            code: '.texto {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="texto">Este parágrafo nunca passa de 240px de largura, mesmo que a tela seja bem maior.</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'max-width sets a maximum width: the element can shrink on small screens, but never goes past that limit on large ones.',
+            secondParagraph: 'min-width sets a minimum width, below which the element won\'t shrink.',
+            endParagraph: 'A rule used all the time on images is max-width: 100%, which stops the image from getting bigger than the available space.',
+            highlight: ['max-width', 'min-width'],
+            codeLanguage: 'CSS',
+            code: '.text {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="text">This paragraph never goes past 240px wide, even if the screen is much bigger.</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Para centralizar na horizontal um bloco com largura definida, usamos margin: 0 auto.',
+            secondParagraph: 'O 0 zera as margens de cima e de baixo, e o auto divide igualmente o espaço que sobra entre a esquerda e a direita.',
+            endParagraph: 'Combinado com max-width, é o jeito clássico de criar um contêiner centralizado para o conteúdo da página.',
+            highlight: ['margin', 'auto', 'max-width'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  max-width: 200px;\n  margin: 0 auto;\n  padding: 12px;\n  background-color: #cfe8ff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="container">Bloco centralizado</div>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'To center a block with a set width horizontally, we use margin: 0 auto.',
+            secondParagraph: 'The 0 zeroes the top and bottom margins, and auto splits the leftover space equally between left and right.',
+            endParagraph: 'Combined with max-width, it\'s the classic way to build a centered container for the page content.',
+            highlight: ['margin', 'auto', 'max-width'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  max-width: 200px;\n  margin: 0 auto;\n  padding: 12px;\n  background-color: #cfe8ff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="container">Centered block</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade impede um elemento de passar de uma largura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['max-width', 'min-width', 'width', 'max-height'],
+            pool: 'max-min'
+          },
+          en: {
+            question: 'Which property stops an element from going past a width?',
+            highlight: [],
+            correctOption: 1,
+            options: ['max-width', 'min-width', 'width', 'max-height'],
+            pool: 'max-min'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra impede uma imagem de ficar maior que o espaço disponível?',
+            highlight: [],
+            correctOption: 1,
+            options: ['max-width: 100%;', 'min-width: 100%;', 'width: 100vh;', 'max-width: 0;'],
+            pool: 'max-min'
+          },
+          en: {
+            question: 'Which rule stops an image from getting bigger than the available space?',
+            highlight: [],
+            correctOption: 1,
+            options: ['max-width: 100%;', 'min-width: 100%;', 'width: 100vh;', 'max-width: 0;'],
+            pool: 'max-min'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'min-width define uma largura mínima, abaixo da qual o elemento não encolhe.',
+            highlight: ['min-width'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'max-min',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'min-width sets a minimum width, below which the element won\'t shrink.',
+            highlight: ['min-width'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'max-min',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração centraliza na horizontal um bloco com largura definida?',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin: 0 auto;', 'text-align: center;', 'padding: auto;', 'margin: auto 0;'],
+            pool: 'center'
+          },
+          en: {
+            question: 'Which declaration horizontally centers a block with a set width?',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin: 0 auto;', 'text-align: center;', 'padding: auto;', 'margin: auto 0;'],
+            pool: 'center'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em margin: 0 auto, o que o auto faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Divide o espaço que sobra entre esquerda e direita', 'Zera as margens laterais', 'Aumenta a altura do bloco', 'Centraliza o texto de dentro'],
+            pool: 'center'
+          },
+          en: {
+            question: 'In margin: 0 auto, what does auto do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Splits the leftover space between left and right', 'Zeroes the side margins', 'Increases the block\'s height', 'Centers the text inside'],
+            pool: 'center'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'margin: 0 auto centraliza um bloco mesmo sem largura definida, ocupando a linha inteira.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'center',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'margin: 0 auto centers a block even without a set width, when it fills the whole line.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'center',
+            fixedOrder: true
           }
         }
       }
@@ -2895,6 +4847,128 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com html { font-size: 16px; }, quanto vale 2rem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['32px', '16px', '2px', '18px'],
+            pool: 'rem-em'
+          },
+          en: {
+            question: 'With html { font-size: 16px; }, how much is 2rem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['32px', '16px', '2px', '18px'],
+            pool: 'rem-em'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A unidade rem toma como referência:',
+            highlight: ['rem'],
+            correctOption: 1,
+            options: ['A fonte raiz da página, no html', 'A fonte do próprio elemento', 'A largura da janela', 'A altura da janela'],
+            pool: 'rem-em'
+          },
+          en: {
+            question: 'The rem unit is based on:',
+            highlight: ['rem'],
+            correctOption: 1,
+            options: ['The page\'s root font, on html', 'The element\'s own font', 'The window width', 'The window height'],
+            pool: 'rem-em'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'As unidades em e rem usam sempre a mesma referência.',
+            highlight: ['rem'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'rem-em',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'em and rem always use the same reference.',
+            highlight: ['em', 'rem'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'rem-em',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma seção deve ocupar toda a altura visível da tela. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height: 100vh;', 'height: 100vw;', 'height: 100px;', 'height: 100rem;'],
+            pool: 'vh-vw'
+          },
+          en: {
+            question: 'A section must fill the whole visible screen height. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height: 100vh;', 'height: 100vw;', 'height: 100px;', 'height: 100rem;'],
+            pool: 'vh-vw'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale 1vw?',
+            highlight: [],
+            correctOption: 1,
+            options: ['1% da largura da janela', '1% da altura da janela', '1 pixel', '1% da fonte raiz'],
+            pool: 'vh-vw'
+          },
+          en: {
+            question: 'How much is 1vw?',
+            highlight: [],
+            correctOption: 1,
+            options: ['1% of the window width', '1% of the window height', '1 pixel', '1% of the root font'],
+            pool: 'vh-vw'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'vh é relativo à altura da janela do navegador.',
+            highlight: ['vh'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'vh-vw',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'vh is relative to the browser window\'s height.',
+            highlight: ['vh'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'vh-vw',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2965,6 +5039,128 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de display faz o elemento começar numa nova linha e ocupar toda a largura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['block', 'inline', 'none', 'inline-text'],
+            pool: 'block-inline'
+          },
+          en: {
+            question: 'Which display value makes the element start on a new line and take the full width?',
+            highlight: [],
+            correctOption: 1,
+            options: ['block', 'inline', 'none', 'inline-text'],
+            pool: 'block-inline'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de display mantém o elemento na mesma linha, quando há espaço?',
+            highlight: [],
+            correctOption: 1,
+            options: ['inline', 'block', 'none', 'row'],
+            pool: 'block-inline'
+          },
+          en: {
+            question: 'Which display value keeps the element on the same line when there\'s room?',
+            highlight: [],
+            correctOption: 1,
+            options: ['inline', 'block', 'none', 'row'],
+            pool: 'block-inline'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Elementos block normalmente ocupam toda a largura disponível.',
+            highlight: ['block'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'block-inline',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Block elements usually take up all the available width.',
+            highlight: ['Block'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'block-inline',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que .oculto { display: none; } faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Remove o elemento da página', 'Deixa o elemento transparente', 'Coloca o elemento na mesma linha', 'Diminui o elemento'],
+            pool: 'inline-block-none'
+          },
+          en: {
+            question: 'What does .hidden { display: none; } do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Removes the element from the page', 'Makes the element transparent', 'Puts the element on the same line', 'Shrinks the element'],
+            pool: 'inline-block-none'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'inline-block combina características de inline e de block.',
+            highlight: ['inline-block'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'inline-block-none',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'inline-block combines traits of inline and block.',
+            highlight: ['inline-block'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'inline-block-none',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor tira o elemento da renderização da página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['display: none;', 'display: hidden;', 'display: inline;', 'display: 0;'],
+            pool: 'inline-block-none'
+          },
+          en: {
+            question: 'Which value takes the element out of the page rendering?',
+            highlight: [],
+            correctOption: 1,
+            options: ['display: none;', 'display: hidden;', 'display: inline;', 'display: 0;'],
+            pool: 'inline-block-none'
+          }
+        }
       }
     ]
   },
@@ -3025,6 +5221,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  margin: 16px;\n  color: #222;\n  background-color: #f2f2f2;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o seletor .card h2 seleciona?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os h2 que estão dentro de .card', 'Todos os h2 da página', 'O .card e todos os h2', 'Só o primeiro h2'],
+            pool: 'combine-rules'
+          },
+          en: {
+            question: 'What does the selector .card h2 select?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The h2 elements inside .card', 'Every h2 on the page', 'The .card and every h2', 'Only the first h2'],
+            pool: 'combine-rules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma regra CSS pode combinar várias propriedades para criar um estilo completo.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'combine-rules',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A CSS rule can combine several properties to create a complete style.',
+            highlight: ['CSS'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'combine-rules',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra está escrita corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.card { padding: 20px; margin: 16px; }', '.card { padding: 20px margin: 16px }', '.card ( padding: 20px; )', 'card: { padding = 20px; }'],
+            pool: 'combine-rules'
+          },
+          en: {
+            question: 'Which rule is written correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.card { padding: 20px; margin: 16px; }', '.card { padding: 20px margin: 16px }', '.card ( padding: 20px; )', 'card: { padding = 20px; }'],
+            pool: 'combine-rules'
           }
         }
       }
@@ -5188,7 +7445,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Verdadeiro ou falso?',
             aditionalParagraph: 'O favicon é declarado no <head> com um <link rel="icon">.',
-            highlight: ['<head>', '<link>'],
+            highlight: ['<head>', 'favicon'],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
             pool: 'meta',
@@ -5197,7 +7454,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             question: 'True or false?',
             aditionalParagraph: 'The favicon is declared in the <head> with a <link rel="icon">.',
-            highlight: ['<head>', '<link>'],
+            highlight: ['<head>', 'favicon'],
             correctOption: 1,
             options: ['True', 'False'],
             pool: 'meta',
@@ -5450,6 +7707,128 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que display: flex faz com o elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Torna o elemento um flex container', 'Esconde o elemento', 'Transforma os filhos em links', 'Cria uma grade de linhas e colunas'],
+            pool: 'flex-basics'
+          },
+          en: {
+            question: 'What does display: flex do to the element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Turns it into a flex container', 'Hides the element', 'Turns its children into links', 'Creates a grid of rows and columns'],
+            pool: 'flex-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com display: flex, os filhos do contêiner viram flex items.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'flex-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With display: flex, the container\'s children become flex items.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'flex-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O Flexbox organiza os elementos em quantas dimensões?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['Uma: linha ou coluna', 'Duas: linhas e colunas juntas', 'Três dimensões', 'Nenhuma, só alinha texto'],
+            pool: 'flex-basics'
+          },
+          en: {
+            question: 'How many dimensions does Flexbox arrange elements in?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['One: a row or a column', 'Two: rows and columns together', 'Three dimensions', 'None, it only aligns text'],
+            pool: 'flex-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define a direção dos itens no Flexbox?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['flex-direction', 'justify-content', 'align-items', 'text-align'],
+            pool: 'flex-align'
+          },
+          en: {
+            question: 'Which property sets the direction of the items in Flexbox?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['flex-direction', 'justify-content', 'align-items', 'text-align'],
+            pool: 'flex-align'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual par de propriedades alinha os itens nos dois eixos do Flexbox?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['justify-content e align-items', 'text-align e vertical-align', 'margin e padding', 'flex-direction e gap'],
+            pool: 'flex-align'
+          },
+          en: {
+            question: 'Which pair of properties aligns the items on Flexbox\'s two axes?',
+            highlight: ['Flexbox'],
+            correctOption: 1,
+            options: ['justify-content and align-items', 'text-align and vertical-align', 'margin and padding', 'flex-direction and gap'],
+            pool: 'flex-align'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'justify-content e align-items alinham os itens no mesmo eixo.',
+            highlight: ['justify-content', 'align-items'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'flex-align',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'justify-content and align-items align the items on the same axis.',
+            highlight: ['justify-content', 'align-items'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'flex-align',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5508,6 +7887,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade cria espaço entre os itens de um flex container?',
+            highlight: [],
+            correctOption: 1,
+            options: ['gap', 'margin', 'padding', 'space'],
+            pool: 'gap-wrap'
+          },
+          en: {
+            question: 'Which property creates space between the items of a flex container?',
+            highlight: [],
+            correctOption: 1,
+            options: ['gap', 'margin', 'padding', 'space'],
+            pool: 'gap-wrap'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Os itens não cabem numa linha e devem descer para a próxima. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['flex-wrap: wrap;', 'gap: wrap;', 'flex-direction: wrap;', 'display: wrap;'],
+            pool: 'gap-wrap'
+          },
+          en: {
+            question: 'The items don\'t fit on one line and should move to the next. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['flex-wrap: wrap;', 'gap: wrap;', 'flex-direction: wrap;', 'display: wrap;'],
+            pool: 'gap-wrap'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'gap separa os itens sem precisar colocar margem em cada um.',
+            highlight: ['gap'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'gap-wrap',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'gap separates the items without adding a margin to each one.',
+            highlight: ['gap'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'gap-wrap',
+            fixedOrder: true
           }
         }
       }
@@ -5584,6 +8024,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define quanto um item cresce em relação aos outros?',
+            highlight: [],
+            correctOption: 1,
+            options: ['flex-grow', 'flex-shrink', 'flex-basis', 'order'],
+            pool: 'grow-order'
+          },
+          en: {
+            question: 'Which property sets how much an item grows compared to the others?',
+            highlight: [],
+            correctOption: 1,
+            options: ['flex-grow', 'flex-shrink', 'flex-basis', 'order'],
+            pool: 'grow-order'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade muda a ordem visual dos itens sem mexer no HTML?',
+            highlight: [],
+            correctOption: 1,
+            options: ['order', 'flex-grow', 'z-index', 'flex-direction'],
+            pool: 'grow-order'
+          },
+          en: {
+            question: 'Which property changes the visual order of items without touching the HTML?',
+            highlight: [],
+            correctOption: 1,
+            options: ['order', 'flex-grow', 'z-index', 'flex-direction'],
+            pool: 'grow-order'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Mudar o order também muda a ordem de leitura das tecnologias assistivas.',
+            highlight: ['order'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'grow-order',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Changing order also changes the reading order of assistive technologies.',
+            highlight: ['order'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'grow-order',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5652,6 +8153,128 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
                 code: '<div class="container">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n  <div>D</div>\n  <div>E</div>\n  <div>F</div>\n</div>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual modelo organiza linhas e colunas ao mesmo tempo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['CSS Grid', 'Flexbox', 'display: inline', 'position: absolute'],
+            pool: 'grid-basics'
+          },
+          en: {
+            question: 'Which model arranges rows and columns at the same time?',
+            highlight: [],
+            correctOption: 1,
+            options: ['CSS Grid', 'Flexbox', 'display: inline', 'position: absolute'],
+            pool: 'grid-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que grid-template-columns: 1fr 1fr; cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Duas colunas de mesma largura', 'Uma coluna de largura 2', 'Duas linhas iguais', 'Dois itens de 1px'],
+            pool: 'grid-basics'
+          },
+          en: {
+            question: 'What does grid-template-columns: 1fr 1fr; create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Two columns of equal width', 'One column of width 2', 'Two equal rows', 'Two 1px items'],
+            pool: 'grid-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Grid facilita organizar linhas e colunas ao mesmo tempo.',
+            highlight: ['Grid'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'grid-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Grid makes it easy to arrange rows and columns at the same time.',
+            highlight: ['Grid'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'grid-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor equivale a 1fr 1fr 1fr?',
+            highlight: [],
+            correctOption: 1,
+            options: ['repeat(3, 1fr)', 'repeat(1fr, 3)', '3fr', 'repeat(3)'],
+            pool: 'grid-repeat'
+          },
+          en: {
+            question: 'Which value is the same as 1fr 1fr 1fr?',
+            highlight: [],
+            correctOption: 1,
+            options: ['repeat(3, 1fr)', 'repeat(1fr, 3)', '3fr', 'repeat(3)'],
+            pool: 'grid-repeat'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A função repeat evita escrever a mesma definição de coluna várias vezes.',
+            highlight: ['repeat'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'grid-repeat',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The repeat function saves you from writing the same column definition several times.',
+            highlight: ['repeat'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'grid-repeat',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantas colunas grid-template-columns: repeat(4, 1fr) cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '1', '3', '5'],
+            pool: 'grid-repeat'
+          },
+          en: {
+            question: 'How many columns does grid-template-columns: repeat(4, 1fr) create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '1', '3', '5'],
+            pool: 'grid-repeat'
           }
         }
       }
@@ -5726,6 +8349,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
                 code: '<div class="grade">\n  <div class="cabecalho">Header</div>\n  <div>Column A</div>\n  <div>Column B</div>\n</div>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define as linhas da grade?',
+            highlight: [],
+            correctOption: 1,
+            options: ['grid-template-rows', 'grid-template-columns', 'grid-row-gap', 'grid-lines'],
+            pool: 'grid-place'
+          },
+          en: {
+            question: 'Which property defines the grid\'s rows?',
+            highlight: [],
+            correctOption: 1,
+            options: ['grid-template-rows', 'grid-template-columns', 'grid-row-gap', 'grid-lines'],
+            pool: 'grid-place'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Numa grade de 2 colunas, o que grid-column: 1 / 3 faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O item ocupa as duas colunas', 'O item ocupa três colunas', 'O item vai para a linha 3', 'O item some da grade'],
+            pool: 'grid-place'
+          },
+          en: {
+            question: 'In a 2-column grid, what does grid-column: 1 / 3 do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The item spans both columns', 'The item spans three columns', 'The item moves to row 3', 'The item leaves the grid'],
+            pool: 'grid-place'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'minmax(80px, auto) define um tamanho mínimo e um máximo para a faixa.',
+            highlight: ['minmax'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'grid-place',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'minmax(80px, auto) sets a minimum and a maximum size for the track.',
+            highlight: ['minmax'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'grid-place',
+            fixedOrder: true
           }
         }
       }
@@ -5819,6 +8503,263 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
                 code: '<div class="caixa atras">Behind</div>\n<div class="caixa frente">In front</div>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um selo com position: absolute deve ficar no canto do cartão. O que o cartão precisa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['position: relative;', 'position: static;', 'display: flex;', 'z-index: 1;'],
+            pool: 'relative-absolute'
+          },
+          en: {
+            question: 'A badge with position: absolute should sit in the card\'s corner. What does the card need?',
+            highlight: [],
+            correctOption: 1,
+            options: ['position: relative;', 'position: static;', 'display: flex;', 'z-index: 1;'],
+            pool: 'relative-absolute'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é o valor padrão de position em todo elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['static', 'relative', 'absolute', 'fixed'],
+            pool: 'relative-absolute'
+          },
+          en: {
+            question: 'What is every element\'s default position value?',
+            highlight: [],
+            correctOption: 1,
+            options: ['static', 'relative', 'absolute', 'fixed'],
+            pool: 'relative-absolute'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'fixed posiciona o elemento em relação à janela de visualização.',
+            highlight: ['fixed'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'relative-absolute',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'fixed positions the element relative to the viewport.',
+            highlight: ['fixed'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'relative-absolute',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um cabeçalho deve ficar preso no topo ao rolar a página. Qual position usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['sticky', 'static', 'relative', 'inline'],
+            pool: 'sticky-z'
+          },
+          en: {
+            question: 'A header should stick to the top while the page scrolls. Which position?',
+            highlight: [],
+            correctOption: 1,
+            options: ['sticky', 'static', 'relative', 'inline'],
+            pool: 'sticky-z'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Dois elementos posicionados se sobrepõem. Qual fica na frente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O de z-index maior', 'O de z-index menor', 'Sempre o primeiro no HTML', 'O que tiver mais texto'],
+            pool: 'sticky-z'
+          },
+          en: {
+            question: 'Two positioned elements overlap. Which one is in front?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The one with the higher z-index', 'The one with the lower z-index', 'Always the first in the HTML', 'The one with more text'],
+            pool: 'sticky-z'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'z-index funciona mesmo em elementos com position: static.',
+            highlight: ['z-index'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'sticky-z',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'z-index works even on elements with position: static.',
+            highlight: ['z-index'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'sticky-z',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Conteúdo que transborda',
+      en: 'Overflowing content'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando o conteúdo é maior que a caixa, ele transborda e invade o que vem depois. A propriedade overflow decide o que fazer com essa sobra.',
+            secondParagraph: 'hidden corta o que passa do limite, scroll sempre mostra barras de rolagem e auto mostra a rolagem só quando é preciso.',
+            endParagraph: 'auto costuma ser a escolha mais equilibrada para áreas com conteúdo de tamanho variável.',
+            highlight: ['overflow', 'hidden', 'scroll', 'auto'],
+            codeLanguage: 'CSS',
+            code: '.caixa {\n  height: 60px;\n  border: 1px solid #999;\n  overflow: auto;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="caixa">\n  Um texto longo que não cabe na altura definida para a caixa, então aparece uma barra de rolagem para ver o resto do conteúdo.\n</div>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'When the content is bigger than its box, it overflows onto whatever comes next. The overflow property decides what to do with the excess.',
+            secondParagraph: 'hidden clips whatever goes past the edge, scroll always shows scrollbars and auto shows scrolling only when needed.',
+            endParagraph: 'auto is usually the most balanced choice for areas whose content size varies.',
+            highlight: ['overflow', 'hidden', 'scroll', 'auto'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  height: 60px;\n  border: 1px solid #999;\n  overflow: auto;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="box">\n  A long text that doesn\'t fit in the height set for the box, so a scrollbar appears to see the rest of the content.\n</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Para cortar uma linha de texto com reticências, três propriedades trabalham juntas.',
+            secondParagraph: 'white-space: nowrap impede a quebra de linha, overflow: hidden esconde a sobra e text-overflow: ellipsis troca o corte por reticências.',
+            endParagraph: 'É o padrão de títulos em cartões e listas, onde o espaço é limitado.',
+            highlight: ['white-space', 'nowrap', 'overflow', 'text-overflow', 'ellipsis'],
+            codeLanguage: 'CSS',
+            code: '.titulo {\n  width: 180px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="titulo">Um título comprido demais para caber aqui</p>'
+              }
+            ]
+          },
+          en: {
+            firstParagraph: 'To cut a line of text with an ellipsis, three properties work together.',
+            secondParagraph: 'white-space: nowrap prevents line breaks, overflow: hidden hides the excess and text-overflow: ellipsis replaces the cut with an ellipsis.',
+            endParagraph: 'It\'s the usual pattern for titles in cards and lists, where space is limited.',
+            highlight: ['white-space', 'nowrap', 'overflow', 'text-overflow', 'ellipsis'],
+            codeLanguage: 'CSS',
+            code: '.title {\n  width: 180px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="title">A title far too long to fit in here</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de overflow corta o conteúdo que passa do limite?',
+            highlight: [],
+            correctOption: 1,
+            options: ['hidden', 'auto', 'scroll', 'visible'],
+            pool: 'overflow'
+          },
+          en: {
+            question: 'Which overflow value clips the content that goes past the edge?',
+            highlight: [],
+            correctOption: 1,
+            options: ['hidden', 'auto', 'scroll', 'visible'],
+            pool: 'overflow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de overflow mostra a rolagem só quando o conteúdo não cabe?',
+            highlight: [],
+            correctOption: 1,
+            options: ['auto', 'scroll', 'hidden', 'nowrap'],
+            pool: 'overflow'
+          },
+          en: {
+            question: 'Which overflow value shows scrolling only when the content doesn\'t fit?',
+            highlight: [],
+            correctOption: 1,
+            options: ['auto', 'scroll', 'hidden', 'nowrap'],
+            pool: 'overflow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'text-overflow: ellipsis funciona sozinho, sem white-space e overflow.',
+            highlight: ['text-overflow'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'overflow',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'text-overflow: ellipsis works on its own, without white-space and overflow.',
+            highlight: ['text-overflow'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'overflow',
+            fixedOrder: true
           }
         }
       }
@@ -5916,6 +8857,128 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual pseudo-classe aplica estilo quando o cursor passa sobre o elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: [':hover', ':focus', ':active', '::before'],
+            pool: 'pc-state'
+          },
+          en: {
+            question: 'Which pseudo-class applies a style when the cursor is over the element?',
+            highlight: [],
+            correctOption: 1,
+            options: [':hover', ':focus', ':active', '::before'],
+            pool: 'pc-state'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual pseudo-classe estiliza um campo desativado?',
+            highlight: [],
+            correctOption: 1,
+            options: [':disabled', ':active', ':hover', ':empty'],
+            pool: 'pc-state'
+          },
+          en: {
+            question: 'Which pseudo-class styles a disabled field?',
+            highlight: [],
+            correctOption: 1,
+            options: [':disabled', ':active', ':hover', ':empty'],
+            pool: 'pc-state'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: ':focus representa um elemento que recebeu foco.',
+            highlight: [':focus'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'pc-state',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: ':focus represents an element that has received focus.',
+            highlight: [':focus'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'pc-state',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega o primeiro item de uma lista?',
+            highlight: [],
+            correctOption: 1,
+            options: ['li:first-child', 'li:last-child', 'li::before', 'li:first'],
+            pool: 'pc-position'
+          },
+          en: {
+            question: 'Which selector gets the first item of a list?',
+            highlight: [],
+            correctOption: 1,
+            options: ['li:first-child', 'li:last-child', 'li::before', 'li:first'],
+            pool: 'pc-position'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que li:nth-child(even) seleciona?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os itens de posição par', 'Os itens de posição ímpar', 'Só o primeiro item', 'Todos os itens'],
+            pool: 'pc-position'
+          },
+          en: {
+            question: 'What does li:nth-child(even) select?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The items in even positions', 'The items in odd positions', 'Only the first item', 'Every item'],
+            pool: 'pc-position'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Pseudo-classes exigem uma classe extra no HTML para cada situação.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'pc-position',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Pseudo-classes require an extra class in the HTML for each situation.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'pc-position',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5986,6 +9049,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que ::before faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Cria conteúdo antes do conteúdo do elemento', 'Seleciona o elemento anterior', 'Aplica estilo antes do hover', 'Carrega o CSS antes do HTML'],
+            pool: 'before-after'
+          },
+          en: {
+            question: 'What does ::before do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Creates content before the element\'s content', 'Selects the previous element', 'Applies a style before hover', 'Loads the CSS before the HTML'],
+            pool: 'before-after'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define o texto de um ::after?',
+            highlight: [],
+            correctOption: 1,
+            options: ['content', 'text', 'value', 'display'],
+            pool: 'before-after'
+          },
+          en: {
+            question: 'Which property sets the text of an ::after?',
+            highlight: [],
+            correctOption: 1,
+            options: ['content', 'text', 'value', 'display'],
+            pool: 'before-after'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Pseudo-elementos criam detalhes visuais sem adicionar elementos ao HTML.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'before-after',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Pseudo-elements create visual details without adding elements to the HTML.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'before-after',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -6046,6 +9170,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como usar a variável --cor-principal em uma regra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['var(--cor-principal)', '--cor-principal()', '$cor-principal', 'cor(--principal)'],
+            pool: 'css-vars'
+          },
+          en: {
+            question: 'How do you use the --main-color variable in a rule?',
+            highlight: [],
+            correctOption: 1,
+            options: ['var(--main-color)', '--main-color()', '$main-color', 'color(--main)'],
+            pool: 'css-vars'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual a vantagem de usar a mesma variável em várias regras?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Mudar o valor num lugar atualiza todos', 'O CSS fica mais pesado', 'A página carrega sem CSS', 'Cada regra ganha uma cor diferente'],
+            pool: 'css-vars'
+          },
+          en: {
+            question: 'What\'s the advantage of using the same variable in several rules?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Changing the value in one place updates them all', 'The CSS gets heavier', 'The page loads without CSS', 'Each rule gets a different color'],
+            pool: 'css-vars'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Variáveis CSS também são chamadas de custom properties.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-vars',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'CSS variables are also called custom properties.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-vars',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -6096,6 +9281,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um menu com links numa única linha. O que costuma funcionar melhor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
+            pool: 'flex-or-grid'
+          },
+          en: {
+            question: 'A menu with links on a single line. What usually works best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
+            pool: 'flex-or-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma vitrine de produtos em linhas e colunas. O que costuma funcionar melhor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
+            pool: 'flex-or-grid'
+          },
+          en: {
+            question: 'A product showcase in rows and columns. What usually works best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
+            pool: 'flex-or-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Flexbox e Grid competem entre si: um layout deve usar só um deles.',
+            highlight: ['Flexbox', 'Grid'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'flex-or-grid',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Flexbox and Grid compete with each other: a layout should use only one.',
+            highlight: ['Flexbox', 'Grid'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'flex-or-grid',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -6144,6 +9390,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: ':root {\n  --spacing: 20px;\n}\n\n.page {\n  display: grid;\n  gap: var(--spacing);\n}\n\n.card {\n  position: relative;\n  display: flex;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A página usa Grid, e o cartão interno empilha seus itens em coluna. O que o cartão pode usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox com flex-direction: column', 'Outro arquivo de CSS', 'position: fixed', 'Só margin'],
+            pool: 'build-layout'
+          },
+          en: {
+            question: 'The page uses Grid, and the inner card stacks its items in a column. What can the card use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox with flex-direction: column', 'Another CSS file', 'position: fixed', 'Only margin'],
+            pool: 'build-layout'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Layouts reais costumam combinar Grid e Flexbox.',
+            highlight: ['Grid', 'Flexbox'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'build-layout',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Real layouts often combine Grid and Flexbox.',
+            highlight: ['Grid', 'Flexbox'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'build-layout',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em grid-template-columns: 2fr 1fr;, qual coluna é maior?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A primeira, com o dobro da segunda', 'A segunda', 'As duas são iguais', 'Depende do texto'],
+            pool: 'build-layout'
+          },
+          en: {
+            question: 'In grid-template-columns: 2fr 1fr;, which column is bigger?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The first, twice the second', 'The second', 'Both are equal', 'It depends on the text'],
+            pool: 'build-layout'
           }
         }
       }
@@ -8695,6 +12002,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que @media (min-width: 768px) { ... } faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Aplica as regras com pelo menos 768px de largura', 'Aplica as regras só abaixo de 768px', 'Fixa a largura da página em 768px', 'Esconde a página em telas pequenas'],
+            pool: 'mq'
+          },
+          en: {
+            question: 'What does @media (min-width: 768px) { ... } do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Applies the rules from 768px wide up', 'Applies the rules only below 768px', 'Fixes the page width at 768px', 'Hides the page on small screens'],
+            pool: 'mq'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Media queries são a base para interfaces que se adaptam a diferentes telas.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'mq',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Media queries are the foundation for interfaces that adapt to different screens.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'mq',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Media queries aplicam regras de acordo com:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Condições, como a largura da tela', 'O nome do arquivo CSS', 'A ordem das tags HTML', 'A cor de fundo'],
+            pool: 'mq'
+          },
+          en: {
+            question: 'Media queries apply rules based on:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Conditions, like the screen width', 'The CSS file name', 'The order of the HTML tags', 'The background color'],
+            pool: 'mq'
+          }
+        }
       }
     ]
   },
@@ -8745,6 +12113,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No mobile-first, por onde começamos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pela tela menor, ampliando para as maiores', 'Pela tela maior, reduzindo depois', 'Por um breakpoint para cada aparelho', 'Sempre pelo desktop'],
+            pool: 'mobile-first'
+          },
+          en: {
+            question: 'In mobile-first, where do we start?',
+            highlight: [],
+            correctOption: 1,
+            options: ['From the smallest screen, scaling up', 'From the largest screen, scaling down', 'With one breakpoint per device', 'Always from desktop'],
+            pool: 'mobile-first'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'É preciso um breakpoint para cada tamanho de tela possível.',
+            highlight: ['breakpoint'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'mobile-first',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'You need a breakpoint for every possible screen size.',
+            highlight: ['breakpoint'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'mobile-first',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é um breakpoint?',
+            highlight: ['breakpoint'],
+            correctOption: 1,
+            options: ['Um ponto em que o layout muda de comportamento', 'Um erro que quebra o CSS', 'Uma pausa na animação', 'A largura máxima de uma imagem'],
+            pool: 'mobile-first'
+          },
+          en: {
+            question: 'What is a breakpoint?',
+            highlight: ['breakpoint'],
+            correctOption: 1,
+            options: ['A point where the layout changes behavior', 'An error that breaks the CSS', 'A pause in an animation', 'An image\'s maximum width'],
+            pool: 'mobile-first'
+          }
+        }
       }
     ]
   },
@@ -8784,6 +12213,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em clamp(2rem, 5vw, 4rem), qual é o valor máximo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4rem', '2rem', '5vw', '9rem'],
+            pool: 'clamp'
+          },
+          en: {
+            question: 'In clamp(2rem, 5vw, 4rem), what is the maximum value?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4rem', '2rem', '5vw', '9rem'],
+            pool: 'clamp'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com clamp, o texto cresce com a tela, mas respeita um mínimo e um máximo.',
+            highlight: ['clamp'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'clamp',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With clamp, the text grows with the screen but respects a minimum and a maximum.',
+            highlight: ['clamp'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'clamp',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em clamp(2rem, 5vw, 4rem), o que é o 5vw?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O valor preferido', 'O mínimo', 'O máximo', 'O incremento'],
+            pool: 'clamp'
+          },
+          en: {
+            question: 'In clamp(2rem, 5vw, 4rem), what is the 5vw?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The preferred value', 'The minimum', 'The maximum', 'The step'],
+            pool: 'clamp'
+          }
+        }
       }
     ]
   },
@@ -8811,6 +12301,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve transition?',
+            highlight: ['transition'],
+            correctOption: 1,
+            options: ['Suavizar a mudança entre dois estados', 'Criar uma animação em loop', 'Mudar o elemento de lugar no HTML', 'Trocar de página'],
+            pool: 'transition'
+          },
+          en: {
+            question: 'What is transition for?',
+            highlight: ['transition'],
+            correctOption: 1,
+            options: ['Smoothing the change between two states', 'Creating a looping animation', 'Moving the element within the HTML', 'Switching pages'],
+            pool: 'transition'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'transition precisa de um @keyframes para funcionar.',
+            highlight: ['transition'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'transition',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'transition needs a @keyframes to work.',
+            highlight: ['transition'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'transition',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em transition: transform 0.2s;, o que é 0.2s?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A duração da transição', 'O atraso até começar', 'O tamanho do elemento', 'O número de repetições'],
+            pool: 'transition'
+          },
+          en: {
+            question: 'In transition: transform 0.2s;, what is 0.2s?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The transition\'s duration', 'The delay before it starts', 'The element\'s size', 'The number of repeats'],
+            pool: 'transition'
           }
         }
       }
@@ -8861,6 +12412,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.icon:hover {\n  transform:\n    rotate(10deg)\n    scale(1.1);\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de transform gira o elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['rotate(10deg)', 'scale(10deg)', 'translateY(10deg)', 'move(10deg)'],
+            pool: 'transform'
+          },
+          en: {
+            question: 'Which transform value rotates the element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['rotate(10deg)', 'scale(10deg)', 'translateY(10deg)', 'move(10deg)'],
+            pool: 'transform'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que transform: scale(1.05) faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Aumenta o elemento em 5%', 'Move o elemento 5px', 'Gira o elemento 5 graus', 'Diminui a opacidade'],
+            pool: 'transform'
+          },
+          en: {
+            question: 'What does transform: scale(1.05) do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Grows the element by 5%', 'Moves the element 5px', 'Rotates the element 5 degrees', 'Lowers the opacity'],
+            pool: 'transform'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'transform muda a posição original do elemento no fluxo do documento.',
+            highlight: ['transform'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'transform',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'transform changes the element\'s original position in the document flow.',
+            highlight: ['transform'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'transform',
+            fixedOrder: true
           }
         }
       }
@@ -8923,6 +12535,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que @keyframes define?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os estados que uma animação percorre', 'A duração de uma transição', 'A cor de fundo', 'O breakpoint do layout'],
+            pool: 'keyframes'
+          },
+          en: {
+            question: 'What does @keyframes define?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The states an animation goes through', 'A transition\'s duration', 'The background color', 'The layout breakpoint'],
+            pool: 'keyframes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade aplica um @keyframes a um elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['animation', 'transition', 'transform', 'keyframe'],
+            pool: 'keyframes'
+          },
+          en: {
+            question: 'Which property applies a @keyframes to an element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['animation', 'transition', 'transform', 'keyframe'],
+            pool: 'keyframes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Em um @keyframes, from e to marcam o início e o fim da animação.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'keyframes',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In a @keyframes, from and to mark the start and end of the animation.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'keyframes',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -8983,6 +12656,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o @keyframes do exemplo anima ao mesmo tempo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['opacity e transform', 'Só a cor', 'Só o tamanho da fonte', 'A ordem dos elementos'],
+            pool: 'combo-anim'
+          },
+          en: {
+            question: 'What does the example\'s @keyframes animate at the same time?',
+            highlight: [],
+            correctOption: 1,
+            options: ['opacity and transform', 'Only the color', 'Only the font size', 'The order of the elements'],
+            pool: 'combo-anim'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma boa animação costuma combinar muitos efeitos ao mesmo tempo.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'combo-anim',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A good animation usually combines many effects at once.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'combo-anim',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em animation: entrar 0.6s ease;, o que é entrar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O nome do @keyframes', 'A duração', 'O tipo de suavização', 'O seletor do elemento'],
+            pool: 'combo-anim'
+          },
+          en: {
+            question: 'In animation: enter 0.6s ease;, what is enter?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The name of the @keyframes', 'The duration', 'The easing type', 'The element\'s selector'],
+            pool: 'combo-anim'
+          }
+        }
       }
     ]
   },
@@ -9031,6 +12765,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.box {\n  width: min(90%, 400px);\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que width: calc(100% - 240px) faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ocupa todo o espaço menos 240px', 'Ocupa 240px fixos', 'Ocupa 100px', 'Soma 240px ao espaço total'],
+            pool: 'css-functions'
+          },
+          en: {
+            question: 'What does width: calc(100% - 240px) do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Takes all the space minus 240px', 'Takes a fixed 240px', 'Takes 100px', 'Adds 240px to the total space'],
+            pool: 'css-functions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em width: min(90%, 400px), qual valor vale?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O menor dos dois', 'O maior dos dois', 'Sempre 400px', 'A soma dos dois'],
+            pool: 'css-functions'
+          },
+          en: {
+            question: 'In width: min(90%, 400px), which value applies?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The smaller of the two', 'The larger of the two', 'Always 400px', 'The sum of both'],
+            pool: 'css-functions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A função max escolhe o maior entre os valores informados.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'css-functions',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The max function picks the largest of the values given.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'css-functions',
+            fixedOrder: true
           }
         }
       }
@@ -9103,6 +12898,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que p:not(.destaque) seleciona?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os parágrafos sem a classe destaque', 'Só os parágrafos com destaque', 'Nenhum parágrafo', 'Todos os elementos, menos p'],
+            pool: 'modern-selectors'
+          },
+          en: {
+            question: 'What does p:not(.highlight) select?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The paragraphs without the highlight class', 'Only the paragraphs with highlight', 'No paragraphs', 'Every element except p'],
+            pool: 'modern-selectors'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que .card:has(img) seleciona?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os cartões que têm uma imagem dentro', 'As imagens dentro dos cartões', 'Os cartões sem imagem', 'Todas as imagens da página'],
+            pool: 'modern-selectors'
+          },
+          en: {
+            question: 'What does .card:has(img) select?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The cards that have an image inside', 'The images inside the cards', 'The cards without images', 'Every image on the page'],
+            pool: 'modern-selectors'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O seletor :where nunca aumenta a especificidade.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'modern-selectors',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The :where selector never increases specificity.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'modern-selectors',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9142,6 +12998,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
                 code: '<p>Text</p>'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Duas regras com a mesma especificidade disputam o mesmo elemento. Qual vale?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A que aparece por último', 'A que aparece primeiro', 'A mais curta', 'Nenhuma das duas'],
+            pool: 'cascade'
+          },
+          en: {
+            question: 'Two rules with the same specificity target the same element. Which one applies?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The one that comes last', 'The one that comes first', 'The shorter one', 'Neither'],
+            pool: 'cascade'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A cascata decide qual regra vale quando duas competem pelo mesmo elemento.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'cascade',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The cascade decides which rule applies when two compete for the same element.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'cascade',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'p { color: black; } e, depois, p { color: blue; }. De que cor fica o parágrafo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Azul', 'Preto', 'Roxo, uma mistura', 'Sem cor'],
+            pool: 'cascade'
+          },
+          en: {
+            question: 'p { color: black; } and then p { color: blue; }. What color is the paragraph?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Blue', 'Black', 'Purple, a mix', 'No color'],
+            pool: 'cascade'
           }
         }
       }
@@ -9206,6 +13123,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor tem mais especificidade?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#titulo', '.titulo', 'h1', 'body h1'],
+            pool: 'specificity'
+          },
+          en: {
+            question: 'Which selector has the highest specificity?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#title', '.title', 'h1', 'body h1'],
+            pool: 'specificity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma regra de tag vem depois de uma regra de classe. Qual vence?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A de classe', 'A de tag, por vir depois', 'As duas se misturam', 'Nenhuma'],
+            pool: 'specificity'
+          },
+          en: {
+            question: 'A tag rule comes after a class rule. Which one wins?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The class rule', 'The tag rule, for coming later', 'They blend together', 'Neither'],
+            pool: 'specificity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar !important é a melhor forma de resolver conflitos entre regras.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'specificity',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using !important is the best way to resolve conflicts between rules.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'specificity',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9233,6 +13211,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.card-container {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card {\n    display: flex;\n  }\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A que as container queries reagem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ao tamanho do elemento contêiner', 'Ao tamanho da tela inteira', 'À orientação do celular', 'À cor do tema'],
+            pool: 'container-q'
+          },
+          en: {
+            question: 'What do container queries respond to?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The size of the container element', 'The size of the whole screen', 'The phone\'s orientation', 'The theme color'],
+            pool: 'container-q'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Media queries e container queries reagem à mesma coisa: o tamanho da tela.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'container-q',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Media queries and container queries respond to the same thing: the screen size.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'container-q',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um componente deve mudar conforme o espaço onde é usado. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma container query', 'Uma media query', 'z-index', 'Um id'],
+            pool: 'container-q'
+          },
+          en: {
+            question: 'A component should change based on the space it\'s placed in. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A container query', 'A media query', 'z-index', 'An id'],
+            pool: 'container-q'
           }
         }
       }
@@ -9295,6 +13334,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que aspect-ratio: 16 / 9 faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Mantém a proporção entre largura e altura', 'Define 16px de largura e 9px de altura', 'Divide a tela em 16 colunas', 'Corta a imagem ao meio'],
+            pool: 'ratio-fit'
+          },
+          en: {
+            question: 'What does aspect-ratio: 16 / 9 do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Keeps the ratio between width and height', 'Sets 16px wide and 9px tall', 'Splits the screen into 16 columns', 'Cuts the image in half'],
+            pool: 'ratio-fit'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor de object-fit preenche a caixa cortando o excesso?',
+            highlight: [],
+            correctOption: 1,
+            options: ['cover', 'contain', 'crop', 'auto'],
+            pool: 'ratio-fit'
+          },
+          en: {
+            question: 'Which object-fit value fills the box by cropping the excess?',
+            highlight: [],
+            correctOption: 1,
+            options: ['cover', 'contain', 'crop', 'auto'],
+            pool: 'ratio-fit'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'object-fit: contain encaixa a imagem inteira, podendo sobrar espaço vazio.',
+            highlight: ['object-fit'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ratio-fit',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'object-fit: contain fits the whole image, possibly leaving empty space.',
+            highlight: ['object-fit'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'ratio-fit',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9347,6 +13447,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que scroll-behavior: smooth faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Deixa suave a rolagem até uma âncora', 'Esconde a barra de rolagem', 'Trava a rolagem', 'Deixa a página mais rápida'],
+            pool: 'visual-xp'
+          },
+          en: {
+            question: 'What does scroll-behavior: smooth do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Makes scrolling to an anchor smooth', 'Hides the scrollbar', 'Locks scrolling', 'Makes the page faster'],
+            pool: 'visual-xp'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade muda a cor de checkbox e radio nativos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['accent-color', 'color', 'background-color', 'checkbox-color'],
+            pool: 'visual-xp'
+          },
+          en: {
+            question: 'Which property changes the color of native checkbox and radio inputs?',
+            highlight: [],
+            correctOption: 1,
+            options: ['accent-color', 'color', 'background-color', 'checkbox-color'],
+            pool: 'visual-xp'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'backdrop-filter funciona igual em todos os navegadores.',
+            highlight: ['backdrop-filter'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'visual-xp',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'backdrop-filter works the same in every browser.',
+            highlight: ['backdrop-filter'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'visual-xp',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9376,6 +13537,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '/* Evite isto sem um substituto */\nbutton:focus {\n  outline: none;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Remover o anel de foco com outline: none, sem colocar nada no lugar, prejudica quem usa o teclado.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'focus-ring',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Removing the focus ring with outline: none, without a replacement, hurts keyboard users.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'focus-ring',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Você quer mudar o visual do foco. O que fazer?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Trocar o outline por outro indicador visível', 'Usar outline: none e pronto', 'Esconder o elemento', 'Tirar o foco do botão'],
+            pool: 'focus-ring'
+          },
+          en: {
+            question: 'You want to change how focus looks. What do you do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Replace the outline with another visible indicator', 'Use outline: none and be done', 'Hide the element', 'Remove focus from the button'],
+            pool: 'focus-ring'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é o anel de foco?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O contorno que mostra o elemento focado pelo teclado', 'A borda arredondada de um botão', 'Uma animação de carregamento', 'A sombra de um cartão'],
+            pool: 'focus-ring'
+          },
+          en: {
+            question: 'What is the focus ring?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The outline showing the keyboard-focused element', 'A button\'s rounded border', 'A loading animation', 'A card\'s shadow'],
+            pool: 'focus-ring'
           }
         }
       }
@@ -9428,6 +13650,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual media query respeita quem prefere menos movimento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['prefers-reduced-motion', 'prefers-color-scheme', 'min-width', 'reduce-animation'],
+            pool: 'prefs'
+          },
+          en: {
+            question: 'Which media query respects people who prefer less motion?',
+            highlight: [],
+            correctOption: 1,
+            options: ['prefers-reduced-motion', 'prefers-color-scheme', 'min-width', 'reduce-animation'],
+            pool: 'prefs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual media query detecta se o sistema está no tema claro ou escuro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['prefers-color-scheme', 'prefers-reduced-motion', 'dark-mode', 'theme-color'],
+            pool: 'prefs'
+          },
+          en: {
+            question: 'Which media query detects whether the system uses a light or dark theme?',
+            highlight: [],
+            correctOption: 1,
+            options: ['prefers-color-scheme', 'prefers-reduced-motion', 'dark-mode', 'theme-color'],
+            pool: 'prefs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Animações devem melhorar a experiência, não prejudicá-la.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'prefs',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Animations should improve the experience, not harm it.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'prefs',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9455,6 +13738,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '/* Bom contraste: texto escuro em fundo claro */\n.texto {\n  color: #222;\n  background: #fff;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quais três pontos formam a base da acessibilidade em CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Contraste, foco visível e navegação por teclado', 'Cores, fontes e sombras', 'Animações, gradientes e bordas', 'Grid, Flexbox e posicionamento'],
+            pool: 'contrast'
+          },
+          en: {
+            question: 'Which three points form the basis of accessibility in CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Contrast, visible focus and keyboard navigation', 'Colors, fonts and shadows', 'Animations, gradients and borders', 'Grid, Flexbox and positioning'],
+            pool: 'contrast'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Texto escuro em fundo claro é um exemplo de bom contraste.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'contrast',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Dark text on a light background is an example of good contrast.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'contrast',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual combinação tem contraste ruim?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Texto cinza-claro em fundo branco', 'Texto #222 em fundo branco', 'Texto branco em fundo preto', 'Texto preto em fundo amarelo-claro'],
+            pool: 'contrast'
+          },
+          en: {
+            question: 'Which combination has poor contrast?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Light gray text on a white background', '#222 text on a white background', 'White text on a black background', 'Black text on a light yellow background'],
+            pool: 'contrast'
           }
         }
       }
@@ -12874,6 +17218,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que faz um pré-processador, como o Sass?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adiciona recursos à escrita de CSS', 'Substitui o HTML', 'Executa o JavaScript', 'Hospeda o site'],
+            pool: 'ecosystem'
+          },
+          en: {
+            question: 'What does a preprocessor, like Sass, do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adds features to writing CSS', 'Replaces the HTML', 'Runs the JavaScript', 'Hosts the site'],
+            pool: 'ecosystem'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Tailwind, Bootstrap, Sass e PostCSS são todos o mesmo tipo de ferramenta.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ecosystem',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tailwind, Bootstrap, Sass and PostCSS are all the same kind of tool.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'ecosystem',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Mesmo com essas ferramentas, qual continua sendo a base da estilização na web?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O CSS', 'O Tailwind', 'O Bootstrap', 'O Sass'],
+            pool: 'ecosystem'
+          },
+          en: {
+            question: 'Even with these tools, what is still the foundation of styling on the web?',
+            highlight: [],
+            correctOption: 1,
+            options: ['CSS', 'Tailwind', 'Bootstrap', 'Sass'],
+            pool: 'ecosystem'
+          }
+        }
       }
     ]
   },
@@ -12911,6 +17316,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '.bg-blue-600 { background-color: #2563eb; }\n.text-white { color: #ffffff; }\n.px-4 { padding-left: 1rem; padding-right: 1rem; }\n.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }\n.rounded-lg { border-radius: 0.5rem; }'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O Tailwind CSS se baseia em:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Classes utilitárias combinadas', 'Uma classe grande para cada componente', 'Estilos no atributo style', 'Arquivos de imagem'],
+            pool: 'tailwind-what'
+          },
+          en: {
+            question: 'Tailwind CSS is based on:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Combined utility classes', 'One big class per component', 'Styles in the style attribute', 'Image files'],
+            pool: 'tailwind-what'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No Tailwind, a interface é montada combinando pequenas classes de estilo.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tailwind-what',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In Tailwind, the interface is built by combining small style classes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tailwind-what',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em class="bg-blue-600 text-white px-4", quantas classes utilitárias há?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '1', '2', '4'],
+            pool: 'tailwind-what'
+          },
+          en: {
+            question: 'In class="bg-blue-600 text-white px-4", how many utility classes are there?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '1', '2', '4'],
+            pool: 'tailwind-what'
           }
         }
       }
@@ -12954,6 +17420,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No utility-first, cada classe representa:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma pequena responsabilidade de estilo', 'Um componente inteiro', 'Uma página inteira', 'Uma função JavaScript'],
+            pool: 'utility-first'
+          },
+          en: {
+            question: 'In utility-first, each class represents:',
+            highlight: [],
+            correctOption: 1,
+            options: ['One small styling responsibility', 'A whole component', 'A whole page', 'A JavaScript function'],
+            pool: 'utility-first'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No utility-first, criamos uma classe única que representa o componente inteiro.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'utility-first',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In utility-first, we create a single class that represents the whole component.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'utility-first',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual exemplo segue o utility-first?',
+            highlight: [],
+            correctOption: 1,
+            options: ['class="p-4 text-lg font-bold"', 'class="card-completo"', 'style="padding: 1rem"', 'id="card"'],
+            pool: 'utility-first'
+          },
+          en: {
+            question: 'Which example follows utility-first?',
+            highlight: [],
+            correctOption: 1,
+            options: ['class="p-4 text-lg font-bold"', 'class="full-card"', 'style="padding: 1rem"', 'id="card"'],
+            pool: 'utility-first'
+          }
+        }
       }
     ]
   },
@@ -12991,6 +17518,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '.text-lg { font-size: 1.125rem; line-height: 1.75rem; }\n.font-bold { font-weight: 700; }'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a classe font-bold faz no Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Deixa o texto em negrito', 'Aumenta o texto', 'Centraliza o texto', 'Troca a fonte'],
+            pool: 'utilities'
+          },
+          en: {
+            question: 'What does the font-bold class do in Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Makes the text bold', 'Makes the text bigger', 'Centers the text', 'Changes the font'],
+            pool: 'utilities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde as classes utilitárias são escritas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Direto na marcação, no atributo class', 'Num arquivo .js', 'No atributo id', 'Dentro de uma media query'],
+            pool: 'utilities'
+          },
+          en: {
+            question: 'Where are utility classes written?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Right in the markup, in the class attribute', 'In a .js file', 'In the id attribute', 'Inside a media query'],
+            pool: 'utilities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Classes utilitárias representam pequenas decisões de estilo.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'utilities',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Utility classes represent small styling decisions.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'utilities',
+            fixedOrder: true
           }
         }
       }
@@ -13032,6 +17620,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No Tailwind, a classe p-4 representa:',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'position', 'font-size'],
+            pool: 'tw-spacing'
+          },
+          en: {
+            question: 'In Tailwind, the p-4 class represents:',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding', 'margin', 'position', 'font-size'],
+            pool: 'tw-spacing'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No Tailwind, a classe mt-4 representa:',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin-top', 'padding-top', 'max-width', 'margin em todos os lados'],
+            pool: 'tw-spacing'
+          },
+          en: {
+            question: 'In Tailwind, the mt-4 class represents:',
+            highlight: [],
+            correctOption: 1,
+            options: ['margin-top', 'padding-top', 'max-width', 'margin on every side'],
+            pool: 'tw-spacing'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No Tailwind, p-4 corresponde a uma margin.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-spacing',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In Tailwind, p-4 corresponds to a margin.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tw-spacing',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -13069,6 +17718,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '.bg-blue-600 { background-color: #2563eb; }\n.text-white { color: #ffffff; }'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe define a cor de fundo no Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['bg-blue-600', 'text-blue-600', 'color-blue-600', 'fill-blue-600'],
+            pool: 'tw-colors'
+          },
+          en: {
+            question: 'Which class sets the background color in Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['bg-blue-600', 'text-blue-600', 'color-blue-600', 'fill-blue-600'],
+            pool: 'tw-colors'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe deixa o texto branco?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-white', 'bg-white', 'white-text', 'font-white'],
+            pool: 'tw-colors'
+          },
+          en: {
+            question: 'Which class makes the text white?',
+            highlight: [],
+            correctOption: 1,
+            options: ['text-white', 'bg-white', 'white-text', 'font-white'],
+            pool: 'tw-colors'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'As classes text-* definem a cor de fundo do elemento.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-colors',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The text-* classes set the element\'s background color.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tw-colors',
+            fixedOrder: true
           }
         }
       }
@@ -13110,6 +17820,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em class="text-2xl font-bold", o que text-2xl controla?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O tamanho do texto', 'A cor do texto', 'O peso da fonte', 'O alinhamento'],
+            pool: 'tw-type'
+          },
+          en: {
+            question: 'In class="text-2xl font-bold", what does text-2xl control?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The text size', 'The text color', 'The font weight', 'The alignment'],
+            pool: 'tw-type'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Os conceitos de tipografia do Tailwind são os mesmos do CSS.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-type',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tailwind\'s typography concepts are the same as CSS\'s.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-type',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual par representa o peso e o tamanho do texto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['font-bold e text-2xl', 'bg-blue-600 e p-4', 'flex e gap-4', 'md: e dark:'],
+            pool: 'tw-type'
+          },
+          en: {
+            question: 'Which pair represents the text\'s weight and size?',
+            highlight: [],
+            correctOption: 1,
+            options: ['font-bold and text-2xl', 'bg-blue-600 and p-4', 'flex and gap-4', 'md: and dark:'],
+            pool: 'tw-type'
+          }
+        }
       }
     ]
   },
@@ -13147,6 +17918,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '.flex { display: flex; }\n.items-center { align-items: center; }\n.justify-between { justify-content: space-between; }'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A classe justify-between equivale a:',
+            highlight: [],
+            correctOption: 1,
+            options: ['justify-content: space-between', 'align-items: space-between', 'display: flex', 'gap: between'],
+            pool: 'tw-flex'
+          },
+          en: {
+            question: 'The justify-between class is the same as:',
+            highlight: [],
+            correctOption: 1,
+            options: ['justify-content: space-between', 'align-items: space-between', 'display: flex', 'gap: between'],
+            pool: 'tw-flex'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A classe items-center equivale a:',
+            highlight: [],
+            correctOption: 1,
+            options: ['align-items: center', 'justify-content: center', 'text-align: center', 'display: center'],
+            pool: 'tw-flex'
+          },
+          en: {
+            question: 'The items-center class is the same as:',
+            highlight: [],
+            correctOption: 1,
+            options: ['align-items: center', 'justify-content: center', 'text-align: center', 'display: center'],
+            pool: 'tw-flex'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Tailwind cria um sistema de layout novo, diferente do Flexbox.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-flex',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tailwind creates a new layout system, different from Flexbox.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tw-flex',
+            fixedOrder: true
           }
         }
       }
@@ -13188,6 +18020,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a classe grid-cols-3 cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma grade com 3 colunas', 'Uma grade com 3 linhas', 'Três grades separadas', 'Um item com 3px'],
+            pool: 'tw-grid'
+          },
+          en: {
+            question: 'What does the grid-cols-3 class create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A grid with 3 columns', 'A grid with 3 rows', 'Three separate grids', 'An item 3px wide'],
+            pool: 'tw-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em class="grid grid-cols-3 gap-4", o que gap-4 controla?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O espaço entre os itens', 'O número de colunas', 'A largura da grade', 'A cor da borda'],
+            pool: 'tw-grid'
+          },
+          en: {
+            question: 'In class="grid grid-cols-3 gap-4", what does gap-4 control?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The space between the items', 'The number of columns', 'The grid\'s width', 'The border color'],
+            pool: 'tw-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Tailwind aplica propriedades do Grid sem abandonar o modelo do CSS.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-grid',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tailwind applies Grid properties without leaving the CSS model behind.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-grid',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -13215,6 +18108,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<div class="text-sm md:text-lg">\n  Responsive text\n</div>',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em class="text-sm md:text-lg", quando vale o text-lg?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A partir do breakpoint md', 'Só abaixo do breakpoint md', 'Sempre', 'Só no modo escuro'],
+            pool: 'tw-responsive'
+          },
+          en: {
+            question: 'In class="text-sm md:text-lg", when does text-lg apply?',
+            highlight: [],
+            correctOption: 1,
+            options: ['From the md breakpoint up', 'Only below the md breakpoint', 'Always', 'Only in dark mode'],
+            pool: 'tw-responsive'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Em text-sm md:text-lg, o text-sm é o comportamento padrão.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-responsive',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In text-sm md:text-lg, text-sm is the default behavior.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-responsive',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No Tailwind, o prefixo md: representa:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um breakpoint de tela', 'O tema escuro', 'O estado de hover', 'Uma cor média'],
+            pool: 'tw-responsive'
+          },
+          en: {
+            question: 'In Tailwind, the md: prefix represents:',
+            highlight: [],
+            correctOption: 1,
+            options: ['A screen breakpoint', 'The dark theme', 'The hover state', 'A medium color'],
+            pool: 'tw-responsive'
           }
         }
       }
@@ -13246,6 +18200,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em hover:bg-blue-700, quando o fundo muda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Quando o cursor passa sobre o elemento', 'Quando a página carrega', 'No modo escuro', 'Em telas grandes'],
+            pool: 'tw-states'
+          },
+          en: {
+            question: 'In hover:bg-blue-700, when does the background change?',
+            highlight: [],
+            correctOption: 1,
+            options: ['When the cursor is over the element', 'When the page loads', 'In dark mode', 'On large screens'],
+            pool: 'tw-states'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No CSS tradicional, prefixos como hover: seriam escritos com:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pseudo-classes', 'Media queries', 'Variáveis CSS', 'Keyframes'],
+            pool: 'tw-states'
+          },
+          en: {
+            question: 'In traditional CSS, prefixes like hover: would be written with:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pseudo-classes', 'Media queries', 'CSS variables', 'Keyframes'],
+            pool: 'tw-states'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O prefixo focus: aplica classes quando o elemento recebe foco.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-states',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The focus: prefix applies classes when the element receives focus.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-states',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -13273,6 +18288,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<div class="bg-white text-black dark:bg-gray-900 dark:text-white">\n  Content\n</div>',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual modificador aplica estilos no modo escuro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['dark:', 'night:', 'md:', 'hover:'],
+            pool: 'tw-dark'
+          },
+          en: {
+            question: 'Which modifier applies styles in dark mode?',
+            highlight: [],
+            correctOption: 1,
+            options: ['dark:', 'night:', 'md:', 'hover:'],
+            pool: 'tw-dark'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em dark:bg-gray-900, quando o fundo fica cinza-escuro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No modo escuro', 'Sempre', 'Ao passar o cursor', 'Em telas pequenas'],
+            pool: 'tw-dark'
+          },
+          en: {
+            question: 'In dark:bg-gray-900, when does the background turn dark gray?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In dark mode', 'Always', 'On hover', 'On small screens'],
+            pool: 'tw-dark'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O mesmo elemento pode ter estilos diferentes nos modos claro e escuro.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-dark',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The same element can have different styles in light and dark mode.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-dark',
+            fixedOrder: true
           }
         }
       }
@@ -13304,6 +18380,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O projeto tem uma cor própria de marca. O que o Tailwind permite?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adicionar essa cor ao sistema dele', 'Só usar as cores padrão', 'Usar apenas estilo inline', 'Nada, os valores são fixos'],
+            pool: 'tw-custom'
+          },
+          en: {
+            question: 'The project has its own brand color. What does Tailwind allow?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adding that color to its system', 'Only using the default colors', 'Using only inline styles', 'Nothing, the values are fixed'],
+            pool: 'tw-custom'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No Tailwind, ficamos limitados aos valores padrão.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-custom',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In Tailwind, we\'re limited to the default values.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tw-custom',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde a cor da marca do exemplo foi definida?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Na configuração do tema do Tailwind', 'No atributo style', 'Numa media query', 'No HTML de cada botão'],
+            pool: 'tw-custom'
+          },
+          en: {
+            question: 'Where was the example\'s brand color defined?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the Tailwind theme configuration', 'In the style attribute', 'In a media query', 'In each button\'s HTML'],
+            pool: 'tw-custom'
+          }
+        }
       }
     ]
   },
@@ -13331,6 +18468,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve a configuração do Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Integrar o Tailwind às necessidades do projeto', 'Executar o JavaScript da página', 'Substituir o HTML', 'Criar o banco de dados'],
+            pool: 'tw-config'
+          },
+          en: {
+            question: 'What is Tailwind\'s configuration for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Fitting Tailwind to the project\'s needs', 'Running the page\'s JavaScript', 'Replacing the HTML', 'Creating the database'],
+            pool: 'tw-config'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Ferramentas como o Tailwind precisam saber como o projeto será processado.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-config',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tools like Tailwind need to know how the project will be processed.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-config',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual arquivo o exemplo configura o Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['tailwind.config.js', 'index.html', 'style.css', 'package-lock.json'],
+            pool: 'tw-config'
+          },
+          en: {
+            question: 'Which file does the example use to configure Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['tailwind.config.js', 'index.html', 'style.css', 'package-lock.json'],
+            pool: 'tw-config'
           }
         }
       }
@@ -13370,6 +18568,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
                 code: '.rounded-lg { border-radius: 0.5rem; }\n.px-4 { padding-left: 1rem; padding-right: 1rem; }\n.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }\n.font-medium { font-weight: 500; }'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um botão com as mesmas classes aparece em várias telas. O que fazer?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Organizar as classes num componente reutilizável', 'Copiar as classes à mão em cada tela', 'Trocar por estilo inline', 'Dar um id para cada botão'],
+            pool: 'tw-components'
+          },
+          en: {
+            question: 'A button with the same classes shows up on several screens. What do you do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Put the classes in a reusable component', 'Copy the classes by hand on each screen', 'Switch to inline styles', 'Give each button an id'],
+            pool: 'tw-components'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Tailwind fornece os estilos; a tecnologia da aplicação organiza os componentes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-components',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Tailwind provides the styles; the app\'s technology organizes the components.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'tw-components',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um bom candidato a componente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um botão que se repete na interface', 'Um parágrafo que aparece uma vez', 'Um comentário no código', 'A tag head'],
+            pool: 'tw-components'
+          },
+          en: {
+            question: 'Which of these is a good candidate for a component?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A button repeated across the interface', 'A paragraph that appears once', 'A code comment', 'The head tag'],
+            pool: 'tw-components'
           }
         }
       }
@@ -13420,6 +18679,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '/* Traditional CSS */\n.card {\n  padding: 1rem;\n}\n\n/* Tailwind equivalent: class="p-4" */',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A classe p-4 equivale a qual CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding: 1rem;', 'margin: 1rem;', 'padding: 4px;', 'font-size: 4rem;'],
+            pool: 'tw-and-css'
+          },
+          en: {
+            question: 'The p-4 class is the same as which CSS?',
+            highlight: [],
+            correctOption: 1,
+            options: ['padding: 1rem;', 'margin: 1rem;', 'padding: 4px;', 'font-size: 4rem;'],
+            pool: 'tw-and-css'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Aprender Tailwind dispensa aprender CSS.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tw-and-css',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Learning Tailwind makes learning CSS unnecessary.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tw-and-css',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que saber CSS ajuda a usar o Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['As classes representam propriedades do CSS', 'O Tailwind só funciona sem CSS', 'O Tailwind é outra linguagem', 'Não ajuda em nada'],
+            pool: 'tw-and-css'
+          },
+          en: {
+            question: 'Why does knowing CSS help you use Tailwind?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The classes represent CSS properties', 'Tailwind only works without CSS', 'Tailwind is another language', 'It doesn\'t help at all'],
+            pool: 'tw-and-css'
           }
         }
       }
