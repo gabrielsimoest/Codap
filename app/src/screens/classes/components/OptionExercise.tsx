@@ -141,7 +141,10 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		height: 70,
+		// minHeight, não height: alternativa longa (ou fonte aumentada pelo
+		// ResizableText) quebra em mais linhas, e com altura fixa a segunda
+		// linha era cortada.
+		minHeight: 70,
 		marginLeft: 10,
 		marginRight: 10,
 		marginTop: 5,

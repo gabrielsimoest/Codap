@@ -20,14 +20,23 @@ const ValidationModal = ({ visible, onDismiss, correct, onProceed }: Props) => {
 
 	return (
 		<Portal>
+			{/* Sem `contentContainerStyle={{ flex: 1 }}`: com ele o conteúdo
+			    cobria a tela inteira e tocar fora do cartão não fechava nada —
+			    o X era o único jeito de sair pela tela. Agora o fundo do Modal
+			    do paper recebe o toque e chama `onDismiss`. */}
 			<Modal
 				visible={visible}
 				onDismiss={onDismiss}
-				contentContainerStyle={{ flex: 1 }}
 				style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
 			>
 				<ThemedView style={styles.modalView}>
-					<TouchableOpacity style={styles.button} onPress={onDismiss}>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={onDismiss}
+						hitSlop={16}
+						accessibilityRole="button"
+						accessibilityLabel={t("close")}
+					>
 						<Icon
 							type="ionicon"
 							name="close-outline"
@@ -99,8 +108,16 @@ const styles = StyleSheet.create({
 	text: {
 		fontFamily: "Roboto",
 	},
+	// Alvo de toque com tamanho próprio (e `hitSlop` no elemento), em vez de
+	// só o ícone empurrado por `marginLeft: "83%"`: o X falhava às vezes.
 	button: {
-		marginLeft: "83%",
+		alignSelf: "flex-end",
+		width: 60,
+		height: 60,
+		marginTop: 8,
+		marginRight: 8,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	buttonText: {
 		color: "white",
