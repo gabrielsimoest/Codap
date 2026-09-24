@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute, type RouteProp } from "@react-navigation/native";
 import Icon from "../../components/Icon";
@@ -10,6 +11,7 @@ import useNavigate from "../../hooks/useNavigate";
 import useLanguageStore from "../../stores/LanguageStore";
 import useUserStore from "../../stores/UserStore";
 import { recordLessonCompletion } from "../../services/SyncService";
+import { buildLessonSession } from "../../utils/buildLessonSession";
 import type { RootStackParamList } from "../../types/navigation";
 
 /**
@@ -30,6 +32,14 @@ export default function Lesson() {
 	const lesson = modules
 		?.find((module) => module.id === moduleId)
 		?.lessons.find((item) => item.id === lessonId);
+
+	// Sorteio da sessão (teoria fixa + prática sorteada/embaralhada) congelado
+	// por lição e idioma: um refetch que devolve a mesma lição não re-sorteia
+	// no meio do caminho. Fica antes dos returns antecipados (regra dos hooks).
+	const activities = useMemo(
+		() => (lesson ? buildLessonSession(filterPlayable(lesson.activities)) : []),
+		[lesson?.id, language]
+	);
 
 	const goBack = () => navigation.goBack();
 
@@ -53,7 +63,6 @@ export default function Lesson() {
 
 	// Lição inexistente (deep link antigo ou id digitado à mão) ou sem nenhuma
 	// atividade que este app saiba renderizar.
-	const activities = lesson ? filterPlayable(lesson.activities) : [];
 	if (activities.length === 0) {
 		return (
 			<ThemedView style={styles.container}>
@@ -75,6 +84,7 @@ export default function Lesson() {
 	return (
 		<ThemedView style={styles.container}>
 			<ActivityPlayer
+				key={`${lessonId}-${language}`}
 				activities={activities}
 				onFinish={finish}
 				onClose={goBack}

@@ -151,7 +151,30 @@ export function TheoryFields () {
         ))}
       </div>
 
+      <div className="space-y-2 rounded-md border border-border p-3">
+        <div>
+          <Label htmlFor="terminalCode">Código do terminal (terminalCode)</Label>
+          <p className="text-xs text-muted-foreground">
+            JavaScript que o botão "Executar" roda no lugar do código exibido: TypeScript já
+            transpilado, ou JS que simula o que não roda direto no app. Vazio = roda o próprio código.
+          </p>
+        </div>
+        <Textarea
+          id="terminalCode"
+          rows={4}
+          className="font-mono text-xs"
+          {...form.register('terminalCode')}
+        />
+      </div>
+
       <div className="flex flex-wrap gap-6">
+        <ToggleRow
+          id="noTerminal"
+          label="Sem terminal (noTerminal)"
+          hint="Esconde o botão Executar numa tela de JS que não mostra nada no console."
+          checked={form.watch('noTerminal') ?? false}
+          onChange={(checked) => { form.setValue('noTerminal', checked, { shouldDirty: true }) }}
+        />
         <ToggleRow
           id="onlyCode"
           label="Somente código (onlyCode)"

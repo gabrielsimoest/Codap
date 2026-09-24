@@ -139,6 +139,53 @@ export function OptionFields () {
         )}
       </div>
 
+      {/*
+        Sorteio da prática: o app mostra a teoria fixa e, depois, sorteia
+        `draw` atividades de cada `pool` e embaralha as alternativas.
+      */}
+      <div className="space-y-3 rounded-md border border-border p-3">
+        <div>
+          <Label>Sorteio</Label>
+          <p className="text-xs text-muted-foreground">
+            Perguntas com o mesmo pool são alternativas entre si: cada sessão sorteia algumas delas.
+          </p>
+        </div>
+        <div className="grid grid-cols-[1fr_7rem] gap-3">
+          <div className="space-y-2">
+            <Label htmlFor="option-pool" className="text-sm">Pool</Label>
+            <Input id="option-pool" placeholder="ex.: img-alt" {...form.register('pool')} />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="option-draw" className="text-sm">Sortear</Label>
+            <Input
+              id="option-draw"
+              type="number"
+              min={1}
+              placeholder="1"
+              {...form.register('draw', {
+                setValueAs: (value: unknown) => (value === '' || value === undefined || value === null ? undefined : Number(value))
+              })}
+            />
+          </div>
+        </div>
+        {form.formState.errors.draw && (
+          <p className="text-xs text-destructive">{form.formState.errors.draw.message}</p>
+        )}
+        <div className="flex items-start gap-2">
+          <Switch
+            id="option-fixed-order"
+            checked={form.watch('fixedOrder') ?? false}
+            onCheckedChange={(checked) => { form.setValue('fixedOrder', checked, { shouldDirty: true }) }}
+          />
+          <div>
+            <Label htmlFor="option-fixed-order" className="text-sm">Ordem fixa</Label>
+            <p className="text-xs text-muted-foreground">
+              Não embaralha as alternativas — use em verdadeiro/falso.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-start gap-2">
         <Switch
           id="option-tutorial"

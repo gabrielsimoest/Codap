@@ -108,7 +108,8 @@ const THEORY_FIELD_ORDER = [
   'highlight', 'codeLanguage', 'code', 'additionalCode', 'onlyCode', 'noTerminal', 'terminalCode', 'tutorial'
 ]
 const OPTION_FIELD_ORDER = [
-  'question', 'aditionalParagraph', 'highlight', 'tutorial', 'correctOption', 'options'
+  'question', 'aditionalParagraph', 'highlight', 'tutorial', 'correctOption', 'options',
+  'pool', 'draw', 'fixedOrder'
 ]
 /** Ordem candidata, na ordem em que deve ser testada — a primeira que "cobre" exatamente as chaves do objeto vence. */
 const FIELD_ORDER_TABLE = [['name', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, OPTION_FIELD_ORDER]

@@ -152,7 +152,31 @@ step('o formulário de atividade abre com o preview de highlight', async (page) 
     throw new Error('a prévia não pintou nenhum termo')
   }
 
+  // Sem esses campos no formulário (e no zod), salvar uma teoria apagava
+  // `noTerminal`/`terminalCode` do conteúdo em silêncio.
+  await page.getByLabel('Sem terminal (noTerminal)').waitFor({ timeout: 10_000 })
+  await page.getByLabel('Código do terminal (terminalCode)').waitFor({ timeout: 10_000 })
+
   await page.screenshot(shot('05-atividade.png'))
+  await page.keyboard.press('Escape')
+})
+
+/*
+ * A prática vem depois da teoria, então a última atividade da primeira lição
+ * de HTML é uma `option`. Se o formulário não carregar `pool` de volta, salvar
+ * pelo dashboard apaga o sorteio em silêncio.
+ */
+step('o formulário de múltipla escolha mostra o sorteio', async (page) => {
+  await page.locator('main').getByRole('button', { name: 'Editar', exact: true }).last().click()
+  await page.getByText('Alternativas').first().waitFor({ timeout: 10_000 })
+  await page.getByText('Sorteio').waitFor({ timeout: 10_000 })
+
+  const pool = await page.getByLabel('Pool').inputValue()
+  if (pool.length === 0) {
+    throw new Error('o campo Pool veio vazio para uma atividade com pool')
+  }
+
+  await page.screenshot(shot('06-multipla-escolha.png'))
   await page.keyboard.press('Escape')
 })
 

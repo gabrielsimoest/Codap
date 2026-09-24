@@ -34,6 +34,10 @@ export const theoryContentSchema = z.object({
   code: z.string().min(1, 'O bloco de código é obrigatório.'),
   additionalCode: z.array(additionalCodeSchema).optional(),
   onlyCode: z.boolean().optional(),
+  /** Esconde o botão "Executar" do terminal numa tela de JS sem saída de console. */
+  noTerminal: z.boolean().optional(),
+  /** JS que o terminal executa no lugar de `code` (TS pré-transpilado ou JS simulado). */
+  terminalCode: z.string().optional(),
   tutorial: z.boolean().optional()
 })
 
@@ -47,7 +51,13 @@ export const optionContentSchema = z.object({
   tutorial: z.boolean().optional(),
   /** 1-based: a primeira opção é `1`, não `0`. */
   correctOption: z.number().int().min(1),
-  options: z.array(z.string().min(1, 'A alternativa não pode ficar vazia.')).min(2, 'São necessárias ao menos duas alternativas.')
+  options: z.array(z.string().min(1, 'A alternativa não pode ficar vazia.')).min(2, 'São necessárias ao menos duas alternativas.'),
+  /** Banco de perguntas: práticas com o mesmo `pool` são sorteadas entre si. */
+  pool: z.string().optional(),
+  /** Quantas do pool sortear por sessão (lido da primeira do pool). */
+  draw: z.number().int().min(1, 'Sorteie ao menos uma.').optional(),
+  /** Não embaralha as alternativas (verdadeiro/falso). */
+  fixedOrder: z.boolean().optional()
 }).refine(
   (content) => content.correctOption <= content.options.length,
   { message: 'A alternativa correta precisa apontar para uma das opções.', path: ['correctOption'] }

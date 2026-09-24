@@ -132,6 +132,19 @@ export interface OptionActivityContent {
   /** 1-based: a primeira opção é `1`, não `0`. */
   correctOption: number;
   options: string[];
+  /**
+   * Banco de perguntas dentro da lição: atividades práticas com o mesmo `pool`
+   * são alternativas entre si, e o app sorteia `draw` delas por sessão.
+   * Ausente = pool de uma atividade só (sempre aparece).
+   */
+  pool?: string;
+  /** Quantas atividades do pool sortear por sessão. Lido da primeira do pool; default 1. */
+  draw?: number;
+  /**
+   * Não embaralha as alternativas. Usado no verdadeiro/falso, que é uma
+   * `option` com duas alternativas ("Verdadeiro" sempre antes de "Falso").
+   */
+  fixedOrder?: boolean;
 }
 
 export interface ActivityResponse {

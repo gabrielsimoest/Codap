@@ -228,6 +228,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<p>This is a paragraph.</p>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o HTML faz em uma página web?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Estrutura o conteúdo e diz o que cada parte representa', 'Define as cores e as fontes da página', 'Guarda os dados de quem visita o site', 'Faz cálculos quando alguém clica'],
+            pool: 'html-markup'
+          },
+          en: {
+            question: 'What does HTML do on a web page?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Structures the content and says what each part represents', 'Sets the page\'s colors and fonts', 'Stores the visitors\' data', 'Runs calculations when someone clicks'],
+            pool: 'html-markup'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'HTML é uma linguagem de programação.',
+            highlight: ['HTML'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'html-markup',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'HTML is a programming language.',
+            highlight: ['HTML'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'html-markup',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'HTML significa HyperText Markup Language. O que "Markup" indica?',
+            highlight: ['HTML', 'Markup'],
+            correctOption: 1,
+            options: ['Que é uma linguagem de marcação', 'Que é uma linguagem de programação', 'Que cuida da aparência da página', 'Que só funciona no celular'],
+            pool: 'html-markup'
+          },
+          en: {
+            question: 'HTML stands for HyperText Markup Language. What does "Markup" tell you?',
+            highlight: ['HTML', 'Markup'],
+            correctOption: 1,
+            options: ['That it is a markup language', 'That it is a programming language', 'That it handles the page\'s appearance', 'That it only works on phones'],
+            pool: 'html-markup'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <p>Olá</p>, qual é a tag de fechamento?',
+            highlight: ['<p>'],
+            correctOption: 1,
+            options: ['</p>', '<p>', 'Olá', '<p/>'],
+            pool: 'html-element'
+          },
+          en: {
+            question: 'In <p>Hello</p>, which one is the closing tag?',
+            highlight: ['<p>'],
+            correctOption: 1,
+            options: ['</p>', '<p>', 'Hello', '<p/>'],
+            pool: 'html-element'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um elemento HTML costuma ter uma tag de abertura, um conteúdo e uma tag de fechamento.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'html-element',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An HTML element usually has an opening tag, some content and a closing tag.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'html-element',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho cria um parágrafo corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>Texto</p>', '<p>Texto<p>', '</p>Texto<p>', 'p>Texto</p'],
+            pool: 'html-element'
+          },
+          en: {
+            question: 'Which snippet creates a paragraph correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>Text</p>', '<p>Text<p>', '</p>Text<p>', 'p>Text</p'],
+            pool: 'html-element'
+          }
+        }
       }
     ]
   },
@@ -295,6 +417,189 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<body>\n  <div>\n    <h1>Page title</h1>\n    <p>A paragraph inside the div.</p>\n  </div>\n</body>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde fica o conteúdo que aparece na página, como textos e imagens?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No <body>', 'No <head>', 'No <title>', 'Antes do <html>'],
+            pool: 'head-body'
+          },
+          en: {
+            question: 'Where does the content shown on the page, like text and images, go?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the <body>', 'In the <head>', 'In the <title>', 'Before the <html>'],
+            pool: 'head-body'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Tudo que está dentro do <head> aparece no meio da página.',
+            highlight: ['<head>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'head-body',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Everything inside the <head> shows up in the middle of the page.',
+            highlight: ['<head>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'head-body',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O <title> define o texto mostrado na aba do navegador. Em qual parte ele fica?',
+            highlight: ['<title>'],
+            correctOption: 1,
+            options: ['No <head>', 'No <body>', 'Dentro de um <h1>', 'Depois do </html>'],
+            pool: 'head-body'
+          },
+          en: {
+            question: 'The <title> sets the text shown on the browser tab. Which part does it go in?',
+            highlight: ['<title>'],
+            correctOption: 1,
+            options: ['In the <head>', 'In the <body>', 'Inside an <h1>', 'After the </html>'],
+            pool: 'head-body'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento envolve o <head> e o <body>?',
+            highlight: ['<head>', '<body>'],
+            correctOption: 1,
+            options: ['<html>', '<title>', '<div>', '<p>'],
+            pool: 'doc-skeleton'
+          },
+          en: {
+            question: 'Which element wraps both the <head> and the <body>?',
+            highlight: ['<head>', '<body>'],
+            correctOption: 1,
+            options: ['<html>', '<title>', '<div>', '<p>'],
+            pool: 'doc-skeleton'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No documento, o <head> vem antes do <body>.',
+            highlight: ['<head>', '<body>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'doc-skeleton',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In the document, the <head> comes before the <body>.',
+            highlight: ['<head>', '<body>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'doc-skeleton',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a ordem certa dentro do <html>?',
+            highlight: ['<html>'],
+            correctOption: 1,
+            options: ['<head>, depois <body>', '<body>, depois <head>', '<body> dentro do <head>', '<title>, depois <head>'],
+            pool: 'doc-skeleton'
+          },
+          en: {
+            question: 'What is the right order inside <html>?',
+            highlight: ['<html>'],
+            correctOption: 1,
+            options: ['<head>, then <body>', '<body>, then <head>', '<body> inside the <head>', '<title>, then <head>'],
+            pool: 'doc-skeleton'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho está aninhado corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div><p>Oi</p></div>', '<div><p>Oi</div></p>', '<p><div>Oi</p></div>', '<div><p>Oi</div>'],
+            pool: 'nesting'
+          },
+          en: {
+            question: 'Which snippet is nested correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div><p>Hi</p></div>', '<div><p>Hi</div></p>', '<p><div>Hi</p></div>', '<div><p>Hi</div>'],
+            pool: 'nesting'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <div><h1>Título</h1></div>, o que a <div> é do <h1>?',
+            highlight: ['<div>', '<h1>'],
+            correctOption: 1,
+            options: ['O elemento pai', 'O elemento filho', 'Um comentário', 'Um atributo'],
+            pool: 'nesting'
+          },
+          en: {
+            question: 'In <div><h1>Title</h1></div>, what is the <div> to the <h1>?',
+            highlight: ['<div>', '<h1>'],
+            correctOption: 1,
+            options: ['Its parent element', 'Its child element', 'A comment', 'An attribute'],
+            pool: 'nesting'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A indentação muda o resultado que o navegador mostra.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'nesting',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Indentation changes what the browser displays.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'nesting',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -345,6 +650,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<ul>\n  <li>Active item</li>\n  <!-- <li>Item disabled for now</li> -->\n</ul>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a sintaxe de um comentário em HTML?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['<!-- texto -->', '// texto', '/* texto */', '<comment>texto</comment>'],
+            pool: 'comment-syntax'
+          },
+          en: {
+            question: 'What is the syntax of an HTML comment?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['<!-- text -->', '// text', '/* text */', '<comment>text</comment>'],
+            pool: 'comment-syntax'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Você quer esconder um item da lista por enquanto, sem apagá-lo. O que faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Coloca o item dentro de <!-- e -->', 'Apaga o <li> e reescreve depois', 'Troca <li> por <p>', 'Remove só a tag de fechamento'],
+            pool: 'comment-syntax'
+          },
+          en: {
+            question: 'You want to hide a list item for now, without deleting it. What do you do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Wrap the item in <!-- and -->', 'Delete the <li> and rewrite it later', 'Swap <li> for <p>', 'Remove only the closing tag'],
+            pool: 'comment-syntax'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O navegador ignora o que está dentro de um comentário.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'comment-syntax',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The browser ignores whatever is inside a comment.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'comment-syntax',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um comentário é um bom lugar para guardar uma senha, já que não aparece na página.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'comment-visibility',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A comment is a good place to keep a password, since it doesn\'t show on the page.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'comment-visibility',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quem consegue ler um comentário HTML?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Quem abrir o código-fonte da página', 'Ninguém, ele é apagado ao publicar', 'Só quem escreveu o código', 'Só o navegador'],
+            pool: 'comment-visibility'
+          },
+          en: {
+            question: 'Who can read an HTML comment?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Anyone who opens the page source', 'No one, it\'s removed when published', 'Only whoever wrote the code', 'Only the browser'],
+            pool: 'comment-visibility'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um bom uso de comentário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Explicar por que um trecho foi escrito assim', 'Guardar a senha do servidor', 'Deixar um texto visível para o visitante', 'Mudar a cor de um título'],
+            pool: 'comment-visibility'
+          },
+          en: {
+            question: 'Which of these is a good use of a comment?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Explaining why a snippet was written that way', 'Keeping the server password', 'Showing text to the visitor', 'Changing a heading\'s color'],
+            pool: 'comment-visibility'
+          }
+        }
       }
     ]
   },
@@ -389,6 +816,300 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             highlight: ['p', 'strong'],
             codeLanguage: 'HTML',
             code: '<p>\n  Learning <strong>HTML</strong> is important\n  for building web pages.\n</p>\n\n<p>\n  This text has <em>emphasis</em>.\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantos níveis de título existem no HTML?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Seis, de <h1> a <h6>', 'Três, de <h1> a <h3>', 'Dez, de <h1> a <h10>', 'Só um, o <h1>'],
+            pool: 'headings'
+          },
+          en: {
+            question: 'How many heading levels does HTML have?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Six, from <h1> to <h6>', 'Three, from <h1> to <h3>', 'Ten, from <h1> to <h10>', 'Just one, the <h1>'],
+            pool: 'headings'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual título representa o assunto principal da página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h1>', '<h6>', '<h3>', '<p>'],
+            pool: 'headings'
+          },
+          en: {
+            question: 'Which heading represents the page\'s main topic?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h1>', '<h6>', '<h3>', '<p>'],
+            pool: 'headings'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Devo escolher o nível do título pelo tamanho da letra que eu quero.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'headings',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'I should pick the heading level based on how big I want the text.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'headings',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<strong> e <em> devem ser escolhidos pelo significado, não só pela aparência.',
+            highlight: ['<strong>', '<em>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'text-meaning',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<strong> and <em> should be chosen for their meaning, not just their looks.',
+            highlight: ['<strong>', '<em>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'text-meaning',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa um parágrafo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>', '<para>', '<text>', '<h1>'],
+            pool: 'text-meaning'
+          },
+          en: {
+            question: 'Which element represents a paragraph?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>', '<para>', '<text>', '<h1>'],
+            pool: 'text-meaning'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Numa frase, você quer marcar uma palavra como importante. Qual elemento usa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<strong>', '<h1>', '<div>', '<title>'],
+            pool: 'text-meaning'
+          },
+          en: {
+            question: 'In a sentence, you want to mark one word as important. Which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<strong>', '<h1>', '<div>', '<title>'],
+            pool: 'text-meaning'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Caracteres especiais e quebras',
+      en: 'Special characters and breaks'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Alguns caracteres têm um significado especial no HTML. O sinal < abre uma tag, então, para mostrá-lo como texto, usamos uma entidade.',
+            secondParagraph: '&lt; mostra <, &gt; mostra > e &amp; mostra &. Toda entidade começa com & e termina com ponto e vírgula.',
+            endParagraph: 'Sem as entidades, o navegador pode confundir o texto com uma tag e esconder parte do conteúdo.',
+            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
+            codeLanguage: 'HTML',
+            code: '<p>Use &lt;p&gt; para criar parágrafos.</p>\n<p>Arroz &amp; feijão</p>'
+          },
+          en: {
+            firstParagraph: 'Some characters have a special meaning in HTML. The < sign opens a tag, so to show it as text, we use an entity.',
+            secondParagraph: '&lt; shows <, &gt; shows > and &amp; shows &. Every entity starts with & and ends with a semicolon.',
+            endParagraph: 'Without entities, the browser may mistake the text for a tag and hide part of the content.',
+            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
+            codeLanguage: 'HTML',
+            code: '<p>Use &lt;p&gt; to create paragraphs.</p>\n<p>Salt &amp; pepper</p>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O <br> cria uma quebra de linha dentro do mesmo bloco de texto, como num endereço ou num poema. Assim como o <img>, ele não tem tag de fechamento.',
+            secondParagraph: 'O <hr> representa uma mudança de assunto entre dois trechos, e o navegador o mostra como uma linha horizontal.',
+            endParagraph: 'Não use vários <br> seguidos para criar espaço entre blocos: isso é trabalho do CSS. O <br> é para quebras que fazem parte do conteúdo.',
+            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Rua das Flores, 123<br>\n  São Paulo - SP\n</p>\n\n<hr>\n\n<p>Outro assunto começa aqui.</p>'
+          },
+          en: {
+            firstParagraph: 'The <br> creates a line break inside the same block of text, like in an address or a poem. Like the <img>, it has no closing tag.',
+            secondParagraph: 'The <hr> represents a change of topic between two passages, and the browser shows it as a horizontal line.',
+            endParagraph: 'Don\'t stack several <br> to create space between blocks: that\'s CSS\'s job. The <br> is for breaks that are part of the content.',
+            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  123 Flower Street<br>\n  Springfield\n</p>\n\n<hr>\n\n<p>Another topic starts here.</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como mostrar o sinal < como texto na página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&lt;', '&gt;', '<<', '\\<'],
+            pool: 'entities'
+          },
+          en: {
+            question: 'How do you show the < sign as text on the page?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&lt;', '&gt;', '<<', '\\<'],
+            pool: 'entities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual entidade mostra o caractere &?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&amp;', '&&', '&e;', '&ec;'],
+            pool: 'entities'
+          },
+          en: {
+            question: 'Which entity shows the & character?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&amp;', '&&', '&e;', '&ec;'],
+            pool: 'entities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Toda entidade HTML começa com & e termina com ponto e vírgula.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'entities',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Every HTML entity starts with & and ends with a semicolon.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'entities',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Num endereço, você quer a cidade na linha de baixo, no mesmo parágrafo. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<br>', '<hr>', 'Um novo <h2>', 'Um <p></p> vazio'],
+            pool: 'br-hr'
+          },
+          en: {
+            question: 'In an address, you want the city on the next line, in the same paragraph. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<br>', '<hr>', 'A new <h2>', 'An empty <p></p>'],
+            pool: 'br-hr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar vários <br> seguidos é o jeito certo de criar espaço entre blocos.',
+            highlight: ['<br>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'br-hr',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Stacking several <br> is the right way to create space between blocks.',
+            highlight: ['<br>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'br-hr',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o <hr> representa?',
+            highlight: ['<hr>'],
+            correctOption: 1,
+            options: ['Uma mudança de assunto entre trechos', 'Uma quebra de linha no meio da frase', 'Um título de seção', 'Um link para o topo'],
+            pool: 'br-hr'
+          },
+          en: {
+            question: 'What does the <hr> represent?',
+            highlight: ['<hr>'],
+            correctOption: 1,
+            options: ['A change of topic between passages', 'A line break mid-sentence', 'A section heading', 'A link back to the top'],
+            pool: 'br-hr'
           }
         }
       }
@@ -437,6 +1158,302 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<a href="about.html">\n  About us\n</a>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo define para onde um link leva?',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['href', 'src', 'alt', 'link'],
+            pool: 'link-href'
+          },
+          en: {
+            question: 'Which attribute sets where a link goes?',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['href', 'src', 'alt', 'link'],
+            pool: 'link-href'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <a href="loja.html">Ver loja</a>, o que a pessoa vê na página?',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['Ver loja', 'loja.html', 'href', 'O código inteiro do link'],
+            pool: 'link-href'
+          },
+          en: {
+            question: 'In <a href="shop.html">See shop</a>, what does the reader see on the page?',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['See shop', 'shop.html', 'href', 'The link\'s entire code'],
+            pool: 'link-href'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O elemento <a> cria links.',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'link-href',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The <a> element creates links.',
+            highlight: ['<a>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'link-href',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual href aponta para uma página do seu próprio projeto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['sobre.html', 'https://example.com', 'https://wikipedia.org', 'http://google.com'],
+            pool: 'link-relative'
+          },
+          en: {
+            question: 'Which href points to a page in your own project?',
+            highlight: [],
+            correctOption: 1,
+            options: ['about.html', 'https://example.com', 'https://wikipedia.org', 'http://google.com'],
+            pool: 'link-relative'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Todo link precisa apontar para outro site.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'link-relative',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Every link has to point to another site.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'link-relative',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um link relativo como contato.html é procurado a partir de onde?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Da localização do arquivo atual', 'Da página inicial do Google', 'Da pasta do navegador', 'De qualquer site da internet'],
+            pool: 'link-relative'
+          },
+          en: {
+            question: 'A relative link like contact.html is looked up starting from where?',
+            highlight: [],
+            correctOption: 1,
+            options: ['From the current file\'s location', 'From Google\'s home page', 'From the browser\'s folder', 'From any site on the internet'],
+            pool: 'link-relative'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Mais sobre links',
+      en: 'More about links'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um link também pode levar a uma parte da mesma página. Para isso, o elemento de destino recebe um id, e o href aponta para ele com # na frente.',
+            secondParagraph: 'No exemplo, tocar em "Ir para contato" leva direto à seção com id="contato".',
+            endParagraph: 'Links internos são comuns em páginas longas, como um índice no topo que leva a cada seção.',
+            highlight: ['id', 'href'],
+            codeLanguage: 'HTML',
+            code: '<a href="#contato">Ir para contato</a>\n\n<p>Muito conteúdo aqui...</p>\n\n<h2 id="contato">Contato</h2>\n<p>Fale com a gente.</p>'
+          },
+          en: {
+            firstParagraph: 'A link can also lead to a part of the same page. For that, the target element gets an id, and the href points to it with a # in front.',
+            secondParagraph: 'In the example, tapping "Go to contact" jumps straight to the section with id="contact".',
+            endParagraph: 'Internal links are common on long pages, like a table of contents at the top that leads to each section.',
+            highlight: ['id', 'href'],
+            codeLanguage: 'HTML',
+            code: '<a href="#contact">Go to contact</a>\n\n<p>Lots of content here...</p>\n\n<h2 id="contact">Contact</h2>\n<p>Get in touch.</p>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O atributo target="_blank" faz o link abrir em uma nova aba, em vez de substituir a página atual.',
+            secondParagraph: 'Já um href que começa com mailto: abre o aplicativo de e-mail da pessoa, com o destinatário preenchido.',
+            endParagraph: 'Use target="_blank" com moderação: abrir abas sem aviso pode confundir quem navega.',
+            highlight: ['target', 'href', 'mailto'],
+            codeLanguage: 'HTML',
+            code: '<a href="https://example.com" target="_blank">\n  Abrir em nova aba\n</a>\n\n<a href="mailto:contato@exemplo.com">\n  Enviar e-mail\n</a>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The target="_blank" attribute makes the link open in a new tab instead of replacing the current page.',
+            secondParagraph: 'An href that starts with mailto: opens the person\'s email app, with the recipient already filled in.',
+            endParagraph: 'Use target="_blank" sparingly: opening tabs without warning can confuse people.',
+            highlight: ['target', 'href', 'mailto'],
+            codeLanguage: 'HTML',
+            code: '<a href="https://example.com" target="_blank">\n  Open in a new tab\n</a>\n\n<a href="mailto:contact@example.com">\n  Send an email\n</a>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual href leva à seção <h2 id="faq">?',
+            highlight: ['<h2>'],
+            correctOption: 1,
+            options: ['href="#faq"', 'href="faq"', 'href="id=faq"', 'href="/faq.html"'],
+            pool: 'link-anchor'
+          },
+          en: {
+            question: 'Which href leads to the section <h2 id="faq">?',
+            highlight: ['<h2>'],
+            correctOption: 1,
+            options: ['href="#faq"', 'href="faq"', 'href="id=faq"', 'href="/faq.html"'],
+            pool: 'link-anchor'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Para um link levar a uma seção da mesma página, o destino precisa ter um id.',
+            highlight: ['id'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'link-anchor',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'For a link to lead to a section on the same page, the target needs an id.',
+            highlight: ['id'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'link-anchor',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em href="#contato", o que o # indica?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Que o destino é um id nesta mesma página', 'Que o link é externo', 'Que o link está desativado', 'Que o link é um comentário'],
+            pool: 'link-anchor'
+          },
+          en: {
+            question: 'In href="#contact", what does the # mean?',
+            highlight: [],
+            correctOption: 1,
+            options: ['That the target is an id on this same page', 'That the link is external', 'That the link is disabled', 'That the link is a comment'],
+            pool: 'link-anchor'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo faz o link abrir em uma nova aba?',
+            highlight: [],
+            correctOption: 1,
+            options: ['target="_blank"', 'href="_blank"', 'rel="new"', 'open="tab"'],
+            pool: 'link-target'
+          },
+          en: {
+            question: 'Which attribute makes a link open in a new tab?',
+            highlight: [],
+            correctOption: 1,
+            options: ['target="_blank"', 'href="_blank"', 'rel="new"', 'open="tab"'],
+            pool: 'link-target'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual href abre o app de e-mail com o destinatário preenchido?',
+            highlight: [],
+            correctOption: 1,
+            options: ['mailto:ana@exemplo.com', 'email:ana@exemplo.com', 'https://ana@exemplo.com', '#ana@exemplo.com'],
+            pool: 'link-target'
+          },
+          en: {
+            question: 'Which href opens the email app with the recipient filled in?',
+            highlight: [],
+            correctOption: 1,
+            options: ['mailto:ana@example.com', 'email:ana@example.com', 'https://ana@example.com', '#ana@example.com'],
+            pool: 'link-target'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Abrir todo link em uma nova aba é sempre a melhor escolha.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'link-target',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Opening every link in a new tab is always the best choice.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'link-target',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -483,6 +1500,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<img src="cat.jpg" alt="Cat sitting on a chair" />'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O elemento <img> não tem tag de fechamento.',
+            highlight: ['<img>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'img-tag',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The <img> element has no closing tag.',
+            highlight: ['<img>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'img-tag',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo diz onde está o arquivo da imagem?',
+            highlight: ['<img>'],
+            correctOption: 1,
+            options: ['src', 'href', 'alt', 'file'],
+            pool: 'img-tag'
+          },
+          en: {
+            question: 'Which attribute says where the image file is?',
+            highlight: ['<img>'],
+            correctOption: 1,
+            options: ['src', 'href', 'alt', 'file'],
+            pool: 'img-tag'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho adiciona uma imagem corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<img src="gato.jpg" alt="Gato" />', '<img>gato.jpg</img>', '<image href="gato.jpg">', '<img alt="gato.jpg" />'],
+            pool: 'img-tag'
+          },
+          en: {
+            question: 'Which snippet adds an image correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<img src="cat.jpg" alt="Cat" />', '<img>cat.jpg</img>', '<image href="cat.jpg">', '<img alt="cat.jpg" />'],
+            pool: 'img-tag'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve o atributo alt?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Descrever a imagem em texto', 'Definir o tamanho da imagem', 'Indicar onde está o arquivo', 'Colocar uma borda na imagem'],
+            pool: 'img-alt'
+          },
+          en: {
+            question: 'What is the alt attribute for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Describing the image in text', 'Setting the image\'s size', 'Pointing to the file', 'Adding a border to the image'],
+            pool: 'img-alt'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A imagem de um gráfico não carregou. O que ajuda o visitante a entender o que havia ali?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O texto do alt', 'O nome do arquivo no src', 'Nada, a imagem some', 'Uma mensagem de erro do HTML'],
+            pool: 'img-alt'
+          },
+          en: {
+            question: 'A chart image failed to load. What helps the visitor understand what was there?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The alt text', 'The file name in src', 'Nothing, the image just disappears', 'An HTML error message'],
+            pool: 'img-alt'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O alt é opcional porque só serve para enfeitar o código.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'img-alt',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The alt is optional because it only decorates the code.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'img-alt',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -527,6 +1666,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             highlight: ['ol', 'li', 'ul'],
             codeLanguage: 'HTML',
             code: '<ol>\n  <li>Open the browser</li>\n  <li>Go to the site</li>\n  <li>Log in</li>\n</ol>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Os passos de uma receita precisam seguir uma ordem. Qual lista usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ol>', '<ul>', '<li>', '<div>'],
+            pool: 'ul-ol'
+          },
+          en: {
+            question: 'A recipe\'s steps must follow an order. Which list do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ol>', '<ul>', '<li>', '<div>'],
+            pool: 'ul-ol'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma lista de linguagens que você conhece, em qualquer ordem. Qual usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul>', '<ol>', '<li>', '<p>'],
+            pool: 'ul-ol'
+          },
+          en: {
+            question: 'A list of languages you know, in any order. Which one do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul>', '<ol>', '<li>', '<p>'],
+            pool: 'ul-ol'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A escolha entre <ul> e <ol> depende só da aparência.',
+            highlight: ['<ul>', '<ol>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ul-ol',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Choosing between <ul> and <ol> is only about looks.',
+            highlight: ['<ul>', '<ol>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'ul-ol',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Tanto em <ul> quanto em <ol>, cada item é um <li>.',
+            highlight: ['<ul>', '<ol>', '<li>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'list-items',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In both <ul> and <ol>, each item is an <li>.',
+            highlight: ['<ul>', '<ol>', '<li>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'list-items',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa um item de lista?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<li>', '<item>', '<ul>', '<p>'],
+            pool: 'list-items'
+          },
+          en: {
+            question: 'Which element represents a list item?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<li>', '<item>', '<ul>', '<p>'],
+            pool: 'list-items'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho monta uma lista corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
+            pool: 'list-items'
+          },
+          en: {
+            question: 'Which snippet builds a list correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
+            pool: 'list-items'
           }
         }
       }
@@ -577,6 +1838,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<img src="cat.jpg" alt="Cat sitting" />\n\n<a href="about.html">\n  About\n</a>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde um atributo é escrito?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Na tag de abertura', 'Na tag de fechamento', 'Entre as tags, junto do conteúdo', 'Num arquivo separado'],
+            pool: 'attr-where'
+          },
+          en: {
+            question: 'Where is an attribute written?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the opening tag', 'In the closing tag', 'Between the tags, with the content', 'In a separate file'],
+            pool: 'attr-where'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho coloca o atributo no lugar certo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<a href="sobre.html">Sobre</a>', '<a>Sobre</a href="sobre.html">', '<a>href="sobre.html" Sobre</a>', 'href="sobre.html"<a>Sobre</a>'],
+            pool: 'attr-where'
+          },
+          en: {
+            question: 'Which snippet puts the attribute in the right place?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<a href="about.html">About</a>', '<a>About</a href="about.html">', '<a>href="about.html" About</a>', 'href="about.html"<a>About</a>'],
+            pool: 'attr-where'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Atributos adicionam informações ou configurações a um elemento.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'attr-where',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Attributes add information or settings to an element.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'attr-where',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um atributo costuma ter um nome e um valor, como href="sobre.html".',
+            highlight: ['href'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'attr-format',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An attribute usually has a name and a value, like href="about.html".',
+            highlight: ['href'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'attr-format',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em alt="Gato sentado", qual é o nome do atributo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['alt', 'Gato sentado', '=', 'img'],
+            pool: 'attr-format'
+          },
+          en: {
+            question: 'In alt="Cat sitting", what is the attribute\'s name?',
+            highlight: [],
+            correctOption: 1,
+            options: ['alt', 'Cat sitting', '=', 'img'],
+            pool: 'attr-format'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo pertence ao <img>, e não ao <a>?',
+            highlight: ['<img>', '<a>'],
+            correctOption: 1,
+            options: ['src', 'href', 'link', 'to'],
+            pool: 'attr-format'
+          },
+          en: {
+            question: 'Which attribute belongs to <img>, not to <a>?',
+            highlight: ['<img>', '<a>'],
+            correctOption: 1,
+            options: ['src', 'href', 'link', 'to'],
+            pool: 'attr-format'
+          }
+        }
       }
     ]
   },
@@ -621,6 +2004,128 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             highlight: ['div', 'span'],
             codeLanguage: 'HTML',
             code: '<p>\n  My name is\n  <span>Gabriel</span>.\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para agrupar um título e um parágrafo num bloco de perfil, qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div>', '<span>', '<li>', '<a>'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'To group a heading and a paragraph into a profile block, which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div>', '<span>', '<li>', '<a>'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para envolver só uma palavra no meio de uma frase, qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<span>', '<div>', '<h1>', '<ul>'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'To wrap just one word in the middle of a sentence, which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<span>', '<div>', '<h1>', '<ul>'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a principal diferença de uso entre <div> e <span>?',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['<div> agrupa blocos; <span> envolve trechos numa linha', '<div> é para textos; <span> é para imagens', '<span> agrupa blocos; <div> envolve palavras', 'Não há diferença, são iguais'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'What is the main difference in use between <div> and <span>?',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['<div> groups blocks; <span> wraps bits within a line', '<div> is for text; <span> is for images', '<span> groups blocks; <div> wraps words', 'There is no difference'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<div> e <span> são contêineres genéricos: não dão um significado específico ao conteúdo.',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'generic-container',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<div> and <span> are generic containers: they give the content no specific meaning.',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'generic-container',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar <div> deixa claro que o conteúdo é um título.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'generic-container',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using a <div> makes it clear that the content is a heading.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'generic-container',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a <div> diz sobre o conteúdo dentro dela?',
+            highlight: ['<div>'],
+            correctOption: 1,
+            options: ['Nada específico, ela só agrupa', 'Que ele é o título principal', 'Que ele é um link', 'Que ele é uma lista'],
+            pool: 'generic-container'
+          },
+          en: {
+            question: 'What does a <div> say about the content inside it?',
+            highlight: ['<div>'],
+            correctOption: 1,
+            options: ['Nothing specific, it just groups', 'That it is the main heading', 'That it is a link', 'That it is a list'],
+            pool: 'generic-container'
           }
         }
       }
@@ -2367,6 +3872,128 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<main>\n  <section>\n    <h2>Products</h2>\n    <p>Check out our products.</p>\n  </section>\n</main>\n\n<footer>\n  <p>All rights reserved.</p>\n</footer>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa a área de navegação, com os links do site?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<nav>', '<header>', '<footer>', '<section>'],
+            pool: 'page-regions'
+          },
+          en: {
+            question: 'Which element represents the navigation area, with the site\'s links?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<nav>', '<header>', '<footer>', '<section>'],
+            pool: 'page-regions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar <header> e <nav> deixa a estrutura mais clara do que agrupar tudo em <div>.',
+            highlight: ['<header>', '<nav>', '<div>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'page-regions',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using <header> and <nav> makes the structure clearer than grouping everything in a <div>.',
+            highlight: ['<header>', '<nav>', '<div>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'page-regions',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O título do site e o menu, no topo da página, ficam bem em qual elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<header>', '<footer>', '<main>', '<aside>'],
+            pool: 'page-regions'
+          },
+          en: {
+            question: 'The site title and menu, at the top of the page, fit best in which element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<header>', '<footer>', '<main>', '<aside>'],
+            pool: 'page-regions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento envolve o conteúdo principal da página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<main>', '<section>', '<header>', '<nav>'],
+            pool: 'page-main'
+          },
+          en: {
+            question: 'Which element wraps the page\'s main content?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<main>', '<section>', '<header>', '<nav>'],
+            pool: 'page-main'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual elemento fica o aviso "Todos os direitos reservados"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<footer>', '<header>', '<main>', '<nav>'],
+            pool: 'page-main'
+          },
+          en: {
+            question: 'Which element holds the notice "All rights reserved"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<footer>', '<header>', '<main>', '<nav>'],
+            pool: 'page-main'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<section> agrupa uma seção temática da página, como "Produtos".',
+            highlight: ['<section>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'page-main',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<section> groups a themed section of the page, like "Products".',
+            highlight: ['<section>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'page-main',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2415,6 +4042,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<header>My site</header>\n\n<nav>Menu</nav>\n\n<main>\n  <section>\n    <h1>News</h1>\n  </section>\n</main>\n\n<footer>Contact</footer>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que significa escrever HTML semântico?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Usar elementos que descrevem o significado do conteúdo', 'Usar só <div> para organizar tudo', 'Deixar a página mais colorida', 'Escrever HTML sem nenhum atributo'],
+            pool: 'semantic-why'
+          },
+          en: {
+            question: 'What does writing semantic HTML mean?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Using elements that describe what the content means', 'Using only <div> to organize everything', 'Making the page more colorful', 'Writing HTML with no attributes'],
+            pool: 'semantic-why'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A semântica serve apenas para organizar a página visualmente.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'semantic-why',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Semantics only exists to organize the page visually.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'semantic-why',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quem se beneficia de uma estrutura semântica?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Navegadores, buscadores, leitores de tela e outros devs', 'Só quem escreveu o código', 'Só o CSS da página', 'Ninguém, é só uma convenção'],
+            pool: 'semantic-why'
+          },
+          en: {
+            question: 'Who benefits from a semantic structure?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Browsers, search engines, screen readers and other devs', 'Only whoever wrote the code', 'Only the page\'s CSS', 'No one, it\'s just a convention'],
+            pool: 'semantic-why'
+          }
+        }
       }
     ]
   },
@@ -2461,6 +4149,180 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<main>\n  <article>\n    <h1>Learning HTML</h1>\n    <p>Main content.</p>\n  </article>\n\n  <aside>\n    <h2>Read also</h2>\n    <p>Other related content.</p>\n  </aside>\n</main>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma notícia que faria sentido sozinha, fora do site. Qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<article>', '<aside>', '<nav>', '<span>'],
+            pool: 'article-aside'
+          },
+          en: {
+            question: 'A news story that would make sense on its own, outside the site. Which element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<article>', '<aside>', '<nav>', '<span>'],
+            pool: 'article-aside'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um bloco "Leia também" ao lado do texto principal. Qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<aside>', '<article>', '<main>', '<header>'],
+            pool: 'article-aside'
+          },
+          en: {
+            question: 'A "Read also" block next to the main text. Which element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<aside>', '<article>', '<main>', '<header>'],
+            pool: 'article-aside'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<aside> representa o conteúdo principal da página.',
+            highlight: ['<aside>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'article-aside',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<aside> represents the page\'s main content.',
+            highlight: ['<aside>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'article-aside',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Figuras e imagens responsivas',
+      en: 'Figures and responsive images'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<figure> envolve um conteúdo ilustrativo, como uma imagem, um gráfico ou um trecho de código, e <figcaption> dá a legenda dele.',
+            secondParagraph: 'A legenda fica ligada à figura na estrutura do documento, não só visualmente abaixo dela.',
+            endParagraph: 'O alt continua necessário: ele descreve a imagem, e o <figcaption> é a legenda que todos veem.',
+            highlight: ['<figure>', '<figcaption>', 'alt'],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <img src="grafico.png" alt="Vendas subindo de janeiro a março">\n  <figcaption>Vendas do primeiro trimestre</figcaption>\n</figure>'
+          },
+          en: {
+            firstParagraph: '<figure> wraps illustrative content, like an image, a chart or a code snippet, and <figcaption> gives it a caption.',
+            secondParagraph: 'The caption is tied to the figure in the document structure, not just placed visually below it.',
+            endParagraph: 'The alt is still needed: it describes the image, while the <figcaption> is the caption everyone sees.',
+            highlight: ['<figure>', '<figcaption>', 'alt'],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <img src="chart.png" alt="Sales rising from January to March">\n  <figcaption>First quarter sales</figcaption>\n</figure>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Nem toda tela precisa da mesma imagem. O atributo srcset oferece versões de tamanhos diferentes, e o navegador escolhe a mais adequada.',
+            secondParagraph: 'O atributo loading="lazy" adia o carregamento de imagens que ainda estão longe da área visível, deixando a página mais rápida.',
+            endParagraph: 'Assim, quem está no celular não baixa uma imagem enorme feita para monitores grandes.',
+            highlight: ['srcset', 'loading'],
+            codeLanguage: 'HTML',
+            code: '<img\n  src="foto-800.jpg"\n  srcset="foto-400.jpg 400w, foto-800.jpg 800w"\n  alt="Praia ao entardecer"\n  loading="lazy"\n>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Not every screen needs the same image. The srcset attribute offers versions in different sizes, and the browser picks the best fit.',
+            secondParagraph: 'The loading="lazy" attribute delays loading images that are still far from the visible area, making the page faster.',
+            endParagraph: 'That way, someone on a phone doesn\'t download a huge image made for large monitors.',
+            highlight: ['srcset', 'loading'],
+            codeLanguage: 'HTML',
+            code: '<img\n  src="photo-800.jpg"\n  srcset="photo-400.jpg 400w, photo-800.jpg 800w"\n  alt="Beach at sunset"\n  loading="lazy"\n>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento dá a legenda de uma <figure>?',
+            highlight: ['<figure>'],
+            correctOption: 1,
+            options: ['<figcaption>', '<caption>', '<legend>', '<alt>'],
+            pool: 'figure-img'
+          },
+          en: {
+            question: 'Which element gives a <figure> its caption?',
+            highlight: ['<figure>'],
+            correctOption: 1,
+            options: ['<figcaption>', '<caption>', '<legend>', '<alt>'],
+            pool: 'figure-img'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com um <figcaption>, a imagem não precisa mais de alt.',
+            highlight: ['<figcaption>', 'alt'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'figure-img',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With a <figcaption>, the image no longer needs an alt.',
+            highlight: ['<figcaption>', 'alt'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'figure-img',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que loading="lazy" faz em uma imagem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adia o carregamento até ela se aproximar da tela', 'Diminui a qualidade da imagem', 'Carrega a imagem antes do resto', 'Esconde a imagem no celular'],
+            pool: 'figure-img'
+          },
+          en: {
+            question: 'What does loading="lazy" do to an image?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Delays loading until it gets close to the screen', 'Lowers the image quality', 'Loads the image before everything else', 'Hides the image on phones'],
+            pool: 'figure-img'
+          }
+        }
       }
     ]
   },
@@ -2505,6 +4367,128 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['input'],
             codeLanguage: 'HTML',
             code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa o formulário inteiro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<form>', '<input>', '<label>', '<submit>'],
+            pool: 'form-basics'
+          },
+          en: {
+            question: 'Which element represents the whole form?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<form>', '<input>', '<label>', '<submit>'],
+            pool: 'form-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual botão envia o formulário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<button type="submit">', '<button type="text">', '<input type="email">', '<label for="enviar">'],
+            pool: 'form-basics'
+          },
+          en: {
+            question: 'Which button submits the form?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<button type="submit">', '<button type="text">', '<input type="email">', '<label for="send">'],
+            pool: 'form-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um <form> pode conter vários campos de entrada.',
+            highlight: ['<form>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'form-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A <form> can contain several input fields.',
+            highlight: ['<form>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'form-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Campo para o e-mail da pessoa. Qual type é o mais adequado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
+            pool: 'input-types'
+          },
+          en: {
+            question: 'A field for the person\'s email. Which type fits best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
+            pool: 'input-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Campo para a data de nascimento. Qual type é o mais adequado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
+            pool: 'input-types'
+          },
+          en: {
+            question: 'A field for the date of birth. Which type fits best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
+            pool: 'input-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Escolher o type certo do <input> ajuda o navegador a interpretar a informação.',
+            highlight: ['<input>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'input-types',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Picking the right type for an <input> helps the browser interpret the information.',
+            highlight: ['<input>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'input-types',
+            fixedOrder: true
           }
         }
       }
@@ -2555,6 +4539,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="name"\n  minlength="3"\n>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O atributo for do <label> precisa ser igual a qual atributo do campo?',
+            highlight: ['<label>'],
+            correctOption: 1,
+            options: ['id', 'name', 'type', 'value'],
+            pool: 'label-validation'
+          },
+          en: {
+            question: 'The for attribute of a <label> must match which attribute of the field?',
+            highlight: ['<label>'],
+            correctOption: 1,
+            options: ['id', 'name', 'type', 'value'],
+            pool: 'label-validation'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo torna um campo obrigatório?',
+            highlight: [],
+            correctOption: 1,
+            options: ['required', 'minlength', 'type', 'for'],
+            pool: 'label-validation'
+          },
+          en: {
+            question: 'Which attribute makes a field mandatory?',
+            highlight: [],
+            correctOption: 1,
+            options: ['required', 'minlength', 'type', 'for'],
+            pool: 'label-validation'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'minlength="3" exige pelo menos 3 caracteres no campo.',
+            highlight: ['minlength'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'label-validation',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'minlength="3" requires at least 3 characters in the field.',
+            highlight: ['minlength'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'label-validation',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2603,6 +4648,239 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['select', 'option', 'value'],
             codeLanguage: 'HTML',
             code: '<label for="state">State</label>\n<select id="state" name="state">\n  <option value="ny">New York</option>\n  <option value="ca">California</option>\n</select>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para uma mensagem longa, com várias linhas, qual campo usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
+            pool: 'textarea-select'
+          },
+          en: {
+            question: 'For a long, multi-line message, which field do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
+            pool: 'textarea-select'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <option value="sp">São Paulo</option>, o que o formulário envia?',
+            highlight: ['<option>'],
+            correctOption: 1,
+            options: ['sp', 'São Paulo', 'option', 'value'],
+            pool: 'textarea-select'
+          },
+          en: {
+            question: 'In <option value="ca">California</option>, what does the form send?',
+            highlight: ['<option>'],
+            correctOption: 1,
+            options: ['ca', 'California', 'option', 'value'],
+            pool: 'textarea-select'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O <textarea>, assim como o <input>, não tem tag de fechamento.',
+            highlight: ['<textarea>', '<input>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'textarea-select',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Like the <input>, the <textarea> has no closing tag.',
+            highlight: ['<textarea>', '<input>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'textarea-select',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Escolhas no formulário',
+      en: 'Choices in forms'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando a pessoa deve escolher só uma opção entre várias, usamos um input com type="radio".',
+            secondParagraph: 'Os radios de um mesmo grupo compartilham o mesmo name. É isso que faz marcar um desmarcar o outro.',
+            endParagraph: 'Já o type="checkbox" permite marcar várias opções ao mesmo tempo, ou nenhuma.',
+            highlight: ['radio', 'radios', 'name', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<p>Tamanho:</p>\n<input type="radio" id="p" name="tamanho" value="p">\n<label for="p">P</label>\n<input type="radio" id="m" name="tamanho" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="gelo" name="gelo">\n<label for="gelo">Gelo</label>'
+          },
+          en: {
+            firstParagraph: 'When the person must pick just one option among several, we use an input with type="radio".',
+            secondParagraph: 'Radios in the same group share the same name. That\'s what makes checking one uncheck the other.',
+            endParagraph: 'A type="checkbox", on the other hand, lets the person check several options at once, or none.',
+            highlight: ['radio', 'Radios', 'name', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<p>Size:</p>\n<input type="radio" id="s" name="size" value="s">\n<label for="s">S</label>\n<input type="radio" id="m" name="size" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="ice" name="ice">\n<label for="ice">Ice</label>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: '<fieldset> agrupa campos relacionados, e <legend> dá um título a esse grupo.',
+            secondParagraph: 'É o jeito semântico de dizer "estas opções respondem à mesma pergunta": leitores de tela anunciam a legenda junto com cada opção.',
+            endParagraph: 'Grupos de radio e checkbox quase sempre ficam melhores dentro de um <fieldset>.',
+            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <legend>Forma de pagamento</legend>\n\n  <input type="radio" id="pix" name="pagamento" value="pix">\n  <label for="pix">Pix</label>\n\n  <input type="radio" id="cartao" name="pagamento" value="cartao">\n  <label for="cartao">Cartão</label>\n</fieldset>'
+          },
+          en: {
+            firstParagraph: '<fieldset> groups related fields, and <legend> gives that group a title.',
+            secondParagraph: 'It\'s the semantic way to say "these options answer the same question": screen readers announce the legend along with each option.',
+            endParagraph: 'Groups of radio and checkbox inputs almost always work better inside a <fieldset>.',
+            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <legend>Payment method</legend>\n\n  <input type="radio" id="card" name="payment" value="card">\n  <label for="card">Card</label>\n\n  <input type="radio" id="cash" name="payment" value="cash">\n  <label for="cash">Cash</label>\n</fieldset>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A pessoa deve escolher só um tamanho: P, M ou G. Qual type usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
+            pool: 'radio-checkbox'
+          },
+          en: {
+            question: 'The person must pick just one size: S, M or L. Which type do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
+            pool: 'radio-checkbox'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Marcar um radio desmarca o outro. O que liga os dois?',
+            highlight: ['radio'],
+            correctOption: 1,
+            options: ['O mesmo name', 'O mesmo id', 'O mesmo value', 'O mesmo label'],
+            pool: 'radio-checkbox'
+          },
+          en: {
+            question: 'Checking one radio unchecks the other. What links the two?',
+            highlight: ['radio'],
+            correctOption: 1,
+            options: ['The same name', 'The same id', 'The same value', 'The same label'],
+            pool: 'radio-checkbox'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com checkbox, a pessoa pode marcar várias opções ao mesmo tempo.',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'radio-checkbox',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With checkbox inputs, the person can check several options at once.',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'radio-checkbox',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento dá um título a um grupo de campos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<legend>', '<label>', '<caption>', '<summary>'],
+            pool: 'fieldset-legend'
+          },
+          en: {
+            question: 'Which element gives a group of fields a title?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<legend>', '<label>', '<caption>', '<summary>'],
+            pool: 'fieldset-legend'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento agrupa campos relacionados de um formulário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
+            pool: 'fieldset-legend'
+          },
+          en: {
+            question: 'Which element groups related fields in a form?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
+            pool: 'fieldset-legend'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Leitores de tela anunciam o <legend> junto com as opções do grupo.',
+            highlight: ['<legend>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'fieldset-legend',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Screen readers announce the <legend> along with the group\'s options.',
+            highlight: ['<legend>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'fieldset-legend',
+            fixedOrder: true
           }
         }
       }
@@ -2670,6 +4948,128 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['colspan', 'rowspan'],
             codeLanguage: 'HTML',
             code: '<table>\n  <tr>\n    <th colspan="2">Contact</th>\n  </tr>\n  <tr>\n    <td>E-mail</td>\n    <td>ana@example.com</td>\n  </tr>\n</table>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento é uma célula de cabeçalho?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<th>', '<td>', '<tr>', '<thead>'],
+            pool: 'table-cells'
+          },
+          en: {
+            question: 'Which element is a header cell?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<th>', '<td>', '<tr>', '<thead>'],
+            pool: 'table-cells'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa uma linha da tabela?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<tr>', '<td>', '<th>', '<tbody>'],
+            pool: 'table-cells'
+          },
+          en: {
+            question: 'Which element represents a table row?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<tr>', '<td>', '<th>', '<tbody>'],
+            pool: 'table-cells'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<td> representa uma célula de dados.',
+            highlight: ['<td>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'table-cells',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<td> represents a data cell.',
+            highlight: ['<td>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'table-cells',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma célula de título precisa ocupar duas colunas. Qual atributo usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['colspan="2"', 'rowspan="2"', 'width="2"', 'cols="2"'],
+            pool: 'table-span'
+          },
+          en: {
+            question: 'A title cell needs to span two columns. Which attribute do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['colspan="2"', 'rowspan="2"', 'width="2"', 'cols="2"'],
+            pool: 'table-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'rowspan estende a célula por várias linhas, na vertical.',
+            highlight: ['rowspan'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'table-span',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'rowspan stretches the cell across several rows, vertically.',
+            highlight: ['rowspan'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'table-span',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual parte da tabela fica a linha de "Total", no fim?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<tfoot>', '<thead>', '<tbody>', '<th>'],
+            pool: 'table-span'
+          },
+          en: {
+            question: 'Which part of the table holds the "Total" row at the end?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<tfoot>', '<thead>', '<tbody>', '<th>'],
+            pool: 'table-span'
           }
         }
       }
@@ -2743,6 +5143,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<head>\n  <title>My site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde ficam os metadados de uma página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No <head>', 'No <body>', 'No <footer>', 'No <main>'],
+            pool: 'meta'
+          },
+          en: {
+            question: 'Where does a page\'s metadata go?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the <head>', 'In the <body>', 'In the <footer>', 'In the <main>'],
+            pool: 'meta'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual metadado traz uma descrição do conteúdo da página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
+            pool: 'meta'
+          },
+          en: {
+            question: 'Which metadata gives a description of the page\'s content?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
+            pool: 'meta'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O favicon é declarado no <head> com um <link rel="icon">.',
+            highlight: ['<head>', '<link>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'meta',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The favicon is declared in the <head> with a <link rel="icon">.',
+            highlight: ['<head>', '<link>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'meta',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -2789,6 +5250,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['h2', 'h3', 'hierarchy'],
             codeLanguage: 'HTML',
             code: '<h1>HTML course</h1>\n\n<h2>Fundamentals</h2>\n<h3>Elements</h3>\n\n<h2>Forms</h2>\n<h3>Inputs</h3>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Antes de buscar soluções complexas, usar bem os recursos semânticos do HTML já melhora a acessibilidade.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'a11y-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Before reaching for complex solutions, using HTML\'s semantic features well already improves accessibility.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'a11y-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois de um <h2> "Fundamentos", qual título representa uma subseção dele?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h3>', '<h1>', '<h2>', '<h6>'],
+            pool: 'a11y-basics'
+          },
+          en: {
+            question: 'After an <h2> "Fundamentals", which heading represents a subsection of it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h3>', '<h1>', '<h2>', '<h6>'],
+            pool: 'a11y-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destas práticas melhora a acessibilidade?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Escrever um alt que descreva a imagem', 'Pular do <h1> direto para o <h4>', 'Usar só <div> na página toda', 'Deixar os campos sem <label>'],
+            pool: 'a11y-basics'
+          },
+          en: {
+            question: 'Which of these practices improves accessibility?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Writing an alt that describes the image', 'Jumping from <h1> straight to <h4>', 'Using only <div> on the whole page', 'Leaving fields without a <label>'],
+            pool: 'a11y-basics'
           }
         }
       }
@@ -4598,6 +7120,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<p>\n  As an old proverb says:\n  <q>Knowledge is power.</q>\n</p>\n\n<blockquote>\n  A long quotation can be represented\n  using this element.\n</blockquote>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma citação curta, dentro de uma frase. Qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<q>', '<blockquote>', '<cite>', '<abbr>'],
+            pool: 'quote-abbr'
+          },
+          en: {
+            question: 'A short quote inside a sentence. Which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<q>', '<blockquote>', '<cite>', '<abbr>'],
+            pool: 'quote-abbr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa uma abreviação, como API?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<abbr>', '<cite>', '<q>', '<code>'],
+            pool: 'quote-abbr'
+          },
+          en: {
+            question: 'Which element represents an abbreviation, like API?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<abbr>', '<cite>', '<q>', '<code>'],
+            pool: 'quote-abbr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<cite> identifica o título de uma obra, como um livro.',
+            highlight: ['<cite>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'quote-abbr',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<cite> identifies the title of a work, like a book.',
+            highlight: ['<cite>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'quote-abbr',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -4642,6 +7225,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['kbd', 'samp'],
             codeLanguage: 'HTML',
             code: '<p>\n  Press <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  to save.\n</p>\n\n<p>\n  Result:\n  <samp>File saved.</samp>\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: '"Pressione Ctrl + S para salvar." Qual elemento representa as teclas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
+            pool: 'code-kbd'
+          },
+          en: {
+            question: '"Press Ctrl + S to save." Which element represents the keys?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
+            pool: 'code-kbd'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa a saída de um programa, como "Arquivo salvo."?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<samp>', '<kbd>', '<code>', '<q>'],
+            pool: 'code-kbd'
+          },
+          en: {
+            question: 'Which element represents a program\'s output, like "File saved."?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<samp>', '<kbd>', '<code>', '<q>'],
+            pool: 'code-kbd'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<pre> preserva os espaços e as quebras de linha do texto.',
+            highlight: ['<pre>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'code-kbd',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<pre> keeps the text\'s spaces and line breaks.',
+            highlight: ['<pre>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'code-kbd',
+            fixedOrder: true
           }
         }
       }
@@ -4692,6 +7336,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<p>\n  From <del>$100</del>\n  <ins>$80</ins>\n</p>\n\n<p>\n  H<sub>2</sub>O and 10<sup>2</sup>\n</p>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um preço antigo riscado e o preço novo ao lado. Qual par usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<del> e <ins>', '<sub> e <sup>', '<mark> e <small>', '<q> e <cite>'],
+            pool: 'text-edits'
+          },
+          en: {
+            question: 'An old price struck out with the new price next to it. Which pair?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<del> and <ins>', '<sub> and <sup>', '<mark> and <small>', '<q> and <cite>'],
+            pool: 'text-edits'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em H2O, qual elemento desloca o 2 para baixo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<sub>', '<sup>', '<small>', '<del>'],
+            pool: 'text-edits'
+          },
+          en: {
+            question: 'In H2O, which element shifts the 2 down?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<sub>', '<sup>', '<small>', '<del>'],
+            pool: 'text-edits'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<mark> e <small> só mudam a aparência, sem acrescentar significado.',
+            highlight: ['<mark>', '<small>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'text-edits',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<mark> and <small> only change how text looks, adding no meaning.',
+            highlight: ['<mark>', '<small>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'text-edits',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -4740,6 +7445,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <time datetime="2026-09-10">10 de setembro</time>, o que aparece na tela?',
+            highlight: ['<time>'],
+            correctOption: 1,
+            options: ['10 de setembro', '2026-09-10', 'Os dois, lado a lado', 'Nada'],
+            pool: 'time-data'
+          },
+          en: {
+            question: 'In <time datetime="2026-09-10">September 10</time>, what shows on screen?',
+            highlight: ['<time>'],
+            correctOption: 1,
+            options: ['September 10', '2026-09-10', 'Both, side by side', 'Nothing'],
+            pool: 'time-data'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O atributo value do <data> muda o que aparece na tela.',
+            highlight: ['<data>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'time-data',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The value attribute of <data> changes what shows on screen.',
+            highlight: ['<data>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'time-data',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve o atributo datetime?',
+            highlight: ['datetime'],
+            correctOption: 1,
+            options: ['Guardar a data num formato que máquinas entendem', 'Formatar a data para o visitante', 'Mostrar um calendário', 'Definir o fuso horário do navegador'],
+            pool: 'time-data'
+          },
+          en: {
+            question: 'What is the datetime attribute for?',
+            highlight: ['datetime'],
+            correctOption: 1,
+            options: ['Storing the date in a machine-readable format', 'Formatting the date for the visitor', 'Showing a calendar', 'Setting the browser\'s time zone'],
+            pool: 'time-data'
+          }
+        }
       }
     ]
   },
@@ -4786,6 +7552,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['track', 'kind', 'srclang', 'label'],
             codeLanguage: 'HTML',
             code: '<video controls width="320">\n  <source\n    src="video.mp4"\n    type="video/mp4"\n  >\n  <track\n    src="captions.vtt"\n    kind="captions"\n    srclang="en"\n    label="English"\n    default\n  >\n</video>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento adiciona legendas a um vídeo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<track>', '<source>', '<caption>', '<audio>'],
+            pool: 'media-track'
+          },
+          en: {
+            question: 'Which element adds captions to a video?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<track>', '<source>', '<caption>', '<audio>'],
+            pool: 'media-track'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Legendas são um extra opcional, sem relação com acessibilidade.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'media-track',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Captions are an optional extra, unrelated to accessibility.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'media-track',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo mostra os botões de reproduzir e pausar no <video>?',
+            highlight: ['<video>'],
+            correctOption: 1,
+            options: ['controls', 'src', 'kind', 'label'],
+            pool: 'media-track'
+          },
+          en: {
+            question: 'Which attribute shows the play and pause buttons on a <video>?',
+            highlight: ['<video>'],
+            correctOption: 1,
+            options: ['controls', 'src', 'kind', 'label'],
+            pool: 'media-track'
           }
         }
       }
@@ -4838,6 +7665,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<iframe\n  src="https://example.com"\n  sandbox="allow-scripts"\n>\n</iframe>',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que um <iframe> deve ter o atributo title?',
+            highlight: ['<iframe>'],
+            correctOption: 1,
+            options: ['Para descrever o conteúdo a quem usa leitor de tela', 'Para definir o tamanho do quadro', 'Para mudar o texto da aba', 'Para liberar a execução de scripts'],
+            pool: 'iframe'
+          },
+          en: {
+            question: 'Why should an <iframe> have a title attribute?',
+            highlight: ['<iframe>'],
+            correctOption: 1,
+            options: ['To describe the content to screen reader users', 'To set the frame\'s size', 'To change the tab\'s text', 'To allow scripts to run'],
+            pool: 'iframe'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo restringe o que o conteúdo incorporado pode fazer?',
+            highlight: [],
+            correctOption: 1,
+            options: ['sandbox', 'title', 'src', 'width'],
+            pool: 'iframe'
+          },
+          en: {
+            question: 'Which attribute restricts what the embedded content can do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['sandbox', 'title', 'src', 'width'],
+            pool: 'iframe'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar muitos iframes pode deixar a página mais lenta.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'iframe',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using many iframes can make the page slower.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'iframe',
+            fixedOrder: true
           }
         }
       }
@@ -4900,6 +7788,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um ícone que precisa ficar nítido em qualquer tamanho. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['SVG', 'Canvas', 'Uma imagem JPG pequena', 'Um <iframe>'],
+            pool: 'svg-canvas'
+          },
+          en: {
+            question: 'An icon that must stay sharp at any size. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['SVG', 'Canvas', 'A small JPG image', 'An <iframe>'],
+            pool: 'svg-canvas'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O <canvas> é uma área de desenho controlada principalmente por JavaScript.',
+            highlight: ['<canvas>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'svg-canvas',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The <canvas> is a drawing area controlled mainly by JavaScript.',
+            highlight: ['<canvas>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'svg-canvas',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a diferença entre SVG e Canvas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['SVG descreve formas; Canvas é desenhado por código', 'Canvas descreve formas; SVG é desenhado por código', 'SVG só funciona com JavaScript', 'Não há diferença'],
+            pool: 'svg-canvas'
+          },
+          en: {
+            question: 'What is the difference between SVG and Canvas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['SVG describes shapes; Canvas is drawn by code', 'Canvas describes shapes; SVG is drawn by code', 'SVG only works with JavaScript', 'There is no difference'],
+            pool: 'svg-canvas'
+          }
+        }
       }
     ]
   },
@@ -4946,6 +7895,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<dialog open>\n  <h2>Hello!</h2>\n  <p>This is a dialog box.</p>\n\n  <button>Close</button>\n</dialog>'
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento define o título que abre um <details>?',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
+            pool: 'details-dialog'
+          },
+          en: {
+            question: 'Which element sets the title that opens a <details>?',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
+            pool: 'details-dialog'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<details> cria uma seção expansível sem precisar de JavaScript.',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'details-dialog',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<details> creates an expandable section without needing JavaScript.',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'details-dialog',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento nativo representa uma caixa de diálogo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
+            pool: 'details-dialog'
+          },
+          en: {
+            question: 'Which native element represents a dialog box?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
+            pool: 'details-dialog'
+          }
+        }
       }
     ]
   },
@@ -4990,6 +8000,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['lang', 'dir'],
             codeLanguage: 'HTML',
             code: '<p lang="pt">\n  Este parágrafo está em português.\n</p>\n\n<p dir="rtl">\n  نص باللغة العربية\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo indica que um parágrafo está em inglês?',
+            highlight: [],
+            correctOption: 1,
+            options: ['lang="en"', 'dir="en"', 'hidden="en"', 'title="en"'],
+            pool: 'global-attrs'
+          },
+          en: {
+            question: 'Which attribute says a paragraph is in English?',
+            highlight: [],
+            correctOption: 1,
+            options: ['lang="en"', 'dir="en"', 'hidden="en"', 'title="en"'],
+            pool: 'global-attrs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo esconde o elemento, inclusive de leitores de tela?',
+            highlight: [],
+            correctOption: 1,
+            options: ['hidden', 'dir', 'lang', 'title'],
+            pool: 'global-attrs'
+          },
+          en: {
+            question: 'Which attribute hides the element, including from screen readers?',
+            highlight: [],
+            correctOption: 1,
+            options: ['hidden', 'dir', 'lang', 'title'],
+            pool: 'global-attrs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'dir="rtl" indica um texto escrito da direita para a esquerda.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'global-attrs',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'dir="rtl" marks text written from right to left.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'global-attrs',
+            fixedOrder: true
           }
         }
       }
@@ -5042,6 +8113,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como o JavaScript lê o data-product-id de um botão?',
+            highlight: [],
+            correctOption: 1,
+            options: ['botao.dataset.productId', 'botao.data.product-id', 'botao.productId', 'botao.getData("id")'],
+            pool: 'data-attrs'
+          },
+          en: {
+            question: 'How does JavaScript read a button\'s data-product-id?',
+            highlight: [],
+            correctOption: 1,
+            options: ['button.dataset.productId', 'button.data.product-id', 'button.productId', 'button.getData("id")'],
+            pool: 'data-attrs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Para guardar uma informação própria no elemento, o certo é inventar um atributo, como produto="42".',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'data-attrs',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'To store your own information on an element, the right way is to invent an attribute, like product="42".',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'data-attrs',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que servem os atributos que começam com data-?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Guardar informações personalizadas no elemento', 'Estilizar o elemento', 'Esconder o elemento', 'Transformar o elemento em link'],
+            pool: 'data-attrs'
+          },
+          en: {
+            question: 'What are attributes starting with data- for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Storing custom information on the element', 'Styling the element', 'Hiding the element', 'Turning the element into a link'],
+            pool: 'data-attrs'
+          }
+        }
       }
     ]
   },
@@ -5090,6 +8222,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<template id="cartao">\n  <li>Novo item</li>\n</template>',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O conteúdo de um <template> aparece na página assim que ela carrega.',
+            highlight: ['<template>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'template-edit',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The content of a <template> shows on the page as soon as it loads.',
+            highlight: ['<template>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'template-edit',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo deixa o usuário editar o texto de um parágrafo na página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['contenteditable', 'draggable', 'hidden', 'tabindex'],
+            pool: 'template-edit'
+          },
+          en: {
+            question: 'Which attribute lets the user edit a paragraph\'s text on the page?',
+            highlight: [],
+            correctOption: 1,
+            options: ['contenteditable', 'draggable', 'hidden', 'tabindex'],
+            pool: 'template-edit'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando o conteúdo de um <template> aparece?',
+            highlight: ['<template>'],
+            correctOption: 1,
+            options: ['Quando é clonado e inserido na página', 'Sempre, ao carregar a página', 'Quando o usuário rola até ele', 'Nunca, ele funciona como comentário'],
+            pool: 'template-edit'
+          },
+          en: {
+            question: 'When does the content of a <template> show up?',
+            highlight: ['<template>'],
+            correctOption: 1,
+            options: ['When it\'s cloned and inserted into the page', 'Always, when the page loads', 'When the user scrolls to it', 'Never, it works like a comment'],
+            pool: 'template-edit'
           }
         }
       }
@@ -5144,6 +8337,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que tabindex="0" faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Coloca o elemento na ordem natural do Tab', 'Tira o elemento da navegação', 'Faz dele sempre o primeiro do Tab', 'Esconde o elemento'],
+            pool: 'tabindex'
+          },
+          en: {
+            question: 'What does tabindex="0" do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adds the element to the natural Tab order', 'Removes the element from navigation', 'Always makes it first in the Tab order', 'Hides the element'],
+            pool: 'tabindex'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que tabindex="-1" faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Tira o elemento da navegação pelo Tab', 'Coloca na ordem natural do Tab', 'Faz dele o último do Tab', 'Desativa o clique'],
+            pool: 'tabindex'
+          },
+          en: {
+            question: 'What does tabindex="-1" do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Removes the element from Tab navigation', 'Adds it to the natural Tab order', 'Makes it last in the Tab order', 'Disables clicking'],
+            pool: 'tabindex'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma <div> recebe foco pelo teclado automaticamente, como um botão.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tabindex',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A <div> gets keyboard focus automatically, like a button.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tabindex',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5194,6 +8448,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que servem landmarks como <header>, <nav> e <main>?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pontos de navegação rápida para leitores de tela', 'Só para organizar o visual', 'Para a página carregar mais rápido', 'Para validar formulários'],
+            pool: 'landmarks'
+          },
+          en: {
+            question: 'What are landmarks like <header>, <nav> and <main> for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Quick navigation points for screen readers', 'Only organizing the visuals', 'Making the page load faster', 'Validating forms'],
+            pool: 'landmarks'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um leitor de tela pode pular direto para o <main>, sem passar pelo cabeçalho.',
+            highlight: ['<main>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'landmarks',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A screen reader can jump straight to the <main>, skipping the header.',
+            highlight: ['<main>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'landmarks',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como um leitor de tela sabe o propósito de um campo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pelo <label> ligado ao campo com for e id', 'Pela cor do campo', 'Pelo tamanho do campo', 'Pela posição do campo na tela'],
+            pool: 'landmarks'
+          },
+          en: {
+            question: 'How does a screen reader know what a field is for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Through the <label> linked to it with for and id', 'By the field\'s color', 'By the field\'s size', 'By the field\'s position on screen'],
+            pool: 'landmarks'
+          }
+        }
       }
     ]
   },
@@ -5242,6 +8557,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<!-- Preferable -->\n<button>\n  Save\n</button>\n\n<!-- Avoid when there is no need -->\n<div role="button">\n  Save\n</div>',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'ARIA deve substituir os elementos nativos do HTML sempre que possível.',
+            highlight: ['ARIA', 'HTML'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'aria',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'ARIA should replace native HTML elements whenever possible.',
+            highlight: ['ARIA', 'HTML'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'aria',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para um botão de salvar, o que é preferível?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<button>Salvar</button>', '<div role="button">Salvar</div>', '<span>Salvar</span>', '<p>Salvar</p>'],
+            pool: 'aria'
+          },
+          en: {
+            question: 'For a save button, what is preferable?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<button>Save</button>', '<div role="button">Save</div>', '<span>Save</span>', '<p>Save</p>'],
+            pool: 'aria'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um botão mostra só o ícone ×. O que ajuda o leitor de tela a anunciá-lo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['aria-label="Fechar janela"', 'hidden', 'tabindex="-1"', 'dir="rtl"'],
+            pool: 'aria'
+          },
+          en: {
+            question: 'A button shows only a × icon. What helps the screen reader announce it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['aria-label="Close window"', 'hidden', 'tabindex="-1"', 'dir="rtl"'],
+            pool: 'aria'
           }
         }
       }
@@ -8160,6 +11536,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'React é uma linguagem de programação diferente do JavaScript.',
+            highlight: ['React', 'JavaScript'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'react-what',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'React is a programming language separate from JavaScript.',
+            highlight: ['React', 'JavaScript'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'react-what',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é React?',
+            highlight: ['React'],
+            correctOption: 1,
+            options: ['Uma biblioteca JavaScript para construir interfaces', 'Uma linguagem de marcação', 'Um navegador', 'Um banco de dados'],
+            pool: 'react-what'
+          },
+          en: {
+            question: 'What is React?',
+            highlight: ['React'],
+            correctOption: 1,
+            options: ['A JavaScript library for building interfaces', 'A markup language', 'A browser', 'A database'],
+            pool: 'react-what'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Ao aprender React, o que acontece com o que você sabe de HTML?',
+            highlight: ['React', 'HTML'],
+            correctOption: 1,
+            options: ['Continua sendo uma base importante', 'Deixa de ser útil', 'Só serve para o CSS', 'É trocado por outra linguagem'],
+            pool: 'react-what'
+          },
+          en: {
+            question: 'When you learn React, what happens to what you know about HTML?',
+            highlight: ['React', 'HTML'],
+            correctOption: 1,
+            options: ['It stays an important foundation', 'It stops being useful', 'It only helps with CSS', 'It\'s replaced by another language'],
+            pool: 'react-what'
+          }
+        }
       }
     ]
   },
@@ -8208,6 +11645,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Button() {\n  return <button>Sign in</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Button />\n    </main>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é um componente no React?',
+            highlight: ['React'],
+            correctOption: 1,
+            options: ['Uma parte da interface que pode ser reutilizada', 'Um arquivo de CSS', 'Sempre uma página inteira', 'Um atributo do HTML'],
+            pool: 'components'
+          },
+          en: {
+            question: 'What is a component in React?',
+            highlight: ['React'],
+            correctOption: 1,
+            options: ['A reusable part of the interface', 'A CSS file', 'Always a whole page', 'An HTML attribute'],
+            pool: 'components'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um componente pode usar outros componentes para formar uma interface maior.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'components',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A component can use other components to build a bigger interface.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'components',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No trecho <main><Botao /></main>, o que é <Botao />?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um componente sendo usado', 'Uma tag nativa do HTML', 'Um comentário', 'Um atributo do <main>'],
+            pool: 'components'
+          },
+          en: {
+            question: 'In the snippet <main><Button /></main>, what is <Button />?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A component being used', 'A native HTML tag', 'A comment', 'An attribute of <main>'],
+            pool: 'components'
           }
         }
       }
@@ -8262,6 +11760,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No JSX, como se escreve o atributo class do HTML?',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['className', 'class', 'cssClass', 'classList'],
+            pool: 'jsx-attrs'
+          },
+          en: {
+            question: 'In JSX, how do you write HTML\'s class attribute?',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['className', 'class', 'cssClass', 'classList'],
+            pool: 'jsx-attrs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No JSX, o atributo for de um <label> vira:',
+            highlight: ['JSX', '<label>'],
+            correctOption: 1,
+            options: ['htmlFor', 'for', 'labelFor', 'forId'],
+            pool: 'jsx-attrs'
+          },
+          en: {
+            question: 'In JSX, the for attribute of a <label> becomes:',
+            highlight: ['JSX', '<label>'],
+            correctOption: 1,
+            options: ['htmlFor', 'for', 'labelFor', 'forId'],
+            pool: 'jsx-attrs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'JSX é HTML puro escrito dentro do JavaScript.',
+            highlight: ['JSX'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'jsx-attrs',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'JSX is plain HTML written inside JavaScript.',
+            highlight: ['JSX'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'jsx-attrs',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -8312,6 +11871,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como mostrar o valor da variável nome dentro do JSX?',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['{nome}', '"nome"', '(nome)', '<nome>'],
+            pool: 'jsx-expr'
+          },
+          en: {
+            question: 'How do you show the value of the name variable inside JSX?',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['{name}', '"name"', '(name)', '<name>'],
+            pool: 'jsx-expr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const idade = 20, o que <p>Idade: {idade}</p> mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Idade: 20', 'Idade: {idade}', 'Idade: idade', 'Nada'],
+            pool: 'jsx-expr'
+          },
+          en: {
+            question: 'With const age = 20, what does <p>Age: {age}</p> show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Age: 20', 'Age: {age}', 'Age: age', 'Nothing'],
+            pool: 'jsx-expr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'As chaves permitem colocar expressões JavaScript dentro do JSX.',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'jsx-expr',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Curly braces let you put JavaScript expressions inside JSX.',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'jsx-expr',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -8339,6 +11959,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Greeting({ name }) {\n  return <h2>Hello, {name}!</h2>;\n}\n\nfunction App() {\n  return <Greeting name="Ana" />;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quem fornece as props de um componente?',
+            highlight: ['props'],
+            correctOption: 1,
+            options: ['Quem usa o componente', 'O próprio componente', 'O navegador', 'O CSS da página'],
+            pool: 'props'
+          },
+          en: {
+            question: 'Who provides a component\'s props?',
+            highlight: ['props'],
+            correctOption: 1,
+            options: ['Whoever uses the component', 'The component itself', 'The browser', 'The page\'s CSS'],
+            pool: 'props'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em <Saudacao nome="Ana" />, qual é o nome da prop?',
+            highlight: [],
+            correctOption: 1,
+            options: ['nome', 'Ana', 'Saudacao', 'props'],
+            pool: 'props'
+          },
+          en: {
+            question: 'In <Greeting name="Ana" />, what is the prop\'s name?',
+            highlight: [],
+            correctOption: 1,
+            options: ['name', 'Ana', 'Greeting', 'props'],
+            pool: 'props'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com props, o mesmo componente pode mostrar informações diferentes.',
+            highlight: ['props'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'props',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With props, the same component can show different information.',
+            highlight: ['props'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'props',
+            fixedOrder: true
           }
         }
       }
@@ -8451,6 +12132,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que acontece quando o estado de um componente muda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O componente é renderizado de novo', 'A página inteira recarrega', 'Nada muda na tela', 'O componente é apagado'],
+            pool: 'state'
+          },
+          en: {
+            question: 'What happens when a component\'s state changes?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The component renders again', 'The whole page reloads', 'Nothing changes on screen', 'The component is removed'],
+            pool: 'state'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Re-renderizar faz o React refazer a página inteira no navegador.',
+            highlight: ['React'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'state',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Re-rendering makes React rebuild the whole page in the browser.',
+            highlight: ['React'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'state',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando faz sentido usar estado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Para um valor que muda enquanto a pessoa usa a tela', 'Para um texto que nunca muda', 'Para o nome de um arquivo', 'Para o título da aba'],
+            pool: 'state'
+          },
+          en: {
+            question: 'When does it make sense to use state?',
+            highlight: [],
+            correctOption: 1,
+            options: ['For a value that changes while the person uses the screen', 'For text that never changes', 'For a file name', 'For the tab title'],
+            pool: 'state'
+          }
+        }
       }
     ]
   },
@@ -8530,6 +12272,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O número de um contador, atualizado pelo próprio componente a cada clique, deve ser:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Estado', 'Uma prop', 'Um atributo HTML', 'Um comentário'],
+            pool: 'props-vs-state'
+          },
+          en: {
+            question: 'A counter\'s number, updated by the component itself on each click, should be:',
+            highlight: [],
+            correctOption: 1,
+            options: ['State', 'A prop', 'An HTML attribute', 'A comment'],
+            pool: 'props-vs-state'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O título que um componente recebe de quem o usa é:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma prop', 'Um estado', 'Um Hook', 'Um evento'],
+            pool: 'props-vs-state'
+          },
+          en: {
+            question: 'The title a component receives from whoever uses it is:',
+            highlight: [],
+            correctOption: 1,
+            options: ['A prop', 'State', 'A Hook', 'An event'],
+            pool: 'props-vs-state'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Props são recebidas pelo componente; o estado é controlado pelo próprio componente.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'props-vs-state',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Props are received by the component; state is controlled by the component itself.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'props-vs-state',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -8607,6 +12410,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'useState();',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que são Hooks?',
+            highlight: ['Hooks'],
+            correctOption: 1,
+            options: ['Funções do React para usar recursos dele nos componentes', 'Atributos novos do HTML', 'Arquivos de estilo', 'Tags especiais do navegador'],
+            pool: 'hooks'
+          },
+          en: {
+            question: 'What are Hooks?',
+            highlight: ['Hooks'],
+            correctOption: 1,
+            options: ['React functions to use its features in components', 'New HTML attributes', 'Style files', 'Special browser tags'],
+            pool: 'hooks'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'useState é um Hook.',
+            highlight: ['useState'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'hooks',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'useState is a Hook.',
+            highlight: ['useState'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'hooks',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Além do useState, qual destes também é um Hook do React?',
+            highlight: ['useState'],
+            correctOption: 1,
+            options: ['useEffect', 'onClick', 'className', 'htmlFor'],
+            pool: 'hooks'
+          },
+          en: {
+            question: 'Besides useState, which of these is also a React Hook?',
+            highlight: ['useState'],
+            correctOption: 1,
+            options: ['useEffect', 'onClick', 'className', 'htmlFor'],
+            pool: 'hooks'
           }
         }
       }
@@ -8854,6 +12718,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Em React, a semântica do HTML deixa de importar.',
+            highlight: ['React', 'HTML'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'html-react',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In React, HTML semantics stop mattering.',
+            highlight: ['React', 'HTML'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'html-react',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Num componente de cartão de produto, qual elemento representa melhor esse conteúdo independente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<article>', '<span>', '<b>', '<small>'],
+            pool: 'html-react'
+          },
+          en: {
+            question: 'In a product card component, which element best represents that standalone content?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<article>', '<span>', '<b>', '<small>'],
+            pool: 'html-react'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a principal mudança ao passar do HTML para o React?',
+            highlight: ['HTML', 'React'],
+            correctOption: 1,
+            options: ['A forma de organizar a interface, em componentes', 'Os elementos HTML deixam de existir', 'Não é mais preciso estruturar a página', 'O CSS passa a ser obrigatório'],
+            pool: 'html-react'
+          },
+          en: {
+            question: 'What is the main change when moving from HTML to React?',
+            highlight: ['HTML', 'React'],
+            correctOption: 1,
+            options: ['How the interface is organized, into components', 'HTML elements stop existing', 'You no longer need to structure the page', 'CSS becomes mandatory'],
+            pool: 'html-react'
           }
         }
       }

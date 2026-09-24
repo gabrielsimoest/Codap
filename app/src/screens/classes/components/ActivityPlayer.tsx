@@ -61,6 +61,7 @@ export default function ActivityPlayer({
 			const content = current.content as TheoryActivityContent;
 			return (
 				<TheoryView
+					key={activityIndex}
 					firstParagraph={content.firstParagraph}
 					secondParagraph={content.secondParagraph}
 					thirdParagraph={content.thirdParagraph}
@@ -82,7 +83,10 @@ export default function ActivityPlayer({
 		case "option": {
 			const content = current.content as OptionActivityContent;
 			return (
+				// `key` por índice: sem ela, duas `option` seguidas reaproveitariam
+				// a mesma instância e herdariam a alternativa marcada da anterior.
 				<OptionExercise
+					key={activityIndex}
 					question={content.question}
 					aditionalParagraph={content.aditionalParagraph}
 					options={content.options}
