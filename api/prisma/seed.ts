@@ -5420,6 +5420,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é o papel do JavaScript numa página web?',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['Criar comportamentos e interações', 'Definir a estrutura do conteúdo', 'Definir as cores e as fontes', 'Guardar o HTML no servidor'],
+            pool: 'js-role'
+          },
+          en: {
+            question: 'What is JavaScript\'s role on a web page?',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['Creating behavior and interactions', 'Defining the content structure', 'Defining colors and fonts', 'Storing the HTML on the server'],
+            pool: 'js-role'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'HTML define a estrutura, CSS define a aparência e JavaScript define o comportamento.',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'js-role',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'HTML defines the structure, CSS the look and JavaScript the behavior.',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'js-role',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'JavaScript é uma linguagem de:',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['Programação', 'Marcação', 'Estilo', 'Banco de dados'],
+            pool: 'js-role'
+          },
+          en: {
+            question: 'JavaScript is a:',
+            highlight: ['JavaScript'],
+            correctOption: 1,
+            options: ['Programming language', 'Markup language', 'Style language', 'Database'],
+            pool: 'js-role'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve o console.log?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Mostrar um valor no console', 'Criar uma variável', 'Parar o programa', 'Estilizar a página'],
+            pool: 'console-log'
+          },
+          en: {
+            question: 'What is console.log for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Showing a value in the console', 'Creating a variable', 'Stopping the program', 'Styling the page'],
+            pool: 'console-log'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que console.log("Olá, " + "Ana" + "!") mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Olá, Ana!', '"Olá, " + "Ana" + "!"', 'Olá,Ana', 'Erro'],
+            pool: 'console-log'
+          },
+          en: {
+            question: 'What does console.log("Hello, " + "Ana" + "!") show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Hello, Ana!', '"Hello, " + "Ana" + "!"', 'Hello,Ana', 'Error'],
+            pool: 'console-log'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'console.log é útil para ver valores enquanto desenvolvemos.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'console-log',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'console.log is useful for seeing values while developing.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'console-log',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5470,6 +5592,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'let age = 20;\nage = 21;\n\nconst name = "Ana";\n\nconsole.log(age, name);',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é uma variável?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um nome que guarda um valor para usar depois', 'Um tipo de laço', 'Uma tag do HTML', 'Um erro do programa'],
+            pool: 'variables'
+          },
+          en: {
+            question: 'What is a variable?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A name that stores a value to use later', 'A kind of loop', 'An HTML tag', 'A program error'],
+            pool: 'variables'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em let idade = 20;, o que é idade?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O nome da variável', 'O valor', 'O tipo', 'A palavra-chave'],
+            pool: 'variables'
+          },
+          en: {
+            question: 'In let age = 20;, what is age?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The variable\'s name', 'The value', 'The type', 'The keyword'],
+            pool: 'variables'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Variáveis permitem dar nome aos dados que o programa usa.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'variables',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Variables let you name the data the program uses.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'variables',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual palavra usar para um valor que vai ser reatribuído depois?',
+            highlight: [],
+            correctOption: 1,
+            options: ['let', 'const', 'fixed', 'static'],
+            pool: 'let-const'
+          },
+          en: {
+            question: 'Which keyword do you use for a value that will be reassigned later?',
+            highlight: [],
+            correctOption: 1,
+            options: ['let', 'const', 'fixed', 'static'],
+            pool: 'let-const'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma variável declarada com const pode receber um novo valor depois.',
+            highlight: ['const'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'let-const',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A variable declared with const can get a new value later.',
+            highlight: ['const'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'let-const',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que acontece em const nome = "Ana"; nome = "Bia";?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Dá erro: const não pode ser reatribuída', 'nome passa a ser "Bia"', 'nome vira undefined', 'Os dois valores ficam guardados'],
+            pool: 'let-const'
+          },
+          en: {
+            question: 'What happens in const name = "Ana"; name = "Bia";?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An error: const can\'t be reassigned', 'name becomes "Bia"', 'name becomes undefined', 'Both values are kept'],
+            pool: 'let-const'
           }
         }
       }
@@ -5524,6 +5768,304 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é o tipo de true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['boolean', 'string', 'number', 'undefined'],
+            pool: 'types'
+          },
+          en: {
+            question: 'What is the type of true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['boolean', 'string', 'number', 'undefined'],
+            pool: 'types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é o tipo de "20"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['string', 'number', 'boolean', 'null'],
+            pool: 'types'
+          },
+          en: {
+            question: 'What is the type of "20"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['string', 'number', 'boolean', 'null'],
+            pool: 'types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um boolean tem só dois valores possíveis: true e false.',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'types',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A boolean has only two possible values: true and false.',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'types',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor representa uma ausência intencional de valor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['null', 'undefined', '0', '""'],
+            pool: 'null-undefined'
+          },
+          en: {
+            question: 'Which value represents an intentional absence of value?',
+            highlight: [],
+            correctOption: 1,
+            options: ['null', 'undefined', '0', '""'],
+            pool: 'null-undefined'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma variável declarada sem valor, como let x;, vale:',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', 'null', '0', '""'],
+            pool: 'null-undefined'
+          },
+          en: {
+            question: 'A variable declared without a value, like let x;, holds:',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', 'null', '0', '""'],
+            pool: 'null-undefined'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'null e undefined são a mesma coisa em JavaScript.',
+            highlight: ['null', 'undefined'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'null-undefined',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'null and undefined are the same thing in JavaScript.',
+            highlight: ['null', 'undefined'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'null-undefined',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Strings',
+      en: 'Strings'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Strings têm propriedades e métodos próprios. length informa quantos caracteres há no texto.',
+            secondParagraph: 'toUpperCase e toLowerCase devolvem o texto em maiúsculas ou minúsculas, e includes verifica se um trecho aparece dentro dele.',
+            endParagraph: 'Esses métodos devolvem um valor novo: a string original não muda.',
+            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "JavaScript";\n\nconsole.log(nome.length);\nconsole.log(nome.toUpperCase());\nconsole.log(nome.includes("Script"));',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Strings have their own properties and methods. length tells you how many characters the text has.',
+            secondParagraph: 'toUpperCase and toLowerCase return the text in upper or lower case, and includes checks whether a piece of text appears inside it.',
+            endParagraph: 'These methods return a new value: the original string doesn\'t change.',
+            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "JavaScript";\n\nconsole.log(name.length);\nconsole.log(name.toUpperCase());\nconsole.log(name.includes("Script"));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'slice recorta um pedaço da string, do índice inicial até antes do final. Assim como nos arrays, o primeiro caractere fica no índice 0.',
+            secondParagraph: 'trim remove os espaços do começo e do fim, e split divide a string em um array usando um separador.',
+            endParagraph: 'split é muito útil para transformar uma lista escrita em texto em um array de verdade.',
+            highlight: ['slice', 'trim', 'split'],
+            codeLanguage: 'JavaScript',
+            code: 'const frase = "  aprender JavaScript  ";\n\nconsole.log(frase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("maçã,banana,uva".split(","));',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'slice cuts out a piece of the string, from the start index up to just before the end one. Just like arrays, the first character is at index 0.',
+            secondParagraph: 'trim removes spaces from the start and end, and split breaks the string into an array using a separator.',
+            endParagraph: 'split is very handy for turning a list written as text into a real array.',
+            highlight: ['slice', 'trim', 'split'],
+            codeLanguage: 'JavaScript',
+            code: 'const phrase = "  learning JavaScript  ";\n\nconsole.log(phrase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("apple,banana,grape".split(","));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que console.log("Olá".length) mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '"Olá"'],
+            pool: 'string-basics'
+          },
+          en: {
+            question: 'What does console.log("Hi!".length) show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '"Hi!"'],
+            pool: 'string-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método deixa o texto todo em maiúsculas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
+            pool: 'string-basics'
+          },
+          en: {
+            question: 'Which method makes the whole text uppercase?',
+            highlight: [],
+            correctOption: 1,
+            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
+            pool: 'string-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'toUpperCase altera a string original.',
+            highlight: ['toUpperCase'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'string-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'toUpperCase changes the original string.',
+            highlight: ['toUpperCase'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'string-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que "JavaScript".slice(0, 4) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
+            pool: 'string-methods'
+          },
+          en: {
+            question: 'What does "JavaScript".slice(0, 4) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
+            pool: 'string-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que "a,b,c".split(",") devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
+            pool: 'string-methods'
+          },
+          en: {
+            question: 'What does "a,b,c".split(",") return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
+            pool: 'string-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'trim remove os espaços do começo e do fim da string.',
+            highlight: ['trim'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'string-methods',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'trim removes the spaces at the start and end of the string.',
+            highlight: ['trim'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'string-methods',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5576,6 +6118,304 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale 10 * 5?',
+            highlight: [],
+            correctOption: 1,
+            options: ['50', '15', '2', '105'],
+            pool: 'arith'
+          },
+          en: {
+            question: 'What is 10 * 5?',
+            highlight: [],
+            correctOption: 1,
+            options: ['50', '15', '2', '105'],
+            pool: 'arith'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que console.log(10 / 5) mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['2', '50', '5', '0.5'],
+            pool: 'arith'
+          },
+          en: {
+            question: 'What does console.log(10 / 5) show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['2', '50', '5', '0.5'],
+            pool: 'arith'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Os operadores + - * / servem para cálculos matemáticos.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'arith',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The + - * / operators are used for math.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'arith',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o resultado de 10 === 10?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', '10', 'undefined'],
+            pool: 'compare'
+          },
+          en: {
+            question: 'What is the result of 10 === 10?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', '10', 'undefined'],
+            pool: 'compare'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual operador verifica se dois valores são diferentes?',
+            highlight: [],
+            correctOption: 1,
+            options: ['!==', '===', '>', '='],
+            pool: 'compare'
+          },
+          en: {
+            question: 'Which operator checks whether two values are different?',
+            highlight: [],
+            correctOption: 1,
+            options: ['!==', '===', '>', '='],
+            pool: 'compare'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Comparações como 10 > 5 produzem um resultado booleano.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'compare',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Comparisons like 10 > 5 produce a boolean result.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'compare',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Operadores lógicos',
+      en: 'Logical operators'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O operador && (e) só é verdadeiro quando os dois lados são verdadeiros. O operador || (ou) é verdadeiro quando pelo menos um lado é verdadeiro.',
+            secondParagraph: 'Já o ! (não) inverte um valor booleano: !true vira false.',
+            endParagraph: 'Esses operadores combinam comparações para montar condições mais completas.',
+            highlight: ['booleano'],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\nconst temIngresso = true;\n\nconsole.log(idade >= 18 && temIngresso);\nconsole.log(idade < 12 || temIngresso);\nconsole.log(!temIngresso);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The && (and) operator is only true when both sides are true. The || (or) operator is true when at least one side is true.',
+            secondParagraph: 'The ! (not) operator flips a boolean value: !true becomes false.',
+            endParagraph: 'These operators combine comparisons to build more complete conditions.',
+            highlight: ['boolean'],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\nconst hasTicket = true;\n\nconsole.log(age >= 18 && hasTicket);\nconsole.log(age < 12 || hasTicket);\nconsole.log(!hasTicket);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Numa condição, todo valor é tratado como verdadeiro ou falso. Os valores tratados como falsos são chamados de falsy.',
+            secondParagraph: 'São falsy: false, 0, "" (string vazia), null, undefined e NaN. Todo o resto é truthy, inclusive "0" e arrays vazios.',
+            endParagraph: 'Por isso, um if (nome) só entra no bloco quando nome não é uma string vazia.',
+            highlight: ['falsy', 'truthy'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n} else {\n  console.log("Nome vazio");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'In a condition, every value is treated as true or false. The values treated as false are called falsy.',
+            secondParagraph: 'These are falsy: false, 0, "" (empty string), null, undefined and NaN. Everything else is truthy, including "0" and empty arrays.',
+            endParagraph: 'That\'s why an if (name) only runs its block when name isn\'t an empty string.',
+            highlight: ['falsy', 'truthy'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "";\n\nif (name) {\n  console.log("Hello, " + name);\n} else {\n  console.log("Empty name");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o resultado de true && false?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'Erro'],
+            pool: 'and-or-not'
+          },
+          en: {
+            question: 'What is the result of true && false?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'Error'],
+            pool: 'and-or-not'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o resultado de false || true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', 'null', 'Erro'],
+            pool: 'and-or-not'
+          },
+          en: {
+            question: 'What is the result of false || true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', 'null', 'Error'],
+            pool: 'and-or-not'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O operador ! inverte um valor booleano.',
+            highlight: ['booleano'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'and-or-not',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The ! operator flips a boolean value.',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'and-or-not',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes valores é falsy?',
+            highlight: ['falsy'],
+            correctOption: 1,
+            options: ['0', '"0"', '[]', '"false"'],
+            pool: 'truthy-falsy'
+          },
+          en: {
+            question: 'Which of these values is falsy?',
+            highlight: ['falsy'],
+            correctOption: 1,
+            options: ['0', '"0"', '[]', '"false"'],
+            pool: 'truthy-falsy'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const nome = "", o bloco de if (nome) roda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não, porque string vazia é falsy', 'Sim, porque a variável existe', 'Sim, porque "" é truthy', 'Dá erro, nome não tem valor'],
+            pool: 'truthy-falsy'
+          },
+          en: {
+            question: 'With const name = "", does the if (name) block run?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No, because an empty string is falsy', 'Yes, because the variable exists', 'Yes, because "" is truthy', 'It errors, name has no value'],
+            pool: 'truthy-falsy'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um array vazio [] é falsy.',
+            highlight: ['falsy'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'truthy-falsy',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An empty array [] is falsy.',
+            highlight: ['falsy'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'truthy-falsy',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5624,6 +6464,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const age = 16;\n\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const idade = 20, o que if (idade >= 18) { console.log("Maior de idade") } mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Maior de idade', 'Nada', 'Menor de idade', 'Erro'],
+            pool: 'if'
+          },
+          en: {
+            question: 'With const age = 20, what does if (age >= 18) { console.log("Adult") } show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Adult', 'Nothing', 'Minor', 'Error'],
+            pool: 'if'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O bloco do if só roda quando a condição é verdadeira.',
+            highlight: ['if'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'if',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The if block only runs when the condition is true.',
+            highlight: ['if'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'if',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o if avalia?',
+            highlight: ['if'],
+            correctOption: 1,
+            options: ['Uma condição, verdadeira ou falsa', 'Um texto qualquer', 'A quantidade de linhas', 'O nome de uma função'],
+            pool: 'if'
+          },
+          en: {
+            question: 'What does the if evaluate?',
+            highlight: ['if'],
+            correctOption: 1,
+            options: ['A condition, true or false', 'Any text', 'The number of lines', 'A function\'s name'],
+            pool: 'if'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const idade = 16, qual bloco roda em if (idade >= 18) {...} else {...}?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O do else', 'O do if', 'Os dois', 'Nenhum'],
+            pool: 'else'
+          },
+          en: {
+            question: 'With const age = 16, which block runs in if (age >= 18) {...} else {...}?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The else block', 'The if block', 'Both', 'Neither'],
+            pool: 'else'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve o else?',
+            highlight: ['else'],
+            correctOption: 1,
+            options: ['Definir o que fazer quando a condição do if é falsa', 'Repetir o bloco do if', 'Encerrar o programa', 'Criar uma variável'],
+            pool: 'else'
+          },
+          en: {
+            question: 'What is else for?',
+            highlight: ['else'],
+            correctOption: 1,
+            options: ['Defining what to do when the if condition is false', 'Repeating the if block', 'Ending the program', 'Creating a variable'],
+            pool: 'else'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um else precisa vir acompanhado de um if.',
+            highlight: ['else', 'if'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'else',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An else must come with an if.',
+            highlight: ['else', 'if'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'else',
+            fixedOrder: true
           }
         }
       }
@@ -5678,6 +6640,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const age = 20;\n\nconst status = age >= 18 ? "adult" : "minor";\n\nconsole.log(status);',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No switch, o que o break faz?',
+            highlight: ['switch', 'break'],
+            correctOption: 1,
+            options: ['Encerra o bloco do case', 'Pula para o próximo case', 'Reinicia o switch', 'Cria um novo case'],
+            pool: 'switch'
+          },
+          en: {
+            question: 'In a switch, what does break do?',
+            highlight: ['switch', 'break'],
+            correctOption: 1,
+            options: ['Ends the case block', 'Jumps to the next case', 'Restarts the switch', 'Creates a new case'],
+            pool: 'switch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No switch, qual parte cobre os valores que não combinaram com nenhum case?',
+            highlight: ['switch'],
+            correctOption: 1,
+            options: ['default', 'else', 'break', 'otherwise'],
+            pool: 'switch'
+          },
+          en: {
+            question: 'In a switch, which part covers values that matched no case?',
+            highlight: ['switch'],
+            correctOption: 1,
+            options: ['default', 'else', 'break', 'otherwise'],
+            pool: 'switch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O switch é útil para comparar um mesmo valor com várias opções.',
+            highlight: ['switch'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'switch',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'switch is useful for comparing the same value against several options.',
+            highlight: ['switch'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'switch',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com idade = 20, o que idade >= 18 ? "maior" : "menor" devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"maior"', '"menor"', 'true', '20'],
+            pool: 'ternary'
+          },
+          en: {
+            question: 'With age = 20, what does age >= 18 ? "adult" : "minor" return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"adult"', '"minor"', 'true', '20'],
+            pool: 'ternary'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantas partes tem o operador ternário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Três: condição, valor se verdadeiro e valor se falso', 'Duas: condição e valor', 'Uma: só a condição', 'Quatro, contando o default'],
+            pool: 'ternary'
+          },
+          en: {
+            question: 'How many parts does the ternary operator have?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Three: condition, value if true and value if false', 'Two: condition and value', 'One: just the condition', 'Four, counting default'],
+            pool: 'ternary'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Para lógicas grandes, o ternário é sempre melhor que o if.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ternary',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'For large logic, the ternary is always better than if.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'ternary',
+            fixedOrder: true
           }
         }
       }
@@ -5755,6 +6839,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantas vezes o bloco de for (let i = 0; i < 5; i++) roda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['5', '4', '6', 'Infinitas vezes'],
+            pool: 'for'
+          },
+          en: {
+            question: 'How many times does the for (let i = 0; i < 5; i++) block run?',
+            highlight: [],
+            correctOption: 1,
+            options: ['5', '4', '6', 'Forever'],
+            pool: 'for'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o último número mostrado por for (let i = 0; i < 5; i++) { console.log(i) }?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '5', '0', '6'],
+            pool: 'for'
+          },
+          en: {
+            question: 'What is the last number shown by for (let i = 0; i < 5; i++) { console.log(i) }?',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '5', '0', '6'],
+            pool: 'for'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Laços evitam escrever o mesmo código várias vezes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'for',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Loops save you from writing the same code over and over.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'for',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o while faz?',
+            highlight: ['while'],
+            correctOption: 1,
+            options: ['Repete o bloco enquanto a condição for verdadeira', 'Roda o bloco uma única vez', 'Repete para sempre', 'Roda só se a condição for falsa'],
+            pool: 'while'
+          },
+          en: {
+            question: 'What does while do?',
+            highlight: ['while'],
+            correctOption: 1,
+            options: ['Repeats the block while the condition is true', 'Runs the block only once', 'Repeats forever', 'Runs only if the condition is false'],
+            pool: 'while'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual laço garante que o bloco rode pelo menos uma vez?',
+            highlight: [],
+            correctOption: 1,
+            options: ['do while', 'while', 'for', 'if'],
+            pool: 'while'
+          },
+          en: {
+            question: 'Which loop guarantees the block runs at least once?',
+            highlight: [],
+            correctOption: 1,
+            options: ['do while', 'while', 'for', 'if'],
+            pool: 'while'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O do while testa a condição antes de executar o bloco.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'while',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'do while checks the condition before running the block.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'while',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5803,6 +7009,304 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const fruits = [\n  "apple",\n  "banana",\n  "orange"\n];\n\nconsole.log(fruits[0]);\nconsole.log(fruits[1]);',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é um array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma estrutura que guarda vários valores em ordem', 'Um único texto', 'Uma função', 'Um tipo de condição'],
+            pool: 'arrays'
+          },
+          en: {
+            question: 'What is an array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A structure that stores several values in order', 'A single piece of text', 'A function', 'A kind of condition'],
+            pool: 'arrays'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Os elementos de um array são organizados por índices.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'arrays',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An array\'s elements are organized by indexes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'arrays',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como se escreve um array com três frutas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["maçã", "banana", "uva"]', '{"maçã", "banana", "uva"}', '("maçã", "banana", "uva")', '<maçã, banana, uva>'],
+            pool: 'arrays'
+          },
+          en: {
+            question: 'How do you write an array of three fruits?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["apple", "banana", "grape"]', '{"apple", "banana", "grape"}', '("apple", "banana", "grape")', '<apple, banana, grape>'],
+            pool: 'arrays'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const f = ["maçã", "banana", "uva"], o que f[1] devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"banana"', '"maçã"', '"uva"', 'undefined'],
+            pool: 'index'
+          },
+          en: {
+            question: 'With const f = ["apple", "banana", "grape"], what does f[1] return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"banana"', '"apple"', '"grape"', 'undefined'],
+            pool: 'index'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é o índice do primeiro elemento de um array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['0', '1', '-1', 'Depende do array'],
+            pool: 'index'
+          },
+          en: {
+            question: 'What is the index of an array\'s first element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['0', '1', '-1', 'It depends on the array'],
+            pool: 'index'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O primeiro elemento de um array fica no índice 1.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'index',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An array\'s first element is at index 1.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'index',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Manipulando arrays',
+      en: 'Working with arrays'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'length informa quantos elementos o array tem. push adiciona um elemento no final, e pop remove o último.',
+            secondParagraph: 'Diferente dos métodos de string, push e pop alteram o próprio array.',
+            endParagraph: 'Como o primeiro índice é 0, o último elemento fica sempre em length - 1.',
+            highlight: ['length', 'push', 'pop'],
+            codeLanguage: 'JavaScript',
+            code: 'const frutas = ["maçã", "banana"];\n\nfrutas.push("uva");\nconsole.log(frutas.length);\n\nfrutas.pop();\nconsole.log(frutas);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'length tells you how many elements the array has. push adds an element at the end, and pop removes the last one.',
+            secondParagraph: 'Unlike string methods, push and pop change the array itself.',
+            endParagraph: 'Since the first index is 0, the last element is always at length - 1.',
+            highlight: ['length', 'push', 'pop'],
+            codeLanguage: 'JavaScript',
+            code: 'const fruits = ["apple", "banana"];\n\nfruits.push("grape");\nconsole.log(fruits.length);\n\nfruits.pop();\nconsole.log(fruits);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'includes verifica se um valor está no array e devolve true ou false.',
+            secondParagraph: 'Para percorrer todos os elementos, o laço for of entrega um elemento por vez, sem precisar lidar com índices.',
+            endParagraph: 'Use o for of quando só importa o valor de cada elemento, e o for clássico quando precisar do índice.',
+            highlight: ['includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const frutas = ["maçã", "banana", "uva"];\n\nconsole.log(frutas.includes("banana"));\n\nfor (const fruta of frutas) {\n  console.log(fruta);\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'includes checks whether a value is in the array and returns true or false.',
+            secondParagraph: 'To go through every element, the for of loop hands you one element at a time, with no need to deal with indexes.',
+            endParagraph: 'Use for of when only each element\'s value matters, and the classic for when you need the index.',
+            highlight: ['includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const fruits = ["apple", "banana", "grape"];\n\nconsole.log(fruits.includes("banana"));\n\nfor (const fruit of fruits) {\n  console.log(fruit);\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois de const n = [1, 2]; n.push(3);, quanto vale n.length?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '1'],
+            pool: 'push-pop'
+          },
+          en: {
+            question: 'After const n = [1, 2]; n.push(3);, what is n.length?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '1'],
+            pool: 'push-pop'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método remove o último elemento de um array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['pop', 'push', 'shift', 'slice'],
+            pool: 'push-pop'
+          },
+          en: {
+            question: 'Which method removes the last element of an array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['pop', 'push', 'shift', 'slice'],
+            pool: 'push-pop'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'push e pop alteram o próprio array.',
+            highlight: ['push', 'pop'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'push-pop',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'push and pop change the array itself.',
+            highlight: ['push', 'pop'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'push-pop',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que ["a", "b"].includes("c") devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', '-1', '"c"'],
+            pool: 'includes-forof'
+          },
+          en: {
+            question: 'What does ["a", "b"].includes("c") return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', '-1', '"c"'],
+            pool: 'includes-forof'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o laço for of entrega a cada volta?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um elemento do array', 'O índice do elemento', 'O array inteiro', 'O tamanho do array'],
+            pool: 'includes-forof'
+          },
+          en: {
+            question: 'What does the for of loop hand you on each pass?',
+            highlight: [],
+            correctOption: 1,
+            options: ['One element of the array', 'The element\'s index', 'The whole array', 'The array\'s size'],
+            pool: 'includes-forof'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Num array com 5 elementos, o último fica no índice 5.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'includes-forof',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In an array with 5 elements, the last one is at index 5.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'includes-forof',
+            fixedOrder: true
           }
         }
       }
@@ -5857,6 +7361,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que um objeto agrupa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Propriedades, cada uma com nome e valor', 'Só números', 'Só funções', 'Elementos por índice'],
+            pool: 'objects'
+          },
+          en: {
+            question: 'What does an object group?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Properties, each with a name and a value', 'Only numbers', 'Only functions', 'Elements by index'],
+            pool: 'objects'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em { nome: "Ana", idade: 20 }, quais são as propriedades?',
+            highlight: [],
+            correctOption: 1,
+            options: ['nome e idade', '"Ana" e 20', 'Só nome', 'Só idade'],
+            pool: 'objects'
+          },
+          en: {
+            question: 'In { name: "Ana", age: 20 }, which are the properties?',
+            highlight: [],
+            correctOption: 1,
+            options: ['name and age', '"Ana" and 20', 'Only name', 'Only age'],
+            pool: 'objects'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Objetos são usados para representar entidades, como uma pessoa.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'objects',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Objects are used to represent entities, like a person.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'objects',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const pessoa = { nome: "Ana", idade: 20 }, o que pessoa.nome devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Ana"', '"nome"', '20', 'undefined'],
+            pool: 'dot'
+          },
+          en: {
+            question: 'With const person = { name: "Ana", age: 20 }, what does person.name return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Ana"', '"name"', '20', 'undefined'],
+            pool: 'dot'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como acessar a propriedade idade do objeto pessoa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['pessoa.idade', 'idade.pessoa', 'pessoa->idade', 'pessoa:idade'],
+            pool: 'dot'
+          },
+          en: {
+            question: 'How do you access the age property of the person object?',
+            highlight: [],
+            correctOption: 1,
+            options: ['person.age', 'age.person', 'person->age', 'person:age'],
+            pool: 'dot'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A notação de ponto acessa uma propriedade diretamente pelo nome.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'dot',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Dot notation accesses a property directly by its name.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'dot',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5909,6 +7535,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é uma função?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um bloco de código reutilizável, executado quando chamado', 'Uma variável que só guarda texto', 'Um tipo de array', 'Um comentário no código'],
+            pool: 'functions'
+          },
+          en: {
+            question: 'What is a function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A reusable block of code that runs when called', 'A variable that only stores text', 'A kind of array', 'A code comment'],
+            pool: 'functions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como chamar a função saudacao?',
+            highlight: [],
+            correctOption: 1,
+            options: ['saudacao()', 'saudacao', 'call saudacao', 'function saudacao'],
+            pool: 'functions'
+          },
+          en: {
+            question: 'How do you call the greet function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['greet()', 'greet', 'call greet', 'function greet'],
+            pool: 'functions'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Só de definir uma função, o código dela já é executado.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'functions',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Just defining a function already runs its code.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'functions',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com function somar(a, b) { return a + b }, o que somar(5, 3) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['8', '53', '"5 + 3"', 'undefined'],
+            pool: 'params-return'
+          },
+          en: {
+            question: 'With function add(a, b) { return a + b }, what does add(5, 3) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['8', '53', '"5 + 3"', 'undefined'],
+            pool: 'params-return'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em function somar(a, b), o que são a e b?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Parâmetros', 'Retornos', 'Propriedades', 'Índices'],
+            pool: 'params-return'
+          },
+          en: {
+            question: 'In function add(a, b), what are a and b?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Parameters', 'Return values', 'Properties', 'Indexes'],
+            pool: 'params-return'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'return devolve um resultado para quem chamou a função.',
+            highlight: ['return'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'params-return',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'return sends a result back to whoever called the function.',
+            highlight: ['return'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'params-return',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -5959,6 +7707,128 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'if (true) {\n  const message = "Hello";\n  console.log(message);\n}\n\n// message is not available here',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const dobrar = n => n * 2, o que dobrar(4) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['8', '6', '42', '4'],
+            pool: 'arrow'
+          },
+          en: {
+            question: 'With const double = n => n * 2, what does double(4) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['8', '6', '42', '4'],
+            pool: 'arrow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destas é uma arrow function válida?',
+            highlight: [],
+            correctOption: 1,
+            options: ['const somar = (a, b) => a + b;', 'const somar = (a, b) -> a + b;', 'const somar => (a, b) a + b;', 'function => somar(a, b)'],
+            pool: 'arrow'
+          },
+          en: {
+            question: 'Which of these is a valid arrow function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['const add = (a, b) => a + b;', 'const add = (a, b) -> a + b;', 'const add => (a, b) a + b;', 'function => add(a, b)'],
+            pool: 'arrow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Arrow functions são uma sintaxe alternativa para criar funções.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'arrow',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Arrow functions are an alternative syntax for creating functions.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'arrow',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma variável criada com const dentro de um bloco if pode ser usada fora dele?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não, ela só existe dentro do bloco', 'Sim, em qualquer lugar', 'Sim, mas só em funções', 'Só se guardar um número'],
+            pool: 'scope'
+          },
+          en: {
+            question: 'Can a variable created with const inside an if block be used outside it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No, it only exists inside the block', 'Yes, anywhere', 'Yes, but only in functions', 'Only if it holds a number'],
+            pool: 'scope'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é escopo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O lugar do código onde uma variável pode ser acessada', 'O tipo de uma variável', 'O valor inicial de uma variável', 'A velocidade do código'],
+            pool: 'scope'
+          },
+          en: {
+            question: 'What is scope?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Where in the code a variable can be accessed', 'A variable\'s type', 'A variable\'s initial value', 'How fast the code runs'],
+            pool: 'scope'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Variáveis let e const criadas dentro de um bloco só existem naquele bloco.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'scope',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'let and const variables created inside a block only exist in that block.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'scope',
+            fixedOrder: true
           }
         }
       }
@@ -9566,6 +11436,128 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [1, 2, 3].map(n => n * 2) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[2, 4, 6]', '[1, 2, 3]', '[2]', '12'],
+            pool: 'map-filter'
+          },
+          en: {
+            question: 'What does [1, 2, 3].map(n => n * 2) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[2, 4, 6]', '[1, 2, 3]', '[2]', '12'],
+            pool: 'map-filter'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [1, 2, 3, 4].filter(n => n % 2 === 0) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[2, 4]', '[1, 3]', '[false, true, false, true]', '2'],
+            pool: 'map-filter'
+          },
+          en: {
+            question: 'What does [1, 2, 3, 4].filter(n => n % 2 === 0) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[2, 4]', '[1, 3]', '[false, true, false, true]', '2'],
+            pool: 'map-filter'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'map e filter criam um array novo, sem alterar o original.',
+            highlight: ['map', 'filter'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'map-filter',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'map and filter create a new array without changing the original.',
+            highlight: ['map', 'filter'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'map-filter',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [2, 4, 6, 8].find(n => n > 5) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['6', '[6, 8]', '8', 'true'],
+            pool: 'find-some-every'
+          },
+          en: {
+            question: 'What does [2, 4, 6, 8].find(n => n > 5) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['6', '[6, 8]', '8', 'true'],
+            pool: 'find-some-every'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [2, 4, 6].every(n => n % 2 === 0) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', '[2, 4, 6]', '3'],
+            pool: 'find-some-every'
+          },
+          en: {
+            question: 'What does [2, 4, 6].every(n => n % 2 === 0) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', '[2, 4, 6]', '3'],
+            pool: 'find-some-every'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'some verifica se todos os elementos atendem à condição.',
+            highlight: ['some'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'find-some-every',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'some checks whether every element meets the condition.',
+            highlight: ['some'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'find-some-every',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9616,6 +11608,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const products = [\n  { name: "Mouse", price: 50 },\n  { name: "Keyboard", price: 100 }\n];\n\nconst names = products.map(\n  product => product.name\n);\n\nconst expensive = products.filter(\n  product => product.price > 60\n);\n\nconsole.log(names, expensive);',
             onlyCode: true,
             noTerminal: false
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [10, 20, 30].reduce((soma, n) => soma + n, 0) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['60', '102030', '[10, 20, 30]', '30'],
+            pool: 'reduce'
+          },
+          en: {
+            question: 'What does [10, 20, 30].reduce((sum, n) => sum + n, 0) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['60', '102030', '[10, 20, 30]', '30'],
+            pool: 'reduce'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método combina os elementos de um array em um único resultado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['reduce', 'map', 'filter', 'find'],
+            pool: 'reduce'
+          },
+          en: {
+            question: 'Which method combines an array\'s elements into a single result?',
+            highlight: [],
+            correctOption: 1,
+            options: ['reduce', 'map', 'filter', 'find'],
+            pool: 'reduce'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No reduce, o valor acumulado passa de uma volta para a outra.',
+            highlight: ['reduce'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'reduce',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In reduce, the accumulated value carries over from one pass to the next.',
+            highlight: ['reduce'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'reduce',
+            fixedOrder: true
           }
         }
       }
@@ -9672,6 +11725,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const { nome } = { nome: "Ana", idade: 20 }, quanto vale nome?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Ana"', '{ nome: "Ana" }', '20', 'undefined'],
+            pool: 'destructuring'
+          },
+          en: {
+            question: 'With const { name } = { name: "Ana", age: 20 }, what is name?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Ana"', '{ name: "Ana" }', '20', 'undefined'],
+            pool: 'destructuring'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const [a, b] = ["azul", "verde", "vermelho"], quanto vale b?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"verde"', '"azul"', '"vermelho"', '["verde"]'],
+            pool: 'destructuring'
+          },
+          en: {
+            question: 'With const [a, b] = ["blue", "green", "red"], what is b?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"green"', '"blue"', '"red"', '["green"]'],
+            pool: 'destructuring'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No destructuring de arrays, a posição define qual valor é extraído.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'destructuring',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In array destructuring, the position decides which value is extracted.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'destructuring',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9722,6 +11836,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function add(...numbers) {\n  return numbers.reduce(\n    (total, number) => total + number,\n    0\n  );\n}\n\nconsole.log(add(1, 2, 3));',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que [...[1, 2], 3] devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[1, 2, 3]', '[[1, 2], 3]', '[1, 2]', '6'],
+            pool: 'spread-rest'
+          },
+          en: {
+            question: 'What does [...[1, 2], 3] return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['[1, 2, 3]', '[[1, 2], 3]', '[1, 2]', '6'],
+            pool: 'spread-rest'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com function contar(...n) { return n.length }, o que contar(1, 2, 3) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '6', '[1, 2, 3]', '1'],
+            pool: 'spread-rest'
+          },
+          en: {
+            question: 'With function count(...n) { return n.length }, what does count(1, 2, 3) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '6', '[1, 2, 3]', '1'],
+            pool: 'spread-rest'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O spread reúne valores, e o rest expande valores.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'spread-rest',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Spread gathers values, and rest expands them.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'spread-rest',
+            fixedOrder: true
           }
         }
       }
@@ -9780,6 +11955,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const nome = "Ana", o que `Olá, ${nome}!` produz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Olá, Ana!', 'Olá, ${nome}!', 'Olá, nome!', '"Olá, " + nome'],
+            pool: 'template-modern'
+          },
+          en: {
+            question: 'With const name = "Ana", what does `Hi, ${name}!` produce?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Hi, Ana!', 'Hi, ${name}!', 'Hi, name!', '"Hi, " + name'],
+            pool: 'template-modern'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const usuario = {}, o que usuario.endereco?.cidade ?? "Não informada" devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Não informada"', 'undefined', 'Um erro', 'null'],
+            pool: 'template-modern'
+          },
+          en: {
+            question: 'With const user = {}, what does user.address?.city ?? "Not provided" return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Not provided"', 'undefined', 'An error', 'null'],
+            pool: 'template-modern'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Template literals são escritos entre crases.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'template-modern',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Template literals are written between backticks.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'template-modern',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -9832,6 +12068,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'import { add } from "./math.js";\n\nconst result = add(2, 3);\n\nconsole.log(result);',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual palavra disponibiliza uma função para outros arquivos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'return', 'public'],
+            pool: 'modules'
+          },
+          en: {
+            question: 'Which keyword makes a function available to other files?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'return', 'public'],
+            pool: 'modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha usa a função somar exportada por math.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['import { somar } from "./math.js";', 'export { somar } from "./math.js";', 'require somar from math;', 'include "./math.js";'],
+            pool: 'modules'
+          },
+          en: {
+            question: 'Which line uses the add function exported by math.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['import { add } from "./math.js";', 'export { add } from "./math.js";', 'require add from math;', 'include "./math.js";'],
+            pool: 'modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Módulos ajudam a dividir o código em arquivos menores e reutilizáveis.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'modules',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Modules help split code into smaller, reusable files.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'modules',
+            fixedOrder: true
           }
         }
       }
@@ -9902,6 +12199,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
                 code: 'let counter = 1;\n\ndocument\n  .querySelector("#add-button")\n  .addEventListener("click", () => {\n    counter++;\n\n    const item =\n      document.createElement("li");\n    item.textContent = "Item " + counter;\n\n    document\n      .querySelector("#list")\n      .appendChild(item);\n  });'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é o DOM?',
+            highlight: ['DOM'],
+            correctOption: 1,
+            options: ['A página representada como objetos que o JavaScript acessa', 'Um banco de dados do navegador', 'Uma linguagem de estilo', 'Um servidor web'],
+            pool: 'dom'
+          },
+          en: {
+            question: 'What is the DOM?',
+            highlight: ['DOM'],
+            correctOption: 1,
+            options: ['The page represented as objects JavaScript can access', 'A browser database', 'A style language', 'A web server'],
+            pool: 'dom'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método cria um elemento novo, como um li?',
+            highlight: [],
+            correctOption: 1,
+            options: ['document.createElement', 'document.querySelector', 'document.appendChild', 'document.newElement'],
+            pool: 'dom'
+          },
+          en: {
+            question: 'Which method creates a new element, like an li?',
+            highlight: [],
+            correctOption: 1,
+            options: ['document.createElement', 'document.querySelector', 'document.appendChild', 'document.newElement'],
+            pool: 'dom'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'textContent troca o texto de um elemento que já está na página.',
+            highlight: ['textContent'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'dom',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'textContent changes the text of an element already on the page.',
+            highlight: ['textContent'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'dom',
+            fixedOrder: true
           }
         }
       }
@@ -9982,6 +12340,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que classList.toggle("ativo") faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Liga e desliga a classe ativo a cada chamada', 'Remove o elemento', 'Cria um elemento chamado ativo', 'Muda o texto do elemento'],
+            pool: 'classes-events'
+          },
+          en: {
+            question: 'What does classList.toggle("active") do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Turns the active class on and off on each call', 'Removes the element', 'Creates an element called active', 'Changes the element\'s text'],
+            pool: 'classes-events'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método executa uma função quando um evento acontece?',
+            highlight: [],
+            correctOption: 1,
+            options: ['addEventListener', 'setAttribute', 'classList', 'querySelector'],
+            pool: 'classes-events'
+          },
+          en: {
+            question: 'Which method runs a function when an event happens?',
+            highlight: [],
+            correctOption: 1,
+            options: ['addEventListener', 'setAttribute', 'classList', 'querySelector'],
+            pool: 'classes-events'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'setAttribute muda atributos de um elemento, como o aria-label.',
+            highlight: ['setAttribute'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'classes-events',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'setAttribute changes an element\'s attributes, like aria-label.',
+            highlight: ['setAttribute'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'classes-events',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -10034,6 +12453,243 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const user = {\n  name: "Ana",\n  age: 20\n};\n\nlocalStorage.setItem(\n  "user",\n  JSON.stringify(user)\n);\n\nconst saved =\n  JSON.parse(\n    localStorage.getItem("user")\n  );',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Que tipo de valor o localStorage guarda?',
+            highlight: ['localStorage'],
+            correctOption: 1,
+            options: ['Strings', 'Objetos de qualquer tipo', 'Só números', 'Funções'],
+            pool: 'storage-json'
+          },
+          en: {
+            question: 'What kind of value does localStorage store?',
+            highlight: ['localStorage'],
+            correctOption: 1,
+            options: ['Strings', 'Objects of any kind', 'Only numbers', 'Functions'],
+            pool: 'storage-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que console.log(JSON.stringify({ a: 1 })) mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['{"a":1}', '{ a: 1 }', '[object Object]', '1'],
+            pool: 'storage-json'
+          },
+          en: {
+            question: 'What does console.log(JSON.stringify({ a: 1 })) show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['{"a":1}', '{ a: 1 }', '[object Object]', '1'],
+            pool: 'storage-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'JSON.parse transforma uma string JSON de volta em um valor JavaScript.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'storage-json',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'JSON.parse turns a JSON string back into a JavaScript value.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'storage-json',
+            fixedOrder: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Tratamento de erros',
+      en: 'Error handling'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Quando um trecho pode falhar, colocamos ele dentro de um try. Se acontecer um erro, a execução pula para o catch, em vez de parar o programa.',
+            secondParagraph: 'No exemplo, JSON.parse recebe um texto que não é JSON válido e lança um erro, que o catch captura.',
+            endParagraph: 'O bloco finally, quando existe, roda sempre, com erro ou sem erro.',
+            highlight: ['try', 'catch', 'finally'],
+            codeLanguage: 'JavaScript',
+            code: 'try {\n  const dados = JSON.parse("isso não é JSON");\n  console.log(dados);\n} catch (erro) {\n  console.log("Não deu para ler:", erro.name);\n} finally {\n  console.log("Fim da leitura");\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'When a piece of code can fail, we put it inside a try. If an error happens, execution jumps to the catch instead of stopping the program.',
+            secondParagraph: 'In the example, JSON.parse gets text that isn\'t valid JSON and throws an error, which the catch captures.',
+            endParagraph: 'The finally block, when present, always runs, with or without an error.',
+            highlight: ['try', 'catch', 'finally'],
+            codeLanguage: 'JavaScript',
+            code: 'try {\n  const data = JSON.parse("this is not JSON");\n  console.log(data);\n} catch (error) {\n  console.log("Could not read:", error.name);\n} finally {\n  console.log("Done reading");\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Também podemos lançar um erro de propósito com throw, quando um valor não faz sentido para o programa.',
+            secondParagraph: 'new Error recebe uma mensagem, que fica disponível na propriedade message do erro dentro do catch.',
+            endParagraph: 'Lançar um erro claro logo cedo evita que um valor errado se espalhe pelo resto do código.',
+            highlight: ['throw', 'catch', 'message'],
+            codeLanguage: 'JavaScript',
+            code: 'function dividir(a, b) {\n  if (b === 0) {\n    throw new Error("Não dá para dividir por zero");\n  }\n  return a / b;\n}\n\ntry {\n  console.log(dividir(10, 0));\n} catch (erro) {\n  console.log(erro.message);\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'We can also throw an error on purpose with throw, when a value makes no sense for the program.',
+            secondParagraph: 'new Error takes a message, which is available in the error\'s message property inside the catch.',
+            endParagraph: 'Throwing a clear error early keeps a wrong value from spreading through the rest of the code.',
+            highlight: ['throw', 'catch', 'message'],
+            codeLanguage: 'JavaScript',
+            code: 'function divide(a, b) {\n  if (b === 0) {\n    throw new Error("Can\'t divide by zero");\n  }\n  return a / b;\n}\n\ntry {\n  console.log(divide(10, 0));\n} catch (error) {\n  console.log(error.message);\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando o código dentro do try lança um erro, o que acontece?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A execução pula para o catch', 'O erro é ignorado e o try continua', 'O finally é pulado', 'O programa recomeça do início'],
+            pool: 'try-catch'
+          },
+          en: {
+            question: 'When the code inside the try throws an error, what happens?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Execution jumps to the catch', 'The error is ignored and the try continues', 'The finally is skipped', 'The program starts over'],
+            pool: 'try-catch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O bloco finally roda mesmo quando não acontece erro.',
+            highlight: ['finally'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'try-catch',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The finally block runs even when no error happens.',
+            highlight: ['finally'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'try-catch',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que JSON.parse("isso não é JSON") faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Lança um erro', 'Devolve null', 'Devolve a própria string', 'Devolve um objeto vazio'],
+            pool: 'try-catch'
+          },
+          en: {
+            question: 'What does JSON.parse("this is not JSON") do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Throws an error', 'Returns null', 'Returns the string itself', 'Returns an empty object'],
+            pool: 'try-catch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual comando lança um erro de propósito?',
+            highlight: [],
+            correctOption: 1,
+            options: ['throw new Error("mensagem")', 'catch new Error("mensagem")', 'return Error("mensagem")', 'try Error("mensagem")'],
+            pool: 'throw'
+          },
+          en: {
+            question: 'Which statement throws an error on purpose?',
+            highlight: [],
+            correctOption: 1,
+            options: ['throw new Error("message")', 'catch new Error("message")', 'return Error("message")', 'try Error("message")'],
+            pool: 'throw'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Dentro de catch (erro), onde fica a mensagem passada para new Error?',
+            highlight: [],
+            correctOption: 1,
+            options: ['erro.message', 'erro.text', 'erro.name', 'erro.value'],
+            pool: 'throw'
+          },
+          en: {
+            question: 'Inside catch (error), where is the message given to new Error?',
+            highlight: [],
+            correctOption: 1,
+            options: ['error.message', 'error.text', 'error.name', 'error.value'],
+            pool: 'throw'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um erro lançado com throw, sem nenhum try/catch em volta, é ignorado pelo programa.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'throw',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An error thrown with throw, with no try/catch around it, is ignored by the program.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'throw',
+            fixedOrder: true
           }
         }
       }
@@ -10090,6 +12746,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Na comunicação HTTP, o que o cliente envia ao servidor?',
+            highlight: ['HTTP'],
+            correctOption: 1,
+            options: ['Uma requisição', 'Uma resposta', 'Um arquivo CSS', 'Uma variável'],
+            pool: 'http-fetch'
+          },
+          en: {
+            question: 'In HTTP communication, what does the client send to the server?',
+            highlight: ['HTTP'],
+            correctOption: 1,
+            options: ['A request', 'A response', 'A CSS file', 'A variable'],
+            pool: 'http-fetch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o resultado do fetch precisa de um tratamento especial?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Porque ele é assíncrono: termina depois', 'Porque ele trava a página', 'Porque ele só funciona offline', 'Porque ele sempre devolve HTML'],
+            pool: 'http-fetch'
+          },
+          en: {
+            question: 'Why does the fetch result need special handling?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Because it\'s asynchronous: it finishes later', 'Because it freezes the page', 'Because it only works offline', 'Because it always returns HTML'],
+            pool: 'http-fetch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O JavaScript oferece o fetch para fazer requisições HTTP.',
+            highlight: ['fetch', 'HTTP'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'http-fetch',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'JavaScript provides fetch for making HTTP requests.',
+            highlight: ['fetch', 'HTTP'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'http-fetch',
+            fixedOrder: true
           }
         }
       }
@@ -10158,6 +12875,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é um callback?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma função passada como argumento para outra', 'Uma função que nunca é chamada', 'Uma variável global', 'Um tipo de laço'],
+            pool: 'callbacks'
+          },
+          en: {
+            question: 'What is a callback?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A function passed as an argument to another', 'A function that is never called', 'A global variable', 'A kind of loop'],
+            pool: 'callbacks'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como ficou conhecido o encadeamento de callbacks aninhados, difícil de ler?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Callback hell', 'Promise chain', 'Event loop', 'Call stack'],
+            pool: 'callbacks'
+          },
+          en: {
+            question: 'What is the hard-to-read chain of nested callbacks known as?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Callback hell', 'Promise chain', 'Event loop', 'Call stack'],
+            pool: 'callbacks'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O que é passado para map, filter e addEventListener também é um callback.',
+            highlight: ['map', 'filter', 'addEventListener'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'callbacks',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'What you pass to map, filter and addEventListener is also a callback.',
+            highlight: ['map', 'filter', 'addEventListener'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'callbacks',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -10220,6 +12998,128 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em quais situações uma Promise pode estar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pendente, concluída com sucesso ou com erro', 'Ligada ou desligada', 'Criada ou apagada', 'Só concluída'],
+            pool: 'promise-states'
+          },
+          en: {
+            question: 'Which states can a Promise be in?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pending, fulfilled or failed with an error', 'On or off', 'Created or deleted', 'Only fulfilled'],
+            pool: 'promise-states'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma Promise representa uma operação que pode terminar no futuro.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'promise-states',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A Promise represents an operation that may finish in the future.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'promise-states',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma Promise ainda não terminou. Em que situação ela está?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pendente', 'Concluída', 'Com erro', 'Cancelada'],
+            pool: 'promise-states'
+          },
+          en: {
+            question: 'A Promise hasn\'t finished yet. What state is it in?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Pending', 'Fulfilled', 'Failed', 'Cancelled'],
+            pool: 'promise-states'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método trata o resultado de uma Promise bem-sucedida?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.then()', '.catch()', '.done()', '.result()'],
+            pool: 'then-catch'
+          },
+          en: {
+            question: 'Which method handles the result of a successful Promise?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.then()', '.catch()', '.done()', '.result()'],
+            pool: 'then-catch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método trata o erro de uma Promise?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.catch()', '.then()', '.error()', '.fail()'],
+            pool: 'then-catch'
+          },
+          en: {
+            question: 'Which method handles a Promise\'s error?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.catch()', '.then()', '.error()', '.fail()'],
+            pool: 'then-catch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Dá para encadear vários .then() em sequência.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'then-catch',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'You can chain several .then() calls in a row.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'then-catch',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -10278,6 +13178,128 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'async function loadUsers() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o await faz dentro de uma função async?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Espera a Promise terminar antes de seguir', 'Cancela a Promise', 'Roda a Promise duas vezes', 'Ignora o resultado da Promise'],
+            pool: 'await'
+          },
+          en: {
+            question: 'What does await do inside an async function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Waits for the Promise to finish before moving on', 'Cancels the Promise', 'Runs the Promise twice', 'Ignores the Promise\'s result'],
+            pool: 'await'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'async/await permite escrever código assíncrono parecido com código sequencial.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'await',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'async/await lets you write asynchronous code that reads like sequential code.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'await',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Que palavra precisa vir antes da função para usar await dentro dela?',
+            highlight: [],
+            correctOption: 1,
+            options: ['async', 'await', 'promise', 'then'],
+            pool: 'await'
+          },
+          en: {
+            question: 'Which keyword must come before the function to use await inside it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['async', 'await', 'promise', 'then'],
+            pool: 'await'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como tratar um erro numa função async?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Com try/catch em volta do await', 'Com um if depois do await', 'Com outro await', 'Não é possível tratar'],
+            pool: 'async-errors'
+          },
+          en: {
+            question: 'How do you handle an error in an async function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['With try/catch around the await', 'With an if after the await', 'With another await', 'It can\'t be handled'],
+            pool: 'async-errors'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com async/await, o código do exemplo atualiza a tela sem nenhum .then().',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'async-errors',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With async/await, the example updates the screen without any .then().',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'async-errors',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em const users = await response.json(), o que users recebe?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os dados já convertidos', 'Uma Promise pendente', 'O texto "users"', 'undefined'],
+            pool: 'async-errors'
+          },
+          en: {
+            question: 'In const users = await response.json(), what does users get?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The already converted data', 'A pending Promise', 'The text "users"', 'undefined'],
+            pool: 'async-errors'
           }
         }
       }
@@ -13900,6 +16922,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando uma variável não existe no escopo atual, onde o JavaScript procura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No escopo de fora, subindo até achar', 'Dentro das funções internas', 'Em outro arquivo', 'Em lugar nenhum: dá erro na hora'],
+            pool: 'scope-chain'
+          },
+          en: {
+            question: 'When a variable doesn\'t exist in the current scope, where does JavaScript look?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the outer scope, moving up until it finds it', 'Inside inner functions', 'In another file', 'Nowhere: it errors right away'],
+            pool: 'scope-chain'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma função externa enxerga as variáveis criadas dentro de uma função interna.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'scope-chain',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An outer function can see variables created inside an inner function.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'scope-chain',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const nome = "Ana" fora da função, o que saudacao() mostra ao fazer console.log(nome)?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ana', 'undefined', 'Erro', 'nome'],
+            pool: 'scope-chain'
+          },
+          en: {
+            question: 'With const name = "Ana" outside the function, what does greet() show with console.log(name)?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ana', 'undefined', 'Error', 'name'],
+            pool: 'scope-chain'
+          }
+        }
       }
     ]
   },
@@ -13962,6 +17045,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é uma closure?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma função que guarda acesso ao escopo onde foi criada', 'Uma função que encerra o programa', 'Um objeto sem propriedades', 'Um laço que nunca termina'],
+            pool: 'closures'
+          },
+          en: {
+            question: 'What is a closure?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A function that keeps access to the scope where it was created', 'A function that ends the program', 'An object with no properties', 'A loop that never ends'],
+            pool: 'closures'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'contadorA e contadorB vêm da mesma criarContador. Depois de chamar contadorA() duas vezes, o que contadorB() devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', '3', '2', '0'],
+            pool: 'closures'
+          },
+          en: {
+            question: 'counterA and counterB come from the same createCounter. After calling counterA() twice, what does counterB() return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', '3', '2', '0'],
+            pool: 'closures'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Duas closures criadas pela mesma função não compartilham o mesmo estado.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'closures',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Two closures created by the same function don\'t share the same state.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'closures',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -13989,6 +17133,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'console.log(name); // undefined\nvar name = "Ana";\n\nconsole.log(age); // error\nlet age = 20;',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que console.log(nome) mostra antes de var nome = "Ana";?',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '"Ana"', 'Um erro', 'null'],
+            pool: 'hoisting'
+          },
+          en: {
+            question: 'What does console.log(name) show before var name = "Ana";?',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '"Ana"', 'An error', 'null'],
+            pool: 'hoisting'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que acontece ao usar uma variável let antes da linha em que ela é declarada?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Dá erro', 'Ela vale undefined', 'Ela vale null', 'Ela vale 0'],
+            pool: 'hoisting'
+          },
+          en: {
+            question: 'What happens when you use a let variable before the line that declares it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['It throws an error', 'It holds undefined', 'It holds null', 'It holds 0'],
+            pool: 'hoisting'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'let e const não passam por hoisting.',
+            highlight: ['hoisting'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'hoisting',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'let and const are not hoisted.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'hoisting',
+            fixedOrder: true
           }
         }
       }
@@ -14043,6 +17248,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em usuario.saudar(), a quem this se refere?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ao objeto usuario', 'À função saudar', 'Ao console', 'A nada: é sempre undefined'],
+            pool: 'this'
+          },
+          en: {
+            question: 'In user.greet(), what does this refer to?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The user object', 'The greet function', 'The console', 'Nothing: it\'s always undefined'],
+            pool: 'this'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const solta = usuario.saudar; solta();, o que this.nome mostra?',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '"Ana"', '"solta"', 'Um objeto vazio'],
+            pool: 'this'
+          },
+          en: {
+            question: 'With const loose = user.greet; loose();, what does this.name show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '"Ana"', '"loose"', 'An empty object'],
+            pool: 'this'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O valor de this é definido no momento da chamada, e não quando a função é escrita.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'this',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The value of this is set when the function is called, not when it\'s written.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'this',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14093,6 +17359,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const time = {\n  nome: "Team",\n  membros: ["Ana", "Bruno"],\n  listar() {\n    return this.membros.map((m) => m + " belongs to " + this.nome);\n  }\n};\n\nconsole.log(time.listar());',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma arrow function tem this próprio?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não, ela usa o this de onde foi criada', 'Sim, sempre o objeto dela', 'Sim, sempre o window', 'Só quando tem parâmetros'],
+            pool: 'arrow-this'
+          },
+          en: {
+            question: 'Does an arrow function have its own this?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No, it uses the this from where it was created', 'Yes, always its object', 'Yes, always window', 'Only when it has parameters'],
+            pool: 'arrow-this'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Arrow functions são a melhor escolha para métodos de objeto que usam this.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'arrow-this',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Arrow functions are the best choice for object methods that use this.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'arrow-this',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Onde uma arrow function ajuda, em vez de atrapalhar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Dentro de um método, como no callback de um map', 'Como método do próprio objeto', 'Como construtor de classe', 'Em lugar nenhum'],
+            pool: 'arrow-this'
+          },
+          en: {
+            question: 'Where does an arrow function help instead of getting in the way?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Inside a method, like in a map callback', 'As the object\'s own method', 'As a class constructor', 'Nowhere'],
+            pool: 'arrow-this'
           }
         }
       }
@@ -14147,6 +17474,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando uma propriedade não existe no objeto, onde o JavaScript procura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No prototype, subindo pela prototype chain', 'Em outro objeto qualquer', 'Na call stack', 'Em lugar nenhum'],
+            pool: 'prototype'
+          },
+          en: {
+            question: 'When a property doesn\'t exist on the object, where does JavaScript look?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In the prototype, moving up the prototype chain', 'In any other object', 'In the call stack', 'Nowhere'],
+            pool: 'prototype'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Se a busca chega ao fim da prototype chain sem achar a propriedade, o resultado é:',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', 'Um erro', 'null', '0'],
+            pool: 'prototype'
+          },
+          en: {
+            question: 'If the lookup reaches the end of the prototype chain without finding the property, the result is:',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', 'An error', 'null', '0'],
+            pool: 'prototype'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A prototype chain termina quando chega a null.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'prototype',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The prototype chain ends when it reaches null.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'prototype',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14199,6 +17587,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual palavra cria herança entre classes?',
+            highlight: [],
+            correctOption: 1,
+            options: ['extends', 'super', 'inherits', 'prototype'],
+            pool: 'classes'
+          },
+          en: {
+            question: 'Which keyword creates inheritance between classes?',
+            highlight: [],
+            correctOption: 1,
+            options: ['extends', 'super', 'inherits', 'prototype'],
+            pool: 'classes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Dentro de uma classe filha, o que super.emitirSom() faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Chama o método da classe pai', 'Cria uma classe nova', 'Apaga o método do pai', 'Chama de novo o método da filha'],
+            pool: 'classes'
+          },
+          en: {
+            question: 'Inside a child class, what does super.makeSound() do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Calls the parent class\'s method', 'Creates a new class', 'Deletes the parent\'s method', 'Calls the child\'s method again'],
+            pool: 'classes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'class cria um sistema de herança diferente dos prototypes.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'classes',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'class creates an inheritance system different from prototypes.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'classes',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14226,6 +17675,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function one() {\n  console.log("one");\n}\n\nfunction two() {\n  one();\n  console.log("two");\n}\n\ntwo();',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a call stack guarda?',
+            highlight: [],
+            correctOption: 1,
+            options: ['As funções que estão sendo executadas', 'As variáveis globais', 'Os arquivos do projeto', 'As requisições HTTP'],
+            pool: 'stack-loop'
+          },
+          en: {
+            question: 'What does the call stack hold?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The functions currently running', 'The global variables', 'The project files', 'The HTTP requests'],
+            pool: 'stack-loop'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em dois(), que chama um() antes do próprio log, o que aparece primeiro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['um', 'dois', 'Os dois juntos', 'Nada'],
+            pool: 'stack-loop'
+          },
+          en: {
+            question: 'In two(), which calls one() before its own log, what shows first?',
+            highlight: [],
+            correctOption: 1,
+            options: ['one', 'two', 'Both together', 'Nothing'],
+            pool: 'stack-loop'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O event loop espera a call stack esvaziar para rodar o que está aguardando.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'stack-loop',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The event loop waits for the call stack to empty before running what\'s waiting.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'stack-loop',
+            fixedOrder: true
           }
         }
       }
@@ -14269,6 +17779,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual fila roda primeiro depois que a call stack esvazia?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A das microtasks', 'A das macrotasks', 'As duas ao mesmo tempo', 'Depende do navegador'],
+            pool: 'micro-macro'
+          },
+          en: {
+            question: 'Which queue runs first after the call stack empties?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The microtask queue', 'The macrotask queue', 'Both at the same time', 'It depends on the browser'],
+            pool: 'micro-macro'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em que fila entra um setTimeout?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Na fila de macrotasks', 'Na fila de microtasks', 'Direto na call stack', 'Em nenhuma fila'],
+            pool: 'micro-macro'
+          },
+          en: {
+            question: 'Which queue does a setTimeout go into?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The macrotask queue', 'The microtask queue', 'Straight onto the call stack', 'No queue at all'],
+            pool: 'micro-macro'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um setTimeout de 0 milissegundos roda antes de uma Promise já resolvida.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'micro-macro',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A 0 millisecond setTimeout runs before an already resolved Promise.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'micro-macro',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14296,6 +17867,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve("ok").then((value) => {\n  console.log(value);\n});\n\nconsole.log("Runs first");',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com Promise.resolve("ok").then(...) e depois console.log("Executado primeiro"), o que aparece primeiro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Executado primeiro', 'ok', 'Os dois juntos', 'Nenhum dos dois'],
+            pool: 'promise-flow'
+          },
+          en: {
+            question: 'With Promise.resolve("ok").then(...) and then console.log("Runs first"), what shows first?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Runs first', 'ok', 'Both together', 'Neither'],
+            pool: 'promise-flow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O .then() de uma Promise já resolvida entra na fila de microtasks.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'promise-flow',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The .then() of an already resolved Promise goes into the microtask queue.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'promise-flow',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o texto síncrono aparece antes do resultado da Promise?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O .then() espera a call stack ficar livre', 'Promises são lentas por natureza', 'O console.log tem prioridade sobre tudo', 'A Promise ainda não foi resolvida'],
+            pool: 'promise-flow'
+          },
+          en: {
+            question: 'Why does the synchronous text show before the Promise\'s result?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The .then() waits for the call stack to be free', 'Promises are slow by nature', 'console.log has priority over everything', 'The Promise hasn\'t resolved yet'],
+            pool: 'promise-flow'
           }
         }
       }
@@ -14350,6 +17982,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com let a = 10; let b = a; b = 20;, quanto vale a?',
+            highlight: [],
+            correctOption: 1,
+            options: ['10', '20', '30', 'undefined'],
+            pool: 'value-ref'
+          },
+          en: {
+            question: 'With let a = 10; let b = a; b = 20;, what is a?',
+            highlight: [],
+            correctOption: 1,
+            options: ['10', '20', '30', 'undefined'],
+            pool: 'value-ref'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const obj2 = obj1; obj2.total = 20;, quanto vale obj1.total, se era 10?',
+            highlight: [],
+            correctOption: 1,
+            options: ['20', '10', 'undefined', 'Dá erro'],
+            pool: 'value-ref'
+          },
+          en: {
+            question: 'With const obj2 = obj1; obj2.total = 20;, what is obj1.total if it was 10?',
+            highlight: [],
+            correctOption: 1,
+            options: ['20', '10', 'undefined', 'It errors'],
+            pool: 'value-ref'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Objetos e arrays são copiados por referência.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'value-ref',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Objects and arrays are copied by reference.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'value-ref',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14400,6 +18093,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const original = { nome: "Ana", endereco: { cidade: "SP" } };\n\nconst shallow = { ...original };\nshallow.endereco.cidade = "RJ";\nconsole.log(original.endereco.cidade); // "RJ"\n\nconst deep = structuredClone(original);\ndeep.endereco.cidade = "MG";\nconsole.log(original.endereco.cidade); // "RJ"',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que uma shallow copy duplica?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Só o primeiro nível do objeto', 'Todos os níveis', 'Só as funções', 'Nada: só cria uma referência'],
+            pool: 'copies'
+          },
+          en: {
+            question: 'What does a shallow copy duplicate?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Only the object\'s first level', 'Every level', 'Only the functions', 'Nothing: it just creates a reference'],
+            pool: 'copies'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual função faz uma deep copy?',
+            highlight: [],
+            correctOption: 1,
+            options: ['structuredClone', 'Object.assign', 'O spread', 'JSON.copy'],
+            pool: 'copies'
+          },
+          en: {
+            question: 'Which function makes a deep copy?',
+            highlight: [],
+            correctOption: 1,
+            options: ['structuredClone', 'Object.assign', 'The spread', 'JSON.copy'],
+            pool: 'copies'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com { ...original }, mudar copia.endereco.cidade não afeta o original.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'copies',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With { ...original }, changing copy.address.city doesn\'t affect the original.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'copies',
+            fixedOrder: true
           }
         }
       }
@@ -14458,6 +18212,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha adiciona um item sem alterar o array original?',
+            highlight: [],
+            correctOption: 1,
+            options: ['const novo = [...original, 5];', 'original.push(5);', 'original[3] = 5;', 'original.pop();'],
+            pool: 'immutability'
+          },
+          en: {
+            question: 'Which line adds an item without changing the original array?',
+            highlight: [],
+            correctOption: 1,
+            options: ['const next = [...original, 5];', 'original.push(5);', 'original[3] = 5;', 'original.pop();'],
+            pool: 'immutability'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com const atualizado = { ...usuario, idade: 31 }, quanto dá usuario === atualizado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'Dá erro'],
+            pool: 'immutability'
+          },
+          en: {
+            question: 'With const updated = { ...user, age: 31 }, what is user === updated?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'It errors'],
+            pool: 'immutability'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Bibliotecas como o React pedem que o estado seja tratado de forma imutável.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'immutability',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Libraries like React ask for state to be treated as immutable.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'immutability',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14507,6 +18322,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Na event delegation, onde fica o listener?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Num único elemento pai', 'Em cada item da lista', 'No título da página', 'Em nenhum lugar'],
+            pool: 'delegation'
+          },
+          en: {
+            question: 'With event delegation, where does the listener go?',
+            highlight: [],
+            correctOption: 1,
+            options: ['On a single parent element', 'On each list item', 'On the page title', 'Nowhere'],
+            pool: 'delegation'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com event delegation, o listener também funciona em itens criados depois.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'delegation',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With event delegation, the listener also works on items created later.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'delegation',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual a vantagem da event delegation?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um listener só atende todos os itens', 'Deixa os cliques mais rápidos', 'Dispensa o uso de eventos', 'Impede a criação de itens novos'],
+            pool: 'delegation'
+          },
+          en: {
+            question: 'What is the advantage of event delegation?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A single listener handles every item', 'It makes clicks faster', 'It removes the need for events', 'It prevents new items from being created'],
+            pool: 'delegation'
+          }
+        }
       }
     ]
   },
@@ -14546,6 +18422,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
                 code: 'function debounce(fn, delay) {\n  let timer;\n  return (...args) => {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn(...args), delay);\n  };\n}\n\nlet clicks = 0;\nlet debouncedCalls = 0;\n\nfunction updateText() {\n  document.querySelector("#output").textContent =\n    "Clicks: " + clicks + " | Debounced: " + debouncedCalls;\n}\n\nconst registerClick = debounce(() => {\n  debouncedCalls++;\n  updateText();\n}, 500);\n\ndocument\n  .querySelector("#test-button")\n  .addEventListener("click", () => {\n    clicks++;\n    updateText();\n    registerClick();\n  });'
               }
             ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma busca só deve rodar quando a pessoa parar de digitar. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['debounce', 'throttle', 'setInterval', 'Um laço for'],
+            pool: 'debounce'
+          },
+          en: {
+            question: 'A search should only run once the person stops typing. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['debounce', 'throttle', 'setInterval', 'A for loop'],
+            pool: 'debounce'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o throttle faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Executa no máximo uma vez a cada intervalo', 'Espera o usuário parar', 'Executa a cada evento, sem limite', 'Cancela todos os eventos'],
+            pool: 'debounce'
+          },
+          en: {
+            question: 'What does throttle do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Runs at most once per interval', 'Waits for the user to stop', 'Runs on every event, no limit', 'Cancels every event'],
+            pool: 'debounce'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'throttle é comum em eventos de scroll, que disparam com muita frequência.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'debounce',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'throttle is common for scroll events, which fire very often.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'debounce',
+            fixedOrder: true
           }
         }
       }
@@ -14602,6 +18539,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com uma Promise resolvida, um setTimeout de 0 e um console.log comum, em que ordem as mensagens aparecem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['log comum, Promise, setTimeout', 'Promise, setTimeout, log comum', 'setTimeout, Promise, log comum', 'log comum, setTimeout, Promise'],
+            pool: 'closing-adv'
+          },
+          en: {
+            question: 'With a resolved Promise, a 0ms setTimeout and a plain console.log, in what order do the messages show?',
+            highlight: [],
+            correctOption: 1,
+            options: ['plain log, Promise, setTimeout', 'Promise, setTimeout, plain log', 'setTimeout, Promise, plain log', 'plain log, setTimeout, Promise'],
+            pool: 'closing-adv'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'TypeScript é uma camada de tipos sobre o mesmo JavaScript.',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'closing-adv',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'TypeScript is a layer of types on top of the same JavaScript.',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'closing-adv',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Ao passar para o TypeScript, o que do JavaScript continua valendo?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Todo o código aprendido até aqui', 'Nada: é outra linguagem', 'Só o HTML', 'Só as classes'],
+            pool: 'closing-adv'
+          },
+          en: {
+            question: 'When moving to TypeScript, what from JavaScript still applies?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['All the code learned so far', 'Nothing: it\'s another language', 'Only the HTML', 'Only the classes'],
+            pool: 'closing-adv'
+          }
+        }
       }
     ]
   },
@@ -14629,6 +18627,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: 'function add(a: number, b: number) {\n  return a + b;\n}\n\nadd(2, "3"); // error caught before it runs',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual a principal vantagem do TypeScript?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Detectar certos erros antes da execução', 'Deixar o código mais rápido', 'Substituir o HTML', 'Dispensar o navegador'],
+            pool: 'why-ts'
+          },
+          en: {
+            question: 'What is TypeScript\'s main advantage?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Catching certain errors before running', 'Making the code faster', 'Replacing the HTML', 'Removing the need for a browser'],
+            pool: 'why-ts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com somar(a: number, b: number), o que acontece em somar(2, "3")?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O TypeScript aponta o erro antes de rodar', 'Devolve 5', 'Devolve "23" sem aviso', 'O navegador corrige sozinho'],
+            pool: 'why-ts'
+          },
+          en: {
+            question: 'With add(a: number, b: number), what happens with add(2, "3")?',
+            highlight: [],
+            correctOption: 1,
+            options: ['TypeScript flags the error before running', 'It returns 5', 'It returns "23" silently', 'The browser fixes it'],
+            pool: 'why-ts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No JavaScript puro, somar(2, "3") é bloqueado antes de rodar.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'why-ts',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In plain JavaScript, add(2, "3") is blocked before running.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'why-ts',
+            fixedOrder: true
           }
         }
       }
@@ -14683,6 +18742,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que significa dizer que TypeScript é um superset de JavaScript?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Todo JavaScript válido também é TypeScript válido', 'TypeScript é mais antigo', 'TypeScript só roda no servidor', 'Todo TypeScript é JavaScript válido'],
+            pool: 'js-ts'
+          },
+          en: {
+            question: 'What does it mean that TypeScript is a superset of JavaScript?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['All valid JavaScript is also valid TypeScript', 'TypeScript is older', 'TypeScript only runs on the server', 'All TypeScript is valid JavaScript'],
+            pool: 'js-ts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o TypeScript precisa ser transpilado?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Navegadores executam JavaScript, não TypeScript', 'Para ficar mais bonito', 'Para virar HTML', 'Para ganhar tipos novos'],
+            pool: 'js-ts'
+          },
+          en: {
+            question: 'Why does TypeScript need to be transpiled?',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['Browsers run JavaScript, not TypeScript', 'To look nicer', 'To become HTML', 'To gain new types'],
+            pool: 'js-ts'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Depois da transpilação, os tipos somem e sobra só JavaScript.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'js-ts',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'After transpiling, the types are gone and only JavaScript remains.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'js-ts',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14710,6 +18830,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: 'let name = "Ana"; // inferred as string\nlet age = 20; // inferred as number\n\nlet city: string = "São Paulo"; // explicit annotation',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em let idade = 20;, qual tipo o TypeScript infere?',
+            highlight: [],
+            correctOption: 1,
+            options: ['number', 'string', 'any', 'unknown'],
+            pool: 'inference'
+          },
+          en: {
+            question: 'In let age = 20;, which type does TypeScript infer?',
+            highlight: [],
+            correctOption: 1,
+            options: ['number', 'string', 'any', 'unknown'],
+            pool: 'inference'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No TypeScript, toda variável precisa de uma anotação de tipo explícita.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'inference',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In TypeScript, every variable needs an explicit type annotation.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'inference',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha tem uma anotação de tipo explícita?',
+            highlight: [],
+            correctOption: 1,
+            options: ['let cidade: string = "São Paulo";', 'let nome = "Ana";', 'let idade = 20;', 'const ativo = true;'],
+            pool: 'inference'
+          },
+          en: {
+            question: 'Which line has an explicit type annotation?',
+            highlight: [],
+            correctOption: 1,
+            options: ['let city: string = "Boston";', 'let name = "Ana";', 'let age = 20;', 'const active = true;'],
+            pool: 'inference'
           }
         }
       }
@@ -14741,6 +18922,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que servem interface e type num objeto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Descrever a estrutura esperada', 'Criar o objeto automaticamente', 'Deixar o objeto imutável', 'Guardar o objeto no banco'],
+            pool: 'object-types'
+          },
+          en: {
+            question: 'What are interface and type for with an object?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Describing the expected structure', 'Creating the object automatically', 'Making the object immutable', 'Saving the object to a database'],
+            pool: 'object-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um objeto do tipo Usuario, com idade: number, recebe idade: "vinte". O que acontece?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O TypeScript aponta um erro', 'Converte para 20', 'Aceita sem problema', 'Apaga a propriedade'],
+            pool: 'object-types'
+          },
+          en: {
+            question: 'An object of type User, with age: number, gets age: "twenty". What happens?',
+            highlight: [],
+            correctOption: 1,
+            options: ['TypeScript flags an error', 'It converts to 20', 'It accepts it', 'It deletes the property'],
+            pool: 'object-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'interface e type resolvem o mesmo problema na maioria dos casos.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'object-types',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'interface and type solve the same problem in most cases.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'object-types',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14770,6 +19012,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que let id: string | number; permite?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Guardar um texto ou um número', 'Só texto', 'Só número', 'Qualquer tipo, como any'],
+            pool: 'union'
+          },
+          en: {
+            question: 'What does let id: string | number; allow?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Storing a text or a number', 'Only text', 'Only a number', 'Any type, like any'],
+            pool: 'union'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um union type aceita mais de um tipo possível.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'union',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A union type accepts more than one possible type.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'union',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com let id: string | number, qual atribuição dá erro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['id = true;', 'id = 42;', 'id = "abc123";', 'id = 0;'],
+            pool: 'union'
+          },
+          en: {
+            question: 'With let id: string | number, which assignment errors?',
+            highlight: [],
+            correctOption: 1,
+            options: ['id = true;', 'id = 42;', 'id = "abc123";', 'id = 0;'],
+            pool: 'union'
+          }
+        }
       }
     ]
   },
@@ -14797,6 +19100,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: 'function create(\n  name: string,\n  age: number\n): { name: string; age: number } {\n  return { name, age };\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que dá para tipar numa função?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os parâmetros e o retorno', 'Só o nome', 'Só o corpo', 'Nada: só variáveis'],
+            pool: 'typed-fn'
+          },
+          en: {
+            question: 'What can you type in a function?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The parameters and the return', 'Only the name', 'Only the body', 'Nothing: only variables'],
+            pool: 'typed-fn'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com function criar(nome: string, idade: number), qual chamada dá erro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['criar(20, "Ana")', 'criar("Ana", 20)', 'criar("Bia", 30)', 'criar("", 0)'],
+            pool: 'typed-fn'
+          },
+          en: {
+            question: 'With function create(name: string, age: number), which call errors?',
+            highlight: [],
+            correctOption: 1,
+            options: ['create(20, "Ana")', 'create("Ana", 20)', 'create("Bia", 30)', 'create("", 0)'],
+            pool: 'typed-fn'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O TypeScript só verifica os parâmetros, nunca o retorno.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'typed-fn',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'TypeScript only checks the parameters, never the return.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'typed-fn',
+            fixedOrder: true
           }
         }
       }
@@ -14830,6 +19194,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'let value: unknown = "text";\n\nif (typeof value === "string") {\n  console.log(value.toUpperCase());\n}',
             onlyCode: true,
             terminalCode: 'let value = "text";\nif (typeof value === "string") {\n    console.log(value.toUpperCase());\n}'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a opção mais segura quando o tipo ainda não é conhecido?',
+            highlight: [],
+            correctOption: 1,
+            options: ['unknown', 'any', 'never', 'void'],
+            pool: 'any-unknown'
+          },
+          en: {
+            question: 'Which is the safer option when the type isn\'t known yet?',
+            highlight: [],
+            correctOption: 1,
+            options: ['unknown', 'any', 'never', 'void'],
+            pool: 'any-unknown'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que any faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Desliga a verificação de tipos daquele valor', 'Exige uma verificação antes do uso', 'Aceita só textos', 'Transforma o valor em número'],
+            pool: 'any-unknown'
+          },
+          en: {
+            question: 'What does any do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Turns off type checking for that value', 'Requires a check before use', 'Accepts only text', 'Turns the value into a number'],
+            pool: 'any-unknown'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Para usar um valor unknown, é preciso verificar o tipo antes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'any-unknown',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'To use an unknown value, you must check its type first.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'any-unknown',
+            fixedOrder: true
           }
         }
       }
@@ -14884,6 +19309,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em function primeiro<T>(itens: T[]): T, o que é T?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um tipo genérico, definido no uso', 'Um texto fixo', 'Um número', 'Um erro de digitação'],
+            pool: 'generics'
+          },
+          en: {
+            question: 'In function first<T>(items: T[]): T, what is T?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A generic type, set when used', 'A fixed text', 'A number', 'A typo'],
+            pool: 'generics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com primeiro([1, 2, 3]), qual o tipo do retorno?',
+            highlight: [],
+            correctOption: 1,
+            options: ['number', 'string', 'T[]', 'any'],
+            pool: 'generics'
+          },
+          en: {
+            question: 'With first([1, 2, 3]), what is the return type?',
+            highlight: [],
+            correctOption: 1,
+            options: ['number', 'string', 'T[]', 'any'],
+            pool: 'generics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'T extends ComNome obriga o tipo a ter pelo menos a propriedade nome.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'generics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'T extends HasName requires the type to have at least a name property.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'generics',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14915,6 +19401,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que interface consegue e type não?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ser estendida depois com o mesmo nome', 'Representar union types', 'Descrever objetos', 'Ser exportada'],
+            pool: 'type-interface'
+          },
+          en: {
+            question: 'What can interface do that type can\'t?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Be extended later under the same name', 'Represent union types', 'Describe objects', 'Be exported'],
+            pool: 'type-interface'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual forma consegue representar "ativo" | "inativo"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type', 'interface', 'class', 'Nenhuma das duas'],
+            pool: 'type-interface'
+          },
+          en: {
+            question: 'Which one can represent "active" | "inactive"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type', 'interface', 'class', 'Neither'],
+            pool: 'type-interface'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Existe uma regra técnica rígida que obriga usar interface para objetos.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'type-interface',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'There\'s a strict technical rule that requires interface for objects.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'type-interface',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -14942,6 +19489,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: '{\n  "compilerOptions": {\n    "target": "es2022",\n    "strict": true\n  }\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o arquivo tsconfig.json controla?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Como o TypeScript transpila o projeto', 'As dependências do npm', 'O estilo da página', 'As rotas do servidor'],
+            pool: 'tsconfig'
+          },
+          en: {
+            question: 'What does the tsconfig.json file control?',
+            highlight: [],
+            correctOption: 1,
+            options: ['How TypeScript transpiles the project', 'The npm dependencies', 'The page style', 'The server routes'],
+            pool: 'tsconfig'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com "strict": true, o que fica mais rígido?',
+            highlight: [],
+            correctOption: 1,
+            options: ['As checagens de tipo', 'A velocidade do código', 'O tamanho dos arquivos', 'A versão do Node'],
+            pool: 'tsconfig'
+          },
+          en: {
+            question: 'With "strict": true, what gets stricter?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The type checks', 'The code\'s speed', 'The file sizes', 'The Node version'],
+            pool: 'tsconfig'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'É preciso decorar todas as opções do tsconfig para usar TypeScript.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'tsconfig',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'You have to memorize every tsconfig option to use TypeScript.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'tsconfig',
+            fixedOrder: true
           }
         }
       }
@@ -15049,6 +19657,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o Node.js permite?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Executar JavaScript fora do navegador', 'Escrever CSS mais rápido', 'Criar páginas sem HTML', 'Executar só código de interface'],
+            pool: 'node-intro'
+          },
+          en: {
+            question: 'What does Node.js allow?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Running JavaScript outside the browser', 'Writing CSS faster', 'Building pages without HTML', 'Running only interface code'],
+            pool: 'node-intro'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'No Node.js, a linguagem continua sendo JavaScript; o que muda é o ambiente.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'node-intro',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In Node.js, the language is still JavaScript; what changes is the environment.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'node-intro',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O Node.js é um:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Runtime de JavaScript', 'Navegador', 'Framework de CSS', 'Banco de dados'],
+            pool: 'node-intro'
+          },
+          en: {
+            question: 'Node.js is a:',
+            highlight: [],
+            correctOption: 1,
+            options: ['JavaScript runtime', 'Browser', 'CSS framework', 'Database'],
+            pool: 'node-intro'
+          }
+        }
       }
     ]
   },
@@ -15078,6 +19747,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: '// In the browser\nwindow.location.href;\n\n// In Node.js\nprocess.env;',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que é um runtime?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O ambiente que executa o programa', 'Um tipo de variável', 'Um erro de execução', 'Um editor de código'],
+            pool: 'runtime'
+          },
+          en: {
+            question: 'What is a runtime?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The environment that runs the program', 'A kind of variable', 'A runtime error', 'A code editor'],
+            pool: 'runtime'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes só existe no navegador?',
+            highlight: [],
+            correctOption: 1,
+            options: ['window.location', 'process.env', 'console.log', 'Math.max'],
+            pool: 'runtime'
+          },
+          en: {
+            question: 'Which of these exists only in the browser?',
+            highlight: [],
+            correctOption: 1,
+            options: ['window.location', 'process.env', 'console.log', 'Math.max'],
+            pool: 'runtime'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O navegador e o Node.js podem oferecer APIs diferentes.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'runtime',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The browser and Node.js can offer different APIs.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'runtime',
+            fixedOrder: true
           }
         }
       }
@@ -15130,6 +19860,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes pertence ao navegador e não existe no Node.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['document', 'console', 'JSON', 'Math'],
+            pool: 'browser-node'
+          },
+          en: {
+            question: 'Which of these belongs to the browser and doesn\'t exist in Node.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['document', 'console', 'JSON', 'Math'],
+            pool: 'browser-node'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'document.querySelector funciona no Node.js do mesmo jeito que no navegador.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'browser-node',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'document.querySelector works in Node.js the same way as in the browser.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'browser-node',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No backend, que APIs costumamos usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['As fornecidas pelo Node.js', 'As do navegador, como document', 'Só as do CSS', 'Nenhuma'],
+            pool: 'browser-node'
+          },
+          en: {
+            question: 'On the backend, which APIs do we usually use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The ones provided by Node.js', 'The browser\'s, like document', 'Only CSS ones', 'None'],
+            pool: 'browser-node'
+          }
+        }
       }
     ]
   },
@@ -15159,6 +19950,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: '{\n  "name": "my-api",\n  "version": "1.0.0"\n}',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual arquivo descreve o projeto Node.js e suas dependências?',
+            highlight: [],
+            correctOption: 1,
+            options: ['package.json', 'index.html', 'style.css', 'tsconfig.json'],
+            pool: 'package-json'
+          },
+          en: {
+            question: 'Which file describes the Node.js project and its dependencies?',
+            highlight: [],
+            correctOption: 1,
+            options: ['package.json', 'index.html', 'style.css', 'tsconfig.json'],
+            pool: 'package-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O package.json guarda informações como o nome e a versão do projeto.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'package-json',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'package.json stores information like the project\'s name and version.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'package-json',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em { "name": "minha-api", "version": "1.0.0" }, o que é "1.0.0"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A versão do projeto', 'A versão do Node', 'A porta do servidor', 'O número de arquivos'],
+            pool: 'package-json'
+          },
+          en: {
+            question: 'In { "name": "my-api", "version": "1.0.0" }, what is "1.0.0"?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The project\'s version', 'The Node version', 'The server port', 'The number of files'],
+            pool: 'package-json'
           }
         }
       }
@@ -15215,6 +20067,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve o NPM?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Instalar e gerenciar pacotes', 'Executar o navegador', 'Escrever HTML', 'Hospedar o site'],
+            pool: 'npm'
+          },
+          en: {
+            question: 'What is NPM for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Installing and managing packages', 'Running the browser', 'Writing HTML', 'Hosting the site'],
+            pool: 'npm'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois de npm install express, onde o express aparece?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Nas dependencies do package.json', 'No index.html', 'Dentro do CSS', 'Em lugar nenhum'],
+            pool: 'npm'
+          },
+          en: {
+            question: 'After npm install express, where does express show up?',
+            highlight: [],
+            correctOption: 1,
+            options: ['In package.json\'s dependencies', 'In index.html', 'Inside the CSS', 'Nowhere'],
+            pool: 'npm'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Um pacote instalado passa a fazer parte das dependências do projeto.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'npm',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'An installed package becomes part of the project\'s dependencies.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'npm',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15258,6 +20171,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que dividir uma aplicação Node.js em módulos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Para organizar o código e reutilizar funcionalidades', 'Para deixar o servidor mais lento', 'Para dispensar o package.json', 'Para transformar JavaScript em HTML'],
+            pool: 'node-modules'
+          },
+          en: {
+            question: 'Why split a Node.js app into modules?',
+            highlight: [],
+            correctOption: 1,
+            options: ['To organize the code and reuse features', 'To slow the server down', 'To avoid package.json', 'To turn JavaScript into HTML'],
+            pool: 'node-modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual palavra disponibiliza a função somar em math.js para outros arquivos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'require', 'public'],
+            pool: 'node-modules'
+          },
+          en: {
+            question: 'Which keyword makes the add function in math.js available to other files?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'require', 'public'],
+            pool: 'node-modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Só aplicações de frontend podem ser divididas em módulos.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'node-modules',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Only frontend apps can be split into modules.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'node-modules',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15287,6 +20261,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import fs from "node:fs";\n\nconst text =\n  fs.readFileSync(\n    "file.txt",\n    "utf8"\n  );\n\nconsole.log(text);',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Antes de instalar um pacote, o que vale conferir?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Se o próprio Node.js já oferece o recurso', 'Se o navegador tem o recurso', 'Se o CSS resolve', 'Nada: sempre instale'],
+            pool: 'native-apis'
+          },
+          en: {
+            question: 'Before installing a package, what is worth checking?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Whether Node.js itself already offers it', 'Whether the browser has it', 'Whether CSS solves it', 'Nothing: always install'],
+            pool: 'native-apis'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual módulo nativo do Node.js trabalha com arquivos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['node:fs', 'node:http', 'express', 'document'],
+            pool: 'native-apis'
+          },
+          en: {
+            question: 'Which native Node.js module works with files?',
+            highlight: [],
+            correctOption: 1,
+            options: ['node:fs', 'node:http', 'express', 'document'],
+            pool: 'native-apis'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Node.js tem APIs nativas para arquivos, processos e rede.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'native-apis',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Node.js has native APIs for files, processes and networking.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'native-apis',
+            fixedOrder: true
           }
         }
       }
@@ -15320,6 +20355,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que fs.writeFileSync("mensagem.txt", "Olá!") faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Cria ou sobrescreve o arquivo com o texto', 'Lê o arquivo', 'Apaga o arquivo', 'Mostra o texto no navegador'],
+            pool: 'fs'
+          },
+          en: {
+            question: 'What does fs.writeFileSync("message.txt", "Hi!") do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Creates or overwrites the file with the text', 'Reads the file', 'Deletes the file', 'Shows the text in the browser'],
+            pool: 'fs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o Node.js pode mexer em arquivos e uma página web não?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ele roda fora do ambiente restrito da página', 'Ele é mais novo que o navegador', 'Ele não usa JavaScript', 'Páginas não têm memória'],
+            pool: 'fs'
+          },
+          en: {
+            question: 'Why can Node.js work with files while a web page can\'t?',
+            highlight: [],
+            correctOption: 1,
+            options: ['It runs outside the page\'s restricted environment', 'It\'s newer than the browser', 'It doesn\'t use JavaScript', 'Pages have no memory'],
+            pool: 'fs'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Uma página web comum pode gravar arquivos livremente no computador com o fs.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'fs',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'A regular web page can freely write files to the computer with fs.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'fs',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15349,6 +20445,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que createServer, do node:http, cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um servidor HTTP', 'Um banco de dados', 'Uma página HTML', 'Um pacote npm'],
+            pool: 'node-http'
+          },
+          en: {
+            question: 'What does createServer, from node:http, create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An HTTP server', 'A database', 'An HTML page', 'An npm package'],
+            pool: 'node-http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que server.listen(3000) faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Faz o servidor escutar na porta 3000', 'Espera 3000 milissegundos', 'Limita a 3000 requisições', 'Cria 3000 rotas'],
+            pool: 'node-http'
+          },
+          en: {
+            question: 'What does server.listen(3000) do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Makes the server listen on port 3000', 'Waits 3000 milliseconds', 'Limits it to 3000 requests', 'Creates 3000 routes'],
+            pool: 'node-http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Dá para criar um servidor HTTP com o Node.js sem nenhum framework.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'node-http',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'You can build an HTTP server with Node.js without any framework.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'node-http',
+            fixedOrder: true
           }
         }
       }
@@ -15382,6 +20539,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No HTTP, quem envia a requisição?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O cliente', 'O servidor', 'O banco de dados', 'Ninguém: ela é automática'],
+            pool: 'http'
+          },
+          en: {
+            question: 'In HTTP, who sends the request?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The client', 'The server', 'The database', 'No one: it\'s automatic'],
+            pool: 'http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o servidor devolve ao cliente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma resposta', 'Outra requisição', 'O package.json', 'Nada'],
+            pool: 'http'
+          },
+          en: {
+            question: 'What does the server send back to the client?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A response', 'Another request', 'The package.json', 'Nothing'],
+            pool: 'http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'HTTP é o protocolo de comunicação entre clientes e servidores na web.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'http',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'HTTP is the protocol for communication between clients and servers on the web.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'http',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15411,6 +20629,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: '// GET    /users     -> list users\n// POST   /users     -> create a user\n// PUT    /users/1   -> update user 1\n// DELETE /users/1   -> remove user 1',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método é usado para listar usuários?',
+            highlight: [],
+            correctOption: 1,
+            options: ['GET', 'POST', 'PUT', 'DELETE'],
+            pool: 'http-methods'
+          },
+          en: {
+            question: 'Which method is used to list users?',
+            highlight: [],
+            correctOption: 1,
+            options: ['GET', 'POST', 'PUT', 'DELETE'],
+            pool: 'http-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método é usado para criar um usuário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['POST', 'GET', 'DELETE', 'PUT'],
+            pool: 'http-methods'
+          },
+          en: {
+            question: 'Which method is used to create a user?',
+            highlight: [],
+            correctOption: 1,
+            options: ['POST', 'GET', 'DELETE', 'PUT'],
+            pool: 'http-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'DELETE /users/1 serve para atualizar o usuário 1.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'http-methods',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'DELETE /users/1 is for updating user 1.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'http-methods',
+            fixedOrder: true
           }
         }
       }
@@ -15444,6 +20723,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual status indica que o recurso não existe?',
+            highlight: [],
+            correctOption: 1,
+            options: ['404', '200', '201', '500'],
+            pool: 'http-status'
+          },
+          en: {
+            question: 'Which status means the resource doesn\'t exist?',
+            highlight: [],
+            correctOption: 1,
+            options: ['404', '200', '201', '500'],
+            pool: 'http-status'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o status 201 indica?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Que um recurso foi criado', 'Um erro no servidor', 'Uma requisição malformada', 'Um recurso não encontrado'],
+            pool: 'http-status'
+          },
+          en: {
+            question: 'What does status 201 mean?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A resource was created', 'A server error', 'A malformed request', 'A resource not found'],
+            pool: 'http-status'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O status 500 indica um erro no servidor.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'http-status',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Status 500 means a server error.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'http-status',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15473,6 +20813,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que usar um framework como o Express?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Para organizar rotas e responsabilidades que se acumulam', 'Porque o Node.js não roda JavaScript', 'Para escrever CSS', 'Para substituir o HTTP'],
+            pool: 'why-express'
+          },
+          en: {
+            question: 'Why use a framework like Express?',
+            highlight: [],
+            correctOption: 1,
+            options: ['To organize routes and responsibilities that pile up', 'Because Node.js doesn\'t run JavaScript', 'To write CSS', 'To replace HTTP'],
+            pool: 'why-express'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Sem o Express, é impossível criar um servidor HTTP no Node.js.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'why-express',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Without Express, it\'s impossible to build an HTTP server in Node.js.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'why-express',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O Express é usado para criar:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Aplicações web e APIs com Node.js', 'Estilos com classes utilitárias', 'Apps nativos de celular', 'Bancos de dados'],
+            pool: 'why-express'
+          },
+          en: {
+            question: 'Express is used to build:',
+            highlight: [],
+            correctOption: 1,
+            options: ['Web apps and APIs with Node.js', 'Styles with utility classes', 'Native mobile apps', 'Databases'],
+            pool: 'why-express'
           }
         }
       }
@@ -15506,6 +20907,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual a divisão de papéis entre Node.js e Express?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Node.js executa; Express facilita a aplicação HTTP', 'Express executa; Node.js estiliza', 'Os dois fazem a mesma coisa', 'Node.js é o banco de dados'],
+            pool: 'express'
+          },
+          en: {
+            question: 'How are roles split between Node.js and Express?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Node.js runs it; Express makes the HTTP app easier', 'Express runs it; Node.js styles it', 'Both do the same thing', 'Node.js is the database'],
+            pool: 'express'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que const app = express(); cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A aplicação Express', 'Uma rota', 'Um arquivo', 'Uma requisição'],
+            pool: 'express'
+          },
+          en: {
+            question: 'What does const app = express(); create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The Express app', 'A route', 'A file', 'A request'],
+            pool: 'express'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O Express é um framework para Node.js.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'express',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Express is a framework for Node.js.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'express',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15535,6 +20997,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.get("/users", (req, res) => {\n  res.send("User list");\n});',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que uma rota associa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um método HTTP e um caminho a uma função', 'Um arquivo CSS a uma página', 'Uma variável a um tipo', 'Um pacote a uma versão'],
+            pool: 'routes'
+          },
+          en: {
+            question: 'What does a route link together?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An HTTP method and a path to a function', 'A CSS file to a page', 'A variable to a type', 'A package to a version'],
+            pool: 'routes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual requisição a rota app.get("/users", ...) responde?',
+            highlight: [],
+            correctOption: 1,
+            options: ['GET em /users', 'POST em /users', 'Qualquer requisição', 'GET em /'],
+            pool: 'routes'
+          },
+          en: {
+            question: 'Which request does the route app.get("/users", ...) answer?',
+            highlight: [],
+            correctOption: 1,
+            options: ['GET on /users', 'POST on /users', 'Any request', 'GET on /'],
+            pool: 'routes'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A rota define como a aplicação responde a uma requisição.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'routes',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The route defines how the app responds to a request.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'routes',
+            fixedOrder: true
           }
         }
       }
@@ -15568,6 +21091,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No Express, o que req representa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A requisição recebida', 'A resposta enviada', 'O servidor', 'O banco de dados'],
+            pool: 'req-res'
+          },
+          en: {
+            question: 'In Express, what does req represent?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The incoming request', 'The outgoing response', 'The server', 'The database'],
+            pool: 'req-res'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual objeto usamos para enviar a resposta ao cliente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['res', 'req', 'app', 'next'],
+            pool: 'req-res'
+          },
+          en: {
+            question: 'Which object do we use to send the response to the client?',
+            highlight: [],
+            correctOption: 1,
+            options: ['res', 'req', 'app', 'next'],
+            pool: 'req-res'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'res guarda as informações da requisição recebida.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'req-res',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'res holds the information of the incoming request.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'req-res',
+            fixedOrder: true
+          }
+        }
       }
     ]
   },
@@ -15597,6 +21181,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    name: "Ana"\n  });\n});',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método do Express responde com JSON?',
+            highlight: [],
+            correctOption: 1,
+            options: ['res.json', 'res.html', 'req.json', 'app.json'],
+            pool: 'api-json'
+          },
+          en: {
+            question: 'Which Express method responds with JSON?',
+            highlight: [],
+            correctOption: 1,
+            options: ['res.json', 'res.html', 'req.json', 'app.json'],
+            pool: 'api-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'APIs costumam usar JSON para transportar dados.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'api-json',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'APIs commonly use JSON to carry data.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'api-json',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o JSON é tão usado em APIs?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Estrutura dados de forma simples', 'Deixa a página colorida', 'Só funciona no navegador', 'Substitui o HTTP'],
+            pool: 'api-json'
+          },
+          en: {
+            question: 'Why is JSON so common in APIs?',
+            highlight: [],
+            correctOption: 1,
+            options: ['It structures data simply', 'It makes the page colorful', 'It only works in the browser', 'It replaces HTTP'],
+            pool: 'api-json'
           }
         }
       }
@@ -15630,6 +21275,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Na rota /users/:id, ao acessar /users/7, quanto vale req.params.id?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"7"', '":id"', '"users"', 'undefined'],
+            pool: 'route-params'
+          },
+          en: {
+            question: 'On the route /users/:id, when you open /users/7, what is req.params.id?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"7"', '":id"', '"users"', 'undefined'],
+            pool: 'route-params'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O :id é uma parte variável da rota.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'route-params',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The :id is a variable part of the route.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'route-params',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que servem os parâmetros de rota?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Identificar um recurso específico pela URL', 'Definir a porta do servidor', 'Instalar pacotes', 'Estilizar a resposta'],
+            pool: 'route-params'
+          },
+          en: {
+            question: 'What are route parameters for?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Identifying a specific resource by URL', 'Setting the server port', 'Installing packages', 'Styling the response'],
+            pool: 'route-params'
+          }
+        }
       }
     ]
   },
@@ -15659,6 +21365,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que app.use(express.json()) faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Interpreta requisições com corpo em JSON', 'Responde tudo em JSON', 'Cria um arquivo JSON', 'Apaga o corpo da requisição'],
+            pool: 'receive-json'
+          },
+          en: {
+            question: 'What does app.use(express.json()) do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Parses requests with a JSON body', 'Responds to everything in JSON', 'Creates a JSON file', 'Deletes the request body'],
+            pool: 'receive-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois disso, onde fica o objeto enviado pelo cliente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['req.body', 'res.body', 'req.params', 'app.json'],
+            pool: 'receive-json'
+          },
+          en: {
+            question: 'After that, where is the object sent by the client?',
+            highlight: [],
+            correctOption: 1,
+            options: ['req.body', 'res.body', 'req.params', 'app.json'],
+            pool: 'receive-json'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Sem nenhum middleware, o Express já entende o corpo JSON de qualquer requisição.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'receive-json',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Without any middleware, Express already understands the JSON body of any request.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'receive-json',
+            fixedOrder: true
           }
         }
       }
@@ -15692,6 +21459,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           }
         }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Na API do exemplo, o que GET /users devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma lista de usuários em JSON', 'Uma página HTML', 'Um único usuário', 'Nada, só o status'],
+            pool: 'build-api'
+          },
+          en: {
+            question: 'In the example API, what does GET /users return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A list of users in JSON', 'An HTML page', 'A single user', 'Nothing, just the status'],
+            pool: 'build-api'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A API do exemplo combina Node.js, Express, rotas e JSON.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'build-api',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The example API combines Node.js, Express, routes and JSON.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'build-api',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha faz a API começar a receber requisições?',
+            highlight: [],
+            correctOption: 1,
+            options: ['app.listen(3000);', 'app.use(express.json());', 'const app = express();', 'import express from "express";'],
+            pool: 'build-api'
+          },
+          en: {
+            question: 'Which line makes the API start accepting requests?',
+            highlight: [],
+            correctOption: 1,
+            options: ['app.listen(3000);', 'app.use(express.json());', 'const app = express();', 'import express from "express";'],
+            pool: 'build-api'
+          }
+        }
       }
     ]
   },
@@ -15721,6 +21549,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando um cliente acessa uma rota, o que o Express identifica?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O método e o caminho da requisição', 'A cor da página', 'O nome do usuário', 'O tamanho do arquivo'],
+            pool: 'flow'
+          },
+          en: {
+            question: 'When a client hits a route, what does Express identify?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The request\'s method and path', 'The page color', 'The user\'s name', 'The file size'],
+            pool: 'flow'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Esse fluxo de rota e resposta é a base de muitas APIs web e mobile.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'flow',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'This route-and-response flow is the basis of many web and mobile APIs.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'flow',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois de identificar a rota, o que o Express faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Executa o código dela e envia a resposta', 'Reinicia o servidor', 'Ignora a requisição', 'Instala um pacote'],
+            pool: 'flow'
+          },
+          en: {
+            question: 'After identifying the route, what does Express do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Runs its code and sends the response', 'Restarts the server', 'Ignores the request', 'Installs a package'],
+            pool: 'flow'
           }
         }
       }
@@ -15775,6 +21664,67 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No ecossistema do módulo, qual é o papel do JSON?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Transportar dados estruturados', 'Executar o JavaScript', 'Criar o servidor', 'Definir a comunicação'],
+            pool: 'ecosystem-js'
+          },
+          en: {
+            question: 'In the module\'s ecosystem, what is JSON\'s role?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Carrying structured data', 'Running the JavaScript', 'Creating the server', 'Defining the communication'],
+            pool: 'ecosystem-js'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'E qual é o papel do HTTP?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Definir a comunicação entre cliente e servidor', 'Guardar os dados', 'Estilizar a resposta', 'Executar o código'],
+            pool: 'ecosystem-js'
+          },
+          en: {
+            question: 'And what is HTTP\'s role?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Defining communication between client and server', 'Storing the data', 'Styling the response', 'Running the code'],
+            pool: 'ecosystem-js'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com o Node.js, o JavaScript também serve para construir servidores e APIs.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ecosystem-js',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With Node.js, JavaScript can also be used to build servers and APIs.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'ecosystem-js',
+            fixedOrder: true
           }
         }
       }
