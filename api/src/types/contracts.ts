@@ -133,6 +133,14 @@ export interface OptionActivityContent {
   correctOption: number;
   options: string[];
   /**
+   * Trecho de código mostrado entre o enunciado e as alternativas, com destaque
+   * de sintaxe e só leitura (sem aba "Web" nem "Executar", que entregariam a
+   * resposta num "qual a saída?"). Ausente = pergunta só de texto, como antes.
+   */
+  code?: string;
+  /** Linguagem do `code`; default `'JavaScript'`. */
+  codeLanguage?: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  /**
    * Banco de perguntas dentro da lição: atividades práticas com o mesmo `pool`
    * são alternativas entre si, e o app sorteia `draw` delas por sessão.
    * Ausente = pool de uma atividade só (sempre aparece).

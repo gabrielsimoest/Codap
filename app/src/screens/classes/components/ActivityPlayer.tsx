@@ -90,6 +90,8 @@ export default function ActivityPlayer({
 					question={content.question}
 					aditionalParagraph={content.aditionalParagraph}
 					options={content.options}
+					code={content.code}
+					codeLanguage={content.codeLanguage}
 					correctOption={content.correctOption}
 					highlight={content.highlight}
 					tutorial={content.tutorial}

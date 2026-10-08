@@ -12,6 +12,7 @@ import ResizableText from "../../../components/ResizableText";
 import NextButton from "./NextButton";
 import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
+import CodeSnippet from "./CodeSnippet";
 
 const textSize = 23;
 
@@ -21,6 +22,9 @@ interface Props {
 	options: string[];
 	correctOption: number;
 	highlight: string[];
+	/** Trecho de código mostrado entre o enunciado e as alternativas. */
+	code?: string;
+	codeLanguage?: string;
 	tutorial?: boolean;
 	progress: DimensionValue;
 	onProceed: () => void;
@@ -32,6 +36,8 @@ export default function OptionExercise({
 	tutorial = false,
 	aditionalParagraph,
 	question,
+	code,
+	codeLanguage = "JavaScript",
 	options,
 	correctOption,
 	progress,
@@ -75,6 +81,9 @@ export default function OptionExercise({
 						text={question}
 						defaultSize={textSize}
 					/>
+					{code !== undefined ? (
+						<CodeSnippet code={code} codeLanguage={codeLanguage} />
+					) : null}
 					<>
 						{options.map((option, index) => (
 							<OptionButton

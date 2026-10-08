@@ -124,7 +124,11 @@ function buildOption (content: OptionActivityContent): Partial<ExportActivity> {
       correct: position + 1 === content.correctOption
     })),
     highlight: content.highlight ?? [],
-    codeBlocks: [],
+    // No app o trecho aparece entre o enunciado e as alternativas; aqui vai
+    // junto dos demais blocos de código, que é onde os dois formatos já os põem.
+    codeBlocks: content.code
+      ? [{ language: fenceLanguage(content.codeLanguage ?? 'JavaScript'), code: content.code }]
+      : [],
     notes
   }
 }

@@ -5,9 +5,16 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 import { HighlightField } from './HighlightField'
-import type { OptionContentForm } from '@/lib/activitySchemas'
+import { CODE_LANGUAGES, type OptionContentForm } from '@/lib/activitySchemas'
 
 /**
  * Formulário de uma atividade `option`, espelhando `OptionActivityContent`.
@@ -31,6 +38,7 @@ export function OptionFields () {
   const question = useWatch({ control, name: 'question' })
   const additional = useWatch({ control, name: 'aditionalParagraph' })
   const highlight = useWatch({ control, name: 'highlight' }) ?? []
+  const codeLanguage = useWatch({ control, name: 'codeLanguage' })
 
   return (
     <div className="space-y-4">
@@ -57,6 +65,34 @@ export function OptionFields () {
         onChange={(next) => { form.setValue('highlight', next, { shouldDirty: true }) }}
         paragraphs={[question, additional].filter((text): text is string => Boolean(text))}
       />
+
+      {/*
+        Mesma ordem do app: o trecho fica entre o enunciado e as alternativas.
+        Vazio = pergunta só de texto (o `stripEmpty` não grava `code: ""`).
+      */}
+      <div className="space-y-2 rounded-md border border-border p-3">
+        <div className="flex items-center gap-3">
+          <Label htmlFor="option-code" className="shrink-0">Trecho de código</Label>
+          <Select
+            value={codeLanguage ?? 'JavaScript'}
+            onValueChange={(value) => {
+              form.setValue('codeLanguage', value as OptionContentForm['codeLanguage'], { shouldDirty: true })
+            }}
+          >
+            <SelectTrigger className="w-40" aria-label="Linguagem do trecho"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              {CODE_LANGUAGES.map((language) => (
+                <SelectItem key={language} value={language}>{language}</SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <p className="text-xs text-muted-foreground">
+          Opcional. Aparece com destaque de sintaxe, só para leitura — sem aba Web nem Executar,
+          para não entregar a resposta de um "qual a saída?".
+        </p>
+        <Textarea id="option-code" rows={4} className="font-mono text-xs" {...form.register('code')} />
+      </div>
 
       <div className="space-y-2 rounded-md border border-border p-3">
         <div className="flex items-center justify-between">

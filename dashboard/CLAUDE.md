@@ -140,7 +140,7 @@ Atenção ao campo `aditionalParagraph` de `option`: o nome tem um erro de
 digitação que veio do contrato e está gravado no banco. **Não corrija** — isso
 quebraria todo o conteúdo já semeado.
 
-O formulário de `option` tem uma seção **Sorteio** com `pool`, `draw` e
+O formulário de `option` tem um campo **Trecho de código** (`code` + `codeLanguage`, que a exportação em Markdown/PDF também inclui como bloco de código) e uma seção **Sorteio** com `pool`, `draw` e
 `fixedOrder`, e o de `theory` tem `noTerminal` e `terminalCode` (ver
 `api/CLAUDE.md` e `app/CLAUDE.md`). O zod descarta campo não declarado, então
 um campo de contrato que falte no schema **é apagado em silêncio** ao salvar

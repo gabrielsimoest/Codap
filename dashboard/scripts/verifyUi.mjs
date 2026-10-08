@@ -170,6 +170,7 @@ step('o formulário de múltipla escolha mostra o sorteio', async (page) => {
   await page.locator('main').getByRole('button', { name: 'Editar', exact: true }).last().click()
   await page.getByText('Alternativas').first().waitFor({ timeout: 10_000 })
   await page.getByText('Sorteio').waitFor({ timeout: 10_000 })
+  await page.getByLabel('Trecho de código').waitFor({ timeout: 10_000 })
 
   const pool = await page.getByLabel('Pool').inputValue()
   if (pool.length === 0) {

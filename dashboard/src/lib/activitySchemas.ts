@@ -52,6 +52,9 @@ export const optionContentSchema = z.object({
   /** 1-based: a primeira opção é `1`, não `0`. */
   correctOption: z.number().int().min(1),
   options: z.array(z.string().min(1, 'A alternativa não pode ficar vazia.')).min(2, 'São necessárias ao menos duas alternativas.'),
+  /** Trecho de código mostrado entre o enunciado e as alternativas (só leitura). */
+  code: z.string().optional(),
+  codeLanguage: codeLanguageSchema.optional(),
   /** Banco de perguntas: práticas com o mesmo `pool` são sorteadas entre si. */
   pool: z.string().optional(),
   /** Quantas do pool sortear por sessão (lido da primeira do pool). */

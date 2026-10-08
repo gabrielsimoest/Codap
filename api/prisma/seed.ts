@@ -121,10 +121,10 @@ async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise
   console.log('Subtítulos de módulo atualizados.')
 }
 
-// Conteúdo curricular real do primeiro módulo de HTML ("HTML Básico"): 8
-// lições cobrindo os fundamentos da linguagem, cada uma com até 2 atividades
-// teóricas. Só `theory` por enquanto — a parte prática (`option`) ainda está
-// em validação e entra depois, no lugar/complemento destas mesmas lições.
+// Formato de uma lição nos arrays `*_LESSONS` abaixo: a teoria (`theory`) vem
+// primeiro, seguida da prática (`option`, múltipla escolha e verdadeiro/falso,
+// sorteada pelo app a cada sessão). Os arrays são regenerados a partir do banco
+// por `pnpm seed:generate` — não edite à mão (ver api/CLAUDE.md).
 type ActivitySeed = {
   type: 'theory' | 'option';
   content: Record<LocaleCode, TheoryActivityContent | OptionActivityContent>;
@@ -1182,15 +1182,19 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em <a href="loja.html">Ver loja</a>, o que a pessoa vê na página?',
-            highlight: ['<a>'],
+            question: 'Neste link, o que a pessoa vê na página?',
+            codeLanguage: 'HTML',
+            code: '<a href="loja.html">\n  Ver loja\n</a>',
+            highlight: [],
             correctOption: 1,
             options: ['Ver loja', 'loja.html', 'href', 'O código inteiro do link'],
             pool: 'link-href'
           },
           en: {
-            question: 'In <a href="shop.html">See shop</a>, what does the reader see on the page?',
-            highlight: ['<a>'],
+            question: 'In this link, what does the reader see on the page?',
+            codeLanguage: 'HTML',
+            code: '<a href="shop.html">\n  See shop\n</a>',
+            highlight: [],
             correctOption: 1,
             options: ['See shop', 'shop.html', 'href', 'The link\'s entire code'],
             pool: 'link-href'
@@ -2376,14 +2380,18 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em p { color: red; }, qual parte é o seletor?',
+            question: 'Nesta regra, qual parte é o seletor?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: red;\n}',
             highlight: [],
             correctOption: 1,
             options: ['p', 'color', 'red', '{ }'],
             pool: 'css-rule'
           },
           en: {
-            question: 'In p { color: red; }, which part is the selector?',
+            question: 'In this rule, which part is the selector?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: red;\n}',
             highlight: [],
             correctOption: 1,
             options: ['p', 'color', 'red', '{ }'],
@@ -2395,14 +2403,18 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em p { color: red; }, o que é color: red;?',
+            question: 'Nesta regra, o que é color: red;?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: red;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Uma declaração', 'Um seletor', 'Uma tag HTML', 'Um comentário'],
             pool: 'css-rule'
           },
           en: {
-            question: 'In p { color: red; }, what is color: red;?',
+            question: 'In this rule, what is color: red;?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: red;\n}',
             highlight: [],
             correctOption: 1,
             options: ['A declaration', 'A selector', 'An HTML tag', 'A comment'],
@@ -4852,14 +4864,18 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com html { font-size: 16px; }, quanto vale 2rem?',
+            question: 'Com este CSS, quanto vale 2rem?',
+            codeLanguage: 'CSS',
+            code: 'html {\n  font-size: 16px;\n}',
             highlight: [],
             correctOption: 1,
             options: ['32px', '16px', '2px', '18px'],
             pool: 'rem-em'
           },
           en: {
-            question: 'With html { font-size: 16px; }, how much is 2rem?',
+            question: 'With this CSS, how much is 2rem?',
+            codeLanguage: 'CSS',
+            code: 'html {\n  font-size: 16px;\n}',
             highlight: [],
             correctOption: 1,
             options: ['32px', '16px', '2px', '18px'],
@@ -5105,14 +5121,18 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que .oculto { display: none; } faz?',
+            question: 'O que esta regra faz com o elemento?',
+            codeLanguage: 'CSS',
+            code: '.oculto {\n  display: none;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Remove o elemento da página', 'Deixa o elemento transparente', 'Coloca o elemento na mesma linha', 'Diminui o elemento'],
             pool: 'inline-block-none'
           },
           en: {
-            question: 'What does .hidden { display: none; } do?',
+            question: 'What does this rule do to the element?',
+            codeLanguage: 'CSS',
+            code: '.hidden {\n  display: none;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Removes the element from the page', 'Makes the element transparent', 'Puts the element on the same line', 'Shrinks the element'],
@@ -5505,14 +5525,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que console.log("Olá, " + "Ana" + "!") mostra?',
+            question: 'O que este código mostra no console?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  "Olá, " + "Ana" + "!"\n);',
             highlight: [],
             correctOption: 1,
             options: ['Olá, Ana!', '"Olá, " + "Ana" + "!"', 'Olá,Ana', 'Erro'],
             pool: 'console-log'
           },
           en: {
-            question: 'What does console.log("Hello, " + "Ana" + "!") show?',
+            question: 'What does this code show in the console?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  "Hello, " + "Ana" + "!"\n);',
             highlight: [],
             correctOption: 1,
             options: ['Hello, Ana!', '"Hello, " + "Ana" + "!"', 'Hello,Ana', 'Error'],
@@ -5702,14 +5726,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que acontece em const nome = "Ana"; nome = "Bia";?',
+            question: 'O que acontece ao rodar este código?',
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\nnome = "Bia";',
             highlight: [],
             correctOption: 1,
             options: ['Dá erro: const não pode ser reatribuída', 'nome passa a ser "Bia"', 'nome vira undefined', 'Os dois valores ficam guardados'],
             pool: 'let-const'
           },
           en: {
-            question: 'What happens in const name = "Ana"; name = "Bia";?',
+            question: 'What happens when this code runs?',
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\nname = "Bia";',
             highlight: [],
             correctOption: 1,
             options: ['An error: const can\'t be reassigned', 'name becomes "Bia"', 'name becomes undefined', 'Both values are kept'],
@@ -5949,14 +5977,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que console.log("Olá".length) mostra?',
+            question: 'O que este código mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Olá".length);',
             highlight: [],
             correctOption: 1,
             options: ['3', '2', '4', '"Olá"'],
             pool: 'string-basics'
           },
           en: {
-            question: 'What does console.log("Hi!".length) show?',
+            question: 'What does this code show?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Hi!".length);',
             highlight: [],
             correctOption: 1,
             options: ['3', '2', '4', '"Hi!"'],
@@ -6142,14 +6174,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que console.log(10 / 5) mostra?',
+            question: 'O que esta linha mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(10 / 5);',
             highlight: [],
             correctOption: 1,
             options: ['2', '50', '5', '0.5'],
             pool: 'arith'
           },
           en: {
-            question: 'What does console.log(10 / 5) show?',
+            question: 'What does this line show?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(10 / 5);',
             highlight: [],
             correctOption: 1,
             options: ['2', '50', '5', '0.5'],
@@ -6379,14 +6415,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const nome = "", o bloco de if (nome) roda?',
+            question: 'O bloco deste if roda?',
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n}',
             highlight: [],
             correctOption: 1,
             options: ['Não, porque string vazia é falsy', 'Sim, porque a variável existe', 'Sim, porque "" é truthy', 'Dá erro, nome não tem valor'],
             pool: 'truthy-falsy'
           },
           en: {
-            question: 'With const name = "", does the if (name) block run?',
+            question: 'Does this if block run?',
+            codeLanguage: 'JavaScript',
+            code: 'const name = "";\n\nif (name) {\n  console.log(\n    "Hello, " + name\n  );\n}',
             highlight: [],
             correctOption: 1,
             options: ['No, because an empty string is falsy', 'Yes, because the variable exists', 'Yes, because "" is truthy', 'It errors, name has no value'],
@@ -6471,14 +6511,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const idade = 20, o que if (idade >= 18) { console.log("Maior de idade") } mostra?',
+            question: 'O que este if mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\n\nif (idade >= 18) {\n  console.log(\n    "Maior de idade"\n  );\n}',
             highlight: [],
             correctOption: 1,
             options: ['Maior de idade', 'Nada', 'Menor de idade', 'Erro'],
             pool: 'if'
           },
           en: {
-            question: 'With const age = 20, what does if (age >= 18) { console.log("Adult") } show?',
+            question: 'What does this if show?',
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\n\nif (age >= 18) {\n  console.log("Adult");\n}',
             highlight: [],
             correctOption: 1,
             options: ['Adult', 'Nothing', 'Minor', 'Error'],
@@ -6532,14 +6576,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const idade = 16, qual bloco roda em if (idade >= 18) {...} else {...}?',
+            question: 'Qual bloco roda?',
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 16;\n\nif (idade >= 18) {\n  console.log(\n    "Maior de idade"\n  );\n} else {\n  console.log(\n    "Menor de idade"\n  );\n}',
             highlight: [],
             correctOption: 1,
             options: ['O do else', 'O do if', 'Os dois', 'Nenhum'],
             pool: 'else'
           },
           en: {
-            question: 'With const age = 16, which block runs in if (age >= 18) {...} else {...}?',
+            question: 'Which block runs?',
+            codeLanguage: 'JavaScript',
+            code: 'const age = 16;\n\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}',
             highlight: [],
             correctOption: 1,
             options: ['The else block', 'The if block', 'Both', 'Neither'],
@@ -6708,14 +6756,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com idade = 20, o que idade >= 18 ? "maior" : "menor" devolve?',
+            question: 'Que valor situacao recebe?',
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\n\nconst situacao =\n  idade >= 18\n    ? "maior"\n    : "menor";',
             highlight: [],
             correctOption: 1,
             options: ['"maior"', '"menor"', 'true', '20'],
             pool: 'ternary'
           },
           en: {
-            question: 'With age = 20, what does age >= 18 ? "adult" : "minor" return?',
+            question: 'What value does status get?',
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\n\nconst status =\n  age >= 18\n    ? "adult"\n    : "minor";',
             highlight: [],
             correctOption: 1,
             options: ['"adult"', '"minor"', 'true', '20'],
@@ -6844,14 +6896,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Quantas vezes o bloco de for (let i = 0; i < 5; i++) roda?',
+            question: 'Quantas vezes o bloco deste for roda?',
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i < 5; i++) {\n  // bloco\n}',
             highlight: [],
             correctOption: 1,
             options: ['5', '4', '6', 'Infinitas vezes'],
             pool: 'for'
           },
           en: {
-            question: 'How many times does the for (let i = 0; i < 5; i++) block run?',
+            question: 'How many times does this for block run?',
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i < 5; i++) {\n  // block\n}',
             highlight: [],
             correctOption: 1,
             options: ['5', '4', '6', 'Forever'],
@@ -6863,14 +6919,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual o último número mostrado por for (let i = 0; i < 5; i++) { console.log(i) }?',
+            question: 'Qual o último número mostrado?',
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i < 5; i++) {\n  console.log(i);\n}',
             highlight: [],
             correctOption: 1,
             options: ['4', '5', '0', '6'],
             pool: 'for'
           },
           en: {
-            question: 'What is the last number shown by for (let i = 0; i < 5; i++) { console.log(i) }?',
+            question: 'What is the last number shown?',
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i < 5; i++) {\n  console.log(i);\n}',
             highlight: [],
             correctOption: 1,
             options: ['4', '5', '0', '6'],
@@ -7077,14 +7137,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const f = ["maçã", "banana", "uva"], o que f[1] devolve?',
+            question: 'O que frutas[1] devolve?',
+            codeLanguage: 'JavaScript',
+            code: 'const frutas = [\n  "maçã",\n  "banana",\n  "uva"\n];',
             highlight: [],
             correctOption: 1,
             options: ['"banana"', '"maçã"', '"uva"', 'undefined'],
             pool: 'index'
           },
           en: {
-            question: 'With const f = ["apple", "banana", "grape"], what does f[1] return?',
+            question: 'What does fruits[1] return?',
+            codeLanguage: 'JavaScript',
+            code: 'const fruits = [\n  "apple",\n  "banana",\n  "grape"\n];',
             highlight: [],
             correctOption: 1,
             options: ['"banana"', '"apple"', '"grape"', 'undefined'],
@@ -7192,14 +7256,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Depois de const n = [1, 2]; n.push(3);, quanto vale n.length?',
+            question: 'Depois deste código, quanto vale n.length?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2];\nn.push(3);',
             highlight: [],
             correctOption: 1,
             options: ['3', '2', '4', '1'],
             pool: 'push-pop'
           },
           en: {
-            question: 'After const n = [1, 2]; n.push(3);, what is n.length?',
+            question: 'After this code, what is n.length?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2];\nn.push(3);',
             highlight: [],
             correctOption: 1,
             options: ['3', '2', '4', '1'],
@@ -7427,14 +7495,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const pessoa = { nome: "Ana", idade: 20 }, o que pessoa.nome devolve?',
+            question: 'O que pessoa.nome devolve?',
+            codeLanguage: 'JavaScript',
+            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};',
             highlight: [],
             correctOption: 1,
             options: ['"Ana"', '"nome"', '20', 'undefined'],
             pool: 'dot'
           },
           en: {
-            question: 'With const person = { name: "Ana", age: 20 }, what does person.name return?',
+            question: 'What does person.name return?',
+            codeLanguage: 'JavaScript',
+            code: 'const person = {\n  name: "Ana",\n  age: 20\n};',
             highlight: [],
             correctOption: 1,
             options: ['"Ana"', '"name"', '20', 'undefined'],
@@ -7601,14 +7673,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com function somar(a, b) { return a + b }, o que somar(5, 3) devolve?',
+            question: 'O que somar(5, 3) devolve?',
+            codeLanguage: 'JavaScript',
+            code: 'function somar(a, b) {\n  return a + b;\n}',
             highlight: [],
             correctOption: 1,
             options: ['8', '53', '"5 + 3"', 'undefined'],
             pool: 'params-return'
           },
           en: {
-            question: 'With function add(a, b) { return a + b }, what does add(5, 3) return?',
+            question: 'What does add(5, 3) return?',
+            codeLanguage: 'JavaScript',
+            code: 'function add(a, b) {\n  return a + b;\n}',
             highlight: [],
             correctOption: 1,
             options: ['8', '53', '"5 + 3"', 'undefined'],
@@ -7714,14 +7790,18 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const dobrar = n => n * 2, o que dobrar(4) devolve?',
+            question: 'O que dobrar(4) devolve?',
+            codeLanguage: 'JavaScript',
+            code: 'const dobrar = n => n * 2;',
             highlight: [],
             correctOption: 1,
             options: ['8', '6', '42', '4'],
             pool: 'arrow'
           },
           en: {
-            question: 'With const double = n => n * 2, what does double(4) return?',
+            question: 'What does double(4) return?',
+            codeLanguage: 'JavaScript',
+            code: 'const double = n => n * 2;',
             highlight: [],
             correctOption: 1,
             options: ['8', '6', '42', '4'],
@@ -8801,15 +8881,19 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em <option value="sp">São Paulo</option>, o que o formulário envia?',
-            highlight: ['<option>'],
+            question: 'Com esta opção escolhida, o que o formulário envia?',
+            codeLanguage: 'HTML',
+            code: '<option value="sp">\n  São Paulo\n</option>',
+            highlight: [],
             correctOption: 1,
             options: ['sp', 'São Paulo', 'option', 'value'],
             pool: 'textarea-select'
           },
           en: {
-            question: 'In <option value="ca">California</option>, what does the form send?',
-            highlight: ['<option>'],
+            question: 'With this option selected, what does the form send?',
+            codeLanguage: 'HTML',
+            code: '<option value="ca">\n  California\n</option>',
+            highlight: [],
             correctOption: 1,
             options: ['ca', 'California', 'option', 'value'],
             pool: 'textarea-select'
@@ -10049,14 +10133,18 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que grid-template-columns: 1fr 1fr; cria?',
+            question: 'O que esta grade cria?',
+            codeLanguage: 'CSS',
+            code: '.grade {\n  display: grid;\n  grid-template-columns:\n    1fr 1fr;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Duas colunas de mesma largura', 'Uma coluna de largura 2', 'Duas linhas iguais', 'Dois itens de 1px'],
             pool: 'grid-basics'
           },
           en: {
-            question: 'What does grid-template-columns: 1fr 1fr; create?',
+            question: 'What does this grid create?',
+            codeLanguage: 'CSS',
+            code: '.grid {\n  display: grid;\n  grid-template-columns:\n    1fr 1fr;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Two columns of equal width', 'One column of width 2', 'Two equal rows', 'Two 1px items'],
@@ -11309,14 +11397,18 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em grid-template-columns: 2fr 1fr;, qual coluna é maior?',
+            question: 'Nesta grade, qual coluna é maior?',
+            codeLanguage: 'CSS',
+            code: '.pagina {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n}',
             highlight: [],
             correctOption: 1,
             options: ['A primeira, com o dobro da segunda', 'A segunda', 'As duas são iguais', 'Depende do texto'],
             pool: 'build-layout'
           },
           en: {
-            question: 'In grid-template-columns: 2fr 1fr;, which column is bigger?',
+            question: 'In this grid, which column is bigger?',
+            codeLanguage: 'CSS',
+            code: '.page {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n}',
             highlight: [],
             correctOption: 1,
             options: ['The first, twice the second', 'The second', 'Both are equal', 'It depends on the text'],
@@ -11441,14 +11533,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [1, 2, 3].map(n => n * 2) devolve?',
+            question: 'Quanto vale dobrados?',
+            codeLanguage: 'JavaScript',
+            code: 'const dobrados =\n  [1, 2, 3].map(n => n * 2);',
             highlight: [],
             correctOption: 1,
             options: ['[2, 4, 6]', '[1, 2, 3]', '[2]', '12'],
             pool: 'map-filter'
           },
           en: {
-            question: 'What does [1, 2, 3].map(n => n * 2) return?',
+            question: 'What is doubled?',
+            codeLanguage: 'JavaScript',
+            code: 'const doubled =\n  [1, 2, 3].map(n => n * 2);',
             highlight: [],
             correctOption: 1,
             options: ['[2, 4, 6]', '[1, 2, 3]', '[2]', '12'],
@@ -11460,14 +11556,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [1, 2, 3, 4].filter(n => n % 2 === 0) devolve?',
+            question: 'Quanto vale pares?',
+            codeLanguage: 'JavaScript',
+            code: 'const pares = [1, 2, 3, 4]\n  .filter(n => n % 2 === 0);',
             highlight: [],
             correctOption: 1,
             options: ['[2, 4]', '[1, 3]', '[false, true, false, true]', '2'],
             pool: 'map-filter'
           },
           en: {
-            question: 'What does [1, 2, 3, 4].filter(n => n % 2 === 0) return?',
+            question: 'What is evens?',
+            codeLanguage: 'JavaScript',
+            code: 'const evens = [1, 2, 3, 4]\n  .filter(n => n % 2 === 0);',
             highlight: [],
             correctOption: 1,
             options: ['[2, 4]', '[1, 3]', '[false, true, false, true]', '2'],
@@ -11502,14 +11602,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [2, 4, 6, 8].find(n => n > 5) devolve?',
+            question: 'Quanto vale encontrado?',
+            codeLanguage: 'JavaScript',
+            code: 'const numeros = [2, 4, 6, 8];\n\nconst encontrado =\n  numeros.find(n => n > 5);',
             highlight: [],
             correctOption: 1,
             options: ['6', '[6, 8]', '8', 'true'],
             pool: 'find-some-every'
           },
           en: {
-            question: 'What does [2, 4, 6, 8].find(n => n > 5) return?',
+            question: 'What is found?',
+            codeLanguage: 'JavaScript',
+            code: 'const numbers = [2, 4, 6, 8];\n\nconst found =\n  numbers.find(n => n > 5);',
             highlight: [],
             correctOption: 1,
             options: ['6', '[6, 8]', '8', 'true'],
@@ -11521,14 +11625,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [2, 4, 6].every(n => n % 2 === 0) devolve?',
+            question: 'Quanto vale todosPares?',
+            codeLanguage: 'JavaScript',
+            code: 'const numeros = [2, 4, 6];\n\nconst todosPares =\n  numeros.every(\n    n => n % 2 === 0\n  );',
             highlight: [],
             correctOption: 1,
             options: ['true', 'false', '[2, 4, 6]', '3'],
             pool: 'find-some-every'
           },
           en: {
-            question: 'What does [2, 4, 6].every(n => n % 2 === 0) return?',
+            question: 'What is allEven?',
+            codeLanguage: 'JavaScript',
+            code: 'const numbers = [2, 4, 6];\n\nconst allEven =\n  numbers.every(\n    n => n % 2 === 0\n  );',
             highlight: [],
             correctOption: 1,
             options: ['true', 'false', '[2, 4, 6]', '3'],
@@ -11615,14 +11723,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [10, 20, 30].reduce((soma, n) => soma + n, 0) devolve?',
+            question: 'Quanto vale total?',
+            codeLanguage: 'JavaScript',
+            code: 'const numeros = [10, 20, 30];\n\nconst total = numeros.reduce(\n  (soma, n) => soma + n,\n  0\n);',
             highlight: [],
             correctOption: 1,
             options: ['60', '102030', '[10, 20, 30]', '30'],
             pool: 'reduce'
           },
           en: {
-            question: 'What does [10, 20, 30].reduce((sum, n) => sum + n, 0) return?',
+            question: 'What is total?',
+            codeLanguage: 'JavaScript',
+            code: 'const numbers = [10, 20, 30];\n\nconst total = numbers.reduce(\n  (sum, n) => sum + n,\n  0\n);',
             highlight: [],
             correctOption: 1,
             options: ['60', '102030', '[10, 20, 30]', '30'],
@@ -11730,14 +11842,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const { nome } = { nome: "Ana", idade: 20 }, quanto vale nome?',
+            question: 'Quanto vale nome?',
+            codeLanguage: 'JavaScript',
+            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { nome } = pessoa;',
             highlight: [],
             correctOption: 1,
             options: ['"Ana"', '{ nome: "Ana" }', '20', 'undefined'],
             pool: 'destructuring'
           },
           en: {
-            question: 'With const { name } = { name: "Ana", age: 20 }, what is name?',
+            question: 'What is name?',
+            codeLanguage: 'JavaScript',
+            code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { name } = person;',
             highlight: [],
             correctOption: 1,
             options: ['"Ana"', '{ name: "Ana" }', '20', 'undefined'],
@@ -11749,14 +11865,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const [a, b] = ["azul", "verde", "vermelho"], quanto vale b?',
+            question: 'Quanto vale b?',
+            codeLanguage: 'JavaScript',
+            code: 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [a, b] = cores;',
             highlight: [],
             correctOption: 1,
             options: ['"verde"', '"azul"', '"vermelho"', '["verde"]'],
             pool: 'destructuring'
           },
           en: {
-            question: 'With const [a, b] = ["blue", "green", "red"], what is b?',
+            question: 'What is b?',
+            codeLanguage: 'JavaScript',
+            code: 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [a, b] = colors;',
             highlight: [],
             correctOption: 1,
             options: ['"green"', '"blue"', '"red"', '["green"]'],
@@ -11843,14 +11963,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que [...[1, 2], 3] devolve?',
+            question: 'Quanto vale lista?',
+            codeLanguage: 'JavaScript',
+            code: 'const lista = [...[1, 2], 3];',
             highlight: [],
             correctOption: 1,
             options: ['[1, 2, 3]', '[[1, 2], 3]', '[1, 2]', '6'],
             pool: 'spread-rest'
           },
           en: {
-            question: 'What does [...[1, 2], 3] return?',
+            question: 'What is list?',
+            codeLanguage: 'JavaScript',
+            code: 'const list = [...[1, 2], 3];',
             highlight: [],
             correctOption: 1,
             options: ['[1, 2, 3]', '[[1, 2], 3]', '[1, 2]', '6'],
@@ -11862,14 +11986,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com function contar(...n) { return n.length }, o que contar(1, 2, 3) devolve?',
+            question: 'O que contar(1, 2, 3) devolve?',
+            codeLanguage: 'JavaScript',
+            code: 'function contar(...n) {\n  return n.length;\n}',
             highlight: [],
             correctOption: 1,
             options: ['3', '6', '[1, 2, 3]', '1'],
             pool: 'spread-rest'
           },
           en: {
-            question: 'With function count(...n) { return n.length }, what does count(1, 2, 3) return?',
+            question: 'What does count(1, 2, 3) return?',
+            codeLanguage: 'JavaScript',
+            code: 'function count(...n) {\n  return n.length;\n}',
             highlight: [],
             correctOption: 1,
             options: ['3', '6', '[1, 2, 3]', '1'],
@@ -11960,14 +12088,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const nome = "Ana", o que `Olá, ${nome}!` produz?',
+            question: 'Que texto mensagem guarda?',
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n\nconst mensagem =\n  `Olá, ${nome}!`;',
             highlight: [],
             correctOption: 1,
             options: ['Olá, Ana!', 'Olá, ${nome}!', 'Olá, nome!', '"Olá, " + nome'],
             pool: 'template-modern'
           },
           en: {
-            question: 'With const name = "Ana", what does `Hi, ${name}!` produce?',
+            question: 'What text does message hold?',
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n\nconst message =\n  `Hi, ${name}!`;',
             highlight: [],
             correctOption: 1,
             options: ['Hi, Ana!', 'Hi, ${name}!', 'Hi, name!', '"Hi, " + name'],
@@ -11979,14 +12111,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const usuario = {}, o que usuario.endereco?.cidade ?? "Não informada" devolve?',
+            question: 'Quanto vale cidade?',
+            codeLanguage: 'JavaScript',
+            code: 'const usuario = {};\n\nconst cidade =\n  usuario.endereco?.cidade\n  ?? "Não informada";',
             highlight: [],
             correctOption: 1,
             options: ['"Não informada"', 'undefined', 'Um erro', 'null'],
             pool: 'template-modern'
           },
           en: {
-            question: 'With const user = {}, what does user.address?.city ?? "Not provided" return?',
+            question: 'What is city?',
+            codeLanguage: 'JavaScript',
+            code: 'const user = {};\n\nconst city =\n  user.address?.city\n  ?? "Not provided";',
             highlight: [],
             correctOption: 1,
             options: ['"Not provided"', 'undefined', 'An error', 'null'],
@@ -12479,14 +12615,18 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que console.log(JSON.stringify({ a: 1 })) mostra?',
+            question: 'O que esta linha mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  JSON.stringify({ a: 1 })\n);',
             highlight: [],
             correctOption: 1,
             options: ['{"a":1}', '{ a: 1 }', '[object Object]', '1'],
             pool: 'storage-json'
           },
           en: {
-            question: 'What does console.log(JSON.stringify({ a: 1 })) show?',
+            question: 'What does this line show?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  JSON.stringify({ a: 1 })\n);',
             highlight: [],
             correctOption: 1,
             options: ['{"a":1}', '{ a: 1 }', '[object Object]', '1'],
@@ -13779,15 +13919,19 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em <time datetime="2026-09-10">10 de setembro</time>, o que aparece na tela?',
-            highlight: ['<time>'],
+            question: 'Com este trecho, o que aparece na tela?',
+            codeLanguage: 'HTML',
+            code: '<time datetime="2026-09-10">\n  10 de setembro\n</time>',
+            highlight: [],
             correctOption: 1,
             options: ['10 de setembro', '2026-09-10', 'Os dois, lado a lado', 'Nada'],
             pool: 'time-data'
           },
           en: {
-            question: 'In <time datetime="2026-09-10">September 10</time>, what shows on screen?',
-            highlight: ['<time>'],
+            question: 'With this snippet, what shows on screen?',
+            codeLanguage: 'HTML',
+            code: '<time datetime="2026-09-10">\n  September 10\n</time>',
+            highlight: [],
             correctOption: 1,
             options: ['September 10', '2026-09-10', 'Both, side by side', 'Nothing'],
             pool: 'time-data'
@@ -15029,14 +15173,18 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que @media (min-width: 768px) { ... } faz?',
+            question: 'O que esta media query faz?',
+            codeLanguage: 'CSS',
+            code: '@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
             highlight: [],
             correctOption: 1,
             options: ['Aplica as regras com pelo menos 768px de largura', 'Aplica as regras só abaixo de 768px', 'Fixa a largura da página em 768px', 'Esconde a página em telas pequenas'],
             pool: 'mq'
           },
           en: {
-            question: 'What does @media (min-width: 768px) { ... } do?',
+            question: 'What does this media query do?',
+            codeLanguage: 'CSS',
+            code: '@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
             highlight: [],
             correctOption: 1,
             options: ['Applies the rules from 768px wide up', 'Applies the rules only below 768px', 'Fixes the page width at 768px', 'Hides the page on small screens'],
@@ -16069,14 +16217,18 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'p { color: black; } e, depois, p { color: blue; }. De que cor fica o parágrafo?',
+            question: 'Com estas duas regras, de que cor fica o parágrafo?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Azul', 'Preto', 'Roxo, uma mistura', 'Sem cor'],
             pool: 'cascade'
           },
           en: {
-            question: 'p { color: black; } and then p { color: blue; }. What color is the paragraph?',
+            question: 'With these two rules, what color is the paragraph?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
             highlight: [],
             correctOption: 1,
             options: ['Blue', 'Black', 'Purple, a mix', 'No color'],
@@ -16969,14 +17121,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const nome = "Ana" fora da função, o que saudacao() mostra ao fazer console.log(nome)?',
+            question: 'O que este código mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n\nfunction saudacao() {\n  console.log(nome);\n}\n\nsaudacao();',
             highlight: [],
             correctOption: 1,
             options: ['Ana', 'undefined', 'Erro', 'nome'],
             pool: 'scope-chain'
           },
           en: {
-            question: 'With const name = "Ana" outside the function, what does greet() show with console.log(name)?',
+            question: 'What does this code show?',
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n\nfunction greet() {\n  console.log(name);\n}\n\ngreet();',
             highlight: [],
             correctOption: 1,
             options: ['Ana', 'undefined', 'Error', 'name'],
@@ -17069,14 +17225,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'contadorA e contadorB vêm da mesma criarContador. Depois de chamar contadorA() duas vezes, o que contadorB() devolve?',
+            question: 'O que a última linha mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'function criarContador() {\n  let total = 0;\n  return () => ++total;\n}\n\nconst contadorA =\n  criarContador();\nconst contadorB =\n  criarContador();\n\ncontadorA();\ncontadorA();\nconsole.log(contadorB());',
             highlight: [],
             correctOption: 1,
             options: ['1', '3', '2', '0'],
             pool: 'closures'
           },
           en: {
-            question: 'counterA and counterB come from the same createCounter. After calling counterA() twice, what does counterB() return?',
+            question: 'What does the last line show?',
+            codeLanguage: 'JavaScript',
+            code: 'function createCounter() {\n  let total = 0;\n  return () => ++total;\n}\n\nconst counterA =\n  createCounter();\nconst counterB =\n  createCounter();\n\ncounterA();\ncounterA();\nconsole.log(counterB());',
             highlight: [],
             correctOption: 1,
             options: ['1', '3', '2', '0'],
@@ -17140,14 +17300,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que console.log(nome) mostra antes de var nome = "Ana";?',
+            question: 'O que a primeira linha mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(nome);\nvar nome = "Ana";',
             highlight: [],
             correctOption: 1,
             options: ['undefined', '"Ana"', 'Um erro', 'null'],
             pool: 'hoisting'
           },
           en: {
-            question: 'What does console.log(name) show before var name = "Ana";?',
+            question: 'What does the first line show?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log(name);\nvar name = "Ana";',
             highlight: [],
             correctOption: 1,
             options: ['undefined', '"Ana"', 'An error', 'null'],
@@ -17272,14 +17436,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const solta = usuario.saudar; solta();, o que this.nome mostra?',
+            question: 'O que solta() mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nconst solta = usuario.saudar;\nsolta();',
             highlight: [],
             correctOption: 1,
             options: ['undefined', '"Ana"', '"solta"', 'Um objeto vazio'],
             pool: 'this'
           },
           en: {
-            question: 'With const loose = user.greet; loose();, what does this.name show?',
+            question: 'What does loose() show?',
+            codeLanguage: 'JavaScript',
+            code: 'const user = {\n  name: "Ana",\n  greet() {\n    console.log(this.name);\n  }\n};\n\nconst loose = user.greet;\nloose();',
             highlight: [],
             correctOption: 1,
             options: ['undefined', '"Ana"', '"loose"', 'An empty object'],
@@ -17701,14 +17869,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em dois(), que chama um() antes do próprio log, o que aparece primeiro?',
+            question: 'O que aparece primeiro no console?',
+            codeLanguage: 'JavaScript',
+            code: 'function um() {\n  console.log("um");\n}\n\nfunction dois() {\n  um();\n  console.log("dois");\n}\n\ndois();',
             highlight: [],
             correctOption: 1,
             options: ['um', 'dois', 'Os dois juntos', 'Nada'],
             pool: 'stack-loop'
           },
           en: {
-            question: 'In two(), which calls one() before its own log, what shows first?',
+            question: 'What shows first in the console?',
+            codeLanguage: 'JavaScript',
+            code: 'function one() {\n  console.log("one");\n}\n\nfunction two() {\n  one();\n  console.log("two");\n}\n\ntwo();',
             highlight: [],
             correctOption: 1,
             options: ['one', 'two', 'Both together', 'Nothing'],
@@ -17874,14 +18046,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com Promise.resolve("ok").then(...) e depois console.log("Executado primeiro"), o que aparece primeiro?',
+            question: 'O que aparece primeiro no console?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("ok")\n  .then((valor) => {\n    console.log(valor);\n  });\n\nconsole.log(\n  "Executado primeiro"\n);',
             highlight: [],
             correctOption: 1,
             options: ['Executado primeiro', 'ok', 'Os dois juntos', 'Nenhum dos dois'],
             pool: 'promise-flow'
           },
           en: {
-            question: 'With Promise.resolve("ok").then(...) and then console.log("Runs first"), what shows first?',
+            question: 'What shows first in the console?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("ok")\n  .then((value) => {\n    console.log(value);\n  });\n\nconsole.log("Runs first");',
             highlight: [],
             correctOption: 1,
             options: ['Runs first', 'ok', 'Both together', 'Neither'],
@@ -17987,14 +18163,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com let a = 10; let b = a; b = 20;, quanto vale a?',
+            question: 'Depois deste código, quanto vale a?',
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;',
             highlight: [],
             correctOption: 1,
             options: ['10', '20', '30', 'undefined'],
             pool: 'value-ref'
           },
           en: {
-            question: 'With let a = 10; let b = a; b = 20;, what is a?',
+            question: 'After this code, what is a?',
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;',
             highlight: [],
             correctOption: 1,
             options: ['10', '20', '30', 'undefined'],
@@ -18006,14 +18186,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const obj2 = obj1; obj2.total = 20;, quanto vale obj1.total, se era 10?',
+            question: 'Depois deste código, quanto vale obj1.total?',
+            codeLanguage: 'JavaScript',
+            code: 'const obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;',
             highlight: [],
             correctOption: 1,
             options: ['20', '10', 'undefined', 'Dá erro'],
             pool: 'value-ref'
           },
           en: {
-            question: 'With const obj2 = obj1; obj2.total = 20;, what is obj1.total if it was 10?',
+            question: 'After this code, what is obj1.total?',
+            codeLanguage: 'JavaScript',
+            code: 'const obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;',
             highlight: [],
             correctOption: 1,
             options: ['20', '10', 'undefined', 'It errors'],
@@ -18236,14 +18420,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const atualizado = { ...usuario, idade: 31 }, quanto dá usuario === atualizado?',
+            question: 'Quanto dá usuario === atualizado?',
+            codeLanguage: 'JavaScript',
+            code: 'const usuario = {\n  nome: "Ana",\n  idade: 30\n};\n\nconst atualizado = {\n  ...usuario,\n  idade: 31\n};',
             highlight: [],
             correctOption: 1,
             options: ['false', 'true', 'undefined', 'Dá erro'],
             pool: 'immutability'
           },
           en: {
-            question: 'With const updated = { ...user, age: 31 }, what is user === updated?',
+            question: 'What is user === updated?',
+            codeLanguage: 'JavaScript',
+            code: 'const user = {\n  name: "Ana",\n  age: 30\n};\n\nconst updated = {\n  ...user,\n  age: 31\n};',
             highlight: [],
             correctOption: 1,
             options: ['false', 'true', 'undefined', 'It errors'],
@@ -18544,14 +18732,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com uma Promise resolvida, um setTimeout de 0 e um console.log comum, em que ordem as mensagens aparecem?',
+            question: 'Em que ordem as mensagens aparecem?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve().then(() => {\n  console.log("Promise");\n});\n\nsetTimeout(() => {\n  console.log("setTimeout");\n}, 0);\n\nconsole.log("log comum");',
             highlight: [],
             correctOption: 1,
             options: ['log comum, Promise, setTimeout', 'Promise, setTimeout, log comum', 'setTimeout, Promise, log comum', 'log comum, setTimeout, Promise'],
             pool: 'closing-adv'
           },
           en: {
-            question: 'With a resolved Promise, a 0ms setTimeout and a plain console.log, in what order do the messages show?',
+            question: 'In what order do the messages show?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve().then(() => {\n  console.log("Promise");\n});\n\nsetTimeout(() => {\n  console.log("setTimeout");\n}, 0);\n\nconsole.log("plain log");',
             highlight: [],
             correctOption: 1,
             options: ['plain log, Promise, setTimeout', 'Promise, setTimeout, plain log', 'setTimeout, Promise, plain log', 'plain log, setTimeout, Promise'],
@@ -18837,14 +19029,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em let idade = 20;, qual tipo o TypeScript infere?',
+            question: 'Qual tipo o TypeScript infere para idade?',
+            codeLanguage: 'TypeScript',
+            code: 'let idade = 20;',
             highlight: [],
             correctOption: 1,
             options: ['number', 'string', 'any', 'unknown'],
             pool: 'inference'
           },
           en: {
-            question: 'In let age = 20;, which type does TypeScript infer?',
+            question: 'Which type does TypeScript infer for age?',
+            codeLanguage: 'TypeScript',
+            code: 'let age = 20;',
             highlight: [],
             correctOption: 1,
             options: ['number', 'string', 'any', 'unknown'],
@@ -19017,14 +19213,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que let id: string | number; permite?',
+            question: 'O que esta declaração permite guardar em id?',
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | number;',
             highlight: [],
             correctOption: 1,
             options: ['Guardar um texto ou um número', 'Só texto', 'Só número', 'Qualquer tipo, como any'],
             pool: 'union'
           },
           en: {
-            question: 'What does let id: string | number; allow?',
+            question: 'What does this declaration allow id to hold?',
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | number;',
             highlight: [],
             correctOption: 1,
             options: ['Storing a text or a number', 'Only text', 'Only a number', 'Any type, like any'],
@@ -19314,14 +19514,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em function primeiro<T>(itens: T[]): T, o que é T?',
+            question: 'Nesta função, o que é T?',
+            codeLanguage: 'TypeScript',
+            code: 'function primeiro<T>(\n  itens: T[]\n): T {\n  return itens[0];\n}',
             highlight: [],
             correctOption: 1,
             options: ['Um tipo genérico, definido no uso', 'Um texto fixo', 'Um número', 'Um erro de digitação'],
             pool: 'generics'
           },
           en: {
-            question: 'In function first<T>(items: T[]): T, what is T?',
+            question: 'In this function, what is T?',
+            codeLanguage: 'TypeScript',
+            code: 'function first<T>(\n  items: T[]\n): T {\n  return items[0];\n}',
             highlight: [],
             correctOption: 1,
             options: ['A generic type, set when used', 'A fixed text', 'A number', 'A typo'],
@@ -19333,14 +19537,18 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com primeiro([1, 2, 3]), qual o tipo do retorno?',
+            question: 'Qual é o tipo de numero?',
+            codeLanguage: 'TypeScript',
+            code: 'const numero =\n  primeiro([1, 2, 3]);',
             highlight: [],
             correctOption: 1,
             options: ['number', 'string', 'T[]', 'any'],
             pool: 'generics'
           },
           en: {
-            question: 'With first([1, 2, 3]), what is the return type?',
+            question: 'What is the type of num?',
+            codeLanguage: 'TypeScript',
+            code: 'const num = first([1, 2, 3]);',
             highlight: [],
             correctOption: 1,
             options: ['number', 'string', 'T[]', 'any'],
@@ -19999,14 +20207,18 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em { "name": "minha-api", "version": "1.0.0" }, o que é "1.0.0"?',
+            question: 'Neste package.json, o que é "1.0.0"?',
+            codeLanguage: 'JavaScript',
+            code: '{\n  "name": "minha-api",\n  "version": "1.0.0"\n}',
             highlight: [],
             correctOption: 1,
             options: ['A versão do projeto', 'A versão do Node', 'A porta do servidor', 'O número de arquivos'],
             pool: 'package-json'
           },
           en: {
-            question: 'In { "name": "my-api", "version": "1.0.0" }, what is "1.0.0"?',
+            question: 'In this package.json, what is "1.0.0"?',
+            codeLanguage: 'JavaScript',
+            code: '{\n  "name": "my-api",\n  "version": "1.0.0"\n}',
             highlight: [],
             correctOption: 1,
             options: ['The project\'s version', 'The Node version', 'The server port', 'The number of files'],
@@ -21372,14 +21584,18 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O que app.use(express.json()) faz?',
+            question: 'O que esta linha faz?',
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.json());',
             highlight: [],
             correctOption: 1,
             options: ['Interpreta requisições com corpo em JSON', 'Responde tudo em JSON', 'Cria um arquivo JSON', 'Apaga o corpo da requisição'],
             pool: 'receive-json'
           },
           en: {
-            question: 'What does app.use(express.json()) do?',
+            question: 'What does this line do?',
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.json());',
             highlight: [],
             correctOption: 1,
             options: ['Parses requests with a JSON body', 'Responds to everything in JSON', 'Creates a JSON file', 'Deletes the request body'],
@@ -22189,14 +22405,18 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com const idade = 20, o que <p>Idade: {idade}</p> mostra?',
+            question: 'O que este JSX mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\n\nreturn <p>Idade: {idade}</p>;',
             highlight: [],
             correctOption: 1,
             options: ['Idade: 20', 'Idade: {idade}', 'Idade: idade', 'Nada'],
             pool: 'jsx-expr'
           },
           en: {
-            question: 'With const age = 20, what does <p>Age: {age}</p> show?',
+            question: 'What does this JSX show?',
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\n\nreturn <p>Age: {age}</p>;',
             highlight: [],
             correctOption: 1,
             options: ['Age: 20', 'Age: {age}', 'Age: age', 'Nothing'],
@@ -22279,14 +22499,18 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em <Saudacao nome="Ana" />, qual é o nome da prop?',
+            question: 'Neste uso do componente, qual é o nome da prop?',
+            codeLanguage: 'JavaScript',
+            code: '<Saudacao nome="Ana" />',
             highlight: [],
             correctOption: 1,
             options: ['nome', 'Ana', 'Saudacao', 'props'],
             pool: 'props'
           },
           en: {
-            question: 'In <Greeting name="Ana" />, what is the prop\'s name?',
+            question: 'In this use of the component, what is the prop\'s name?',
+            codeLanguage: 'JavaScript',
+            code: '<Greeting name="Ana" />',
             highlight: [],
             correctOption: 1,
             options: ['name', 'Ana', 'Greeting', 'props'],
@@ -24065,14 +24289,18 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Em class="text-sm md:text-lg", quando vale o text-lg?',
+            question: 'Neste elemento, quando vale o text-lg?',
+            codeLanguage: 'HTML',
+            code: '<p class="text-sm md:text-lg">\n  Texto responsivo\n</p>',
             highlight: [],
             correctOption: 1,
             options: ['A partir do breakpoint md', 'Só abaixo do breakpoint md', 'Sempre', 'Só no modo escuro'],
             pool: 'tw-responsive'
           },
           en: {
-            question: 'In class="text-sm md:text-lg", when does text-lg apply?',
+            question: 'On this element, when does text-lg apply?',
+            codeLanguage: 'HTML',
+            code: '<p class="text-sm md:text-lg">\n  Responsive text\n</p>',
             highlight: [],
             correctOption: 1,
             options: ['From the md breakpoint up', 'Only below the md breakpoint', 'Always', 'Only in dark mode'],
