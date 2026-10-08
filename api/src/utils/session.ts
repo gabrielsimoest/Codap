@@ -20,10 +20,26 @@ interface CreateSessionOptions {
 }
 
 /**
+ * O token de `supersedesTokenId` já tinha sido revogado quando esta rotação
+ * tentou revogá-lo — outra requisição concorrente rotacionou primeiro. Quem
+ * chama trata como reuso (ver routes/auth/refresh.ts).
+ */
+export class RefreshTokenAlreadyRotatedError extends Error {
+  constructor () {
+    super('refresh_token_already_rotated')
+    this.name = 'RefreshTokenAlreadyRotatedError'
+  }
+}
+
+/**
  * Cria uma nova sessão (access token assinado + refresh token persistido).
- * Quando `supersedesTokenId` é passado (rotação em /auth/refresh), a criação
- * do novo token e a revogação do antigo acontecem na mesma transação, para
- * nunca existir um estado intermediário com dois tokens válidos ao mesmo tempo.
+ * Quando `supersedesTokenId` é passado (rotação em /auth/refresh), a revogação
+ * do antigo e a criação do novo acontecem na mesma transação, nessa ordem, e
+ * a revogação é condicional (`revoked_at: null`). Com duas rotações
+ * concorrentes do mesmo token, a segunda espera o lock da linha, reavalia a
+ * condição depois do commit da primeira, não atualiza nada e lança
+ * `RefreshTokenAlreadyRotatedError` — então nunca existem dois tokens válidos
+ * na mesma família.
  */
 export async function createSession (
   fastify: FastifyInstance,
@@ -37,8 +53,22 @@ export async function createSession (
   const familyId = options.familyId ?? randomUUID()
 
   await fastify.prisma.$transaction(async (tx) => {
-    const created = await tx.refresh_tokens.create({
+    // Id gerado aqui para gravar `replaced_by_id` já na revogação, antes do insert.
+    const newTokenId = randomUUID()
+
+    if (options.supersedesTokenId) {
+      const { count } = await tx.refresh_tokens.updateMany({
+        where: { id: options.supersedesTokenId, revoked_at: null },
+        data: { revoked_at: new Date(), replaced_by_id: newTokenId }
+      })
+      if (count === 0) {
+        throw new RefreshTokenAlreadyRotatedError()
+      }
+    }
+
+    await tx.refresh_tokens.create({
       data: {
+        id: newTokenId,
         user_id: userId,
         token_hash: hashRefreshToken(rawRefreshToken),
         family_id: familyId,
@@ -48,13 +78,6 @@ export async function createSession (
         expires_at: refreshTokenExpiresAt
       }
     })
-
-    if (options.supersedesTokenId) {
-      await tx.refresh_tokens.update({
-        where: { id: options.supersedesTokenId },
-        data: { revoked_at: new Date(), replaced_by_id: created.id }
-      })
-    }
   })
 
   const accessToken = await fastify.jwt.sign({ id: userId }, { expiresIn: `${ACCESS_TOKEN_TTL_MINUTES}m` })

@@ -5,12 +5,19 @@ import useAuthSession from "./src/hooks/useAuthSession";
 import useNetworkSync from "./src/hooks/useNetworkSync";
 import MainNavigation from "./src/routes/MainNavigation";
 import useThemeStore from "./src/stores/ThemeStore";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import useFontSizeStore from "./src/stores/FontSizeStore";
 import useLanguageStore from "./src/stores/LanguageStore";
 import useAuthStore from "./src/stores/AuthStore";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+	NavigationContainer,
+	useNavigationContainerRef,
+} from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import useUserStore from "./src/stores/UserStore";
+import type { RootStackParamList } from "./src/types/navigation";
+import type { User } from "./src/types/entities";
 import { Provider } from "react-native-paper";
 import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
 import queryClient from "./src/services/queryClient";
@@ -45,6 +52,16 @@ export default function App() {
 	const alertVisible = useAlertStore((S) => S.alertVisible);
 	const alertMessage = useAlertStore((S) => S.alertMessage);
 	const setAlertVisible = useAlertStore((S) => S.setAlertVisible);
+	const setAlertMessage = useAlertStore((S) => S.setAlertMessage);
+	const sessionExpired = useAuthStore((s) => s.sessionExpired);
+	const clearAuthSession = useAuthStore((s) => s.clearSession);
+	const acknowledgeSessionExpired = useAuthStore(
+		(s) => s.acknowledgeSessionExpired
+	);
+	const setUser = useUserStore((s) => s.setUser);
+	const { t } = useTranslation();
+	const navigationRef = useNavigationContainerRef<RootStackParamList>();
+	const [navigationReady, setNavigationReady] = useState(false);
 
 	const isReady =
 		theme !== undefined &&
@@ -60,6 +77,31 @@ export default function App() {
 			setTimeout(() => SplashScreen.hide(), 100);
 		}
 	}, [isReady]);
+
+	// Sessão encerrada pelo servidor (ApiClient recebeu 401 no /auth/refresh e
+	// chamou expireSession): leva ao Login, limpando a pilha, com o aviso de
+	// sessão expirada. Espera a navegação montar — o 401 pode chegar durante
+	// o boot, antes do NavigationContainer existir; o flag fica de pé até
+	// ser tratado aqui. O clearSession de novo cobre a corrida em que a
+	// hidratação de useAuthSession, por ter lido o SecureStore antes de ele
+	// ser limpo, marcou a AuthStore como logada depois do expireSession.
+	// O logout manual (User.tsx) não passa por aqui: ele navega sozinho.
+	useEffect(() => {
+		if (!sessionExpired || !navigationReady) {
+			return;
+		}
+
+		clearAuthSession();
+		setUser({} as User);
+		navigationRef.reset({ index: 0, routes: [{ name: "Login" }] });
+		setAlertMessage({
+			title: t("login.alert.sessionExpired.title"),
+			message: t("login.alert.sessionExpired.message"),
+			buttonText: "ok",
+		});
+		setAlertVisible(true);
+		acknowledgeSessionExpired();
+	}, [sessionExpired, navigationReady]);
 
 	// Deep linking (teste via ADB e futuros links de e-mail/notificação) —
 	// as rotas de Home só entram na config quando logado, então um deep link
@@ -229,7 +271,12 @@ export default function App() {
 				void queryClient.prefetchQuery(areasQueryOptions());
 			}}
 		>
-			<NavigationContainer theme={themeStored} linking={linking}>
+			<NavigationContainer
+				ref={navigationRef}
+				theme={themeStored}
+				linking={linking}
+				onReady={() => setNavigationReady(true)}
+			>
 				<Provider>
 					{/*
 						Atualização de conteúdo sob demanda. Precisa ficar DENTRO

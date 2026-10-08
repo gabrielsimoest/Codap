@@ -95,6 +95,10 @@
 				"unexpected": {
 					"title": "Oops, something went wrong",
 					"message": "Could not sign in. Please try again shortly."
+				},
+				"sessionExpired": {
+					"title": "Session expired",
+					"message": "Your session has expired. Please sign in again to continue."
 				}
 			},
 			"password": "Password",

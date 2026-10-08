@@ -95,6 +95,10 @@
 				"unexpected": {
 					"title": "Ops, algo deu errado",
 					"message": "Não foi possível entrar. Tente novamente em instantes."
+				},
+				"sessionExpired": {
+					"title": "Sessão expirada",
+					"message": "Sua sessão expirou. Entre novamente para continuar."
 				}
 			},
 			"password": "Senha",
