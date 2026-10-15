@@ -91,3 +91,7 @@ skills-lock.json
 CODAP_Estrutura_Conteudo.pdf
 
 TCC
+
+# Saida do prebuild nativo do Expo (descartavel, NUNCA versionar nem fazer eject — ver CLAUDE.md, regra 7)
+/app/android/
+/app/ios/

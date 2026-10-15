@@ -92,6 +92,14 @@ próprio do pacote (`chromium.launch()`, perfil efêmero) e **nunca** toca no
 perfil do MCP — pode rodar a qualquer momento, mesmo com outra sessão navegando.
 Prefira-o; deixe o navegador do MCP para inspeção interativa.
 
+## 7. Expo: NUNCA fazer eject
+
+**NUNCA, em hipótese alguma, faça eject do Expo no `/app`. JAMAIS.**
+
+O app vive no fluxo gerenciado (Expo Go no desenvolvimento; o EAS gera o código nativo a partir do `app.json`). Eject é tornar as pastas `android/` ou `ios/` parte do repositório, ou abandonar a geração nativa contínua — e isso também faz o EAS Build deixar de rodar o prebuild e ignorar os plugins do `app.json`. Não faça, nem "temporariamente", nem como atalho, e não o sugira como solução.
+
+Exceção única, só com pedido explícito do desenvolvedor naquele momento: um **build nativo descartável** para testar algo que o Expo Go não suporta (ex.: `expo-notifications` no Android). Nesse caso, `android/` e `ios/` ficam no `.gitignore`, nada nativo é versionado e a pasta gerada é apagada depois do teste. Isso é prebuild descartável, não eject. Na dúvida se algo conta como eject, não faça e pergunte.
+
 ## Processo obrigatório antes de qualquer implementação
 
 Antes de implementar uma tarefa: entenda o pedido, analise a estrutura relacionada, leia o código relevante, procure implementações existentes que possam ser reutilizadas, verifique os padrões já adotados pelo projeto, identifique possíveis impactos em outras partes do sistema, implemente somente o que foi solicitado, atualize testes/Swagger/documentação quando necessário, execute as verificações apropriadas, revise as alterações finais e só então informe que a tarefa foi concluída.
