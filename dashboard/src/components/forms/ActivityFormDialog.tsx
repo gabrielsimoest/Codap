@@ -17,8 +17,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Textarea } from '@/components/ui/textarea'
 import { TheoryFields } from './TheoryFields'
 import { OptionFields } from './OptionFields'
+import { CodeBlankFields } from './CodeBlankFields'
 import { useCreateActivityMutation, useUpdateActivityMutation } from '@/hooks/useContentMutations'
 import {
+  codeBlankContentSchema,
+  emptyCodeBlankContent,
   emptyOptionContent,
   emptyTheoryContent,
   isTypedActivity,
@@ -162,6 +165,20 @@ function ActivityContentForm ({
         onSubmit={onSubmit}
       >
         <OptionFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'code_blank') {
+    return (
+      <TypedContentForm
+        schema={codeBlankContentSchema}
+        defaults={(content as object) ?? emptyCodeBlankContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <CodeBlankFields />
       </TypedContentForm>
     )
   }

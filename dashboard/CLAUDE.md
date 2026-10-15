@@ -140,7 +140,7 @@ Atenção ao campo `aditionalParagraph` de `option`: o nome tem um erro de
 digitação que veio do contrato e está gravado no banco. **Não corrija** — isso
 quebraria todo o conteúdo já semeado.
 
-O formulário de `option` tem um campo **Trecho de código** (`code` + `codeLanguage`, que a exportação em Markdown/PDF também inclui como bloco de código) e uma seção **Sorteio** com `pool`, `draw` e
+O `code_blank` tem formulário próprio (`CodeBlankFields`): o número de respostas acompanha sozinho o número de lacunas `___` do código, há uma lista de blocos errados e uma prévia com as respostas encaixadas; o schema recusa 0 ou mais de 3 lacunas, respostas em número diferente das lacunas e linhas acima de 30 caracteres com a resposta encaixada. Na exportação, as respostas aparecem como alternativas corretas e os blocos errados como incorretas. O formulário de `option` tem um campo **Trecho de código** (`code` + `codeLanguage`, que a exportação em Markdown/PDF também inclui como bloco de código) e uma seção **Sorteio** com `pool`, `draw` e
 `fixedOrder`, e o de `theory` tem `noTerminal` e `terminalCode` (ver
 `api/CLAUDE.md` e `app/CLAUDE.md`). O zod descarta campo não declarado, então
 um campo de contrato que falte no schema **é apagado em silêncio** ao salvar
@@ -149,7 +149,7 @@ tempo. Por isso o `verify:ui` confere esses campos nos dois formulários.
 
 ### Um tipo sem formulário dedicado cai no editor de JSON
 
-`theory` e `option` têm formulário tipado; qualquer outro `type` é editado como
+`theory`, `option` e `code_blank` têm formulário tipado; qualquer outro `type` é editado como
 JSON cru. É a mesma postura da API (transportar fielmente o que não se sabe
 interpretar) e já serve os tipos previstos em
 [docs/roadmap-atividades-praticas.md](../docs/roadmap-atividades-praticas.md)

@@ -17,6 +17,13 @@
 		"change": "Alterar",
 		"Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
 
+		"codeBlank": {
+			"hintOne": "Toque num bloco para completar o código.",
+			"hintMany": "Toque nos blocos na ordem das lacunas. Toque numa lacuna preenchida para desfazer.",
+			"emptySlot": "Lacuna {{n}}, vazia",
+			"filledSlot": "Lacuna {{n}}: {{value}}. Toque para desfazer"
+		},
+
 		"codeSection": {
 			"consoleError": "Erro",
 			"run": "Executar",

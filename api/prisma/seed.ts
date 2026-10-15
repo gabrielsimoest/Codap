@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { pathToFileURL } from 'node:url'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../src/generated/prisma/client.js'
-import type { OptionActivityContent, TheoryActivityContent } from '../src/types/contracts.js'
+import type { CodeBlankActivityContent, OptionActivityContent, TheoryActivityContent } from '../src/types/contracts.js'
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
 const prisma = new PrismaClient({ adapter })
@@ -123,11 +123,12 @@ async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise
 
 // Formato de uma lição nos arrays `*_LESSONS` abaixo: a teoria (`theory`) vem
 // primeiro, seguida da prática (`option`, múltipla escolha e verdadeiro/falso,
-// sorteada pelo app a cada sessão). Os arrays são regenerados a partir do banco
-// por `pnpm seed:generate` — não edite à mão (ver api/CLAUDE.md).
+// e `code_blank`, completar código com blocos), sorteada pelo app a cada
+// sessão. Os arrays são regenerados a partir do banco por `pnpm seed:generate`
+// — não edite à mão (ver api/CLAUDE.md).
 type ActivitySeed = {
-  type: 'theory' | 'option';
-  content: Record<LocaleCode, TheoryActivityContent | OptionActivityContent>;
+  type: 'theory' | 'option' | 'code_blank';
+  content: Record<LocaleCode, TheoryActivityContent | OptionActivityContent | CodeBlankActivityContent>;
 }
 
 type LessonSeed = {
@@ -348,6 +349,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['<p>Text</p>', '<p>Text<p>', '</p>Text<p>', 'p>Text</p'],
             pool: 'html-element'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete as tags do parágrafo.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Olá, mundo!</___>',
+            answers: ['p', 'p'],
+            distractors: ['a', 'text']
+          },
+          en: {
+            question: 'Complete the paragraph tags.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Hello, world!</___>',
+            answers: ['p', 'p'],
+            distractors: ['a', 'text']
           }
         }
       }
@@ -600,6 +622,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a estrutura da página.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<html>\n  <___>\n    <title>Site</title>\n  </head>\n  <___>\n    <h1>Olá!</h1>\n  </body>\n</html>',
+            answers: ['head', 'body'],
+            distractors: ['main', 'header']
+          },
+          en: {
+            question: 'Complete the page structure.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<html>\n  <___>\n    <title>Site</title>\n  </head>\n  <___>\n    <h1>Hello!</h1>\n  </body>\n</html>',
+            answers: ['head', 'body'],
+            distractors: ['main', 'header']
+          }
+        }
       }
     ]
   },
@@ -772,6 +815,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             pool: 'comment-visibility'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o comentário.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '___ Cabeçalho ___\n<h1>Meu site</h1>',
+            answers: ['<!--', '-->'],
+            distractors: ['//', '/*', '*/']
+          },
+          en: {
+            question: 'Complete the comment.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '___ Header ___\n<h1>My site</h1>',
+            answers: ['<!--', '-->'],
+            distractors: ['//', '/*', '*/']
+          }
+        }
       }
     ]
   },
@@ -938,6 +1002,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['<strong>', '<h1>', '<div>', '<title>'],
             pool: 'text-meaning'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o título principal e uma palavra importante.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Receitas</h1>\n<p>\n  Use <___>sal</strong>.\n</p>',
+            answers: ['h1', 'strong'],
+            distractors: ['h6', 'b', 'title']
+          },
+          en: {
+            question: 'Complete with the main heading and an important word.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Recipes</h1>\n<p>\n  Add <___>salt</strong>.\n</p>',
+            answers: ['h1', 'strong'],
+            distractors: ['h6', 'b', 'title']
           }
         }
       }
@@ -1112,6 +1197,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             pool: 'br-hr'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar < e & como texto.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Use ___p&gt;</p>\n<p>Arroz ___ feijão</p>',
+            answers: ['&lt;', '&amp;'],
+            distractors: ['&gt;', '<', '&']
+          },
+          en: {
+            question: 'Complete to show < and & as text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Use ___p&gt;</p>\n<p>Salt ___ pepper</p>',
+            answers: ['&lt;', '&amp;'],
+            distractors: ['&gt;', '<', '&']
+          }
+        }
       }
     ]
   },
@@ -1282,6 +1388,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['From the current file\'s location', 'From Google\'s home page', 'From the browser\'s folder', 'From any site on the internet'],
             pool: 'link-relative'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o link para a página sobre.html.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a ___="sobre.html">\n  Sobre nós\n</a>',
+            answers: ['href'],
+            distractors: ['src', 'alt', 'link']
+          },
+          en: {
+            question: 'Complete the link to the about.html page.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a ___="about.html">\n  About us\n</a>',
+            answers: ['href'],
+            distractors: ['src', 'alt', 'link']
           }
         }
       }
@@ -1458,6 +1585,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para abrir o link em uma nova aba.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a href="loja.html"\n   ___="_blank">\n  Loja\n</a>',
+            answers: ['target'],
+            distractors: ['href', 'rel', 'open']
+          },
+          en: {
+            question: 'Complete to open the link in a new tab.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a href="shop.html"\n   ___="_blank">\n  Shop\n</a>',
+            answers: ['target'],
+            distractors: ['href', 'rel', 'open']
+          }
+        }
       }
     ]
   },
@@ -1626,6 +1774,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a imagem com o arquivo e a descrição.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<img ___="gato.jpg"\n     ___="Gato dormindo">',
+            answers: ['src', 'alt'],
+            distractors: ['href', 'title']
+          },
+          en: {
+            question: 'Complete the image with the file and the description.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<img ___="cat.jpg"\n     ___="Sleeping cat">',
+            answers: ['src', 'alt'],
+            distractors: ['href', 'title']
+          }
+        }
       }
     ]
   },
@@ -1792,6 +1961,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
             pool: 'list-items'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a lista de passos, que precisa de ordem.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>Abrir o site</li>\n  <li>Fazer login</li>\n</ol>',
+            answers: ['ol', 'li'],
+            distractors: ['ul', 'item']
+          },
+          en: {
+            question: 'Complete the list of steps, which needs an order.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>Open the site</li>\n  <li>Log in</li>\n</ol>',
+            answers: ['ol', 'li'],
+            distractors: ['ul', 'item']
           }
         }
       }
@@ -1964,6 +2154,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             pool: 'attr-format'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o atributo do link.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a href___"contato.html">\n  Contato\n</a>',
+            answers: ['='],
+            distractors: [':', '==', '=>']
+          },
+          en: {
+            question: 'Complete the link\'s attribute.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<a href___"contact.html">\n  Contact\n</a>',
+            answers: ['='],
+            distractors: [':', '==', '=>']
+          }
+        }
       }
     ]
   },
@@ -2130,6 +2341,27 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Nothing specific, it just groups', 'That it is the main heading', 'That it is a link', 'That it is a list'],
             pool: 'generic-container'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: um bloco que agrupa e um trecho dentro da linha.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>Meu nome é\n    <___>Ana</span>\n  </p>\n</div>',
+            answers: ['div', 'span'],
+            distractors: ['p', 'section']
+          },
+          en: {
+            question: 'Complete: a block that groups and a bit inside the line.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>My name is\n    <___>Ana</span>\n  </p>\n</div>',
+            answers: ['div', 'span'],
+            distractors: ['p', 'section']
           }
         }
       }
@@ -2444,6 +2676,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a regra para deixar os parágrafos azuis.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['<p>', '.p', '#p']
+          },
+          en: {
+            question: 'Complete the rule to make paragraphs blue.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['<p>', '.p', '#p']
+          }
+        }
       }
     ]
   },
@@ -2626,6 +2879,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['It makes the page harder to maintain', 'It makes the site less secure', 'It stops the browser from reading the HTML', 'It erases the external styles'],
             pool: 'css-link'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a ligação do arquivo CSS.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<link ___="stylesheet"\n      href="style.css">',
+            answers: ['rel'],
+            distractors: ['src', 'type', 'href']
+          },
+          en: {
+            question: 'Complete the link to the CSS file.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<link ___="stylesheet"\n      href="style.css">',
+            answers: ['rel'],
+            distractors: ['src', 'type', 'href']
           }
         }
       }
@@ -2814,6 +3088,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['A class is reusable; an id identifies one specific element', 'An id is reusable; a class is unique', 'They\'re the same, only the symbol changes', 'A class only works on div'],
             pool: 'class-vs-id'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete os seletores da classe e do id.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___destaque {\n  color: red;\n}\n\n___titulo {\n  color: blue;\n}',
+            answers: ['.', '#'],
+            distractors: ['@', '*']
+          },
+          en: {
+            question: 'Complete the class and id selectors.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___highlight {\n  color: red;\n}\n\n___title {\n  color: blue;\n}',
+            answers: ['.', '#'],
+            distractors: ['@', '*']
           }
         }
       }
@@ -3012,6 +3307,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para pegar só os li filhos diretos de .lista.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.lista ___ li {\n  color: green;\n}',
+            answers: ['>'],
+            distractors: ['+', ',', '~']
+          },
+          en: {
+            question: 'Complete to get only the li direct children of .list.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.list ___ li {\n  color: green;\n}',
+            answers: ['>'],
+            distractors: ['+', ',', '~']
+          }
+        }
       }
     ]
   },
@@ -3202,6 +3518,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['blue', 'bleu', '#blue', 'blue-color'],
             pool: 'color-values'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: texto branco em fundo azul.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  ___: white;\n  ___: blue;\n}',
+            answers: ['color', 'background-color'],
+            distractors: ['font-color', 'bg']
+          },
+          en: {
+            question: 'Complete: white text on a blue background.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.button {\n  ___: white;\n  ___: blue;\n}',
+            answers: ['color', 'background-color'],
+            distractors: ['font-color', 'bg']
           }
         }
       }
@@ -3398,6 +3735,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The gradient\'s direction', 'The final color', 'The text alignment', 'The element\'s width'],
             pool: 'gradient'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete um fundo azul 50% transparente.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.faixa {\n  background-color:\n    ___(0, 0, 255, ___);\n}',
+            answers: ['rgba', '0.5'],
+            distractors: ['rgb', '50', '5']
+          },
+          en: {
+            question: 'Complete a blue background, 50% transparent.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.band {\n  background-color:\n    ___(0, 0, 255, ___);\n}',
+            answers: ['rgba', '0.5'],
+            distractors: ['rgb', '50', '5']
           }
         }
       }
@@ -3625,6 +3983,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: título em negrito e centralizado.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-___: bold;\n  text-___: center;\n}',
+            answers: ['weight', 'align'],
+            distractors: ['size', 'style', 'decoration']
+          },
+          en: {
+            question: 'Complete: a bold, centered heading.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-___: bold;\n  text-___: center;\n}',
+            answers: ['weight', 'align'],
+            distractors: ['size', 'style', 'decoration']
+          }
+        }
       }
     ]
   },
@@ -3821,6 +4200,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: texto em maiúsculas e linhas mais espaçadas.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  text-transform: ___;\n  line-height: ___;\n}',
+            answers: ['uppercase', '1.6'],
+            distractors: ['capitalize', '16']
+          },
+          en: {
+            question: 'Complete: uppercase text with more line spacing.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  text-transform: ___;\n  line-height: ___;\n}',
+            answers: ['uppercase', '1.6'],
+            distractors: ['capitalize', '16']
+          }
+        }
       }
     ]
   },
@@ -4011,6 +4411,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['padding', 'margin', 'border', 'font-size'],
             pool: 'padding-margin'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: espaço por dentro e por fora da borda.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 20px;\n  border: 2px solid;\n  ___: 16px;\n}',
+            answers: ['padding', 'margin'],
+            distractors: ['gap', 'spacing']
+          },
+          en: {
+            question: 'Complete: space inside and outside the border.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 20px;\n  border: 2px solid;\n  ___: 16px;\n}',
+            answers: ['padding', 'margin'],
+            distractors: ['gap', 'spacing']
           }
         }
       }
@@ -4209,6 +4630,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: cantos arredondados e uma sombra.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 12px;\n  ___:\n    0 4px 8px gray;\n}',
+            answers: ['border-radius', 'box-shadow'],
+            distractors: ['corner-radius', 'shadow']
+          },
+          en: {
+            question: 'Complete: rounded corners and a shadow.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 12px;\n  ___:\n    0 4px 8px gray;\n}',
+            answers: ['border-radius', 'box-shadow'],
+            distractors: ['corner-radius', 'shadow']
+          }
+        }
       }
     ]
   },
@@ -4405,6 +4847,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para o width incluir o padding e a borda.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '* {\n  box-sizing: ___;\n}',
+            answers: ['border-box'],
+            distractors: ['content-box', 'padding-box', 'inline-box']
+          },
+          en: {
+            question: 'Complete so width includes padding and border.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '* {\n  box-sizing: ___;\n}',
+            answers: ['border-box'],
+            distractors: ['content-box', 'padding-box', 'inline-box']
+          }
+        }
       }
     ]
   },
@@ -4587,6 +5050,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
             pool: 'px-percent'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: cartão com 300px de largura e 150px de altura.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
+            answers: ['width', 'height'],
+            distractors: ['size', 'length']
+          },
+          en: {
+            question: 'Complete: a card 300px wide and 150px tall.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
+            answers: ['width', 'height'],
+            distractors: ['size', 'length']
           }
         }
       }
@@ -4783,6 +5267,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'center',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para centralizar o bloco na horizontal.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  max-width: 600px;\n  margin: 0 ___;\n}',
+            answers: ['auto'],
+            distractors: ['center', '50%', '0']
+          },
+          en: {
+            question: 'Complete to center the block horizontally.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  max-width: 600px;\n  margin: 0 ___;\n}',
+            answers: ['auto'],
+            distractors: ['center', '50%', '0']
           }
         }
       }
@@ -4985,6 +5490,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: título com o dobro da fonte raiz e seção com a altura da tela.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.titulo {\n  font-size: 2___;\n}\n\n.secao {\n  height: 100___;\n}',
+            answers: ['rem', 'vh'],
+            distractors: ['vw', 'px', '%']
+          },
+          en: {
+            question: 'Complete: a heading twice the root font and a section as tall as the screen.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.title {\n  font-size: 2___;\n}\n\n.section {\n  height: 100___;\n}',
+            answers: ['rem', 'vh'],
+            distractors: ['vw', 'px', '%']
+          }
+        }
       }
     ]
   },
@@ -5181,6 +5707,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             pool: 'inline-block-none'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para esconder o elemento.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.oculto {\n  display: ___;\n}',
+            answers: ['none'],
+            distractors: ['hidden', 'inline', 'block']
+          },
+          en: {
+            question: 'Complete to hide the element.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.hidden {\n  display: ___;\n}',
+            answers: ['none'],
+            distractors: ['hidden', 'inline', 'block']
+          }
+        }
       }
     ]
   },
@@ -5302,6 +5849,27 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['.card { padding: 20px; margin: 16px; }', '.card { padding: 20px margin: 16px }', '.card ( padding: 20px; )', 'card: { padding = 20px; }'],
             pool: 'combine-rules'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para estilizar só os h2 dentro de .card.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card ___ {\n  color: #222;\n}',
+            answers: ['h2'],
+            distractors: ['.h2', '#h2', '<h2>']
+          },
+          en: {
+            question: 'Complete to style only the h2 inside .card.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card ___ {\n  color: #222;\n}',
+            answers: ['h2'],
+            distractors: ['.h2', '#h2', '<h2>']
           }
         }
       }
@@ -5566,6 +6134,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar a mensagem no console.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.___("Olá!");',
+            answers: ['log'],
+            distractors: ['print', 'write', 'show']
+          },
+          en: {
+            question: 'Complete to show the message in the console.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.___("Hello!");',
+            answers: ['log'],
+            distractors: ['print', 'write', 'show']
+          }
+        }
       }
     ]
   },
@@ -5744,6 +6333,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             pool: 'let-const'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a idade muda depois, o nome não.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ idade = 20;\nidade = 21;\n\n___ nome = "Ana";\nconsole.log(idade, nome);',
+            answers: ['let', 'const'],
+            distractors: ['static', 'set']
+          },
+          en: {
+            question: 'Complete: the age changes later, the name doesn\'t.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ age = 20;\nage = 21;\n\n___ name = "Ana";\nconsole.log(age, name);',
+            answers: ['let', 'const'],
+            distractors: ['static', 'set']
+          }
+        }
       }
     ]
   },
@@ -5916,6 +6526,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'null-undefined',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com um valor do tipo boolean.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const aprovado = ___;\n\nconsole.log(typeof aprovado);',
+            answers: ['true'],
+            distractors: ['"true"', '1', 'null']
+          },
+          en: {
+            question: 'Complete with a boolean value.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const passed = ___;\n\nconsole.log(typeof passed);',
+            answers: ['true'],
+            distractors: ['"true"', '1', 'null']
           }
         }
       }
@@ -6098,6 +6729,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar o nome em maiúsculas.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "ana";\n\nconsole.log(\n  nome.___()\n);',
+            answers: ['toUpperCase'],
+            distractors: ['toLowerCase', 'upper', 'length']
+          },
+          en: {
+            question: 'Complete to show the name in uppercase.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "ana";\n\nconsole.log(\n  name.___()\n);',
+            answers: ['toUpperCase'],
+            distractors: ['toLowerCase', 'upper', 'length']
+          }
+        }
       }
     ]
   },
@@ -6274,6 +6926,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'compare',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a comparação de igualdade estrita.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const a = 10;\n\nconsole.log(a ___ 10);',
+            answers: ['==='],
+            distractors: ['=', '!==', '=>']
+          },
+          en: {
+            question: 'Complete the strict equality check.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const a = 10;\n\nconsole.log(a ___ 10);',
+            answers: ['==='],
+            distractors: ['=', '!==', '=>']
           }
         }
       }
@@ -6456,6 +7129,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: entra quem é maior de idade e tem ingresso.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\nconst ingresso = true;\n\nconsole.log(\n  idade >= 18 ___ ingresso\n);',
+            answers: ['&&'],
+            distractors: ['||', '!', '&']
+          },
+          en: {
+            question: 'Complete: only adults who have a ticket get in.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\nconst ticket = true;\n\nconsole.log(\n  age >= 18 ___ ticket\n);',
+            answers: ['&&'],
+            distractors: ['||', '!', '&']
+          }
+        }
       }
     ]
   },
@@ -6636,6 +7330,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a condição e o caminho contrário.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 16;\n\n___ (idade >= 18) {\n  console.log("Maior");\n} ___ {\n  console.log("Menor");\n}',
+            answers: ['if', 'else'],
+            distractors: ['for', 'then', 'when']
+          },
+          en: {
+            question: 'Complete the condition and the other path.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 16;\n\n___ (age >= 18) {\n  console.log("Adult");\n} ___ {\n  console.log("Minor");\n}',
+            answers: ['if', 'else'],
+            distractors: ['for', 'then', 'when']
+          }
+        }
       }
     ]
   },
@@ -6814,6 +7529,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'ternary',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o operador ternário.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\n\nconst tipo = idade >= 18\n  ___ "adulto"\n  ___ "jovem";\n\nconsole.log(tipo);',
+            answers: ['?', ':'],
+            distractors: ['&&', '||', '=>']
+          },
+          en: {
+            question: 'Complete the ternary operator.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\n\nconst kind = age >= 18\n  ___ "adult"\n  ___ "minor";\n\nconsole.log(kind);',
+            answers: ['?', ':'],
+            distractors: ['&&', '||', '=>']
           }
         }
       }
@@ -7021,6 +7757,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o for para mostrar de 0 a 4.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i ___ 5; i___) {\n  console.log(i);\n}',
+            answers: ['<', '++'],
+            distractors: ['<=', '--', '>']
+          },
+          en: {
+            question: 'Complete the for loop to show 0 to 4.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'for (let i = 0; i ___ 5; i___) {\n  console.log(i);\n}',
+            answers: ['<', '++'],
+            distractors: ['<=', '--', '>']
+          }
+        }
       }
     ]
   },
@@ -7195,6 +7952,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'index',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar a primeira fruta.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const frutas = [\n  "maçã",\n  "banana"\n];\n\nconsole.log(frutas[___]);',
+            answers: ['0'],
+            distractors: ['1', '-1', 'first']
+          },
+          en: {
+            question: 'Complete to show the first fruit.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const fruits = [\n  "apple",\n  "banana"\n];\n\nconsole.log(fruits[___]);',
+            answers: ['0'],
+            distractors: ['1', '-1', 'first']
           }
         }
       }
@@ -7377,6 +8155,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para adicionar "uva" no final do array.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const frutas = ["maçã"];\n\nfrutas.___("uva");\nconsole.log(frutas);',
+            answers: ['push'],
+            distractors: ['pop', 'add', 'includes']
+          },
+          en: {
+            question: 'Complete to add "grape" to the end of the array.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const fruits = ["apple"];\n\nfruits.___("grape");\nconsole.log(fruits);',
+            answers: ['push'],
+            distractors: ['pop', 'add', 'includes']
+          }
+        }
       }
     ]
   },
@@ -7553,6 +8352,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'dot',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar o nome da pessoa.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconsole.log(pessoa___nome);',
+            answers: ['.'],
+            distractors: [',', '->', ':']
+          },
+          en: {
+            question: 'Complete to show the person\'s name.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconsole.log(person___name);',
+            answers: ['.'],
+            distractors: [',', '->', ':']
           }
         }
       }
@@ -7733,6 +8553,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a função para devolver a soma.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function somar(a, b) {\n  ___ a + b;\n}\n\nconsole.log(somar(2, 3));',
+            answers: ['return'],
+            distractors: ['console', 'print', 'break']
+          },
+          en: {
+            question: 'Complete the function to return the sum.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function add(a, b) {\n  ___ a + b;\n}\n\nconsole.log(add(2, 3));',
+            answers: ['return'],
+            distractors: ['console', 'print', 'break']
+          }
+        }
       }
     ]
   },
@@ -7909,6 +8750,27 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'scope',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a arrow function.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const dobrar = n ___ n * 2;\n\nconsole.log(dobrar(4));',
+            answers: ['=>'],
+            distractors: ['->', '==', '>=']
+          },
+          en: {
+            question: 'Complete the arrow function.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const double = n ___ n * 2;\n\nconsole.log(double(4));',
+            answers: ['=>'],
+            distractors: ['->', '==', '>=']
           }
         }
       }
@@ -8201,6 +9063,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o cabeçalho e a navegação.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h1>Meu site</h1>\n  <___>\n    <a href="/">Início</a>\n  </nav>\n</header>',
+            answers: ['header', 'nav'],
+            distractors: ['main', 'footer']
+          },
+          en: {
+            question: 'Complete with the header and the navigation.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h1>My site</h1>\n  <___>\n    <a href="/">Home</a>\n  </nav>\n</header>',
+            answers: ['header', 'nav'],
+            distractors: ['main', 'footer']
+          }
+        }
       }
     ]
   },
@@ -8310,6 +9193,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             pool: 'semantic-why'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Troque as divs por elementos semânticos.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Menu</nav>\n<___>\n  Conteúdo principal\n</main>',
+            answers: ['nav', 'main'],
+            distractors: ['div', 'span']
+          },
+          en: {
+            question: 'Swap the divs for semantic elements.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Menu</nav>\n<___>\n  Main content\n</main>',
+            answers: ['nav', 'main'],
+            distractors: ['div', 'span']
+          }
+        }
       }
     ]
   },
@@ -8415,6 +9319,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'article-aside',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: uma notícia independente e um bloco complementar.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h2>Nova versão</h2>\n</article>\n<___>\n  <h2>Leia também</h2>\n</aside>',
+            answers: ['article', 'aside'],
+            distractors: ['section', 'div']
+          },
+          en: {
+            question: 'Complete: a standalone news story and a complementary block.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h2>New version</h2>\n</article>\n<___>\n  <h2>Read also</h2>\n</aside>',
+            answers: ['article', 'aside'],
+            distractors: ['section', 'div']
           }
         }
       }
@@ -8528,6 +9453,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Delays loading until it gets close to the screen', 'Lowers the image quality', 'Loads the image before everything else', 'Hides the image on phones'],
             pool: 'figure-img'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a figura com a legenda.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <img src="g.png"\n       alt="Gráfico">\n  <___>\n    Vendas do ano\n  </figcaption>\n</figure>',
+            answers: ['figcaption'],
+            distractors: ['caption', 'legend', 'label']
+          },
+          en: {
+            question: 'Complete the figure with its caption.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <img src="g.png"\n       alt="Chart">\n  <___>\n    Sales this year\n  </figcaption>\n</figure>',
+            answers: ['figcaption'],
+            distractors: ['caption', 'legend', 'label']
           }
         }
       }
@@ -8698,6 +9644,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o campo de e-mail e o botão de envio.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<input type="___">\n<button type="___">\n  Enviar\n</button>',
+            answers: ['email', 'submit'],
+            distractors: ['text', 'button', 'send']
+          },
+          en: {
+            question: 'Complete the email field and the submit button.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<input type="___">\n<button type="___">\n  Send\n</button>',
+            answers: ['email', 'submit'],
+            distractors: ['text', 'button', 'send']
+          }
+        }
       }
     ]
   },
@@ -8805,6 +9772,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'label-validation',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Ligue o label ao campo e torne-o obrigatório.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  E-mail\n</label>\n<input id="___"\n       ___>',
+            answers: ['email', 'required'],
+            distractors: ['name', 'for', 'min']
+          },
+          en: {
+            question: 'Link the label to the field and make it mandatory.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  Email\n</label>\n<input id="___"\n       ___>',
+            answers: ['email', 'required'],
+            distractors: ['name', 'for', 'min']
           }
         }
       }
@@ -8920,6 +9908,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'textarea-select',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o campo para textos longos.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ rows="4">\n</textarea>',
+            answers: ['textarea'],
+            distractors: ['input', 'select', 'text']
+          },
+          en: {
+            question: 'Complete the field for long text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ rows="4">\n</textarea>',
+            answers: ['textarea'],
+            distractors: ['input', 'select', 'text']
           }
         }
       }
@@ -9092,6 +10101,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'fieldset-legend',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: título do grupo e uma opção única.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <___>Tamanho</legend>\n  <input type="___"\n         name="t">\n</fieldset>',
+            answers: ['legend', 'radio'],
+            distractors: ['label', 'checkbox', 'caption']
+          },
+          en: {
+            question: 'Complete: the group title and a single-choice option.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <___>Size</legend>\n  <input type="___"\n         name="s">\n</fieldset>',
+            answers: ['legend', 'radio'],
+            distractors: ['label', 'checkbox', 'caption']
           }
         }
       }
@@ -9283,6 +10313,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             pool: 'table-span'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a célula de cabeçalho e a de dados.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<tr>\n  <___>Produto</th>\n</tr>\n<tr>\n  <___>Mouse</td>\n</tr>',
+            answers: ['th', 'td'],
+            distractors: ['tr', 'thead']
+          },
+          en: {
+            question: 'Complete the header cell and the data cell.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<tr>\n  <___>Product</th>\n</tr>\n<tr>\n  <___>Mouse</td>\n</tr>',
+            answers: ['th', 'td'],
+            distractors: ['tr', 'thead']
+          }
+        }
       }
     ]
   },
@@ -9415,6 +10466,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a codificação e o título da aba.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <meta ___="UTF-8">\n  <___>Meu site</title>\n</head>',
+            answers: ['charset', 'title'],
+            distractors: ['name', 'h1', 'lang']
+          },
+          en: {
+            question: 'Complete the encoding and the tab title.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <meta ___="UTF-8">\n  <___>My site</title>\n</head>',
+            answers: ['charset', 'title'],
+            distractors: ['name', 'h1', 'lang']
+          }
+        }
       }
     ]
   },
@@ -9522,6 +10594,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Writing an alt that describes the image', 'Jumping from <h1> straight to <h4>', 'Using only <div> on the whole page', 'Leaving fields without a <label>'],
             pool: 'a11y-basics'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o elemento nativo para ações.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ type="button">\n  Seguir\n</button>',
+            answers: ['button'],
+            distractors: ['div', 'span', 'a']
+          },
+          en: {
+            question: 'Complete with the native element for actions.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ type="button">\n  Follow\n</button>',
+            answers: ['button'],
+            distractors: ['div', 'span', 'a']
           }
         }
       }
@@ -9783,6 +10876,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para centralizar os itens na linha.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            answers: ['flex', 'center'],
+            distractors: ['block', 'grid', 'middle']
+          },
+          en: {
+            question: 'Complete to center the items on the row.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            answers: ['flex', 'center'],
+            distractors: ['block', 'grid', 'middle']
+          }
+        }
       }
     ]
   },
@@ -9902,6 +11016,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'gap-wrap',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: espaço entre os itens e quebra de linha.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.lista {\n  display: flex;\n  ___: 16px;\n  flex-wrap: ___;\n}',
+            answers: ['gap', 'wrap'],
+            distractors: ['margin', 'nowrap', 'row']
+          },
+          en: {
+            question: 'Complete: space between items and line wrapping.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.list {\n  display: flex;\n  ___: 16px;\n  flex-wrap: ___;\n}',
+            answers: ['gap', 'wrap'],
+            distractors: ['margin', 'nowrap', 'row']
           }
         }
       }
@@ -10037,6 +11172,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'grow-order',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o item cresce e aparece primeiro.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.destaque {\n  flex-___: 1;\n  ___: -1;\n}',
+            answers: ['grow', 'order'],
+            distractors: ['shrink', 'basis', 'z-index']
+          },
+          en: {
+            question: 'Complete: the item grows and shows first.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.featured {\n  flex-___: 1;\n  ___: -1;\n}',
+            answers: ['grow', 'order'],
+            distractors: ['shrink', 'basis', 'z-index']
           }
         }
       }
@@ -10235,6 +11391,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             pool: 'grid-repeat'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete uma grade de 3 colunas iguais.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.grade {\n  display: ___;\n  grid-template-columns:\n    ___(3, 1fr);\n}',
+            answers: ['grid', 'repeat'],
+            distractors: ['flex', 'columns', 'calc']
+          },
+          en: {
+            question: 'Complete a grid of 3 equal columns.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.grid {\n  display: ___;\n  grid-template-columns:\n    ___(3, 1fr);\n}',
+            answers: ['grid', 'repeat'],
+            distractors: ['flex', 'columns', 'calc']
+          }
+        }
       }
     ]
   },
@@ -10368,6 +11545,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'grid-place',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o cabeçalho ocupa as duas colunas.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.cabecalho {\n  grid-___: 1 / 3;\n}',
+            answers: ['column'],
+            distractors: ['row', 'area', 'span']
+          },
+          en: {
+            question: 'Complete: the header spans both columns.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.header {\n  grid-___: 1 / 3;\n}',
+            answers: ['column'],
+            distractors: ['row', 'area', 'span']
           }
         }
       }
@@ -10585,6 +11783,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o selo fica no canto do cartão.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  position: ___;\n}\n.selo {\n  position: ___;\n  top: 8px;\n}',
+            answers: ['relative', 'absolute'],
+            distractors: ['static', 'fixed']
+          },
+          en: {
+            question: 'Complete: the badge sits in the card\'s corner.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  position: ___;\n}\n.badge {\n  position: ___;\n  top: 8px;\n}',
+            answers: ['relative', 'absolute'],
+            distractors: ['static', 'fixed']
+          }
+        }
       }
     ]
   },
@@ -10718,6 +11937,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'overflow',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para cortar o título com reticências.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.titulo {\n  white-space: ___;\n  overflow: hidden;\n  text-overflow: ___;\n}',
+            answers: ['nowrap', 'ellipsis'],
+            distractors: ['wrap', 'scroll', 'dots']
+          },
+          en: {
+            question: 'Complete to cut the title with an ellipsis.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.title {\n  white-space: ___;\n  overflow: hidden;\n  text-overflow: ___;\n}',
+            answers: ['nowrap', 'ellipsis'],
+            distractors: ['wrap', 'scroll', 'dots']
           }
         }
       }
@@ -10937,6 +12177,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: muda com o cursor e pinta os itens pares.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'a:___ {\n  color: red;\n}\nli:nth-child(___) {\n  color: gray;\n}',
+            answers: ['hover', 'even'],
+            distractors: ['focus', 'odd', 'active']
+          },
+          en: {
+            question: 'Complete: changes on hover and paints even items.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'a:___ {\n  color: red;\n}\nli:nth-child(___) {\n  color: gray;\n}',
+            answers: ['hover', 'even'],
+            distractors: ['focus', 'odd', 'active']
+          }
+        }
       }
     ]
   },
@@ -11068,6 +12329,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: uma seta antes do título.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.titulo::___ {\n  ___: "→ ";\n}',
+            answers: ['before', 'content'],
+            distractors: ['after', 'text']
+          },
+          en: {
+            question: 'Complete: an arrow before the title.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.title::___ {\n  ___: "→ ";\n}',
+            answers: ['before', 'content'],
+            distractors: ['after', 'text']
+          }
+        }
       }
     ]
   },
@@ -11189,6 +12471,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete onde a variável é criada e onde é usada.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: ':___ {\n  --cor: #2563eb;\n}\nbutton {\n  color: ___(--cor);\n}',
+            answers: ['root', 'var'],
+            distractors: ['body', 'calc', 'get']
+          },
+          en: {
+            question: 'Complete where the variable is created and where it\'s used.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: ':___ {\n  --color: #2563eb;\n}\nbutton {\n  color: ___(--color);\n}',
+            answers: ['root', 'var'],
+            distractors: ['body', 'calc', 'get']
+          }
+        }
       }
     ]
   },
@@ -11298,6 +12601,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'flex-or-grid',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: menu em linha e vitrine em grade.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n}\n.vitrine {\n  display: ___;\n}',
+            answers: ['flex', 'grid'],
+            distractors: ['block', 'inline']
+          },
+          en: {
+            question: 'Complete: a menu in a row and a showcase in a grid.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n}\n.showcase {\n  display: ___;\n}',
+            answers: ['flex', 'grid'],
+            distractors: ['block', 'inline']
           }
         }
       }
@@ -11413,6 +12737,27 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The first, twice the second', 'The second', 'Both are equal', 'It depends on the text'],
             pool: 'build-layout'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a página em grade e o cartão em coluna.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.pagina {\n  display: ___;\n}\n.card {\n  display: flex;\n  flex-direction: ___;\n}',
+            answers: ['grid', 'column'],
+            distractors: ['row', 'block']
+          },
+          en: {
+            question: 'Complete: the page as a grid and the card as a column.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.page {\n  display: ___;\n}\n.card {\n  display: flex;\n  flex-direction: ___;\n}',
+            answers: ['grid', 'column'],
+            distractors: ['row', 'block']
           }
         }
       }
@@ -11666,6 +13011,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para dobrar cada número.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];\n\nconsole.log(\n  n.___(x => x * 2)\n);',
+            answers: ['map'],
+            distractors: ['filter', 'find', 'forEach']
+          },
+          en: {
+            question: 'Complete to double each number.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];\n\nconsole.log(\n  n.___(x => x * 2)\n);',
+            answers: ['map'],
+            distractors: ['filter', 'find', 'forEach']
+          }
+        }
       }
     ]
   },
@@ -11781,6 +13147,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'reduce',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a soma de todos os números.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [10, 20, 30];\n\nconst total = n.___(\n  (s, x) => s + x,\n  ___\n);\nconsole.log(total);',
+            answers: ['reduce', '0'],
+            distractors: ['map', '1', '[]']
+          },
+          en: {
+            question: 'Complete the sum of all the numbers.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [10, 20, 30];\n\nconst total = n.___(\n  (s, x) => s + x,\n  ___\n);\nconsole.log(total);',
+            answers: ['reduce', '0'],
+            distractors: ['map', '1', '[]']
           }
         }
       }
@@ -11906,6 +13293,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para extrair o nome do objeto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const pessoa = {\n  nome: "Ana"\n};\n\nconst { ___ } = pessoa;\nconsole.log(nome);',
+            answers: ['nome'],
+            distractors: ['pessoa', '"nome"', 'name']
+          },
+          en: {
+            question: 'Complete to pull the name out of the object.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const person = {\n  name: "Ana"\n};\n\nconst { ___ } = person;\nconsole.log(name);',
+            answers: ['name'],
+            distractors: ['person', '"name"', 'nome']
+          }
+        }
       }
     ]
   },
@@ -12025,6 +13433,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'spread-rest',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para criar um array novo com mais um item.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const a = [1, 2];\nconst b = [___a, 3];\n\nconsole.log(b);',
+            answers: ['...'],
+            distractors: ['..', '*', '&']
+          },
+          en: {
+            question: 'Complete to create a new array with one more item.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const a = [1, 2];\nconst b = [___a, 3];\n\nconsole.log(b);',
+            answers: ['...'],
+            distractors: ['..', '*', '&']
           }
         }
       }
@@ -12152,6 +13581,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a template literal.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n\nconsole.log(\n  ___Olá, ${nome}!___\n);',
+            answers: ['`', '`'],
+            distractors: ['"', '\'']
+          },
+          en: {
+            question: 'Complete the template literal.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n\nconsole.log(\n  ___Hi, ${name}!___\n);',
+            answers: ['`', '`'],
+            distractors: ['"', '\'']
+          }
+        }
       }
     ]
   },
@@ -12265,6 +13715,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'modules',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para importar somar de math.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ { somar }\n  ___ "./math.js";',
+            answers: ['import', 'from'],
+            distractors: ['export', 'require', 'in']
+          },
+          en: {
+            question: 'Complete to import add from math.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ { add }\n  ___ "./math.js";',
+            answers: ['import', 'from'],
+            distractors: ['export', 'require', 'in']
           }
         }
       }
@@ -12396,6 +13867,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'dom',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para achar o título e trocar o texto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const t = document\n  .___("#titulo");\n\nt.___ = "Olá!";',
+            answers: ['querySelector', 'textContent'],
+            distractors: ['select', 'value', 'text']
+          },
+          en: {
+            question: 'Complete to find the heading and change its text.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const t = document\n  .___("#title");\n\nt.___ = "Hi!";',
+            answers: ['querySelector', 'textContent'],
+            distractors: ['select', 'value', 'text']
           }
         }
       }
@@ -12537,6 +14029,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: ao clicar, a classe ativo liga e desliga.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'botao.___(\n  "click",\n  () => cartao\n    .classList.___("ativo")\n);',
+            answers: ['addEventListener', 'toggle'],
+            distractors: ['onClick', 'listen', 'switch']
+          },
+          en: {
+            question: 'Complete: on click, the active class turns on and off.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'button.___(\n  "click",\n  () => card.classList\n    .___("active")\n);',
+            answers: ['addEventListener', 'toggle'],
+            distractors: ['onClick', 'listen', 'switch']
+          }
+        }
       }
     ]
   },
@@ -12654,6 +14167,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'storage-json',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o objeto vira texto e volta a ser objeto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const txt =\n  JSON.___({ a: 1 });\nconst obj =\n  JSON.___(txt);\nconsole.log(obj.a);',
+            answers: ['stringify', 'parse'],
+            distractors: ['toString', 'read', 'text']
+          },
+          en: {
+            question: 'Complete: the object becomes text and turns back into an object.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const txt =\n  JSON.___({ a: 1 });\nconst obj =\n  JSON.___(txt);\nconsole.log(obj.a);',
+            answers: ['stringify', 'parse'],
+            distractors: ['toString', 'read', 'text']
           }
         }
       }
@@ -12832,6 +14366,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o bloco que tenta e o que captura o erro.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ {\n  JSON.parse("x");\n} ___ (erro) {\n  console.log("falhou");\n}',
+            answers: ['try', 'catch'],
+            distractors: ['finally', 'throw', 'if']
+          },
+          en: {
+            question: 'Complete the block that tries and the one that catches the error.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ {\n  JSON.parse("x");\n} ___ (error) {\n  console.log("failed");\n}',
+            answers: ['try', 'catch'],
+            distractors: ['finally', 'throw', 'if']
+          }
+        }
       }
     ]
   },
@@ -12947,6 +14502,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'http-fetch',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a conversão da resposta e o encadeamento.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
+            answers: ['json', 'then'],
+            distractors: ['parse', 'catch', 'data']
+          },
+          en: {
+            question: 'Complete the response conversion and the chaining.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
+            answers: ['json', 'then'],
+            distractors: ['parse', 'catch', 'data']
           }
         }
       }
@@ -13074,6 +14650,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'callbacks',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a função recebe outra e a chama no fim.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function saudar(\n  nome,\n  ___\n) {\n  callback("Oi, " + nome);\n}\n\nsaudar("Ana", console.log);',
+            answers: ['callback'],
+            distractors: ['return', 'function', 'log']
+          },
+          en: {
+            question: 'Complete: the function takes another one and calls it at the end.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function greet(\n  name,\n  ___\n) {\n  callback("Hi, " + name);\n}\n\ngreet("Ana", console.log);',
+            answers: ['callback'],
+            distractors: ['return', 'function', 'log']
           }
         }
       }
@@ -13260,6 +14857,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o tratamento de sucesso e o de erro.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'buscar()\n  .___(mostrar)\n  .___(avisar);',
+            answers: ['then', 'catch'],
+            distractors: ['finally', 'done', 'error']
+          },
+          en: {
+            question: 'Complete the success handling and the error handling.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fetchData()\n  .___(show)\n  .___(warn);',
+            answers: ['then', 'catch'],
+            distractors: ['finally', 'done', 'error']
+          }
+        }
       }
     ]
   },
@@ -13440,6 +15058,27 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The already converted data', 'A pending Promise', 'The text "users"', 'undefined'],
             pool: 'async-errors'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a função assíncrona.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ function carregar() {\n  const r =\n    ___ fetch("/api");\n  return r.json();\n}',
+            answers: ['async', 'await'],
+            distractors: ['then', 'promise', 'sync']
+          },
+          en: {
+            question: 'Complete the asynchronous function.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ function load() {\n  const r =\n    ___ fetch("/api");\n  return r.json();\n}',
+            answers: ['async', 'await'],
+            distractors: ['then', 'promise', 'sync']
           }
         }
       }
@@ -13650,6 +15289,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a abreviação com o significado.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<abbr ___="Application\n  Programming Interface">\n  API\n</abbr>',
+            answers: ['title'],
+            distractors: ['alt', 'cite', 'name']
+          },
+          en: {
+            question: 'Complete the abbreviation with its meaning.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<abbr ___="Application\n  Programming Interface">\n  API\n</abbr>',
+            answers: ['title'],
+            distractors: ['alt', 'cite', 'name']
+          }
+        }
       }
     ]
   },
@@ -13755,6 +15415,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'code-kbd',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: uma tecla e um trecho de código no texto.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Aperte <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
+            answers: ['kbd', 'code'],
+            distractors: ['samp', 'pre']
+          },
+          en: {
+            question: 'Complete: a key and a bit of code in the text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Press <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
+            answers: ['kbd', 'code'],
+            distractors: ['samp', 'pre']
           }
         }
       }
@@ -13864,6 +15545,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'text-edits',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o preço removido e o preço novo.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>R$ 100</del>\n<___>R$ 80</ins>',
+            answers: ['del', 'ins'],
+            distractors: ['sub', 'sup', 'mark']
+          },
+          en: {
+            question: 'Complete: the removed price and the new price.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>$100</del>\n<___>$80</ins>',
+            answers: ['del', 'ins'],
+            distractors: ['sub', 'sup', 'mark']
           }
         }
       }
@@ -13979,6 +15681,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'time-data'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o atributo com o valor que as máquinas leem.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<time ___="2026-09-10">\n  10 de setembro\n</time>',
+            answers: ['datetime'],
+            distractors: ['date', 'value', 'time']
+          },
+          en: {
+            question: 'Complete the attribute with the machine-readable value.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<time ___="2026-09-10">\n  September 10\n</time>',
+            answers: ['datetime'],
+            distractors: ['date', 'value', 'time']
+          }
+        }
       }
     ]
   },
@@ -14086,6 +15809,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['controls', 'src', 'kind', 'label'],
             pool: 'media-track'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o vídeo com controles e legendas.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<video ___>\n  <___ src="leg.vtt"\n    kind="captions">\n</video>',
+            answers: ['controls', 'track'],
+            distractors: ['source', 'autoplay', 'caption']
+          },
+          en: {
+            question: 'Complete the video with controls and captions.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<video ___>\n  <___ src="caps.vtt"\n    kind="captions">\n</video>',
+            answers: ['controls', 'track'],
+            distractors: ['source', 'autoplay', 'caption']
           }
         }
       }
@@ -14199,6 +15943,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'iframe',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o iframe com uma descrição e com restrições.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<iframe src="mapa.html"\n  ___="Mapa da loja"\n  ___>\n</iframe>',
+            answers: ['title', 'sandbox'],
+            distractors: ['alt', 'name', 'hidden']
+          },
+          en: {
+            question: 'Complete the iframe with a description and restrictions.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<iframe src="map.html"\n  ___="Store map"\n  ___>\n</iframe>',
+            answers: ['title', 'sandbox'],
+            distractors: ['alt', 'name', 'hidden']
           }
         }
       }
@@ -14322,6 +16087,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'svg-canvas'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o desenho vetorial de um círculo.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ width="80"\n     height="80">\n  <___ cx="40" cy="40"\n          r="30" />\n</svg>',
+            answers: ['svg', 'circle'],
+            distractors: ['canvas', 'img', 'round']
+          },
+          en: {
+            question: 'Complete the vector drawing of a circle.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ width="80"\n     height="80">\n  <___ cx="40" cy="40"\n          r="30" />\n</svg>',
+            answers: ['svg', 'circle'],
+            distractors: ['canvas', 'img', 'round']
+          }
+        }
       }
     ]
   },
@@ -14429,6 +16215,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'details-dialog'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a seção que abre e fecha.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>\n    Ver mais\n  </summary>\n  <p>Detalhes.</p>\n</details>',
+            answers: ['details', 'summary'],
+            distractors: ['dialog', 'label', 'title']
+          },
+          en: {
+            question: 'Complete the section that opens and closes.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>\n    See more\n  </summary>\n  <p>Details.</p>\n</details>',
+            answers: ['details', 'summary'],
+            distractors: ['dialog', 'label', 'title']
+          }
+        }
       }
     ]
   },
@@ -14534,6 +16341,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'global-attrs',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: um parágrafo em inglês e outro escondido.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p ___="en">Hello</p>\n<p ___>Secreto</p>',
+            answers: ['lang', 'hidden'],
+            distractors: ['dir', 'title', 'alt']
+          },
+          en: {
+            question: 'Complete: a paragraph in English and a hidden one.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p ___="en">Hello</p>\n<p ___>Secret</p>',
+            answers: ['lang', 'hidden'],
+            distractors: ['dir', 'title', 'alt']
           }
         }
       }
@@ -14647,6 +16475,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'data-attrs'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o atributo de dado personalizado.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___-id="42">\n  Comprar\n</button>',
+            answers: ['data'],
+            distractors: ['aria', 'custom', 'meta']
+          },
+          en: {
+            question: 'Complete the custom data attribute.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___-id="42">\n  Buy\n</button>',
+            answers: ['data'],
+            distractors: ['aria', 'custom', 'meta']
+          }
+        }
       }
     ]
   },
@@ -14756,6 +16605,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['When it\'s cloned and inserted into the page', 'Always, when the page loads', 'When the user scrolls to it', 'Never, it works like a comment'],
             pool: 'template-edit'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: texto editável e um modelo que não aparece.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p ___="true">\n  Edite aqui\n</p>\n<___ id="item">\n  <li>Novo</li>\n</template>',
+            answers: ['contenteditable', 'template'],
+            distractors: ['draggable', 'hidden', 'div']
+          },
+          en: {
+            question: 'Complete: editable text and a template that isn\'t shown.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p ___="true">\n  Edit here\n</p>\n<___ id="item">\n  <li>New</li>\n</template>',
+            answers: ['contenteditable', 'template'],
+            distractors: ['draggable', 'hidden', 'div']
           }
         }
       }
@@ -14871,6 +16741,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a div entra na ordem do Tab.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div ___="0">\n  Recebe foco\n</div>',
+            answers: ['tabindex'],
+            distractors: ['focus', 'tab', 'order']
+          },
+          en: {
+            question: 'Complete: the div joins the Tab order.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div ___="0">\n  Gets focus\n</div>',
+            answers: ['tabindex'],
+            distractors: ['focus', 'tab', 'order']
+          }
+        }
       }
     ]
   },
@@ -14982,6 +16873,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'landmarks'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o landmark principal e a ligação do label.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <label ___="nome">\n    Nome\n  </label>\n  <input id="nome">\n</main>',
+            answers: ['main', 'for'],
+            distractors: ['section', 'id', 'name']
+          },
+          en: {
+            question: 'Complete the main landmark and the label link.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <label ___="name">\n    Name\n  </label>\n  <input id="name">\n</main>',
+            answers: ['main', 'for'],
+            distractors: ['section', 'id', 'name']
+          }
+        }
       }
     ]
   },
@@ -15091,6 +17003,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['aria-label="Close window"', 'hidden', 'tabindex="-1"', 'dir="rtl"'],
             pool: 'aria'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o nome acessível do botão de ícone.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___="Fechar">\n  ×\n</button>',
+            answers: ['aria-label'],
+            distractors: ['alt', 'title', 'role']
+          },
+          en: {
+            question: 'Complete the accessible name of the icon button.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___="Close">\n  ×\n</button>',
+            answers: ['aria-label'],
+            distractors: ['alt', 'title', 'role']
           }
         }
       }
@@ -15233,6 +17166,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'mq'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a regra para telas de 768px ou mais.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ (min-width: 768px) {\n  .card { width: 50%; }\n}',
+            answers: ['@media'],
+            distractors: ['@screen', '@if', 'media']
+          },
+          en: {
+            question: 'Complete the rule for screens 768px and up.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ (min-width: 768px) {\n  .card { width: 50%; }\n}',
+            answers: ['@media'],
+            distractors: ['@screen', '@if', 'media']
+          }
+        }
       }
     ]
   },
@@ -15344,6 +17298,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'mobile-first'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: coluna no celular, linha a partir de 768px.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.box {\n  flex-direction: column;\n}\n@media (___: 768px) {\n  .box {\n    flex-direction: ___;\n  }\n}',
+            answers: ['min-width', 'row'],
+            distractors: ['max-width', 'width', 'wrap']
+          },
+          en: {
+            question: 'Complete: a column on phones, a row from 768px.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.box {\n  flex-direction: column;\n}\n@media (___: 768px) {\n  .box {\n    flex-direction: ___;\n  }\n}',
+            answers: ['min-width', 'row'],
+            distractors: ['max-width', 'width', 'wrap']
+          }
+        }
       }
     ]
   },
@@ -15444,6 +17419,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'clamp'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: no mínimo 2rem e no máximo 4rem.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-size:\n    ___(2rem, 5vw, 4rem);\n}',
+            answers: ['clamp'],
+            distractors: ['min', 'max', 'calc']
+          },
+          en: {
+            question: 'Complete: at least 2rem and at most 4rem.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-size:\n    ___(2rem, 5vw, 4rem);\n}',
+            answers: ['clamp'],
+            distractors: ['min', 'max', 'calc']
+          }
+        }
       }
     ]
   },
@@ -15532,6 +17528,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The transition\'s duration', 'The delay before it starts', 'The element\'s size', 'The number of repeats'],
             pool: 'transition'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a mudança suave do transform.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  ___: transform 0.2s;\n}',
+            answers: ['transition'],
+            distractors: ['animation', 'transform', 'delay']
+          },
+          en: {
+            question: 'Complete the smooth change of transform.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.button {\n  ___: transform 0.2s;\n}',
+            answers: ['transition'],
+            distractors: ['animation', 'transform', 'delay']
           }
         }
       }
@@ -15643,6 +17660,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'transform',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: sobe 4px e aumenta um pouco.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card:hover {\n  transform:\n    ___(-4px)\n    ___(1.05);\n}',
+            answers: ['translateY', 'scale'],
+            distractors: ['rotate', 'translateX', 'zoom']
+          },
+          en: {
+            question: 'Complete: moves up 4px and grows a bit.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card:hover {\n  transform:\n    ___(-4px)\n    ___(1.05);\n}',
+            answers: ['translateY', 'scale'],
+            distractors: ['rotate', 'translateX', 'zoom']
           }
         }
       }
@@ -15766,6 +17804,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a criação e o uso da animação.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ aparecer {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n.card {\n  ___: aparecer 1s;\n}',
+            answers: ['@keyframes', 'animation'],
+            distractors: ['@animation', 'transition']
+          },
+          en: {
+            question: 'Complete the animation\'s creation and use.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '___ appear {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n.card {\n  ___: appear 1s;\n}',
+            answers: ['@keyframes', 'animation'],
+            distractors: ['@animation', 'transition']
+          }
+        }
       }
     ]
   },
@@ -15887,6 +17946,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'combo-anim'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o começo e o fim da animação.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@keyframes entrar {\n  ___ {\n    opacity: 0;\n  }\n  ___ {\n    opacity: 1;\n  }\n}',
+            answers: ['from', 'to'],
+            distractors: ['start', 'end']
+          },
+          en: {
+            question: 'Complete the animation\'s start and end.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@keyframes enter {\n  ___ {\n    opacity: 0;\n  }\n  ___ {\n    opacity: 1;\n  }\n}',
+            answers: ['from', 'to'],
+            distractors: ['start', 'end']
+          }
+        }
       }
     ]
   },
@@ -15996,6 +18076,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'css-functions',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a largura total menos a lateral.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.conteudo {\n  width:\n    ___(100% - 240px);\n}',
+            answers: ['calc'],
+            distractors: ['clamp', 'min', 'sum']
+          },
+          en: {
+            question: 'Complete: the full width minus the sidebar.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.content {\n  width:\n    ___(100% - 240px);\n}',
+            answers: ['calc'],
+            distractors: ['clamp', 'min', 'sum']
           }
         }
       }
@@ -16129,6 +18230,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: parágrafos sem destaque e cartões com imagem.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p:___(.destaque) {\n  color: gray;\n}\n.card:___(img) {\n  border: 1px solid;\n}',
+            answers: ['not', 'has'],
+            distractors: ['is', 'where']
+          },
+          en: {
+            question: 'Complete: paragraphs without highlight and cards with an image.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p:___(.highlight) {\n  color: gray;\n}\n.card:___(img) {\n  border: 1px solid;\n}',
+            answers: ['not', 'has'],
+            distractors: ['is', 'where']
+          }
+        }
       }
     ]
   },
@@ -16233,6 +18355,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Blue', 'Black', 'Purple, a mix', 'No color'],
             pool: 'cascade'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'O parágrafo deve ficar azul. Complete a regra que vem por último.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['body', 'html', '*']
+          },
+          en: {
+            question: 'The paragraph should end up blue. Complete the rule that comes last.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['body', 'html', '*']
           }
         }
       }
@@ -16358,6 +18501,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com uma propriedade que os filhos herdam.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: blue;\n}',
+            answers: ['color'],
+            distractors: ['border', 'margin', 'padding']
+          },
+          en: {
+            question: 'Complete with a property the children inherit.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: blue;\n}',
+            answers: ['color'],
+            distractors: ['border', 'margin', 'padding']
+          }
+        }
       }
     ]
   },
@@ -16446,6 +18610,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['A container query', 'A media query', 'z-index', 'An id'],
             pool: 'container-q'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a consulta pelo tamanho do contêiner.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.lista {\n  container-type:\n    inline-size;\n}\n___\n  (min-width: 300px) {\n  .card { display: flex; }\n}',
+            answers: ['@container'],
+            distractors: ['@media', '@size', '@parent']
+          },
+          en: {
+            question: 'Complete the query on the container\'s size.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.list {\n  container-type:\n    inline-size;\n}\n___\n  (min-width: 300px) {\n  .card { display: flex; }\n}',
+            answers: ['@container'],
+            distractors: ['@media', '@size', '@parent']
           }
         }
       }
@@ -16569,6 +18754,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: proporção 16:9 e imagem preenchendo a caixa sem distorcer.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.thumb {\n  ___: 16 / 9;\n}\nimg {\n  object-fit: ___;\n}',
+            answers: ['aspect-ratio', 'cover'],
+            distractors: ['ratio', 'contain', 'fill']
+          },
+          en: {
+            question: 'Complete: a 16:9 ratio and an image filling the box without distortion.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.thumb {\n  ___: 16 / 9;\n}\nimg {\n  object-fit: ___;\n}',
+            answers: ['aspect-ratio', 'cover'],
+            distractors: ['ratio', 'contain', 'fill']
+          }
+        }
       }
     ]
   },
@@ -16682,6 +18888,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: rolagem suave e cor dos checkboxes.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'html {\n  scroll-behavior: ___;\n}\ninput {\n  ___: blue;\n}',
+            answers: ['smooth', 'accent-color'],
+            distractors: ['auto', 'color']
+          },
+          en: {
+            question: 'Complete: smooth scrolling and the checkbox color.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'html {\n  scroll-behavior: ___;\n}\ninput {\n  ___: blue;\n}',
+            answers: ['smooth', 'accent-color'],
+            distractors: ['auto', 'color']
+          }
+        }
       }
     ]
   },
@@ -16772,6 +18999,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The outline showing the keyboard-focused element', 'A button\'s rounded border', 'A loading animation', 'A card\'s shadow'],
             pool: 'focus-ring'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: um foco visível com contorno próprio.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'button:___ {\n  ___: 2px solid blue;\n}',
+            answers: ['focus', 'outline'],
+            distractors: ['hover', 'active', 'shadow']
+          },
+          en: {
+            question: 'Complete: a visible focus with its own outline.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'button:___ {\n  ___: 2px solid blue;\n}',
+            answers: ['focus', 'outline'],
+            distractors: ['hover', 'active', 'shadow']
           }
         }
       }
@@ -16885,6 +19133,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: respeitar quem prefere menos movimento.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@media\n  (prefers-___-motion:\n    reduce) {\n  * {\n    animation: none;\n  }\n}',
+            answers: ['reduced'],
+            distractors: ['less', 'no', 'slow']
+          },
+          en: {
+            question: 'Complete: respect people who prefer less motion.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@media\n  (prefers-___-motion:\n    reduce) {\n  * {\n    animation: none;\n  }\n}',
+            answers: ['reduced'],
+            distractors: ['less', 'no', 'slow']
+          }
+        }
       }
     ]
   },
@@ -16973,6 +19242,27 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Light gray text on a white background', '#222 text on a white background', 'White text on a black background', 'Black text on a light yellow background'],
             pool: 'contrast'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com texto escuro sobre fundo claro.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.texto {\n  color: ___;\n  background: ___;\n}',
+            answers: ['#222', '#fff'],
+            distractors: ['#eee', '#ccc']
+          },
+          en: {
+            question: 'Complete with dark text on a light background.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.text {\n  color: ___;\n  background: ___;\n}',
+            answers: ['#222', '#fff'],
+            distractors: ['#eee', '#ccc']
           }
         }
       }
@@ -17139,6 +19429,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'scope-chain'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a função enxerga a variável de fora.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n\nfunction mostrar() {\n  console.log(___);\n}\nmostrar();',
+            answers: ['nome'],
+            distractors: ['this', '"nome"', 'undefined']
+          },
+          en: {
+            question: 'Complete: the function sees the outer variable.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n\nfunction show() {\n  console.log(___);\n}\nshow();',
+            answers: ['name'],
+            distractors: ['this', '"name"', 'undefined']
+          }
+        }
       }
     ]
   },
@@ -17266,6 +19577,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o contador que guarda o total.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function criar() {\n  let total = 0;\n  return () => ___total;\n}\nconst c = criar();\nc();\nconsole.log(c());',
+            answers: ['++'],
+            distractors: ['--', '+', '=']
+          },
+          en: {
+            question: 'Complete the counter that keeps the total.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function create() {\n  let total = 0;\n  return () => ___total;\n}\nconst c = create();\nc();\nconsole.log(c());',
+            answers: ['++'],
+            distractors: ['--', '+', '=']
+          }
+        }
       }
     ]
   },
@@ -17358,6 +19690,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'hoisting',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com a declaração que pode ser lida antes (e vale undefined).',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(nome);\n___ nome = "Ana";',
+            answers: ['var'],
+            distractors: ['let', 'const']
+          },
+          en: {
+            question: 'Complete with the declaration that can be read early (and holds undefined).',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(name);\n___ name = "Ana";',
+            answers: ['var'],
+            distractors: ['let', 'const']
           }
         }
       }
@@ -17477,6 +19830,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para ler o nome do próprio objeto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  nome: "Ana",\n  saudar() {\n    console.log(\n      ___.nome\n    );\n  }\n};\nu.saudar();',
+            answers: ['this'],
+            distractors: ['self', 'me', 'nome']
+          },
+          en: {
+            question: 'Complete to read the object\'s own name.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  name: "Ana",\n  greet() {\n    console.log(\n      ___.name\n    );\n  }\n};\nu.greet();',
+            answers: ['this'],
+            distractors: ['self', 'me', 'name']
+          }
+        }
       }
     ]
   },
@@ -17588,6 +19962,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Inside a method, like in a map callback', 'As the object\'s own method', 'As a class constructor', 'Nowhere'],
             pool: 'arrow-this'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com a função que herda o this do método.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const t = {\n  nome: " (Time)",\n  m: ["Ana"],\n  listar() {\n    return this.m.map(\n      x ___ x + this.nome\n    );\n  }\n};\nconsole.log(t.listar());',
+            answers: ['=>'],
+            distractors: ['->', '==', '>=']
+          },
+          en: {
+            question: 'Complete with the function that inherits the method\'s this.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const t = {\n  name: " (Team)",\n  m: ["Ana"],\n  list() {\n    return this.m.map(\n      x ___ x + this.name\n    );\n  }\n};\nconsole.log(t.list());',
+            answers: ['=>'],
+            distractors: ['->', '==', '>=']
           }
         }
       }
@@ -17703,6 +20098,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o cachorro herda de animal.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const animal = {\n  som() {\n    console.log("Som");\n  }\n};\nconst dog =\n  Object.___(animal);\ndog.som();',
+            answers: ['create'],
+            distractors: ['assign', 'new', 'copy']
+          },
+          en: {
+            question: 'Complete: the dog inherits from animal.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const animal = {\n  sound() {\n    console.log("Sound");\n  }\n};\nconst dog =\n  Object.___(animal);\ndog.sound();',
+            answers: ['create'],
+            distractors: ['assign', 'new', 'copy']
+          }
+        }
       }
     ]
   },
@@ -17816,6 +20232,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a herança e a chamada ao método do pai.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'class Cao ___ Animal {\n  som() {\n    ___.som();\n  }\n}',
+            answers: ['extends', 'super'],
+            distractors: ['implements', 'this', 'parent']
+          },
+          en: {
+            question: 'Complete the inheritance and the call to the parent\'s method.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'class Dog ___ Animal {\n  sound() {\n    ___.sound();\n  }\n}',
+            answers: ['extends', 'super'],
+            distractors: ['implements', 'this', 'parent']
+          }
+        }
       }
     ]
   },
@@ -17908,6 +20345,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'stack-loop',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: dois chama um antes do próprio log.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function um() {\n  console.log("um");\n}\nfunction dois() {\n  ___();\n  console.log("dois");\n}\ndois();',
+            answers: ['um'],
+            distractors: ['dois', 'log', 'main']
+          },
+          en: {
+            question: 'Complete: two calls one before its own log.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function one() {\n  console.log("one");\n}\nfunction two() {\n  ___();\n  console.log("two");\n}\ntwo();',
+            answers: ['one'],
+            distractors: ['two', 'log', 'main']
           }
         }
       }
@@ -18012,6 +20470,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o que entra na fila de macrotasks.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___(() => {\n  console.log("depois");\n}, 0);',
+            answers: ['setTimeout'],
+            distractors: ['Promise', 'then', 'await']
+          },
+          en: {
+            question: 'Complete with what goes into the macrotask queue.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___(() => {\n  console.log("later");\n}, 0);',
+            answers: ['setTimeout'],
+            distractors: ['Promise', 'then', 'await']
+          }
+        }
       }
     ]
   },
@@ -18104,6 +20583,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The .then() waits for the call stack to be free', 'Promises are slow by nature', 'console.log has priority over everything', 'The Promise hasn\'t resolved yet'],
             pool: 'promise-flow'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a Promise já resolvida e o seu tratamento.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'Promise.___("ok")\n  .___(v => console.log(v));',
+            answers: ['resolve', 'then'],
+            distractors: ['reject', 'catch', 'done']
+          },
+          en: {
+            question: 'Complete the already resolved Promise and its handling.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'Promise.___("ok")\n  .___(v => console.log(v));',
+            answers: ['resolve', 'then'],
+            distractors: ['reject', 'catch', 'done']
           }
         }
       }
@@ -18227,6 +20727,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: obj2 aponta para o mesmo objeto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const obj1 = { total: 10 };\nconst obj2 = ___;\nobj2.total = 20;\nconsole.log(obj1.total);',
+            answers: ['obj1'],
+            distractors: ['{ ...obj1 }', 'obj1.total', '{}']
+          },
+          en: {
+            question: 'Complete: obj2 points to the same object.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const obj1 = { total: 10 };\nconst obj2 = ___;\nobj2.total = 20;\nconsole.log(obj1.total);',
+            answers: ['obj1'],
+            distractors: ['{ ...obj1 }', 'obj1.total', '{}']
+          }
+        }
       }
     ]
   },
@@ -18338,6 +20859,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'copies',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a cópia profunda, que não mexe no original.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const original = {\n  end: { cidade: "SP" }\n};\nconst c =\n  ___(original);\nc.end.cidade = "RJ";\nconsole.log(\n  original.end.cidade\n);',
+            answers: ['structuredClone'],
+            distractors: ['Object.assign', 'deepCopy', 'copy']
+          },
+          en: {
+            question: 'Complete the deep copy, which leaves the original alone.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const original = {\n  addr: { city: "NY" }\n};\nconst c =\n  ___(original);\nc.addr.city = "LA";\nconsole.log(\n  original.addr.city\n);',
+            answers: ['structuredClone'],
+            distractors: ['Object.assign', 'deepCopy', 'copy']
           }
         }
       }
@@ -18461,6 +21003,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: um objeto novo, sem mudar o original.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const u = { idade: 30 };\nconst novo =\n  { ___u, idade: 31 };\nconsole.log(u.idade);',
+            answers: ['...'],
+            distractors: ['..', '*', '&']
+          },
+          en: {
+            question: 'Complete: a new object, without changing the original.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const u = { age: 30 };\nconst next =\n  { ___u, age: 31 };\nconsole.log(u.age);',
+            answers: ['...'],
+            distractors: ['..', '*', '&']
+          }
+        }
       }
     ]
   },
@@ -18571,6 +21134,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'delegation'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o listener fica no pai e lê quem foi clicado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'lista.addEventListener(\n  "click",\n  (e) => mostrar(e.___)\n);',
+            answers: ['target'],
+            distractors: ['this', 'value', 'parent']
+          },
+          en: {
+            question: 'Complete: the listener sits on the parent and reads what was clicked.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'list.addEventListener(\n  "click",\n  (e) => show(e.___)\n);',
+            answers: ['target'],
+            distractors: ['this', 'value', 'parent']
+          }
+        }
       }
     ]
   },
@@ -18671,6 +21255,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'debounce',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: a busca espera a pessoa parar de digitar.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'campo.addEventListener(\n  "input",\n  ___(buscar, 500)\n);',
+            answers: ['debounce'],
+            distractors: ['throttle', 'setTimeout', 'delay']
+          },
+          en: {
+            question: 'Complete: the search waits for the person to stop typing.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'field.addEventListener(\n  "input",\n  ___(search, 500)\n);',
+            answers: ['debounce'],
+            distractors: ['throttle', 'setTimeout', 'delay']
           }
         }
       }
@@ -18792,6 +21397,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'closing-adv'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o tipo do parâmetro em TypeScript.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function dobrar(\n  n: ___\n): number {\n  return n * 2;\n}',
+            answers: ['number'],
+            distractors: ['string', 'int', 'numeric']
+          },
+          en: {
+            question: 'Complete the parameter\'s type in TypeScript.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function double(\n  n: ___\n): number {\n  return n * 2;\n}',
+            answers: ['number'],
+            distractors: ['string', 'int', 'numeric']
+          }
+        }
       }
     ]
   },
@@ -18880,6 +21506,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'why-ts',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete os tipos dos dois parâmetros.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function somar(\n  a: ___,\n  b: ___\n) {\n  return a + b;\n}',
+            answers: ['number', 'number'],
+            distractors: ['string', 'any']
+          },
+          en: {
+            question: 'Complete the types of both parameters.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function add(\n  a: ___,\n  b: ___\n) {\n  return a + b;\n}',
+            answers: ['number', 'number'],
+            distractors: ['string', 'any']
           }
         }
       }
@@ -18995,6 +21642,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a anotação de tipo.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let idade___ number = 20;',
+            answers: [':'],
+            distractors: ['=', '::', 'as']
+          },
+          en: {
+            question: 'Complete the type annotation.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let age___ number = 20;',
+            answers: [':'],
+            distractors: ['=', '::', 'as']
+          }
+        }
       }
     ]
   },
@@ -19089,6 +21757,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'inference'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a anotação explícita de texto.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let cidade: ___ =\n  "São Paulo";',
+            answers: ['string'],
+            distractors: ['number', 'text', 'char']
+          },
+          en: {
+            question: 'Complete the explicit text annotation.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let city: ___ =\n  "Boston";',
+            answers: ['string'],
+            distractors: ['number', 'text', 'char']
+          }
+        }
       }
     ]
   },
@@ -19177,6 +21866,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'object-types',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a descrição do objeto usuário.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '___ Usuario {\n  nome: ___;\n  idade: number;\n}',
+            answers: ['interface', 'string'],
+            distractors: ['type', 'class', 'text']
+          },
+          en: {
+            question: 'Complete the description of the user object.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '___ User {\n  name: ___;\n  age: number;\n}',
+            answers: ['interface', 'string'],
+            distractors: ['type', 'class', 'text']
           }
         }
       }
@@ -19273,6 +21983,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             pool: 'union'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o id aceita texto ou número.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let id: string ___ number;',
+            answers: ['|'],
+            distractors: ['&', '||', ',']
+          },
+          en: {
+            question: 'Complete: the id accepts text or a number.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let id: string ___ number;',
+            answers: ['|'],
+            distractors: ['&', '||', ',']
+          }
+        }
       }
     ]
   },
@@ -19361,6 +22092,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'typed-fn',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a anotação do tipo do retorno.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function dobro(\n  n: number\n)___ number {\n  return n * 2;\n}',
+            answers: [':'],
+            distractors: ['=>', '->', '=']
+          },
+          en: {
+            question: 'Complete the return type annotation.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function twice(\n  n: number\n)___ number {\n  return n * 2;\n}',
+            answers: [':'],
+            distractors: ['=>', '->', '=']
           }
         }
       }
@@ -19455,6 +22207,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'any-unknown',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o tipo mais seguro para um valor desconhecido.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let valor: ___ = "x";\n\nif (typeof valor ===\n    "string") {\n  valor.toUpperCase();\n}',
+            answers: ['unknown'],
+            distractors: ['any', 'never', 'void']
+          },
+          en: {
+            question: 'Complete with the safest type for an unknown value.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'let value: ___ = "x";\n\nif (typeof value ===\n    "string") {\n  value.toUpperCase();\n}',
+            answers: ['unknown'],
+            distractors: ['any', 'never', 'void']
           }
         }
       }
@@ -19578,6 +22351,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o tipo genérico da função.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function primeiro<___>(\n  itens: T[]\n): T {\n  return itens[0];\n}',
+            answers: ['T'],
+            distractors: ['any', 'Array', 'U']
+          },
+          en: {
+            question: 'Complete the function\'s generic type.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: 'function first<___>(\n  items: T[]\n): T {\n  return items[0];\n}',
+            answers: ['T'],
+            distractors: ['any', 'Array', 'U']
+          }
+        }
       }
     ]
   },
@@ -19670,6 +22464,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o union type de status.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '___ Status =\n  "ativo" | "inativo";',
+            answers: ['type'],
+            distractors: ['interface', 'enum', 'let']
+          },
+          en: {
+            question: 'Complete the status union type.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '___ Status =\n  "active" | "inactive";',
+            answers: ['type'],
+            distractors: ['interface', 'enum', 'let']
+          }
+        }
       }
     ]
   },
@@ -19758,6 +22573,27 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'tsconfig',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a opção que liga as checagens rígidas.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '{\n  "compilerOptions": {\n    "___": true\n  }\n}',
+            answers: ['strict'],
+            distractors: ['strictMode', 'check', 'safe']
+          },
+          en: {
+            question: 'Complete the option that turns on strict checks.',
+            highlight: [],
+            codeLanguage: 'TypeScript',
+            code: '{\n  "compilerOptions": {\n    "___": true\n  }\n}',
+            answers: ['strict'],
+            distractors: ['strictMode', 'check', 'safe']
           }
         }
       }
@@ -19926,6 +22762,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'node-intro'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o comando que executa o arquivo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// no terminal:\n// ___ app.js',
+            answers: ['node'],
+            distractors: ['npm', 'run', 'js']
+          },
+          en: {
+            question: 'Complete the command that runs the file.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// in the terminal:\n// ___ app.js',
+            answers: ['node'],
+            distractors: ['npm', 'run', 'js']
+          }
+        }
       }
     ]
   },
@@ -20016,6 +22873,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'runtime',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: as variáveis de ambiente no Node.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  ___.env.PORT\n);',
+            answers: ['process'],
+            distractors: ['window', 'document', 'node']
+          },
+          en: {
+            question: 'Complete: the environment variables in Node.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  ___.env.PORT\n);',
+            answers: ['process'],
+            distractors: ['window', 'document', 'node']
           }
         }
       }
@@ -20129,6 +23007,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'browser-node'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com a API que só existe no navegador.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___.querySelector(\n  "button"\n);',
+            answers: ['document'],
+            distractors: ['process', 'console', 'require']
+          },
+          en: {
+            question: 'Complete with the API that only exists in the browser.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___.querySelector(\n  "button"\n);',
+            answers: ['document'],
+            distractors: ['process', 'console', 'require']
+          }
+        }
       }
     ]
   },
@@ -20223,6 +23122,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The project\'s version', 'The Node version', 'The server port', 'The number of files'],
             pool: 'package-json'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o arquivo que descreve o projeto.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___.json\n{\n  "name": "minha-api"\n}',
+            answers: ['package'],
+            distractors: ['node', 'npm', 'project']
+          },
+          en: {
+            question: 'Complete the file that describes the project.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___.json\n{\n  "name": "my-api"\n}',
+            answers: ['package'],
+            distractors: ['node', 'npm', 'project']
           }
         }
       }
@@ -20340,6 +23260,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o comando que instala o Express.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// npm ___ express',
+            answers: ['install'],
+            distractors: ['get', 'download', 'require']
+          },
+          en: {
+            question: 'Complete the command that installs Express.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// npm ___ express',
+            answers: ['install'],
+            distractors: ['get', 'download', 'require']
+          }
+        }
       }
     ]
   },
@@ -20444,6 +23385,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para disponibilizar a função a outros arquivos.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ function somar(a, b) {\n  return a + b;\n}',
+            answers: ['export'],
+            distractors: ['import', 'module', 'public']
+          },
+          en: {
+            question: 'Complete to make the function available to other files.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ function add(a, b) {\n  return a + b;\n}',
+            answers: ['export'],
+            distractors: ['import', 'module', 'public']
+          }
+        }
       }
     ]
   },
@@ -20534,6 +23496,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'native-apis',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o import do módulo nativo de arquivos.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'import fs\n  from "node:___";',
+            answers: ['fs'],
+            distractors: ['file', 'http', 'path']
+          },
+          en: {
+            question: 'Complete the import of the native file module.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'import fs\n  from "node:___";',
+            answers: ['fs'],
+            distractors: ['file', 'http', 'path']
           }
         }
       }
@@ -20628,6 +23611,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para gravar o arquivo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fs.___(\n  "msg.txt",\n  "Olá!"\n);',
+            answers: ['writeFileSync'],
+            distractors: ['readFileSync', 'saveFile', 'write']
+          },
+          en: {
+            question: 'Complete to write the file.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fs.___(\n  "msg.txt",\n  "Hi!"\n);',
+            answers: ['writeFileSync'],
+            distractors: ['readFileSync', 'saveFile', 'write']
+          }
+        }
       }
     ]
   },
@@ -20718,6 +23722,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'node-http',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o servidor que escuta na porta 3000.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const server = ___(\n  (req, res) => res.end("Oi")\n);\nserver.___(3000);',
+            answers: ['createServer', 'listen'],
+            distractors: ['express', 'start', 'open']
+          },
+          en: {
+            question: 'Complete the server that listens on port 3000.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const server = ___(\n  (req, res) => res.end("Hi")\n);\nserver.___(3000);',
+            answers: ['createServer', 'listen'],
+            distractors: ['express', 'start', 'open']
           }
         }
       }
@@ -20812,6 +23837,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar o status da resposta.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  await fetch("/users");\nconsole.log(r.___);',
+            answers: ['status'],
+            distractors: ['code', 'state', 'result']
+          },
+          en: {
+            question: 'Complete to show the response status.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  await fetch("/users");\nconsole.log(r.___);',
+            answers: ['status'],
+            distractors: ['code', 'state', 'result']
+          }
+        }
       }
     ]
   },
@@ -20902,6 +23948,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'http-methods',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o método que cria um usuário.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___ /users\n// cria um usuário',
+            answers: ['POST'],
+            distractors: ['GET', 'PUT', 'DELETE']
+          },
+          en: {
+            question: 'Complete with the method that creates a user.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___ /users\n// creates a user',
+            answers: ['POST'],
+            distractors: ['GET', 'PUT', 'DELETE']
           }
         }
       }
@@ -20996,6 +24063,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o status de recurso não encontrado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'res.status(___)\n  .json({ erro: "x" });',
+            answers: ['404'],
+            distractors: ['200', '500', '201']
+          },
+          en: {
+            question: 'Complete the status for a resource that wasn\'t found.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'res.status(___)\n  .json({ error: "x" });',
+            answers: ['404'],
+            distractors: ['200', '500', '201']
+          }
+        }
       }
     ]
   },
@@ -21086,6 +24174,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Web apps and APIs with Node.js', 'Styles with utility classes', 'Native mobile apps', 'Databases'],
             pool: 'why-express'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a rota que o Express organiza para você.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users",\n  (req, res) => {\n    res.send("Lista");\n  }\n);',
+            answers: ['get'],
+            distractors: ['route', 'path', 'fetch']
+          },
+          en: {
+            question: 'Complete the route Express organizes for you.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users",\n  (req, res) => {\n    res.send("List");\n  }\n);',
+            answers: ['get'],
+            distractors: ['route', 'path', 'fetch']
           }
         }
       }
@@ -21180,6 +24289,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a criação da aplicação.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const app = ___();\n\napp.listen(3000);',
+            answers: ['express'],
+            distractors: ['server', 'app', 'http']
+          },
+          en: {
+            question: 'Complete the creation of the app.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const app = ___();\n\napp.listen(3000);',
+            answers: ['express'],
+            distractors: ['server', 'app', 'http']
+          }
+        }
       }
     ]
   },
@@ -21270,6 +24400,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'routes',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a rota que cria um usuário.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users",\n  (req, res) => {\n    res.send("Criado");\n  }\n);',
+            answers: ['post'],
+            distractors: ['get', 'put', 'create']
+          },
+          en: {
+            question: 'Complete the route that creates a user.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users",\n  (req, res) => {\n    res.send("Created");\n  }\n);',
+            answers: ['post'],
+            distractors: ['get', 'put', 'create']
           }
         }
       }
@@ -21364,6 +24515,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a resposta enviada ao cliente.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/oi", (req, res) => {\n  ___.send("Oi!");\n});',
+            answers: ['res'],
+            distractors: ['req', 'app', 'server']
+          },
+          en: {
+            question: 'Complete the response sent to the client.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/hi", (req, res) => {\n  ___.send("Hi!");\n});',
+            answers: ['res'],
+            distractors: ['req', 'app', 'server']
+          }
+        }
       }
     ]
   },
@@ -21456,6 +24628,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'api-json'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para responder em JSON.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'res.___({\n  id: 1,\n  nome: "Ana"\n});',
+            answers: ['json'],
+            distractors: ['JSON', 'toJSON', 'body']
+          },
+          en: {
+            question: 'Complete to respond with JSON.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'res.___({\n  id: 1,\n  name: "Ana"\n});',
+            answers: ['json'],
+            distractors: ['JSON', 'toJSON', 'body']
+          }
+        }
       }
     ]
   },
@@ -21546,6 +24739,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Identifying a specific resource by URL', 'Setting the server port', 'Installing packages', 'Styling the response'],
             pool: 'route-params'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o parâmetro da rota e a leitura dele.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/users/___id",\n  (req, res) => {\n    res.json(req.___.id);\n  }\n);',
+            answers: [':', 'params'],
+            distractors: ['#', 'body', 'query']
+          },
+          en: {
+            question: 'Complete the route parameter and how it\'s read.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/users/___id",\n  (req, res) => {\n    res.json(req.___.id);\n  }\n);',
+            answers: [':', 'params'],
+            distractors: ['#', 'body', 'query']
           }
         }
       }
@@ -21644,6 +24858,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o middleware de JSON e a leitura do corpo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.___());\n\napp.post("/users",\n  (req, res) => {\n    res.json(req.___);\n  }\n);',
+            answers: ['json', 'body'],
+            distractors: ['params', 'parse', 'data']
+          },
+          en: {
+            question: 'Complete the JSON middleware and how the body is read.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.___());\n\napp.post("/users",\n  (req, res) => {\n    res.json(req.___);\n  }\n);',
+            answers: ['json', 'body'],
+            distractors: ['params', 'parse', 'data']
+          }
+        }
       }
     ]
   },
@@ -21736,6 +24971,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'build-api'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a resposta com a lista e o início do servidor.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const users = [\n  { id: 1, nome: "Ana" }\n];\napp.get("/users",\n  (req, res) => {\n    res.json(___);\n  }\n);\napp.___(3000);',
+            answers: ['users', 'listen'],
+            distractors: ['req', 'start', 'run']
+          },
+          en: {
+            question: 'Complete the response with the list and the server start.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const users = [\n  { id: 1, name: "Ana" }\n];\napp.get("/users",\n  (req, res) => {\n    res.json(___);\n  }\n);\napp.___(3000);',
+            answers: ['users', 'listen'],
+            distractors: ['req', 'start', 'run']
+          }
+        }
       }
     ]
   },
@@ -21826,6 +25082,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['Runs its code and sends the response', 'Restarts the server', 'Ignores the request', 'Installs a package'],
             pool: 'flow'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a rota que atende GET /users.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("___",\n  (req, res) => {\n    res.json([]);\n  }\n);',
+            answers: ['get', '/users'],
+            distractors: ['post', '/user', 'users']
+          },
+          en: {
+            question: 'Complete the route that answers GET /users.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("___",\n  (req, res) => {\n    res.json([]);\n  }\n);',
+            answers: ['get', '/users'],
+            distractors: ['post', '/user', 'users']
           }
         }
       }
@@ -21941,6 +25218,27 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'ecosystem-js',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a API mínima: criar o app e escutar a porta.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const app = ___();\napp.use(express.json());\napp.___(3000);',
+            answers: ['express', 'listen'],
+            distractors: ['http', 'start', 'run']
+          },
+          en: {
+            question: 'Complete the minimal API: create the app and listen on the port.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const app = ___();\napp.use(express.json());\napp.___(3000);',
+            answers: ['express', 'listen'],
+            distractors: ['http', 'start', 'run']
           }
         }
       }
@@ -22107,6 +25405,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'react-what'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o componente que mostra um título.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  ___ <h1>Olá!</h1>;\n}',
+            answers: ['return'],
+            distractors: ['render', 'print', 'show']
+          },
+          en: {
+            question: 'Complete the component that shows a heading.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  ___ <h1>Hello!</h1>;\n}',
+            answers: ['return'],
+            distractors: ['render', 'print', 'show']
+          }
+        }
       }
     ]
   },
@@ -22216,6 +25535,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['A component being used', 'A native HTML tag', 'A comment', 'An attribute of <main>'],
             pool: 'components'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Use o componente Botao dentro do App.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  return (\n    <main>\n      <___ />\n    </main>\n  );\n}',
+            answers: ['Botao'],
+            distractors: ['botao', 'button', 'Main']
+          },
+          en: {
+            question: 'Use the Button component inside App.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  return (\n    <main>\n      <___ />\n    </main>\n  );\n}',
+            answers: ['Button'],
+            distractors: ['button', 'btn', 'Main']
           }
         }
       }
@@ -22329,6 +25669,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'jsx-attrs',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete os atributos do jeito do JSX.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<label ___="nome">\n  Nome\n</label>\n<p ___="aviso">Oi</p>',
+            answers: ['htmlFor', 'className'],
+            distractors: ['for', 'class']
+          },
+          en: {
+            question: 'Complete the attributes the JSX way.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<label ___="name">\n  Name\n</label>\n<p ___="notice">Hi</p>',
+            answers: ['htmlFor', 'className'],
+            distractors: ['for', 'class']
           }
         }
       }
@@ -22446,6 +25807,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar o valor de nome.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n\nreturn <h1>Olá, ___nome___</h1>;',
+            answers: ['{', '}'],
+            distractors: ['(', ')', '"']
+          },
+          en: {
+            question: 'Complete to show the value of name.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n\nreturn <h1>Hi, ___name___</h1>;',
+            answers: ['{', '}'],
+            distractors: ['(', ')', '"']
+          }
+        }
       }
     ]
   },
@@ -22540,6 +25922,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Passe o nome para o componente.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<Saudacao ___="Ana" />',
+            answers: ['nome'],
+            distractors: ['props', 'value', 'key']
+          },
+          en: {
+            question: 'Pass the name to the component.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<Greeting ___="Ana" />',
+            answers: ['name'],
+            distractors: ['props', 'value', 'key']
+          }
+        }
       }
     ]
   },
@@ -22569,6 +25972,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Reaproveite o componente com outro nome.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<Usuario nome="Ana" />\n<___ nome="João" />',
+            answers: ['Usuario'],
+            distractors: ['usuario', 'Nome', 'Ana']
+          },
+          en: {
+            question: 'Reuse the component with another name.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<User name="Ana" />\n<___ name="John" />',
+            answers: ['User'],
+            distractors: ['user', 'Name', 'Ana']
+          }
+        }
       }
     ]
   },
@@ -22596,6 +26020,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Button() {\n  function handleClick() {\n    console.log("Clicked!");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click\n    </button>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o evento de clique.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<button ___={clicar}>\n  Clique\n</button>',
+            answers: ['onClick'],
+            distractors: ['onclick', 'click', 'onPress']
+          },
+          en: {
+            question: 'Complete the click event.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<button ___={handleClick}>\n  Click\n</button>',
+            answers: ['onClick'],
+            distractors: ['onclick', 'click', 'onPress']
           }
         }
       }
@@ -22711,6 +26156,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'state'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para somar 1 ao total.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const [total, setTotal] =\n  useState(0);\n\nfunction somar() {\n  ___(total + 1);\n}',
+            answers: ['setTotal'],
+            distractors: ['total', 'useState', 'setState']
+          },
+          en: {
+            question: 'Complete to add 1 to the total.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const [total, setTotal] =\n  useState(0);\n\nfunction add() {\n  ___(total + 1);\n}',
+            answers: ['setTotal'],
+            distractors: ['total', 'useState', 'setState']
+          }
+        }
       }
     ]
   },
@@ -22759,6 +26225,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Counter() {\n  const [count, setCount] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setCount(count + 1)\n      }\n    >\n      {count}\n    </button>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a criação do estado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const [n, ___] =\n  ___(0);',
+            answers: ['setN', 'useState'],
+            distractors: ['useEffect', 'n', 'setState']
+          },
+          en: {
+            question: 'Complete the state creation.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const [n, ___] =\n  ___(0);',
+            answers: ['setN', 'useState'],
+            distractors: ['useEffect', 'n', 'setState']
           }
         }
       }
@@ -22851,6 +26338,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o título vem por props e o valor é estado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function Card({ ___ }) {\n  const [valor] =\n    ___(0);\n}',
+            answers: ['titulo', 'useState'],
+            distractors: ['state', 'props', 'useRef']
+          },
+          en: {
+            question: 'Complete: the title comes from props and the value is state.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function Card({ ___ }) {\n  const [value] =\n    ___(0);\n}',
+            answers: ['title', 'useState'],
+            distractors: ['state', 'props', 'useRef']
+          }
+        }
       }
     ]
   },
@@ -22878,6 +26386,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Field() {\n  function handleChange(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={handleChange} />\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para acompanhar o que é digitado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<input\n  ___={alterar}\n/>',
+            answers: ['onChange'],
+            distractors: ['onClick', 'change', 'onSubmit']
+          },
+          en: {
+            question: 'Complete to follow what is typed.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<input\n  ___={handleChange}\n/>',
+            answers: ['onChange'],
+            distractors: ['onClick', 'change', 'onSubmit']
           }
         }
       }
@@ -22991,6 +26520,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'hooks'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o import do Hook de estado.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  ___\n} from "react";',
+            answers: ['useState'],
+            distractors: ['setState', 'state', 'useHook']
+          },
+          en: {
+            question: 'Complete the import of the state Hook.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  ___\n} from "react";',
+            answers: ['useState'],
+            distractors: ['setState', 'state', 'useHook']
+          }
+        }
       }
     ]
   },
@@ -23043,6 +26593,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o efeito roda quando nome muda.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'useEffect(() => {\n  console.log(nome);\n}, [___]);',
+            answers: ['nome'],
+            distractors: ['valor', 'useState', 'log']
+          },
+          en: {
+            question: 'Complete: the effect runs when name changes.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'useEffect(() => {\n  console.log(name);\n}, [___]);',
+            answers: ['name'],
+            distractors: ['value', 'useState', 'log']
+          }
+        }
       }
     ]
   },
@@ -23070,6 +26641,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'import { useRef } from "react";\n\nconst inputRef = useRef(null);',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a referência que começa vazia.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const inputRef =\n  ___(null);',
+            answers: ['useRef'],
+            distractors: ['useState', 'useEffect', 'ref']
+          },
+          en: {
+            question: 'Complete the reference that starts empty.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const inputRef =\n  ___(null);',
+            answers: ['useRef'],
+            distractors: ['useState', 'useEffect', 'ref']
           }
         }
       }
@@ -23101,6 +26693,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o ternário que escolhe a mensagem.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return logado\n  ___ <p>Bem-vindo!</p>\n  ___ <p>Faça login.</p>;',
+            answers: ['?', ':'],
+            distractors: ['&&', '||']
+          },
+          en: {
+            question: 'Complete the ternary that picks the message.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return loggedIn\n  ___ <p>Welcome!</p>\n  ___ <p>Please log in.</p>;',
+            answers: ['?', ':'],
+            distractors: ['&&', '||']
+          }
+        }
       }
     ]
   },
@@ -23128,6 +26741,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const names = ["Ana", "John"];\n\nfunction List() {\n  return (\n    <ul>\n      {names.map(name => (\n        <li>{name}</li>\n      ))}\n    </ul>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para criar um li por nome.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<ul>\n  {nomes.___(nome => (\n    <li>{nome}</li>\n  ))}\n</ul>',
+            answers: ['map'],
+            distractors: ['filter', 'forEach', 'find']
+          },
+          en: {
+            question: 'Complete to create one li per name.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '<ul>\n  {names.___(name => (\n    <li>{name}</li>\n  ))}\n</ul>',
+            answers: ['map'],
+            distractors: ['filter', 'forEach', 'find']
           }
         }
       }
@@ -23159,6 +26793,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o identificador estável de cada item.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'usuarios.map(u => (\n  <p ___={u.id}>\n    {u.nome}\n  </p>\n))',
+            answers: ['key'],
+            distractors: ['id', 'ref', 'index']
+          },
+          en: {
+            question: 'Complete with each item\'s stable identifier.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'users.map(u => (\n  <p ___={u.id}>\n    {u.name}\n  </p>\n))',
+            answers: ['key'],
+            distractors: ['id', 'ref', 'index']
+          }
+        }
       }
     ]
   },
@@ -23186,6 +26841,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'function Header() {\n  return <header>My site</header>;\n}\n\nfunction Content() {\n  return <main>Content</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Content />\n    </>\n  );\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Monte o App com o componente de cabeçalho.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <>\n    <___ />\n    <Conteudo />\n  </>\n);',
+            answers: ['Header'],
+            distractors: ['header', 'Main', 'App']
+          },
+          en: {
+            question: 'Build the App with the header component.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <>\n    <___ />\n    <Content />\n  </>\n);',
+            answers: ['Header'],
+            distractors: ['header', 'Main', 'App']
           }
         }
       }
@@ -23297,6 +26973,27 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['How the interface is organized, into components', 'HTML elements stop existing', 'You no longer need to structure the page', 'CSS becomes mandatory'],
             pool: 'html-react'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o cartão com o elemento semântico certo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <___>\n    <h2>Produto</h2>\n  </article>\n);',
+            answers: ['article'],
+            distractors: ['div', 'span', 'aside']
+          },
+          en: {
+            question: 'Complete the card with the right semantic element.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <___>\n    <h2>Product</h2>\n  </article>\n);',
+            answers: ['article'],
+            distractors: ['div', 'span', 'aside']
           }
         }
       }
@@ -23453,6 +27150,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'ecosystem'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o botão em CSS tradicional.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  padding: 8px 16px;\n  ___: 8px;\n}',
+            answers: ['border-radius'],
+            distractors: ['radius', 'rounded', 'corner']
+          },
+          en: {
+            question: 'Complete the button in traditional CSS.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.button {\n  padding: 8px 16px;\n  ___: 8px;\n}',
+            answers: ['border-radius'],
+            distractors: ['radius', 'rounded', 'corner']
+          }
+        }
       }
     ]
   },
@@ -23551,6 +27269,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['3', '1', '2', '4'],
             pool: 'tailwind-what'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o botão com a classe de fundo azul.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button class="___\n  text-white px-4">\n  Comprar\n</button>',
+            answers: ['bg-blue-600'],
+            distractors: ['blue-600', 'color-blue', 'bg:blue']
+          },
+          en: {
+            question: 'Complete the button with the blue background class.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button class="___\n  text-white px-4">\n  Buy\n</button>',
+            answers: ['bg-blue-600'],
+            distractors: ['blue-600', 'color-blue', 'bg:blue']
           }
         }
       }
@@ -23655,6 +27394,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'utility-first'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: padding de 1rem com uma classe utilitária.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="___">\n  Cartão\n</div>',
+            answers: ['p-4'],
+            distractors: ['padding-4', 'p-1rem', 'pad-4']
+          },
+          en: {
+            question: 'Complete: 1rem of padding with a utility class.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="___">\n  Card\n</div>',
+            answers: ['p-4'],
+            distractors: ['padding-4', 'p-1rem', 'pad-4']
+          }
+        }
       }
     ]
   },
@@ -23753,6 +27513,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'utilities',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o texto também fica em negrito.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p class="text-lg ___">\n  Olá!\n</p>',
+            answers: ['font-bold'],
+            distractors: ['bold', 'text-bold', 'weight-bold']
+          },
+          en: {
+            question: 'Complete: the text is bold too.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p class="text-lg ___">\n  Hi!\n</p>',
+            answers: ['font-bold'],
+            distractors: ['bold', 'text-bold', 'weight-bold']
           }
         }
       }
@@ -23855,6 +27636,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com a margem no topo.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="p-4 ___">\n  Conteúdo\n</div>',
+            answers: ['mt-4'],
+            distractors: ['pt-4', 'm-top-4', 'top-4']
+          },
+          en: {
+            question: 'Complete with the top margin.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="p-4 ___">\n  Content\n</div>',
+            answers: ['mt-4'],
+            distractors: ['pt-4', 'm-top-4', 'top-4']
+          }
+        }
       }
     ]
   },
@@ -23953,6 +27755,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'tw-colors',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: fundo azul e texto branco.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button\n  class="___-blue-600\n    ___-white">',
+            answers: ['bg', 'text'],
+            distractors: ['color', 'font', 'fg']
+          },
+          en: {
+            question: 'Complete: a blue background and white text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button\n  class="___-blue-600\n    ___-white">',
+            answers: ['bg', 'text'],
+            distractors: ['color', 'font', 'fg']
           }
         }
       }
@@ -24055,6 +27878,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'tw-type'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o título com o tamanho 2xl.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<h1 class="text-___\n  font-bold">\n  Título\n</h1>',
+            answers: ['2xl'],
+            distractors: ['xxl', 'large', '32']
+          },
+          en: {
+            question: 'Complete the heading with size 2xl.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<h1 class="text-___\n  font-bold">\n  Title\n</h1>',
+            answers: ['2xl'],
+            distractors: ['xxl', 'large', '32']
+          }
+        }
       }
     ]
   },
@@ -24153,6 +27997,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'tw-flex',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: itens centralizados e espaço entre eles.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="flex\n  items-___\n  justify-___">',
+            answers: ['center', 'between'],
+            distractors: ['middle', 'spaced', 'start']
+          },
+          en: {
+            question: 'Complete: centered items with space between them.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="flex\n  items-___\n  justify-___">',
+            answers: ['center', 'between'],
+            distractors: ['middle', 'spaced', 'start']
           }
         }
       }
@@ -24255,6 +28120,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete uma grade de 3 colunas.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="grid\n  grid-___-3 gap-4">',
+            answers: ['cols'],
+            distractors: ['columns', 'col', 'rows']
+          },
+          en: {
+            question: 'Complete a 3-column grid.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="grid\n  grid-___-3 gap-4">',
+            answers: ['cols'],
+            distractors: ['columns', 'col', 'rows']
+          }
+        }
       }
     ]
   },
@@ -24349,6 +28235,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'tw-responsive'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: texto maior a partir do breakpoint md.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p class="text-sm\n  ___:text-lg">',
+            answers: ['md'],
+            distractors: ['sm', 'lg', 'tablet']
+          },
+          en: {
+            question: 'Complete: larger text from the md breakpoint up.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p class="text-sm\n  ___:text-lg">',
+            answers: ['md'],
+            distractors: ['sm', 'lg', 'tablet']
+          }
+        }
       }
     ]
   },
@@ -24437,6 +28344,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             options: ['True', 'False'],
             pool: 'tw-states',
             fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o fundo escurece ao passar o cursor.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button class="bg-blue-600\n  ___:bg-blue-700">',
+            answers: ['hover'],
+            distractors: ['focus', 'active', 'over']
+          },
+          en: {
+            question: 'Complete: the background darkens on hover.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button class="bg-blue-600\n  ___:bg-blue-700">',
+            answers: ['hover'],
+            distractors: ['focus', 'active', 'over']
           }
         }
       }
@@ -24529,6 +28457,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             fixedOrder: true
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o fundo do modo escuro.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="bg-white\n  ___:bg-gray-900">',
+            answers: ['dark'],
+            distractors: ['night', 'black', 'md']
+          },
+          en: {
+            question: 'Complete the dark mode background.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<div class="bg-white\n  ___:bg-gray-900">',
+            answers: ['dark'],
+            distractors: ['night', 'black', 'md']
+          }
+        }
       }
     ]
   },
@@ -24619,6 +28568,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             pool: 'tw-custom'
           }
         }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete onde ficam as cores próprias do tema.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'theme: {\n  ___: {\n    marca: "#2563eb"\n  }\n}',
+            answers: ['colors'],
+            distractors: ['color', 'palette', 'styles']
+          },
+          en: {
+            question: 'Complete where the theme\'s own colors go.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'theme: {\n  ___: {\n    brand: "#2563eb"\n  }\n}',
+            answers: ['colors'],
+            distractors: ['color', 'palette', 'styles']
+          }
+        }
       }
     ]
   },
@@ -24707,6 +28677,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['tailwind.config.js', 'index.html', 'style.css', 'package-lock.json'],
             pool: 'tw-config'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o nome do arquivo de configuração.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___.config.js\nexport default {\n  theme: {}\n};',
+            answers: ['tailwind'],
+            distractors: ['tw', 'css', 'vite']
+          },
+          en: {
+            question: 'Complete the name of the config file.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '// ___.config.js\nexport default {\n  theme: {}\n};',
+            answers: ['tailwind'],
+            distractors: ['tw', 'css', 'vite']
           }
         }
       }
@@ -24807,6 +28798,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['A button repeated across the interface', 'A paragraph that appears once', 'A code comment', 'The head tag'],
             pool: 'tw-components'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o botão reutilizável em JSX.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function Botao() {\n  return (\n    <button\n      ___="rounded-lg">\n      Salvar\n    </button>\n  );\n}',
+            answers: ['className'],
+            distractors: ['class', 'style', 'tw']
+          },
+          en: {
+            question: 'Complete the reusable button in JSX.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function Button() {\n  return (\n    <button\n      ___="rounded-lg">\n      Save\n    </button>\n  );\n}',
+            answers: ['className'],
+            distractors: ['class', 'style', 'tw']
           }
         }
       }
@@ -24918,6 +28930,27 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             correctOption: 1,
             options: ['The classes represent CSS properties', 'Tailwind only works without CSS', 'Tailwind is another language', 'It doesn\'t help at all'],
             pool: 'tw-and-css'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o CSS equivalente à classe p-4.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 1rem;\n}',
+            answers: ['padding'],
+            distractors: ['margin', 'p', 'gap']
+          },
+          en: {
+            question: 'Complete the CSS equivalent to the p-4 class.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 1rem;\n}',
+            answers: ['padding'],
+            distractors: ['margin', 'p', 'gap']
           }
         }
       }

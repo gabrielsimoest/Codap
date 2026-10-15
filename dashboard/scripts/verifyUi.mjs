@@ -44,6 +44,19 @@ const IGNORED_CONSOLE = [
 
 const steps = []
 
+/**
+ * Botão "Editar" do último cartão de atividade de um tipo, na lição aberta.
+ * Procura pelo tipo, e não pela posição: a ordem das atividades muda quando
+ * entra conteúdo novo (o piloto de `code_blank` virou a última atividade das
+ * lições do Módulo 1, por exemplo).
+ */
+function editActivityOfType (page, type) {
+  return page.locator('main [data-slot="card"]')
+    .filter({ has: page.getByText(type, { exact: true }) })
+    .last()
+    .getByRole('button', { name: 'Editar', exact: true })
+}
+
 function step (name, fn) {
   steps.push({ name, fn })
 }
@@ -162,12 +175,11 @@ step('o formulário de atividade abre com o preview de highlight', async (page) 
 })
 
 /*
- * A prática vem depois da teoria, então a última atividade da primeira lição
- * de HTML é uma `option`. Se o formulário não carregar `pool` de volta, salvar
- * pelo dashboard apaga o sorteio em silêncio.
+ * A primeira lição de HTML tem prática `option` com pool. Se o formulário não
+ * carregar `pool` de volta, salvar pelo dashboard apaga o sorteio em silêncio.
  */
 step('o formulário de múltipla escolha mostra o sorteio', async (page) => {
-  await page.locator('main').getByRole('button', { name: 'Editar', exact: true }).last().click()
+  await editActivityOfType(page, 'option').click()
   await page.getByText('Alternativas').first().waitFor({ timeout: 10_000 })
   await page.getByText('Sorteio').waitFor({ timeout: 10_000 })
   await page.getByLabel('Trecho de código').waitFor({ timeout: 10_000 })
@@ -178,6 +190,28 @@ step('o formulário de múltipla escolha mostra o sorteio', async (page) => {
   }
 
   await page.screenshot(shot('06-multipla-escolha.png'))
+  await page.keyboard.press('Escape')
+})
+
+/*
+ * A primeira lição de JavaScript tem um `code_blank` (piloto do Módulo 1). O
+ * formulário precisa carregar o código e uma resposta por lacuna — sem isso,
+ * salvar pelo dashboard apagaria o exercício em silêncio.
+ */
+step('o formulário de completar código carrega lacunas e respostas', async (page) => {
+  await page.getByRole('combobox', { name: 'Área' }).click()
+  await page.getByRole('option', { name: 'JavaScript' }).click()
+  await page.getByTestId('lesson-node').first().click()
+  await editActivityOfType(page, 'code_blank').click()
+  await page.getByLabel('Resposta da lacuna 1').waitFor({ timeout: 10_000 })
+
+  const answer = await page.getByLabel('Resposta da lacuna 1').inputValue()
+  const code = await page.locator('#blank-code').inputValue()
+  if (!code.includes('___') || answer.length === 0) {
+    throw new Error('o formulário de code_blank não carregou o código com lacunas e a resposta')
+  }
+
+  await page.screenshot(shot('08-completar-codigo.png'))
   await page.keyboard.press('Escape')
 })
 

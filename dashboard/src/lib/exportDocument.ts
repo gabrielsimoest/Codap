@@ -1,5 +1,6 @@
 import type {
   AdminLessonResponse,
+  CodeBlankActivityContent,
   ContentModule,
   LocaleCode,
   OptionActivityContent,
@@ -133,6 +134,29 @@ function buildOption (content: OptionActivityContent): Partial<ExportActivity> {
   }
 }
 
+function buildCodeBlank (content: CodeBlankActivityContent): Partial<ExportActivity> {
+  const notes: string[] = ['Completar código: cada ___ é uma lacuna, preenchida tocando nos blocos']
+  if (content.tutorial) {
+    notes.push('Marcada como tutorial')
+  }
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    // Respostas e blocos errados viram "alternativas" — o que um revisor
+    // precisa ver é quais blocos o aluno recebe e quais são os certos.
+    options: [
+      ...(content.answers ?? []).map((text, position) => ({ text: `Lacuna ${position + 1}: ${text}`, correct: true })),
+      ...(content.distractors ?? []).map((text) => ({ text, correct: false }))
+    ],
+    highlight: content.highlight ?? [],
+    codeBlocks: content.code
+      ? [{ language: fenceLanguage(content.codeLanguage ?? 'JavaScript'), code: content.code }]
+      : [],
+    notes
+  }
+}
+
 function buildActivity (
   index: number,
   type: string,
@@ -158,6 +182,10 @@ function buildActivity (
 
   if (type === 'option') {
     return { ...base, ...buildOption(content as OptionActivityContent) }
+  }
+
+  if (type === 'code_blank') {
+    return { ...base, ...buildCodeBlank(content as CodeBlankActivityContent) }
   }
 
   // Tipo sem formatação dedicada: o conteúdo cru vai junto, para o documento

@@ -1,19 +1,21 @@
 import { DimensionValue } from "react-native";
 import { useState } from "react";
 import type {
+	CodeBlankActivityContent,
 	OptionActivityContent,
 	TheoryActivityContent,
 } from "codap-api/src/types/contracts";
 import type { PlayableActivity } from "../../../types/entities";
 import TheoryView from "./TheoryLesson";
 import OptionExercise from "./OptionExercise";
+import CodeBlankExercise from "./CodeBlankExercise";
 
 /**
  * Tipos que este player sabe renderizar. Uma atividade de tipo fora desta
  * lista é filtrada antes de entrar (ver `filterPlayable`) — para estender,
  * basta adicionar o tipo aqui e um `case` no `switch` abaixo.
  */
-const SUPPORTED_TYPES = new Set(["theory", "option"]);
+const SUPPORTED_TYPES = new Set(["theory", "option", "code_blank"]);
 
 export function filterPlayable<T extends PlayableActivity>(activities: T[]): T[] {
 	return activities.filter((activity) => SUPPORTED_TYPES.has(activity.type));
@@ -94,6 +96,26 @@ export default function ActivityPlayer({
 					codeLanguage={content.codeLanguage}
 					correctOption={content.correctOption}
 					highlight={content.highlight}
+					tutorial={content.tutorial}
+					progress={progress}
+					onProceed={advance}
+					onClose={onClose}
+				/>
+			);
+		}
+		case "code_blank": {
+			const content = current.content as CodeBlankActivityContent;
+			return (
+				// Mesma razão da `key` acima: os blocos postos nas lacunas não
+				// podem vazar de um exercício para o seguinte.
+				<CodeBlankExercise
+					key={activityIndex}
+					question={content.question}
+					highlight={content.highlight}
+					codeLanguage={content.codeLanguage}
+					code={content.code}
+					answers={content.answers}
+					distractors={content.distractors}
 					tutorial={content.tutorial}
 					progress={progress}
 					onProceed={advance}

@@ -155,6 +155,34 @@ export interface OptionActivityContent {
   fixedOrder?: boolean;
 }
 
+/**
+ * `type: 'code_blank'` — completar código tocando em blocos (estilo
+ * Grasshopper), sem teclado: o aluno vê o trecho com 1 a 3 lacunas e toca nos
+ * blocos para preenchê-las, na ordem em que aparecem no código.
+ */
+export interface CodeBlankActivityContent {
+  /** Instrução curta, ex.: "Complete para centralizar o texto." */
+  question: string;
+  highlight: string[];
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  /**
+   * Trecho com cada lacuna marcada por `___` (três sublinhados), de 1 a 3.
+   * Este arquivo é importado só como tipo pelo app e pelo dashboard, então a
+   * marca não é uma constante exportada daqui: cada lado declara a sua.
+   * Mesma regra de formatação do `code` da `option`: no máximo 30 caracteres
+   * por linha, contando a resposta já encaixada.
+   */
+  code: string;
+  /** Resposta de cada lacuna, na ordem em que aparecem no código. */
+  answers: string[];
+  /** Blocos errados que aparecem junto com as respostas, embaralhados. */
+  distractors: string[];
+  tutorial?: boolean;
+  /** Mesmo sorteio da `option` (ver `OptionActivityContent.pool`). */
+  pool?: string;
+  draw?: number;
+}
+
 export interface ActivityResponse {
   id: number;
   index: number;

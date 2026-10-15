@@ -1,6 +1,14 @@
 # Arquitetura de atividades práticas e progressão de módulos
 
-> Documento de design, não implementado ainda. Nasceu de um brainstorm em 2026-08-29 e fica guardado aqui para retomar quando o desenvolvedor pedir explicitamente — ver Seção 6 (Roadmap faseado) para a ordem de implementação prevista.
+> Documento de design. Nasceu de um brainstorm em 2026-08-29 e fica guardado aqui para retomar quando o desenvolvedor pedir explicitamente — ver Seção 6 (Roadmap faseado) para a ordem de implementação prevista.
+>
+> **Já implementado (outubro de 2026)**, fora da ordem das fases abaixo:
+> - **Prática sorteada**: `pool`/`draw`/`fixedOrder` em `option`, teoria fixa e prática embaralhada a cada sessão (`buildLessonSession`); verdadeiro/falso é `option` com `fixedOrder`, sem tipo novo.
+> - **"O que este código faz?"** (Seção 3): `code`/`codeLanguage` opcionais na `option`, mostrados por `CodeSnippet` (só leitura).
+> - **`code_blank`** (Fase 3), com até 3 lacunas e **sempre** por blocos de toque — o `wordBank` previsto aqui virou `answers` + `distractors`. Como os blocos resolvem o problema de digitar código no celular, o `fill_blank` com teclado livre (Fase 1) deixou de ser prioridade. Um exercício por lição em toda a trilha das três áreas (192).
+> - A registry da Seção 1 ainda não foi criada: com 3 tipos, o `switch` do `ActivityPlayer` continua suficiente.
+>
+> Detalhes de cada um em `api/CLAUDE.md` e `app/CLAUDE.md`.
 
 ## Context
 

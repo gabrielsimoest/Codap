@@ -17,6 +17,13 @@
 		"change": "Change",
 		"Oops": "There are no classes for this module yet. We will bring new, better and more interactive classes soon!",
 
+		"codeBlank": {
+			"hintOne": "Tap a block to complete the code.",
+			"hintMany": "Tap the blocks in the order of the blanks. Tap a filled blank to undo.",
+			"emptySlot": "Blank {{n}}, empty",
+			"filledSlot": "Blank {{n}}: {{value}}. Tap to undo"
+		},
+
 		"codeSection": {
 			"consoleError": "Error",
 			"run": "Run",

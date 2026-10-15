@@ -23,6 +23,7 @@ export type {
   ModuleResponse,
   ModuleTranslationInput,
   OptionActivityContent,
+  CodeBlankActivityContent,
   PublishContentVersionBody,
   ReorderBody,
   TheoryActivityContent,
