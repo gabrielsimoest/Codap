@@ -33,7 +33,14 @@
           "backgroundColor": "#000000"
         }
       ],
-      "expo-status-bar"
+      "expo-status-bar",
+      [
+        "expo-notifications",
+        {
+          "color": "#5469D3",
+          "defaultChannel": "reminders"
+        }
+      ]
     ],
     "extra": {
       "eas": {

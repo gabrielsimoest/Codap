@@ -180,8 +180,48 @@
 		},
 
 		"notificationService": {
-			"title": "Reminder",
-			"message": "Come take more classes with CODAP, we miss you!"
+			"reminders": [
+				{
+					"title": "We miss you! 💙",
+					"body": "Cody is missing you. How about a quick lesson today?"
+				},
+				{
+					"title": "Your code is waiting 👋",
+					"body": "Just 5 minutes is enough to pick up where you left off."
+				},
+				{
+					"title": "Time for a Codap break?",
+					"body": "Come back and continue your journey at your own pace. We'll be here!"
+				},
+				{
+					"title": "Cody saved your spot 🌟",
+					"body": "How about doing an activity today? Every step counts."
+				},
+				{
+					"title": "Ready to code a little?",
+					"body": "A short lesson already makes a difference. We're rooting for you!"
+				},
+				{
+					"title": "It's been a little while… 😊",
+					"body": "Your lessons are right here, ready to go. Come back whenever you like!"
+				},
+				{
+					"title": "A new challenge awaits 🚀",
+					"body": "Come discover one more piece of HTML, CSS or JavaScript."
+				},
+				{
+					"title": "We miss you so much! ✨",
+					"body": "Codap isn't the same without you. Shall we learn something new today?"
+				},
+				{
+					"title": "Ease back in 🌱",
+					"body": "No need to rush: one activity at a time and you'll get there."
+				},
+				{
+					"title": "Cody says hi! 👾",
+					"body": "He wants to know how your learning is going. Come back and tell him!"
+				}
+			]
 		}
 	}
 }

@@ -3,6 +3,9 @@ import useLanguage from "./src/hooks/useLanguage";
 import useFontSize from "./src/hooks/useFontSize";
 import useAuthSession from "./src/hooks/useAuthSession";
 import useNetworkSync from "./src/hooks/useNetworkSync";
+import useNotificationPreference from "./src/hooks/useNotificationPreference";
+import useInactivityReminder from "./src/hooks/useInactivityReminder";
+import useNotificationStore from "./src/stores/NotificationStore";
 import MainNavigation from "./src/routes/MainNavigation";
 import useThemeStore from "./src/stores/ThemeStore";
 import { useEffect, useMemo, useState } from "react";
@@ -42,12 +45,14 @@ export default function App() {
 	const language = useLanguage();
 	const fontSize = useFontSize();
 	const isLoggedIn = useAuthSession();
+	const notificationPreference = useNotificationPreference();
 	useNetworkSync();
 
 	const setTheme = useThemeStore((s) => s.setTheme);
 	const themeStored = useThemeStore((s) => s.theme);
 	const setFontSize = useFontSizeStore((s) => s.setFontSize);
 	const setLanguage = useLanguageStore((s) => s.setLanguage);
+	const hydrateNotifications = useNotificationStore((s) => s.hydrate);
 	const authIsLoggedIn = useAuthStore((s) => s.isLoggedIn);
 	const alertVisible = useAlertStore((S) => S.alertVisible);
 	const alertMessage = useAlertStore((S) => S.alertMessage);
@@ -67,16 +72,22 @@ export default function App() {
 		theme !== undefined &&
 		fontSize !== undefined &&
 		language !== undefined &&
-		isLoggedIn !== undefined;
+		isLoggedIn !== undefined &&
+		notificationPreference !== undefined;
 
 	useEffect(() => {
 		if (isReady) {
 			setTheme(theme);
 			setFontSize(fontSize);
 			setLanguage(language);
+			hydrateNotifications(notificationPreference);
 			setTimeout(() => SplashScreen.hide(), 100);
 		}
 	}, [isReady]);
+
+	// Lembretes de inatividade (notificação local após 7/14/30 dias sem abrir o
+	// app). Chamado antes do `return null` abaixo para respeitar a ordem dos hooks.
+	useInactivityReminder(isReady);
 
 	// Sessão encerrada pelo servidor (ApiClient recebeu 401 no /auth/refresh e
 	// chamou expireSession): leva ao Login, limpando a pilha, com o aviso de

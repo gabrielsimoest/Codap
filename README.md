@@ -24,6 +24,7 @@ Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md]
 - Expo + React Native + TypeScript
 - Zustand (estado global)
 - SQLite + AsyncStorage (persistência local) + `expo-secure-store` (tokens de sessão)
+- `expo-notifications` (lembretes locais de inatividade, ligáveis em Configurações)
 - Axios + `@tanstack/react-query` (requisições à API)
 
 **API (`/api`)**

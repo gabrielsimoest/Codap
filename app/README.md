@@ -11,6 +11,7 @@ Para detalhes de arquitetura, convenções e regras de contribuição específic
 - Estado global: `zustand`
 - UI: `react-native-paper`
 - Persistência local: `expo-sqlite` + `@react-native-async-storage/async-storage`; tokens de sessão em `expo-secure-store`
+- Notificações: `expo-notifications` (lembretes locais após 7, 14 e 30 dias sem abrir o app, ligáveis em Configurações)
 - Requisições à API: `axios` + `@tanstack/react-query`
 - i18n: `i18next` (`pt`/`en`)
 
