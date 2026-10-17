@@ -1,5 +1,9 @@
 import type {
+	CodeBlankActivityContent,
+	FillBlankActivityContent,
+	MatchingActivityContent,
 	OptionActivityContent,
+	ReorderActivityContent,
 	TheoryActivityContent,
 } from "codap-api/src/types/contracts";
 
@@ -51,12 +55,32 @@ export type Option = {
 	lesson: OptionActivityContent;
 };
 
+export type CodeBlank = {
+	type: "code_blank";
+	lesson: CodeBlankActivityContent;
+};
+
+export type FillBlank = {
+	type: "fill_blank";
+	lesson: FillBlankActivityContent;
+};
+
+export type Reorder = {
+	type: "reorder";
+	lesson: ReorderActivityContent;
+};
+
+export type Matching = {
+	type: "matching";
+	lesson: MatchingActivityContent;
+};
+
 type DummyClass = {
 	type: string;
 	lesson: string[];
 };
 
-export type Classes = Theory | Option | DummyClass;
+export type Classes = Theory | Option | CodeBlank | FillBlank | Reorder | Matching | DummyClass;
 
 /**
  * O que o `ActivityPlayer` sabe reproduzir, venha da API (`ActivityResponse`,

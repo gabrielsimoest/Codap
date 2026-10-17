@@ -16,6 +16,13 @@ import { cn } from '@/lib/utils'
 import { HighlightField } from './HighlightField'
 import { CODE_LANGUAGES, type OptionContentForm } from '@/lib/activitySchemas'
 
+/** Mesmo limite do `code`: linha mais longa obriga a arrastar o bloco no celular. */
+const MAX_OPTION_CODE_LINE = 30
+
+function longestLine (text: string | undefined): number {
+  return (text ?? '').split('\n').reduce((max, line) => Math.max(max, line.length), 0)
+}
+
 /**
  * Formulário de uma atividade `option`, espelhando `OptionActivityContent`.
  *
@@ -39,6 +46,8 @@ export function OptionFields () {
   const additional = useWatch({ control, name: 'aditionalParagraph' })
   const highlight = useWatch({ control, name: 'highlight' }) ?? []
   const codeLanguage = useWatch({ control, name: 'codeLanguage' })
+  const optionsAsCode = useWatch({ control, name: 'optionsAsCode' }) ?? false
+  const optionValues = useWatch({ control, name: 'options' }) ?? []
 
   return (
     <div className="space-y-4">
@@ -92,6 +101,31 @@ export function OptionFields () {
           para não entregar a resposta de um "qual a saída?".
         </p>
         <Textarea id="option-code" rows={4} className="font-mono text-xs" {...form.register('code')} />
+
+        {/*
+          "Ache o erro": cada alternativa vira um trecho de código, na linguagem
+          do Select acima. O `code` do enunciado continua valendo junto.
+        */}
+        <div className="flex items-start gap-2 pt-1">
+          <Switch
+            id="option-options-as-code"
+            checked={optionsAsCode}
+            onCheckedChange={(checked) => {
+              // `undefined` (e não `false`) ao desligar: o conteúdo volta a não
+              // ter a chave, como antes de alguém ligar.
+              form.setValue('optionsAsCode', checked ? true : undefined, { shouldDirty: true, shouldValidate: true })
+            }}
+          />
+          <div>
+            <Label htmlFor="option-options-as-code" className="text-sm">
+              Alternativas como código (optionsAsCode)
+            </Label>
+            <p className="text-xs text-muted-foreground">
+              Cada alternativa aparece em monoespaçado, com destaque na linguagem acima — para
+              "qual destes trechos tem um erro?". Aceita várias linhas, de até {MAX_OPTION_CODE_LINE} caracteres.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-2 rounded-md border border-border p-3">
@@ -116,7 +150,7 @@ export function OptionFields () {
         {fields.map((field, index) => {
           const isCorrect = correctOption === index + 1
           return (
-            <div key={field.id} className="flex items-center gap-2">
+            <div key={field.id} className={cn('flex gap-2', optionsAsCode ? 'items-start' : 'items-center')}>
               <Button
                 type="button"
                 variant="ghost"
@@ -135,7 +169,25 @@ export function OptionFields () {
                 {isCorrect ? <Check className="size-4" /> : <span className="text-xs">{index + 1}</span>}
               </Button>
 
-              <Input {...form.register(`options.${index}`)} />
+              {optionsAsCode
+                ? (
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <Textarea
+                      rows={Math.min(Math.max((optionValues[index] ?? '').split('\n').length, 2), 6)}
+                      className="font-mono text-xs"
+                      spellCheck={false}
+                      aria-label={`Alternativa ${index + 1} (código)`}
+                      {...form.register(`options.${index}`)}
+                    />
+                    {longestLine(optionValues[index]) > MAX_OPTION_CODE_LINE && (
+                      <p className="text-xs text-destructive">
+                        Uma linha tem {longestLine(optionValues[index])} caracteres; o máximo é {MAX_OPTION_CODE_LINE}
+                        {' '}para caber no celular.
+                      </p>
+                    )}
+                  </div>
+                  )
+                : <Input aria-label={`Alternativa ${index + 1}`} {...form.register(`options.${index}`)} />}
 
               <Button
                 type="button"

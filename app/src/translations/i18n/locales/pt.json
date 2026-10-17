@@ -24,6 +24,28 @@
 			"filledSlot": "Lacuna {{n}}: {{value}}. Toque para desfazer"
 		},
 
+		"reorder": {
+			"hint": "Toque nas linhas para montar o código de cima para baixo. Toque numa linha montada para devolvê-la.",
+			"emptyLine": "Posição {{n}}, vazia",
+			"placedLine": "Posição {{n}}: {{value}}. Toque para devolver",
+			"chip": "{{value}}. Toque para adicionar ao código",
+			"chipUsed": "{{value}}, já usada"
+		},
+
+		"matching": {
+			"hint": "Toque num item de cada coluna para formar um par.",
+			"done": "Todos os pares ligados! Toque em {{next}}.",
+			"paired": "Par ligado: {{value}}",
+			"leftColumn": "Coluna da esquerda",
+			"rightColumn": "Coluna da direita"
+		},
+
+		"fillBlank": {
+			"hint": "Digite a palavra que falta e toque em {{next}}.",
+			"placeholder": "Sua resposta",
+			"inputLabel": "Resposta da lacuna"
+		},
+
 		"codeSection": {
 			"consoleError": "Erro",
 			"run": "Executar",

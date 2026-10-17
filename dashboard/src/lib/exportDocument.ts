@@ -2,8 +2,11 @@ import type {
   AdminLessonResponse,
   CodeBlankActivityContent,
   ContentModule,
+  FillBlankActivityContent,
   LocaleCode,
+  MatchingActivityContent,
   OptionActivityContent,
+  ReorderActivityContent,
   TheoryActivityContent
 } from '@/types/api'
 import { LOCALE_LABELS } from '@/types/api'
@@ -112,6 +115,9 @@ function buildTheory (content: TheoryActivityContent): Partial<ExportActivity> {
 
 function buildOption (content: OptionActivityContent): Partial<ExportActivity> {
   const notes: string[] = []
+  if (content.optionsAsCode) {
+    notes.push('Alternativas mostradas como código')
+  }
   if (content.tutorial) {
     notes.push('Marcada como tutorial')
   }
@@ -157,6 +163,62 @@ function buildCodeBlank (content: CodeBlankActivityContent): Partial<ExportActiv
   }
 }
 
+function buildFillBlank (content: FillBlankActivityContent): Partial<ExportActivity> {
+  const notes: string[] = ['Digitar a resposta: o aluno escreve a palavra que falta no lugar de ___']
+  notes.push(content.ignoreCase ? 'Aceita maiúsculas e minúsculas' : 'Maiúsculas e minúsculas contam')
+  if (content.tutorial) {
+    notes.push('Marcada como tutorial')
+  }
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    options: (content.answers ?? []).map((text) => ({ text: `Resposta aceita: ${text}`, correct: true })),
+    highlight: content.highlight ?? [],
+    codeBlocks: content.code
+      ? [{ language: fenceLanguage(content.codeLanguage ?? 'JavaScript'), code: content.code }]
+      : [],
+    notes
+  }
+}
+
+function buildReorder (content: ReorderActivityContent): Partial<ExportActivity> {
+  const notes: string[] = ['Montar o código: o aluno toca nas linhas, embaralhadas, na ordem certa']
+  if (content.tutorial) {
+    notes.push('Marcada como tutorial')
+  }
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    // A resposta é o próprio código montado; os distratores, as linhas que
+    // aparecem no banco e não entram nele.
+    options: (content.distractors ?? []).map((text) => ({ text: `Linha distratora: ${text}`, correct: false })),
+    highlight: content.highlight ?? [],
+    codeBlocks: [{ language: fenceLanguage(content.codeLanguage ?? 'JavaScript'), code: (content.lines ?? []).join('\n') }],
+    notes
+  }
+}
+
+function buildMatching (content: MatchingActivityContent): Partial<ExportActivity> {
+  const notes: string[] = ['Ligar pares: as duas colunas aparecem embaralhadas']
+  if (content.leftAsCode) {
+    notes.push('Coluna da esquerda mostrada como código')
+  }
+  if (content.tutorial) {
+    notes.push('Marcada como tutorial')
+  }
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    options: (content.pairs ?? []).map((pair) => ({ text: `${pair.left} → ${pair.right}`, correct: true })),
+    highlight: content.highlight ?? [],
+    codeBlocks: [],
+    notes
+  }
+}
+
 function buildActivity (
   index: number,
   type: string,
@@ -186,6 +248,18 @@ function buildActivity (
 
   if (type === 'code_blank') {
     return { ...base, ...buildCodeBlank(content as CodeBlankActivityContent) }
+  }
+
+  if (type === 'fill_blank') {
+    return { ...base, ...buildFillBlank(content as FillBlankActivityContent) }
+  }
+
+  if (type === 'reorder') {
+    return { ...base, ...buildReorder(content as ReorderActivityContent) }
+  }
+
+  if (type === 'matching') {
+    return { ...base, ...buildMatching(content as MatchingActivityContent) }
   }
 
   // Tipo sem formatação dedicada: o conteúdo cru vai junto, para o documento

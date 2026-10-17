@@ -153,6 +153,92 @@ export interface OptionActivityContent {
    * `option` com duas alternativas ("Verdadeiro" sempre antes de "Falso").
    */
   fixedOrder?: boolean;
+  /**
+   * Mostra cada alternativa como código (monoespaçado, com destaque de sintaxe
+   * em `codeLanguage`) em vez de texto. Usado no "ache o erro"/"qual está
+   * certo?". Alternativas podem ter várias linhas (`\n`), com a mesma regra do
+   * `code`: no máximo 30 caracteres por linha.
+   */
+  optionsAsCode?: boolean;
+}
+
+/**
+ * `type: 'fill_blank'` — completar código **digitando**: o aluno vê o trecho
+ * com uma lacuna e escreve a palavra que falta num campo logo abaixo; o código
+ * mostra o que está sendo digitado no lugar da lacuna. Diferente do
+ * `code_blank`, exige lembrar a resposta, não reconhecê-la entre blocos.
+ */
+export interface FillBlankActivityContent {
+  /** Instrução explícita, ex.: 'Digite a tag de parágrafo que fecha o texto "Oi".' */
+  question: string;
+  highlight: string[];
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  /**
+   * Trecho com **exatamente uma** lacuna marcada por `___` (a mesma marca do
+   * `code_blank`). No máximo 30 caracteres por linha com a resposta encaixada.
+   */
+  code: string;
+  /**
+   * Respostas aceitas (1 a 3); a primeira é a principal. Só letras, números e
+   * hífen, até 20 caracteres — digitar `<`, `{` ou `;` no celular é justamente
+   * o que este formato evita. A correção ignora espaços nas pontas.
+   */
+  answers: string[];
+  /**
+   * Aceita a resposta com qualquer combinação de maiúsculas e minúsculas. Use em
+   * HTML e CSS (`H1` vale como `h1`); deixe ausente em JavaScript e TypeScript,
+   * onde `push` e `Push` são coisas diferentes.
+   */
+  ignoreCase?: boolean;
+  tutorial?: boolean;
+  /** Mesmo sorteio da `option` (ver `OptionActivityContent.pool`). */
+  pool?: string;
+  draw?: number;
+}
+
+/**
+ * `type: 'reorder'` — montar o código tocando nas linhas na ordem certa
+ * (Parsons problem; o "monte a frase" do Duolingo aplicado a código). O aluno
+ * vê as linhas embaralhadas e toca nelas para montar o trecho de cima para
+ * baixo; tocar numa linha já posta a devolve.
+ */
+export interface ReorderActivityContent {
+  /** Instrução curta, ex.: "Monte um parágrafo dentro do body." */
+  question: string;
+  highlight: string[];
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  /**
+   * As linhas na ordem correta, de 3 a 6, cada uma com a indentação que terá
+   * no código montado (espaços à esquerda). No máximo 30 caracteres por linha.
+   * A correção compara o texto da sequência montada com esta, então duas
+   * linhas iguais (dois `}`) podem trocar de lugar sem erro. Autoria: só
+   * trechos com uma única ordem válida.
+   */
+  lines: string[];
+  /** Linhas que não entram no código (0 a 2), embaralhadas junto. */
+  distractors?: string[];
+  tutorial?: boolean;
+  /** Mesmo sorteio da `option` (ver `OptionActivityContent.pool`). */
+  pool?: string;
+  draw?: number;
+}
+
+/**
+ * `type: 'matching'` — ligar pares: duas colunas embaralhadas, o aluno toca um
+ * item de cada lado para formar um par.
+ */
+export interface MatchingActivityContent {
+  /** Instrução curta, ex.: "Ligue cada tag à sua função." */
+  question: string;
+  highlight: string[];
+  /** De 3 a 4 pares; `left` até 20 caracteres, `right` até 40. Lados únicos. */
+  pairs: { left: string; right: string }[];
+  /** Mostra a coluna da esquerda como código (monoespaçado), ex.: tags e propriedades. */
+  leftAsCode?: boolean;
+  tutorial?: boolean;
+  /** Mesmo sorteio da `option` (ver `OptionActivityContent.pool`). */
+  pool?: string;
+  draw?: number;
 }
 
 /**

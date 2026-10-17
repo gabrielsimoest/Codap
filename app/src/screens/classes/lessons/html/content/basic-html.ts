@@ -1,4 +1,8 @@
 import { ClassContent } from "../../../../../types/entities";
+import { reorderTestLessons } from "./tests/reorder";
+import { matchingTestLessons } from "./tests/matching";
+import { optionsAsCodeTestLessons } from "./tests/options-as-code";
+import { fillBlankTestLessons } from "./tests/fill-blank";
 
 const codeList = {
 	structure: `<!DOCTYPE html>
@@ -58,6 +62,10 @@ const BasicHtmlLessons: ClassContent = {
 				},
 			],
 		},
+		...reorderTestLessons.pt,
+		...matchingTestLessons.pt,
+		...optionsAsCodeTestLessons.pt,
+		...fillBlankTestLessons.pt,
 	],
 	en: [
 		{
@@ -93,6 +101,10 @@ const BasicHtmlLessons: ClassContent = {
 				},
 			],
 		},
+		...reorderTestLessons.en,
+		...matchingTestLessons.en,
+		...optionsAsCodeTestLessons.en,
+		...fillBlankTestLessons.en,
 	],
 };
 

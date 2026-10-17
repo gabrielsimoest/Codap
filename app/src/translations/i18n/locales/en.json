@@ -24,6 +24,28 @@
 			"filledSlot": "Blank {{n}}: {{value}}. Tap to undo"
 		},
 
+		"reorder": {
+			"hint": "Tap the lines to build the code from top to bottom. Tap a placed line to send it back.",
+			"emptyLine": "Position {{n}}, empty",
+			"placedLine": "Position {{n}}: {{value}}. Tap to send back",
+			"chip": "{{value}}. Tap to add to the code",
+			"chipUsed": "{{value}}, already used"
+		},
+
+		"matching": {
+			"hint": "Tap one item from each column to form a pair.",
+			"done": "All pairs matched! Tap {{next}}.",
+			"paired": "Matched pair: {{value}}",
+			"leftColumn": "Left column",
+			"rightColumn": "Right column"
+		},
+
+		"fillBlank": {
+			"hint": "Type the missing word and tap {{next}}.",
+			"placeholder": "Your answer",
+			"inputLabel": "Answer for the blank"
+		},
+
 		"codeSection": {
 			"consoleError": "Error",
 			"run": "Run",

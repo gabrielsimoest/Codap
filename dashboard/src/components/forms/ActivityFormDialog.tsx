@@ -18,14 +18,23 @@ import { Textarea } from '@/components/ui/textarea'
 import { TheoryFields } from './TheoryFields'
 import { OptionFields } from './OptionFields'
 import { CodeBlankFields } from './CodeBlankFields'
+import { FillBlankFields } from './FillBlankFields'
+import { ReorderFields } from './ReorderFields'
+import { MatchingFields } from './MatchingFields'
 import { useCreateActivityMutation, useUpdateActivityMutation } from '@/hooks/useContentMutations'
 import {
   codeBlankContentSchema,
+  fillBlankContentSchema,
   emptyCodeBlankContent,
+  emptyFillBlankContent,
+  emptyMatchingContent,
   emptyOptionContent,
+  emptyReorderContent,
   emptyTheoryContent,
   isTypedActivity,
+  matchingContentSchema,
   optionContentSchema,
+  reorderContentSchema,
   theoryContentSchema
 } from '@/lib/activitySchemas'
 import { LOCALE_LABELS, LOCALES, type AdminActivityResponse, type LocaleCode, type TranslationMap } from '@/types/api'
@@ -179,6 +188,48 @@ function ActivityContentForm ({
         onSubmit={onSubmit}
       >
         <CodeBlankFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'fill_blank') {
+    return (
+      <TypedContentForm
+        schema={fillBlankContentSchema}
+        defaults={(content as object) ?? emptyFillBlankContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <FillBlankFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'reorder') {
+    return (
+      <TypedContentForm
+        schema={reorderContentSchema}
+        defaults={(content as object) ?? emptyReorderContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <ReorderFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'matching') {
+    return (
+      <TypedContentForm
+        schema={matchingContentSchema}
+        defaults={(content as object) ?? emptyMatchingContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <MatchingFields />
       </TypedContentForm>
     )
   }

@@ -1,24 +1,17 @@
 import { DimensionValue } from "react-native";
 import { useState } from "react";
-import type {
-	CodeBlankActivityContent,
-	OptionActivityContent,
-	TheoryActivityContent,
-} from "codap-api/src/types/contracts";
 import type { PlayableActivity } from "../../../types/entities";
-import TheoryView from "./TheoryLesson";
-import OptionExercise from "./OptionExercise";
-import CodeBlankExercise from "./CodeBlankExercise";
+import { ACTIVITY_REGISTRY } from "./activityRegistry";
 
 /**
- * Tipos que este player sabe renderizar. Uma atividade de tipo fora desta
- * lista é filtrada antes de entrar (ver `filterPlayable`) — para estender,
- * basta adicionar o tipo aqui e um `case` no `switch` abaixo.
+ * Descarta as atividades de tipo que este app não sabe renderizar (fora do
+ * `ACTIVITY_REGISTRY`) antes de entrarem no player.
  */
-const SUPPORTED_TYPES = new Set(["theory", "option", "code_blank"]);
-
 export function filterPlayable<T extends PlayableActivity>(activities: T[]): T[] {
-	return activities.filter((activity) => SUPPORTED_TYPES.has(activity.type));
+	// `hasOwnProperty`, não `in`: um `type` "constructor" acharia o protótipo.
+	return activities.filter((activity) =>
+		Object.prototype.hasOwnProperty.call(ACTIVITY_REGISTRY, activity.type)
+	);
 }
 
 interface Props {
@@ -31,9 +24,9 @@ interface Props {
 
 /**
  * Percorre as N atividades de uma lição, controlando progresso e despachando
- * cada uma para o componente do seu tipo. Não decide como é exibido: quem
- * monta é a casca — a tela `Lesson` (rota dedicada) ou o `ClassView` (modal do
- * conteúdo de teste).
+ * cada uma para o componente do seu tipo (`ACTIVITY_REGISTRY`). Não decide
+ * como é exibido: quem monta é a casca — a tela `Lesson` (rota dedicada) ou o
+ * `ClassView` (modal do conteúdo de teste).
  */
 export default function ActivityPlayer({
 	activities,
@@ -44,6 +37,9 @@ export default function ActivityPlayer({
 
 	const current = activities[activityIndex];
 	if (!current) return null;
+
+	const render = ACTIVITY_REGISTRY[current.type];
+	if (!render) return null;
 
 	const progress = `${(
 		((activityIndex + 1) / activities.length) *
@@ -58,72 +54,11 @@ export default function ActivityPlayer({
 		}
 	};
 
-	switch (current.type) {
-		case "theory": {
-			const content = current.content as TheoryActivityContent;
-			return (
-				<TheoryView
-					key={activityIndex}
-					firstParagraph={content.firstParagraph}
-					secondParagraph={content.secondParagraph}
-					thirdParagraph={content.thirdParagraph}
-					endParagraph={content.endParagraph}
-					highlight={content.highlight}
-					codeLanguage={content.codeLanguage}
-					code={content.code}
-					additionalCode={content.additionalCode}
-					onlyCode={content.onlyCode}
-					noTerminal={content.noTerminal}
-					terminalCode={content.terminalCode}
-					tutorial={content.tutorial}
-					progress={progress}
-					onProceed={advance}
-					onClose={onClose}
-				/>
-			);
-		}
-		case "option": {
-			const content = current.content as OptionActivityContent;
-			return (
-				// `key` por índice: sem ela, duas `option` seguidas reaproveitariam
-				// a mesma instância e herdariam a alternativa marcada da anterior.
-				<OptionExercise
-					key={activityIndex}
-					question={content.question}
-					aditionalParagraph={content.aditionalParagraph}
-					options={content.options}
-					code={content.code}
-					codeLanguage={content.codeLanguage}
-					correctOption={content.correctOption}
-					highlight={content.highlight}
-					tutorial={content.tutorial}
-					progress={progress}
-					onProceed={advance}
-					onClose={onClose}
-				/>
-			);
-		}
-		case "code_blank": {
-			const content = current.content as CodeBlankActivityContent;
-			return (
-				// Mesma razão da `key` acima: os blocos postos nas lacunas não
-				// podem vazar de um exercício para o seguinte.
-				<CodeBlankExercise
-					key={activityIndex}
-					question={content.question}
-					highlight={content.highlight}
-					codeLanguage={content.codeLanguage}
-					code={content.code}
-					answers={content.answers}
-					distractors={content.distractors}
-					tutorial={content.tutorial}
-					progress={progress}
-					onProceed={advance}
-					onClose={onClose}
-				/>
-			);
-		}
-		default:
-			return null;
-	}
+	return render({
+		content: current.content,
+		activityKey: activityIndex,
+		progress,
+		onProceed: advance,
+		onClose,
+	});
 }
