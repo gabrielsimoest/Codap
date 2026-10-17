@@ -140,6 +140,8 @@ Atenção ao campo `aditionalParagraph` de `option`: o nome tem um erro de
 digitação que veio do contrato e está gravado no banco. **Não corrija** — isso
 quebraria todo o conteúdo já semeado.
 
+`fill_blank`, `reorder` e `matching` também têm formulário próprio. O de `fill_blank` (`FillBlankFields`) pede o código com exatamente uma lacuna `___`, uma lista de 1 a 3 respostas aceitas (editada com `setValue`, porque o `useFieldArray` espera objetos e não strings), o switch **Ignorar maiúsculas** (`ignoreCase`) e mostra a prévia com a resposta principal encaixada; o schema recusa resposta com símbolo (só letras, números, hífen e sublinhado, até 20 caracteres — `FILL_BLANK_ANSWER`), resposta repetida e linha acima de 30 caracteres com a resposta mais longa encaixada. O de `reorder` (`ReorderFields`) edita as linhas como uma lista de strings controlada (`useWatch` + `setValue`, sem `useFieldArray`), **sem trim em nenhum ponto** — os espaços à esquerda são a indentação do código montado; o schema também não usa `.trim()` (que transforma o valor) nas linhas nem nos distratores, só valida que não estão vazios. Tem botões para recuar/avançar a indentação e mover a linha, contador de 30 caracteres por linha e uma prévia do código montado e do banco que o app mostra (sem indentação). O de `matching` (`MatchingFields`) tem os pares lado a lado com contadores de 20/40 caracteres, de 3 a 4 pares, e o schema recusa item repetido numa coluna. O formulário de `option` ganhou o toggle **Alternativas como código** (`optionsAsCode`), que troca as alternativas por campos monoespaçados multilinha e passa a exigir no máximo 30 caracteres por linha. Os três têm passo próprio no `verify:ui`, que abre o formulário, preenche, confere a validação e fecha **sem salvar** (as capturas são `09-reorder.png`, `10-matching.png`, `11-ache-o-erro.png` e, para o `fill_blank`, `12-digitar-resposta.png`, cujo passo também confere que uma resposta com símbolo é recusada).
+
 O `code_blank` tem formulário próprio (`CodeBlankFields`): o número de respostas acompanha sozinho o número de lacunas `___` do código, há uma lista de blocos errados e uma prévia com as respostas encaixadas; o schema recusa 0 ou mais de 3 lacunas, respostas em número diferente das lacunas e linhas acima de 30 caracteres com a resposta encaixada. Na exportação, as respostas aparecem como alternativas corretas e os blocos errados como incorretas. O formulário de `option` tem um campo **Trecho de código** (`code` + `codeLanguage`, que a exportação em Markdown/PDF também inclui como bloco de código) e uma seção **Sorteio** com `pool`, `draw` e
 `fixedOrder`, e o de `theory` tem `noTerminal` e `terminalCode` (ver
 `api/CLAUDE.md` e `app/CLAUDE.md`). O zod descarta campo não declarado, então
@@ -149,7 +151,7 @@ tempo. Por isso o `verify:ui` confere esses campos nos dois formulários.
 
 ### Um tipo sem formulário dedicado cai no editor de JSON
 
-`theory`, `option` e `code_blank` têm formulário tipado; qualquer outro `type` é editado como
+`theory`, `option`, `code_blank`, `fill_blank`, `reorder` e `matching` têm formulário tipado; qualquer outro `type` é editado como
 JSON cru. É a mesma postura da API (transportar fielmente o que não se sabe
 interpretar) e já serve os tipos previstos em
 [docs/roadmap-atividades-praticas.md](../docs/roadmap-atividades-praticas.md)

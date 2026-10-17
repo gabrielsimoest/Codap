@@ -2,7 +2,14 @@ import 'dotenv/config'
 import { pathToFileURL } from 'node:url'
 import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../src/generated/prisma/client.js'
-import type { CodeBlankActivityContent, OptionActivityContent, TheoryActivityContent } from '../src/types/contracts.js'
+import type {
+  CodeBlankActivityContent,
+  FillBlankActivityContent,
+  MatchingActivityContent,
+  OptionActivityContent,
+  ReorderActivityContent,
+  TheoryActivityContent
+} from '../src/types/contracts.js'
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL })
 const prisma = new PrismaClient({ adapter })
@@ -123,12 +130,18 @@ async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise
 
 // Formato de uma lição nos arrays `*_LESSONS` abaixo: a teoria (`theory`) vem
 // primeiro, seguida da prática (`option`, múltipla escolha e verdadeiro/falso,
-// e `code_blank`, completar código com blocos), sorteada pelo app a cada
-// sessão. Os arrays são regenerados a partir do banco por `pnpm seed:generate`
+// às vezes com as alternativas em código; `code_blank`, completar código com
+// blocos; `fill_blank`, completar digitando; `reorder`, montar o código;
+// `matching`, ligar pares), sorteada pelo
+// app a cada sessão. Os arrays são regenerados a partir do banco por `pnpm seed:generate`
 // — não edite à mão (ver api/CLAUDE.md).
 type ActivitySeed = {
-  type: 'theory' | 'option' | 'code_blank';
-  content: Record<LocaleCode, TheoryActivityContent | OptionActivityContent | CodeBlankActivityContent>;
+  type: 'theory' | 'option' | 'code_blank' | 'fill_blank' | 'reorder' | 'matching';
+  content: Record<
+    LocaleCode,
+    | TheoryActivityContent | OptionActivityContent | CodeBlankActivityContent
+    | FillBlankActivityContent | ReorderActivityContent | MatchingActivityContent
+  >;
 }
 
 type LessonSeed = {
@@ -370,6 +383,65 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<___>Hello, world!</___>',
             answers: ['p', 'p'],
             distractors: ['a', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um título h1 com o texto "Olá!" e, abaixo dele, um parágrafo com o texto "Minha página."',
+            highlight: ['título', 'parágrafo'],
+            codeLanguage: 'HTML',
+            lines: ['<h1>', '  Olá!', '</h1>', '<p>', '  Minha página.', '</p>']
+          },
+          en: {
+            question: 'Build an h1 heading with the text "Hello!" and, below it, a paragraph with the text "My page."',
+            highlight: ['heading', 'paragraph'],
+            codeLanguage: 'HTML',
+            lines: ['<h1>', '  Hello!', '</h1>', '<p>', '  My page.', '</p>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'HTML',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['<p>Olá, mundo!<p>', '<p>Olá, mundo!</p>', '<h1>Olá, mundo!</h1>', '<h1>Bem-vindo</h1>\n<p>Texto.</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'HTML',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['<p>Hello, world!<p>', '<p>Hello, world!</p>', '<h1>Hello, world!</h1>', '<h1>Welcome</h1>\n<p>Text.</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que transforma "Olá, mundo!" no título principal da página.',
+            highlight: ['título principal'],
+            codeLanguage: 'HTML',
+            code: '<___>Olá, mundo!</h1>',
+            answers: ['h1'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that turns "Hello, world!" into the main heading of the page.',
+            highlight: ['main heading'],
+            codeLanguage: 'HTML',
+            code: '<___>Hello, world!</h1>',
+            answers: ['h1'],
+            ignoreCase: true
           }
         }
       }
@@ -643,6 +715,116 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['main', 'header']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a página: dentro do html, o head com o título da aba "Site" e, depois dele, um body vazio.',
+            highlight: ['head', 'título da aba', 'body'],
+            codeLanguage: 'HTML',
+            lines: ['<html>', '  <head>', '    <title>Site</title>', '  </head>', '  <body></body>', '</html>']
+          },
+          en: {
+            question: 'Build the page: inside html, the head with the tab title "Site" and, after it, an empty body.',
+            highlight: ['head', 'tab title', 'body'],
+            codeLanguage: 'HTML',
+            lines: ['<html>', '  <head>', '    <title>Site</title>', '  </head>', '  <body></body>', '</html>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho coloca o título da aba no lugar certo?',
+            codeLanguage: 'HTML',
+            highlight: ['título', 'aba'],
+            correctOption: 1,
+            options: ['<head>\n  <title>Loja</title>\n</head>', '<body>\n  <title>Loja</title>\n</body>', '<title>\n  <head>Loja</head>\n</title>', '<head>\n  <h1>Loja</h1>\n</head>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet puts the tab title in the right place?',
+            codeLanguage: 'HTML',
+            highlight: ['tab title'],
+            correctOption: 1,
+            options: ['<head>\n  <title>Shop</title>\n</head>', '<body>\n  <title>Shop</title>\n</body>', '<title>\n  <head>Shop</head>\n</title>', '<head>\n  <h1>Shop</h1>\n</head>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada tag à sua função.',
+            highlight: ['tag'],
+            pairs: [
+              {
+                left: '<html>',
+                right: 'Envolve todo o documento'
+              },
+              {
+                left: '<head>',
+                right: 'Informações sobre a página'
+              },
+              {
+                left: '<title>',
+                right: 'Título mostrado na aba'
+              },
+              {
+                left: '<body>',
+                right: 'Conteúdo exibido na página'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each tag to its role.',
+            highlight: ['tag'],
+            pairs: [
+              {
+                left: '<html>',
+                right: 'Wraps the whole document'
+              },
+              {
+                left: '<head>',
+                right: 'Information about the page'
+              },
+              {
+                left: '<title>',
+                right: 'Title shown on the tab'
+              },
+              {
+                left: '<body>',
+                right: 'Content shown on the page'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que guarda o título da aba, "Site", dentro do head.',
+            highlight: ['título da aba'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <___>Site</title>\n</head>',
+            answers: ['title'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that holds the tab title, "Site", inside the head.',
+            highlight: ['tab title'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <___>Site</title>\n</head>',
+            answers: ['title'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -836,6 +1018,67 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['//', '/*', '*/']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma lista ul com o item "Ativo" e, depois dele, o item "Inativo" desativado por um comentário.',
+            highlight: ['comentário'],
+            codeLanguage: 'HTML',
+            lines: ['<ul>', '  <li>Ativo</li>', '  <!-- <li>Inativo</li> -->', '</ul>'],
+            distractors: ['  // <li>Inativo</li>']
+          },
+          en: {
+            question: 'Build a ul list with the item "Active" and, after it, the item "Inactive" disabled by a comment.',
+            highlight: ['comment'],
+            codeLanguage: 'HTML',
+            lines: ['<ul>', '  <li>Active</li>', '  <!-- <li>Inactive</li> -->', '</ul>'],
+            distractors: ['  // <li>Inactive</li>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual comentário está escrito corretamente?',
+            codeLanguage: 'HTML',
+            highlight: ['comentário'],
+            correctOption: 1,
+            options: ['<!-- Menu -->', '<!- Menu ->', '// Menu', '<-- Menu -->'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which comment is written correctly?',
+            codeLanguage: 'HTML',
+            highlight: ['comment'],
+            correctOption: 1,
+            options: ['<!-- Menu -->', '<!- Menu ->', '// Menu', '<-- Menu -->'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'O item "Item" foi desativado por um comentário. Digite o nome da tag que abre esse item de lista.',
+            highlight: ['comentário'],
+            codeLanguage: 'HTML',
+            code: '<ul>\n  <!-- <___>Item</li> -->\n</ul>',
+            answers: ['li'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'The item "Item" was disabled by a comment. Type the name of the tag that opens this list item.',
+            highlight: ['comment'],
+            codeLanguage: 'HTML',
+            code: '<ul>\n  <!-- <___>Item</li> -->\n</ul>',
+            answers: ['li'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -1023,6 +1266,118 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<___>Recipes</h1>\n<p>\n  Add <___>salt</strong>.\n</p>',
             answers: ['h1', 'strong'],
             distractors: ['h6', 'b', 'title']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um título h2 "Receita" e, abaixo dele, um parágrafo "Use sal" com a palavra sal marcada como importante.',
+            highlight: ['título', 'parágrafo', 'importante'],
+            codeLanguage: 'HTML',
+            lines: ['<h2>Receita</h2>', '<p>', '  Use <strong>sal</strong>', '</p>'],
+            distractors: ['<h7>Receita</h7>', '  Use <bold>sal</bold>']
+          },
+          en: {
+            question: 'Build an h2 heading "Recipe" and, below it, a paragraph "Add salt" with the word salt marked as important.',
+            highlight: ['heading', 'paragraph', 'important'],
+            codeLanguage: 'HTML',
+            lines: ['<h2>Recipe</h2>', '<p>', '  Add <strong>salt</strong>', '</p>'],
+            distractors: ['<h7>Recipe</h7>', '  Add <bold>salt</bold>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'HTML',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['<h7>Título</h7>', '<h6>Título</h6>', '<p>Um <em>destaque</em></p>', '<h2>Seção</h2>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'HTML',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['<h7>Title</h7>', '<h6>Title</h6>', '<p>An <em>emphasis</em></p>', '<h2>Section</h2>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento ao seu significado.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<h1>',
+                right: 'Título principal da página'
+              },
+              {
+                left: '<p>',
+                right: 'Parágrafo de texto'
+              },
+              {
+                left: '<strong>',
+                right: 'Texto de grande importância'
+              },
+              {
+                left: '<em>',
+                right: 'Ênfase em um trecho'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to its meaning.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<h1>',
+                right: 'Main heading of the page'
+              },
+              {
+                left: '<p>',
+                right: 'Paragraph of text'
+              },
+              {
+                left: '<strong>',
+                right: 'Text of strong importance'
+              },
+              {
+                left: '<em>',
+                right: 'Emphasis on a passage'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que dá ênfase à palavra "sal".',
+            highlight: ['ênfase'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Use <___>sal</em>\n</p>',
+            answers: ['em'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that gives emphasis to the word "salt".',
+            highlight: ['emphasis'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Add <___>salt</em>\n</p>',
+            answers: ['em'],
+            ignoreCase: true
           }
         }
       }
@@ -1218,6 +1573,67 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['&gt;', '<', '&']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um parágrafo com o endereço em duas linhas: "Rua A, 10", uma quebra de linha e "Recife - PE".',
+            highlight: ['quebra de linha'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Rua A, 10<br>', '  Recife - PE', '</p>'],
+            distractors: ['  Rua A, 10<hr>']
+          },
+          en: {
+            question: 'Build a paragraph with the address on two lines: "12 Main St", a line break and "Boston - MA".',
+            highlight: ['line break'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  12 Main St<br>', '  Boston - MA', '</p>'],
+            distractors: ['  12 Main St<hr>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho mostra o texto <p> na tela, sem criar um parágrafo?',
+            codeLanguage: 'HTML',
+            highlight: ['texto'],
+            correctOption: 1,
+            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &menor;p&maior;', 'Use \\<p\\>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet shows the text <p> on screen, without creating a paragraph?',
+            codeLanguage: 'HTML',
+            highlight: ['text'],
+            correctOption: 1,
+            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &less;p&more;', 'Use \\<p\\>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que quebra a linha entre "Rua A, 10" e "Recife".',
+            highlight: ['quebra a linha'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Rua A, 10<___>\n  Recife\n</p>',
+            answers: ['br'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that breaks the line between "12 Main St" and "Boston".',
+            highlight: ['breaks the line'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  12 Main St<___>\n  Boston\n</p>',
+            answers: ['br'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -1409,6 +1825,67 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<a ___="about.html">\n  About us\n</a>',
             answers: ['href'],
             distractors: ['src', 'alt', 'link']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um link para a página contato.html com o texto "Fale conosco".',
+            highlight: ['link'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="contato.html">', '  Fale conosco', '</a>'],
+            distractors: ['<a link="contato.html">', '<a src="contato.html">']
+          },
+          en: {
+            question: 'Build a link to the contact.html page with the text "Contact us".',
+            highlight: ['link'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="contact.html">', '  Contact us', '</a>'],
+            distractors: ['<a link="contact.html">', '<a src="contact.html">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual link está escrito corretamente?',
+            codeLanguage: 'HTML',
+            highlight: ['link'],
+            correctOption: 1,
+            options: ['<a href="sobre.html">Sobre</a>', '<a src="sobre.html">Sobre</a>', '<a>sobre.html</a>', '<a href="sobre.html">Sobre<a>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which link is written correctly?',
+            codeLanguage: 'HTML',
+            highlight: ['link'],
+            correctOption: 1,
+            options: ['<a href="about.html">About</a>', '<a src="about.html">About</a>', '<a>about.html</a>', '<a href="about.html">About<a>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que fecha o link para sobre.html.',
+            highlight: ['fecha'],
+            codeLanguage: 'HTML',
+            code: '<a href="sobre.html">\n  Sobre\n</___>',
+            answers: ['a'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that closes the link to about.html.',
+            highlight: ['closes'],
+            codeLanguage: 'HTML',
+            code: '<a href="about.html">\n  About\n</___>',
+            answers: ['a'],
+            ignoreCase: true
           }
         }
       }
@@ -1606,6 +2083,118 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['href', 'rel', 'open']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um link com o texto "Enviar e-mail" que abre o e-mail para oi@a.com.',
+            highlight: ['e-mail'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="mailto:oi@a.com">', '  Enviar e-mail', '</a>'],
+            distractors: ['<a href="email:oi@a.com">', '<a mailto="oi@a.com">']
+          },
+          en: {
+            question: 'Build a link with the text "Send email" that opens an email to hi@a.com.',
+            highlight: ['email'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="mailto:hi@a.com">', '  Send email', '</a>'],
+            distractors: ['<a href="email:hi@a.com">', '<a mailto="hi@a.com">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual link leva à seção com id="contato"?',
+            codeLanguage: 'HTML',
+            highlight: ['seção'],
+            correctOption: 1,
+            options: ['<a href="#contato">Ir</a>', '<a href="contato">Ir</a>', '<a id="#contato">Ir</a>', '<a href=".contato">Ir</a>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which link goes to the section with id="contact"?',
+            codeLanguage: 'HTML',
+            highlight: ['section'],
+            correctOption: 1,
+            options: ['<a href="#contact">Go</a>', '<a href="contact">Go</a>', '<a id="#contact">Go</a>', '<a href=".contact">Go</a>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada trecho ao que ele faz.',
+            highlight: ['trecho'],
+            pairs: [
+              {
+                left: 'href="#topo"',
+                right: 'Vai para uma parte da mesma página'
+              },
+              {
+                left: 'target="_blank"',
+                right: 'Abre o link em uma nova aba'
+              },
+              {
+                left: 'mailto:',
+                right: 'Abre o aplicativo de e-mail'
+              },
+              {
+                left: 'href="sobre.html"',
+                right: 'Leva a outra página do site'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each snippet to what it does.',
+            highlight: ['snippet'],
+            pairs: [
+              {
+                left: 'href="#top"',
+                right: 'Goes to a part of the same page'
+              },
+              {
+                left: 'target="_blank"',
+                right: 'Opens the link in a new tab'
+              },
+              {
+                left: 'mailto:',
+                right: 'Opens the email app'
+              },
+              {
+                left: 'href="about.html"',
+                right: 'Goes to another page of the site'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o prefixo do href que faz o link abrir o aplicativo de e-mail para oi@a.com.',
+            highlight: ['e-mail'],
+            codeLanguage: 'HTML',
+            code: '<a href="___:oi@a.com">\n  E-mail\n</a>',
+            answers: ['mailto'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the href prefix that makes the link open the email app for hi@a.com.',
+            highlight: ['email'],
+            codeLanguage: 'HTML',
+            code: '<a href="___:hi@a.com">\n  Email\n</a>',
+            answers: ['mailto'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -1795,6 +2384,67 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['href', 'title']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com o título h2 "Meu gato" e, abaixo dele, a imagem gato.jpg com o alt "Gato dormindo".',
+            highlight: ['imagem', 'alt'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>Meu gato</h2>', '  <img src="gato.jpg"', '    alt="Gato dormindo">', '</div>'],
+            distractors: ['  <img href="gato.jpg"', '    text="Gato dormindo">']
+          },
+          en: {
+            question: 'Build a div with the h2 heading "My cat" and, below it, the image cat.jpg with the alt "Sleeping cat".',
+            highlight: ['image', 'alt'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>My cat</h2>', '  <img src="cat.jpg"', '    alt="Sleeping cat">', '</div>'],
+            distractors: ['  <img href="cat.jpg"', '    text="Sleeping cat">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual imagem está escrita corretamente?',
+            codeLanguage: 'HTML',
+            highlight: ['imagem'],
+            correctOption: 1,
+            options: ['<img src="sol.jpg" alt="Sol">', '<img href="sol.jpg" alt="Sol">', '<img src="sol.jpg">Sol</img>', '<img alt="sol.jpg">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which image is written correctly?',
+            codeLanguage: 'HTML',
+            highlight: ['image'],
+            correctOption: 1,
+            options: ['<img src="sun.jpg" alt="Sun">', '<img href="sun.jpg" alt="Sun">', '<img src="sun.jpg">Sun</img>', '<img alt="sun.jpg">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que mostra a imagem gato.jpg.',
+            highlight: ['imagem'],
+            codeLanguage: 'HTML',
+            code: '<___ src="gato.jpg"\n  alt="Gato">',
+            answers: ['img'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that shows the image cat.jpg.',
+            highlight: ['image'],
+            codeLanguage: 'HTML',
+            code: '<___ src="cat.jpg"\n  alt="Cat">',
+            answers: ['img'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -1982,6 +2632,67 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<___>\n  <___>Open the site</li>\n  <li>Log in</li>\n</ol>',
             answers: ['ol', 'li'],
             distractors: ['ul', 'item']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma lista numerada com o item "Lavar" e, depois dele, o item "Secar".',
+            highlight: ['lista numerada'],
+            codeLanguage: 'HTML',
+            lines: ['<ol>', '  <li>Lavar</li>', '  <li>Secar</li>', '</ol>'],
+            distractors: ['<ul>', '</ul>']
+          },
+          en: {
+            question: 'Build a numbered list with the item "Wash" and, after it, the item "Dry".',
+            highlight: ['numbered list'],
+            codeLanguage: 'HTML',
+            lines: ['<ol>', '  <li>Wash</li>', '  <li>Dry</li>', '</ol>'],
+            distractors: ['<ul>', '</ul>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'HTML',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>Um</li>\n  <li>Dois</li>\n</ol>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'HTML',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>One</li>\n  <li>Two</li>\n</ol>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que abre esta lista sem numeração, em que a ordem não importa.',
+            highlight: ['sem numeração'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
+            answers: ['ul'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that opens this unnumbered list, where the order does not matter.',
+            highlight: ['unnumbered'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
+            answers: ['ul'],
+            ignoreCase: true
           }
         }
       }
@@ -2175,6 +2886,118 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             distractors: [':', '==', '=>']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um link para foto.html com o texto "Ver foto", com o atributo na tag de abertura.',
+            highlight: ['atributo'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="foto.html">', '  Ver foto', '</a>'],
+            distractors: ['</a href="foto.html">', '<a>href="foto.html"']
+          },
+          en: {
+            question: 'Build a link to photo.html with the text "See photo", with the attribute in the opening tag.',
+            highlight: ['attribute'],
+            codeLanguage: 'HTML',
+            lines: ['<a href="photo.html">', '  See photo', '</a>'],
+            distractors: ['</a href="photo.html">', '<a>href="photo.html"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual trecho o atributo está no lugar certo?',
+            codeLanguage: 'HTML',
+            highlight: ['atributo'],
+            correctOption: 1,
+            options: ['<a href="#">Topo</a>', '<a>Topo</a href="#">', '<a>href="#" Topo</a>', '<a>Topo</a> href="#"'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In which snippet is the attribute in the right place?',
+            codeLanguage: 'HTML',
+            highlight: ['attribute'],
+            correctOption: 1,
+            options: ['<a href="#">Top</a>', '<a>Top</a href="#">', '<a>href="#" Top</a>', '<a>Top</a> href="#"'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada atributo à informação que ele traz.',
+            highlight: ['atributo'],
+            pairs: [
+              {
+                left: 'src',
+                right: 'Caminho da imagem'
+              },
+              {
+                left: 'alt',
+                right: 'Descrição da imagem'
+              },
+              {
+                left: 'href',
+                right: 'Destino do link'
+              },
+              {
+                left: 'target',
+                right: 'Onde o link abre'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each attribute to the information it carries.',
+            highlight: ['attribute'],
+            pairs: [
+              {
+                left: 'src',
+                right: 'Path to the image'
+              },
+              {
+                left: 'alt',
+                right: 'Description of the image'
+              },
+              {
+                left: 'href',
+                right: 'Destination of the link'
+              },
+              {
+                left: 'target',
+                right: 'Where the link opens'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que indica o destino do link: foto.html.',
+            highlight: ['atributo'],
+            codeLanguage: 'HTML',
+            code: '<a ___="foto.html">\n  Foto\n</a>',
+            answers: ['href'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that sets the destination of the link: photo.html.',
+            highlight: ['attribute'],
+            codeLanguage: 'HTML',
+            code: '<a ___="photo.html">\n  Photo\n</a>',
+            answers: ['href'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -2362,6 +3185,65 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<___>\n  <p>My name is\n    <___>Ana</span>\n  </p>\n</div>',
             answers: ['div', 'span'],
             distractors: ['p', 'section']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com o título h2 "Perfil" e, abaixo dele, um parágrafo "Sou Ana" com o nome Ana dentro de um span.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>Perfil</h2>', '  <p>', '    Sou <span>Ana</span>', '  </p>', '</div>']
+          },
+          en: {
+            question: 'Build a div with the h2 heading "Profile" and, below it, a paragraph "I am Ana" with the name Ana inside a span.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>Profile</h2>', '  <p>', '    I am <span>Ana</span>', '  </p>', '</div>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho usa div e span corretamente?',
+            codeLanguage: 'HTML',
+            highlight: ['div', 'span'],
+            correctOption: 1,
+            options: ['<p>Oi, <span>Ana</span></p>', '<span>\n  <div>Bloco</div>\n</span>', '<p>Oi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet uses div and span correctly?',
+            codeLanguage: 'HTML',
+            highlight: ['div', 'span'],
+            correctOption: 1,
+            options: ['<p>Hi, <span>Ana</span></p>', '<span>\n  <div>Block</div>\n</span>', '<p>Hi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que envolve só o nome "Ana", dentro da linha do parágrafo.',
+            highlight: ['dentro da linha'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Sou <___>Ana</span>\n</p>',
+            answers: ['span'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that wraps only the name "Ana", inside the line of the paragraph.',
+            highlight: ['inside the line'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  I am <___>Ana</span>\n</p>',
+            answers: ['span'],
+            ignoreCase: true
           }
         }
       }
@@ -2697,6 +3579,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['<p>', '.p', '#p']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que pinta de vermelho (red) o texto dos títulos h1.',
+            highlight: ['regra'],
+            codeLanguage: 'CSS',
+            lines: ['h1 {', '  color: red;', '}'],
+            distractors: ['  color = red;', 'h1 (']
+          },
+          en: {
+            question: 'Build the rule that colors the text of h1 headings red.',
+            highlight: ['rule'],
+            codeLanguage: 'CSS',
+            lines: ['h1 {', '  color: red;', '}'],
+            distractors: ['  color = red;', 'h1 (']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra CSS está escrita corretamente?',
+            codeLanguage: 'CSS',
+            highlight: ['regra'],
+            correctOption: 1,
+            options: ['p {\n  color: blue;\n}', 'p {\n  color = blue;\n}', 'p (\n  color: blue;\n)', '{ p\n  color: blue;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which CSS rule is written correctly?',
+            codeLanguage: 'CSS',
+            highlight: ['rule'],
+            correctOption: 1,
+            options: ['p {\n  color: blue;\n}', 'p {\n  color = blue;\n}', 'p (\n  color: blue;\n)', '{ p\n  color: blue;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que pinta de azul (blue) o texto dos títulos h1.',
+            highlight: ['propriedade'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  ___: blue;\n}',
+            answers: ['color'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that colors the text of h1 headings blue.',
+            highlight: ['property'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  ___: blue;\n}',
+            answers: ['color'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -2900,6 +3843,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '<link ___="stylesheet"\n      href="style.css">',
             answers: ['rel'],
             distractors: ['src', 'type', 'href']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o CSS interno, dentro da tag style, que pinta de verde (green) o texto dos parágrafos.',
+            highlight: ['CSS interno'],
+            codeLanguage: 'HTML',
+            lines: ['<style>', '  p {', '    color: green;', '  }', '</style>'],
+            distractors: ['<css>', '</css>']
+          },
+          en: {
+            question: 'Build the internal CSS, inside the style tag, that colors the text of paragraphs green.',
+            highlight: ['internal CSS'],
+            codeLanguage: 'HTML',
+            lines: ['<style>', '  p {', '    color: green;', '  }', '</style>'],
+            distractors: ['<css>', '</css>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho liga o arquivo style.css à página?',
+            codeLanguage: 'HTML',
+            highlight: ['arquivo'],
+            correctOption: 1,
+            options: ['<link rel="stylesheet"\n  href="style.css">', '<style href="style.css">', '<link src="style.css">', '<css href="style.css">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet links the style.css file to the page?',
+            codeLanguage: 'HTML',
+            highlight: ['file'],
+            correctOption: 1,
+            options: ['<link rel="stylesheet"\n  href="style.css">', '<style href="style.css">', '<link src="style.css">', '<css href="style.css">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que guarda o CSS interno, dentro do próprio HTML.',
+            highlight: ['CSS interno'],
+            codeLanguage: 'CSS',
+            code: '<___>\n  p { color: red; }\n</style>',
+            answers: ['style'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that holds internal CSS, inside the HTML itself.',
+            highlight: ['internal CSS'],
+            codeLanguage: 'CSS',
+            code: '<___>\n  p { color: red; }\n</style>',
+            answers: ['style'],
+            ignoreCase: true
           }
         }
       }
@@ -3109,6 +4113,110 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '___highlight {\n  color: red;\n}\n\n___title {\n  color: blue;\n}',
             answers: ['.', '#'],
             distractors: ['@', '*']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá font-size de 32px ao elemento com o id titulo.',
+            highlight: ['id'],
+            codeLanguage: 'CSS',
+            lines: ['#titulo {', '  font-size: 32px;', '}'],
+            distractors: ['.titulo {', 'titulo {']
+          },
+          en: {
+            question: 'Build the rule that gives a font-size of 32px to the element with the id title.',
+            highlight: ['id'],
+            codeLanguage: 'CSS',
+            lines: ['#title {', '  font-size: 32px;', '}'],
+            distractors: ['.title {', 'title {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega os elementos com a classe destaque?',
+            codeLanguage: 'CSS',
+            highlight: ['classe'],
+            correctOption: 1,
+            options: ['.destaque', '#destaque', 'destaque', 'class.destaque'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which selector targets the elements with the class highlight?',
+            codeLanguage: 'CSS',
+            highlight: ['class'],
+            correctOption: 1,
+            options: ['.highlight', '#highlight', 'highlight', 'class.highlight'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada seletor ao que ele seleciona.',
+            highlight: ['seletor'],
+            pairs: [
+              {
+                left: 'p',
+                right: 'Todos os parágrafos'
+              },
+              {
+                left: '.card',
+                right: 'Elementos com a classe card'
+              },
+              {
+                left: '#topo',
+                right: 'O elemento com o id topo'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each selector to what it selects.',
+            highlight: ['selector'],
+            pairs: [
+              {
+                left: 'p',
+                right: 'Every paragraph'
+              },
+              {
+                left: '.card',
+                right: 'Elements with the class card'
+              },
+              {
+                left: '#top',
+                right: 'The element with the id top'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo do HTML que dá ao parágrafo a classe destaque.',
+            highlight: ['classe'],
+            codeLanguage: 'CSS',
+            code: '<p ___="destaque">Oi</p>',
+            answers: ['class'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the HTML attribute that gives the paragraph the highlight class.',
+            highlight: ['class'],
+            codeLanguage: 'CSS',
+            code: '<p ___="highlight">Hi</p>',
+            answers: ['class'],
+            ignoreCase: true
           }
         }
       }
@@ -3328,6 +4436,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['+', ',', '~']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que pinta de verde (green) os links que estão dentro do nav.',
+            highlight: ['dentro'],
+            codeLanguage: 'CSS',
+            lines: ['nav a {', '  color: green;', '}'],
+            distractors: ['nav, a {', 'a nav {']
+          },
+          en: {
+            question: 'Build the rule that colors green the links that are inside the nav.',
+            highlight: ['inside'],
+            codeLanguage: 'CSS',
+            lines: ['nav a {', '  color: green;', '}'],
+            distractors: ['nav, a {', 'a nav {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega só os p que são filhos diretos de .card?',
+            codeLanguage: 'CSS',
+            highlight: ['filhos diretos'],
+            correctOption: 1,
+            options: ['.card > p', '.card p', '.card, p', 'p > .card'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which selector targets only the p that are direct children of .card?',
+            codeLanguage: 'CSS',
+            highlight: ['direct children'],
+            correctOption: 1,
+            options: ['.card > p', '.card p', '.card, p', 'p > .card'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Complete o seletor para pegar os links (a) que estão dentro do nav: digite o elemento de fora.',
+            highlight: ['dentro do nav'],
+            codeLanguage: 'CSS',
+            code: '___ a {\n  color: green;\n}',
+            answers: ['nav'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Complete the selector to pick the links (a) inside the nav: type the outer element.',
+            highlight: ['inside the nav'],
+            codeLanguage: 'CSS',
+            code: '___ a {\n  color: green;\n}',
+            answers: ['nav'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -3539,6 +4708,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.button {\n  ___: white;\n  ___: blue;\n}',
             answers: ['color', 'background-color'],
             distractors: ['font-color', 'bg']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá fundo preto (black) ao .card.',
+            highlight: ['fundo'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  background-color: black;', '}'],
+            distractors: ['  color: black;', '  background-color = black;']
+          },
+          en: {
+            question: 'Build the rule that gives .card a black background.',
+            highlight: ['background'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  background-color: black;', '}'],
+            distractors: ['  color: black;', '  background-color = black;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa o texto branco?',
+            codeLanguage: 'CSS',
+            highlight: ['texto'],
+            correctOption: 1,
+            options: ['p {\n  color: white;\n}', 'p {\n  background-color: white;\n}', 'p {\n  text-color: white;\n}', 'p {\n  font-color: white;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the text white?',
+            codeLanguage: 'CSS',
+            highlight: ['text'],
+            correctOption: 1,
+            options: ['p {\n  color: white;\n}', 'p {\n  background-color: white;\n}', 'p {\n  text-color: white;\n}', 'p {\n  font-color: white;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que dá fundo preto (black) ao .card.',
+            highlight: ['fundo'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: black;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that gives .card a black background.',
+            highlight: ['background'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: black;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
           }
         }
       }
@@ -3756,6 +4986,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.band {\n  background-color:\n    ___(0, 0, 255, ___);\n}',
             answers: ['rgba', '0.5'],
             distractors: ['rgb', '50', '5']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o fundo do .banner: um gradiente de red para blue, da esquerda para a direita (to right).',
+            highlight: ['gradiente'],
+            codeLanguage: 'CSS',
+            lines: ['.banner {', '  background:', '    linear-gradient(', '      to right,', '      red, blue);', '}'],
+            distractors: ['  background-color:']
+          },
+          en: {
+            question: 'Build the background of .banner: a gradient from red to blue, from left to right (to right).',
+            highlight: ['gradient'],
+            codeLanguage: 'CSS',
+            lines: ['.banner {', '  background:', '    linear-gradient(', '      to right,', '      red, blue);', '}'],
+            distractors: ['  background-color:']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa só o fundo transparente, sem apagar o texto?',
+            codeLanguage: 'CSS',
+            highlight: ['fundo'],
+            correctOption: 1,
+            options: ['.faixa {\n  background-color:\n    rgba(0, 0, 0, 0.3);\n}', '.faixa {\n  opacity: 0.3;\n}', '.faixa {\n  color:\n    rgba(0, 0, 0, 0.3);\n}', '.faixa {\n  transparent: 0.3;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes only the background transparent, without fading the text?',
+            codeLanguage: 'CSS',
+            highlight: ['background'],
+            correctOption: 1,
+            options: ['.strip {\n  background-color:\n    rgba(0, 0, 0, 0.3);\n}', '.strip {\n  opacity: 0.3;\n}', '.strip {\n  color:\n    rgba(0, 0, 0, 0.3);\n}', '.strip {\n  transparent: 0.3;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que deixa o elemento inteiro, texto incluído, com 40% de visibilidade (valor 0.4).',
+            highlight: ['elemento inteiro'],
+            codeLanguage: 'CSS',
+            code: '.apagado {\n  ___: 0.4;\n}',
+            answers: ['opacity'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that makes the whole element, text included, 40% visible (value 0.4).',
+            highlight: ['whole element'],
+            codeLanguage: 'CSS',
+            code: '.faded {\n  ___: 0.4;\n}',
+            answers: ['opacity'],
+            ignoreCase: true
           }
         }
       }
@@ -4004,6 +5295,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['size', 'style', 'decoration']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que tira o sublinhado dos links (a).',
+            highlight: ['sublinhado'],
+            codeLanguage: 'CSS',
+            lines: ['a {', '  text-decoration: none;', '}'],
+            distractors: ['  text-decoration: underline;', '  font-decoration: none;']
+          },
+          en: {
+            question: 'Build the rule that removes the underline from links (a).',
+            highlight: ['underline'],
+            codeLanguage: 'CSS',
+            lines: ['a {', '  text-decoration: none;', '}'],
+            distractors: ['  text-decoration: underline;', '  font-decoration: none;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa o título em negrito?',
+            codeLanguage: 'CSS',
+            highlight: ['negrito'],
+            correctOption: 1,
+            options: ['h1 {\n  font-weight: 700;\n}', 'h1 {\n  font-size: 700;\n}', 'h1 {\n  text-weight: 700;\n}', 'h1 {\n  font-style: 700;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the heading bold?',
+            codeLanguage: 'CSS',
+            highlight: ['bold'],
+            correctOption: 1,
+            options: ['h1 {\n  font-weight: 700;\n}', 'h1 {\n  font-size: 700;\n}', 'h1 {\n  text-weight: 700;\n}', 'h1 {\n  font-style: 700;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de text-decoration que tira o sublinhado dos links.',
+            highlight: ['sublinhado'],
+            codeLanguage: 'CSS',
+            code: 'a {\n  text-decoration: ___;\n}',
+            answers: ['none'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the text-decoration value that removes the underline from links.',
+            highlight: ['underline'],
+            codeLanguage: 'CSS',
+            code: 'a {\n  text-decoration: ___;\n}',
+            answers: ['none'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -4221,6 +5573,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['capitalize', '16']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que deixa todo o texto do .rotulo em maiúsculas.',
+            highlight: ['maiúsculas'],
+            codeLanguage: 'CSS',
+            lines: ['.rotulo {', '  text-transform: uppercase;', '}'],
+            distractors: ['  text-transform: capitalize;', '  font-transform: uppercase;']
+          },
+          en: {
+            question: 'Build the rule that makes all the text of .label uppercase.',
+            highlight: ['uppercase'],
+            codeLanguage: 'CSS',
+            lines: ['.label {', '  text-transform: uppercase;', '}'],
+            distractors: ['  text-transform: capitalize;', '  font-transform: uppercase;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra aumenta o espaço entre as linhas do parágrafo?',
+            codeLanguage: 'CSS',
+            highlight: ['linhas'],
+            correctOption: 1,
+            options: ['p {\n  line-height: 1.6;\n}', 'p {\n  letter-spacing: 1.6;\n}', 'p {\n  line-spacing: 1.6;\n}', 'p {\n  text-height: 1.6;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule increases the space between the lines of the paragraph?',
+            codeLanguage: 'CSS',
+            highlight: ['lines'],
+            correctOption: 1,
+            options: ['p {\n  line-height: 1.6;\n}', 'p {\n  letter-spacing: 1.6;\n}', 'p {\n  line-spacing: 1.6;\n}', 'p {\n  text-height: 1.6;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que aumenta em 2px o espaço entre as letras do .rotulo.',
+            highlight: ['espaço entre as letras'],
+            codeLanguage: 'CSS',
+            code: '.rotulo {\n  ___: 2px;\n}',
+            answers: ['letter-spacing'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that adds 2px of space between the letters of .label.',
+            highlight: ['space between the letters'],
+            codeLanguage: 'CSS',
+            code: '.label {\n  ___: 2px;\n}',
+            answers: ['letter-spacing'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -4432,6 +5845,118 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.card {\n  ___: 20px;\n  border: 2px solid;\n  ___: 16px;\n}',
             answers: ['padding', 'margin'],
             distractors: ['gap', 'spacing']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá 20px de espaço por dentro da borda do .card.',
+            highlight: ['por dentro'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  padding: 20px;', '}'],
+            distractors: ['  margin: 20px;', '  border: 20px;']
+          },
+          en: {
+            question: 'Build the rule that gives .card 20px of space inside the border.',
+            highlight: ['inside'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  padding: 20px;', '}'],
+            distractors: ['  margin: 20px;', '  border: 20px;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra cria espaço por fora da borda?',
+            codeLanguage: 'CSS',
+            highlight: ['por fora'],
+            correctOption: 1,
+            options: ['.card {\n  margin: 16px;\n}', '.card {\n  padding: 16px;\n}', '.card {\n  outside: 16px;\n}', '.card {\n  border-space: 16px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule creates space outside the border?',
+            codeLanguage: 'CSS',
+            highlight: ['outside'],
+            correctOption: 1,
+            options: ['.card {\n  margin: 16px;\n}', '.card {\n  padding: 16px;\n}', '.card {\n  outside: 16px;\n}', '.card {\n  border-space: 16px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada propriedade à parte da caixa que ela controla.',
+            highlight: ['propriedade'],
+            pairs: [
+              {
+                left: 'padding',
+                right: 'Espaço entre o conteúdo e a borda'
+              },
+              {
+                left: 'border',
+                right: 'A borda da caixa'
+              },
+              {
+                left: 'margin',
+                right: 'Espaço ao redor, fora da borda'
+              },
+              {
+                left: 'width',
+                right: 'Largura do conteúdo'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each property to the part of the box it controls.',
+            highlight: ['property'],
+            pairs: [
+              {
+                left: 'padding',
+                right: 'Space between content and border'
+              },
+              {
+                left: 'border',
+                right: 'The border of the box'
+              },
+              {
+                left: 'margin',
+                right: 'Space around, outside the border'
+              },
+              {
+                left: 'width',
+                right: 'Width of the content'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que desenha no .card uma borda de 2px, contínua e preta.',
+            highlight: ['borda'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 2px solid black;\n}',
+            answers: ['border'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that draws a 2px, solid, black border on .card.',
+            highlight: ['border'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 2px solid black;\n}',
+            answers: ['border'],
+            ignoreCase: true
           }
         }
       }
@@ -4651,6 +6176,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['corner-radius', 'shadow']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que arredonda os cantos do .card em 12px.',
+            highlight: ['arredonda'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  border-radius: 12px;', '}'],
+            distractors: ['  border-round: 12px;', '  corner-radius: 12px;']
+          },
+          en: {
+            question: 'Build the rule that rounds the corners of .card by 12px.',
+            highlight: ['rounds'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  border-radius: 12px;', '}'],
+            distractors: ['  border-round: 12px;', '  corner-radius: 12px;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destas bordas aparece na tela?',
+            codeLanguage: 'CSS',
+            highlight: ['bordas'],
+            correctOption: 1,
+            options: ['p {\n  border: 2px solid red;\n}', 'p {\n  border: 2px red;\n}', 'p {\n  border-style: 2px;\n}', 'p {\n  border: 2px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these borders shows up on screen?',
+            codeLanguage: 'CSS',
+            highlight: ['borders'],
+            correctOption: 1,
+            options: ['p {\n  border: 2px solid red;\n}', 'p {\n  border: 2px red;\n}', 'p {\n  border-style: 2px;\n}', 'p {\n  border: 2px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o estilo de borda que desenha uma linha contínua.',
+            highlight: ['linha contínua'],
+            codeLanguage: 'CSS',
+            code: '.cheia {\n  border: 2px ___ #333;\n}',
+            answers: ['solid'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the border style that draws a continuous line.',
+            highlight: ['continuous line'],
+            codeLanguage: 'CSS',
+            code: '.full {\n  border: 2px ___ #333;\n}',
+            answers: ['solid'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -4868,6 +6454,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['content-box', 'padding-box', 'inline-box']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que faz todos os elementos (*) usarem box-sizing border-box.',
+            highlight: ['todos os elementos'],
+            codeLanguage: 'CSS',
+            lines: ['* {', '  box-sizing: border-box;', '}'],
+            distractors: ['  box-sizing: content-box;', '  box-model: border-box;']
+          },
+          en: {
+            question: 'Build the rule that makes every element (*) use box-sizing border-box.',
+            highlight: ['every element'],
+            codeLanguage: 'CSS',
+            lines: ['* {', '  box-sizing: border-box;', '}'],
+            distractors: ['  box-sizing: content-box;', '  box-model: border-box;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra faz o width incluir o padding e a borda?',
+            codeLanguage: 'CSS',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['.caixa {\n  box-sizing: border-box;\n}', '.caixa {\n  box-sizing: content-box;\n}', '.caixa {\n  width: border-box;\n}', '.caixa {\n  padding: border-box;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the width include the padding and the border?',
+            codeLanguage: 'CSS',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['.box {\n  box-sizing: border-box;\n}', '.box {\n  box-sizing: content-box;\n}', '.box {\n  width: border-box;\n}', '.box {\n  padding: border-box;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que faz o width incluir o padding e a borda.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            code: '* {\n  ___: border-box;\n}',
+            answers: ['box-sizing'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that makes width include the padding and the border.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            code: '* {\n  ___: border-box;\n}',
+            answers: ['box-sizing'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -5071,6 +6718,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
             answers: ['width', 'height'],
             distractors: ['size', 'length']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá ao .container 80% da largura.',
+            highlight: ['largura'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  width: 80%;', '}'],
+            distractors: ['  height: 80%;', '  width: 80;']
+          },
+          en: {
+            question: 'Build the rule that gives .container 80% of the width.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  width: 80%;', '}'],
+            distractors: ['  height: 80%;', '  width: 80;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra cria um cartão de 300px de largura?',
+            codeLanguage: 'CSS',
+            highlight: ['largura'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule creates a card 300px wide?',
+            codeLanguage: 'CSS',
+            highlight: ['wide'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que dá ao .container 80% da largura.',
+            highlight: ['largura'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: 80%;\n}',
+            answers: ['width'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that gives .container 80% of the width.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: 80%;\n}',
+            answers: ['width'],
+            ignoreCase: true
           }
         }
       }
@@ -5288,6 +6996,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.container {\n  max-width: 600px;\n  margin: 0 ___;\n}',
             answers: ['auto'],
             distractors: ['center', '50%', '0']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que centraliza o .container na horizontal.',
+            highlight: ['centraliza'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  margin: 0 auto;', '}'],
+            distractors: ['  margin: auto 0;', '  text-align: center;']
+          },
+          en: {
+            question: 'Build the rule that centers .container horizontally.',
+            highlight: ['centers'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  margin: 0 auto;', '}'],
+            distractors: ['  margin: auto 0;', '  text-align: center;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra impede a imagem de passar da largura disponível?',
+            codeLanguage: 'CSS',
+            highlight: ['largura'],
+            correctOption: 1,
+            options: ['img {\n  max-width: 100%;\n}', 'img {\n  min-width: 100%;\n}', 'img {\n  width: max;\n}', 'img {\n  max-width: 100;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule keeps the image from going past the available width?',
+            codeLanguage: 'CSS',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['img {\n  max-width: 100%;\n}', 'img {\n  min-width: 100%;\n}', 'img {\n  width: max;\n}', 'img {\n  max-width: 100;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que impede a imagem de passar de 100% da largura disponível.',
+            highlight: ['passar'],
+            codeLanguage: 'CSS',
+            code: 'img {\n  ___: 100%;\n}',
+            answers: ['max-width'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that keeps the image from going past 100% of the available width.',
+            highlight: ['going past'],
+            codeLanguage: 'CSS',
+            code: 'img {\n  ___: 100%;\n}',
+            answers: ['max-width'],
+            ignoreCase: true
           }
         }
       }
@@ -5511,6 +7280,118 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['vw', 'px', '%']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá à .secao a altura da tela inteira.',
+            highlight: ['altura'],
+            codeLanguage: 'CSS',
+            lines: ['.secao {', '  height: 100vh;', '}'],
+            distractors: ['  height: 100vw;', '  height: 100rem;']
+          },
+          en: {
+            question: 'Build the rule that gives .section the height of the whole screen.',
+            highlight: ['height'],
+            codeLanguage: 'CSS',
+            lines: ['.section {', '  height: 100vh;', '}'],
+            distractors: ['  height: 100vw;', '  height: 100rem;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra dá ao título o dobro da fonte raiz da página?',
+            codeLanguage: 'CSS',
+            highlight: ['fonte raiz'],
+            correctOption: 1,
+            options: ['h1 {\n  font-size: 2rem;\n}', 'h1 {\n  font-size: 2vh;\n}', 'h1 {\n  font-size: 2px;\n}', 'h1 {\n  font-size: 2;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule gives the heading twice the root font size of the page?',
+            codeLanguage: 'CSS',
+            highlight: ['root font'],
+            correctOption: 1,
+            options: ['h1 {\n  font-size: 2rem;\n}', 'h1 {\n  font-size: 2vh;\n}', 'h1 {\n  font-size: 2px;\n}', 'h1 {\n  font-size: 2;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada unidade ao que ela mede.',
+            highlight: ['unidade'],
+            pairs: [
+              {
+                left: 'px',
+                right: 'Pixels, uma medida fixa'
+              },
+              {
+                left: '%',
+                right: 'Proporção do elemento de referência'
+              },
+              {
+                left: 'rem',
+                right: 'Relativa à fonte raiz da página'
+              },
+              {
+                left: 'vh',
+                right: '1% da altura da janela'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each unit to what it measures.',
+            highlight: ['unit'],
+            pairs: [
+              {
+                left: 'px',
+                right: 'Pixels, a fixed measure'
+              },
+              {
+                left: '%',
+                right: 'Share of the reference element'
+              },
+              {
+                left: 'rem',
+                right: 'Relative to the root font of the page'
+              },
+              {
+                left: 'vh',
+                right: '1% of the window height'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a unidade que vale 1% da largura da janela, para o .banner ocupar a janela inteira.',
+            highlight: ['unidade'],
+            codeLanguage: 'CSS',
+            code: '.banner {\n  width: 100___;\n}',
+            answers: ['vw'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the unit equal to 1% of the window width, so .banner fills the whole window.',
+            highlight: ['unit'],
+            codeLanguage: 'CSS',
+            code: '.banner {\n  width: 100___;\n}',
+            answers: ['vw'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -5728,6 +7609,118 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['hidden', 'inline', 'block']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que esconde o .aviso da página.',
+            highlight: ['esconde'],
+            codeLanguage: 'CSS',
+            lines: ['.aviso {', '  display: none;', '}'],
+            distractors: ['  display: hidden;', '  display: block;']
+          },
+          en: {
+            question: 'Build the rule that hides .notice from the page.',
+            highlight: ['hides'],
+            codeLanguage: 'CSS',
+            lines: ['.notice {', '  display: none;', '}'],
+            distractors: ['  display: hidden;', '  display: block;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra faz o span começar em uma nova linha e ocupar a largura toda?',
+            codeLanguage: 'CSS',
+            highlight: ['nova linha'],
+            correctOption: 1,
+            options: ['span {\n  display: block;\n}', 'span {\n  display: inline;\n}', 'span {\n  display: none;\n}', 'span {\n  display: line;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the span start on a new line and take the full width?',
+            codeLanguage: 'CSS',
+            highlight: ['new line'],
+            correctOption: 1,
+            options: ['span {\n  display: block;\n}', 'span {\n  display: inline;\n}', 'span {\n  display: none;\n}', 'span {\n  display: line;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada valor de display ao seu comportamento.',
+            highlight: ['display'],
+            pairs: [
+              {
+                left: 'block',
+                right: 'Nova linha e largura toda'
+              },
+              {
+                left: 'inline',
+                right: 'Fica na mesma linha do texto'
+              },
+              {
+                left: 'none',
+                right: 'Remove o elemento da página'
+              },
+              {
+                left: 'inline-block',
+                right: 'Na linha, mas aceita width e height'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each display value to its behavior.',
+            highlight: ['display'],
+            pairs: [
+              {
+                left: 'block',
+                right: 'New line and full width'
+              },
+              {
+                left: 'inline',
+                right: 'Stays on the same line as text'
+              },
+              {
+                left: 'none',
+                right: 'Removes the element from the page'
+              },
+              {
+                left: 'inline-block',
+                right: 'In the line, but takes width and height'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de display que faz o span começar numa nova linha e ocupar a largura toda.',
+            highlight: ['nova linha'],
+            codeLanguage: 'CSS',
+            code: 'span {\n  display: ___;\n}',
+            answers: ['block'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the display value that makes the span start on a new line and take the full width.',
+            highlight: ['new line'],
+            codeLanguage: 'CSS',
+            code: 'span {\n  display: ___;\n}',
+            answers: ['block'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -5870,6 +7863,67 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.card ___ {\n  color: #222;\n}',
             answers: ['h2'],
             distractors: ['.h2', '#h2', '<h2>']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que pinta de #222 o texto dos h2 que estão dentro de .card.',
+            highlight: ['dentro'],
+            codeLanguage: 'CSS',
+            lines: ['.card h2 {', '  color: #222;', '}'],
+            distractors: ['.card, h2 {', 'h2 .card {']
+          },
+          en: {
+            question: 'Build the rule that colors #222 the text of the h2 elements inside .card.',
+            highlight: ['inside'],
+            codeLanguage: 'CSS',
+            lines: ['.card h2 {', '  color: #222;', '}'],
+            distractors: ['.card, h2 {', 'h2 .card {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'CSS',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px\n  padding: 20px;\n}', '.card {\n  width: 300px;\n  padding: 20px;\n}', '.card h2 {\n  color: #222;\n}', '.card {\n  margin: 16px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'CSS',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px\n  padding: 20px;\n}', '.card {\n  width: 300px;\n  padding: 20px;\n}', '.card h2 {\n  color: #222;\n}', '.card {\n  margin: 16px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que dá 20px de espaço interno ao .card, entre o conteúdo e a borda.',
+            highlight: ['espaço interno'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 20px;\n}',
+            answers: ['padding'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that gives .card 20px of inner space, between the content and the border.',
+            highlight: ['inner space'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 20px;\n}',
+            answers: ['padding'],
+            ignoreCase: true
           }
         }
       }
@@ -6155,6 +8209,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['print', 'write', 'show']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: guarde "Ana" em nome, monte em msg a mensagem "Oi, Ana" e mostre msg no console.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "Ana";', 'const msg = "Oi, " + nome;', 'console.log(msg);'],
+            distractors: ['console.print(msg);']
+          },
+          en: {
+            question: 'Build the code: store "Ana" in name, build in msg the message "Hi, Ana" and show msg in the console.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "Ana";', 'const msg = "Hi, " + name;', 'console.log(msg);'],
+            distractors: ['console.print(msg);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha mostra uma mensagem no console?',
+            codeLanguage: 'JavaScript',
+            highlight: ['console'],
+            correctOption: 1,
+            options: ['console.log("Oi");', 'console.print("Oi");', 'log.console("Oi");', 'console("Oi");'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line shows a message in the console?',
+            codeLanguage: 'JavaScript',
+            highlight: ['console'],
+            correctOption: 1,
+            options: ['console.log("Hi");', 'console.print("Hi");', 'log.console("Hi");', 'console("Hi");'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome do objeto que mostra o nome no console, antes do .log.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\n___.log(nome);',
+            answers: ['console']
+          },
+          en: {
+            question: 'Type the name of the object that shows the name in the console, before .log.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\n___.log(name);',
+            answers: ['console']
+          }
+        }
       }
     ]
   },
@@ -6354,6 +8467,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['static', 'set']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: crie idade valendo 20, mude idade para 21 e mostre idade no console.',
+            highlight: ['idade'],
+            codeLanguage: 'JavaScript',
+            lines: ['let idade = 20;', 'idade = 21;', 'console.log(idade);'],
+            distractors: ['const idade = 20;']
+          },
+          en: {
+            question: 'Build the code: create age equal to 20, change age to 21 and show age in the console.',
+            highlight: ['age'],
+            codeLanguage: 'JavaScript',
+            lines: ['let age = 20;', 'age = 21;', 'console.log(age);'],
+            distractors: ['const age = 20;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos dá erro ao rodar?',
+            codeLanguage: 'JavaScript',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['const nome = "Ana";\nnome = "Bia";', 'let nome = "Ana";\nnome = "Bia";', 'const nome = "Ana";\nconsole.log(nome);', 'let idade = 20;\nidade = 21;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets throws an error when run?',
+            codeLanguage: 'JavaScript',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['const name = "Ana";\nname = "Bia";', 'let name = "Ana";\nname = "Bia";', 'const name = "Ana";\nconsole.log(name);', 'let age = 20;\nage = 21;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que declara nome como um valor que não vai mudar.',
+            highlight: ['não vai mudar'],
+            codeLanguage: 'JavaScript',
+            code: '___ nome = "Ana";\nconsole.log(nome);',
+            answers: ['const']
+          },
+          en: {
+            question: 'Type the word that declares name as a value that will not change.',
+            highlight: ['will not change'],
+            codeLanguage: 'JavaScript',
+            code: '___ name = "Ana";\nconsole.log(name);',
+            answers: ['const']
+          }
+        }
       }
     ]
   },
@@ -6547,6 +8719,116 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const passed = ___;\n\nconsole.log(typeof passed);',
             answers: ['true'],
             distractors: ['"true"', '1', 'null']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: crie nota valendo null (vazia de propósito), depois dê a ela o valor 8 e mostre nota no console.',
+            highlight: ['null'],
+            codeLanguage: 'JavaScript',
+            lines: ['let nota = null;', 'nota = 8;', 'console.log(nota);'],
+            distractors: ['let nota = "null";']
+          },
+          en: {
+            question: 'Build the code: create grade equal to null (empty on purpose), then give it the value 8 and show grade in the console.',
+            highlight: ['null'],
+            codeLanguage: 'JavaScript',
+            lines: ['let grade = null;', 'grade = 8;', 'console.log(grade);'],
+            distractors: ['let grade = "null";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destas variáveis guarda um boolean?',
+            codeLanguage: 'JavaScript',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['const ativo = true;', 'const ativo = "true";', 'const ativo = 1;', 'const ativo = null;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these variables holds a boolean?',
+            codeLanguage: 'JavaScript',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['const active = true;', 'const active = "true";', 'const active = 1;', 'const active = null;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada valor ao seu tipo.',
+            highlight: ['tipo'],
+            pairs: [
+              {
+                left: '"Ana"',
+                right: 'string (texto)'
+              },
+              {
+                left: '20',
+                right: 'number (número)'
+              },
+              {
+                left: 'true',
+                right: 'boolean (verdadeiro ou falso)'
+              },
+              {
+                left: 'null',
+                right: 'null (sem valor, de propósito)'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each value to its type.',
+            highlight: ['type'],
+            pairs: [
+              {
+                left: '"Ana"',
+                right: 'string (text)'
+              },
+              {
+                left: '20',
+                right: 'number'
+              },
+              {
+                left: 'true',
+                right: 'boolean (true or false)'
+              },
+              {
+                left: 'null',
+                right: 'null (no value, on purpose)'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor que representa, de propósito, a ausência de valor em nota.',
+            highlight: ['de propósito'],
+            codeLanguage: 'JavaScript',
+            code: 'let nota = ___;\nconsole.log(nota);',
+            answers: ['null']
+          },
+          en: {
+            question: 'Type the value that stands for an intentional absence of value in grade.',
+            highlight: ['intentional'],
+            codeLanguage: 'JavaScript',
+            code: 'let grade = ___;\nconsole.log(grade);',
+            answers: ['null']
           }
         }
       }
@@ -6750,6 +9032,67 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['toLowerCase', 'upper', 'length']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: guarde "  Ana  " em nome, guarde em limpo o nome sem os espaços das pontas (trim) e mostre limpo.',
+            highlight: ['espaços'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "  Ana  ";', 'const limpo = nome.trim();', 'console.log(limpo);'],
+            distractors: ['const limpo = trim(nome);']
+          },
+          en: {
+            question: 'Build the code: store "  Ana  " in name, store in clean the name without the surrounding spaces (trim) and show clean.',
+            highlight: ['spaces'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "  Ana  ";', 'const clean = name.trim();', 'console.log(clean);'],
+            distractors: ['const clean = trim(name);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão devolve "Java"?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = "JavaScript";',
+            highlight: ['expressão'],
+            correctOption: 1,
+            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression returns "Java"?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = "JavaScript";',
+            highlight: ['expression'],
+            correctOption: 1,
+            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que tira os espaços das pontas de s.',
+            highlight: ['método'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = "  oi  ";\nconsole.log(s.___());',
+            answers: ['trim']
+          },
+          en: {
+            question: 'Type the method that removes the spaces around s.',
+            highlight: ['method'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = "  hi  ";\nconsole.log(s.___());',
+            answers: ['trim']
+          }
+        }
       }
     ]
   },
@@ -6947,6 +9290,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const a = 10;\n\nconsole.log(a ___ 10);',
             answers: ['==='],
             distractors: ['=', '!==', '=>']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: preco vale 10, total é preco vezes 3, e total é mostrado no console.',
+            highlight: ['total'],
+            codeLanguage: 'JavaScript',
+            lines: ['const preco = 10;', 'const total = preco * 3;', 'console.log(total);'],
+            distractors: ['const total = preco x 3;']
+          },
+          en: {
+            question: 'Build the code: price is 10, total is price times 3, and total is shown in the console.',
+            highlight: ['total'],
+            codeLanguage: 'JavaScript',
+            lines: ['const price = 10;', 'const total = price * 3;', 'console.log(total);'],
+            distractors: ['const total = price x 3;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual comparação dá true?',
+            codeLanguage: 'JavaScript',
+            highlight: ['true'],
+            correctOption: 1,
+            options: ['10 === 10', '10 === "10"', '10 !== 10', '5 > 10'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which comparison gives true?',
+            codeLanguage: 'JavaScript',
+            highlight: ['true'],
+            correctOption: 1,
+            options: ['10 === 10', '10 === "10"', '10 !== 10', '5 > 10'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o número que aparece no console para 10 * 3.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(10 * 3);\n// saída: ___',
+            answers: ['30']
+          },
+          en: {
+            question: 'Type the number shown in the console for 10 * 3.',
+            highlight: ['console'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(10 * 3);\n// output: ___',
+            answers: ['30']
           }
         }
       }
@@ -7150,6 +9552,108 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['||', '!', '&']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o if: se idade for 18 ou mais e vip for verdadeiro, mostre "Entra"; senão, mostre "Espera".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (idade >= 18 && vip) {', '  console.log("Entra");', '} else {', '  console.log("Espera");', '}'],
+            distractors: ['if (idade >= 18 || vip) {']
+          },
+          en: {
+            question: 'Build the if: when age is 18 or more and vip is true, show "Come in"; otherwise, show "Wait".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (age >= 18 && vip) {', '  console.log("Come in");', '} else {', '  console.log("Wait");', '}'],
+            distractors: ['if (age >= 18 || vip) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes valores é truthy?',
+            codeLanguage: 'JavaScript',
+            highlight: ['truthy'],
+            correctOption: 1,
+            options: ['"0"', '0', '""', 'null'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these values is truthy?',
+            codeLanguage: 'JavaScript',
+            highlight: ['truthy'],
+            correctOption: 1,
+            options: ['"0"', '0', '""', 'null'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada operador ao que ele faz.',
+            highlight: ['operador'],
+            pairs: [
+              {
+                left: '&&',
+                right: 'Verdadeiro se os dois lados forem'
+              },
+              {
+                left: '||',
+                right: 'Verdadeiro se ao menos um lado for'
+              },
+              {
+                left: '!',
+                right: 'Inverte o valor booleano'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each operator to what it does.',
+            highlight: ['operator'],
+            pairs: [
+              {
+                left: '&&',
+                right: 'True when both sides are'
+              },
+              {
+                left: '||',
+                right: 'True when at least one side is'
+              },
+              {
+                left: '!',
+                right: 'Flips the boolean value'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o que aparece no console: o ! inverte o valor de ativo, que é false.',
+            highlight: ['inverte'],
+            codeLanguage: 'JavaScript',
+            code: 'const ativo = false;\nconsole.log(!ativo);\n// saída: ___',
+            answers: ['true']
+          },
+          en: {
+            question: 'Type what shows in the console: the ! flips the value of active, which is false.',
+            highlight: ['flips'],
+            codeLanguage: 'JavaScript',
+            code: 'const active = false;\nconsole.log(!active);\n// output: ___',
+            answers: ['true']
+          }
+        }
       }
     ]
   },
@@ -7351,6 +9855,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['for', 'then', 'when']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o if: com nota 7 ou mais, mostre "Passou"; senão, mostre "Reprovou".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (nota >= 7) {', '  console.log("Passou");', '} else {', '  console.log("Reprovou");', '}'],
+            distractors: ['} if else {']
+          },
+          en: {
+            question: 'Build the if: with a grade of 7 or more, show "Passed"; otherwise, show "Failed".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (grade >= 7) {', '  console.log("Passed");', '} else {', '  console.log("Failed");', '}'],
+            distractors: ['} if else {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro de sintaxe?',
+            codeLanguage: 'JavaScript',
+            highlight: ['erro de sintaxe'],
+            correctOption: 1,
+            options: ['if idade >= 18 {\n  console.log("Ok");\n}', 'if (idade >= 18) {\n  console.log("Ok");\n}', 'if (idade < 18) {\n  console.log("Não");\n}', 'if (idade) {\n  console.log("Ok");\n} else {\n  console.log("Não");\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has a syntax error?',
+            codeLanguage: 'JavaScript',
+            highlight: ['syntax error'],
+            correctOption: 1,
+            options: ['if age >= 18 {\n  console.log("Ok");\n}', 'if (age >= 18) {\n  console.log("Ok");\n}', 'if (age < 18) {\n  console.log("No");\n}', 'if (age) {\n  console.log("Ok");\n} else {\n  console.log("No");\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite exatamente o texto que aparece no console quando idade vale 16.',
+            highlight: ['exatamente'],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 16;\nif (idade >= 18) {\n  console.log("Maior");\n} else {\n  console.log("Menor");\n}\n// saída: ___',
+            answers: ['Menor']
+          },
+          en: {
+            question: 'Type exactly the text shown in the console when age is 16.',
+            highlight: ['exactly'],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 16;\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}\n// output: ___',
+            answers: ['Minor']
+          }
+        }
       }
     ]
   },
@@ -7550,6 +10113,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const age = 20;\n\nconst kind = age >= 18\n  ___ "adult"\n  ___ "minor";\n\nconsole.log(kind);',
             answers: ['?', ':'],
             distractors: ['&&', '||', '=>']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: nota vale 8, e o ternário guarda em res "aprovado" se nota for 7 ou mais, ou "reprovado" se não for. Mostre res.',
+            highlight: ['ternário'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nota = 8;', 'const res = nota >= 7', '  ? "aprovado"', '  : "reprovado";', 'console.log(res);'],
+            distractors: ['  else "reprovado";']
+          },
+          en: {
+            question: 'Build the code: score is 8, and the ternary stores in res "passed" when score is 7 or more, or "failed" otherwise. Show res.',
+            highlight: ['ternary'],
+            codeLanguage: 'JavaScript',
+            lines: ['const score = 8;', 'const res = score >= 7', '  ? "passed"', '  : "failed";', 'console.log(res);'],
+            distractors: ['  else "failed";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes ternários tem um erro de sintaxe?',
+            codeLanguage: 'JavaScript',
+            highlight: ['erro de sintaxe'],
+            correctOption: 1,
+            options: ['n > 5 ? "a" "b"', 'n > 5 ? "a" : "b"', 'n ? 1 : 2', 'n === 0 ? "zero" : n'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these ternaries has a syntax error?',
+            codeLanguage: 'JavaScript',
+            highlight: ['syntax error'],
+            correctOption: 1,
+            options: ['n > 5 ? "a" "b"', 'n > 5 ? "a" : "b"', 'n ? 1 : 2', 'n === 0 ? "zero" : n'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que encerra o case, para a execução não continuar no default.',
+            highlight: ['encerra'],
+            codeLanguage: 'JavaScript',
+            code: 'switch (dia) {\n  case "sab":\n    console.log("Fim");\n    ___;\n  default:\n    console.log("Útil");\n}',
+            answers: ['break']
+          },
+          en: {
+            question: 'Type the word that ends the case, so execution does not carry on into default.',
+            highlight: ['ends'],
+            codeLanguage: 'JavaScript',
+            code: 'switch (day) {\n  case "sat":\n    console.log("Weekend");\n    ___;\n  default:\n    console.log("Weekday");\n}',
+            answers: ['break']
           }
         }
       }
@@ -7778,6 +10400,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['<=', '--', '>']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o while: i começa em 0, e o laço mostra 0, 1 e 2 no console.',
+            highlight: ['while'],
+            codeLanguage: 'JavaScript',
+            lines: ['let i = 0;', 'while (i < 3) {', '  console.log(i);', '  i++;', '}'],
+            distractors: ['while (i <= 3) {']
+          },
+          en: {
+            question: 'Build the while: i starts at 0, and the loop shows 0, 1 and 2 in the console.',
+            highlight: ['while'],
+            codeLanguage: 'JavaScript',
+            lines: ['let i = 0;', 'while (i < 3) {', '  console.log(i);', '  i++;', '}'],
+            distractors: ['while (i <= 3) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual laço mostra os números de 0 a 4?',
+            codeLanguage: 'JavaScript',
+            highlight: ['laço'],
+            correctOption: 1,
+            options: ['for (let i = 0; i < 5; i++) {\n  console.log(i);\n}', 'for (let i = 0; i <= 5; i++) {\n  console.log(i);\n}', 'for (let i = 1; i < 5; i++) {\n  console.log(i);\n}', 'for (let i = 0; i < 4; i++) {\n  console.log(i);\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which loop shows the numbers from 0 to 4?',
+            codeLanguage: 'JavaScript',
+            highlight: ['loop'],
+            correctOption: 1,
+            options: ['for (let i = 0; i < 5; i++) {\n  console.log(i);\n}', 'for (let i = 0; i <= 5; i++) {\n  console.log(i);\n}', 'for (let i = 1; i < 5; i++) {\n  console.log(i);\n}', 'for (let i = 0; i < 4; i++) {\n  console.log(i);\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o laço que repete o bloco enquanto i for menor que 3.',
+            highlight: ['laço'],
+            codeLanguage: 'JavaScript',
+            code: 'let i = 0;\n___ (i < 3) {\n  console.log(i);\n  i++;\n}',
+            answers: ['while']
+          },
+          en: {
+            question: 'Type the loop that repeats the block while i is less than 3.',
+            highlight: ['loop'],
+            codeLanguage: 'JavaScript',
+            code: 'let i = 0;\n___ (i < 3) {\n  console.log(i);\n  i++;\n}',
+            answers: ['while']
+          }
+        }
       }
     ]
   },
@@ -7973,6 +10654,67 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const fruits = [\n  "apple",\n  "banana"\n];\n\nconsole.log(fruits[___]);',
             answers: ['0'],
             distractors: ['1', '-1', 'first']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o array cores com "azul" e depois "verde", e mostre "verde" pelo índice.',
+            highlight: ['array', 'índice'],
+            codeLanguage: 'JavaScript',
+            lines: ['const cores = [', '  "azul",', '  "verde"', '];', 'console.log(cores[1]);'],
+            distractors: ['console.log(cores[2]);']
+          },
+          en: {
+            question: 'Build the colors array with "blue" and then "green", and show "green" by its index.',
+            highlight: ['array', 'index'],
+            codeLanguage: 'JavaScript',
+            lines: ['const colors = [', '  "blue",', '  "green"', '];', 'console.log(colors[1]);'],
+            distractors: ['console.log(colors[2]);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha mostra "maçã"?',
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["maçã", "uva"];',
+            highlight: ['maçã'],
+            correctOption: 1,
+            options: ['console.log(f[0]);', 'console.log(f[1]);', 'console.log(f[2]);', 'console.log(f(0));'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line shows "apple"?',
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["apple", "grape"];',
+            highlight: ['apple'],
+            correctOption: 1,
+            options: ['console.log(f[0]);', 'console.log(f[1]);', 'console.log(f[2]);', 'console.log(f(0));'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o índice que mostra "uva", o segundo elemento de f.',
+            highlight: ['índice'],
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["maçã", "uva"];\nconsole.log(f[___]);',
+            answers: ['1']
+          },
+          en: {
+            question: 'Type the index that shows "grape", the second element of f.',
+            highlight: ['index'],
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["apple", "grape"];\nconsole.log(f[___]);',
+            answers: ['1']
           }
         }
       }
@@ -8176,6 +10918,118 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['pop', 'add', 'includes']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: lista começa com "a" e "b"; adicione "c" no fim e mostre o tamanho (length) da lista.',
+            highlight: ['tamanho'],
+            codeLanguage: 'JavaScript',
+            lines: ['const lista = ["a", "b"];', 'lista.push("c");', 'console.log(lista.length);'],
+            distractors: ['lista.add("c");', 'console.log(lista.size);']
+          },
+          en: {
+            question: 'Build the code: list starts with "a" and "b"; add "c" to the end and show the size (length) of the list.',
+            highlight: ['size'],
+            codeLanguage: 'JavaScript',
+            lines: ['const list = ["a", "b"];', 'list.push("c");', 'console.log(list.length);'],
+            distractors: ['list.add("c");', 'console.log(list.size);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha remove o último elemento do array?',
+            codeLanguage: 'JavaScript',
+            code: 'const nums = [1, 2, 3];',
+            highlight: ['último elemento'],
+            correctOption: 1,
+            options: ['nums.pop();', 'nums.push();', 'nums.remove();', 'pop(nums);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line removes the last element of the array?',
+            codeLanguage: 'JavaScript',
+            code: 'const nums = [1, 2, 3];',
+            highlight: ['last element'],
+            correctOption: 1,
+            options: ['nums.pop();', 'nums.push();', 'nums.remove();', 'pop(nums);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada recurso do array ao que ele faz.',
+            highlight: ['array'],
+            pairs: [
+              {
+                left: 'push',
+                right: 'Adiciona no final'
+              },
+              {
+                left: 'pop',
+                right: 'Remove o último'
+              },
+              {
+                left: 'includes',
+                right: 'Diz se o valor está no array'
+              },
+              {
+                left: 'length',
+                right: 'Quantidade de elementos'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each array feature to what it does.',
+            highlight: ['array'],
+            pairs: [
+              {
+                left: 'push',
+                right: 'Adds to the end'
+              },
+              {
+                left: 'pop',
+                right: 'Removes the last one'
+              },
+              {
+                left: 'includes',
+                right: 'Tells if the value is in the array'
+              },
+              {
+                left: 'length',
+                right: 'Number of elements'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que remove o último elemento do array f.',
+            highlight: ['último elemento'],
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["maçã", "uva"];\nf.___();\nconsole.log(f);',
+            answers: ['pop']
+          },
+          en: {
+            question: 'Type the method that removes the last element of the array f.',
+            highlight: ['last element'],
+            codeLanguage: 'JavaScript',
+            code: 'const f = ["apple", "grape"];\nf.___();\nconsole.log(f);',
+            answers: ['pop']
+          }
+        }
       }
     ]
   },
@@ -8373,6 +11227,67 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconsole.log(person___name);',
             answers: ['.'],
             distractors: [',', '->', ':']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o objeto carro com marca "Fiat" e depois ano 2020, e mostre o ano no console.',
+            highlight: ['objeto'],
+            codeLanguage: 'JavaScript',
+            lines: ['const carro = {', '  marca: "Fiat",', '  ano: 2020', '};', 'console.log(carro.ano);'],
+            distractors: ['console.log(carro[ano]);']
+          },
+          en: {
+            question: 'Build the car object with brand "Fiat" and then year 2020, and show the year in the console.',
+            highlight: ['object'],
+            codeLanguage: 'JavaScript',
+            lines: ['const car = {', '  brand: "Fiat",', '  year: 2020', '};', 'console.log(car.year);'],
+            distractors: ['console.log(car[year]);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha mostra o nome da pessoa?',
+            codeLanguage: 'JavaScript',
+            code: 'const p = { nome: "Ana" };',
+            highlight: ['nome'],
+            correctOption: 1,
+            options: ['console.log(p.nome);', 'console.log(p.Ana);', 'console.log(nome.p);', 'console.log(p->nome);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line shows the name of the person?',
+            codeLanguage: 'JavaScript',
+            code: 'const p = { name: "Ana" };',
+            highlight: ['name'],
+            correctOption: 1,
+            options: ['console.log(p.name);', 'console.log(p.Ana);', 'console.log(name.p);', 'console.log(p->name);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que mostra "Ana" no console.',
+            highlight: ['propriedade'],
+            codeLanguage: 'JavaScript',
+            code: 'const p = { nome: "Ana" };\nconsole.log(p.___);',
+            answers: ['nome']
+          },
+          en: {
+            question: 'Type the property that shows "Ana" in the console.',
+            highlight: ['property'],
+            codeLanguage: 'JavaScript',
+            code: 'const p = { name: "Ana" };\nconsole.log(p.___);',
+            answers: ['name']
           }
         }
       }
@@ -8574,6 +11489,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             distractors: ['console', 'print', 'break']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função dobro, que devolve n vezes 2, e mostre dobro(4) no console.',
+            highlight: ['função'],
+            codeLanguage: 'JavaScript',
+            lines: ['function dobro(n) {', '  return n * 2;', '}', 'console.log(dobro(4));'],
+            distractors: ['  return: n * 2;']
+          },
+          en: {
+            question: 'Build the double function, which returns n times 2, and show double(4) in the console.',
+            highlight: ['function'],
+            codeLanguage: 'JavaScript',
+            lines: ['function double(n) {', '  return n * 2;', '}', 'console.log(double(4));'],
+            distractors: ['  return: n * 2;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual função devolve a soma?',
+            codeLanguage: 'JavaScript',
+            highlight: ['soma'],
+            correctOption: 1,
+            options: ['function soma(a, b) {\n  return a + b;\n}', 'function soma(a, b) {\n  console.log(a + b);\n}', 'function soma(a, b) {\n  a + b;\n}', 'function soma(a, b) {\n  return;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which function returns the sum?',
+            codeLanguage: 'JavaScript',
+            highlight: ['sum'],
+            correctOption: 1,
+            options: ['function sum(a, b) {\n  return a + b;\n}', 'function sum(a, b) {\n  console.log(a + b);\n}', 'function sum(a, b) {\n  a + b;\n}', 'function sum(a, b) {\n  return;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que cria a função somar.',
+            highlight: ['função'],
+            codeLanguage: 'JavaScript',
+            code: '___ somar(a, b) {\n  return a + b;\n}\nconsole.log(somar(2, 3));',
+            answers: ['function']
+          },
+          en: {
+            question: 'Type the word that creates the sum function.',
+            highlight: ['function'],
+            codeLanguage: 'JavaScript',
+            code: '___ sum(a, b) {\n  return a + b;\n}\nconsole.log(sum(2, 3));',
+            answers: ['function']
+          }
+        }
       }
     ]
   },
@@ -8771,6 +11745,65 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             code: 'const double = n ___ n * 2;\n\nconsole.log(double(4));',
             answers: ['=>'],
             distractors: ['->', '==', '>=']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a arrow function soma, que devolve a + b, e mostre soma(2, 3) no console.',
+            highlight: ['arrow function'],
+            codeLanguage: 'JavaScript',
+            lines: ['const soma = (a, b) => {', '  return a + b;', '};', 'console.log(soma(2, 3));'],
+            distractors: ['const soma = (a, b) -> {']
+          },
+          en: {
+            question: 'Build the sum arrow function, which returns a + b, and show sum(2, 3) in the console.',
+            highlight: ['arrow function'],
+            codeLanguage: 'JavaScript',
+            lines: ['const sum = (a, b) => {', '  return a + b;', '};', 'console.log(sum(2, 3));'],
+            distractors: ['const sum = (a, b) -> {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual arrow function está escrita corretamente?',
+            codeLanguage: 'JavaScript',
+            highlight: ['arrow function'],
+            correctOption: 1,
+            options: ['const d = n => n * 2;', 'const d = n -> n * 2;', 'const d = => n * 2;', 'const d = (n) = n * 2;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which arrow function is written correctly?',
+            codeLanguage: 'JavaScript',
+            highlight: ['arrow function'],
+            correctOption: 1,
+            options: ['const d = n => n * 2;', 'const d = n -> n * 2;', 'const d = => n * 2;', 'const d = (n) = n * 2;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que declara msg só dentro do bloco, sem poder mudar o valor depois.',
+            highlight: ['dentro do bloco'],
+            codeLanguage: 'JavaScript',
+            code: 'if (true) {\n  ___ msg = "Oi";\n  console.log(msg);\n}',
+            answers: ['const']
+          },
+          en: {
+            question: 'Type the word that declares msg only inside the block, with no way to change it later.',
+            highlight: ['inside the block'],
+            codeLanguage: 'JavaScript',
+            code: 'if (true) {\n  ___ msg = "Hi";\n  console.log(msg);\n}',
+            answers: ['const']
           }
         }
       }
@@ -9084,6 +12117,65 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['main', 'footer']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um header com o título h1 "Meu site" e, abaixo dele, um nav com o link "Início" para /.',
+            highlight: ['header', 'nav'],
+            codeLanguage: 'HTML',
+            lines: ['<header>', '  <h1>Meu site</h1>', '  <nav>', '    <a href="/">Início</a>', '  </nav>', '</header>']
+          },
+          en: {
+            question: 'Build a header with the h1 heading "My site" and, below it, a nav with the link "Home" to /.',
+            highlight: ['header', 'nav'],
+            codeLanguage: 'HTML',
+            lines: ['<header>', '  <h1>My site</h1>', '  <nav>', '    <a href="/">Home</a>', '  </nav>', '</header>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho usa o elemento certo para o rodapé da página?',
+            codeLanguage: 'HTML',
+            highlight: ['rodapé'],
+            correctOption: 1,
+            options: ['<footer>\n  <p>Contato</p>\n</footer>', '<foot>\n  <p>Contato</p>\n</foot>', '<header>\n  <p>Contato</p>\n</header>', '<bottom>\n  <p>Contato</p>\n</bottom>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet uses the right element for the page footer?',
+            codeLanguage: 'HTML',
+            highlight: ['footer'],
+            correctOption: 1,
+            options: ['<footer>\n  <p>Contact</p>\n</footer>', '<foot>\n  <p>Contact</p>\n</foot>', '<header>\n  <p>Contact</p>\n</header>', '<bottom>\n  <p>Contact</p>\n</bottom>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que abre o rodapé da página.',
+            highlight: ['rodapé'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>© 2026</p>\n</footer>',
+            answers: ['footer'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that opens the footer of the page.',
+            highlight: ['footer'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>© 2026</p>\n</footer>',
+            answers: ['footer'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -9214,6 +12306,118 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['div', 'span']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o conteúdo principal: um main com uma section que tem o título h1 "Notícias".',
+            highlight: ['main', 'section'],
+            codeLanguage: 'HTML',
+            lines: ['<main>', '  <section>', '    <h1>Notícias</h1>', '  </section>', '</main>'],
+            distractors: ['  <secao>']
+          },
+          en: {
+            question: 'Build the main content: a main with a section that has the h1 heading "News".',
+            highlight: ['main', 'section'],
+            codeLanguage: 'HTML',
+            lines: ['<main>', '  <section>', '    <h1>News</h1>', '  </section>', '</main>'],
+            distractors: ['  <sect>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho é o mais semântico para o menu de navegação?',
+            codeLanguage: 'HTML',
+            highlight: ['semântico'],
+            correctOption: 1,
+            options: ['<nav>Menu</nav>', '<div>Menu</div>', '<span>Menu</span>', '<menu-nav>Menu</menu-nav>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet is the most semantic for the navigation menu?',
+            codeLanguage: 'HTML',
+            highlight: ['semantic'],
+            correctOption: 1,
+            options: ['<nav>Menu</nav>', '<div>Menu</div>', '<span>Menu</span>', '<menu-nav>Menu</menu-nav>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento à parte da página que ele representa.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<header>',
+                right: 'Cabeçalho ou introdução'
+              },
+              {
+                left: '<nav>',
+                right: 'Área de navegação'
+              },
+              {
+                left: '<main>',
+                right: 'Conteúdo principal da página'
+              },
+              {
+                left: '<footer>',
+                right: 'Rodapé da página'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to the part of the page it represents.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<header>',
+                right: 'Header or introduction'
+              },
+              {
+                left: '<nav>',
+                right: 'Navigation area'
+              },
+              {
+                left: '<main>',
+                right: 'Main content of the page'
+              },
+              {
+                left: '<footer>',
+                right: 'Footer of the page'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que abre a seção temática com o título "Notícias".',
+            highlight: ['seção temática'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h1>Notícias</h1>\n</section>',
+            answers: ['section'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that opens the themed section with the heading "News".',
+            highlight: ['themed section'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <h1>News</h1>\n</section>',
+            answers: ['section'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -9340,6 +12544,65 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<___>\n  <h2>New version</h2>\n</article>\n<___>\n  <h2>Read also</h2>\n</aside>',
             answers: ['article', 'aside'],
             distractors: ['section', 'div']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um article com o título h2 "Nova versão" e, depois dele, um aside com o título h2 "Leia também".',
+            highlight: ['article', 'aside'],
+            codeLanguage: 'HTML',
+            lines: ['<article>', '  <h2>Nova versão</h2>', '</article>', '<aside>', '  <h2>Leia também</h2>', '</aside>']
+          },
+          en: {
+            question: 'Build an article with the h2 heading "New version" and, after it, an aside with the h2 heading "Read more".',
+            highlight: ['article', 'aside'],
+            codeLanguage: 'HTML',
+            lines: ['<article>', '  <h2>New version</h2>', '</article>', '<aside>', '  <h2>Read more</h2>', '</aside>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento combina com uma notícia que faz sentido sozinha?',
+            codeLanguage: 'HTML',
+            highlight: ['notícia'],
+            correctOption: 1,
+            options: ['<article>', '<aside>', '<footer>', '<nav>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which element fits a news story that makes sense on its own?',
+            codeLanguage: 'HTML',
+            highlight: ['news story'],
+            correctOption: 1,
+            options: ['<article>', '<aside>', '<footer>', '<nav>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag do conteúdo principal, onde ficam o article e o aside.',
+            highlight: ['conteúdo principal'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <article>...</article>\n  <aside>...</aside>\n</main>',
+            answers: ['main'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the main content tag, which holds the article and the aside.',
+            highlight: ['main content'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <article>...</article>\n  <aside>...</aside>\n</main>',
+            answers: ['main'],
+            ignoreCase: true
           }
         }
       }
@@ -9474,6 +12737,65 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<figure>\n  <img src="g.png"\n       alt="Chart">\n  <___>\n    Sales this year\n  </figcaption>\n</figure>',
             answers: ['figcaption'],
             distractors: ['caption', 'legend', 'label']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma figure com a imagem g.png (alt "Alta") e, abaixo dela, a legenda "Vendas".',
+            highlight: ['figure', 'legenda'],
+            codeLanguage: 'HTML',
+            lines: ['<figure>', '  <img src="g.png" alt="Alta">', '  <figcaption>', '    Vendas', '  </figcaption>', '</figure>']
+          },
+          en: {
+            question: 'Build a figure with the image g.png (alt "Gain") and, below it, the caption "Sales".',
+            highlight: ['figure', 'caption'],
+            codeLanguage: 'HTML',
+            lines: ['<figure>', '  <img src="g.png" alt="Gain">', '  <figcaption>', '    Sales', '  </figcaption>', '</figure>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo adia o carregamento da imagem até ela chegar perto da tela?',
+            codeLanguage: 'HTML',
+            highlight: ['carregamento'],
+            correctOption: 1,
+            options: ['<img loading="lazy">', '<img srcset="lazy">', '<img lazy="true">', '<img load="later">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which attribute delays loading the image until it gets close to the screen?',
+            codeLanguage: 'HTML',
+            highlight: ['loading'],
+            correctOption: 1,
+            options: ['<img loading="lazy">', '<img srcset="lazy">', '<img lazy="true">', '<img load="later">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag da imagem g.png, que fica dentro da figure.',
+            highlight: ['imagem'],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <___ src="g.png"\n    alt="Vendas">\n</figure>',
+            answers: ['img'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag for the image g.png, which sits inside the figure.',
+            highlight: ['image'],
+            codeLanguage: 'HTML',
+            code: '<figure>\n  <___ src="g.png"\n    alt="Sales">\n</figure>',
+            answers: ['img'],
+            ignoreCase: true
           }
         }
       }
@@ -9665,6 +12987,118 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['text', 'button', 'send']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um form com um campo de e-mail (input type email) e, depois dele, o botão "Enviar" do tipo submit.',
+            highlight: ['form', 'botão'],
+            codeLanguage: 'HTML',
+            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Enviar', '  </button>', '</form>'],
+            distractors: ['  <input type="mail">']
+          },
+          en: {
+            question: 'Build a form with an email field (input type email) and, after it, the submit button "Send".',
+            highlight: ['form', 'button'],
+            codeLanguage: 'HTML',
+            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Send', '  </button>', '</form>'],
+            distractors: ['  <input type="mail">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual input é o mais adequado para uma data de nascimento?',
+            codeLanguage: 'HTML',
+            highlight: ['data de nascimento'],
+            correctOption: 1,
+            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which input is the best fit for a date of birth?',
+            codeLanguage: 'HTML',
+            highlight: ['date of birth'],
+            correctOption: 1,
+            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada tipo de input à informação que ele recebe.',
+            highlight: ['tipo de input'],
+            pairs: [
+              {
+                left: 'type="text"',
+                right: 'Texto curto, como um nome'
+              },
+              {
+                left: 'type="email"',
+                right: 'Endereço de e-mail'
+              },
+              {
+                left: 'type="number"',
+                right: 'Valor numérico'
+              },
+              {
+                left: 'type="checkbox"',
+                right: 'Caixa de marcar'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each input type to the information it takes.',
+            highlight: ['input type'],
+            pairs: [
+              {
+                left: 'type="text"',
+                right: 'Short text, like a name'
+              },
+              {
+                left: 'type="email"',
+                right: 'Email address'
+              },
+              {
+                left: 'type="number"',
+                right: 'Numeric value'
+              },
+              {
+                left: 'type="checkbox"',
+                right: 'Tick box'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que agrupa os campos do formulário.',
+            highlight: ['formulário'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <input type="text">\n</form>',
+            answers: ['form'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that groups the fields of the form.',
+            highlight: ['form'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <input type="text">\n</form>',
+            answers: ['form'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -9793,6 +13227,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<label for="email">\n  Email\n</label>\n<input id="___"\n       ___>',
             answers: ['email', 'required'],
             distractors: ['name', 'for', 'min']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o label "E-mail" ligado ao campo de id email e, depois dele, esse campo como obrigatório (required).',
+            highlight: ['label', 'obrigatório'],
+            codeLanguage: 'HTML',
+            lines: ['<label for="email">', '  E-mail', '</label>', '<input id="email"', '  required>'],
+            distractors: ['<label id="email">']
+          },
+          en: {
+            question: 'Build the label "Email" linked to the field with id email and, after it, that field as required.',
+            highlight: ['label', 'required'],
+            codeLanguage: 'HTML',
+            lines: ['<label for="email">', '  Email', '</label>', '<input id="email"', '  required>'],
+            distractors: ['<label id="email">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual trecho o label está ligado ao campo?',
+            codeLanguage: 'HTML',
+            highlight: ['label'],
+            correctOption: 1,
+            options: ['<label for="nome">Nome</label>\n<input id="nome">', '<label for="nome">Nome</label>\n<input name="x">', '<label id="nome">Nome</label>\n<input for="nome">', '<label>Nome</label>\n<input id="nome">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In which snippet is the label linked to the field?',
+            codeLanguage: 'HTML',
+            highlight: ['label'],
+            correctOption: 1,
+            options: ['<label for="name">Name</label>\n<input id="name">', '<label for="name">Name</label>\n<input name="x">', '<label id="name">Name</label>\n<input for="name">', '<label>Name</label>\n<input id="name">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que exige pelo menos 3 caracteres no campo.',
+            highlight: ['pelo menos 3'],
+            codeLanguage: 'HTML',
+            code: '<input type="text"\n  ___="3">',
+            answers: ['minlength'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that requires at least 3 characters in the field.',
+            highlight: ['at least 3'],
+            codeLanguage: 'HTML',
+            code: '<input type="text"\n  ___="3">',
+            answers: ['minlength'],
+            ignoreCase: true
           }
         }
       }
@@ -9929,6 +13424,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<___ rows="4">\n</textarea>',
             answers: ['textarea'],
             distractors: ['input', 'select', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um select com uma única opção: o texto "São Paulo", com value sp.',
+            highlight: ['select', 'value'],
+            codeLanguage: 'HTML',
+            lines: ['<select>', '  <option value="sp">', '    São Paulo', '  </option>', '</select>'],
+            distractors: ['  <option text="sp">', '  <input value="sp">']
+          },
+          en: {
+            question: 'Build a select with a single option: the text "New York", with value ny.',
+            highlight: ['select', 'value'],
+            codeLanguage: 'HTML',
+            lines: ['<select>', '  <option value="ny">', '    New York', '  </option>', '</select>'],
+            distractors: ['  <option text="ny">', '  <input value="ny">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual campo aceita um texto longo, de várias linhas?',
+            codeLanguage: 'HTML',
+            highlight: ['texto longo'],
+            correctOption: 1,
+            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which field takes a long text, with several lines?',
+            codeLanguage: 'HTML',
+            highlight: ['long text'],
+            correctOption: 1,
+            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que cria a lista de opções do campo estado.',
+            highlight: ['lista de opções'],
+            codeLanguage: 'HTML',
+            code: '<___ name="estado">\n  <option>SP</option>\n</select>',
+            answers: ['select'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that creates the list of options for the state field.',
+            highlight: ['list of options'],
+            codeLanguage: 'HTML',
+            code: '<___ name="state">\n  <option>NY</option>\n</select>',
+            answers: ['select'],
+            ignoreCase: true
           }
         }
       }
@@ -10122,6 +13678,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<fieldset>\n  <___>Size</legend>\n  <input type="___"\n         name="s">\n</fieldset>',
             answers: ['legend', 'radio'],
             distractors: ['label', 'checkbox', 'caption']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um fieldset com a legenda "Tamanho" e, depois dela, um radio do grupo t (name t).',
+            highlight: ['fieldset', 'radio'],
+            codeLanguage: 'HTML',
+            lines: ['<fieldset>', '  <legend>Tamanho</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
+            distractors: ['  <input type="checkbox"']
+          },
+          en: {
+            question: 'Build a fieldset with the legend "Size" and, after it, a radio of group t (name t).',
+            highlight: ['fieldset', 'radio'],
+            codeLanguage: 'HTML',
+            lines: ['<fieldset>', '  <legend>Size</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
+            distractors: ['  <input type="checkbox"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual par de radios deixa marcar só um dos dois?',
+            codeLanguage: 'HTML',
+            highlight: ['só um'],
+            correctOption: 1,
+            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which pair of radios lets you tick only one of the two?',
+            codeLanguage: 'HTML',
+            highlight: ['only one'],
+            correctOption: 1,
+            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo de input que deixa marcar várias opções ao mesmo tempo.',
+            highlight: ['várias opções'],
+            codeLanguage: 'HTML',
+            code: '<input type="___"\n  name="extras">',
+            answers: ['checkbox'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the input type that lets you tick several options at once.',
+            highlight: ['several options'],
+            codeLanguage: 'HTML',
+            code: '<input type="___"\n  name="extras">',
+            answers: ['checkbox'],
+            ignoreCase: true
           }
         }
       }
@@ -10334,6 +13951,118 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['tr', 'thead']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma tabela com uma linha de cabeçalho "Produto" e, abaixo dela, uma linha com o dado "Mouse".',
+            highlight: ['cabeçalho', 'dado'],
+            codeLanguage: 'HTML',
+            lines: ['<table>', '  <tr><th>Produto</th></tr>', '  <tr><td>Mouse</td></tr>', '</table>'],
+            distractors: ['  <tr><td>Produto</td></tr>']
+          },
+          en: {
+            question: 'Build a table with a header row "Product" and, below it, a row with the data "Mouse".',
+            highlight: ['header', 'data'],
+            codeLanguage: 'HTML',
+            lines: ['<table>', '  <tr><th>Product</th></tr>', '  <tr><td>Mouse</td></tr>', '</table>'],
+            distractors: ['  <tr><td>Product</td></tr>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual célula ocupa duas colunas?',
+            codeLanguage: 'HTML',
+            highlight: ['duas colunas'],
+            correctOption: 1,
+            options: ['<th colspan="2">Contato</th>', '<th rowspan="2">Contato</th>', '<th cols="2">Contato</th>', '<th span="2">Contato</th>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which cell spans two columns?',
+            codeLanguage: 'HTML',
+            highlight: ['two columns'],
+            correctOption: 1,
+            options: ['<th colspan="2">Contact</th>', '<th rowspan="2">Contact</th>', '<th cols="2">Contact</th>', '<th span="2">Contact</th>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada tag à parte da tabela que ela representa.',
+            highlight: ['tag'],
+            pairs: [
+              {
+                left: '<table>',
+                right: 'A tabela inteira'
+              },
+              {
+                left: '<tr>',
+                right: 'Uma linha'
+              },
+              {
+                left: '<th>',
+                right: 'Célula de cabeçalho'
+              },
+              {
+                left: '<td>',
+                right: 'Célula de dados'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each tag to the part of the table it represents.',
+            highlight: ['tag'],
+            pairs: [
+              {
+                left: '<table>',
+                right: 'The whole table'
+              },
+              {
+                left: '<tr>',
+                right: 'A row'
+              },
+              {
+                left: '<th>',
+                right: 'Header cell'
+              },
+              {
+                left: '<td>',
+                right: 'Data cell'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que agrupa a linha de cabeçalho da tabela.',
+            highlight: ['cabeçalho'],
+            codeLanguage: 'HTML',
+            code: '<table>\n  <___>\n    <tr>...</tr>\n  </thead>\n</table>',
+            answers: ['thead'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that groups the header row of the table.',
+            highlight: ['header row'],
+            codeLanguage: 'HTML',
+            code: '<table>\n  <___>\n    <tr>...</tr>\n  </thead>\n</table>',
+            answers: ['thead'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -10487,6 +14216,118 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['name', 'h1', 'lang']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o head com o charset UTF-8 e, depois dele, o título "Meu site".',
+            highlight: ['head', 'charset'],
+            codeLanguage: 'HTML',
+            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>Meu site</title>', '</head>'],
+            distractors: ['  <charset="UTF-8">']
+          },
+          en: {
+            question: 'Build the head with the UTF-8 charset and, after it, the title "My site".',
+            highlight: ['head', 'charset'],
+            codeLanguage: 'HTML',
+            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>My site</title>', '</head>'],
+            distractors: ['  <charset="UTF-8">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho declara o favicon da página?',
+            codeLanguage: 'HTML',
+            highlight: ['favicon'],
+            correctOption: 1,
+            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet declares the favicon of the page?',
+            codeLanguage: 'HTML',
+            highlight: ['favicon'],
+            correctOption: 1,
+            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada metadado à sua função.',
+            highlight: ['metadado'],
+            pairs: [
+              {
+                left: 'charset',
+                right: 'Codificação dos caracteres'
+              },
+              {
+                left: 'viewport',
+                right: 'Ajuste da página à tela'
+              },
+              {
+                left: 'description',
+                right: 'Resumo da página para buscadores'
+              },
+              {
+                left: '<title>',
+                right: 'Texto mostrado na aba'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each piece of metadata to its role.',
+            highlight: ['metadata'],
+            pairs: [
+              {
+                left: 'charset',
+                right: 'Character encoding'
+              },
+              {
+                left: 'viewport',
+                right: 'Fits the page to the screen'
+              },
+              {
+                left: 'description',
+                right: 'Page summary for search engines'
+              },
+              {
+                left: '<title>',
+                right: 'Text shown on the tab'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome do metadado que resume a página para os buscadores.',
+            highlight: ['buscadores'],
+            codeLanguage: 'HTML',
+            code: '<meta name="___"\n  content="Aprenda web.">',
+            answers: ['description'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the metadata that sums up the page for search engines.',
+            highlight: ['search engines'],
+            codeLanguage: 'HTML',
+            code: '<meta name="___"\n  content="Learn the web.">',
+            answers: ['description'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -10615,6 +14456,67 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<___ type="button">\n  Follow\n</button>',
             answers: ['button'],
             distractors: ['div', 'span', 'a']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a hierarquia: título h1 "Curso", depois o h2 "Fundamentos" e, dentro dessa seção, o h3 "Elementos".',
+            highlight: ['hierarquia'],
+            codeLanguage: 'HTML',
+            lines: ['<h1>Curso</h1>', '<h2>Fundamentos</h2>', '<h3>Elementos</h3>'],
+            distractors: ['<h4>Elementos</h4>']
+          },
+          en: {
+            question: 'Build the hierarchy: h1 heading "Course", then the h2 "Basics" and, inside that section, the h3 "Elements".',
+            highlight: ['hierarchy'],
+            codeLanguage: 'HTML',
+            lines: ['<h1>Course</h1>', '<h2>Basics</h2>', '<h3>Elements</h3>'],
+            distractors: ['<h4>Elements</h4>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual imagem é acessível?',
+            codeLanguage: 'HTML',
+            highlight: ['acessível'],
+            correctOption: 1,
+            options: ['<img src="a.jpg"\n  alt="Foto da Ana">', '<img src="a.jpg">', '<img src="a.jpg"\n  title="Foto">', '<img alt="a.jpg">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which image is accessible?',
+            codeLanguage: 'HTML',
+            highlight: ['accessible'],
+            correctOption: 1,
+            options: ['<img src="a.jpg"\n  alt="Photo of Ana">', '<img src="a.jpg">', '<img src="a.jpg"\n  title="Photo">', '<img alt="a.jpg">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que descreve a imagem para quem usa leitor de tela.',
+            highlight: ['leitor de tela'],
+            codeLanguage: 'HTML',
+            code: '<img src="a.jpg"\n  ___="Foto da Ana">',
+            answers: ['alt'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that describes the image for screen reader users.',
+            highlight: ['screen reader'],
+            codeLanguage: 'HTML',
+            code: '<img src="a.jpg"\n  ___="Photo of Ana">',
+            answers: ['alt'],
+            ignoreCase: true
           }
         }
       }
@@ -10897,6 +14799,118 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['block', 'grid', 'middle']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que transforma o .box em um flex container (display flex).',
+            highlight: ['flex container'],
+            codeLanguage: 'CSS',
+            lines: ['.box {', '  display: flex;', '}'],
+            distractors: ['  display: flexbox;', '  flex: display;']
+          },
+          en: {
+            question: 'Build the rule that turns .box into a flex container (display flex).',
+            highlight: ['flex container'],
+            codeLanguage: 'CSS',
+            lines: ['.box {', '  display: flex;', '}'],
+            distractors: ['  display: flexbox;', '  flex: display;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Num flex container em linha, qual regra centraliza os itens na horizontal?',
+            codeLanguage: 'CSS',
+            highlight: ['horizontal'],
+            correctOption: 1,
+            options: ['.box {\n  justify-content: center;\n}', '.box {\n  align-items: center;\n}', '.box {\n  text-align: middle;\n}', '.box {\n  justify-content: middle;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In a row flex container, which rule centers the items horizontally?',
+            codeLanguage: 'CSS',
+            highlight: ['horizontally'],
+            correctOption: 1,
+            options: ['.box {\n  justify-content: center;\n}', '.box {\n  align-items: center;\n}', '.box {\n  text-align: middle;\n}', '.box {\n  justify-content: middle;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada propriedade do Flexbox ao que ela faz.',
+            highlight: ['Flexbox'],
+            pairs: [
+              {
+                left: 'flex-direction',
+                right: 'Define a direção dos itens'
+              },
+              {
+                left: 'justify-content',
+                right: 'Alinha no eixo principal'
+              },
+              {
+                left: 'align-items',
+                right: 'Alinha no eixo cruzado'
+              },
+              {
+                left: 'display: flex',
+                right: 'Torna o elemento um flex container'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Flexbox property to what it does.',
+            highlight: ['Flexbox'],
+            pairs: [
+              {
+                left: 'flex-direction',
+                right: 'Sets the direction of the items'
+              },
+              {
+                left: 'justify-content',
+                right: 'Aligns on the main axis'
+              },
+              {
+                left: 'align-items',
+                right: 'Aligns on the cross axis'
+              },
+              {
+                left: 'display: flex',
+                right: 'Turns the element into a flex container'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que empilha os itens do flex container em coluna.',
+            highlight: ['coluna'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: flex;\n  ___: column;\n}',
+            answers: ['flex-direction'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that stacks the items of the flex container in a column.',
+            highlight: ['column'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: flex;\n  ___: column;\n}',
+            answers: ['flex-direction'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -11037,6 +15051,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.list {\n  display: flex;\n  ___: 16px;\n  flex-wrap: ___;\n}',
             answers: ['gap', 'wrap'],
             distractors: ['margin', 'nowrap', 'row']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá 16px de espaço entre os itens da .lista (gap).',
+            highlight: ['gap'],
+            codeLanguage: 'CSS',
+            lines: ['.lista {', '  gap: 16px;', '}'],
+            distractors: ['  margin: 16px;', '  space: 16px;']
+          },
+          en: {
+            question: 'Build the rule that gives 16px of space between the items of .list (gap).',
+            highlight: ['gap'],
+            codeLanguage: 'CSS',
+            lines: ['.list {', '  gap: 16px;', '}'],
+            distractors: ['  margin: 16px;', '  space: 16px;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa os itens descerem para uma nova linha quando falta espaço?',
+            codeLanguage: 'CSS',
+            highlight: ['nova linha'],
+            correctOption: 1,
+            options: ['.lista {\n  flex-wrap: wrap;\n}', '.lista {\n  flex-wrap: nowrap;\n}', '.lista {\n  flex-direction: wrap;\n}', '.lista {\n  wrap: true;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule lets the items drop to a new line when there is not enough space?',
+            codeLanguage: 'CSS',
+            highlight: ['new line'],
+            correctOption: 1,
+            options: ['.list {\n  flex-wrap: wrap;\n}', '.list {\n  flex-wrap: nowrap;\n}', '.list {\n  flex-direction: wrap;\n}', '.list {\n  wrap: true;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de flex-wrap que impede os itens de descer para outra linha.',
+            highlight: ['outra linha'],
+            codeLanguage: 'CSS',
+            code: '.lista {\n  display: flex;\n  flex-wrap: ___;\n}',
+            answers: ['nowrap'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the flex-wrap value that keeps the items from dropping to another line.',
+            highlight: ['another line'],
+            codeLanguage: 'CSS',
+            code: '.list {\n  display: flex;\n  flex-wrap: ___;\n}',
+            answers: ['nowrap'],
+            ignoreCase: true
           }
         }
       }
@@ -11193,6 +15268,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.featured {\n  flex-___: 1;\n  ___: -1;\n}',
             answers: ['grow', 'order'],
             distractors: ['shrink', 'basis', 'z-index']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que faz o .destaque crescer o dobro dos outros itens (flex-grow 2).',
+            highlight: ['flex-grow'],
+            codeLanguage: 'CSS',
+            lines: ['.destaque {', '  flex-grow: 2;', '}'],
+            distractors: ['  flex-shrink: 2;', '  flex-size: 2;']
+          },
+          en: {
+            question: 'Build the rule that makes .featured grow twice as much as the other items (flex-grow 2).',
+            highlight: ['flex-grow'],
+            codeLanguage: 'CSS',
+            lines: ['.featured {', '  flex-grow: 2;', '}'],
+            distractors: ['  flex-shrink: 2;', '  flex-size: 2;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra faz o .primeiro aparecer antes dos outros itens, sem mudar o HTML?',
+            codeLanguage: 'CSS',
+            highlight: ['antes'],
+            correctOption: 1,
+            options: ['.primeiro {\n  order: -1;\n}', '.primeiro {\n  order: 1;\n}', '.primeiro {\n  z-index: -1;\n}', '.primeiro {\n  flex-order: -1;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes .first show up before the other items, without changing the HTML?',
+            codeLanguage: 'CSS',
+            highlight: ['before'],
+            correctOption: 1,
+            options: ['.first {\n  order: -1;\n}', '.first {\n  order: 1;\n}', '.first {\n  z-index: -1;\n}', '.first {\n  flex-order: -1;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que define o tamanho inicial do item: 80px.',
+            highlight: ['tamanho inicial'],
+            codeLanguage: 'CSS',
+            code: '.item {\n  ___: 80px;\n}',
+            answers: ['flex-basis'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that sets the starting size of the item: 80px.',
+            highlight: ['starting size'],
+            codeLanguage: 'CSS',
+            code: '.item {\n  ___: 80px;\n}',
+            answers: ['flex-basis'],
+            ignoreCase: true
           }
         }
       }
@@ -11412,6 +15548,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['flex', 'columns', 'calc']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que divide a .grade em 3 colunas iguais, usando repeat(3, 1fr).',
+            highlight: ['colunas'],
+            codeLanguage: 'CSS',
+            lines: ['.grade {', '  grid-template-columns:', '    repeat(3, 1fr);', '}'],
+            distractors: ['    repeat(1fr, 3);']
+          },
+          en: {
+            question: 'Build the rule that splits .grid into 3 equal columns, using repeat(3, 1fr).',
+            highlight: ['columns'],
+            codeLanguage: 'CSS',
+            lines: ['.grid {', '  grid-template-columns:', '    repeat(3, 1fr);', '}'],
+            distractors: ['    repeat(1fr, 3);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra cria uma grade de duas colunas iguais?',
+            codeLanguage: 'CSS',
+            highlight: ['duas colunas'],
+            correctOption: 1,
+            options: ['.g {\n  display: grid;\n  grid-template-columns:\n    1fr 1fr;\n}', '.g {\n  display: grid;\n  grid-template-rows:\n    1fr 1fr;\n}', '.g {\n  display: flex;\n  grid-columns: 2;\n}', '.g {\n  display: grid;\n  columns: 1fr 1fr;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule creates a grid with two equal columns?',
+            codeLanguage: 'CSS',
+            highlight: ['two equal columns'],
+            correctOption: 1,
+            options: ['.g {\n  display: grid;\n  grid-template-columns:\n    1fr 1fr;\n}', '.g {\n  display: grid;\n  grid-template-rows:\n    1fr 1fr;\n}', '.g {\n  display: flex;\n  grid-columns: 2;\n}', '.g {\n  display: grid;\n  columns: 1fr 1fr;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que dá 16px de espaço entre as células da grade.',
+            highlight: ['células'],
+            codeLanguage: 'CSS',
+            code: '.grade {\n  display: grid;\n  ___: 16px;\n}',
+            answers: ['gap'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that gives 16px of space between the grid cells.',
+            highlight: ['cells'],
+            codeLanguage: 'CSS',
+            code: '.grid {\n  display: grid;\n  ___: 16px;\n}',
+            answers: ['gap'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -11566,6 +15763,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.header {\n  grid-___: 1 / 3;\n}',
             answers: ['column'],
             distractors: ['row', 'area', 'span']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que faz o .cabecalho ir da linha 1 até a linha 3 das colunas (grid-column).',
+            highlight: ['grid-column'],
+            codeLanguage: 'CSS',
+            lines: ['.cabecalho {', '  grid-column: 1 / 3;', '}'],
+            distractors: ['  grid-row: 1 / 3;', '  grid-column: 1 - 3;']
+          },
+          en: {
+            question: 'Build the rule that makes .header go from line 1 to line 3 of the columns (grid-column).',
+            highlight: ['grid-column'],
+            codeLanguage: 'CSS',
+            lines: ['.header {', '  grid-column: 1 / 3;', '}'],
+            distractors: ['  grid-row: 1 / 3;', '  grid-column: 1 - 3;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor faz uma linha da grade ter no mínimo 80px e crescer com o conteúdo?',
+            codeLanguage: 'CSS',
+            highlight: ['no mínimo'],
+            correctOption: 1,
+            options: ['minmax(80px, auto)', 'max(80px, auto)', 'minmax(auto, 80px)', 'min(80px)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which value makes a grid row at least 80px tall and grow with its content?',
+            codeLanguage: 'CSS',
+            highlight: ['at least'],
+            correctOption: 1,
+            options: ['minmax(80px, auto)', 'max(80px, auto)', 'minmax(auto, 80px)', 'min(80px)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que dá à linha da grade no mínimo 80px e a deixa crescer.',
+            highlight: ['no mínimo'],
+            codeLanguage: 'CSS',
+            code: '.grade {\n  grid-template-rows:\n    ___(80px, auto);\n}',
+            answers: ['minmax'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the function that gives the grid row at least 80px and lets it grow.',
+            highlight: ['at least'],
+            codeLanguage: 'CSS',
+            code: '.grid {\n  grid-template-rows:\n    ___(80px, auto);\n}',
+            answers: ['minmax'],
+            ignoreCase: true
           }
         }
       }
@@ -11804,6 +16062,118 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['static', 'fixed']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que deixa o .header grudado no topo durante a rolagem (position sticky).',
+            highlight: ['position sticky'],
+            codeLanguage: 'CSS',
+            lines: ['.header {', '  position: sticky;', '}'],
+            distractors: ['  position: static;', '  position: stuck;']
+          },
+          en: {
+            question: 'Build the rule that keeps .header stuck to the top while scrolling (position sticky).',
+            highlight: ['position sticky'],
+            codeLanguage: 'CSS',
+            lines: ['.header {', '  position: sticky;', '}'],
+            distractors: ['  position: static;', '  position: stuck;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra cria o contexto para posicionar um filho com absolute?',
+            codeLanguage: 'CSS',
+            highlight: ['contexto'],
+            correctOption: 1,
+            options: ['.card {\n  position: relative;\n}', '.card {\n  position: static;\n}', '.card {\n  position: context;\n}', '.card {\n  display: relative;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule creates the context to position a child with absolute?',
+            codeLanguage: 'CSS',
+            highlight: ['context'],
+            correctOption: 1,
+            options: ['.card {\n  position: relative;\n}', '.card {\n  position: static;\n}', '.card {\n  position: context;\n}', '.card {\n  display: relative;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada valor de position ao seu comportamento.',
+            highlight: ['position'],
+            pairs: [
+              {
+                left: 'static',
+                right: 'Fluxo normal da página'
+              },
+              {
+                left: 'relative',
+                right: 'Contexto para filhos absolute'
+              },
+              {
+                left: 'absolute',
+                right: 'Posição em relação ao contexto'
+              },
+              {
+                left: 'fixed',
+                right: 'Preso à janela de visualização'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each position value to its behavior.',
+            highlight: ['position'],
+            pairs: [
+              {
+                left: 'static',
+                right: 'Normal flow of the page'
+              },
+              {
+                left: 'relative',
+                right: 'Context for absolute children'
+              },
+              {
+                left: 'absolute',
+                right: 'Placed relative to the context'
+              },
+              {
+                left: 'fixed',
+                right: 'Pinned to the viewport'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que afasta o .selo 8px do topo do card.',
+            highlight: ['topo'],
+            codeLanguage: 'CSS',
+            code: '.selo {\n  position: absolute;\n  ___: 8px;\n}',
+            answers: ['top'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that keeps .badge 8px from the top of the card.',
+            highlight: ['top'],
+            codeLanguage: 'CSS',
+            code: '.badge {\n  position: absolute;\n  ___: 8px;\n}',
+            answers: ['top'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -11958,6 +16328,118 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.title {\n  white-space: ___;\n  overflow: hidden;\n  text-overflow: ___;\n}',
             answers: ['nowrap', 'ellipsis'],
             distractors: ['wrap', 'scroll', 'dots']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que mostra barra de rolagem na .caixa só quando o conteúdo não cabe (overflow auto).',
+            highlight: ['overflow auto'],
+            codeLanguage: 'CSS',
+            lines: ['.caixa {', '  overflow: auto;', '}'],
+            distractors: ['  overflow: visible;', '  scroll: auto;']
+          },
+          en: {
+            question: 'Build the rule that shows a scroll bar on .box only when the content does not fit (overflow auto).',
+            highlight: ['overflow auto'],
+            codeLanguage: 'CSS',
+            lines: ['.box {', '  overflow: auto;', '}'],
+            distractors: ['  overflow: visible;', '  scroll: auto;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra troca o fim de um texto cortado por reticências?',
+            codeLanguage: 'CSS',
+            highlight: ['reticências'],
+            correctOption: 1,
+            options: ['.t {\n  text-overflow: ellipsis;\n}', '.t {\n  text-overflow: dots;\n}', '.t {\n  overflow: ellipsis;\n}', '.t {\n  white-space: ellipsis;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule replaces the end of a cut text with an ellipsis?',
+            codeLanguage: 'CSS',
+            highlight: ['ellipsis'],
+            correctOption: 1,
+            options: ['.t {\n  text-overflow: ellipsis;\n}', '.t {\n  text-overflow: dots;\n}', '.t {\n  overflow: ellipsis;\n}', '.t {\n  white-space: ellipsis;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada valor de overflow ao que ele faz com a sobra.',
+            highlight: ['overflow'],
+            pairs: [
+              {
+                left: 'hidden',
+                right: 'Corta o que passa do limite'
+              },
+              {
+                left: 'scroll',
+                right: 'Sempre mostra barras de rolagem'
+              },
+              {
+                left: 'auto',
+                right: 'Barra só quando precisa'
+              },
+              {
+                left: 'visible',
+                right: 'Deixa o conteúdo transbordar'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each overflow value to what it does with the extra content.',
+            highlight: ['overflow'],
+            pairs: [
+              {
+                left: 'hidden',
+                right: 'Cuts what goes past the limit'
+              },
+              {
+                left: 'scroll',
+                right: 'Always shows scroll bars'
+              },
+              {
+                left: 'auto',
+                right: 'Scroll bar only when needed'
+              },
+              {
+                left: 'visible',
+                right: 'Lets the content overflow'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de overflow que corta o que passa do limite, sem barra de rolagem.',
+            highlight: ['corta'],
+            codeLanguage: 'CSS',
+            code: '.caixa {\n  overflow: ___;\n}',
+            answers: ['hidden'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the overflow value that cuts what goes past the limit, with no scroll bar.',
+            highlight: ['cuts'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  overflow: ___;\n}',
+            answers: ['hidden'],
+            ignoreCase: true
           }
         }
       }
@@ -12198,6 +16680,118 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['focus', 'odd', 'active']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que pinta de vermelho (red) os links (a) quando o cursor passa sobre eles.',
+            highlight: ['cursor'],
+            codeLanguage: 'CSS',
+            lines: ['a:hover {', '  color: red;', '}'],
+            distractors: ['a:focus {', 'a::hover {']
+          },
+          en: {
+            question: 'Build the rule that colors links (a) red when the cursor is over them.',
+            highlight: ['cursor'],
+            codeLanguage: 'CSS',
+            lines: ['a:hover {', '  color: red;', '}'],
+            distractors: ['a:focus {', 'a::hover {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega os itens de lista em posição par?',
+            codeLanguage: 'CSS',
+            highlight: ['posição par'],
+            correctOption: 1,
+            options: ['li:nth-child(even)', 'li:nth-child(odd)', 'li:even', 'li:nth-child(2)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which selector picks the list items in even positions?',
+            codeLanguage: 'CSS',
+            highlight: ['even positions'],
+            correctOption: 1,
+            options: ['li:nth-child(even)', 'li:nth-child(odd)', 'li:even', 'li:nth-child(2)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada pseudo-classe ao estado que ela representa.',
+            highlight: ['pseudo-classe'],
+            pairs: [
+              {
+                left: ':hover',
+                right: 'Cursor sobre o elemento'
+              },
+              {
+                left: ':focus',
+                right: 'Elemento que recebeu foco'
+              },
+              {
+                left: ':first-child',
+                right: 'Primeiro elemento de um grupo'
+              },
+              {
+                left: ':disabled',
+                right: 'Campo desativado'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each pseudo-class to the state it represents.',
+            highlight: ['pseudo-class'],
+            pairs: [
+              {
+                left: ':hover',
+                right: 'Cursor over the element'
+              },
+              {
+                left: ':focus',
+                right: 'Element that got focus'
+              },
+              {
+                left: ':first-child',
+                right: 'First element of a group'
+              },
+              {
+                left: ':disabled',
+                right: 'Disabled field'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a pseudo-classe que pega o primeiro item da lista.',
+            highlight: ['primeiro item'],
+            codeLanguage: 'CSS',
+            code: 'li:___ {\n  font-weight: bold;\n}',
+            answers: ['first-child'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the pseudo-class that picks the first item of the list.',
+            highlight: ['first item'],
+            codeLanguage: 'CSS',
+            code: 'li:___ {\n  font-weight: bold;\n}',
+            answers: ['first-child'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -12350,6 +16944,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['after', 'text']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que coloca "→ " antes do conteúdo do .titulo (::before).',
+            highlight: ['::before'],
+            codeLanguage: 'CSS',
+            lines: ['.titulo::before {', '  content: "→ ";', '}'],
+            distractors: ['.titulo::after {', '  text: "→ ";']
+          },
+          en: {
+            question: 'Build the rule that puts "→ " before the content of .title (::before).',
+            highlight: ['::before'],
+            codeLanguage: 'CSS',
+            lines: ['.title::before {', '  content: "→ ";', '}'],
+            distractors: ['.title::after {', '  text: "→ ";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes ::before aparece na tela?',
+            codeLanguage: 'CSS',
+            highlight: ['::before'],
+            correctOption: 1,
+            options: ['.c::before {\n  content: "★";\n}', '.c::before {\n  color: red;\n}', '.c::before {\n  text: "★";\n}', '.c:before-text {\n  content: "★";\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these ::before shows up on screen?',
+            codeLanguage: 'CSS',
+            highlight: ['::before'],
+            correctOption: 1,
+            options: ['.c::before {\n  content: "★";\n}', '.c::before {\n  color: red;\n}', '.c::before {\n  text: "★";\n}', '.c:before-text {\n  content: "★";\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o pseudo-elemento que cria conteúdo depois do texto do .titulo.',
+            highlight: ['depois'],
+            codeLanguage: 'CSS',
+            code: '.titulo::___ {\n  content: " ←";\n}',
+            answers: ['after'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the pseudo-element that creates content after the text of .title.',
+            highlight: ['after'],
+            codeLanguage: 'CSS',
+            code: '.title::___ {\n  content: " ←";\n}',
+            answers: ['after'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -12492,6 +17147,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['body', 'calc', 'get']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a variável --cor, com o valor #2563eb, dentro do :root.',
+            highlight: ['--cor'],
+            codeLanguage: 'CSS',
+            lines: [':root {', '  --cor: #2563eb;', '}'],
+            distractors: ['  $cor: #2563eb;', '  var(--cor): #2563eb;']
+          },
+          en: {
+            question: 'Build the --color variable, with the value #2563eb, inside :root.',
+            highlight: ['--color'],
+            codeLanguage: 'CSS',
+            lines: [':root {', '  --color: #2563eb;', '}'],
+            distractors: ['  $color: #2563eb;', '  var(--color): #2563eb;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração usa a variável --cor?',
+            codeLanguage: 'CSS',
+            highlight: ['--cor'],
+            correctOption: 1,
+            options: ['color: var(--cor);', 'color: --cor;', 'color: $cor;', 'color: var(cor);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which declaration uses the --color variable?',
+            codeLanguage: 'CSS',
+            highlight: ['--color'],
+            correctOption: 1,
+            options: ['color: var(--color);', 'color: --color;', 'color: $color;', 'color: var(color);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da variável que guarda 16px, para usar no gap (sem os hífens).',
+            highlight: ['variável'],
+            codeLanguage: 'CSS',
+            code: ':root {\n  --espaco: 16px;\n}\n.card {\n  gap: var(--___);\n}',
+            answers: ['espaco'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the variable that holds 16px, to use in gap (without the dashes).',
+            highlight: ['variable'],
+            codeLanguage: 'CSS',
+            code: ':root {\n  --space: 16px;\n}\n.card {\n  gap: var(--___);\n}',
+            answers: ['space'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -12622,6 +17338,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.menu {\n  display: ___;\n}\n.showcase {\n  display: ___;\n}',
             answers: ['flex', 'grid'],
             distractors: ['block', 'inline']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que organiza o .menu em uma única direção, com Flexbox (display flex).',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            lines: ['.menu {', '  display: flex;', '}'],
+            distractors: ['  display: grid;', '  display: row;']
+          },
+          en: {
+            question: 'Build the rule that lays out .menu in a single direction, with Flexbox (display flex).',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            lines: ['.menu {', '  display: flex;', '}'],
+            distractors: ['  display: grid;', '  display: row;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra controla linhas e colunas ao mesmo tempo?',
+            codeLanguage: 'CSS',
+            highlight: ['linhas e colunas'],
+            correctOption: 1,
+            options: ['.vitrine {\n  display: grid;\n}', '.vitrine {\n  display: flex;\n}', '.vitrine {\n  display: block;\n}', '.vitrine {\n  display: inline;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule controls rows and columns at the same time?',
+            codeLanguage: 'CSS',
+            highlight: ['rows and columns'],
+            correctOption: 1,
+            options: ['.shop {\n  display: grid;\n}', '.shop {\n  display: flex;\n}', '.shop {\n  display: block;\n}', '.shop {\n  display: inline;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor que espalha os itens do menu, com o espaço que sobra entre eles.',
+            highlight: ['espalha'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
+            answers: ['space-between'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the value that spreads the menu items, with the leftover space between them.',
+            highlight: ['spreads'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
+            answers: ['space-between'],
+            ignoreCase: true
           }
         }
       }
@@ -12758,6 +17535,67 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.page {\n  display: ___;\n}\n.card {\n  display: flex;\n  flex-direction: ___;\n}',
             answers: ['grid', 'column'],
             distractors: ['row', 'block']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que empilha os itens do .card em coluna (flex-direction column).',
+            highlight: ['coluna'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  flex-direction: column;', '}'],
+            distractors: ['  flex-direction: row;', '  direction: column;']
+          },
+          en: {
+            question: 'Build the rule that stacks the items of .card in a column (flex-direction column).',
+            highlight: ['column'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  flex-direction: column;', '}'],
+            distractors: ['  flex-direction: row;', '  direction: column;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra divide a .pagina em duas colunas, a primeira com o dobro da largura?',
+            codeLanguage: 'CSS',
+            highlight: ['duas colunas'],
+            correctOption: 1,
+            options: ['.pagina {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n}', '.pagina {\n  display: grid;\n  grid-template-columns:\n    1fr 2fr;\n}', '.pagina {\n  display: grid;\n  grid-template-columns:\n    2 1;\n}', '.pagina {\n  display: flex;\n  columns: 2fr 1fr;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule splits .page into two columns, the first one twice as wide?',
+            codeLanguage: 'CSS',
+            highlight: ['two columns'],
+            correctOption: 1,
+            options: ['.page {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n}', '.page {\n  display: grid;\n  grid-template-columns:\n    1fr 2fr;\n}', '.page {\n  display: grid;\n  grid-template-columns:\n    2 1;\n}', '.page {\n  display: flex;\n  columns: 2fr 1fr;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a fração da segunda coluna, que tem a metade da largura da primeira (2fr).',
+            highlight: ['segunda coluna'],
+            codeLanguage: 'CSS',
+            code: '.pagina {\n  grid-template-columns:\n    2fr ___;\n}',
+            answers: ['1fr'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the fraction for the second column, half as wide as the first (2fr).',
+            highlight: ['second column'],
+            codeLanguage: 'CSS',
+            code: '.page {\n  grid-template-columns:\n    2fr ___;\n}',
+            answers: ['1fr'],
+            ignoreCase: true
           }
         }
       }
@@ -13032,6 +17870,118 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['filter', 'find', 'forEach']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: n vale [1, 2, 3], dobrados recebe cada número de n vezes 2 (map) e dobrados é mostrado.',
+            highlight: ['map'],
+            codeLanguage: 'JavaScript',
+            lines: ['const n = [1, 2, 3];', 'const dobrados =', '  n.map(x => x * 2);', 'console.log(dobrados);'],
+            distractors: ['  n.forEach(x => x * 2);']
+          },
+          en: {
+            question: 'Build the code: n is [1, 2, 3], doubled gets each number of n times 2 (map) and doubled is shown.',
+            highlight: ['map'],
+            codeLanguage: 'JavaScript',
+            lines: ['const n = [1, 2, 3];', 'const doubled =', '  n.map(x => x * 2);', 'console.log(doubled);'],
+            distractors: ['  n.forEach(x => x * 2);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão devolve [2, 4], só os números pares?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3, 4];',
+            highlight: ['pares'],
+            correctOption: 1,
+            options: ['n.filter(x => x % 2 === 0)', 'n.map(x => x % 2 === 0)', 'n.find(x => x % 2 === 0)', 'n.some(x => x % 2 === 0)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression returns [2, 4], only the even numbers?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3, 4];',
+            highlight: ['even numbers'],
+            correctOption: 1,
+            options: ['n.filter(x => x % 2 === 0)', 'n.map(x => x % 2 === 0)', 'n.find(x => x % 2 === 0)', 'n.some(x => x % 2 === 0)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada método de array ao que ele faz.',
+            highlight: ['método de array'],
+            pairs: [
+              {
+                left: 'map',
+                right: 'Transforma cada elemento'
+              },
+              {
+                left: 'filter',
+                right: 'Mantém só os que passam no teste'
+              },
+              {
+                left: 'find',
+                right: 'Devolve o primeiro que passa'
+              },
+              {
+                left: 'some',
+                right: 'Diz se ao menos um passa'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each array method to what it does.',
+            highlight: ['array method'],
+            pairs: [
+              {
+                left: 'map',
+                right: 'Transforms each element'
+              },
+              {
+                left: 'filter',
+                right: 'Keeps only those that pass the test'
+              },
+              {
+                left: 'find',
+                right: 'Returns the first one that passes'
+              },
+              {
+                left: 'some',
+                right: 'Says if at least one passes'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que cria um array só com os números pares.',
+            highlight: ['números pares'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3, 4];\nconst p = n.___(\n  x => x % 2 === 0\n);\nconsole.log(p);',
+            answers: ['filter']
+          },
+          en: {
+            question: 'Type the method that builds an array with only the even numbers.',
+            highlight: ['even numbers'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3, 4];\nconst p = n.___(\n  x => x % 2 === 0\n);\nconsole.log(p);',
+            answers: ['filter']
+          }
+        }
       }
     ]
   },
@@ -13168,6 +18118,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const n = [10, 20, 30];\n\nconst total = n.___(\n  (s, x) => s + x,\n  ___\n);\nconsole.log(total);',
             answers: ['reduce', '0'],
             distractors: ['map', '1', '[]']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: n vale [10, 20, 30], total soma todos os números com reduce começando em 0, e total é mostrado.',
+            highlight: ['reduce'],
+            codeLanguage: 'JavaScript',
+            lines: ['const n = [10, 20, 30];', 'const total = n.reduce(', '  (s, x) => s + x,', '  0', ');', 'console.log(total);'],
+            distractors: ['  (s, x) => s * x,']
+          },
+          en: {
+            question: 'Build the code: n is [10, 20, 30], total adds up all the numbers with reduce starting at 0, and total is shown.',
+            highlight: ['reduce'],
+            codeLanguage: 'JavaScript',
+            lines: ['const n = [10, 20, 30];', 'const total = n.reduce(', '  (s, x) => s + x,', '  0', ');', 'console.log(total);'],
+            distractors: ['  (s, x) => s * x,']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão soma todos os números de n?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];',
+            highlight: ['soma'],
+            correctOption: 1,
+            options: ['n.reduce((s, x) => s + x, 0)', 'n.map((s, x) => s + x)', 'n.filter(x => x + x)', 'n.reduce((s, x) => s * x, 0)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression adds up all the numbers in n?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];',
+            highlight: ['adds up'],
+            correctOption: 1,
+            options: ['n.reduce((s, x) => s + x, 0)', 'n.map((s, x) => s + x)', 'n.filter(x => x + x)', 'n.reduce((s, x) => s * x, 0)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que devolve o primeiro número maior que 5.',
+            highlight: ['primeiro'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [3, 8, 12];\nconst g = n.___(\n  x => x > 5\n);\nconsole.log(g);',
+            answers: ['find']
+          },
+          en: {
+            question: 'Type the method that returns the first number greater than 5.',
+            highlight: ['first'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [3, 8, 12];\nconst g = n.___(\n  x => x > 5\n);\nconsole.log(g);',
+            answers: ['find']
           }
         }
       }
@@ -13314,6 +18325,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['person', '"name"', 'nome']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: o objeto aluna tem nome "Ana" e depois idade 20; extraia nome e idade com destructuring e mostre os dois.',
+            highlight: ['destructuring'],
+            codeLanguage: 'JavaScript',
+            lines: ['const aluna = {', '  nome: "Ana",', '  idade: 20', '};', 'const { nome, idade } = aluna;', 'console.log(nome, idade);']
+          },
+          en: {
+            question: 'Build the code: the person object has name "Ana" and then age 20; pull out name and age with destructuring and show both.',
+            highlight: ['destructuring'],
+            codeLanguage: 'JavaScript',
+            lines: ['const person = {', '  name: "Ana",', '  age: 20', '};', 'const { name, age } = person;', 'console.log(name, age);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha guarda "verde" em segunda?',
+            codeLanguage: 'JavaScript',
+            code: 'const cores =\n  ["azul", "verde"];',
+            highlight: ['segunda'],
+            correctOption: 1,
+            options: ['const [, segunda] = cores;', 'const { segunda } = cores;', 'const [segunda] = cores;', 'const segunda = cores[2];'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line stores "green" in second?',
+            codeLanguage: 'JavaScript',
+            code: 'const colors =\n  ["blue", "green"];',
+            highlight: ['second'],
+            correctOption: 1,
+            options: ['const [, second] = colors;', 'const { second } = colors;', 'const [second] = colors;', 'const second = colors[2];'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade extraída de p com destructuring para mostrar a idade.',
+            highlight: ['destructuring'],
+            codeLanguage: 'JavaScript',
+            code: 'const p = { idade: 20 };\nconst { ___ } = p;\nconsole.log(idade);',
+            answers: ['idade']
+          },
+          en: {
+            question: 'Type the property pulled out of p with destructuring to show the age.',
+            highlight: ['destructuring'],
+            codeLanguage: 'JavaScript',
+            code: 'const p = { age: 20 };\nconst { ___ } = p;\nconsole.log(age);',
+            answers: ['age']
+          }
+        }
       }
     ]
   },
@@ -13454,6 +18524,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const a = [1, 2];\nconst b = [___a, 3];\n\nconsole.log(b);',
             answers: ['...'],
             distractors: ['..', '*', '&']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: a vale [1, 2]; b é um array novo com os itens de a (spread) e depois o 3; mostre b.',
+            highlight: ['spread'],
+            codeLanguage: 'JavaScript',
+            lines: ['const a = [1, 2];', 'const b = [...a, 3];', 'console.log(b);'],
+            distractors: ['const b = [a, 3];']
+          },
+          en: {
+            question: 'Build the code: a is [1, 2]; b is a new array with the items of a (spread) and then 3; show b.',
+            highlight: ['spread'],
+            codeLanguage: 'JavaScript',
+            lines: ['const a = [1, 2];', 'const b = [...a, 3];', 'console.log(b);'],
+            distractors: ['const b = [a, 3];']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual função reúne todos os argumentos num array chamado nums?',
+            codeLanguage: 'JavaScript',
+            highlight: ['todos os argumentos'],
+            correctOption: 1,
+            options: ['function f(...nums) {}', 'function f(nums...) {}', 'function f([nums]) {}', 'function f(nums) {}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which function gathers all the arguments into an array called nums?',
+            codeLanguage: 'JavaScript',
+            highlight: ['all the arguments'],
+            correctOption: 1,
+            options: ['function f(...nums) {}', 'function f(nums...) {}', 'function f([nums]) {}', 'function f(nums) {}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome que o parâmetro rest precisa ter para o return funcionar.',
+            highlight: ['rest'],
+            codeLanguage: 'JavaScript',
+            code: 'function contar(...___) {\n  return nums.length;\n}\nconsole.log(contar(1, 2));',
+            answers: ['nums']
+          },
+          en: {
+            question: 'Type the name the rest parameter needs for the return to work.',
+            highlight: ['rest'],
+            codeLanguage: 'JavaScript',
+            code: 'function count(...___) {\n  return nums.length;\n}\nconsole.log(count(1, 2));',
+            answers: ['nums']
           }
         }
       }
@@ -13602,6 +18731,67 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['"', '\'']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: nome vale "Ana", msg é o template literal com crases `Olá, ${nome}!` e msg é mostrada.',
+            highlight: ['template literal'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "Ana";', 'const msg = `Olá, ${nome}!`;', 'console.log(msg);'],
+            distractors: ['const msg = "Olá, ${nome}!";']
+          },
+          en: {
+            question: 'Build the code: name is "Ana", msg is the template literal with backticks `Hi, ${name}!` and msg is shown.',
+            highlight: ['template literal'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "Ana";', 'const msg = `Hi, ${name}!`;', 'console.log(msg);'],
+            distractors: ['const msg = "Hi, ${name}!";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como u não tem a propriedade end, qual expressão devolve "Sem cidade" sem dar erro?',
+            codeLanguage: 'JavaScript',
+            code: 'const u = {};',
+            highlight: ['sem dar erro'],
+            correctOption: 1,
+            options: ['u.end?.cidade ?? "Sem cidade"', 'u.end.cidade ?? "Sem cidade"', 'u.end?.cidade', 'u.end.cidade || "Sem cidade"'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Since u has no end property, which expression returns "No city" without an error?',
+            codeLanguage: 'JavaScript',
+            code: 'const u = {};',
+            highlight: ['without an error'],
+            correctOption: 1,
+            options: ['u.end?.city ?? "No city"', 'u.end.city ?? "No city"', 'u.end?.city', 'u.end.city || "No city"'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a variável inserida no template literal para mostrar "Oi, Ana".',
+            highlight: ['template literal'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "Ana";\nconsole.log(`Oi, ${___}`);',
+            answers: ['nome']
+          },
+          en: {
+            question: 'Type the variable inserted in the template literal to show "Hi, Ana".',
+            highlight: ['template literal'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "Ana";\nconsole.log(`Hi, ${___}`);',
+            answers: ['name']
+          }
+        }
       }
     ]
   },
@@ -13736,6 +18926,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '___ { add }\n  ___ "./math.js";',
             answers: ['import', 'from'],
             distractors: ['export', 'require', 'in']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: importe somar de "./math.js", guarde em r o resultado de somar(2, 3) e mostre r.',
+            highlight: ['importe'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { somar }', '  from "./math.js";', 'const r = somar(2, 3);', 'console.log(r);'],
+            distractors: ['require { somar }']
+          },
+          en: {
+            question: 'Build the code: import sum from "./math.js", store in r the result of sum(2, 3) and show r.',
+            highlight: ['import'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { sum }', '  from "./math.js";', 'const r = sum(2, 3);', 'console.log(r);'],
+            distractors: ['require { sum }']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha deixa a função somar disponível para outros arquivos?',
+            codeLanguage: 'JavaScript',
+            highlight: ['outros arquivos'],
+            correctOption: 1,
+            options: ['export function somar() {}', 'import function somar() {}', 'public function somar() {}', 'module function somar() {}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line makes the sum function available to other files?',
+            codeLanguage: 'JavaScript',
+            highlight: ['other files'],
+            correctOption: 1,
+            options: ['export function sum() {}', 'import function sum() {}', 'public function sum() {}', 'module function sum() {}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que deixa somar disponível para outros arquivos.',
+            highlight: ['outros arquivos'],
+            codeLanguage: 'JavaScript',
+            code: '___ function somar(a, b) {\n  return a + b;\n}',
+            answers: ['export']
+          },
+          en: {
+            question: 'Type the word that makes sum available to other files.',
+            highlight: ['other files'],
+            codeLanguage: 'JavaScript',
+            code: '___ function sum(a, b) {\n  return a + b;\n}',
+            answers: ['export']
           }
         }
       }
@@ -13888,6 +19137,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const t = document\n  .___("#title");\n\nt.___ = "Hi!";',
             answers: ['querySelector', 'textContent'],
             distractors: ['select', 'value', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: pegue o elemento de id titulo com querySelector e troque o texto dele para "Olá!".',
+            highlight: ['querySelector'],
+            codeLanguage: 'JavaScript',
+            lines: ['const titulo =', '  document.querySelector(', '    "#titulo"', '  );', 'titulo.textContent = "Olá!";'],
+            distractors: ['    ".titulo"']
+          },
+          en: {
+            question: 'Build the code: get the element with id title using querySelector and change its text to "Hi!".',
+            highlight: ['querySelector'],
+            codeLanguage: 'JavaScript',
+            lines: ['const title =', '  document.querySelector(', '    "#title"', '  );', 'title.textContent = "Hi!";'],
+            distractors: ['    ".title"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão cria um novo item de lista?',
+            codeLanguage: 'JavaScript',
+            highlight: ['novo item'],
+            correctOption: 1,
+            options: ['document.createElement("li")', 'document.querySelector("li")', 'new Element("li")', 'document.create("li")'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression creates a new list item?',
+            codeLanguage: 'JavaScript',
+            highlight: ['new list item'],
+            correctOption: 1,
+            options: ['document.createElement("li")', 'document.querySelector("li")', 'new Element("li")', 'document.create("li")'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que cria um novo elemento li.',
+            highlight: ['novo elemento'],
+            codeLanguage: 'JavaScript',
+            code: 'const li = document\n  .___("li");',
+            answers: ['createElement']
+          },
+          en: {
+            question: 'Type the method that creates a new li element.',
+            highlight: ['new li element'],
+            codeLanguage: 'JavaScript',
+            code: 'const li = document\n  .___("li");',
+            answers: ['createElement']
           }
         }
       }
@@ -14050,6 +19358,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['onClick', 'listen', 'switch']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: quando botao for clicado (click), alterne a classe "ativo" do cartao com toggle.',
+            highlight: ['toggle'],
+            codeLanguage: 'JavaScript',
+            lines: ['botao.addEventListener(', '  "click",', '  () => cartao.classList', '    .toggle("ativo")', ');'],
+            distractors: ['  "onclick",']
+          },
+          en: {
+            question: 'Build the code: when button is clicked (click), toggle the "active" class of card.',
+            highlight: ['toggle'],
+            codeLanguage: 'JavaScript',
+            lines: ['button.addEventListener(', '  "click",', '  () => card.classList', '    .toggle("active")', ');'],
+            distractors: ['  "onclick",']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho executa mostrar quando o botão b é clicado?',
+            codeLanguage: 'JavaScript',
+            highlight: ['clicado'],
+            correctOption: 1,
+            options: ['b.addEventListener(\n  "click",\n  mostrar\n);', 'b.addEventListener(\n  "click",\n  mostrar()\n);', 'b.addEventListener(\n  "clique",\n  mostrar\n);', 'b.listen(\n  "click",\n  mostrar\n);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet runs show when button b is clicked?',
+            codeLanguage: 'JavaScript',
+            highlight: ['clicked'],
+            correctOption: 1,
+            options: ['b.addEventListener(\n  "click",\n  show\n);', 'b.addEventListener(\n  "click",\n  show()\n);', 'b.addEventListener(\n  "press",\n  show\n);', 'b.listen(\n  "click",\n  show\n);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método de classList que só adiciona a classe "ativo", sem alternar.',
+            highlight: ['só adiciona'],
+            codeLanguage: 'JavaScript',
+            code: 'card.classList.___("ativo");',
+            answers: ['add']
+          },
+          en: {
+            question: 'Type the classList method that only adds the "active" class, without toggling.',
+            highlight: ['only adds'],
+            codeLanguage: 'JavaScript',
+            code: 'card.classList.___("active");',
+            answers: ['add']
+          }
+        }
       }
     ]
   },
@@ -14188,6 +19555,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const txt =\n  JSON.___({ a: 1 });\nconst obj =\n  JSON.___(txt);\nconsole.log(obj.a);',
             answers: ['stringify', 'parse'],
             distractors: ['toString', 'read', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: transforme { a: 1 } em texto com JSON.stringify, volte para objeto com JSON.parse e mostre obj.a.',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            lines: ['const txt =', '  JSON.stringify({ a: 1 });', 'const obj = JSON.parse(txt);', 'console.log(obj.a);'],
+            distractors: ['const obj = txt.parse();']
+          },
+          en: {
+            question: 'Build the code: turn { a: 1 } into text with JSON.stringify, back into an object with JSON.parse and show obj.a.',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            lines: ['const txt =', '  JSON.stringify({ a: 1 });', 'const obj = JSON.parse(txt);', 'console.log(obj.a);'],
+            distractors: ['const obj = txt.parse();']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho salva o objeto u no localStorage?',
+            codeLanguage: 'JavaScript',
+            highlight: ['localStorage'],
+            correctOption: 1,
+            options: ['localStorage.setItem(\n  "u",\n  JSON.stringify(u)\n);', 'localStorage.setItem(\n  "u",\n  u\n);', 'localStorage.save(\n  "u",\n  u\n);', 'localStorage.getItem(\n  "u",\n  JSON.stringify(u)\n);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet saves the object u in localStorage?',
+            codeLanguage: 'JavaScript',
+            highlight: ['localStorage'],
+            correctOption: 1,
+            options: ['localStorage.setItem(\n  "u",\n  JSON.stringify(u)\n);', 'localStorage.setItem(\n  "u",\n  u\n);', 'localStorage.save(\n  "u",\n  u\n);', 'localStorage.getItem(\n  "u",\n  JSON.stringify(u)\n);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que salva o valor "Ana" na chave nome do localStorage.',
+            highlight: ['salva'],
+            codeLanguage: 'JavaScript',
+            code: 'localStorage.___(\n  "nome", "Ana"\n);',
+            answers: ['setItem']
+          },
+          en: {
+            question: 'Type the method that saves the value "Ana" under the name key in localStorage.',
+            highlight: ['saves'],
+            codeLanguage: 'JavaScript',
+            code: 'localStorage.___(\n  "name", "Ana"\n);',
+            answers: ['setItem']
           }
         }
       }
@@ -14387,6 +19813,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['finally', 'throw', 'if']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o try/catch: tente ler o JSON "x" com JSON.parse e, se falhar, mostre "falhou" no catch.',
+            highlight: ['try', 'catch'],
+            codeLanguage: 'JavaScript',
+            lines: ['try {', '  JSON.parse("x");', '} catch (erro) {', '  console.log("falhou");', '}'],
+            distractors: ['} except (erro) {']
+          },
+          en: {
+            question: 'Build the try/catch: try to read the JSON "x" with JSON.parse and, if it fails, show "failed" in the catch.',
+            highlight: ['try', 'catch'],
+            codeLanguage: 'JavaScript',
+            lines: ['try {', '  JSON.parse("x");', '} catch (error) {', '  console.log("failed");', '}'],
+            distractors: ['} except (error) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual função lança um erro quando b é 0?',
+            codeLanguage: 'JavaScript',
+            highlight: ['lança um erro'],
+            correctOption: 1,
+            options: ['function d(a, b) {\n  if (b === 0) {\n    throw new Error("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    return new Error("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    console.log("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    catch new Error("zero");\n  }\n  return a / b;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which function throws an error when b is 0?',
+            codeLanguage: 'JavaScript',
+            highlight: ['throws an error'],
+            correctOption: 1,
+            options: ['function d(a, b) {\n  if (b === 0) {\n    throw new Error("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    return new Error("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    console.log("zero");\n  }\n  return a / b;\n}', 'function d(a, b) {\n  if (b === 0) {\n    catch new Error("zero");\n  }\n  return a / b;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o bloco que roda sempre, com ou sem erro.',
+            highlight: ['roda sempre'],
+            codeLanguage: 'JavaScript',
+            code: 'try {\n  JSON.parse("x");\n} catch (e) {\n  console.log("erro");\n} ___ {\n  console.log("fim");\n}',
+            answers: ['finally']
+          },
+          en: {
+            question: 'Type the block that always runs, with or without an error.',
+            highlight: ['always runs'],
+            codeLanguage: 'JavaScript',
+            code: 'try {\n  JSON.parse("x");\n} catch (e) {\n  console.log("error");\n} ___ {\n  console.log("end");\n}',
+            answers: ['finally']
+          }
+        }
       }
     ]
   },
@@ -14523,6 +20008,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
             answers: ['json', 'then'],
             distractors: ['parse', 'catch', 'data']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: busque "/api/users" com fetch, transforme a resposta em JSON e mostre os dados no console.',
+            highlight: ['fetch'],
+            codeLanguage: 'JavaScript',
+            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(dados =>', '    console.log(dados));'],
+            distractors: ['  .then(r => r.data)']
+          },
+          en: {
+            question: 'Build the code: get "/api/users" with fetch, turn the response into JSON and show the data in the console.',
+            highlight: ['fetch'],
+            codeLanguage: 'JavaScript',
+            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(data =>', '    console.log(data));'],
+            distractors: ['  .then(r => r.data)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho transforma a resposta do fetch em dados JavaScript?',
+            codeLanguage: 'JavaScript',
+            highlight: ['resposta'],
+            correctOption: 1,
+            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet turns the fetch response into JavaScript data?',
+            codeLanguage: 'JavaScript',
+            highlight: ['response'],
+            correctOption: 1,
+            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que faz a requisição HTTP para "/api/users".',
+            highlight: ['requisição HTTP'],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  await ___("/api/users");',
+            answers: ['fetch']
+          },
+          en: {
+            question: 'Type the function that makes the HTTP request to "/api/users".',
+            highlight: ['HTTP request'],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  await ___("/api/users");',
+            answers: ['fetch']
           }
         }
       }
@@ -14671,6 +20215,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'function greet(\n  name,\n  ___\n) {\n  callback("Hi, " + name);\n}\n\ngreet("Ana", console.log);',
             answers: ['callback'],
             distractors: ['return', 'function', 'log']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: saudar recebe nome e um callback (cb) e chama cb com "Oi, " + nome; depois, chame saudar com "Ana" e console.log.',
+            highlight: ['callback'],
+            codeLanguage: 'JavaScript',
+            lines: ['function saudar(nome, cb) {', '  cb("Oi, " + nome);', '}', 'saudar("Ana", console.log);'],
+            distractors: ['saudar("Ana", console.log());']
+          },
+          en: {
+            question: 'Build the code: greet takes name and a callback (cb) and calls cb with "Hi, " + name; then call greet with "Ana" and console.log.',
+            highlight: ['callback'],
+            codeLanguage: 'JavaScript',
+            lines: ['function greet(name, cb) {', '  cb("Hi, " + name);', '}', 'greet("Ana", console.log);'],
+            distractors: ['greet("Ana", console.log());']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual chamada passa mostrar como callback, sem executá-la na hora?',
+            codeLanguage: 'JavaScript',
+            highlight: ['callback'],
+            correctOption: 1,
+            options: ['executar(mostrar);', 'executar(mostrar());', 'executar("mostrar");', 'mostrar(executar);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which call passes show as a callback, without running it right away?',
+            codeLanguage: 'JavaScript',
+            highlight: ['callback'],
+            correctOption: 1,
+            options: ['run(show);', 'run(show());', 'run("show");', 'show(run);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o objeto cujo método log é passado como callback para saudar.',
+            highlight: ['callback'],
+            codeLanguage: 'JavaScript',
+            code: 'function saudar(nome, cb) {\n  cb("Oi, " + nome);\n}\nsaudar("Ana", ___.log);',
+            answers: ['console']
+          },
+          en: {
+            question: 'Type the object whose log method is passed as the callback to greet.',
+            highlight: ['callback'],
+            codeLanguage: 'JavaScript',
+            code: 'function greet(name, cb) {\n  cb("Hi, " + name);\n}\ngreet("Ana", ___.log);',
+            answers: ['console']
           }
         }
       }
@@ -14878,6 +20481,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             distractors: ['finally', 'done', 'error']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: chame buscar(); se der certo, chame mostrar (then); se falhar, chame avisar (catch).',
+            highlight: ['then', 'catch'],
+            codeLanguage: 'JavaScript',
+            lines: ['buscar()', '  .then(mostrar)', '  .catch(avisar);'],
+            distractors: ['  .error(avisar);']
+          },
+          en: {
+            question: 'Build the code: call load(); when it works, call show (then); when it fails, call warn (catch).',
+            highlight: ['then', 'catch'],
+            codeLanguage: 'JavaScript',
+            lines: ['load()', '  .then(show)', '  .catch(warn);'],
+            distractors: ['  .error(warn);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quais são os três estados de uma Promise?',
+            codeLanguage: 'JavaScript',
+            highlight: ['três estados'],
+            correctOption: 1,
+            options: ['pending, fulfilled, rejected', 'waiting, done, error', 'start, middle, end', 'open, closed, broken'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What are the three states of a Promise?',
+            codeLanguage: 'JavaScript',
+            highlight: ['three states'],
+            correctOption: 1,
+            options: ['pending, fulfilled, rejected', 'waiting, done, error', 'start, middle, end', 'open, closed, broken'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que conclui a Promise com o valor "pronto".',
+            highlight: ['conclui'],
+            codeLanguage: 'JavaScript',
+            code: 'new Promise((resolve) =>\n  ___("pronto")\n).then(console.log);',
+            answers: ['resolve']
+          },
+          en: {
+            question: 'Type the function that completes the Promise with the value "ready".',
+            highlight: ['completes'],
+            codeLanguage: 'JavaScript',
+            code: 'new Promise((resolve) =>\n  ___("ready")\n).then(console.log);',
+            answers: ['resolve']
+          }
+        }
       }
     ]
   },
@@ -15079,6 +20741,65 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '___ function load() {\n  const r =\n    ___ fetch("/api");\n  return r.json();\n}',
             answers: ['async', 'await'],
             distractors: ['then', 'promise', 'sync']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função async carregar: espere (await) o fetch de "/api" em r e devolva r.json().',
+            highlight: ['async', 'await'],
+            codeLanguage: 'JavaScript',
+            lines: ['async function carregar() {', '  const r =', '    await fetch("/api");', '  return r.json();', '}'],
+            distractors: ['function async carregar() {']
+          },
+          en: {
+            question: 'Build the async function load: wait (await) for the fetch of "/api" in r and return r.json().',
+            highlight: ['async', 'await'],
+            codeLanguage: 'JavaScript',
+            lines: ['async function load() {', '  const r =', '    await fetch("/api");', '  return r.json();', '}'],
+            distractors: ['function async load() {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual função o await pode ser usado?',
+            codeLanguage: 'JavaScript',
+            highlight: ['await'],
+            correctOption: 1,
+            options: ['async function f() {\n  await g();\n}', 'function f() {\n  await g();\n}', 'function async f() {\n  await g();\n}', 'await function f() {\n  g();\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In which function can await be used?',
+            codeLanguage: 'JavaScript',
+            highlight: ['await'],
+            correctOption: 1,
+            options: ['async function f() {\n  await g();\n}', 'function f() {\n  await g();\n}', 'function async f() {\n  await g();\n}', 'await function f() {\n  g();\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o bloco que trata o erro do await.',
+            highlight: ['trata o erro'],
+            codeLanguage: 'JavaScript',
+            code: 'async function f() {\n  try {\n    await g();\n  } ___ (e) {\n    console.log(e);\n  }\n}',
+            answers: ['catch']
+          },
+          en: {
+            question: 'Type the block that handles the error from await.',
+            highlight: ['handles the error'],
+            codeLanguage: 'JavaScript',
+            code: 'async function f() {\n  try {\n    await g();\n  } ___ (e) {\n    console.log(e);\n  }\n}',
+            answers: ['catch']
           }
         }
       }
@@ -15310,6 +21031,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['alt', 'cite', 'name']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um parágrafo com a abreviação API, explicada pelo title "Interface".',
+            highlight: ['abreviação', 'title'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  <abbr title="Interface">', '    API', '  </abbr>', '</p>'],
+            distractors: ['  <abbr alt="Interface">']
+          },
+          en: {
+            question: 'Build a paragraph with the abbreviation API, explained by the title "Interface".',
+            highlight: ['abbreviation', 'title'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  <abbr title="Interface">', '    API', '  </abbr>', '</p>'],
+            distractors: ['  <abbr alt="Interface">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento é o certo para uma citação longa, em bloco?',
+            codeLanguage: 'HTML',
+            highlight: ['citação longa'],
+            correctOption: 1,
+            options: ['<blockquote>', '<q>', '<cite>', '<quote>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which element is right for a long quotation, as a block?',
+            codeLanguage: 'HTML',
+            highlight: ['long quotation'],
+            correctOption: 1,
+            options: ['<blockquote>', '<q>', '<cite>', '<quote>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que marca "Dom Casmurro" como título de uma obra.',
+            highlight: ['título de uma obra'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  <___>Dom Casmurro</cite>\n</p>',
+            answers: ['cite'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that marks "Moby Dick" as the title of a work.',
+            highlight: ['title of a work'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  <___>Moby Dick</cite>\n</p>',
+            answers: ['cite'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -15436,6 +21218,118 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<p>Press <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
             answers: ['kbd', 'code'],
             distractors: ['samp', 'pre']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o parágrafo "Aperte Ctrl" com Ctrl marcado como tecla e, abaixo dele, um parágrafo com a saída de programa "Salvo.".',
+            highlight: ['tecla', 'saída'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Aperte <kbd>Ctrl</kbd>', '</p>', '<p><samp>Salvo.</samp></p>'],
+            distractors: ['  Aperte <key>Ctrl</key>']
+          },
+          en: {
+            question: 'Build the paragraph "Press Ctrl" with Ctrl marked as a key and, below it, a paragraph with the program output "Saved.".',
+            highlight: ['key', 'output'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Press <kbd>Ctrl</kbd>', '</p>', '<p><samp>Saved.</samp></p>'],
+            distractors: ['  Press <key>Ctrl</key>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento preserva os espaços e as quebras de linha do texto?',
+            codeLanguage: 'HTML',
+            highlight: ['preserva'],
+            correctOption: 1,
+            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which element keeps the spaces and line breaks of the text?',
+            codeLanguage: 'HTML',
+            highlight: ['keeps'],
+            correctOption: 1,
+            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento ao conteúdo técnico que ele representa.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<code>',
+                right: 'Trecho de código'
+              },
+              {
+                left: '<pre>',
+                right: 'Mantém espaços e quebras de linha'
+              },
+              {
+                left: '<kbd>',
+                right: 'Tecla ou entrada do usuário'
+              },
+              {
+                left: '<samp>',
+                right: 'Saída de um programa'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to the technical content it represents.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<code>',
+                right: 'Piece of code'
+              },
+              {
+                left: '<pre>',
+                right: 'Keeps spaces and line breaks'
+              },
+              {
+                left: '<kbd>',
+                right: 'Key or user input'
+              },
+              {
+                left: '<samp>',
+                right: 'Output of a program'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que marca "OK" como saída de um programa.',
+            highlight: ['saída'],
+            codeLanguage: 'HTML',
+            code: '<p>Saída: <___>OK</samp></p>',
+            answers: ['samp'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that marks "OK" as the output of a program.',
+            highlight: ['output'],
+            codeLanguage: 'HTML',
+            code: '<p>Result: <___>OK</samp></p>',
+            answers: ['samp'],
+            ignoreCase: true
           }
         }
       }
@@ -15566,6 +21460,118 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<___>$100</del>\n<___>$80</ins>',
             answers: ['del', 'ins'],
             distractors: ['sub', 'sup', 'mark']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o preço: "De", o valor R$ 100 marcado como removido e, depois, o novo valor R$ 80 marcado como inserido.',
+            highlight: ['removido', 'inserido'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  De <del>R$ 100</del>', '  <ins>R$ 80</ins>', '</p>'],
+            distractors: ['  <new>R$ 80</new>']
+          },
+          en: {
+            question: 'Build the price: "From", the value $100 marked as removed and, then, the new value $80 marked as inserted.',
+            highlight: ['removed', 'inserted'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  From <del>$100</del>', '  <ins>$80</ins>', '</p>'],
+            distractors: ['  <new>$80</new>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho escreve H2O com o 2 abaixo da linha?',
+            codeLanguage: 'HTML',
+            highlight: ['abaixo da linha'],
+            correctOption: 1,
+            options: ['H<sub>2</sub>O', 'H<sup>2</sup>O', 'H<small>2</small>O', 'H<low>2</low>O'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet writes H2O with the 2 below the line?',
+            codeLanguage: 'HTML',
+            highlight: ['below the line'],
+            correctOption: 1,
+            options: ['H<sub>2</sub>O', 'H<sup>2</sup>O', 'H<small>2</small>O', 'H<low>2</low>O'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento ao seu significado.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<mark>',
+                right: 'Destaca um trecho relevante'
+              },
+              {
+                left: '<small>',
+                right: 'Texto secundário, como aviso legal'
+              },
+              {
+                left: '<del>',
+                right: 'Trecho removido'
+              },
+              {
+                left: '<sup>',
+                right: 'Texto acima da linha'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to its meaning.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<mark>',
+                right: 'Highlights a relevant passage'
+              },
+              {
+                left: '<small>',
+                right: 'Side text, like a legal note'
+              },
+              {
+                left: '<del>',
+                right: 'Removed passage'
+              },
+              {
+                left: '<sup>',
+                right: 'Text above the line'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que destaca "3 dias" como o trecho relevante.',
+            highlight: ['destaca'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Prazo: <___>3 dias</mark>\n</p>',
+            answers: ['mark'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that highlights "3 days" as the relevant part.',
+            highlight: ['highlights'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Due: <___>3 days</mark>\n</p>',
+            answers: ['mark'],
+            ignoreCase: true
           }
         }
       }
@@ -15702,6 +21708,65 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['date', 'value', 'time']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o parágrafo "Publicado em" seguido da data "10 de setembro", com o datetime 2026-09-10.',
+            highlight: ['datetime'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Publicado em', '  <time datetime="2026-09-10">', '    10 de setembro', '  </time>', '</p>']
+          },
+          en: {
+            question: 'Build the paragraph "Published on" followed by the date "September 10", with the datetime 2026-09-10.',
+            highlight: ['datetime'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Published on', '  <time datetime="2026-09-10">', '    September 10', '  </time>', '</p>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho deixa a data legível para máquinas?',
+            codeLanguage: 'HTML',
+            highlight: ['máquinas'],
+            correctOption: 1,
+            options: ['<time datetime="2026-01-05">\n  5 de janeiro\n</time>', '<time>5 de janeiro</time>', '<date value="2026-01-05">\n  5 de janeiro\n</date>', '<time date="2026-01-05">\n  5 de janeiro\n</time>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet makes the date readable by machines?',
+            codeLanguage: 'HTML',
+            highlight: ['machines'],
+            correctOption: 1,
+            options: ['<time datetime="2026-01-05">\n  January 5\n</time>', '<time>January 5</time>', '<date value="2026-01-05">\n  January 5\n</date>', '<time date="2026-01-05">\n  January 5\n</time>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que guarda o valor 42 para máquinas e mostra "Produto #42".',
+            highlight: ['para máquinas'],
+            codeLanguage: 'HTML',
+            code: '<___ value="42">\n  Produto #42\n</data>',
+            answers: ['data'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that stores the value 42 for machines and shows "Product #42".',
+            highlight: ['for machines'],
+            codeLanguage: 'HTML',
+            code: '<___ value="42">\n  Product #42\n</data>',
+            answers: ['data'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -15830,6 +21895,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<video ___>\n  <___ src="caps.vtt"\n    kind="captions">\n</video>',
             answers: ['controls', 'track'],
             distractors: ['source', 'autoplay', 'caption']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um video com controles, a fonte video.mp4 e, depois dela, a legenda leg.vtt (kind captions).',
+            highlight: ['video', 'legenda'],
+            codeLanguage: 'HTML',
+            lines: ['<video controls>', '  <source src="video.mp4">', '  <track src="leg.vtt"', '    kind="captions">', '</video>'],
+            distractors: ['  <caption src="leg.vtt">']
+          },
+          en: {
+            question: 'Build a video with controls, the source video.mp4 and, after it, the subtitles subs.vtt (kind captions).',
+            highlight: ['video', 'subtitles'],
+            codeLanguage: 'HTML',
+            lines: ['<video controls>', '  <source src="video.mp4">', '  <track src="subs.vtt"', '    kind="captions">', '</video>'],
+            distractors: ['  <caption src="subs.vtt">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual áudio mostra os botões de tocar e pausar?',
+            codeLanguage: 'HTML',
+            highlight: ['botões'],
+            correctOption: 1,
+            options: ['<audio controls>\n  <source src="a.mp3">\n</audio>', '<audio>\n  <source src="a.mp3">\n</audio>', '<audio buttons>\n  <source src="a.mp3">\n</audio>', '<sound controls>\n  <source src="a.mp3">\n</sound>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which audio shows the play and pause buttons?',
+            codeLanguage: 'HTML',
+            highlight: ['buttons'],
+            correctOption: 1,
+            options: ['<audio controls>\n  <source src="a.mp3">\n</audio>', '<audio>\n  <source src="a.mp3">\n</audio>', '<audio buttons>\n  <source src="a.mp3">\n</audio>', '<sound controls>\n  <source src="a.mp3">\n</sound>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que toca o áudio a.mp3, com controles.',
+            highlight: ['áudio'],
+            codeLanguage: 'HTML',
+            code: '<___ controls>\n  <source src="a.mp3">\n</audio>',
+            answers: ['audio'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that plays the audio a.mp3, with controls.',
+            highlight: ['audio'],
+            codeLanguage: 'HTML',
+            code: '<___ controls>\n  <source src="a.mp3">\n</audio>',
+            answers: ['audio'],
+            ignoreCase: true
           }
         }
       }
@@ -15964,6 +22090,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<iframe src="map.html"\n  ___="Store map"\n  ___>\n</iframe>',
             answers: ['title', 'sandbox'],
             distractors: ['alt', 'name', 'hidden']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um iframe que mostra mapa.html, com o title "Mapa" para leitores de tela.',
+            highlight: ['iframe', 'title'],
+            codeLanguage: 'HTML',
+            lines: ['<iframe src="mapa.html"', '  title="Mapa">', '</iframe>'],
+            distractors: ['  alt="Mapa">', '<frame src="mapa.html"']
+          },
+          en: {
+            question: 'Build an iframe that shows map.html, with the title "Map" for screen readers.',
+            highlight: ['iframe', 'title'],
+            codeLanguage: 'HTML',
+            lines: ['<iframe src="map.html"', '  title="Map">', '</iframe>'],
+            distractors: ['  alt="Map">', '<frame src="map.html"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo restringe o que a página incorporada pode fazer?',
+            codeLanguage: 'HTML',
+            highlight: ['restringe'],
+            correctOption: 1,
+            options: ['<iframe sandbox>', '<iframe secure>', '<iframe title>', '<iframe safe>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which attribute restricts what the embedded page can do?',
+            codeLanguage: 'HTML',
+            highlight: ['restricts'],
+            correctOption: 1,
+            options: ['<iframe sandbox>', '<iframe secure>', '<iframe title>', '<iframe safe>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que incorpora a página mapa.html dentro da página atual.',
+            highlight: ['incorpora'],
+            codeLanguage: 'HTML',
+            code: '<___ src="mapa.html"\n  title="Mapa">\n</iframe>',
+            answers: ['iframe'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that embeds the page map.html inside the current page.',
+            highlight: ['embeds'],
+            codeLanguage: 'HTML',
+            code: '<___ src="map.html"\n  title="Map">\n</iframe>',
+            answers: ['iframe'],
+            ignoreCase: true
           }
         }
       }
@@ -16108,6 +22295,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['canvas', 'img', 'round']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um svg de 80 por 80 com um circle no centro (cx 40, cy 40) e raio (r) 30.',
+            highlight: ['svg', 'circle'],
+            codeLanguage: 'HTML',
+            lines: ['<svg width="80"', '  height="80">', '  <circle cx="40" cy="40"', '    r="30" />', '</svg>'],
+            distractors: ['  <round cx="40" cy="40"']
+          },
+          en: {
+            question: 'Build an 80 by 80 svg with a circle in the center (cx 40, cy 40) and radius (r) 30.',
+            highlight: ['svg', 'circle'],
+            codeLanguage: 'HTML',
+            lines: ['<svg width="80"', '  height="80">', '  <circle cx="40" cy="40"', '    r="30" />', '</svg>'],
+            distractors: ['  <round cx="40" cy="40"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento é uma área de desenho controlada por JavaScript?',
+            codeLanguage: 'HTML',
+            highlight: ['área de desenho'],
+            correctOption: 1,
+            options: ['<canvas>', '<svg>', '<img>', '<draw>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which element is a drawing area controlled by JavaScript?',
+            codeLanguage: 'HTML',
+            highlight: ['drawing area'],
+            correctOption: 1,
+            options: ['<canvas>', '<svg>', '<img>', '<draw>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag da área de desenho controlada por JavaScript.',
+            highlight: ['área de desenho'],
+            codeLanguage: 'HTML',
+            code: '<___ id="tela"\n  width="200">\n</canvas>',
+            answers: ['canvas'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag for the drawing area controlled by JavaScript.',
+            highlight: ['drawing area'],
+            codeLanguage: 'HTML',
+            code: '<___ id="board"\n  width="200">\n</canvas>',
+            answers: ['canvas'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -16236,6 +22484,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['dialog', 'label', 'title']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um details com o resumo "Ver mais" e, depois dele, o parágrafo "Detalhes.".',
+            highlight: ['details', 'resumo'],
+            codeLanguage: 'HTML',
+            lines: ['<details>', '  <summary>Ver mais</summary>', '  <p>Detalhes.</p>', '</details>'],
+            distractors: ['  <title>Ver mais</title>']
+          },
+          en: {
+            question: 'Build a details element with the summary "See more" and, after it, the paragraph "Details.".',
+            highlight: ['details', 'summary'],
+            codeLanguage: 'HTML',
+            lines: ['<details>', '  <summary>See more</summary>', '  <p>Details.</p>', '</details>'],
+            distractors: ['  <title>See more</title>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho cria uma caixa de diálogo já aberta?',
+            codeLanguage: 'HTML',
+            highlight: ['caixa de diálogo'],
+            correctOption: 1,
+            options: ['<dialog open>\n  <p>Olá!</p>\n</dialog>', '<dialog>\n  <p>Olá!</p>\n</dialog>', '<modal open>\n  <p>Olá!</p>\n</modal>', '<details open>\n  <p>Olá!</p>\n</details>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet creates a dialog box that is already open?',
+            codeLanguage: 'HTML',
+            highlight: ['dialog box'],
+            correctOption: 1,
+            options: ['<dialog open>\n  <p>Hello!</p>\n</dialog>', '<dialog>\n  <p>Hello!</p>\n</dialog>', '<modal open>\n  <p>Hello!</p>\n</modal>', '<details open>\n  <p>Hello!</p>\n</details>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag da caixa de diálogo nativa, que aqui já está aberta.',
+            highlight: ['caixa de diálogo'],
+            codeLanguage: 'HTML',
+            code: '<___ open>\n  <p>Olá!</p>\n</dialog>',
+            answers: ['dialog'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag for the native dialog box, which is already open here.',
+            highlight: ['dialog box'],
+            codeLanguage: 'HTML',
+            code: '<___ open>\n  <p>Hello!</p>\n</dialog>',
+            answers: ['dialog'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -16362,6 +22671,108 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<p ___="en">Hello</p>\n<p ___>Secret</p>',
             answers: ['lang', 'hidden'],
             distractors: ['dir', 'title', 'alt']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte dois parágrafos: primeiro "Hello", marcado como inglês (lang en), depois "Secreto", escondido (hidden).',
+            highlight: ['inglês', 'escondido'],
+            codeLanguage: 'HTML',
+            lines: ['<p lang="en">', '  Hello', '</p>', '<p hidden>', '  Secreto', '</p>']
+          },
+          en: {
+            question: 'Build two paragraphs: first "Olá", marked as Portuguese (lang pt), then "Secret", hidden.',
+            highlight: ['Portuguese', 'hidden'],
+            codeLanguage: 'HTML',
+            lines: ['<p lang="pt">', '  Olá', '</p>', '<p hidden>', '  Secret', '</p>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho esconde o parágrafo da página?',
+            codeLanguage: 'HTML',
+            highlight: ['esconde'],
+            correctOption: 1,
+            options: ['<p hidden>Oi</p>', '<p hide>Oi</p>', '<p visible="no">Oi</p>', '<p lang="hidden">Oi</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet hides the paragraph from the page?',
+            codeLanguage: 'HTML',
+            highlight: ['hides'],
+            correctOption: 1,
+            options: ['<p hidden>Hi</p>', '<p hide>Hi</p>', '<p visible="no">Hi</p>', '<p lang="hidden">Hi</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada atributo global ao que ele faz.',
+            highlight: ['atributo global'],
+            pairs: [
+              {
+                left: 'hidden',
+                right: 'Esconde o elemento'
+              },
+              {
+                left: 'lang',
+                right: 'Indica o idioma do conteúdo'
+              },
+              {
+                left: 'dir',
+                right: 'Indica a direção do texto'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each global attribute to what it does.',
+            highlight: ['global attribute'],
+            pairs: [
+              {
+                left: 'hidden',
+                right: 'Hides the element'
+              },
+              {
+                left: 'lang',
+                right: 'States the language of the content'
+              },
+              {
+                left: 'dir',
+                right: 'States the direction of the text'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que define a direção do texto da direita para a esquerda (rtl).',
+            highlight: ['direção do texto'],
+            codeLanguage: 'HTML',
+            code: '<p ___="rtl">\n  texto\n</p>',
+            answers: ['dir'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that sets the text direction from right to left (rtl).',
+            highlight: ['text direction'],
+            codeLanguage: 'HTML',
+            code: '<p ___="rtl">\n  text\n</p>',
+            answers: ['dir'],
+            ignoreCase: true
           }
         }
       }
@@ -16496,6 +22907,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['aria', 'custom', 'meta']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um botão "Comprar" que guarda o id 42 no atributo data-id.',
+            highlight: ['data-id'],
+            codeLanguage: 'HTML',
+            lines: ['<button data-id="42">', '  Comprar', '</button>'],
+            distractors: ['<button id-data="42">', '<button data="42">']
+          },
+          en: {
+            question: 'Build a "Buy" button that stores the id 42 in the data-id attribute.',
+            highlight: ['data-id'],
+            codeLanguage: 'HTML',
+            lines: ['<button data-id="42">', '  Buy', '</button>'],
+            distractors: ['<button id-data="42">', '<button data="42">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como o JavaScript lê o data-product-id deste botão?',
+            codeLanguage: 'HTML',
+            code: 'const b =\n  document.querySelector(\n    "button"\n  );',
+            highlight: ['data-product-id'],
+            correctOption: 1,
+            options: ['b.dataset.productId', 'b.data.productId', 'b.dataset.product-id', 'b.productId'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'How does JavaScript read the data-product-id of this button?',
+            codeLanguage: 'HTML',
+            code: 'const b =\n  document.querySelector(\n    "button"\n  );',
+            highlight: ['data-product-id'],
+            correctOption: 1,
+            options: ['b.dataset.productId', 'b.data.productId', 'b.dataset.product-id', 'b.productId'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade do elemento que dá acesso aos atributos data-*.',
+            highlight: ['atributos'],
+            codeLanguage: 'JavaScript',
+            code: 'const b = document\n  .querySelector("button");\nb.___.productId;',
+            answers: ['dataset']
+          },
+          en: {
+            question: 'Type the element property that gives access to the data-* attributes.',
+            highlight: ['attributes'],
+            codeLanguage: 'JavaScript',
+            code: 'const b = document\n  .querySelector("button");\nb.___.productId;',
+            answers: ['dataset']
+          }
+        }
       }
     ]
   },
@@ -16626,6 +23098,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<p ___="true">\n  Edit here\n</p>\n<___ id="item">\n  <li>New</li>\n</template>',
             answers: ['contenteditable', 'template'],
             distractors: ['draggable', 'hidden', 'div']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um template de id item com o item de lista "Novo" dentro dele.',
+            highlight: ['template'],
+            codeLanguage: 'HTML',
+            lines: ['<template id="item">', '  <li>Novo</li>', '</template>'],
+            distractors: ['<hidden id="item">']
+          },
+          en: {
+            question: 'Build a template with id item and the list item "New" inside it.',
+            highlight: ['template'],
+            codeLanguage: 'HTML',
+            lines: ['<template id="item">', '  <li>New</li>', '</template>'],
+            distractors: ['<hidden id="item">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual parágrafo pode ser editado pelo usuário?',
+            codeLanguage: 'HTML',
+            highlight: ['editado'],
+            correctOption: 1,
+            options: ['<p contenteditable="true">\n  Edite\n</p>', '<p editable="true">\n  Edite\n</p>', '<p draggable="true">\n  Edite\n</p>', '<p input="true">\n  Edite\n</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which paragraph can be edited by the user?',
+            codeLanguage: 'HTML',
+            highlight: ['edited'],
+            correctOption: 1,
+            options: ['<p contenteditable="true">\n  Edit\n</p>', '<p editable="true">\n  Edit\n</p>', '<p draggable="true">\n  Edit\n</p>', '<p input="true">\n  Edit\n</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que deixa a div ser arrastada.',
+            highlight: ['arrastada'],
+            codeLanguage: 'HTML',
+            code: '<div ___="true">\n  Arraste\n</div>',
+            answers: ['draggable'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that lets the div be dragged.',
+            highlight: ['dragged'],
+            codeLanguage: 'HTML',
+            code: '<div ___="true">\n  Drag me\n</div>',
+            answers: ['draggable'],
+            ignoreCase: true
           }
         }
       }
@@ -16762,6 +23295,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['focus', 'tab', 'order']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com o texto "Foco" que entra na navegação por Tab (tabindex 0).',
+            highlight: ['Tab'],
+            codeLanguage: 'HTML',
+            lines: ['<div tabindex="0">', '  Foco', '</div>'],
+            distractors: ['<div tabindex="-1">', '<div focus="true">']
+          },
+          en: {
+            question: 'Build a div with the text "Focus" that joins Tab navigation (tabindex 0).',
+            highlight: ['Tab'],
+            codeLanguage: 'HTML',
+            lines: ['<div tabindex="0">', '  Focus', '</div>'],
+            distractors: ['<div tabindex="-1">', '<div focus="true">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual botão sai da navegação pelo teclado?',
+            codeLanguage: 'HTML',
+            highlight: ['teclado'],
+            correctOption: 1,
+            options: ['<button tabindex="-1">', '<button tabindex="0">', '<button>', '<button focus="off">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which button is taken out of keyboard navigation?',
+            codeLanguage: 'HTML',
+            highlight: ['keyboard'],
+            correctOption: 1,
+            options: ['<button tabindex="-1">', '<button tabindex="0">', '<button>', '<button focus="off">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de tabindex que tira o botão da navegação pelo teclado.',
+            highlight: ['teclado'],
+            codeLanguage: 'HTML',
+            code: '<button tabindex="___">\n  Sair\n</button>',
+            answers: ['-1'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the tabindex value that takes the button out of keyboard navigation.',
+            highlight: ['keyboard'],
+            codeLanguage: 'HTML',
+            code: '<button tabindex="___">\n  Exit\n</button>',
+            answers: ['-1'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -16894,6 +23488,65 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['section', 'id', 'name']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um main com o label "Nome" ligado ao campo de id nome e, depois do label, esse campo.',
+            highlight: ['main', 'label'],
+            codeLanguage: 'HTML',
+            lines: ['<main>', '  <label for="nome">', '    Nome', '  </label>', '  <input id="nome">', '</main>']
+          },
+          en: {
+            question: 'Build a main with the label "Name" linked to the field with id name and, after the label, that field.',
+            highlight: ['main', 'label'],
+            codeLanguage: 'HTML',
+            lines: ['<main>', '  <label for="name">', '    Name', '  </label>', '  <input id="name">', '</main>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho marca o conteúdo principal como landmark?',
+            codeLanguage: 'HTML',
+            highlight: ['landmark'],
+            correctOption: 1,
+            options: ['<main>Texto</main>', '<div>Texto</div>', '<principal>Texto</principal>', '<body-main>Texto</body-main>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet marks the main content as a landmark?',
+            codeLanguage: 'HTML',
+            highlight: ['landmark'],
+            correctOption: 1,
+            options: ['<main>Content</main>', '<div>Content</div>', '<principal>Content</principal>', '<body-main>Content</body-main>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag do landmark de navegação, com o link "Início".',
+            highlight: ['landmark'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <a href="/">Início</a>\n</nav>',
+            answers: ['nav'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag for the navigation landmark, with the link "Home".',
+            highlight: ['landmark'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <a href="/">Home</a>\n</nav>',
+            answers: ['nav'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -17024,6 +23677,67 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<button ___="Close">\n  ×\n</button>',
             answers: ['aria-label'],
             distractors: ['alt', 'title', 'role']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um botão que mostra o símbolo × e tem o nome acessível "Fechar" (aria-label).',
+            highlight: ['aria-label'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  aria-label="Fechar">', '  ×', '</button>'],
+            distractors: ['  alt="Fechar">']
+          },
+          en: {
+            question: 'Build a button that shows the symbol × and has the accessible name "Close" (aria-label).',
+            highlight: ['aria-label'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  aria-label="Close">', '  ×', '</button>'],
+            distractors: ['  alt="Close">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a melhor escolha para um botão "Salvar"?',
+            codeLanguage: 'HTML',
+            highlight: ['melhor escolha'],
+            correctOption: 1,
+            options: ['<button>Salvar</button>', '<div role="button">\n  Salvar\n</div>', '<span>Salvar</span>', '<a>Salvar</a>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is the best choice for a "Save" button?',
+            codeLanguage: 'HTML',
+            highlight: ['best choice'],
+            correctOption: 1,
+            options: ['<button>Save</button>', '<div role="button">\n  Save\n</div>', '<span>Save</span>', '<a>Save</a>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo ARIA que diz que esta div funciona como botão.',
+            highlight: ['ARIA'],
+            codeLanguage: 'HTML',
+            code: '<div ___="button">\n  Salvar\n</div>',
+            answers: ['role'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the ARIA attribute that says this div works as a button.',
+            highlight: ['ARIA'],
+            codeLanguage: 'HTML',
+            code: '<div ___="button">\n  Save\n</div>',
+            answers: ['role'],
+            ignoreCase: true
           }
         }
       }
@@ -17187,6 +23901,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['@screen', '@if', 'media']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a media query que, a partir de 768px de largura, deixa o .card com 50% de largura.',
+            highlight: ['media query'],
+            codeLanguage: 'CSS',
+            lines: ['@media (min-width: 768px) {', '  .card {', '    width: 50%;', '  }', '}'],
+            distractors: ['@media (max-width: 768px) {']
+          },
+          en: {
+            question: 'Build the media query that, from 768px wide up, gives .card 50% of the width.',
+            highlight: ['media query'],
+            codeLanguage: 'CSS',
+            lines: ['@media (min-width: 768px) {', '  .card {', '    width: 50%;', '  }', '}'],
+            distractors: ['@media (max-width: 768px) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual media query vale para telas de até 600px?',
+            codeLanguage: 'CSS',
+            highlight: ['até 600px'],
+            correctOption: 1,
+            options: ['@media (max-width: 600px)', '@media (min-width: 600px)', '@media (width: 600px)', '@media (screen: 600px)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which media query applies to screens up to 600px?',
+            codeLanguage: 'CSS',
+            highlight: ['up to 600px'],
+            correctOption: 1,
+            options: ['@media (max-width: 600px)', '@media (min-width: 600px)', '@media (width: 600px)', '@media (screen: 600px)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a condição que aplica a regra em telas de até 600px.',
+            highlight: ['até 600px'],
+            codeLanguage: 'CSS',
+            code: '@media (___: 600px) {\n  .menu { display: none; }\n}',
+            answers: ['max-width'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the condition that applies the rule to screens up to 600px.',
+            highlight: ['up to 600px'],
+            codeLanguage: 'CSS',
+            code: '@media (___: 600px) {\n  .menu { display: none; }\n}',
+            answers: ['max-width'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -17319,6 +24094,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['max-width', 'width', 'wrap']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o ajuste mobile-first: a partir de 1024px, o .box passa a ter flex-direction row.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            lines: ['@media (min-width: 1024px) {', '  .box {', '    flex-direction: row;', '  }', '}'],
+            distractors: ['@media (max-width: 1024px) {']
+          },
+          en: {
+            question: 'Build the mobile-first tweak: from 1024px up, .box switches to flex-direction row.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            lines: ['@media (min-width: 1024px) {', '  .box {', '    flex-direction: row;', '  }', '}'],
+            distractors: ['@media (max-width: 1024px) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho segue a ideia mobile-first?',
+            codeLanguage: 'CSS',
+            highlight: ['mobile-first'],
+            correctOption: 1,
+            options: ['.b { width: 100%; }\n@media (min-width: 768px) {\n  .b { width: 50%; }\n}', '.b { width: 50%; }\n@media (max-width: 767px) {\n  .b { width: 100%; }\n}', '@media (mobile) {\n  .b { width: 100%; }\n}', '.b { width: 100%; }\n.b { width: 50%; }'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet follows the mobile-first idea?',
+            codeLanguage: 'CSS',
+            highlight: ['mobile-first'],
+            correctOption: 1,
+            options: ['.b { width: 100%; }\n@media (min-width: 768px) {\n  .b { width: 50%; }\n}', '.b { width: 50%; }\n@media (max-width: 767px) {\n  .b { width: 100%; }\n}', '@media (mobile) {\n  .b { width: 100%; }\n}', '.b { width: 100%; }\n.b { width: 50%; }'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'No mobile-first, digite a direção base para telas pequenas: itens empilhados.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: flex;\n  flex-direction: ___;\n}',
+            answers: ['column'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'In mobile-first, type the base direction for small screens: stacked items.',
+            highlight: ['mobile-first'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  display: flex;\n  flex-direction: ___;\n}',
+            answers: ['column'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -17440,6 +24276,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['min', 'max', 'calc']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que deixa a fonte do h1 entre 2rem e 4rem, preferindo 5vw (clamp).',
+            highlight: ['clamp'],
+            codeLanguage: 'CSS',
+            lines: ['h1 {', '  font-size:', '    clamp(2rem, 5vw, 4rem);', '}'],
+            distractors: ['    clamp(4rem, 5vw, 2rem);', '    clamp(5vw, 2rem, 4rem);']
+          },
+          en: {
+            question: 'Build the rule that keeps the h1 font between 2rem and 4rem, preferring 5vw (clamp).',
+            highlight: ['clamp'],
+            codeLanguage: 'CSS',
+            lines: ['h1 {', '  font-size:', '    clamp(2rem, 5vw, 4rem);', '}'],
+            distractors: ['    clamp(4rem, 5vw, 2rem);', '    clamp(5vw, 2rem, 4rem);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em clamp(1rem, 3vw, 2rem), qual é o valor máximo?',
+            codeLanguage: 'CSS',
+            highlight: ['valor máximo'],
+            correctOption: 1,
+            options: ['2rem', '1rem', '3vw', '6vw'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In clamp(1rem, 3vw, 2rem), which is the maximum value?',
+            codeLanguage: 'CSS',
+            highlight: ['maximum value'],
+            correctOption: 1,
+            options: ['2rem', '1rem', '3vw', '6vw'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor preferido do clamp: 5% da largura da janela.',
+            highlight: ['valor preferido'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-size:\n    clamp(2rem, ___, 4rem);\n}',
+            answers: ['5vw'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the preferred value of the clamp: 5% of the window width.',
+            highlight: ['preferred value'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  font-size:\n    clamp(2rem, ___, 4rem);\n}',
+            answers: ['5vw'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -17549,6 +24446,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.button {\n  ___: transform 0.2s;\n}',
             answers: ['transition'],
             distractors: ['animation', 'transform', 'delay']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que suaviza a mudança de transform do .botao em 0.2s (transition).',
+            highlight: ['transition'],
+            codeLanguage: 'CSS',
+            lines: ['.botao {', '  transition:', '    transform 0.2s;', '}'],
+            distractors: ['  animation:', '    transform: 0.2s;']
+          },
+          en: {
+            question: 'Build the rule that smooths the transform change of .button over 0.2s (transition).',
+            highlight: ['transition'],
+            codeLanguage: 'CSS',
+            lines: ['.button {', '  transition:', '    transform 0.2s;', '}'],
+            distractors: ['  animation:', '    transform: 0.2s;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa suave a troca de cor do botão?',
+            codeLanguage: 'CSS',
+            highlight: ['suave'],
+            correctOption: 1,
+            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the button color change smooth?',
+            codeLanguage: 'CSS',
+            highlight: ['smooth'],
+            correctOption: 1,
+            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que a transição suaviza: a cor de fundo.',
+            highlight: ['cor de fundo'],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  transition:\n    ___ 0.2s;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property the transition smooths: the background color.',
+            highlight: ['background color'],
+            codeLanguage: 'CSS',
+            code: '.button {\n  transition:\n    ___ 0.2s;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
           }
         }
       }
@@ -17681,6 +24639,118 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.card:hover {\n  transform:\n    ___(-4px)\n    ___(1.05);\n}',
             answers: ['translateY', 'scale'],
             distractors: ['rotate', 'translateX', 'zoom']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que, no hover do .card, sobe o card 4px (translateY) e depois o aumenta em 5% (scale 1.05).',
+            highlight: ['translateY', 'scale'],
+            codeLanguage: 'CSS',
+            lines: ['.card:hover {', '  transform:', '    translateY(-4px)', '    scale(1.05);', '}'],
+            distractors: ['    rotate(1.05);']
+          },
+          en: {
+            question: 'Build the rule that, on .card hover, moves the card up 4px (translateY) and then grows it by 5% (scale 1.05).',
+            highlight: ['translateY', 'scale'],
+            codeLanguage: 'CSS',
+            lines: ['.card:hover {', '  transform:', '    translateY(-4px)', '    scale(1.05);', '}'],
+            distractors: ['    rotate(1.05);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração gira o ícone 10 graus?',
+            codeLanguage: 'CSS',
+            highlight: ['gira'],
+            correctOption: 1,
+            options: ['transform: rotate(10deg);', 'transform: scale(10deg);', 'transform: rotate(10);', 'transform: turn(10deg);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which declaration rotates the icon 10 degrees?',
+            codeLanguage: 'CSS',
+            highlight: ['rotates'],
+            correctOption: 1,
+            options: ['transform: rotate(10deg);', 'transform: scale(10deg);', 'transform: rotate(10);', 'transform: turn(10deg);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada função de transform ao que ela faz.',
+            highlight: ['transform'],
+            pairs: [
+              {
+                left: 'translateY()',
+                right: 'Move na vertical'
+              },
+              {
+                left: 'scale()',
+                right: 'Aumenta ou diminui'
+              },
+              {
+                left: 'rotate()',
+                right: 'Gira o elemento'
+              },
+              {
+                left: 'skew()',
+                right: 'Inclina o elemento'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each transform function to what it does.',
+            highlight: ['transform'],
+            pairs: [
+              {
+                left: 'translateY()',
+                right: 'Moves vertically'
+              },
+              {
+                left: 'scale()',
+                right: 'Grows or shrinks'
+              },
+              {
+                left: 'rotate()',
+                right: 'Rotates the element'
+              },
+              {
+                left: 'skew()',
+                right: 'Tilts the element'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função de transform que gira o ícone 10 graus.',
+            highlight: ['gira'],
+            codeLanguage: 'CSS',
+            code: '.icone:hover {\n  transform:\n    ___(10deg);\n}',
+            answers: ['rotate'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the transform function that rotates the icon 10 degrees.',
+            highlight: ['rotates'],
+            codeLanguage: 'CSS',
+            code: '.icon:hover {\n  transform:\n    ___(10deg);\n}',
+            answers: ['rotate'],
+            ignoreCase: true
           }
         }
       }
@@ -17825,6 +24895,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['@animation', 'transition']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o @keyframes aparecer: de opacity 0 (from) para opacity 1 (to).',
+            highlight: ['@keyframes'],
+            codeLanguage: 'CSS',
+            lines: ['@keyframes aparecer {', '  from { opacity: 0; }', '  to { opacity: 1; }', '}'],
+            distractors: ['@animation aparecer {']
+          },
+          en: {
+            question: 'Build the @keyframes appear: from opacity 0 (from) to opacity 1 (to).',
+            highlight: ['@keyframes'],
+            codeLanguage: 'CSS',
+            lines: ['@keyframes appear {', '  from { opacity: 0; }', '  to { opacity: 1; }', '}'],
+            distractors: ['@animation appear {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra aplica a animação aparecer ao .card, com duração de 1s?',
+            codeLanguage: 'CSS',
+            highlight: ['animação'],
+            correctOption: 1,
+            options: ['.card {\n  animation: aparecer 1s;\n}', '.card {\n  transition: aparecer 1s;\n}', '.card {\n  keyframes: aparecer 1s;\n}', '.card {\n  animation: 1s;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule applies the appear animation to .card, lasting 1s?',
+            codeLanguage: 'CSS',
+            highlight: ['animation'],
+            correctOption: 1,
+            options: ['.card {\n  animation: appear 1s;\n}', '.card {\n  transition: appear 1s;\n}', '.card {\n  keyframes: appear 1s;\n}', '.card {\n  animation: 1s;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que vai de 0 a 1 para o elemento aparecer.',
+            highlight: ['de 0 a 1'],
+            codeLanguage: 'CSS',
+            code: '@keyframes aparecer {\n  from { ___: 0; }\n  to { opacity: 1; }\n}',
+            answers: ['opacity'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that goes from 0 to 1 so the element appears.',
+            highlight: ['from 0 to 1'],
+            codeLanguage: 'CSS',
+            code: '@keyframes appear {\n  from { ___: 0; }\n  to { opacity: 1; }\n}',
+            answers: ['opacity'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -17967,6 +25098,65 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['start', 'end']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o @keyframes piscar: opacity 1 em 0%, opacity 0 em 50% e opacity 1 de novo em 100%.',
+            highlight: ['@keyframes'],
+            codeLanguage: 'CSS',
+            lines: ['@keyframes piscar {', '  0% { opacity: 1; }', '  50% { opacity: 0; }', '  100% { opacity: 1; }', '}']
+          },
+          en: {
+            question: 'Build the @keyframes blink: opacity 1 at 0%, opacity 0 at 50% and opacity 1 again at 100%.',
+            highlight: ['@keyframes'],
+            codeLanguage: 'CSS',
+            lines: ['@keyframes blink {', '  0% { opacity: 1; }', '  50% { opacity: 0; }', '  100% { opacity: 1; }', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual @keyframes está escrito corretamente?',
+            codeLanguage: 'CSS',
+            highlight: ['@keyframes'],
+            correctOption: 1,
+            options: ['@keyframes a {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}', '@keyframes a {\n  start { opacity: 0; }\n  end { opacity: 1; }\n}', '@keyframe a {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}', '@keyframes a {\n  0 { opacity: 0; }\n  1 { opacity: 1; }\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which @keyframes is written correctly?',
+            codeLanguage: 'CSS',
+            highlight: ['@keyframes'],
+            correctOption: 1,
+            options: ['@keyframes a {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}', '@keyframes a {\n  start { opacity: 0; }\n  end { opacity: 1; }\n}', '@keyframe a {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}', '@keyframes a {\n  0 { opacity: 0; }\n  1 { opacity: 1; }\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que faz o elemento entrar a partir de scale(0).',
+            highlight: ['scale'],
+            codeLanguage: 'CSS',
+            code: '@keyframes entrar {\n  from {\n    ___: scale(0);\n  }\n}',
+            answers: ['transform'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that makes the element come in from scale(0).',
+            highlight: ['scale'],
+            codeLanguage: 'CSS',
+            code: '@keyframes enter {\n  from {\n    ___: scale(0);\n  }\n}',
+            answers: ['transform'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -18097,6 +25287,118 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.content {\n  width:\n    ___(100% - 240px);\n}',
             answers: ['calc'],
             distractors: ['clamp', 'min', 'sum']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá ao .conteudo a largura total menos 240px (calc).',
+            highlight: ['calc'],
+            codeLanguage: 'CSS',
+            lines: ['.conteudo {', '  width:', '    calc(100% - 240px);', '}'],
+            distractors: ['    calc(100%-240px);', '    (100% - 240px);']
+          },
+          en: {
+            question: 'Build the rule that gives .content the full width minus 240px (calc).',
+            highlight: ['calc'],
+            codeLanguage: 'CSS',
+            lines: ['.content {', '  width:', '    calc(100% - 240px);', '}'],
+            distractors: ['    calc(100%-240px);', '    (100% - 240px);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual largura usa 90% em telas pequenas, mas nunca passa de 400px?',
+            codeLanguage: 'CSS',
+            highlight: ['nunca passa'],
+            correctOption: 1,
+            options: ['width: min(90%, 400px);', 'width: max(90%, 400px);', 'width: calc(90%, 400px);', 'width: clamp(90%, 400px);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which width uses 90% on small screens but never goes past 400px?',
+            codeLanguage: 'CSS',
+            highlight: ['never goes past'],
+            correctOption: 1,
+            options: ['width: min(90%, 400px);', 'width: max(90%, 400px);', 'width: calc(90%, 400px);', 'width: clamp(90%, 400px);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada função CSS ao que ela faz.',
+            highlight: ['função'],
+            pairs: [
+              {
+                left: 'calc()',
+                right: 'Faz contas com unidades diferentes'
+              },
+              {
+                left: 'min()',
+                right: 'Escolhe o menor valor'
+              },
+              {
+                left: 'max()',
+                right: 'Escolhe o maior valor'
+              },
+              {
+                left: 'clamp()',
+                right: 'Mínimo, preferido e máximo'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each CSS function to what it does.',
+            highlight: ['function'],
+            pairs: [
+              {
+                left: 'calc()',
+                right: 'Does math with different units'
+              },
+              {
+                left: 'min()',
+                right: 'Picks the smallest value'
+              },
+              {
+                left: 'max()',
+                right: 'Picks the largest value'
+              },
+              {
+                left: 'clamp()',
+                right: 'Minimum, preferred and maximum'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que escolhe o menor valor entre 90% e 400px.',
+            highlight: ['menor valor'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  width: ___(90%, 400px);\n}',
+            answers: ['min'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the function that picks the smallest value between 90% and 400px.',
+            highlight: ['smallest value'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  width: ___(90%, 400px);\n}',
+            answers: ['min'],
+            ignoreCase: true
           }
         }
       }
@@ -18251,6 +25553,110 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['is', 'where']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que pinta de cinza (gray) os parágrafos que não têm a classe destaque.',
+            highlight: ['não têm'],
+            codeLanguage: 'CSS',
+            lines: ['p:not(.destaque) {', '  color: gray;', '}'],
+            distractors: ['p:is(.destaque) {', 'p:has(.destaque) {']
+          },
+          en: {
+            question: 'Build the rule that colors gray the paragraphs that do not have the class highlight.',
+            highlight: ['do not have'],
+            codeLanguage: 'CSS',
+            lines: ['p:not(.highlight) {', '  color: gray;', '}'],
+            distractors: ['p:is(.highlight) {', 'p:has(.highlight) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor pega os .card que têm uma imagem dentro?',
+            codeLanguage: 'CSS',
+            highlight: ['imagem dentro'],
+            correctOption: 1,
+            options: ['.card:has(img)', '.card img', '.card:is(img)', '.card:not(img)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which selector picks the .card elements that have an image inside?',
+            codeLanguage: 'CSS',
+            highlight: ['image inside'],
+            correctOption: 1,
+            options: ['.card:has(img)', '.card img', '.card:is(img)', '.card:not(img)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada seletor moderno ao que ele faz.',
+            highlight: ['seletor moderno'],
+            pairs: [
+              {
+                left: ':not()',
+                right: 'Exclui o que combina'
+              },
+              {
+                left: ':is()',
+                right: 'Agrupa vários seletores'
+              },
+              {
+                left: ':has()',
+                right: 'Olha o que existe dentro'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each modern selector to what it does.',
+            highlight: ['modern selector'],
+            pairs: [
+              {
+                left: ':not()',
+                right: 'Leaves out what matches'
+              },
+              {
+                left: ':is()',
+                right: 'Groups several selectors'
+              },
+              {
+                left: ':has()',
+                right: 'Looks at what is inside'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o seletor moderno que agrupa h1 e h2 numa regra só.',
+            highlight: ['agrupa'],
+            codeLanguage: 'CSS',
+            code: ':___(h1, h2) {\n  color: navy;\n}',
+            answers: ['is', 'where'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the modern selector that groups h1 and h2 into a single rule.',
+            highlight: ['groups'],
+            codeLanguage: 'CSS',
+            code: ':___(h1, h2) {\n  color: navy;\n}',
+            answers: ['is', 'where'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -18376,6 +25782,65 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
             answers: ['p'],
             distractors: ['body', 'html', '*']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte duas regras para p: primeiro a de color black e, depois, a de color blue, que vence por vir por último.',
+            highlight: ['por último'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
+          },
+          en: {
+            question: 'Build two rules for p: first the one with color black and, then, the one with color blue, which wins by coming last.',
+            highlight: ['coming last'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes pares de regras deixa o parágrafo azul?',
+            codeLanguage: 'CSS',
+            highlight: ['azul'],
+            correctOption: 1,
+            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these pairs of rules makes the paragraph blue?',
+            codeLanguage: 'CSS',
+            highlight: ['blue'],
+            correctOption: 1,
+            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'As duas regras usam o mesmo seletor. Digite a cor final do parágrafo.',
+            highlight: ['cor final'],
+            codeLanguage: 'CSS',
+            code: 'p { color: black; }\np { color: blue; }\n/* cor final: ___ */',
+            answers: ['blue'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Both rules use the same selector. Type the final color of the paragraph.',
+            highlight: ['final color'],
+            codeLanguage: 'CSS',
+            code: 'p { color: black; }\np { color: blue; }\n/* final color: ___ */',
+            answers: ['blue'],
+            ignoreCase: true
           }
         }
       }
@@ -18522,6 +25987,65 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['border', 'margin', 'padding']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte as regras: primeiro a tag p com color black e, depois, a classe .destaque com color blue.',
+            highlight: ['classe'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', '.destaque {', '  color: blue;', '}']
+          },
+          en: {
+            question: 'Build the rules: first the p tag with color black and, then, the .highlight class with color blue.',
+            highlight: ['class'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', '.highlight {', '  color: blue;', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para <p class="aviso" id="topo">, qual seletor tem mais peso?',
+            codeLanguage: 'CSS',
+            highlight: ['mais peso'],
+            correctOption: 1,
+            options: ['#topo', '.aviso', 'p', 'p.aviso'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'For <p class="note" id="top">, which selector has the most weight?',
+            codeLanguage: 'CSS',
+            highlight: ['most weight'],
+            correctOption: 1,
+            options: ['#top', '.note', 'p', 'p.note'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Para <p class="aviso">, a classe pesa mais que a tag. Digite a cor que fica.',
+            highlight: ['pesa mais'],
+            codeLanguage: 'CSS',
+            code: '.aviso { color: red; }\np { color: black; }\n/* fica: ___ */',
+            answers: ['red'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'For <p class="note">, the class weighs more than the tag. Type the color that wins.',
+            highlight: ['weighs more'],
+            codeLanguage: 'CSS',
+            code: '.note { color: red; }\np { color: black; }\n/* wins: ___ */',
+            answers: ['red'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -18631,6 +26155,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.list {\n  container-type:\n    inline-size;\n}\n___\n  (min-width: 300px) {\n  .card { display: flex; }\n}',
             answers: ['@container'],
             distractors: ['@media', '@size', '@parent']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que transforma a .lista em container (container-type inline-size).',
+            highlight: ['container'],
+            codeLanguage: 'CSS',
+            lines: ['.lista {', '  container-type:', '    inline-size;', '}'],
+            distractors: ['    block-size;', '  display: container;']
+          },
+          en: {
+            question: 'Build the rule that turns .list into a container (container-type inline-size).',
+            highlight: ['container'],
+            codeLanguage: 'CSS',
+            lines: ['.list {', '  container-type:', '    inline-size;', '}'],
+            distractors: ['    block-size;', '  display: container;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra reage ao tamanho do elemento pai, e não da tela?',
+            codeLanguage: 'CSS',
+            highlight: ['elemento pai'],
+            correctOption: 1,
+            options: ['@container (min-width: 300px)', '@media (min-width: 300px)', '@parent (min-width: 300px)', '@element (min-width: 300px)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule reacts to the size of the parent element, not the screen?',
+            codeLanguage: 'CSS',
+            highlight: ['parent element'],
+            correctOption: 1,
+            options: ['@container (min-width: 300px)', '@media (min-width: 300px)', '@parent (min-width: 300px)', '@element (min-width: 300px)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de container-type que mede a largura do contêiner.',
+            highlight: ['largura'],
+            codeLanguage: 'CSS',
+            code: '.lista {\n  container-type:\n    ___;\n}',
+            answers: ['inline-size'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the container-type value that measures the width of the container.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            code: '.list {\n  container-type:\n    ___;\n}',
+            answers: ['inline-size'],
+            ignoreCase: true
           }
         }
       }
@@ -18775,6 +26360,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['ratio', 'contain', 'fill']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que mantém o .thumb na proporção 16 por 9 (aspect-ratio).',
+            highlight: ['aspect-ratio'],
+            codeLanguage: 'CSS',
+            lines: ['.thumb {', '  aspect-ratio: 16 / 9;', '}'],
+            distractors: ['  aspect-ratio: 16 x 9;', '  ratio: 16 / 9;']
+          },
+          en: {
+            question: 'Build the rule that keeps .thumb in a 16 by 9 ratio (aspect-ratio).',
+            highlight: ['aspect-ratio'],
+            codeLanguage: 'CSS',
+            lines: ['.thumb {', '  aspect-ratio: 16 / 9;', '}'],
+            distractors: ['  aspect-ratio: 16 x 9;', '  ratio: 16 / 9;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra faz a imagem preencher a caixa toda, cortando o excesso?',
+            codeLanguage: 'CSS',
+            highlight: ['cortando'],
+            correctOption: 1,
+            options: ['img {\n  object-fit: cover;\n}', 'img {\n  object-fit: contain;\n}', 'img {\n  fill: cover;\n}', 'img {\n  background-size: cover;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the image fill the whole box, cutting off the excess?',
+            codeLanguage: 'CSS',
+            highlight: ['cutting off'],
+            correctOption: 1,
+            options: ['img {\n  object-fit: cover;\n}', 'img {\n  object-fit: contain;\n}', 'img {\n  fill: cover;\n}', 'img {\n  background-size: cover;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de object-fit que mostra a imagem inteira, mesmo sobrando espaço.',
+            highlight: ['imagem inteira'],
+            codeLanguage: 'CSS',
+            code: 'img {\n  object-fit: ___;\n}',
+            answers: ['contain'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the object-fit value that shows the whole image, even with space left over.',
+            highlight: ['whole image'],
+            codeLanguage: 'CSS',
+            code: 'img {\n  object-fit: ___;\n}',
+            answers: ['contain'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -18909,6 +26555,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['auto', 'color']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que deixa a rolagem do html suave (scroll-behavior smooth).',
+            highlight: ['suave'],
+            codeLanguage: 'CSS',
+            lines: ['html {', '  scroll-behavior: smooth;', '}'],
+            distractors: ['  scroll-behavior: slow;', '  scroll: smooth;']
+          },
+          en: {
+            question: 'Build the rule that makes scrolling in html smooth (scroll-behavior smooth).',
+            highlight: ['smooth'],
+            codeLanguage: 'CSS',
+            lines: ['html {', '  scroll-behavior: smooth;', '}'],
+            distractors: ['  scroll-behavior: slow;', '  scroll: smooth;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra muda a cor do checkbox nativo para azul?',
+            codeLanguage: 'CSS',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['input {\n  accent-color: blue;\n}', 'input {\n  color: blue;\n}', 'input {\n  background: blue;\n}', 'input {\n  check-color: blue;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule changes the color of the native checkbox to blue?',
+            codeLanguage: 'CSS',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['input {\n  accent-color: blue;\n}', 'input {\n  color: blue;\n}', 'input {\n  background: blue;\n}', 'input {\n  check-color: blue;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que desfoca o que fica atrás do .painel.',
+            highlight: ['desfoca'],
+            codeLanguage: 'CSS',
+            code: '.painel {\n  backdrop-filter:\n    ___(8px);\n}',
+            answers: ['blur'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the function that blurs what sits behind .panel.',
+            highlight: ['blurs'],
+            codeLanguage: 'CSS',
+            code: '.panel {\n  backdrop-filter:\n    ___(8px);\n}',
+            answers: ['blur'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -19020,6 +26727,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'button:___ {\n  ___: 2px solid blue;\n}',
             answers: ['focus', 'outline'],
             distractors: ['hover', 'active', 'shadow']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que mostra um contorno azul no botão com foco (outline 2px solid blue).',
+            highlight: ['foco'],
+            codeLanguage: 'CSS',
+            lines: ['button:focus {', '  outline: 2px solid blue;', '}'],
+            distractors: ['  outline: none;', 'button:hover {']
+          },
+          en: {
+            question: 'Build the rule that shows a blue outline on the focused button (outline 2px solid blue).',
+            highlight: ['focused'],
+            codeLanguage: 'CSS',
+            lines: ['button:focus {', '  outline: 2px solid blue;', '}'],
+            distractors: ['  outline: none;', 'button:hover {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra prejudica quem navega pelo teclado?',
+            codeLanguage: 'CSS',
+            highlight: ['teclado'],
+            correctOption: 1,
+            options: ['button:focus {\n  outline: none;\n}', 'button:focus {\n  outline: 2px solid;\n}', 'button:hover {\n  color: blue;\n}', 'button {\n  padding: 8px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule hurts people who navigate with the keyboard?',
+            codeLanguage: 'CSS',
+            highlight: ['keyboard'],
+            correctOption: 1,
+            options: ['button:focus {\n  outline: none;\n}', 'button:focus {\n  outline: 2px solid;\n}', 'button:hover {\n  color: blue;\n}', 'button {\n  padding: 8px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor de outline que, sem substituto, prejudica quem navega pelo teclado.',
+            highlight: ['teclado'],
+            codeLanguage: 'CSS',
+            code: 'button:focus {\n  outline: ___;\n}',
+            answers: ['none'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the outline value that, with no replacement, hurts keyboard users.',
+            highlight: ['keyboard'],
+            codeLanguage: 'CSS',
+            code: 'button:focus {\n  outline: ___;\n}',
+            answers: ['none'],
+            ignoreCase: true
           }
         }
       }
@@ -19154,6 +26922,65 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['less', 'no', 'slow']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a media query que, para quem prefere tema escuro (dark), deixa o fundo do body preto (black).',
+            highlight: ['tema escuro'],
+            codeLanguage: 'CSS',
+            lines: ['@media (prefers-color-scheme:', '  dark) {', '  body {', '    background: black;', '  }', '}']
+          },
+          en: {
+            question: 'Build the media query that, for people who prefer a dark theme (dark), makes the body background black.',
+            highlight: ['dark theme'],
+            codeLanguage: 'CSS',
+            lines: ['@media (prefers-color-scheme:', '  dark) {', '  body {', '    background: black;', '  }', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual preferência indica que a pessoa quer menos movimento na tela?',
+            codeLanguage: 'CSS',
+            highlight: ['menos movimento'],
+            correctOption: 1,
+            options: ['prefers-reduced-motion', 'prefers-color-scheme', 'reduce-animation', 'prefers-no-motion'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which preference says the person wants less motion on screen?',
+            codeLanguage: 'CSS',
+            highlight: ['less motion'],
+            correctOption: 1,
+            options: ['prefers-reduced-motion', 'prefers-color-scheme', 'reduce-animation', 'prefers-no-motion'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a preferência de tema escuro na media query.',
+            highlight: ['tema escuro'],
+            codeLanguage: 'CSS',
+            code: '@media (prefers-color-scheme:\n  ___) {\n  body { color: white; }\n}',
+            answers: ['dark'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the dark theme preference in the media query.',
+            highlight: ['dark theme'],
+            codeLanguage: 'CSS',
+            code: '@media (prefers-color-scheme:\n  ___) {\n  body { color: white; }\n}',
+            answers: ['dark'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -19263,6 +27090,67 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.text {\n  color: ___;\n  background: ___;\n}',
             answers: ['#222', '#fff'],
             distractors: ['#eee', '#ccc']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que deixa o texto do .texto com a cor escura #222.',
+            highlight: ['cor escura'],
+            codeLanguage: 'CSS',
+            lines: ['.texto {', '  color: #222;', '}'],
+            distractors: ['  color: #ddd;', '  colour: #222;']
+          },
+          en: {
+            question: 'Build the rule that gives the text of .text the dark color #222.',
+            highlight: ['dark color'],
+            codeLanguage: 'CSS',
+            lines: ['.text {', '  color: #222;', '}'],
+            distractors: ['  color: #ddd;', '  colour: #222;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual combinação de cores tem o melhor contraste?',
+            codeLanguage: 'CSS',
+            highlight: ['contraste'],
+            correctOption: 1,
+            options: ['color: #222;\nbackground: #fff;', 'color: #999;\nbackground: #aaa;', 'color: #fff;\nbackground: #eee;', 'color: yellow;\nbackground: white;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which color pair has the best contrast?',
+            codeLanguage: 'CSS',
+            highlight: ['contrast'],
+            correctOption: 1,
+            options: ['color: #222;\nbackground: #fff;', 'color: #999;\nbackground: #aaa;', 'color: #fff;\nbackground: #eee;', 'color: yellow;\nbackground: white;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade do fundo claro (#fff), que faz contraste com o texto #222.',
+            highlight: ['contraste'],
+            codeLanguage: 'CSS',
+            code: '.texto {\n  color: #222;\n  ___: #fff;\n}',
+            answers: ['background', 'background-color'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property for the light background (#fff), which contrasts with the #222 text.',
+            highlight: ['contrasts'],
+            codeLanguage: 'CSS',
+            code: '.text {\n  color: #222;\n  ___: #fff;\n}',
+            answers: ['background', 'background-color'],
+            ignoreCase: true
           }
         }
       }
@@ -19450,6 +27338,63 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['this', '"name"', 'undefined']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: nome vale "Ana" fora da função; a função mostrar usa nome no console.log; depois, chame mostrar().',
+            highlight: ['fora da função'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "Ana";', 'function mostrar() {', '  console.log(nome);', '}', 'mostrar();']
+          },
+          en: {
+            question: 'Build the code: name is "Ana" outside the function; the show function uses name in console.log; then call show().',
+            highlight: ['outside the function'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "Ana";', 'function show() {', '  console.log(name);', '}', 'show();']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho dá erro porque a variável não existe naquele escopo?',
+            codeLanguage: 'JavaScript',
+            highlight: ['escopo'],
+            correctOption: 1,
+            options: ['function f() {\n  const x = 1;\n}\nf();\nconsole.log(x);', 'const x = 1;\nfunction f() {\n  console.log(x);\n}\nf();', 'function f() {\n  const x = 1;\n  console.log(x);\n}\nf();', 'let x = 1;\nif (true) {\n  console.log(x);\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet throws an error because the variable does not exist in that scope?',
+            codeLanguage: 'JavaScript',
+            highlight: ['scope'],
+            correctOption: 1,
+            options: ['function f() {\n  const x = 1;\n}\nf();\nconsole.log(x);', 'const x = 1;\nfunction f() {\n  console.log(x);\n}\nf();', 'function f() {\n  const x = 1;\n  console.log(x);\n}\nf();', 'let x = 1;\nif (true) {\n  console.log(x);\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que declara x só neste bloco e permite mudar o valor depois.',
+            highlight: ['só neste bloco'],
+            codeLanguage: 'JavaScript',
+            code: 'if (true) {\n  ___ x = 1;\n  x = 2;\n}',
+            answers: ['let']
+          },
+          en: {
+            question: 'Type the word that declares x only in this block and lets the value change later.',
+            highlight: ['only in this block'],
+            codeLanguage: 'JavaScript',
+            code: 'if (true) {\n  ___ x = 1;\n  x = 2;\n}',
+            answers: ['let']
+          }
+        }
       }
     ]
   },
@@ -19598,6 +27543,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['--', '+', '=']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o contador: criar guarda total valendo 0 e devolve uma função que soma 1 a total e o devolve; crie c e mostre c() duas vezes no mesmo console.log.',
+            highlight: ['contador'],
+            codeLanguage: 'JavaScript',
+            lines: ['function criar() {', '  let total = 0;', '  return () => ++total;', '}', 'const c = criar();', 'console.log(c(), c());']
+          },
+          en: {
+            question: 'Build the counter: create keeps total at 0 and returns a function that adds 1 to total and returns it; create c and show c() twice in the same console.log.',
+            highlight: ['counter'],
+            codeLanguage: 'JavaScript',
+            lines: ['function create() {', '  let total = 0;', '  return () => ++total;', '}', 'const c = create();', 'console.log(c(), c());']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale b() depois deste código?',
+            codeLanguage: 'JavaScript',
+            code: 'function criar() {\n  let t = 0;\n  return () => ++t;\n}\nconst a = criar();\nconst b = criar();\na(); a();',
+            highlight: ['b'],
+            correctOption: 1,
+            options: ['1', '3', '2', '0'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is b() after this code?',
+            codeLanguage: 'JavaScript',
+            code: 'function create() {\n  let t = 0;\n  return () => ++t;\n}\nconst a = create();\nconst b = create();\na(); a();',
+            highlight: ['b'],
+            correctOption: 1,
+            options: ['1', '3', '2', '0'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'A closure guarda t entre as chamadas. Digite a saída do console.',
+            highlight: ['closure'],
+            codeLanguage: 'JavaScript',
+            code: 'function criar() {\n  let t = 0;\n  return () => ++t;\n}\nconst a = criar();\na(); a();\nconsole.log(a());\n// saída: ___',
+            answers: ['3']
+          },
+          en: {
+            question: 'The closure keeps t between calls. Type the console output.',
+            highlight: ['closure'],
+            codeLanguage: 'JavaScript',
+            code: 'function create() {\n  let t = 0;\n  return () => ++t;\n}\nconst a = create();\na(); a();\nconsole.log(a());\n// output: ___',
+            answers: ['3']
+          }
+        }
       }
     ]
   },
@@ -19711,6 +27715,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'console.log(name);\n___ name = "Ana";',
             answers: ['var'],
             distractors: ['let', 'const']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: mostre nome, depois declare var nome = "Ana" e mostre nome de novo; a saída é undefined e depois Ana.',
+            highlight: ['var'],
+            codeLanguage: 'JavaScript',
+            lines: ['console.log(nome);', 'var nome = "Ana";', 'console.log(nome);'],
+            distractors: ['let nome = "Ana";']
+          },
+          en: {
+            question: 'Build the code: show name, then declare var name = "Ana" and show name again; the output is undefined and then Ana.',
+            highlight: ['var'],
+            codeLanguage: 'JavaScript',
+            lines: ['console.log(name);', 'var name = "Ana";', 'console.log(name);'],
+            distractors: ['let name = "Ana";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos dá erro ao rodar?',
+            codeLanguage: 'JavaScript',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['console.log(x);\nlet x = 1;', 'console.log(x);\nvar x = 1;', 'let x = 1;\nconsole.log(x);', 'var x;\nconsole.log(x);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets throws an error when run?',
+            codeLanguage: 'JavaScript',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['console.log(x);\nlet x = 1;', 'console.log(x);\nvar x = 1;', 'let x = 1;\nconsole.log(x);', 'var x;\nconsole.log(x);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Por causa do hoisting do var, digite a saída do console.',
+            highlight: ['hoisting'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(x);\nvar x = 5;\n// saída: ___',
+            answers: ['undefined']
+          },
+          en: {
+            question: 'Because of var hoisting, type the console output.',
+            highlight: ['hoisting'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(x);\nvar x = 5;\n// output: ___',
+            answers: ['undefined']
           }
         }
       }
@@ -19851,6 +27914,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['self', 'me', 'name']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o objeto u, com nome "Ana" e o método saudar, que devolve this.nome.',
+            highlight: ['this'],
+            codeLanguage: 'JavaScript',
+            lines: ['const u = {', '  nome: "Ana",', '  saudar() {', '    return this.nome;', '  }', '};'],
+            distractors: ['    return nome;']
+          },
+          en: {
+            question: 'Build the object u, with name "Ana" and the greet method, which returns this.name.',
+            highlight: ['this'],
+            codeLanguage: 'JavaScript',
+            lines: ['const u = {', '  name: "Ana",', '  greet() {', '    return this.name;', '  }', '};'],
+            distractors: ['    return name;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual chamada devolve "Ana"?',
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  nome: "Ana",\n  f() { return this.nome; }\n};\nconst g = u.f;',
+            highlight: ['Ana'],
+            correctOption: 1,
+            options: ['u.f()', 'g()', 'f()', 'u.g()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which call returns "Ana"?',
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  name: "Ana",\n  f() { return this.name; }\n};\nconst g = u.f;',
+            highlight: ['Ana'],
+            correctOption: 1,
+            options: ['u.f()', 'g()', 'f()', 'u.g()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'O método foi chamado a partir de u. Digite a saída do console.',
+            highlight: ['chamado a partir de u'],
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  nome: "Ana",\n  f() { return this.nome; }\n};\nconsole.log(u.f());\n// saída: ___',
+            answers: ['Ana']
+          },
+          en: {
+            question: 'The method was called from u. Type the console output.',
+            highlight: ['called from u'],
+            codeLanguage: 'JavaScript',
+            code: 'const u = {\n  name: "Ana",\n  f() { return this.name; }\n};\nconsole.log(u.f());\n// output: ___',
+            answers: ['Ana']
+          }
+        }
       }
     ]
   },
@@ -19983,6 +28107,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'const t = {\n  name: " (Team)",\n  m: ["Ana"],\n  list() {\n    return this.m.map(\n      x ___ x + this.name\n    );\n  }\n};\nconsole.log(t.list());',
             answers: ['=>'],
             distractors: ['->', '==', '>=']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o método listar: ele devolve this.m.map, com uma arrow function que junta cada x com this.nome.',
+            highlight: ['arrow function'],
+            codeLanguage: 'JavaScript',
+            lines: ['listar() {', '  return this.m.map(', '    x => x + this.nome', '  );', '}'],
+            distractors: ['    function (x) {']
+          },
+          en: {
+            question: 'Build the list method: it returns this.m.map, with an arrow function that joins each x with this.name.',
+            highlight: ['arrow function'],
+            codeLanguage: 'JavaScript',
+            lines: ['list() {', '  return this.m.map(', '    x => x + this.name', '  );', '}'],
+            distractors: ['    function (x) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método f devolve "Ana" quando chamado como u.f()?',
+            codeLanguage: 'JavaScript',
+            highlight: ['método'],
+            correctOption: 1,
+            options: ['f() {\n  return this.nome;\n}', 'f: () => {\n  return this.nome;\n}', 'f() {\n  return nome;\n}', 'f() {\n  return self.nome;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which method f returns "Ana" when called as u.f()?',
+            codeLanguage: 'JavaScript',
+            highlight: ['method'],
+            correctOption: 1,
+            options: ['f() {\n  return this.name;\n}', 'f: () => {\n  return this.name;\n}', 'f() {\n  return name;\n}', 'f() {\n  return self.name;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'A arrow function não tem this próprio. Digite a saída do console.',
+            highlight: ['this próprio'],
+            codeLanguage: 'JavaScript',
+            code: 'const t = {\n  n: "Time",\n  f: () => this.n\n};\nconsole.log(t.f());\n// saída: ___',
+            answers: ['undefined']
+          },
+          en: {
+            question: 'The arrow function has no this of its own. Type the console output.',
+            highlight: ['no this of its own'],
+            codeLanguage: 'JavaScript',
+            code: 'const t = {\n  n: "Team",\n  f: () => this.n\n};\nconsole.log(t.f());\n// output: ___',
+            answers: ['undefined']
           }
         }
       }
@@ -20119,6 +28302,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['assign', 'new', 'copy']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: animal tem o método som, que mostra "Au"; dog é criado com Object.create(animal); depois, chame dog.som().',
+            highlight: ['create'],
+            codeLanguage: 'JavaScript',
+            lines: ['const animal = {', '  som() { console.log("Au"); }', '};', 'const dog =', '  Object.create(animal);', 'dog.som();'],
+            distractors: ['  new animal();']
+          },
+          en: {
+            question: 'Build the code: animal has the say method, which shows "Hi"; dog is created with Object.create(animal); then call dog.say().',
+            highlight: ['create'],
+            codeLanguage: 'JavaScript',
+            lines: ['const animal = {', '  say() { console.log("Hi"); }', '};', 'const dog =', '  Object.create(animal);', 'dog.say();'],
+            distractors: ['  new animal();']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale a propriedade x de b?',
+            codeLanguage: 'JavaScript',
+            code: 'const a = { x: 1 };\nconst b = Object.create(a);',
+            highlight: ['propriedade'],
+            correctOption: 1,
+            options: ['1', 'undefined', 'null', '0'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is the x property of b?',
+            codeLanguage: 'JavaScript',
+            code: 'const a = { x: 1 };\nconst b = Object.create(a);',
+            highlight: ['property'],
+            correctOption: 1,
+            options: ['1', 'undefined', 'null', '0'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'b não tem x, mas herda de a pelo prototype. Digite a saída do console.',
+            highlight: ['prototype'],
+            codeLanguage: 'JavaScript',
+            code: 'const a = { x: 1 };\nconst b = Object.create(a);\nconsole.log(b.x);\n// saída: ___',
+            answers: ['1']
+          },
+          en: {
+            question: 'b has no x, but inherits it from a through the prototype. Type the console output.',
+            highlight: ['prototype'],
+            codeLanguage: 'JavaScript',
+            code: 'const a = { x: 1 };\nconst b = Object.create(a);\nconsole.log(b.x);\n// output: ___',
+            answers: ['1']
+          }
+        }
       }
     ]
   },
@@ -20253,6 +28497,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['implements', 'this', 'parent']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a classe Cao, que estende Animal: no método som, ela chama primeiro super.som() e depois mostra "Au".',
+            highlight: ['super'],
+            codeLanguage: 'JavaScript',
+            lines: ['class Cao extends Animal {', '  som() {', '    super.som();', '    console.log("Au");', '  }', '}'],
+            distractors: ['class Cao inherits Animal {']
+          },
+          en: {
+            question: 'Build the Dog class, which extends Animal: in the sound method, it first calls super.sound() and then shows "Woof".',
+            highlight: ['super'],
+            codeLanguage: 'JavaScript',
+            lines: ['class Dog extends Animal {', '  sound() {', '    super.sound();', '    console.log("Woof");', '  }', '}'],
+            distractors: ['class Dog inherits Animal {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha cria a classe Gato herdando de Animal?',
+            codeLanguage: 'JavaScript',
+            highlight: ['herdando'],
+            correctOption: 1,
+            options: ['class Gato extends Animal {}', 'class Gato inherits Animal {}', 'class Gato(Animal) {}', 'class Gato : Animal {}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line creates the Cat class inheriting from Animal?',
+            codeLanguage: 'JavaScript',
+            highlight: ['inheriting'],
+            correctOption: 1,
+            options: ['class Cat extends Animal {}', 'class Cat inherits Animal {}', 'class Cat(Animal) {}', 'class Cat : Animal {}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que cria uma instância da classe Cao.',
+            highlight: ['instância'],
+            codeLanguage: 'JavaScript',
+            code: 'class Cao {}\nconst c = ___ Cao();',
+            answers: ['new']
+          },
+          en: {
+            question: 'Type the word that creates an instance of the Dog class.',
+            highlight: ['instance'],
+            codeLanguage: 'JavaScript',
+            code: 'class Dog {}\nconst d = ___ Dog();',
+            answers: ['new']
+          }
+        }
       }
     ]
   },
@@ -20366,6 +28669,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'function one() {\n  console.log("one");\n}\nfunction two() {\n  ___();\n  console.log("two");\n}\ntwo();',
             answers: ['one'],
             distractors: ['two', 'log', 'main']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte as funções: um mostra "um"; dois chama um() e depois mostra "dois". A chamada dois() já vem pronta depois do código.',
+            highlight: ['dois'],
+            codeLanguage: 'JavaScript',
+            lines: ['const um = () =>', '  console.log("um");', 'function dois() {', '  um();', '  console.log("dois");', '}'],
+            distractors: ['  um;']
+          },
+          en: {
+            question: 'Build the functions: one shows "one"; two calls one() and then shows "two". The call two() is already in place after the code.',
+            highlight: ['two'],
+            codeLanguage: 'JavaScript',
+            lines: ['const one = () =>', '  console.log("one");', 'function two() {', '  one();', '  console.log("two");', '}'],
+            distractors: ['  one;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em que ordem as saídas aparecem?',
+            codeLanguage: 'JavaScript',
+            code: 'function a() {\n  console.log("a");\n}\nfunction b() {\n  a();\n  console.log("b");\n}\nb();',
+            highlight: ['ordem'],
+            correctOption: 1,
+            options: ['a, b', 'b, a', 'a', 'b'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In what order do the outputs show up?',
+            codeLanguage: 'JavaScript',
+            code: 'function a() {\n  console.log("a");\n}\nfunction b() {\n  a();\n  console.log("b");\n}\nb();',
+            highlight: ['order'],
+            correctOption: 1,
+            options: ['a, b', 'b, a', 'a', 'b'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o que aparece primeiro no console.',
+            highlight: ['primeiro'],
+            codeLanguage: 'JavaScript',
+            code: 'function a() {\n  console.log("A");\n}\nfunction b() {\n  a();\n  console.log("B");\n}\nb();\n// primeiro: ___',
+            answers: ['A']
+          },
+          en: {
+            question: 'Type what shows up first in the console.',
+            highlight: ['first'],
+            codeLanguage: 'JavaScript',
+            code: 'function a() {\n  console.log("A");\n}\nfunction b() {\n  a();\n  console.log("B");\n}\nb();\n// first: ___',
+            answers: ['A']
           }
         }
       }
@@ -20491,6 +28855,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['Promise', 'then', 'await']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte, nesta ordem: um setTimeout de 0 que mostra "depois" e, em seguida, um console.log("agora") — que aparece primeiro.',
+            highlight: ['setTimeout'],
+            codeLanguage: 'JavaScript',
+            lines: ['setTimeout(() => {', '  console.log("depois");', '}, 0);', 'console.log("agora");'],
+            distractors: ['}, "0");']
+          },
+          en: {
+            question: 'Build, in this order: a setTimeout of 0 that shows "later" and, after it, a console.log("now") — which shows up first.',
+            highlight: ['setTimeout'],
+            codeLanguage: 'JavaScript',
+            lines: ['setTimeout(() => {', '  console.log("later");', '}, 0);', 'console.log("now");'],
+            distractors: ['}, "0");']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a saída deste código?',
+            codeLanguage: 'JavaScript',
+            code: 'setTimeout(() =>\n  console.log("C"), 0);\nPromise.resolve().then(() =>\n  console.log("B"));\nconsole.log("A");',
+            highlight: ['saída'],
+            correctOption: 1,
+            options: ['A, B, C', 'A, C, B', 'C, B, A', 'B, A, C'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is the output of this code?',
+            codeLanguage: 'JavaScript',
+            code: 'setTimeout(() =>\n  console.log("C"), 0);\nPromise.resolve().then(() =>\n  console.log("B"));\nconsole.log("A");',
+            highlight: ['output'],
+            correctOption: 1,
+            options: ['A, B, C', 'A, C, B', 'C, B, A', 'B, A, C'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'setTimeout é macrotask, e a Promise é microtask. Digite o que aparece por último.',
+            highlight: ['por último'],
+            codeLanguage: 'JavaScript',
+            code: 'setTimeout(() =>\n  console.log("C"), 0);\nPromise.resolve().then(() =>\n  console.log("B"));\nconsole.log("A");\n// último: ___',
+            answers: ['C']
+          },
+          en: {
+            question: 'setTimeout is a macrotask and the Promise is a microtask. Type what shows up last.',
+            highlight: ['last'],
+            codeLanguage: 'JavaScript',
+            code: 'setTimeout(() =>\n  console.log("C"), 0);\nPromise.resolve().then(() =>\n  console.log("B"));\nconsole.log("A");\n// last: ___',
+            answers: ['C']
+          }
+        }
       }
     ]
   },
@@ -20604,6 +29029,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'Promise.___("ok")\n  .___(v => console.log(v));',
             answers: ['resolve', 'then'],
             distractors: ['reject', 'catch', 'done']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte, nesta ordem: Promise.resolve("ok") com um then que mostra o valor e, depois, console.log("primeiro") — que aparece antes de "ok".',
+            highlight: ['then'],
+            codeLanguage: 'JavaScript',
+            lines: ['Promise.resolve("ok")', '  .then(v => console.log(v));', 'console.log("primeiro");'],
+            distractors: ['  .then(console.log(v));']
+          },
+          en: {
+            question: 'Build, in this order: Promise.resolve("ok") with a then that shows the value and, after it, console.log("first") — which shows up before "ok".',
+            highlight: ['then'],
+            codeLanguage: 'JavaScript',
+            lines: ['Promise.resolve("ok")', '  .then(v => console.log(v));', 'console.log("first");'],
+            distractors: ['  .then(console.log(v));']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a saída deste código?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("B")\n  .then(console.log);\nconsole.log("A");',
+            highlight: ['saída'],
+            correctOption: 1,
+            options: ['A, B', 'B, A', 'A', 'B'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is the output of this code?',
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("B")\n  .then(console.log);\nconsole.log("A");',
+            highlight: ['output'],
+            correctOption: 1,
+            options: ['A, B', 'B, A', 'A', 'B'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'O then espera a call stack ficar livre. Digite o que aparece primeiro.',
+            highlight: ['primeiro'],
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("B")\n  .then(console.log);\nconsole.log("A");\n// primeiro: ___',
+            answers: ['A']
+          },
+          en: {
+            question: 'The then waits for the call stack to be free. Type what shows up first.',
+            highlight: ['first'],
+            codeLanguage: 'JavaScript',
+            code: 'Promise.resolve("B")\n  .then(console.log);\nconsole.log("A");\n// first: ___',
+            answers: ['A']
           }
         }
       }
@@ -20748,6 +29234,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['{ ...obj1 }', 'obj1.total', '{}']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: obj1 tem total 10; obj2 aponta para o mesmo objeto; mude obj2.total para 20 e mostre obj1.total.',
+            highlight: ['mesmo objeto'],
+            codeLanguage: 'JavaScript',
+            lines: ['const obj1 = { total: 10 };', 'const obj2 = obj1;', 'obj2.total = 20;', 'console.log(obj1.total);'],
+            distractors: ['const obj2 = { ...obj1 };']
+          },
+          en: {
+            question: 'Build the code: obj1 has total 10; obj2 points to the same object; change obj2.total to 20 and show obj1.total.',
+            highlight: ['same object'],
+            codeLanguage: 'JavaScript',
+            lines: ['const obj1 = { total: 10 };', 'const obj2 = obj1;', 'obj2.total = 20;', 'console.log(obj1.total);'],
+            distractors: ['const obj2 = { ...obj1 };']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale a no fim?',
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;',
+            highlight: ['no fim'],
+            correctOption: 1,
+            options: ['10', '20', 'undefined', '30'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What is a at the end?',
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;',
+            highlight: ['at the end'],
+            correctOption: 1,
+            options: ['10', '20', 'undefined', '30'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Números são copiados por valor. Digite a saída do console.',
+            highlight: ['por valor'],
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a);\n// saída: ___',
+            answers: ['10']
+          },
+          en: {
+            question: 'Numbers are copied by value. Type the console output.',
+            highlight: ['by value'],
+            codeLanguage: 'JavaScript',
+            code: 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a);\n// output: ___',
+            answers: ['10']
+          }
+        }
       }
     ]
   },
@@ -20880,6 +29427,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'const original = {\n  addr: { city: "NY" }\n};\nconst c =\n  ___(original);\nc.addr.city = "LA";\nconsole.log(\n  original.addr.city\n);',
             answers: ['structuredClone'],
             distractors: ['Object.assign', 'deepCopy', 'copy']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: o tem end com cidade "SP"; c é uma cópia profunda feita com structuredClone; mude c.end.cidade para "RJ" e mostre o.end.cidade.',
+            highlight: ['cópia profunda'],
+            codeLanguage: 'JavaScript',
+            lines: ['const o = {', '  end: { cidade: "SP" }', '};', 'const c = structuredClone(o);', 'c.end.cidade = "RJ";', 'console.log(o.end.cidade);'],
+            distractors: ['const c = { ...o };']
+          },
+          en: {
+            question: 'Build the code: o has end with city "SP"; c is a deep copy made with structuredClone; change c.end.city to "RJ" and show o.end.city.',
+            highlight: ['deep copy'],
+            codeLanguage: 'JavaScript',
+            lines: ['const o = {', '  end: { city: "SP" }', '};', 'const c = structuredClone(o);', 'c.end.city = "RJ";', 'console.log(o.end.city);'],
+            distractors: ['const c = { ...o };']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Depois deste código, quanto vale o.end.cidade?',
+            codeLanguage: 'JavaScript',
+            code: 'const o = {\n  end: { cidade: "SP" }\n};\nconst c = { ...o };\nc.end.cidade = "RJ";',
+            highlight: ['cidade'],
+            correctOption: 1,
+            options: ['"RJ"', '"SP"', 'undefined', 'null'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'After this code, what is o.end.city?',
+            codeLanguage: 'JavaScript',
+            code: 'const o = {\n  end: { city: "SP" }\n};\nconst c = { ...o };\nc.end.city = "RJ";',
+            highlight: ['city'],
+            correctOption: 1,
+            options: ['"RJ"', '"SP"', 'undefined', 'null'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'O spread faz uma cópia rasa. Digite a saída do console.',
+            highlight: ['cópia rasa'],
+            codeLanguage: 'JavaScript',
+            code: 'const o = { n: { c: "SP" } };\nconst c = { ...o };\nc.n.c = "RJ";\nconsole.log(o.n.c);\n// saída: ___',
+            answers: ['RJ']
+          },
+          en: {
+            question: 'The spread makes a shallow copy. Type the console output.',
+            highlight: ['shallow copy'],
+            codeLanguage: 'JavaScript',
+            code: 'const o = { n: { c: "SP" } };\nconst c = { ...o };\nc.n.c = "RJ";\nconsole.log(o.n.c);\n// output: ___',
+            answers: ['RJ']
           }
         }
       }
@@ -21024,6 +29632,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['..', '*', '&']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: u tem idade 30; novo é um objeto novo com tudo de u (spread) e idade 31; mostre u.idade, que continua 30.',
+            highlight: ['objeto novo'],
+            codeLanguage: 'JavaScript',
+            lines: ['const u = { idade: 30 };', 'const novo =', '  { ...u, idade: 31 };', 'console.log(u.idade);'],
+            distractors: ['u.idade = 31;']
+          },
+          en: {
+            question: 'Build the code: u has age 30; next is a new object with everything from u (spread) and age 31; show u.age, which stays 30.',
+            highlight: ['new object'],
+            codeLanguage: 'JavaScript',
+            lines: ['const u = { age: 30 };', 'const next =', '  { ...u, age: 31 };', 'console.log(u.age);'],
+            distractors: ['u.age = 31;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha adiciona o 4 sem alterar o array original n?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];',
+            highlight: ['sem alterar'],
+            correctOption: 1,
+            options: ['const m = [...n, 4];', 'n.push(4);', 'const m = n.push(4);', 'n[3] = 4;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line adds 4 without changing the original array n?',
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2, 3];',
+            highlight: ['without changing'],
+            correctOption: 1,
+            options: ['const m = [...n, 4];', 'n.push(4);', 'const m = n.push(4);', 'n[3] = 4;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que mostra que n continua com 2 itens.',
+            highlight: ['continua com 2'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2];\nconst m = [...n, 3];\nconsole.log(n.___);',
+            answers: ['length']
+          },
+          en: {
+            question: 'Type the property that shows n still has 2 items.',
+            highlight: ['still has 2'],
+            codeLanguage: 'JavaScript',
+            code: 'const n = [1, 2];\nconst m = [...n, 3];\nconsole.log(n.___);',
+            answers: ['length']
+          }
+        }
       }
     ]
   },
@@ -21155,6 +29824,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['this', 'value', 'parent']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: um único listener de click na lista mostra o texto do item tocado (e.target.textContent).',
+            highlight: ['listener'],
+            codeLanguage: 'JavaScript',
+            lines: ['lista.addEventListener(', '  "click",', '  (e) => console.log(', '    e.target.textContent)', ');'],
+            distractors: ['    lista.textContent)']
+          },
+          en: {
+            question: 'Build the code: a single click listener on list shows the text of the tapped item (e.target.textContent).',
+            highlight: ['listener'],
+            codeLanguage: 'JavaScript',
+            lines: ['list.addEventListener(', '  "click",', '  (e) => console.log(', '    e.target.textContent)', ');'],
+            distractors: ['    list.textContent)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No listener do elemento pai, qual expressão indica o item que recebeu o toque?',
+            codeLanguage: 'JavaScript',
+            highlight: ['elemento pai'],
+            correctOption: 1,
+            options: ['e.target', 'e.parent', 'this.item', 'e.clicked'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In the parent element listener, which expression points to the item that was tapped?',
+            codeLanguage: 'JavaScript',
+            highlight: ['parent element'],
+            correctOption: 1,
+            options: ['e.target', 'e.parent', 'this.item', 'e.clicked'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que mostra o texto do item tocado.',
+            highlight: ['texto'],
+            codeLanguage: 'JavaScript',
+            code: 'lista.addEventListener(\n  "click",\n  e => console.log(\n    e.target.___)\n);',
+            answers: ['textContent']
+          },
+          en: {
+            question: 'Type the property that shows the text of the tapped item.',
+            highlight: ['text'],
+            codeLanguage: 'JavaScript',
+            code: 'list.addEventListener(\n  "click",\n  e => console.log(\n    e.target.___)\n);',
+            answers: ['textContent']
+          }
+        }
       }
     ]
   },
@@ -21276,6 +30004,108 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'field.addEventListener(\n  "input",\n  ___(search, 500)\n);',
             answers: ['debounce'],
             distractors: ['throttle', 'setTimeout', 'delay']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: no evento input do campo, chame buscar com debounce de 500 ms.',
+            highlight: ['debounce'],
+            codeLanguage: 'JavaScript',
+            lines: ['campo.addEventListener(', '  "input",', '  debounce(buscar, 500)', ');'],
+            distractors: ['  debounce(buscar(), 500)']
+          },
+          en: {
+            question: 'Build the code: on the input event of field, call search with a 500 ms debounce.',
+            highlight: ['debounce'],
+            codeLanguage: 'JavaScript',
+            lines: ['field.addEventListener(', '  "input",', '  debounce(search, 500)', ');'],
+            distractors: ['  debounce(search(), 500)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual técnica executa a função no máximo uma vez a cada intervalo?',
+            codeLanguage: 'JavaScript',
+            highlight: ['no máximo'],
+            correctOption: 1,
+            options: ['throttle', 'debounce', 'setTimeout', 'closure'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which technique runs the function at most once per interval?',
+            codeLanguage: 'JavaScript',
+            highlight: ['at most'],
+            correctOption: 1,
+            options: ['throttle', 'debounce', 'setTimeout', 'closure'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada recurso ao que ele faz.',
+            highlight: ['recurso'],
+            pairs: [
+              {
+                left: 'debounce',
+                right: 'Espera o evento parar de disparar'
+              },
+              {
+                left: 'throttle',
+                right: 'No máximo uma vez por intervalo'
+              },
+              {
+                left: 'setTimeout',
+                right: 'Agenda uma execução para depois'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each tool to what it does.',
+            highlight: ['tool'],
+            pairs: [
+              {
+                left: 'debounce',
+                right: 'Waits for the event to stop firing'
+              },
+              {
+                left: 'throttle',
+                right: 'At most once per interval'
+              },
+              {
+                left: 'setTimeout',
+                right: 'Schedules a run for later'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a técnica que executa buscar no máximo uma vez a cada 300 ms.',
+            highlight: ['no máximo'],
+            codeLanguage: 'JavaScript',
+            code: 'campo.addEventListener(\n  "input",\n  ___(buscar, 300)\n);',
+            answers: ['throttle']
+          },
+          en: {
+            question: 'Type the technique that runs search at most once every 300 ms.',
+            highlight: ['at most'],
+            codeLanguage: 'JavaScript',
+            code: 'field.addEventListener(\n  "input",\n  ___(search, 300)\n);',
+            answers: ['throttle']
           }
         }
       }
@@ -21418,6 +30248,63 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['string', 'int', 'numeric']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte, nesta ordem: um setTimeout que mostra "3", uma Promise.resolve().then que mostra "2" e um console.log("1"). A saída será 1, 2, 3.',
+            highlight: ['setTimeout', 'Promise'],
+            codeLanguage: 'JavaScript',
+            lines: ['setTimeout(() =>', '  console.log("3"), 0);', 'Promise.resolve().then(() =>', '  console.log("2"));', 'console.log("1");']
+          },
+          en: {
+            question: 'Build, in this order: a setTimeout that shows "3", a Promise.resolve().then that shows "2" and a console.log("1"). The output will be 1, 2, 3.',
+            highlight: ['setTimeout', 'Promise'],
+            codeLanguage: 'JavaScript',
+            lines: ['setTimeout(() =>', '  console.log("3"), 0);', 'Promise.resolve().then(() =>', '  console.log("2"));', 'console.log("1");']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual função TypeScript recebe dois number e devolve number?',
+            codeLanguage: 'TypeScript',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['function s(\n  a: number,\n  b: number\n): number {', 'function s(\n  number a,\n  number b\n) {', 'function s(\n  a: num,\n  b: num\n): num {', 'function s(\n  a: number,\n  b: number\n) => number {'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which TypeScript function takes two numbers and returns a number?',
+            codeLanguage: 'TypeScript',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['function s(\n  a: number,\n  b: number\n): number {', 'function s(\n  number a,\n  number b\n) {', 'function s(\n  a: num,\n  b: num\n): num {', 'function s(\n  a: number,\n  b: number\n) => number {'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo de retorno de par, que devolve true ou false.',
+            highlight: ['tipo de retorno'],
+            codeLanguage: 'TypeScript',
+            code: 'function par(\n  n: number\n): ___ {\n  return n % 2 === 0;\n}',
+            answers: ['boolean']
+          },
+          en: {
+            question: 'Type the return type of isEven, which returns true or false.',
+            highlight: ['return type'],
+            codeLanguage: 'TypeScript',
+            code: 'function isEven(\n  n: number\n): ___ {\n  return n % 2 === 0;\n}',
+            answers: ['boolean']
+          }
+        }
       }
     ]
   },
@@ -21527,6 +30414,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'function add(\n  a: ___,\n  b: ___\n) {\n  return a + b;\n}',
             answers: ['number', 'number'],
             distractors: ['string', 'any']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função somar em TypeScript: recebe a e depois b, os dois do tipo number, e devolve a + b.',
+            highlight: ['number'],
+            codeLanguage: 'TypeScript',
+            lines: ['function somar(', '  a: number,', '  b: number', ') {', '  return a + b;', '}'],
+            distractors: ['  a: num,']
+          },
+          en: {
+            question: 'Build the sum function in TypeScript: it takes a and then b, both of type number, and returns a + b.',
+            highlight: ['number'],
+            codeLanguage: 'TypeScript',
+            lines: ['function sum(', '  a: number,', '  b: number', ') {', '  return a + b;', '}'],
+            distractors: ['  a: num,']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual chamada o TypeScript marca como erro?',
+            codeLanguage: 'TypeScript',
+            code: 'function somar(\n  a: number,\n  b: number\n) {\n  return a + b;\n}',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['somar(2, "3");', 'somar(2, 3);', 'somar(0, -1);', 'somar(1.5, 2);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which call does TypeScript flag as an error?',
+            codeLanguage: 'TypeScript',
+            code: 'function sum(\n  a: number,\n  b: number\n) {\n  return a + b;\n}',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['sum(2, "3");', 'sum(2, 3);', 'sum(0, -1);', 'sum(1.5, 2);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo do parâmetro nome, que é um texto.',
+            highlight: ['tipo'],
+            codeLanguage: 'TypeScript',
+            code: 'function oi(\n  nome: ___\n) {\n  return "Oi, " + nome;\n}',
+            answers: ['string']
+          },
+          en: {
+            question: 'Type the type of the name parameter, which is text.',
+            highlight: ['type'],
+            codeLanguage: 'TypeScript',
+            code: 'function hi(\n  name: ___\n) {\n  return "Hi, " + name;\n}',
+            answers: ['string']
           }
         }
       }
@@ -21663,6 +30611,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['=', '::', 'as']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte as variáveis: idade do tipo number valendo 20 e, depois, nome do tipo string valendo "Ana"; mostre as duas.',
+            highlight: ['number', 'string'],
+            codeLanguage: 'TypeScript',
+            lines: ['let idade: number = 20;', 'let nome: string = "Ana";', 'console.log(idade, nome);'],
+            distractors: ['let idade: int = 20;']
+          },
+          en: {
+            question: 'Build the variables: age of type number set to 20 and, after it, name of type string set to "Ana"; show both.',
+            highlight: ['number', 'string'],
+            codeLanguage: 'TypeScript',
+            lines: ['let age: number = 20;', 'let name: string = "Ana";', 'console.log(age, name);'],
+            distractors: ['let age: int = 20;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha só é válida em TypeScript, e não em JavaScript?',
+            codeLanguage: 'TypeScript',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['let x: number = 1;', 'let x = 1;', 'const x = "1";', 'var x = [1];'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line is only valid in TypeScript, not in JavaScript?',
+            codeLanguage: 'TypeScript',
+            highlight: ['TypeScript'],
+            correctOption: 1,
+            options: ['let x: number = 1;', 'let x = 1;', 'const x = "1";', 'var x = [1];'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo de ativo, que guarda true ou false.',
+            highlight: ['tipo'],
+            codeLanguage: 'TypeScript',
+            code: 'let ativo: ___ = true;',
+            answers: ['boolean']
+          },
+          en: {
+            question: 'Type the type of active, which holds true or false.',
+            highlight: ['type'],
+            codeLanguage: 'TypeScript',
+            code: 'let active: ___ = true;',
+            answers: ['boolean']
+          }
+        }
       }
     ]
   },
@@ -21778,6 +30785,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['number', 'text', 'char']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: cidade com anotação explícita string valendo "São Paulo" e, depois, idade sem anotação valendo 20 (tipo inferido).',
+            highlight: ['anotação explícita', 'inferido'],
+            codeLanguage: 'TypeScript',
+            lines: ['let cidade: string =', '  "São Paulo";', 'let idade = 20;'],
+            distractors: ['let idade: = 20;']
+          },
+          en: {
+            question: 'Build: city with an explicit string annotation set to "New York" and, after it, age without an annotation set to 20 (inferred type).',
+            highlight: ['explicit', 'inferred'],
+            codeLanguage: 'TypeScript',
+            lines: ['let city: string =', '  "New York";', 'let age = 20;'],
+            distractors: ['let age: = 20;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual tipo o TypeScript infere para total?',
+            codeLanguage: 'TypeScript',
+            code: 'let total = 10;',
+            highlight: ['infere'],
+            correctOption: 1,
+            options: ['number', 'string', 'any', 'unknown'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which type does TypeScript infer for total?',
+            codeLanguage: 'TypeScript',
+            code: 'let total = 10;',
+            highlight: ['infer'],
+            correctOption: 1,
+            options: ['number', 'string', 'any', 'unknown'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo dos itens do array notas.',
+            highlight: ['tipo'],
+            codeLanguage: 'TypeScript',
+            code: 'let notas: ___[] = [7, 8];',
+            answers: ['number']
+          },
+          en: {
+            question: 'Type the type of the items in the grades array.',
+            highlight: ['type'],
+            codeLanguage: 'TypeScript',
+            code: 'let grades: ___[] = [7, 8];',
+            answers: ['number']
+          }
+        }
       }
     ]
   },
@@ -21887,6 +30955,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '___ User {\n  name: ___;\n  age: number;\n}',
             answers: ['interface', 'string'],
             distractors: ['type', 'class', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a interface Usuario com nome do tipo string e, depois, idade do tipo number.',
+            highlight: ['interface'],
+            codeLanguage: 'TypeScript',
+            lines: ['interface Usuario {', '  nome: string;', '  idade: number;', '}'],
+            distractors: ['interface Usuario = {']
+          },
+          en: {
+            question: 'Build the User interface with name of type string and, after it, age of type number.',
+            highlight: ['interface'],
+            codeLanguage: 'TypeScript',
+            lines: ['interface User {', '  name: string;', '  age: number;', '}'],
+            distractors: ['interface User = {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual objeto segue a interface Usuario?',
+            codeLanguage: 'TypeScript',
+            code: 'interface Usuario {\n  nome: string;\n  idade: number;\n}',
+            highlight: ['interface'],
+            correctOption: 1,
+            options: ['{ nome: "Ana", idade: 20 }', '{ nome: "Ana", idade: "20" }', '{ nome: "Ana" }', '{ name: "Ana", idade: 20 }'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which object follows the User interface?',
+            codeLanguage: 'TypeScript',
+            code: 'interface User {\n  name: string;\n  age: number;\n}',
+            highlight: ['interface'],
+            correctOption: 1,
+            options: ['{ name: "Ana", age: 20 }', '{ name: "Ana", age: "20" }', '{ name: "Ana" }', '{ nome: "Ana", age: 20 }'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo de idade na interface Usuario.',
+            highlight: ['interface'],
+            codeLanguage: 'TypeScript',
+            code: 'interface Usuario {\n  nome: string;\n  idade: ___;\n}',
+            answers: ['number']
+          },
+          en: {
+            question: 'Type the type of age in the User interface.',
+            highlight: ['interface'],
+            codeLanguage: 'TypeScript',
+            code: 'interface User {\n  name: string;\n  age: ___;\n}',
+            answers: ['number']
           }
         }
       }
@@ -22004,6 +31133,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['&', '||', ',']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: id aceita string ou number (union); primeiro receba "abc" e, depois, 42.',
+            highlight: ['union'],
+            codeLanguage: 'TypeScript',
+            lines: ['let id: string | number;', 'id = "abc";', 'id = 42;'],
+            distractors: ['let id: string & number;']
+          },
+          en: {
+            question: 'Build: id takes string or number (union); first give it "abc" and then 42.',
+            highlight: ['union'],
+            codeLanguage: 'TypeScript',
+            lines: ['let id: string | number;', 'id = "abc";', 'id = 42;'],
+            distractors: ['let id: string & number;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atribuição o TypeScript recusa?',
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | number;',
+            highlight: ['recusa'],
+            correctOption: 1,
+            options: ['id = true;', 'id = "a1";', 'id = 7;', 'id = 0;'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which assignment does TypeScript reject?',
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | number;',
+            highlight: ['reject'],
+            correctOption: 1,
+            options: ['id = true;', 'id = "a1";', 'id = 7;', 'id = 0;'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o segundo tipo do union, para id aceitar 42.',
+            highlight: ['union'],
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | ___;\nid = 42;',
+            answers: ['number']
+          },
+          en: {
+            question: 'Type the second type of the union, so id accepts 42.',
+            highlight: ['union'],
+            codeLanguage: 'TypeScript',
+            code: 'let id: string | ___;\nid = 42;',
+            answers: ['number']
+          }
+        }
       }
     ]
   },
@@ -22113,6 +31303,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'function twice(\n  n: number\n)___ number {\n  return n * 2;\n}',
             answers: [':'],
             distractors: ['=>', '->', '=']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função dobro: recebe n do tipo number, declara retorno number e devolve n * 2.',
+            highlight: ['retorno'],
+            codeLanguage: 'TypeScript',
+            lines: ['function dobro(', '  n: number', '): number {', '  return n * 2;', '}'],
+            distractors: [') => number {']
+          },
+          en: {
+            question: 'Build the double function: it takes n of type number, declares a number return and returns n * 2.',
+            highlight: ['return'],
+            codeLanguage: 'TypeScript',
+            lines: ['function double(', '  n: number', '): number {', '  return n * 2;', '}'],
+            distractors: [') => number {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual assinatura declara que a função devolve string?',
+            codeLanguage: 'TypeScript',
+            highlight: ['devolve string'],
+            correctOption: 1,
+            options: ['function f(): string {', 'function f(string) {', 'function f(): {string}', 'string function f() {'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which signature declares that the function returns string?',
+            codeLanguage: 'TypeScript',
+            highlight: ['returns string'],
+            correctOption: 1,
+            options: ['function f(): string {', 'function f(string) {', 'function f(): {string}', 'string function f() {'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo do parâmetro nome, que recebe um texto.',
+            highlight: ['parâmetro'],
+            codeLanguage: 'TypeScript',
+            code: 'function criar(\n  nome: ___\n) {\n  return { nome };\n}',
+            answers: ['string']
+          },
+          en: {
+            question: 'Type the type of the name parameter, which takes text.',
+            highlight: ['parameter'],
+            codeLanguage: 'TypeScript',
+            code: 'function create(\n  name: ___\n) {\n  return { name };\n}',
+            answers: ['string']
           }
         }
       }
@@ -22228,6 +31477,108 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'let value: ___ = "x";\n\nif (typeof value ===\n    "string") {\n  value.toUpperCase();\n}',
             answers: ['unknown'],
             distractors: ['any', 'never', 'void']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: valor é unknown com "x"; só depois de checar com typeof que é "string", mostre valor em maiúsculas.',
+            highlight: ['unknown', 'typeof'],
+            codeLanguage: 'TypeScript',
+            lines: ['let valor: unknown = "x";', 'if (typeof valor', '    === "string") {', '  console.log(', '    valor.toUpperCase());', '}'],
+            distractors: ['let valor: any = "x";']
+          },
+          en: {
+            question: 'Build: value is unknown with "x"; only after checking with typeof that it is "string", show value in uppercase.',
+            highlight: ['unknown', 'typeof'],
+            codeLanguage: 'TypeScript',
+            lines: ['let value: unknown = "x";', 'if (typeof value', '    === "string") {', '  console.log(', '    value.toUpperCase());', '}'],
+            distractors: ['let value: any = "x";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual tipo aceita qualquer valor, mas exige uma verificação antes do uso?',
+            codeLanguage: 'TypeScript',
+            highlight: ['verificação'],
+            correctOption: 1,
+            options: ['unknown', 'any', 'never', 'object'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which type accepts any value but requires a check before use?',
+            codeLanguage: 'TypeScript',
+            highlight: ['check'],
+            correctOption: 1,
+            options: ['unknown', 'any', 'never', 'object'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada tipo ao seu comportamento.',
+            highlight: ['tipo'],
+            pairs: [
+              {
+                left: 'any',
+                right: 'Desliga a checagem de tipos'
+              },
+              {
+                left: 'unknown',
+                right: 'Aceita tudo, mas exige verificação'
+              },
+              {
+                left: 'string | number',
+                right: 'Um tipo ou outro (union)'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each type to its behavior.',
+            highlight: ['type'],
+            pairs: [
+              {
+                left: 'any',
+                right: 'Turns type checking off'
+              },
+              {
+                left: 'unknown',
+                right: 'Accepts anything, but needs a check'
+              },
+              {
+                left: 'string | number',
+                right: 'One type or the other (union)'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo que desliga a checagem e deixa usar v sem verificar.',
+            highlight: ['desliga a checagem'],
+            codeLanguage: 'TypeScript',
+            code: 'let v: ___ = "x";\nv.toUpperCase();',
+            answers: ['any']
+          },
+          en: {
+            question: 'Type the type that turns checking off and lets you use v without a check.',
+            highlight: ['turns checking off'],
+            codeLanguage: 'TypeScript',
+            code: 'let v: ___ = "x";\nv.toUpperCase();',
+            answers: ['any']
           }
         }
       }
@@ -22372,6 +31723,67 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['any', 'Array', 'U']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função genérica primeiro<T>: recebe itens do tipo T[] e devolve T, o itens[0].',
+            highlight: ['genérica'],
+            codeLanguage: 'TypeScript',
+            lines: ['function primeiro<T>(', '  itens: T[]', '): T {', '  return itens[0];', '}'],
+            distractors: ['): T[] {']
+          },
+          en: {
+            question: 'Build the generic function first<T>: it takes items of type T[] and returns T, the items[0].',
+            highlight: ['generic'],
+            codeLanguage: 'TypeScript',
+            lines: ['function first<T>(', '  items: T[]', '): T {', '  return items[0];', '}'],
+            distractors: ['): T[] {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Que tipo tem primeiro(["a", "b"])?',
+            codeLanguage: 'TypeScript',
+            code: 'function primeiro<T>(\n  itens: T[]\n): T {\n  return itens[0];\n}',
+            highlight: ['tipo'],
+            correctOption: 1,
+            options: ['string', 'string[]', 'T', 'any'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'What type does first(["a", "b"]) have?',
+            codeLanguage: 'TypeScript',
+            code: 'function first<T>(\n  items: T[]\n): T {\n  return items[0];\n}',
+            highlight: ['type'],
+            correctOption: 1,
+            options: ['string', 'string[]', 'T', 'any'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que restringe T a tipos que têm nome.',
+            highlight: ['restringe'],
+            codeLanguage: 'TypeScript',
+            code: 'function d<T ___ ComNome>(\n  item: T\n) {}',
+            answers: ['extends']
+          },
+          en: {
+            question: 'Type the word that restricts T to types that have a name.',
+            highlight: ['restricts'],
+            codeLanguage: 'TypeScript',
+            code: 'function d<T ___ HasName>(\n  item: T\n) {}',
+            answers: ['extends']
+          }
+        }
       }
     ]
   },
@@ -22485,6 +31897,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['interface', 'enum', 'let']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o type Status, que só aceita "ativo" ou "inativo", e a variável s do tipo Status valendo "ativo".',
+            highlight: ['type'],
+            codeLanguage: 'TypeScript',
+            lines: ['type Status =', '  "ativo" | "inativo";', 'let s: Status = "ativo";'],
+            distractors: ['interface Status =']
+          },
+          en: {
+            question: 'Build the Status type, which only accepts "active" or "inactive", and the variable s of type Status set to "active".',
+            highlight: ['type'],
+            codeLanguage: 'TypeScript',
+            lines: ['type Status =', '  "active" | "inactive";', 'let s: Status = "active";'],
+            distractors: ['interface Status =']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destas declarações é inválida?',
+            codeLanguage: 'TypeScript',
+            highlight: ['inválida'],
+            correctOption: 1,
+            options: ['interface S = "a" | "b";', 'type S = "a" | "b";', 'interface S { a: string; }', 'type S = { a: string };'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these declarations is invalid?',
+            codeLanguage: 'TypeScript',
+            highlight: ['invalid'],
+            correctOption: 1,
+            options: ['interface S = "a" | "b";', 'type S = "a" | "b";', 'interface S { a: string; }', 'type S = { a: string };'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que declara Usuario de um jeito que pode ser estendido depois, no mesmo nome.',
+            highlight: ['estendido depois'],
+            codeLanguage: 'TypeScript',
+            code: '___ Usuario {\n  nome: string;\n}',
+            answers: ['interface']
+          },
+          en: {
+            question: 'Type the word that declares User in a way that can be extended later, under the same name.',
+            highlight: ['extended later'],
+            codeLanguage: 'TypeScript',
+            code: '___ User {\n  name: string;\n}',
+            answers: ['interface']
+          }
+        }
       }
     ]
   },
@@ -22594,6 +32065,65 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '{\n  "compilerOptions": {\n    "___": true\n  }\n}',
             answers: ['strict'],
             distractors: ['strictMode', 'check', 'safe']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o tsconfig.json com compilerOptions: target "es2022" e, depois dele, strict true.',
+            highlight: ['compilerOptions'],
+            codeLanguage: 'TypeScript',
+            lines: ['{', '  "compilerOptions": {', '    "target": "es2022",', '    "strict": true', '  }', '}'],
+            distractors: ['  "options": {']
+          },
+          en: {
+            question: 'Build the tsconfig.json with compilerOptions: target "es2022" and, after it, strict true.',
+            highlight: ['compilerOptions'],
+            codeLanguage: 'TypeScript',
+            lines: ['{', '  "compilerOptions": {', '    "target": "es2022",', '    "strict": true', '  }', '}'],
+            distractors: ['  "options": {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual opção liga as checagens de tipo mais rígidas?',
+            codeLanguage: 'TypeScript',
+            highlight: ['mais rígidas'],
+            correctOption: 1,
+            options: ['"strict": true', '"target": "strict"', '"rigid": true', '"strict": "on"'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which option turns on the strictest type checks?',
+            codeLanguage: 'TypeScript',
+            highlight: ['strictest'],
+            correctOption: 1,
+            options: ['"strict": true', '"target": "strict"', '"rigid": true', '"strict": "on"'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a opção que define a versão de JavaScript gerada.',
+            highlight: ['versão'],
+            codeLanguage: 'TypeScript',
+            code: '{\n  "compilerOptions": {\n    "___": "es2022"\n  }\n}',
+            answers: ['target']
+          },
+          en: {
+            question: 'Type the option that sets the generated JavaScript version.',
+            highlight: ['version'],
+            codeLanguage: 'TypeScript',
+            code: '{\n  "compilerOptions": {\n    "___": "es2022"\n  }\n}',
+            answers: ['target']
           }
         }
       }
@@ -22783,6 +32313,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['npm', 'run', 'js']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: o arquivo app.js tem console.log("Olá, Node!") e, depois, o comentário de como rodar no terminal: node app.js.',
+            highlight: ['terminal'],
+            codeLanguage: 'JavaScript',
+            lines: ['// app.js', 'console.log("Olá, Node!");', '// terminal: node app.js'],
+            distractors: ['// terminal: run app.js']
+          },
+          en: {
+            question: 'Build: the app.js file has console.log("Hi, Node!") and, after it, the comment on how to run it in the terminal: node app.js.',
+            highlight: ['terminal'],
+            codeLanguage: 'JavaScript',
+            lines: ['// app.js', 'console.log("Hi, Node!");', '// terminal: node app.js'],
+            distractors: ['// terminal: run app.js']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual comando roda o arquivo app.js com Node.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['comando'],
+            correctOption: 1,
+            options: ['node app.js', 'npm app.js', 'run app.js', 'js app.js'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which command runs the app.js file with Node.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['command'],
+            correctOption: 1,
+            options: ['node app.js', 'npm app.js', 'run app.js', 'js app.js'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o objeto que mostra a mensagem no terminal do Node.js.',
+            highlight: ['terminal'],
+            codeLanguage: 'JavaScript',
+            code: '___.log("Olá, Node!");',
+            answers: ['console']
+          },
+          en: {
+            question: 'Type the object that shows the message in the Node.js terminal.',
+            highlight: ['terminal'],
+            codeLanguage: 'JavaScript',
+            code: '___.log("Hi, Node!");',
+            answers: ['console']
+          }
+        }
       }
     ]
   },
@@ -22894,6 +32483,116 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'console.log(\n  ___.env.PORT\n);',
             answers: ['process'],
             distractors: ['window', 'document', 'node']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: no Node.js, guarde em porta a variável de ambiente PORT (process.env) e mostre porta.',
+            highlight: ['variável de ambiente'],
+            codeLanguage: 'JavaScript',
+            lines: ['const porta =', '  process.env.PORT;', 'console.log(porta);'],
+            distractors: ['  window.env.PORT;']
+          },
+          en: {
+            question: 'Build: in Node.js, store in port the PORT environment variable (process.env) and show port.',
+            highlight: ['environment variable'],
+            codeLanguage: 'JavaScript',
+            lines: ['const port =', '  process.env.PORT;', 'console.log(port);'],
+            distractors: ['  window.env.PORT;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual objeto só existe no navegador?',
+            codeLanguage: 'JavaScript',
+            highlight: ['navegador'],
+            correctOption: 1,
+            options: ['window', 'process', 'console', 'JSON'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which object only exists in the browser?',
+            codeLanguage: 'JavaScript',
+            highlight: ['browser'],
+            correctOption: 1,
+            options: ['window', 'process', 'console', 'JSON'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada objeto ao que ele representa.',
+            highlight: ['objeto'],
+            pairs: [
+              {
+                left: 'document',
+                right: 'Acessa os elementos da página'
+              },
+              {
+                left: 'window',
+                right: 'A janela do navegador'
+              },
+              {
+                left: 'process',
+                right: 'O processo do Node.js'
+              },
+              {
+                left: 'console',
+                right: 'Existe nos dois ambientes'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each object to what it represents.',
+            highlight: ['object'],
+            pairs: [
+              {
+                left: 'document',
+                right: 'Reaches the elements of the page'
+              },
+              {
+                left: 'window',
+                right: 'The browser window'
+              },
+              {
+                left: 'process',
+                right: 'The Node.js process'
+              },
+              {
+                left: 'console',
+                right: 'Exists in both environments'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade de process que guarda as variáveis de ambiente.',
+            highlight: ['variáveis de ambiente'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  process.___.PORT\n);',
+            answers: ['env']
+          },
+          en: {
+            question: 'Type the property of process that holds the environment variables.',
+            highlight: ['environment variables'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(\n  process.___.PORT\n);',
+            answers: ['env']
           }
         }
       }
@@ -23028,6 +32727,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['process', 'console', 'require']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: no navegador, pegue o button com document.querySelector e mostre o texto dele.',
+            highlight: ['navegador'],
+            codeLanguage: 'JavaScript',
+            lines: ['const b =', '  document.querySelector(', '    "button"', '  );', 'console.log(b.textContent);'],
+            distractors: ['  process.querySelector(']
+          },
+          en: {
+            question: 'Build: in the browser, get the button with document.querySelector and show its text.',
+            highlight: ['browser'],
+            codeLanguage: 'JavaScript',
+            lines: ['const b =', '  document.querySelector(', '    "button"', '  );', 'console.log(b.textContent);'],
+            distractors: ['  process.querySelector(']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha funciona no Node.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['funciona'],
+            correctOption: 1,
+            options: ['console.log("ok");', 'document.title = "x";', 'window.alert("x");', 'localStorage.clear();'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line works in Node.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['works'],
+            correctOption: 1,
+            options: ['console.log("ok");', 'document.title = "x";', 'window.alert("x");', 'localStorage.clear();'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'No navegador, digite a propriedade do window que traz o endereço da página.',
+            highlight: ['endereço'],
+            codeLanguage: 'JavaScript',
+            code: 'window.___.href;',
+            answers: ['location']
+          },
+          en: {
+            question: 'In the browser, type the window property that holds the page address.',
+            highlight: ['address'],
+            codeLanguage: 'JavaScript',
+            code: 'window.___.href;',
+            answers: ['location']
+          }
+        }
       }
     ]
   },
@@ -23143,6 +32901,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: '// ___.json\n{\n  "name": "my-api"\n}',
             answers: ['package'],
             distractors: ['node', 'npm', 'project']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o package.json com name "minha-api" e, depois, version "1.0.0".',
+            highlight: ['name', 'version'],
+            codeLanguage: 'JavaScript',
+            lines: ['{', '  "name": "minha-api",', '  "version": "1.0.0"', '}'],
+            distractors: ['  name: minha-api,']
+          },
+          en: {
+            question: 'Build the package.json with name "my-api" and, after it, version "1.0.0".',
+            highlight: ['name', 'version'],
+            codeLanguage: 'JavaScript',
+            lines: ['{', '  "name": "my-api",', '  "version": "1.0.0"', '}'],
+            distractors: ['  name: my-api,']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual arquivo descreve o projeto Node.js e suas dependências?',
+            codeLanguage: 'JavaScript',
+            highlight: ['dependências'],
+            correctOption: 1,
+            options: ['package.json', 'node.config', 'index.html', 'deps.txt'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which file describes the Node.js project and its dependencies?',
+            codeLanguage: 'JavaScript',
+            highlight: ['dependencies'],
+            correctOption: 1,
+            options: ['package.json', 'node.config', 'index.html', 'deps.txt'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o campo do package.json que guarda a versão do projeto.',
+            highlight: ['versão'],
+            codeLanguage: 'JavaScript',
+            code: '{\n  "name": "minha-api",\n  "___": "1.0.0"\n}',
+            answers: ['version']
+          },
+          en: {
+            question: 'Type the package.json field that holds the project version.',
+            highlight: ['version'],
+            codeLanguage: 'JavaScript',
+            code: '{\n  "name": "my-api",\n  "___": "1.0.0"\n}',
+            answers: ['version']
           }
         }
       }
@@ -23281,6 +33098,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['get', 'download', 'require']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o package.json com a dependência express, na versão "^5.0.0", dentro de dependencies.',
+            highlight: ['dependencies'],
+            codeLanguage: 'JavaScript',
+            lines: ['{', '  "dependencies": {', '    "express": "^5.0.0"', '  }', '}'],
+            distractors: ['  "packages": {']
+          },
+          en: {
+            question: 'Build the package.json with the express dependency, at version "^5.0.0", inside dependencies.',
+            highlight: ['dependencies'],
+            codeLanguage: 'JavaScript',
+            lines: ['{', '  "dependencies": {', '    "express": "^5.0.0"', '  }', '}'],
+            distractors: ['  "packages": {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual comando instala o pacote express?',
+            codeLanguage: 'JavaScript',
+            highlight: ['instala'],
+            correctOption: 1,
+            options: ['npm install express', 'npm get express', 'node install express', 'npm express'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which command installs the express package?',
+            codeLanguage: 'JavaScript',
+            highlight: ['installs'],
+            correctOption: 1,
+            options: ['npm install express', 'npm get express', 'node install express', 'npm express'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o campo do package.json que lista os pacotes instalados.',
+            highlight: ['pacotes instalados'],
+            codeLanguage: 'JavaScript',
+            code: '{\n  "___": {\n    "express": "^5.0.0"\n  }\n}',
+            answers: ['dependencies']
+          },
+          en: {
+            question: 'Type the package.json field that lists the installed packages.',
+            highlight: ['installed packages'],
+            codeLanguage: 'JavaScript',
+            code: '{\n  "___": {\n    "express": "^5.0.0"\n  }\n}',
+            answers: ['dependencies']
+          }
+        }
       }
     ]
   },
@@ -23406,6 +33282,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['import', 'module', 'public']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o arquivo math.js: o comentário // math.js e, depois, a função somar exportada, que devolve a + b.',
+            highlight: ['exportada'],
+            codeLanguage: 'JavaScript',
+            lines: ['// math.js', 'export function somar(a, b) {', '  return a + b;', '}'],
+            distractors: ['exports function somar(a, b) {']
+          },
+          en: {
+            question: 'Build the math.js file: the comment // math.js and, after it, the exported sum function, which returns a + b.',
+            highlight: ['exported'],
+            codeLanguage: 'JavaScript',
+            lines: ['// math.js', 'export function sum(a, b) {', '  return a + b;', '}'],
+            distractors: ['exports function sum(a, b) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho importa somar de math.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['importa'],
+            correctOption: 1,
+            options: ['import { somar }\n  from "./math.js";', 'export { somar }\n  from "./math.js";', 'import somar\n  to "./math.js";', 'require { somar }\n  from "./math.js";'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet imports sum from math.js?',
+            codeLanguage: 'JavaScript',
+            highlight: ['imports'],
+            correctOption: 1,
+            options: ['import { sum }\n  from "./math.js";', 'export { sum }\n  from "./math.js";', 'import sum\n  to "./math.js";', 'require { sum }\n  from "./math.js";'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que traz somar de outro arquivo.',
+            highlight: ['outro arquivo'],
+            codeLanguage: 'JavaScript',
+            code: '___ { somar }\n  from "./math.js";',
+            answers: ['import']
+          },
+          en: {
+            question: 'Type the word that brings sum in from another file.',
+            highlight: ['another file'],
+            codeLanguage: 'JavaScript',
+            code: '___ { sum }\n  from "./math.js";',
+            answers: ['import']
+          }
+        }
       }
     ]
   },
@@ -23517,6 +33452,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'import fs\n  from "node:___";',
             answers: ['fs'],
             distractors: ['file', 'http', 'path']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: importe fs de "node:fs", leia o arquivo "a.txt" em "utf8" e mostre o texto.',
+            highlight: ['node:fs'],
+            codeLanguage: 'JavaScript',
+            lines: ['import fs from "node:fs";', 'const texto =', '  fs.readFileSync(', '    "a.txt", "utf8");', 'console.log(texto);'],
+            distractors: ['import fs from "fs-node";']
+          },
+          en: {
+            question: 'Build: import fs from "node:fs", read the file "a.txt" as "utf8" and show the text.',
+            highlight: ['node:fs'],
+            codeLanguage: 'JavaScript',
+            lines: ['import fs from "node:fs";', 'const text =', '  fs.readFileSync(', '    "a.txt", "utf8");', 'console.log(text);'],
+            distractors: ['import fs from "fs-node";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual módulo nativo do Node.js trabalha com arquivos?',
+            codeLanguage: 'JavaScript',
+            highlight: ['arquivos'],
+            correctOption: 1,
+            options: ['node:fs', 'node:http', 'node:files', 'node:os'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which native Node.js module works with files?',
+            codeLanguage: 'JavaScript',
+            highlight: ['files'],
+            correctOption: 1,
+            options: ['node:fs', 'node:http', 'node:files', 'node:os'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que lê o arquivo "a.txt" como texto.',
+            highlight: ['lê'],
+            codeLanguage: 'JavaScript',
+            code: 'import fs from "node:fs";\nfs.___(\n  "a.txt", "utf8"\n);',
+            answers: ['readFileSync']
+          },
+          en: {
+            question: 'Type the method that reads the file "a.txt" as text.',
+            highlight: ['reads'],
+            codeLanguage: 'JavaScript',
+            code: 'import fs from "node:fs";\nfs.___(\n  "a.txt", "utf8"\n);',
+            answers: ['readFileSync']
           }
         }
       }
@@ -23632,6 +33626,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['readFileSync', 'saveFile', 'write']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: escreva "Olá!" no arquivo "msg.txt" com fs.writeFileSync (primeiro o nome do arquivo, depois o texto).',
+            highlight: ['writeFileSync'],
+            codeLanguage: 'JavaScript',
+            lines: ['fs.writeFileSync(', '  "msg.txt",', '  "Olá!"', ');'],
+            distractors: ['fs.readFileSync(']
+          },
+          en: {
+            question: 'Build: write "Hi!" to the file "msg.txt" with fs.writeFileSync (first the file name, then the text).',
+            highlight: ['writeFileSync'],
+            codeLanguage: 'JavaScript',
+            lines: ['fs.writeFileSync(', '  "msg.txt",', '  "Hi!"', ');'],
+            distractors: ['fs.readFileSync(']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho lê o conteúdo de "a.txt" como texto?',
+            codeLanguage: 'JavaScript',
+            highlight: ['lê'],
+            correctOption: 1,
+            options: ['fs.readFileSync(\n  "a.txt", "utf8")', 'fs.writeFileSync(\n  "a.txt", "utf8")', 'fs.read(\n  "a.txt")', 'fs.open("a.txt").text()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet reads the content of "a.txt" as text?',
+            codeLanguage: 'JavaScript',
+            highlight: ['reads'],
+            correctOption: 1,
+            options: ['fs.readFileSync(\n  "a.txt", "utf8")', 'fs.writeFileSync(\n  "a.txt", "utf8")', 'fs.read(\n  "a.txt")', 'fs.open("a.txt").text()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome do módulo nativo de arquivos, depois de "node:".',
+            highlight: ['módulo nativo'],
+            codeLanguage: 'JavaScript',
+            code: 'import fs from "node:___";',
+            answers: ['fs']
+          },
+          en: {
+            question: 'Type the name of the native files module, after "node:".',
+            highlight: ['native files module'],
+            codeLanguage: 'JavaScript',
+            code: 'import fs from "node:___";',
+            answers: ['fs']
+          }
+        }
       }
     ]
   },
@@ -23743,6 +33796,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'const server = ___(\n  (req, res) => res.end("Hi")\n);\nserver.___(3000);',
             answers: ['createServer', 'listen'],
             distractors: ['express', 'start', 'open']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o servidor: createServer responde "Oi" com res.end, e o servidor escuta a porta 3000.',
+            highlight: ['createServer'],
+            codeLanguage: 'JavaScript',
+            lines: ['const server = createServer(', '  (req, res) => res.end("Oi")', ');', 'server.listen(3000);'],
+            distractors: ['server.start(3000);']
+          },
+          en: {
+            question: 'Build the server: createServer answers "Hi" with res.end, and the server listens on port 3000.',
+            highlight: ['createServer'],
+            codeLanguage: 'JavaScript',
+            lines: ['const server = createServer(', '  (req, res) => res.end("Hi")', ');', 'server.listen(3000);'],
+            distractors: ['server.start(3000);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha faz o servidor receber requisições na porta 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['porta 3000'],
+            correctOption: 1,
+            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line makes the server take requests on port 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['port 3000'],
+            correctOption: 1,
+            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método da resposta que envia "Oi" e encerra.',
+            highlight: ['encerra'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Oi")\n);',
+            answers: ['end']
+          },
+          en: {
+            question: 'Type the response method that sends "Hi" and finishes.',
+            highlight: ['finishes'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Hi")\n);',
+            answers: ['end']
           }
         }
       }
@@ -23858,6 +33970,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['code', 'state', 'result']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: espere (await) o fetch de "/users" em r e mostre o status da resposta.',
+            highlight: ['status'],
+            codeLanguage: 'JavaScript',
+            lines: ['const r =', '  await fetch("/users");', 'console.log(r.status);'],
+            distractors: ['console.log(r.code);']
+          },
+          en: {
+            question: 'Build: wait (await) for the fetch of "/users" in r and show the status of the response.',
+            highlight: ['status'],
+            codeLanguage: 'JavaScript',
+            lines: ['const r =', '  await fetch("/users");', 'console.log(r.status);'],
+            distractors: ['console.log(r.code);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual status indica que a requisição deu certo?',
+            codeLanguage: 'JavaScript',
+            highlight: ['deu certo'],
+            correctOption: 1,
+            options: ['200', '404', '500', '400'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which status says the request worked?',
+            codeLanguage: 'JavaScript',
+            highlight: ['worked'],
+            correctOption: 1,
+            options: ['200', '404', '500', '400'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'A requisição deu certo. Digite o status que aparece no console.',
+            highlight: ['deu certo'],
+            codeLanguage: 'JavaScript',
+            code: 'const r = await fetch("/u");\nconsole.log(r.status);\n// saída: ___',
+            answers: ['200']
+          },
+          en: {
+            question: 'The request worked. Type the status shown in the console.',
+            highlight: ['worked'],
+            codeLanguage: 'JavaScript',
+            code: 'const r = await fetch("/u");\nconsole.log(r.status);\n// output: ___',
+            answers: ['200']
+          }
+        }
       }
     ]
   },
@@ -23969,6 +34140,118 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: '// ___ /users\n// creates a user',
             answers: ['POST'],
             distractors: ['GET', 'PUT', 'DELETE']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte os comentários de rota, nesta ordem: GET /users para listar, POST /users para criar e DELETE /users/1 para remover.',
+            highlight: ['GET', 'POST', 'DELETE'],
+            codeLanguage: 'JavaScript',
+            lines: ['// GET /users: listar', '// POST /users: criar', '// DELETE /users/1: remover'],
+            distractors: ['// SEND /users: criar']
+          },
+          en: {
+            question: 'Build the route comments, in this order: GET /users to list, POST /users to create and DELETE /users/1 to remove.',
+            highlight: ['GET', 'POST', 'DELETE'],
+            codeLanguage: 'JavaScript',
+            lines: ['// GET /users: list', '// POST /users: create', '// DELETE /users/1: remove'],
+            distractors: ['// SEND /users: create']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método HTTP é usado para criar um recurso?',
+            codeLanguage: 'JavaScript',
+            highlight: ['criar'],
+            correctOption: 1,
+            options: ['POST', 'GET', 'DELETE', 'FETCH'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which HTTP method is used to create a resource?',
+            codeLanguage: 'JavaScript',
+            highlight: ['create'],
+            correctOption: 1,
+            options: ['POST', 'GET', 'DELETE', 'FETCH'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada método HTTP à sua ação.',
+            highlight: ['método HTTP'],
+            pairs: [
+              {
+                left: 'GET',
+                right: 'Buscar dados'
+              },
+              {
+                left: 'POST',
+                right: 'Criar um recurso'
+              },
+              {
+                left: 'PUT',
+                right: 'Atualizar um recurso'
+              },
+              {
+                left: 'DELETE',
+                right: 'Remover um recurso'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each HTTP method to its action.',
+            highlight: ['HTTP method'],
+            pairs: [
+              {
+                left: 'GET',
+                right: 'Get data'
+              },
+              {
+                left: 'POST',
+                right: 'Create a resource'
+              },
+              {
+                left: 'PUT',
+                right: 'Update a resource'
+              },
+              {
+                left: 'DELETE',
+                right: 'Remove a resource'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método HTTP que remove um recurso.',
+            highlight: ['remove'],
+            codeLanguage: 'JavaScript',
+            code: '// ___ /users/1\n// remove o usuário 1',
+            answers: ['DELETE'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the HTTP method that removes a resource.',
+            highlight: ['removes'],
+            codeLanguage: 'JavaScript',
+            code: '// ___ /users/1\n// removes user 1',
+            answers: ['DELETE'],
+            ignoreCase: true
           }
         }
       }
@@ -24084,6 +34367,116 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['200', '500', '201']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a resposta de erro: status 404 e, depois, o JSON { erro: "não achei" }.',
+            highlight: ['404'],
+            codeLanguage: 'JavaScript',
+            lines: ['res.status(404)', '  .json({', '    erro: "não achei"', '  });'],
+            distractors: ['  .send(404)']
+          },
+          en: {
+            question: 'Build the error response: status 404 and, after it, the JSON { error: "not found" }.',
+            highlight: ['404'],
+            codeLanguage: 'JavaScript',
+            lines: ['res.status(404)', '  .json({', '    error: "not found"', '  });'],
+            distractors: ['  .send(404)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual status indica que o recurso não foi encontrado?',
+            codeLanguage: 'JavaScript',
+            highlight: ['não foi encontrado'],
+            correctOption: 1,
+            options: ['404', '200', '201', '500'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which status says the resource was not found?',
+            codeLanguage: 'JavaScript',
+            highlight: ['not found'],
+            correctOption: 1,
+            options: ['404', '200', '201', '500'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada status HTTP ao seu significado.',
+            highlight: ['status HTTP'],
+            pairs: [
+              {
+                left: '200',
+                right: 'Deu certo'
+              },
+              {
+                left: '201',
+                right: 'Recurso criado'
+              },
+              {
+                left: '400',
+                right: 'Requisição malformada'
+              },
+              {
+                left: '404',
+                right: 'Recurso não encontrado'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each HTTP status to its meaning.',
+            highlight: ['HTTP status'],
+            pairs: [
+              {
+                left: '200',
+                right: 'It worked'
+              },
+              {
+                left: '201',
+                right: 'Resource created'
+              },
+              {
+                left: '400',
+                right: 'Malformed request'
+              },
+              {
+                left: '404',
+                right: 'Resource not found'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o status de recurso criado.',
+            highlight: ['recurso criado'],
+            codeLanguage: 'JavaScript',
+            code: 'res.status(___)\n  .json(novo);',
+            answers: ['201']
+          },
+          en: {
+            question: 'Type the status for a created resource.',
+            highlight: ['created resource'],
+            codeLanguage: 'JavaScript',
+            code: 'res.status(___)\n  .json(created);',
+            answers: ['201']
+          }
+        }
       }
     ]
   },
@@ -24195,6 +34588,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.___("/users",\n  (req, res) => {\n    res.send("List");\n  }\n);',
             answers: ['get'],
             distractors: ['route', 'path', 'fetch']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a rota GET /users, que responde "Lista" com res.send.',
+            highlight: ['GET /users'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/users",', '  (req, res) => {', '    res.send("Lista");', '  }', ');'],
+            distractors: ['    req.send("Lista");']
+          },
+          en: {
+            question: 'Build the GET /users route, which answers "List" with res.send.',
+            highlight: ['GET /users'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/users",', '  (req, res) => {', '    res.send("List");', '  }', ');'],
+            distractors: ['    req.send("List");']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho cria uma rota com Express?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Express'],
+            correctOption: 1,
+            options: ['app.get("/", f);', 'createServer("/", f);', 'app.route = "/";', 'express.get("/", f);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet creates a route with Express?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Express'],
+            correctOption: 1,
+            options: ['app.get("/", f);', 'createServer("/", f);', 'app.route = "/";', 'express.get("/", f);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que faz o app escutar a porta 3000.',
+            highlight: ['escutar'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___(3000);',
+            answers: ['listen']
+          },
+          en: {
+            question: 'Type the method that makes the app listen on port 3000.',
+            highlight: ['listen'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___(3000);',
+            answers: ['listen']
           }
         }
       }
@@ -24310,6 +34762,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['server', 'app', 'http']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: importe express de "express", crie o app com express() e faça o app escutar a porta 3000.',
+            highlight: ['express'],
+            codeLanguage: 'JavaScript',
+            lines: ['import express from "express";', 'const app = express();', 'app.listen(3000);'],
+            distractors: ['const app = new Express();']
+          },
+          en: {
+            question: 'Build: import express from "express", create the app with express() and make the app listen on port 3000.',
+            highlight: ['express'],
+            codeLanguage: 'JavaScript',
+            lines: ['import express from "express";', 'const app = express();', 'app.listen(3000);'],
+            distractors: ['const app = new Express();']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha cria a aplicação Express?',
+            codeLanguage: 'JavaScript',
+            highlight: ['aplicação'],
+            correctOption: 1,
+            options: ['const app = express();', 'const app = Express.create();', 'const app = express;', 'const app = http(express);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line creates the Express application?',
+            codeLanguage: 'JavaScript',
+            highlight: ['application'],
+            correctOption: 1,
+            options: ['const app = express();', 'const app = Express.create();', 'const app = express;', 'const app = http(express);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o middleware do express que interpreta corpos em JSON.',
+            highlight: ['middleware'],
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.___());',
+            answers: ['json']
+          },
+          en: {
+            question: 'Type the express middleware that parses JSON bodies.',
+            highlight: ['middleware'],
+            codeLanguage: 'JavaScript',
+            code: 'app.use(express.___());',
+            answers: ['json']
+          }
+        }
       }
     ]
   },
@@ -24421,6 +34932,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.___("/users",\n  (req, res) => {\n    res.send("Created");\n  }\n);',
             answers: ['post'],
             distractors: ['get', 'put', 'create']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a rota POST /users, que responde "Criado" com res.send.',
+            highlight: ['POST /users'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.post("/users",', '  (req, res) => {', '    res.send("Criado");', '  }', ');'],
+            distractors: ['app.get("/users",']
+          },
+          en: {
+            question: 'Build the POST /users route, which answers "Created" with res.send.',
+            highlight: ['POST /users'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.post("/users",', '  (req, res) => {', '    res.send("Created");', '  }', ');'],
+            distractors: ['app.get("/users",']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual rota responde a uma requisição DELETE /users/1?',
+            codeLanguage: 'JavaScript',
+            highlight: ['DELETE'],
+            correctOption: 1,
+            options: ['app.delete("/users/:id", f);', 'app.get("/users/:id", f);', 'app.remove("/users/:id", f);', 'app.delete("/users", f);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which route answers a DELETE /users/1 request?',
+            codeLanguage: 'JavaScript',
+            highlight: ['DELETE'],
+            correctOption: 1,
+            options: ['app.delete("/users/:id", f);', 'app.get("/users/:id", f);', 'app.remove("/users/:id", f);', 'app.delete("/users", f);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método da rota que atualiza um usuário (PUT).',
+            highlight: ['atualiza'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users/:id", f);',
+            answers: ['put']
+          },
+          en: {
+            question: 'Type the route method that updates a user (PUT).',
+            highlight: ['updates'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users/:id", f);',
+            answers: ['put']
           }
         }
       }
@@ -24536,6 +35106,108 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['req', 'app', 'server']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a rota GET /oi, que responde "Oi!" usando o objeto de resposta (res).',
+            highlight: ['res'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/oi",', '  (req, res) => {', '    res.send("Oi!");', '  }', ');'],
+            distractors: ['    req.send("Oi!");']
+          },
+          en: {
+            question: 'Build the GET /hi route, which answers "Hi!" using the response object (res).',
+            highlight: ['res'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/hi",', '  (req, res) => {', '    res.send("Hi!");', '  }', ');'],
+            distractors: ['    req.send("Hi!");']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em (req, res), qual objeto traz as informações da requisição?',
+            codeLanguage: 'JavaScript',
+            highlight: ['requisição'],
+            correctOption: 1,
+            options: ['req', 'res', 'app', 'next'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In (req, res), which object carries the request information?',
+            codeLanguage: 'JavaScript',
+            highlight: ['request'],
+            correctOption: 1,
+            options: ['req', 'res', 'app', 'next'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada objeto do Express ao que ele representa.',
+            highlight: ['Express'],
+            pairs: [
+              {
+                left: 'req',
+                right: 'Dados da requisição recebida'
+              },
+              {
+                left: 'res',
+                right: 'Resposta enviada ao cliente'
+              },
+              {
+                left: 'app',
+                right: 'A aplicação Express'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Express object to what it represents.',
+            highlight: ['Express'],
+            pairs: [
+              {
+                left: 'req',
+                right: 'Data of the incoming request'
+              },
+              {
+                left: 'res',
+                right: 'Response sent to the client'
+              },
+              {
+                left: 'app',
+                right: 'The Express application'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o objeto da requisição, que traz os dados recebidos.',
+            highlight: ['requisição'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/u", (___, res) =>\n  res.json(req.query));',
+            answers: ['req']
+          },
+          en: {
+            question: 'Type the request object, which carries the incoming data.',
+            highlight: ['request'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/u", (___, res) =>\n  res.json(req.query));',
+            answers: ['req']
+          }
+        }
       }
     ]
   },
@@ -24649,6 +35321,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['JSON', 'toJSON', 'body']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a resposta em JSON: um objeto com id 1 e, depois, nome "Ana".',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            lines: ['res.json({', '  id: 1,', '  nome: "Ana"', '});'],
+            distractors: ['res.send.json({']
+          },
+          en: {
+            question: 'Build the JSON response: an object with id 1 and, after it, name "Ana".',
+            highlight: ['JSON'],
+            codeLanguage: 'JavaScript',
+            lines: ['res.json({', '  id: 1,', '  name: "Ana"', '});'],
+            distractors: ['res.send.json({']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha responde com JSON?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSON'],
+            correctOption: 1,
+            options: ['res.json({ ok: true });', 'res.send(JSON);', 'req.json({ ok: true });', 'res.html({ ok: true });'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line answers with JSON?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSON'],
+            correctOption: 1,
+            options: ['res.json({ ok: true });', 'res.send(JSON);', 'req.json({ ok: true });', 'res.html({ ok: true });'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que responde com o texto "Oi".',
+            highlight: ['texto'],
+            codeLanguage: 'JavaScript',
+            code: 'res.___("Oi");',
+            answers: ['send']
+          },
+          en: {
+            question: 'Type the method that answers with the text "Hi".',
+            highlight: ['text'],
+            codeLanguage: 'JavaScript',
+            code: 'res.___("Hi");',
+            answers: ['send']
+          }
+        }
       }
     ]
   },
@@ -24760,6 +35491,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.get("/users/___id",\n  (req, res) => {\n    res.json(req.___.id);\n  }\n);',
             answers: [':', 'params'],
             distractors: ['#', 'body', 'query']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a rota GET /users/:id, que responde em JSON com o id vindo de req.params.',
+            highlight: ['id'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/users/:id",', '  (req, res) => {', '    res.json(req.params.id);', '  }', ');'],
+            distractors: ['    res.json(req.body.id);']
+          },
+          en: {
+            question: 'Build the GET /users/:id route, which answers in JSON with the id from req.params.',
+            highlight: ['id'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/users/:id",', '  (req, res) => {', '    res.json(req.params.id);', '  }', ');'],
+            distractors: ['    res.json(req.body.id);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para GET /users/7, qual expressão vale "7"?',
+            codeLanguage: 'JavaScript',
+            highlight: ['GET /users/7'],
+            correctOption: 1,
+            options: ['req.params.id', 'req.body.id', 'res.params.id', 'req.id'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'For GET /users/7, which expression is "7"?',
+            codeLanguage: 'JavaScript',
+            highlight: ['GET /users/7'],
+            correctOption: 1,
+            options: ['req.params.id', 'req.body.id', 'res.params.id', 'req.id'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o parâmetro da rota que é lido em params.',
+            highlight: ['params'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/users/:id",\n  (q, r) =>\n    r.json(q.params.___));',
+            answers: ['id']
+          },
+          en: {
+            question: 'Type the route parameter that is read from params.',
+            highlight: ['params'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/users/:id",\n  (q, r) =>\n    r.json(q.params.___));',
+            answers: ['id']
           }
         }
       }
@@ -24879,6 +35669,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['params', 'parse', 'data']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte: ative o middleware express.json() e, depois, a rota POST /users que responde com req.body.',
+            highlight: ['middleware'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.use(express.json());', 'app.post("/users",', '  (req, res) => {', '    res.json(req.body);', '  }', ');'],
+            distractors: ['app.use(express.body());']
+          },
+          en: {
+            question: 'Build: turn on the express.json() middleware and, after it, the POST /users route that answers with req.body.',
+            highlight: ['middleware'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.use(express.json());', 'app.post("/users",', '  (req, res) => {', '    res.json(req.body);', '  }', ');'],
+            distractors: ['app.use(express.body());']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha deixa o Express entender corpos de requisição em JSON?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSON'],
+            correctOption: 1,
+            options: ['app.use(express.json());', 'app.json(express);', 'app.use(JSON.parse);', 'express.use(json());'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line lets Express understand JSON request bodies?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSON'],
+            correctOption: 1,
+            options: ['app.use(express.json());', 'app.json(express);', 'app.use(JSON.parse);', 'express.use(json());'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que ativa um middleware no app.',
+            highlight: ['ativa'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___(express.json());',
+            answers: ['use']
+          },
+          en: {
+            question: 'Type the method that turns on a middleware in the app.',
+            highlight: ['turns on'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___(express.json());',
+            answers: ['use']
+          }
+        }
       }
     ]
   },
@@ -24992,6 +35841,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['req', 'start', 'run']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a API: o array base tem um usuário { id: 1 }; a rota GET /users responde base em JSON; o app escuta a porta 3000.',
+            highlight: ['API'],
+            codeLanguage: 'JavaScript',
+            lines: ['const base = [{ id: 1 }];', 'app.get("/users",', '  (req, res) => res.json(base)', ');', 'app.listen(3000);'],
+            distractors: ['  (req, res) => req.json(base)']
+          },
+          en: {
+            question: 'Build the API: list has one user { id: 1 }; the GET /users route answers list in JSON; the app listens on port 3000.',
+            highlight: ['API'],
+            codeLanguage: 'JavaScript',
+            lines: ['const list = [{ id: 1 }];', 'app.get("/users",', '  (req, res) => res.json(list)', ');', 'app.listen(3000);'],
+            distractors: ['  (req, res) => req.json(list)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho junta corretamente a rota e a resposta em JSON?',
+            codeLanguage: 'JavaScript',
+            highlight: ['rota'],
+            correctOption: 1,
+            options: ['app.get("/a", (q, r) =>\n  r.json([]));', 'app.get("/a", r.json([]));', 'app.json("/a", []);', 'app.get("/a").json([]);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet correctly joins the route and the JSON response?',
+            codeLanguage: 'JavaScript',
+            highlight: ['route'],
+            correctOption: 1,
+            options: ['app.get("/a", (q, r) =>\n  r.json([]));', 'app.get("/a", r.json([]));', 'app.json("/a", []);', 'app.get("/a").json([]);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o status para quando o usuário não existe.',
+            highlight: ['não existe'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/u/:id", (q, r) =>\n  r.status(___).json({}));',
+            answers: ['404']
+          },
+          en: {
+            question: 'Type the status for when the user does not exist.',
+            highlight: ['does not exist'],
+            codeLanguage: 'JavaScript',
+            code: 'app.get("/u/:id", (q, r) =>\n  r.status(___).json({}));',
+            answers: ['404']
+          }
+        }
       }
     ]
   },
@@ -25103,6 +36011,65 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'app.___("___",\n  (req, res) => {\n    res.json([]);\n  }\n);',
             answers: ['get', '/users'],
             distractors: ['post', '/user', 'users']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a rota GET /produtos, que responde uma lista vazia em JSON.',
+            highlight: ['GET /produtos'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/produtos",', '  (req, res) => {', '    res.json([]);', '  }', ');'],
+            distractors: ['app.post("/produtos",']
+          },
+          en: {
+            question: 'Build the GET /products route, which answers an empty list in JSON.',
+            highlight: ['GET /products'],
+            codeLanguage: 'JavaScript',
+            lines: ['app.get("/products",', '  (req, res) => {', '    res.json([]);', '  }', ');'],
+            distractors: ['app.post("/products",']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual rota responde a uma requisição GET /produtos?',
+            codeLanguage: 'JavaScript',
+            highlight: ['GET /produtos'],
+            correctOption: 1,
+            options: ['app.get("/produtos", f);', 'app.post("/produtos", f);', 'app.get("/produto", f);', 'app.use("/produtos");'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which route answers a GET /products request?',
+            codeLanguage: 'JavaScript',
+            highlight: ['GET /products'],
+            correctOption: 1,
+            options: ['app.get("/products", f);', 'app.post("/products", f);', 'app.get("/product", f);', 'app.use("/products");'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método da rota que cria usuários.',
+            highlight: ['cria'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users", f);',
+            answers: ['post']
+          },
+          en: {
+            question: 'Type the route method that creates users.',
+            highlight: ['creates'],
+            codeLanguage: 'JavaScript',
+            code: 'app.___("/users", f);',
+            answers: ['post']
           }
         }
       }
@@ -25239,6 +36206,114 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'const app = ___();\napp.use(express.json());\napp.___(3000);',
             answers: ['express', 'listen'],
             distractors: ['http', 'start', 'run']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o início da API: crie o app com express(), ative express.json() e, por fim, escute a porta 3000.',
+            highlight: ['API'],
+            codeLanguage: 'JavaScript',
+            lines: ['const app = express();', 'app.use(express.json());', 'app.listen(3000);'],
+            distractors: ['app.use(json.express());']
+          },
+          en: {
+            question: 'Build the start of the API: create the app with express(), turn on express.json() and, last, listen on port 3000.',
+            highlight: ['API'],
+            codeLanguage: 'JavaScript',
+            lines: ['const app = express();', 'app.use(express.json());', 'app.listen(3000);'],
+            distractors: ['app.use(json.express());']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha escuta a porta 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['porta 3000'],
+            correctOption: 1,
+            options: ['app.listen(3000);', 'app.use(3000);', 'app.port = 3000;', 'express(3000);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line listens on port 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['port 3000'],
+            correctOption: 1,
+            options: ['app.listen(3000);', 'app.use(3000);', 'app.port = 3000;', 'express(3000);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada peça ao seu papel na API.',
+            highlight: ['peça'],
+            pairs: [
+              {
+                left: 'Node.js',
+                right: 'Executa JavaScript fora do navegador'
+              },
+              {
+                left: 'Express',
+                right: 'Simplifica o servidor HTTP'
+              },
+              {
+                left: 'HTTP',
+                right: 'Comunicação entre cliente e servidor'
+              },
+              {
+                left: 'JSON',
+                right: 'Formato dos dados transportados'
+              }
+            ]
+          },
+          en: {
+            question: 'Match each piece to its role in the API.',
+            highlight: ['piece'],
+            pairs: [
+              {
+                left: 'Node.js',
+                right: 'Runs JavaScript outside the browser'
+              },
+              {
+                left: 'Express',
+                right: 'Makes the HTTP server simpler'
+              },
+              {
+                left: 'HTTP',
+                right: 'Talk between client and server'
+              },
+              {
+                left: 'JSON',
+                right: 'Format of the data carried'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que registra uma rota GET no app.',
+            highlight: ['rota GET'],
+            codeLanguage: 'JavaScript',
+            code: 'const app = express();\napp.use(express.json());\napp.___("/users", f);',
+            answers: ['get']
+          },
+          en: {
+            question: 'Type the method that registers a GET route in the app.',
+            highlight: ['GET route'],
+            codeLanguage: 'JavaScript',
+            code: 'const app = express();\napp.use(express.json());\napp.___("/users", f);',
+            answers: ['get']
           }
         }
       }
@@ -25426,6 +36501,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['render', 'print', 'show']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o componente App, que devolve o título h1 "Olá!".',
+            highlight: ['componente'],
+            codeLanguage: 'JavaScript',
+            lines: ['function App() {', '  return <h1>Olá!</h1>;', '}'],
+            distractors: ['  print <h1>Olá!</h1>;', 'function App {']
+          },
+          en: {
+            question: 'Build the App component, which returns the h1 heading "Hello!".',
+            highlight: ['component'],
+            codeLanguage: 'JavaScript',
+            lines: ['function App() {', '  return <h1>Hello!</h1>;', '}'],
+            distractors: ['  print <h1>Hello!</h1>;', 'function App {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual componente React mostra o título na tela?',
+            codeLanguage: 'JavaScript',
+            highlight: ['componente'],
+            correctOption: 1,
+            options: ['function Titulo() {\n  return <h1>Oi</h1>;\n}', 'function Titulo() {\n  <h1>Oi</h1>;\n}', 'function Titulo {\n  return <h1>Oi</h1>;\n}', 'function Titulo() {\n  return h1(Oi);\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which React component shows the heading on screen?',
+            codeLanguage: 'JavaScript',
+            highlight: ['component'],
+            correctOption: 1,
+            options: ['function Title() {\n  return <h1>Hi</h1>;\n}', 'function Title() {\n  <h1>Hi</h1>;\n}', 'function Title {\n  return <h1>Hi</h1>;\n}', 'function Title() {\n  return h1(Hi);\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que cria o componente App.',
+            highlight: ['componente'],
+            codeLanguage: 'JavaScript',
+            code: '___ App() {\n  return <h1>Oi</h1>;\n}',
+            answers: ['function']
+          },
+          en: {
+            question: 'Type the word that creates the App component.',
+            highlight: ['component'],
+            codeLanguage: 'JavaScript',
+            code: '___ App() {\n  return <h1>Hi</h1>;\n}',
+            answers: ['function']
+          }
+        }
       }
     ]
   },
@@ -25556,6 +36690,63 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: 'function App() {\n  return (\n    <main>\n      <___ />\n    </main>\n  );\n}',
             answers: ['Button'],
             distractors: ['button', 'btn', 'Main']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o retorno do App: um main com o título h1 "Login" e, abaixo dele, o componente Botao.',
+            highlight: ['main', 'Botao'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <main>', '    <h1>Login</h1>', '    <Botao />', '  </main>', ');']
+          },
+          en: {
+            question: 'Build the return of App: a main with the h1 heading "Login" and, below it, the Button component.',
+            highlight: ['main', 'Button'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <main>', '    <h1>Login</h1>', '    <Button />', '  </main>', ');']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como usar o componente Botao dentro de outro componente?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Botao'],
+            correctOption: 1,
+            options: ['<Botao />', '<botao />', '<Botao>', '{Botao}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'How do you use the Button component inside another component?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Button'],
+            correctOption: 1,
+            options: ['<Button />', '<button />', '<Button>', '{Button}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite como o componente Titulo é usado dentro do App.',
+            highlight: ['componente Titulo'],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  return <___ />;\n}',
+            answers: ['Titulo']
+          },
+          en: {
+            question: 'Type how the Title component is used inside App.',
+            highlight: ['Title component'],
+            codeLanguage: 'JavaScript',
+            code: 'function App() {\n  return <___ />;\n}',
+            answers: ['Title']
           }
         }
       }
@@ -25690,6 +36881,116 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: '<label ___="name">\n  Name\n</label>\n<p ___="notice">Hi</p>',
             answers: ['htmlFor', 'className'],
             distractors: ['for', 'class']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o JSX: uma div com a classe aviso e, dentro dela, o label "Nome" ligado ao campo nome.',
+            highlight: ['classe', 'label'],
+            codeLanguage: 'JavaScript',
+            lines: ['<div className="aviso">', '  <label htmlFor="nome">', '    Nome', '  </label>', '</div>'],
+            distractors: ['<div class="aviso">', '  <label for="nome">']
+          },
+          en: {
+            question: 'Build the JSX: a div with the class notice and, inside it, the label "Name" linked to the name field.',
+            highlight: ['class', 'label'],
+            codeLanguage: 'JavaScript',
+            lines: ['<div className="notice">', '  <label htmlFor="name">', '    Name', '  </label>', '</div>'],
+            distractors: ['<div class="notice">', '  <label for="name">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho de JSX está correto?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['<p className="aviso">Oi</p>', '<p class="aviso">Oi</p>', '<label for="x">Oi</label>', '<p style="color: red">Oi</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which JSX snippet is correct?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['<p className="note">Hi</p>', '<p class="note">Hi</p>', '<label for="x">Hi</label>', '<p style="color: red">Hi</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada trecho de JSX ao que ele faz.',
+            highlight: ['JSX'],
+            pairs: [
+              {
+                left: 'className',
+                right: 'Faz o papel do class do HTML'
+              },
+              {
+                left: 'htmlFor',
+                right: 'Faz o papel do for do label'
+              },
+              {
+                left: '{ }',
+                right: 'Insere uma expressão JavaScript'
+              },
+              {
+                left: '<></>',
+                right: 'Agrupa sem criar elemento extra'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each piece of JSX to what it does.',
+            highlight: ['JSX'],
+            pairs: [
+              {
+                left: 'className',
+                right: 'Plays the role of class in HTML'
+              },
+              {
+                left: 'htmlFor',
+                right: 'Plays the role of for in a label'
+              },
+              {
+                left: '{ }',
+                right: 'Inserts a JavaScript expression'
+              },
+              {
+                left: '<></>',
+                right: 'Groups without an extra element'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite como se escreve no JSX, em camelCase, o atributo tabindex do input.',
+            highlight: ['camelCase'],
+            codeLanguage: 'JavaScript',
+            code: '<input ___={0} />',
+            answers: ['tabIndex']
+          },
+          en: {
+            question: 'Type how the input tabindex attribute is written in JSX, in camelCase.',
+            highlight: ['camelCase'],
+            codeLanguage: 'JavaScript',
+            code: '<input ___={0} />',
+            answers: ['tabIndex']
           }
         }
       }
@@ -25828,6 +37129,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['(', ')', '"']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: nome vale "Ana", e o App devolve o parágrafo "Olá, Ana!" usando a variável nome.',
+            highlight: ['nome'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "Ana";', 'function App() {', '  return <p>Olá, {nome}!</p>;', '}'],
+            distractors: ['  return <p>Olá, nome!</p>;']
+          },
+          en: {
+            question: 'Build the code: name is "Ana", and App returns the paragraph "Hi, Ana!" using the name variable.',
+            highlight: ['name'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "Ana";', 'function App() {', '  return <p>Hi, {name}!</p>;', '}'],
+            distractors: ['  return <p>Hi, name!</p>;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha mostra o valor guardado na variável idade?',
+            codeLanguage: 'JavaScript',
+            highlight: ['idade'],
+            correctOption: 1,
+            options: ['<p>Idade: {idade}</p>', '<p>Idade: idade</p>', '<p>Idade: (idade)</p>', '<p>Idade: "idade"</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line shows the value stored in the age variable?',
+            codeLanguage: 'JavaScript',
+            highlight: ['age'],
+            correctOption: 1,
+            options: ['<p>Age: {age}</p>', '<p>Age: age</p>', '<p>Age: (age)</p>', '<p>Age: "age"</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a variável que mostra a idade dentro das chaves.',
+            highlight: ['chaves'],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\nreturn <p>{___}</p>;',
+            answers: ['idade']
+          },
+          en: {
+            question: 'Type the variable that shows the age inside the braces.',
+            highlight: ['braces'],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\nreturn <p>{___}</p>;',
+            answers: ['age']
+          }
+        }
       }
     ]
   },
@@ -25943,6 +37303,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['props', 'value', 'key']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o componente Saudacao, que recebe nome por props e devolve o parágrafo "Olá, {nome}!"; depois, use-o com nome "Ana".',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            lines: ['function Saudacao({ nome }) {', '  return <p>Olá, {nome}!</p>;', '}', '<Saudacao nome="Ana" />'],
+            distractors: ['<Saudacao props="Ana" />']
+          },
+          en: {
+            question: 'Build the Greeting component, which takes name through props and returns the paragraph "Hi, {name}!"; then use it with name "Ana".',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            lines: ['function Greeting({ name }) {', '  return <p>Hi, {name}!</p>;', '}', '<Greeting name="Ana" />'],
+            distractors: ['<Greeting props="Ana" />']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como o componente Card recebe a prop nome?',
+            codeLanguage: 'JavaScript',
+            highlight: ['prop'],
+            correctOption: 1,
+            options: ['function Card({ nome }) {', 'function Card({ p.nome }) {', 'function Card[nome] {', 'function Card(nome: prop) {'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'How does the Card component take the name prop?',
+            codeLanguage: 'JavaScript',
+            highlight: ['prop'],
+            correctOption: 1,
+            options: ['function Card({ name }) {', 'function Card({ p.name }) {', 'function Card[name] {', 'function Card(name: prop) {'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome do parâmetro que recebe todas as props, para ler props.nome.',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            code: 'function Card(___) {\n  return <p>{props.nome}</p>;\n}',
+            answers: ['props']
+          },
+          en: {
+            question: 'Type the name of the parameter that takes all the props, to read props.name.',
+            highlight: ['props'],
+            codeLanguage: 'JavaScript',
+            code: 'function Card(___) {\n  return <p>{props.name}</p>;\n}',
+            answers: ['props']
+          }
+        }
       }
     ]
   },
@@ -25993,6 +37412,63 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['user', 'Name', 'Ana']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o retorno do App: um fragmento com o Usuario de nome "Ana" e, depois dele, o Usuario de nome "João".',
+            highlight: ['fragmento', 'Usuario'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <>', '    <Usuario nome="Ana" />', '    <Usuario nome="João" />', '  </>', ');']
+          },
+          en: {
+            question: 'Build the return of App: a fragment with the User named "Ana" and, after it, the User named "John".',
+            highlight: ['fragment', 'User'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <>', '    <User name="Ana" />', '    <User name="John" />', '  </>', ');']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho reutiliza o mesmo componente com dados diferentes?',
+            codeLanguage: 'JavaScript',
+            highlight: ['reutiliza'],
+            correctOption: 1,
+            options: ['<Usuario nome="Ana" />\n<Usuario nome="Bia" />', '<Usuario nome="Ana" />\n<Usuario nome="Ana" />', '<Ana />\n<Bia />', '<Usuario />\n<Pessoa />'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet reuses the same component with different data?',
+            codeLanguage: 'JavaScript',
+            highlight: ['reuses'],
+            correctOption: 1,
+            options: ['<User name="Ana" />\n<User name="Bia" />', '<User name="Ana" />\n<User name="Ana" />', '<Ana />\n<Bia />', '<User />\n<Person />'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da prop que leva "João" para o componente Usuario.',
+            highlight: ['prop'],
+            codeLanguage: 'JavaScript',
+            code: '<Usuario ___="João" />',
+            answers: ['nome']
+          },
+          en: {
+            question: 'Type the name of the prop that carries "John" into the User component.',
+            highlight: ['prop'],
+            codeLanguage: 'JavaScript',
+            code: '<User ___="John" />',
+            answers: ['name']
+          }
+        }
       }
     ]
   },
@@ -26041,6 +37517,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: '<button ___={handleClick}>\n  Click\n</button>',
             answers: ['onClick'],
             distractors: ['onclick', 'click', 'onPress']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o botão "Clique", que chama a função clicar quando é clicado.',
+            highlight: ['clicar'],
+            codeLanguage: 'JavaScript',
+            lines: ['<button onClick={clicar}>', '  Clique', '</button>'],
+            distractors: ['<button onclick="clicar()">', '<button onClick={clicar()}>']
+          },
+          en: {
+            question: 'Build the "Click" button, which calls the click function when it is clicked.',
+            highlight: ['click function'],
+            codeLanguage: 'JavaScript',
+            lines: ['<button onClick={click}>', '  Click', '</button>'],
+            distractors: ['<button onclick="click()">', '<button onClick={click()}>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho passa a função ao evento, sem chamá-la na hora?',
+            codeLanguage: 'JavaScript',
+            highlight: ['sem chamá-la'],
+            correctOption: 1,
+            options: ['onClick={clicar}', 'onClick={clicar()}', 'onClick="clicar"', 'onclick={clicar}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet passes the function to the event, without calling it right away?',
+            codeLanguage: 'JavaScript',
+            highlight: ['without calling it'],
+            correctOption: 1,
+            options: ['onClick={click}', 'onClick={click()}', 'onClick="click"', 'onclick={click}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que o botão chama quando é clicado, sem parênteses.',
+            highlight: ['sem parênteses'],
+            codeLanguage: 'JavaScript',
+            code: 'function clicar() {\n  console.log("Oi");\n}\n<button onClick={___}>',
+            answers: ['clicar']
+          },
+          en: {
+            question: 'Type the function the button calls when clicked, without parentheses.',
+            highlight: ['without parentheses'],
+            codeLanguage: 'JavaScript',
+            code: 'function click() {\n  console.log("Hi");\n}\n<button onClick={___}>',
+            answers: ['click']
           }
         }
       }
@@ -26177,6 +37712,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['total', 'useState', 'setState']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: total começa em 0 com useState, e a função somar aumenta total em 1 com setTotal.',
+            highlight: ['useState', 'setTotal'],
+            codeLanguage: 'JavaScript',
+            lines: ['const [total, setTotal] =', '  useState(0);', 'function somar() {', '  setTotal(total + 1);', '}'],
+            distractors: ['  total = total + 1;']
+          },
+          en: {
+            question: 'Build the code: total starts at 0 with useState, and the add function increases total by 1 with setTotal.',
+            highlight: ['useState', 'setTotal'],
+            codeLanguage: 'JavaScript',
+            lines: ['const [total, setTotal] =', '  useState(0);', 'function add() {', '  setTotal(total + 1);', '}'],
+            distractors: ['  total = total + 1;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha atualiza o estado do jeito certo?',
+            codeLanguage: 'JavaScript',
+            highlight: ['estado'],
+            correctOption: 1,
+            options: ['setTotal(total + 1);', 'total = total + 1;', 'total++;', 'useState(total + 1);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line updates the state the right way?',
+            codeLanguage: 'JavaScript',
+            highlight: ['state'],
+            correctOption: 1,
+            options: ['setTotal(total + 1);', 'total = total + 1;', 'total++;', 'useState(total + 1);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o estado que é somado a 1 nesta atualização.',
+            highlight: ['estado'],
+            codeLanguage: 'JavaScript',
+            code: 'const [total, setTotal] =\n  useState(0);\nsetTotal(___ + 1);',
+            answers: ['total']
+          },
+          en: {
+            question: 'Type the state that gets 1 added to it in this update.',
+            highlight: ['state'],
+            codeLanguage: 'JavaScript',
+            code: 'const [total, setTotal] =\n  useState(0);\nsetTotal(___ + 1);',
+            answers: ['total']
+          }
+        }
       }
     ]
   },
@@ -26246,6 +37840,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: 'const [n, ___] =\n  ___(0);',
             answers: ['setN', 'useState'],
             distractors: ['useEffect', 'n', 'setState']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o estado n, que começa em 0, e o botão que mostra n e soma 1 a cada clique.',
+            highlight: ['estado', 'botão'],
+            codeLanguage: 'JavaScript',
+            lines: ['const [n, setN] = useState(0);', '<button onClick={() =>', '  setN(n + 1)}>', '  {n}', '</button>'],
+            distractors: ['  n = n + 1}>']
+          },
+          en: {
+            question: 'Build the state n, which starts at 0, and the button that shows n and adds 1 on each click.',
+            highlight: ['state', 'button'],
+            codeLanguage: 'JavaScript',
+            lines: ['const [n, setN] = useState(0);', '<button onClick={() =>', '  setN(n + 1)}>', '  {n}', '</button>'],
+            distractors: ['  n = n + 1}>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha cria o estado c começando em 0?',
+            codeLanguage: 'JavaScript',
+            highlight: ['estado'],
+            correctOption: 1,
+            options: ['const [c, setC] = useState(0);', 'const c = useState(0);', 'const [c, setC] = useState;', 'const {c, setC} = useState(0);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line creates the state c starting at 0?',
+            codeLanguage: 'JavaScript',
+            highlight: ['state'],
+            correctOption: 1,
+            options: ['const [c, setC] = useState(0);', 'const c = useState(0);', 'const [c, setC] = useState;', 'const {c, setC} = useState(0);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor inicial do estado n: zero.',
+            highlight: ['valor inicial'],
+            codeLanguage: 'JavaScript',
+            code: 'const [n, setN] =\n  useState(___);',
+            answers: ['0']
+          },
+          en: {
+            question: 'Type the initial value of the state n: zero.',
+            highlight: ['initial value'],
+            codeLanguage: 'JavaScript',
+            code: 'const [n, setN] =\n  useState(___);',
+            answers: ['0']
           }
         }
       }
@@ -26359,6 +38012,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['state', 'props', 'useRef']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o Card: recebe titulo por props, guarda v no estado começando em 0 e devolve um parágrafo "titulo: v".',
+            highlight: ['props', 'estado'],
+            codeLanguage: 'JavaScript',
+            lines: ['function Card({ titulo }) {', '  const [v] = useState(0);', '  return <p>{titulo}: {v}</p>;', '}'],
+            distractors: ['  const [titulo] = useState();']
+          },
+          en: {
+            question: 'Build Card: takes title through props, keeps v in state starting at 0 and returns a paragraph "title: v".',
+            highlight: ['props', 'state'],
+            codeLanguage: 'JavaScript',
+            lines: ['function Card({ title }) {', '  const [v] = useState(0);', '  return <p>{title}: {v}</p>;', '}'],
+            distractors: ['  const [title] = useState(0);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual componente guarda o próprio contador no estado?',
+            codeLanguage: 'JavaScript',
+            highlight: ['estado'],
+            correctOption: 1,
+            options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which component keeps its own counter in state?',
+            codeLanguage: 'JavaScript',
+            highlight: ['state'],
+            correctOption: 1,
+            options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da função que atualiza v, no padrão set + nome do estado.',
+            highlight: ['set'],
+            codeLanguage: 'JavaScript',
+            code: 'function Card({ titulo }) {\n  const [v, ___] =\n    useState(0);\n}',
+            answers: ['setV']
+          },
+          en: {
+            question: 'Type the name of the function that updates v, following set + state name.',
+            highlight: ['set'],
+            codeLanguage: 'JavaScript',
+            code: 'function Card({ title }) {\n  const [v, ___] =\n    useState(0);\n}',
+            answers: ['setV']
+          }
+        }
       }
     ]
   },
@@ -26407,6 +38119,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: '<input\n  ___={handleChange}\n/>',
             answers: ['onChange'],
             distractors: ['onClick', 'change', 'onSubmit']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a função alterar, que mostra no console o valor digitado, e o input que chama alterar a cada mudança.',
+            highlight: ['alterar'],
+            codeLanguage: 'JavaScript',
+            lines: ['function alterar(event) {', '  console.log(', '    event.target.value);', '}', '<input onChange={alterar} />'],
+            distractors: ['<input onchange="alterar" />']
+          },
+          en: {
+            question: 'Build the change function, which logs the typed value, and the input that calls change on every edit.',
+            highlight: ['change function'],
+            codeLanguage: 'JavaScript',
+            lines: ['function change(event) {', '  console.log(', '    event.target.value);', '}', '<input onChange={change} />'],
+            distractors: ['<input onchange="change" />']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão lê o texto digitado no campo?',
+            codeLanguage: 'JavaScript',
+            highlight: ['texto digitado'],
+            correctOption: 1,
+            options: ['event.target.value', 'event.value', 'event.target.text', 'input.value()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression reads the text typed in the field?',
+            codeLanguage: 'JavaScript',
+            highlight: ['text typed'],
+            correctOption: 1,
+            options: ['event.target.value', 'event.value', 'event.target.text', 'input.value()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que traz o texto digitado no campo.',
+            highlight: ['texto digitado'],
+            codeLanguage: 'JavaScript',
+            code: '<input onChange={e =>\n  console.log(e.target.___)\n} />',
+            answers: ['value']
+          },
+          en: {
+            question: 'Type the property that holds the text typed in the field.',
+            highlight: ['text typed'],
+            codeLanguage: 'JavaScript',
+            code: '<input onChange={e =>\n  console.log(e.target.___)\n} />',
+            answers: ['value']
           }
         }
       }
@@ -26541,6 +38312,108 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['setState', 'state', 'useHook']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o import do useState e, depois dele, do useEffect, vindos de "react".',
+            highlight: ['import'],
+            codeLanguage: 'JavaScript',
+            lines: ['import {', '  useState,', '  useEffect', '} from "react";'],
+            distractors: ['} from "useState";']
+          },
+          en: {
+            question: 'Build the import of useState and, after it, useEffect, coming from "react".',
+            highlight: ['import'],
+            codeLanguage: 'JavaScript',
+            lines: ['import {', '  useState,', '  useEffect', '} from "react";'],
+            distractors: ['} from "useState";']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um Hook do React?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Hook'],
+            correctOption: 1,
+            options: ['useState()', 'setState()', 'getState()', 'stateHook()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these is a React Hook?',
+            codeLanguage: 'JavaScript',
+            highlight: ['Hook'],
+            correctOption: 1,
+            options: ['useState()', 'setState()', 'getState()', 'stateHook()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada Hook ao que ele faz.',
+            highlight: ['Hook'],
+            pairs: [
+              {
+                left: 'useState',
+                right: 'Guarda um valor que muda'
+              },
+              {
+                left: 'useEffect',
+                right: 'Roda um efeito após renderizar'
+              },
+              {
+                left: 'useRef',
+                right: 'Referência que não renderiza de novo'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Hook to what it does.',
+            highlight: ['Hook'],
+            pairs: [
+              {
+                left: 'useState',
+                right: 'Keeps a value that changes'
+              },
+              {
+                left: 'useEffect',
+                right: 'Runs an effect after rendering'
+              },
+              {
+                left: 'useRef',
+                right: 'Reference that does not re-render'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o Hook que roda um efeito depois da renderização.',
+            highlight: ['Hook'],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  ___\n} from "react";',
+            answers: ['useEffect']
+          },
+          en: {
+            question: 'Type the Hook that runs an effect after rendering.',
+            highlight: ['Hook'],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  ___\n} from "react";',
+            answers: ['useEffect']
+          }
+        }
       }
     ]
   },
@@ -26614,6 +38487,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['value', 'useState', 'log']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o useEffect que mostra nome no console sempre que nome mudar.',
+            highlight: ['useEffect'],
+            codeLanguage: 'JavaScript',
+            lines: ['useEffect(() => {', '  console.log(nome);', '}, [nome]);'],
+            distractors: ['}, []);']
+          },
+          en: {
+            question: 'Build the useEffect that logs name every time name changes.',
+            highlight: ['useEffect'],
+            codeLanguage: 'JavaScript',
+            lines: ['useEffect(() => {', '  console.log(name);', '}, [name]);'],
+            distractors: ['}, []);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual useEffect roda só uma vez, depois da primeira renderização?',
+            codeLanguage: 'JavaScript',
+            highlight: ['uma vez'],
+            correctOption: 1,
+            options: ['useEffect(() => {\n  iniciar();\n}, []);', 'useEffect(() => {\n  iniciar();\n}, [nome]);', 'useEffect(() => {\n  iniciar();\n});', 'useEffect(() => {\n  iniciar();\n}, once);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which useEffect runs only once, after the first render?',
+            codeLanguage: 'JavaScript',
+            highlight: ['only once'],
+            correctOption: 1,
+            options: ['useEffect(() => {\n  start();\n}, []);', 'useEffect(() => {\n  start();\n}, [name]);', 'useEffect(() => {\n  start();\n});', 'useEffect(() => {\n  start();\n}, once);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o Hook que roda o efeito sempre que nome muda.',
+            highlight: ['Hook'],
+            codeLanguage: 'JavaScript',
+            code: '___(() => {\n  console.log(nome);\n}, [nome]);',
+            answers: ['useEffect']
+          },
+          en: {
+            question: 'Type the Hook that runs the effect every time name changes.',
+            highlight: ['Hook'],
+            codeLanguage: 'JavaScript',
+            code: '___(() => {\n  console.log(name);\n}, [name]);',
+            answers: ['useEffect']
+          }
+        }
       }
     ]
   },
@@ -26662,6 +38594,67 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: 'const inputRef =\n  ___(null);',
             answers: ['useRef'],
             distractors: ['useState', 'useEffect', 'ref']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: importe useRef de "react" e, depois, crie inputRef começando em null.',
+            highlight: ['useRef'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { useRef }', '  from "react";', 'const inputRef =', '  useRef(null);'],
+            distractors: ['  useState(null);']
+          },
+          en: {
+            question: 'Build the code: import useRef from "react" and then create inputRef starting at null.',
+            highlight: ['useRef'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { useRef }', '  from "react";', 'const inputRef =', '  useRef(null);'],
+            distractors: ['  useState(null);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha muda o valor guardado na ref?',
+            codeLanguage: 'JavaScript',
+            code: 'const contador = useRef(0);',
+            highlight: ['ref'],
+            correctOption: 1,
+            options: ['contador.current = 5;', 'contador = 5;', 'contador.value = 5;', 'setContador(5);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line changes the value stored in the ref?',
+            codeLanguage: 'JavaScript',
+            code: 'const counter = useRef(0);',
+            highlight: ['ref'],
+            correctOption: 1,
+            options: ['counter.current = 5;', 'counter = 5;', 'counter.value = 5;', 'setCounter(5);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade da ref que guarda o valor.',
+            highlight: ['ref'],
+            codeLanguage: 'JavaScript',
+            code: 'const ref = useRef(0);\nref.___ = 5;',
+            answers: ['current']
+          },
+          en: {
+            question: 'Type the property of the ref that holds the value.',
+            highlight: ['ref'],
+            codeLanguage: 'JavaScript',
+            code: 'const ref = useRef(0);\nref.___ = 5;',
+            answers: ['current']
           }
         }
       }
@@ -26714,6 +38707,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['&&', '||']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o retorno: se logado for verdadeiro, o parágrafo "Bem-vindo!"; senão, o parágrafo "Faça login.".',
+            highlight: ['logado'],
+            codeLanguage: 'JavaScript',
+            lines: ['return logado', '  ? <p>Bem-vindo!</p>', '  : <p>Faça login.</p>;'],
+            distractors: ['  else <p>Faça login.</p>;']
+          },
+          en: {
+            question: 'Build the return: if loggedIn is true, the paragraph "Welcome!"; otherwise, the paragraph "Log in.".',
+            highlight: ['loggedIn'],
+            codeLanguage: 'JavaScript',
+            lines: ['return loggedIn', '  ? <p>Welcome!</p>', '  : <p>Log in.</p>;'],
+            distractors: ['  else <p>Log in.</p>;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho mostra o aviso só quando erro é verdadeiro?',
+            codeLanguage: 'JavaScript',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['{erro && <p>Erro!</p>}', '{erro || <p>Erro!</p>}', '{if (erro) <p>Erro!</p>}', '{erro ? <p>Erro!</p>}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet shows the warning only when error is true?',
+            codeLanguage: 'JavaScript',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['{error && <p>Error!</p>}', '{error || <p>Error!</p>}', '{if (error) <p>Error!</p>}', '{error ? <p>Error!</p>}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da prop que decide se o parágrafo "Oi!" aparece.',
+            highlight: ['prop'],
+            codeLanguage: 'JavaScript',
+            code: 'function Status({ ___ }) {\n  return logado\n    ? <p>Oi!</p> : null;\n}',
+            answers: ['logado']
+          },
+          en: {
+            question: 'Type the name of the prop that decides whether the paragraph "Hi!" shows up.',
+            highlight: ['prop'],
+            codeLanguage: 'JavaScript',
+            code: 'function Status({ ___ }) {\n  return logged\n    ? <p>Hi!</p> : null;\n}',
+            answers: ['logged']
+          }
+        }
       }
     ]
   },
@@ -26762,6 +38814,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: '<ul>\n  {names.___(name => (\n    <li>{name}</li>\n  ))}\n</ul>',
             answers: ['map'],
             distractors: ['filter', 'forEach', 'find']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a lista ul que transforma cada nome do array nomes em um li.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'JavaScript',
+            lines: ['<ul>', '  {nomes.map(nome => (', '    <li>{nome}</li>', '  ))}', '</ul>'],
+            distractors: ['  {nomes.forEach(nome => (']
+          },
+          en: {
+            question: 'Build the ul list that turns each name in the names array into an li.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'JavaScript',
+            lines: ['<ul>', '  {names.map(name => (', '    <li>{name}</li>', '  ))}', '</ul>'],
+            distractors: ['  {names.forEach(name => (']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método transforma o array em elementos da interface?',
+            codeLanguage: 'JavaScript',
+            highlight: ['método'],
+            correctOption: 1,
+            options: ['nomes.map(...)', 'nomes.forEach(...)', 'nomes.push(...)', 'nomes.includes(...)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which method turns the array into interface elements?',
+            codeLanguage: 'JavaScript',
+            highlight: ['method'],
+            correctOption: 1,
+            options: ['names.map(...)', 'names.forEach(...)', 'names.push(...)', 'names.includes(...)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que mantém só os itens ativos antes de mostrar a lista.',
+            highlight: ['método'],
+            codeLanguage: 'JavaScript',
+            code: 'itens.___(i => i.ativo)',
+            answers: ['filter']
+          },
+          en: {
+            question: 'Type the method that keeps only the active items before showing the list.',
+            highlight: ['method'],
+            codeLanguage: 'JavaScript',
+            code: 'items.___(i => i.active)',
+            answers: ['filter']
           }
         }
       }
@@ -26814,6 +38925,65 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['id', 'ref', 'index']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a lista: cada usuário u vira um parágrafo com u.nome e a key igual a u.id.',
+            highlight: ['key'],
+            codeLanguage: 'JavaScript',
+            lines: ['usuarios.map(u => (', '  <p key={u.id}>', '    {u.nome}', '  </p>', '))'],
+            distractors: ['  <p id={u.key}>']
+          },
+          en: {
+            question: 'Build the list: each user u becomes a paragraph with u.name and the key equal to u.id.',
+            highlight: ['key'],
+            codeLanguage: 'JavaScript',
+            lines: ['users.map(u => (', '  <p key={u.id}>', '    {u.name}', '  </p>', '))'],
+            distractors: ['  <p id={u.key}>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual key é a mais adequada para itens que podem mudar de ordem?',
+            codeLanguage: 'JavaScript',
+            highlight: ['key'],
+            correctOption: 1,
+            options: ['key={produto.id}', 'key={Math.random()}', 'key="item"', 'key={indice}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which key fits best for items that can change order?',
+            codeLanguage: 'JavaScript',
+            highlight: ['key'],
+            correctOption: 1,
+            options: ['key={product.id}', 'key={Math.random()}', 'key="item"', 'key={index}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade estável usada como key: o identificador do usuário.',
+            highlight: ['key'],
+            codeLanguage: 'JavaScript',
+            code: 'usuarios.map(u =>\n  <p key={u.___}>{u.nome}</p>)',
+            answers: ['id']
+          },
+          en: {
+            question: 'Type the stable property used as the key: the user identifier.',
+            highlight: ['key'],
+            codeLanguage: 'JavaScript',
+            code: 'users.map(u =>\n  <p key={u.___}>{u.name}</p>)',
+            answers: ['id']
+          }
+        }
       }
     ]
   },
@@ -26862,6 +39032,63 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: 'return (\n  <>\n    <___ />\n    <Content />\n  </>\n);',
             answers: ['Header'],
             distractors: ['header', 'Main', 'App']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o retorno do App: um fragmento com o Header e, depois dele, o Conteudo.',
+            highlight: ['fragmento'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <>', '    <Header />', '    <Conteudo />', '  </>', ');']
+          },
+          en: {
+            question: 'Build the return of App: a fragment with the Header and, after it, the Content.',
+            highlight: ['fragment'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <>', '    <Header />', '    <Content />', '  </>', ');']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual retorno agrupa dois componentes sem criar um elemento extra?',
+            codeLanguage: 'JavaScript',
+            highlight: ['elemento extra'],
+            correctOption: 1,
+            options: ['<>\n  <A />\n  <B />\n</>', '<div>\n  <A />\n  <B />\n</div>', '<A /><B />', '<group>\n  <A />\n  <B />\n</group>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which return groups two components without creating an extra element?',
+            codeLanguage: 'JavaScript',
+            highlight: ['extra element'],
+            correctOption: 1,
+            options: ['<>\n  <A />\n  <B />\n</>', '<div>\n  <A />\n  <B />\n</div>', '<A /><B />', '<group>\n  <A />\n  <B />\n</group>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o componente que vem depois do Header: o Conteudo.',
+            highlight: ['Conteudo'],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <>\n    <Header />\n    <___ />\n  </>\n);',
+            answers: ['Conteudo']
+          },
+          en: {
+            question: 'Type the component that comes after the Header: the Content.',
+            highlight: ['Content'],
+            codeLanguage: 'JavaScript',
+            code: 'return (\n  <>\n    <Header />\n    <___ />\n  </>\n);',
+            answers: ['Content']
           }
         }
       }
@@ -26994,6 +39221,63 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             code: 'return (\n  <___>\n    <h2>Product</h2>\n  </article>\n);',
             answers: ['article'],
             distractors: ['div', 'span', 'aside']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o retorno do Card: um article com o título h2 "Produto" e, abaixo dele, o botão "Comprar".',
+            highlight: ['article'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <article>', '    <h2>Produto</h2>', '    <button>Comprar</button>', '  </article>', ');']
+          },
+          en: {
+            question: 'Build the return of Card: an article with the h2 heading "Product" and, below it, the "Buy" button.',
+            highlight: ['article'],
+            codeLanguage: 'JavaScript',
+            lines: ['return (', '  <article>', '    <h2>Product</h2>', '    <button>Buy</button>', '  </article>', ');']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual JSX é o mais semântico para o cartão de um produto?',
+            codeLanguage: 'JavaScript',
+            highlight: ['semântico'],
+            correctOption: 1,
+            options: ['<article>\n  <h2>Produto</h2>\n</article>', '<div>\n  <div>Produto</div>\n</div>', '<span>\n  <b>Produto</b>\n</span>', '<produto>\n  Produto\n</produto>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which JSX is the most semantic for a product card?',
+            codeLanguage: 'JavaScript',
+            highlight: ['semantic'],
+            correctOption: 1,
+            options: ['<article>\n  <h2>Product</h2>\n</article>', '<div>\n  <div>Product</div>\n</div>', '<span>\n  <b>Product</b>\n</span>', '<product>\n  Product\n</product>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag do botão "Comprar", dentro do article.',
+            highlight: ['botão'],
+            codeLanguage: 'JavaScript',
+            code: '<article>\n  <h2>Produto</h2>\n  <___>Comprar</button>\n</article>',
+            answers: ['button']
+          },
+          en: {
+            question: 'Type the name of the tag for the "Buy" button, inside the article.',
+            highlight: ['button'],
+            codeLanguage: 'JavaScript',
+            code: '<article>\n  <h2>Product</h2>\n  <___>Buy</button>\n</article>',
+            answers: ['button']
           }
         }
       }
@@ -27171,6 +39455,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['radius', 'rounded', 'corner']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra de CSS tradicional que arredonda os cantos do .botao em 8px.',
+            highlight: ['CSS tradicional'],
+            codeLanguage: 'CSS',
+            lines: ['.botao {', '  border-radius: 8px;', '}'],
+            distractors: ['  border-round: 8px;', '  radius: 8px;']
+          },
+          en: {
+            question: 'Build the traditional CSS rule that rounds the corners of .button by 8px.',
+            highlight: ['traditional CSS'],
+            codeLanguage: 'CSS',
+            lines: ['.button {', '  border-radius: 8px;', '}'],
+            distractors: ['  border-round: 8px;', '  radius: 8px;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho usa classes utilitárias, no estilo do Tailwind?',
+            codeLanguage: 'HTML',
+            highlight: ['classes utilitárias'],
+            correctOption: 1,
+            options: ['<button class="px-4 py-2">', '.botao {\n  padding: 8px 16px;\n}', '<button style="padding: 8px">', '<button id="botao">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet uses utility classes, in the Tailwind style?',
+            codeLanguage: 'HTML',
+            highlight: ['utility classes'],
+            correctOption: 1,
+            options: ['<button class="px-4 py-2">', '.button {\n  padding: 8px 16px;\n}', '<button style="padding: 8px">', '<button id="button">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade de CSS tradicional que dá ao .botao 8px de espaço externo.',
+            highlight: ['espaço externo'],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  padding: 8px 16px;\n  ___: 8px;\n}',
+            answers: ['margin'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the traditional CSS property that gives .button 8px of outer space.',
+            highlight: ['outer space'],
+            codeLanguage: 'CSS',
+            code: '.button {\n  padding: 8px 16px;\n  ___: 8px;\n}',
+            answers: ['margin'],
+            ignoreCase: true
+          }
+        }
       }
     ]
   },
@@ -27290,6 +39635,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '<button class="___\n  text-white px-4">\n  Buy\n</button>',
             answers: ['bg-blue-600'],
             distractors: ['blue-600', 'color-blue', 'bg:blue']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o botão "Comprar" com fundo azul, usando a classe bg-blue-600.',
+            highlight: ['bg-blue-600'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="bg-blue-600">', '  Comprar', '</button>'],
+            distractors: ['  style="bg-blue-600">', '  class="blue-600-bg">']
+          },
+          en: {
+            question: 'Build the "Buy" button with a blue background, using the bg-blue-600 class.',
+            highlight: ['bg-blue-600'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="bg-blue-600">', '  Buy', '</button>'],
+            distractors: ['  style="bg-blue-600">', '  class="blue-600-bg">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe do Tailwind equivale a color: #ffffff?',
+            codeLanguage: 'HTML',
+            highlight: ['color'],
+            correctOption: 1,
+            options: ['text-white', 'bg-white', 'color-white', 'white-text'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which Tailwind class is the same as color: #ffffff?',
+            codeLanguage: 'HTML',
+            highlight: ['color'],
+            correctOption: 1,
+            options: ['text-white', 'bg-white', 'color-white', 'white-text'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe do Tailwind que deixa o texto do botão branco.',
+            highlight: ['branco'],
+            codeLanguage: 'HTML',
+            code: '<button class="bg-blue-600\n  ___">',
+            answers: ['text-white']
+          },
+          en: {
+            question: 'Type the Tailwind class that makes the button text white.',
+            highlight: ['white'],
+            codeLanguage: 'HTML',
+            code: '<button class="bg-blue-600\n  ___">',
+            answers: ['text-white']
           }
         }
       }
@@ -27415,6 +39819,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['padding-4', 'p-1rem', 'pad-4']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com a classe p-4 e o texto "Cartão".',
+            highlight: ['p-4'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="p-4">', '  Cartão', '</div>'],
+            distractors: ['<div class="padding-4">', '<div p-4>']
+          },
+          en: {
+            question: 'Build a div with the p-4 class and the text "Card".',
+            highlight: ['p-4'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="p-4">', '  Card', '</div>'],
+            distractors: ['<div class="padding-4">', '<div p-4>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho segue o modelo utility-first?',
+            codeLanguage: 'HTML',
+            highlight: ['utility-first'],
+            correctOption: 1,
+            options: ['<div class="p-4 rounded-lg">', '<div class="card">', '<div style="p-4">', '<div p-4 rounded-lg>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet follows the utility-first model?',
+            codeLanguage: 'HTML',
+            highlight: ['utility-first'],
+            correctOption: 1,
+            options: ['<div class="p-4 rounded-lg">', '<div class="card">', '<div style="p-4">', '<div p-4 rounded-lg>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe utilitária que arredonda os cantos no tamanho lg.',
+            highlight: ['arredonda'],
+            codeLanguage: 'HTML',
+            code: '<div class="p-4 ___">',
+            answers: ['rounded-lg']
+          },
+          en: {
+            question: 'Type the utility class that rounds the corners at size lg.',
+            highlight: ['rounds'],
+            codeLanguage: 'HTML',
+            code: '<div class="p-4 ___">',
+            answers: ['rounded-lg']
+          }
+        }
       }
     ]
   },
@@ -27534,6 +39997,116 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '<p class="text-lg ___">\n  Hi!\n</p>',
             answers: ['font-bold'],
             distractors: ['bold', 'text-bold', 'weight-bold']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o parágrafo "Olá!" em negrito, com a classe font-bold.',
+            highlight: ['font-bold'],
+            codeLanguage: 'HTML',
+            lines: ['<p class="font-bold">', '  Olá!', '</p>'],
+            distractors: ['<p class="bold">', '<p class="font-700">']
+          },
+          en: {
+            question: 'Build the paragraph "Hello!" in bold, with the font-bold class.',
+            highlight: ['font-bold'],
+            codeLanguage: 'HTML',
+            lines: ['<p class="font-bold">', '  Hello!', '</p>'],
+            distractors: ['<p class="bold">', '<p class="font-700">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe aumenta o tamanho do texto?',
+            codeLanguage: 'HTML',
+            highlight: ['tamanho do texto'],
+            correctOption: 1,
+            options: ['text-lg', 'font-bold', 'p-4', 'text-white'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class makes the text bigger?',
+            codeLanguage: 'HTML',
+            highlight: ['bigger'],
+            correctOption: 1,
+            options: ['text-lg', 'font-bold', 'p-4', 'text-white'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada classe do Tailwind ao CSS que ela aplica.',
+            highlight: ['Tailwind'],
+            pairs: [
+              {
+                left: 'text-lg',
+                right: 'Fonte maior (font-size)'
+              },
+              {
+                left: 'font-bold',
+                right: 'font-weight: 700'
+              },
+              {
+                left: 'p-4',
+                right: 'padding: 1rem'
+              },
+              {
+                left: 'rounded-lg',
+                right: 'border-radius: 0.5rem'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Tailwind class to the CSS it applies.',
+            highlight: ['Tailwind'],
+            pairs: [
+              {
+                left: 'text-lg',
+                right: 'Bigger font (font-size)'
+              },
+              {
+                left: 'font-bold',
+                right: 'font-weight: 700'
+              },
+              {
+                left: 'p-4',
+                right: 'padding: 1rem'
+              },
+              {
+                left: 'rounded-lg',
+                right: 'border-radius: 0.5rem'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que aumenta o tamanho do texto no tamanho lg.',
+            highlight: ['tamanho do texto'],
+            codeLanguage: 'HTML',
+            code: '<p class="___ font-bold">',
+            answers: ['text-lg']
+          },
+          en: {
+            question: 'Type the class that makes the text bigger at size lg.',
+            highlight: ['text bigger'],
+            codeLanguage: 'HTML',
+            code: '<p class="___ font-bold">',
+            answers: ['text-lg']
           }
         }
       }
@@ -27657,6 +40230,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['pt-4', 'm-top-4', 'top-4']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a div "Conteúdo" com margem no topo, usando a classe mt-4.',
+            highlight: ['mt-4'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="mt-4">', '  Conteúdo', '</div>'],
+            distractors: ['<div class="p-4">', '<div class="margin-4">']
+          },
+          en: {
+            question: 'Build the div "Content" with a top margin, using the mt-4 class.',
+            highlight: ['mt-4'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="mt-4">', '  Content', '</div>'],
+            distractors: ['<div class="p-4">', '<div class="margin-4">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe equivale a padding: 1rem?',
+            codeLanguage: 'HTML',
+            highlight: ['padding'],
+            correctOption: 1,
+            options: ['p-4', 'm-4', 'mt-4', 'pad-4'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class is the same as padding: 1rem?',
+            codeLanguage: 'HTML',
+            highlight: ['padding'],
+            correctOption: 1,
+            options: ['p-4', 'm-4', 'mt-4', 'pad-4'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que dá padding de 1rem em todos os lados.',
+            highlight: ['padding'],
+            codeLanguage: 'HTML',
+            code: '<div class="___">',
+            answers: ['p-4']
+          },
+          en: {
+            question: 'Type the class that gives 1rem of padding on every side.',
+            highlight: ['padding'],
+            codeLanguage: 'HTML',
+            code: '<div class="___">',
+            answers: ['p-4']
+          }
+        }
       }
     ]
   },
@@ -27776,6 +40408,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '<button\n  class="___-blue-600\n    ___-white">',
             answers: ['bg', 'text'],
             distractors: ['color', 'font', 'fg']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o botão "Salvar" com texto branco, usando a classe text-white.',
+            highlight: ['text-white'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="text-white">', '  Salvar', '</button>'],
+            distractors: ['  class="bg-white">', '  class="color-white">']
+          },
+          en: {
+            question: 'Build the "Save" button with white text, using the text-white class.',
+            highlight: ['text-white'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="text-white">', '  Save', '</button>'],
+            distractors: ['  class="bg-white">', '  class="color-white">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe pinta o fundo de azul?',
+            codeLanguage: 'HTML',
+            highlight: ['fundo'],
+            correctOption: 1,
+            options: ['bg-blue-600', 'text-blue-600', 'blue-600', 'background-blue'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class paints the background blue?',
+            codeLanguage: 'HTML',
+            highlight: ['background'],
+            correctOption: 1,
+            options: ['bg-blue-600', 'text-blue-600', 'blue-600', 'background-blue'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que pinta o texto de azul, no tom 600.',
+            highlight: ['texto'],
+            codeLanguage: 'HTML',
+            code: '<p class="___">',
+            answers: ['text-blue-600']
+          },
+          en: {
+            question: 'Type the class that colors the text blue, at shade 600.',
+            highlight: ['text'],
+            codeLanguage: 'HTML',
+            code: '<p class="___">',
+            answers: ['text-blue-600']
           }
         }
       }
@@ -27899,6 +40590,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['xxl', 'large', '32']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o título h1 "Título" com a classe text-2xl.',
+            highlight: ['text-2xl'],
+            codeLanguage: 'HTML',
+            lines: ['<h1 class="text-2xl">', '  Título', '</h1>'],
+            distractors: ['<h1 class="font-2xl">', '<h1 class="size-2xl">']
+          },
+          en: {
+            question: 'Build the h1 heading "Title" with the text-2xl class.',
+            highlight: ['text-2xl'],
+            codeLanguage: 'HTML',
+            lines: ['<h1 class="text-2xl">', '  Title', '</h1>'],
+            distractors: ['<h1 class="font-2xl">', '<h1 class="size-2xl">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe centraliza o texto?',
+            codeLanguage: 'HTML',
+            highlight: ['centraliza'],
+            correctOption: 1,
+            options: ['text-center', 'items-center', 'justify-center', 'align-center'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class centers the text?',
+            codeLanguage: 'HTML',
+            highlight: ['centers'],
+            correctOption: 1,
+            options: ['text-center', 'items-center', 'justify-center', 'align-center'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que deixa o título em negrito.',
+            highlight: ['negrito'],
+            codeLanguage: 'HTML',
+            code: '<h1 class="text-2xl\n  ___">',
+            answers: ['font-bold']
+          },
+          en: {
+            question: 'Type the class that makes the heading bold.',
+            highlight: ['bold'],
+            codeLanguage: 'HTML',
+            code: '<h1 class="text-2xl\n  ___">',
+            answers: ['font-bold']
+          }
+        }
       }
     ]
   },
@@ -28018,6 +40768,116 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '<div class="flex\n  items-___\n  justify-___">',
             answers: ['center', 'between'],
             distractors: ['middle', 'spaced', 'start']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com as classes flex e items-center, com o item "A" dentro.',
+            highlight: ['flex', 'items-center'],
+            codeLanguage: 'HTML',
+            lines: ['<div', '  class="flex items-center">', '  <span>A</span>', '</div>'],
+            distractors: ['  class="flex align-center">']
+          },
+          en: {
+            question: 'Build a div with the flex and items-center classes, with the item "A" inside.',
+            highlight: ['flex', 'items-center'],
+            codeLanguage: 'HTML',
+            lines: ['<div', '  class="flex items-center">', '  <span>A</span>', '</div>'],
+            distractors: ['  class="flex align-center">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe equivale a justify-content: space-between?',
+            codeLanguage: 'HTML',
+            highlight: ['space-between'],
+            correctOption: 1,
+            options: ['justify-between', 'items-between', 'justify-space', 'space-between'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class is the same as justify-content: space-between?',
+            codeLanguage: 'HTML',
+            highlight: ['space-between'],
+            correctOption: 1,
+            options: ['justify-between', 'items-between', 'justify-space', 'space-between'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada classe do Tailwind ao CSS equivalente.',
+            highlight: ['Tailwind'],
+            pairs: [
+              {
+                left: 'flex',
+                right: 'display: flex'
+              },
+              {
+                left: 'items-center',
+                right: 'align-items: center'
+              },
+              {
+                left: 'justify-between',
+                right: 'justify-content: space-between'
+              },
+              {
+                left: 'gap-4',
+                right: 'gap: 1rem'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Tailwind class to the matching CSS.',
+            highlight: ['Tailwind'],
+            pairs: [
+              {
+                left: 'flex',
+                right: 'display: flex'
+              },
+              {
+                left: 'items-center',
+                right: 'align-items: center'
+              },
+              {
+                left: 'justify-between',
+                right: 'justify-content: space-between'
+              },
+              {
+                left: 'gap-4',
+                right: 'gap: 1rem'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que equivale a display: flex.',
+            highlight: ['display'],
+            codeLanguage: 'HTML',
+            code: '<div class="___\n  items-center">',
+            answers: ['flex']
+          },
+          en: {
+            question: 'Type the class that is the same as display: flex.',
+            highlight: ['display'],
+            codeLanguage: 'HTML',
+            code: '<div class="___\n  items-center">',
+            answers: ['flex']
           }
         }
       }
@@ -28141,6 +41001,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['columns', 'col', 'rows']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com as classes grid e grid-cols-3, com o item "1" dentro.',
+            highlight: ['grid-cols-3'],
+            codeLanguage: 'HTML',
+            lines: ['<div', '  class="grid grid-cols-3">', '  <div>1</div>', '</div>'],
+            distractors: ['  class="grid cols-3">']
+          },
+          en: {
+            question: 'Build a div with the grid and grid-cols-3 classes, with the item "1" inside.',
+            highlight: ['grid-cols-3'],
+            codeLanguage: 'HTML',
+            lines: ['<div', '  class="grid grid-cols-3">', '  <div>1</div>', '</div>'],
+            distractors: ['  class="grid cols-3">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe equivale a gap: 1rem?',
+            codeLanguage: 'HTML',
+            highlight: ['gap'],
+            correctOption: 1,
+            options: ['gap-4', 'gap-1', 'space-4', 'p-4'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class is the same as gap: 1rem?',
+            codeLanguage: 'HTML',
+            highlight: ['gap'],
+            correctOption: 1,
+            options: ['gap-4', 'gap-1', 'space-4', 'p-4'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que dá 1rem de espaço entre as células da grade.',
+            highlight: ['espaço'],
+            codeLanguage: 'HTML',
+            code: '<div class="grid\n  grid-cols-3 ___">',
+            answers: ['gap-4']
+          },
+          en: {
+            question: 'Type the class that gives 1rem of space between the grid cells.',
+            highlight: ['space'],
+            codeLanguage: 'HTML',
+            code: '<div class="grid\n  grid-cols-3 ___">',
+            answers: ['gap-4']
+          }
+        }
       }
     ]
   },
@@ -28256,6 +41175,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['sm', 'lg', 'tablet']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o parágrafo "Texto", que usa text-sm por padrão e text-lg a partir do breakpoint md.',
+            highlight: ['breakpoint md'],
+            codeLanguage: 'HTML',
+            lines: ['<p', '  class="text-sm md:text-lg">', '  Texto', '</p>'],
+            distractors: ['  class="text-sm md-text-lg">']
+          },
+          en: {
+            question: 'Build the paragraph "Text", which uses text-sm by default and text-lg from the md breakpoint up.',
+            highlight: ['md breakpoint'],
+            codeLanguage: 'HTML',
+            lines: ['<p', '  class="text-sm md:text-lg">', '  Text', '</p>'],
+            distractors: ['  class="text-sm md-text-lg">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe só vale a partir do breakpoint md?',
+            codeLanguage: 'HTML',
+            highlight: ['breakpoint md'],
+            correctOption: 1,
+            options: ['md:text-lg', 'text-lg', 'md-text-lg', 'text-lg:md'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class only applies from the md breakpoint up?',
+            codeLanguage: 'HTML',
+            highlight: ['md breakpoint'],
+            correctOption: 1,
+            options: ['md:text-lg', 'text-lg', 'md-text-lg', 'text-lg:md'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que, a partir do breakpoint md, transforma a div em flex container.',
+            highlight: ['breakpoint md'],
+            codeLanguage: 'HTML',
+            code: '<div class="block\n  md:___">',
+            answers: ['flex']
+          },
+          en: {
+            question: 'Type the class that, from the md breakpoint up, turns the div into a flex container.',
+            highlight: ['md breakpoint'],
+            codeLanguage: 'HTML',
+            code: '<div class="block\n  md:___">',
+            answers: ['flex']
+          }
+        }
       }
     ]
   },
@@ -28365,6 +41343,116 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '<button class="bg-blue-600\n  ___:bg-blue-700">',
             answers: ['hover'],
             distractors: ['focus', 'active', 'over']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o botão "Enviar", que fica com fundo bg-blue-700 quando o cursor passa sobre ele (hover).',
+            highlight: ['hover'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="hover:bg-blue-700">', '  Enviar', '</button>'],
+            distractors: ['  class="bg-blue-700:hover">']
+          },
+          en: {
+            question: 'Build the "Send" button, which gets the bg-blue-700 background when the cursor is over it (hover).',
+            highlight: ['hover'],
+            codeLanguage: 'HTML',
+            lines: ['<button', '  class="hover:bg-blue-700">', '  Send', '</button>'],
+            distractors: ['  class="bg-blue-700:hover">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe mostra um anel de foco no botão?',
+            codeLanguage: 'HTML',
+            highlight: ['anel de foco'],
+            correctOption: 1,
+            options: ['focus:ring-2', 'ring-2:focus', 'hover:ring-2', 'focus-ring-2'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class shows a focus ring on the button?',
+            codeLanguage: 'HTML',
+            highlight: ['focus ring'],
+            correctOption: 1,
+            options: ['focus:ring-2', 'ring-2:focus', 'hover:ring-2', 'focus-ring-2'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada prefixo do Tailwind a quando ele vale.',
+            highlight: ['prefixo'],
+            pairs: [
+              {
+                left: 'hover:',
+                right: 'Cursor sobre o elemento'
+              },
+              {
+                left: 'focus:',
+                right: 'Elemento com foco'
+              },
+              {
+                left: 'md:',
+                right: 'A partir do breakpoint md'
+              },
+              {
+                left: 'dark:',
+                right: 'No modo escuro'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each Tailwind prefix to when it applies.',
+            highlight: ['prefix'],
+            pairs: [
+              {
+                left: 'hover:',
+                right: 'Cursor over the element'
+              },
+              {
+                left: 'focus:',
+                right: 'Element with focus'
+              },
+              {
+                left: 'md:',
+                right: 'From the md breakpoint up'
+              },
+              {
+                left: 'dark:',
+                right: 'In dark mode'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o prefixo de estado que aplica o anel quando o botão recebe foco.',
+            highlight: ['foco'],
+            codeLanguage: 'HTML',
+            code: '<button class="___:ring-2">',
+            answers: ['focus']
+          },
+          en: {
+            question: 'Type the state prefix that applies the ring when the button gets focus.',
+            highlight: ['focus'],
+            codeLanguage: 'HTML',
+            code: '<button class="___:ring-2">',
+            answers: ['focus']
           }
         }
       }
@@ -28478,6 +41566,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['night', 'black', 'md']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a div "Conteúdo" com fundo branco (bg-white) e, no modo escuro, fundo bg-gray-900.',
+            highlight: ['modo escuro'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="bg-white', '  dark:bg-gray-900">', '  Conteúdo', '</div>'],
+            distractors: ['  night:bg-gray-900">']
+          },
+          en: {
+            question: 'Build the div "Content" with a white background (bg-white) and, in dark mode, the bg-gray-900 background.',
+            highlight: ['dark mode'],
+            codeLanguage: 'HTML',
+            lines: ['<div class="bg-white', '  dark:bg-gray-900">', '  Content', '</div>'],
+            distractors: ['  night:bg-gray-900">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe muda a cor do texto só no modo escuro?',
+            codeLanguage: 'HTML',
+            highlight: ['modo escuro'],
+            correctOption: 1,
+            options: ['dark:text-white', 'text-white', 'dark-text-white', 'night:text-white'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which class changes the text color only in dark mode?',
+            codeLanguage: 'HTML',
+            highlight: ['dark mode'],
+            correctOption: 1,
+            options: ['dark:text-white', 'text-white', 'dark-text-white', 'night:text-white'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que deixa o texto branco no modo escuro.',
+            highlight: ['modo escuro'],
+            codeLanguage: 'HTML',
+            code: '<div class="text-black\n  dark:___">',
+            answers: ['text-white']
+          },
+          en: {
+            question: 'Type the class that makes the text white in dark mode.',
+            highlight: ['dark mode'],
+            codeLanguage: 'HTML',
+            code: '<div class="text-black\n  dark:___">',
+            answers: ['text-white']
+          }
+        }
       }
     ]
   },
@@ -28589,6 +41736,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['color', 'palette', 'styles']
           }
         }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o tema com a cor marca, valendo "#2563eb", dentro de colors.',
+            highlight: ['tema'],
+            codeLanguage: 'JavaScript',
+            lines: ['theme: {', '  colors: {', '    marca: "#2563eb"', '  }', '}'],
+            distractors: ['  colours: {']
+          },
+          en: {
+            question: 'Build the theme with the brand color, set to "#2563eb", inside colors.',
+            highlight: ['theme'],
+            codeLanguage: 'JavaScript',
+            lines: ['theme: {', '  colors: {', '    brand: "#2563eb"', '  }', '}'],
+            distractors: ['  colours: {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho cria a cor marca no tema do Tailwind?',
+            codeLanguage: 'JavaScript',
+            highlight: ['cor marca'],
+            correctOption: 1,
+            options: ['colors: {\n  marca: "#2563eb"\n}', 'colors: [\n  marca: "#2563eb"\n]', 'color: marca(#2563eb)', 'marca: colors("#2563eb")'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet creates the brand color in the Tailwind theme?',
+            codeLanguage: 'JavaScript',
+            highlight: ['brand color'],
+            correctOption: 1,
+            options: ['colors: {\n  brand: "#2563eb"\n}', 'colors: [\n  brand: "#2563eb"\n]', 'color: brand(#2563eb)', 'brand: colors("#2563eb")'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da cor personalizada do tema, chamada marca.',
+            highlight: ['cor personalizada'],
+            codeLanguage: 'JavaScript',
+            code: 'theme: {\n  colors: {\n    ___: "#2563eb"\n  }\n}',
+            answers: ['marca']
+          },
+          en: {
+            question: 'Type the name of the custom theme color, called brand.',
+            highlight: ['custom theme color'],
+            codeLanguage: 'JavaScript',
+            code: 'theme: {\n  colors: {\n    ___: "#2563eb"\n  }\n}',
+            answers: ['brand']
+          }
+        }
       }
     ]
   },
@@ -28698,6 +41904,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '// ___.config.js\nexport default {\n  theme: {}\n};',
             answers: ['tailwind'],
             distractors: ['tw', 'css', 'vite']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o arquivo de configuração: o comentário // tailwind.config.js e, depois, o export default com theme vazio.',
+            highlight: ['export default'],
+            codeLanguage: 'JavaScript',
+            lines: ['// tailwind.config.js', 'export default {', '  theme: {}', '};'],
+            distractors: ['import default {']
+          },
+          en: {
+            question: 'Build the config file: the comment // tailwind.config.js and, after it, the export default with an empty theme.',
+            highlight: ['export default'],
+            codeLanguage: 'JavaScript',
+            lines: ['// tailwind.config.js', 'export default {', '  theme: {}', '};'],
+            distractors: ['import default {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual arquivo guarda a configuração do Tailwind?',
+            codeLanguage: 'JavaScript',
+            highlight: ['configuração'],
+            correctOption: 1,
+            options: ['tailwind.config.js', 'tailwind.css.html', 'package.tailwind', 'config.tailwind.txt'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which file holds the Tailwind configuration?',
+            codeLanguage: 'JavaScript',
+            highlight: ['configuration'],
+            correctOption: 1,
+            options: ['tailwind.config.js', 'tailwind.css.html', 'package.tailwind', 'config.tailwind.txt'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que exporta a configuração do arquivo.',
+            highlight: ['exporta'],
+            codeLanguage: 'JavaScript',
+            code: '// tailwind.config.js\n___ default {\n  theme: {}\n};',
+            answers: ['export']
+          },
+          en: {
+            question: 'Type the word that exports the configuration from the file.',
+            highlight: ['exports'],
+            codeLanguage: 'JavaScript',
+            code: '// tailwind.config.js\n___ default {\n  theme: {}\n};',
+            answers: ['export']
           }
         }
       }
@@ -28819,6 +42084,65 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: 'function Button() {\n  return (\n    <button\n      ___="rounded-lg">\n      Save\n    </button>\n  );\n}',
             answers: ['className'],
             distractors: ['class', 'style', 'tw']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o componente Botao, que devolve o botão "Salvar" com a classe rounded-lg (className).',
+            highlight: ['className'],
+            codeLanguage: 'JavaScript',
+            lines: ['const Botao = () => (', '  <button', '    className="rounded-lg">', '    Salvar', '  </button>', ');'],
+            distractors: ['    class="rounded-lg">']
+          },
+          en: {
+            question: 'Build the Button component, which returns the "Save" button with the rounded-lg class (className).',
+            highlight: ['className'],
+            codeLanguage: 'JavaScript',
+            lines: ['const Button = () => (', '  <button', '    className="rounded-lg">', '    Save', '  </button>', ');'],
+            distractors: ['    class="rounded-lg">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'No JSX, como se escreve a classe rounded-lg?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['className="rounded-lg"', 'class="rounded-lg"', 'classes="rounded-lg"', 'className={rounded-lg}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In JSX, how do you write the rounded-lg class?',
+            codeLanguage: 'JavaScript',
+            highlight: ['JSX'],
+            correctOption: 1,
+            options: ['className="rounded-lg"', 'class="rounded-lg"', 'classes="rounded-lg"', 'className={rounded-lg}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe que arredonda os cantos do botão no tamanho lg.',
+            highlight: ['arredonda'],
+            codeLanguage: 'JavaScript',
+            code: 'const Botao = () => (\n  <button\n    className="___">\n    Salvar\n  </button>\n);',
+            answers: ['rounded-lg']
+          },
+          en: {
+            question: 'Type the class that rounds the button corners at size lg.',
+            highlight: ['rounds'],
+            codeLanguage: 'JavaScript',
+            code: 'const Button = () => (\n  <button\n    className="___">\n    Save\n  </button>\n);',
+            answers: ['rounded-lg']
           }
         }
       }
@@ -28951,6 +42275,67 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             code: '.card {\n  ___: 1rem;\n}',
             answers: ['padding'],
             distractors: ['margin', 'p', 'gap']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o CSS tradicional equivalente à classe p-4: o .card com padding de 1rem.',
+            highlight: ['p-4'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  padding: 1rem;', '}'],
+            distractors: ['  padding: 4rem;', '  p: 1rem;']
+          },
+          en: {
+            question: 'Build the traditional CSS that matches the p-4 class: .card with a padding of 1rem.',
+            highlight: ['p-4'],
+            codeLanguage: 'CSS',
+            lines: ['.card {', '  padding: 1rem;', '}'],
+            distractors: ['  padding: 4rem;', '  p: 1rem;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual classe do Tailwind equivale a este CSS?',
+            codeLanguage: 'HTML',
+            code: '.card {\n  padding: 1rem;\n}',
+            highlight: ['Tailwind'],
+            correctOption: 1,
+            options: ['p-4', 'p-1', 'pd-1rem', 'padding-4'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which Tailwind class matches this CSS?',
+            codeLanguage: 'HTML',
+            code: '.card {\n  padding: 1rem;\n}',
+            highlight: ['Tailwind'],
+            correctOption: 1,
+            options: ['p-4', 'p-1', 'pd-1rem', 'padding-4'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a classe do Tailwind equivalente a margin-top: 1rem.',
+            highlight: ['margin-top'],
+            codeLanguage: 'HTML',
+            code: '<div class="___">',
+            answers: ['mt-4']
+          },
+          en: {
+            question: 'Type the Tailwind class that matches margin-top: 1rem.',
+            highlight: ['margin-top'],
+            codeLanguage: 'HTML',
+            code: '<div class="___">',
+            answers: ['mt-4']
           }
         }
       }

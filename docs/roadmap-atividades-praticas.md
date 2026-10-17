@@ -6,7 +6,10 @@
 > - **Prática sorteada**: `pool`/`draw`/`fixedOrder` em `option`, teoria fixa e prática embaralhada a cada sessão (`buildLessonSession`); verdadeiro/falso é `option` com `fixedOrder`, sem tipo novo.
 > - **"O que este código faz?"** (Seção 3): `code`/`codeLanguage` opcionais na `option`, mostrados por `CodeSnippet` (só leitura).
 > - **`code_blank`** (Fase 3), com até 3 lacunas e **sempre** por blocos de toque — o `wordBank` previsto aqui virou `answers` + `distractors`. Como os blocos resolvem o problema de digitar código no celular, o `fill_blank` com teclado livre (Fase 1) deixou de ser prioridade. Um exercício por lição em toda a trilha das três áreas (192).
-> - A registry da Seção 1 ainda não foi criada: com 3 tipos, o `switch` do `ActivityPlayer` continua suficiente.
+> - **`reorder` e `matching`** (Fase 2) e **"ache o erro"** (`optionsAsCode` na `option`, Seção 3), em toda a trilha: um "montar o código" e um "ache o erro" por lição (192 cada) e "ligar pares" nas 38 lições de vocabulário. O `reorder` ficou específico de código: `lines` com indentação e `distractors` opcionais, em vez do `items` genérico previsto abaixo.
+> - A **registry** da Seção 1 foi criada junto (`activityRegistry.tsx`), ao chegar a 5 tipos, substituindo o `switch` + `SUPPORTED_TYPES` do `ActivityPlayer`.
+> - **`fill_blank`** (Fase 1): em toda a trilha, um por lição (192). Ficou diferente do contrato previsto abaixo: em vez de `textBefore`/`textAfter`, usa `code` com uma lacuna `___` (como o `code_blank`), e o campo vai abaixo do código, que mostra o que está sendo digitado. Sem `wordBank` (blocos de toque são o `code_blank`). Respostas restritas a letras, números e hífen, com `ignoreCase` opcional.
+> - Continuam só no papel: `code_playground` (Fase 3) e os spikes da Fase 4.
 >
 > Detalhes de cada um em `api/CLAUDE.md` e `app/CLAUDE.md`.
 
