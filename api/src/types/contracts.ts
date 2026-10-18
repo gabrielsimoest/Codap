@@ -197,6 +197,54 @@ export interface FillBlankActivityContent {
 }
 
 /**
+ * `type: 'code_playground'` — playground guiado (Fase 3a do roadmap): o aluno
+ * completa de 1 a 3 lacunas tocando em blocos, como no `code_blank`, e o código
+ * **roda de verdade** numa WebView (prévia de HTML/CSS + console). A correção é
+ * pelo **comportamento**: o `checkScript` roda depois do código do aluno e
+ * chama `__codap_report(passed, message?)` — qualquer combinação de blocos que
+ * funcione é aceita, não só a prevista.
+ */
+export interface CodePlaygroundActivityContent {
+  /** Instrução explícita: o que o código precisa fazer ao rodar. */
+  question: string;
+  highlight: string[];
+  /** Linguagem do trecho que o aluno completa. */
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript';
+  /**
+   * O trecho do aluno, com 1 a 3 lacunas `___` (mesma marca do `code_blank`).
+   * No máximo 30 caracteres por linha com a solução encaixada.
+   */
+  code: string;
+  /** Blocos oferecidos para as lacunas (soluções e distratores juntos), embaralhados. */
+  blocks: string[];
+  /**
+   * Um preenchimento que passa no `checkScript`, na ordem das lacunas. Serve à
+   * autoria (o dashboard e os scripts de conteúdo rodam o exercício com ela);
+   * o app **não** corrige comparando com ela.
+   */
+  solution: string[];
+  /**
+   * Arquivos de apoio fixos, que o aluno não edita: o documento roda com eles
+   * mais o `code` no lugar da linguagem `codeLanguage`. Ex.: um exercício de CSS
+   * leva o `html` em que o estilo se aplica.
+   */
+  html?: string;
+  css?: string;
+  js?: string;
+  /**
+   * JavaScript autorado (nunca do aluno) que roda depois do código e chama
+   * `__codap_report(passed, message?)`. Pode ler o DOM, `getComputedStyle` e o
+   * console capturado em `window.__codapConsoleEntries`. Sem chamar o report, o
+   * resultado conta como erro.
+   */
+  checkScript: string;
+  tutorial?: boolean;
+  /** Mesmo sorteio da `option` (ver `OptionActivityContent.pool`). */
+  pool?: string;
+  draw?: number;
+}
+
+/**
  * `type: 'reorder'` — montar o código tocando nas linhas na ordem certa
  * (Parsons problem; o "monte a frase" do Duolingo aplicado a código). O aluno
  * vê as linhas embaralhadas e toca nelas para montar o trecho de cima para

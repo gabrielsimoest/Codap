@@ -1,6 +1,7 @@
 import type {
   AdminLessonResponse,
   CodeBlankActivityContent,
+  CodePlaygroundActivityContent,
   ContentModule,
   FillBlankActivityContent,
   LocaleCode,
@@ -182,6 +183,32 @@ function buildFillBlank (content: FillBlankActivityContent): Partial<ExportActiv
   }
 }
 
+function buildCodePlayground (content: CodePlaygroundActivityContent): Partial<ExportActivity> {
+  const notes: string[] = [
+    'Playground: o aluno completa as lacunas tocando em blocos e executa o código; a correção é pelo comportamento (checkScript)',
+    `Solução de referência: ${(content.solution ?? []).join(' | ')}`
+  ]
+  if (content.tutorial) {
+    notes.push('Marcada como tutorial')
+  }
+  const support = (['html', 'css', 'js'] as const)
+    .filter((key) => content[key])
+    .map((key) => ({ language: fenceLanguage(key === 'js' ? 'JavaScript' : key.toUpperCase()), code: content[key] as string }))
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    options: (content.blocks ?? []).map((text) => ({ text: `Bloco: ${text}`, correct: (content.solution ?? []).includes(text) })),
+    highlight: content.highlight ?? [],
+    codeBlocks: [
+      ...(content.code ? [{ language: fenceLanguage(content.codeLanguage ?? 'JavaScript'), code: content.code }] : []),
+      ...support,
+      { language: 'js', code: `// checkScript\n${content.checkScript ?? ''}` }
+    ],
+    notes
+  }
+}
+
 function buildReorder (content: ReorderActivityContent): Partial<ExportActivity> {
   const notes: string[] = ['Montar o código: o aluno toca nas linhas, embaralhadas, na ordem certa']
   if (content.tutorial) {
@@ -252,6 +279,10 @@ function buildActivity (
 
   if (type === 'fill_blank') {
     return { ...base, ...buildFillBlank(content as FillBlankActivityContent) }
+  }
+
+  if (type === 'code_playground') {
+    return { ...base, ...buildCodePlayground(content as CodePlaygroundActivityContent) }
   }
 
   if (type === 'reorder') {

@@ -19,14 +19,17 @@ import { TheoryFields } from './TheoryFields'
 import { OptionFields } from './OptionFields'
 import { CodeBlankFields } from './CodeBlankFields'
 import { FillBlankFields } from './FillBlankFields'
+import { CodePlaygroundFields } from './CodePlaygroundFields'
 import { ReorderFields } from './ReorderFields'
 import { MatchingFields } from './MatchingFields'
 import { useCreateActivityMutation, useUpdateActivityMutation } from '@/hooks/useContentMutations'
 import {
   codeBlankContentSchema,
   fillBlankContentSchema,
+  codePlaygroundContentSchema,
   emptyCodeBlankContent,
   emptyFillBlankContent,
+  emptyCodePlaygroundContent,
   emptyMatchingContent,
   emptyOptionContent,
   emptyReorderContent,
@@ -202,6 +205,20 @@ function ActivityContentForm ({
         onSubmit={onSubmit}
       >
         <FillBlankFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'code_playground') {
+    return (
+      <TypedContentForm
+        schema={codePlaygroundContentSchema}
+        defaults={(content as object) ?? emptyCodePlaygroundContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <CodePlaygroundFields />
       </TypedContentForm>
     )
   }

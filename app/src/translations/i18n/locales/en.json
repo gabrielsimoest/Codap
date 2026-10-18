@@ -46,6 +46,15 @@
 			"inputLabel": "Answer for the blank"
 		},
 
+		"playground": {
+			"hiddenLines": "… {{count}} earlier lines hidden",
+			"loopInterrupted": "The loop was stopped: it never ended.",
+			"runFirst": "Fill in the blanks and tap {{run}} to test it; then tap {{next}}.",
+			"passed": "It works!",
+			"failed": "Not working yet.",
+			"noReport": "The exercise could not check the result."
+		},
+
 		"codeSection": {
 			"consoleError": "Error",
 			"run": "Run",

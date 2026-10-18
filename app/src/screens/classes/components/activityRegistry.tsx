@@ -2,6 +2,7 @@ import type { ReactElement } from "react";
 import type { DimensionValue } from "react-native";
 import type {
 	CodeBlankActivityContent,
+	CodePlaygroundActivityContent,
 	FillBlankActivityContent,
 	MatchingActivityContent,
 	OptionActivityContent,
@@ -11,6 +12,7 @@ import type {
 import TheoryView from "./TheoryLesson";
 import OptionExercise from "./OptionExercise";
 import CodeBlankExercise from "./CodeBlankExercise";
+import CodePlaygroundExercise from "./CodePlaygroundExercise";
 import FillBlankExercise from "./FillBlankExercise";
 import ReorderExercise from "./ReorderExercise";
 import MatchingExercise from "./MatchingExercise";
@@ -92,6 +94,27 @@ export const ACTIVITY_REGISTRY: Record<
 				code={c.code}
 				answers={c.answers}
 				distractors={c.distractors}
+				tutorial={c.tutorial}
+				progress={progress}
+				onProceed={onProceed}
+				onClose={onClose}
+			/>
+		);
+	},
+	code_playground: ({ content, activityKey, progress, onProceed, onClose }) => {
+		const c = content as CodePlaygroundActivityContent;
+		return (
+			<CodePlaygroundExercise
+				key={activityKey}
+				question={c.question}
+				highlight={c.highlight}
+				codeLanguage={c.codeLanguage}
+				code={c.code}
+				blocks={c.blocks}
+				html={c.html}
+				css={c.css}
+				js={c.js}
+				checkScript={c.checkScript}
 				tutorial={c.tutorial}
 				progress={progress}
 				onProceed={onProceed}

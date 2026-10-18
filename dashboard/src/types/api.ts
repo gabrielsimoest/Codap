@@ -24,6 +24,7 @@ export type {
   ModuleTranslationInput,
   OptionActivityContent,
   CodeBlankActivityContent,
+  CodePlaygroundActivityContent,
   FillBlankActivityContent,
   MatchingActivityContent,
   ReorderActivityContent,

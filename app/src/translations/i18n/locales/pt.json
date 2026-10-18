@@ -46,6 +46,15 @@
 			"inputLabel": "Resposta da lacuna"
 		},
 
+		"playground": {
+			"hiddenLines": "… {{count}} linhas anteriores omitidas",
+			"loopInterrupted": "O laço foi interrompido: ele não terminava.",
+			"runFirst": "Complete as lacunas e toque em {{run}} para testar; depois, em {{next}}.",
+			"passed": "Funcionou!",
+			"failed": "Ainda não funcionou.",
+			"noReport": "O exercício não conseguiu conferir o resultado."
+		},
+
 		"codeSection": {
 			"consoleError": "Erro",
 			"run": "Executar",

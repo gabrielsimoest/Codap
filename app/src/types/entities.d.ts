@@ -1,5 +1,6 @@
 import type {
 	CodeBlankActivityContent,
+	CodePlaygroundActivityContent,
 	FillBlankActivityContent,
 	MatchingActivityContent,
 	OptionActivityContent,
@@ -60,6 +61,11 @@ export type CodeBlank = {
 	lesson: CodeBlankActivityContent;
 };
 
+export type CodePlayground = {
+	type: "code_playground";
+	lesson: CodePlaygroundActivityContent;
+};
+
 export type FillBlank = {
 	type: "fill_blank";
 	lesson: FillBlankActivityContent;
@@ -80,7 +86,15 @@ type DummyClass = {
 	lesson: string[];
 };
 
-export type Classes = Theory | Option | CodeBlank | FillBlank | Reorder | Matching | DummyClass;
+export type Classes =
+	| Theory
+	| Option
+	| CodeBlank
+	| CodePlayground
+	| FillBlank
+	| Reorder
+	| Matching
+	| DummyClass;
 
 /**
  * O que o `ActivityPlayer` sabe reproduzir, venha da API (`ActivityResponse`,

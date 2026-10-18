@@ -3,6 +3,7 @@ import { reorderTestLessons } from "./tests/reorder";
 import { matchingTestLessons } from "./tests/matching";
 import { optionsAsCodeTestLessons } from "./tests/options-as-code";
 import { fillBlankTestLessons } from "./tests/fill-blank";
+import { playgroundTestLessons } from "./tests/playground";
 
 const codeList = {
 	structure: `<!DOCTYPE html>
@@ -66,6 +67,7 @@ const BasicHtmlLessons: ClassContent = {
 		...matchingTestLessons.pt,
 		...optionsAsCodeTestLessons.pt,
 		...fillBlankTestLessons.pt,
+		...playgroundTestLessons.pt,
 	],
 	en: [
 		{
@@ -105,6 +107,7 @@ const BasicHtmlLessons: ClassContent = {
 		...matchingTestLessons.en,
 		...optionsAsCodeTestLessons.en,
 		...fillBlankTestLessons.en,
+		...playgroundTestLessons.en,
 	],
 };
 

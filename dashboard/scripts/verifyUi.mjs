@@ -295,6 +295,51 @@ step('o formulário de digitar a resposta valida a lacuna e as respostas', async
   await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
 })
 
+/*
+ * `code_playground` novo só até o formulário: o "Testar com a solução" roda o
+ * exercício num iframe isolado e precisa dar o veredito do checkScript — passar
+ * com a solução certa e reprovar com um bloco errado. É o que garante que o
+ * documento de teste do dashboard continua espelhando o do app. Nada é salvo.
+ */
+step('o formulário do playground testa a solução no iframe', async (page) => {
+  await page.getByRole('button', { name: 'Nova atividade' }).click()
+  await page.locator('#activity-type').fill('code_playground')
+  await page.locator('#playground-code').waitFor({ timeout: 10_000 })
+
+  await page.locator('#playground-code').fill('h1 {\n  ___: red;\n}')
+  await page.locator('#playground-block-0').fill('color')
+  await page.locator('#playground-block-1').fill('background')
+  await page.locator('#playground-solution-0').fill('color')
+  await page.locator('#playground-html').fill('<h1>Oi</h1>')
+  await page.locator('#playground-check').fill(
+    'var c = getComputedStyle(document.querySelector("h1")).color;\n__codap_report(c === "rgb(255, 0, 0)", "O título precisa ficar vermelho.");'
+  )
+
+  const verdict = page.getByTestId('playground-verdict')
+  await page.getByRole('button', { name: 'Testar com a solução' }).click()
+  await verdict.filter({ hasText: 'Passou' }).waitFor({ timeout: 10_000 })
+
+  await page.locator('#playground-solution-0').fill('background')
+  await page.getByRole('button', { name: 'Testar com a solução' }).click()
+  await verdict.filter({ hasText: 'Reprovou' }).waitFor({ timeout: 10_000 })
+
+  // Laço infinito: a proteção de laços (espelho do app) precisa cortar a
+  // execução e o veredito chegar, em vez de a aba do dashboard congelar.
+  await page.getByRole('combobox', { name: 'Linguagem do código do aluno' }).click()
+  await page.getByRole('option', { name: 'JavaScript', exact: true }).click()
+  await page.locator('#playground-code').fill('let i = 0;\nwhile (i < 3) {\n  ___;\n}')
+  await page.locator('#playground-block-0').fill('i--')
+  await page.locator('#playground-block-1').fill('i++')
+  await page.locator('#playground-solution-0').fill('i--')
+  await page.locator('#playground-check').fill('__codap_report(true)')
+  await page.getByRole('button', { name: 'Testar com a solução' }).click()
+  await page.getByTestId('playground-test').getByText('O laço foi interrompido', { exact: false }).waitFor({ timeout: 10_000 })
+
+  await page.screenshot(shot('13-playground.png'))
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
+})
+
 // --- passos de reorder aqui ---
 
 /*

@@ -4,6 +4,7 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../src/generated/prisma/client.js'
 import type {
   CodeBlankActivityContent,
+  CodePlaygroundActivityContent,
   FillBlankActivityContent,
   MatchingActivityContent,
   OptionActivityContent,
@@ -136,11 +137,11 @@ async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise
 // app a cada sessão. Os arrays são regenerados a partir do banco por `pnpm seed:generate`
 // — não edite à mão (ver api/CLAUDE.md).
 type ActivitySeed = {
-  type: 'theory' | 'option' | 'code_blank' | 'fill_blank' | 'reorder' | 'matching';
+  type: 'theory' | 'option' | 'code_blank' | 'fill_blank' | 'code_playground' | 'reorder' | 'matching';
   content: Record<
     LocaleCode,
     | TheoryActivityContent | OptionActivityContent | CodeBlankActivityContent
-    | FillBlankActivityContent | ReorderActivityContent | MatchingActivityContent
+    | FillBlankActivityContent | CodePlaygroundActivityContent | ReorderActivityContent | MatchingActivityContent
   >;
 }
 
@@ -2695,6 +2696,29 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Crie uma lista numerada com os passos "Misture" e "Asse", seguida do parágrafo "Bom apetite!".',
+            highlight: ['numerada'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>Misture</li>\n  <li>Asse</li>\n</___>\n<p>Bom apetite!</p>',
+            blocks: ['ol', 'ol', 'ul', 'ul'],
+            solution: ['ol', 'ol'],
+            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "A lista precisa ser numerada.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Abra e feche a lista com a mesma tag.");\n})();'
+          },
+          en: {
+            question: 'Create a numbered list with the steps "Mix" and "Bake", followed by the paragraph "Enjoy!".',
+            highlight: ['numbered'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>Mix</li>\n  <li>Bake</li>\n</___>\n<p>Enjoy!</p>',
+            blocks: ['ol', 'ol', 'ul', 'ul'],
+            solution: ['ol', 'ol'],
+            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "The list needs to be numbered.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Open and close the list with the same tag.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -2996,6 +3020,29 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<a ___="photo.html">\n  Photo\n</a>',
             answers: ['href'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'A imagem gato.jpg não carrega aqui. Complete para ela apontar para gato.jpg e mostrar o texto "Gato sentado" no lugar.',
+            highlight: ['Gato sentado'],
+            codeLanguage: 'HTML',
+            code: '<img\n  ___="gato.jpg"\n  ___="Gato sentado"\n/>',
+            blocks: ['src', 'alt', 'href', 'class'],
+            solution: ['src', 'alt'],
+            checkScript: '(function () {\n  var img = document.querySelector("img");\n  if (!img || img.getAttribute("src") !== "gato.jpg") {\n    __codap_report(false, "O endereço da imagem vai no src.");\n    return;\n  }\n  __codap_report(img.getAttribute("alt") === "Gato sentado", "O texto que aparece no lugar da imagem vai no alt.");\n})();'
+          },
+          en: {
+            question: 'The image cat.jpg does not load here. Complete it so it points to cat.jpg and shows the text "Sitting cat" in its place.',
+            highlight: ['Sitting cat'],
+            codeLanguage: 'HTML',
+            code: '<img\n  ___="cat.jpg"\n  ___="Sitting cat"\n/>',
+            blocks: ['src', 'alt', 'href', 'class'],
+            solution: ['src', 'alt'],
+            checkScript: '(function () {\n  var img = document.querySelector("img");\n  if (!img || img.getAttribute("src") !== "cat.jpg") {\n    __codap_report(false, "The image address goes in src.");\n    return;\n  }\n  __codap_report(img.getAttribute("alt") === "Sitting cat", "The text shown in place of the image goes in alt.");\n})();'
           }
         }
       }
@@ -7059,6 +7106,31 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Centralize a caixa na horizontal: no máximo 200px de largura e margens automáticas nas laterais.',
+            highlight: ['200px', 'automáticas'],
+            codeLanguage: 'CSS',
+            code: '.caixa {\n  max-width: ___;\n  margin: 0 ___;\n  background-color: #cfe8ff;\n}',
+            blocks: ['200px', 'auto', '0', '100%'],
+            solution: ['200px', 'auto'],
+            html: '<div class="caixa">Centralizada</div>',
+            checkScript: '(function () {\n  var r = document.querySelector(".caixa").getBoundingClientRect();\n  var b = document.body.getBoundingClientRect();\n  var esquerda = r.left - b.left;\n  var direita = b.right - r.right;\n  if (r.width > 201) {\n    __codap_report(false, "A caixa precisa ter no máximo 200px de largura.");\n  } else if (r.width < 100) {\n    __codap_report(false, "A caixa ficou estreita demais: o limite é 200px.");\n  } else {\n    __codap_report(esquerda > 1 && Math.abs(esquerda - direita) <= 1, "A caixa precisa ficar no centro, com margens iguais dos dois lados.");\n  }\n})();'
+          },
+          en: {
+            question: 'Center the box horizontally: at most 200px wide and automatic side margins.',
+            highlight: ['200px', 'automatic'],
+            codeLanguage: 'CSS',
+            code: '.box {\n  max-width: ___;\n  margin: 0 ___;\n  background-color: #cfe8ff;\n}',
+            blocks: ['200px', 'auto', '0', '100%'],
+            solution: ['200px', 'auto'],
+            html: '<div class="box">Centered</div>',
+            checkScript: '(function () {\n  var r = document.querySelector(".box").getBoundingClientRect();\n  var b = document.body.getBoundingClientRect();\n  var left = r.left - b.left;\n  var right = b.right - r.right;\n  if (r.width > 201) {\n    __codap_report(false, "The box needs to be at most 200px wide.");\n  } else if (r.width < 100) {\n    __codap_report(false, "The box got too narrow: the limit is 200px.");\n  } else {\n    __codap_report(left > 1 && Math.abs(left - right) <= 1, "The box needs to be centered, with equal margins on both sides.");\n  }\n})();'
+          }
+        }
       }
     ]
   },
@@ -7719,6 +7791,31 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: 'span {\n  display: ___;\n}',
             answers: ['block'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Deixe as três etiquetas lado a lado, cada uma com os 80px de largura.',
+            highlight: ['lado a lado'],
+            codeLanguage: 'CSS',
+            code: '.etiqueta {\n  display: ___;\n  width: 80px;\n  background-color: #cfe8ff;\n}',
+            blocks: ['inline-block', 'inline', 'block', 'none'],
+            solution: ['inline-block'],
+            html: '<span class="etiqueta">A</span>\n<span class="etiqueta">B</span>\n<span class="etiqueta">C</span>',
+            checkScript: '(function () {\n  var t = document.querySelectorAll(".etiqueta");\n  var y0 = t[0].getBoundingClientRect().top;\n  var linha = true, largura = true, visivel = true;\n  for (var i = 0; i < t.length; i++) {\n    var r = t[i].getBoundingClientRect();\n    if (Math.abs(r.top - y0) > 1) linha = false;\n    if (Math.round(r.width) !== 80) largura = false;\n    if (r.width === 0) visivel = false;\n  }\n  if (!visivel) {\n    __codap_report(false, "As etiquetas sumiram da tela.");\n  } else if (!linha) {\n    __codap_report(false, "As etiquetas precisam ficar na mesma linha.");\n  } else {\n    __codap_report(largura, "Estão na mesma linha, mas a largura de 80px foi ignorada.");\n  }\n})();'
+          },
+          en: {
+            question: 'Put the three tags side by side, each one 80px wide.',
+            highlight: ['side by side'],
+            codeLanguage: 'CSS',
+            code: '.tag {\n  display: ___;\n  width: 80px;\n  background-color: #cfe8ff;\n}',
+            blocks: ['inline-block', 'inline', 'block', 'none'],
+            solution: ['inline-block'],
+            html: '<span class="tag">A</span>\n<span class="tag">B</span>\n<span class="tag">C</span>',
+            checkScript: '(function () {\n  var t = document.querySelectorAll(".tag");\n  var y0 = t[0].getBoundingClientRect().top;\n  var row = true, width = true, visible = true;\n  for (var i = 0; i < t.length; i++) {\n    var r = t[i].getBoundingClientRect();\n    if (Math.abs(r.top - y0) > 1) row = false;\n    if (Math.round(r.width) !== 80) width = false;\n    if (r.width === 0) visible = false;\n  }\n  if (!visible) {\n    __codap_report(false, "The tags disappeared from the screen.");\n  } else if (!row) {\n    __codap_report(false, "The tags need to be on the same line.");\n  } else {\n    __codap_report(width, "They are on the same line, but the 80px width was ignored.");\n  }\n})();'
           }
         }
       }
@@ -11030,6 +11127,29 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             answers: ['pop']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Adicione a nota 8 no final do array e mostre no console quantas notas ele passa a ter.',
+            highlight: ['no final', 'quantas notas'],
+            codeLanguage: 'JavaScript',
+            code: 'const notas = [7, 9];\n\nnotas.___(8);\nconsole.log(notas.___);',
+            blocks: ['push', 'pop', 'length', 'includes'],
+            solution: ['push', 'length'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries;\n  __codap_report(e.length === 1 && e[0].message === "3", "O console precisa mostrar 3: as notas 7, 9 e 8.");\n})();'
+          },
+          en: {
+            question: 'Add the score 8 to the end of the array and show in the console how many scores it now has.',
+            highlight: ['to the end', 'how many scores'],
+            codeLanguage: 'JavaScript',
+            code: 'const scores = [7, 9];\n\nscores.___(8);\nconsole.log(scores.___);',
+            blocks: ['push', 'pop', 'length', 'includes'],
+            solution: ['push', 'length'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries;\n  __codap_report(e.length === 1 && e[0].message === "3", "The console needs to show 3: the scores 7, 9 and 8.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -11546,6 +11666,29 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: '___ sum(a, b) {\n  return a + b;\n}\nconsole.log(sum(2, 3));',
             answers: ['function']
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete a função para devolver o dobro do número e chame-a de um jeito que o console mostre 10.',
+            highlight: ['devolver o dobro', '10'],
+            codeLanguage: 'JavaScript',
+            code: 'function dobro(n) {\n  ___ n * 2;\n}\n\nconsole.log(dobro(___));',
+            blocks: ['return', 'const', '5', '10', '20'],
+            solution: ['return', '5'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries;\n  __codap_report(e.length === 1 && e[0].message === "10", "A função precisa devolver o dobro, e o console precisa mostrar 10.");\n})();'
+          },
+          en: {
+            question: 'Complete the function so it returns double the number, and call it so the console shows 10.',
+            highlight: ['returns double', '10'],
+            codeLanguage: 'JavaScript',
+            code: 'function double(n) {\n  ___ n * 2;\n}\n\nconsole.log(double(___));',
+            blocks: ['return', 'const', '5', '10', '20'],
+            solution: ['return', '5'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries;\n  __codap_report(e.length === 1 && e[0].message === "10", "The function needs to return double, and the console needs to show 10.");\n})();'
           }
         }
       }

@@ -10,7 +10,7 @@ import { z } from 'zod'
  * impede um `content` malformado de virar dado está aqui.
  *
  * Os schemas espelham os `*ActivityContent` (theory, option, code_blank,
- * fill_blank, reorder, matching) de
+ * fill_blank, code_playground, reorder, matching) de
  * `codap-api/src/types/contracts.ts`. Os tipos continuam vindo de lá; estes
  * schemas descrevem a mesma forma para efeito de validação — ao mudar um dos
  * contratos, mude os dois.
@@ -132,6 +132,52 @@ export const codeBlankContentSchema = z.object({
 /** Mesmo limite do `code`: linha mais longa obriga a arrastar no celular. */
 const MAX_CODE_LINE = 30
 
+export const PLAYGROUND_LANGUAGES = ['HTML', 'CSS', 'JavaScript'] as const
+
+export const codePlaygroundContentSchema = z.object({
+  question: z.string().min(1, 'A instrução é obrigatória.'),
+  highlight: z.array(z.string().min(1)),
+  codeLanguage: z.enum(PLAYGROUND_LANGUAGES),
+  /** Trecho do aluno, com 1 a 3 lacunas ___. */
+  code: z.string().min(1, 'O trecho de código é obrigatório.'),
+  /** Blocos oferecidos (soluções e distratores juntos). */
+  blocks: z.array(z.string().trim().min(1, 'O bloco não pode ficar vazio.')).min(2, 'Ofereça ao menos 2 blocos.'),
+  /** Um preenchimento que passa no checkScript (só para autoria). */
+  solution: z.array(z.string().trim().min(1, 'A solução não pode ficar vazia.')),
+  html: z.string().optional(),
+  css: z.string().optional(),
+  js: z.string().optional(),
+  /** Correção: roda depois do código e chama __codap_report(passed, message?). */
+  checkScript: z.string().min(1, 'O script de correção é obrigatório.'),
+  tutorial: z.boolean().optional(),
+  pool: z.string().optional(),
+  draw: z.number().int().min(1, 'Sorteie ao menos uma.').optional()
+}).superRefine((content, ctx) => {
+  const blanks = countBlanks(content.code)
+  if (blanks < 1 || blanks > 3) {
+    ctx.addIssue({ code: 'custom', path: ['code'], message: 'Marque de 1 a 3 lacunas com ___ no código.' })
+    return
+  }
+  if (content.solution.length !== blanks) {
+    ctx.addIssue({ code: 'custom', path: ['solution'], message: `O código tem ${blanks} lacuna(s), mas a solução tem ${content.solution.length} bloco(s).` })
+  }
+  for (const [index, value] of content.solution.entries()) {
+    if (!content.blocks.includes(value)) {
+      ctx.addIssue({ code: 'custom', path: ['solution', index], message: 'A solução precisa usar um dos blocos oferecidos.' })
+    }
+  }
+  if (!content.checkScript.includes('__codap_report')) {
+    ctx.addIssue({ code: 'custom', path: ['checkScript'], message: 'O script precisa chamar __codap_report(passou, mensagem).' })
+  }
+  const filled = content.solution.reduce((code, value) => code.replace(CODE_BLANK_MARKER, value), content.code)
+  for (const [index, line] of filled.split('\n').entries()) {
+    if (line.length > MAX_CODE_LINE) {
+      ctx.addIssue({ code: 'custom', path: ['code'], message: `A linha ${index + 1} passa de ${MAX_CODE_LINE} caracteres com a solução encaixada; quebre-a para caber no celular.` })
+      break
+    }
+  }
+})
+
 /**
  * Resposta do `fill_blank`: só letras, números, hífen e sublinhado, até 20
  * caracteres. É o que dá para digitar no celular sem caçar símbolo no teclado
@@ -243,11 +289,12 @@ export type TheoryContentForm = z.infer<typeof theoryContentSchema>
 export type OptionContentForm = z.infer<typeof optionContentSchema>
 export type CodeBlankContentForm = z.infer<typeof codeBlankContentSchema>
 export type FillBlankContentForm = z.infer<typeof fillBlankContentSchema>
+export type CodePlaygroundContentForm = z.infer<typeof codePlaygroundContentSchema>
 export type ReorderContentForm = z.infer<typeof reorderContentSchema>
 export type MatchingContentForm = z.infer<typeof matchingContentSchema>
 
 /** Tipos com formulário dedicado. Qualquer outro cai no editor de JSON cru. */
-export const TYPED_ACTIVITY_TYPES = ['theory', 'option', 'code_blank', 'fill_blank', 'reorder', 'matching'] as const
+export const TYPED_ACTIVITY_TYPES = ['theory', 'option', 'code_blank', 'fill_blank', 'code_playground', 'reorder', 'matching'] as const
 
 export type TypedActivityType = (typeof TYPED_ACTIVITY_TYPES)[number]
 
@@ -292,6 +339,19 @@ export function emptyFillBlankContent (): FillBlankContentForm {
     codeLanguage: 'JavaScript',
     code: '',
     answers: ['']
+  }
+}
+
+export function emptyCodePlaygroundContent (): CodePlaygroundContentForm {
+  return {
+    question: '',
+    highlight: [],
+    codeLanguage: 'CSS',
+    code: '',
+    blocks: ['', ''],
+    solution: [''],
+    html: '',
+    checkScript: '__codap_report(true)'
   }
 }
 
