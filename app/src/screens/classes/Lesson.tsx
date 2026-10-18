@@ -11,6 +11,7 @@ import useNavigate from "../../hooks/useNavigate";
 import useLanguageStore from "../../stores/LanguageStore";
 import useUserStore from "../../stores/UserStore";
 import { recordLessonCompletion } from "../../services/SyncService";
+import { evaluateAfterLesson } from "../../services/AchievementService";
 import { buildLessonSession } from "../../utils/buildLessonSession";
 import type { RootStackParamList } from "../../types/navigation";
 
@@ -49,6 +50,9 @@ export default function Lesson() {
 		// senão o envio para /sync não é agendado.
 		if (user?.remoteId) {
 			recordLessonCompletion(user.remoteId, lessonId);
+			// Concluir uma lição é o único momento em que uma conquista pode
+			// ser desbloqueada — confere a área desta lição (e a Tríade Web).
+			evaluateAfterLesson(user.remoteId, areaId);
 		}
 		goBack();
 	};

@@ -205,6 +205,32 @@
 			}
 		},
 
+		"achievement": {
+			"close": "Close",
+			"locked": "Locked",
+			"tapToClose": "Tap anywhere to close",
+			"html": {
+				"name": "HTML",
+				"hint": "Complete every HTML lesson.",
+				"description": "Completed every HTML lesson."
+			},
+			"css": {
+				"name": "CSS",
+				"hint": "Complete every CSS lesson.",
+				"description": "Completed every CSS lesson."
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"hint": "Complete every JavaScript lesson.",
+				"description": "Completed every JavaScript lesson."
+			},
+			"webTriad": {
+				"name": "Web Triad",
+				"hint": "Earn the HTML, CSS and JavaScript emblems.",
+				"description": "Mastered the web development basics: HTML, CSS and JavaScript."
+			}
+		},
+
 		"comingSoon": {
 			"title": "COMING SOON!",
 			"message": "This feature is currently under development. Keep an eye out for future CODAP updates!"

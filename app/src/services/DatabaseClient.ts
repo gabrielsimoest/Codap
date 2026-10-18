@@ -5,7 +5,12 @@ import * as SQLite from "expo-sqlite";
 // depende de `crypto.getRandomValues`, que não existe no runtime do React
 // Native sem polyfill. `randomUUID` resolve os dois de uma vez, nativamente.
 import { randomUUID } from "expo-crypto";
-import { UserLesson, SyncQueueRow, User } from "../types/entities";
+import {
+	UserLesson,
+	UserAchievement,
+	SyncQueueRow,
+	User,
+} from "../types/entities";
 import runMigrations from "./migrations";
 
 /** TODO: Change tables atribute names */
@@ -157,6 +162,13 @@ export default class DatabaseClient {
 				);
 			}
 		});
+	}
+
+	getUnlockedAchievements(userId: string) {
+		return this.database.getAllSync<UserAchievement>(
+			"SELECT achievementId, unlockedAt FROM UserAchievements WHERE userId = ?;",
+			[userId]
+		);
 	}
 
 	/** Só os eventos do usuário atual — outra conta que já tenha usado o mesmo dispositivo fica intocada. */

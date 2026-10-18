@@ -205,6 +205,32 @@
 			}
 		},
 
+		"achievement": {
+			"close": "Fechar",
+			"locked": "Bloqueada",
+			"tapToClose": "Toque em qualquer lugar para fechar",
+			"html": {
+				"name": "HTML",
+				"hint": "Conclua todas as lições de HTML.",
+				"description": "Concluiu todas as lições de HTML."
+			},
+			"css": {
+				"name": "CSS",
+				"hint": "Conclua todas as lições de CSS.",
+				"description": "Concluiu todas as lições de CSS."
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"hint": "Conclua todas as lições de JavaScript.",
+				"description": "Concluiu todas as lições de JavaScript."
+			},
+			"webTriad": {
+				"name": "Tríade Web",
+				"hint": "Conquiste os emblemas de HTML, CSS e JavaScript.",
+				"description": "Dominou o básico do desenvolvimento web: HTML, CSS e JavaScript."
+			}
+		},
+
 		"comingSoon": {
 			"title": "EM BREVE!",
 			"message": "No momento esse recurso está em desenvolvimento. Fique de olho em futuras atualizações do CODAP!"

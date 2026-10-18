@@ -25,6 +25,12 @@ export interface UserLesson {
 	lessonId: number;
 }
 
+/** Linha de `UserAchievements` — `achievementId` é um dos ids fixos de `ACHIEVEMENT_IDS`. */
+export interface UserAchievement {
+	achievementId: number;
+	unlockedAt: string;
+}
+
 export type SyncEventType = "lesson_completed" | "achievement_unlocked";
 export type SyncQueueStatus = "pending" | "syncing" | "synced" | "failed";
 

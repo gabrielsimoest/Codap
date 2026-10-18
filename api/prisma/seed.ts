@@ -42640,6 +42640,45 @@ async function seedContentVersions (localeIds: Map<LocaleCode, number>): Promise
   }
 }
 
+/*
+ * Catálogo de conquistas — com ids FIXOS, ao contrário de áreas/módulos/lições.
+ *
+ * A regra de desbloqueio mora no app (`app/src/services/AchievementService.ts`,
+ * que decide offline e envia `achievement_unlocked` com o `achievementId` pela
+ * fila de sync), então o id é um contrato entre os dois lados, não um dado de
+ * conteúdo: os dois precisam concordar sobre ele sem nenhuma consulta. Mudar
+ * um id aqui exige mudar `ACHIEVEMENT_IDS` no app na mesma tarefa.
+ *
+ * `upsert` por id é idempotente (roda sempre, sem guard). Inserir ids
+ * explícitos não avança a sequência do autoincrement, então ela é empurrada
+ * para pelo menos o maior id — senão o próximo `create` sem id (os testes de
+ * `/sync` criam conquistas de fixture assim) colidiria com uma destas linhas.
+ */
+const ACHIEVEMENTS: Array<{ id: number; name: string; description: string }> = [
+  { id: 1, name: 'HTML', description: 'Concluiu todas as lições da área de HTML.' },
+  { id: 2, name: 'CSS', description: 'Concluiu todas as lições da área de CSS.' },
+  { id: 3, name: 'JavaScript', description: 'Concluiu todas as lições da área de JavaScript.' },
+  { id: 4, name: 'Tríade Web', description: 'Concluiu as áreas de HTML, CSS e JavaScript — o básico do desenvolvimento web.' }
+]
+
+export async function seedAchievements (): Promise<void> {
+  for (const { id, name, description } of ACHIEVEMENTS) {
+    await prisma.achievements.upsert({
+      where: { id },
+      create: { id, name, description },
+      update: { name, description }
+    })
+  }
+
+  await prisma.$queryRaw`
+    SELECT setval(
+      pg_get_serial_sequence('achievements', 'id'),
+      GREATEST((SELECT MAX(id) FROM achievements), (SELECT last_value FROM achievements_id_seq))
+    )
+  `
+  console.log(`Conquistas seedadas: ${ACHIEVEMENTS.length}.`)
+}
+
 async function main (): Promise<void> {
   const localeIds = await seedLocales()
   await seedAreasAndModules(localeIds)
@@ -42651,6 +42690,7 @@ async function main (): Promise<void> {
   await seedAdvancedLessons(localeIds)
   await seedBeyondLessons(localeIds)
   await seedContentVersions(localeIds)
+  await seedAchievements()
 }
 
 /*

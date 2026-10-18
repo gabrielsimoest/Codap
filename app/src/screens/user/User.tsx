@@ -12,7 +12,7 @@ import ChangePassword from "./components/ChangePassword";
 import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
-import ComingSoon from "../../components/ComingSoon";
+import AchievementsModal from "./components/achievements/AchievementsModal";
 import { useState } from "react";
 
 const TextSize = 20; // Tamanho padrão da fonte
@@ -100,7 +100,10 @@ export default function User() {
 					/>
 				</ScrollView>
 			</ThemedView>
-			<ComingSoon visible={visible} onDismiss={() => setVisible(false)} />
+			<AchievementsModal
+				visible={visible}
+				onDismiss={() => setVisible(false)}
+			/>
 		</>
 	);
 }

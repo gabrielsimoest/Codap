@@ -11,6 +11,10 @@ const Images = {
 	doubleXP: require(path + "double_xp.png"),
 	doubleTime: require(path + "double_time.png"),
 	surpriseChest: require(path + "surprise_chest.png"),
+	emblemHtml: require(path + "emblema_html.png"),
+	emblemCss: require(path + "emblema_css.png"),
+	emblemJs: require(path + "emblema_js.png"),
+	emblemWebTriad: require(path + "emblema_triade_web.png"),
 };
 
 export default Images;
