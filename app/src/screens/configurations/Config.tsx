@@ -15,6 +15,12 @@ import { useState } from "react";
 export default function Config() {
 	const { t } = useTranslation();
 	const [testLessonVisible, setTestLessonVisible] = useState(false);
+	// Enquanto "Sobre" está pressionado, a lista não rola. No Android, quando
+	// a tela tem o que rolar, o ScrollView toma o gesto assim que o dedo anda
+	// alguns dp (o limiar de rolagem) e cancela o toque longo de 5 s da
+	// galeria — com a tela inteira cabendo, isso não acontecia. Travar a
+	// rolagem tira o ScrollView da disputa.
+	const [holdingAbout, setHoldingAbout] = useState(false);
 
 	return (
 		<ThemedView style={{ flex: 1 }}>
@@ -22,6 +28,7 @@ export default function Config() {
 			<ScrollView
 				style={styles.scroller}
 				showsVerticalScrollIndicator={false}
+				scrollEnabled={!holdingAbout}
 			>
 				<ConfigHeading
 					iconType="materialCommunity"
@@ -45,6 +52,7 @@ export default function Config() {
 				<VersionInfo />
 				<AboutCodap
 					onLongPress={() => setTestLessonVisible(true)}
+					onHoldChange={setHoldingAbout}
 				/>
 			</ScrollView>
 			<SecretTestLesson

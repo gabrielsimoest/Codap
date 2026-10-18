@@ -9,6 +9,9 @@ interface Props {
 	onLongPress?: () => void;
 	/** Quanto tempo segurando até `onLongPress`. Política de quem usa, não do botão. */
 	delayLongPress?: number;
+	/** O dedo encostou / saiu do botão (inclusive quando o toque é cancelado). */
+	onPressIn?: () => void;
+	onPressOut?: () => void;
 }
 
 export default function SecondaryButton({
@@ -16,6 +19,8 @@ export default function SecondaryButton({
 	onPress,
 	onLongPress,
 	delayLongPress,
+	onPressIn,
+	onPressOut,
 }: Props) {
 	const { colors } = useTheme();
 
@@ -25,6 +30,8 @@ export default function SecondaryButton({
 			onPress={onPress}
 			onLongPress={onLongPress}
 			delayLongPress={delayLongPress}
+			onPressIn={onPressIn}
+			onPressOut={onPressOut}
 		>
 			<ResizableText style={[styles.text]} defaultSize={20}>
 				{title}

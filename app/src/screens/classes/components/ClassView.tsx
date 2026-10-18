@@ -10,14 +10,15 @@ interface Props {
 }
 
 /**
- * Casca de modal do conteúdo de teste hardcoded (alcançável só pelo gesto
- * secreto em Configurações — ver SecretTestLesson). O conteúdo vindo da API usa
- * a tela `Lesson`; os dois compartilham o mesmo `ActivityPlayer`.
+ * Casca de modal da galeria de atividades (alcançável só pelo gesto secreto em
+ * Configurações — ver SecretTestLesson). O conteúdo vindo da API usa a tela
+ * `Lesson`; os dois compartilham o mesmo `ActivityPlayer`. A galeria mostra as
+ * telas em ordem fixa, sem o sorteio de `buildLessonSession`.
  */
 export default function ClassView({ classes, title }: Props) {
 	const [visible, setVisible] = useState(false);
 
-	// O conteúdo hardcoded guarda o payload em `lesson`; o da API, em `content`.
+	// A galeria guarda o payload em `lesson`; o da API, em `content`.
 	// O adaptador fica aqui, no caminho legado, e não na tela nova.
 	const activities = useMemo(
 		() => filterPlayable(classes.map(({ type, lesson }) => ({ type, content: lesson }))),

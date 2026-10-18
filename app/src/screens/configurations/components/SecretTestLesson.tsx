@@ -1,9 +1,11 @@
-import { Pressable, StyleSheet } from "react-native";
+import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import Icon from "../../../components/Icon";
-import CenterView from "../../../components/layout/CenterView";
+import ResizableText from "../../../components/ResizableText";
 import ThemedView from "../../../components/themed/ThemedView";
-import ClassList from "../../classes/components/ClassList";
+import ClassView from "../../classes/components/ClassView";
+import useLanguageStore from "../../../stores/LanguageStore";
+import { activityGallery } from "../activityGallery";
 
 interface Props {
 	visible: boolean;
@@ -11,52 +13,76 @@ interface Props {
 }
 
 /**
- * Acesso escondido ao conteúdo de aula hardcoded (`lessons/html/content`), que
- * não vem da API e por isso não aparece na lista de lições de nenhum módulo.
- * Aberto segurando o botão "Sobre" por 5 segundos nas configurações.
+ * Galeria de atividades (`activityGallery.ts`): um exemplar de cada tela de
+ * atividade, para revisar o visual. Aberta segurando o botão "Sobre" por 5
+ * segundos nas configurações — não aparece em lugar nenhum do app.
  *
- * Existe só para manter esse conteúdo de teste alcançável — é autocontido de
- * propósito, para poder sumir junto com o conteúdo quando ele não for mais
- * necessário.
+ * A lista rola dentro do cartão: são mais entradas do que cabem na tela, e o
+ * cabeçalho com o botão de fechar fica fixo em cima.
  */
 export default function SecretTestLesson({ visible, onDismiss }: Props) {
+	const language = useLanguageStore((s) => s.language);
+	const entries = activityGallery[language as "pt" | "en"];
+
 	return (
 		<Portal>
 			<Modal
 				visible={visible}
 				onDismiss={onDismiss}
-				contentContainerStyle={{ flex: 1 }}
 				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
 				dismissableBackButton
 			>
-				<CenterView style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}>
-					<ThemedView style={styles.modalView}>
-						<Pressable style={styles.close} onPress={onDismiss}>
-							<Icon
-								type="ionicon"
-								name="close-circle"
-								color={"#5469D3"}
-							/>
+				<ThemedView style={styles.card}>
+					<View style={styles.header}>
+						<ResizableText style={styles.title} defaultSize={20}>
+							{language === "en" ? "Activity gallery" : "Galeria de atividades"}
+						</ResizableText>
+						<Pressable
+							onPress={onDismiss}
+							hitSlop={12}
+							accessibilityRole="button"
+							accessibilityLabel={language === "en" ? "Close" : "Fechar"}
+						>
+							<Icon type="ionicon" name="close-circle" color={"#5469D3"} />
 						</Pressable>
-						<ClassList topic="HTML" moduleType="basic" />
-					</ThemedView>
-				</CenterView>
+					</View>
+					<ScrollView contentContainerStyle={styles.list}>
+						{entries.map((entry, index) => (
+							<ClassView key={index} classes={entry.classes} title={entry.title} />
+						))}
+					</ScrollView>
+				</ThemedView>
 			</Modal>
 		</Portal>
 	);
 }
 
 const styles = StyleSheet.create({
-	modalView: {
-		margin: 20,
+	card: {
+		alignSelf: "center",
+		width: "90%",
+		maxHeight: "85%",
 		borderColor: "#637aff",
 		borderWidth: 1,
 		borderRadius: 20,
-		width: "90%",
-		paddingBottom: 20,
+		overflow: "hidden",
 	},
-	close: {
-		margin: 10,
-		alignSelf: "flex-end",
+	header: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		paddingHorizontal: 16,
+		paddingVertical: 12,
+		borderBottomWidth: 1,
+		borderBottomColor: "#304D66",
+	},
+	title: {
+		fontFamily: "Roboto",
+		fontWeight: "bold",
+		color: "#5469D3",
+	},
+	list: {
+		paddingTop: 16,
+		paddingBottom: 8,
 	},
 });

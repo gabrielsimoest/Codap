@@ -11,9 +11,15 @@ import { Modal, Portal } from "react-native-paper";
 interface Props {
 	/** Gesto escondido: segurar este botão abre a aula de teste (ver Config). */
 	onLongPress?: () => void;
+	/**
+	 * Avisa quando o dedo começa e termina de segurar "Sobre". Quem tem a
+	 * rolagem trava ela nesse intervalo: senão o dedo mexendo uns poucos dp
+	 * durante os 5 s vira rolagem e cancela o toque longo.
+	 */
+	onHoldChange?: (holding: boolean) => void;
 }
 
-const AboutCodap = ({ onLongPress }: Props) => {
+const AboutCodap = ({ onLongPress, onHoldChange }: Props) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const { t } = useTranslation();
@@ -129,6 +135,8 @@ const AboutCodap = ({ onLongPress }: Props) => {
 				onPress={() => setModalVisible(true)}
 				onLongPress={onLongPress}
 				delayLongPress={5000}
+				onPressIn={() => onHoldChange?.(true)}
+				onPressOut={() => onHoldChange?.(false)}
 			/>
 		</>
 	);

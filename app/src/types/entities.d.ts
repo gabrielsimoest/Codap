@@ -49,10 +49,10 @@ export interface SyncQueueRow {
 	updatedAt: string;
 }
 
-// O conteúdo hardcoded (lessons/html/content/*) e o que vem da API são a mesma
-// forma, então os tipos são os mesmos: `TheoryActivityContent`/
-// `OptionActivityContent` são a fonte da verdade, e o conteúdo local não pode
-// divergir do contrato sem quebrar o build.
+// A galeria de atividades (screens/configurations/activityGallery.ts) e o que
+// vem da API são a mesma forma, então os tipos são os mesmos: os
+// `*ActivityContent` do contrato são a fonte da verdade, e a galeria não pode
+// divergir dele sem quebrar o build.
 export type Theory = {
 	type: "theory";
 	lesson: TheoryActivityContent;
