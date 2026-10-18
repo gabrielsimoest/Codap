@@ -1,7 +1,11 @@
 import { type FastifyPluginAsync } from 'fastify'
 import type { PublishContentVersionBody } from '../../types/contracts.js'
 import { errorResponseSchema } from '../../utils/schemas.js'
-import { findLatestContentVersions } from '../../utils/contentVersion.js'
+import {
+  CONTENT_VERSION_SELECT,
+  findLatestContentVersions,
+  toContentVersionResponse
+} from '../../utils/contentVersion.js'
 import {
   contentVersionResponseSchema,
   publishContentVersionBodySchema
@@ -21,7 +25,7 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       }
     }
   }, async (request, reply) => {
-    const { locale, version, changelog } = request.body
+    const { locale, version, changelog, announce = false } = request.body
 
     // Idioma validado contra a tabela, não contra um enum no schema: é o que
     // permite publicar para um idioma novo sem alterar código da API.
@@ -47,22 +51,13 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
         locale_id: localeRow.id,
         version,
         changelog,
-        released_at: new Date()
+        released_at: new Date(),
+        announce
       },
-      select: {
-        version: true,
-        changelog: true,
-        released_at: true,
-        locale: { select: { locale: true } }
-      }
+      select: CONTENT_VERSION_SELECT
     })
 
-    return reply.code(201).send({
-      locale: created.locale.locale,
-      version: created.version,
-      changelog: created.changelog,
-      releasedAt: created.released_at.toISOString().slice(0, 10)
-    })
+    return reply.code(201).send(toContentVersionResponse(created))
   })
 }
 

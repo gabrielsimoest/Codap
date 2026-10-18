@@ -142,6 +142,16 @@ step('o diálogo de publicação mostra a versão vigente', async (page) => {
     throw new Error('nenhuma versão vigente foi exibida')
   }
 
+  // O aviso aos alunos nasce ligado: é o caso comum, e esquecer de ligá-lo
+  // faria uma novidade chegar ao app em silêncio. Só confere o estado — não
+  // publica nada, para não criar versões de verdade no banco.
+  const aviso = page.getByRole('dialog').getByRole('switch')
+  await aviso.waitFor({ timeout: 10_000 })
+  if (await aviso.getAttribute('aria-checked') !== 'true') {
+    throw new Error('"Avisar os alunos" deveria começar ligado')
+  }
+  await page.getByText('Avisar os alunos').waitFor()
+
   await page.screenshot(shot('07-publicar.png'))
   await page.keyboard.press('Escape')
 })

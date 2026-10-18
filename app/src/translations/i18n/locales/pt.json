@@ -259,6 +259,15 @@
 			}
 		},
 
+		"contentUpdate": {
+			"title": "Conteúdo atualizado!",
+			"version": "Versão {{version}}",
+			"earlier": "Atualizações anteriores",
+			"moreOne": "e mais 1 atualização.",
+			"moreMany": "e mais {{count}} atualizações.",
+			"ok": "Entendi"
+		},
+
 		"comingSoon": {
 			"title": "EM BREVE!",
 			"message": "No momento esse recurso está em desenvolvimento. Fique de olho em futuras atualizações do CODAP!"

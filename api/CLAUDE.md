@@ -321,6 +321,27 @@ em `App.tsx`, doze vezes ao longo do projeto).
   idioma, ou só a de `?locale=pt` quando informado (forma que o app usa). Idioma
   sem publicação devolve `[]`, não 404: para o app isso significa "não há o que
   comparar", e ele mantém o cache.
+- **`?locale=pt&sinceId=N`** devolve **todas** as publicações do idioma com
+  `id > N`, da mais nova para a mais antiga — é o que o app usa para montar o
+  aviso de "conteúdo atualizado" de quem ficou várias publicações sem abrir.
+  Devolve também as não anunciadas (`announce: false`): filtrar é decisão de
+  quem mostra. **`sinceId` exige `locale`** (`dependencies` no schema, 400 sem
+  ele): ids de idiomas diferentes não formam um histórico único.
+- **Toda resposta traz `id` e `announce`.** O app compara publicações pelo `id`
+  (autoincrement, estritamente crescente), nunca pela string de versão: "o que
+  saiu desde a versão do usuário" vira `id > guardado`, sem semver no cliente,
+  e continua certo depois de um rollback (que é uma linha nova, de `id` maior).
+  Leitura e publicação usam o mesmo `CONTENT_VERSION_SELECT` +
+  `toContentVersionResponse` (`src/utils/contentVersion.ts`), para as duas
+  rotas nunca devolverem formas diferentes.
+- **`content_version.announce`** (migration
+  `20261018120000_content_version_announce`, `BOOLEAN NOT NULL DEFAULT false`)
+  decide se a publicação aparece no aviso do app. O padrão falso é deliberado:
+  uma publicação sem aviso continua sendo uma atualização silenciosa (correção
+  de digitação não deve interromper ninguém), e todas as publicações anteriores
+  à coluna — inclusive notas técnicas de setembro, sem acento — ficaram
+  silenciosas sem precisar de backfill. **O `changelog` é escrito para o
+  aluno**: com `announce`, é exatamente o texto que aparece no app.
 - **Esta rota existe em produção**, ao contrário de toda a escrita de catálogo.
   O gate de `NODE_ENV=development` em `content-version/index.ts` cobre **só o
   `POST`** — é o app em produção que consome o `GET`. Não estenda o gate para o
@@ -332,8 +353,8 @@ em `App.tsx`, doze vezes ao longo do projeto).
 - **"Mais recente" é o maior `id`, nunca `released_at`.** A coluna é `@db.Date`
   (sem hora): duas publicações no mesmo dia empatariam e a ordem ficaria
   indefinida. `src/utils/contentVersion.ts` centraliza isso — há teste dedicado.
-- **`POST /content-version`** recebe `{ locale, version, changelog }`;
-  `released_at` é do servidor, nunca do cliente. **409 se a versão for igual à
+- **`POST /content-version`** recebe `{ locale, version, changelog, announce? }`
+  (`announce` omitido = `false`); `released_at` é do servidor, nunca do cliente. **409 se a versão for igual à
   vigente** daquele idioma: republicar o mesmo número seria um no-op silencioso
   (o app compara por diferença), e um botão "publicar" que não publica é pior
   que um erro. Versão **menor é permitida** — rollback é legítimo.

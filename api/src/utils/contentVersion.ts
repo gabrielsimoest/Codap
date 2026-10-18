@@ -8,20 +8,35 @@ import type { ContentVersionResponse } from '../types/contracts.js'
  */
 const NEWEST_FIRST = { id: 'desc' } as const
 
-function toResponse (row: {
-  version: string;
-  changelog: string;
-  released_at: Date;
-  locale: { locale: string };
-}): ContentVersionResponse {
+/**
+ * Campos lidos em toda consulta de versão. Compartilhado entre leitura e
+ * publicação para as duas rotas nunca devolverem formas diferentes — um
+ * `select` divergente produziria respostas com campos faltando sem erro algum.
+ */
+export const CONTENT_VERSION_SELECT = {
+  id: true,
+  version: true,
+  changelog: true,
+  released_at: true,
+  announce: true,
+  locale: { select: { locale: true } }
+} as const
+
+type ContentVersionRow = Prisma.content_versionGetPayload<{
+  select: typeof CONTENT_VERSION_SELECT;
+}>
+
+export function toContentVersionResponse (row: ContentVersionRow): ContentVersionResponse {
   return {
+    id: row.id,
     locale: row.locale.locale,
     version: row.version,
     changelog: row.changelog,
     // `toISOString().slice(0, 10)` e não `toLocaleDateString`: a coluna é uma
     // data pura, e o formato precisa ser estável independentemente do fuso do
     // servidor.
-    releasedAt: row.released_at.toISOString().slice(0, 10)
+    releasedAt: row.released_at.toISOString().slice(0, 10),
+    announce: row.announce
   }
 }
 
@@ -38,12 +53,7 @@ export async function findLatestContentVersions (
 ): Promise<ContentVersionResponse[]> {
   const rows = await prisma.content_version.findMany({
     where: locale === undefined ? undefined : { locale: { locale } },
-    select: {
-      version: true,
-      changelog: true,
-      released_at: true,
-      locale: { select: { locale: true } }
-    },
+    select: CONTENT_VERSION_SELECT,
     orderBy: NEWEST_FIRST
   })
 
@@ -52,9 +62,32 @@ export async function findLatestContentVersions (
     // `rows` já vem do mais novo para o mais antigo: a primeira ocorrência de
     // cada idioma é a vigente.
     if (!latestByLocale.has(row.locale.locale)) {
-      latestByLocale.set(row.locale.locale, toResponse(row))
+      latestByLocale.set(row.locale.locale, toContentVersionResponse(row))
     }
   }
 
   return [...latestByLocale.values()]
+}
+
+/**
+ * Todas as publicações de um idioma posteriores a `sinceId`, da mais nova para
+ * a mais antiga.
+ *
+ * É o que o app usa para montar o aviso de "conteúdo atualizado": quem ficou
+ * várias publicações sem abrir recebe todas, não só a última. Devolve inclusive
+ * as que não são anunciadas (`announce: false`) — filtrar é decisão de quem
+ * mostra, e o dashboard pode querer o histórico completo.
+ */
+export async function findContentVersionsSince (
+  prisma: Prisma.TransactionClient,
+  locale: string,
+  sinceId: number
+): Promise<ContentVersionResponse[]> {
+  const rows = await prisma.content_version.findMany({
+    where: { locale: { locale }, id: { gt: sinceId } },
+    select: CONTENT_VERSION_SELECT,
+    orderBy: NEWEST_FIRST
+  })
+
+  return rows.map(toContentVersionResponse)
 }

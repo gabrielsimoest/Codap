@@ -3,8 +3,11 @@ import NetInfo from "@react-native-community/netinfo";
 import { useIsRestoring, useQueryClient } from "@tanstack/react-query";
 import {
 	getRemoteContentVersion,
-	getStoredContentVersion,
-	saveStoredContentVersion,
+	getStoredContentState,
+	needsRefetch,
+	nextSyncedState,
+	refreshPendingAnnouncements,
+	updateStoredContentState,
 } from "../services/ContentVersionService";
 import useLanguageStore from "../stores/LanguageStore";
 
@@ -79,21 +82,22 @@ const useContentVersionSync = () => {
 				return;
 			}
 
-			const stored = await getStoredContentVersion(language);
-			// Compara por DIFERENÇA, não por "maior": cobre rollback e evita
-			// comparação semver no cliente ("0.0.10" > "0.0.9" é falso como
-			// string).
-			if (stored === remote.version || cancelled) {
+			const stored = await getStoredContentState(language);
+			if (cancelled) {
 				return;
 			}
 
-			await queryClient.invalidateQueries({
-				predicate: (query) =>
-					isStaleForLanguage(query.queryKey, language),
-			});
+			// Compara por DIFERENÇA de `id`, não por "maior" — ver
+			// `needsRefetch`.
+			if (needsRefetch(stored, remote)) {
+				await queryClient.invalidateQueries({
+					predicate: (query) =>
+						isStaleForLanguage(query.queryKey, language),
+				});
 
-			if (cancelled) {
-				return;
+				if (cancelled) {
+					return;
+				}
 			}
 
 			// A versão só é gravada DEPOIS do refetch terminar.
@@ -103,7 +107,23 @@ const useContentVersionSync = () => {
 			// comparação seguinte daria "igual" e ele nunca mais se corrigiria.
 			// Falhando aqui, a versão guardada continua a antiga e o próximo
 			// boot tenta de novo.
-			await saveStoredContentVersion(language, remote.version);
+			//
+			// Também é gravada quando NÃO houve refetch: é assim que o formato
+			// antigo da chave (só a string) é convertido para o novo.
+			await updateStoredContentState(language, (current) =>
+				nextSyncedState(current, remote)
+			);
+
+			if (cancelled) {
+				return;
+			}
+
+			// O aviso de "conteúdo atualizado" não é mostrado daqui: a
+			// sincronização roda em segundo plano, possivelmente no meio de uma
+			// lição. Aqui só se buscam e guardam as notas; quem mostra é a aba
+			// de aulas, na próxima vez que a pessoa entrar nela
+			// (`useContentAnnouncement`).
+			await refreshPendingAnnouncements(language);
 		};
 
 		// Uma falha em qualquer etapa não pode escapar para o boot do app.

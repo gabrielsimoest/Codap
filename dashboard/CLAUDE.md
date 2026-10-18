@@ -119,6 +119,15 @@ consequência implícita.
   que o dashboard não tem como inferir.
 - **O 409 de duplicata é mostrado com a mensagem da API**, não como "erro 409" —
   ela diz qual é a versão vigente, que é a informação de que o autor precisa.
+- **"Avisar os alunos" decide se a publicação aparece no aviso de "conteúdo
+  atualizado" do app** (`announce` na API). Nasce **ligado**: a maior parte das
+  publicações é novidade para o aluno, e esquecer de ligar faria uma novidade
+  chegar em silêncio. Desligado, o conteúdo chega do mesmo jeito, só sem aviso —
+  é o certo para correções pequenas. A API, ao contrário, tem padrão `false`
+  (quem chama sem o campo publica em silêncio); o formulário sempre envia o
+  valor explícito. Com o aviso ligado, **o campo "O que mudou" é o texto que o
+  aluno lê** — escreva para ele, não para o histórico interno. O painel "Versão
+  vigente" marca "com aviso" na publicação que foi anunciada.
 
 ### A ordem só muda por endpoint de reorder
 

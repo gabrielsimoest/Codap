@@ -51,6 +51,8 @@ test('GET /content-version devolve a versão mais recente de cada idioma', async
   assert.equal(found[0].version, '0.0.2')
   assert.equal(found[0].changelog, 'atual')
   assert.match(found[0].releasedAt, DATE_ONLY)
+  assert.equal(typeof found[0].id, 'number', 'o app compara por id, que precisa vir na resposta')
+  assert.equal(found[0].announce, false, 'sem announce gravado, a publicação é silenciosa')
 })
 
 test('GET /content-version desempata pelo id, não por released_at', async (t) => {
@@ -227,6 +229,125 @@ test('POST /content-version devolve 404 para idioma inexistente', async (t) => {
     payload: { locale: 'zz', version: '0.1.0', changelog: 'x' }
   })
   assert.equal(res.statusCode, 404)
+})
+
+test('POST /content-version grava announce quando informado', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+
+  const res = await app.inject({
+    method: 'POST',
+    url: '/content-version',
+    payload: { locale: locale.locale, version: '0.1.0', changelog: 'Lições novas.', announce: true }
+  })
+  assert.equal(res.statusCode, 201)
+
+  const body = JSON.parse(res.payload)
+  assert.equal(body.announce, true)
+  assert.equal(typeof body.id, 'number')
+
+  const stored = await app.prisma.content_version.findUniqueOrThrow({ where: { id: body.id } })
+  assert.equal(stored.announce, true)
+})
+
+test('POST /content-version sem announce publica em silêncio', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+
+  const res = await app.inject({
+    method: 'POST',
+    url: '/content-version',
+    payload: { locale: locale.locale, version: '0.1.0', changelog: 'Correção de digitação.' }
+  })
+  assert.equal(res.statusCode, 201)
+  assert.equal(JSON.parse(res.payload).announce, false)
+})
+
+/** Publica três versões em sequência e devolve as linhas, da mais antiga para a mais nova. */
+async function publishThree (app: App, localeId: number) {
+  const rows = []
+  for (const [version, announce] of [['0.0.1', true], ['0.0.2', false], ['0.0.3', true]] as const) {
+    rows.push(await app.prisma.content_version.create({
+      data: { locale_id: localeId, version, changelog: `nota ${version}`, released_at: new Date(), announce }
+    }))
+  }
+  return rows
+}
+
+test('GET /content-version?sinceId= devolve tudo depois do id, do mais novo para o mais antigo', async (t) => {
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+  const [primeira, segunda, terceira] = await publishThree(app, locale.id)
+
+  const res = await app.inject({
+    url: `/content-version?locale=${locale.locale}&sinceId=${primeira.id}`
+  })
+  assert.equal(res.statusCode, 200)
+
+  const body = JSON.parse(res.payload)
+  assert.deepEqual(
+    body.map((v: { id: number }) => v.id),
+    [terceira.id, segunda.id],
+    'exclui o próprio sinceId e vem do mais novo para o mais antigo'
+  )
+  // As não anunciadas vêm junto: filtrar é decisão de quem mostra.
+  assert.deepEqual(body.map((v: { announce: boolean }) => v.announce), [true, false])
+})
+
+test('GET /content-version?sinceId=0 devolve o histórico inteiro do idioma', async (t) => {
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+  await publishThree(app, locale.id)
+
+  const res = await app.inject({ url: `/content-version?locale=${locale.locale}&sinceId=0` })
+  assert.equal(res.statusCode, 200)
+  assert.equal(JSON.parse(res.payload).length, 3)
+})
+
+test('GET /content-version?sinceId= na versão vigente devolve lista vazia', async (t) => {
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+  const rows = await publishThree(app, locale.id)
+
+  const res = await app.inject({
+    url: `/content-version?locale=${locale.locale}&sinceId=${rows[2].id}`
+  })
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload), [])
+})
+
+test('GET /content-version?sinceId= não mistura idiomas', async (t) => {
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+  const outro = await scratchLocale(app, t)
+  await publishThree(app, outro.id)
+  const [minha] = await publishThree(app, locale.id)
+
+  const res = await app.inject({ url: `/content-version?locale=${locale.locale}&sinceId=0` })
+  const body = JSON.parse(res.payload)
+  assert.equal(body.length, 3)
+  assert.ok(body.every((v: { locale: string }) => v.locale === locale.locale))
+  assert.ok(body.some((v: { id: number }) => v.id === minha.id))
+})
+
+test('GET /content-version?sinceId= sem locale é recusado com 400', async (t) => {
+  const app = await build(t)
+
+  // Ids de idiomas diferentes não formam um histórico único: devolver algo
+  // aqui seria ambíguo, então o schema recusa.
+  const res = await app.inject({ url: '/content-version?sinceId=1' })
+  assert.equal(res.statusCode, 400)
+})
+
+test('GET /content-version?sinceId= rejeita valor negativo ou não inteiro com 400', async (t) => {
+  const app = await build(t)
+
+  for (const sinceId of ['-1', '1.5', 'abc']) {
+    const res = await app.inject({ url: `/content-version?locale=pt&sinceId=${sinceId}` })
+    assert.equal(res.statusCode, 400, `sinceId=${sinceId} deveria ser rejeitado`)
+  }
 })
 
 test('POST /content-version não é registrado fora de desenvolvimento', async (t) => {

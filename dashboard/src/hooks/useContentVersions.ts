@@ -19,7 +19,10 @@ export function usePublishContentVersionMutation () {
   return useMutation({
     mutationFn: (body: PublishContentVersionBody) => contentVersionApi.publish(body),
     onSuccess: async (published) => {
-      toast.success(`Versão ${published.version} publicada para ${published.locale}.`)
+      toast.success(
+        `Versão ${published.version} publicada para ${published.locale}` +
+          (published.announce ? ', com aviso aos alunos.' : ', sem aviso.')
+      )
       await client.invalidateQueries({ queryKey: queryKeys.contentVersions() })
     },
     onError: (error) => {

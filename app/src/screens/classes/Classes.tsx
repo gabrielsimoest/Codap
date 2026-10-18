@@ -15,13 +15,21 @@ import ThemedText from "../../components/themed/ThemedText";
 import ThemedView from "../../components/themed/ThemedView";
 import ThemedTouchableOpacity from "../../components/themed/ThemedTouchableOpacity";
 import useAreasQuery from "../../hooks/queries/useAreasQuery";
+import useContentAnnouncement from "../../hooks/useContentAnnouncement";
 import areaMetadata, { getAreaIndex } from "./areaMetadata";
+import ContentUpdateModal from "./components/ContentUpdateModal";
 
 export default function Class() {
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [pickedAreaId, setPickedAreaId] = useState<number>();
 
 	const { data: areas, isPending: areasPending } = useAreasQuery();
+
+	// Aviso de "conteúdo atualizado". Mora nesta aba, e não junto da
+	// sincronização, porque é aqui que ele nunca interrompe uma lição — ver
+	// `useContentAnnouncement`.
+	const { announcement, dismiss: dismissAnnouncement } =
+		useContentAnnouncement();
 
 	// Área padrão = a primeira retornada por GET /areas (HTML, sempre a
 	// primeira criada pelo seeder). Derivado, não sincronizado por useEffect:
@@ -109,6 +117,12 @@ export default function Class() {
 					<AreaModules areaId={selectedAreaId} />
 				)}
 			</View>
+			{announcement !== null ? (
+				<ContentUpdateModal
+					entries={announcement.entries}
+					onDismiss={dismissAnnouncement}
+				/>
+			) : null}
 		</ThemedView>
 	);
 }

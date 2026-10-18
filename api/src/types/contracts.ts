@@ -506,17 +506,31 @@ export interface AdminLessonResponse {
  * no cliente (`'0.0.10' > '0.0.9'` é falso como string).
  */
 export interface ContentVersionResponse {
+  /**
+   * Autoincrement, estritamente crescente — é o que ordena as publicações.
+   *
+   * O app compara por `id`, não pela string de versão: "tudo o que saiu desde a
+   * versão do usuário" vira `id > guardado`, sem comparar semver no cliente, e
+   * continua correto depois de um rollback (que é uma linha **nova**, com `id`
+   * maior, mesmo que o número de versão seja menor).
+   */
+  id: number;
   /** Código do idioma (`locales.locale`), ex.: `pt`. */
   locale: string;
   /** Três segmentos numéricos, ex.: `0.1.4`. */
   version: string;
+  /** Escrito para o aluno: é o texto que aparece no aviso do app. */
   changelog: string;
   /** `YYYY-MM-DD` — a coluna é `@db.Date`, sem hora. */
   releasedAt: string;
+  /** Se esta publicação aparece no aviso de "conteúdo atualizado" do app. */
+  announce: boolean;
 }
 
 export interface PublishContentVersionBody {
   locale: string;
   version: string;
   changelog: string;
+  /** Omitido = `false`: a publicação atualiza o conteúdo em silêncio. */
+  announce?: boolean;
 }

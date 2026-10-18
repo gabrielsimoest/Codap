@@ -16,6 +16,7 @@ import {
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { Switch } from '@/components/ui/switch'
 import {
   Select,
   SelectContent,
@@ -38,7 +39,8 @@ import { VERSION_PATTERN } from '@/lib/contentVersion'
 const publishSchema = z.object({
   locale: z.string().min(1),
   version: z.string().regex(VERSION_PATTERN, 'Use três números separados por ponto (ex.: 0.1.4).'),
-  changelog: z.string().min(1, 'Descreva o que mudou.')
+  changelog: z.string().min(1, 'Descreva o que mudou.'),
+  announce: z.boolean()
 })
 
 type PublishFormValues = z.infer<typeof publishSchema>
@@ -60,7 +62,9 @@ export function ContentVersionDialog () {
 
   const form = useForm<PublishFormValues>({
     resolver: zodResolver(publishSchema),
-    defaultValues: { locale: LOCALES[0], version: '0.0.1', changelog: '' }
+    // Avisar ligado por padrão: a maior parte das publicações é novidade para o
+    // aluno. Correções pequenas desligam na hora de publicar.
+    defaultValues: { locale: LOCALES[0], version: '0.0.1', changelog: '', announce: true }
   })
 
   // `useWatch` e nao `form.watch`: o React Compiler nao consegue memoizar o
@@ -83,7 +87,7 @@ export function ContentVersionDialog () {
 
   async function onSubmit (values: PublishFormValues) {
     await publish.mutateAsync(values)
-    form.reset({ locale: values.locale, version: '', changelog: '' })
+    form.reset({ locale: values.locale, version: '', changelog: '', announce: true })
     setOpen(false)
   }
 
@@ -130,6 +134,11 @@ export function ContentVersionDialog () {
               </span>
               <code className="font-mono text-primary">{entry.version}</code>
               <span className="text-xs text-muted-foreground">{entry.releasedAt}</span>
+              {entry.announce && (
+                <span className="shrink-0 text-xs text-primary" title="Publicada com aviso aos alunos">
+                  com aviso
+                </span>
+              )}
               <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">
                 {entry.changelog}
               </span>
@@ -189,7 +198,29 @@ export function ContentVersionDialog () {
                       {...field}
                     />
                   </FormControl>
+                  <p className="text-xs text-muted-foreground">
+                    Escreva para o aluno: com o aviso ligado, este é o texto que aparece no app.
+                  </p>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="announce"
+              render={({ field }) => (
+                <FormItem className="flex items-start gap-2 space-y-0">
+                  <FormControl>
+                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                  </FormControl>
+                  <div>
+                    <FormLabel className="text-sm">Avisar os alunos</FormLabel>
+                    <p className="text-xs text-muted-foreground">
+                      Mostra o texto acima no aviso de "conteúdo atualizado" do app. Desligado, o
+                      conteúdo chega do mesmo jeito, só que em silêncio — bom para correções pequenas.
+                    </p>
+                  </div>
                 </FormItem>
               )}
             />

@@ -24,6 +24,10 @@ model content_version {
   version     String   @db.VarChar(20)
   changelog   String
   released_at DateTime @db.Date
+  /// Se o app deve mostrar esta publicação no aviso de "conteúdo atualizado".
+  /// Falso por padrão: uma publicação sem aviso continua sendo uma atualização
+  /// silenciosa, como era antes do aviso existir.
+  announce    Boolean  @default(false)
 }
 
 model app_version {
