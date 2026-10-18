@@ -13632,6 +13632,29 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete a caixa de mensagem: o nome "mensagem", usado no envio do formulário, e altura de 4 linhas.',
+            highlight: ['nome', '4 linhas'],
+            codeLanguage: 'HTML',
+            code: '<textarea\n  ___="mensagem"\n  ___="4"\n></textarea>',
+            blocks: ['name', 'rows', 'id', 'cols'],
+            solution: ['name', 'rows'],
+            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "mensagem") { __codap_report(false, "O nome usado no envio vai no atributo name."); return; }\n  __codap_report(ta.rows === 4, "A altura em linhas vai no atributo rows.");\n})();'
+          },
+          en: {
+            question: 'Complete the message box: the name "message", used when the form is sent, and a height of 4 lines.',
+            highlight: ['name', '4 lines'],
+            codeLanguage: 'HTML',
+            code: '<textarea\n  ___="message"\n  ___="4"\n></textarea>',
+            blocks: ['name', 'rows', 'id', 'cols'],
+            solution: ['name', 'rows'],
+            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "message") { __codap_report(false, "The name used when sending goes in the name attribute."); return; }\n  __codap_report(ta.rows === 4, "The height in lines goes in the rows attribute.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -13884,6 +13907,29 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<input type="___"\n  name="extras">',
             answers: ['checkbox'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete para que P e M sejam de escolha única: marcar uma opção desmarca a outra.',
+            highlight: ['escolha única'],
+            codeLanguage: 'HTML',
+            code: '<input type="radio"\n  name="tamanho" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
+            blocks: ['tamanho', 'm', 'p', 'radio'],
+            solution: ['tamanho'],
+            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Marcar M precisa desmarcar P: as duas opções precisam do mesmo name.");\n})();'
+          },
+          en: {
+            question: 'Complete it so P and M are single choice: checking one option unchecks the other.',
+            highlight: ['single choice'],
+            codeLanguage: 'HTML',
+            code: '<input type="radio"\n  name="size" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
+            blocks: ['size', 'm', 'p', 'radio'],
+            solution: ['size'],
+            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Checking M needs to uncheck P: both options need the same name.");\n})();'
           }
         }
       }
@@ -14206,6 +14252,31 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '<table>\n  <___>\n    <tr>...</tr>\n  </thead>\n</table>',
             answers: ['thead'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça o cabeçalho "Contato" ocupar as duas colunas da tabela.',
+            highlight: ['duas colunas'],
+            codeLanguage: 'HTML',
+            code: '<table>\n  <tr>\n    <th ___="2">\n      Contato\n    </th>\n  </tr>\n  <tr>\n    <td>E-mail</td>\n    <td>ana@ex.com</td>\n  </tr>\n</table>',
+            blocks: ['colspan', 'rowspan', 'span', 'cols'],
+            solution: ['colspan'],
+            css: 'th, td {\n  border: 1px solid #999;\n  padding: 4px;\n}',
+            checkScript: '(function () {\n  var th = document.querySelector("th");\n  var tds = document.querySelectorAll("td");\n  var largura = tds[0].getBoundingClientRect().width + tds[1].getBoundingClientRect().width;\n  __codap_report(th.getBoundingClientRect().width >= largura - 2, "O cabeçalho precisa se estender pelas 2 colunas.");\n})();'
+          },
+          en: {
+            question: 'Make the "Contact" header span both columns of the table.',
+            highlight: ['both columns'],
+            codeLanguage: 'HTML',
+            code: '<table>\n  <tr>\n    <th ___="2">\n      Contact\n    </th>\n  </tr>\n  <tr>\n    <td>Email</td>\n    <td>ana@ex.com</td>\n  </tr>\n</table>',
+            blocks: ['colspan', 'rowspan', 'span', 'cols'],
+            solution: ['colspan'],
+            css: 'th, td {\n  border: 1px solid #999;\n  padding: 4px;\n}',
+            checkScript: '(function () {\n  var th = document.querySelector("th");\n  var tds = document.querySelectorAll("td");\n  var largura = tds[0].getBoundingClientRect().width + tds[1].getBoundingClientRect().width;\n  __codap_report(th.getBoundingClientRect().width >= largura - 2, "The header needs to stretch across the 2 columns.");\n})();'
           }
         }
       }
@@ -17181,6 +17252,31 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça cada .item ganhar uma seta "→ " antes do texto, sem mudar o HTML.',
+            highlight: ['antes do texto'],
+            codeLanguage: 'CSS',
+            code: '.item::___ {\n  ___: "→ ";\n}',
+            blocks: ['before', 'after', 'content', 'text'],
+            solution: ['before', 'content'],
+            html: '<p class="item">Início</p>\n<p class="item">Contato</p>',
+            checkScript: '(function () {\n  var item = document.querySelector(".item");\n  var antes = getComputedStyle(item, "::before").content;\n  __codap_report(antes === \'"→ "\', "A seta precisa aparecer antes do texto de cada item.");\n})();'
+          },
+          en: {
+            question: 'Give each .item an arrow "→ " before its text, without changing the HTML.',
+            highlight: ['before its text'],
+            codeLanguage: 'CSS',
+            code: '.item::___ {\n  ___: "→ ";\n}',
+            blocks: ['before', 'after', 'content', 'text'],
+            solution: ['before', 'content'],
+            html: '<p class="item">Home</p>\n<p class="item">Contact</p>',
+            checkScript: '(function () {\n  var item = document.querySelector(".item");\n  var antes = getComputedStyle(item, "::before").content;\n  __codap_report(antes === \'"→ "\', "The arrow needs to show up before the text of each item.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -17384,6 +17480,31 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Crie a variável --cor com o azul #2563eb e use-a no fundo do botão.',
+            highlight: ['--cor'],
+            codeLanguage: 'CSS',
+            code: ':root {\n  ___: #2563eb;\n}\n\nbutton {\n  background-color:\n    ___(--cor);\n  color: white;\n}',
+            blocks: ['--cor', 'cor', 'var', 'calc'],
+            solution: ['--cor', 'var'],
+            html: '<button>Enviar</button>',
+            checkScript: '(function () {\n  var botao = document.querySelector("button");\n  var root = document.documentElement;\n  var antes = getComputedStyle(botao).backgroundColor;\n  root.style.setProperty("--cor", "rgb(255, 0, 0)");\n  var depois = getComputedStyle(botao).backgroundColor;\n  root.style.removeProperty("--cor");\n  if (antes !== "rgb(37, 99, 235)") { __codap_report(false, "O fundo do botão precisa ficar azul #2563eb."); return; }\n  __codap_report(depois === "rgb(255, 0, 0)", "O fundo precisa vir da variável --cor, lida com var().");\n})();'
+          },
+          en: {
+            question: 'Create the variable --color with the blue #2563eb and use it for the button background.',
+            highlight: ['--color'],
+            codeLanguage: 'CSS',
+            code: ':root {\n  ___: #2563eb;\n}\n\nbutton {\n  background-color:\n    ___(--color);\n  color: white;\n}',
+            blocks: ['--color', 'color', 'var', 'calc'],
+            solution: ['--color', 'var'],
+            html: '<button>Send</button>',
+            checkScript: '(function () {\n  var botao = document.querySelector("button");\n  var root = document.documentElement;\n  var antes = getComputedStyle(botao).backgroundColor;\n  root.style.setProperty("--color", "rgb(255, 0, 0)");\n  var depois = getComputedStyle(botao).backgroundColor;\n  root.style.removeProperty("--color");\n  if (antes !== "rgb(37, 99, 235)") { __codap_report(false, "The button background needs to be blue #2563eb."); return; }\n  __codap_report(depois === "rgb(255, 0, 0)", "The background needs to come from the --color variable, read with var().");\n})();'
+          }
+        }
       }
     ]
   },
@@ -17575,6 +17696,31 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
             answers: ['space-between'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'No menu, deixe "Logo" encostado na esquerda e "Entrar" encostado na direita, na mesma linha.',
+            highlight: ['esquerda', 'direita'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            blocks: ['flex', 'grid', 'space-between', 'center'],
+            solution: ['flex', 'space-between'],
+            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Entrar</span>\n</nav>',
+            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Os dois precisam ficar na mesma linha, um em cada ponta do menu.");\n})();'
+          },
+          en: {
+            question: 'In the menu, put "Logo" against the left edge and "Sign in" against the right edge, on the same line.',
+            highlight: ['left edge', 'right edge'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            blocks: ['flex', 'grid', 'space-between', 'center'],
+            solution: ['flex', 'space-between'],
+            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Sign in</span>\n</nav>',
+            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Both need to be on the same line, one at each end of the menu.");\n})();'
           }
         }
       }
@@ -20081,6 +20227,29 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             answers: ['finally']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça sacar lançar um erro "Sem saldo" quando o valor passar do saldo, e mostre no console a mensagem do erro capturado.',
+            highlight: ['lançar', 'mensagem'],
+            codeLanguage: 'JavaScript',
+            code: 'function sacar(\n  saldo,\n  valor\n) {\n  if (valor > saldo) {\n    ___ new Error(\n      "Sem saldo"\n    );\n  }\n  return saldo - valor;\n}\n\ntry {\n  console.log(\n    sacar(50, 80)\n  );\n} catch (erro) {\n  console.log(erro.___);\n}',
+            blocks: ['throw', 'return', 'message', 'name'],
+            solution: ['throw', 'message'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var normal = false;\n  try { normal = sacar(100, 30) === 70; } catch (x) {}\n  __codap_report(last === "Sem saldo" && normal, "O console precisa mostrar \\"Sem saldo\\", a mensagem do erro lançado.");\n})();'
+          },
+          en: {
+            question: 'Make withdraw throw a "No balance" error when the amount is over the balance, and show the caught error\'s message in the console.',
+            highlight: ['throw', 'message'],
+            codeLanguage: 'JavaScript',
+            code: 'function withdraw(\n  balance,\n  amount\n) {\n  if (amount > balance) {\n    ___ new Error(\n      "No balance"\n    );\n  }\n  return balance - amount;\n}\n\ntry {\n  console.log(\n    withdraw(50, 80)\n  );\n} catch (error) {\n  console.log(error.___);\n}',
+            blocks: ['throw', 'return', 'message', 'name'],
+            solution: ['throw', 'message'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var normal = false;\n  try { normal = withdraw(100, 30) === 70; } catch (x) {}\n  __codap_report(last === "No balance" && normal, "The console needs to show \\"No balance\\", the message of the thrown error.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -20485,6 +20654,29 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             answers: ['console']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça aplicar receber uma função de callback chamada acao e usá-la em cada item. Passe a ela uma função que multiplica por 10: o console deve mostrar [10,20].',
+            highlight: ['callback', 'multiplica'],
+            codeLanguage: 'JavaScript',
+            code: 'function aplicar(\n  lista,\n  ___\n) {\n  const saida = [];\n  for (const item of lista) {\n    saida.push(acao(item));\n  }\n  return saida;\n}\n\nconsole.log(\n  aplicar([1, 2], ___)\n);',
+            blocks: ['acao', 'item', 'n => n * 10', 'n * 10'],
+            solution: ['acao', 'n => n * 10'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var outro = false;\n  try { outro = JSON.stringify(aplicar([3], function (x) { return x + 1; })) === "[4]"; } catch (x) {}\n  __codap_report(last === "[10,20]" && outro, "aplicar precisa receber o callback acao, e o console precisa mostrar [10,20].");\n})();'
+          },
+          en: {
+            question: 'Make apply receive a callback function called action and use it on each item. Pass it a function that multiplies by 10: the console must show [10,20].',
+            highlight: ['callback', 'multiplies'],
+            codeLanguage: 'JavaScript',
+            code: 'function apply(\n  list,\n  ___\n) {\n  const result = [];\n  for (const item of list) {\n    result.push(action(item));\n  }\n  return result;\n}\n\nconsole.log(\n  apply([1, 2], ___)\n);',
+            blocks: ['action', 'item', 'n => n * 10', 'n * 10'],
+            solution: ['action', 'n => n * 10'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var outro = false;\n  try { outro = JSON.stringify(apply([3], function (x) { return x + 1; })) === "[4]"; } catch (x) {}\n  __codap_report(last === "[10,20]" && outro, "apply needs to receive the action callback, and the console needs to show [10,20].");\n})();'
+          }
+        }
       }
     ]
   },
@@ -20747,6 +20939,29 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'new Promise((resolve) =>\n  ___("ready")\n).then(console.log);',
             answers: ['resolve']
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Encadeie a promessa: primeiro dobre o valor e depois mostre o resultado, 42, no console.',
+            highlight: ['Encadeie', 'dobre'],
+            codeLanguage: 'JavaScript',
+            code: 'const promessa =\n  Promise.resolve(21);\n\npromessa\n  .___(n => n * 2)\n  .___(n => console.log(n));',
+            blocks: ['then', 'then', 'catch', 'finally'],
+            solution: ['then', 'then'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "42", "O console precisa mostrar 42: dobre o valor num passo e mostre no seguinte.");\n})();'
+          },
+          en: {
+            question: 'Chain the promise: first double the value, then show the result, 42, in the console.',
+            highlight: ['Chain', 'double'],
+            codeLanguage: 'JavaScript',
+            code: 'const promise =\n  Promise.resolve(21);\n\npromise\n  .___(n => n * 2)\n  .___(n => console.log(n));',
+            blocks: ['then', 'then', 'catch', 'finally'],
+            solution: ['then', 'then'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "42", "The console needs to show 42: double the value in one step and show it in the next.");\n})();'
           }
         }
       }
@@ -23210,6 +23425,31 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             answers: ['dataset']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'O JavaScript de apoio lê botao.dataset.productId. Complete o atributo para o console mostrar 42.',
+            highlight: ['dataset'],
+            codeLanguage: 'HTML',
+            code: '<button\n  data-___="42"\n>\n  Comprar\n</button>',
+            blocks: ['product-id', 'productId', 'id', 'product_id'],
+            solution: ['product-id'],
+            js: 'const botao =\n  document.querySelector("button");\n\nconsole.log(\n  botao.dataset.productId\n);',
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "42", "O console precisa mostrar 42. Lembre: data-product-id vira dataset.productId.");\n})();'
+          },
+          en: {
+            question: 'The support JavaScript reads button.dataset.productId. Complete the attribute so the console shows 42.',
+            highlight: ['dataset'],
+            codeLanguage: 'HTML',
+            code: '<button\n  data-___="42"\n>\n  Buy\n</button>',
+            blocks: ['product-id', 'productId', 'id', 'product_id'],
+            solution: ['product-id'],
+            js: 'const button =\n  document.querySelector("button");\n\nconsole.log(\n  button.dataset.productId\n);',
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "42", "The console needs to show 42. Remember: data-product-id becomes dataset.productId.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -23401,6 +23641,31 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<div ___="true">\n  Drag me\n</div>',
             answers: ['draggable'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Clone o conteúdo do <template> e coloque a cópia dentro da lista: "Novo item" deve aparecer na página.',
+            highlight: ['Clone'],
+            codeLanguage: 'JavaScript',
+            code: 'const modelo = document\n  .querySelector("#modelo");\nconst lista = document\n  .querySelector("#lista");\n\nconst copia = modelo.___\n  .cloneNode(true);\nlista.___(copia);',
+            blocks: ['content', 'appendChild', 'innerHTML', 'children', 'remove'],
+            solution: ['content', 'appendChild'],
+            html: '<template id="modelo">\n  <li>Novo item</li>\n</template>\n<ul id="lista"></ul>',
+            checkScript: '(function () {\n  var itens = document.querySelectorAll("#lista li");\n  __codap_report(itens.length === 1 && itens[0].textContent.trim() === "Novo item", "A lista precisa ganhar o item \\"Novo item\\" copiado do template.");\n})();'
+          },
+          en: {
+            question: 'Clone the content of the <template> and put the copy inside the list: "New item" must show up on the page.',
+            highlight: ['Clone'],
+            codeLanguage: 'JavaScript',
+            code: 'const model = document\n  .querySelector("#model");\nconst list = document\n  .querySelector("#list");\n\nconst copy = model.___\n  .cloneNode(true);\nlist.___(copy);',
+            blocks: ['content', 'appendChild', 'innerHTML', 'children', 'remove'],
+            solution: ['content', 'appendChild'],
+            html: '<template id="model">\n  <li>New item</li>\n</template>\n<ul id="list"></ul>',
+            checkScript: '(function () {\n  var itens = document.querySelectorAll("#list li");\n  __codap_report(itens.length === 1 && itens[0].textContent.trim() === "New item", "The list needs to get the \\"New item\\" item copied from the template.");\n})();'
           }
         }
       }
@@ -23598,6 +23863,29 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Coloque a div na navegação por Tab, na posição natural da página, e tire o botão dessa navegação.',
+            highlight: ['posição natural', 'tire'],
+            codeLanguage: 'HTML',
+            code: '<div tabindex="___">\n  Cartão\n</div>\n<button tabindex="___">\n  Oculto\n</button>',
+            blocks: ['0', '-1', '1', 'true'],
+            solution: ['0', '-1'],
+            checkScript: '(function () {\n  var div = document.querySelector("div");\n  var botao = document.querySelector("button");\n  if (div.tabIndex !== 0) { __codap_report(false, "A div precisa entrar na ordem natural do Tab (tabindex 0)."); return; }\n  __codap_report(botao.tabIndex === -1, "O botão precisa sair da navegação por Tab (tabindex -1).");\n})();'
+          },
+          en: {
+            question: 'Put the div in the Tab navigation, in the natural order of the page, and take the button out of that navigation.',
+            highlight: ['natural order', 'take the button out'],
+            codeLanguage: 'HTML',
+            code: '<div tabindex="___">\n  Card\n</div>\n<button tabindex="___">\n  Hidden\n</button>',
+            blocks: ['0', '-1', '1', 'true'],
+            solution: ['0', '-1'],
+            checkScript: '(function () {\n  var div = document.querySelector("div");\n  var botao = document.querySelector("button");\n  if (div.tabIndex !== 0) { __codap_report(false, "The div needs to join the natural Tab order (tabindex 0)."); return; }\n  __codap_report(botao.tabIndex === -1, "The button needs to leave the Tab navigation (tabindex -1).");\n})();'
+          }
+        }
       }
     ]
   },
@@ -23787,6 +24075,29 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<___>\n  <a href="/">Home</a>\n</nav>',
             answers: ['nav'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Ligue o rótulo "Buscar" ao campo: tocar no texto do rótulo deve levar o foco para o campo.',
+            highlight: ['Ligue'],
+            codeLanguage: 'HTML',
+            code: '<main>\n  <label ___="busca">\n    Buscar\n  </label>\n  <input ___="busca">\n</main>',
+            blocks: ['for', 'id', 'name', 'href'],
+            solution: ['for', 'id'],
+            checkScript: '(function () {\n  var label = document.querySelector("label");\n  var campo = document.querySelector("input");\n  label.click();\n  var foco = document.activeElement === campo;\n  campo.blur();\n  __codap_report(foco, "Tocar no rótulo precisa focar o campo: o for do label e o id do input precisam ter o mesmo valor.");\n})();'
+          },
+          en: {
+            question: 'Link the "Search" label to the field: tapping the label text must move the focus to the field.',
+            highlight: ['Link'],
+            codeLanguage: 'HTML',
+            code: '<main>\n  <label ___="search">\n    Search\n  </label>\n  <input ___="search">\n</main>',
+            blocks: ['for', 'id', 'name', 'href'],
+            solution: ['for', 'id'],
+            checkScript: '(function () {\n  var label = document.querySelector("label");\n  var campo = document.querySelector("input");\n  label.click();\n  var foco = document.activeElement === campo;\n  campo.blur();\n  __codap_report(foco, "Tapping the label needs to focus the field: the label for and the input id need the same value.");\n})();'
           }
         }
       }
@@ -26694,6 +27005,31 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Deixe a .thumb com a altura calculada pela proporção 16 por 9, sem escrever a altura.',
+            highlight: ['proporção'],
+            codeLanguage: 'CSS',
+            code: '.thumb {\n  width: 200px;\n  ___: 16 / 9;\n  background: #cfe8ff;\n}',
+            blocks: ['aspect-ratio', 'ratio', 'height', 'object-fit'],
+            solution: ['aspect-ratio'],
+            html: '<div class="thumb"></div>',
+            checkScript: '(function () {\n  var r = document.querySelector(".thumb").getBoundingClientRect();\n  __codap_report(Math.abs(r.height - 112.5) < 1, "Com 200px de largura e proporção 16:9, a altura precisa dar 112,5px.");\n})();'
+          },
+          en: {
+            question: 'Give .thumb a height calculated from the 16 by 9 ratio, without writing the height.',
+            highlight: ['ratio'],
+            codeLanguage: 'CSS',
+            code: '.thumb {\n  width: 200px;\n  ___: 16 / 9;\n  background: #cfe8ff;\n}',
+            blocks: ['aspect-ratio', 'ratio', 'height', 'object-fit'],
+            solution: ['aspect-ratio'],
+            html: '<div class="thumb"></div>',
+            checkScript: '(function () {\n  var r = document.querySelector(".thumb").getBoundingClientRect();\n  __codap_report(Math.abs(r.height - 112.5) < 1, "With a 200px width and a 16:9 ratio, the height needs to be 112.5px.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -26889,6 +27225,31 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ignoreCase: true
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Pinte a caixa de seleção marcada de verde (green), mantendo o componente nativo do navegador.',
+            highlight: ['verde', 'nativo'],
+            codeLanguage: 'CSS',
+            code: 'input[type="checkbox"] {\n  ___: green;\n}',
+            blocks: ['accent-color', 'color', 'background', 'border-color'],
+            solution: ['accent-color'],
+            html: '<label>\n  <input type="checkbox" checked>\n  Aceito os termos\n</label>',
+            checkScript: '(function () {\n  var cb = document.querySelector("input");\n  __codap_report(getComputedStyle(cb).accentColor === "rgb(0, 128, 0)", "A cor de destaque da caixa de seleção precisa ser verde.");\n})();'
+          },
+          en: {
+            question: 'Paint the checked checkbox green, keeping the browser\'s native component.',
+            highlight: ['green', 'native'],
+            codeLanguage: 'CSS',
+            code: 'input[type="checkbox"] {\n  ___: green;\n}',
+            blocks: ['accent-color', 'color', 'background', 'border-color'],
+            solution: ['accent-color'],
+            html: '<label>\n  <input type="checkbox" checked>\n  I accept the terms\n</label>',
+            checkScript: '(function () {\n  var cb = document.querySelector("input");\n  __codap_report(getComputedStyle(cb).accentColor === "rgb(0, 128, 0)", "The checkbox accent color needs to be green.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -27061,6 +27422,31 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'button:focus {\n  outline: ___;\n}',
             answers: ['none'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Quando o botão receber foco pelo teclado ou pelo toque, mostre um contorno sólido de 3px azul (#1d4ed8).',
+            highlight: ['receber foco', 'sólido'],
+            codeLanguage: 'CSS',
+            code: 'button:___ {\n  outline: 3px ___ #1d4ed8;\n}',
+            blocks: ['focus', 'hover', 'solid', 'none'],
+            solution: ['focus', 'solid'],
+            html: '<button>Salvar</button>',
+            checkScript: '(function () {\n  // :focus lido das regras escritas: a prévia não recebe foco de verdade.\n  var ok = false;\n  for (var s = 0; s < document.styleSheets.length; s++) {\n    var regras = document.styleSheets[s].cssRules;\n    for (var r = 0; r < regras.length; r++) {\n      var regra = regras[r];\n      if (regra.selectorText && regra.selectorText.replace(/\\s/g, "") === "button:focus" &&\n          regra.style.outlineStyle === "solid" && regra.style.outlineWidth === "3px") ok = true;\n    }\n  }\n  __codap_report(ok, "No estado de foco (:focus), o botão precisa de um contorno sólido de 3px.");\n})();'
+          },
+          en: {
+            question: 'When the button gets focus from the keyboard or a tap, show a solid 3px blue (#1d4ed8) outline.',
+            highlight: ['gets focus', 'solid'],
+            codeLanguage: 'CSS',
+            code: 'button:___ {\n  outline: 3px ___ #1d4ed8;\n}',
+            blocks: ['focus', 'hover', 'solid', 'none'],
+            solution: ['focus', 'solid'],
+            html: '<button>Save</button>',
+            checkScript: '(function () {\n  // :focus lido das regras escritas: a prévia não recebe foco de verdade.\n  var ok = false;\n  for (var s = 0; s < document.styleSheets.length; s++) {\n    var regras = document.styleSheets[s].cssRules;\n    for (var r = 0; r < regras.length; r++) {\n      var regra = regras[r];\n      if (regra.selectorText && regra.selectorText.replace(/\\s/g, "") === "button:focus" &&\n          regra.style.outlineStyle === "solid" && regra.style.outlineWidth === "3px") ok = true;\n    }\n  }\n  __codap_report(ok, "In the focus state (:focus), the button needs a solid 3px outline.");\n})();'
           }
         }
       }
@@ -27424,6 +27810,31 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.text {\n  color: #222;\n  ___: #fff;\n}',
             answers: ['background', 'background-color'],
             ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Escolha a cor do texto e a do fundo do aviso para que o contraste entre eles seja de pelo menos 4,5:1, o mínimo recomendado para texto comum.',
+            highlight: ['contraste'],
+            codeLanguage: 'CSS',
+            code: '.aviso {\n  color: ___;\n  background: ___;\n  padding: 8px;\n}',
+            blocks: ['#222', '#fff', '#777', '#999', '#ccc'],
+            solution: ['#222', '#fff'],
+            html: '<p class="aviso">Sua sessão vai expirar.</p>',
+            checkScript: '(function () {\n  function luz(cor) {\n    var c = cor.match(/\\d+/g).slice(0, 3).map(function (v) {\n      v = v / 255;\n      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);\n    });\n    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];\n  }\n  var st = getComputedStyle(document.querySelector(".aviso"));\n  var a = luz(st.color), b = luz(st.backgroundColor);\n  var razao = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);\n  var texto = razao.toFixed(2).replace(".", ",");\n  __codap_report(razao >= 4.5, "Contraste atual: " + texto + ":1. Precisa de pelo menos 4,5:1.");\n})();'
+          },
+          en: {
+            question: 'Pick the text color and the background color of the notice so the contrast between them is at least 4.5:1, the recommended minimum for regular text.',
+            highlight: ['contrast'],
+            codeLanguage: 'CSS',
+            code: '.aviso {\n  color: ___;\n  background: ___;\n  padding: 8px;\n}',
+            blocks: ['#222', '#fff', '#777', '#999', '#ccc'],
+            solution: ['#222', '#fff'],
+            html: '<p class="aviso">Your session will expire.</p>',
+            checkScript: '(function () {\n  function luz(cor) {\n    var c = cor.match(/\\d+/g).slice(0, 3).map(function (v) {\n      v = v / 255;\n      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);\n    });\n    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];\n  }\n  var st = getComputedStyle(document.querySelector(".aviso"));\n  var a = luz(st.color), b = luz(st.backgroundColor);\n  var razao = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);\n  var texto = razao.toFixed(2);\n  __codap_report(razao >= 4.5, "Current contrast: " + texto + ":1. It needs at least 4.5:1.");\n})();'
           }
         }
       }
@@ -29601,6 +30012,29 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             answers: ['10']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete as chamadas para o console mostrar 20 10: o objeto muda dentro da função, o número passado não.',
+            highlight: ['objeto muda'],
+            codeLanguage: 'JavaScript',
+            code: 'function encarecer(p) {\n  p.preco *= 2;\n}\n\nfunction dobrar(n) {\n  n *= 2;\n}\n\nconst item = { preco: 10 };\nlet total = 10;\nencarecer(___);\ndobrar(___);\nconsole.log(\n  item.preco,\n  total\n);',
+            blocks: ['item', 'total', 'item.preco', '10'],
+            solution: ['item', 'total'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "20 10", "O console precisa mostrar 20 10.");\n})();'
+          },
+          en: {
+            question: 'Complete the calls so the console shows 20 10: the object changes inside the function, the number passed does not.',
+            highlight: ['object changes'],
+            codeLanguage: 'JavaScript',
+            code: 'function raise(p) {\n  p.price *= 2;\n}\n\nfunction double(n) {\n  n *= 2;\n}\n\nconst item = { price: 10 };\nlet total = 10;\nraise(___);\ndouble(___);\nconsole.log(\n  item.price,\n  total\n);',
+            blocks: ['item', 'total', 'item.price', '10'],
+            solution: ['item', 'total'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "20 10", "The console needs to show 20 10.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -29794,6 +30228,29 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'const o = { n: { c: "SP" } };\nconst c = { ...o };\nc.n.c = "RJ";\nconsole.log(o.n.c);\n// output: ___',
             answers: ['RJ']
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça uma cópia em que mudar copia.tags não altere o original: o console deve continuar mostrando ["js"].',
+            highlight: ['não altere'],
+            codeLanguage: 'JavaScript',
+            code: 'const original = {\n  nome: "Ana",\n  tags: ["js"]\n};\n\nconst copia =\n  ___;\ncopia.tags.push("css");\n\nconsole.log(original.tags);',
+            blocks: ['structuredClone(original)', '{ ...original }', 'original', 'Object.assign({}, original)'],
+            solution: ['structuredClone(original)'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === \'["js"]\', "O original mudou junto com a cópia: a lista tags continuou compartilhada.");\n})();'
+          },
+          en: {
+            question: 'Make a copy where changing copy.tags does not change the original: the console must still show ["js"].',
+            highlight: ['does not change'],
+            codeLanguage: 'JavaScript',
+            code: 'const original = {\n  name: "Ana",\n  tags: ["js"]\n};\n\nconst copy =\n  ___;\ncopy.tags.push("css");\n\nconsole.log(original.tags);',
+            blocks: ['structuredClone(original)', '{ ...original }', 'original', 'Object.assign({}, original)'],
+            solution: ['structuredClone(original)'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === \'["js"]\', "The original changed together with the copy: the tags list was still shared.");\n})();'
           }
         }
       }
@@ -29999,6 +30456,29 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             answers: ['length']
           }
         }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Faça incluir devolver um array novo com o item no fim, sem mudar o original: o console deve mostrar ["pão"] ["pão","leite"].',
+            highlight: ['array novo', 'sem mudar'],
+            codeLanguage: 'JavaScript',
+            code: 'function incluir(\n  lista,\n  item\n) {\n  return ___;\n}\n\nconst carrinho = ["pão"];\nconst novo = incluir(\n  carrinho, "leite"\n);\nconsole.log(carrinho, novo);',
+            blocks: ['[...lista, item]', 'lista.push(item)', '[lista, item]', 'lista'],
+            solution: ['[...lista, item]'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var outro = false;\n  try {\n    var base = [1];\n    var r = incluir(base, 2);\n    outro = base.length === 1 && r !== base && JSON.stringify(r) === "[1,2]";\n  } catch (x) {}\n  __codap_report(last === "[\\"pão\\"] [\\"pão\\",\\"leite\\"]" && outro, "incluir precisa devolver um array novo e deixar o original como estava.");\n})();'
+          },
+          en: {
+            question: 'Make append return a new array with the item at the end, without changing the original: the console must show ["bread"] ["bread","milk"].',
+            highlight: ['new array', 'without changing'],
+            codeLanguage: 'JavaScript',
+            code: 'function append(\n  list,\n  item\n) {\n  return ___;\n}\n\nconst cart = ["bread"];\nconst result = append(\n  cart, "milk"\n);\nconsole.log(cart, result);',
+            blocks: ['[...list, item]', 'list.push(item)', '[list, item]', 'list'],
+            solution: ['[...list, item]'],
+            checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  var outro = false;\n  try {\n    var base = [1];\n    var r = append(base, 2);\n    outro = base.length === 1 && r !== base && JSON.stringify(r) === "[1,2]";\n  } catch (x) {}\n  __codap_report(last === "[\\"bread\\"] [\\"bread\\",\\"milk\\"]" && outro, "append needs to return a new array and leave the original as it was.");\n})();'
+          }
+        }
       }
     ]
   },
@@ -30187,6 +30667,31 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'list.addEventListener(\n  "click",\n  e => console.log(\n    e.target.___)\n);',
             answers: ['textContent']
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Com um único listener na lista, mostre no #saida o texto do item tocado, inclusive de itens criados depois.',
+            highlight: ['único listener'],
+            codeLanguage: 'JavaScript',
+            code: 'const lista = document\n  .querySelector("#lista");\nconst saida = document\n  .querySelector("#saida");\n\nlista.___(\n  "click",\n  (e) => {\n    saida.textContent =\n      e.___.textContent;\n  }\n);',
+            blocks: ['addEventListener', 'removeEventListener', 'target', 'currentTarget'],
+            solution: ['addEventListener', 'target'],
+            html: '<ul id="lista">\n  <li>Café</li>\n  <li>Chá</li>\n</ul>\n<p id="saida">Toque em um item</p>',
+            checkScript: '(function () {\n  var lista = document.querySelector("#lista");\n  var saida = document.querySelector("#saida");\n  var antes = saida.textContent;\n  lista.children[1].click();\n  var segundo = saida.textContent.trim();\n  // Um item criado depois também precisa funcionar: é a vantagem da delegação.\n  var novo = document.createElement("li");\n  novo.textContent = "Suco";\n  lista.appendChild(novo);\n  novo.click();\n  var terceiro = saida.textContent.trim();\n  lista.removeChild(novo);\n  saida.textContent = antes;\n  __codap_report(segundo === "Chá" && terceiro === "Suco", "O #saida precisa mostrar o texto do item tocado, também nos itens novos.");\n})();'
+          },
+          en: {
+            question: 'With a single listener on the list, show the text of the tapped item in #output, including items created later.',
+            highlight: ['single listener'],
+            codeLanguage: 'JavaScript',
+            code: 'const list = document\n  .querySelector("#list");\nconst output = document\n  .querySelector("#output");\n\nlist.___(\n  "click",\n  (e) => {\n    output.textContent =\n      e.___.textContent;\n  }\n);',
+            blocks: ['addEventListener', 'removeEventListener', 'target', 'currentTarget'],
+            solution: ['addEventListener', 'target'],
+            html: '<ul id="list">\n  <li>Coffee</li>\n  <li>Tea</li>\n</ul>\n<p id="output">Tap an item</p>',
+            checkScript: '(function () {\n  var lista = document.querySelector("#list");\n  var saida = document.querySelector("#output");\n  var antes = saida.textContent;\n  lista.children[1].click();\n  var segundo = saida.textContent.trim();\n  // Um item criado depois também precisa funcionar: é a vantagem da delegação.\n  var novo = document.createElement("li");\n  novo.textContent = "Juice";\n  lista.appendChild(novo);\n  novo.click();\n  var terceiro = saida.textContent.trim();\n  lista.removeChild(novo);\n  saida.textContent = antes;\n  __codap_report(segundo === "Tea" && terceiro === "Juice", "#output needs to show the text of the tapped item, new items included.");\n})();'
           }
         }
       }
@@ -42673,6 +43178,31 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<div class="___">',
             answers: ['mt-4']
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'No Tailwind, a classe p-4 dá 1rem de espaçamento interno em todos os lados. Escreva o CSS equivalente para o .card.',
+            highlight: ['p-4', 'espaçamento interno'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: ___;\n  background: #cfe8ff;\n}',
+            blocks: ['padding', 'margin', '1rem', '4px'],
+            solution: ['padding', '1rem'],
+            html: '<div class="card">Card</div>',
+            checkScript: '(function () {\n  var st = getComputedStyle(document.querySelector(".card"));\n  var ok = ["Top", "Right", "Bottom", "Left"].every(function (lado) { return st["padding" + lado] === "16px"; });\n  __codap_report(ok, "O .card precisa de 1rem (16px) de espaçamento interno em todos os lados, como o p-4.");\n})();'
+          },
+          en: {
+            question: 'In Tailwind, the p-4 class gives 1rem of inner spacing on every side. Write the equivalent CSS for .card.',
+            highlight: ['p-4', 'inner spacing'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: ___;\n  background: #cfe8ff;\n}',
+            blocks: ['padding', 'margin', '1rem', '4px'],
+            solution: ['padding', '1rem'],
+            html: '<div class="card">Card</div>',
+            checkScript: '(function () {\n  var st = getComputedStyle(document.querySelector(".card"));\n  var ok = ["Top", "Right", "Bottom", "Left"].every(function (lado) { return st["padding" + lado] === "16px"; });\n  __codap_report(ok, ".card needs 1rem (16px) of inner spacing on every side, like p-4.");\n})();'
           }
         }
       }
