@@ -2,6 +2,7 @@ import type {
   AdminLessonResponse,
   CodeBlankActivityContent,
   CodePlaygroundActivityContent,
+  CodeEditorActivityContent,
   ContentModule,
   FillBlankActivityContent,
   LocaleCode,
@@ -209,6 +210,31 @@ function buildCodePlayground (content: CodePlaygroundActivityContent): Partial<E
   }
 }
 
+function buildCodeEditor (content: CodeEditorActivityContent): Partial<ExportActivity> {
+  const notes: string[] = [
+    'Desafio do módulo: o aluno digita o código e executa; a correção é pelo comportamento (checkScript), requisito por requisito',
+    ...(content.hints ?? []).map((hint, index) => `Dica ${index + 1}: ${hint}`)
+  ]
+  const support = (['html', 'css', 'js'] as const)
+    .filter((key) => content[key])
+    .map((key) => ({ language: fenceLanguage(key === 'js' ? 'JavaScript' : key.toUpperCase()), code: content[key] as string }))
+  const language = fenceLanguage(content.codeLanguage ?? 'JavaScript')
+
+  return {
+    question: content.question,
+    paragraphs: [],
+    options: [],
+    highlight: content.highlight ?? [],
+    codeBlocks: [
+      ...(content.starterCode ? [{ language, code: `${content.codeLanguage === 'HTML' ? '<!-- código inicial -->' : '/* código inicial */'}\n${content.starterCode}` }] : []),
+      ...support,
+      { language, code: `${content.codeLanguage === 'HTML' ? '<!-- solução -->' : '/* solução */'}\n${content.solution ?? ''}` },
+      { language: 'js', code: `// checkScript\n${content.checkScript ?? ''}` }
+    ],
+    notes
+  }
+}
+
 function buildReorder (content: ReorderActivityContent): Partial<ExportActivity> {
   const notes: string[] = ['Montar o código: o aluno toca nas linhas, embaralhadas, na ordem certa']
   if (content.tutorial) {
@@ -283,6 +309,10 @@ function buildActivity (
 
   if (type === 'code_playground') {
     return { ...base, ...buildCodePlayground(content as CodePlaygroundActivityContent) }
+  }
+
+  if (type === 'code_editor') {
+    return { ...base, ...buildCodeEditor(content as CodeEditorActivityContent) }
   }
 
   if (type === 'reorder') {

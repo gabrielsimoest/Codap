@@ -340,6 +340,49 @@ step('o formulário do playground testa a solução no iframe', async (page) => 
   await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
 })
 
+/*
+ * Abre um `code_editor` (desafio do módulo) novo só até o formulário: o "Testar
+ * com a solução" precisa passar e mostrar a lista de requisitos do
+ * `__codap_check`, o "Testar o código inicial" precisa NÃO passar, e um HTML
+ * que termina no meio de uma tag ainda precisa receber veredito (a correção
+ * roda no DOMContentLoaded, fora do caminho do código do aluno). Nada é salvo.
+ */
+step('o formulário do desafio testa a solução e o código inicial', async (page) => {
+  await page.getByRole('button', { name: 'Nova atividade' }).click()
+  await page.locator('#activity-type').fill('code_editor')
+  await page.locator('#editor-solution').waitFor({ timeout: 10_000 })
+
+  await page.locator('#editor-question').fill('Crie um título "Oi" e um parágrafo "Tchau".')
+  await page.locator('#editor-starter').fill('<h1>Oi</h1>')
+  await page.locator('#editor-solution').fill('<h1>Oi</h1>\n<p>Tchau</p>')
+  await page.locator('#editor-hint-0').fill('Um parágrafo usa a tag <p>.')
+  await page.locator('#editor-check').fill(
+    '__codap_check("Um título Oi", !!document.querySelector("h1"));\n' +
+    'var p = document.querySelector("p");\n' +
+    '__codap_check("Um parágrafo Tchau", !!p && p.textContent === "Tchau");'
+  )
+
+  const verdict = page.getByTestId('editor-verdict')
+  await page.getByRole('button', { name: 'Testar com a solução' }).click()
+  await verdict.filter({ hasText: 'Passou' }).waitFor({ timeout: 10_000 })
+  const checks = page.getByTestId('editor-checks').locator('li')
+  if (await checks.count() !== 2) {
+    throw new Error(`esperava 2 requisitos na lista, vieram ${await checks.count()}`)
+  }
+
+  await page.getByRole('button', { name: 'Testar o código inicial' }).click()
+  await verdict.filter({ hasText: 'não passa, como esperado' }).waitFor({ timeout: 10_000 })
+  await page.getByTestId('editor-test').scrollIntoViewIfNeeded()
+  await page.screenshot(shot('14-desafio.png'))
+
+  await page.locator('#editor-solution').fill('<h1>Oi</h1>\n<p>Tchau</p>\n<input type="text"')
+  await page.getByRole('button', { name: 'Testar com a solução' }).click()
+  await verdict.filter({ hasText: 'Passou' }).waitFor({ timeout: 10_000 })
+
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
+})
+
 // --- passos de reorder aqui ---
 
 /*

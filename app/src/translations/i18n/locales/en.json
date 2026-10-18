@@ -55,6 +55,34 @@
 			"noReport": "The exercise could not check the result."
 		},
 
+		"editor": {
+			"badge": "Module challenge",
+			"codeTab": "Code",
+			"resultTab": "Result",
+			"placeholder": "Write your code here",
+			"reset": "Start over",
+			"resetTitle": "Start the code over?",
+			"resetMessage": "What you wrote will be replaced by the starting code.",
+			"cancel": "Cancel",
+			"runFirst": "Write the code and tap {{run}} to test it; then tap {{next}}.",
+			"passed": "Challenge complete!",
+			"passedBefore": "The previous version of the code passed.",
+			"stale": "You changed the code after running it. Tap {{run}} again.",
+			"requirements": "Requirements",
+			"console": "Console",
+			"help": "Need help?",
+			"helpIntro": "If you get stuck, hints unlock little by little, and finally the solution.",
+			"hint": "Hint {{n}}",
+			"showHint": "Show hint {{n}}",
+			"hintLocked": "Hint {{n}}: unlocks in {{time}} or after {{count}} more run(s) that don't pass.",
+			"solution": "Solution",
+			"showSolution": "Show the solution",
+			"solutionLocked": "Solution: unlocks in {{time}} or after {{count}} more run(s) that don't pass.",
+			"solutionNote": "Write the solution in the editor and run it to complete the challenge.",
+			"indent": "Insert indent",
+			"insert": "Insert {{symbol}}"
+		},
+
 		"codeSection": {
 			"consoleError": "Error",
 			"run": "Run",

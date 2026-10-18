@@ -10,8 +10,7 @@ import {
 	View,
 } from "react-native";
 import { useTranslation } from "react-i18next";
-import WebView, { WebViewMessageEvent } from "react-native-webview";
-import type { ShouldStartLoadRequest } from "react-native-webview/lib/WebViewTypes";
+import type { WebViewMessageEvent } from "react-native-webview";
 import { LessonHeader, Progressbar } from "./LessonHeader";
 import ResizableHighlighter from "../../../components/ResizableHighlighter";
 import ResizableText from "../../../components/ResizableText";
@@ -22,6 +21,7 @@ import CodeSnippet from "./CodeSnippet";
 import Icon from "../../../components/Icon";
 import DarkMode from "../../../theme/DarkMode";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
+import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./SandboxWebView";
 
 /** Marca de uma lacuna no `code` (a mesma do `code_blank` — ver o contrato). */
 const BLANK = "___";
@@ -37,17 +37,6 @@ const MAX_SHOWN_LINES = 40;
 
 type Language = "HTML" | "CSS" | "JavaScript";
 type RunStatus = "idle" | "running" | "done" | "timeout";
-
-interface ConsoleEntry {
-	type: "log" | "warn" | "error";
-	message: string;
-}
-
-interface RunResult {
-	entries: ConsoleEntry[];
-	/** `null` quando o checkScript não chamou `__codap_report`. */
-	result: { passed: boolean; message: string } | null;
-}
 
 interface Props {
 	question: string;
@@ -74,31 +63,6 @@ function shuffled<T>(items: readonly T[]): T[] {
 	return result;
 }
 
-export function parsePlaygroundMessage(data: string): RunResult | null {
-	try {
-		const parsed = JSON.parse(data);
-		if (parsed && parsed.codapTerminal === true && Array.isArray(parsed.entries)) {
-			const result =
-				parsed.result && typeof parsed.result.passed === "boolean"
-					? { passed: parsed.result.passed, message: String(parsed.result.message ?? "") }
-					: null;
-			return { entries: parsed.entries as ConsoleEntry[], result };
-		}
-	} catch {
-		// Mensagem malformada ou de outra origem: ignora.
-	}
-	return null;
-}
-
-/**
- * Só o próprio documento pode carregar: um link ou `location.href` no código do
- * aluno não tira a WebView do sandbox. O documento de `source={{ html }}` abre
- * como `about:blank` (ou `data:` em algumas versões do Android).
- */
-function onlyTheDocument(request: ShouldStartLoadRequest): boolean {
-	return request.url === "about:blank" || request.url.startsWith("data:");
-}
-
 /**
  * Playground guiado (Fase 3a do roadmap): o aluno completa as lacunas tocando
  * em blocos, como no `CodeBlankExercise`, e toca em "Executar" para rodar o
@@ -110,9 +74,9 @@ function onlyTheDocument(request: ShouldStartLoadRequest): boolean {
  * é preciso executar de novo antes de seguir.
  *
  * Hardening, já que agora o código é do aluno: CSP sem rede
- * (`blockNetwork`), navegação travada no próprio documento, sem acesso a
- * arquivo nem janelas novas, e um watchdog para laço infinito. Cada execução
- * remonta a WebView (`key`), sem estado sobrando da anterior.
+ * (`blockNetwork`), proteção de laços, a `SandboxWebView` (navegação travada
+ * no próprio documento, sem acesso a arquivo nem janelas novas) e um watchdog.
+ * Cada execução remonta a WebView (`key`), sem estado sobrando da anterior.
  */
 export default function CodePlaygroundExercise({
 	question,
@@ -145,7 +109,7 @@ export default function CodePlaygroundExercise({
 	);
 
 	const [status, setStatus] = useState<RunStatus>("idle");
-	const [run, setRun] = useState<RunResult | null>(null);
+	const [run, setRun] = useState<SandboxRunResult | null>(null);
 	const [runKey, setRunKey] = useState(0);
 	const watchdog = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -192,7 +156,7 @@ export default function CodePlaygroundExercise({
 	};
 
 	const handleMessage = (event: WebViewMessageEvent) => {
-		const received = parsePlaygroundMessage(event.nativeEvent.data);
+		const received = parseSandboxMessage(event.nativeEvent.data);
 		if (received === null) return;
 		clearWatchdog();
 		setRun(received);
@@ -337,21 +301,7 @@ export default function CodePlaygroundExercise({
 							]}
 							pointerEvents={showPreview ? "auto" : "none"}
 						>
-							<WebView
-								key={runKey}
-								source={{ html: documentHtml }}
-								originWhitelist={["about:*", "data:*"]}
-								onShouldStartLoadWithRequest={onlyTheDocument}
-								javaScriptEnabled={true}
-								javaScriptCanOpenWindowsAutomatically={false}
-								setSupportMultipleWindows={false}
-								allowFileAccess={false}
-								allowFileAccessFromFileURLs={false}
-								allowUniversalAccessFromFileURLs={false}
-								cacheEnabled={false}
-								onMessage={handleMessage}
-								nestedScrollEnabled
-							/>
+							<SandboxWebView key={runKey} html={documentHtml} onMessage={handleMessage} />
 						</View>
 					)}
 

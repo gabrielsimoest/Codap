@@ -1,5 +1,6 @@
 import type {
 	CodeBlankActivityContent,
+	CodeEditorActivityContent,
 	CodePlaygroundActivityContent,
 	FillBlankActivityContent,
 	MatchingActivityContent,
@@ -72,6 +73,11 @@ export type CodePlayground = {
 	lesson: CodePlaygroundActivityContent;
 };
 
+export type CodeEditor = {
+	type: "code_editor";
+	lesson: CodeEditorActivityContent;
+};
+
 export type FillBlank = {
 	type: "fill_blank";
 	lesson: FillBlankActivityContent;
@@ -97,6 +103,7 @@ export type Classes =
 	| Option
 	| CodeBlank
 	| CodePlayground
+	| CodeEditor
 	| FillBlank
 	| Reorder
 	| Matching

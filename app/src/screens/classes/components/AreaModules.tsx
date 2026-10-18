@@ -79,6 +79,9 @@ export default function AreaModules({ areaId }: Props) {
 										key={lesson.id}
 										title={lesson.name}
 										checked={completed.includes(lesson.id)}
+										// A lição de desafio do módulo ("Testando seus
+										// conhecimentos") é a que tem um `code_editor`.
+										challenge={lesson.activities.some((activity) => activity.type === "code_editor")}
 										onPress={() =>
 											navigation.navigate("Lesson", {
 												areaId,

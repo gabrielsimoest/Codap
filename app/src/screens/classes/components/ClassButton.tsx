@@ -10,12 +10,17 @@ interface Props {
 	title: string;
 	onPress: () => void;
 	checked?: boolean;
+	/** Lição de desafio do módulo: ganha um troféu e uma borda dourada. */
+	challenge?: boolean;
 }
+
+const CHALLENGE_GOLD = "#E0B04C";
 
 export default function ClassButton({
 	title,
 	onPress,
 	checked = false,
+	challenge = false,
 }: Props) {
 	const theme = useThemeStore((s) => s.theme);
 
@@ -40,9 +45,17 @@ export default function ClassButton({
 			/>
 			<ThemedTouchableOpacity
 				theme="primary"
-				style={styles.button}
+				style={[styles.button, challenge ? styles.challenge : null]}
 				onPress={onPress}
 			>
+				{challenge ? (
+					<Icon
+						type="ionicon"
+						name="trophy-outline"
+						color={CHALLENGE_GOLD}
+						size={22}
+					/>
+				) : null}
 				<ResizableText style={[styles.text]} defaultSize={20}>
 					{title}
 				</ResizableText>
@@ -60,8 +73,18 @@ const styles = StyleSheet.create({
 		width: "75%",
 		borderRadius: 10,
 		elevation: 2,
+		gap: 10,
+	},
+	// Respiro para o troféu e o título não encostarem na borda; com fonte
+	// maior, o título quebra em vez de vazar.
+	challenge: {
+		borderWidth: 2,
+		borderColor: CHALLENGE_GOLD,
+		paddingHorizontal: 12,
 	},
 	text: {
 		fontFamily: "Roboto",
+		flexShrink: 1,
+		textAlign: "center",
 	},
 });

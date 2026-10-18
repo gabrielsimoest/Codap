@@ -119,6 +119,9 @@ const CODE_PLAYGROUND_FIELD_ORDER = [
   'question', 'highlight', 'codeLanguage', 'code', 'blocks', 'solution', 'html', 'css', 'js', 'checkScript', 'tutorial',
   'pool', 'draw'
 ]
+const CODE_EDITOR_FIELD_ORDER = [
+  'question', 'highlight', 'codeLanguage', 'starterCode', 'html', 'css', 'js', 'checkScript', 'hints', 'solution'
+]
 const FILL_BLANK_FIELD_ORDER = [
   'question', 'highlight', 'codeLanguage', 'code', 'answers', 'ignoreCase', 'tutorial',
   'pool', 'draw'
@@ -133,7 +136,7 @@ const MATCHING_FIELD_ORDER = [
 ]
 /** Ordem candidata, na ordem em que deve ser testada — a primeira que "cobre" exatamente as chaves do objeto vence. */
 const FIELD_ORDER_TABLE = [['name', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, OPTION_FIELD_ORDER, CODE_BLANK_FIELD_ORDER,
-  FILL_BLANK_FIELD_ORDER, CODE_PLAYGROUND_FIELD_ORDER, REORDER_FIELD_ORDER, MATCHING_FIELD_ORDER, ['left', 'right']]
+  FILL_BLANK_FIELD_ORDER, CODE_PLAYGROUND_FIELD_ORDER, CODE_EDITOR_FIELD_ORDER, REORDER_FIELD_ORDER, MATCHING_FIELD_ORDER, ['left', 'right']]
 
 function orderedKeys (obj: Record<string, unknown>): string[] {
   const objKeys = new Set(Object.keys(obj))

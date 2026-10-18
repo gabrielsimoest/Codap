@@ -10,7 +10,7 @@ import { z } from 'zod'
  * impede um `content` malformado de virar dado está aqui.
  *
  * Os schemas espelham os `*ActivityContent` (theory, option, code_blank,
- * fill_blank, code_playground, reorder, matching) de
+ * fill_blank, code_playground, code_editor, reorder, matching) de
  * `codap-api/src/types/contracts.ts`. Os tipos continuam vindo de lá; estes
  * schemas descrevem a mesma forma para efeito de validação — ao mudar um dos
  * contratos, mude os dois.
@@ -179,6 +179,40 @@ export const codePlaygroundContentSchema = z.object({
 })
 
 /**
+ * `code_editor`: desafio final de módulo, o aluno digita o código. Sem lacunas
+ * nem blocos — a correção é toda do `checkScript`, então ele precisa marcar os
+ * requisitos (`__codap_check`) ou dar o veredito (`__codap_report`).
+ */
+export const codeEditorContentSchema = z.object({
+  question: z.string().min(1, 'O desafio é obrigatório.'),
+  highlight: z.array(z.string().min(1)),
+  codeLanguage: z.enum(PLAYGROUND_LANGUAGES),
+  /** Com o que o editor começa; pode ser vazio. */
+  starterCode: z.string(),
+  html: z.string().optional(),
+  css: z.string().optional(),
+  js: z.string().optional(),
+  checkScript: z.string().min(1, 'O script de correção é obrigatório.'),
+  hints: z.array(z.string().trim().min(1, 'A dica não pode ficar vazia.'))
+    .min(1, 'Escreva ao menos 1 dica.')
+    .max(3, 'No máximo 3 dicas.'),
+  /** Código completo que passa: liberado por último ao aluno e usado no Testar. */
+  solution: z.string().trim().min(1, 'A solução é obrigatória.')
+}).superRefine((content, ctx) => {
+  if (!content.checkScript.includes('__codap_check') && !content.checkScript.includes('__codap_report')) {
+    ctx.addIssue({ code: 'custom', path: ['checkScript'], message: 'O script precisa marcar os requisitos com __codap_check(rótulo, passou) ou chamar __codap_report.' })
+  }
+  for (const field of ['starterCode', 'solution'] as const) {
+    for (const [index, line] of content[field].split('\n').entries()) {
+      if (line.length > MAX_CODE_LINE) {
+        ctx.addIssue({ code: 'custom', path: [field], message: `A linha ${index + 1} passa de ${MAX_CODE_LINE} caracteres; quebre-a para caber no celular.` })
+        break
+      }
+    }
+  }
+})
+
+/**
  * Resposta do `fill_blank`: só letras, números, hífen e sublinhado, até 20
  * caracteres. É o que dá para digitar no celular sem caçar símbolo no teclado
  * — respostas com `<`, `{` ou `;` ficam para o `code_blank`, por blocos.
@@ -290,11 +324,12 @@ export type OptionContentForm = z.infer<typeof optionContentSchema>
 export type CodeBlankContentForm = z.infer<typeof codeBlankContentSchema>
 export type FillBlankContentForm = z.infer<typeof fillBlankContentSchema>
 export type CodePlaygroundContentForm = z.infer<typeof codePlaygroundContentSchema>
+export type CodeEditorContentForm = z.infer<typeof codeEditorContentSchema>
 export type ReorderContentForm = z.infer<typeof reorderContentSchema>
 export type MatchingContentForm = z.infer<typeof matchingContentSchema>
 
 /** Tipos com formulário dedicado. Qualquer outro cai no editor de JSON cru. */
-export const TYPED_ACTIVITY_TYPES = ['theory', 'option', 'code_blank', 'fill_blank', 'code_playground', 'reorder', 'matching'] as const
+export const TYPED_ACTIVITY_TYPES = ['theory', 'option', 'code_blank', 'fill_blank', 'code_playground', 'code_editor', 'reorder', 'matching'] as const
 
 export type TypedActivityType = (typeof TYPED_ACTIVITY_TYPES)[number]
 
@@ -352,6 +387,18 @@ export function emptyCodePlaygroundContent (): CodePlaygroundContentForm {
     solution: [''],
     html: '',
     checkScript: '__codap_report(true)'
+  }
+}
+
+export function emptyCodeEditorContent (): CodeEditorContentForm {
+  return {
+    question: '',
+    highlight: [],
+    codeLanguage: 'HTML',
+    starterCode: '',
+    checkScript: '__codap_check("Requisito 1", true);',
+    hints: [''],
+    solution: ''
   }
 }
 

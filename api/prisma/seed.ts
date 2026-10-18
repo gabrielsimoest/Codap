@@ -4,6 +4,7 @@ import { PrismaPg } from '@prisma/adapter-pg'
 import { PrismaClient } from '../src/generated/prisma/client.js'
 import type {
   CodeBlankActivityContent,
+  CodeEditorActivityContent,
   CodePlaygroundActivityContent,
   FillBlankActivityContent,
   MatchingActivityContent,
@@ -137,11 +138,12 @@ async function seedModuleSubtitles (localeIds: Map<LocaleCode, number>): Promise
 // app a cada sessão. Os arrays são regenerados a partir do banco por `pnpm seed:generate`
 // — não edite à mão (ver api/CLAUDE.md).
 type ActivitySeed = {
-  type: 'theory' | 'option' | 'code_blank' | 'fill_blank' | 'code_playground' | 'reorder' | 'matching';
+  type: 'theory' | 'option' | 'code_blank' | 'fill_blank' | 'code_playground' | 'code_editor' | 'reorder' | 'matching';
   content: Record<
     LocaleCode,
     | TheoryActivityContent | OptionActivityContent | CodeBlankActivityContent
-    | FillBlankActivityContent | CodePlaygroundActivityContent | ReorderActivityContent | MatchingActivityContent
+    | FillBlankActivityContent | CodePlaygroundActivityContent | CodeEditorActivityContent | ReorderActivityContent
+    | MatchingActivityContent
   >;
 }
 
@@ -14664,6 +14666,37 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Monte a página de contato: entre o cabeçalho e o rodapé, crie um <main> com um formulário que tenha um campo de e-mail obrigatório, um <label> "E-mail" ligado a esse campo e um botão "Enviar".',
+            highlight: ['obrigatório', 'ligado'],
+            codeLanguage: 'HTML',
+            starterCode: '<header>\n  <h1>Contato</h1>\n</header>\n\n\n\n<footer>\n  <p>Até breve!</p>\n</footer>',
+            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("Um formulário dentro de um <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("Um campo de e-mail (type=\\"email\\") no formulário", !!input);\n  __codap_check("O campo de e-mail é obrigatório (required)", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("Um <label> \\"E-mail\\" ligado ao campo", !!label && label.textContent.trim() === "E-mail");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("Um botão \\"Enviar\\" no formulário", text === "Enviar");\n})();',
+            hints: ['O <main> fica entre o </header> e o <footer>, e o <form> vai dentro dele. Os campos e o botão vão dentro do <form>.', 'O <label> se liga ao campo quando o for dele tem o mesmo valor do id do <input>: for="email" e id="email".', 'O campo precisa de type="email" e do atributo required, que não leva valor. O botão é <button>Enviar</button>, antes do </form>.'],
+            solution: '<header>\n  <h1>Contato</h1>\n</header>\n\n<main>\n  <form>\n    <label for="email">\n      E-mail\n    </label>\n    <input\n      id="email"\n      type="email"\n      required\n    >\n    <button>Enviar</button>\n  </form>\n</main>\n\n<footer>\n  <p>Até breve!</p>\n</footer>'
+          },
+          en: {
+            question: 'Build the contact page: between the header and the footer, create a <main> with a form that has a required email field, a <label> "Email" linked to that field and a "Send" button.',
+            highlight: ['required', 'linked'],
+            codeLanguage: 'HTML',
+            starterCode: '<header>\n  <h1>Contact</h1>\n</header>\n\n\n\n<footer>\n  <p>See you soon!</p>\n</footer>',
+            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("A form inside a <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("An email field (type=\\"email\\") in the form", !!input);\n  __codap_check("The email field is required", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("A <label> \\"Email\\" linked to the field", !!label && label.textContent.trim() === "Email");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("A \\"Send\\" button in the form", text === "Send");\n})();',
+            hints: ['The <main> goes between </header> and <footer>, and the <form> goes inside it. The field and the button go inside the <form>.', 'A <label> is linked to a field when its for has the same value as the <input> id: for="email" and id="email".', 'The field needs type="email" and the required attribute, which takes no value. The button is <button>Send</button>, before </form>.'],
+            solution: '<header>\n  <h1>Contact</h1>\n</header>\n\n<main>\n  <form>\n    <label for="email">\n      Email\n    </label>\n    <input\n      id="email"\n      type="email"\n      required\n    >\n    <button>Send</button>\n  </form>\n</main>\n\n<footer>\n  <p>See you soon!</p>\n</footer>'
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -17739,6 +17772,39 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: '.page {\n  grid-template-columns:\n    2fr ___;\n}',
             answers: ['1fr'],
             ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Monte o layout da loja: no :root, crie a variável --espaco com 12px. Deixe o .menu em flex, com gap igual a --espaco. Faça .produtos virar um grid de 3 colunas iguais, também com gap igual a --espaco.',
+            highlight: ['--espaco', 'grid'],
+            codeLanguage: 'CSS',
+            starterCode: ':root {\n}\n\n.menu {\n}\n\n.produtos {\n}\n\n.produtos div {\n  background: #cfe8ff;\n  padding: 8px;\n}',
+            html: '<nav class="menu">\n  <a>Início</a>\n  <a>Loja</a>\n</nav>\n<div class="produtos">\n  <div>Café</div>\n  <div>Chá</div>\n  <div>Suco</div>\n</div>',
+            checkScript: '(function () {\n  var root = document.documentElement;\n  var menu = document.querySelector(".menu");\n  var grid = document.querySelector(".produtos");\n  var value = getComputedStyle(root).getPropertyValue("--espaco").trim();\n  __codap_check("A variável --espaco vale 12px no :root", value === "12px");\n  __codap_check("O .menu usa display: flex", getComputedStyle(menu).display === "flex");\n  // Usa a variável? Troca o valor dela e vê se o espaçamento acompanha.\n  var gapsBefore = [getComputedStyle(menu).columnGap, getComputedStyle(grid).columnGap];\n  root.style.setProperty("--espaco", "30px");\n  var gapsAfter = [getComputedStyle(menu).columnGap, getComputedStyle(grid).columnGap];\n  root.style.removeProperty("--espaco");\n  __codap_check("O gap do .menu usa a variável --espaco", gapsBefore[0] === "12px" && gapsAfter[0] === "30px");\n  var items = grid.children;\n  var sameRow = items.length === 3;\n  for (var i = 1; i < items.length; i++) {\n    var a = items[0].getBoundingClientRect(), b = items[i].getBoundingClientRect();\n    if (Math.abs(a.top - b.top) > 1 || Math.abs(a.width - b.width) > 1) sameRow = false;\n  }\n  __codap_check(".produtos é um grid de 3 colunas iguais", getComputedStyle(grid).display === "grid" && sameRow);\n  __codap_check("O gap de .produtos usa a variável --espaco", gapsBefore[1] === "12px" && gapsAfter[1] === "30px");\n})();',
+            hints: ['Variáveis são declaradas com dois hífens dentro do :root (--espaco: 12px;) e usadas com var(--espaco).', 'No .menu bastam duas linhas: display: flex; e gap: var(--espaco);', 'Em .produtos: display: grid; grid-template-columns: repeat(3, 1fr); e o mesmo gap do menu.'],
+            solution: ':root {\n  --espaco: 12px;\n}\n\n.menu {\n  display: flex;\n  gap: var(--espaco);\n}\n\n.produtos {\n  display: grid;\n  grid-template-columns:\n    repeat(3, 1fr);\n  gap: var(--espaco);\n}\n\n.produtos div {\n  background: #cfe8ff;\n  padding: 8px;\n}'
+          },
+          en: {
+            question: 'Build the store layout: in :root, create the variable --space with 12px. Make .menu flex, with a gap equal to --space. Turn .products into a grid of 3 equal columns, also with a gap equal to --space.',
+            highlight: ['--space', 'grid'],
+            codeLanguage: 'CSS',
+            starterCode: ':root {\n}\n\n.menu {\n}\n\n.products {\n}\n\n.products div {\n  background: #cfe8ff;\n  padding: 8px;\n}',
+            html: '<nav class="menu">\n  <a>Home</a>\n  <a>Store</a>\n</nav>\n<div class="products">\n  <div>Coffee</div>\n  <div>Tea</div>\n  <div>Juice</div>\n</div>',
+            checkScript: '(function () {\n  var root = document.documentElement;\n  var menu = document.querySelector(".menu");\n  var grid = document.querySelector(".products");\n  var value = getComputedStyle(root).getPropertyValue("--space").trim();\n  __codap_check("The --space variable is 12px in :root", value === "12px");\n  __codap_check(".menu uses display: flex", getComputedStyle(menu).display === "flex");\n  // Usa a variável? Troca o valor dela e vê se o espaçamento acompanha.\n  var gapsBefore = [getComputedStyle(menu).columnGap, getComputedStyle(grid).columnGap];\n  root.style.setProperty("--space", "30px");\n  var gapsAfter = [getComputedStyle(menu).columnGap, getComputedStyle(grid).columnGap];\n  root.style.removeProperty("--space");\n  __codap_check("The .menu gap uses the --space variable", gapsBefore[0] === "12px" && gapsAfter[0] === "30px");\n  var items = grid.children;\n  var sameRow = items.length === 3;\n  for (var i = 1; i < items.length; i++) {\n    var a = items[0].getBoundingClientRect(), b = items[i].getBoundingClientRect();\n    if (Math.abs(a.top - b.top) > 1 || Math.abs(a.width - b.width) > 1) sameRow = false;\n  }\n  __codap_check(".products is a grid of 3 equal columns", getComputedStyle(grid).display === "grid" && sameRow);\n  __codap_check("The .products gap uses the --space variable", gapsBefore[1] === "12px" && gapsAfter[1] === "30px");\n})();',
+            hints: ['Variables are declared with two hyphens inside :root (--space: 12px;) and used with var(--space).', 'In .menu two lines are enough: display: flex; and gap: var(--space);', 'In .products: display: grid; grid-template-columns: repeat(3, 1fr); and the same gap as the menu.'],
+            solution: ':root {\n  --space: 12px;\n}\n\n.menu {\n  display: flex;\n  gap: var(--space);\n}\n\n.products {\n  display: grid;\n  grid-template-columns:\n    repeat(3, 1fr);\n  gap: var(--space);\n}\n\n.products div {\n  background: #cfe8ff;\n  padding: 8px;\n}'
           }
         }
       }
@@ -20947,6 +21013,39 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Mostre no #total o texto "Total: R$ 150", somando os preços de produtos. Quando o botão #cabo for clicado, acrescente { nome: "Cabo", preco: 20 } a produtos e recalcule o #total a partir do array (fica "Total: R$ 170").',
+            highlight: ['somando', 'recalcule'],
+            codeLanguage: 'JavaScript',
+            starterCode: 'const produtos = [\n  { nome: "Fone", preco: 50 },\n  { nome: "Capa", preco: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst botao = document\n  .querySelector("#cabo");\n',
+            html: '<p id="total"></p>\n<button id="cabo">\n  Adicionar cabo\n</button>',
+            checkScript: '(function () {\n  var total = document.querySelector("#total");\n  var initial = total.textContent;\n  __codap_check("O #total mostra \\"Total: R$ 150\\" ao carregar", total.textContent.trim() === "Total: R$ 150");\n  var list = null;\n  try { list = produtos; } catch (e) {}\n  var ok = Array.isArray(list);\n  var before = ok ? list.length : 0;\n  // Um item a mais antes do clique: um total escrito à mão não acompanha.\n  if (ok) list.push({ nome: "X", preco: 5 });\n  document.querySelector("#cabo").click();\n  var last = ok ? list[list.length - 1] : null;\n  __codap_check("Clicar em #cabo acrescenta o Cabo (R$ 20) a produtos", ok && list.length === before + 2 && !!last && last.nome === "Cabo" && last.preco === 20);\n  __codap_check("Depois do clique, o #total é recalculado a partir de produtos", total.textContent.trim() === "Total: R$ 175");\n  // Desfaz o teste: a prévia volta a mostrar a página como carregou, e o\n  // clique do aluno nela dá o total do enunciado.\n  if (ok) list.splice(before);\n  total.textContent = initial;\n})();',
+            hints: ['Uma função atualizar() pode somar com produtos.reduce((t, p) => t + p.preco, 0) e escrever o resultado em total.textContent.', 'Use template literal no texto (`Total: R$ ${soma}`) e chame atualizar() uma vez no começo, para o total já aparecer.', 'No clique: botao.addEventListener("click", () => { … }), com produtos.push({ nome: "Cabo", preco: 20 }) e atualizar() dentro.'],
+            solution: 'const produtos = [\n  { nome: "Fone", preco: 50 },\n  { nome: "Capa", preco: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst botao = document\n  .querySelector("#cabo");\n\nfunction atualizar() {\n  const soma =\n    produtos.reduce(\n      (t, p) => t + p.preco,\n      0\n    );\n  total.textContent =\n    `Total: R$ ${soma}`;\n}\n\natualizar();\n\nbotao.addEventListener(\n  "click",\n  () => {\n    produtos.push({\n      nome: "Cabo",\n      preco: 20\n    });\n    atualizar();\n  }\n);'
+          },
+          en: {
+            question: 'Show the text "Total: $150" in #total, adding up the prices in products. When the #cable button is clicked, add { name: "Cable", price: 20 } to products and recalculate #total from the array (it becomes "Total: $170").',
+            highlight: ['adding up', 'recalculate'],
+            codeLanguage: 'JavaScript',
+            starterCode: 'const products = [\n  { name: "Mug", price: 50 },\n  { name: "Lamp", price: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst button = document\n  .querySelector("#cable");\n',
+            html: '<p id="total"></p>\n<button id="cable">\n  Add cable\n</button>',
+            checkScript: '(function () {\n  var total = document.querySelector("#total");\n  var initial = total.textContent;\n  __codap_check("#total shows \\"Total: $150\\" on load", total.textContent.trim() === "Total: $150");\n  var list = null;\n  try { list = products; } catch (e) {}\n  var ok = Array.isArray(list);\n  var before = ok ? list.length : 0;\n  // Um item a mais antes do clique: um total escrito à mão não acompanha.\n  if (ok) list.push({ name: "X", price: 5 });\n  document.querySelector("#cable").click();\n  var last = ok ? list[list.length - 1] : null;\n  __codap_check("Clicking #cable adds the Cable ($20) to products", ok && list.length === before + 2 && !!last && last.name === "Cable" && last.price === 20);\n  __codap_check("After the click, #total is recalculated from products", total.textContent.trim() === "Total: $175");\n  // Desfaz o teste: a prévia volta a mostrar a página como carregou, e o\n  // clique do aluno nela dá o total do enunciado.\n  if (ok) list.splice(before);\n  total.textContent = initial;\n})();',
+            hints: ['An update() function can add up with products.reduce((t, p) => t + p.price, 0) and write the result into total.textContent.', 'Use a template literal for the text (`Total: $${sum}`) and call update() once at the start, so the total shows up right away.', 'On click: button.addEventListener("click", () => { … }), with products.push({ name: "Cable", price: 20 }) and update() inside.'],
+            solution: 'const products = [\n  { name: "Mug", price: 50 },\n  { name: "Lamp", price: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst button = document\n  .querySelector("#cable");\n\nfunction update() {\n  const sum =\n    products.reduce(\n      (t, p) => t + p.price,\n      0\n    );\n  total.textContent =\n    `Total: $${sum}`;\n}\n\nupdate();\n\nbutton.addEventListener(\n  "click",\n  () => {\n    products.push({\n      name: "Cable",\n      price: 20\n    });\n    update();\n  }\n);'
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -23881,6 +23980,37 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             code: '<div ___="button">\n  Save\n</div>',
             answers: ['role'],
             ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Complete o cartão da oferta dentro do <article>: um parágrafo com o preço antigo "R$ 200" riscado (<del>) e o novo "R$ 150" marcado como inserido (<ins>); um <details> com o resumo "Ficha técnica" e, dentro dele, o parágrafo "Bateria: 20 h"; e um botão "Comprar" com data-product-id="42".',
+            highlight: ['riscado', 'inserido'],
+            codeLanguage: 'HTML',
+            starterCode: '<article>\n  <h2>Fone Bluetooth</h2>\n\n</article>',
+            checkScript: '(function () {\n  var art = document.querySelector("article");\n  var del = art ? art.querySelector("del") : null;\n  __codap_check("O preço antigo \\"R$ 200\\" riscado com <del>", !!del && del.textContent.trim() === "R$ 200");\n  var ins = art ? art.querySelector("ins") : null;\n  __codap_check("O preço novo \\"R$ 150\\" marcado com <ins>", !!ins && ins.textContent.trim() === "R$ 150");\n  var details = art ? art.querySelector("details") : null;\n  var summary = details ? details.querySelector("summary") : null;\n  __codap_check("Um <details> com o resumo \\"Ficha técnica\\"", !!summary && summary.textContent.trim() === "Ficha técnica");\n  var p = details ? details.querySelector("p") : null;\n  __codap_check("Dentro do <details>, o parágrafo \\"Bateria: 20 h\\"", !!p && p.textContent.trim() === "Bateria: 20 h");\n  var b = art ? art.querySelector("button") : null;\n  __codap_check("Um botão \\"Comprar\\" com data-product-id=\\"42\\"", !!b && b.textContent.trim() === "Comprar" && b.dataset.productId === "42");\n})();',
+            hints: ['Os dois preços podem ficar no mesmo parágrafo: <p><del>…</del> <ins>…</ins></p>.', 'O <summary> é o título clicável e vem primeiro dentro do <details>; o conteúdo que abre e fecha vem depois dele.', 'Atributos data-* vão na tag de abertura: <button data-product-id="42">Comprar</button>.'],
+            solution: '<article>\n  <h2>Fone Bluetooth</h2>\n  <p>\n    <del>R$ 200</del>\n    <ins>R$ 150</ins>\n  </p>\n  <details>\n    <summary>\n      Ficha técnica\n    </summary>\n    <p>Bateria: 20 h</p>\n  </details>\n  <button\n    data-product-id="42"\n  >\n    Comprar\n  </button>\n</article>'
+          },
+          en: {
+            question: 'Complete the deal card inside the <article>: a paragraph with the old price "$200" struck through (<del>) and the new "$150" marked as inserted (<ins>); a <details> with the summary "Specs" and, inside it, the paragraph "Battery: 20 h"; and a "Buy" button with data-product-id="42".',
+            highlight: ['struck through', 'inserted'],
+            codeLanguage: 'HTML',
+            starterCode: '<article>\n  <h2>Bluetooth Headset</h2>\n\n</article>',
+            checkScript: '(function () {\n  var art = document.querySelector("article");\n  var del = art ? art.querySelector("del") : null;\n  __codap_check("The old price \\"$200\\" struck through with <del>", !!del && del.textContent.trim() === "$200");\n  var ins = art ? art.querySelector("ins") : null;\n  __codap_check("The new price \\"$150\\" marked with <ins>", !!ins && ins.textContent.trim() === "$150");\n  var details = art ? art.querySelector("details") : null;\n  var summary = details ? details.querySelector("summary") : null;\n  __codap_check("A <details> with the summary \\"Specs\\"", !!summary && summary.textContent.trim() === "Specs");\n  var p = details ? details.querySelector("p") : null;\n  __codap_check("Inside the <details>, the paragraph \\"Battery: 20 h\\"", !!p && p.textContent.trim() === "Battery: 20 h");\n  var b = art ? art.querySelector("button") : null;\n  __codap_check("A \\"Buy\\" button with data-product-id=\\"42\\"", !!b && b.textContent.trim() === "Buy" && b.dataset.productId === "42");\n})();',
+            hints: ['Both prices can go in the same paragraph: <p><del>…</del> <ins>…</ins></p>.', 'The <summary> is the clickable title and comes first inside the <details>; the content that opens and closes comes after it.', 'data-* attributes go in the opening tag: <button data-product-id="42">Buy</button>.'],
+            solution: '<article>\n  <h2>Bluetooth Headset</h2>\n  <p>\n    <del>$200</del>\n    <ins>$150</ins>\n  </p>\n  <details>\n    <summary>\n      Specs\n    </summary>\n    <p>Battery: 20 h</p>\n  </details>\n  <button\n    data-product-id="42"\n  >\n    Buy\n  </button>\n</article>'
           }
         }
       }
@@ -27298,6 +27428,39 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Faça a página mobile-first: os .cards ficam em flex, em coluna, e a partir de 768px de largura (min-width) passam a ficar em linha. O .botao ganha uma transição de transform de 0.2s e, no :hover, cresce com scale(1.1).',
+            highlight: ['mobile-first', 'min-width'],
+            codeLanguage: 'CSS',
+            starterCode: '.card {\n  background: #cfe8ff;\n  padding: 8px;\n  margin: 4px;\n}\n\n.cards {\n}\n\n.botao {\n}',
+            html: '<div class="cards">\n  <div class="card">Plano A</div>\n  <div class="card">Plano B</div>\n</div>\n<button class="botao">Assinar</button>',
+            checkScript: '(function () {\n  // Media queries e :hover não aparecem no estilo calculado de uma tela só:\n  // a correção lê as regras escritas (CSSOM).\n  var top = [], inMedia = [];\n  for (var s = 0; s < document.styleSheets.length; s++) {\n    var list = document.styleSheets[s].cssRules;\n    for (var r = 0; r < list.length; r++) {\n      var rule = list[r];\n      if (rule.media) {\n        var wide = /min-width:\\s*768px/.test(rule.media.mediaText);\n        for (var k = 0; k < rule.cssRules.length; k++) if (wide) inMedia.push(rule.cssRules[k]);\n      } else if (rule.selectorText) {\n        top.push(rule);\n      }\n    }\n  }\n  function has(rules, selector, test) {\n    return rules.some(function (rule) {\n      return rule.selectorText.split(",").map(function (x) { return x.trim(); }).indexOf(selector) !== -1 && test(rule.style);\n    });\n  }\n  __codap_check(".cards em flex e em coluna, como regra base (celular)", has(top, ".cards", function (st) { return st.display === "flex" && st.flexDirection === "column"; }));\n  __codap_check("A partir de 768px (min-width), .cards fica em linha", has(inMedia, ".cards", function (st) { return st.flexDirection === "row"; }));\n  var button = getComputedStyle(document.querySelector(".botao"));\n  var property = button.transitionProperty;\n  __codap_check(".botao tem transição de transform de 0.2s", (property.indexOf("transform") !== -1 || property === "all") && button.transitionDuration === "0.2s");\n  __codap_check("No :hover, .botao cresce com scale(1.1)", has(top, ".botao:hover", function (st) { return st.transform.replace(/\\s/g, "") === "scale(1.1)"; }));\n})();',
+            hints: ['Mobile-first: a regra sem media query vale para o celular (.cards em coluna); a @media (min-width: 768px) só troca o flex-direction para row.', 'A transição fica no estado normal do botão, não no :hover: transition: transform 0.2s;', 'O :hover só muda o transform: .botao:hover { transform: scale(1.1); }'],
+            solution: '.card {\n  background: #cfe8ff;\n  padding: 8px;\n  margin: 4px;\n}\n\n.cards {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 768px) {\n  .cards {\n    flex-direction: row;\n  }\n}\n\n.botao {\n  transition: transform 0.2s;\n}\n\n.botao:hover {\n  transform: scale(1.1);\n}'
+          },
+          en: {
+            question: 'Make the page mobile-first: .cards are flex, in a column, and from 768px wide (min-width) they switch to a row. The .button gets a transform transition of 0.2s and, on :hover, grows with scale(1.1).',
+            highlight: ['mobile-first', 'min-width'],
+            codeLanguage: 'CSS',
+            starterCode: '.card {\n  background: #cfe8ff;\n  padding: 8px;\n  margin: 4px;\n}\n\n.cards {\n}\n\n.button {\n}',
+            html: '<div class="cards">\n  <div class="card">Plan A</div>\n  <div class="card">Plan B</div>\n</div>\n<button class="button">Subscribe</button>',
+            checkScript: '(function () {\n  // Media queries e :hover não aparecem no estilo calculado de uma tela só:\n  // a correção lê as regras escritas (CSSOM).\n  var top = [], inMedia = [];\n  for (var s = 0; s < document.styleSheets.length; s++) {\n    var list = document.styleSheets[s].cssRules;\n    for (var r = 0; r < list.length; r++) {\n      var rule = list[r];\n      if (rule.media) {\n        var wide = /min-width:\\s*768px/.test(rule.media.mediaText);\n        for (var k = 0; k < rule.cssRules.length; k++) if (wide) inMedia.push(rule.cssRules[k]);\n      } else if (rule.selectorText) {\n        top.push(rule);\n      }\n    }\n  }\n  function has(rules, selector, test) {\n    return rules.some(function (rule) {\n      return rule.selectorText.split(",").map(function (x) { return x.trim(); }).indexOf(selector) !== -1 && test(rule.style);\n    });\n  }\n  __codap_check(".cards flex and in a column, as the base rule (phone)", has(top, ".cards", function (st) { return st.display === "flex" && st.flexDirection === "column"; }));\n  __codap_check("From 768px (min-width), .cards becomes a row", has(inMedia, ".cards", function (st) { return st.flexDirection === "row"; }));\n  var button = getComputedStyle(document.querySelector(".button"));\n  var property = button.transitionProperty;\n  __codap_check(".button has a transform transition of 0.2s", (property.indexOf("transform") !== -1 || property === "all") && button.transitionDuration === "0.2s");\n  __codap_check("On :hover, .button grows with scale(1.1)", has(top, ".button:hover", function (st) { return st.transform.replace(/\\s/g, "") === "scale(1.1)"; }));\n})();',
+            hints: ['Mobile-first: the rule without a media query is for phones (.cards in a column); @media (min-width: 768px) only switches flex-direction to row.', 'The transition goes on the button\'s normal state, not on :hover: transition: transform 0.2s;', ':hover only changes the transform: .button:hover { transform: scale(1.1); }'],
+            solution: '.card {\n  background: #cfe8ff;\n  padding: 8px;\n  margin: 4px;\n}\n\n.cards {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 768px) {\n  .cards {\n    flex-direction: row;\n  }\n}\n\n.button {\n  transition: transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.1);\n}'
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -30446,6 +30609,37 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: 'function isEven(\n  n: number\n): ___ {\n  return n % 2 === 0;\n}',
             answers: ['boolean']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Testando seus conhecimentos',
+      en: 'Test your knowledge'
+    },
+    activities: [
+      {
+        type: 'code_editor',
+        content: {
+          pt: {
+            question: 'Crie a classe Conta, com saldo começando em 0 e o método depositar(valor), que soma ao saldo e devolve o saldo novo. Crie a classe Poupanca, que estende Conta e tem o método render(), que acrescenta 10% ao saldo. Por fim, crie criarContador(): ela devolve uma função que, a cada chamada, devolve o próximo número (1, 2, 3…), e cada contador conta separado.',
+            highlight: ['estende', 'separado'],
+            codeLanguage: 'JavaScript',
+            starterCode: '// 1. Conta\n\n// 2. Poupanca\n\n// 3. criarContador\n',
+            checkScript: '(function () {\n  function attempt(fn) { try { return fn(); } catch (e) { return false; } }\n  __codap_check("Uma Conta nova começa com saldo 0", attempt(function () { return new Conta().saldo === 0; }));\n  __codap_check("depositar soma ao saldo e devolve o saldo novo", attempt(function () {\n    var c = new Conta();\n    return c.depositar(50) === 50 && c.depositar(25) === 75 && c.saldo === 75;\n  }));\n  __codap_check("Poupanca estende Conta", attempt(function () { return new Poupanca() instanceof Conta; }));\n  __codap_check("render() acrescenta 10% ao saldo da Poupanca", attempt(function () {\n    var p = new Poupanca();\n    p.depositar(200);\n    p.render();\n    return Math.abs(p.saldo - 220) < 0.000001;\n  }));\n  __codap_check("criarContador() devolve uma função que conta 1, 2, 3…", attempt(function () {\n    var a = criarContador();\n    return a() === 1 && a() === 2 && a() === 3;\n  }));\n  __codap_check("Cada contador conta separado (closure)", attempt(function () {\n    var a = criarContador(), b = criarContador();\n    a(); a();\n    return b() === 1 && a() === 3;\n  }));\n})();',
+            hints: ['No constructor() da Conta, this.saldo = 0. O método depositar(valor) faz this.saldo += valor e devolve this.saldo.', 'class Poupanca extends Conta já herda depositar; render() só precisa de this.saldo *= 1.1;', 'criarContador() guarda let n = 0 dentro dela e devolve uma função que faz n++ e return n. Como cada chamada de criarContador() cria o próprio n, os contadores não se misturam.'],
+            solution: 'class Conta {\n  constructor() {\n    this.saldo = 0;\n  }\n\n  depositar(valor) {\n    this.saldo += valor;\n    return this.saldo;\n  }\n}\n\nclass Poupanca extends Conta {\n  render() {\n    this.saldo *= 1.1;\n  }\n}\n\nfunction criarContador() {\n  let n = 0;\n  return () => {\n    n++;\n    return n;\n  };\n}'
+          },
+          en: {
+            question: 'Create the Wallet class, with balance starting at 0 and the method deposit(amount), which adds to the balance and returns the new balance. Create the Savings class, which extends Wallet and has the method addInterest(), which adds 10% to the balance. Finally, create createCounter(): it returns a function that, on each call, returns the next number (1, 2, 3…), and each counter counts on its own.',
+            highlight: ['extends', 'on its own'],
+            codeLanguage: 'JavaScript',
+            starterCode: '// 1. Wallet\n\n// 2. Savings\n\n// 3. createCounter\n',
+            checkScript: '(function () {\n  function attempt(fn) { try { return fn(); } catch (e) { return false; } }\n  __codap_check("A new Wallet starts with balance 0", attempt(function () { return new Wallet().balance === 0; }));\n  __codap_check("deposit adds to the balance and returns the new balance", attempt(function () {\n    var c = new Wallet();\n    return c.deposit(50) === 50 && c.deposit(25) === 75 && c.balance === 75;\n  }));\n  __codap_check("Savings extends Wallet", attempt(function () { return new Savings() instanceof Wallet; }));\n  __codap_check("addInterest() adds 10% to the Savings balance", attempt(function () {\n    var p = new Savings();\n    p.deposit(200);\n    p.addInterest();\n    return Math.abs(p.balance - 220) < 0.000001;\n  }));\n  __codap_check("createCounter() returns a function that counts 1, 2, 3…", attempt(function () {\n    var a = createCounter();\n    return a() === 1 && a() === 2 && a() === 3;\n  }));\n  __codap_check("Each counter counts on its own (closure)", attempt(function () {\n    var a = createCounter(), b = createCounter();\n    a(); a();\n    return b() === 1 && a() === 3;\n  }));\n})();',
+            hints: ['In Wallet\'s constructor(), this.balance = 0. The deposit(amount) method does this.balance += amount and returns this.balance.', 'class Savings extends Wallet already inherits deposit; addInterest() only needs this.balance *= 1.1;', 'createCounter() keeps let n = 0 inside it and returns a function that does n++ and return n. Since each call to createCounter() makes its own n, the counters do not mix.'],
+            solution: 'class Wallet {\n  constructor() {\n    this.balance = 0;\n  }\n\n  deposit(amount) {\n    this.balance += amount;\n    return this.balance;\n  }\n}\n\nclass Savings extends Wallet {\n  addInterest() {\n    this.balance *= 1.1;\n  }\n}\n\nfunction createCounter() {\n  let n = 0;\n  return () => {\n    n++;\n    return n;\n  };\n}'
           }
         }
       }

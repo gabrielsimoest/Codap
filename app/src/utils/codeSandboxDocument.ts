@@ -6,9 +6,11 @@ export interface BuildSandboxDocumentOptions {
 	/** Rótulo traduzido prefixado nas linhas de erro do painel de console. */
 	errorLabel?: string;
 	/**
-	 * Script de correção do `code_playground`, autorado (nunca do aluno). Roda
-	 * depois do código do aluno e chama `__codap_report(passed, message?)`; o
-	 * resultado viaja junto com o console na mensagem `codapTerminal`.
+	 * Script de correção do `code_playground` e do `code_editor`, autorado
+	 * (nunca do aluno). Roda depois do código do aluno e chama
+	 * `__codap_report(passed, message?)` ou, para uma lista de requisitos,
+	 * `__codap_check(label, passed)` uma vez por requisito; o resultado viaja
+	 * junto com o console na mensagem `codapTerminal`.
 	 */
 	checkScript?: string;
 	/**
@@ -24,11 +26,14 @@ export interface BuildSandboxDocumentOptions {
 	 */
 	blockNetwork?: boolean;
 	/**
-	 * Proteção contra laço infinito no código do aluno: cada `for`/`while`/`do`
-	 * ganha uma checagem que lança um erro depois desse tempo (ms) de execução.
-	 * No Android, um laço preso trava o processo de renderização (desmontar a
-	 * WebView não para JavaScript em execução) e, com `console.log` dentro,
-	 * inunda o app até ele parar de responder — o watchdog de fora não basta.
+	 * Proteção contra laço infinito no código do aluno: cada `for`/`while` (e o
+	 * `while` do fim de um `do`) ganha uma checagem que lança um erro quando a
+	 * tarefa em que os laços rodam passa desse tempo (ms). O relógio é por
+	 * tarefa, não desde o carregamento: um laço num clique, minutos depois,
+	 * ganha o próprio prazo. No Android, um laço preso trava o processo de
+	 * renderização (desmontar a WebView não para JavaScript em execução) e, com
+	 * `console.log` dentro, inunda o app até ele parar de responder — o
+	 * watchdog de fora não basta.
 	 */
 	loopGuardMs?: number;
 	/** Texto do erro que interrompe o laço (aparece no console do aluno). */
@@ -48,20 +53,69 @@ const MAX_CONSOLE_ENTRIES = 500;
 // console.* e window.onerror para empilhar entradas em
 // window.__codapConsoleEntries, sem nunca lançar e sem depender de
 // window.ReactNativeWebView (funciona igual dentro ou fora de uma WebView RN).
-// Também define __codap_report, que o checkScript do playground chama.
-function buildShimScript(forwardConsole: boolean, loopGuardMessage: string): string {
+//
+// Também define a correção (`__codap_report`, `__codap_check`) e a proteção de
+// laços. Tudo isso fica travado (`writable: false`, `configurable: false`) e o
+// resultado mora numa variável fechada: no `code_editor` o aluno escreve
+// JavaScript livre, e um `__codap_report = function () {}` ou um
+// `window.__codapResult = { passed: true }` no código dele não pode burlar a
+// correção. `Date.now` e `setTimeout` são guardados antes, pelo mesmo motivo.
+function buildShimScript(forwardConsole: boolean, loopGuardMessage: string, loopGuardMs: number): string {
 	return `
-		window.__codapConsoleEntries = [];
-		window.__codapResult = null;
-		window.__codapLoopDeadline = 0;
-		window.__codapLoopGuard = function () {
-			if (window.__codapLoopDeadline && Date.now() > window.__codapLoopDeadline) {
-				throw new Error(${JSON.stringify(loopGuardMessage)});
+		(function () {
+			var result = null;
+			var checks = [];
+			var now = Date.now;
+			var later = window.setTimeout;
+			var taskStart = 0;
+			function lock(name, value) {
+				Object.defineProperty(window, name, { value: value, writable: false, configurable: false });
 			}
-		};
-		window.__codap_report = function (passed, message) {
-			window.__codapResult = { passed: passed === true, message: message == null ? "" : String(message) };
-		};
+			lock("__codapConsoleEntries", []);
+			lock("__codap_report", function (passed, message) {
+				result = { passed: passed === true, message: message == null ? "" : String(message) };
+			});
+			lock("__codap_check", function (label, passed) {
+				checks.push({ label: String(label), passed: passed === true });
+				return passed === true;
+			});
+			lock("__codapResetResult", function () {
+				result = null;
+				checks = [];
+			});
+			// Sem __codap_report explícito, a lista de requisitos decide: passa
+			// quando todos passam.
+			lock("__codapFinishChecks", function () {
+				if (result === null && checks.length > 0) {
+					result = {
+						passed: checks.every(function (check) { return check.passed; }),
+						message: ""
+					};
+				}
+			});
+			Object.defineProperty(window, "__codapResult", {
+				get: function () {
+					return result === null
+						? null
+						: { passed: result.passed, message: result.message, checks: checks.slice() };
+				},
+				set: function () {},
+				configurable: false
+			});
+			// O prazo conta desde a primeira volta de laço da tarefa atual e
+			// zera quando ela acaba (o setTimeout só roda depois dela).
+			lock("__codapLoopGuard", function () {
+				if (!${loopGuardMs}) return true;
+				var t = now();
+				if (!taskStart) {
+					taskStart = t;
+					later(function () { taskStart = 0; }, 0);
+				} else if (t - taskStart > ${loopGuardMs}) {
+					throw new Error(${JSON.stringify(loopGuardMessage)});
+				}
+				return true;
+			});
+		})();
 		function __codapFormatArgs(args) {
 			return Array.prototype.map.call(args, function (arg) {
 				return typeof arg === "string" ? arg : JSON.stringify(arg);
@@ -88,22 +142,75 @@ function buildShimScript(forwardConsole: boolean, loopGuardMessage: string): str
 			}
 			return true;
 		};
+		// Erro dentro de código async (inclusive o laço interrompido num
+		// "while (…) { await … }") rejeita uma promise e não passa pelo onerror.
+		window.addEventListener("unhandledrejection", function (event) {
+			if (window.__codapConsoleEntries.length < ${MAX_CONSOLE_ENTRIES} + 20) {
+				window.__codapConsoleEntries.push({ type: "error", message: "Uncaught (in promise) " + String(event.reason) });
+			}
+			event.preventDefault();
+		});
 	`;
 }
 
+/** Fim de uma string/template que começa em `start` (índice depois da aspa final). */
+function skipQuoted(code: string, start: number): number {
+	const quote = code[start];
+	let k = start + 1;
+	while (k < code.length && code[k] !== quote) k += code[k] === "\\" ? 2 : 1;
+	return k + 1;
+}
+
+/** Índice do `)` que fecha o `(` em `open`, pulando strings; -1 se não fechar. */
+function matchParen(code: string, open: number): number {
+	let depth = 0;
+	for (let k = open; k < code.length; k++) {
+		const c = code[k];
+		if (c === '"' || c === "'" || c === "`") {
+			k = skipQuoted(code, k) - 1;
+		} else if (c === "(") {
+			depth++;
+		} else if (c === ")") {
+			depth--;
+			if (depth === 0) return k;
+		}
+	}
+	return -1;
+}
+
+/** Posições dos `;` fora de parênteses, colchetes, chaves e strings. */
+function topLevelSemicolons(code: string): number[] {
+	const found: number[] = [];
+	let depth = 0;
+	for (let k = 0; k < code.length; k++) {
+		const c = code[k];
+		if (c === '"' || c === "'" || c === "`") k = skipQuoted(code, k) - 1;
+		else if (c === "(" || c === "[" || c === "{") depth++;
+		else if (c === ")" || c === "]" || c === "}") depth--;
+		else if (c === ";" && depth === 0) found.push(k);
+	}
+	return found;
+}
+
 /**
- * Insere `__codapLoopGuard();` no início do corpo de cada `for (…) {`,
- * `while (…) {` e `do {` — a mesma técnica do "loop protect" do CodePen. Um
- * scanner pequeno pula strings, template strings e comentários; o `while (…);`
- * do fim de um `do…while` fica de fora (não abre bloco). Laços sem chaves não
- * ganham a checagem — o conteúdo do app sempre usa chaves, e o watchdog de
- * fora continua valendo para eles.
+ * Proteção de laços — a técnica do "loop protect" do CodePen, adaptada. A
+ * checagem vai na **condição** do laço: `while (x)` vira
+ * `while (__codapLoopGuard() && (x))` e `for (a; b; c)` vira
+ * `for (a; __codapLoopGuard() && (b); c)` (`__codapLoopGuard()` sozinho se a
+ * condição for vazia). Assim valem também laços sem chaves (`while (true);`,
+ * `for (;;) x++;`) e o `while` do fim de um `do…while` — o que um aluno
+ * digitando código livre escreve. `for…in`/`for…of` não têm condição: ganham a
+ * checagem no início do corpo, quando ele tem chaves.
+ *
+ * Um scanner pequeno pula strings, template strings e comentários. Não
+ * reconhece expressões regulares: um `while (` dentro de uma regex literal
+ * seria alterado. O watchdog de fora continua valendo para o que escapar.
  */
 export function protectLoops(code: string): string {
 	let out = "";
 	let i = 0;
 	const n = code.length;
-	const isIdent = (c: string | undefined) => c !== undefined && /[A-Za-z0-9_$]/.test(c);
+	const isIdent = (c: string | undefined) => c !== undefined && /[A-Za-z0-9_$.]/.test(c);
 	const skipSpace = (from: number) => {
 		let k = from;
 		while (k < n && /\s/.test(code[k])) k++;
@@ -127,36 +234,41 @@ export function protectLoops(code: string): string {
 			continue;
 		}
 		if (c === '"' || c === "'" || c === "`") {
-			let k = i + 1;
-			while (k < n && code[k] !== c) k += code[k] === "\\" ? 2 : 1;
-			out += code.slice(i, k + 1);
-			i = k + 1;
+			const stop = skipQuoted(code, i);
+			out += code.slice(i, stop);
+			i = stop;
 			continue;
 		}
-		const word = /^(for|while|do)\b/.exec(code.slice(i, i + 6));
+		const word = /^(for|while)\b/.exec(code.slice(i, i + 6));
 		if (word && !isIdent(code[i - 1])) {
 			const keyword = word[1];
-			let k = skipSpace(i + keyword.length);
-			if (keyword !== "do") {
-				if (code[k] !== "(") {
-					out += c;
-					i++;
+			const open = skipSpace(i + keyword.length);
+			const close = code[open] === "(" ? matchParen(code, open) : -1;
+			if (close !== -1) {
+				const head = code.slice(i, open + 1);
+				const inner = code.slice(open + 1, close);
+				if (keyword === "while") {
+					out += `${head}__codapLoopGuard() && (${protectLoops(inner)}))`;
+					i = close + 1;
 					continue;
 				}
-				let depth = 0;
-				for (; k < n; k++) {
-					if (code[k] === "(") depth++;
-					else if (code[k] === ")") {
-						depth--;
-						if (depth === 0) break;
-					}
+				const semicolons = topLevelSemicolons(inner);
+				if (semicolons.length === 2) {
+					const [a, b] = semicolons;
+					const condition = inner.slice(a + 1, b);
+					const guarded = condition.trim()
+						? `__codapLoopGuard() && (${protectLoops(condition)})`
+						: " __codapLoopGuard()";
+					out += `${head}${protectLoops(inner.slice(0, a))};${guarded};${protectLoops(inner.slice(b + 1))})`;
+					i = close + 1;
+					continue;
 				}
-				k = skipSpace(k + 1);
-			}
-			if (code[k] === "{") {
-				out += code.slice(i, k + 1) + " __codapLoopGuard();";
-				i = k + 1;
-				continue;
+				const body = skipSpace(close + 1);
+				if (code[body] === "{") {
+					out += code.slice(i, body + 1) + " __codapLoopGuard();";
+					i = body + 1;
+					continue;
+				}
 			}
 		}
 		out += c;
@@ -165,28 +277,51 @@ export function protectLoops(code: string): string {
 	return out;
 }
 
-// O prazo dos laços começa a contar quando o script do aluno começa a rodar.
-function guardedScript(js: string, loopGuardMs: number | undefined): string {
-	if (!loopGuardMs) return js;
-	return `window.__codapLoopDeadline = Date.now() + ${loopGuardMs};\n${protectLoops(js)}`;
+/** Protege também os `<script>` que o aluno escreve dentro do próprio HTML. */
+function protectInlineScripts(html: string): string {
+	return html.replace(
+		/(<script\b[^>]*>)([\s\S]*?)(<\/script\s*>)/gi,
+		(_, open: string, body: string, close: string) => open + protectLoops(body) + close
+	);
 }
 
-// Roda depois do código do aluno, num <script> próprio: um erro no código do
-// aluno não impede a correção de rodar. Um erro no próprio checkScript vira
-// reprovação com a mensagem do erro, em vez de deixar o resultado vazio.
+// Um "</script>" dentro do código (numa string, por exemplo) fecharia o
+// <script> no meio e quebraria o resto do documento — inclusive a correção.
+// "<\/script>" é a mesma string em JavaScript; em CSS, "<\/style>" também.
+function escapeScript(code: string): string {
+	return code.replace(/<\/(script)/gi, "<\\/$1");
+}
+
+function escapeStyle(code: string): string {
+	return code.replace(/<\/(style)/gi, "<\\/$1");
+}
+
+// Registrado no <head>, roda no DOMContentLoaded — depois do código do aluno,
+// mas fora do caminho dele: um HTML do aluno que termina no meio de uma tag
+// (`<input type="email"` sem o `>`) engoliria um <script> posto depois dele no
+// <body>, e a correção nunca rodaria. Fica num <script> próprio: um erro de
+// sintaxe no checkScript não derruba o envio do resultado. Um erro do
+// checkScript ao rodar vira reprovação com a mensagem do erro. O resultado é
+// zerado antes: o que o código do aluno tenha reportado não conta.
 function buildCheckScript(checkScript: string): string {
 	return `
-		try {
-			${checkScript}
-		} catch (__codapCheckError) {
-			window.__codap_report(false, String(__codapCheckError && __codapCheckError.message || __codapCheckError));
-		}
+		document.addEventListener("DOMContentLoaded", function () {
+			window.__codapResetResult();
+			try {
+				${checkScript}
+			} catch (__codapCheckError) {
+				window.__codap_report(false, String(__codapCheckError && __codapCheckError.message || __codapCheckError));
+			}
+			window.__codapFinishChecks();
+		});
 	`;
 }
 
-// Roda por último, depois do <script> do usuário: lê window.__codapConsoleEntries
-// e injeta um painel no fim do document.body — nunca aparece se não houver
-// nenhuma entrada (uma lição sem console.log/erro não ganha um painel vazio).
+// Roda por último, no DOMContentLoaded (registrado no <head>, depois da
+// correção — os ouvintes rodam na ordem em que foram registrados): lê
+// window.__codapConsoleEntries e injeta um painel no fim do document.body —
+// nunca aparece se não houver nenhuma entrada (uma lição sem console.log/erro
+// não ganha um painel vazio).
 // Também repassa as mesmas entradas via postMessage, se algo estiver ouvindo
 // (o TerminalSection do CodeSection) — window.ReactNativeWebView é undefined
 // fora de uma WebView RN (ou na própria aba "Web", que não tem onMessage),
@@ -194,7 +329,7 @@ function buildCheckScript(checkScript: string): string {
 function buildConsolePanelScript(errorLabel: string | undefined, consolePanel: boolean): string {
 	const labelLiteral = JSON.stringify(errorLabel ?? "Error");
 	return `
-		(function () {
+		document.addEventListener("DOMContentLoaded", function () {
 			var entries = window.__codapConsoleEntries || [];
 			if (${consolePanel ? "entries.length > 0" : "false"}) {
 				var panel = document.createElement("div");
@@ -211,7 +346,7 @@ function buildConsolePanelScript(errorLabel: string | undefined, consolePanel: b
 			if (window.ReactNativeWebView && typeof window.ReactNativeWebView.postMessage === "function") {
 				window.ReactNativeWebView.postMessage(JSON.stringify({ codapTerminal: true, entries: entries, result: window.__codapResult }));
 			}
-		})();
+		});
 	`;
 }
 
@@ -231,9 +366,9 @@ const BLOCK_NETWORK_CSP =
  * window.onerror nativamente (comportamento padrão de qualquer engine JS) —
  * não precisa de try/catch manual envolvendo o código do usuário.
  *
- * O `code_playground` usa o mesmo documento com `checkScript`,
- * `consolePanel: false`, `blockNetwork: true`, `loopGuardMs` e
- * `forwardConsole: false`.
+ * O `code_playground` e o `code_editor` usam o mesmo documento com
+ * `checkScript`, `consolePanel: false`, `blockNetwork: true`, `loopGuardMs`
+ * e `forwardConsole: false`.
  */
 export function buildSandboxHtmlDocument(opts: BuildSandboxDocumentOptions): string {
 	const {
@@ -244,24 +379,27 @@ export function buildSandboxHtmlDocument(opts: BuildSandboxDocumentOptions): str
 		checkScript,
 		consolePanel = true,
 		blockNetwork = false,
-		loopGuardMs,
+		loopGuardMs = 0,
 		loopGuardMessage = "Loop interrupted",
 		forwardConsole = true,
 	} = opts;
+
+	const body = loopGuardMs ? protectInlineScripts(html) : html;
+	const script = escapeScript(loopGuardMs ? protectLoops(js) : js);
 
 	return `<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 ${blockNetwork ? `<meta http-equiv="Content-Security-Policy" content="${BLOCK_NETWORK_CSP}">` : ""}
-<style>${css}</style>
-<script>${buildShimScript(forwardConsole, loopGuardMessage)}</script>
+<style>${escapeStyle(css)}</style>
+<script>${buildShimScript(forwardConsole, loopGuardMessage, loopGuardMs)}</script>
+${checkScript ? `<script>${buildCheckScript(escapeScript(checkScript))}</script>` : ""}
+<script>${buildConsolePanelScript(errorLabel, consolePanel)}</script>
 </head>
 <body>
-${html}
-${js ? `<script>${guardedScript(js, loopGuardMs)}</script>` : ""}
-${checkScript ? `<script>${buildCheckScript(checkScript)}</script>` : ""}
-<script>${buildConsolePanelScript(errorLabel, consolePanel)}</script>
+${body}
+${js ? `<script>${script}</script>` : ""}
 </body>
 </html>`;
 }

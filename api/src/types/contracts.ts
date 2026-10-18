@@ -245,6 +245,42 @@ export interface CodePlaygroundActivityContent {
 }
 
 /**
+ * `type: 'code_editor'` — desafio final de módulo (Fase 3b do roadmap): o aluno
+ * **digita** o código livremente, executa numa WebView (prévia + console) e a
+ * correção é pelo comportamento, como no `code_playground`. Vive sozinho numa
+ * lição "Testando seus conhecimentos" no fim dos módulos 2 e 3 de cada área, e
+ * a lista de lições do app marca como desafio toda lição que tem um.
+ *
+ * Para não travar quem empaca, as dicas e por fim a solução são liberadas aos
+ * poucos — por tempo ou por execuções que não passaram, o que vier primeiro.
+ * Concluir a lição continua exigindo passar.
+ */
+export interface CodeEditorActivityContent {
+  /** O desafio: o que o código precisa fazer ao rodar, com os valores exatos. */
+  question: string;
+  highlight: string[];
+  /** Linguagem que o aluno escreve. */
+  codeLanguage: 'HTML' | 'CSS' | 'JavaScript';
+  /** Código com que o editor começa (pode ser vazio). O aluno pode voltar a ele. */
+  starterCode: string;
+  /** Arquivos de apoio fixos, como no `code_playground`. */
+  html?: string;
+  css?: string;
+  js?: string;
+  /**
+   * JavaScript autorado que roda depois do código do aluno. Num desafio, chame
+   * `__codap_check(rotulo, passou)` uma vez por requisito: o aluno vê a lista
+   * marcada e passa quando todos passam. `__codap_report(passed, message?)`
+   * continua valendo e tem a palavra final se for chamado.
+   */
+  checkScript: string;
+  /** De 1 a 3 dicas, da mais leve à mais direta, liberadas em sequência. */
+  hints: string[];
+  /** Código completo que passa: liberado por último ao aluno, e usado pelo "Testar" do dashboard. */
+  solution: string;
+}
+
+/**
  * `type: 'reorder'` — montar o código tocando nas linhas na ordem certa
  * (Parsons problem; o "monte a frase" do Duolingo aplicado a código). O aluno
  * vê as linhas embaralhadas e toca nelas para montar o trecho de cima para

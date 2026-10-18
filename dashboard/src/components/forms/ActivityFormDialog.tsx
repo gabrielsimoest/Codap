@@ -20,6 +20,7 @@ import { OptionFields } from './OptionFields'
 import { CodeBlankFields } from './CodeBlankFields'
 import { FillBlankFields } from './FillBlankFields'
 import { CodePlaygroundFields } from './CodePlaygroundFields'
+import { CodeEditorFields } from './CodeEditorFields'
 import { ReorderFields } from './ReorderFields'
 import { MatchingFields } from './MatchingFields'
 import { useCreateActivityMutation, useUpdateActivityMutation } from '@/hooks/useContentMutations'
@@ -27,9 +28,11 @@ import {
   codeBlankContentSchema,
   fillBlankContentSchema,
   codePlaygroundContentSchema,
+  codeEditorContentSchema,
   emptyCodeBlankContent,
   emptyFillBlankContent,
   emptyCodePlaygroundContent,
+  emptyCodeEditorContent,
   emptyMatchingContent,
   emptyOptionContent,
   emptyReorderContent,
@@ -219,6 +222,20 @@ function ActivityContentForm ({
         onSubmit={onSubmit}
       >
         <CodePlaygroundFields />
+      </TypedContentForm>
+    )
+  }
+
+  if (type === 'code_editor') {
+    return (
+      <TypedContentForm
+        schema={codeEditorContentSchema}
+        defaults={(content as object) ?? emptyCodeEditorContent()}
+        submitLabel={submitLabel}
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+      >
+        <CodeEditorFields />
       </TypedContentForm>
     )
   }

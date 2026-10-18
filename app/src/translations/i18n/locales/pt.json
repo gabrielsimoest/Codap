@@ -55,6 +55,34 @@
 			"noReport": "O exercício não conseguiu conferir o resultado."
 		},
 
+		"editor": {
+			"badge": "Desafio do módulo",
+			"codeTab": "Código",
+			"resultTab": "Resultado",
+			"placeholder": "Escreva seu código aqui",
+			"reset": "Recomeçar",
+			"resetTitle": "Recomeçar o código?",
+			"resetMessage": "O que você escreveu será trocado pelo código inicial.",
+			"cancel": "Cancelar",
+			"runFirst": "Escreva o código e toque em {{run}} para testar; depois, em {{next}}.",
+			"passed": "Desafio concluído!",
+			"passedBefore": "A versão anterior do código passou.",
+			"stale": "Você mudou o código depois de executar. Toque em {{run}} de novo.",
+			"requirements": "Requisitos",
+			"console": "Console",
+			"help": "Precisa de ajuda?",
+			"helpIntro": "Se travar, dicas são liberadas aos poucos e, por fim, a solução.",
+			"hint": "Dica {{n}}",
+			"showHint": "Ver a dica {{n}}",
+			"hintLocked": "Dica {{n}}: libera em {{time}} ou depois de mais {{count}} execução(ões) sem passar.",
+			"solution": "Solução",
+			"showSolution": "Ver a solução",
+			"solutionLocked": "Solução: libera em {{time}} ou depois de mais {{count}} execução(ões) sem passar.",
+			"solutionNote": "Escreva a solução no editor e execute para concluir o desafio.",
+			"indent": "Inserir recuo",
+			"insert": "Inserir {{symbol}}"
+		},
+
 		"codeSection": {
 			"consoleError": "Erro",
 			"run": "Executar",

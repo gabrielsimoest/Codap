@@ -25,6 +25,7 @@ export type {
   OptionActivityContent,
   CodeBlankActivityContent,
   CodePlaygroundActivityContent,
+  CodeEditorActivityContent,
   FillBlankActivityContent,
   MatchingActivityContent,
   ReorderActivityContent,
