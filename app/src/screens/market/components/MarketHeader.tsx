@@ -36,9 +36,9 @@ const MarketHeader = () => {
 					fontWeight: "bold",
 				}}
 			>
-				{user?.dependaBots}{" "}
+				{user?.bits}{" "}
 			</Text>
-			<ThemedIcon type={"octicons"} name="dependabot" size={21} />
+			<ThemedIcon type={"octicons"} name="cpu" size={21} />
 		</View>
 	);
 	return (

@@ -6,12 +6,18 @@ import * as SQLite from "expo-sqlite";
 // Native sem polyfill. `randomUUID` resolve os dois de uma vez, nativamente.
 import { randomUUID } from "expo-crypto";
 import {
+	LessonCompletionResult,
 	UserLesson,
 	UserAchievement,
 	SyncQueueRow,
 	User,
 } from "../types/entities";
 import runMigrations from "./migrations";
+import {
+	LESSON_XP_REWARD,
+	bitsEarnedBetween,
+	levelForXp,
+} from "../utils/levels";
 
 /** TODO: Change tables atribute names */
 
@@ -35,6 +41,8 @@ export default class DatabaseClient {
 	}
 
 	initDefaultTables() {
+		// Tabela base, mantida como nasceu (com `dependaBots`): as migrações
+		// reconstroem e renomeiam (v3 e v5 → coluna `bits`).
 		this.database.execSync(
 			"CREATE TABLE IF NOT EXISTS Users " +
 				"(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, dependaBots INT, xp LONG, doubleXp INT, doubleTime INT);"
@@ -65,17 +73,22 @@ export default class DatabaseClient {
 	 * Grava/atualiza o cache local do perfil vindo da API. `remoteId` é a
 	 * própria chave primária de `Users` — não há mais um ID local separado,
 	 * já que toda conta nasce no backend (registro exige internet).
+	 *
+	 * XP e Bits locais são uma estimativa imediata (o nível reage offline); o
+	 * servidor é a autoridade. Sem eventos esperando para sincronizar, o valor
+	 * do servidor vence. Com eventos pendentes, vale o maior dos dois: o local
+	 * está à frente por causa deles, e um login não pode apagar isso.
 	 */
 	upsertLocalProfile(profile: {
 		remoteId: string;
 		name: string;
 		email: string;
 		xp: number | null;
-		dependabots: number | null;
+		bits: number | null;
 	}): User {
 		const now = new Date().toISOString();
-		const xp = profile.xp ?? 0;
-		const dependaBots = profile.dependabots ?? 0;
+		const serverXp = profile.xp ?? 0;
+		const serverBits = profile.bits ?? 0;
 
 		const existing = this.database.getFirstSync<User>(
 			"SELECT * FROM Users WHERE remoteId = ? LIMIT 1",
@@ -83,48 +96,126 @@ export default class DatabaseClient {
 		);
 
 		if (existing) {
+			const unsynced = this.hasUnsyncedEvents(profile.remoteId);
+			const xp = unsynced ? Math.max(existing.xp ?? 0, serverXp) : serverXp;
+			const bits = unsynced
+				? Math.max(existing.bits ?? 0, serverBits)
+				: serverBits;
+
 			this.database.runSync(
-				"UPDATE Users SET name = ?, email = ?, xp = ?, dependaBots = ?, lastProfileSyncAt = ? WHERE remoteId = ?;",
-				[profile.name, profile.email, xp, dependaBots, now, profile.remoteId]
+				"UPDATE Users SET name = ?, email = ?, xp = ?, bits = ?, lastProfileSyncAt = ? WHERE remoteId = ?;",
+				[profile.name, profile.email, xp, bits, now, profile.remoteId]
 			);
 			return {
 				...existing,
 				name: profile.name,
 				email: profile.email,
 				xp,
-				dependaBots,
+				bits,
 			};
 		}
 
 		this.database.runSync(
-			"INSERT INTO Users (remoteId, name, email, dependaBots, xp, doubleXp, doubleTime, lastProfileSyncAt) VALUES (?,?,?,?,?,?,?,?);",
-			[profile.remoteId, profile.name, profile.email, dependaBots, xp, 0, 0, now]
+			"INSERT INTO Users (remoteId, name, email, bits, xp, doubleXp, doubleTime, lastProfileSyncAt) VALUES (?,?,?,?,?,?,?,?);",
+			[profile.remoteId, profile.name, profile.email, serverBits, serverXp, 0, 0, now]
 		);
 
 		return {
 			name: profile.name,
 			email: profile.email,
-			dependaBots,
-			xp,
+			bits: serverBits,
+			xp: serverXp,
 			doubleXp: 0,
 			doubleTime: 0,
 			remoteId: profile.remoteId,
 		};
 	}
 
+	/** Perfil guardado no SQLite (fonte de exibição de XP e Bits), ou `null` se a conta nunca logou neste aparelho. */
+	getLocalProfile(userId: string): User | null {
+		const row = this.database.getFirstSync<User>(
+			"SELECT * FROM Users WHERE remoteId = ? LIMIT 1",
+			[userId]
+		);
+		return row ? { ...row, xp: row.xp ?? 0, bits: row.bits ?? 0 } : null;
+	}
+
+	/** Há eventos `pending` ou `syncing` desse usuário? (`failed` é terminal e `synced` já está no servidor.) */
+	hasUnsyncedEvents(userId: string): boolean {
+		return (
+			this.database.getFirstSync(
+				"SELECT 1 AS found FROM SyncQueue WHERE userId = ? AND status IN ('pending', 'syncing') LIMIT 1;",
+				[userId]
+			) !== null
+		);
+	}
+
+	/** Adota o XP e os Bits que o servidor confirmou. `null` se o usuário não existe localmente. */
+	applyServerProfile(
+		userId: string,
+		profile: { xp: number; bits: number }
+	): User | null {
+		const { changes } = this.database.runSync(
+			"UPDATE Users SET xp = ?, bits = ? WHERE remoteId = ?;",
+			[profile.xp, profile.bits, userId]
+		);
+		return changes > 0 ? this.getLocalProfile(userId) : null;
+	}
+
 	/**
 	 * Grava a conclusão da lição e a enfileira para sincronização na mesma
 	 * transação — é essa atomicidade que garante que o progresso local e a
-	 * fila de sync nunca divirjam (ver api/CLAUDE.md e app/CLAUDE.md).
+	 * fila de sync nunca divirjam (ver api/CLAUDE.md e app/CLAUDE.md). A mesma
+	 * transação paga o XP e os Bits dos níveis cruzados.
+	 *
+	 * Só a primeira conclusão de cada lição rende: refazer uma lição não grava
+	 * nada (o servidor também recusaria como duplicada).
 	 */
-	completeLesson(userId: string, lessonId: number) {
+	completeLesson(userId: string, lessonId: number): LessonCompletionResult {
 		const clientEventId = randomUUID();
 		const occurredAt = new Date().toISOString();
+		let result!: LessonCompletionResult;
 
 		this.database.withTransactionSync(() => {
+			const current = this.database.getFirstSync<{
+				xp: number | null;
+				bits: number | null;
+			}>("SELECT xp, bits FROM Users WHERE remoteId = ?;", [userId]);
+			const xpBefore = current?.xp ?? 0;
+			const bitsBefore = current?.bits ?? 0;
+			const levelBefore = levelForXp(xpBefore);
+
+			const alreadyDone =
+				this.database.getFirstSync(
+					"SELECT 1 AS found FROM UserLessons WHERE userId = ? AND lessonId = ? LIMIT 1;",
+					[userId, lessonId]
+				) !== null;
+
+			if (alreadyDone) {
+				result = {
+					firstTime: false,
+					xpGained: 0,
+					bitsGained: 0,
+					xpBefore,
+					xpAfter: xpBefore,
+					levelBefore,
+					levelAfter: levelBefore,
+					bitsAfter: bitsBefore,
+				};
+				return;
+			}
+
+			const xpAfter = xpBefore + LESSON_XP_REWARD;
+			const bitsGained = bitsEarnedBetween(xpBefore, xpAfter);
+			const bitsAfter = bitsBefore + bitsGained;
+
 			this.database.runSync(
 				"INSERT INTO UserLessons (userId, lessonId) VALUES (?, ?);",
 				[userId, lessonId]
+			);
+			this.database.runSync(
+				"UPDATE Users SET xp = ?, bits = ? WHERE remoteId = ?;",
+				[xpAfter, bitsAfter, userId]
 			);
 			this.database.runSync(
 				"INSERT INTO SyncQueue (userId, clientEventId, type, payload, occurredAt) VALUES (?, ?, ?, ?, ?);",
@@ -136,7 +227,20 @@ export default class DatabaseClient {
 					occurredAt,
 				]
 			);
+
+			result = {
+				firstTime: true,
+				xpGained: LESSON_XP_REWARD,
+				bitsGained,
+				xpBefore,
+				xpAfter,
+				levelBefore,
+				levelAfter: levelForXp(xpAfter),
+				bitsAfter,
+			};
 		});
+
+		return result;
 	}
 
 	/** Idempotente localmente: uma conquista já desbloqueada por esse usuário não é enfileirada de novo. */
@@ -176,6 +280,20 @@ export default class DatabaseClient {
 		return this.database.getAllSync<SyncQueueRow>(
 			"SELECT * FROM SyncQueue WHERE status = 'pending' AND userId = ? ORDER BY createdAt ASC LIMIT ?;",
 			[userId, limit]
+		);
+	}
+
+	/**
+	 * Devolve para `pending` os eventos do usuário que ficaram em `syncing`.
+	 * Uma linha só fica assim se o app foi encerrado com o `/sync` em voo, e nada
+	 * mais a solta. Quem chama (`flushQueue`) faz isso dentro do lock de envio,
+	 * então nenhum outro envio em andamento é dono dessas linhas, e reenviá-las é
+	 * seguro porque o servidor é idempotente.
+	 */
+	releaseSyncingEvents(userId: string): void {
+		this.database.runSync(
+			"UPDATE SyncQueue SET status = 'pending', updatedAt = datetime('now') WHERE userId = ? AND status = 'syncing';",
+			[userId]
 		);
 	}
 

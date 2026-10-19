@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRoute, type RouteProp } from "@react-navigation/native";
 import Icon from "../../components/Icon";
 import ThemedView from "../../components/themed/ThemedView";
 import ActivityPlayer, { filterPlayable } from "./components/ActivityPlayer";
 import LessonComingSoon from "./components/LessonComingSoon";
+import LessonComplete from "./components/LessonComplete";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
 import useModulesQuery from "../../hooks/queries/useModulesQuery";
 import useNavigate from "../../hooks/useNavigate";
@@ -13,6 +14,7 @@ import useUserStore from "../../stores/UserStore";
 import { recordLessonCompletion } from "../../services/SyncService";
 import { evaluateAfterLesson } from "../../services/AchievementService";
 import { buildLessonSession } from "../../utils/buildLessonSession";
+import type { LessonCompletionResult } from "../../types/entities";
 import type { RootStackParamList } from "../../types/navigation";
 
 /**
@@ -42,6 +44,12 @@ export default function Lesson() {
 		[lesson?.id, language]
 	);
 
+	// O que a conclusão rendeu — enquanto existir, a tela de conclusão ocupa o
+	// lugar das atividades. Fica antes dos returns antecipados (regra dos hooks).
+	const [completion, setCompletion] = useState<LessonCompletionResult | null>(
+		null
+	);
+
 	const goBack = () => navigation.goBack();
 
 	const finish = () => {
@@ -49,13 +57,19 @@ export default function Lesson() {
 		// flush). Usar SyncService, nunca DatabaseClient.completeLesson direto,
 		// senão o envio para /sync não é agendado.
 		if (user?.remoteId) {
-			recordLessonCompletion(user.remoteId, lessonId);
+			const result = recordLessonCompletion(user.remoteId, lessonId);
 			// Concluir uma lição é o único momento em que uma conquista pode
 			// ser desbloqueada — confere a área desta lição (e a Tríade Web).
 			evaluateAfterLesson(user.remoteId, areaId);
+			setCompletion(result);
+			return;
 		}
 		goBack();
 	};
+
+	if (completion) {
+		return <LessonComplete result={completion} onContinue={goBack} />;
+	}
 
 	if (isPending) {
 		return (

@@ -30,6 +30,7 @@ api/
     seed.ts                 # popula locales/areas/modules de referência — ver "Conteúdo pedagógico" abaixo
     checkSeedDrift.ts        # compara seed.ts com o banco e acusa divergência (`pnpm seed:check`)
     generateSeed.ts          # reescreve os arrays *_LESSONS a partir do banco (`pnpm seed:generate`)
+    backfillBits.ts           # concede uma vez os Bits dos níveis que o XP já cobre (simula por padrão; `--apply` grava) — ver "Sincronização"
     generateTerminalCode.ts   # gera candidatos de terminalCode (TS→JS) pra revisão humana, não escreve nada
   src/
     app.ts                  # ponto de entrada: registra plugins e routes via @fastify/autoload
@@ -72,6 +73,7 @@ api/
       content.ts                 # helpers da escrita de catálogo: locales, cascata, reorder, upsert de traduções
       contentVersion.ts           # findLatestContentVersions — a versão vigente por idioma (ordena por id, não por released_at)
       schemas.ts                  # errorResponseSchema compartilhado (fica em utils/ porque routes/ é autoloaded)
+      levels.ts                   # curva de nível (1–50), XP por lição e Bits por nível — DUPLICADO em app/src/utils/levels.ts
   test/
     helper.ts                  # build() sobe a app inteira via fastify-cli/helper para testes com app.inject
     plugins/*.test.ts           # espelha src/plugins
@@ -131,6 +133,9 @@ Quando um recurso tem várias operações (CRUD completo), organize em uma pasta
 
 - Recebe um lote de eventos (`{ events: [{ clientEventId, type, occurredAt, payload }] }`, máx. 100) gerados offline pelo app e aplica cada um independentemente — um evento inválido não aborta o lote (`src/routes/sync/create.ts`).
 - Idempotência via as constraints únicas do Prisma citadas acima (não um `clientEventId` persistido no servidor) — `P2002` vira `"duplicate"`, `P2003` (FK inexistente) vira `"error"`. XP só é incrementado na primeira aplicação bem-sucedida, dentro da mesma transação do insert.
+- **XP e Bits** (`src/utils/levels.ts`): cada `lesson_completed` aplicada soma `LESSON_XP_REWARD` (10) em `users.xp` e, se o XP cruzou um ou mais níveis, `bitsForLevel(n)` (`10 × n`, a partir do nível 2) em `users.bits` — tudo na mesma transação do insert em `user_lessons`. O `UPDATE` de XP devolve o XP novo (`select: { xp: true }`) e o "antes" é `novo − 10`: como o `UPDATE` trava a linha até o commit, isso é serializado entre os eventos do lote (que rodam em `Promise.all`), então um nível cruzado por dois eventos do mesmo lote nunca é pago duas vezes. `xp`/`bits` são `Int?` e `increment` em `NULL` continua `NULL`, então são normalizados para 0 antes. **A curva e as constantes são duplicadas em `app/src/utils/levels.ts`** (o app importa `codap-api` só como tipo): mudou um, mude o outro.
+- **A resposta traz `profile: { xp, bits }`**, os valores atuais do usuário depois do lote (lidos ao final do handler). O app adota esses valores quando a fila local está vazia — é o que corrige o XP local de quem reinstalou ou jogou em outro aparelho. Por isso o app também chama `POST /sync` com `{ events: [] }` quando não tem nada a enviar (a resposta traz o `profile` do mesmo jeito). Declarado em `syncResponseSchema` (o `fast-json-stringify` apagaria um campo não declarado) e opcional em `SyncResponseBody`, para um cliente ignorar a ausência.
+- **`users.bits`** (antes `dependabots`, renomeada pela migration `20261018140000_rename_dependabots_to_bits`, `RENAME COLUMN`, que preserva os valores). **Bits retroativos:** `pnpm seed:backfill-bits` (dentro de `/api`; `pnpm api:seed:backfill-bits` da raiz) simula por padrão e grava com `--apply`: `bits = max(bits, bitsEarnedBetween(0, xp))`, idempotente e só aumenta. Rode **uma vez, antes de a loja permitir gastar Bits** — depois disso (saldo = ganhos − gastos) o script devolveria o que foi gasto e deve ser removido.
 - Resposta `200` sempre que a requisição em si é válida e autenticada — é um ack em lote (`results: [{ clientEventId, status, error? }]`), não uma falha única; só `400`/`401`/`429` refletem problema na chamada como um todo.
 - Ao adicionar um novo tipo de evento sincronizável, siga esse mesmo padrão: uma função `applyXxx` dedicada, idempotência via constraint única no schema (evite introduzir uma tabela de log genérica sem necessidade real).
 
@@ -418,6 +423,8 @@ O repositório é um workspace pnpm unificado (ver [CLAUDE.md](../CLAUDE.md) da 
 - Popular o catálogo de referência (áreas/módulos/locales — idempotente, ver "Conteúdo pedagógico"): `pnpm seed` (dentro de `/api`) ou `pnpm api:seed` (da raiz); wired também em `prisma.config.ts` (`migrations.seed`), então `npx prisma db seed` funciona igual.
 - Conferir se `seed.ts` reflete o conteúdo do banco: `pnpm seed:check` (dentro de `/api`). Não escreve nada; sai com código 1 se houver divergência. Ver "Divergência entre `seed.ts` e o banco".
 - Regenerar os arrays `*_LESSONS` de `seed.ts` a partir do banco: `pnpm seed:generate` (dentro de `/api`) ou `pnpm api:seed:generate` (da raiz). Ver "Regenerar automaticamente".
+- Conceder os Bits retroativos (simula por padrão, `--apply` grava): `pnpm seed:backfill-bits` ou `pnpm api:seed:backfill-bits`. Ver "Sincronização".
+- **Os testes rodam contra o NeonDB remoto e, em paralelo (`pnpm test` usa a concorrência padrão do `node --test`), alguns arquivos falham de forma intermitente** — timeout de `autoload` no boot da app, `500` em rotas de escrita de conteúdo, erro de requisição do Prisma num hook —, e cada rodada falha em testes diferentes; isolados, eles passam. Para uma verdade confiável, rode serial: `node --import tsx --test --test-concurrency=1 "test/**/*.ts"` (dentro de `/api`, depois de `pnpm build:ts`). Um teste que falha a meio deixa dados de teste órfãos no banco (o cleanup fica depois da asserção): confira com uma consulta de leitura antes de seguir.
 - Regenerar o Prisma Client após alterar o schema: `npx prisma generate` (dentro de `/api`)
 - Criar/aplicar uma migration: `npx prisma migrate dev --name <nome>` (dentro de `/api`) — em ambiente não-interativo, ver o passo a passo alternativo na seção "Banco de dados (Prisma)".
 - **`.env` precisa de `DATABASE_URL` e `JWT_ACCESS_SECRET`** (ver `.env.example`) — sem `JWT_ACCESS_SECRET` a aplicação não sobe (erro explícito no boot, em `src/plugins/jwt.ts`).

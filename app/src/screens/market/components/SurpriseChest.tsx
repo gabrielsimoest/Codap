@@ -38,7 +38,7 @@ export default function SurpiseChest() {
 							<Icon
 								color="#637aff"
 								type={"octicons"}
-								name="dependabot"
+								name="cpu"
 								size={20}
 							/>
 							<Text style={styles.price}> 500</Text>

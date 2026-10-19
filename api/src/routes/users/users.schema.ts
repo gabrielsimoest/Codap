@@ -6,7 +6,7 @@ export const userResponseSchema = {
     name: { type: 'string' },
     email: { type: 'string', format: 'email' },
     xp: { type: ['integer', 'null'] },
-    dependabots: { type: ['integer', 'null'] },
+    bits: { type: ['integer', 'null'] },
     created_at: { type: 'string', format: 'date-time' },
     updated_at: { type: 'string', format: 'date-time' }
   },
@@ -30,7 +30,7 @@ export const createUserBodySchema = {
     email: { type: 'string', format: 'email' },
     password: { type: 'string', minLength: 8 },
     xp: { type: 'integer', minimum: 0 },
-    dependabots: { type: 'integer', minimum: 0 }
+    bits: { type: 'integer', minimum: 0 }
   }
 }
 
@@ -43,6 +43,6 @@ export const updateUserBodySchema = {
     email: { type: 'string', format: 'email' },
     password: { type: 'string', minLength: 8 },
     xp: { type: 'integer', minimum: 0 },
-    dependabots: { type: 'integer', minimum: 0 }
+    bits: { type: 'integer', minimum: 0 }
   }
 }

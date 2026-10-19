@@ -26,7 +26,7 @@ async function applySession(authResponse: AuthResponse): Promise<User> {
 		name: authResponse.user.name,
 		email: authResponse.user.email,
 		xp: authResponse.user.xp,
-		dependabots: authResponse.user.dependabots,
+		bits: authResponse.user.bits,
 	});
 
 	await AsyncStorage.setItem(CACHED_PROFILE_KEY, JSON.stringify(localUser));
@@ -80,7 +80,24 @@ export async function refreshAccessTokenIfNeeded(): Promise<void> {
 	await ensureFreshAccessToken();
 }
 
+/**
+ * Perfil da conta logada. O AsyncStorage só diz QUEM é (o `remoteId`, gravado no
+ * login); os números vêm do SQLite, que é onde XP e Bits mudam a cada lição.
+ * O JSON do AsyncStorage nunca é atualizado depois do login — devolvê-lo como
+ * está mostraria o XP do dia em que a pessoa logou.
+ */
 export async function getCachedProfile(): Promise<User | null> {
 	const raw = await AsyncStorage.getItem(CACHED_PROFILE_KEY);
-	return raw ? JSON.parse(raw) : null;
+	if (!raw) {
+		return null;
+	}
+
+	const { remoteId } = JSON.parse(raw) as Partial<User>;
+	if (!remoteId) {
+		return null;
+	}
+
+	const database = new DatabaseClient();
+	database.initDefaultTables();
+	return database.getLocalProfile(remoteId);
 }

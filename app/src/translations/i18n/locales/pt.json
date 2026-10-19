@@ -124,7 +124,7 @@
 
 		"_comment3*********": "*********MARKET*********",
 		"market": "Mercado",
-		"buy using dependabots": "COMPRE COM DEPENDABOTS",
+		"buy using bits": "COMPRE COM BITS",
 		"double experience": "Dobro de XP",
 		"surprise chest": "Baú Surpresa",
 		"double time": "Dobro de Tempo",
@@ -223,13 +223,29 @@
 			"market": {
 				"title": "Aviso!",
 				"message": {
-					"dependabots": "DependaBots Insuficientes.",
+					"bits": "Bits insuficientes.",
 					"doubleXP": "Dobro de Experiencia Desativado."
 				}
 			},
 			"notification": {
 				"title": "Permissão de Notificação Negada",
 				"message": "Por favor, ative as notificações para receber lembretes. Você pode ativá-las nas configurações do seu dispositivo."
+			}
+		},
+
+		"levels": {
+			"level": "Nível {{level}}",
+			"levelShort": "Nv. {{level}}",
+			"maxLevel": "Nível máximo",
+			"xpProgress": "{{current}} / {{needed}} XP",
+			"totalXp": "{{xp}} XP no total",
+			"bits": "Bits",
+			"complete": {
+				"title": "Lição concluída!",
+				"xpGained": "+{{xp}} XP",
+				"alreadyDone": "Você já tinha concluído esta lição. Sem XP desta vez.",
+				"levelUp": "Nível {{level}}!",
+				"bitsGained": "+{{bits}} Bits"
 			}
 		},
 

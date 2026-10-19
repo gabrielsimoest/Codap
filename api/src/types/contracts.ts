@@ -62,6 +62,8 @@ export interface SyncEventResult {
 
 export interface SyncResponseBody {
   results: SyncEventResult[];
+  /** Valores atuais do usuário depois do lote. Opcional para o cliente: um servidor antigo não o envia. */
+  profile?: { xp: number; bits: number };
 }
 
 export interface AreaResponse {

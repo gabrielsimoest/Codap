@@ -124,7 +124,7 @@
 
 		"_comment3*********": "*********MARKET*********",
 		"market": "Market",
-		"buy using dependabots": "BUY USING DEPENDABOTS",
+		"buy using bits": "BUY USING BITS",
 		"double experience": "Double XP",
 		"surprise chest": "Surprise Chest",
 		"double time": "Double Time",
@@ -223,13 +223,29 @@
 			"market": {
 				"title": "Warning!",
 				"message": {
-					"dependabots": "Insufficient DependaBots.",
+					"bits": "Insufficient Bits.",
 					"doubleXP": "Double Experience Disabled."
 				}
 			},
 			"notification": {
 				"title": "Notification Permission Denied",
 				"message": "Please enable notifications to receive reminders. You can enable them in your device's settings."
+			}
+		},
+
+		"levels": {
+			"level": "Level {{level}}",
+			"levelShort": "Lv. {{level}}",
+			"maxLevel": "Max level",
+			"xpProgress": "{{current}} / {{needed}} XP",
+			"totalXp": "{{xp}} XP in total",
+			"bits": "Bits",
+			"complete": {
+				"title": "Lesson complete!",
+				"xpGained": "+{{xp}} XP",
+				"alreadyDone": "You had already completed this lesson. No XP this time.",
+				"levelUp": "Level {{level}}!",
+				"bitsGained": "+{{bits}} Bits"
 			}
 		},
 

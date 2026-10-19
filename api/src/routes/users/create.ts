@@ -7,7 +7,7 @@ interface CreateUserBody {
   email: string;
   password: string;
   xp?: number;
-  dependabots?: number;
+  bits?: number;
 }
 
 const create: FastifyPluginAsync = async (fastify): Promise<void> => {
@@ -21,7 +21,7 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       }
     }
   }, async (request, reply) => {
-    const { name, email, password, xp, dependabots } = request.body
+    const { name, email, password, xp, bits } = request.body
 
     const existingUser = await fastify.prisma.users.findUnique({ where: { email } })
     if (existingUser) {
@@ -34,14 +34,14 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
         email,
         password: await hashPassword(password),
         xp: xp ?? 0,
-        dependabots: dependabots ?? 0
+        bits: bits ?? 0
       },
       select: {
         id: true,
         name: true,
         email: true,
         xp: true,
-        dependabots: true,
+        bits: true,
         created_at: true,
         updated_at: true
       }

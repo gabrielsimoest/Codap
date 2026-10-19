@@ -25,7 +25,7 @@ const getById: FastifyPluginAsync = async (fastify): Promise<void> => {
         name: true,
         email: true,
         xp: true,
-        dependabots: true,
+        bits: true,
         created_at: true,
         updated_at: true
       }

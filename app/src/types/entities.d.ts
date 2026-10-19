@@ -12,12 +12,25 @@ import type {
 export interface User {
 	name: string;
 	email: string;
-	dependaBots: number;
+	/** Moeda do app (antes "Dependabots"). Creditada ao subir de nível. */
+	bits: number;
 	xp: number;
 	doubleXp: number;
 	doubleTime: number;
 	/** UUID do usuário na API (users.id) — chave primária de Users; toda conta nasce via /auth. */
 	remoteId: string;
+}
+
+/** O que concluir uma lição rendeu — alimenta a tela de conclusão. Refazer uma lição já concluída não rende nada (`firstTime: false`). */
+export interface LessonCompletionResult {
+	firstTime: boolean;
+	xpGained: number;
+	bitsGained: number;
+	xpBefore: number;
+	xpAfter: number;
+	levelBefore: number;
+	levelAfter: number;
+	bitsAfter: number;
 }
 
 export interface UserLesson {

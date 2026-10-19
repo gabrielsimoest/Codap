@@ -41,7 +41,7 @@ const login: FastifyPluginAsync = async (fastify): Promise<void> => {
         name: existingUser.name,
         email: existingUser.email,
         xp: existingUser.xp,
-        dependabots: existingUser.dependabots,
+        bits: existingUser.bits,
         created_at: existingUser.created_at,
         updated_at: existingUser.updated_at
       },

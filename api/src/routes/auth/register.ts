@@ -38,14 +38,14 @@ const register: FastifyPluginAsync = async (fastify): Promise<void> => {
         email,
         password: await hashPassword(password),
         xp: 0,
-        dependabots: 0
+        bits: 0
       },
       select: {
         id: true,
         name: true,
         email: true,
         xp: true,
-        dependabots: true,
+        bits: true,
         created_at: true,
         updated_at: true
       }

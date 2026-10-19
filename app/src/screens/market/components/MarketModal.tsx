@@ -74,7 +74,7 @@ export default function MarketModal({
 							</ThemedText>
 							<ThemedIcon
 								type={"octicons"}
-								name="dependabot"
+								name="cpu"
 								size={25}
 							/>
 						</RowView>

@@ -45,7 +45,7 @@ export default function DoubleExperience() {
 							<Icon
 								color="#637aff"
 								type={"octicons"}
-								name="dependabot"
+								name="cpu"
 								size={20}
 							/>
 						</RowView>
@@ -61,7 +61,7 @@ export default function DoubleExperience() {
 				onDismiss={() => setVisible(false)}
 				onBuy={() => console.log("")}
 				title={t("buy double experience")}
-				price={300}
+				price={200}
 				image={Images.doubleXP}
 			/>
 		</>

@@ -18,26 +18,27 @@ test('POST /users creates a user and never returns the password', async (t) => {
   assert.equal(body.name, 'Create Test')
   assert.equal(body.email, email)
   assert.equal(body.xp, 0)
-  assert.equal(body.dependabots, 0)
+  assert.equal(body.bits, 0)
+  assert.equal('dependabots' in body, false)
   assert.equal('password' in body, false)
 
   await app.prisma.users.delete({ where: { id: body.id } })
 })
 
-test('POST /users accepts optional xp/dependabots', async (t) => {
+test('POST /users accepts optional xp/bits', async (t) => {
   const app = await build(t)
   const email = `create-${randomUUID()}@example.com`
 
   const res = await app.inject({
     method: 'POST',
     url: '/users',
-    payload: { name: 'Create Test', email, password: 'senha1234', xp: 42, dependabots: 3 }
+    payload: { name: 'Create Test', email, password: 'senha1234', xp: 42, bits: 3 }
   })
 
   assert.equal(res.statusCode, 201)
   const body = JSON.parse(res.payload)
   assert.equal(body.xp, 42)
-  assert.equal(body.dependabots, 3)
+  assert.equal(body.bits, 3)
 
   await app.prisma.users.delete({ where: { id: body.id } })
 })

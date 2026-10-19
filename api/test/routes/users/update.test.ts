@@ -8,7 +8,7 @@ test('PATCH /users/:id updates the allowed fields', async (t) => {
   const email = `update-${randomUUID()}@example.com`
 
   const created = await app.prisma.users.create({
-    data: { name: 'Update Test', email, password: 'irrelevant', xp: 0, dependabots: 0 }
+    data: { name: 'Update Test', email, password: 'irrelevant', xp: 0, bits: 0 }
   })
 
   const res = await app.inject({

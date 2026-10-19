@@ -11,6 +11,7 @@
     "api:seed": "pnpm --filter codap-api seed",
     "api:seed:check": "pnpm --filter codap-api seed:check",
     "api:seed:generate": "pnpm --filter codap-api seed:generate",
+    "api:seed:backfill-bits": "pnpm --filter codap-api seed:backfill-bits",
     "app:start": "pnpm --filter codap start",
     "app:android": "pnpm --filter codap android",
     "app:ios": "pnpm --filter codap ios",

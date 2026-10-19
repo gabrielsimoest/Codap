@@ -13,6 +13,7 @@ import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import AchievementsModal from "./components/achievements/AchievementsModal";
+import LevelProgress from "./components/LevelProgress";
 import { useState } from "react";
 
 const TextSize = 20; // Tamanho padrão da fonte
@@ -81,6 +82,7 @@ export default function User() {
 					style={styles.scroller}
 					showsVerticalScrollIndicator={false}
 				>
+					<LevelProgress />
 					<EditProfile />
 					<ChangePassword />
 					<UserButton

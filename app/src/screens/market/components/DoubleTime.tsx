@@ -45,7 +45,7 @@ export default function DoubleTime() {
 							<Icon
 								color="#637aff"
 								type={"octicons"}
-								name="dependabot"
+								name="cpu"
 								size={20}
 							/>
 						</RowView>
@@ -61,7 +61,7 @@ export default function DoubleTime() {
 				onDismiss={() => setVisible(false)}
 				onBuy={() => console.log("")}
 				title={t("buy double time")}
-				price={200}
+				price={300}
 				image={Images.doubleTime}
 			/>
 		</>

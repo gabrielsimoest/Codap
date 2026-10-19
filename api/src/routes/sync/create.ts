@@ -1,6 +1,7 @@
 import { type FastifyInstance, type FastifyPluginAsync } from 'fastify'
 import { Prisma } from '../../generated/prisma/client.js'
 import { syncRequestBodySchema, syncResponseSchema } from './sync.schema.js'
+import { LESSON_XP_REWARD, bitsEarnedBetween } from '../../utils/levels.js'
 
 type SyncEventType = 'lesson_completed' | 'achievement_unlocked'
 
@@ -23,8 +24,6 @@ interface SyncEventResult {
   error?: string;
 }
 
-const LESSON_XP_REWARD = 10
-
 const PRISMA_UNIQUE_CONSTRAINT_ERROR = 'P2002'
 const PRISMA_FOREIGN_KEY_ERROR = 'P2003'
 
@@ -39,10 +38,22 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
       await tx.user_lessons.create({
         data: { user_id: userId, lesson_id: lessonId, completed_at: new Date(event.occurredAt) }
       })
-      await tx.users.update({
+      // `xp`/`bits` são `Int?`, e `increment` em NULL continua NULL — normaliza antes.
+      await tx.users.updateMany({ where: { id: userId, xp: null }, data: { xp: 0 } })
+      await tx.users.updateMany({ where: { id: userId, bits: null }, data: { bits: 0 } })
+
+      // O UPDATE trava a linha até o commit, então o XP devolvido é serializado
+      // entre os eventos do lote (que rodam em paralelo): cada um enxerga o seu
+      // "antes" e o seu "depois", e um nível cruzado nunca é pago duas vezes.
+      const { xp } = await tx.users.update({
         where: { id: userId },
-        data: { xp: { increment: LESSON_XP_REWARD } }
+        data: { xp: { increment: LESSON_XP_REWARD } },
+        select: { xp: true }
       })
+      const bitsEarned = bitsEarnedBetween((xp ?? 0) - LESSON_XP_REWARD, xp ?? 0)
+      if (bitsEarned > 0) {
+        await tx.users.update({ where: { id: userId }, data: { bits: { increment: bitsEarned } } })
+      }
     })
     return { clientEventId: event.clientEventId, status: 'applied' }
   } catch (error) {
@@ -89,7 +100,7 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       rateLimit: { max: 30, timeWindow: '1 minute' }
     },
     schema: {
-      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor.',
+      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor. Concluir uma lição pela primeira vez credita XP e, ao cruzar um nível, Bits. A resposta traz `profile` com o XP e os Bits atuais do usuário depois do lote.',
       tags: ['sync'],
       body: syncRequestBodySchema,
       response: {
@@ -108,7 +119,13 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       return applyAchievementUnlocked(fastify, userId, event)
     }))
 
-    return { results }
+    // Valores atuais depois do lote: o app adota quando a fila dele está vazia.
+    const { xp, bits } = await fastify.prisma.users.findUniqueOrThrow({
+      where: { id: userId },
+      select: { xp: true, bits: true }
+    })
+
+    return { results, profile: { xp: xp ?? 0, bits: bits ?? 0 } }
   })
 }
 

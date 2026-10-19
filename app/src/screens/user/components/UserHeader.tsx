@@ -5,6 +5,7 @@ import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import useUserStore from "../../../stores/UserStore";
 import ThemedText from "../../../components/themed/ThemedText";
+import { levelForXp } from "../../../utils/levels";
 
 function UserHeader() {
 	const { colors } = useTheme();
@@ -13,7 +14,7 @@ function UserHeader() {
 
 	const user = useUserStore((s) => s.user);
 
-	const XP = user?.xp || 0;
+	const level = levelForXp(user?.xp ?? 0);
 
 	return (
 		<View style={[styles.header, { backgroundColor: colors.background }]}>
@@ -28,7 +29,7 @@ function UserHeader() {
 			</Title>
 			<View style={styles.xpStyle}>
 				<ThemedText style={styles.textXP}>
-					XP: {XP.toString()}
+					{t("levels.levelShort", { level })}
 				</ThemedText>
 			</View>
 		</View>

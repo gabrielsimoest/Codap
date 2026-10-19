@@ -11,7 +11,7 @@ interface UpdateUserBody {
   email?: string;
   password?: string;
   xp?: number;
-  dependabots?: number;
+  bits?: number;
 }
 
 const update: FastifyPluginAsync = async (fastify): Promise<void> => {
@@ -27,7 +27,7 @@ const update: FastifyPluginAsync = async (fastify): Promise<void> => {
     }
   }, async (request) => {
     const { id } = request.params
-    const { name, email, password, xp, dependabots } = request.body
+    const { name, email, password, xp, bits } = request.body
 
     const existingUser = await fastify.prisma.users.findUnique({ where: { id } })
     if (!existingUser) {
@@ -47,7 +47,7 @@ const update: FastifyPluginAsync = async (fastify): Promise<void> => {
         name,
         email,
         xp,
-        dependabots,
+        bits,
         password: password ? await hashPassword(password) : undefined
       },
       select: {
@@ -55,7 +55,7 @@ const update: FastifyPluginAsync = async (fastify): Promise<void> => {
         name: true,
         email: true,
         xp: true,
-        dependabots: true,
+        bits: true,
         created_at: true,
         updated_at: true
       }

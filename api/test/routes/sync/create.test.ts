@@ -316,3 +316,122 @@ test('POST /sync rejects a batch larger than 100 events with 400', async (t) => 
 
   await user.cleanup()
 })
+
+async function syncLessons (app: App, accessToken: string, lessonIds: number[]) {
+  return app.inject({
+    method: 'POST',
+    url: '/sync',
+    headers: { authorization: `Bearer ${accessToken}` },
+    payload: {
+      events: lessonIds.map((lessonId) => ({
+        clientEventId: randomUUID(),
+        type: 'lesson_completed',
+        occurredAt: new Date().toISOString(),
+        payload: { lessonId }
+      }))
+    }
+  })
+}
+
+test('POST /sync below the first level threshold credits no Bits and returns the profile', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+
+  const res = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  const body = JSON.parse(res.payload)
+  assert.deepEqual(body.profile, { xp: 10, bits: 0 })
+
+  const updatedUser = await app.prisma.users.findUniqueOrThrow({ where: { id: user.userId } })
+  assert.equal(updatedUser.xp, 10)
+  assert.equal(updatedUser.bits, 0)
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync credits the Bits of a level when one lesson crosses its threshold', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+  await app.prisma.users.update({ where: { id: user.userId }, data: { xp: 50 } })
+
+  const res = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 60, bits: 20 }) // nível 2 em 54 XP
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync credits the Bits of a level only once when one batch crosses it', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lessons = await Promise.all(Array.from({ length: 6 }, () => createLessonFixture(app)))
+
+  const res = await syncLessons(app, user.accessToken, lessons.map((lesson) => lesson.lessonId))
+
+  assert.equal(res.statusCode, 200)
+  const body = JSON.parse(res.payload)
+  assert.ok(body.results.every((result: { status: string }) => result.status === 'applied'))
+  assert.deepEqual(body.profile, { xp: 60, bits: 20 })
+
+  const updatedUser = await app.prisma.users.findUniqueOrThrow({ where: { id: user.userId } })
+  assert.equal(updatedUser.xp, 60)
+  assert.equal(updatedUser.bits, 20)
+
+  await user.cleanup()
+  for (const lesson of lessons) await lesson.cleanup()
+})
+
+test('POST /sync does not pay a lesson that was already completed and the profile reflects the server', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+
+  const first = await syncLessons(app, user.accessToken, [lesson.lessonId])
+  const second = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(JSON.parse(first.payload).results[0].status, 'applied')
+  const body = JSON.parse(second.payload)
+  assert.equal(body.results[0].status, 'duplicate')
+  assert.deepEqual(body.profile, { xp: 10, bits: 0 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync treats null xp and bits as zero', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+  await app.prisma.users.update({ where: { id: user.userId }, data: { xp: null, bits: null } })
+
+  const res = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 10, bits: 0 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync returns the profile even when the batch is empty', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+
+  const res = await app.inject({
+    method: 'POST',
+    url: '/sync',
+    headers: { authorization: `Bearer ${user.accessToken}` },
+    payload: { events: [] }
+  })
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 0, bits: 0 })
+
+  await user.cleanup()
+})

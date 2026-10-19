@@ -10,7 +10,7 @@ const authUserSchema = {
     name: { type: 'string' },
     email: { type: 'string', format: 'email' },
     xp: { type: ['integer', 'null'] },
-    dependabots: { type: ['integer', 'null'] },
+    bits: { type: ['integer', 'null'] },
     created_at: { type: 'string', format: 'date-time' },
     updated_at: { type: 'string', format: 'date-time' }
   },

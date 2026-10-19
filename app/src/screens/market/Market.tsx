@@ -20,7 +20,7 @@ export default function Market() {
 	const [visibleModal4, setVisibleModal4] = useState(false);
 	const [visibleModal5, setVisibleModal5] = useState(false);
 	const [UserId, setUserId] = useState("");
-	const [Dependa, setDependa] = useState("");
+	const [Bits, setBits] = useState("");
 	const [XP, setXP] = useState("");
 	const [Double, setDouble] = useState("");
 	const [XpDoubleBool, setXpDoubleBool] = useState("0");
@@ -38,7 +38,7 @@ export default function Market() {
 	}, [XpDoubleBool, t]); */
 
 	const getUser = async () => {
-		/* const storageDependa = await AsyncStorage.getItem("DependaBots");
+		/* const storageBits = await AsyncStorage.getItem("Bits");
 		const storageXP = await AsyncStorage.getItem("XP");
 		const storageUser = await AsyncStorage.getItem("IdUser");
 		const storageDouble = await AsyncStorage.getItem("Double");
@@ -46,21 +46,21 @@ export default function Market() {
 		setXP(storageXP);
 		setUserId(storageUser);
 		setDouble(parseInt(storageDouble) + 1);
-		setDependa(storageDependa);
+		setBits(storageBits);
 		setXpDoubleBool(storageXPDouble); */
 	};
 
-	var DoubleCoins = Dependa;
+	var DoubleCoins = Bits;
 
 	async function DoubleF() {
 		/* await db.transaction(async (tx) => {
 			await tx.executeSql(
-				"UPDATE Users SET Double=?, DependaBots=? WHERE ID = ?;",
+				"UPDATE Users SET Double=?, Bits=? WHERE ID = ?;",
 				[Double, DoubleCoins, UserId]
 			);
 			await AsyncStorage.setItem("Double", JSON.stringify(Double));
 			await AsyncStorage.setItem(
-				"DependaBots",
+				"Bits",
 				JSON.stringify(DoubleCoins)
 			);
 			forceUpdate();
@@ -69,12 +69,12 @@ export default function Market() {
 	async function DoubleX() {
 		/* await db.transaction(async (tx) => {
 			await tx.executeSql(
-				"UPDATE Users SET DependaBots=? WHERE ID = ?;",
+				"UPDATE Users SET Bits=? WHERE ID = ?;",
 				[DoubleCoins, UserId]
 			);
 			await AsyncStorage.setItem("XPDouble", "1");
 			await AsyncStorage.setItem(
-				"DependaBots",
+				"Bits",
 				JSON.stringify(DoubleCoins)
 			);
 			setXpAtivo("Ativo");
@@ -92,25 +92,25 @@ export default function Market() {
 	}
 
 	const sendXP = async () => {
-		/* if (Dependa > 200) {
+		/* if (Bits > 200) {
 			DoubleCoins = DoubleCoins - 200;
 			DoubleX();
 		} else {
 			showAlert(
 				t("alert.market.title"),
-				t("alert.market.message.dependabots")
+				t("alert.market.message.bits")
 			);
 		} */
 	};
 
 	const sendDouble = async () => {
-		/* if (Dependa > 300) {
+		/* if (Bits > 300) {
 			DoubleCoins = DoubleCoins - 300;
 			DoubleF();
 		} else {
 			showAlert(
 				t("alert.market.title"),
-				t("alert.market.message.dependabots")
+				t("alert.market.message.bits")
 			);
 		} */
 	};
@@ -119,7 +119,7 @@ export default function Market() {
 		<ThemedView style={styles.container}>
 			<MarketHeader />
 			<ThemedText style={styles.headert}>
-				{t("buy using dependabots")}
+				{t("buy using bits")}
 			</ThemedText>
 			<ScrollView style={{ marginBottom: "18.2%" }}>
 				<DoubleExperience />
