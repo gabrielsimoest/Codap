@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
 import { build } from '../../helper'
+import { scratchModule } from '../../contentFixtures'
 
 async function ensureLocale (app: Awaited<ReturnType<typeof build>>, code: 'pt' | 'en', name: string) {
   const existing = await app.prisma.locales.findFirst({ where: { locale: code } })
@@ -226,4 +227,25 @@ test('GET /modules rejects an unknown locale with 400', async (t) => {
   const app = await build(t)
   const res = await app.inject({ url: '/modules?areaId=1&locale=fr' })
   assert.equal(res.statusCode, 400)
+})
+
+test('GET /modules returns minLevel and xpReward of a lesson (null for a main-trail lesson)', async (t) => {
+  const app = await build(t)
+  const { area, module } = await scratchModule(app, t)
+  const deepening = await app.prisma.lessons.create({
+    data: { module_id: module.id, index: 0, min_level: 8, xp_reward: 30 }
+  })
+  const trail = await app.prisma.lessons.create({ data: { module_id: module.id, index: 1 } })
+
+  const res = await app.inject({ method: 'GET', url: `/modules?areaId=${area.id}&locale=pt` })
+
+  assert.equal(res.statusCode, 200)
+  const lessons = JSON.parse(res.payload)[0].lessons
+  const byId = new Map<number, { minLevel: number | null; xpReward: number | null }>(
+    lessons.map((lesson: { id: number; minLevel: number | null; xpReward: number | null }) => [lesson.id, lesson])
+  )
+  assert.equal(byId.get(deepening.id)?.minLevel, 8)
+  assert.equal(byId.get(deepening.id)?.xpReward, 30)
+  assert.strictEqual(byId.get(trail.id)?.minLevel, null)
+  assert.strictEqual(byId.get(trail.id)?.xpReward, null)
 })

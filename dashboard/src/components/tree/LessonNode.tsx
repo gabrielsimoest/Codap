@@ -56,6 +56,15 @@ export function LessonNode ({
           {lesson.index + 1}
         </span>
         <span className="min-w-0 flex-1 truncate text-sm">{label}</span>
+        {lesson.minLevel != null && (
+          <span
+            data-testid="lesson-optional-badge"
+            title="Aula de aprofundamento (opcional)"
+            className="shrink-0 rounded border border-violet-400/40 px-1 text-[10px] text-violet-300"
+          >
+            Nv. {lesson.minLevel} · +{lesson.xpReward ?? 10} XP
+          </span>
+        )}
         <span className="shrink-0 text-xs text-muted-foreground">
           {lesson.activities.length}
         </span>

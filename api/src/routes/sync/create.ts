@@ -38,6 +38,14 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
       await tx.user_lessons.create({
         data: { user_id: userId, lesson_id: lessonId, completed_at: new Date(event.occurredAt) }
       })
+      // Aula de aprofundamento paga o XP próprio; lição da trilha, o padrão. O
+      // nível mínimo não é conferido aqui (ver a spec): só o XP muda.
+      const { xp_reward: xpReward } = await tx.lessons.findUniqueOrThrow({
+        where: { id: lessonId },
+        select: { xp_reward: true }
+      })
+      const reward = xpReward ?? LESSON_XP_REWARD
+
       // `xp`/`bits` são `Int?`, e `increment` em NULL continua NULL — normaliza antes.
       await tx.users.updateMany({ where: { id: userId, xp: null }, data: { xp: 0 } })
       await tx.users.updateMany({ where: { id: userId, bits: null }, data: { bits: 0 } })
@@ -47,10 +55,10 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
       // "antes" e o seu "depois", e um nível cruzado nunca é pago duas vezes.
       const { xp } = await tx.users.update({
         where: { id: userId },
-        data: { xp: { increment: LESSON_XP_REWARD } },
+        data: { xp: { increment: reward } },
         select: { xp: true }
       })
-      const bitsEarned = bitsEarnedBetween((xp ?? 0) - LESSON_XP_REWARD, xp ?? 0)
+      const bitsEarned = bitsEarnedBetween((xp ?? 0) - reward, xp ?? 0)
       if (bitsEarned > 0) {
         await tx.users.update({ where: { id: userId }, data: { bits: { increment: bitsEarned } } })
       }
@@ -100,7 +108,7 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       rateLimit: { max: 30, timeWindow: '1 minute' }
     },
     schema: {
-      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor. Concluir uma lição pela primeira vez credita XP e, ao cruzar um nível, Bits. A resposta traz `profile` com o XP e os Bits atuais do usuário depois do lote.',
+      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor. Concluir uma lição pela primeira vez credita o XP dela (`lessons.xp_reward`, padrão 10) e, ao cruzar um ou mais níveis, os Bits de cada um. A resposta traz `profile` com o XP e os Bits atuais do usuário depois do lote.',
       tags: ['sync'],
       body: syncRequestBodySchema,
       response: {

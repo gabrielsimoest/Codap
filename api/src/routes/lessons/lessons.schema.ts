@@ -38,6 +38,22 @@ const lessonTranslationsSchema = {
   }
 }
 
+const minLevelSchema = {
+  type: ['integer', 'null'],
+  minimum: 2,
+  maximum: 50,
+  description:
+    'Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50). No PATCH, `null` limpa o campo e a ausência não mexe nele.'
+}
+
+const xpRewardSchema = {
+  type: ['integer', 'null'],
+  minimum: 1,
+  maximum: 100,
+  description:
+    'XP pago ao concluir a lição pela primeira vez. Nulo = 10, o valor padrão. No PATCH, `null` limpa o campo e a ausência não mexe nele.'
+}
+
 /**
  * `content` por idioma. Mesma regra do schema de resposta de `GET /modules`:
  * `additionalProperties: true` é **obrigatório**, senão o fast-json-stringify
@@ -71,6 +87,8 @@ export const adminLessonResponseSchema = {
     id: { type: 'integer' },
     moduleId: { type: 'integer' },
     index: { type: 'integer' },
+    minLevel: { type: ['integer', 'null'] },
+    xpReward: { type: ['integer', 'null'] },
     translations: {
       type: 'object',
       additionalProperties: false,
@@ -82,7 +100,7 @@ export const adminLessonResponseSchema = {
     },
     activities: { type: 'array', items: adminActivityResponseSchema }
   },
-  required: ['id', 'moduleId', 'index', 'translations', 'activities']
+  required: ['id', 'moduleId', 'index', 'minLevel', 'xpReward', 'translations', 'activities']
 }
 
 export const createLessonBodySchema = {
@@ -92,15 +110,21 @@ export const createLessonBodySchema = {
   properties: {
     moduleId: { type: 'integer' },
     index: { type: 'integer', minimum: 0, description: 'Omitido = append no fim.' },
+    minLevel: minLevelSchema,
+    xpReward: xpRewardSchema,
     translations: lessonTranslationsSchema
   }
 }
 
 export const updateLessonBodySchema = {
   type: 'object',
-  required: ['translations'],
+  // Nenhuma propriedade é obrigatória por si só, mas o corpo precisa ter ao
+  // menos uma: um PATCH vazio não diria o que mudar.
+  minProperties: 1,
   additionalProperties: false,
   properties: {
+    minLevel: minLevelSchema,
+    xpReward: xpRewardSchema,
     translations: lessonTranslationsSchema
   }
 }

@@ -145,6 +145,10 @@ model lessons {
   module_id    Int
   module       modules               @relation(fields: [module_id], references: [id])
   index        Int
+  /// Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50).
+  min_level    Int?
+  /// XP pago ao concluir pela primeira vez. Nulo = 10 (`LESSON_XP_REWARD`).
+  xp_reward    Int?
   created_at   DateTime              @default(now())
   updated_at   DateTime              @updatedAt
   activities   activities[]

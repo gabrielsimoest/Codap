@@ -6,6 +6,7 @@ import ThemedView from "../../components/themed/ThemedView";
 import ActivityPlayer, { filterPlayable } from "./components/ActivityPlayer";
 import LessonComingSoon from "./components/LessonComingSoon";
 import LessonComplete from "./components/LessonComplete";
+import LessonLocked from "./components/LessonLocked";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
 import useModulesQuery from "../../hooks/queries/useModulesQuery";
 import useNavigate from "../../hooks/useNavigate";
@@ -14,6 +15,8 @@ import useUserStore from "../../stores/UserStore";
 import { recordLessonCompletion } from "../../services/SyncService";
 import { evaluateAfterLesson } from "../../services/AchievementService";
 import { buildLessonSession } from "../../utils/buildLessonSession";
+import { isLessonUnlocked, lessonXpReward } from "../../utils/lessonAccess";
+import { levelForXp } from "../../utils/levels";
 import type { LessonCompletionResult } from "../../types/entities";
 import type { RootStackParamList } from "../../types/navigation";
 
@@ -57,7 +60,12 @@ export default function Lesson() {
 		// flush). Usar SyncService, nunca DatabaseClient.completeLesson direto,
 		// senão o envio para /sync não é agendado.
 		if (user?.remoteId) {
-			const result = recordLessonCompletion(user.remoteId, lessonId);
+			// Uma aula de aprofundamento paga o XP próprio; a trilha, o padrão.
+			const result = recordLessonCompletion(
+				user.remoteId,
+				lessonId,
+				lesson ? lessonXpReward(lesson) : undefined
+			);
 			// Concluir uma lição é o único momento em que uma conquista pode
 			// ser desbloqueada — confere a área desta lição (e a Tríade Web).
 			evaluateAfterLesson(user.remoteId, areaId);
@@ -75,6 +83,24 @@ export default function Lesson() {
 		return (
 			<ThemedView style={styles.container}>
 				<ModuleListSkeleton />
+			</ThemedView>
+		);
+	}
+
+	// Aula de aprofundamento ainda bloqueada para o nível da pessoa (a lista já
+	// não deixa tocar nela; isto cobre um deep link). Não roda nada nem paga XP.
+	if (lesson && !isLessonUnlocked(lesson, levelForXp(user?.xp ?? 0))) {
+		return (
+			<ThemedView style={styles.container}>
+				<TouchableOpacity onPress={goBack} style={styles.closeButton}>
+					<Icon
+						type="ionicon"
+						name="close-outline"
+						color={"#33526E"}
+						size={60}
+					/>
+				</TouchableOpacity>
+				<LessonLocked minLevel={lesson.minLevel ?? 0} />
 			</ThemedView>
 		);
 	}

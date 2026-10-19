@@ -46,9 +46,17 @@ export const lessonResponseSchema = {
     id: { type: 'integer' },
     index: { type: 'integer' },
     name: { type: 'string' },
+    minLevel: {
+      type: ['integer', 'null'],
+      description: 'Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50).'
+    },
+    xpReward: {
+      type: ['integer', 'null'],
+      description: 'XP pago ao concluir pela primeira vez. Nulo = 10, o valor padrão de uma lição.'
+    },
     activities: { type: 'array', items: activityResponseSchema }
   },
-  required: ['id', 'index', 'name', 'activities']
+  required: ['id', 'index', 'name', 'minLevel', 'xpReward', 'activities']
 }
 
 export const moduleResponseSchema = {

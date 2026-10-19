@@ -149,6 +149,10 @@ type ActivitySeed = {
 
 type LessonSeed = {
   name: Record<LocaleCode, string>;
+  /** Presente = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50). Ausente = lição da trilha principal. */
+  minLevel?: number;
+  /** XP pago na primeira conclusão. Ausente = 10. */
+  xpReward?: number;
   activities: ActivitySeed[];
 }
 
@@ -3333,7 +3337,12 @@ async function seedHtmlBasicLessons (localeIds: Map<LocaleCode, number>): Promis
   for (let lessonIndex = 0; lessonIndex < HTML_BASIC_LESSONS.length; lessonIndex++) {
     const lessonSeed = HTML_BASIC_LESSONS[lessonIndex]
     const lesson = await prisma.lessons.create({
-      data: { module_id: firstModule.id, index: lessonIndex }
+      data: {
+        module_id: firstModule.id,
+        index: lessonIndex,
+        min_level: lessonSeed.minLevel ?? null,
+        xp_reward: lessonSeed.xpReward ?? null
+      }
     })
 
     await prisma.lesson_translations.createMany({
@@ -8055,7 +8064,12 @@ async function seedCssBasicLessons (localeIds: Map<LocaleCode, number>): Promise
   for (let lessonIndex = 0; lessonIndex < CSS_BASIC_LESSONS.length; lessonIndex++) {
     const lessonSeed = CSS_BASIC_LESSONS[lessonIndex]
     const lesson = await prisma.lessons.create({
-      data: { module_id: firstModule.id, index: lessonIndex }
+      data: {
+        module_id: firstModule.id,
+        index: lessonIndex,
+        min_level: lessonSeed.minLevel ?? null,
+        xp_reward: lessonSeed.xpReward ?? null
+      }
     })
 
     await prisma.lesson_translations.createMany({
@@ -11981,7 +11995,12 @@ async function seedJsBasicLessons (localeIds: Map<LocaleCode, number>): Promise<
   for (let lessonIndex = 0; lessonIndex < JS_BASIC_LESSONS.length; lessonIndex++) {
     const lessonSeed = JS_BASIC_LESSONS[lessonIndex]
     const lesson = await prisma.lessons.create({
-      data: { module_id: firstModule.id, index: lessonIndex }
+      data: {
+        module_id: firstModule.id,
+        index: lessonIndex,
+        min_level: lessonSeed.minLevel ?? null,
+        xp_reward: lessonSeed.xpReward ?? null
+      }
     })
 
     await prisma.lesson_translations.createMany({
@@ -24326,6 +24345,155 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Dados estruturados com JSON-LD',
+      en: 'Structured data with JSON-LD'
+    },
+    minLevel: 8,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Dados estruturados descrevem o significado de uma página para máquinas, como os buscadores. O formato recomendado pelos buscadores é o JSON-LD: um bloco de JSON dentro de um script.',
+            endParagraph: 'A página continua igual para quem a lê: o bloco não aparece na tela.',
+            highlight: ['dados estruturados', 'JSON-LD'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Aprendendo HTML",\n  "author": "Ana Souza"\n}\n</script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Structured data describes the meaning of a page to machines, like search engines. The format search engines recommend is JSON-LD: a block of JSON inside a script.',
+            endParagraph: 'The page looks the same to people reading it: the block does not show on screen.',
+            highlight: ['structured data', 'JSON-LD'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Learning HTML",\n  "author": "Ana Souza"\n}\n</script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Cada objeto tem um @type, que diz o que ele é, e propriedades definidas pelo vocabulário schema.org. O @context aponta para esse vocabulário.',
+            endParagraph: 'Um valor também pode ser outro objeto, com o seu próprio @type.',
+            highlight: ['@type', '@context', 'schema.org'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Aprendendo HTML",\n  "author": {\n    "@type": "Person",\n    "name": "Ana Souza"\n  }\n}\n</script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Each object has a @type, which says what it is, and properties defined by the schema.org vocabulary. The @context points to that vocabulary.',
+            endParagraph: 'A value can also be another object, with its own @type.',
+            highlight: ['@type', '@context', 'schema.org'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Learning HTML",\n  "author": {\n    "@type": "Person",\n    "name": "Ana Souza"\n  }\n}\n</script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Os microdados dizem a mesma coisa de outro jeito: marcam o próprio HTML visível com os atributos itemscope, itemtype e itemprop.',
+            endParagraph: 'A diferença é onde a descrição mora. No JSON-LD ela fica num bloco à parte; nos microdados, misturada ao conteúdo da página.',
+            highlight: ['itemscope', 'itemtype', 'itemprop', 'microdados'],
+            codeLanguage: 'HTML',
+            code: '<article itemscope\n  itemtype="https://schema.org/Book">\n  <h2 itemprop="name">\n    Aprendendo HTML\n  </h2>\n  <p>Autora:\n    <span itemprop="author">\n      Ana Souza\n    </span>\n  </p>\n</article>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Microdata says the same thing another way: it marks up the visible HTML itself with the itemscope, itemtype and itemprop attributes.',
+            endParagraph: 'The difference is where the description lives. In JSON-LD it sits in a separate block; in microdata, mixed into the page content.',
+            highlight: ['itemscope', 'itemtype', 'itemprop', 'microdata'],
+            codeLanguage: 'HTML',
+            code: '<article itemscope\n  itemtype="https://schema.org/Book">\n  <h2 itemprop="name">\n    Learning HTML\n  </h2>\n  <p>Author:\n    <span itemprop="author">\n      Ana Souza\n    </span>\n  </p>\n</article>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em JSON-LD, qual propriedade diz o tipo do objeto?',
+            highlight: [],
+            correctOption: 1,
+            options: ['@type', 'type', '@context', 'itemtype']
+          },
+          en: {
+            question: 'In JSON-LD, which property says the type of the object?',
+            highlight: [],
+            correctOption: 1,
+            options: ['@type', 'type', '@context', 'itemtype']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que este JSON-LD é inválido?',
+            codeLanguage: 'JavaScript',
+            code: '{\n  "@context":\n    "https://schema.org",\n  "@type": "Book",\n  "name": "HTML",\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Sobrou uma vírgula depois do último valor', 'O @context não pode ser uma URL', 'Falta o atributo itemprop', 'O @type precisa ser minúsculo']
+          },
+          en: {
+            question: 'Why is this JSON-LD invalid?',
+            codeLanguage: 'JavaScript',
+            code: '{\n  "@context":\n    "https://schema.org",\n  "@type": "Book",\n  "name": "HTML",\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['There is a comma left after the last value', 'The @context cannot be a URL', 'The itemprop attribute is missing', 'The @type must be lowercase']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a principal diferença entre JSON-LD e microdados?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O JSON-LD fica num bloco à parte; os microdados marcam o HTML visível', 'O JSON-LD aparece na tela; os microdados ficam escondidos', 'Só os microdados usam o vocabulário schema.org', 'Só o JSON-LD funciona dentro de um article']
+          },
+          en: {
+            question: 'What is the main difference between JSON-LD and microdata?',
+            highlight: [],
+            correctOption: 1,
+            options: ['JSON-LD sits in a separate block; microdata marks up the visible HTML', 'JSON-LD shows on screen; microdata is hidden', 'Only microdata uses the schema.org vocabulary', 'Only JSON-LD works inside an article']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o atributo que liga o texto à propriedade name.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<h2 ___="name">HTML</h2>',
+            answers: ['itemprop'],
+            distractors: ['itemtype', 'itemscope', 'itemid']
+          },
+          en: {
+            question: 'Complete the attribute that links the text to the name property.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<h2 ___="name">HTML</h2>',
+            answers: ['itemprop'],
+            distractors: ['itemtype', 'itemscope', 'itemid']
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -27868,6 +28036,155 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             checkScript: '(function () {\n  // Media queries e :hover não aparecem no estilo calculado de uma tela só:\n  // a correção lê as regras escritas (CSSOM).\n  var top = [], inMedia = [];\n  for (var s = 0; s < document.styleSheets.length; s++) {\n    var list = document.styleSheets[s].cssRules;\n    for (var r = 0; r < list.length; r++) {\n      var rule = list[r];\n      if (rule.media) {\n        var wide = /min-width:\\s*768px/.test(rule.media.mediaText);\n        for (var k = 0; k < rule.cssRules.length; k++) if (wide) inMedia.push(rule.cssRules[k]);\n      } else if (rule.selectorText) {\n        top.push(rule);\n      }\n    }\n  }\n  function has(rules, selector, test) {\n    return rules.some(function (rule) {\n      return rule.selectorText.split(",").map(function (x) { return x.trim(); }).indexOf(selector) !== -1 && test(rule.style);\n    });\n  }\n  __codap_check(".cards flex and in a column, as the base rule (phone)", has(top, ".cards", function (st) { return st.display === "flex" && st.flexDirection === "column"; }));\n  __codap_check("From 768px (min-width), .cards becomes a row", has(inMedia, ".cards", function (st) { return st.flexDirection === "row"; }));\n  var button = getComputedStyle(document.querySelector(".button"));\n  var property = button.transitionProperty;\n  __codap_check(".button has a transform transition of 0.2s", (property.indexOf("transform") !== -1 || property === "all") && button.transitionDuration === "0.2s");\n  __codap_check("On :hover, .button grows with scale(1.1)", has(top, ".button:hover", function (st) { return st.transform.replace(/\\s/g, "") === "scale(1.1)"; }));\n})();',
             hints: ['Mobile-first: the rule without a media query is for phones (.cards in a column); @media (min-width: 768px) only switches flex-direction to row.', 'The transition goes on the button\'s normal state, not on :hover: transition: transform 0.2s;', ':hover only changes the transform: .button:hover { transform: scale(1.1); }'],
             solution: '.card {\n  background: #cfe8ff;\n  padding: 8px;\n  margin: 4px;\n}\n\n.cards {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 768px) {\n  .cards {\n    flex-direction: row;\n  }\n}\n\n.button {\n  transition: transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.1);\n}'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Camadas da cascata com @layer',
+      en: 'Cascade layers with @layer'
+    },
+    minLevel: 15,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O @layer agrupa regras em camadas. Quando duas regras disputam a mesma propriedade, vence a camada declarada por último, e a especificidade nem entra na conta.',
+            endParagraph: 'Aqui o link fica verde: a regra a.link é mais específica, mas está numa camada anterior.',
+            highlight: ['@layer', 'camadas', 'especificidade'],
+            codeLanguage: 'CSS',
+            code: '@layer base, tema;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer tema {\n  a { color: green; }\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The @layer rule groups rules into layers. When two rules compete for the same property, the layer declared last wins, and specificity does not even count.',
+            endParagraph: 'Here the link turns green: the a.link rule is more specific, but it sits in an earlier layer.',
+            highlight: ['@layer', 'layers', 'specificity'],
+            codeLanguage: 'CSS',
+            code: '@layer base, theme;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer theme {\n  a { color: green; }\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A ordem das camadas é definida na primeira vez que o nome aparece. Declarar @layer reset, base, tema; no começo fixa a ordem de uma vez.',
+            endParagraph: 'Por isso o parágrafo fica verde, mesmo com o bloco reset escrito depois do bloco tema.',
+            highlight: ['@layer', 'ordem'],
+            codeLanguage: 'CSS',
+            code: '@layer reset, base, tema;\n\n@layer tema {\n  p { color: green; }\n}\n\n@layer reset {\n  p { color: black; }\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The order of the layers is set the first time each name appears. Declaring @layer reset, base, theme; at the top fixes the order at once.',
+            endParagraph: 'That is why the paragraph turns green, even with the reset block written after the theme block.',
+            highlight: ['@layer', 'order'],
+            codeLanguage: 'CSS',
+            code: '@layer reset, base, theme;\n\n@layer theme {\n  p { color: green; }\n}\n\n@layer reset {\n  p { color: black; }\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Estilos fora de qualquer camada vencem os que estão dentro delas, sem precisar de !important. Aqui o parágrafo fica vermelho.',
+            endParagraph: 'Com !important a ordem se inverte: a camada declarada primeiro passa a vencer a declarada depois.',
+            highlight: ['fora de qualquer camada', '!important'],
+            codeLanguage: 'CSS',
+            code: '@layer base {\n  p { color: blue; }\n}\n\np { color: red; }',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Styles outside any layer beat the ones inside layers, with no need for !important. Here the paragraph turns red.',
+            endParagraph: 'With !important the order flips: the layer declared first now beats the one declared later.',
+            highlight: ['outside any layer', '!important'],
+            codeLanguage: 'CSS',
+            code: '@layer base {\n  p { color: blue; }\n}\n\np { color: red; }',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'De que cor fica um link com a classe link?',
+            codeLanguage: 'CSS',
+            code: '@layer base, tema;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer tema {\n  a { color: green; }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verde, porque a camada tema vem depois', 'Azul, porque a.link é mais específico', 'Azul, porque a camada base foi escrita primeiro', 'Nenhuma: o CSS dá erro']
+          },
+          en: {
+            question: 'What color is a link with the class link?',
+            codeLanguage: 'CSS',
+            code: '@layer base, theme;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer theme {\n  a { color: green; }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Green, because the theme layer comes later', 'Blue, because a.link is more specific', 'Blue, because the base layer was written first', 'None: the CSS throws an error']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma regra sem camada e outra dentro de uma camada disputam o mesmo elemento, sem !important. Qual vence?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A regra sem camada', 'A regra dentro da camada', 'A mais específica, sempre', 'A que aparece primeiro no arquivo']
+          },
+          en: {
+            question: 'A rule with no layer and another inside a layer compete for the same element, with no !important. Which one wins?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The rule with no layer', 'The rule inside the layer', 'The most specific one, always', 'The one that appears first in the file']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Entre duas camadas, ambas com !important, qual vence?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A declarada primeiro', 'A declarada por último', 'A mais específica', 'A que tem mais regras']
+          },
+          en: {
+            question: 'Between two layers, both with !important, which one wins?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The one declared first', 'The one declared last', 'The most specific one', 'The one with more rules']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a ordem: a camada reset deve ser a primeira.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@layer ___, base, tema;',
+            answers: ['reset'],
+            distractors: ['@reset', 'layer', 'import']
+          },
+          en: {
+            question: 'Complete the order: the reset layer must be the first one.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '@layer ___, base, theme;',
+            answers: ['reset'],
+            distractors: ['@reset', 'layer', 'import']
           }
         }
       }
@@ -32966,6 +33283,159 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'TypeScript',
             code: '{\n  "compilerOptions": {\n    "___": "es2022"\n  }\n}',
             answers: ['target']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Iteradores e geradores',
+      en: 'Iterators and generators'
+    },
+    minLevel: 22,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um iterador é um objeto com um método next() que devolve { value, done }. Arrays, strings, Map e Set já são iteráveis, e o for...of usa isso por baixo.',
+            endParagraph: 'Quando os valores acabam, next() devolve done: true.',
+            highlight: ['iterador', 'next', 'done'],
+            codeLanguage: 'JavaScript',
+            code: 'const it = [10, 20][Symbol.iterator]();\n\nconsole.log(it.next());\nconsole.log(it.next());\nconsole.log(it.next());',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'An iterator is an object with a next() method that returns { value, done }. Arrays, strings, Map and Set are already iterable, and for...of relies on that under the hood.',
+            endParagraph: 'When the values run out, next() returns done: true.',
+            highlight: ['iterator', 'next', 'done'],
+            codeLanguage: 'JavaScript',
+            code: 'const it = [10, 20][Symbol.iterator]();\n\nconsole.log(it.next());\nconsole.log(it.next());\nconsole.log(it.next());',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma função geradora (function*) devolve um iterador. Cada yield pausa a função e entrega um valor; o próximo next() continua de onde ela parou.',
+            endParagraph: 'O valor de return aparece uma única vez, junto com done: true.',
+            highlight: ['geradora', 'yield', 'return'],
+            codeLanguage: 'JavaScript',
+            code: 'function* contar() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst g = contar();\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A generator function (function*) returns an iterator. Each yield pauses the function and hands out a value; the next next() resumes where it stopped.',
+            endParagraph: 'The return value shows up only once, together with done: true.',
+            highlight: ['generator', 'yield', 'return'],
+            codeLanguage: 'JavaScript',
+            code: 'function* count() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst g = count();\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Geradores são preguiçosos: só calculam o próximo valor quando alguém pede. Isso permite sequências infinitas, desde que você pare de pedir.',
+            endParagraph: 'Aqui o laço do gerador nunca termina sozinho, mas o for...of para no break.',
+            highlight: ['preguiçosos', 'infinitas', 'break'],
+            codeLanguage: 'JavaScript',
+            code: 'function* naturais() {\n  let n = 1;\n  while (true) yield n++;\n}\n\nfor (const n of naturais()) {\n  if (n > 3) break;\n  console.log(n);\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Generators are lazy: they only compute the next value when someone asks for it. That allows infinite sequences, as long as you stop asking.',
+            endParagraph: 'Here the generator loop never ends on its own, but the for...of stops at the break.',
+            highlight: ['lazy', 'infinite', 'break'],
+            codeLanguage: 'JavaScript',
+            code: 'function* naturals() {\n  let n = 1;\n  while (true) yield n++;\n}\n\nfor (const n of naturals()) {\n  if (n > 3) break;\n  console.log(n);\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código imprime?',
+            codeLanguage: 'JavaScript',
+            code: 'function* g() {\n  yield \'a\';\n  yield \'b\';\n}\n\nconst it = g();\nit.next();\nconsole.log(it.next().value);',
+            highlight: [],
+            correctOption: 1,
+            options: ['b', 'a', 'undefined', '{ value: "b", done: true }']
+          },
+          en: {
+            question: 'What does this code print?',
+            codeLanguage: 'JavaScript',
+            code: 'function* g() {\n  yield \'a\';\n  yield \'b\';\n}\n\nconst it = g();\nit.next();\nconsole.log(it.next().value);',
+            highlight: [],
+            correctOption: 1,
+            options: ['b', 'a', 'undefined', '{ value: "b", done: true }']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando o código dentro de um gerador é executado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A cada next(), até o próximo yield', 'Assim que a função geradora é chamada', 'Só depois de chamar return()', 'De uma vez só, quando o último yield termina']
+          },
+          en: {
+            question: 'When does the code inside a generator run?',
+            highlight: [],
+            correctOption: 1,
+            options: ['On each next(), up to the next yield', 'As soon as the generator function is called', 'Only after calling return()', 'All at once, when the last yield finishes']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código imprime?',
+            codeLanguage: 'JavaScript',
+            code: 'function* g() {\n  yield 1;\n  return 2;\n}\n\nconsole.log([...g()]);',
+            highlight: [],
+            correctOption: 1,
+            options: ['[1]', '[1, 2]', '[2]', '[]']
+          },
+          en: {
+            question: 'What does this code print?',
+            codeLanguage: 'JavaScript',
+            code: 'function* g() {\n  yield 1;\n  return 2;\n}\n\nconsole.log([...g()]);',
+            highlight: [],
+            correctOption: 1,
+            options: ['[1]', '[1, 2]', '[2]', '[]']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o gerador para entregar cada id.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function* ids() {\n  let id = 1;\n  while (id < 3) ___ id++;\n}',
+            answers: ['yield'],
+            distractors: ['return', 'await', 'next']
+          },
+          en: {
+            question: 'Complete the generator so it hands out each id.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function* ids() {\n  let id = 1;\n  while (id < 3) ___ id++;\n}',
+            answers: ['yield'],
+            distractors: ['return', 'await', 'next']
           }
         }
       }
@@ -43261,7 +43731,12 @@ async function seedModuleLessons (
   for (let lessonIndex = 0; lessonIndex < lessons.length; lessonIndex++) {
     const lessonSeed = lessons[lessonIndex]
     const lesson = await prisma.lessons.create({
-      data: { module_id: module.id, index: lessonIndex }
+      data: {
+        module_id: module.id,
+        index: lessonIndex,
+        min_level: lessonSeed.minLevel ?? null,
+        xp_reward: lessonSeed.xpReward ?? null
+      }
     })
 
     await prisma.lesson_translations.createMany({

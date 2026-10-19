@@ -158,6 +158,10 @@ um campo de contrato que falte no schema **é apagado em silêncio** ao salvar
 pelo dashboard — `noTerminal`/`terminalCode` chegaram a ficar de fora por um
 tempo. Por isso o `verify:ui` confere esses campos nos dois formulários.
 
+### Aula de aprofundamento é um interruptor no formulário da lição
+
+`LessonFormDialog` tem o interruptor **Aula de aprofundamento** e, ligado, os campos **Nível mínimo** (2 a 50) e **XP ao concluir** (1 a 100, sugestão 30). Eles espelham `lessons.min_level`/`xp_reward` da API (mesmos limites); a lógica vive em `lib/lessonForm.ts` (funções puras: o schema zod, `toFormValues`, `toDeepeningFields`). Três regras que não devem ser desfeitas: **o formulário mostra o que está gravado, sem inventar** — um `xpReward` nulo aparece vazio ("padrão: 10"), nunca como 30, porque preencher 30 por conta própria faria um simples "Salvar" de renomeação trocar 10 XP por 30 sem ninguém ver (a sugestão de 30 só entra ao **ligar** o interruptor com o campo vazio); **o XP vazio vale "padrão"** e vai como `null`; e **só se envia o que o usuário mexeu** — com o interruptor ligado vão o nível e o XP, uma aula de aprofundamento que foi desligada manda `null` nos dois (volta à trilha principal), e uma lição da trilha editada sem ligar o interruptor **não manda nada**, para não zerar um `xpReward` que veio pela API (ausente não mexe na coluna). A árvore marca a lição com o selo "Nv. N · +XP" (`data-testid="lesson-optional-badge"`). `mergeContent` copia `minLevel`/`xpReward` da resposta de `GET /modules` (iguais nos dois idiomas). O `verify:ui` abre o formulário, liga o interruptor, confere que os campos aparecem e que nível 1 é recusado, e fecha **sem salvar** (captura `15-licao-aprofundamento.png`). Criar a lição por aqui **não publica** uma `content_version`: veja o aviso sobre apps antigos em [api/CLAUDE.md](../api/CLAUDE.md).
+
 ### Um tipo sem formulário dedicado cai no editor de JSON
 
 `theory`, `option`, `code_blank`, `fill_blank`, `code_playground`, `code_editor`, `reorder` e `matching` têm formulário tipado; qualquer outro `type` é editado como

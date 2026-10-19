@@ -239,7 +239,9 @@ evento ou endpoint de compra validado. Itens:
 - **Dobro de XP**: multiplica o XP do conteúdo opcional (o da trilha segue fixo,
   porque o servidor calcula 10 por lição).
 
-**Fase 3 — conteúdo opcional.**
+**Fase 3 — conteúdo opcional.** *(O aprofundamento por nível foi entregue na
+Fase 3a — ver [2026-10-18-aulas-aprofundamento-design.md](2026-10-18-aulas-aprofundamento-design.md);
+o baú continua pendente.)*
 - **Aprofundamento por nível**: aulas opcionais, **apagadas com borda tracejada,
   cadeado e o nível exigido** no cartão ("Nível 12"); desbloqueadas, ganham borda
   **roxa sutil** (menos chamativa que o troféu dourado do desafio do módulo). O

@@ -240,6 +240,11 @@
 			"xpProgress": "{{current}} / {{needed}} XP",
 			"totalXp": "{{xp}} XP no total",
 			"bits": "Bits",
+			"requiredLevel": "Nível {{level}}",
+			"lockedLesson": {
+				"title": "Aula bloqueada",
+				"message": "Esta aula abre no nível {{level}}."
+			},
 			"complete": {
 				"title": "Lição concluída!",
 				"xpGained": "+{{xp}} XP",

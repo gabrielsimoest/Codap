@@ -249,6 +249,8 @@ export async function findAdminLessons (
       id: true,
       module_id: true,
       index: true,
+      min_level: true,
+      xp_reward: true,
       translations: {
         select: { name: true, locale: { select: { locale: true } } }
       },
@@ -272,6 +274,8 @@ export async function findAdminLessons (
     id: lesson.id,
     moduleId: lesson.module_id,
     index: lesson.index,
+    minLevel: lesson.min_level,
+    xpReward: lesson.xp_reward,
     translations: toTranslationMap(lesson.translations, (row) => ({ name: row.name })),
     activities: lesson.activities.map((activity) => ({
       id: activity.id,

@@ -79,6 +79,34 @@ step('a árvore mostra módulos e lições da área', async (page) => {
   }
 })
 
+step('o formulário de lição liga o aprofundamento, mostra os campos e valida o nível', async (page) => {
+  // Os controles da linha só aparecem no hover (`opacity-0` + `group-hover`).
+  const row = page.getByTestId('lesson-node').first().locator('xpath=..')
+  await row.hover()
+  await row.getByTitle('Editar lição').click()
+  await page.getByRole('heading', { name: 'Editar lição' }).waitFor({ timeout: 10_000 })
+
+  const interruptor = page.getByRole('dialog').getByRole('switch', { name: 'Aula de aprofundamento' })
+  await interruptor.waitFor({ timeout: 10_000 })
+  if (await interruptor.getAttribute('aria-checked') !== 'true') {
+    await interruptor.click()
+  }
+
+  const nivel = page.getByLabel('Nível mínimo')
+  await nivel.waitFor({ timeout: 10_000 })
+  await page.getByLabel('XP ao concluir').waitFor({ timeout: 10_000 })
+
+  // Nível 1 não existe como aula de aprofundamento (a faixa é de 2 a 50): o
+  // formulário recusa sem chamar a API — nada é gravado neste passo.
+  await nivel.fill('1')
+  await page.getByRole('button', { name: 'Salvar' }).click()
+  await page.getByText('O nível mínimo vai de 2 a 50.').waitFor({ timeout: 10_000 })
+
+  await page.screenshot(shot('15-licao-aprofundamento.png'))
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'hidden', timeout: 10_000 })
+})
+
 step('selecionar uma lição abre o painel de atividades', async (page) => {
   await page.getByTestId('lesson-node').first().click()
   await page.getByRole('button', { name: 'Nova atividade' }).waitFor({ timeout: 10_000 })

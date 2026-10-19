@@ -158,6 +158,14 @@ async function verificar (alvo: Alvo): Promise<void> {
       }
     }
 
+    // Nulo no banco e ausente no seed são a mesma coisa (lição da trilha / XP padrão).
+    if ((doBanco.min_level ?? null) !== (doSeed.minLevel ?? null)) {
+      relatar(posicao, `nível mínimo difere — seed ${doSeed.minLevel ?? '(nenhum)'}, banco ${doBanco.min_level ?? '(nenhum)'}`)
+    }
+    if ((doBanco.xp_reward ?? null) !== (doSeed.xpReward ?? null)) {
+      relatar(posicao, `XP da lição difere — seed ${doSeed.xpReward ?? '(padrão)'}, banco ${doBanco.xp_reward ?? '(padrão)'}`)
+    }
+
     if (doBanco.activities.length !== doSeed.activities.length) {
       relatar(
         posicao,

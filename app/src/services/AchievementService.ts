@@ -9,6 +9,7 @@ import { areasQueryOptions } from "../hooks/queries/useAreasQuery";
 import { filterPlayable } from "../screens/classes/components/ActivityPlayer";
 import useAchievementStore from "../stores/AchievementStore";
 import useLanguageStore from "../stores/LanguageStore";
+import { isOptionalLesson } from "../utils/lessonAccess";
 
 /**
  * Ids FIXOS — os mesmos de `ACHIEVEMENTS` em `api/prisma/seed.ts`. Ao contrário
@@ -48,7 +49,8 @@ const AREA_ACHIEVEMENTS: number[] = [
 /**
  * Área concluída = todas as lições que este app consegue reproduzir estão em
  * `UserLessons`. Lição sem nenhuma atividade suportada (abre o "em breve") não
- * conta: o usuário não teria como concluí-la nesta versão do app.
+ * conta: o usuário não teria como concluí-la nesta versão do app. Aula de
+ * aprofundamento (com `minLevel`) também não conta: é opcional.
  */
 export function isAreaComplete(
 	modules: ModuleResponse[],
@@ -56,7 +58,11 @@ export function isAreaComplete(
 ): boolean {
 	const required = modules
 		.flatMap((module) => module.lessons)
-		.filter((lesson) => filterPlayable(lesson.activities).length > 0);
+		// Aula de aprofundamento é opcional: nunca impede o emblema da área.
+		.filter(
+			(lesson) =>
+				!isOptionalLesson(lesson) && filterPlayable(lesson.activities).length > 0
+		);
 	return (
 		required.length > 0 &&
 		required.every((lesson) => completedLessonIds.has(lesson.id))

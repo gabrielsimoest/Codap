@@ -5,10 +5,10 @@ import { build } from '../../helper'
 
 type App = Awaited<ReturnType<typeof build>>
 
-async function createLessonFixture (app: App) {
+async function createLessonFixture (app: App, extra: { xp_reward?: number; min_level?: number } = {}) {
   const area = await app.prisma.areas.create({ data: { name: `Sync Fixture Area ${randomUUID()}` } })
   const learningModule = await app.prisma.modules.create({ data: { area_id: area.id, index: 1 } })
-  const lesson = await app.prisma.lessons.create({ data: { module_id: learningModule.id, index: 1 } })
+  const lesson = await app.prisma.lessons.create({ data: { module_id: learningModule.id, index: 1, ...extra } })
 
   return {
     lessonId: lesson.id,
@@ -434,4 +434,34 @@ test('POST /sync returns the profile even when the batch is empty', async (t) =>
   assert.deepEqual(JSON.parse(res.payload).profile, { xp: 0, bits: 0 })
 
   await user.cleanup()
+})
+
+test('POST /sync pays the xpReward of an optional lesson', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app, { min_level: 8, xp_reward: 30 })
+
+  const res = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 30, bits: 0 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync pays the Bits of every level an optional lesson crosses', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app, { min_level: 8, xp_reward: 100 })
+  await app.prisma.users.update({ where: { id: user.userId }, data: { xp: 100 } })
+
+  const res = await syncLessons(app, user.accessToken, [lesson.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  // 100 XP é o nível 2; 200 XP é o nível 4: cruza os níveis 3 e 4 (10 × 3 + 10 × 4).
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 200, bits: 70 })
+
+  await user.cleanup()
+  await lesson.cleanup()
 })

@@ -54,6 +54,9 @@ export function mergeModulesByLocale (
             id: lesson.id,
             moduleId: module.id,
             index: lesson.index,
+            // Não dependem do idioma: vêm iguais nas duas respostas.
+            minLevel: lesson.minLevel ?? null,
+            xpReward: lesson.xpReward ?? null,
             translations: {},
             activities: []
           }

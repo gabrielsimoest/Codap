@@ -372,6 +372,14 @@ export interface LessonResponse {
   id: number;
   index: number;
   name: string;
+  /**
+   * Nulo = lição da trilha principal. Preenchido = aula de aprofundamento
+   * (opcional), aberta a partir deste nível (2 a 50). Um cache antigo do app
+   * não traz o campo: ausente conta como nulo.
+   */
+  minLevel: number | null;
+  /** XP pago ao concluir pela primeira vez. Nulo = 10 (`LESSON_XP_REWARD`). */
+  xpReward: number | null;
   activities: ActivityResponse[];
 }
 
@@ -434,10 +442,17 @@ export interface UpdateModuleBody {
 export interface CreateLessonBody {
   moduleId: number;
   index?: number;
+  /** 2 a 50. Preenchido torna a lição uma aula de aprofundamento (opcional, aberta a partir deste nível). */
+  minLevel?: number | null;
+  /** 1 a 100. Omitido ou nulo = 10 XP. */
+  xpReward?: number | null;
   translations: TranslationMap<LessonTranslationInput>;
 }
 
+/** O corpo precisa ter ao menos uma propriedade. `null` limpa `minLevel`/`xpReward`; ausente não mexe. */
 export interface UpdateLessonBody {
+  minLevel?: number | null;
+  xpReward?: number | null;
   translations?: TranslationMap<LessonTranslationInput>;
 }
 
@@ -492,6 +507,8 @@ export interface AdminLessonResponse {
   id: number;
   moduleId: number;
   index: number;
+  minLevel: number | null;
+  xpReward: number | null;
   translations: TranslationMap<LessonTranslationInput>;
   activities: AdminActivityResponse[];
 }

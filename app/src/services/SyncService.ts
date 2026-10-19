@@ -121,10 +121,11 @@ export async function flushQueue(): Promise<void> {
  */
 export function recordLessonCompletion(
 	userId: string,
-	lessonId: number
+	lessonId: number,
+	xpReward?: number
 ): LessonCompletionResult {
 	const database = new DatabaseClient();
-	const result = database.completeLesson(userId, lessonId);
+	const result = database.completeLesson(userId, lessonId, xpReward);
 
 	if (result.firstTime) {
 		const { user, setUser } = useUserStore.getState();

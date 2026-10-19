@@ -14,6 +14,8 @@ import useLanguageStore from "../../../stores/LanguageStore";
 import useUserStore from "../../../stores/UserStore";
 import DatabaseClient from "../../../services/DatabaseClient";
 import areaMetadata, { getAreaIndex } from "../areaMetadata";
+import { levelForXp } from "../../../utils/levels";
+import { isLessonUnlocked, isOptionalLesson } from "../../../utils/lessonAccess";
 
 interface Props {
 	// Sempre definido: `Classes` só monta este componente depois de resolver a
@@ -50,6 +52,9 @@ export default function AreaModules({ areaId }: Props) {
 		}, [user?.remoteId])
 	);
 
+	// O nível vem do XP local, então a lista reage na hora (e funciona offline).
+	const level = levelForXp(user?.xp ?? 0);
+
 	const areaIndex = getAreaIndex(areas, areaId);
 	const metadata = areaIndex >= 0 ? areaMetadata[areaIndex] : undefined;
 
@@ -74,23 +79,34 @@ export default function AreaModules({ areaId }: Props) {
 							subtitle={module.subtitle}
 						>
 							{module.lessons.length > 0 ? (
-								module.lessons.map((lesson) => (
-									<ClassButton
-										key={lesson.id}
-										title={lesson.name}
-										checked={completed.includes(lesson.id)}
-										// A lição de desafio do módulo ("Testando seus
-										// conhecimentos") é a que tem um `code_editor`.
-										challenge={lesson.activities.some((activity) => activity.type === "code_editor")}
-										onPress={() =>
-											navigation.navigate("Lesson", {
-												areaId,
-												moduleId: module.id,
-												lessonId: lesson.id,
-											})
-										}
-									/>
-								))
+								module.lessons.map((lesson) => {
+									const optional = isOptionalLesson(lesson);
+									const unlocked = isLessonUnlocked(lesson, level);
+
+									return (
+										<ClassButton
+											key={lesson.id}
+											title={lesson.name}
+											checked={completed.includes(lesson.id)}
+											// A lição de desafio do módulo ("Testando seus
+											// conhecimentos") é a que tem um `code_editor`.
+											challenge={lesson.activities.some((activity) => activity.type === "code_editor")}
+											// Aula de aprofundamento: opcional, abre a partir de um
+											// nível. Bloqueada fica apagada e sem toque.
+											deepening={optional && unlocked}
+											lockedLevel={
+												optional && !unlocked ? lesson.minLevel ?? undefined : undefined
+											}
+											onPress={() =>
+												navigation.navigate("Lesson", {
+													areaId,
+													moduleId: module.id,
+													lessonId: lesson.id,
+												})
+											}
+										/>
+									);
+								})
 							) : (
 								<LessonComingSoon />
 							)}

@@ -64,6 +64,8 @@ function LocalePreview ({
         id: 0,
         moduleId: 0,
         index: 0,
+        minLevel: null,
+        xpReward: null,
         translations: {},
         activities: [activity]
       }]

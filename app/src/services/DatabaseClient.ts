@@ -169,9 +169,15 @@ export default class DatabaseClient {
 	 * transação paga o XP e os Bits dos níveis cruzados.
 	 *
 	 * Só a primeira conclusão de cada lição rende: refazer uma lição não grava
-	 * nada (o servidor também recusaria como duplicada).
+	 * nada (o servidor também recusaria como duplicada). `xpReward` é o XP da
+	 * lição (uma aula de aprofundamento paga mais que as 10 padrão) — o mesmo
+	 * valor que o servidor lê de `lessons.xp_reward`.
 	 */
-	completeLesson(userId: string, lessonId: number): LessonCompletionResult {
+	completeLesson(
+		userId: string,
+		lessonId: number,
+		xpReward: number = LESSON_XP_REWARD
+	): LessonCompletionResult {
 		const clientEventId = randomUUID();
 		const occurredAt = new Date().toISOString();
 		let result!: LessonCompletionResult;
@@ -205,7 +211,7 @@ export default class DatabaseClient {
 				return;
 			}
 
-			const xpAfter = xpBefore + LESSON_XP_REWARD;
+			const xpAfter = xpBefore + xpReward;
 			const bitsGained = bitsEarnedBetween(xpBefore, xpAfter);
 			const bitsAfter = bitsBefore + bitsGained;
 
@@ -230,7 +236,7 @@ export default class DatabaseClient {
 
 			result = {
 				firstTime: true,
-				xpGained: LESSON_XP_REWARD,
+				xpGained: xpReward,
 				bitsGained,
 				xpBefore,
 				xpAfter,

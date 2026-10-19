@@ -240,6 +240,11 @@
 			"xpProgress": "{{current}} / {{needed}} XP",
 			"totalXp": "{{xp}} XP in total",
 			"bits": "Bits",
+			"requiredLevel": "Level {{level}}",
+			"lockedLesson": {
+				"title": "Locked lesson",
+				"message": "This lesson opens at level {{level}}."
+			},
 			"complete": {
 				"title": "Lesson complete!",
 				"xpGained": "+{{xp}} XP",

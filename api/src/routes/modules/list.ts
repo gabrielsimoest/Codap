@@ -37,6 +37,8 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
           select: {
             id: true,
             index: true,
+            min_level: true,
+            xp_reward: true,
             translations: {
               where: { locale: { locale } },
               select: { name: true },
@@ -72,6 +74,8 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
         id: lesson.id,
         index: lesson.index,
         name: lesson.translations[0]?.name ?? '',
+        minLevel: lesson.min_level,
+        xpReward: lesson.xp_reward,
         activities: lesson.activities.map((activity) => ({
           id: activity.id,
           index: activity.index,
