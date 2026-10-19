@@ -5,7 +5,7 @@ import { build } from '../../helper'
 
 type App = Awaited<ReturnType<typeof build>>
 
-async function createLessonFixture (app: App, extra: { xp_reward?: number; min_level?: number } = {}) {
+async function createLessonFixture (app: App, extra: { xp_reward?: number; min_level?: number; is_chest?: boolean } = {}) {
   const area = await app.prisma.areas.create({ data: { name: `Sync Fixture Area ${randomUUID()}` } })
   const learningModule = await app.prisma.modules.create({ data: { area_id: area.id, index: 1 } })
   const lesson = await app.prisma.lessons.create({ data: { module_id: learningModule.id, index: 1, ...extra } })
@@ -46,6 +46,8 @@ async function registerTestUser (app: App) {
     userId: body.user.id as string,
     accessToken: body.accessToken as string,
     cleanup: async () => {
+      await app.prisma.xp_boosts.deleteMany({ where: { user_id: body.user.id } })
+      await app.prisma.user_chest_lessons.deleteMany({ where: { user_id: body.user.id } })
       await app.prisma.user_lessons.deleteMany({ where: { user_id: body.user.id } })
       await app.prisma.user_achievements.deleteMany({ where: { user_id: body.user.id } })
       await app.prisma.refresh_tokens.deleteMany({ where: { user_id: body.user.id } })
@@ -464,4 +466,133 @@ test('POST /sync pays the Bits of every level an optional lesson crosses', async
 
   await user.cleanup()
   await lesson.cleanup()
+})
+
+const MINUTE_MS = 60 * 1000
+
+async function syncLessonsAt (app: App, accessToken: string, events: Array<{ lessonId: number, occurredAt: Date }>) {
+  return app.inject({
+    method: 'POST',
+    url: '/sync',
+    headers: { authorization: `Bearer ${accessToken}` },
+    payload: {
+      events: events.map(({ lessonId, occurredAt }) => ({
+        clientEventId: randomUUID(),
+        type: 'lesson_completed',
+        occurredAt: occurredAt.toISOString(),
+        payload: { lessonId }
+      }))
+    }
+  })
+}
+
+async function openBoost (app: App, userId: string, startsInMinutes: number, endsInMinutes: number) {
+  const now = Date.now()
+  await app.prisma.xp_boosts.create({
+    data: {
+      user_id: userId,
+      starts_at: new Date(now + startsInMinutes * MINUTE_MS),
+      ends_at: new Date(now + endsInMinutes * MINUTE_MS)
+    }
+  })
+}
+
+test('POST /sync doubles the XP of an event inside a boost window', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+  await openBoost(app, user.userId, -1, 4)
+
+  const res = await syncLessonsAt(app, user.accessToken, [{ lessonId: lesson.lessonId, occurredAt: new Date() }])
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 20, bits: 0 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync does not double an event outside every window', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const [before, after] = [await createLessonFixture(app), await createLessonFixture(app)]
+  await openBoost(app, user.userId, -20, -15)
+
+  const res = await syncLessonsAt(app, user.accessToken, [
+    { lessonId: before.lessonId, occurredAt: new Date(Date.now() - 30 * MINUTE_MS) }, // antes da janela
+    { lessonId: after.lessonId, occurredAt: new Date() } // depois do fim
+  ])
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 20, bits: 0 }) // 10 + 10, sem dobro
+
+  await user.cleanup()
+  await before.cleanup()
+  await after.cleanup()
+})
+
+test('POST /sync doubles an event completed offline inside a window that already ended', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app)
+  await openBoost(app, user.userId, -60, -55)
+
+  const res = await syncLessonsAt(app, user.accessToken, [
+    { lessonId: lesson.lessonId, occurredAt: new Date(Date.now() - 58 * MINUTE_MS) }
+  ])
+
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 20, bits: 0 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync doubles the xpReward of an optional lesson and pays the Bits of the levels crossed', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lesson = await createLessonFixture(app, { min_level: 8, xp_reward: 50 })
+  await app.prisma.users.update({ where: { id: user.userId }, data: { xp: 100 } })
+  await openBoost(app, user.userId, -1, 4)
+
+  const res = await syncLessonsAt(app, user.accessToken, [{ lessonId: lesson.lessonId, occurredAt: new Date() }])
+
+  // 50 × 2 = 100 XP: de 100 (nível 2) a 200 (nível 4) cruza os níveis 3 e 4 (30 + 40 Bits).
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 200, bits: 70 })
+
+  await user.cleanup()
+  await lesson.cleanup()
+})
+
+test('POST /sync refuses a chest lesson that was not revealed (lesson_locked) and the batch goes on', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const chest = await createLessonFixture(app, { is_chest: true, xp_reward: 50 })
+  const trail = await createLessonFixture(app)
+
+  const res = await syncLessons(app, user.accessToken, [chest.lessonId, trail.lessonId])
+
+  assert.equal(res.statusCode, 200)
+  const body = JSON.parse(res.payload)
+  assert.deepEqual(body.results.map((r: { status: string, error?: string }) => [r.status, r.error]), [['error', 'lesson_locked'], ['applied', undefined]])
+  assert.deepEqual(body.profile, { xp: 10, bits: 0 }) // só a lição da trilha pagou
+  assert.equal(await app.prisma.user_lessons.count({ where: { user_id: user.userId, lesson_id: chest.lessonId } }), 0)
+
+  await user.cleanup()
+  await chest.cleanup()
+  await trail.cleanup()
+})
+
+test('POST /sync pays a revealed chest lesson with its xpReward', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const chest = await createLessonFixture(app, { is_chest: true, xp_reward: 50 })
+  await app.prisma.user_chest_lessons.create({ data: { user_id: user.userId, lesson_id: chest.lessonId } })
+
+  const res = await syncLessons(app, user.accessToken, [chest.lessonId])
+
+  assert.equal(JSON.parse(res.payload).results[0].status, 'applied')
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 50, bits: 0 })
+
+  await user.cleanup()
+  await chest.cleanup()
 })

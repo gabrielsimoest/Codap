@@ -56,6 +56,15 @@ export function LessonNode ({
           {lesson.index + 1}
         </span>
         <span className="min-w-0 flex-1 truncate text-sm">{label}</span>
+        {lesson.chest && (
+          <span
+            data-testid="lesson-chest-badge"
+            title="Aula do baú (exclusiva)"
+            className="shrink-0 rounded border border-fuchsia-400/40 px-1 text-[10px] text-fuchsia-300"
+          >
+            Baú · +{lesson.xpReward ?? 10} XP
+          </span>
+        )}
         {lesson.minLevel != null && (
           <span
             data-testid="lesson-optional-badge"

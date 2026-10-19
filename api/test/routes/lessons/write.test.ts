@@ -408,3 +408,91 @@ test('PATCH /lessons/:id with xpReward null alone clears only the xpReward', asy
   assert.equal(body.minLevel, 8)
   assert.strictEqual(body.xpReward, null)
 })
+
+test('POST /lessons with chest true stores is_chest, has no minLevel and answers chest: true', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+
+  const res = await createLessonVia(app, module.id, { chest: true, xpReward: 50 })
+
+  assert.equal(res.statusCode, 201)
+  const body = JSON.parse(res.payload)
+  assert.strictEqual(body.chest, true)
+  assert.strictEqual(body.minLevel, null)
+  assert.equal(body.xpReward, 50)
+  assert.equal((await app.prisma.lessons.findUniqueOrThrow({ where: { id: body.id } })).is_chest, true)
+  assert.strictEqual(JSON.parse((await createLessonVia(app, module.id)).payload).chest, false)
+})
+
+test('POST /lessons rejects chest together with minLevel with 400', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+
+  assert.equal((await createLessonVia(app, module.id, { chest: true, minLevel: 8 })).statusCode, 400)
+})
+
+test('PATCH /lessons/:id chest true clears the minLevel, and a minLevel turns the chest off', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+  const lessonId = JSON.parse((await createLessonVia(app, module.id, { minLevel: 8, xpReward: 30 })).payload).id
+
+  const toChest = await app.inject({ method: 'PATCH', url: `/lessons/${lessonId}`, payload: { chest: true } })
+  assert.equal(toChest.statusCode, 200)
+  assert.strictEqual(JSON.parse(toChest.payload).chest, true)
+  assert.strictEqual(JSON.parse(toChest.payload).minLevel, null)
+  assert.equal(JSON.parse(toChest.payload).xpReward, 30)
+
+  const toLevel = await app.inject({ method: 'PATCH', url: `/lessons/${lessonId}`, payload: { minLevel: 9 } })
+  assert.strictEqual(JSON.parse(toLevel.payload).chest, false)
+  assert.equal(JSON.parse(toLevel.payload).minLevel, 9)
+
+  const off = await app.inject({ method: 'PATCH', url: `/lessons/${lessonId}`, payload: { chest: false, minLevel: null } })
+  assert.strictEqual(JSON.parse(off.payload).chest, false)
+  assert.strictEqual(JSON.parse(off.payload).minLevel, null)
+})
+
+test('PATCH /lessons/:id rejects chest true together with a minLevel with 400', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+  const lessonId = JSON.parse((await createLessonVia(app, module.id)).payload).id
+
+  const res = await app.inject({ method: 'PATCH', url: `/lessons/${lessonId}`, payload: { chest: true, minLevel: 8 } })
+
+  assert.equal(res.statusCode, 400)
+})
+
+test('GET /lessons (admin) returns chest lessons with the chest flag', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+  const chestId = JSON.parse((await createLessonVia(app, module.id, { chest: true })).payload).id
+
+  const res = await app.inject({ url: `/lessons?moduleId=${module.id}` })
+
+  const lesson = (JSON.parse(res.payload) as Array<{ id: number, chest: boolean }>).find((l) => l.id === chestId)
+  assert.strictEqual(lesson?.chest, true)
+})
+
+test('DELETE /lessons/:id refuses with 409 when a user already revealed the chest lesson', async (t) => {
+  useDevelopmentEnv(t)
+  const app = await build(t)
+  const { module } = await scratchModule(app, t)
+
+  const lesson = await app.prisma.lessons.create({ data: { module_id: module.id, index: 0, is_chest: true } })
+  const user = await app.prisma.users.create({
+    data: { name: 'Chest User', email: `${randomUUID()}@test.dev`, password: 'x' }
+  })
+  await app.prisma.user_chest_lessons.create({ data: { user_id: user.id, lesson_id: lesson.id } })
+
+  t.after(async () => {
+    await app.prisma.users.deleteMany({ where: { id: user.id } })
+  })
+
+  const res = await app.inject({ method: 'DELETE', url: `/lessons/${lesson.id}` })
+  assert.equal(res.statusCode, 409)
+  assert.equal(await app.prisma.lessons.count({ where: { id: lesson.id } }), 1)
+})

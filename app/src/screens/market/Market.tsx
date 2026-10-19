@@ -1,131 +1,200 @@
-import React, { useReducer, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import type { ChestOutcome, ShopItem } from "codap-api/src/types/contracts";
 import MarketHeader from "./components/MarketHeader";
-import DoubleExperience from "./components/DoubleExperience";
-import SurpiseChest from "./components/SurpriseChest";
-import DoubleTime from "./components/DoubleTime";
+import MarketModal from "./components/MarketModal";
+import ShopItemCard from "./components/ShopItemCard";
 import ThemedView from "../../components/themed/ThemedView";
 import ThemedText from "../../components/themed/ThemedText";
+import useAreasQuery from "../../hooks/queries/useAreasQuery";
+import Images from "../../utils/imageIndexer";
+import { showAlert } from "../../utils/showAlert";
+import { buyItem, refreshShop, type BuyResult } from "../../services/ShopActions";
+import useLanguageStore from "../../stores/LanguageStore";
+import useShopStore from "../../stores/ShopStore";
+import useUserStore from "../../stores/UserStore";
+
+/**
+ * Só para exibir enquanto o estado da loja não chegou (sem conexão): os preços
+ * de verdade moram no servidor e `GET /shop` os devolve — comprar sem ter o
+ * estado nem é oferecido.
+ */
+const FALLBACK_PRICES = { double_xp: 200, instant_hint: 300, chest: 500 };
+
+const formatTime = (iso: string) =>
+	new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
 export default function Market() {
-	//Constante de tradução, usar {t("CHAVE")} para tradução
 	const { t } = useTranslation();
 
-	const [visibleCommingSoon, setVisibleCommingSoon] = useState(false);
-	const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-	const [visibleModal, setVisibleModal] = useState(false);
-	const [visibleModal2, setVisibleModal2] = useState(false);
-	const [visibleModal3, setVisibleModal3] = useState(false);
-	const [visibleModal4, setVisibleModal4] = useState(false);
-	const [visibleModal5, setVisibleModal5] = useState(false);
-	const [UserId, setUserId] = useState("");
-	const [Bits, setBits] = useState("");
-	const [XP, setXP] = useState("");
-	const [Double, setDouble] = useState("");
-	const [XpDoubleBool, setXpDoubleBool] = useState("0");
-	const [XpAtivo, setXpAtivo] = useState(t("inactive"));
+	const remoteId = useUserStore((s) => s.user?.remoteId);
+	const language = useLanguageStore((s) => s.language);
+	const { data: areas } = useAreasQuery();
+	// O estado da loja é de uma conta: outra conta no mesmo aparelho nunca o herda.
+	const shop = useShopStore((s) => (s.userId === remoteId ? s.state : null));
 
-	/* useFocusEffect(
-		React.useCallback(() => {
-			getUser();
-		}, [reducerValue])
+	const [confirming, setConfirming] = useState<ShopItem | null>(null);
+	const [busy, setBusy] = useState(false);
+
+	useFocusEffect(
+		useCallback(() => {
+			refreshShop();
+		}, [remoteId])
 	);
-	useEffect(() => {
-		if (XpDoubleBool == "0" || XpDoubleBool == null)
-			setXpAtivo(t("inactive"));
-		if (XpDoubleBool == "1") setXpAtivo(t("active"));
-	}, [XpDoubleBool, t]); */
 
-	const getUser = async () => {
-		/* const storageBits = await AsyncStorage.getItem("Bits");
-		const storageXP = await AsyncStorage.getItem("XP");
-		const storageUser = await AsyncStorage.getItem("IdUser");
-		const storageDouble = await AsyncStorage.getItem("Double");
-		const storageXPDouble = await AsyncStorage.getItem("XPDouble");
-		setXP(storageXP);
-		setUserId(storageUser);
-		setDouble(parseInt(storageDouble) + 1);
-		setBits(storageBits);
-		setXpDoubleBool(storageXPDouble); */
+	const prices = shop?.prices ?? FALLBACK_PRICES;
+	const boostActive =
+		shop?.doubleXpEndsAt != null &&
+		new Date(shop.doubleXpEndsAt).getTime() > Date.now();
+
+	const ask = (item: ShopItem) => {
+		if (!shop) {
+			showAlert(t("alert.market.title"), t("shop.errors.offline"));
+			return;
+		}
+		setConfirming(item);
 	};
 
-	var DoubleCoins = Bits;
-
-	async function DoubleF() {
-		/* await db.transaction(async (tx) => {
-			await tx.executeSql(
-				"UPDATE Users SET Double=?, Bits=? WHERE ID = ?;",
-				[Double, DoubleCoins, UserId]
-			);
-			await AsyncStorage.setItem("Double", JSON.stringify(Double));
-			await AsyncStorage.setItem(
-				"Bits",
-				JSON.stringify(DoubleCoins)
-			);
-			forceUpdate();
-		}); */
-	}
-	async function DoubleX() {
-		/* await db.transaction(async (tx) => {
-			await tx.executeSql(
-				"UPDATE Users SET Bits=? WHERE ID = ?;",
-				[DoubleCoins, UserId]
-			);
-			await AsyncStorage.setItem("XPDouble", "1");
-			await AsyncStorage.setItem(
-				"Bits",
-				JSON.stringify(DoubleCoins)
-			);
-			setXpAtivo("Ativo");
-			setTimeout(forceUpdate, 2000);
-			setTimeout(async function () {
-				await AsyncStorage.setItem("XPDouble", "0");
-				showAlert(
-					t("alert.market.title"),
-					t("alert.market.message.doubleXP")
-				);
-				setXpAtivo(t("inactive"));
-				setTimeout(forceUpdate, 2000);
-			}, 300000);
-		}); */
-	}
-
-	const sendXP = async () => {
-		/* if (Bits > 200) {
-			DoubleCoins = DoubleCoins - 200;
-			DoubleX();
-		} else {
-			showAlert(
-				t("alert.market.title"),
-				t("alert.market.message.bits")
-			);
-		} */
+	const announce = (item: ShopItem, result: BuyResult) => {
+		const title = t("alert.market.title");
+		if (result.ok) {
+			showAlert(t("shop.success"), successMessage(item, result.response.chest));
+			return;
+		}
+		switch (result.reason) {
+			case "offline":
+				showAlert(title, t("shop.errors.offline"));
+				break;
+			case "pending_sync":
+				showAlert(title, t("shop.errors.pendingSync"));
+				break;
+			case "insufficient_bits":
+				showAlert(title, t("shop.errors.insufficient", { bits: result.bits ?? 0 }));
+				break;
+			case "boost_active":
+				showAlert(title, t("shop.errors.boostActive"));
+				break;
+			default:
+				showAlert(title, t("shop.errors.generic"));
+		}
 	};
 
-	const sendDouble = async () => {
-		/* if (Bits > 300) {
-			DoubleCoins = DoubleCoins - 300;
-			DoubleF();
-		} else {
-			showAlert(
-				t("alert.market.title"),
-				t("alert.market.message.bits")
-			);
-		} */
+	/** O que o baú entregou, ou a mensagem fixa dos outros itens. */
+	const successMessage = (item: ShopItem, chest?: ChestOutcome): string => {
+		if (item !== "chest" || !chest) return t(`shop.${item}.bought`);
+		switch (chest.kind) {
+			case "lesson":
+				return t("shop.chest.lesson", { name: chest.lesson.name });
+			case "instant_hint":
+				return t("shop.chest.hint");
+			case "double_xp":
+				return t("shop.chest.boost");
+			default:
+				return t("shop.chest.bits", { amount: chest.amount });
+		}
+	};
+
+	const chestAreas = shop?.chest.areas ?? [];
+	const chestTotal = chestAreas.reduce((sum, area) => sum + area.total, 0);
+	const chestRevealed = chestAreas.reduce((sum, area) => sum + area.revealed, 0);
+
+	const confirm = async () => {
+		if (!confirming || busy) return;
+		const item = confirming;
+		setBusy(true);
+		const result = await buyItem(item, language);
+		setBusy(false);
+		setConfirming(null);
+		announce(item, result);
 	};
 
 	return (
 		<ThemedView style={styles.container}>
 			<MarketHeader />
-			<ThemedText style={styles.headert}>
-				{t("buy using bits")}
-			</ThemedText>
+			<ThemedText style={styles.headert}>{t("buy using bits")}</ThemedText>
 			<ScrollView style={{ marginBottom: "18.2%" }}>
-				<DoubleExperience />
-				<SurpiseChest />
-				<DoubleTime />
+				<ShopItemCard
+					title={t("double experience")}
+					price={prices.double_xp}
+					image={Images.doubleXP}
+					status={
+						boostActive
+							? t("shop.double_xp.active", { time: formatTime(shop!.doubleXpEndsAt!) })
+							: t("inactive")
+					}
+					buyLabel={t("buy")}
+					onBuy={() => ask("double_xp")}
+				/>
+				<ShopItemCard
+					title={t("surprise chest")}
+					price={prices.chest}
+					image={Images.surpriseChest}
+					imageSide="right"
+					status={
+						shop && chestTotal > 0
+							? t("shop.chest.collection", { revealed: chestRevealed, total: chestTotal })
+							: undefined
+					}
+					buyLabel={t("buy")}
+					onBuy={() => ask("chest")}
+				/>
+				<ShopItemCard
+					title={t("instant hint")}
+					price={prices.instant_hint}
+					image={Images.doubleTime}
+					status={shop ? t("shop.instant_hint.owned", { count: shop.instantHints }) : undefined}
+					buyLabel={t("buy")}
+					onBuy={() => ask("instant_hint")}
+				/>
 			</ScrollView>
+
+			<MarketModal
+				visible={confirming === "double_xp"}
+				onDismiss={() => setConfirming(null)}
+				onBuy={confirm}
+				loading={busy}
+				title={t("shop.double_xp.confirm")}
+				price={prices.double_xp}
+				image={Images.doubleXP}
+			/>
+			<MarketModal
+				visible={confirming === "chest"}
+				onDismiss={() => setConfirming(null)}
+				onBuy={confirm}
+				loading={busy}
+				title={t("shop.chest.confirm")}
+				price={prices.chest}
+				image={Images.surpriseChest}
+			>
+				{/* Quantas aulas exclusivas cada área tem e quantas já são suas —
+				    nunca quais são: a surpresa é parte do baú. */}
+				<ThemedView style={styles.chestInfo}>
+					{chestAreas.length === 0 ? (
+						<ThemedText style={styles.chestInfoText}>{t("shop.chest.empty")}</ThemedText>
+					) : (
+						chestAreas.map((area) => (
+							<ThemedText key={area.areaId} style={styles.chestInfoText}>
+								{t("shop.chest.areaCount", {
+									area: areas?.find((item) => item.id === area.areaId)?.name ?? "",
+									revealed: area.revealed,
+									total: area.total,
+								})}
+							</ThemedText>
+						))
+					)}
+				</ThemedView>
+			</MarketModal>
+			<MarketModal
+				visible={confirming === "instant_hint"}
+				onDismiss={() => setConfirming(null)}
+				onBuy={confirm}
+				loading={busy}
+				title={t("shop.instant_hint.confirm")}
+				price={prices.instant_hint}
+				image={Images.doubleTime}
+			/>
 		</ThemedView>
 	);
 }
@@ -135,6 +204,15 @@ const styles = StyleSheet.create({
 		backgroundColor: "#141f29",
 		height: "100%",
 	},
+	chestInfo: {
+		alignItems: "center",
+		marginBottom: 8,
+	},
+	chestInfoText: {
+		fontFamily: "Roboto",
+		fontSize: 16,
+		textAlign: "center",
+	},
 	headert: {
 		margin: 10,
 		fontSize: 25,
@@ -142,154 +220,5 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		fontFamily: "Roboto",
 		textAlign: "center",
-	},
-	list: {
-		backgroundColor: "#1B2B39",
-		borderRadius: 10,
-		height: 170,
-		margin: 10,
-		elevation: 7,
-	},
-	button: {
-		left: "8%",
-		top: "25%",
-	},
-	xpImage: {
-		top: 30,
-		margin: 5,
-		width: 150,
-		height: 120,
-	},
-	chestImage: {
-		position: "absolute",
-		right: -5,
-		bottom: 0,
-		width: 180,
-		height: 180,
-	},
-	timeImage: {
-		top: 15,
-		margin: 5,
-		width: 160,
-		height: 130,
-	},
-	textL: {
-		color: "#fff",
-		position: "absolute",
-		fontSize: 20,
-		fontWeight: "bold",
-		fontFamily: "Roboto",
-		right: 37,
-		top: 10,
-	},
-	textL2: {
-		color: "#fff",
-		fontWeight: "bold",
-		position: "absolute",
-		fontFamily: "Roboto",
-		fontSize: 20,
-		left: 35,
-		top: 10,
-	},
-	textL3: {
-		color: "#fff",
-		position: "absolute",
-		fontSize: 20,
-		fontWeight: "bold",
-		fontFamily: "Roboto",
-		right: 60,
-		top: 38,
-	},
-	textLD: {
-		color: "#637aff",
-		position: "absolute",
-		fontSize: 20,
-		fontWeight: "bold",
-		fontFamily: "Roboto",
-		right: 40,
-		top: 38,
-	},
-	textLD2: {
-		color: "#637aff",
-		fontSize: 20,
-		fontWeight: "bold",
-		fontFamily: "Roboto",
-	},
-	textLD3: {
-		color: "#637aff",
-		position: "absolute",
-		fontSize: 20,
-		fontWeight: "bold",
-		fontFamily: "Roboto",
-		right: 40,
-		top: 38,
-	},
-	contant: {
-		opacity: 0.99,
-		margin: 20,
-		marginTop: 130,
-		zIndex: 99,
-		padding: 20,
-		borderRadius: 30,
-		borderColor: "rgba(0,0,0, 0.2)",
-		backgroundColor: "#141f29",
-
-		shadowColor: "rgba(0,0,0, 0.3)",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		elevation: 5,
-		shadowOpacity: 0.28,
-		shadowRadius: 4,
-	},
-	textModal: {
-		flexGrow: 1,
-		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 23,
-		fontWeight: "bold",
-		marginTop: -40,
-	},
-	xpImageModal: {
-		right: 70,
-		margin: 10,
-		width: 265,
-		height: 220,
-		marginLeft: "28%",
-	},
-	chestImageModal: {
-		right: 30,
-		width: 350,
-		height: 350,
-		margin: 10,
-	},
-	timeImageModal: {
-		right: 70,
-		margin: 10,
-		width: 265,
-		height: 220,
-		marginLeft: "28%",
-	},
-	icon: {
-		marginLeft: 260,
-		top: -15,
-	},
-	text: {
-		flexGrow: 1,
-		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 30,
-		fontWeight: "bold",
-		marginLeft: "35%",
-	},
-	Double: {
-		position: "absolute",
-		top: "3%",
-		left: "4%",
-	},
-	centeredView: {
-		flex: 1,
-		backgroundColor: "rgba(0, 0, 0, 0.85)",
 	},
 });

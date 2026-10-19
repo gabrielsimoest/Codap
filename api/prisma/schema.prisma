@@ -49,11 +49,41 @@ model users {
   password          String
   xp                Int?
   bits              Int?
+  /// Dicas instantâneas compradas e ainda não usadas.
+  instant_hints     Int                 @default(0)
+  /// Baús seguidos que não deram aula exclusiva (a garantia contra azar).
+  chest_misses      Int                 @default(0)
   created_at        DateTime            @default(now())
   updated_at        DateTime            @updatedAt
   user_lessons      user_lessons[]
   user_achievements user_achievements[]
   refresh_tokens    refresh_tokens[]
+  xp_boosts         xp_boosts[]
+  chest_lessons     user_chest_lessons[]
+}
+
+/// Janela de Dobro de XP: toda `lesson_completed` cujo `occurredAt` cai dentro de alguma janela do usuário paga o dobro.
+model xp_boosts {
+  id         Int      @id @default(autoincrement())
+  user_id    String   @db.Uuid
+  user       users    @relation(fields: [user_id], references: [id])
+  starts_at  DateTime
+  ends_at    DateTime
+  created_at DateTime @default(now())
+
+  @@index([user_id, ends_at])
+}
+
+/// Aulas exclusivas do baú que o usuário já revelou (a coleção). Única por usuário e lição.
+model user_chest_lessons {
+  id          Int      @id @default(autoincrement())
+  user_id     String   @db.Uuid
+  user        users    @relation(fields: [user_id], references: [id])
+  lesson_id   Int
+  lesson      lessons  @relation(fields: [lesson_id], references: [id])
+  revealed_at DateTime @default(now())
+
+  @@unique([user_id, lesson_id])
 }
 
 model user_lessons {
@@ -149,11 +179,14 @@ model lessons {
   min_level    Int?
   /// XP pago ao concluir pela primeira vez. Nulo = 10 (`LESSON_XP_REWARD`).
   xp_reward    Int?
+  /// Aula exclusiva do baú: fora do catálogo público, só chega a quem a revelou (`user_chest_lessons`). Nunca tem `min_level`.
+  is_chest     Boolean               @default(false)
   created_at   DateTime              @default(now())
   updated_at   DateTime              @updatedAt
   activities   activities[]
   translations lesson_translations[]
   user_lessons user_lessons[]
+  chest_users  user_chest_lessons[]
 }
 
 model activities {

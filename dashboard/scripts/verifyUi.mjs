@@ -107,6 +107,42 @@ step('o formulário de lição liga o aprofundamento, mostra os campos e valida 
   await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'hidden', timeout: 10_000 })
 })
 
+step('o formulário de lição liga o baú, esconde o nível e exclui o aprofundamento', async (page) => {
+  const row = page.getByTestId('lesson-node').first().locator('xpath=..')
+  await row.hover()
+  await row.getByTitle('Editar lição').click()
+  await page.getByRole('heading', { name: 'Editar lição' }).waitFor({ timeout: 10_000 })
+
+  const dialog = page.getByRole('dialog')
+  const bau = dialog.getByRole('switch', { name: 'Aula do baú' })
+  const aprofundamento = dialog.getByRole('switch', { name: 'Aula de aprofundamento' })
+  await bau.waitFor({ timeout: 10_000 })
+
+  // Baú ligado: só o XP (com a sugestão do baú), sem nível mínimo.
+  if (await bau.getAttribute('aria-checked') !== 'true') {
+    await bau.click()
+  }
+  await page.getByLabel('XP ao concluir').waitFor({ timeout: 10_000 })
+  if (await page.getByLabel('Nível mínimo').count() !== 0) {
+    throw new Error('uma aula do baú não deveria pedir nível mínimo')
+  }
+  if (await aprofundamento.getAttribute('aria-checked') !== 'false') {
+    throw new Error('ligar o baú deveria desligar o aprofundamento')
+  }
+  await page.screenshot(shot('16-licao-bau.png'))
+
+  // Ligar o aprofundamento desliga o baú e traz o nível de volta.
+  await aprofundamento.click()
+  await page.getByLabel('Nível mínimo').waitFor({ timeout: 10_000 })
+  if (await bau.getAttribute('aria-checked') !== 'false') {
+    throw new Error('ligar o aprofundamento deveria desligar o baú')
+  }
+
+  // Fecha sem salvar: nada é gravado neste passo.
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'hidden', timeout: 10_000 })
+})
+
 step('selecionar uma lição abre o painel de atividades', async (page) => {
   await page.getByTestId('lesson-node').first().click()
   await page.getByRole('button', { name: 'Nova atividade' }).waitFor({ timeout: 10_000 })

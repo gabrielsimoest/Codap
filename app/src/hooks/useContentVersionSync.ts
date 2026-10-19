@@ -59,7 +59,12 @@ export function isStaleForLanguage(
 		return true;
 	}
 
-	return entity === "modules" && queryLanguage === language;
+	// A coleção do baú (`["collection", userId, idioma]`) é conteúdo traduzido
+	// como os módulos: uma aula do baú editada chega pela mesma versão.
+	return (
+		(entity === "modules" || entity === "collection") &&
+		queryLanguage === language
+	);
 }
 
 const useContentVersionSync = () => {

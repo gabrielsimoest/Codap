@@ -4,7 +4,11 @@ export const listModulesQuerystringSchema = {
   additionalProperties: false,
   properties: {
     areaId: { type: 'integer' },
-    locale: { type: 'string', enum: ['pt', 'en'] }
+    locale: { type: 'string', enum: ['pt', 'en'] },
+    includeChest: {
+      type: 'boolean',
+      description: 'Só vale com NODE_ENV=development (é o que o dashboard usa para ver as aulas do baú); em qualquer outro ambiente é ignorado. As aulas do baú nunca saem deste catálogo: ele é igual para todos e cacheado, e elas são por usuário (ver GET /collection).'
+    }
   }
 }
 
@@ -46,6 +50,10 @@ export const lessonResponseSchema = {
     id: { type: 'integer' },
     index: { type: 'integer' },
     name: { type: 'string' },
+    chest: {
+      type: 'boolean',
+      description: 'Aula exclusiva do baú. Sempre `false` no catálogo público.'
+    },
     minLevel: {
       type: ['integer', 'null'],
       description: 'Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50).'
@@ -56,7 +64,7 @@ export const lessonResponseSchema = {
     },
     activities: { type: 'array', items: activityResponseSchema }
   },
-  required: ['id', 'index', 'name', 'minLevel', 'xpReward', 'activities']
+  required: ['id', 'index', 'name', 'minLevel', 'xpReward', 'chest', 'activities']
 }
 
 export const moduleResponseSchema = {

@@ -11,7 +11,7 @@ const remove: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.delete<{ Params: RemoveModuleParams }>('/:id', {
     schema: {
       description:
-        'Remove um módulo e, em cascata, suas lições, atividades e traduções. Falha com 409 se alguma lição já tiver progresso de usuário. Só existe em desenvolvimento.',
+        'Remove um módulo e, em cascata, suas lições, atividades e traduções. Falha com 409 se alguma lição já tiver progresso de usuário (inclusive uma aula do baú já revelada). Só existe em desenvolvimento.',
       tags: ['modules'],
       params: moduleIdParamsSchema,
       response: {

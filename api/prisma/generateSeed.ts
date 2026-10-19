@@ -60,6 +60,7 @@ interface LessonDump {
   /** Só presente em aula de aprofundamento — a trilha principal não escreve o campo. */
   minLevel?: number
   xpReward?: number
+  chest?: true
   activities: Array<{ type: string; content: Record<LocaleCode, Record<string, unknown>> }>
 }
 
@@ -104,6 +105,7 @@ async function fetchLessons (areaName: string, moduleIndex: number): Promise<Les
       name,
       ...(lesson.min_level !== null ? { minLevel: lesson.min_level } : {}),
       ...(lesson.xp_reward !== null ? { xpReward: lesson.xp_reward } : {}),
+      ...(lesson.is_chest ? { chest: true as const } : {}),
       activities
     }
   })
@@ -143,7 +145,7 @@ const MATCHING_FIELD_ORDER = [
   'pool', 'draw'
 ]
 /** Ordem candidata, na ordem em que deve ser testada — a primeira que "cobre" exatamente as chaves do objeto vence. */
-const FIELD_ORDER_TABLE = [['name', 'minLevel', 'xpReward', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, OPTION_FIELD_ORDER, CODE_BLANK_FIELD_ORDER,
+const FIELD_ORDER_TABLE = [['name', 'minLevel', 'xpReward', 'chest', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, OPTION_FIELD_ORDER, CODE_BLANK_FIELD_ORDER,
   FILL_BLANK_FIELD_ORDER, CODE_PLAYGROUND_FIELD_ORDER, CODE_EDITOR_FIELD_ORDER, REORDER_FIELD_ORDER, MATCHING_FIELD_ORDER, ['left', 'right']]
 
 function orderedKeys (obj: Record<string, unknown>): string[] {

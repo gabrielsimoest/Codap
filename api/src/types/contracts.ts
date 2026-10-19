@@ -380,6 +380,11 @@ export interface LessonResponse {
   minLevel: number | null;
   /** XP pago ao concluir pela primeira vez. Nulo = 10 (`LESSON_XP_REWARD`). */
   xpReward: number | null;
+  /**
+   * Aula exclusiva do baú. `GET /modules` nunca devolve uma (sai `false`): ela é
+   * por usuário e chega por `GET /collection`, só depois de revelada.
+   */
+  chest: boolean;
   activities: ActivityResponse[];
 }
 
@@ -446,6 +451,8 @@ export interface CreateLessonBody {
   minLevel?: number | null;
   /** 1 a 100. Omitido ou nulo = 10 XP. */
   xpReward?: number | null;
+  /** Aula exclusiva do baú. Não convive com `minLevel` (os dois juntos são 400). */
+  chest?: boolean;
   translations: TranslationMap<LessonTranslationInput>;
 }
 
@@ -453,6 +460,8 @@ export interface CreateLessonBody {
 export interface UpdateLessonBody {
   minLevel?: number | null;
   xpReward?: number | null;
+  /** `true` zera o `minLevel`; um `minLevel` não nulo desliga o baú; os dois juntos são 400. */
+  chest?: boolean;
   translations?: TranslationMap<LessonTranslationInput>;
 }
 
@@ -509,6 +518,7 @@ export interface AdminLessonResponse {
   index: number;
   minLevel: number | null;
   xpReward: number | null;
+  chest: boolean;
   translations: TranslationMap<LessonTranslationInput>;
   activities: AdminActivityResponse[];
 }
@@ -552,4 +562,75 @@ export interface PublishContentVersionBody {
   changelog: string;
   /** Omitido = `false`: a publicação atualiza o conteúdo em silêncio. */
   announce?: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Loja e baú (spec 2026-10-19-loja-e-bau-design.md). Tudo exige internet e é
+// validado no servidor; os preços moram aqui, no servidor.
+// ---------------------------------------------------------------------------
+
+export type ShopItem = 'double_xp' | 'instant_hint' | 'chest'
+
+/** Quantas aulas do baú existem e quantas o usuário já revelou, por área. */
+export interface ChestAreaCount {
+  areaId: number;
+  total: number;
+  revealed: number;
+}
+
+export interface ShopStateResponse {
+  prices: Record<ShopItem, number>;
+  bits: number;
+  instantHints: number;
+  /** Fim da última janela de Dobro de XP que ainda não terminou, ou `null` sem nenhuma. */
+  doubleXpEndsAt: string | null;
+  chest: {
+    /** Baús seguidos sem aula; aos 2, o próximo baú dá aula. */
+    missesInARow: number;
+    areas: ChestAreaCount[];
+  };
+}
+
+export interface PurchaseBody {
+  item: ShopItem;
+  /** Idioma do nome da aula revelada por um baú. Padrão: `pt`. */
+  locale?: LocaleCode;
+}
+
+/** A aula revelada por um baú. Só o necessário para o aviso — o conteúdo vem de `GET /collection`. */
+export interface RevealedLessonSummary {
+  id: number;
+  areaId: number;
+  moduleId: number;
+  name: string;
+}
+
+/** O que um baú entregou. */
+export type ChestOutcome =
+  | { kind: 'lesson'; lesson: RevealedLessonSummary }
+  | { kind: 'instant_hint' }
+  | { kind: 'double_xp'; endsAt: string }
+  | { kind: 'bits'; amount: number }
+
+export interface PurchaseResponse {
+  item: ShopItem;
+  bits: number;
+  instantHints: number;
+  doubleXpEndsAt: string | null;
+  /** Só na compra de um baú. */
+  chest?: ChestOutcome;
+}
+
+export interface UseHintResponse {
+  instantHints: number;
+}
+
+/** Aula do baú já revelada: o formato de `LessonResponse` mais onde ela mora. */
+export interface CollectionLessonResponse extends LessonResponse {
+  moduleId: number;
+  areaId: number;
+}
+
+export interface CollectionResponse {
+  lessons: CollectionLessonResponse[];
 }

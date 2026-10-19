@@ -162,6 +162,9 @@ async function verificar (alvo: Alvo): Promise<void> {
     if ((doBanco.min_level ?? null) !== (doSeed.minLevel ?? null)) {
       relatar(posicao, `nível mínimo difere — seed ${doSeed.minLevel ?? '(nenhum)'}, banco ${doBanco.min_level ?? '(nenhum)'}`)
     }
+    if (doBanco.is_chest !== (doSeed.chest ?? false)) {
+      relatar(posicao, `aula do baú difere — seed ${doSeed.chest ?? false}, banco ${doBanco.is_chest}`)
+    }
     if ((doBanco.xp_reward ?? null) !== (doSeed.xpReward ?? null)) {
       relatar(posicao, `XP da lição difere — seed ${doSeed.xpReward ?? '(padrão)'}, banco ${doBanco.xp_reward ?? '(padrão)'}`)
     }

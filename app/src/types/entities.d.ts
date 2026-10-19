@@ -17,6 +17,8 @@ export interface User {
 	xp: number;
 	doubleXp: number;
 	doubleTime: number;
+	/** Fim da janela de Dobro de XP (ISO, horário do servidor), ou nulo sem janela. */
+	doubleXpEndsAt?: string | null;
 	/** UUID do usuário na API (users.id) — chave primária de Users; toda conta nasce via /auth. */
 	remoteId: string;
 }
@@ -31,6 +33,8 @@ export interface LessonCompletionResult {
 	levelBefore: number;
 	levelAfter: number;
 	bitsAfter: number;
+	/** O XP desta conclusão foi dobrado por uma janela de Dobro de XP. */
+	boosted: boolean;
 }
 
 export interface UserLesson {

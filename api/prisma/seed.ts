@@ -153,6 +153,8 @@ type LessonSeed = {
   minLevel?: number;
   /** XP pago na primeira conclusão. Ausente = 10. */
   xpReward?: number;
+  /** Aula exclusiva do baú: fora do catálogo público, só chega a quem a revelou. Nunca tem `minLevel`. */
+  chest?: boolean;
   activities: ActivitySeed[];
 }
 
@@ -3341,7 +3343,8 @@ async function seedHtmlBasicLessons (localeIds: Map<LocaleCode, number>): Promis
         module_id: firstModule.id,
         index: lessonIndex,
         min_level: lessonSeed.minLevel ?? null,
-        xp_reward: lessonSeed.xpReward ?? null
+        xp_reward: lessonSeed.xpReward ?? null,
+        is_chest: lessonSeed.chest ?? false
       }
     })
 
@@ -8068,7 +8071,8 @@ async function seedCssBasicLessons (localeIds: Map<LocaleCode, number>): Promise
         module_id: firstModule.id,
         index: lessonIndex,
         min_level: lessonSeed.minLevel ?? null,
-        xp_reward: lessonSeed.xpReward ?? null
+        xp_reward: lessonSeed.xpReward ?? null,
+        is_chest: lessonSeed.chest ?? false
       }
     })
 
@@ -11999,7 +12003,8 @@ async function seedJsBasicLessons (localeIds: Map<LocaleCode, number>): Promise<
         module_id: firstModule.id,
         index: lessonIndex,
         min_level: lessonSeed.minLevel ?? null,
-        xp_reward: lessonSeed.xpReward ?? null
+        xp_reward: lessonSeed.xpReward ?? null,
+        is_chest: lessonSeed.chest ?? false
       }
     })
 
@@ -24494,6 +24499,260 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Elementos personalizados (Custom Elements)',
+      en: 'Custom elements'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um elemento personalizado é uma tag nova, criada por você: uma classe que estende HTMLElement e é registrada com customElements.define. O nome precisa ter um hífen.',
+            endParagraph: 'O método connectedCallback roda quando o elemento entra no documento.',
+            highlight: ['customElements.define', 'hífen', 'connectedCallback'],
+            codeLanguage: 'HTML',
+            code: '<my-card title="A"></my-card>\n\n<script>\nclass MyCard extends HTMLElement {\n  connectedCallback() {\n    this.textContent =\n      this.getAttribute("title");\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A custom element is a new tag made by you: a class that extends HTMLElement and is registered with customElements.define. The name must contain a hyphen.',
+            endParagraph: 'The connectedCallback method runs when the element enters the document.',
+            highlight: ['customElements.define', 'hyphen', 'connectedCallback'],
+            codeLanguage: 'HTML',
+            code: '<my-card title="A"></my-card>\n\n<script>\nclass MyCard extends HTMLElement {\n  connectedCallback() {\n    this.textContent =\n      this.getAttribute("title");\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Para reagir a mudanças de atributos, liste-os em observedAttributes. Só os atributos dessa lista chamam o attributeChangedCallback.',
+            endParagraph: 'Um atributo fora da lista muda no HTML, mas o método não é chamado.',
+            highlight: ['observedAttributes', 'attributeChangedCallback'],
+            codeLanguage: 'HTML',
+            code: '<script>\nclass MyCard extends HTMLElement {\n  static observedAttributes = ["title"];\n\n  attributeChangedCallback(name, old, now) {\n    this.textContent = now;\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'To react to attribute changes, list them in observedAttributes. Only the attributes on that list call attributeChangedCallback.',
+            endParagraph: 'An attribute outside the list changes in the HTML, but the method is not called.',
+            highlight: ['observedAttributes', 'attributeChangedCallback'],
+            codeLanguage: 'HTML',
+            code: '<script>\nclass MyCard extends HTMLElement {\n  static observedAttributes = ["title"];\n\n  attributeChangedCallback(name, old, now) {\n    this.textContent = now;\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes é um nome válido para um elemento personalizado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['my-card', 'myCard', 'card', 'my_card']
+          },
+          en: {
+            question: 'Which of these is a valid name for a custom element?',
+            highlight: [],
+            correctOption: 1,
+            options: ['my-card', 'myCard', 'card', 'my_card']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quando o connectedCallback é executado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Quando o elemento é inserido no documento', 'Quando a classe é declarada', 'Quando um atributo muda', 'Quando o elemento é removido']
+          },
+          en: {
+            question: 'When does connectedCallback run?',
+            highlight: [],
+            correctOption: 1,
+            options: ['When the element is inserted into the document', 'When the class is declared', 'When an attribute changes', 'When the element is removed']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Num <my-card>, o que imprime el.setAttribute("color", "red")?',
+            codeLanguage: 'JavaScript',
+            code: 'class A extends HTMLElement {\n  static observedAttributes =\n    ["title"];\n  attributeChangedCallback() {\n    console.log("mudou");\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Nada: color não está em observedAttributes', 'mudou', 'Lança um erro', 'undefined']
+          },
+          en: {
+            question: 'On a <my-card>, what does el.setAttribute("color", "red") print?',
+            codeLanguage: 'JavaScript',
+            code: 'class A extends HTMLElement {\n  static observedAttributes =\n    ["title"];\n  attributeChangedCallback() {\n    console.log("changed");\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Nothing: color is not in observedAttributes', 'changed', 'It throws an error', 'undefined']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o método que registra o elemento.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'customElements.___(\n  "my-card",\n  MyCard\n);',
+            answers: ['define'],
+            distractors: ['register', 'create', 'add']
+          },
+          en: {
+            question: 'Complete the method that registers the element.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'customElements.___(\n  "my-card",\n  MyCard\n);',
+            answers: ['define'],
+            distractors: ['register', 'create', 'add']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Validação nativa de formulários',
+      en: 'Native form validation'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O próprio HTML valida formulários: required, pattern, minlength e type="email". Com um campo inválido, o navegador barra o envio e mostra a mensagem.',
+            endParagraph: 'O pattern precisa casar com o valor inteiro, e um campo vazio só é recusado por required.',
+            highlight: ['required', 'pattern', 'minlength'],
+            codeLanguage: 'HTML',
+            code: '<form>\n  <input name="zip" required\n    pattern="[0-9]{5}-[0-9]{3}">\n  <button>Enviar</button>\n</form>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'HTML itself validates forms: required, pattern, minlength and type="email". With an invalid field, the browser blocks the submit and shows the message.',
+            endParagraph: 'The pattern must match the whole value, and an empty field is only rejected by required.',
+            highlight: ['required', 'pattern', 'minlength'],
+            codeLanguage: 'HTML',
+            code: '<form>\n  <input name="zip" required\n    pattern="[0-9]{5}-[0-9]{3}">\n  <button>Send</button>\n</form>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'A API de validação deixa o JavaScript participar: checkValidity() diz se o campo é válido e setCustomValidity() define uma mensagem própria.',
+            endParagraph: 'Uma mensagem não vazia torna o campo inválido; só uma string vazia o torna válido de novo.',
+            highlight: ['checkValidity', 'setCustomValidity'],
+            codeLanguage: 'JavaScript',
+            code: 'const field =\n  document.querySelector("#pass");\n\nfield.addEventListener("input", () => {\n  field.setCustomValidity(\n    field.value.length < 8 ? "Mínimo de 8" : ""\n  );\n});',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            firstParagraph: 'The validation API lets JavaScript take part: checkValidity() says whether the field is valid and setCustomValidity() sets a message of your own.',
+            endParagraph: 'A non-empty message makes the field invalid; only an empty string makes it valid again.',
+            highlight: ['checkValidity', 'setCustomValidity'],
+            codeLanguage: 'JavaScript',
+            code: 'const field =\n  document.querySelector("#pass");\n\nfield.addEventListener("input", () => {\n  field.setCustomValidity(\n    field.value.length < 8 ? "At least 8" : ""\n  );\n});',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual valor passado a setCustomValidity torna o campo válido de novo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Uma string vazia', 'null', 'false', 'undefined']
+          },
+          en: {
+            question: 'Which value passed to setCustomValidity makes the field valid again?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An empty string', 'null', 'false', 'undefined']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O pattern [0-9]{3} aceita o valor 1234?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não: o pattern precisa casar com o valor inteiro', 'Sim: basta conter três dígitos', 'Sim, se o campo não for required', 'Só se o type for number']
+          },
+          en: {
+            question: 'Does the pattern [0-9]{3} accept the value 1234?',
+            highlight: [],
+            correctOption: 1,
+            options: ['No: the pattern must match the whole value', 'Yes: it only needs to contain three digits', 'Yes, if the field is not required', 'Only if the type is number']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um campo vazio, sem required e com pattern, é válido?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Sim: um valor vazio só é recusado por required', 'Não: o pattern rejeita o vazio', 'Só se tiver minlength', 'Depende do navegador']
+          },
+          en: {
+            question: 'Is an empty field, without required and with a pattern, valid?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Yes: an empty value is only rejected by required', 'No: the pattern rejects the empty value', 'Only if it has minlength', 'It depends on the browser']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para tornar o campo válido de novo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'field.___("");',
+            answers: ['setCustomValidity'],
+            distractors: ['setValidity', 'checkValidity', 'reportValidity']
+          },
+          en: {
+            question: 'Complete it to make the field valid again.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'field.___("");',
+            answers: ['setCustomValidity'],
+            distractors: ['setValidity', 'checkValidity', 'reportValidity']
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -28185,6 +28444,254 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '@layer ___, base, theme;',
             answers: ['reset'],
             distractors: ['@reset', 'layer', 'import']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Variáveis tipadas com @property',
+      en: 'Typed variables with @property'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O @property registra uma variável CSS com tipo: syntax diz o tipo, inherits diz se ela é herdada e initial-value dá o valor de partida.',
+            endParagraph: 'Com o tipo, o navegador sabe que --angle é um ângulo, e não só texto.',
+            highlight: ['@property', 'syntax', 'inherits', 'initial-value'],
+            codeLanguage: 'CSS',
+            code: '@property --angle {\n  syntax: "<angle>";\n  inherits: false;\n  initial-value: 0deg;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The @property rule registers a CSS variable with a type: syntax says the type, inherits says whether it is inherited and initial-value gives the starting value.',
+            endParagraph: 'With the type, the browser knows that --angle is an angle, not just text.',
+            highlight: ['@property', 'syntax', 'inherits', 'initial-value'],
+            codeLanguage: 'CSS',
+            code: '@property --angle {\n  syntax: "<angle>";\n  inherits: false;\n  initial-value: 0deg;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma variável registrada pode ser animada. Sem o registro, o navegador a trata como texto, e a transição troca o valor de uma vez.',
+            endParagraph: 'Aqui o gradiente gira suavemente quando o mouse passa por cima.',
+            highlight: ['animada', 'transição'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  background: conic-gradient(\n    from var(--angle), red, blue\n  );\n  transition: --angle 1s;\n}\n\n.card:hover {\n  --angle: 180deg;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A registered variable can be animated. Without the registration, the browser treats it as text, and the transition swaps the value at once.',
+            endParagraph: 'Here the gradient turns smoothly when the mouse goes over it.',
+            highlight: ['animated', 'transition'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  background: conic-gradient(\n    from var(--angle), red, blue\n  );\n  transition: --angle 1s;\n}\n\n.card:hover {\n  --angle: 180deg;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve a propriedade syntax no @property?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Declarar o tipo do valor, como <angle>', 'Escolher a versão do CSS', 'Dizer se a variável é herdada', 'Dar o valor inicial']
+          },
+          en: {
+            question: 'What is the syntax property for in @property?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Declaring the type of the value, like <angle>', 'Choosing the CSS version', 'Saying whether the variable is inherited', 'Giving the initial value']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Sem @property, o que faz transition: --angle 1s ao mudar de 0deg para 180deg?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O valor troca de uma vez, sem animar', 'Anima suavemente do mesmo jeito', 'Dá erro de sintaxe', 'Anima só na volta']
+          },
+          en: {
+            question: 'Without @property, what does transition: --angle 1s do when going from 0deg to 180deg?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The value swaps at once, with no animation', 'It animates smoothly all the same', 'It throws a syntax error', 'It animates only on the way back']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com inherits: false, o que acontece com os filhos do elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não herdam o valor do pai: usam o valor inicial', 'Herdam o valor normalmente', 'Não podem usar a variável', 'Herdam só se tiverem a mesma classe']
+          },
+          en: {
+            question: 'With inherits: false, what happens to the element’s children?',
+            highlight: [],
+            correctOption: 1,
+            options: ['They do not inherit the parent value: they use the initial value', 'They inherit the value as usual', 'They cannot use the variable', 'They inherit only if they share the class']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o tipo de uma variável que guarda um ângulo.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '  syntax: "<___>";',
+            answers: ['angle'],
+            distractors: ['degree', 'rotation', 'deg']
+          },
+          en: {
+            question: 'Complete the type of a variable that holds an angle.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '  syntax: "<___>";',
+            answers: ['angle'],
+            distractors: ['degree', 'rotation', 'deg']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Subgrid',
+      en: 'Subgrid'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma grade dentro de outra não conhece as trilhas da grade de fora. Com subgrid, o item passa a usar as colunas ou as linhas da grade pai.',
+            endParagraph: 'Assim os filhos de cada item se alinham com as colunas da grade externa.',
+            highlight: ['subgrid'],
+            codeLanguage: 'CSS',
+            code: '.list {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n}\n\n.item {\n  display: grid;\n  grid-column: span 3;\n  grid-template-columns: subgrid;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A grid inside another one does not know the tracks of the outer grid. With subgrid, the item uses the columns or the rows of the parent grid.',
+            endParagraph: 'That way the children of each item line up with the columns of the outer grid.',
+            highlight: ['subgrid'],
+            codeLanguage: 'CSS',
+            code: '.list {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n}\n\n.item {\n  display: grid;\n  grid-column: span 3;\n  grid-template-columns: subgrid;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Para alinhar partes de cartões diferentes (título, texto e rodapé), o subgrid também vale para as linhas. Ele herda o gap do pai, a menos que defina o próprio.',
+            endParagraph: 'O elemento precisa ser filho direto de uma grade e ter display grid.',
+            highlight: ['gap', 'filho direto'],
+            codeLanguage: 'CSS',
+            code: '.cards {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 1fr auto;\n  gap: 16px;\n}\n\n.card {\n  display: grid;\n  grid-row: span 3;\n  grid-template-rows: subgrid;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'To line up parts of different cards (title, text and footer), subgrid works for rows too. It inherits the gap of the parent, unless it sets its own.',
+            endParagraph: 'The element must be a direct child of a grid and have display grid.',
+            highlight: ['gap', 'direct child'],
+            codeLanguage: 'CSS',
+            code: '.cards {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 1fr auto;\n  gap: 16px;\n}\n\n.card {\n  display: grid;\n  grid-row: span 3;\n  grid-template-rows: subgrid;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que grid-template-columns: subgrid faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O item passa a usar as colunas da grade pai', 'Cria uma grade com uma coluna só', 'Esconde a grade pai', 'Repete as colunas três vezes']
+          },
+          en: {
+            question: 'What does grid-template-columns: subgrid do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The item uses the columns of the parent grid', 'It creates a grid with a single column', 'It hides the parent grid', 'It repeats the columns three times']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual condição o subgrid exige?',
+            highlight: [],
+            correctOption: 1,
+            options: ['O elemento ser filho direto de uma grade e ter display: grid', 'O elemento ter position: relative', 'A grade pai usar grid-template-areas', 'O elemento ser um item flex']
+          },
+          en: {
+            question: 'Which condition does subgrid require?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The element being a direct child of a grid and having display: grid', 'The element having position: relative', 'The parent grid using grid-template-areas', 'The element being a flex item']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'E o gap de um subgrid?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Herda o gap da grade pai, se ele não definir o próprio', 'É sempre zero', 'É o dobro do gap do pai', 'Subgrid não aceita gap']
+          },
+          en: {
+            question: 'And the gap of a subgrid?',
+            highlight: [],
+            correctOption: 1,
+            options: ['It inherits the parent gap, if it does not set its own', 'It is always zero', 'It is double the parent gap', 'Subgrid does not accept a gap']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para o cartão usar as linhas da grade pai.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  display: grid;\n  grid-template-rows: ___;\n}',
+            answers: ['subgrid'],
+            distractors: ['parent', 'inherit-grid', 'sub']
+          },
+          en: {
+            question: 'Complete it so the card uses the rows of the parent grid.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  display: grid;\n  grid-template-rows: ___;\n}',
+            answers: ['subgrid'],
+            distractors: ['parent', 'inherit-grid', 'sub']
           }
         }
       }
@@ -33436,6 +33943,262 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'function* ids() {\n  let id = 1;\n  while (id < 3) ___ id++;\n}',
             answers: ['yield'],
             distractors: ['return', 'await', 'next']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Proxy e Reflect',
+      en: 'Proxy and Reflect'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um Proxy envolve um objeto e intercepta operações com funções chamadas traps. O trap get decide o que sai quando alguém lê uma propriedade.',
+            endParagraph: 'Aqui, ler uma propriedade que não existe devolve "?" em vez de undefined.',
+            highlight: ['Proxy', 'traps', 'get'],
+            codeLanguage: 'JavaScript',
+            code: 'const base = { name: "Ana" };\n\nconst p = new Proxy(base, {\n  get(target, key) {\n    return key in target ? target[key] : "?";\n  }\n});\n\nconsole.log(p.name);\nconsole.log(p.age);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A Proxy wraps an object and intercepts operations with functions called traps. The get trap decides what comes out when someone reads a property.',
+            endParagraph: 'Here, reading a property that does not exist returns "?" instead of undefined.',
+            highlight: ['Proxy', 'traps', 'get'],
+            codeLanguage: 'JavaScript',
+            code: 'const base = { name: "Ana" };\n\nconst p = new Proxy(base, {\n  get(target, key) {\n    return key in target ? target[key] : "?";\n  }\n});\n\nconsole.log(p.name);\nconsole.log(p.age);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O trap set intercepta atribuições, e Reflect.set faz a atribuição padrão no objeto alvo. Em modo estrito, um trap set que devolve um valor falso lança TypeError.',
+            endParagraph: 'O Reflect tem um método para cada trap, com os mesmos argumentos.',
+            highlight: ['set', 'Reflect', 'TypeError'],
+            codeLanguage: 'JavaScript',
+            code: '"use strict";\n\nconst ages = new Proxy({}, {\n  set(target, key, value) {\n    if (value < 0) throw new RangeError("neg");\n    return Reflect.set(target, key, value);\n  }\n});\n\nages.a = 30;\nconsole.log(ages.a);\ntry { ages.a = -1; } catch (e) { console.log(e.message); }',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The set trap intercepts assignments, and Reflect.set does the default assignment on the target object. In strict mode, a set trap that returns a falsy value throws TypeError.',
+            endParagraph: 'Reflect has one method for each trap, with the same arguments.',
+            highlight: ['set', 'Reflect', 'TypeError'],
+            codeLanguage: 'JavaScript',
+            code: '"use strict";\n\nconst ages = new Proxy({}, {\n  set(target, key, value) {\n    if (value < 0) throw new RangeError("neg");\n    return Reflect.set(target, key, value);\n  }\n});\n\nages.a = 30;\nconsole.log(ages.a);\ntry { ages.a = -1; } catch (e) { console.log(e.message); }',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código imprime?',
+            codeLanguage: 'JavaScript',
+            code: 'const p = new Proxy({}, {\n  get() { return "?"; }\n});\n\nconsole.log(p.x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['?', 'undefined', 'null', 'Dá erro']
+          },
+          en: {
+            question: 'What does this code print?',
+            codeLanguage: 'JavaScript',
+            code: 'const p = new Proxy({}, {\n  get() { return "?"; }\n});\n\nconsole.log(p.x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['?', 'undefined', 'null', 'It throws']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em modo estrito, o que acontece se o trap set não devolver um valor verdadeiro?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Lança TypeError', 'A atribuição é aceita mesmo assim', 'O Proxy é desfeito', 'O valor vira undefined']
+          },
+          en: {
+            question: 'In strict mode, what happens if the set trap does not return a truthy value?',
+            highlight: [],
+            correctOption: 1,
+            options: ['It throws TypeError', 'The assignment is accepted anyway', 'The Proxy is undone', 'The value becomes undefined']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve Reflect.set dentro de um trap set?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Fazer a atribuição padrão no objeto alvo', 'Criar um novo Proxy', 'Impedir a atribuição', 'Copiar o objeto']
+          },
+          en: {
+            question: 'What is Reflect.set for inside a set trap?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Doing the default assignment on the target object', 'Creating a new Proxy', 'Blocking the assignment', 'Copying the object']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o método que repassa a leitura ao objeto alvo.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const p = new Proxy(obj, {\n  get(t, k) {\n    return Reflect.___(t, k);\n  }\n});',
+            answers: ['get'],
+            distractors: ['set', 'has', 'apply']
+          },
+          en: {
+            question: 'Complete the method that passes the read on to the target object.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const p = new Proxy(obj, {\n  get(t, k) {\n    return Reflect.___(t, k);\n  }\n});',
+            answers: ['get'],
+            distractors: ['set', 'has', 'apply']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Tagged templates',
+      en: 'Tagged templates'
+    },
+    xpReward: 50,
+    chest: true,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma tagged template chama uma função com a template literal, sem parênteses. A função recebe o array de textos e, depois, cada valor interpolado como um argumento.',
+            endParagraph: 'Com n valores, o array de textos tem n + 1 itens.',
+            highlight: ['tagged template', 'array de textos'],
+            codeLanguage: 'JavaScript',
+            code: 'function tag(parts, name, age) {\n  console.log(parts);\n  console.log(name, age);\n}\n\ntag`Olá ${"Ana"}, ${30} anos`;',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A tagged template calls a function with the template literal, without parentheses. The function receives the array of strings and then each interpolated value as an argument.',
+            endParagraph: 'With n values, the array of strings has n + 1 items.',
+            highlight: ['tagged template', 'array of strings'],
+            codeLanguage: 'JavaScript',
+            code: 'function tag(parts, name, age) {\n  console.log(parts);\n  console.log(name, age);\n}\n\ntag`Hi ${"Ana"}, ${30} years`;',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'String.raw é uma tag pronta que devolve o texto sem processar as barras invertidas. A função também pode ler strings.raw, a versão crua de cada pedaço.',
+            endParagraph: 'Por isso String.raw é útil para caminhos de arquivo e expressões regulares.',
+            highlight: ['String.raw', 'barras invertidas'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(String.raw`a\\nb`);\nconsole.log(`a\\nb`);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'String.raw is a ready-made tag that returns the text without processing backslashes. A function can also read strings.raw, the raw version of each piece.',
+            endParagraph: 'That is why String.raw is useful for file paths and regular expressions.',
+            highlight: ['String.raw', 'backslashes'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log(String.raw`a\\nb`);\nconsole.log(`a\\nb`);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantos itens tem o array de textos em tag`a${1}b${2}c`?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '5', '1']
+          },
+          en: {
+            question: 'How many items does the array of strings have in tag`a${1}b${2}c`?',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '5', '1']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código imprime?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = String.raw`x\\ty`;\nconsole.log(s.length);',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '3', '2', '5']
+          },
+          en: {
+            question: 'What does this code print?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = String.raw`x\\ty`;\nconsole.log(s.length);',
+            highlight: [],
+            correctOption: 1,
+            options: ['4', '3', '2', '5']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a função tag recebe?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um array com os textos e os valores interpolados como argumentos seguintes', 'Só o texto final, já montado', 'Os valores num array e os textos num objeto', 'Nenhum argumento']
+          },
+          en: {
+            question: 'What does the tag function receive?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An array of strings and the interpolated values as the next arguments', 'Only the final text, already built', 'The values in an array and the strings in an object', 'No arguments']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a chamada da função como tag.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function dobro(txt, n) {\n  return n * 2;\n}\nconsole.log(___`n=${5}`);',
+            answers: ['dobro'],
+            distractors: ['dobro(', 'dobro.', '@dobro']
+          },
+          en: {
+            question: 'Complete the function call as a tag.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'function dobro(txt, n) {\n  return n * 2;\n}\nconsole.log(___`n=${5}`);',
+            answers: ['dobro'],
+            distractors: ['dobro(', 'dobro.', '@dobro']
           }
         }
       }
@@ -43735,7 +44498,8 @@ async function seedModuleLessons (
         module_id: module.id,
         index: lessonIndex,
         min_level: lessonSeed.minLevel ?? null,
-        xp_reward: lessonSeed.xpReward ?? null
+        xp_reward: lessonSeed.xpReward ?? null,
+        is_chest: lessonSeed.chest ?? false
       }
     })
 

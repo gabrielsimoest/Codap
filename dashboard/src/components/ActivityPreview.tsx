@@ -66,6 +66,7 @@ function LocalePreview ({
         index: 0,
         minLevel: null,
         xpReward: null,
+        chest: false,
         translations: {},
         activities: [activity]
       }]

@@ -8,7 +8,7 @@ import * as SQLite from "expo-sqlite";
  * cada boot. Se novas migrações forem necessárias no futuro, adicione um
  * novo `if (version < N)` em sequência.
  */
-const CURRENT_SCHEMA_VERSION = 5;
+const CURRENT_SCHEMA_VERSION = 6;
 
 export default function runMigrations(database: SQLite.SQLiteDatabase) {
 	const row = database.getFirstSync<{ user_version: number }>(
@@ -169,6 +169,17 @@ export default function runMigrations(database: SQLite.SQLiteDatabase) {
 			// A moeda deixou de se chamar "Dependabots" (marca da GitHub) e passou
 			// a ser "Bits". RENAME COLUMN preserva os valores já gravados.
 			database.execSync("ALTER TABLE Users RENAME COLUMN dependaBots TO bits;");
+			database.execSync("PRAGMA user_version = 5;");
+		});
+	}
+
+	if (version < 6) {
+		database.withTransactionSync(() => {
+			// Fim da janela de Dobro de XP (ISO, horário do servidor): o app dobra o
+			// XP de uma lição concluída até esse momento. Nulo = sem janela. As
+			// colunas `doubleXp`/`doubleTime` de antes nunca foram usadas e ficam
+			// como estão.
+			database.execSync("ALTER TABLE Users ADD COLUMN doubleXpEndsAt TEXT;");
 			database.execSync(`PRAGMA user_version = ${CURRENT_SCHEMA_VERSION};`);
 		});
 	}

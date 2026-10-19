@@ -10,8 +10,10 @@ import {
 const MIN_LEVEL_RANGE = { min: 2, max: 50 }
 const XP_REWARD_RANGE = { min: 1, max: 100 }
 
-/** Valor sugerido ao ligar o interruptor com o campo vazio: três vezes o XP de uma lição comum. */
+/** Valor sugerido ao ligar "Aula de aprofundamento" com o campo vazio: três vezes o XP de uma lição comum. */
 export const DEFAULT_XP_REWARD = '30'
+/** Valor sugerido ao ligar "Aula do baú" com o campo vazio: é a mais difícil, então paga mais. */
+export const DEFAULT_CHEST_XP_REWARD = '50'
 
 function isIntegerInRange (value: string, { min, max }: { min: number; max: number }): boolean {
   const number = Number(value)
@@ -20,13 +22,15 @@ function isIntegerInRange (value: string, { min, max }: { min: number; max: numb
 
 /**
  * Mesma regra do formulário de módulo: nome vazio = idioma não enviado. Os
- * campos de aprofundamento só são validados com o interruptor ligado. O XP pode
- * ficar **vazio**: é "o padrão" (10) — a API guarda `null`.
+ * campos de aprofundamento só são validados com o interruptor ligado, e o do baú
+ * não pede nível. O XP pode ficar **vazio** nos dois: é "o padrão" (10) — a API
+ * guarda `null`. Aprofundamento e baú se excluem.
  */
 export const lessonFormSchema = z.object({
   pt: z.object({ name: z.string() }),
   en: z.object({ name: z.string() }),
   optional: z.boolean(),
+  chest: z.boolean(),
   minLevel: z.string(),
   xpReward: z.string()
 }).superRefine((values, ctx) => {
@@ -38,21 +42,28 @@ export const lessonFormSchema = z.object({
     })
   }
 
-  if (values.optional) {
-    if (!isIntegerInRange(values.minLevel, MIN_LEVEL_RANGE)) {
-      ctx.addIssue({
-        code: 'custom',
-        message: `O nível mínimo vai de ${MIN_LEVEL_RANGE.min} a ${MIN_LEVEL_RANGE.max}.`,
-        path: ['minLevel']
-      })
-    }
-    if (values.xpReward.trim().length > 0 && !isIntegerInRange(values.xpReward, XP_REWARD_RANGE)) {
-      ctx.addIssue({
-        code: 'custom',
-        message: `O XP vai de ${XP_REWARD_RANGE.min} a ${XP_REWARD_RANGE.max}, ou deixe vazio para o padrão (10).`,
-        path: ['xpReward']
-      })
-    }
+  if (values.optional && values.chest) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'Escolha só um: aula de aprofundamento ou aula do baú.',
+      path: ['chest']
+    })
+  }
+
+  if (values.optional && !isIntegerInRange(values.minLevel, MIN_LEVEL_RANGE)) {
+    ctx.addIssue({
+      code: 'custom',
+      message: `O nível mínimo vai de ${MIN_LEVEL_RANGE.min} a ${MIN_LEVEL_RANGE.max}.`,
+      path: ['minLevel']
+    })
+  }
+
+  if ((values.optional || values.chest) && values.xpReward.trim().length > 0 && !isIntegerInRange(values.xpReward, XP_REWARD_RANGE)) {
+    ctx.addIssue({
+      code: 'custom',
+      message: `O XP vai de ${XP_REWARD_RANGE.min} a ${XP_REWARD_RANGE.max}, ou deixe vazio para o padrão (10).`,
+      path: ['xpReward']
+    })
   }
 })
 
@@ -68,6 +79,7 @@ export function toFormValues (lesson?: AdminLessonResponse): LessonFormValues {
     pt: { name: lesson?.translations.pt?.name ?? '' },
     en: { name: lesson?.translations.en?.name ?? '' },
     optional: lesson?.minLevel != null,
+    chest: lesson?.chest === true,
     minLevel: lesson?.minLevel?.toString() ?? '',
     xpReward: lesson?.xpReward?.toString() ?? ''
   }
@@ -86,24 +98,41 @@ export function toTranslations (values: LessonFormValues): TranslationMap<Lesson
   return translations
 }
 
+/** XP vazio = "padrão" (10) = `null` na API. */
+function parseXpReward (value: string): number | null {
+  const xp = value.trim()
+  return xp === '' ? null : Number(xp)
+}
+
 /**
- * O que enviar de `minLevel`/`xpReward` ao salvar. Só mexe no que o usuário
- * mexeu: na API, ausente não toca na coluna e `null` a limpa.
+ * O que enviar de `minLevel`/`xpReward`/`chest` ao salvar. Só mexe no que o
+ * usuário mexeu: na API, ausente não toca na coluna e `null` a limpa.
  *
- * - Interruptor ligado: envia o nível e o XP (XP vazio = `null` = padrão).
- * - Era aula de aprofundamento e foi desligada: `null` nos dois — a lição volta
- *   à trilha principal.
- * - Lição da trilha, interruptor desligado o tempo todo: não envia nada. Zerar
+ * - Baú ligado: envia o XP (e `chest: true` se a lição ainda não era do baú — a
+ *   API zera o nível sozinha).
+ * - Aprofundamento ligado: envia o nível e o XP (e `chest: false` se era do baú).
+ * - Era aula de aprofundamento ou do baú e foi desligada: volta à trilha
+ *   principal, com `null` em tudo que ela tinha.
+ * - Lição da trilha, interruptores desligados o tempo todo: não envia nada. Zerar
  *   o `xpReward` de uma lição da trilha num "Salvar" qualquer seria uma
  *   alteração que ninguém pediu.
  */
 export function toDeepeningFields (
   values: LessonFormValues,
   lesson?: AdminLessonResponse
-): { minLevel?: number | null; xpReward?: number | null } {
+): { minLevel?: number | null; xpReward?: number | null; chest?: boolean } {
+  if (values.chest) {
+    const xpReward = parseXpReward(values.xpReward)
+    return lesson?.chest ? { xpReward } : { chest: true, xpReward }
+  }
+
   if (values.optional) {
-    const xp = values.xpReward.trim()
-    return { minLevel: Number(values.minLevel), xpReward: xp === '' ? null : Number(xp) }
+    const fields = { minLevel: Number(values.minLevel), xpReward: parseXpReward(values.xpReward) }
+    return lesson?.chest ? { ...fields, chest: false } : fields
+  }
+
+  if (lesson?.chest) {
+    return { chest: false, minLevel: null, xpReward: null }
   }
 
   if (lesson?.minLevel != null) {

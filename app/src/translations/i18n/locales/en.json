@@ -57,6 +57,7 @@
 
 		"editor": {
 			"badge": "Module challenge",
+			"useInstantHint": "Use now ({{count}})",
 			"codeTab": "Code",
 			"resultTab": "Result",
 			"placeholder": "Write your code here",
@@ -127,13 +128,8 @@
 		"buy using bits": "BUY USING BITS",
 		"double experience": "Double XP",
 		"surprise chest": "Surprise Chest",
-		"double time": "Double Time",
+		"instant hint": "Instant Hint",
 		"buy": "BUY",
-		"buy double experience": "Do you really want to buy Double Experience for 5 Minutes?",
-		"buy surprise chest": "Do you really want to buy the Surprise Chest?",
-		"buy double time": "Do you really want to buy Double Time for your next class?",
-		"you have double experience": "You've earned Double XP for 5 Minutes!",
-		"you have double time": "You won Double Time for the Next Class!",
 		"active": "Active",
 		"inactive": "Inactive",
 
@@ -233,6 +229,39 @@
 			}
 		},
 
+		"shop": {
+			"success": "Done!",
+			"double_xp": {
+				"confirm": "Do you really want to buy Double XP for 5 minutes?",
+				"bought": "Double XP is on for 5 minutes!",
+				"active": "Active until {{time}}"
+			},
+			"instant_hint": {
+				"confirm": "Do you really want to buy an Instant Hint? It unlocks the next hint of a challenge right away.",
+				"bought": "Instant Hint bought! Use it in a challenge's help.",
+				"owned": "You have {{count}}"
+			},
+			"chest": {
+				"confirm": "Do you really want to open the Surprise Chest? It may reveal an exclusive, hard lesson that stays in your collection for good.",
+				"bought": "Chest opened!",
+				"collection": "Collection: {{revealed}} of {{total}}",
+				"areaCount": "{{area}}: {{revealed}} of {{total}}",
+				"empty": "There are no exclusive lessons in the chest yet.",
+				"lesson": "New exclusive lesson: {{name}}! Look for it at the end of its module.",
+				"hint": "You won an Instant Hint!",
+				"boost": "You won Double XP for 5 minutes!",
+				"bits": "You got {{amount}} Bits back!"
+			},
+			"errors": {
+				"offline": "No connection. Connect to the internet to use the shop.",
+				"pendingSync": "Connect to the internet to sync your progress before buying.",
+				"insufficient": "Not enough Bits. You have {{bits}}.",
+				"boostActive": "Your Double XP is already on.",
+				"generic": "The purchase could not be completed. Try again."
+			},
+			"noHints": "You have no Instant Hints left."
+		},
+
 		"levels": {
 			"level": "Level {{level}}",
 			"levelShort": "Lv. {{level}}",
@@ -249,6 +278,7 @@
 				"title": "Lesson complete!",
 				"xpGained": "+{{xp}} XP",
 				"alreadyDone": "You had already completed this lesson. No XP this time.",
+				"boosted": "Double XP!",
 				"levelUp": "Level {{level}}!",
 				"bitsGained": "+{{bits}} Bits"
 			}

@@ -186,7 +186,8 @@ export default class DatabaseClient {
 			const current = this.database.getFirstSync<{
 				xp: number | null;
 				bits: number | null;
-			}>("SELECT xp, bits FROM Users WHERE remoteId = ?;", [userId]);
+				doubleXpEndsAt: string | null;
+			}>("SELECT xp, bits, doubleXpEndsAt FROM Users WHERE remoteId = ?;", [userId]);
 			const xpBefore = current?.xp ?? 0;
 			const bitsBefore = current?.bits ?? 0;
 			const levelBefore = levelForXp(xpBefore);
@@ -207,11 +208,20 @@ export default class DatabaseClient {
 					levelBefore,
 					levelAfter: levelBefore,
 					bitsAfter: bitsBefore,
+					boosted: false,
 				};
 				return;
 			}
 
-			const xpAfter = xpBefore + xpReward;
+			// Dobro de XP: vale se a conclusão acontece até o fim da janela que o
+			// servidor concedeu na compra. O servidor aplica a mesma regra pelo
+			// horário do evento; se os relógios destoarem, a adoção do `profile`
+			// corrige o XP depois.
+			const boosted =
+				current?.doubleXpEndsAt != null &&
+				new Date(occurredAt).getTime() <= new Date(current.doubleXpEndsAt).getTime();
+			const xpGained = xpReward * (boosted ? 2 : 1);
+			const xpAfter = xpBefore + xpGained;
 			const bitsGained = bitsEarnedBetween(xpBefore, xpAfter);
 			const bitsAfter = bitsBefore + bitsGained;
 
@@ -236,17 +246,35 @@ export default class DatabaseClient {
 
 			result = {
 				firstTime: true,
-				xpGained: xpReward,
+				xpGained,
 				bitsGained,
 				xpBefore,
 				xpAfter,
 				levelBefore,
 				levelAfter: levelForXp(xpAfter),
 				bitsAfter,
+				boosted,
 			};
 		});
 
 		return result;
+	}
+
+	/** Grava (ou, com `null`, limpa) o fim da janela de Dobro de XP que o servidor concedeu. */
+	setDoubleXpEndsAt(userId: string, endsAt: string | null): void {
+		this.database.runSync(
+			"UPDATE Users SET doubleXpEndsAt = ? WHERE remoteId = ?;",
+			[endsAt, userId]
+		);
+	}
+
+	/** Sobrescreve o saldo de Bits (depois de uma compra, o saldo é o que o servidor devolveu). `null` se o usuário não existe localmente. */
+	setLocalBits(userId: string, bits: number): User | null {
+		const { changes } = this.database.runSync(
+			"UPDATE Users SET bits = ? WHERE remoteId = ?;",
+			[bits, userId]
+		);
+		return changes > 0 ? this.getLocalProfile(userId) : null;
 	}
 
 	/** Idempotente localmente: uma conquista já desbloqueada por esse usuário não é enfileirada de novo. */

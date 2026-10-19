@@ -67,7 +67,9 @@ export function isSameIdSet (existingIds: number[], orderedIds: number[]): boole
  * Quantas linhas de progresso de usuário existem para um conjunto de lições.
  * Toda remoção em cascata consulta isto antes de apagar qualquer coisa: apagar
  * uma lição concluída destruiria o histórico do usuário (`user_lessons`), o que
- * nenhuma edição de conteúdo deveria poder fazer silenciosamente.
+ * nenhuma edição de conteúdo deveria poder fazer silenciosamente. Uma aula do
+ * baú já revelada também conta: foi paga, e a FK de `user_chest_lessons` faria
+ * a remoção falhar com 500 em vez de 409.
  */
 export async function countLessonProgress (
   prisma: Prisma.TransactionClient,
@@ -76,9 +78,11 @@ export async function countLessonProgress (
   if (lessonIds.length === 0) {
     return 0
   }
-  return await prisma.user_lessons.count({
-    where: { lesson_id: { in: lessonIds } }
-  })
+  const [completed, revealed] = await Promise.all([
+    prisma.user_lessons.count({ where: { lesson_id: { in: lessonIds } } }),
+    prisma.user_chest_lessons.count({ where: { lesson_id: { in: lessonIds } } })
+  ])
+  return completed + revealed
 }
 
 /**
@@ -251,6 +255,7 @@ export async function findAdminLessons (
       index: true,
       min_level: true,
       xp_reward: true,
+      is_chest: true,
       translations: {
         select: { name: true, locale: { select: { locale: true } } }
       },
@@ -276,6 +281,7 @@ export async function findAdminLessons (
     index: lesson.index,
     minLevel: lesson.min_level,
     xpReward: lesson.xp_reward,
+    chest: lesson.is_chest,
     translations: toTranslationMap(lesson.translations, (row) => ({ name: row.name })),
     activities: lesson.activities.map((activity) => ({
       id: activity.id,

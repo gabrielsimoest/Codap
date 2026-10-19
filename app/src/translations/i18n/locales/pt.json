@@ -57,6 +57,7 @@
 
 		"editor": {
 			"badge": "Desafio do módulo",
+			"useInstantHint": "Liberar agora ({{count}})",
 			"codeTab": "Código",
 			"resultTab": "Resultado",
 			"placeholder": "Escreva seu código aqui",
@@ -127,13 +128,8 @@
 		"buy using bits": "COMPRE COM BITS",
 		"double experience": "Dobro de XP",
 		"surprise chest": "Baú Surpresa",
-		"double time": "Dobro de Tempo",
+		"instant hint": "Dica Instantânea",
 		"buy": "COMPRAR",
-		"buy double experience": "Você deseja realmente comprar o Dobro de Experiência por 5 Minutos?",
-		"buy surprise chest": "Você deseja realmente comprar o Baú Surpresa?",
-		"buy double time": "Você deseja realmente comprar o Dobro de Tempo para sua proxima aula?",
-		"you have double experience": "Você ganhou o Dobro de XP por 5 Minutos!",
-		"you have double time": "Você ganhou o Dobro de Tempo para a Proxima aula!",
 		"active": "Ativo",
 		"inactive": "Inativo",
 
@@ -233,6 +229,39 @@
 			}
 		},
 
+		"shop": {
+			"success": "Pronto!",
+			"double_xp": {
+				"confirm": "Você deseja realmente comprar o Dobro de XP por 5 minutos?",
+				"bought": "Dobro de XP ativo por 5 minutos!",
+				"active": "Ativo até {{time}}"
+			},
+			"instant_hint": {
+				"confirm": "Você deseja realmente comprar uma Dica Instantânea? Ela libera na hora a próxima dica de um desafio.",
+				"bought": "Dica Instantânea comprada! Use-a na ajuda de um desafio.",
+				"owned": "Você tem {{count}}"
+			},
+			"chest": {
+				"confirm": "Você deseja realmente abrir o Baú Surpresa? Ele pode revelar uma aula exclusiva e difícil, que fica para sempre na sua coleção.",
+				"bought": "Baú aberto!",
+				"collection": "Coleção: {{revealed}} de {{total}}",
+				"areaCount": "{{area}}: {{revealed}} de {{total}}",
+				"empty": "Ainda não há aulas exclusivas no baú.",
+				"lesson": "Nova aula exclusiva: {{name}}! Procure-a no fim do módulo dela.",
+				"hint": "Você ganhou uma Dica Instantânea!",
+				"boost": "Você ganhou o Dobro de XP por 5 minutos!",
+				"bits": "Você ganhou {{amount}} Bits de volta!"
+			},
+			"errors": {
+				"offline": "Sem conexão. Conecte-se à internet para usar a loja.",
+				"pendingSync": "Conecte-se à internet para sincronizar seu progresso antes de comprar.",
+				"insufficient": "Bits insuficientes. Você tem {{bits}}.",
+				"boostActive": "Seu Dobro de XP já está ativo.",
+				"generic": "Não foi possível concluir a compra. Tente de novo."
+			},
+			"noHints": "Você não tem mais Dicas Instantâneas."
+		},
+
 		"levels": {
 			"level": "Nível {{level}}",
 			"levelShort": "Nv. {{level}}",
@@ -249,6 +278,7 @@
 				"title": "Lição concluída!",
 				"xpGained": "+{{xp}} XP",
 				"alreadyDone": "Você já tinha concluído esta lição. Sem XP desta vez.",
+				"boosted": "XP em dobro!",
 				"levelUp": "Nível {{level}}!",
 				"bitsGained": "+{{bits}} Bits"
 			}

@@ -57,6 +57,7 @@ export function mergeModulesByLocale (
             // Não dependem do idioma: vêm iguais nas duas respostas.
             minLevel: lesson.minLevel ?? null,
             xpReward: lesson.xpReward ?? null,
+            chest: lesson.chest ?? false,
             translations: {},
             activities: []
           }

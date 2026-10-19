@@ -33,7 +33,7 @@ export const areasApi = {
 
 export const modulesApi = {
   list: (areaId: number, locale: LocaleCode) =>
-    request<ModuleResponse[]>(`/modules?areaId=${areaId}&locale=${locale}`),
+    request<ModuleResponse[]>(`/modules?areaId=${areaId}&locale=${locale}&includeChest=true`),
   create: (body: CreateModuleBody) =>
     request<AdminModuleResponse>('/modules', { method: 'POST', body }),
   update: (id: number, body: UpdateModuleBody) =>

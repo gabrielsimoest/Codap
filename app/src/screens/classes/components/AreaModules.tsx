@@ -9,6 +9,7 @@ import ThemedLine from "../../../components/themed/ThemedLine";
 import ThemedView from "../../../components/themed/ThemedView";
 import useAreasQuery from "../../../hooks/queries/useAreasQuery";
 import useModulesQuery from "../../../hooks/queries/useModulesQuery";
+import useCollectionQuery from "../../../hooks/queries/useCollectionQuery";
 import useNavigate from "../../../hooks/useNavigate";
 import useLanguageStore from "../../../stores/LanguageStore";
 import useUserStore from "../../../stores/UserStore";
@@ -29,6 +30,9 @@ export default function AreaModules({ areaId }: Props) {
 	const language = useLanguageStore((s) => s.language);
 	const user = useUserStore((s) => s.user);
 	const { data: areas } = useAreasQuery();
+	// As aulas do baú que a pessoa já revelou: não vêm no catálogo (que é igual
+	// para todos), então são encaixadas aqui, ao fim do módulo delas.
+	const { data: collection } = useCollectionQuery(user?.remoteId, language);
 	const { data: modules, isPending: modulesPending } = useModulesQuery(
 		areaId,
 		language
@@ -70,6 +74,9 @@ export default function AreaModules({ areaId }: Props) {
 				{modules?.map((module) => {
 					const moduleMetadata = metadata.modules[module.index];
 					if (!moduleMetadata) return null;
+					const chestLessons = (collection?.lessons ?? []).filter(
+						(lesson) => lesson.moduleId === module.id
+					);
 
 					return (
 						<ModuleCard
@@ -78,8 +85,9 @@ export default function AreaModules({ areaId }: Props) {
 							title={module.name}
 							subtitle={module.subtitle}
 						>
-							{module.lessons.length > 0 ? (
-								module.lessons.map((lesson) => {
+							{module.lessons.length > 0 || chestLessons.length > 0 ? (
+								[
+								...module.lessons.map((lesson) => {
 									const optional = isOptionalLesson(lesson);
 									const unlocked = isLessonUnlocked(lesson, level);
 
@@ -106,7 +114,24 @@ export default function AreaModules({ areaId }: Props) {
 											}
 										/>
 									);
-								})
+								}),
+								...chestLessons.map((lesson) => (
+									<ClassButton
+										key={lesson.id}
+										title={lesson.name}
+										checked={completed.includes(lesson.id)}
+										// Aula exclusiva do baú: já revelada, então sempre aberta.
+										chest
+										onPress={() =>
+											navigation.navigate("Lesson", {
+												areaId,
+												moduleId: module.id,
+												lessonId: lesson.id,
+											})
+										}
+									/>
+								)),
+								]
 							) : (
 								<LessonComingSoon />
 							)}

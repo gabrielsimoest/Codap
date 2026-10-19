@@ -15,6 +15,8 @@ interface Props {
 	challenge?: boolean;
 	/** Aula de aprofundamento já aberta: borda roxa sutil e um foguete. */
 	deepening?: boolean;
+	/** Aula exclusiva do baú, já revelada: borda magenta e uma caveira. */
+	chest?: boolean;
 	/**
 	 * Aula de aprofundamento ainda bloqueada: o nível que a abre. O cartão fica
 	 * apagado, tracejado, com cadeado e o nível exigido, e não responde ao toque.
@@ -25,6 +27,9 @@ interface Props {
 const CHALLENGE_GOLD = "#E0B04C";
 // Roxo discreto: menos chamativo que o dourado do desafio do módulo.
 const DEEPENING_PURPLE = "#8E7CC3";
+// Magenta: as aulas do baú são as mais difíceis, e a caveira (uma forma, não só
+// uma cor) as distingue do roxo do aprofundamento mesmo para quem enxerga mal cores.
+const CHEST_MAGENTA = "#D946A8";
 const LOCKED_GREY = "#5b6b7a";
 
 export default function ClassButton({
@@ -33,6 +38,7 @@ export default function ClassButton({
 	checked = false,
 	challenge = false,
 	deepening = false,
+	chest = false,
 	lockedLevel,
 }: Props) {
 	const { t } = useTranslation();
@@ -64,6 +70,7 @@ export default function ClassButton({
 					styles.button,
 					challenge ? styles.challenge : null,
 					deepening ? styles.deepening : null,
+					chest ? styles.chest : null,
 					locked ? styles.locked : null,
 				]}
 				onPress={onPress}
@@ -75,6 +82,13 @@ export default function ClassButton({
 						type="ionicon"
 						name="lock-closed-outline"
 						color={LOCKED_GREY}
+						size={22}
+					/>
+				) : chest ? (
+					<Icon
+						type="ionicon"
+						name="skull-outline"
+						color={CHEST_MAGENTA}
 						size={22}
 					/>
 				) : deepening ? (
@@ -128,6 +142,11 @@ const styles = StyleSheet.create({
 	deepening: {
 		borderWidth: 2,
 		borderColor: DEEPENING_PURPLE,
+		paddingHorizontal: 12,
+	},
+	chest: {
+		borderWidth: 2,
+		borderColor: CHEST_MAGENTA,
 		paddingHorizontal: 12,
 	},
 	// Bloqueada: apagada e tracejada. Altura mínima em vez de fixa, porque o

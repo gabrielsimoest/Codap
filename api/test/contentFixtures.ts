@@ -45,6 +45,7 @@ async function cleanupArea (app: App, areaId: number): Promise<void> {
   await app.prisma.activities.deleteMany({ where: { id: { in: activityIds } } })
   await app.prisma.lesson_translations.deleteMany({ where: { lesson_id: { in: lessonIds } } })
   await app.prisma.user_lessons.deleteMany({ where: { lesson_id: { in: lessonIds } } })
+  await app.prisma.user_chest_lessons.deleteMany({ where: { lesson_id: { in: lessonIds } } })
   await app.prisma.lessons.deleteMany({ where: { id: { in: lessonIds } } })
   await app.prisma.module_translations.deleteMany({ where: { module_id: { in: moduleIds } } })
   await app.prisma.modules.deleteMany({ where: { id: { in: moduleIds } } })

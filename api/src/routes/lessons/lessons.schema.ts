@@ -54,6 +54,12 @@ const xpRewardSchema = {
     'XP pago ao concluir a lição pela primeira vez. Nulo = 10, o valor padrão. No PATCH, `null` limpa o campo e a ausência não mexe nele.'
 }
 
+const chestSchema = {
+  type: 'boolean',
+  description:
+    'Aula exclusiva do baú: fora do catálogo público, só chega a quem a revelou. `true` zera o `minLevel`; um `minLevel` não nulo desliga o baú; os dois juntos no mesmo corpo são 400.'
+}
+
 /**
  * `content` por idioma. Mesma regra do schema de resposta de `GET /modules`:
  * `additionalProperties: true` é **obrigatório**, senão o fast-json-stringify
@@ -89,6 +95,7 @@ export const adminLessonResponseSchema = {
     index: { type: 'integer' },
     minLevel: { type: ['integer', 'null'] },
     xpReward: { type: ['integer', 'null'] },
+    chest: { type: 'boolean' },
     translations: {
       type: 'object',
       additionalProperties: false,
@@ -100,7 +107,7 @@ export const adminLessonResponseSchema = {
     },
     activities: { type: 'array', items: adminActivityResponseSchema }
   },
-  required: ['id', 'moduleId', 'index', 'minLevel', 'xpReward', 'translations', 'activities']
+  required: ['id', 'moduleId', 'index', 'minLevel', 'xpReward', 'chest', 'translations', 'activities']
 }
 
 export const createLessonBodySchema = {
@@ -112,6 +119,7 @@ export const createLessonBodySchema = {
     index: { type: 'integer', minimum: 0, description: 'Omitido = append no fim.' },
     minLevel: minLevelSchema,
     xpReward: xpRewardSchema,
+    chest: chestSchema,
     translations: lessonTranslationsSchema
   }
 }
@@ -125,6 +133,7 @@ export const updateLessonBodySchema = {
   properties: {
     minLevel: minLevelSchema,
     xpReward: xpRewardSchema,
+    chest: chestSchema,
     translations: lessonTranslationsSchema
   }
 }

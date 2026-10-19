@@ -9,6 +9,7 @@ import LessonComplete from "./components/LessonComplete";
 import LessonLocked from "./components/LessonLocked";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
 import useModulesQuery from "../../hooks/queries/useModulesQuery";
+import useCollectionQuery from "../../hooks/queries/useCollectionQuery";
 import useNavigate from "../../hooks/useNavigate";
 import useLanguageStore from "../../stores/LanguageStore";
 import useUserStore from "../../stores/UserStore";
@@ -34,10 +35,18 @@ export default function Lesson() {
 	const language = useLanguageStore((s) => s.language);
 	const user = useUserStore((s) => s.user);
 	const { data: modules, isPending } = useModulesQuery(areaId, language);
+	// Uma aula do baú não está no catálogo (que é igual para todos): vem da
+	// coleção de quem a revelou.
+	const { data: collection, isLoading: collectionLoading } = useCollectionQuery(
+		user?.remoteId,
+		language
+	);
 
-	const lesson = modules
-		?.find((module) => module.id === moduleId)
-		?.lessons.find((item) => item.id === lessonId);
+	const lesson =
+		modules
+			?.find((module) => module.id === moduleId)
+			?.lessons.find((item) => item.id === lessonId) ??
+		collection?.lessons.find((item) => item.id === lessonId);
 
 	// Sorteio da sessão (teoria fixa + prática sorteada/embaralhada) congelado
 	// por lição e idioma: um refetch que devolve a mesma lição não re-sorteia
@@ -79,7 +88,8 @@ export default function Lesson() {
 		return <LessonComplete result={completion} onContinue={goBack} />;
 	}
 
-	if (isPending) {
+	// Sem a lição no catálogo, ainda pode estar na coleção que está chegando.
+	if (isPending || (!lesson && collectionLoading)) {
 		return (
 			<ThemedView style={styles.container}>
 				<ModuleListSkeleton />

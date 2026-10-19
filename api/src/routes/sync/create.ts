@@ -24,6 +24,9 @@ interface SyncEventResult {
   error?: string;
 }
 
+/** A lição é do baú e o usuário ainda não a revelou: desfaz o insert e vira `lesson_locked`. */
+class LessonLockedError extends Error {}
+
 const PRISMA_UNIQUE_CONSTRAINT_ERROR = 'P2002'
 const PRISMA_FOREIGN_KEY_ERROR = 'P2003'
 
@@ -40,11 +43,28 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
       })
       // Aula de aprofundamento paga o XP próprio; lição da trilha, o padrão. O
       // nível mínimo não é conferido aqui (ver a spec): só o XP muda.
-      const { xp_reward: xpReward } = await tx.lessons.findUniqueOrThrow({
+      const { xp_reward: xpReward, is_chest: isChest } = await tx.lessons.findUniqueOrThrow({
         where: { id: lessonId },
-        select: { xp_reward: true }
+        select: { xp_reward: true, is_chest: true }
       })
-      const reward = xpReward ?? LESSON_XP_REWARD
+
+      // Aula do baú só vale para quem a revelou. Diferente do nível mínimo, isto
+      // não depende da ordem dos eventos do lote: revelar é uma compra online
+      // anterior. Lançar aqui desfaz o insert em `user_lessons` desta transação.
+      if (isChest) {
+        const revealed = await tx.user_chest_lessons.count({ where: { user_id: userId, lesson_id: lessonId } })
+        if (revealed === 0) {
+          throw new LessonLockedError()
+        }
+      }
+      // Dobro de XP: vale o HORÁRIO DO EVENTO, não o de quando ele chega. Assim
+      // funciona também para uma lição feita offline dentro da janela e enviada
+      // depois, e não depende da ordem dos eventos do lote.
+      const occurredAt = new Date(event.occurredAt)
+      const boosted = await tx.xp_boosts.count({
+        where: { user_id: userId, starts_at: { lte: occurredAt }, ends_at: { gte: occurredAt } }
+      }) > 0
+      const reward = (xpReward ?? LESSON_XP_REWARD) * (boosted ? 2 : 1)
 
       // `xp`/`bits` são `Int?`, e `increment` em NULL continua NULL — normaliza antes.
       await tx.users.updateMany({ where: { id: userId, xp: null }, data: { xp: 0 } })
@@ -65,6 +85,9 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
     })
     return { clientEventId: event.clientEventId, status: 'applied' }
   } catch (error) {
+    if (error instanceof LessonLockedError) {
+      return { clientEventId: event.clientEventId, status: 'error', error: 'lesson_locked' }
+    }
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === PRISMA_UNIQUE_CONSTRAINT_ERROR) {
         return { clientEventId: event.clientEventId, status: 'duplicate' }
@@ -108,7 +131,7 @@ const create: FastifyPluginAsync = async (fastify): Promise<void> => {
       rateLimit: { max: 30, timeWindow: '1 minute' }
     },
     schema: {
-      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor. Concluir uma lição pela primeira vez credita o XP dela (`lessons.xp_reward`, padrão 10) e, ao cruzar um ou mais níveis, os Bits de cada um. A resposta traz `profile` com o XP e os Bits atuais do usuário depois do lote.',
+      description: 'Envia em lote as mudanças feitas offline (lições concluídas, conquistas desbloqueadas) para aplicação idempotente no servidor. Concluir uma lição pela primeira vez credita o XP dela (`lessons.xp_reward`, padrão 10; o dobro se o `occurredAt` cai numa janela de Dobro de XP do usuário) e, ao cruzar um ou mais níveis, os Bits de cada um. A resposta traz `profile` com o XP e os Bits atuais do usuário depois do lote.',
       tags: ['sync'],
       body: syncRequestBodySchema,
       response: {

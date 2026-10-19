@@ -115,6 +115,11 @@ export default function LessonComplete({ result, onContinue }: Props) {
 						>
 							{t("levels.complete.xpGained", { xp: result.xpGained })}
 						</ResizableText>
+						{result.boosted ? (
+							<ResizableText style={styles.boosted} defaultSize={16} useCustomColor>
+								{t("levels.complete.boosted")}
+							</ResizableText>
+						) : null}
 						<ResizableText style={styles.level} defaultSize={20}>
 							{t("levels.level", { level: shownLevel })}
 						</ResizableText>
@@ -210,6 +215,13 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		color: "#5469D3",
 		marginBottom: 28,
+	},
+	boosted: {
+		fontWeight: "bold",
+		textAlign: "center",
+		color: "#E0B04C",
+		marginTop: -20,
+		marginBottom: 20,
 	},
 	level: {
 		fontWeight: "bold",

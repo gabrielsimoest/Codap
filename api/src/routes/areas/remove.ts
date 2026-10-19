@@ -11,7 +11,7 @@ const remove: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.delete<{ Params: RemoveAreaParams }>('/:id', {
     schema: {
       description:
-        'Remove uma área e, em cascata, seus módulos, lições, atividades e todas as traduções. Falha com 409 se alguma lição já tiver progresso de usuário. Só existe em desenvolvimento.',
+        'Remove uma área e, em cascata, seus módulos, lições, atividades e todas as traduções. Falha com 409 se alguma lição já tiver progresso de usuário (inclusive uma aula do baú já revelada). Só existe em desenvolvimento.',
       tags: ['areas'],
       params: areaIdParamsSchema,
       response: {

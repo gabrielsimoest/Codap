@@ -10,6 +10,7 @@ import Icon from "../../../components/Icon";
 import CenterView from "../../../components/layout/CenterView";
 import ThemedView from "../../../components/themed/ThemedView";
 import { useTranslation } from "react-i18next";
+import type { ReactNode } from "react";
 import ThemedText from "../../../components/themed/ThemedText";
 import ThemedIcon from "../../../components/themed/ThemedIcon";
 import { Portal, Modal } from "react-native-paper";
@@ -23,6 +24,10 @@ interface Props {
 	title: string;
 	price: number;
 	image: ImageSourcePropType;
+	/** Detalhes entre a imagem e o preço (no baú, a contagem de aulas por área). */
+	children?: ReactNode;
+	/** Compra em andamento: o botão fica travado, para um toque duplo não comprar duas vezes. */
+	loading?: boolean;
 }
 
 export default function MarketModal({
@@ -32,6 +37,8 @@ export default function MarketModal({
 	title,
 	price,
 	image,
+	children,
+	loading = false,
 }: Props) {
 	const { t } = useTranslation();
 
@@ -63,6 +70,7 @@ export default function MarketModal({
 							{title}
 						</ResizableText>
 						<Image style={styles.imageModal} source={image} />
+						{children}
 						<RowView
 							useSize
 							align="center"
@@ -79,8 +87,9 @@ export default function MarketModal({
 							/>
 						</RowView>
 						<TouchableOpacity
-							style={[styles.button]}
+							style={[styles.button, loading ? styles.buttonLoading : null]}
 							onPress={onBuy}
+							disabled={loading}
 						>
 							<ResizableText
 								style={styles.buttonText}
@@ -139,6 +148,9 @@ const styles = StyleSheet.create({
 		color: "white",
 		fontSize: 25,
 		fontWeight: "bold",
+	},
+	buttonLoading: {
+		opacity: 0.5,
 	},
 	buttonText: {
 		fontFamily: "Roboto",

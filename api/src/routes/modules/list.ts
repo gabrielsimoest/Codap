@@ -4,6 +4,7 @@ import { listModulesQuerystringSchema, moduleResponseSchema } from './modules.sc
 interface ListQuerystring {
   areaId: number;
   locale: 'pt' | 'en';
+  includeChest?: boolean;
 }
 
 const list: FastifyPluginAsync = async (fastify): Promise<void> => {
@@ -20,7 +21,12 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
       }
     }
   }, async (request) => {
-    const { areaId, locale } = request.query
+    const { areaId, locale, includeChest } = request.query
+
+    // As aulas do baú são por usuário e o catálogo é igual para todos (e cacheado
+    // para sempre no app): ficam fora. O dashboard as enxerga por um parâmetro
+    // que só vale em desenvolvimento.
+    const withChest = includeChest === true && process.env.NODE_ENV === 'development'
 
     const modules = await fastify.prisma.modules.findMany({
       where: { area_id: areaId },
@@ -34,11 +40,13 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
           take: 1
         },
         lessons: {
+          where: withChest ? {} : { is_chest: false },
           select: {
             id: true,
             index: true,
             min_level: true,
             xp_reward: true,
+            is_chest: true,
             translations: {
               where: { locale: { locale } },
               select: { name: true },
@@ -76,6 +84,7 @@ const list: FastifyPluginAsync = async (fastify): Promise<void> => {
         name: lesson.translations[0]?.name ?? '',
         minLevel: lesson.min_level,
         xpReward: lesson.xp_reward,
+        chest: lesson.is_chest,
         activities: lesson.activities.map((activity) => ({
           id: activity.id,
           index: activity.index,

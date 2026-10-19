@@ -249,3 +249,33 @@ test('GET /modules returns minLevel and xpReward of a lesson (null for a main-tr
   assert.strictEqual(byId.get(trail.id)?.minLevel, null)
   assert.strictEqual(byId.get(trail.id)?.xpReward, null)
 })
+
+test('GET /modules never returns chest lessons, and marks the others as not chest', async (t) => {
+  const app = await build(t)
+  const { area, module } = await scratchModule(app, t)
+  const trail = await app.prisma.lessons.create({ data: { module_id: module.id, index: 0 } })
+  const chest = await app.prisma.lessons.create({ data: { module_id: module.id, index: 1, is_chest: true } })
+
+  const res = await app.inject({ method: 'GET', url: `/modules?areaId=${area.id}&locale=pt` })
+
+  assert.equal(res.statusCode, 200)
+  const lessons = JSON.parse(res.payload)[0].lessons
+  assert.deepEqual(lessons.map((l: { id: number }) => l.id), [trail.id])
+  assert.strictEqual(lessons[0].chest, false)
+  assert.ok(!JSON.stringify(lessons).includes(String(chest.id)) || lessons.every((l: { id: number }) => l.id !== chest.id))
+})
+
+test('GET /modules honours includeChest=true only in development', async (t) => {
+  const app = await build(t)
+  const { area, module } = await scratchModule(app, t)
+  const trail = await app.prisma.lessons.create({ data: { module_id: module.id, index: 0 } })
+  const chest = await app.prisma.lessons.create({ data: { module_id: module.id, index: 1, is_chest: true } })
+  const ids = async () => (JSON.parse((await app.inject({ url: `/modules?areaId=${area.id}&locale=pt&includeChest=true` })).payload)[0].lessons as Array<{ id: number }>).map((l) => l.id)
+
+  assert.deepEqual(await ids(), [trail.id]) // sem NODE_ENV=development o parâmetro é ignorado
+
+  const original = process.env.NODE_ENV
+  process.env.NODE_ENV = 'development'
+  t.after(() => { process.env.NODE_ENV = original })
+  assert.deepEqual(await ids(), [trail.id, chest.id])
+})

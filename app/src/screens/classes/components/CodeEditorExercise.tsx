@@ -24,6 +24,10 @@ import CodeSnippet from "./CodeSnippet";
 import Icon from "../../../components/Icon";
 import DarkMode from "../../../theme/DarkMode";
 import useFontSizeStore from "../../../stores/FontSizeStore";
+import useShopStore from "../../../stores/ShopStore";
+import useUserStore from "../../../stores/UserStore";
+import { refreshShop, spendHint } from "../../../services/ShopActions";
+import { showAlert } from "../../../utils/showAlert";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./SandboxWebView";
 
@@ -543,11 +547,45 @@ function ChallengeHelp({
 	const { t } = useTranslation();
 	const [now, setNow] = useState(() => Date.now());
 	const [revealed, setRevealed] = useState<number[]>([]);
+	// Quantos passos a pessoa abriu com Dicas Instantâneas. É um piso, não uma
+	// soma: o passo que o tempo (ou as tentativas) liberaria de qualquer jeito
+	// não pode ser "gasto" duas vezes.
+	const [forced, setForced] = useState(0);
+	const [spending, setSpending] = useState(false);
 	const totalSteps = hints.length + 1;
 	const unlocked = Math.min(
 		totalSteps,
-		Math.max(Math.floor(failedRuns / RUNS_PER_STEP), Math.floor((now - startedAt) / MS_PER_STEP))
+		Math.max(
+			Math.floor(failedRuns / RUNS_PER_STEP),
+			Math.floor((now - startedAt) / MS_PER_STEP),
+			forced
+		)
 	);
+	// O estoque vem do servidor e é de uma conta; sem ele carregado, o botão não aparece.
+	const remoteId = useUserStore((s) => s.user?.remoteId);
+	const instantHints = useShopStore((s) => (s.userId === remoteId ? s.state?.instantHints ?? 0 : 0));
+	const unlockedRef = useRef(unlocked);
+	unlockedRef.current = unlocked;
+
+	useEffect(() => {
+		refreshShop();
+	}, []);
+
+	const releaseNow = async () => {
+		if (spending) return;
+		setSpending(true);
+		const result = await spendHint();
+		setSpending(false);
+		if (result.ok) {
+			// Lido do ref: durante o pedido o tempo pode ter aberto um passo.
+			setForced((current) => Math.max(current, unlockedRef.current + 1));
+			return;
+		}
+		showAlert(
+			t("alert.market.title"),
+			t(result.reason === "no_hints" ? "shop.noHints" : result.reason === "offline" ? "shop.errors.offline" : "shop.errors.generic")
+		);
+	};
 
 	useEffect(() => {
 		if (unlocked >= totalSteps) return;
@@ -610,6 +648,19 @@ function ChallengeHelp({
 							count: Math.max(1, remainingRuns),
 						})}
 					</Text>
+				</View>
+			)}
+			{nextStep !== null && instantHints > 0 && (
+				<View style={styles.helpCard}>
+					<TouchableOpacity
+						accessibilityRole="button"
+						disabled={spending}
+						onPress={releaseNow}
+						style={[styles.revealButton, spending ? { opacity: 0.5 } : null]}
+					>
+						<Icon type="ionicon" name="flash-outline" color="#E0B04C" size={18} />
+						<Text style={styles.revealText}>{t("editor.useInstantHint", { count: instantHints })}</Text>
+					</TouchableOpacity>
 				</View>
 			)}
 		</View>
