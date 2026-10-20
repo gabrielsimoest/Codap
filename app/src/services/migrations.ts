@@ -179,7 +179,13 @@ export default function runMigrations(database: SQLite.SQLiteDatabase) {
 			// XP de uma lição concluída até esse momento. Nulo = sem janela. As
 			// colunas `doubleXp`/`doubleTime` de antes nunca foram usadas e ficam
 			// como estão.
-			database.execSync("ALTER TABLE Users ADD COLUMN doubleXpEndsAt TEXT;");
+			// Só adiciona se ainda não existe: um banco que ganhou a coluna sem registrar
+			// a versão (migração interrompida) repetiria o ALTER e o login falharia
+			// com "duplicate column name" — e offline-first não pode travar na migração.
+			const columns = database.getAllSync<{ name: string }>("PRAGMA table_info(Users)");
+			if (!columns.some((column) => column.name === "doubleXpEndsAt")) {
+				database.execSync("ALTER TABLE Users ADD COLUMN doubleXpEndsAt TEXT;");
+			}
 			database.execSync(`PRAGMA user_version = ${CURRENT_SCHEMA_VERSION};`);
 		});
 	}
