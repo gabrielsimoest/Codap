@@ -12,6 +12,15 @@ export const SHOP_PRICES: Record<ShopItem, number> = {
 /** Duração de uma janela de Dobro de XP. */
 export const BOOST_MINUTES = 5
 
+/**
+ * Quantas lições uma janela de Dobro de XP dobra. O servidor confia no horário do
+ * evento (é o que deixa uma lição offline valer o dobro), então quem atrasasse o
+ * relógio do aparelho para dentro de uma janela vencida dobraria tudo; com o teto,
+ * uma compra de 200 Bits rende no máximo isto, seja qual for o relógio. Em 5
+ * minutos ninguém conclui mais lições do que isso.
+ */
+export const BOOST_MAX_LESSONS = 5
+
 /** Quanto o baú devolve quando sorteia Bits (metade do preço). */
 export const CHEST_REFUND_BITS = 250
 

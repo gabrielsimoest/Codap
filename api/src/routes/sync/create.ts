@@ -2,6 +2,7 @@ import { type FastifyInstance, type FastifyPluginAsync } from 'fastify'
 import { Prisma } from '../../generated/prisma/client.js'
 import { syncRequestBodySchema, syncResponseSchema } from './sync.schema.js'
 import { LESSON_XP_REWARD, bitsEarnedBetween } from '../../utils/levels.js'
+import { BOOST_MAX_LESSONS } from '../../utils/shop.js'
 
 type SyncEventType = 'lesson_completed' | 'achievement_unlocked'
 
@@ -38,6 +39,13 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
 
   try {
     await fastify.prisma.$transaction(async (tx) => {
+      // Trava o usuário ANTES de qualquer escrita: com os eventos do lote em paralelo,
+      // cada um precisa enxergar as lições que os anteriores já gravaram na janela do
+      // Dobro de XP (o teto de lições dobradas), e eles passam a andar um de cada vez.
+      // Tem de ser o primeiro comando: o insert em `user_lessons` já toma um lock
+      // compartilhado da linha do usuário (FK), e dois eventos que o tomassem antes
+      // de pedir o `FOR UPDATE` travariam um ao outro (deadlock).
+      await tx.$queryRaw`SELECT id FROM users WHERE id = ${userId}::uuid FOR UPDATE`
       await tx.user_lessons.create({
         data: { user_id: userId, lesson_id: lessonId, completed_at: new Date(event.occurredAt) }
       })
@@ -61,9 +69,14 @@ async function applyLessonCompleted (fastify: FastifyInstance, userId: string, e
       // funciona também para uma lição feita offline dentro da janela e enviada
       // depois, e não depende da ordem dos eventos do lote.
       const occurredAt = new Date(event.occurredAt)
-      const boosted = await tx.xp_boosts.count({
+      const window = await tx.xp_boosts.findFirst({
         where: { user_id: userId, starts_at: { lte: occurredAt }, ends_at: { gte: occurredAt } }
-      }) > 0
+      })
+      // O teto conta as lições concluídas na janela, esta incluída (o insert já
+      // aconteceu): a de ordem BOOST_MAX_LESSONS ainda dobra, a seguinte não.
+      const boosted = window !== null && await tx.user_lessons.count({
+        where: { user_id: userId, completed_at: { gte: window.starts_at, lte: window.ends_at } }
+      }) <= BOOST_MAX_LESSONS
       const reward = (xpReward ?? LESSON_XP_REWARD) * (boosted ? 2 : 1)
 
       // `xp`/`bits` são `Int?`, e `increment` em NULL continua NULL — normaliza antes.

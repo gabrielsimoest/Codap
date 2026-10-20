@@ -596,3 +596,39 @@ test('POST /sync pays a revealed chest lesson with its xpReward', async (t) => {
   await user.cleanup()
   await chest.cleanup()
 })
+
+test('POST /sync doubles at most BOOST_MAX_LESSONS lessons per window, even in one batch', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lessons = await Promise.all(Array.from({ length: 7 }, () => createLessonFixture(app)))
+  await openBoost(app, user.userId, -1, 4)
+
+  const res = await syncLessonsAt(app, user.accessToken, lessons.map((lesson, i) => ({
+    lessonId: lesson.lessonId,
+    occurredAt: new Date(Date.now() - i * 1000)
+  })))
+
+  assert.equal(res.statusCode, 200)
+  // 5 × 20 (dobradas) + 2 × 10 (passaram do teto da janela) = 120 XP; níveis 2 e 3 = 20 + 30 Bits.
+  assert.deepEqual(JSON.parse(res.payload).profile, { xp: 120, bits: 50 })
+
+  await user.cleanup()
+  for (const lesson of lessons) await lesson.cleanup()
+})
+
+test('POST /sync counts the lessons already synced in the window when applying the cap', async (t) => {
+  const app = await build(t)
+  const user = await registerTestUser(app)
+  const lessons = await Promise.all(Array.from({ length: 6 }, () => createLessonFixture(app)))
+  await openBoost(app, user.userId, -1, 4)
+
+  const first = await syncLessonsAt(app, user.accessToken, lessons.slice(0, 5).map((lesson) => ({ lessonId: lesson.lessonId, occurredAt: new Date() })))
+  assert.deepEqual(JSON.parse(first.payload).profile.xp, 100)
+
+  // Uma sexta lição, no mesmo intervalo, enviada depois: já não dobra.
+  const second = await syncLessonsAt(app, user.accessToken, [{ lessonId: lessons[5].lessonId, occurredAt: new Date() }])
+  assert.deepEqual(JSON.parse(second.payload).profile.xp, 110)
+
+  await user.cleanup()
+  for (const lesson of lessons) await lesson.cleanup()
+})
