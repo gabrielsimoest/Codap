@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -23,8 +23,12 @@ import useUserStore from "../../stores/UserStore";
  */
 const FALLBACK_PRICES = { double_xp: 200, instant_hint: 300, chest: 500 };
 
-const formatTime = (iso: string) =>
-	new Date(iso).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+/** Hora no idioma do app, não no do aparelho (o pt mostra 24 h, o en, AM/PM). */
+const formatTime = (iso: string, language: string) =>
+	new Date(iso).toLocaleTimeString(language === "pt" ? "pt-BR" : "en-US", {
+		hour: "2-digit",
+		minute: "2-digit",
+	});
 
 export default function Market() {
 	const { t } = useTranslation();
@@ -43,6 +47,18 @@ export default function Market() {
 			refreshShop();
 		}, [remoteId])
 	);
+
+	// O rótulo "ativo" é calculado a cada renderização; sem isto ele só sumiria
+	// quando algo mais re-renderizasse a tela depois do fim da janela.
+	const [, setClock] = useState(0);
+	const boostEndsAt = shop?.doubleXpEndsAt ?? null;
+	useEffect(() => {
+		if (!boostEndsAt) return;
+		const remaining = new Date(boostEndsAt).getTime() - Date.now();
+		if (remaining <= 0) return;
+		const id = setTimeout(() => setClock((tick) => tick + 1), remaining + 250);
+		return () => clearTimeout(id);
+	}, [boostEndsAt]);
 
 	const prices = shop?.prices ?? FALLBACK_PRICES;
 	const boostActive =
@@ -121,7 +137,7 @@ export default function Market() {
 					image={Images.doubleXP}
 					status={
 						boostActive
-							? t("shop.double_xp.active", { time: formatTime(shop!.doubleXpEndsAt!) })
+							? t("shop.double_xp.active", { time: formatTime(shop!.doubleXpEndsAt!, language) })
 							: t("inactive")
 					}
 					buyLabel={t("buy")}

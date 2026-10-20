@@ -13,9 +13,21 @@ import type {
  * trata a falha de rede — ver `ShopActions`.
  */
 
+/*
+ * Sem teto, uma rede que conecta e não responde deixaria o modal de compra em
+ * "carregando" para sempre (o `apiClient` não tem timeout). A compra espera mais
+ * que o limite da transação no servidor (15 s), para ele já ter decidido quando o
+ * app desistir; se desistir mesmo assim, `ShopActions` relê o estado, porque a
+ * compra pode ter sido cobrada.
+ */
+const PURCHASE_TIMEOUT_MS = 20_000;
+const READ_TIMEOUT_MS = 10_000;
+
 /** Preços (definidos no servidor), saldo, estoque de dicas, janela de Dobro de XP e as contagens do baú. */
 export async function getShop(): Promise<ShopStateResponse> {
-	const { data } = await apiClient.get<ShopStateResponse>("/shop");
+	const { data } = await apiClient.get<ShopStateResponse>("/shop", {
+		timeout: READ_TIMEOUT_MS,
+	});
 	return data;
 }
 
@@ -24,15 +36,20 @@ export async function purchase(
 	item: ShopItem,
 	locale?: string
 ): Promise<PurchaseResponse> {
-	const { data } = await apiClient.post<PurchaseResponse>("/shop/purchase", {
-		item,
-		...(locale ? { locale } : {}),
-	});
+	const { data } = await apiClient.post<PurchaseResponse>(
+		"/shop/purchase",
+		{ item, ...(locale ? { locale } : {}) },
+		{ timeout: PURCHASE_TIMEOUT_MS }
+	);
 	return data;
 }
 
 export async function spendInstantHint(): Promise<UseHintResponse> {
-	const { data } = await apiClient.post<UseHintResponse>("/shop/use-hint");
+	const { data } = await apiClient.post<UseHintResponse>(
+		"/shop/use-hint",
+		undefined,
+		{ timeout: PURCHASE_TIMEOUT_MS }
+	);
 	return data;
 }
 

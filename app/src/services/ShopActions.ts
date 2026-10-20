@@ -6,7 +6,7 @@ import type {
 } from "codap-api/src/types/contracts";
 import DatabaseClient from "./DatabaseClient";
 import { getShop, purchase, spendInstantHint } from "./ShopService";
-import { flushQueue } from "./SyncService";
+import { flushQueue, isFlushInFlight } from "./SyncService";
 import queryClient from "./queryClient";
 import useShopStore from "../stores/ShopStore";
 import useUserStore from "../stores/UserStore";
@@ -28,6 +28,9 @@ export type BuyResult =
 export type SpendHintResult =
 	| { ok: true; instantHints: number }
 	| { ok: false; reason: "offline" | "no_hints" | "error" };
+
+/** Quanto esperar por um envio da fila já em andamento antes de comprar. */
+const FLUSH_WAIT_MS = 10_000;
 
 function currentUserId(): string | null {
 	return useUserStore.getState().user?.remoteId ?? null;
@@ -56,7 +59,16 @@ export async function buyItem(item: ShopItem, language?: string): Promise<BuyRes
 	if (!userId) return { ok: false, reason: "error" };
 
 	await flushQueue();
+	// Um envio já em andamento faz o `flushQueue` acima retornar na hora, com os
+	// eventos ainda em `syncing`: espera esse envio terminar (e envia o que sobrou)
+	// em vez de recusar a compra sem motivo.
+	for (let waited = 0; isFlushInFlight() && waited < FLUSH_WAIT_MS; waited += 250) {
+		await new Promise((resolve) => setTimeout(resolve, 250));
+	}
 	const database = new DatabaseClient();
+	if (database.hasUnsyncedEvents(userId)) {
+		await flushQueue();
+	}
 	if (database.hasUnsyncedEvents(userId)) {
 		return { ok: false, reason: "pending_sync" };
 	}
@@ -88,7 +100,13 @@ export async function buyItem(item: ShopItem, language?: string): Promise<BuyRes
 
 		return { ok: true, response };
 	} catch (error) {
-		if (isNetworkFailure(error)) return { ok: false, reason: "offline" };
+		if (isNetworkFailure(error)) {
+			// Sem resposta não quer dizer que o servidor não cobrou (tempo esgotado
+			// com a transação já confirmada): relê o estado para o saldo, o estoque e a
+			// coleção refletirem o que de fato aconteceu.
+			void refreshShop();
+			return { ok: false, reason: "offline" };
+		}
 		const failure = responseOf(error);
 		if (failure?.status === 402) {
 			return { ok: false, reason: "insufficient_bits", bits: failure.bits };
@@ -109,7 +127,10 @@ export async function spendHint(): Promise<SpendHintResult> {
 		useShopStore.getState().patch({ instantHints });
 		return { ok: true, instantHints };
 	} catch (error) {
-		if (isNetworkFailure(error)) return { ok: false, reason: "offline" };
+		if (isNetworkFailure(error)) {
+			void refreshShop(); // a dica pode ter sido gasta sem a resposta chegar
+			return { ok: false, reason: "offline" };
+		}
 		if (responseOf(error)?.status === 409) {
 			useShopStore.getState().patch({ instantHints: 0 });
 			return { ok: false, reason: "no_hints" };

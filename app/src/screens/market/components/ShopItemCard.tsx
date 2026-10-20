@@ -48,7 +48,15 @@ export default function ShopItemCard({
 			{status ? <ThemedText style={styles.status}>{status}</ThemedText> : null}
 			<RowView>
 				{imageSide === "left" ? picture : null}
-				<ColumnView style={{ height: "100%", padding: 5 }}>
+				{/* Com a imagem à direita o título começa no canto onde fica o status (que é
+				    absoluto): sem esta folga os dois se encostam. */}
+				<ColumnView
+					style={{
+						height: "100%",
+						padding: 5,
+						paddingTop: status && imageSide === "right" ? 22 : 5,
+					}}
+				>
 					<ResizableText
 						style={[styles.title, imageSide === "right" ? styles.titleRight : null]}
 						defaultSize={TextSize}

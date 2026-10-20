@@ -31,6 +31,11 @@ function reflectInUserStore(updated: User) {
  * apenas devolve os eventos para "pending" para tentar de novo no próximo
  * gatilho.
  */
+/** Há um envio em andamento? (`flushQueue` retorna na hora enquanto houver.) */
+export function isFlushInFlight(): boolean {
+	return isFlushing;
+}
+
 export async function flushQueue(): Promise<void> {
 	if (isFlushing) {
 		return;
