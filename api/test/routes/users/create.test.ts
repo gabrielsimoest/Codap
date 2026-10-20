@@ -1,9 +1,10 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, useDevelopmentEnv } from '../../helper'
 
 test('POST /users creates a user and never returns the password', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `create-${randomUUID()}@example.com`
 
@@ -26,6 +27,7 @@ test('POST /users creates a user and never returns the password', async (t) => {
 })
 
 test('POST /users accepts optional xp/bits', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `create-${randomUUID()}@example.com`
 
@@ -44,6 +46,7 @@ test('POST /users accepts optional xp/bits', async (t) => {
 })
 
 test('POST /users rejects a duplicate email with 409', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `create-${randomUUID()}@example.com`
 
@@ -66,6 +69,7 @@ test('POST /users rejects a duplicate email with 409', async (t) => {
 })
 
 test('POST /users rejects a body missing required fields with 400', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({
@@ -78,6 +82,7 @@ test('POST /users rejects a body missing required fields with 400', async (t) =>
 })
 
 test('POST /users rejects a password shorter than 8 characters with 400', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `create-${randomUUID()}@example.com`
 

@@ -1,9 +1,10 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, useDevelopmentEnv } from '../../helper'
 
 test('GET /users/:id returns the user without the password', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `getbyid-${randomUUID()}@example.com`
 
@@ -23,6 +24,7 @@ test('GET /users/:id returns the user without the password', async (t) => {
 })
 
 test('GET /users/:id returns 404 for a non-existent user', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({ url: '/users/00000000-0000-0000-0000-000000000000' })
@@ -31,6 +33,7 @@ test('GET /users/:id returns 404 for a non-existent user', async (t) => {
 })
 
 test('GET /users/:id returns 400 for a malformed id', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({ url: '/users/not-a-valid-uuid' })

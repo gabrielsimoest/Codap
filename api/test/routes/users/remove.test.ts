@@ -1,9 +1,10 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, useDevelopmentEnv } from '../../helper'
 
 test('DELETE /users/:id removes the user', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `remove-${randomUUID()}@example.com`
 
@@ -19,6 +20,7 @@ test('DELETE /users/:id removes the user', async (t) => {
 })
 
 test('DELETE /users/:id returns 404 for a non-existent user', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({ method: 'DELETE', url: '/users/00000000-0000-0000-0000-000000000000' })
@@ -27,6 +29,7 @@ test('DELETE /users/:id returns 404 for a non-existent user', async (t) => {
 })
 
 test('DELETE /users/:id returns 400 for a malformed id', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({ method: 'DELETE', url: '/users/not-a-valid-uuid' })

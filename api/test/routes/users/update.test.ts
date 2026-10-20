@@ -1,9 +1,10 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, useDevelopmentEnv } from '../../helper'
 
 test('PATCH /users/:id updates the allowed fields', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `update-${randomUUID()}@example.com`
 
@@ -28,6 +29,7 @@ test('PATCH /users/:id updates the allowed fields', async (t) => {
 })
 
 test('PATCH /users/:id updates the password hash without exposing it', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `update-${randomUUID()}@example.com`
 
@@ -51,6 +53,7 @@ test('PATCH /users/:id updates the password hash without exposing it', async (t)
 })
 
 test('PATCH /users/:id rejects changing the email to one already in use', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const emailA = `update-${randomUUID()}@example.com`
   const emailB = `update-${randomUUID()}@example.com`
@@ -75,6 +78,7 @@ test('PATCH /users/:id rejects changing the email to one already in use', async 
 })
 
 test('PATCH /users/:id returns 404 for a non-existent user', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({
@@ -87,6 +91,7 @@ test('PATCH /users/:id returns 404 for a non-existent user', async (t) => {
 })
 
 test('PATCH /users/:id rejects an empty body with 400', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
 
   const res = await app.inject({

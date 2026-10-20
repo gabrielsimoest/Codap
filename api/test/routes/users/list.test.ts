@@ -1,9 +1,10 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, useDevelopmentEnv } from '../../helper'
 
 test('GET /users lists users without exposing passwords', async (t) => {
+  useDevelopmentEnv(t)
   const app = await build(t)
   const email = `list-${randomUUID()}@example.com`
 
