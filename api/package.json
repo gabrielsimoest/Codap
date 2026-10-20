@@ -16,8 +16,7 @@
     "dev:start": "cross-env NODE_ENV=development fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
     "seed": "tsx prisma/seed.ts",
     "seed:check": "tsx prisma/checkSeedDrift.ts",
-    "seed:generate": "tsx prisma/generateSeed.ts",
-    "seed:backfill-bits": "tsx prisma/backfillBits.ts"
+    "seed:generate": "tsx prisma/generateSeed.ts"
   },
   "keywords": [],
   "author": "",
