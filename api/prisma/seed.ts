@@ -24753,6 +24753,310 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         }
       }
     ]
+  },
+  {
+    name: {
+      pt: 'Popover nativo',
+      en: 'Native popover'
+    },
+    minLevel: 12,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O atributo popover transforma um elemento em uma camada flutuante, escondida até ser aberta. Um botão com popovertarget abre o elemento cujo id ele aponta, sem nenhum JavaScript.',
+            endParagraph: 'Com popover (ou popover="auto"), clicar fora da camada ou apertar Esc a fecha.',
+            highlight: ['popover', 'popovertarget', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="menu">\n  Menu\n</button>\n\n<div id="menu" popover>\n  Conteúdo do menu\n</div>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The popover attribute turns an element into a floating layer, hidden until it is opened. A button with popovertarget opens the element whose id it points to, with no JavaScript at all.',
+            endParagraph: 'With popover (or popover="auto"), clicking outside the layer or pressing Esc closes it.',
+            highlight: ['popover', 'popovertarget', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="menu">\n  Menu\n</button>\n\n<div id="menu" popover>\n  Menu content\n</div>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Com popover="manual", nada fecha a camada sozinho. Só os botões com popovertargetaction mexem nela: show abre, hide fecha e toggle alterna (o padrão).',
+            endParagraph: 'Use manual para dicas e avisos que devem ficar na tela até a pessoa decidir.',
+            highlight: ['manual', 'popovertargetaction', 'show', 'hide', 'toggle'],
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="tip"\n  popovertargetaction="show">\n  Abrir\n</button>\n<button popovertarget="tip"\n  popovertargetaction="hide">\n  Fechar\n</button>\n\n<p id="tip" popover="manual">\n  Dica fixa\n</p>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'With popover="manual", nothing closes the layer on its own. Only buttons with popovertargetaction change it: show opens, hide closes and toggle switches (the default).',
+            endParagraph: 'Use manual for tips and notices that must stay on screen until the person decides.',
+            highlight: ['manual', 'popovertargetaction', 'show', 'hide', 'toggle'],
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="tip"\n  popovertargetaction="show">\n  Open\n</button>\n<button popovertarget="tip"\n  popovertargetaction="hide">\n  Close\n</button>\n\n<p id="tip" popover="manual">\n  Pinned tip\n</p>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Pelo JavaScript, showPopover(), hidePopover() e togglePopover() fazem o mesmo que os botões. O evento toggle avisa a mudança, e newState vale open ou closed.',
+            endParagraph: 'O evento toggle dispara depois que o estado já mudou.',
+            highlight: ['showPopover', 'hidePopover', 'togglePopover', 'toggle', 'newState'],
+            codeLanguage: 'JavaScript',
+            code: 'const menu =\n  document.querySelector("#menu");\n\nmenu.showPopover();\nmenu.hidePopover();\nmenu.togglePopover();\n\nmenu.addEventListener("toggle", (e) => {\n  console.log(e.newState);\n});',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            firstParagraph: 'From JavaScript, showPopover(), hidePopover() and togglePopover() do the same as the buttons. The toggle event reports the change, and newState is open or closed.',
+            endParagraph: 'The toggle event fires after the state has already changed.',
+            highlight: ['showPopover', 'hidePopover', 'togglePopover', 'toggle', 'newState'],
+            codeLanguage: 'JavaScript',
+            code: 'const menu =\n  document.querySelector("#menu");\n\nmenu.showPopover();\nmenu.hidePopover();\nmenu.togglePopover();\n\nmenu.addEventListener("toggle", (e) => {\n  console.log(e.newState);\n});',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo transforma um elemento em popover?',
+            highlight: [],
+            correctOption: 1,
+            options: ['popover', 'popup', 'hidden', 'overlay']
+          },
+          en: {
+            question: 'Which attribute turns an element into a popover?',
+            highlight: [],
+            correctOption: 1,
+            options: ['popover', 'popup', 'hidden', 'overlay']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um popover="auto" está aberto. O que o fecha?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Clicar fora dele ou apertar Esc', 'Só o botão que o abriu', 'Só o JavaScript', 'Nada: ele fica aberto até recarregar a página']
+          },
+          en: {
+            question: 'A popover="auto" is open. What closes it?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Clicking outside it or pressing Esc', 'Only the button that opened it', 'Only JavaScript', 'Nothing: it stays open until the page reloads']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este botão faz?',
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="tip"\n  popovertargetaction="hide">\n  Fechar\n</button>',
+            highlight: [],
+            correctOption: 1,
+            options: ['Fecha o popover de id tip', 'Abre o popover de id tip', 'Alterna o popover de id tip', 'Apaga o elemento de id tip']
+          },
+          en: {
+            question: 'What does this button do?',
+            codeLanguage: 'HTML',
+            code: '<button popovertarget="tip"\n  popovertargetaction="hide">\n  Close\n</button>',
+            highlight: [],
+            correctOption: 1,
+            options: ['Closes the popover with id tip', 'Opens the popover with id tip', 'Toggles the popover with id tip', 'Deletes the element with id tip']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o atributo que liga o botão ao popover de id menu.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___="menu">\n  Menu\n</button>',
+            answers: ['popovertarget'],
+            distractors: ['popoverfor', 'popover', 'target']
+          },
+          en: {
+            question: 'Complete the attribute that links the button to the popover with id menu.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<button ___="menu">\n  Menu\n</button>',
+            answers: ['popovertarget'],
+            distractors: ['popoverfor', 'popover', 'target']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Carregamento de scripts: defer e async',
+      en: 'Loading scripts: defer and async'
+    },
+    minLevel: 20,
+    xpReward: 40,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um script comum no head faz o navegador parar de ler o HTML até ele ser baixado e executado. Nesse momento, os elementos do body ainda não existem para ele.',
+            endParagraph: 'Por isso os scripts ficavam no fim do body. Hoje existem defer e async.',
+            highlight: ['head', 'body', 'defer', 'async'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <script src="app.js"></script>\n</head>\n<body>\n  <h1>Olá</h1>\n</body>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A plain script in the head makes the browser stop reading the HTML until it has been downloaded and run. At that point, the elements of the body do not exist for it yet.',
+            endParagraph: 'That is why scripts used to sit at the end of the body. Today there are defer and async.',
+            highlight: ['head', 'body', 'defer', 'async'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <script src="app.js"></script>\n</head>\n<body>\n  <h1>Hello</h1>\n</body>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Com defer, o script baixa em paralelo e só roda depois de o HTML ser lido, na ordem em que aparecem. Com async, ele roda assim que termina de baixar, em qualquer ordem.',
+            endParagraph: 'Use defer para scripts que mexem no DOM ou dependem uns dos outros, e async para os independentes, como métricas.',
+            highlight: ['defer', 'async'],
+            codeLanguage: 'HTML',
+            code: '<script src="a.js" defer></script>\n<script src="b.js" defer></script>\n\n<script src="c.js" async></script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'With defer, the script downloads in parallel and only runs after the HTML has been read, in the order they appear. With async, it runs as soon as it finishes downloading, in any order.',
+            endParagraph: 'Use defer for scripts that touch the DOM or depend on each other, and async for independent ones, such as analytics.',
+            highlight: ['defer', 'async'],
+            codeLanguage: 'HTML',
+            code: '<script src="a.js" defer></script>\n<script src="b.js" defer></script>\n\n<script src="c.js" async></script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um script type="module" já é adiado, como se tivesse defer, sem precisar escrever o atributo. É o jeito moderno de organizar o JavaScript em arquivos.',
+            endParagraph: 'Se o script é um módulo, ele também só roda depois de o HTML ser lido.',
+            highlight: ['module', 'defer'],
+            codeLanguage: 'HTML',
+            code: '<script type="module"\n  src="app.js"></script>',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A script type="module" is already deferred, as if it had defer, with no need to write the attribute. It is the modern way to organize JavaScript into files.',
+            endParagraph: 'When the script is a module, it also only runs after the HTML has been read.',
+            highlight: ['module', 'defer'],
+            codeLanguage: 'HTML',
+            code: '<script type="module"\n  src="app.js"></script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quais scripts rodam depois do HTML lido, na ordem em que aparecem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os que têm defer', 'Os que têm async', 'Os sem atributo, no head', 'Nenhum: a ordem nunca é garantida']
+          },
+          en: {
+            question: 'Which scripts run after the HTML is read, in the order they appear?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Those with defer', 'Those with async', 'Those with no attribute, in the head', 'None: the order is never guaranteed']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'a.js demora a baixar e b.js é rápido. Qual roda primeiro?',
+            codeLanguage: 'HTML',
+            code: '<script async\n  src="a.js"></script>\n<script async\n  src="b.js"></script>',
+            highlight: [],
+            correctOption: 1,
+            options: ['b.js, que terminou de baixar antes', 'a.js, por vir primeiro', 'Sempre a.js: async mantém a ordem', 'Nenhum: async bloqueia os dois']
+          },
+          en: {
+            question: 'a.js is slow to download and b.js is fast. Which one runs first?',
+            codeLanguage: 'HTML',
+            code: '<script async\n  src="a.js"></script>\n<script async\n  src="b.js"></script>',
+            highlight: [],
+            correctOption: 1,
+            options: ['b.js, which finished downloading first', 'a.js, because it comes first', 'Always a.js: async keeps the order', 'Neither: async blocks both']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O script lê o h1 da página. O que ele recebe?',
+            codeLanguage: 'HTML',
+            code: '<script defer\n  src="app.js"></script>\n\n// app.js\nconst h1 = document\n  .querySelector("h1");\nconsole.log(h1);',
+            highlight: [],
+            correctOption: 1,
+            options: ['O elemento h1, já criado', 'null: o h1 ainda não existe', 'Um erro de sintaxe', 'undefined']
+          },
+          en: {
+            question: 'The script reads the h1 of the page. What does it get?',
+            codeLanguage: 'HTML',
+            code: '<script defer\n  src="app.js"></script>\n\n// app.js\nconst h1 = document\n  .querySelector("h1");\nconsole.log(h1);',
+            highlight: [],
+            correctOption: 1,
+            options: ['The h1 element, already created', 'null: the h1 does not exist yet', 'A syntax error', 'undefined']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para o script rodar só depois de o HTML ser lido, na ordem.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<script src="app.js"\n  ___></script>',
+            answers: ['defer'],
+            distractors: ['async', 'lazy', 'wait']
+          },
+          en: {
+            question: 'Complete it so the script only runs after the HTML is read, in order.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<script src="app.js"\n  ___></script>',
+            answers: ['defer'],
+            distractors: ['async', 'lazy', 'wait']
+          }
+        }
+      }
+    ]
   }
 ]
 
@@ -28692,6 +28996,308 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             code: '.card {\n  display: grid;\n  grid-template-rows: ___;\n}',
             answers: ['subgrid'],
             distractors: ['parent', 'inherit-grid', 'sub']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Aninhamento de regras (CSS nesting)',
+      en: 'Rule nesting (CSS nesting)'
+    },
+    minLevel: 11,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O aninhamento deixa escrever uma regra dentro de outra. Os seletores de dentro valem só para os elementos que estão dentro do de fora, sem repetir o nome da classe.',
+            endParagraph: 'O resultado é o mesmo de escrever .card h2 e .card p em regras separadas.',
+            highlight: ['aninhamento', 'seletores'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  padding: 16px;\n\n  h2 {\n    color: tomato;\n  }\n\n  p {\n    margin: 0;\n  }\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Nesting lets you write one rule inside another. The inner selectors only apply to elements inside the outer one, without repeating the class name.',
+            endParagraph: 'The result is the same as writing .card h2 and .card p as separate rules.',
+            highlight: ['Nesting', 'selectors'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  padding: 16px;\n\n  h2 {\n    color: tomato;\n  }\n\n  p {\n    margin: 0;\n  }\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O símbolo & representa o seletor de fora. &:hover vira .btn:hover e &.big vira .btn.big, sem espaço: o elemento que tem as duas coisas ao mesmo tempo.',
+            endParagraph: 'Sem o &, um seletor de dentro vale para os descendentes, e não para o próprio elemento.',
+            highlight: ['&', 'hover', 'descendentes'],
+            codeLanguage: 'CSS',
+            code: '.btn {\n  background: navy;\n\n  &:hover {\n    background: royalblue;\n  }\n\n  &.big {\n    font-size: 24px;\n  }\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The & symbol stands for the outer selector. &:hover becomes .btn:hover and &.big becomes .btn.big, with no space: the element that has both things at once.',
+            endParagraph: 'Without the &, an inner selector applies to descendants, not to the element itself.',
+            highlight: ['&', 'hover', 'descendants'],
+            codeLanguage: 'CSS',
+            code: '.btn {\n  background: navy;\n\n  &:hover {\n    background: royalblue;\n  }\n\n  &.big {\n    font-size: 24px;\n  }\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Uma @media também pode ir dentro da regra, e o & pode ficar depois de outro seletor. .dark & vale para .card quando algum elemento de fora tem a classe dark.',
+            endParagraph: 'Assim as variações de uma regra ficam juntas, no mesmo bloco.',
+            highlight: ['@media', 'dark'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A @media can also go inside the rule, and the & can come after another selector. .dark & applies to .card when some outer element has the class dark.',
+            endParagraph: 'That way the variations of a rule stay together, in the same block.',
+            highlight: ['@media', 'dark'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como o CSS lê &:hover dentro de .btn?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.btn:hover', '.btn :hover', '.hover .btn', '.btn > hover']
+          },
+          en: {
+            question: 'How does CSS read &:hover inside .btn?',
+            highlight: [],
+            correctOption: 1,
+            options: ['.btn:hover', '.btn :hover', '.hover .btn', '.btn > hover']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Esse CSS equivale a qual seletor?',
+            codeLanguage: 'CSS',
+            code: '.menu {\n  a {\n    color: red;\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['.menu a', '.menu.a', 'a.menu', '.menu > a']
+          },
+          en: {
+            question: 'Which selector is this CSS equivalent to?',
+            codeLanguage: 'CSS',
+            code: '.menu {\n  a {\n    color: red;\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['.menu a', '.menu.a', 'a.menu', '.menu > a']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quais elementos ficam verdes?',
+            codeLanguage: 'CSS',
+            code: '.tag {\n  &.on {\n    color: green;\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Os que têm as classes tag e on', 'Os com a classe on dentro de um .tag', 'Todos os que têm a classe on', 'Só o primeiro .tag']
+          },
+          en: {
+            question: 'Which elements turn green?',
+            codeLanguage: 'CSS',
+            code: '.tag {\n  &.on {\n    color: green;\n  }\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Those with both classes tag and on', 'Those with class on inside a .tag', 'Everything with the class on', 'Only the first .tag']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para a regra valer para o próprio .btn com o mouse em cima.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.btn {\n  ___:hover {\n    color: red;\n  }\n}',
+            answers: ['&'],
+            distractors: ['*', '>', '+']
+          },
+          en: {
+            question: 'Complete it so the rule applies to .btn itself under the mouse.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.btn {\n  ___:hover {\n    color: red;\n  }\n}',
+            answers: ['&'],
+            distractors: ['*', '>', '+']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Scroll snap',
+      en: 'Scroll snap'
+    },
+    minLevel: 18,
+    xpReward: 40,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'scroll-snap-type, no contêiner, diz o eixo e o rigor do encaixe, e scroll-snap-align, em cada filho, diz onde ele para. Ao terminar a rolagem, ela fica alinhada a um item.',
+            endParagraph: 'É o que faz carrosséis e galerias pararem certinho em cada slide, sem JavaScript.',
+            highlight: ['scroll-snap-type', 'scroll-snap-align', 'contêiner'],
+            codeLanguage: 'CSS',
+            code: '.carousel {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n}\n\n.slide {\n  flex: 0 0 100%;\n  scroll-snap-align: start;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'scroll-snap-type, on the container, sets the axis and how strict the snapping is, and scroll-snap-align, on each child, sets where it stops. When the scroll ends, it lines up with an item.',
+            endParagraph: 'This is what makes carousels and galleries stop exactly on each slide, with no JavaScript.',
+            highlight: ['scroll-snap-type', 'scroll-snap-align', 'container'],
+            codeLanguage: 'CSS',
+            code: '.carousel {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n}\n\n.slide {\n  flex: 0 0 100%;\n  scroll-snap-align: start;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'mandatory sempre encaixa: a rolagem nunca termina entre dois itens. proximity só encaixa quando a rolagem para perto de um ponto. O primeiro valor é o eixo: x, y ou both.',
+            endParagraph: 'Prefira proximity em listas longas, onde forçar o encaixe atrapalharia a leitura.',
+            highlight: ['mandatory', 'proximity', 'eixo'],
+            codeLanguage: 'CSS',
+            code: '/* sempre encaixa */\nscroll-snap-type: x mandatory;\n\n/* só encaixa se estiver perto */\nscroll-snap-type: y proximity;',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'mandatory always snaps: the scroll never ends between two items. proximity only snaps when the scroll stops near a point. The first value is the axis: x, y or both.',
+            endParagraph: 'Prefer proximity on long lists, where forcing the snap would get in the way of reading.',
+            highlight: ['mandatory', 'proximity', 'axis'],
+            codeLanguage: 'CSS',
+            code: '/* always snaps */\nscroll-snap-type: x mandatory;\n\n/* snaps only when close */\nscroll-snap-type: y proximity;',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'center encaixa o item pelo meio. scroll-snap-stop: always impede de passar direto por um item numa rolagem rápida, e scroll-padding deixa uma folga entre o ponto de encaixe e a borda do contêiner.',
+            endParagraph: 'A folga do scroll-padding é útil quando há um cabeçalho fixo cobrindo o topo.',
+            highlight: ['center', 'scroll-snap-stop', 'scroll-padding'],
+            codeLanguage: 'CSS',
+            code: '.slide {\n  scroll-snap-align: center;\n  scroll-snap-stop: always;\n}\n\n.carousel {\n  scroll-padding: 0 16px;\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'center snaps the item by its middle. scroll-snap-stop: always stops a fast scroll from skipping an item, and scroll-padding leaves a gap between the snap point and the edge of the container.',
+            endParagraph: 'The scroll-padding gap is useful when a fixed header covers the top.',
+            highlight: ['center', 'scroll-snap-stop', 'scroll-padding'],
+            codeLanguage: 'CSS',
+            code: '.slide {\n  scroll-snap-align: center;\n  scroll-snap-stop: always;\n}\n\n.carousel {\n  scroll-padding: 0 16px;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade vai no contêiner da rolagem?',
+            highlight: [],
+            correctOption: 1,
+            options: ['scroll-snap-type', 'scroll-snap-align', 'scroll-snap-stop', 'snap-type']
+          },
+          en: {
+            question: 'Which property goes on the scroll container?',
+            highlight: [],
+            correctOption: 1,
+            options: ['scroll-snap-type', 'scroll-snap-align', 'scroll-snap-stop', 'snap-type']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o valor mandatory faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A rolagem sempre termina alinhada a um ponto', 'Só encaixa se a rolagem parar perto', 'Impede a pessoa de rolar', 'Rola sozinho de tempos em tempos']
+          },
+          en: {
+            question: 'What does the mandatory value do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The scroll always ends lined up with a point', 'It only snaps if the scroll stops close', 'It stops the person from scrolling', 'It scrolls on its own every now and then']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o encaixe não acontece ao rolar a lista?',
+            codeLanguage: 'CSS',
+            code: '.list {\n  overflow-y: auto;\n  scroll-snap-type:\n    x mandatory;\n}\n\n.item {\n  scroll-snap-align: start;\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['O eixo é x, mas a lista rola em y', 'Falta o overflow-x', 'mandatory desliga o encaixe', 'Falta position: relative']
+          },
+          en: {
+            question: 'Why does the snapping not happen when scrolling the list?',
+            codeLanguage: 'CSS',
+            code: '.list {\n  overflow-y: auto;\n  scroll-snap-type:\n    x mandatory;\n}\n\n.item {\n  scroll-snap-align: start;\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['The axis is x, but the list scrolls on y', 'overflow-x is missing', 'mandatory turns the snapping off', 'position: relative is missing']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a propriedade que diz onde cada slide para.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.slide {\n  scroll-snap-___: start;\n}',
+            answers: ['align'],
+            distractors: ['type', 'stop', 'start']
+          },
+          en: {
+            question: 'Complete the property that says where each slide stops.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.slide {\n  scroll-snap-___: start;\n}',
+            answers: ['align'],
+            distractors: ['type', 'stop', 'start']
           }
         }
       }
@@ -34199,6 +34805,312 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             code: 'function dobro(txt, n) {\n  return n * 2;\n}\nconsole.log(___`n=${5}`);',
             answers: ['dobro'],
             distractors: ['dobro(', 'dobro.', '@dobro']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Map e Set',
+      en: 'Map and Set'
+    },
+    minLevel: 13,
+    xpReward: 30,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Map guarda pares chave-valor, como um objeto, mas qualquer valor serve de chave, inclusive um objeto, e ele lembra a ordem em que as chaves entraram. Os métodos principais são set, get, has e delete, além de size.',
+            endParagraph: 'O size é uma propriedade, não um método: sem parênteses.',
+            highlight: ['Map', 'set', 'get', 'size'],
+            codeLanguage: 'JavaScript',
+            code: 'const notas = new Map();\n\nnotas.set("Ana", 9);\nnotas.set("Bia", 7);\n\nconsole.log(notas.get("Ana"));\nconsole.log(notas.has("Caio"));\nconsole.log(notas.size);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Map stores key-value pairs, like an object, but any value works as a key, even an object, and it remembers the order the keys came in. The main methods are set, get, has and delete, plus size.',
+            endParagraph: 'The size is a property, not a method: no parentheses.',
+            highlight: ['Map', 'set', 'get', 'size'],
+            codeLanguage: 'JavaScript',
+            code: 'const notas = new Map();\n\nnotas.set("Ana", 9);\nnotas.set("Bia", 7);\n\nconsole.log(notas.get("Ana"));\nconsole.log(notas.has("Caio"));\nconsole.log(notas.size);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Set guarda valores sem repetição. Passar um array ao construtor remove os duplicados, e o spread [...set] devolve um array de novo.',
+            endParagraph: 'Os valores ficam na ordem em que entraram, e has confere se um valor está lá.',
+            highlight: ['Set', 'spread'],
+            codeLanguage: 'JavaScript',
+            code: 'const ids = [3, 1, 3, 2, 1];\nconst unicos = new Set(ids);\n\nconsole.log(unicos.size);\nconsole.log([...unicos]);\nconsole.log(unicos.has(2));',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'Set stores values with no repetition. Passing an array to the constructor removes the duplicates, and the spread [...set] gives an array back.',
+            endParagraph: 'The values stay in the order they came in, and has checks whether a value is there.',
+            highlight: ['Set', 'spread'],
+            codeLanguage: 'JavaScript',
+            code: 'const ids = [3, 1, 3, 2, 1];\nconst unicos = new Set(ids);\n\nconsole.log(unicos.size);\nconsole.log([...unicos]);\nconsole.log(unicos.has(2));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um Map é iterável: for...of entrega cada par como [chave, valor], na ordem de inserção. Object.fromEntries(map) converte o Map em um objeto comum.',
+            endParagraph: 'O contrário também existe: new Map(Object.entries(obj)).',
+            highlight: ['iterável', 'Object.fromEntries'],
+            codeLanguage: 'JavaScript',
+            code: 'const preco = new Map([\n  ["pão", 5],\n  ["leite", 8]\n]);\n\nfor (const [item, valor] of preco) {\n  console.log(item, valor);\n}\n\nconsole.log(Object.fromEntries(preco));',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A Map is iterable: for...of hands over each pair as [key, value], in insertion order. Object.fromEntries(map) converts the Map into a plain object.',
+            endParagraph: 'The opposite also exists: new Map(Object.entries(obj)).',
+            highlight: ['iterable', 'Object.fromEntries'],
+            codeLanguage: 'JavaScript',
+            code: 'const preco = new Map([\n  ["bread", 5],\n  ["milk", 8]\n]);\n\nfor (const [item, valor] of preco) {\n  console.log(item, valor);\n}\n\nconsole.log(Object.fromEntries(preco));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale a.size?',
+            codeLanguage: 'JavaScript',
+            code: 'const a = new Set([1, 1, 2]);\nconsole.log(a.size);',
+            highlight: [],
+            correctOption: 1,
+            options: ['2', '3', '1', 'Dá erro']
+          },
+          en: {
+            question: 'What is a.size?',
+            codeLanguage: 'JavaScript',
+            code: 'const a = new Set([1, 1, 2]);\nconsole.log(a.size);',
+            highlight: [],
+            correctOption: 1,
+            options: ['2', '3', '1', 'It throws']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quanto vale m.size?',
+            codeLanguage: 'JavaScript',
+            code: 'const m = new Map();\nm.set("x", 1);\nm.set("x", 2);\nconsole.log(m.size);',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', '2', '0', 'Dá erro']
+          },
+          en: {
+            question: 'What is m.size?',
+            codeLanguage: 'JavaScript',
+            code: 'const m = new Map();\nm.set("x", 1);\nm.set("x", 2);\nconsole.log(m.size);',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', '2', '0', 'It throws']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é uma vantagem do Map sobre um objeto comum?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Qualquer valor, até um objeto, pode ser chave', 'As chaves são sempre texto', 'Ele não guarda a ordem das chaves', 'Ele só aceita números como valor']
+          },
+          en: {
+            question: 'What is an advantage of Map over a plain object?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Any value, even an object, can be a key', 'The keys are always text', 'It does not keep the order of the keys', 'It only accepts numbers as values']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para remover os duplicados da lista.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const lista = [1, 2, 2, 3];\nconst u = [...new ___(lista)];\nconsole.log(u);',
+            answers: ['Set'],
+            distractors: ['Map', 'Array', 'List']
+          },
+          en: {
+            question: 'Complete it to remove the duplicates from the list.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const lista = [1, 2, 2, 3];\nconst u = [...new ___(lista)];\nconsole.log(u);',
+            answers: ['Set'],
+            distractors: ['Map', 'Array', 'List']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Campos privados e acessores',
+      en: 'Private fields and accessors'
+    },
+    minLevel: 26,
+    xpReward: 40,
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'Um campo com # no nome é privado: só o código de dentro da classe lê e escreve. O get cria um acessor, que se usa como uma propriedade, sem parênteses.',
+            endParagraph: 'Quem usa a classe lê c.saldo, e nunca mexe direto no campo.',
+            highlight: ['privado', 'get', 'acessor'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 0;\n\n  depositar(valor) {\n    this.#saldo += valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.depositar(50);\nconsole.log(c.saldo);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'A field with # in its name is private: only code inside the class reads and writes it. The get creates an accessor, which is used like a property, with no parentheses.',
+            endParagraph: 'Whoever uses the class reads c.saldo, and never touches the field directly.',
+            highlight: ['private', 'get', 'accessor'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 0;\n\n  depositar(valor) {\n    this.#saldo += valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.depositar(50);\nconsole.log(c.saldo);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O set valida antes de gravar: quem escreve c.saldo = -5 recebe o erro, e o campo privado nunca guarda um valor inválido. Um get e um set com o mesmo nome formam uma propriedade só.',
+            endParagraph: 'Atribuir passa pelo set; ler passa pelo get.',
+            highlight: ['set', 'valida'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 0;\n\n  set saldo(valor) {\n    if (valor < 0) {\n      throw new Error("negativo");\n    }\n    this.#saldo = valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.saldo = 30;\nconsole.log(c.saldo);\n\ntry {\n  c.saldo = -5;\n} catch (e) {\n  console.log(e.message);\n}',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The set validates before saving: whoever writes c.saldo = -5 gets the error, and the private field never stores an invalid value. A get and a set with the same name make a single property.',
+            endParagraph: 'Assigning goes through the set; reading goes through the get.',
+            highlight: ['set', 'validates'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 0;\n\n  set saldo(valor) {\n    if (valor < 0) {\n      throw new Error("negative");\n    }\n    this.#saldo = valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.saldo = 30;\nconsole.log(c.saldo);\n\ntry {\n  c.saldo = -5;\n} catch (e) {\n  console.log(e.message);\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            firstParagraph: 'O campo privado não aparece em Object.keys nem em JSON.stringify, e ler c.#saldo de fora é erro de sintaxe, não só undefined. Por isso ele protege o dado de verdade.',
+            endParagraph: 'O erro acontece antes de o código rodar, quando o arquivo é lido.',
+            highlight: ['Object.keys', 'JSON.stringify', 'erro de sintaxe'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 50;\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\n\nconsole.log(Object.keys(c));\nconsole.log(JSON.stringify(c));\nconsole.log(c.saldo);',
+            onlyCode: true
+          },
+          en: {
+            firstParagraph: 'The private field does not show up in Object.keys or JSON.stringify, and reading c.#saldo from outside is a syntax error, not just undefined. That is why it really protects the data.',
+            endParagraph: 'The error happens before the code runs, when the file is read.',
+            highlight: ['Object.keys', 'JSON.stringify', 'syntax error'],
+            codeLanguage: 'JavaScript',
+            code: 'class Conta {\n  #saldo = 50;\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\n\nconsole.log(Object.keys(c));\nconsole.log(JSON.stringify(c));\nconsole.log(c.saldo);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código imprime?',
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #x = 1;\n  get x() { return this.#x; }\n}\nconsole.log(new A().x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', 'undefined', 'Dá erro', 'null']
+          },
+          en: {
+            question: 'What does this code print?',
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #x = 1;\n  get x() { return this.#x; }\n}\nconsole.log(new A().x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['1', 'undefined', 'It throws', 'null']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'E este?',
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #x = 1;\n}\nconsole.log(new A().x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '1', 'Dá erro', 'null']
+          },
+          en: {
+            question: 'And this one?',
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #x = 1;\n}\nconsole.log(new A().x);',
+            highlight: [],
+            correctOption: 1,
+            options: ['undefined', '1', 'It throws', 'null']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que acontece ao escrever c.#saldo fora da classe?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Erro de sintaxe, antes de o código rodar', 'Devolve undefined', 'Devolve o saldo normalmente', 'Cria um campo novo no objeto']
+          },
+          en: {
+            question: 'What happens when you write c.#saldo outside the class?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A syntax error, before the code runs', 'It returns undefined', 'It returns the balance as usual', 'It creates a new field on the object']
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a palavra que cria o acessor de leitura.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #n = 7;\n  ___ n() { return this.#n; }\n}\nconsole.log(new A().n);',
+            answers: ['get'],
+            distractors: ['set', 'static', 'read']
+          },
+          en: {
+            question: 'Complete the word that creates the read accessor.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'class A {\n  #n = 7;\n  ___ n() { return this.#n; }\n}\nconsole.log(new A().n);',
+            answers: ['get'],
+            distractors: ['set', 'static', 'read']
           }
         }
       }
