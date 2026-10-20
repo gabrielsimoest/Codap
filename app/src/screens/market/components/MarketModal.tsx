@@ -75,7 +75,7 @@ export default function MarketModal({
 							useSize
 							align="center"
 							justify="center"
-							style={{ marginTop: 2 }}
+							style={{ marginTop: 6 }}
 						>
 							<ThemedText style={styles.price}>
 								{price.toString()}{" "}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
 		zIndex: 99,
 		padding: 20,
 		borderRadius: 30,
-		height: "72%",
+		height: "76%",
 		width: "90%",
 	},
 	title: {
@@ -131,10 +131,14 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		marginTop: -10,
 		textAlign: "center",
+		marginBottom: 8,
 	},
 	imageModal: {
 		width: 265,
 		height: 220,
+		// Com detalhes embaixo (baú) a imagem cede espaço em vez de espremer o resto.
+		flexShrink: 1,
+		resizeMode: "contain",
 		marginHorizontal: "auto",
 		marginVertical: "auto",
 	},

@@ -245,7 +245,7 @@
 				"confirm": "Você deseja realmente abrir o Baú Surpresa? Ele pode revelar uma aula exclusiva e difícil, que fica para sempre na sua coleção.",
 				"bought": "Baú aberto!",
 				"collection": "Coleção: {{revealed}} de {{total}}",
-				"areaCount": "{{area}}: {{revealed}} de {{total}}",
+				"areaCount": "{{revealed}} de {{total}}",
 				"empty": "Ainda não há aulas exclusivas no baú.",
 				"lesson": "Nova aula exclusiva: {{name}}! Procure-a no fim do módulo dela.",
 				"hint": "Você ganhou uma Dica Instantânea!",

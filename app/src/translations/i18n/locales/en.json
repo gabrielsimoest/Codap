@@ -245,7 +245,7 @@
 				"confirm": "Do you really want to open the Surprise Chest? It may reveal an exclusive, hard lesson that stays in your collection for good.",
 				"bought": "Chest opened!",
 				"collection": "Collection: {{revealed}} of {{total}}",
-				"areaCount": "{{area}}: {{revealed}} of {{total}}",
+				"areaCount": "{{revealed}} of {{total}}",
 				"empty": "There are no exclusive lessons in the chest yet.",
 				"lesson": "New exclusive lesson: {{name}}! Look for it at the end of its module.",
 				"hint": "You won an Instant Hint!",

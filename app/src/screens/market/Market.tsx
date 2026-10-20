@@ -191,13 +191,17 @@ export default function Market() {
 						<ThemedText style={styles.chestInfoText}>{t("shop.chest.empty")}</ThemedText>
 					) : (
 						chestAreas.map((area) => (
-							<ThemedText key={area.areaId} style={styles.chestInfoText}>
-								{t("shop.chest.areaCount", {
-									area: areas?.find((item) => item.id === area.areaId)?.name ?? "",
-									revealed: area.revealed,
-									total: area.total,
-								})}
-							</ThemedText>
+							<ThemedView key={area.areaId} theme="background" style={styles.chestChip}>
+								<ThemedText style={styles.chestChipArea}>
+									{areas?.find((item) => item.id === area.areaId)?.name ?? ""}
+								</ThemedText>
+								<ThemedText style={styles.chestInfoText}>
+									{t("shop.chest.areaCount", {
+										revealed: area.revealed,
+										total: area.total,
+									})}
+								</ThemedText>
+							</ThemedView>
 						))
 					)}
 				</ThemedView>
@@ -220,13 +224,32 @@ const styles = StyleSheet.create({
 		backgroundColor: "#141f29",
 		height: "100%",
 	},
+	// As contagens por área viram três "fichas" lado a lado (e quebram de linha se a
+	// fonte do app estiver grande): três linhas empilhadas deixavam o modal apertado.
 	chestInfo: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		justifyContent: "center",
+		gap: 8,
+		marginTop: 8,
+		marginBottom: 14,
+	},
+	chestChip: {
 		alignItems: "center",
-		marginBottom: 8,
+		paddingVertical: 6,
+		paddingHorizontal: 14,
+		borderRadius: 12,
+	},
+	chestChipArea: {
+		fontFamily: "Roboto",
+		fontSize: 13,
+		opacity: 0.7,
+		textAlign: "center",
 	},
 	chestInfoText: {
 		fontFamily: "Roboto",
 		fontSize: 16,
+		fontWeight: "bold",
 		textAlign: "center",
 	},
 	headert: {
