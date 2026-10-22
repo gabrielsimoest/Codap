@@ -1,7 +1,9 @@
 import { View, ScrollView, StyleSheet } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import CustomSyntaxHighlighter from "../../../components/CustomSyntaxHighlighter";
+import { codapDark, codapLight } from "../../../components/codapCodeTheme";
 import DarkMode from "../../../theme/DarkMode";
+import type { TheoryPalette } from "./theory/theoryTheme";
 
 /**
  * Tamanho-base do código das alternativas ("ache o erro"). Menor que o do
@@ -11,9 +13,19 @@ import DarkMode from "../../../theme/DarkMode";
  */
 const CODE_SIZE = 14;
 
+/** Cores de código da teoria sem o fundo do editor: aqui quem pinta o fundo é o cartão da alternativa. */
+const CARD_DARK = { ...codapDark, hljs: { ...codapDark.hljs, background: "transparent" } };
+const CARD_LIGHT = { ...codapLight, hljs: { ...codapLight.hljs, background: "transparent" } };
+
 interface Props {
 	code: string;
 	codeLanguage: string;
+	/**
+	 * Visual novo: o bloco fica sem moldura e usa as cores de código da paleta,
+	 * porque quem desenha o cartão (e a seleção) é a alternativa. Sem ele, o
+	 * visual antigo.
+	 */
+	palette?: TheoryPalette;
 }
 
 /**
@@ -27,20 +39,22 @@ interface Props {
  * esconderia a segunda linha visual, porque o highlighter fixa a altura de
  * cada linha); a regra de 30 caracteres por linha é que garante o encaixe.
  */
-export default function CodeOption({ code, codeLanguage }: Props) {
+export default function CodeOption({ code, codeLanguage, palette }: Props) {
 	const theme = useTheme();
 	const isDarkMode = theme === DarkMode;
 
 	return (
 		<View
 			pointerEvents="none"
-			style={[styles.box, isDarkMode ? styles.dark : styles.light]}
+			style={palette ? styles.bare : [styles.box, isDarkMode ? styles.dark : styles.light]}
 		>
-			<ScrollView horizontal scrollEnabled={false}>
+			<ScrollView horizontal scrollEnabled={false} style={palette ? styles.noGrow : undefined}>
 				<CustomSyntaxHighlighter
 					language={codeLanguage}
 					code={code.replace(/\s+$/, "")}
 					defaultSize={CODE_SIZE}
+					themeStyle={palette ? (palette.isDark ? CARD_DARK : CARD_LIGHT) : undefined}
+					containerStyle={palette ? { flexGrow: 0 } : undefined}
 				/>
 			</ScrollView>
 		</View>
@@ -48,6 +62,12 @@ export default function CodeOption({ code, codeLanguage }: Props) {
 }
 
 const styles = StyleSheet.create({
+	noGrow: {
+		flexGrow: 0,
+	},
+	bare: {
+		flex: 1,
+	},
 	box: {
 		alignSelf: "stretch",
 		borderWidth: 2,

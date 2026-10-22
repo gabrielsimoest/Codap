@@ -11,7 +11,7 @@ import ValidationModal from "./ValidationModal";
 
 /** Quanto tempo o par errado fica vermelho antes de a seleção voltar ao normal. */
 const WRONG_FLASH_MS = 600;
-/** Verde dos irmãos (`OptionExercise`, `CodeBlankExercise`). */
+/** Verde do `CodeBlankExercise` (o `OptionExercise` já migrou para o visual novo, com acento roxo). */
 const RIGHT_COLOR = "green";
 const WRONG_COLOR = "#c62828";
 /** Azul da marca: `colors.primary` do tema é quase igual ao fundo, não serve de destaque. */

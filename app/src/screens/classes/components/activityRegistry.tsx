@@ -61,11 +61,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	option: ({ content, activityKey, progress, onProceed, onClose }) => {
+	option: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as OptionActivityContent;
 		return (
 			<OptionExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				aditionalParagraph={c.aditionalParagraph}
 				options={c.options}

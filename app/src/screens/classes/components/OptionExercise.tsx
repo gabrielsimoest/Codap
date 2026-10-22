@@ -1,21 +1,13 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-	TouchableOpacity,
-	StyleSheet,
-	ScrollView,
-	DimensionValue,
-} from "react-native";
-import { LessonHeader, Progressbar } from "./LessonHeader";
+import { DimensionValue, StyleSheet, TouchableOpacity, View } from "react-native";
 import ResizableHighlighter from "../../../components/ResizableHighlighter";
 import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
+import useFontSizeStore from "../../../stores/FontSizeStore";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
 import CodeOption from "./CodeOption";
-
-const textSize = 23;
+import LessonScreen, { useLessonLayout } from "./theory/LessonScreen";
+import { TEXT_SIZE, useTheoryPalette, type TheoryPalette } from "./theory/theoryTheme";
 
 interface Props {
 	aditionalParagraph?: string;
@@ -32,11 +24,23 @@ interface Props {
 	 */
 	optionsAsCode?: boolean;
 	tutorial?: boolean;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
 }
 
+/**
+ * Atividade de seleção: múltipla escolha, verdadeiro/falso e "qual código está
+ * correto" — todas são uma `option`. Mesmo visual da teoria (`LessonScreen`,
+ * paleta, tipografia): o enunciado no estilo de título/texto da seção, o trecho
+ * de código no editor da teoria e cada alternativa num cartão com uma bolinha,
+ * que ganha borda e bolinha na cor de acento quando selecionada. Nenhum campo
+ * novo: é o mesmo conteúdo, só com outra roupa.
+ */
 export default function OptionExercise({
 	highlight = [""],
 	tutorial = false,
@@ -47,10 +51,18 @@ export default function OptionExercise({
 	optionsAsCode = false,
 	options,
 	correctOption,
+	title,
+	step,
+	total,
 	progress,
 	onClose,
 	onProceed,
 }: Props) {
+	const palette = useTheoryPalette();
+	const { textInset } = useLessonLayout();
+	const fontOffset = useFontSizeStore((s) => s.fontSize);
+	// O botão "?" já existia e alternava este estado (o tutorial em si está
+	// desligado); o comportamento foi preservado.
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 
 	const [selectedOption, setSelectedOption] = useState<number>();
@@ -63,50 +75,60 @@ export default function OptionExercise({
 		}
 	};
 
+	const questionLine = Math.round((TEXT_SIZE.sectionTitle + fontOffset) * 1.28);
+	const paragraphLine = Math.round((TEXT_SIZE.body + fontOffset) * 1.28);
+
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<Progressbar progress={progress} />
-				<ScrollView style={styles.scroller}>
-					<LessonHeader
-						onClose={onClose}
-						setTutorialVisible={() =>
-							setTutorialVisible(!tutorialVisible)
-						}
-					/>
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				onNext={Validate}
+			>
+				<View style={[styles.textColumn, { paddingHorizontal: textInset }]}>
 					{aditionalParagraph !== undefined ? (
 						<ResizableHighlighter
-							style={styles.text}
-							highlight={highlight}
 							text={aditionalParagraph}
-							defaultSize={textSize}
+							highlight={highlight}
+							defaultSize={TEXT_SIZE.body}
+							color={palette.text}
+							highlightStyle={{ color: palette.emphasis, fontFamily: "Roboto", fontWeight: "500" }}
+							style={[styles.paragraph, { lineHeight: paragraphLine }]}
 						/>
 					) : null}
 					<ResizableHighlighter
-						style={styles.text}
-						highlight={highlight}
 						text={question}
-						defaultSize={textSize}
+						highlight={highlight}
+						defaultSize={TEXT_SIZE.sectionTitle}
+						color={palette.text}
+						highlightStyle={{ color: palette.accent }}
+						style={[styles.question, { lineHeight: questionLine }]}
 					/>
-					{code !== undefined ? (
-						<CodeSnippet code={code} codeLanguage={codeLanguage} />
-					) : null}
-					<>
-						{options.map((option, index) => (
-							<OptionButton
-								key={index}
-								selectedOption={selectedOption}
-								onSelect={() => setSelectedOption(index)}
-								option={option}
-								index={index}
-								asCode={optionsAsCode}
-								codeLanguage={codeLanguage}
-							/>
-						))}
-					</>
-				</ScrollView>
-				<NextButton onPress={() => Validate()} />
-			</ThemedView>
+				</View>
+
+				{code !== undefined ? (
+					<CodeSnippet code={code} codeLanguage={codeLanguage} palette={palette} />
+				) : null}
+
+				<View style={styles.options} accessibilityRole="radiogroup">
+					{options.map((option, index) => (
+						<OptionButton
+							key={index}
+							palette={palette}
+							selected={selectedOption === index}
+							onSelect={() => setSelectedOption(index)}
+							option={option}
+							asCode={optionsAsCode}
+							codeLanguage={codeLanguage}
+						/>
+					))}
+				</View>
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -124,99 +146,110 @@ export default function OptionExercise({
 }
 
 interface OptionButtonProps {
-	selectedOption?: number;
+	palette: TheoryPalette;
+	selected: boolean;
 	onSelect: () => void;
-	index: number;
 	option: string;
 	asCode: boolean;
 	codeLanguage: string;
 }
 
+/**
+ * Cartão da alternativa: bolinha à esquerda e o texto (ou o código) ao lado.
+ * A borda tem sempre 2 de largura, só muda de cor — selecionar não desloca nada.
+ */
 const OptionButton = ({
-	selectedOption,
+	palette,
+	selected,
 	onSelect,
-	index,
 	option,
 	asCode,
 	codeLanguage,
 }: OptionButtonProps) => {
-	const { colors } = useTheme();
-
-	if (asCode) {
-		// A moldura do botão é que fica verde ao selecionar; o bloco de código
-		// mantém o próprio fundo (as cores do highlight não têm contraste
-		// garantido sobre verde), então o estado continua claro nos dois temas.
-		return (
-			<TouchableOpacity
-				style={[
-					{ backgroundColor: colors.background },
-					styles.button,
-					styles.codeButton,
-					selectedOption === index ? { backgroundColor: "green" } : {},
-				]}
-				onPress={onSelect}
-				accessibilityRole="button"
-				accessibilityLabel={option}
-				accessibilityState={{ selected: selectedOption === index }}
-			>
-				<CodeOption code={option} codeLanguage={codeLanguage} />
-			</TouchableOpacity>
-		);
-	}
-
 	return (
 		<TouchableOpacity
+			activeOpacity={0.8}
 			style={[
-				{ backgroundColor: colors.background },
-				styles.button,
-				selectedOption === index ? { backgroundColor: "green" } : {},
+				styles.card,
+				selected
+					? { backgroundColor: palette.cardBg, borderColor: palette.accent }
+					: { backgroundColor: palette.gradientTo, borderColor: palette.border },
 			]}
 			onPress={onSelect}
+			accessibilityRole="radio"
+			accessibilityLabel={option}
+			accessibilityState={{ selected }}
 		>
-			<ResizableText style={[styles.text]} defaultSize={20}>
-				{option}
-			</ResizableText>
+			<View
+				style={[
+					styles.radio,
+					selected ? { borderColor: palette.accent } : { borderColor: palette.icon, opacity: 0.55 },
+				]}
+			>
+				{selected ? <View style={[styles.radioDot, { backgroundColor: palette.accent }]} /> : null}
+			</View>
+			{asCode ? (
+				<CodeOption code={option} codeLanguage={codeLanguage} palette={palette} />
+			) : (
+				<ResizableText
+					useCustomColor
+					defaultSize={TEXT_SIZE.body + 1}
+					style={[styles.optionText, { color: palette.text }]}
+				>
+					{option}
+				</ResizableText>
+			)}
 		</TouchableOpacity>
 	);
 };
 
 const styles = StyleSheet.create({
-	button: {
+	textColumn: {
+		gap: 8,
+	},
+	paragraph: {
+		fontFamily: "Roboto",
+		fontWeight: "500",
+		textAlign: "left",
+	},
+	question: {
+		fontFamily: "Roboto",
+		fontWeight: "700",
+		textAlign: "left",
+	},
+	options: {
+		gap: 10,
+	},
+	// minHeight, não height: alternativa longa (ou fonte aumentada pelo
+	// ResizableText) quebra em mais linhas, e com altura fixa a segunda linha
+	// era cortada.
+	card: {
 		flexDirection: "row",
 		alignItems: "center",
+		gap: 16,
+		minHeight: 58,
+		paddingVertical: 12,
+		paddingHorizontal: 16,
+		borderWidth: 2,
+		borderRadius: 14,
+	},
+	radio: {
+		width: 22,
+		height: 22,
+		borderRadius: 11,
+		borderWidth: 2,
+		alignItems: "center",
 		justifyContent: "center",
-		// minHeight, não height: alternativa longa (ou fonte aumentada pelo
-		// ResizableText) quebra em mais linhas, e com altura fixa a segunda
-		// linha era cortada.
-		minHeight: 70,
-		marginLeft: 10,
-		marginRight: 10,
-		marginTop: 5,
-		marginBottom: 7,
-		borderRadius: 20,
-		elevation: 10,
 	},
-	// Alternativa em código: a altura acompanha as linhas do trecho (sem o
-	// `minHeight` do botão de texto) e a moldura de 8 é o que fica verde ao
-	// selecionar.
-	codeButton: {
-		flexDirection: "column",
-		alignItems: "stretch",
-		minHeight: 0,
-		padding: 8,
+	radioDot: {
+		width: 10,
+		height: 10,
+		borderRadius: 5,
 	},
-	container: {
-		height: "100%",
-	},
-	text: {
-		margin: 20,
-		flexGrow: 1,
+	optionText: {
+		flex: 1,
 		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 23,
-		fontWeight: "bold",
-	},
-	scroller: {
-		marginBottom: "25%",
+		fontWeight: "500",
+		textAlign: "left",
 	},
 });
