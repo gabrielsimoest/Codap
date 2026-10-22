@@ -1,9 +1,8 @@
 import React from "react";
-import { useAppColors } from "../../theme/appColors";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Modal, Portal } from "react-native-paper";
+import { StyleSheet } from "react-native";
+import AppButton from "../AppButton";
+import AppModal from "../AppModal";
 import ThemedText from "./ThemedText";
-import ThemedView from "./ThemedView";
 
 interface Props {
 	visible: boolean;
@@ -13,6 +12,7 @@ interface Props {
 	buttonText: string;
 }
 
+/** Aviso do app: o `AppModal` com a mensagem e um botão de confirmação (sem o X do canto). */
 const ThemedAlert = ({
 	visible,
 	onDismiss,
@@ -20,77 +20,23 @@ const ThemedAlert = ({
 	message,
 	buttonText,
 }: Props) => {
-	const app = useAppColors();
 	return (
-		<Portal>
-			<Modal
-				visible={visible}
-				onDismiss={onDismiss}
-				contentContainerStyle={{ flex: 1 }}
-				style={{ backgroundColor: app.scrim }}
-				dismissableBackButton
-			>
-				<ThemedView style={styles.modalView}>
-					<Text style={[styles.title, !app.isDark && { color: app.brandText }]}>{title}</Text>
-					<ThemedText style={styles.message}>{message}</ThemedText>
-
-					<TouchableOpacity
-						style={[styles.button, !app.isDark && { backgroundColor: app.action }]}
-						onPress={onDismiss}
-					>
-						<Text style={styles.buttonText}>
-							{buttonText.toUpperCase()}
-						</Text>
-					</TouchableOpacity>
-				</ThemedView>
-			</Modal>
-		</Portal>
+		<AppModal
+			visible={visible}
+			onDismiss={onDismiss}
+			title={title}
+			hideClose
+			footer={<AppButton title={buttonText.toUpperCase()} onPress={onDismiss} />}
+		>
+			<ThemedText style={styles.message}>{message}</ThemedText>
+		</AppModal>
 	);
 };
 
 const styles = StyleSheet.create({
-	modalView: {
-		margin: 20,
-		backgroundColor: "#141f29",
-		borderRadius: 20,
-		padding: 35,
-		alignItems: "center",
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 4,
-		elevation: 5,
-	},
-	title: {
-		fontSize: 24,
-		color: "#7977FD",
-		marginBottom: 20,
-		textAlign: "center",
-		fontWeight: "bold",
-	},
 	message: {
-		fontSize: 19,
-		color: "#fff",
-		marginBottom: 15,
-		textAlign: "center",
-	},
-	button: {
-		backgroundColor: "#7977FD",
-		borderRadius: 20,
-		padding: 10,
-		paddingLeft: 45,
-		paddingRight: 45,
-		elevation: 2,
-		marginTop: 15,
-	},
-	buttonText: {
-		color: "white",
-		fontWeight: "bold",
-		textAlign: "center",
-		fontSize: 20,
+		fontSize: 18,
+		lineHeight: 26,
 	},
 });
 

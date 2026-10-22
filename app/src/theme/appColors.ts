@@ -40,12 +40,10 @@ export interface AppColors {
 	fieldBorder: string;
 	fieldBackground: string;
 	fieldText: string;
-	/** Telas de login e cadastro: fundo, folha e véu da folha, cor de realce e dos placeholders. */
+	/** Telas de login e cadastro: fundo, folha do formulário e cor da marca (wordmark). */
 	canvas: string;
 	sheet: string;
-	shade: string;
 	authAccent: string;
-	authPlaceholder: string;
 	/** Véu atrás de modal (`scrim`) e a segunda camada que o modal empilha por cima (`scrimInner`). */
 	scrim: string;
 	scrimInner: string;
@@ -56,7 +54,8 @@ const DARK: AppColors = {
 	brand: "#5469D3",
 	action: "#637aff",
 	onBrand: "#F1F1F1",
-	brandText: "#5469D3",
+	// Texto de marca no escuro: o índigo `#5469D3` só dá 3,5:1 na tela; este dá 6,2:1 na superfície elevada.
+	brandText: "#9AA5FF",
 	muted: "#9AA9B8",
 	rule: "#F1F1F1",
 	tabIdle: "#637aff99",
@@ -66,9 +65,7 @@ const DARK: AppColors = {
 	fieldText: "#FFFFFF",
 	canvas: "#0b1016",
 	sheet: "#141f29",
-	shade: "rgba(0, 0, 0, 0.3)",
 	authAccent: "#7977FD",
-	authPlaceholder: "#7977FD",
 	scrim: "rgba(0,0,0,0.8)",
 	scrimInner: "rgba(0,0,0,0.85)",
 };
@@ -88,9 +85,7 @@ const LIGHT: AppColors = {
 	fieldText: "#141F29",
 	canvas: "#E3EAF6",
 	sheet: "#FFFFFF",
-	shade: "transparent",
 	authAccent: "#5469D3",
-	authPlaceholder: "#5B6B80",
 	scrim: "rgba(20,31,41,0.5)",
 	scrimInner: "transparent",
 };

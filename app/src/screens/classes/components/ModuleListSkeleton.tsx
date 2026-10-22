@@ -27,6 +27,9 @@ export default function ModuleListSkeleton() {
 				{Array.from({ length: MODULE_SKELETON_COUNT }).map((_, index) => (
 					<ThemedSkeleton
 						key={index}
+						// "auto": com a largura padrão (100%) as margens laterais empurravam o cartão
+						// 40 dp para fora da tela, e o cartão real, menor, "encolhia" ao carregar.
+						width="auto"
 						height={windowHeight * 0.19}
 						theme="primary"
 						style={styles.cardSkeleton}

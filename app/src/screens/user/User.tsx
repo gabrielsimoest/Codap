@@ -1,11 +1,12 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
-import { TAB_BAR_CLEARANCE } from "../../components/layout/tabBarMetrics";
+import { useTheme } from "@react-navigation/native";
 import UserHeader from "./components/UserHeader";
 import { useTranslation } from "react-i18next";
+import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
+import { TAB_BAR_CLEARANCE } from "../../components/layout/tabBarMetrics";
+import Icon from "../../components/Icon";
+import ListRow from "../../components/ListRow";
 import ResizableText from "../../components/ResizableText";
-import UserButton from "./components/UserButton";
-import ThemedIcon from "../../components/themed/ThemedIcon";
 import ThemedView from "../../components/themed/ThemedView";
 import useUserStore from "../../stores/UserStore";
 import useAuthStore from "../../stores/AuthStore";
@@ -15,12 +16,13 @@ import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import AchievementsModal from "./components/achievements/AchievementsModal";
+import { useAppColors } from "../../theme/appColors";
 import { useState } from "react";
-
-const TextSize = 20; // Tamanho padrão da fonte
 
 export default function User() {
 	const { t } = useTranslation();
+	const { colors } = useTheme();
+	const app = useAppColors();
 
 	const navigation = useNavigate();
 
@@ -47,62 +49,48 @@ export default function User() {
 						showsVerticalScrollIndicator={false}
 						contentContainerStyle={styles.content}
 					>
-						<ThemedView style={styles.direction}>
-							<ThemedIcon
-								type="fontawesome"
-								name="user-circle"
-								theme={"border"}
-								useBackground
-								backgroundTheme="notification"
-								size={150}
-								style={styles.account}
-							/>
-							<View style={styles.components}>
-								<ResizableText
-									style={styles.text}
-									defaultSize={TextSize}
-								>
+						<ThemedView theme="primary" style={styles.identity}>
+							<View style={[styles.avatar, { backgroundColor: colors.notification }]}>
+								<Icon type="ionicon" name="person" size={44} color={app.muted} />
+							</View>
+							<View style={styles.identityText}>
+								<ResizableText useCustomColor style={[styles.label, { color: app.muted }]} defaultSize={14}>
 									{t("name")}
 								</ResizableText>
 								<Text
-									style={styles.text2}
-									adjustsFontSizeToFit={true}
-									numberOfLines={2}
+									style={[styles.value, { color: colors.text }]}
+									adjustsFontSizeToFit
+									numberOfLines={1}
 								>
 									{user?.name}
 								</Text>
-								<ResizableText
-									style={styles.text}
-									defaultSize={TextSize}
-								>
+								<ResizableText useCustomColor style={[styles.label, styles.labelGap, { color: app.muted }]} defaultSize={14}>
 									{t("email")}
 								</ResizableText>
 								<Text
-									style={styles.text2}
-									adjustsFontSizeToFit={true}
-									numberOfLines={3}
+									style={[styles.value, { color: colors.text }]}
+									adjustsFontSizeToFit
+									numberOfLines={1}
 								>
 									{user?.email}
 								</Text>
 							</View>
 						</ThemedView>
-						<View style={styles.buttons}>
+
+						<View style={styles.rows}>
 							<EditProfile />
 							<ChangePassword />
-							<UserButton
+							<ListRow
 								title={t("achievements")}
+								icon={{ type: "ionicon", name: "trophy-outline" }}
 								onPress={() => setVisible(true)}
 							/>
-							<UserButton
+							<ListRow
 								title={t("exit")}
+								icon={{ type: "ionicon", name: "log-out-outline" }}
+								danger
+								noChevron
 								onPress={logout}
-								icon={
-									<ThemedIcon
-										type="materialCommunity"
-										name="logout"
-										size={25}
-									/>
-								}
 							/>
 						</View>
 					</ScrollView>
@@ -123,96 +111,40 @@ const styles = StyleSheet.create({
 	},
 	content: {
 		paddingTop: HEADER_FADE,
+		paddingHorizontal: 20,
 		paddingBottom: TAB_BAR_CLEARANCE,
+		gap: 16,
 	},
-	buttons: {
-		width: "90%",
-		marginLeft: "5%",
-	},
-	direction: {
+	identity: {
 		flexDirection: "row",
 		alignItems: "center",
-		height: 240,
-		marginBottom: 15,
+		gap: 16,
+		padding: 18,
+		borderRadius: 20,
+		elevation: 2,
 	},
-	account: {
-		left: "5%",
-		borderRadius: 75,
-		backgroundColor: "#33526E",
-		shadowColor: "#637aff",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.28,
-		shadowRadius: 7.0,
-		elevation: 4,
+	avatar: {
+		width: 84,
+		height: 84,
+		borderRadius: 42,
+		alignItems: "center",
+		justifyContent: "center",
 	},
-	components: {
-		flexDirection: "column",
-		width: "48%",
-		marginLeft: "10%",
+	identityText: {
+		flex: 1,
 	},
-	text: {
-		color: "#E5E5E5",
-		fontSize: 20,
-		fontWeight: "bold",
-		marginTop: 20,
+	label: {
+		fontFamily: "Roboto",
 	},
-	text2: {
-		color: "#5469D3",
+	labelGap: {
+		marginTop: 10,
+	},
+	value: {
+		fontFamily: "Roboto",
 		fontWeight: "bold",
 		fontSize: 19,
-		marginBottom: 20,
 	},
-	textModal: {
-		flexGrow: 1,
-		margin: 10,
-		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 20,
-		fontWeight: "bold",
-	},
-	textModal2: {
-		position: "absolute",
-		left: 10,
-		margin: 10,
-		fontFamily: "Roboto",
-		color: "white",
-		fontSize: 26,
-		fontWeight: "bold",
-	},
-	input: {
-		opacity: 0.93,
-		backgroundColor: "#5469D3",
-		borderRadius: 10,
-		height: 40,
-		color: "#fff",
-		marginLeft: 10,
-		marginRight: 10,
-		padding: 10,
-	},
-	contant: {
-		opacity: 0.99,
-		margin: 20,
-		marginTop: -100,
-		zIndex: 99,
-		padding: 20,
-		borderRadius: 30,
-		borderColor: "rgba(0,0,0, 0.2)",
-		backgroundColor: "#141f29",
-
-		shadowColor: "rgba(0,0,0, 0.3)",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		elevation: 5,
-		shadowOpacity: 0.28,
-		shadowRadius: 4,
-	},
-	icon: {
-		marginLeft: 260,
-		top: -15,
+	rows: {
+		gap: 12,
 	},
 });

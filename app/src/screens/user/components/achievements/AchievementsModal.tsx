@@ -4,15 +4,12 @@ import {
 	Pressable,
 	StyleSheet,
 	Text,
-	TouchableOpacity,
 	View,
 	useWindowDimensions,
 } from "react-native";
-import { Modal, Portal } from "react-native-paper";
 import { useTranslation } from "react-i18next";
-import Icon from "../../../../components/Icon";
+import AppModal from "../../../../components/AppModal";
 import ResizableText from "../../../../components/ResizableText";
-import ThemedView from "../../../../components/themed/ThemedView";
 import AchievementEmblem from "./AchievementEmblem";
 import AchievementSpotlight from "./AchievementSpotlight";
 import achievementCatalog, { AchievementDisplay } from "./achievementCatalog";
@@ -28,8 +25,10 @@ interface Props {
 /** Segurar um emblema por 5 s inverte como ele aparece — só em dev, só visual. */
 const DEV_TOGGLE_DELAY_MS = 5000;
 
+// Mesmas medidas do cartão do `AppModal`: margem de 20 dp, no máximo 440 dp, borda de 1 dp e 20 dp de respiro.
 const CARD_MARGIN = 20;
-const CARD_PADDING = 16;
+const CARD_MAX_WIDTH = 440;
+const CARD_CHROME = 20 * 2 + 2;
 const GRID_GAP = 12;
 
 export default function AchievementsModal({ visible, onDismiss }: Props) {
@@ -65,37 +64,13 @@ export default function AchievementsModal({ visible, onDismiss }: Props) {
 			return next === isUnlocked(id) ? rest : { ...rest, [id]: next };
 		});
 
-	const tileWidth = (width - CARD_MARGIN * 2 - CARD_PADDING * 2 - GRID_GAP) / 2;
+	const tileWidth = (Math.min(CARD_MAX_WIDTH, width - CARD_MARGIN * 2) - CARD_CHROME - GRID_GAP) / 2;
 	const emblemSize = tileWidth - 8;
 
 	return (
-		<Portal>
-			<Modal
-				visible={visible}
-				onDismiss={onDismiss}
-				style={{ backgroundColor: app.scrim }}
-				dismissableBackButton
-			>
-				<ThemedView style={styles.card}>
-					<View style={styles.header}>
-						<ResizableText style={styles.title} defaultSize={24}>
-							{t("achievements")}
-						</ResizableText>
-						<TouchableOpacity
-							onPress={onDismiss}
-							accessibilityRole="button"
-							accessibilityLabel={t("achievement.close")}
-						>
-							<Icon
-								type="ionicon"
-								name="close-outline"
-								color={"#33526E"}
-								size={48}
-							/>
-						</TouchableOpacity>
-					</View>
-
-					<View style={styles.grid}>
+		<>
+			<AppModal visible={visible} onDismiss={onDismiss} title={t("achievements")} scroll>
+				<View style={styles.grid}>
 						{achievementCatalog.map((achievement) => {
 							const shownUnlocked = isShownUnlocked(achievement.id);
 							const name = t(`achievement.${achievement.key}.name`);
@@ -131,7 +106,7 @@ export default function AchievementsModal({ visible, onDismiss }: Props) {
 										useCustomColor
 										style={[
 											styles.name,
-											shownUnlocked ? styles.nameUnlocked : styles.nameLocked,
+											shownUnlocked ? [styles.nameUnlocked, { color: app.isDark ? "#637aff" : app.brandText }] : styles.nameLocked,
 										]}
 										defaultSize={16}
 									>
@@ -153,33 +128,17 @@ export default function AchievementsModal({ visible, onDismiss }: Props) {
 							);
 						})}
 					</View>
-				</ThemedView>
-			</Modal>
+			</AppModal>
 
 			<AchievementSpotlight
 				achievement={spotlight}
 				onClose={() => setSpotlight(null)}
 			/>
-		</Portal>
+		</>
 	);
 }
 
 const styles = StyleSheet.create({
-	card: {
-		margin: CARD_MARGIN,
-		padding: CARD_PADDING,
-		borderRadius: 20,
-	},
-	header: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		marginBottom: 8,
-	},
-	title: {
-		fontWeight: "bold",
-		marginLeft: 4,
-	},
 	grid: {
 		flexDirection: "row",
 		flexWrap: "wrap",
@@ -200,7 +159,6 @@ const styles = StyleSheet.create({
 		marginTop: 4,
 	},
 	nameUnlocked: {
-		color: "#637aff",
 	},
 	nameLocked: {
 		color: "#7d8b99",

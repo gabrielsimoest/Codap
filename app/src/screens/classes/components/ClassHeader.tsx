@@ -9,24 +9,23 @@ interface Props {
 	iconName: string;
 }
 
+/**
+ * Cabeçalho da aba Aulas: o nome da área com a seta que avisa que o título abre o
+ * seletor, e o ícone da área à direita. O título fica na mesma posição dos das
+ * outras abas.
+ */
 export default function ClassHeader({ screenName, iconName }: Props) {
 	const { colors } = useTheme();
 
 	return (
 		<ScreenHeader>
-			<View style={styles.view}>
-				<Icon
-					name="keyboard-arrow-down"
-					type={"material"}
-					color={colors.text}
-				/>
-			</View>
 			<View style={styles.titleView}>
 				<Text variant="titleLarge" style={{ color: colors.text, fontFamily: "Roboto" }}>
 					{screenName}
 				</Text>
+				<Icon name="keyboard-arrow-down" type={"material"} color={colors.text} size={26} />
 			</View>
-			<View style={[styles.view, styles.rightView]}>
+			<View style={styles.rightView}>
 				<Icon name={iconName} type={"ionicon"} color="#637aff" />
 			</View>
 		</ScreenHeader>
@@ -34,15 +33,16 @@ export default function ClassHeader({ screenName, iconName }: Props) {
 }
 
 const styles = StyleSheet.create({
-	view: {
+	titleView: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 2,
+		marginLeft: 30,
+	},
+	rightView: {
 		marginHorizontal: 16,
 		alignItems: "center",
 		flexDirection: "row",
-	},
-	titleView: {
-		flex: 1,
-	},
-	rightView: {
 		justifyContent: "flex-end",
 	},
 });

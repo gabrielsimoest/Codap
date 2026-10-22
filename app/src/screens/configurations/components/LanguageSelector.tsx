@@ -1,23 +1,16 @@
-import { useAppColors } from "../../../theme/appColors";
-import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ResizableText from "../../../components/ResizableText";
 import useLanguageStore from "../../../stores/LanguageStore";
 import { useTranslation } from "react-i18next";
+import AppModal from "../../../components/AppModal";
+import Flag from "../../../components/Flag";
 import Icon from "../../../components/Icon";
-import SecondaryButton from "./SecondaryButton";
-import SettingsButton from "./SettingsButton";
-import CenterView from "../../../components/layout/CenterView";
-import ThemedView from "../../../components/themed/ThemedView";
-import { Modal, Portal } from "react-native-paper";
-
-const textSize = 20;
+import ListRow from "../../../components/ListRow";
+import { useAppColors } from "../../../theme/appColors";
 
 export default function LanguageSelector() {
 	const [modalVisible, setModalVisible] = useState(false);
-	const { colors } = useTheme();
 
 	const { t } = useTranslation();
 	const app = useAppColors();
@@ -39,89 +32,51 @@ export default function LanguageSelector() {
 
 	return (
 		<>
-			<Portal>
-				<Modal
-					visible={modalVisible}
-					onDismiss={() => setModalVisible(false)}
-					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: app.scrim }}
-					dismissableBackButton
-				>
-					<CenterView
-						style={{ backgroundColor: app.scrimInner }}
-					>
-						<ThemedView style={styles.modalView}>
-							<Pressable
-								style={styles.button}
-								onPress={() => setModalVisible(!modalVisible)}
-							>
-								<Icon
-									type={"ionicon"}
-									name="close-circle"
-									color={"#5469D3"}
-								/>
-							</Pressable>
-							<ResizableText
-								useCustomColor
-								style={styles.modalText}
-								defaultSize={textSize}
-							>
-								{t("select the language:")}
-							</ResizableText>
-							<ScrollView style={{ marginBottom: 5 }}>
-								<SettingsButton
-									title="PORTUGUÊS"
-									textStyle={{
-										color:
-											language === "pt"
-												? "#5469D3"
-												: colors.text,
-									}}
-									disabled={language === "pt"}
-									onPress={() => setLanguage("pt")}
-								/>
-								<SettingsButton
-									title="ENGLISH"
-									textStyle={{
-										color:
-											language === "en"
-												? "#5469D3"
-												: colors.text,
-									}}
-									disabled={language === "en"}
-									onPress={() => setLanguage("en")}
-								/>
-							</ScrollView>
-						</ThemedView>
-					</CenterView>
-				</Modal>
-			</Portal>
-			<SecondaryButton
+			<AppModal
+				visible={modalVisible}
+				onDismiss={() => setModalVisible(false)}
+				title={t("select the language:")}
+			>
+				<View style={styles.options}>
+					<ListRow
+						title="Português"
+						leading={<Flag country="br" />}
+						noChevron
+						selected={language === "pt"}
+						onPress={() => setLanguage("pt")}
+					/>
+					<ListRow
+						title="English"
+						leading={<Flag country="us" />}
+						noChevron
+						selected={language === "en"}
+						onPress={() => setLanguage("en")}
+					/>
+				</View>
+			</AppModal>
+			<ListRow
 				title={t("language")}
+				icon={{ type: "ionicon", name: "language-outline" }}
 				onPress={() => setModalVisible(true)}
+				// A bandeira do idioma atual aparece na linha, antes da seta.
+				right={
+					<View style={styles.current}>
+						<Flag country={language === "pt" ? "br" : "us"} width={30} />
+						<Icon type="ionicon" name="chevron-forward" size={20} color={app.muted} />
+					</View>
+				}
 			/>
 		</>
 	);
 }
 
 const styles = StyleSheet.create({
-	modalView: {
-		margin: 20,
-		borderColor: "#637aff",
-		borderWidth: 1,
-		borderRadius: 20,
-		height: "50%",
-		width: "90%",
+	options: {
+		gap: 12,
 	},
-	button: {
-		margin: 10,
-		alignSelf: "flex-end",
-	},
-	modalText: {
-		color: "#5469D3",
-		fontWeight: "bold",
-		marginBottom: 15,
-		marginLeft: 10,
-		fontSize: 20,
+	current: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 10,
 	},
 });

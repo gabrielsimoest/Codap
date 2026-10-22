@@ -28,38 +28,26 @@ export default function Config() {
 		<ThemedView style={{ flex: 1 }}>
 			<ConfigHeader title={t("settings")} />
 			<View style={styles.body}>
-			<ScrollView
-				style={styles.scroller}
-				contentContainerStyle={styles.content}
-				showsVerticalScrollIndicator={false}
-				scrollEnabled={!holdingAbout}
-			>
-				<ConfigHeading
-					iconType="materialCommunity"
-					iconName="cellphone-cog"
-					title={t("system")}
-				/>
-				<LanguageSelector />
-				<FontSizeChanger />
-				<ThemeSwitcher />
-				<ConfigHeading
-					iconType="ionicon"
-					iconName="notifications"
-					title={t("notification")}
-				/>
-				<NotificationSwitcher />
-				<ConfigHeading
-					iconType="materialCommunity"
-					iconName="information-outline"
-					title={t("informations")}
-				/>
-				<VersionInfo />
-				<AboutCodap
-					onLongPress={() => setTestLessonVisible(true)}
-					onHoldChange={setHoldingAbout}
-				/>
-			</ScrollView>
-			<EdgeFade edge="top" height={HEADER_FADE} />
+				<ScrollView
+					style={styles.scroller}
+					contentContainerStyle={styles.content}
+					showsVerticalScrollIndicator={false}
+					scrollEnabled={!holdingAbout}
+				>
+					<ConfigHeading title={t("system")} />
+					<LanguageSelector />
+					<FontSizeChanger />
+					<ThemeSwitcher />
+					<ConfigHeading title={t("notification")} />
+					<NotificationSwitcher />
+					<ConfigHeading title={t("informations")} />
+					<VersionInfo />
+					<AboutCodap
+						onLongPress={() => setTestLessonVisible(true)}
+						onHoldChange={setHoldingAbout}
+					/>
+				</ScrollView>
+				<EdgeFade edge="top" height={HEADER_FADE} />
 			</View>
 			<SecretTestLesson
 				visible={testLessonVisible}
@@ -74,43 +62,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	scroller: {
-		width: "90%",
-		marginLeft: "5%",
+		flex: 1,
 	},
 	// A rolagem vai até a borda da tela: é por trás da barra de abas que o degradê
 	// de baixo (em TabNavigation) faz o conteúdo sumir.
 	content: {
 		paddingTop: HEADER_FADE,
+		paddingHorizontal: 20,
 		paddingBottom: TAB_BAR_CLEARANCE,
-	},
-	text: {
-		color: "#5469D3",
-		fontSize: 25,
-		marginRight: 10,
-	},
-
-	icon: {
-		marginRight: 10,
-	},
-	button: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		height: 60,
-		padding: 10,
-		marginLeft: 5,
-		marginRight: 5,
-		marginTop: 10,
-		marginBottom: 15,
-		backgroundColor: "#141f29",
-		borderRadius: 10,
-		shadowColor: "#637aff",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.28,
-		shadowRadius: 7.0,
-		elevation: 7,
+		gap: 12,
 	},
 });

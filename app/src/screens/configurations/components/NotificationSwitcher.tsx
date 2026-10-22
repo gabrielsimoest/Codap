@@ -1,19 +1,17 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Switch } from "react-native-paper";
-import { useTheme } from "@react-navigation/native";
-import ResizableText from "../../../components/ResizableText";
-import RowView from "../../../components/layout/RowView";
+import ListRow from "../../../components/ListRow";
 import useNotificationStore from "../../../stores/NotificationStore";
 import useAlertStore from "../../../stores/AlertStore";
+import { useAppColors } from "../../../theme/appColors";
 import {
 	areNotificationsAvailable,
 	ensureNotificationPermission,
 } from "../../../services/NotificationService";
 
 const NotificationSwitcher = () => {
-	const theme = useTheme();
 	const { t } = useTranslation();
+	const app = useAppColors();
 	const enabled = useNotificationStore((s) => s.enabled);
 	const setEnabled = useNotificationStore((s) => s.setEnabled);
 	const setAlertMessage = useAlertStore((s) => s.setAlertMessage);
@@ -47,46 +45,20 @@ const NotificationSwitcher = () => {
 	};
 
 	return (
-		<TouchableOpacity
-			style={[
-				styles.button,
-				{ backgroundColor: theme.colors.background },
-			]}
+		<ListRow
+			title={t("notifications")}
+			icon={{ type: "ionicon", name: "notifications-outline" }}
 			onPress={toggleNotifications}
-		>
-			<RowView align="center" justify="space-between">
-				<ResizableText defaultSize={20}>
-					{t("notifications")}
-				</ResizableText>
+			right={
 				<Switch
-					style={{ marginTop: 5 }}
+					accessibilityLabel={t("notifications")}
 					value={enabled === true}
-					color={"#5469D3"}
+					color={app.action}
 					onChange={toggleNotifications}
 				/>
-			</RowView>
-		</TouchableOpacity>
+			}
+		/>
 	);
 };
-
-const styles = StyleSheet.create({
-	button: {
-		height: 60,
-		padding: 10,
-		marginLeft: 5,
-		marginRight: 5,
-		marginTop: 10,
-		marginBottom: 15,
-		borderRadius: 10,
-		shadowColor: "#637aff",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.28,
-		shadowRadius: 7.0,
-		elevation: 2,
-	},
-});
 
 export default NotificationSwitcher;

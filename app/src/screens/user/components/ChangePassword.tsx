@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import UserButton from "./UserButton";
+import ListRow from "../../../components/ListRow";
 import ComingSoon from "../../../components/ComingSoon";
 
 export default function ChangePassword() {
@@ -10,8 +10,9 @@ export default function ChangePassword() {
 
 	return (
 		<>
-			<UserButton
+			<ListRow
 				title={t("change password")}
+				icon={{ type: "ionicon", name: "key-outline" }}
 				onPress={() => setVisible(true)}
 			/>
 			<ComingSoon visible={visible} onDismiss={() => setVisible(false)} />

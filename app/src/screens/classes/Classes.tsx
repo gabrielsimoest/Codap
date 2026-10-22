@@ -1,20 +1,12 @@
 import { useState } from "react";
-import {
-	StyleSheet,
-	TouchableOpacity,
-	TouchableWithoutFeedback,
-	View,
-} from "react-native";
-import Icon from "../../components/Icon";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
 import AreaModules from "./components/AreaModules";
+import AreaSelector from "./components/AreaSelector";
 import ClassHeader from "./components/ClassHeader";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
-import { Modal, Portal } from "react-native-paper";
 import ThemedSkeleton from "../../components/themed/ThemedSkeleton";
-import ThemedText from "../../components/themed/ThemedText";
 import ThemedView from "../../components/themed/ThemedView";
-import ThemedTouchableOpacity from "../../components/themed/ThemedTouchableOpacity";
 import useAreasQuery from "../../hooks/queries/useAreasQuery";
 import useContentAnnouncement from "../../hooks/useContentAnnouncement";
 import areaMetadata, { getAreaIndex } from "./areaMetadata";
@@ -56,61 +48,24 @@ export default function Class() {
 			{areasPending ? (
 				<ThemedSkeleton height={70} borderRadius={0} theme="card" />
 			) : (
-				<TouchableOpacity onPress={() => setVisibleModal(true)}>
+				<TouchableOpacity
+					onPress={() => setVisibleModal(true)}
+					accessibilityRole="button"
+					accessibilityLabel={selectedArea?.name}
+				>
 					<ClassHeader
 						screenName={selectedArea?.name ?? ""}
 						iconName={selectedMetadata?.headerIcon ?? ""}
 					/>
 				</TouchableOpacity>
 			)}
-			<Portal>
-				<Modal
-					visible={visibleModal}
-					onDismiss={() => setVisibleModal(false)}
-					dismissableBackButton
-					contentContainerStyle={{
-						marginBottom: "auto",
-						marginTop: 39,
-					}}
-					theme={{
-						colors: {
-							backdrop: "#00000050",
-						},
-					}}
-				>
-					<TouchableWithoutFeedback
-						onPress={() => setVisibleModal(false)}
-						style={{ flex: 1 }}
-					>
-						<View>
-							{areas?.map((area, index) => {
-								const metadata = areaMetadata[index];
-								if (!metadata) return null;
-
-								return (
-									<ThemedTouchableOpacity
-										key={area.id}
-										style={styles.selector}
-										onPress={() => onSelectArea(area.id)}
-										theme="card"
-									>
-										<Icon
-											type={metadata.icon.type}
-											name={metadata.icon.name}
-											size={30}
-											color={metadata.color}
-										/>
-										<ThemedText style={styles.actionText}>
-											{" "}
-											{area.name}
-										</ThemedText>
-									</ThemedTouchableOpacity>
-								);
-							})}
-						</View>
-					</TouchableWithoutFeedback>
-				</Modal>
-			</Portal>
+			<AreaSelector
+				visible={visibleModal}
+				areas={areas}
+				selectedId={selectedAreaId}
+				onSelect={onSelectArea}
+				onDismiss={() => setVisibleModal(false)}
+			/>
 			<View style={styles.body}>
 				{selectedAreaId === undefined ? (
 					<ModuleListSkeleton />
@@ -136,31 +91,5 @@ const styles = StyleSheet.create({
 	},
 	body: {
 		flex: 1,
-	},
-	selector: {
-		zIndex: 99,
-		padding: 20,
-		borderWidth: 1,
-		borderColor: "rgba(0,0,0, 0.2)",
-		backgroundColor: "#0E151C",
-		shadowColor: "rgba(0,0,0, 0.3)",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		elevation: 5,
-		shadowOpacity: 0.28,
-		shadowRadius: 4,
-		display: "flex",
-		flexDirection: "row",
-		justifyContent: "flex-start",
-		alignItems: "center",
-	},
-	actionText: {
-		fontFamily: "Roboto",
-		color: "white",
-		textAlign: "center",
-		fontSize: 20,
-		marginLeft: 5,
 	},
 });

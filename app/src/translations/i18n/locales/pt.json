@@ -14,6 +14,8 @@
 
 		"_common*********": "*********COMUNS*********",
 		"close": "Fechar",
+		"showPassword": "Mostrar senha",
+		"hidePassword": "Ocultar senha",
 		"change": "Alterar",
 		"Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
 
@@ -108,7 +110,7 @@
 		"font": "Fonte",
 		"theme": "Modo escuro",
 		"notifications": "Notificações",
-		"informations": "informações",
+		"informations": "Informações",
 		"update": "Atualização mais recente",
 		"version": "Versão do aplicativo",
 		"about": "Sobre",

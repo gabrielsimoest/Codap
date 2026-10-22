@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Switch } from "react-native-paper";
 import { Theme, useTheme } from "@react-navigation/native";
 import DarkMode from "../../../theme/DarkMode";
 import useThemeStore from "../../../stores/ThemeStore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ResizableText from "../../../components/ResizableText";
-import RowView from "../../../components/layout/RowView";
+import ListRow from "../../../components/ListRow";
+import { useAppColors } from "../../../theme/appColors";
 
 const ThemeSwitcher = () => {
 	const theme = useTheme();
+	const app = useAppColors();
 	const { t } = useTranslation();
 	const [isSwitchOn, setIsSwitchOn] = useState(false);
 
@@ -41,44 +41,20 @@ const ThemeSwitcher = () => {
 	}, []);
 
 	return (
-		<TouchableOpacity
-			style={[
-				styles.button,
-				{ backgroundColor: theme.colors.background },
-			]}
+		<ListRow
+			title={t("theme")}
+			icon={{ type: "ionicon", name: "moon-outline" }}
 			onPress={ChangeTheme}
-		>
-			<RowView align="center" justify="space-between">
-				<ResizableText defaultSize={20}>{t("theme")}</ResizableText>
+			right={
 				<Switch
-					style={{ marginTop: 5 }}
+					accessibilityLabel={t("theme")}
 					value={isSwitchOn}
-					color={"#5469D3"}
+					color={app.action}
 					onChange={ChangeTheme}
 				/>
-			</RowView>
-		</TouchableOpacity>
+			}
+		/>
 	);
 };
-
-const styles = StyleSheet.create({
-	button: {
-		height: 60,
-		padding: 10,
-		marginLeft: 5,
-		marginRight: 5,
-		marginTop: 10,
-		marginBottom: 15,
-		borderRadius: 10,
-		shadowColor: "#637aff",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.28,
-		shadowRadius: 7.0,
-		elevation: 2,
-	},
-});
 
 export default ThemeSwitcher;

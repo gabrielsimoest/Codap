@@ -132,43 +132,43 @@ export default function Market() {
 		<ThemedView style={styles.container}>
 			<MarketHeader />
 			<View style={styles.body}>
-			<ScrollView contentContainerStyle={styles.content}>
-				<ThemedText style={styles.headert}>{t("buy using bits")}</ThemedText>
-				<ShopItemCard
-					title={t("double experience")}
-					price={prices.double_xp}
-					image={Images.doubleXP}
-					status={
-						boostActive
-							? t("shop.double_xp.active", { time: formatTime(shop!.doubleXpEndsAt!, language) })
-							: t("inactive")
-					}
-					buyLabel={t("buy")}
-					onBuy={() => ask("double_xp")}
-				/>
-				<ShopItemCard
-					title={t("surprise chest")}
-					price={prices.chest}
-					image={Images.surpriseChest}
-					imageSide="right"
-					status={
-						shop && chestTotal > 0
-							? t("shop.chest.collection", { revealed: chestRevealed, total: chestTotal })
-							: undefined
-					}
-					buyLabel={t("buy")}
-					onBuy={() => ask("chest")}
-				/>
-				<ShopItemCard
-					title={t("instant hint")}
-					price={prices.instant_hint}
-					image={Images.doubleTime}
-					status={shop ? t("shop.instant_hint.owned", { count: shop.instantHints }) : undefined}
-					buyLabel={t("buy")}
-					onBuy={() => ask("instant_hint")}
-				/>
-			</ScrollView>
-			<EdgeFade edge="top" height={HEADER_FADE} />
+				<ScrollView contentContainerStyle={styles.content}>
+					<ThemedText style={styles.headert}>{t("buy using bits")}</ThemedText>
+					<ShopItemCard
+						title={t("double experience")}
+						price={prices.double_xp}
+						image={Images.doubleXP}
+						status={
+							boostActive
+								? t("shop.double_xp.active", { time: formatTime(shop!.doubleXpEndsAt!, language) })
+								: t("inactive")
+						}
+						buyLabel={t("buy")}
+						onBuy={() => ask("double_xp")}
+					/>
+					<ShopItemCard
+						title={t("surprise chest")}
+						price={prices.chest}
+						image={Images.surpriseChest}
+						imageSide="right"
+						status={
+							shop && chestTotal > 0
+								? t("shop.chest.collection", { revealed: chestRevealed, total: chestTotal })
+								: undefined
+						}
+						buyLabel={t("buy")}
+						onBuy={() => ask("chest")}
+					/>
+					<ShopItemCard
+						title={t("instant hint")}
+						price={prices.instant_hint}
+						image={Images.doubleTime}
+						status={shop ? t("shop.instant_hint.owned", { count: shop.instantHints }) : undefined}
+						buyLabel={t("buy")}
+						onBuy={() => ask("instant_hint")}
+					/>
+				</ScrollView>
+				<EdgeFade edge="top" height={HEADER_FADE} />
 			</View>
 
 			<MarketModal

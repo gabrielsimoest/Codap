@@ -1,34 +1,19 @@
 import { useAppColors } from "../../theme/appColors";
-import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
-import {
-	Dimensions,
-	Image,
-	Keyboard,
-	StyleSheet,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import DarkMode from "../../theme/DarkMode";
-import AuthButton from "./components/AuthButton";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import AppButton from "../../components/AppButton";
+import TextField from "../../components/TextField";
+import AuthLayout from "./components/AuthLayout";
+import { useTheoryPalette } from "../classes/components/theory/theoryTheme";
 import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
 import isValidEmail from "../../utils/isValidEmail";
-import CenterView from "../../components/layout/CenterView";
-import Images from "../../utils/imageIndexer";
 import useRegisterMutation from "../../hooks/queries/useRegisterMutation";
 
-const windowHeight = Dimensions.get("window").height;
-const windowWidth = Dimensions.get("window").width;
-
 export default function Register() {
-	const theme = useTheme(); //Variavel de cor do tema
-
+	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const app = useAppColors();
 
@@ -138,237 +123,72 @@ export default function Register() {
 	};
 
 	return (
-		<CenterView
-			style={{
-				backgroundColor: app.canvas,
-			}}
-		>
-			<TouchableWithoutFeedback
-				onPress={Keyboard.dismiss}
-				accessible={false}
-			>
-				<View style={[styles.shade, { backgroundColor: app.shade }]}>
-					<View
-						style={[
-							styles.box,
-							,
-							{
-								backgroundColor:
-									app.sheet,
-							},
-						]}
-					>
-						<View style={styles.header}>
-							<Image
-								style={styles.tinyLogo}
-								source={Images.icon}
-							/>
-							<Text style={[styles.title, { color: app.authAccent }]}>Codap</Text>
-						</View>
-						<View>
-							<TextInput
-								autoCapitalize="words"
-								style={[
-									styles.input,
-									{
-										borderColor: app.authAccent,
-										backgroundColor:
-											theme.colors.background,
-										color: theme.colors.text,
-									},
-								]}
-								placeholder={t("register.name")}
-								placeholderTextColor={app.authPlaceholder}
-								onChangeText={(value) => setName(value)}
-							/>
-							<TextInput
-								autoCapitalize="none"
-								keyboardType="email-address"
-								style={[
-									styles.input,
-									{
-										borderColor: app.authAccent,
-										backgroundColor:
-											theme.colors.background,
-										color: theme.colors.text,
-									},
-								]}
-								placeholder="Email"
-								placeholderTextColor={app.authPlaceholder}
-								onChangeText={(value) => setEmail(value)}
-							/>
-							<TextInput
-								autoCapitalize="none"
-								style={[
-									styles.input,
-									{
-										borderColor: app.authAccent,
-										backgroundColor:
-											theme.colors.background,
-										color: theme.colors.text,
-									},
-								]}
-								placeholder={t("register.password")}
-								placeholderTextColor={app.authPlaceholder}
-								onChangeText={(value) =>
-									onChangePassword(value)
-								}
-								secureTextEntry={true}
-							/>
-							<Text
-								style={[
-									styles.text,
-									{
-										color: passwordMatch
-											? theme.colors.text
-											: "red",
-									},
-								]}
-							>
-								{t("register.confirm password")}
-							</Text>
-							<TextInput
-								autoCapitalize="none"
-								style={[
-									styles.input,
-									{
-										backgroundColor:
-											theme.colors.background,
-										borderColor: passwordMatch
-											? app.authAccent
-											: "red",
-										color: passwordMatch
-											? theme.colors.text
-											: "red",
-									},
-								]}
-								placeholder={
-									passwordMatch
-										? t("register.password")
-										: t("register.invalid password")
-								}
-								placeholderTextColor={
-									passwordMatch ? app.authPlaceholder : "red"
-								}
-								onChangeText={(value) =>
-									onChangeConfirmPassword(value)
-								}
-								secureTextEntry={true}
-								value={confirmPassword}
-							/>
-							<AuthButton
-								title={t("register.register")}
-								color={app.authAccent}
-								onPress={register}
-							/>
-							{/* <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} /> */}
-							<TouchableOpacity
-								onPress={navigationHandler}
-								style={{ alignItems: "center" }}
-							>
-								<Text
-									style={[
-										styles.register,
-										{ color: theme.colors.text },
-									]}
-								>
-									{t("register.login")}
-								</Text>
-							</TouchableOpacity>
-						</View>
-					</View>
-				</View>
-				<ThemedAlert
-					visible={alertVisible}
-					onDismiss={onPressAlertHandler}
-					title={alertTitle}
-					message={alertMessage}
-					buttonText="OK"
+		<>
+			<AuthLayout>
+				<TextField
+					label={t("register.name")}
+					autoCapitalize="words"
+					autoComplete="name"
+					onChangeText={(value) => setName(value)}
 				/>
-			</TouchableWithoutFeedback>
-		</CenterView>
+				<TextField
+					label="Email"
+					autoCapitalize="none"
+					keyboardType="email-address"
+					autoComplete="email"
+					onChangeText={(value) => setEmail(value)}
+				/>
+				<TextField
+					label={t("register.password")}
+					autoCapitalize="none"
+					revealable
+					onChangeText={(value) => onChangePassword(value)}
+				/>
+				<View>
+					<TextField
+						label={t("register.confirm password")}
+						autoCapitalize="none"
+						revealable
+						error={!passwordMatch}
+						onChangeText={(value) => onChangeConfirmPassword(value)}
+						value={confirmPassword}
+					/>
+					{passwordMatch ? null : (
+						<Text style={[styles.error, { color: palette.danger }]}>
+							{t("register.invalid password")}
+						</Text>
+					)}
+				</View>
+				<AppButton
+					title={t("register.register")}
+					onPress={register}
+					loading={registerMutation.isPending}
+				/>
+				<TouchableOpacity onPress={navigationHandler} hitSlop={14}>
+					<Text style={[styles.login, { color: app.brandText }]}>
+						{t("register.login")}
+					</Text>
+				</TouchableOpacity>
+			</AuthLayout>
+			<ThemedAlert
+				visible={alertVisible}
+				onDismiss={onPressAlertHandler}
+				title={alertTitle}
+				message={alertMessage}
+				buttonText="OK"
+			/>
+		</>
 	);
 }
 
 const styles = StyleSheet.create({
-	register: {
-		color: "white",
+	login: {
 		textAlign: "center",
-		marginTop: 30,
-		fontSize: 17,
-	},
-	button: {
-		marginLeft: 50,
-		alignItems: "center",
-		marginTop: 30,
-		width: 170,
-		backgroundColor: "#7977FD",
-		padding: 10,
-		borderRadius: 5,
-	},
-	buttonText: {
-		fontSize: 15,
-		color: "#fff",
-	},
-	input: {
-		borderColor: "#7977FD",
-		backgroundColor: "#141f29",
-		borderRadius: 10,
-		height: 50,
-		color: "#fff",
-		width: 300,
-		margin: 12,
-		borderWidth: 1.5,
-		padding: 10,
-		fontSize: 20,
-	},
-	inputError: {
-		borderColor: "red",
-		backgroundColor: "#141f29",
-		borderRadius: 10,
-		height: 50,
-		color: "red",
-		width: 300,
-		margin: 12,
-		borderWidth: 1.5,
-		padding: 10,
-		fontSize: 20,
-	},
-	header: {
-		marginTop: 20,
-		marginBottom: 30,
-		flexWrap: "wrap",
-		alignItems: "flex-start",
-		flexDirection: "row",
-	},
-	tinyLogo: {
-		width: 70,
-		height: 70,
-	},
-	title: {
-		marginLeft: 10,
-		marginTop: 3,
-		fontSize: 50,
+		fontSize: 16,
 		fontWeight: "bold",
-		color: "#7977FD",
 	},
-	box: {
-		backgroundColor: "#141f29",
-		borderRadius: 25,
-		height: windowHeight * 0.945, //710
-		width: windowWidth * 0.942, //370
-		alignItems: "center",
-		justifyContent: "center",
-		elevation: 2,
-	},
-	shade: {
-		backgroundColor: "rgba(0, 0, 0, 0.3)",
-		borderRadius: 25,
-		height: windowHeight * 0.95, //713
-		width: windowWidth * 0.95, //373
-	},
-	text: {
-		color: "white",
-		left: "4%",
+	error: {
+		marginTop: 6,
+		fontSize: 14,
 	},
 });
