@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { DimensionValue, StyleSheet, View } from "react-native";
-import { useTranslation } from "react-i18next";
+import { DimensionValue } from "react-native";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
-import { ActivityChip, ActivityHint, ActivityQuestion } from "./theory/ActivityParts";
+import { ActivityQuestion, BLANK, BlankBank } from "./theory/ActivityParts";
 import LessonScreen from "./theory/LessonScreen";
 import { useTheoryPalette } from "./theory/theoryTheme";
-
-/** Marca de uma lacuna no `code` (ver `CodeBlankActivityContent` no contrato). */
-const BLANK = "___";
 
 interface Props {
 	question: string;
@@ -63,7 +59,6 @@ export default function CodeBlankExercise({
 	onClose,
 }: Props) {
 	const palette = useTheoryPalette();
-	const { t } = useTranslation();
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
@@ -115,54 +110,14 @@ export default function CodeBlankExercise({
 				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
 				<CodeSnippet code={filledCode} codeLanguage={codeLanguage} palette={palette} />
 
-				{blankCount > 1 ? (
-					<View style={styles.slotRow}>
-						{slots.map((slot, k) => (
-							<ActivityChip
-								key={k}
-								palette={palette}
-								mono
-								tone={slot === null ? "idle" : "selected"}
-								disabled={slot === null}
-								label={`${k + 1}. ${slot === null ? BLANK : chips[slot]}`}
-								accessibilityLabel={
-									slot === null
-										? t("codeBlank.emptySlot", { n: k + 1 })
-										: t("codeBlank.filledSlot", { n: k + 1, value: chips[slot] })
-								}
-								onPress={() => clearSlot(k)}
-								style={styles.slot}
-							/>
-						))}
-					</View>
-				) : null}
-
-				<ActivityHint palette={palette}>
-					{blankCount > 1 ? t("codeBlank.hintMany") : t("codeBlank.hintOne")}
-				</ActivityHint>
-
-				<View style={styles.pills}>
-					{chips.map((chip, index) => {
-						// Com várias lacunas, o bloco usado sai do banco (fica apagado);
-						// com uma só, ele fica marcado, como na múltipla escolha.
-						const used = blankCount > 1 && slots.includes(index);
-						return (
-							<ActivityChip
-								key={index}
-								palette={palette}
-								mono
-								label={chip}
-								used={used}
-								tone={blankCount === 1 && slots[0] === index ? "selected" : "idle"}
-								onPress={() =>
-									// Com uma lacuna só, tocar noutro bloco troca a resposta,
-									// em vez de exigir desfazer antes.
-									blankCount === 1 ? setSlots([index]) : placeChip(index)
-								}
-							/>
-						);
-					})}
-				</View>
+				<BlankBank
+					palette={palette}
+					chips={chips}
+					slots={slots}
+					onClear={clearSlot}
+					// Com uma lacuna só, tocar noutro bloco troca a resposta, em vez de exigir desfazer antes.
+					onPick={(index) => (blankCount === 1 ? setSlots([index]) : placeChip(index))}
+				/>
 			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
@@ -173,21 +128,3 @@ export default function CodeBlankExercise({
 		</>
 	);
 }
-
-const styles = StyleSheet.create({
-	pills: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		justifyContent: "center",
-		gap: 10,
-	},
-	slotRow: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		gap: 10,
-	},
-	slot: {
-		minHeight: 40,
-		paddingVertical: 4,
-	},
-});

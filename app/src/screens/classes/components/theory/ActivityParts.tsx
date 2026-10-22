@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
 import { StyleSheet, TouchableOpacity, View, type StyleProp, type ViewStyle } from "react-native";
+import { useTranslation } from "react-i18next";
 import Icon from "../../../../components/Icon";
 import ResizableHighlighter from "../../../../components/ResizableHighlighter";
 import ResizableText from "../../../../components/ResizableText";
@@ -134,7 +134,91 @@ export function ActivityChip({
 	);
 }
 
+/** Marca de uma lacuna no `code` (a mesma do `code_blank` — ver o contrato). */
+export const BLANK = "___";
+
+interface BankProps {
+	palette: TheoryPalette;
+	/** Os blocos, já embaralhados. */
+	chips: string[];
+	/** `slots[k]` = posição em `chips` do bloco posto na lacuna k, ou null. */
+	slots: (number | null)[];
+	/** Tocou num bloco do banco; quem usa decide se preenche a próxima lacuna ou troca a única. */
+	onPick: (chipIndex: number) => void;
+	/** Tocou numa lacuna preenchida: devolve o bloco ao banco. */
+	onClear: (slotIndex: number) => void;
+}
+
+/**
+ * Lacunas e banco de blocos do `code_blank` e do playground guiado: com várias
+ * lacunas, uma fileira de pílulas numeradas mostra o que já foi posto e o bloco
+ * usado apaga no banco; com uma só, o bloco escolhido fica marcado.
+ */
+export function BlankBank({ palette, chips, slots, onPick, onClear }: BankProps) {
+	const { t } = useTranslation();
+	const blankCount = slots.length;
+
+	return (
+		<>
+			{blankCount > 1 ? (
+				<View style={styles.slotRow}>
+					{slots.map((slot, k) => (
+						<ActivityChip
+							key={k}
+							palette={palette}
+							mono
+							tone={slot === null ? "idle" : "selected"}
+							disabled={slot === null}
+							label={`${k + 1}. ${slot === null ? BLANK : chips[slot]}`}
+							accessibilityLabel={
+								slot === null
+									? t("codeBlank.emptySlot", { n: k + 1 })
+									: t("codeBlank.filledSlot", { n: k + 1, value: chips[slot] })
+							}
+							onPress={() => onClear(k)}
+							style={styles.slot}
+						/>
+					))}
+				</View>
+			) : null}
+
+			<ActivityHint palette={palette}>
+				{blankCount > 1 ? t("codeBlank.hintMany") : t("codeBlank.hintOne")}
+			</ActivityHint>
+
+			<View style={styles.pills}>
+				{chips.map((chip, index) => (
+					<ActivityChip
+						key={index}
+						palette={palette}
+						mono
+						label={chip}
+						used={blankCount > 1 && slots.includes(index)}
+						tone={blankCount === 1 && slots[0] === index ? "selected" : "idle"}
+						onPress={() => onPick(index)}
+					/>
+				))}
+			</View>
+		</>
+	);
+}
+
 const styles = StyleSheet.create({
+	slotRow: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		gap: 10,
+	},
+	slot: {
+		minHeight: 40,
+		paddingVertical: 4,
+	},
+	pills: {
+		flexDirection: "row",
+		flexWrap: "wrap",
+		justifyContent: "center",
+		gap: 10,
+	},
 	textColumn: {
 		gap: 8,
 	},

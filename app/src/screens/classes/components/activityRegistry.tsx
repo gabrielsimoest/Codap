@@ -105,11 +105,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	code_playground: ({ content, activityKey, progress, onProceed, onClose }) => {
+	code_playground: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as CodePlaygroundActivityContent;
 		return (
 			<CodePlaygroundExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				codeLanguage={c.codeLanguage}

@@ -1,32 +1,18 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
-import {
-	ActivityIndicator,
-	DimensionValue,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ActivityIndicator, DimensionValue, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { WebViewMessageEvent } from "react-native-webview";
-import { LessonHeader, Progressbar } from "./LessonHeader";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
-import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
 import Icon from "../../../components/Icon";
-import DarkMode from "../../../theme/DarkMode";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./SandboxWebView";
+import { ActivityHint, ActivityQuestion, BLANK, BlankBank } from "./theory/ActivityParts";
+import LessonScreen from "./theory/LessonScreen";
+import { useTheoryPalette } from "./theory/theoryTheme";
 
-/** Marca de uma lacuna no `code` (a mesma do `code_blank` — ver o contrato). */
-const BLANK = "___";
-/** Azul da marca: `colors.primary` deste app é quase a cor de fundo. */
-const BRAND = "#5469D3";
+/** Âmbar do "ainda não passou" (o mesmo do aviso de tempo esgotado do terminal da teoria). */
+const WARNING_COLOR = "#E0A552";
 /**
  * Sem mensagem de volta nesse prazo, a execução é dada como travada (laço
  * infinito no código montado). Mesma janela do `TerminalSection`.
@@ -49,6 +35,10 @@ interface Props {
 	js?: string;
 	checkScript: string;
 	tutorial?: boolean;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
@@ -89,13 +79,14 @@ export default function CodePlaygroundExercise({
 	js,
 	checkScript,
 	tutorial = false,
+	title,
+	step,
+	total,
 	progress,
 	onProceed,
 	onClose,
 }: Props) {
-	const theme = useTheme();
-	const { colors } = theme;
-	const isDarkMode = theme === DarkMode;
+	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -204,146 +195,97 @@ export default function CodePlaygroundExercise({
 
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<Progressbar progress={progress} />
-				<ScrollView style={styles.scroller}>
-					<LessonHeader
-						onClose={onClose}
-						setTutorialVisible={() => setTutorialVisible(!tutorialVisible)}
-					/>
-					<ResizableHighlighter
-						style={styles.question}
-						highlight={highlight}
-						text={question}
-						defaultSize={23}
-					/>
-					<CodeSnippet code={filledCode} codeLanguage={codeLanguage} />
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				onNext={() => evaluated && setModalVisible(true)}
+			>
+				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
+				<CodeSnippet code={filledCode} codeLanguage={codeLanguage} palette={palette} />
 
-					{blankCount > 1 ? (
-						<View style={styles.slotRow}>
-							{slots.map((slot, k) => (
-								<TouchableOpacity
-									key={k}
-									accessibilityRole="button"
-									accessibilityLabel={
-										slot === null
-											? t("codeBlank.emptySlot", { n: k + 1 })
-											: t("codeBlank.filledSlot", { n: k + 1, value: chips[slot] })
-									}
-									disabled={slot === null}
-									onPress={() => clearSlot(k)}
-									style={[
-										styles.slot,
-										{ borderColor: BRAND },
-										slot !== null ? { backgroundColor: BRAND } : null,
-									]}
-								>
-									<ResizableText style={styles.slotText} defaultSize={16} useCustomColor>
-										{`${k + 1}. ${slot === null ? BLANK : chips[slot]}`}
-									</ResizableText>
-								</TouchableOpacity>
-							))}
-						</View>
-					) : null}
+				<BlankBank
+					palette={palette}
+					chips={chips}
+					slots={slots}
+					onClear={clearSlot}
+					// Com uma lacuna só, tocar noutro bloco troca a resposta, em vez de exigir desfazer antes.
+					onPick={(index) => (blankCount === 1 ? changeSlots([index]) : placeChip(index))}
+				/>
 
-					<ResizableText style={styles.hint} defaultSize={15}>
-						{blankCount > 1 ? t("codeBlank.hintMany") : t("codeBlank.hintOne")}
-					</ResizableText>
+				<TouchableOpacity
+					accessibilityRole="button"
+					accessibilityState={{ disabled: !allFilled || status === "running" }}
+					disabled={!allFilled || status === "running"}
+					onPress={execute}
+					style={[styles.runButton, { backgroundColor: palette.accent }, !allFilled ? styles.runDisabled : null]}
+				>
+					<Icon type="ionicon" name="play" color="#fff" size={16} />
+					<Text style={styles.runText}>
+						{status === "running" ? t("codeSection.running") : t("codeSection.run")}
+					</Text>
+					{status === "running" && <ActivityIndicator size="small" color="#fff" />}
+				</TouchableOpacity>
 
-					<View style={styles.bank}>
-						{chips.map((chip, index) => {
-							const used = blankCount > 1 && slots.includes(index);
-							return (
-								<TouchableOpacity
-									key={index}
-									accessibilityRole="button"
-									accessibilityState={{ disabled: used }}
-									disabled={used}
-									onPress={() => (blankCount === 1 ? changeSlots([index]) : placeChip(index))}
-									style={[
-										styles.chip,
-										{ backgroundColor: colors.background },
-										used ? styles.chipUsed : null,
-										blankCount === 1 && slots[0] === index ? { backgroundColor: BRAND } : null,
-									]}
-								>
-									<ResizableText style={styles.chipText} defaultSize={18}>
-										{chip}
-									</ResizableText>
-								</TouchableOpacity>
-							);
-						})}
-					</View>
-
-					<TouchableOpacity
-						accessibilityRole="button"
-						accessibilityState={{ disabled: !allFilled || status === "running" }}
-						disabled={!allFilled || status === "running"}
-						onPress={execute}
-						style={[styles.runButton, !allFilled ? styles.runDisabled : null]}
+				{/* Montada só enquanto roda — ou depois, se houver prévia a mostrar.
+				    No timeout ela sai de cena: desmontar é o que mata a página
+				    presa no laço infinito, que senão seguiria rodando em
+				    segundo plano, gastando CPU e bateria. */}
+				{(status === "running" || (status === "done" && showPreview)) && (
+					<View
+						style={[
+							showPreview ? styles.preview : styles.hiddenWebView,
+							{ borderColor: palette.border },
+						]}
+						pointerEvents={showPreview ? "auto" : "none"}
 					>
-						<Icon type="ionicon" name="play" color="#fff" size={16} />
-						<Text style={styles.runText}>
-							{status === "running" ? t("codeSection.running") : t("codeSection.run")}
-						</Text>
-						{status === "running" && <ActivityIndicator size="small" color="#fff" />}
-					</TouchableOpacity>
+						<SandboxWebView key={runKey} html={documentHtml} onMessage={handleMessage} />
+					</View>
+				)}
 
-					{/* Montada só enquanto roda — ou depois, se houver prévia a mostrar.
-					    No timeout ela sai de cena: desmontar é o que mata a página
-					    presa no laço infinito, que senão seguiria rodando em
-					    segundo plano, gastando CPU e bateria. */}
-					{(status === "running" || (status === "done" && showPreview)) && (
-						<View
-							style={[
-								showPreview ? styles.preview : styles.hiddenWebView,
-								isDarkMode ? styles.boxDark : styles.boxLight,
-							]}
-							pointerEvents={showPreview ? "auto" : "none"}
-						>
-							<SandboxWebView key={runKey} html={documentHtml} onMessage={handleMessage} />
-						</View>
-					)}
-
-					{evaluated && (
-						<View style={[styles.output, isDarkMode ? styles.boxDark : styles.boxLight]}>
-							{resultText !== null && (
+				{evaluated && (
+					<View style={[styles.output, { backgroundColor: palette.terminalBg, borderColor: palette.border }]}>
+						{resultText !== null && (
+							<Text
+								accessibilityLiveRegion="polite"
+								style={[styles.resultText, { color: passed ? palette.success : WARNING_COLOR }]}
+							>
+								{resultText}
+							</Text>
+						)}
+						{hiddenLines > 0 && (
+							<Text style={[styles.mutedText, { color: palette.icon }]}>
+								{t("playground.hiddenLines", { count: hiddenLines })}
+							</Text>
+						)}
+						{allEntries.length === 0 && status === "done" ? (
+							<Text style={[styles.mutedText, { color: palette.icon }]}>{t("codeSection.noOutput")}</Text>
+						) : (
+							shownEntries.map((entry, index) => (
 								<Text
-									accessibilityLiveRegion="polite"
-									style={[styles.resultText, { color: passed ? "#2e9e5b" : "#e0a552" }]}
+									key={index}
+									style={[
+										styles.line,
+										{ color: entry.type === "error" ? palette.danger : palette.codeText },
+									]}
 								>
-									{resultText}
+									{entry.type === "error" ? `${t("codeSection.consoleError")}: ${entry.message}` : entry.message}
 								</Text>
-							)}
-							{hiddenLines > 0 && (
-								<Text style={styles.mutedText}>{t("playground.hiddenLines", { count: hiddenLines })}</Text>
-							)}
-							{allEntries.length === 0 && status === "done" ? (
-								<Text style={styles.mutedText}>{t("codeSection.noOutput")}</Text>
-							) : (
-								shownEntries.map((entry, index) => (
-									<Text
-										key={index}
-										style={[
-											styles.line,
-											entry.type === "error"
-												? styles.errorLine
-												: { color: isDarkMode ? "#cccccc" : "#444444" },
-										]}
-									>
-										{entry.type === "error" ? `${t("codeSection.consoleError")}: ${entry.message}` : entry.message}
-									</Text>
-								))
-							)}
-						</View>
-					)}
+							))
+						)}
+					</View>
+				)}
 
-					<ResizableText style={styles.hint} defaultSize={14}>
-						{evaluated ? "" : t("playground.runFirst", { run: t("codeSection.run"), next: t("next") })}
-					</ResizableText>
-				</ScrollView>
-				<NextButton onPress={() => evaluated && setModalVisible(true)} />
-			</ThemedView>
+				{evaluated ? null : (
+					<ActivityHint palette={palette}>
+						{t("playground.runFirst", { run: t("codeSection.run"), next: t("next") })}
+					</ActivityHint>
+				)}
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -355,78 +297,17 @@ export default function CodePlaygroundExercise({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-	},
-	scroller: {
-		marginBottom: "25%",
-	},
-	question: {
-		margin: 20,
-		fontFamily: "Roboto",
-		color: "white",
-		fontWeight: "bold",
-	},
-	slotRow: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		gap: 8,
-		marginHorizontal: 10,
-		marginBottom: 6,
-	},
-	slot: {
-		borderWidth: 2,
-		borderRadius: 14,
-		paddingHorizontal: 12,
-		paddingVertical: 6,
-	},
-	slotText: {
-		fontFamily: "monospace",
-		color: "white",
-	},
-	hint: {
-		marginHorizontal: 12,
-		marginBottom: 8,
-		color: "#9AA9B8",
-	},
-	bank: {
-		flexDirection: "row",
-		flexWrap: "wrap",
-		justifyContent: "center",
-		gap: 10,
-		marginHorizontal: 10,
-	},
-	chip: {
-		minHeight: 52,
-		minWidth: 64,
-		paddingHorizontal: 16,
-		justifyContent: "center",
-		alignItems: "center",
-		borderRadius: 16,
-		elevation: 6,
-	},
-	chipUsed: {
-		opacity: 0.3,
-		elevation: 0,
-	},
-	chipText: {
-		fontFamily: "monospace",
-		color: "white",
-		fontWeight: "bold",
-	},
+	// Mesmo botão "Executar" do terminal da teoria: pílula de acento, à esquerda.
 	runButton: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		alignSelf: "center",
+		alignSelf: "flex-start",
 		gap: 8,
-		marginTop: 16,
-		marginBottom: 10,
-		paddingVertical: 10,
-		paddingHorizontal: 22,
+		minHeight: 40,
+		paddingVertical: 8,
+		paddingHorizontal: 18,
 		borderRadius: 20,
-		backgroundColor: BRAND,
-		minHeight: 44,
 	},
 	runDisabled: {
 		opacity: 0.4,
@@ -434,16 +315,17 @@ const styles = StyleSheet.create({
 	runText: {
 		color: "#fff",
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 16,
+		fontWeight: "600",
+		fontSize: 14,
 	},
-	// Prévia visível: o HTML/CSS do aluno renderizado, rolável por dentro.
+	// Prévia visível: o HTML/CSS do aluno renderizado, rolável por dentro. Fundo
+	// branco, como a aba "Web" do editor da teoria.
 	preview: {
 		height: 170,
-		marginHorizontal: 10,
-		borderWidth: 1,
-		borderRadius: 8,
+		borderWidth: 2,
+		borderRadius: 14,
 		overflow: "hidden",
+		backgroundColor: "#FFFFFF",
 	},
 	// JavaScript sem HTML: a WebView só executa. Nunca tamanho 0 nem
 	// display:"none" (ver o mesmo estilo no `TerminalSection`).
@@ -453,25 +335,16 @@ const styles = StyleSheet.create({
 		height: 1,
 		opacity: 0,
 	},
-	boxDark: {
-		backgroundColor: "#282c34",
-		borderColor: "#304D66",
-	},
-	boxLight: {
-		backgroundColor: "#fafafa",
-		borderColor: "#A5A5A5",
-	},
+	// Saída no mesmo painel escuro do terminal da teoria.
 	output: {
-		marginTop: 8,
-		marginHorizontal: 10,
-		borderWidth: 1,
-		borderRadius: 8,
-		padding: 10,
+		borderWidth: 2,
+		borderRadius: 14,
+		padding: 14,
 		gap: 4,
 	},
 	resultText: {
 		fontFamily: "Roboto",
-		fontWeight: "bold",
+		fontWeight: "700",
 		fontSize: 15,
 		marginBottom: 4,
 	},
@@ -479,13 +352,9 @@ const styles = StyleSheet.create({
 		fontFamily: "monospace",
 		fontSize: 13,
 	},
-	errorLine: {
-		color: "#e05252",
-	},
 	mutedText: {
 		fontFamily: "monospace",
 		fontSize: 13,
-		color: "#888888",
 		fontStyle: "italic",
 	},
 });
