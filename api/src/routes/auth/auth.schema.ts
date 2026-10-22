@@ -11,6 +11,7 @@ const authUserSchema = {
     email: { type: 'string', format: 'email' },
     xp: { type: ['integer', 'null'] },
     bits: { type: ['integer', 'null'] },
+    email_verified_at: { type: ['string', 'null'], format: 'date-time' },
     created_at: { type: 'string', format: 'date-time' },
     updated_at: { type: 'string', format: 'date-time' }
   },
@@ -45,7 +46,11 @@ export const authErrorResponseSchema = {
   type: 'object',
   properties: {
     error: { type: 'string' },
-    message: { type: 'string' }
+    message: { type: 'string' },
+    // Presentes só em erros que o app precisa tratar por causa, não pelo texto
+    // (ex.: `email_typo` traz a `suggestion` de e-mail corrigido).
+    code: { type: 'string' },
+    suggestion: { type: 'string' }
   }
 }
 
@@ -82,3 +87,56 @@ export const refreshBodySchema = {
 }
 
 export const logoutBodySchema = refreshBodySchema
+
+export const forgotPasswordBodySchema = {
+  type: 'object',
+  required: ['email'],
+  additionalProperties: false,
+  properties: {
+    email: { type: 'string', format: 'email' }
+  }
+}
+
+export const tokenBodySchema = {
+  type: 'object',
+  required: ['token'],
+  additionalProperties: false,
+  properties: {
+    token: { type: 'string', minLength: 1, maxLength: 200 }
+  }
+}
+
+export const resetPasswordBodySchema = {
+  type: 'object',
+  required: ['token', 'password'],
+  additionalProperties: false,
+  properties: {
+    token: { type: 'string', minLength: 1, maxLength: 200 },
+    password: { type: 'string', minLength: 8 }
+  }
+}
+
+export const messageResponseSchema = {
+  type: 'object',
+  properties: {
+    message: { type: 'string' }
+  },
+  required: ['message']
+}
+
+export const meResponseSchema = {
+  type: 'object',
+  properties: {
+    user: authUserSchema
+  },
+  required: ['user']
+}
+
+export const changeEmailBodySchema = {
+  type: 'object',
+  required: ['email'],
+  additionalProperties: false,
+  properties: {
+    email: { type: 'string', format: 'email' }
+  }
+}

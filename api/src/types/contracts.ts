@@ -35,6 +35,34 @@ export interface RefreshBody {
 
 export type RefreshResponse = Omit<AuthResponse, 'user'>
 
+/** `GET /auth/me` e `POST /auth/change-email`: a conta, com `email_verified_at` (nulo = e-mail não confirmado). */
+export interface AccountResponse {
+  user: UserResponse;
+}
+
+export interface ChangeEmailBody {
+  email: string;
+}
+
+export interface ForgotPasswordBody {
+  email: string;
+}
+
+export interface MessageResponse {
+  message: string;
+}
+
+/**
+ * Corpo dos erros de `/auth/*` que o app trata pela causa e não pelo texto.
+ * `code: 'email_typo'` (400) traz a `suggestion` de e-mail corrigido.
+ */
+export interface AuthErrorBody {
+  error?: string;
+  message?: string;
+  code?: string;
+  suggestion?: string;
+}
+
 export interface LogoutBody {
   refreshToken: string;
 }

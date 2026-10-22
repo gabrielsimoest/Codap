@@ -47,6 +47,10 @@ model users {
   name              String
   email             String              @unique
   password          String
+  /// Quando o e-mail foi confirmado pelo link enviado (ou pela redefinição de senha, que prova a posse do e-mail). Nulo = não confirmado.
+  email_verified_at DateTime?
+  /// Quando o e-mail de boas-vindas foi enviado, no primeiro login. Reivindicado de forma atômica para nunca sair duas vezes.
+  welcome_sent_at   DateTime?
   xp                Int?
   bits              Int?
   /// Dicas instantâneas compradas e ainda não usadas.
@@ -58,6 +62,7 @@ model users {
   user_lessons      user_lessons[]
   user_achievements user_achievements[]
   refresh_tokens    refresh_tokens[]
+  auth_tokens       auth_tokens[]
   xp_boosts         xp_boosts[]
   chest_lessons     user_chest_lessons[]
 }
@@ -128,6 +133,25 @@ model refresh_tokens {
 
   @@index([user_id])
   @@index([family_id])
+}
+
+enum auth_token_type {
+  email_verification
+  password_reset
+}
+
+/// Tokens de uso único enviados por e-mail (confirmação de e-mail e redefinição de senha). Só o hash SHA-256 é guardado; o valor bruto existe apenas no link do e-mail.
+model auth_tokens {
+  id         String          @id @default(uuid()) @db.Uuid
+  user_id    String          @db.Uuid
+  user       users           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  type       auth_token_type
+  token_hash String          @unique @db.VarChar(64)
+  created_at DateTime        @default(now())
+  expires_at DateTime
+  used_at    DateTime?
+
+  @@index([user_id, type])
 }
 
 // ---------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
-import { build } from '../../helper'
+import { build, withNodeEnv } from '../../helper'
 
 async function cleanupUser (app: Awaited<ReturnType<typeof build>>, userId: string) {
   await app.prisma.refresh_tokens.deleteMany({ where: { user_id: userId } })
@@ -102,4 +102,30 @@ test('POST /auth/register rejects a password shorter than 8 characters with 400'
   })
 
   assert.equal(res.statusCode, 400)
+})
+
+test('POST /auth/register refuses a domain that looks like a typo, but only outside development', async (t) => {
+  const app = await build(t)
+  const local = `register-${randomUUID()}`
+
+  const refused = await app.inject({
+    method: 'POST',
+    url: '/auth/register',
+    payload: { name: 'Typo', email: `${local}@gmial.com`, password: 'senha1234' }
+  })
+  assert.equal(refused.statusCode, 400)
+  const error = JSON.parse(refused.payload)
+  assert.match(error.message, new RegExp(`${local}@gmail\.com`))
+  assert.equal(error.code, 'email_typo')
+  assert.equal(error.suggestion, `${local}@gmail.com`)
+
+  // Em desenvolvimento a checagem não existe (não barra e-mails de bancada).
+  const accepted = await withNodeEnv('development', () => app.inject({
+    method: 'POST',
+    url: '/auth/register',
+    payload: { name: 'Typo', email: `${local}@gmial.com`, password: 'senha1234' }
+  }))
+  assert.equal(accepted.statusCode, 201)
+
+  await cleanupUser(app, JSON.parse(accepted.payload).user.id)
 })
