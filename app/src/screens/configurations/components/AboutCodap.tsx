@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import { Pressable, ScrollView, StyleSheet } from "react-native";
 import SecondaryButton from "./SecondaryButton";
 import Icon from "../../../components/Icon";
@@ -23,6 +24,7 @@ const AboutCodap = ({ onLongPress, onHoldChange }: Props) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	return (
 		<>
@@ -31,11 +33,11 @@ const AboutCodap = ({ onLongPress, onHoldChange }: Props) => {
 					visible={modalVisible}
 					onDismiss={() => setModalVisible(false)}
 					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					style={{ backgroundColor: app.scrim }}
 					dismissableBackButton
 				>
 					<CenterView
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+						style={{ backgroundColor: app.scrimInner }}
 					>
 						<ThemedView style={styles.modalView}>
 							<Pressable

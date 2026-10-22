@@ -9,10 +9,8 @@ import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./SandboxWebView";
 import { ActivityHint, ActivityQuestion, BLANK, BlankBank } from "./theory/ActivityParts";
 import LessonScreen from "./theory/LessonScreen";
-import { useTheoryPalette } from "./theory/theoryTheme";
+import { goldLabel, useTheoryPalette } from "./theory/theoryTheme";
 
-/** Âmbar do "ainda não passou" (o mesmo do aviso de tempo esgotado do terminal da teoria). */
-const WARNING_COLOR = "#E0A552";
 /**
  * Sem mensagem de volta nesse prazo, a execução é dada como travada (laço
  * infinito no código montado). Mesma janela do `TerminalSection`.
@@ -252,7 +250,11 @@ export default function CodePlaygroundExercise({
 						{resultText !== null && (
 							<Text
 								accessibilityLiveRegion="polite"
-								style={[styles.resultText, { color: passed ? palette.success : WARNING_COLOR }]}
+								style={[
+								styles.resultText,
+								{ color: passed ? palette.success : palette.warning },
+								passed ? null : goldLabel(palette),
+							]}
 							>
 								{resultText}
 							</Text>

@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
@@ -19,6 +20,7 @@ export default function LanguageSelector() {
 	const { colors } = useTheme();
 
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	const setLanguage = useLanguageStore((s) => s.setLanguage);
 	const language = useLanguageStore((s) => s.language);
@@ -42,11 +44,11 @@ export default function LanguageSelector() {
 					visible={modalVisible}
 					onDismiss={() => setModalVisible(false)}
 					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					style={{ backgroundColor: app.scrim }}
 					dismissableBackButton
 				>
 					<CenterView
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+						style={{ backgroundColor: app.scrimInner }}
 					>
 						<ThemedView style={styles.modalView}>
 							<Pressable

@@ -5,13 +5,14 @@ import {
 	type StyleProp,
 	StyleSheet,
 	Text,
+	TouchableOpacity,
 	View,
 	type ViewStyle,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 import Icon from "../../../components/Icon";
-import ThemedTouchableOpacity from "../../../components/themed/ThemedTouchableOpacity";
+import { useTheme } from "@react-navigation/native";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import { FIXED_UI, type TheoryPalette } from "./theory/theoryTheme";
 
@@ -135,7 +136,12 @@ export default function TerminalSection({ code, isDarkMode, palette }: Props) {
 	const showOutput = status === "done" || status === "timeout";
 	const isRunning = status === "running";
 
+	const { colors } = useTheme();
 	const embedded = palette !== undefined;
+	// O fundo vem sempre do tema (o `accent` do `style` nunca valeu: o antigo
+	// `ThemedTouchableOpacity` o sobrescrevia com `primary`). No escuro isso é um aço
+	// discreto; no claro `primary` é branco e o texto branco sumia — lá o botão é de acento.
+	const buttonColor = isDarkMode ? colors.primary : palette?.accent ?? "#5469D3";
 
 	return (
 		<View
@@ -145,9 +151,8 @@ export default function TerminalSection({ code, isDarkMode, palette }: Props) {
 					: styles.container
 			}
 		>
-			<ThemedTouchableOpacity
-				theme="primary"
-				style={[styles.button, embedded ? { backgroundColor: palette.accent } : null]}
+			<TouchableOpacity
+				style={[styles.button, { backgroundColor: buttonColor }]}
 				onPress={run}
 				disabled={isRunning}
 			>
@@ -162,7 +167,7 @@ export default function TerminalSection({ code, isDarkMode, palette }: Props) {
 						style={styles.spinner}
 					/>
 				)}
-			</ThemedTouchableOpacity>
+			</TouchableOpacity>
 
 			{showOutput && (
 				<OutputContainer

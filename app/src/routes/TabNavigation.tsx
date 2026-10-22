@@ -12,6 +12,7 @@ import Config from "../screens/configurations/Config";
 import User from "../screens/user/User";
 import Market from "../screens/market/Market";
 import type { MainTabParamList } from "../types/navigation";
+import { useAppColors } from "../theme/appColors";
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -87,6 +88,7 @@ type TabButtonProps = { item: TabItem } & BottomTabBarButtonProps;
 //Tab button
 const TabButton = (props: TabButtonProps) => {
 	const { item, onPress } = props;
+	const app = useAppColors();
 	const focused = props["aria-selected"];
 	const viewRef = useRef<View>(null);
 
@@ -120,7 +122,7 @@ const TabButton = (props: TabButtonProps) => {
 				<Icon
 					type={item.type}
 					name={focused ? item.activeIcon : item.inActiveIcon}
-					color={focused ? "#637aff" : "#637aff99"}
+					color={focused ? app.tabActive : app.tabIdle}
 				/>
 			</View>
 		</TouchableOpacity>
@@ -129,6 +131,7 @@ const TabButton = (props: TabButtonProps) => {
 
 export function TabNavigation() {
 	const { colors } = useTheme();
+	const app = useAppColors();
 
 	return (
 		<Tab.Navigator
@@ -142,7 +145,8 @@ export function TabNavigation() {
 					position: "absolute",
 					bottom: 16,
 					borderRadius: 16,
-					backgroundColor: colors.background,
+					// No claro a barra é branca (superfície elevada) sobre a tela azul-gelo.
+					backgroundColor: app.isDark ? colors.background : colors.primary,
 					zIndex: 50,
 					overflow: "hidden",
 					alignItems: "center",

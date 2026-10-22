@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import {
 	StyleProp,
 	StyleSheet,
@@ -19,10 +20,12 @@ export default function MarketButton({
 	textStyle = { color: "#fff" },
 	reversed = false,
 }: Props) {
+	const app = useAppColors();
 	return (
 		<TouchableOpacity
 			style={[
 				styles.button,
+				{ backgroundColor: app.action },
 				reversed
 					? { alignSelf: "flex-start" }
 					: { alignSelf: "flex-end" },

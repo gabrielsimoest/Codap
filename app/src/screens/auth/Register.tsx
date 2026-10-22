@@ -1,3 +1,4 @@
+import { useAppColors } from "../../theme/appColors";
 import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +30,7 @@ export default function Register() {
 	const theme = useTheme(); //Variavel de cor do tema
 
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	const navigation = useNavigate();
 
@@ -138,21 +140,21 @@ export default function Register() {
 	return (
 		<CenterView
 			style={{
-				backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
+				backgroundColor: app.canvas,
 			}}
 		>
 			<TouchableWithoutFeedback
 				onPress={Keyboard.dismiss}
 				accessible={false}
 			>
-				<View style={styles.shade}>
+				<View style={[styles.shade, { backgroundColor: app.shade }]}>
 					<View
 						style={[
 							styles.box,
 							,
 							{
 								backgroundColor:
-									theme == DarkMode ? "#141f29" : "#f2f2f2",
+									app.sheet,
 							},
 						]}
 					>
@@ -161,7 +163,7 @@ export default function Register() {
 								style={styles.tinyLogo}
 								source={Images.icon}
 							/>
-							<Text style={styles.title}>Codap</Text>
+							<Text style={[styles.title, { color: app.authAccent }]}>Codap</Text>
 						</View>
 						<View>
 							<TextInput
@@ -169,13 +171,14 @@ export default function Register() {
 								style={[
 									styles.input,
 									{
+										borderColor: app.authAccent,
 										backgroundColor:
 											theme.colors.background,
 										color: theme.colors.text,
 									},
 								]}
 								placeholder={t("register.name")}
-								placeholderTextColor={"#7977FD"}
+								placeholderTextColor={app.authPlaceholder}
 								onChangeText={(value) => setName(value)}
 							/>
 							<TextInput
@@ -184,13 +187,14 @@ export default function Register() {
 								style={[
 									styles.input,
 									{
+										borderColor: app.authAccent,
 										backgroundColor:
 											theme.colors.background,
 										color: theme.colors.text,
 									},
 								]}
 								placeholder="Email"
-								placeholderTextColor={"#7977FD"}
+								placeholderTextColor={app.authPlaceholder}
 								onChangeText={(value) => setEmail(value)}
 							/>
 							<TextInput
@@ -198,13 +202,14 @@ export default function Register() {
 								style={[
 									styles.input,
 									{
+										borderColor: app.authAccent,
 										backgroundColor:
 											theme.colors.background,
 										color: theme.colors.text,
 									},
 								]}
 								placeholder={t("register.password")}
-								placeholderTextColor={"#7977FD"}
+								placeholderTextColor={app.authPlaceholder}
 								onChangeText={(value) =>
 									onChangePassword(value)
 								}
@@ -230,7 +235,7 @@ export default function Register() {
 										backgroundColor:
 											theme.colors.background,
 										borderColor: passwordMatch
-											? "#7977FD"
+											? app.authAccent
 											: "red",
 										color: passwordMatch
 											? theme.colors.text
@@ -243,7 +248,7 @@ export default function Register() {
 										: t("register.invalid password")
 								}
 								placeholderTextColor={
-									passwordMatch ? "#7977FD" : "red"
+									passwordMatch ? app.authPlaceholder : "red"
 								}
 								onChangeText={(value) =>
 									onChangeConfirmPassword(value)
@@ -253,7 +258,7 @@ export default function Register() {
 							/>
 							<AuthButton
 								title={t("register.register")}
-								color="#7977FD"
+								color={app.authAccent}
 								onPress={register}
 							/>
 							{/* <Image style={styles.image} source={require('../../assets/Robo_feliz_centralizado.png')} /> */}

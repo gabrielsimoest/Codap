@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
@@ -27,6 +28,7 @@ const VersionInfo = () => {
     } */
 
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	return (
 		<>
@@ -35,11 +37,11 @@ const VersionInfo = () => {
 					visible={modalVisible}
 					onDismiss={() => setModalVisible(false)}
 					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					style={{ backgroundColor: app.scrim }}
 					dismissableBackButton
 				>
 					<CenterView
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+						style={{ backgroundColor: app.scrimInner }}
 					>
 						<ThemedView style={styles.modalView}>
 							<Pressable

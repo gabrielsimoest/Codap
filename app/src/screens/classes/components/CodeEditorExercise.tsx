@@ -27,12 +27,8 @@ import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./Sa
 import { ActivityHint, ActivityQuestion } from "./theory/ActivityParts";
 import GradientBar from "./theory/GradientBar";
 import LessonScreen, { useLessonLayout } from "./theory/LessonScreen";
-import { FIXED_UI, TEXT_SIZE, useTheoryPalette, type TheoryPalette } from "./theory/theoryTheme";
+import { FIXED_UI, TEXT_SIZE, goldLabel, useTheoryPalette, type TheoryPalette } from "./theory/theoryTheme";
 
-/** Dourado do desafio de módulo: troféu, dicas e solução (a paleta não tem um). */
-const GOLD = "#E0B04C";
-/** Âmbar do "ainda não passou" (o mesmo do aviso de tempo esgotado do terminal da teoria). */
-const WARNING_COLOR = "#E0A552";
 /** Sem mensagem de volta nesse prazo, a execução é dada como travada. */
 const WATCHDOG_MS = 4000;
 /** Linhas de console mostradas (as últimas). */
@@ -351,9 +347,17 @@ export default function CodeEditorExercise({
 				}
 			>
 				<View style={styles.intro}>
-					<View style={[styles.badge, { paddingHorizontal: textInset }]}>
-						<Icon type="ionicon" name="trophy-outline" color={GOLD} size={18} />
-						<Text style={styles.badgeText}>{t("editor.badge")}</Text>
+					<View
+						style={[
+							styles.badge,
+							// No claro o selo é uma etiqueta dourada (ver `goldLabel`), com o recuo do texto como margem.
+							palette.isDark
+								? { paddingHorizontal: textInset }
+								: { ...goldLabel(palette), marginHorizontal: textInset },
+						]}
+					>
+						<Icon type="ionicon" name="trophy-outline" color={palette.gold} size={18} />
+						<Text style={[styles.badgeText, { color: palette.goldInk }]}>{t("editor.badge")}</Text>
 					</View>
 					<ActivityQuestion palette={palette} highlight={highlight} question={question} />
 				</View>
@@ -440,13 +444,17 @@ export default function CodeEditorExercise({
 							{resultText !== null && (
 								<Text
 									accessibilityLiveRegion="polite"
-									style={[styles.resultText, { color: passed ? palette.success : WARNING_COLOR }]}
+									style={[
+										styles.resultText,
+										{ color: passed ? palette.success : palette.warning },
+										passed ? null : goldLabel(palette),
+									]}
 								>
 									{resultText}
 								</Text>
 							)}
 							{stale && (
-								<Text style={[styles.staleText, { color: WARNING_COLOR }]}>
+								<Text style={[styles.staleText, { color: palette.warning }, goldLabel(palette)]}>
 									{t("editor.stale", { run: t("codeSection.run") })}
 								</Text>
 							)}
@@ -692,7 +700,7 @@ function ChallengeHelp({
 					<View key={index} style={[styles.helpCard, card]}>
 						{open ? (
 							<>
-								<Text style={styles.helpCardTitle}>{title}</Text>
+								<Text style={[styles.helpCardTitle, { color: palette.goldInk }]}>{title}</Text>
 								{isSolution ? (
 									<>
 										<CodeSnippet code={solution} codeLanguage={codeLanguage} palette={palette} />
@@ -708,8 +716,8 @@ function ChallengeHelp({
 								onPress={() => setRevealed((list) => [...list, index])}
 								style={styles.revealButton}
 							>
-								<Icon type="ionicon" name={isSolution ? "key-outline" : "bulb-outline"} color={GOLD} size={18} />
-								<Text style={styles.revealText}>
+								<Icon type="ionicon" name={isSolution ? "key-outline" : "bulb-outline"} color={palette.gold} size={18} />
+								<Text style={[styles.revealText, { color: palette.goldInk }]}>
 									{isSolution ? t("editor.showSolution") : t("editor.showHint", { n: index + 1 })}
 								</Text>
 							</TouchableOpacity>
@@ -737,8 +745,8 @@ function ChallengeHelp({
 						onPress={releaseNow}
 						style={[styles.revealButton, spending ? { opacity: 0.5 } : null]}
 					>
-						<Icon type="ionicon" name="flash-outline" color={GOLD} size={18} />
-						<Text style={styles.revealText}>{t("editor.useInstantHint", { count: instantHints })}</Text>
+						<Icon type="ionicon" name="flash-outline" color={palette.gold} size={18} />
+						<Text style={[styles.revealText, { color: palette.goldInk }]}>{t("editor.useInstantHint", { count: instantHints })}</Text>
 					</TouchableOpacity>
 				</View>
 			)}
@@ -756,7 +764,6 @@ const styles = StyleSheet.create({
 		gap: 6,
 	},
 	badgeText: {
-		color: GOLD,
 		fontFamily: "Roboto",
 		fontWeight: "700",
 		fontSize: 13,
@@ -920,7 +927,6 @@ const styles = StyleSheet.create({
 		gap: 8,
 	},
 	helpCardTitle: {
-		color: GOLD,
 		fontFamily: "Roboto",
 		fontWeight: "700",
 		fontSize: 15,
@@ -938,7 +944,6 @@ const styles = StyleSheet.create({
 		minHeight: 36,
 	},
 	revealText: {
-		color: GOLD,
 		fontFamily: "Roboto",
 		fontWeight: "700",
 		fontSize: 14,

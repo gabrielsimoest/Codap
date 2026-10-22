@@ -1,3 +1,4 @@
+import type { TextStyle } from "react-native";
 import useThemeStore from "../../../../stores/ThemeStore";
 import LightMode from "../../../../theme/LightMode";
 
@@ -39,6 +40,18 @@ export interface TheoryPalette {
 	successBg: string;
 	danger: string;
 	dangerBg: string;
+	/** Aviso ("ainda não funcionou"). */
+	warning: string;
+	/**
+	 * Dourado do desafio do módulo. `gold` é o tom vivo (bordas, ícones, realce); no
+	 * claro um amarelo vivo não chega a 4,5:1 como texto, então o texto dourado é
+	 * `goldInk` (mais fundo) e vive sobre uma etiqueta `goldBg`/`goldBorder`. No escuro
+	 * os três são o mesmo dourado de antes e a etiqueta não existe.
+	 */
+	gold: string;
+	goldInk: string;
+	goldBg: string;
+	goldBorder: string;
 	isDark: boolean;
 }
 
@@ -62,31 +75,67 @@ const DARK: TheoryPalette = {
 	successBg: "rgba(76,195,138,0.16)",
 	danger: "#F2555A",
 	dangerBg: "rgba(242,85,90,0.16)",
+	warning: "#E0A552",
+	gold: "#E0B04C",
+	goldInk: "#E0B04C",
+	goldBg: "transparent",
+	goldBorder: "transparent",
 	isDark: true,
 };
 
+/**
+ * Claro: mesma estrutura de tokens do escuro, com os tons de texto recalculados
+ * contra as superfícies onde aparecem (WCAG 2.x): `emphasis` 6,3:1 e `icon`
+ * 6,3:1 na tela, `cardText` 9,2:1, `success` 4,7:1, `danger` 4,9:1 e `warning`
+ * e `goldInk` 5,4:1 sobre a etiqueta dourada; `gold` (vivo, só borda e ícone) 3,0:1 no branco. Os tons vivos do escuro
+ * (verde, âmbar, dourado) ficam abaixo de 3:1 sobre o claro e não servem aqui.
+ */
 const LIGHT: TheoryPalette = {
-	screen: "#F4F6FB",
+	screen: "#F3F6FB",
 	codeArea: "#FFFFFF",
-	border: "#C9D3EA",
+	border: "#CCD6E6",
 	accent: "#5368D6",
 	emphasis: "#3B4FC2",
-	tabIdle: "#DCE3F5",
+	tabIdle: "#DDE5F4",
 	icon: "#4A5A82",
-	text: "rgba(17,23,36,0.95)",
+	text: "#141F29",
 	cardBg: "rgba(83,104,214,0.10)",
 	cardBorder: "rgba(83,104,214,0.45)",
 	cardText: "#2A3A66",
-	gradientFrom: "#E7ECF9",
-	gradientTo: "#EEF2FB",
-	terminalBg: "#EEF1F8",
+	gradientFrom: "#E6ECF8",
+	gradientTo: "#ECF1FA",
+	terminalBg: "#EDF1F8",
 	codeText: "#1B2236",
-	success: "#1E9E62",
-	successBg: "rgba(30,158,98,0.12)",
-	danger: "#D6373D",
-	dangerBg: "rgba(214,55,61,0.10)",
+	success: "#177A4C",
+	successBg: "rgba(23,122,76,0.10)",
+	danger: "#C42D33",
+	dangerBg: "rgba(196,45,51,0.08)",
+	warning: "#7F5600",
+	gold: "#C28A00",
+	goldInk: "#7F5600",
+	goldBg: "rgba(194,138,0,0.14)",
+	goldBorder: "rgba(194,138,0,0.55)",
 	isDark: false,
 };
+
+/**
+ * Etiqueta dourada (aviso e selo do desafio): fundo e borda no tom vivo e o texto
+ * em `goldInk`. Só existe no claro — no escuro o texto dourado já lê bem sozinho e
+ * a tela não pode mudar —, por isso devolve `null` lá.
+ */
+export function goldLabel(palette: TheoryPalette): TextStyle | null {
+	if (palette.isDark) return null;
+	return {
+		backgroundColor: palette.goldBg,
+		borderWidth: 1,
+		borderColor: palette.goldBorder,
+		borderRadius: 10,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		alignSelf: "flex-start",
+		overflow: "hidden",
+	};
+}
 
 export function useTheoryPalette(): TheoryPalette {
 	const theme = useThemeStore((s) => s.theme);

@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import ResizableText from "../../../components/ResizableText";
 import Icon from "../../../components/Icon";
@@ -19,6 +20,7 @@ const TextSize2 = 26; // Tamanho padrão da fonte
 
 export default function EditProfile() {
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [newName, setNewName] = useState<string>();
@@ -54,11 +56,11 @@ export default function EditProfile() {
 					visible={visibleModal}
 					onDismiss={() => setVisibleModal(false)}
 					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					style={{ backgroundColor: app.scrim }}
 					dismissableBackButton
 				>
 					<CenterView
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+						style={{ backgroundColor: app.scrimInner }}
 					>
 						<ThemedView style={styles.contant}>
 							<ResizableText
@@ -85,7 +87,15 @@ export default function EditProfile() {
 								{t("new name")}:
 							</ResizableText>
 							<TextInput
-								style={styles.input}
+								style={[
+									styles.input,
+									!app.isDark && {
+										backgroundColor: app.fieldBackground,
+										color: app.fieldText,
+										borderWidth: 1.5,
+										borderColor: app.fieldBorder,
+									},
+								]}
 								onChangeText={(value) => setNewName(value)}
 							/>
 							<ModalButtonUser

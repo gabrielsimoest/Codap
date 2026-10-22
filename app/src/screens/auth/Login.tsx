@@ -1,3 +1,4 @@
+import { useAppColors } from "../../theme/appColors";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -40,6 +41,7 @@ export default function Login() {
 
 	const theme = useTheme();
 	const { t } = useTranslation();
+	const app = useAppColors();
 	const route = useRoute<RouteProp<RootStackParamList, "Login">>();
 
 	const navigation = useNavigate();
@@ -126,7 +128,7 @@ export default function Login() {
 			style={[
 				styles.outerContainer,
 				{
-					backgroundColor: theme == DarkMode ? "#0b1016" : "#b2b1b1",
+					backgroundColor: app.canvas,
 				},
 			]}
 		>
@@ -138,13 +140,13 @@ export default function Login() {
 					onPress={Keyboard.dismiss}
 					accessible={false}
 				>
-					<View style={styles.shade}>
+					<View style={[styles.shade, { backgroundColor: app.shade }]}>
 					<View
 						style={[
 							styles.box,
 							{
 								backgroundColor:
-									theme == DarkMode ? "#141f29" : "#f2f2f2",
+									app.sheet,
 							},
 						]}
 					>
@@ -159,7 +161,7 @@ export default function Login() {
 								style={styles.tinyLogo}
 								source={Images.icon}
 							/>
-							<Text style={styles.title}>Codap</Text>
+							<Text style={[styles.title, { color: app.authAccent }]}>Codap</Text>
 						</View>
 						<View>
 							<TextInput
@@ -168,13 +170,14 @@ export default function Login() {
 								style={[
 									styles.input,
 									{
+										borderColor: app.authAccent,
 										backgroundColor:
 											theme.colors.background,
 										color: theme.colors.text,
 									},
 								]}
 								placeholder="Email"
-								placeholderTextColor={"#7977FD"}
+								placeholderTextColor={app.authPlaceholder}
 								onChangeText={(value) => setEmail(value)}
 								value={email}
 							/>
@@ -183,13 +186,14 @@ export default function Login() {
 								style={[
 									styles.input,
 									{
+										borderColor: app.authAccent,
 										backgroundColor:
 											theme.colors.background,
 										color: theme.colors.text,
 									},
 								]}
 								placeholder={t("login.password")}
-								placeholderTextColor={"#7977FD"}
+								placeholderTextColor={app.authPlaceholder}
 								onChangeText={(value) => setSenha(value)}
 								secureTextEntry={true}
 								value={senha}
@@ -198,7 +202,7 @@ export default function Login() {
 								<Switch
 									value={rememberMe}
 									onValueChange={setRememberMe}
-									color="#7977FD"
+									color={app.authAccent}
 								/>
 								<Text
 									style={[
@@ -211,7 +215,7 @@ export default function Login() {
 							</View>
 							<AuthButton
 								title="Login"
-								color="#7977FD"
+								color={app.authAccent}
 								onPress={onSubmit}
 							/>
 							<Image

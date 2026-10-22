@@ -6,7 +6,8 @@ import ThemedView from "../../../components/themed/ThemedView";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
 import Images from "../../../utils/imageIndexer";
-import ThemedTouchableOpacity from "../../../components/themed/ThemedTouchableOpacity";
+import { useTheme } from "@react-navigation/native";
+import { useAppColors } from "../../../theme/appColors";
 
 interface Props {
 	visible: boolean;
@@ -17,6 +18,8 @@ interface Props {
 
 const ValidationModal = ({ visible, onDismiss, correct, onProceed }: Props) => {
 	const { t } = useTranslation();
+	const { colors } = useTheme();
+	const app = useAppColors();
 
 	return (
 		<Portal>
@@ -27,7 +30,7 @@ const ValidationModal = ({ visible, onDismiss, correct, onProceed }: Props) => {
 			<Modal
 				visible={visible}
 				onDismiss={onDismiss}
-				style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+				style={{ backgroundColor: app.isDark ? "rgba(0,0,0,0.6)" : app.scrim }}
 			>
 				<ThemedView style={styles.modalView}>
 					<TouchableOpacity
@@ -56,19 +59,23 @@ const ValidationModal = ({ visible, onDismiss, correct, onProceed }: Props) => {
 						style={styles.figure}
 						source={correct ? Images.codyHappy : Images.codySad}
 					/>
+					{/* No escuro o botão é a superfície `primary`, discreta; no claro ele é de ação (índigo, texto branco): `primary` é branco e sumiria no modal. */}
 					{correct ? (
-						<ThemedTouchableOpacity
-							theme="primary"
-							style={styles.continueButton}
+						<TouchableOpacity
+							style={[
+								styles.continueButton,
+								{ backgroundColor: app.isDark ? colors.primary : app.action },
+							]}
 							onPress={onProceed}
 						>
 							<ResizableText
-								style={[styles.text]}
+								useCustomColor
+								style={[styles.text, { color: app.onBrand }]}
 								defaultSize={20}
 							>
 								{t("next")}
 							</ResizableText>
-						</ThemedTouchableOpacity>
+						</TouchableOpacity>
 					) : null}
 				</ThemedView>
 			</Modal>

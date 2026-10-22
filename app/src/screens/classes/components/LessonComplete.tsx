@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import { useEffect, useRef, useState } from "react";
 import {
 	AccessibilityInfo,
@@ -32,6 +33,7 @@ const BITS_COLOR = "#637aff";
  * final. Refazer uma lição já concluída não rende nada e só avisa isso.
  */
 export default function LessonComplete({ result, onContinue }: Props) {
+	const app = useAppColors();
 	const { t } = useTranslation();
 
 	const before = progressInLevel(result.xpBefore);
@@ -182,7 +184,10 @@ export default function LessonComplete({ result, onContinue }: Props) {
 				)}
 			</View>
 
-			<TouchableOpacity style={styles.button} onPress={onContinue}>
+			<TouchableOpacity
+				style={[styles.button, { backgroundColor: app.action }]}
+				onPress={onContinue}
+			>
 				<ResizableText
 					style={styles.buttonText}
 					defaultSize={20}

@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../../theme/appColors";
 import { useEffect, useState } from "react";
 import {
 	Pressable,
@@ -33,6 +34,7 @@ const GRID_GAP = 12;
 
 export default function AchievementsModal({ visible, onDismiss }: Props) {
 	const { t } = useTranslation();
+	const app = useAppColors();
 	const { width } = useWindowDimensions();
 	const remoteId = useUserStore((s) => s.user?.remoteId);
 	const storeUserId = useAchievementStore((s) => s.userId);
@@ -71,7 +73,7 @@ export default function AchievementsModal({ visible, onDismiss }: Props) {
 			<Modal
 				visible={visible}
 				onDismiss={onDismiss}
-				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
 				<ThemedView style={styles.card}>

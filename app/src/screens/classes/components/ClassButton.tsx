@@ -25,6 +25,7 @@ interface Props {
 }
 
 const CHALLENGE_GOLD = "#E0B04C";
+const CHALLENGE_GOLD_LIGHT = "#C28A00";
 // Roxo discreto: menos chamativo que o dourado do desafio do módulo.
 const DEEPENING_PURPLE = "#8E7CC3";
 // Magenta: as aulas do baú são as mais difíceis, e a caveira (uma forma, não só
@@ -45,11 +46,12 @@ export default function ClassButton({
 	const theme = useThemeStore((s) => s.theme);
 	const locked = lockedLevel !== undefined;
 
-	const color = checked
-		? "#637aff"
-		: theme === LightMode
-		? "#c1c1c1"
-		: "#233648";
+	const light = theme === LightMode;
+	// Dourado do desafio: o do escuro (2,0:1) some sobre o branco; no claro é um dourado mais fundo
+	// e vivo (3,0:1) — borda e troféu; o título da lição já nomeia o desafio.
+	const gold = light ? CHALLENGE_GOLD_LIGHT : CHALLENGE_GOLD;
+	// Lição não concluída: o círculo vazio é informação, então precisa de 3:1 (o `#c1c1c1` antigo tinha 1,7:1).
+	const color = checked ? "#637aff" : light ? "#7F8DA6" : "#233648";
 
 	return (
 		<RowView
@@ -68,7 +70,7 @@ export default function ClassButton({
 				theme="primary"
 				style={[
 					styles.button,
-					challenge ? styles.challenge : null,
+					challenge ? [styles.challenge, { borderColor: gold }] : null,
 					deepening ? styles.deepening : null,
 					chest ? styles.chest : null,
 					locked ? styles.locked : null,
@@ -102,7 +104,7 @@ export default function ClassButton({
 					<Icon
 						type="ionicon"
 						name="trophy-outline"
-						color={CHALLENGE_GOLD}
+						color={gold}
 						size={22}
 					/>
 				) : null}

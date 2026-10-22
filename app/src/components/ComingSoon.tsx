@@ -1,3 +1,4 @@
+import { useAppColors } from "../theme/appColors";
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -14,6 +15,7 @@ interface Props {
 
 const ComingSoon = ({ visible = false, onDismiss }: Props) => {
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	return (
 		<Portal>
@@ -21,7 +23,7 @@ const ComingSoon = ({ visible = false, onDismiss }: Props) => {
 				visible={visible}
 				onDismiss={onDismiss}
 				contentContainerStyle={{ flex: 1 }}
-				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
 				<ThemedView style={styles.modalView}>

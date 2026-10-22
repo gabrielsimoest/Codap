@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Pressable, View } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -16,6 +17,7 @@ const FontSizeChanger = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	const increment = useFontSizeStore((s) => s.increment);
 	const decrement = useFontSizeStore((s) => s.decrement);
@@ -43,11 +45,11 @@ const FontSizeChanger = () => {
 					visible={modalVisible}
 					onDismiss={() => setModalVisible(false)}
 					contentContainerStyle={{ flex: 1 }}
-					style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+					style={{ backgroundColor: app.scrim }}
 					dismissableBackButton
 				>
 					<CenterView
-						style={{ backgroundColor: "rgba(0, 0, 0, 0.85)" }}
+						style={{ backgroundColor: app.scrimInner }}
 					>
 						<ThemedView style={styles.modalView}>
 							<Pressable

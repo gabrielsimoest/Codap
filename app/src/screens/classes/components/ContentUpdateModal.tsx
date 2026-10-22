@@ -10,7 +10,8 @@ import { useTranslation } from "react-i18next";
 import { Modal, Portal } from "react-native-paper";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
-import ThemedTouchableOpacity from "../../../components/themed/ThemedTouchableOpacity";
+import { useTheme } from "@react-navigation/native";
+import { useAppColors } from "../../../theme/appColors";
 import ThemedView from "../../../components/themed/ThemedView";
 import type { ContentAnnouncement } from "../../../services/ContentVersionService";
 import Images from "../../../utils/imageIndexer";
@@ -52,6 +53,8 @@ interface Props {
  */
 const ContentUpdateModal = ({ entries, onDismiss }: Props) => {
 	const { t } = useTranslation();
+	const { colors } = useTheme();
+	const app = useAppColors();
 	const { latest, earlier, hiddenCount } = splitAnnouncements(entries);
 
 	if (latest === undefined) {
@@ -66,7 +69,7 @@ const ContentUpdateModal = ({ entries, onDismiss }: Props) => {
 				visible
 				onDismiss={onDismiss}
 				dismissableBackButton
-				style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
+				style={{ backgroundColor: app.isDark ? "rgba(0,0,0,0.6)" : app.scrim }}
 			>
 				<ThemedView style={styles.modalView}>
 					<TouchableOpacity
@@ -138,15 +141,22 @@ const ContentUpdateModal = ({ entries, onDismiss }: Props) => {
 						) : null}
 					</ScrollView>
 
-					<ThemedTouchableOpacity
-						theme="primary"
-						style={styles.okButton}
+					{/* No claro `primary` é branco: o botão vira de ação (índigo, texto branco). */}
+					<TouchableOpacity
+						style={[
+							styles.okButton,
+							{ backgroundColor: app.isDark ? colors.primary : app.action },
+						]}
 						onPress={onDismiss}
 					>
-						<ResizableText style={styles.okText} defaultSize={20}>
+						<ResizableText
+							useCustomColor
+							style={[styles.okText, { color: app.onBrand }]}
+							defaultSize={20}
+						>
 							{t("contentUpdate.ok")}
 						</ResizableText>
-					</ThemedTouchableOpacity>
+					</TouchableOpacity>
 				</ThemedView>
 			</Modal>
 		</Portal>

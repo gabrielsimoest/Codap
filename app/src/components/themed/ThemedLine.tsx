@@ -1,4 +1,5 @@
 import { useTheme } from "@react-navigation/native";
+import { useAppColors } from "../../theme/appColors";
 import {
 	DimensionValue,
 	StyleProp,
@@ -25,13 +26,17 @@ export default function ThemedLine({
 	height = 1,
 }: Props) {
 	const { colors } = useTheme();
+	const app = useAppColors();
+	// A regra padrão (`text`) é a cor do texto: no escuro um fio claro, no claro um
+	// fio de tinta, duro demais para um separador — lá ela vira `app.rule`.
+	const color = theme === "text" && !app.isDark ? app.rule : colors[theme];
 
 	return (
 		<View
 			style={[
 				style,
 				styles.line,
-				{ backgroundColor: colors[theme], height: height },
+				{ backgroundColor: color, height: height },
 			]}
 		/>
 	);

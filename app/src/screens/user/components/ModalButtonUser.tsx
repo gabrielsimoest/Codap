@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import {
 	StyleProp,
 	StyleSheet,
@@ -13,11 +14,15 @@ interface Props {
 }
 
 export default function ModalButtonUser({ title, onPress, textStyle }: Props) {
+	const app = useAppColors();
 	return (
-		<TouchableOpacity style={styles.button} onPress={onPress}>
+		<TouchableOpacity
+			style={[styles.button, { backgroundColor: app.action }]}
+			onPress={onPress}
+		>
 			<ResizableText
-				useCustomColor={textStyle !== undefined}
-				style={[styles.text, textStyle]}
+				useCustomColor
+				style={[styles.text, { color: app.onBrand }, textStyle]}
 				defaultSize={20}
 			>
 				{title}

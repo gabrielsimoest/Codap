@@ -1,3 +1,4 @@
+import { useAppColors } from "../../../theme/appColors";
 import {
 	Image,
 	ImageSourcePropType,
@@ -41,6 +42,7 @@ export default function MarketModal({
 	loading = false,
 }: Props) {
 	const { t } = useTranslation();
+	const app = useAppColors();
 
 	return (
 		<Portal>
@@ -48,12 +50,12 @@ export default function MarketModal({
 				visible={visible}
 				onDismiss={onDismiss}
 				contentContainerStyle={{ flex: 1 }}
-				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
 				<CenterView
 					style={{
-						backgroundColor: "rgba(0, 0, 0, 0.85)",
+						backgroundColor: app.scrimInner,
 					}}
 				>
 					<ThemedView style={styles.modal}>
@@ -87,12 +89,17 @@ export default function MarketModal({
 							/>
 						</RowView>
 						<TouchableOpacity
-							style={[styles.button, loading ? styles.buttonLoading : null]}
+							style={[
+								styles.button,
+								{ backgroundColor: app.action },
+								loading ? styles.buttonLoading : null,
+							]}
 							onPress={onBuy}
 							disabled={loading}
 						>
 							<ResizableText
-								style={styles.buttonText}
+								useCustomColor
+								style={[styles.buttonText, { color: app.onBrand }]}
 								defaultSize={20}
 							>
 								{t("buy")}

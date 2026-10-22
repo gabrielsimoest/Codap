@@ -1,4 +1,5 @@
 import React from "react";
+import { useAppColors } from "../../theme/appColors";
 import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Modal, Portal } from "react-native-paper";
 import ThemedText from "./ThemedText";
@@ -19,20 +20,24 @@ const ThemedAlert = ({
 	message,
 	buttonText,
 }: Props) => {
+	const app = useAppColors();
 	return (
 		<Portal>
 			<Modal
 				visible={visible}
 				onDismiss={onDismiss}
 				contentContainerStyle={{ flex: 1 }}
-				style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
 				<ThemedView style={styles.modalView}>
-					<Text style={styles.title}>{title}</Text>
+					<Text style={[styles.title, !app.isDark && { color: app.brandText }]}>{title}</Text>
 					<ThemedText style={styles.message}>{message}</ThemedText>
 
-					<TouchableOpacity style={styles.button} onPress={onDismiss}>
+					<TouchableOpacity
+						style={[styles.button, !app.isDark && { backgroundColor: app.action }]}
+						onPress={onDismiss}
+					>
 						<Text style={styles.buttonText}>
 							{buttonText.toUpperCase()}
 						</Text>

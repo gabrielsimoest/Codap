@@ -1,4 +1,5 @@
 import { useTheme } from "@react-navigation/native";
+import { useAppColors } from "../../theme/appColors";
 import { DimensionValue, StyleProp, ViewStyle } from "react-native";
 import { View, CustomAnimation } from "react-native-animatable";
 
@@ -31,6 +32,9 @@ export default function ThemedSkeleton({
 	style,
 }: Props) {
 	const { colors } = useTheme();
+	const app = useAppColors();
+	// No claro `primary` é branco, quase invisível sobre a tela: o esqueleto usa `card`.
+	const color = theme === "primary" && !app.isDark ? colors.card : colors[theme];
 
 	return (
 		<View
@@ -39,7 +43,7 @@ export default function ThemedSkeleton({
 			duration={1100}
 			easing="ease-in-out"
 			style={[
-				{ width, height, borderRadius, backgroundColor: colors[theme] },
+				{ width, height, borderRadius, backgroundColor: color },
 				style,
 			]}
 		/>
