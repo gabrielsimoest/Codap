@@ -5,7 +5,7 @@
     "scheme": "codap",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true
@@ -29,7 +29,8 @@
         "expo-splash-screen",
         {
           "image": "./assets/icon.png",
-          "resizeMode": "cover",
+          "resizeMode": "contain",
+          "imageWidth": 200,
           "backgroundColor": "#000000"
         }
       ],

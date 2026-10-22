@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
+import { HEADER_ROW_HEIGHT, useHeaderTopPadding } from "../../components/layout/ScreenHeader";
 import AreaModules from "./components/AreaModules";
 import AreaSelector from "./components/AreaSelector";
 import ClassHeader from "./components/ClassHeader";
@@ -13,6 +14,7 @@ import areaMetadata, { getAreaIndex } from "./areaMetadata";
 import ContentUpdateModal from "./components/ContentUpdateModal";
 
 export default function Class() {
+	const headerHeight = useHeaderTopPadding() + HEADER_ROW_HEIGHT;
 	const [visibleModal, setVisibleModal] = useState(false);
 	const [pickedAreaId, setPickedAreaId] = useState<number>();
 
@@ -46,7 +48,7 @@ export default function Class() {
 	return (
 		<ThemedView style={styles.container}>
 			{areasPending ? (
-				<ThemedSkeleton height={70} borderRadius={0} theme="card" />
+				<ThemedSkeleton height={headerHeight} borderRadius={0} theme="card" />
 			) : (
 				<TouchableOpacity
 					onPress={() => setVisibleModal(true)}

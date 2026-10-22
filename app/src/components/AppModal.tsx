@@ -1,11 +1,15 @@
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import EdgeFade from "./layout/EdgeFade";
 import { Modal, Portal } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import Icon from "./Icon";
 import ResizableText from "./ResizableText";
 import { useAppColors } from "../theme/appColors";
+
+/** Altura do degradê nas pontas do corpo que rola. */
+const FADE = 24;
 
 interface Props {
 	visible: boolean;
@@ -38,6 +42,16 @@ export default function AppModal({
 	const { colors } = useTheme();
 	const app = useAppColors();
 	const { t } = useTranslation();
+	// Posição da rolagem, para o degradê aparecer só do lado que ainda tem conteúdo.
+	const [scrollY, setScrollY] = useState(0);
+	const [contentHeight, setContentHeight] = useState(0);
+	const [viewHeight, setViewHeight] = useState(0);
+	// O corpo remonta a cada abertura, já no topo: a posição guardada da vez anterior não vale.
+	useEffect(() => {
+		if (visible) setScrollY(0);
+	}, [visible]);
+	const canScrollUp = scrollY > 2;
+	const canScrollDown = contentHeight - viewHeight - scrollY > 2;
 
 	return (
 		<Portal>
@@ -48,10 +62,12 @@ export default function AppModal({
 				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
-				<Pressable style={styles.center} onPress={onDismiss} accessible={false}>
-					{/* O cartão engole o toque: só o que está fora dele fecha o modal. */}
-					<Pressable
-						accessible={false}
+				<View style={styles.center}>
+					{/* Tocar fora do cartão fecha o modal. O fundo é um irmão do cartão, e não o
+					    pai dele: com o cartão dentro de um `Pressable`, o toque era tomado por ele
+					    e a rolagem do corpo (Sobre, Conquistas) não pegava no aparelho. */}
+					<Pressable style={StyleSheet.absoluteFill} onPress={onDismiss} accessible={false} />
+					<View
 						style={[
 							styles.card,
 							{ backgroundColor: colors.primary, borderColor: colors.border },
@@ -80,21 +96,31 @@ export default function AppModal({
 							</View>
 						) : null}
 						{scroll ? (
-							<ScrollView
-								style={styles.body}
-								showsVerticalScrollIndicator={false}
-								// Com o teclado aberto, o primeiro toque num botão ou link do
-								// corpo não pode ser gasto só para fechar o teclado.
-								keyboardShouldPersistTaps="handled"
-							>
-								{children}
-							</ScrollView>
+							<View style={styles.body}>
+								<ScrollView
+									style={styles.scroll}
+									showsVerticalScrollIndicator={false}
+									nestedScrollEnabled
+									// Com o teclado aberto, o primeiro toque num botão ou link do
+									// corpo não pode ser gasto só para fechar o teclado.
+									keyboardShouldPersistTaps="handled"
+									scrollEventThrottle={16}
+									onScroll={(event) => setScrollY(event.nativeEvent.contentOffset.y)}
+									onContentSizeChange={(_, height) => setContentHeight(height)}
+									onLayout={(event) => setViewHeight(event.nativeEvent.layout.height)}
+								>
+									{children}
+								</ScrollView>
+								{/* O que passa por baixo do cabeçalho ou do rodapé some num degradê da cor do cartão. */}
+								{canScrollUp ? <EdgeFade edge="top" height={FADE} color={colors.primary} /> : null}
+								{canScrollDown ? <EdgeFade edge="bottom" height={FADE} color={colors.primary} /> : null}
+							</View>
 						) : (
 							<View style={styles.body}>{children}</View>
 						)}
 						{footer ? <View style={styles.footer}>{footer}</View> : null}
-					</Pressable>
-				</Pressable>
+					</View>
+				</View>
 			</Modal>
 		</Portal>
 	);
@@ -141,6 +167,9 @@ const styles = StyleSheet.create({
 		marginLeft: 12,
 	},
 	body: {
+		flexShrink: 1,
+	},
+	scroll: {
 		flexShrink: 1,
 	},
 	footer: {

@@ -15,6 +15,8 @@ interface Props {
 	 * a cor da tela sólida (a faixa da barra de abas). Padrão: o degradê todo esmaece.
 	 */
 	fade?: number;
+	/** Cor do degradê, quando a superfície por baixo não é a da tela (o cartão de um modal). */
+	color?: string;
 }
 
 /**
@@ -25,9 +27,9 @@ interface Props {
  * Usa a cor da tela com alfa 00 no fim, e não "transparent": no Android o
  * degradê interpola por preto.
  */
-export default function EdgeFade({ edge, height, fade }: Props) {
+export default function EdgeFade({ edge, height, fade, color }: Props) {
 	const { colors } = useTheme();
-	const screen = colors.background;
+	const screen = color ?? colors.background;
 	const fadeStop = fade === undefined ? 1 : Math.min(fade / height, 1);
 
 	return (

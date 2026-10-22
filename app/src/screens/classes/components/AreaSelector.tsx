@@ -4,11 +4,10 @@ import { useTheme } from "@react-navigation/native";
 import type { AreaResponse } from "codap-api/src/types/contracts";
 import Icon from "../../../components/Icon";
 import ResizableText from "../../../components/ResizableText";
+import { HEADER_ROW_HEIGHT, useHeaderTopPadding } from "../../../components/layout/ScreenHeader";
 import { useAppColors } from "../../../theme/appColors";
 import areaMetadata from "../areaMetadata";
 
-/** Onde o cartão começa: logo abaixo do cabeçalho das abas (20 dp de respiro + 50 dp de linha). */
-const CARD_TOP = 66;
 
 interface Props {
 	visible: boolean;
@@ -26,6 +25,8 @@ interface Props {
 export default function AreaSelector({ visible, areas, selectedId, onSelect, onDismiss }: Props) {
 	const { colors } = useTheme();
 	const app = useAppColors();
+	// Logo abaixo do cabeçalho das abas, que acompanha a altura da barra de status.
+	const cardTop = useHeaderTopPadding() + HEADER_ROW_HEIGHT - 4;
 
 	return (
 		<Portal>
@@ -39,7 +40,7 @@ export default function AreaSelector({ visible, areas, selectedId, onSelect, onD
 				<Pressable style={styles.fill} onPress={onDismiss} accessible={false}>
 					<Pressable
 						accessible={false}
-						style={[styles.card, { backgroundColor: colors.primary, borderColor: colors.border }]}
+						style={[styles.card, { marginTop: cardTop, backgroundColor: colors.primary, borderColor: colors.border }]}
 					>
 						{areas?.map((area, index) => {
 							const metadata = areaMetadata[index];
@@ -93,7 +94,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	card: {
-		marginTop: CARD_TOP,
 		marginHorizontal: 16,
 		padding: 8,
 		gap: 4,
