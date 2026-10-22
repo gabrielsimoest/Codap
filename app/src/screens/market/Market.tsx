@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
+import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
+import { TAB_BAR_CLEARANCE } from "../../components/layout/tabBarMetrics";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import type { ChestOutcome, ShopItem } from "codap-api/src/types/contracts";
@@ -129,8 +131,9 @@ export default function Market() {
 	return (
 		<ThemedView style={styles.container}>
 			<MarketHeader />
-			<ThemedText style={styles.headert}>{t("buy using bits")}</ThemedText>
-			<ScrollView style={{ marginBottom: "18.2%" }}>
+			<View style={styles.body}>
+			<ScrollView contentContainerStyle={styles.content}>
+				<ThemedText style={styles.headert}>{t("buy using bits")}</ThemedText>
 				<ShopItemCard
 					title={t("double experience")}
 					price={prices.double_xp}
@@ -165,6 +168,8 @@ export default function Market() {
 					onBuy={() => ask("instant_hint")}
 				/>
 			</ScrollView>
+			<EdgeFade edge="top" height={HEADER_FADE} />
+			</View>
 
 			<MarketModal
 				visible={confirming === "double_xp"}
@@ -223,6 +228,15 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#141f29",
 		height: "100%",
+	},
+	body: {
+		flex: 1,
+	},
+	// A rolagem vai até a borda da tela: é por trás da barra de abas que o degradê
+	// de baixo (em TabNavigation) faz o conteúdo sumir.
+	content: {
+		paddingTop: 4,
+		paddingBottom: TAB_BAR_CLEARANCE,
 	},
 	// As contagens por área viram três "fichas" lado a lado (e quebram de linha se a
 	// fonte do app estiver grande): três linhas empilhadas deixavam o modal apertado.

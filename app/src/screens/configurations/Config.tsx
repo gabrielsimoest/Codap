@@ -1,4 +1,6 @@
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
+import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
+import { TAB_BAR_CLEARANCE } from "../../components/layout/tabBarMetrics";
 import { useTranslation } from "react-i18next";
 import ConfigHeader from "./components/ConfigHeader";
 import ThemeSwitcher from "./components/ThemeSwitcher";
@@ -25,8 +27,10 @@ export default function Config() {
 	return (
 		<ThemedView style={{ flex: 1 }}>
 			<ConfigHeader title={t("settings")} />
+			<View style={styles.body}>
 			<ScrollView
 				style={styles.scroller}
+				contentContainerStyle={styles.content}
 				showsVerticalScrollIndicator={false}
 				scrollEnabled={!holdingAbout}
 			>
@@ -55,6 +59,8 @@ export default function Config() {
 					onHoldChange={setHoldingAbout}
 				/>
 			</ScrollView>
+			<EdgeFade edge="top" height={HEADER_FADE} />
+			</View>
 			<SecretTestLesson
 				visible={testLessonVisible}
 				onDismiss={() => setTestLessonVisible(false)}
@@ -64,10 +70,18 @@ export default function Config() {
 }
 
 const styles = StyleSheet.create({
+	body: {
+		flex: 1,
+	},
 	scroller: {
 		width: "90%",
 		marginLeft: "5%",
-		marginBottom: "18%",
+	},
+	// A rolagem vai até a borda da tela: é por trás da barra de abas que o degradê
+	// de baixo (em TabNavigation) faz o conteúdo sumir.
+	content: {
+		paddingTop: HEADER_FADE,
+		paddingBottom: TAB_BAR_CLEARANCE,
 	},
 	text: {
 		color: "#5469D3",

@@ -1,4 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
+import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
+import { TAB_BAR_CLEARANCE } from "../../components/layout/tabBarMetrics";
 import UserHeader from "./components/UserHeader";
 import { useTranslation } from "react-i18next";
 import ResizableText from "../../components/ResizableText";
@@ -13,7 +15,6 @@ import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import AchievementsModal from "./components/achievements/AchievementsModal";
-import LevelProgress from "./components/LevelProgress";
 import { useState } from "react";
 
 const TextSize = 20; // Tamanho padrão da fonte
@@ -39,68 +40,74 @@ export default function User() {
 		<>
 			<ThemedView style={{ height: "100%" }}>
 				<UserHeader />
-				<ThemedView style={styles.direction}>
-					<ThemedIcon
-						type="fontawesome"
-						name="user-circle"
-						theme={"border"}
-						useBackground
-						backgroundTheme="notification"
-						size={150}
-						style={styles.account}
-					/>
-					<View style={styles.components}>
-						<ResizableText
-							style={styles.text}
-							defaultSize={TextSize}
-						>
-							{t("name")}
-						</ResizableText>
-						<Text
-							style={styles.text2}
-							adjustsFontSizeToFit={true}
-							numberOfLines={2}
-						>
-							{user?.name}
-						</Text>
-						<ResizableText
-							style={styles.text}
-							defaultSize={TextSize}
-						>
-							{t("email")}
-						</ResizableText>
-						<Text
-							style={styles.text2}
-							adjustsFontSizeToFit={true}
-							numberOfLines={3}
-						>
-							{user?.email}
-						</Text>
-					</View>
-				</ThemedView>
-				<ScrollView
-					style={styles.scroller}
-					showsVerticalScrollIndicator={false}
-				>
-					<LevelProgress />
-					<EditProfile />
-					<ChangePassword />
-					<UserButton
-						title={t("achievements")}
-						onPress={() => setVisible(true)}
-					/>
-					<UserButton
-						title={t("exit")}
-						onPress={logout}
-						icon={
+				<View style={styles.body}>
+					{/* A rolagem vai até a borda da tela: é por trás da barra de abas que o
+					    degradê de baixo (em TabNavigation) faz o conteúdo sumir. */}
+					<ScrollView
+						showsVerticalScrollIndicator={false}
+						contentContainerStyle={styles.content}
+					>
+						<ThemedView style={styles.direction}>
 							<ThemedIcon
-								type="materialCommunity"
-								name="logout"
-								size={25}
+								type="fontawesome"
+								name="user-circle"
+								theme={"border"}
+								useBackground
+								backgroundTheme="notification"
+								size={150}
+								style={styles.account}
 							/>
-						}
-					/>
-				</ScrollView>
+							<View style={styles.components}>
+								<ResizableText
+									style={styles.text}
+									defaultSize={TextSize}
+								>
+									{t("name")}
+								</ResizableText>
+								<Text
+									style={styles.text2}
+									adjustsFontSizeToFit={true}
+									numberOfLines={2}
+								>
+									{user?.name}
+								</Text>
+								<ResizableText
+									style={styles.text}
+									defaultSize={TextSize}
+								>
+									{t("email")}
+								</ResizableText>
+								<Text
+									style={styles.text2}
+									adjustsFontSizeToFit={true}
+									numberOfLines={3}
+								>
+									{user?.email}
+								</Text>
+							</View>
+						</ThemedView>
+						<View style={styles.buttons}>
+							<EditProfile />
+							<ChangePassword />
+							<UserButton
+								title={t("achievements")}
+								onPress={() => setVisible(true)}
+							/>
+							<UserButton
+								title={t("exit")}
+								onPress={logout}
+								icon={
+									<ThemedIcon
+										type="materialCommunity"
+										name="logout"
+										size={25}
+									/>
+								}
+							/>
+						</View>
+					</ScrollView>
+					<EdgeFade edge="top" height={HEADER_FADE} />
+				</View>
 			</ThemedView>
 			<AchievementsModal
 				visible={visible}
@@ -111,27 +118,22 @@ export default function User() {
 }
 
 const styles = StyleSheet.create({
-	scroller: {
+	body: {
+		flex: 1,
+	},
+	content: {
+		paddingTop: HEADER_FADE,
+		paddingBottom: TAB_BAR_CLEARANCE,
+	},
+	buttons: {
 		width: "90%",
 		marginLeft: "5%",
-		marginBottom: "18%",
 	},
 	direction: {
 		flexDirection: "row",
 		alignItems: "center",
-		height: "30%",
+		height: 240,
 		marginBottom: 15,
-		backgroundColor: "#141f29",
-		borderTopWidth: 2,
-		borderTopColor: "rgba(0,0,0, 0.2)",
-		shadowColor: "#637aff",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.28,
-		shadowRadius: 7.0,
-		elevation: 3,
 	},
 	account: {
 		left: "5%",

@@ -1,4 +1,5 @@
 import { Dimensions, ScrollView, StyleSheet } from "react-native";
+import { TAB_BAR_CLEARANCE } from "../../../components/layout/tabBarMetrics";
 import ThemedSkeleton from "../../../components/themed/ThemedSkeleton";
 import ThemedView from "../../../components/themed/ThemedView";
 
@@ -21,7 +22,7 @@ const MODULE_SKELETON_COUNT = 4;
  */
 export default function ModuleListSkeleton() {
 	return (
-		<ScrollView style={styles.scroller}>
+		<ScrollView style={styles.scroller} contentContainerStyle={styles.content}>
 			<ThemedView style={styles.container}>
 				{Array.from({ length: MODULE_SKELETON_COUNT }).map((_, index) => (
 					<ThemedSkeleton
@@ -39,7 +40,10 @@ export default function ModuleListSkeleton() {
 const styles = StyleSheet.create({
 	scroller: {
 		marginHorizontal: 10,
-		height: "81%",
+	},
+	content: {
+		paddingTop: 8,
+		paddingBottom: TAB_BAR_CLEARANCE,
 	},
 	container: {
 		flex: 1,

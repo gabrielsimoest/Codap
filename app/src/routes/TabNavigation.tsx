@@ -1,4 +1,5 @@
 import {
+	BottomTabBar,
 	BottomTabBarButtonProps,
 	createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
@@ -6,6 +7,8 @@ import { ComponentType, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { View } from "react-native-animatable";
 import Icon from "../components/Icon";
+import EdgeFade, { TAB_BAR_FADE } from "../components/layout/EdgeFade";
+import { TAB_BAR_BOTTOM, TAB_BAR_HEIGHT } from "../components/layout/tabBarMetrics";
 import { useTheme } from "@react-navigation/native";
 import Classes from "../screens/classes/Classes";
 import Config from "../screens/configurations/Config";
@@ -135,20 +138,33 @@ export function TabNavigation() {
 
 	return (
 		<Tab.Navigator
+			// O degradê vai por trás da barra e cobre a faixa dela: a rolagem some nele em
+			// vez de ser cortada por uma linha logo acima da barra.
+			tabBar={(props) => (
+				<>
+					<EdgeFade
+						edge="bottom"
+						height={TAB_BAR_BOTTOM + TAB_BAR_HEIGHT + TAB_BAR_FADE}
+						fade={TAB_BAR_FADE}
+					/>
+					<BottomTabBar {...props} />
+				</>
+			)}
 			screenOptions={{
 				headerShown: false,
 				tabBarHideOnKeyboard: false,
 				tabBarStyle: {
 					width: "90%",
 					marginHorizontal: "5%",
-					height: 60,
+					height: TAB_BAR_HEIGHT,
 					position: "absolute",
-					bottom: 16,
+					bottom: TAB_BAR_BOTTOM,
 					borderRadius: 16,
 					// No claro a barra é branca (superfície elevada) sobre a tela azul-gelo.
 					backgroundColor: app.isDark ? colors.background : colors.primary,
 					zIndex: 50,
 					overflow: "hidden",
+					borderTopWidth: 0,
 					alignItems: "center",
 					paddingBottom: 0
 				},

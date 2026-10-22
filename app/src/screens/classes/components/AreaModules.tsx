@@ -6,6 +6,7 @@ import LessonComingSoon from "./LessonComingSoon";
 import ModuleCard from "./ModuleCard";
 import ModuleListSkeleton from "./ModuleListSkeleton";
 import ThemedLine from "../../../components/themed/ThemedLine";
+import { TAB_BAR_CLEARANCE } from "../../../components/layout/tabBarMetrics";
 import ThemedView from "../../../components/themed/ThemedView";
 import useAreasQuery from "../../../hooks/queries/useAreasQuery";
 import useModulesQuery from "../../../hooks/queries/useModulesQuery";
@@ -69,7 +70,7 @@ export default function AreaModules({ areaId }: Props) {
 	}
 
 	return (
-		<ScrollView style={styles.scroller}>
+		<ScrollView style={styles.scroller} contentContainerStyle={styles.content}>
 			<ThemedView style={styles.container}>
 				{modules?.map((module) => {
 					const moduleMetadata = metadata.modules[module.index];
@@ -151,7 +152,12 @@ export default function AreaModules({ areaId }: Props) {
 const styles = StyleSheet.create({
 	scroller: {
 		marginHorizontal: 10,
-		height: "81%",
+	},
+	// A rolagem vai até a borda da tela: é por trás da barra de abas que o degradê
+	// de baixo (em TabNavigation) faz o conteúdo sumir.
+	content: {
+		paddingTop: 8,
+		paddingBottom: TAB_BAR_CLEARANCE,
 	},
 	container: {
 		flex: 1,

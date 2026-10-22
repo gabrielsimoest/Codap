@@ -6,6 +6,7 @@ import {
 	View,
 } from "react-native";
 import Icon from "../../components/Icon";
+import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
 import AreaModules from "./components/AreaModules";
 import ClassHeader from "./components/ClassHeader";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
@@ -110,12 +111,13 @@ export default function Class() {
 					</TouchableWithoutFeedback>
 				</Modal>
 			</Portal>
-			<View>
+			<View style={styles.body}>
 				{selectedAreaId === undefined ? (
 					<ModuleListSkeleton />
 				) : (
 					<AreaModules areaId={selectedAreaId} />
 				)}
+				<EdgeFade edge="top" height={HEADER_FADE} />
 			</View>
 			{announcement !== null ? (
 				<ContentUpdateModal
@@ -131,6 +133,9 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: "#141f29",
 		height: "100%",
+	},
+	body: {
+		flex: 1,
 	},
 	selector: {
 		zIndex: 99,
