@@ -1,16 +1,14 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, ScrollView, DimensionValue, View } from "react-native";
+import { DimensionValue, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { LessonHeader, Progressbar } from "./LessonHeader";
 import CustomSyntaxHighlighter from "../../../components/CustomSyntaxHighlighter";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
+import { codapDark, codapLight } from "../../../components/codapCodeTheme";
 import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
-import DarkMode from "../../../theme/DarkMode";
 import useFontSizeStore from "../../../stores/FontSizeStore";
+import { ActivityChip, ActivityHint, ActivityQuestion } from "./theory/ActivityParts";
+import LessonScreen from "./theory/LessonScreen";
+import { useTheoryPalette } from "./theory/theoryTheme";
 
 interface Props {
 	question: string;
@@ -21,6 +19,10 @@ interface Props {
 	/** Linhas que não entram no código (podem ser `[]`). */
 	distractors: string[];
 	tutorial?: boolean;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
@@ -88,21 +90,23 @@ export default function ReorderExercise({
 	lines,
 	distractors = [],
 	tutorial = false,
+	title,
+	step,
+	total,
 	progress,
 	onProceed,
 	onClose,
 }: Props) {
-	const theme = useTheme();
-	const { colors } = theme;
-	const isDarkMode = theme === DarkMode;
+	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 	// Altura que o highlighter ocupa de fato: texto de `CODE_SIZE + fontSize` com
-	// linha de +5 (ver `NativeSyntaxHighlighter`) e o padding de 0.5em (8px) do
-	// tema hljs em cima e embaixo. Fixá-la, com `overflow: hidden`, impede que o
-	// highlighter (dois ScrollViews aninhados) deixe uma sobra embaixo e empurre
-	// o código para cima do número do gutter, que é centralizado na linha.
-	const codeHeight = CODE_SIZE + fontSize + 5 + 16;
+	// linha de +5 (ver `NativeSyntaxHighlighter`); o tema de código da teoria já
+	// vem sem padding. Fixá-la, com `overflow: hidden`, impede que o highlighter
+	// (dois ScrollViews aninhados) deixe uma sobra embaixo e empurre o código para
+	// cima do número do gutter, que é centralizado na linha.
+	const codeHeight = CODE_SIZE + fontSize + 5;
+	const codeTheme = palette.isDark ? codapDark : codapLight;
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
@@ -131,107 +135,83 @@ export default function ReorderExercise({
 
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<Progressbar progress={progress} />
-				<ScrollView style={styles.scroller}>
-					<LessonHeader
-						onClose={onClose}
-						setTutorialVisible={() => setTutorialVisible(!tutorialVisible)}
-					/>
-					<ResizableHighlighter
-						style={styles.question}
-						highlight={highlight}
-						text={question}
-						defaultSize={23}
-					/>
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				onNext={() => allFilled && setModalVisible(true)}
+			>
+				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
 
-					<View style={[styles.box, isDarkMode ? styles.dark : styles.light]}>
-						{lines.map((_, k) => {
-							const chipIndex = k < placed.length ? placed[k] : null;
-							const value = chipIndex !== null ? chips[chipIndex].text : null;
-							return (
-								<TouchableOpacity
-									key={k}
-									accessibilityRole="button"
-									accessibilityLabel={
-										value === null
-											? t("reorder.emptyLine", { n: k + 1 })
-											: t("reorder.placedLine", { n: k + 1, value: value.trim() })
-									}
-									accessibilityState={{ disabled: value === null }}
-									disabled={value === null}
-									onPress={() => removeAt(k)}
-									style={[
-										styles.row,
-										k < lines.length - 1
-											? {
-													borderBottomWidth: StyleSheet.hairlineWidth,
-													borderBottomColor: isDarkMode ? "#304D66" : "#A5A5A5",
-												}
-											: null,
-									]}
-								>
-									<ResizableText style={styles.gutter} defaultSize={13}>
-										{`${k + 1}`}
-									</ResizableText>
-									{value !== null ? (
-										// `pointerEvents="none"`: o highlighter é um ScrollView
-										// horizontal, e sem isso ele competiria com o toque da linha.
-										<View style={[styles.code, { height: codeHeight }]} pointerEvents="none">
-											<CustomSyntaxHighlighter
-												language={codeLanguage}
-												code={value.trimEnd()}
-												defaultSize={CODE_SIZE}
-											/>
-										</View>
-									) : (
-										<View
-											style={[
-												styles.placeholder,
-												{ borderColor: isDarkMode ? "#304D66" : "#A5A5A5" },
-											]}
+				<View style={[styles.box, { backgroundColor: palette.codeArea, borderColor: palette.border }]}>
+					{lines.map((_, k) => {
+						const chipIndex = k < placed.length ? placed[k] : null;
+						const value = chipIndex !== null ? chips[chipIndex].text : null;
+						return (
+							<TouchableOpacity
+								key={k}
+								accessibilityRole="button"
+								accessibilityLabel={
+									value === null
+										? t("reorder.emptyLine", { n: k + 1 })
+										: t("reorder.placedLine", { n: k + 1, value: value.trim() })
+								}
+								accessibilityState={{ disabled: value === null }}
+								disabled={value === null}
+								onPress={() => removeAt(k)}
+								style={[
+									styles.row,
+									k < lines.length - 1
+										? { borderBottomWidth: StyleSheet.hairlineWidth, borderBottomColor: palette.border }
+										: null,
+								]}
+							>
+								<ResizableText useCustomColor style={[styles.gutter, { color: palette.icon }]} defaultSize={13}>
+									{`${k + 1}`}
+								</ResizableText>
+								{value !== null ? (
+									// `pointerEvents="none"`: o highlighter é um ScrollView
+									// horizontal, e sem isso ele competiria com o toque da linha.
+									<View style={[styles.code, { height: codeHeight }]} pointerEvents="none">
+										<CustomSyntaxHighlighter
+											language={codeLanguage}
+											code={value.trimEnd()}
+											defaultSize={CODE_SIZE}
+											themeStyle={codeTheme}
 										/>
-									)}
-								</TouchableOpacity>
-							);
-						})}
-					</View>
+									</View>
+								) : (
+									<View style={[styles.placeholder, { borderColor: palette.border }]} />
+								)}
+							</TouchableOpacity>
+						);
+					})}
+				</View>
 
-					<ResizableText style={styles.hint} defaultSize={15}>
-						{t("reorder.hint")}
-					</ResizableText>
+				<ActivityHint palette={palette}>{t("reorder.hint")}</ActivityHint>
 
-					<View style={styles.bank}>
-						{chips.map((chip, index) => {
-							const used = placed.includes(index);
-							return (
-								<TouchableOpacity
-									key={index}
-									accessibilityRole="button"
-									accessibilityLabel={
-										used
-											? t("reorder.chipUsed", { value: chip.text.trim() })
-											: t("reorder.chip", { value: chip.text.trim() })
-									}
-									accessibilityState={{ disabled: used }}
-									disabled={used}
-									onPress={() => placeChip(index)}
-									style={[
-										styles.chip,
-										{ backgroundColor: colors.background },
-										used ? styles.chipUsed : null,
-									]}
-								>
-									<ResizableText style={styles.chipText} defaultSize={15}>
-										{chip.text.trim()}
-									</ResizableText>
-								</TouchableOpacity>
-							);
-						})}
-					</View>
-				</ScrollView>
-				<NextButton onPress={() => allFilled && setModalVisible(true)} />
-			</ThemedView>
+				<View style={styles.bank}>
+					{chips.map((chip, index) => (
+						<ActivityChip
+							key={index}
+							palette={palette}
+							mono
+							label={chip.text.trim()}
+							used={placed.includes(index)}
+							accessibilityLabel={
+								placed.includes(index)
+									? t("reorder.chipUsed", { value: chip.text.trim() })
+									: t("reorder.chip", { value: chip.text.trim() })
+							}
+							onPress={() => placeChip(index)}
+						/>
+					))}
+				</View>
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -243,40 +223,17 @@ export default function ReorderExercise({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-	},
-	scroller: {
-		marginBottom: "25%",
-	},
-	question: {
-		margin: 20,
-		fontFamily: "Roboto",
-		color: "white",
-		fontWeight: "bold",
-	},
-	// Mesmas cores do `CodeSnippet`, para a área de resposta parecer o mesmo
-	// bloco de código que o aluno viu na teoria.
+	// A área de resposta é o mesmo editor da teoria: fundo de código, borda da paleta.
 	box: {
-		marginHorizontal: 10,
-		marginBottom: 10,
-		borderWidth: 3,
-		borderRadius: 12,
+		borderWidth: 2,
+		borderRadius: 14,
 		overflow: "hidden",
-	},
-	dark: {
-		backgroundColor: "#282c34",
-		borderColor: "#304D66",
-	},
-	light: {
-		backgroundColor: "#fafafa",
-		borderColor: "#A5A5A5",
 	},
 	row: {
 		minHeight: 48,
 		flexDirection: "row",
 		alignItems: "center",
-		paddingHorizontal: 6,
+		paddingHorizontal: 10,
 	},
 	gutter: {
 		width: 22,
@@ -287,6 +244,7 @@ const styles = StyleSheet.create({
 	code: {
 		flex: 1,
 		overflow: "hidden",
+		marginLeft: 8,
 	},
 	placeholder: {
 		flex: 1,
@@ -295,37 +253,12 @@ const styles = StyleSheet.create({
 		borderWidth: 1.5,
 		borderStyle: "dashed",
 		borderRadius: 8,
-		opacity: 0.6,
-	},
-	hint: {
-		marginHorizontal: 12,
-		marginBottom: 8,
-		color: "#9AA9B8",
+		opacity: 0.8,
 	},
 	bank: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		justifyContent: "center",
 		gap: 10,
-		marginHorizontal: 10,
-	},
-	chip: {
-		minHeight: 52,
-		minWidth: 64,
-		maxWidth: "100%",
-		paddingHorizontal: 16,
-		paddingVertical: 6,
-		justifyContent: "center",
-		alignItems: "center",
-		borderRadius: 16,
-		elevation: 6,
-	},
-	chipUsed: {
-		opacity: 0.3,
-		elevation: 0,
-	},
-	chipText: {
-		fontFamily: "monospace",
-		fontWeight: "bold",
 	},
 });

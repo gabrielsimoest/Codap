@@ -34,6 +34,11 @@ export interface TheoryPalette {
 	terminalBg: string;
 	/** Texto padrão do código e do terminal. */
 	codeText: string;
+	/** Feedback de acerto e de erro (ligar pares): cor da borda/ícone e o fundo translúcido do cartão. */
+	success: string;
+	successBg: string;
+	danger: string;
+	dangerBg: string;
 	isDark: boolean;
 }
 
@@ -53,6 +58,10 @@ const DARK: TheoryPalette = {
 	gradientTo: "#162031",
 	terminalBg: "#080B12",
 	codeText: "#E6ECF8",
+	success: "#4CC38A",
+	successBg: "rgba(76,195,138,0.16)",
+	danger: "#F2555A",
+	dangerBg: "rgba(242,85,90,0.16)",
 	isDark: true,
 };
 
@@ -72,6 +81,10 @@ const LIGHT: TheoryPalette = {
 	gradientTo: "#EEF2FB",
 	terminalBg: "#EEF1F8",
 	codeText: "#1B2236",
+	success: "#1E9E62",
+	successBg: "rgba(30,158,98,0.12)",
+	danger: "#D6373D",
+	dangerBg: "rgba(214,55,61,0.10)",
 	isDark: false,
 };
 

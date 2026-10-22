@@ -84,11 +84,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	code_blank: ({ content, activityKey, progress, onProceed, onClose }) => {
+	code_blank: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as CodeBlankActivityContent;
 		return (
 			<CodeBlankExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				codeLanguage={c.codeLanguage}
@@ -144,11 +147,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	fill_blank: ({ content, activityKey, progress, onProceed, onClose }) => {
+	fill_blank: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as FillBlankActivityContent;
 		return (
 			<FillBlankExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				codeLanguage={c.codeLanguage}
@@ -162,11 +168,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	reorder: ({ content, activityKey, progress, onProceed, onClose }) => {
+	reorder: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as ReorderActivityContent;
 		return (
 			<ReorderExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				codeLanguage={c.codeLanguage}
@@ -179,11 +188,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	matching: ({ content, activityKey, progress, onProceed, onClose }) => {
+	matching: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as MatchingActivityContent;
 		return (
 			<MatchingExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				pairs={c.pairs}

@@ -1,21 +1,13 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useRef, useState } from "react";
-import { TouchableOpacity, StyleSheet, ScrollView, DimensionValue, View } from "react-native";
+import { DimensionValue, StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { LessonHeader, Progressbar } from "./LessonHeader";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
-import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
+import { ActivityChip, ActivityHint, ActivityQuestion, type ChipTone } from "./theory/ActivityParts";
+import LessonScreen from "./theory/LessonScreen";
+import { useTheoryPalette } from "./theory/theoryTheme";
 
 /** Quanto tempo o par errado fica vermelho antes de a seleção voltar ao normal. */
 const WRONG_FLASH_MS = 600;
-/** Verde do `CodeBlankExercise` (o `OptionExercise` já migrou para o visual novo, com acento roxo). */
-const RIGHT_COLOR = "green";
-const WRONG_COLOR = "#c62828";
-/** Azul da marca: `colors.primary` do tema é quase igual ao fundo, não serve de destaque. */
-const SELECTED_COLOR = "#5469D3";
 
 interface Props {
 	question: string;
@@ -25,6 +17,10 @@ interface Props {
 	/** Coluna da esquerda em monoespaçado (tags, propriedades, métodos). */
 	leftAsCode?: boolean;
 	tutorial?: boolean;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
@@ -72,11 +68,14 @@ export default function MatchingExercise({
 	pairs,
 	leftAsCode = false,
 	tutorial = false,
+	title,
+	step,
+	total,
 	progress,
 	onProceed,
 	onClose,
 }: Props) {
-	const { colors } = useTheme();
+	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -136,72 +135,58 @@ export default function MatchingExercise({
 	) => {
 		const text = pairs[index][side];
 		const done = matched.includes(index);
-		const isSelected = selected === index;
 		const isWrong = wrong !== null && wrong[side] === index;
-		const colored = done || isSelected || isWrong;
-		const asCode = side === "left" && leftAsCode;
+		// Certo e errado ganham da seleção: o par errado ainda está marcado quando pisca.
+		const tone: ChipTone = done
+			? "right"
+			: isWrong
+				? "wrong"
+				: selected === index
+					? "selected"
+					: "idle";
 
 		return (
-			<TouchableOpacity
+			<ActivityChip
 				key={`${side}-${index}`}
-				accessibilityRole="button"
-				accessibilityLabel={done ? t("matching.paired", { value: text }) : text}
-				accessibilityState={{ selected: isSelected, disabled: done }}
+				palette={palette}
+				label={text}
+				tone={tone}
+				mono={side === "left" && leftAsCode}
 				disabled={done}
+				accessibilityLabel={done ? t("matching.paired", { value: text }) : text}
 				onPress={() => onPress(index)}
-				style={[
-					styles.item,
-					{ backgroundColor: colors.background },
-					isSelected ? { backgroundColor: SELECTED_COLOR } : null,
-					done ? { backgroundColor: RIGHT_COLOR } : null,
-					isWrong ? { backgroundColor: WRONG_COLOR } : null,
-				]}
-			>
-				<ResizableText
-					useCustomColor={colored}
-					style={[
-						asCode ? styles.codeText : styles.text,
-						colored ? { color: "white" } : null,
-					]}
-					defaultSize={asCode ? 15 : 16}
-				>
-					{text}
-				</ResizableText>
-			</TouchableOpacity>
+				style={styles.item}
+			/>
 		);
 	};
 
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<Progressbar progress={progress} />
-				<ScrollView style={styles.scroller}>
-					<LessonHeader
-						onClose={onClose}
-						setTutorialVisible={() => setTutorialVisible(!tutorialVisible)}
-					/>
-					<ResizableHighlighter
-						style={styles.question}
-						highlight={highlight}
-						text={question}
-						defaultSize={23}
-					/>
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				onNext={() => allMatched && setModalVisible(true)}
+			>
+				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
 
-					<ResizableText style={styles.hint} defaultSize={15}>
-						{allMatched ? t("matching.done", { next: t("next") }) : t("matching.hint")}
-					</ResizableText>
+				<ActivityHint palette={palette}>
+					{allMatched ? t("matching.done", { next: t("next") }) : t("matching.hint")}
+				</ActivityHint>
 
-					<View style={styles.columns}>
-						<View style={styles.column} accessibilityLabel={t("matching.leftColumn")}>
-							{order.left.map((index) => renderItem("left", index, selectedLeft, pressLeft))}
-						</View>
-						<View style={styles.column} accessibilityLabel={t("matching.rightColumn")}>
-							{order.right.map((index) => renderItem("right", index, selectedRight, pressRight))}
-						</View>
+				<View style={styles.columns}>
+					<View style={styles.column} accessibilityLabel={t("matching.leftColumn")}>
+						{order.left.map((index) => renderItem("left", index, selectedLeft, pressLeft))}
 					</View>
-				</ScrollView>
-				<NextButton onPress={() => allMatched && setModalVisible(true)} />
-			</ThemedView>
+					<View style={styles.column} accessibilityLabel={t("matching.rightColumn")}>
+						{order.right.map((index) => renderItem("right", index, selectedRight, pressRight))}
+					</View>
+				</View>
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -213,51 +198,19 @@ export default function MatchingExercise({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-	},
-	scroller: {
-		marginBottom: "25%",
-	},
-	question: {
-		margin: 20,
-		fontFamily: "Roboto",
-		color: "white",
-		fontWeight: "bold",
-	},
-	hint: {
-		marginHorizontal: 12,
-		marginBottom: 12,
-		color: "#9AA9B8",
-	},
 	columns: {
 		flexDirection: "row",
 		alignItems: "flex-start",
 		gap: 10,
-		marginHorizontal: 10,
 	},
 	column: {
 		flex: 1,
 		gap: 10,
 	},
+	// O lado direito vai até 40 caracteres e quebra em várias linhas (a fonte
+	// aumentada também): o cartão cresce, não corta.
 	item: {
-		// minHeight, não height: o lado direito vai até 40 caracteres e quebra
-		// em várias linhas (a fonte aumentada também), e altura fixa cortaria.
 		minHeight: 56,
 		paddingHorizontal: 10,
-		paddingVertical: 8,
-		justifyContent: "center",
-		alignItems: "center",
-		borderRadius: 16,
-		elevation: 6,
-	},
-	text: {
-		textAlign: "center",
-		fontWeight: "600",
-	},
-	codeText: {
-		textAlign: "center",
-		fontFamily: "monospace",
-		fontWeight: "bold",
 	},
 });

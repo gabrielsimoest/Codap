@@ -1,27 +1,15 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useState } from "react";
-import {
-	DimensionValue,
-	Keyboard,
-	ScrollView,
-	StyleSheet,
-	TextInput,
-	View,
-} from "react-native";
+import { DimensionValue, Keyboard, StyleSheet, TextInput, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { LessonHeader, Progressbar } from "./LessonHeader";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
-import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
 import useFontSizeStore from "../../../stores/FontSizeStore";
+import { ActivityHint, ActivityQuestion } from "./theory/ActivityParts";
+import LessonScreen from "./theory/LessonScreen";
+import { TEXT_SIZE, useTheoryPalette } from "./theory/theoryTheme";
 
 /** Marca da lacuna no `code` (a mesma do `code_blank` — ver o contrato). */
 const BLANK = "___";
-/** Azul da marca: `colors.primary` deste app é quase a cor de fundo. */
-const BRAND = "#5469D3";
 
 /**
  * Compara o que foi digitado com as respostas aceitas, ignorando espaços nas
@@ -48,6 +36,10 @@ interface Props {
 	answers: string[];
 	ignoreCase?: boolean;
 	tutorial?: boolean;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
@@ -76,11 +68,14 @@ export default function FillBlankExercise({
 	answers,
 	ignoreCase = false,
 	tutorial = false,
+	title,
+	step,
+	total,
 	progress,
 	onProceed,
 	onClose,
 }: Props) {
-	const { colors } = useTheme();
+	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
@@ -101,56 +96,51 @@ export default function FillBlankExercise({
 
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<Progressbar progress={progress} />
-				<ScrollView style={styles.scroller} keyboardShouldPersistTaps="handled">
-					<LessonHeader
-						onClose={onClose}
-						setTutorialVisible={() => setTutorialVisible(!tutorialVisible)}
-					/>
-					<ResizableHighlighter
-						style={styles.question}
-						highlight={highlight}
-						text={question}
-						defaultSize={23}
-					/>
-					<CodeSnippet code={shownCode} codeLanguage={codeLanguage} />
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				onNext={check}
+				keyboardShouldPersistTaps="handled"
+			>
+				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
+				<CodeSnippet code={shownCode} codeLanguage={codeLanguage} palette={palette} />
 
-					<View style={styles.inputArea}>
-						<ResizableText style={styles.hint} defaultSize={15}>
-							{t("fillBlank.hint", { next: t("next") })}
-						</ResizableText>
-						<TextInput
-							value={typed}
-							onChangeText={setTyped}
-							onSubmitEditing={check}
-							onFocus={() => setFocused(true)}
-							onBlur={() => setFocused(false)}
-							placeholder={t("fillBlank.placeholder")}
-							placeholderTextColor="#8A97A5"
-							accessibilityLabel={t("fillBlank.inputLabel")}
-							autoCapitalize="none"
-							autoCorrect={false}
-							autoComplete="off"
-							spellCheck={false}
-							// Android: sem barra de sugestões do teclado.
-							keyboardType="visible-password"
-							returnKeyType="done"
-							maxLength={30}
-							style={[
-								styles.input,
-								{
-									color: colors.text,
-									backgroundColor: colors.background,
-									borderColor: focused ? BRAND : "#5A6B7B",
-									fontSize: 18 + fontSize,
-								},
-							]}
-						/>
-					</View>
-				</ScrollView>
-				<NextButton onPress={check} />
-			</ThemedView>
+				<View style={styles.inputArea}>
+					<ActivityHint palette={palette}>{t("fillBlank.hint", { next: t("next") })}</ActivityHint>
+					<TextInput
+						value={typed}
+						onChangeText={setTyped}
+						onSubmitEditing={check}
+						onFocus={() => setFocused(true)}
+						onBlur={() => setFocused(false)}
+						placeholder={t("fillBlank.placeholder")}
+						placeholderTextColor={palette.icon}
+						accessibilityLabel={t("fillBlank.inputLabel")}
+						autoCapitalize="none"
+						autoCorrect={false}
+						autoComplete="off"
+						spellCheck={false}
+						// Android: sem barra de sugestões do teclado.
+						keyboardType="visible-password"
+						returnKeyType="done"
+						maxLength={30}
+						style={[
+							styles.input,
+							{
+								color: palette.text,
+								backgroundColor: palette.gradientTo,
+								borderColor: focused ? palette.accent : palette.border,
+								fontSize: TEXT_SIZE.body + 2 + fontSize,
+							},
+						]}
+					/>
+				</View>
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -162,32 +152,14 @@ export default function FillBlankExercise({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-	},
-	scroller: {
-		marginBottom: "25%",
-	},
-	question: {
-		margin: 20,
-		fontFamily: "Roboto",
-		color: "white",
-		fontWeight: "bold",
-	},
 	inputArea: {
-		marginHorizontal: 10,
-		marginTop: 4,
-	},
-	hint: {
-		marginHorizontal: 2,
-		marginBottom: 8,
-		color: "#9AA9B8",
+		gap: 8,
 	},
 	input: {
 		minHeight: 52,
 		borderWidth: 2,
 		borderRadius: 14,
-		paddingHorizontal: 14,
+		paddingHorizontal: 16,
 		fontFamily: "monospace",
 	},
 });

@@ -36,6 +36,8 @@ interface Props {
 	onHelp: () => void;
 	/** Toque no botão fixo do rodapé. */
 	onNext: () => void;
+	/** Para telas com campo de texto: tocar fora do teclado não pode engolir o toque dos botões. */
+	keyboardShouldPersistTaps?: "never" | "always" | "handled";
 	children: ReactNode;
 }
 
@@ -55,6 +57,7 @@ export default function LessonScreen({
 	onClose,
 	onHelp,
 	onNext,
+	keyboardShouldPersistTaps,
 	children,
 }: Props) {
 	const { bottom } = useInsets();
@@ -79,6 +82,7 @@ export default function LessonScreen({
 			<View style={styles.scroll}>
 				<ScrollView
 					style={styles.scroll}
+					keyboardShouldPersistTaps={keyboardShouldPersistTaps}
 					contentContainerStyle={{
 						paddingHorizontal: horizontal,
 						paddingTop: gap + 4,

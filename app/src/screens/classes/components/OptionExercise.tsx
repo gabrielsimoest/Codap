@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { DimensionValue, StyleSheet, TouchableOpacity, View } from "react-native";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
 import ResizableText from "../../../components/ResizableText";
-import useFontSizeStore from "../../../stores/FontSizeStore";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
 import CodeOption from "./CodeOption";
-import LessonScreen, { useLessonLayout } from "./theory/LessonScreen";
+import { ActivityQuestion } from "./theory/ActivityParts";
+import LessonScreen from "./theory/LessonScreen";
 import { TEXT_SIZE, useTheoryPalette, type TheoryPalette } from "./theory/theoryTheme";
 
 interface Props {
@@ -59,8 +58,6 @@ export default function OptionExercise({
 	onProceed,
 }: Props) {
 	const palette = useTheoryPalette();
-	const { textInset } = useLessonLayout();
-	const fontOffset = useFontSizeStore((s) => s.fontSize);
 	// O botão "?" já existia e alternava este estado (o tutorial em si está
 	// desligado); o comportamento foi preservado.
 	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
@@ -75,9 +72,6 @@ export default function OptionExercise({
 		}
 	};
 
-	const questionLine = Math.round((TEXT_SIZE.sectionTitle + fontOffset) * 1.28);
-	const paragraphLine = Math.round((TEXT_SIZE.body + fontOffset) * 1.28);
-
 	return (
 		<>
 			<LessonScreen
@@ -90,26 +84,12 @@ export default function OptionExercise({
 				onHelp={() => setTutorialVisible(!tutorialVisible)}
 				onNext={Validate}
 			>
-				<View style={[styles.textColumn, { paddingHorizontal: textInset }]}>
-					{aditionalParagraph !== undefined ? (
-						<ResizableHighlighter
-							text={aditionalParagraph}
-							highlight={highlight}
-							defaultSize={TEXT_SIZE.body}
-							color={palette.text}
-							highlightStyle={{ color: palette.emphasis, fontFamily: "Roboto", fontWeight: "500" }}
-							style={[styles.paragraph, { lineHeight: paragraphLine }]}
-						/>
-					) : null}
-					<ResizableHighlighter
-						text={question}
-						highlight={highlight}
-						defaultSize={TEXT_SIZE.sectionTitle}
-						color={palette.text}
-						highlightStyle={{ color: palette.accent }}
-						style={[styles.question, { lineHeight: questionLine }]}
-					/>
-				</View>
+				<ActivityQuestion
+					palette={palette}
+					highlight={highlight}
+					question={question}
+					paragraph={aditionalParagraph}
+				/>
 
 				{code !== undefined ? (
 					<CodeSnippet code={code} codeLanguage={codeLanguage} palette={palette} />
@@ -204,19 +184,6 @@ const OptionButton = ({
 };
 
 const styles = StyleSheet.create({
-	textColumn: {
-		gap: 8,
-	},
-	paragraph: {
-		fontFamily: "Roboto",
-		fontWeight: "500",
-		textAlign: "left",
-	},
-	question: {
-		fontFamily: "Roboto",
-		fontWeight: "700",
-		textAlign: "left",
-	},
 	options: {
 		gap: 10,
 	},
