@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
+import { useFocusEffect, useTheme } from "@react-navigation/native";
 import UserHeader from "./components/UserHeader";
 import { useTranslation } from "react-i18next";
 import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
@@ -12,17 +12,31 @@ import useUserStore from "../../stores/UserStore";
 import useAuthStore from "../../stores/AuthStore";
 import EditProfile from "./components/EditProfile";
 import ChangePassword from "./components/ChangePassword";
+import ConfirmEmail from "./components/ConfirmEmail";
+import { refreshEmailStatus } from "../../hooks/useEmailStatus";
+import useEmailStatusStore from "../../stores/EmailStatusStore";
+import { useTheoryPalette } from "../classes/components/theory/theoryTheme";
 import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import AchievementsModal from "./components/achievements/AchievementsModal";
 import { useAppColors } from "../../theme/appColors";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 export default function User() {
 	const { t } = useTranslation();
 	const { colors } = useTheme();
 	const app = useAppColors();
+	const palette = useTheoryPalette();
+	const emailVerified = useEmailStatusStore((s) => s.verified);
+
+	// A confirmação do e-mail acontece no navegador: ao voltar para o Perfil o app
+	// pergunta de novo, para a linha "Confirmar e-mail" sumir assim que for resolvida.
+	useFocusEffect(
+		useCallback(() => {
+			void refreshEmailStatus();
+		}, [])
+	);
 
 	const navigation = useNavigate();
 
@@ -64,9 +78,20 @@ export default function User() {
 								>
 									{user?.name}
 								</Text>
-								<ResizableText useCustomColor style={[styles.label, styles.labelGap, { color: app.muted }]} defaultSize={14}>
-									{t("email")}
-								</ResizableText>
+								<View style={[styles.labelRow, styles.labelGap]}>
+									<ResizableText useCustomColor style={[styles.label, { color: app.muted }]} defaultSize={14}>
+										{t("email")}
+									</ResizableText>
+									{emailVerified === true ? (
+										<View
+											accessible
+											accessibilityRole="image"
+											accessibilityLabel={t("emailStatus.verifiedLabel")}
+										>
+											<Icon type="ionicon" name="checkmark-circle" size={16} color={palette.success} />
+										</View>
+									) : null}
+								</View>
 								<Text
 									style={[styles.value, { color: colors.text }]}
 									adjustsFontSizeToFit
@@ -78,6 +103,7 @@ export default function User() {
 						</ThemedView>
 
 						<View style={styles.rows}>
+							<ConfirmEmail />
 							<EditProfile />
 							<ChangePassword />
 							<ListRow
@@ -138,6 +164,11 @@ const styles = StyleSheet.create({
 	},
 	labelGap: {
 		marginTop: 10,
+	},
+	labelRow: {
+		flexDirection: "row",
+		alignItems: "center",
+		gap: 6,
 	},
 	value: {
 		fontFamily: "Roboto",

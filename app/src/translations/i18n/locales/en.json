@@ -189,7 +189,7 @@
 				},
 				"success": {
 					"title": "Success!",
-					"message": "Registration completed."
+					"message": "Registration completed. We sent you an email to confirm your address."
 				},
 				"not match": {
 					"title": "Warning!",
@@ -214,6 +214,10 @@
 				"serverValidation": {
 					"title": "Invalid data",
 					"message": "Please check the entered data and try again."
+				},
+				"typo": {
+					"title": "Check your email",
+					"message": "This looks like a typo. Did you mean {{email}}?"
 				}
 			},
 			"name": "Name",
@@ -222,6 +226,61 @@
 			"invalid password": "Incorrect password",
 			"register": "Register",
 			"login": "Click here to return to login"
+		},
+
+		"emailStatus": {
+			"title": "Confirm your email",
+			"intro": "We sent a confirmation link to:",
+			"introPasswordChange": "To change your password, confirm your email first. We sent a confirmation link to:",
+			"why": "With your email confirmed you can recover and change your account password.",
+			"resend": "Resend email",
+			"resendIn": "Resend in {{seconds}}s",
+			"sent": "Done! We sent a new link. Check your spam folder too.",
+			"fix": "Fix email",
+			"fixTitle": "Fix email",
+			"fixHint": "Type the right address. The confirmation link will be sent to it.",
+			"newEmail": "Correct email",
+			"save": "Save and send link",
+			"cancel": "Cancel",
+			"useSuggestion": "Use {{email}}",
+			"confirmedTitle": "Email confirmed!",
+			"confirmedMessage": "All set: you can now recover and change your account password.",
+			"done": "Done",
+			"pending": "Pending",
+			"row": "Confirm email",
+			"verifiedLabel": "Email confirmed"
+		},
+
+		"passwordChange": {
+			"title": "Change password",
+			"intro": "We will send a link to:",
+			"note": "You create the new password on a secure page and, once saved, you are signed out of all your devices.",
+			"send": "Send link",
+			"cancel": "Cancel",
+			"sentTitle": "Link sent",
+			"sentMessage": "Open the email and tap the link to create your new password. It is valid for 1 hour.",
+			"done": "Got it"
+		},
+
+		"forgotPassword": {
+			"link": "Forgot my password",
+			"title": "Forgot my password",
+			"intro": "Type your account email. If it is registered and confirmed, we will send a link to create a new password.",
+			"send": "Send link",
+			"sentTitle": "Check your email",
+			"sentMessage": "If this email is registered and confirmed, the link is on its way. Check your spam folder too. It is valid for 1 hour.",
+			"done": "Got it"
+		},
+
+		"accountErrors": {
+			"offline": "No connection to the server. Check your internet and try again.",
+			"rate": "Too many requests in a row. Wait a moment and try again.",
+			"unavailable": "We could not send the email right now. Try again in a moment.",
+			"unexpected": "Something went wrong. Try again in a moment.",
+			"invalid": "Type a valid email.",
+			"taken": "An account with this email already exists.",
+			"same": "This is already your account email.",
+			"typo": "This looks like a typo. Did you mean {{email}}?"
 		},
 
 		"alert": {

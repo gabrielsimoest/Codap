@@ -11,6 +11,7 @@ import ThemedAlert from "../../components/themed/ThemedAlert";
 import useNavigate from "../../hooks/useNavigate";
 import isValidEmail from "../../utils/isValidEmail";
 import useRegisterMutation from "../../hooks/queries/useRegisterMutation";
+import { classifyAccountError } from "../../services/AccountService";
 
 export default function Register() {
 	const palette = useTheoryPalette();
@@ -59,7 +60,15 @@ export default function Register() {
 					},
 					onError: (error) => {
 						console.error("Erro ao registrar:", error);
-						if (axios.isAxiosError(error) && error.response?.status === 409) {
+						const classified = classifyAccountError(error);
+						if (classified.kind === "typo") {
+							// Domínio com cara de erro de digitação (gmial.com): o servidor
+							// manda o e-mail corrigido, e o texto é do idioma do app.
+							setAlertTitle(t("register.alert.typo.title"));
+							setAlertMessage(
+								t("register.alert.typo.message", { email: classified.suggestion })
+							);
+						} else if (axios.isAxiosError(error) && error.response?.status === 409) {
 							setAlertTitle(t("register.alert.duplicate.title"));
 							setAlertMessage(t("register.alert.duplicate.message"));
 						} else if (axios.isAxiosError(error) && !error.response) {

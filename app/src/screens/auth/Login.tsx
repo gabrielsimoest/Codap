@@ -11,6 +11,7 @@ import { Switch } from "react-native-paper";
 import AppButton from "../../components/AppButton";
 import TextField from "../../components/TextField";
 import AuthLayout from "./components/AuthLayout";
+import ForgotPasswordModal from "./components/ForgotPasswordModal";
 import useNavigate from "../../hooks/useNavigate";
 import isValidEmail from "../../utils/isValidEmail";
 import Images from "../../utils/imageIndexer";
@@ -34,6 +35,7 @@ export default function Login() {
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
 	const [rememberMe, setRememberMe] = useState(false);
+	const [forgotVisible, setForgotVisible] = useState(false);
 
 	useEffect(() => {
 		// Preenche o e-mail quando chega aqui vindo do registro (navigation.navigate("Login", { email })).
@@ -109,51 +111,85 @@ export default function Login() {
 	};
 
 	return (
-		<AuthLayout>
-			<TextField
-				label="Email"
-				autoCapitalize="none"
-				keyboardType="email-address"
-				autoComplete="email"
-				onChangeText={(value) => setEmail(value)}
-				value={email}
-			/>
-			<TextField
-				label={t("login.password")}
-				autoCapitalize="none"
-				revealable
-				autoComplete="password"
-				onChangeText={(value) => setSenha(value)}
-				value={senha}
-			/>
-			<View style={styles.rememberMeRow}>
-				<Switch
-					value={rememberMe}
-					onValueChange={setRememberMe}
-					color={app.action}
+		<>
+			<AuthLayout>
+				<TextField
+					label="Email"
+					autoCapitalize="none"
+					keyboardType="email-address"
+					autoComplete="email"
+					onChangeText={(value) => setEmail(value)}
+					value={email}
 				/>
-				<Text style={[styles.rememberMeText, { color: theme.colors.text }]}>
-					{t("login.rememberMe")}
-				</Text>
-			</View>
-			<AppButton
-				title="Login"
-				onPress={onSubmit}
-				loading={loginMutation.isPending}
+				{/* O link fica colado ao campo de senha (gap de 8, não os 16 entre campos): é dele. */}
+				<View style={styles.passwordGroup}>
+					<TextField
+						label={t("login.password")}
+						autoCapitalize="none"
+						revealable
+						autoComplete="password"
+						onChangeText={(value) => setSenha(value)}
+						value={senha}
+					/>
+					<TouchableOpacity
+						onPress={() => setForgotVisible(true)}
+						hitSlop={{ top: 8, bottom: 8, left: 12, right: 12 }}
+						accessibilityRole="button"
+						style={styles.forgot}
+					>
+						<Text style={[styles.forgotText, { color: app.brandText }]}>
+							{t("forgotPassword.link")}
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<View style={styles.rememberMeRow}>
+					<Switch
+						value={rememberMe}
+						onValueChange={setRememberMe}
+						color={app.action}
+					/>
+					<Text style={[styles.rememberMeText, { color: theme.colors.text }]}>
+						{t("login.rememberMe")}
+					</Text>
+				</View>
+				<AppButton
+					title="Login"
+					onPress={onSubmit}
+					loading={loginMutation.isPending}
+				/>
+				<Image style={styles.image} source={Images.codyHappy} resizeMode="contain" />
+				<TouchableOpacity onPress={navigationHandler} hitSlop={14}>
+					<Text style={[styles.register, { color: app.brandText }]}>
+						{t("login.register")}
+					</Text>
+				</TouchableOpacity>
+			</AuthLayout>
+			<ForgotPasswordModal
+				visible={forgotVisible}
+				onDismiss={() => setForgotVisible(false)}
+				initialEmail={email}
 			/>
-			<Image style={styles.image} source={Images.codyHappy} resizeMode="contain" />
-			<TouchableOpacity onPress={navigationHandler} hitSlop={14}>
-				<Text style={[styles.register, { color: app.brandText }]}>
-					{t("login.register")}
-				</Text>
-			</TouchableOpacity>
-		</AuthLayout>
+		</>
 	);
 }
 
 const styles = StyleSheet.create({
 	register: {
 		textAlign: "center",
+		fontSize: 16,
+		fontWeight: "bold",
+	},
+	passwordGroup: {
+		gap: 8,
+	},
+	// 32 dp visuais + 8 de hitSlop em cima e embaixo = 48 dp de toque, e o link
+	// fica lido como legenda do campo de senha em vez de flutuar entre dois blocos.
+	forgot: {
+		alignSelf: "flex-end",
+		minHeight: 32,
+		justifyContent: "center",
+	},
+	forgotText: {
 		fontSize: 16,
 		fontWeight: "bold",
 	},

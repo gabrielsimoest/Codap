@@ -30,6 +30,7 @@ import useAlertStore from "./src/stores/AlertStore";
 import ThemedAlert from "./src/components/themed/ThemedAlert";
 import QueryDevTools from "./src/components/dev/QueryDevTools";
 import ContentVersionSync from "./src/components/ContentVersionSync";
+import EmailVerification from "./src/components/EmailVerification";
 import { LogBox } from "react-native";
 import * as Linking from "expo-linking";
 import { NavigationBar } from "expo-navigation-bar";
@@ -298,6 +299,12 @@ export default function App() {
 						restauração do cache seria corrida com ela.
 					*/}
 					<ContentVersionSync />
+					{/*
+						Confirmação de e-mail: pergunta ao servidor se o e-mail da conta
+						está confirmado e, se não, mostra o aviso uma vez por abertura do
+						app. Dentro do Provider porque o modal usa Portal.
+					*/}
+					<EmailVerification />
 					{/*
 						Barra de navegação do Android escondida por padrão (o deslize na
 						borda a mostra por um instante). Quando aparece, segue o tema do

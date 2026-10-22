@@ -55,6 +55,15 @@ export default class DatabaseClient {
 		runMigrations(this.database);
 	}
 
+	/** Atualiza só o e-mail do perfil local (depois de o servidor aceitar a correção do e-mail). */
+	setLocalEmail(userId: string, email: string): User | null {
+		const { changes } = this.database.runSync(
+			"UPDATE Users SET email = ? WHERE remoteId = ?;",
+			[email, userId]
+		);
+		return changes > 0 ? this.getLocalProfile(userId) : null;
+	}
+
 	updateUser(user: User) {
 		return this.database.runSync(
 			"UPDATE Users SET name=?, email=? WHERE remoteId = ?;",

@@ -189,7 +189,7 @@
 				},
 				"success": {
 					"title": "Sucesso!",
-					"message": "Cadastro Realizado."
+					"message": "Cadastro realizado. Enviamos um e-mail para você confirmar seu endereço."
 				},
 				"not match": {
 					"title": "Aviso!",
@@ -214,6 +214,10 @@
 				"serverValidation": {
 					"title": "Dados inválidos",
 					"message": "Verifique os dados informados e tente novamente."
+				},
+				"typo": {
+					"title": "Confira o e-mail",
+					"message": "Parece haver um erro de digitação. Você quis dizer {{email}}?"
 				}
 			},
 			"name": "Nome",
@@ -222,6 +226,61 @@
 			"invalid password": "Senha incorreta",
 			"register": "Registrar",
 			"login": "Clique aqui para retornar ao login"
+		},
+
+		"emailStatus": {
+			"title": "Confirme seu e-mail",
+			"intro": "Enviamos um link de confirmação para:",
+			"introPasswordChange": "Para alterar a senha, confirme seu e-mail primeiro. Enviamos um link de confirmação para:",
+			"why": "Com o e-mail confirmado você pode recuperar e alterar a senha da sua conta.",
+			"resend": "Reenviar e-mail",
+			"resendIn": "Reenviar em {{seconds}}s",
+			"sent": "Pronto! Enviamos um novo link. Confira também a caixa de spam.",
+			"fix": "Corrigir e-mail",
+			"fixTitle": "Corrigir e-mail",
+			"fixHint": "Digite o endereço certo. O link de confirmação será enviado para ele.",
+			"newEmail": "E-mail correto",
+			"save": "Salvar e enviar link",
+			"cancel": "Cancelar",
+			"useSuggestion": "Usar {{email}}",
+			"confirmedTitle": "E-mail confirmado!",
+			"confirmedMessage": "Tudo certo: agora você pode recuperar e alterar a senha da sua conta.",
+			"done": "Pronto",
+			"pending": "Pendente",
+			"row": "Confirmar e-mail",
+			"verifiedLabel": "E-mail confirmado"
+		},
+
+		"passwordChange": {
+			"title": "Alterar senha",
+			"intro": "Enviaremos um link para:",
+			"note": "Você cria a nova senha numa página segura e, ao salvar, é desconectado de todos os aparelhos.",
+			"send": "Enviar link",
+			"cancel": "Cancelar",
+			"sentTitle": "Link enviado",
+			"sentMessage": "Abra o e-mail e toque no link para criar a nova senha. Ele vale por 1 hora.",
+			"done": "Entendi"
+		},
+
+		"forgotPassword": {
+			"link": "Esqueci minha senha",
+			"title": "Esqueci minha senha",
+			"intro": "Digite o e-mail da sua conta. Se ele estiver cadastrado e confirmado, enviamos um link para criar uma nova senha.",
+			"send": "Enviar link",
+			"sentTitle": "Confira seu e-mail",
+			"sentMessage": "Se este e-mail estiver cadastrado e confirmado, o link está a caminho. Confira também a caixa de spam. Ele vale por 1 hora.",
+			"done": "Entendi"
+		},
+
+		"accountErrors": {
+			"offline": "Sem conexão com o servidor. Verifique sua internet e tente de novo.",
+			"rate": "Muitos pedidos seguidos. Aguarde um pouco e tente de novo.",
+			"unavailable": "Não foi possível enviar o e-mail agora. Tente de novo em instantes.",
+			"unexpected": "Algo deu errado. Tente de novo em instantes.",
+			"invalid": "Digite um e-mail válido.",
+			"taken": "Já existe uma conta com este e-mail.",
+			"same": "Este já é o e-mail da sua conta.",
+			"typo": "Parece haver um erro de digitação. Você quis dizer {{email}}?"
 		},
 
 		"alert": {

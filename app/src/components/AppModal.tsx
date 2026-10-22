@@ -83,6 +83,9 @@ export default function AppModal({
 							<ScrollView
 								style={styles.body}
 								showsVerticalScrollIndicator={false}
+								// Com o teclado aberto, o primeiro toque num botão ou link do
+								// corpo não pode ser gasto só para fechar o teclado.
+								keyboardShouldPersistTaps="handled"
 							>
 								{children}
 							</ScrollView>

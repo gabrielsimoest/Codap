@@ -88,9 +88,24 @@ async function ensureFreshAccessTokenNow(): Promise<string | null> {
 	}
 }
 
+/**
+ * Rotas de `/auth/*` chamadas pela pessoa **logada**, que exigem o Bearer token
+ * (as demais — login, registro, refresh, logout, "esqueci a senha" — não usam).
+ */
+const AUTHENTICATED_AUTH_ROUTES = [
+	"/auth/me",
+	"/auth/resend-verification",
+	"/auth/request-password-change",
+	"/auth/change-email",
+];
+
 apiClient.interceptors.request.use(async (config) => {
-	// Rotas de /auth/* não usam Bearer token — evita recursão em /auth/refresh.
-	if (config.url?.startsWith("/auth/")) {
+	// Rotas de /auth/* não usam Bearer token — evita recursão em /auth/refresh —,
+	// exceto as de conta logada listadas acima.
+	if (
+		config.url?.startsWith("/auth/") &&
+		!AUTHENTICATED_AUTH_ROUTES.includes(config.url)
+	) {
 		return config;
 	}
 
