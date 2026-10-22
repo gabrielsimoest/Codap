@@ -1,0 +1,276 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider            = "prisma-client"
+  output              = "../src/generated/prisma"
+  importFileExtension = "js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Versionamento
+// ---------------------------------------------------------------------------
+
+model content_version {
+  id          Int      @id @default(autoincrement())
+  locale_id   Int
+  locale      locales  @relation(fields: [locale_id], references: [id])
+  version     String   @db.VarChar(20)
+  changelog   String
+  released_at DateTime @db.Date
+  /// Se o app deve mostrar esta publicação no aviso de "conteúdo atualizado".
+  /// Falso por padrão: uma publicação sem aviso continua sendo uma atualização
+  /// silenciosa, como era antes do aviso existir.
+  announce    Boolean  @default(false)
+}
+
+model app_version {
+  id          Int      @id @default(autoincrement())
+  version     String   @db.VarChar(5)
+  changelog   String
+  need_update Boolean?
+  released_at DateTime @db.Date
+}
+
+// ---------------------------------------------------------------------------
+// Usuário e Relações
+// ---------------------------------------------------------------------------
+
+model users {
+  id                String              @id @default(uuid()) @db.Uuid
+  name              String
+  email             String              @unique
+  password          String
+  /// Quando o e-mail foi confirmado pelo link enviado (ou pela redefinição de senha, que prova a posse do e-mail). Nulo = não confirmado.
+  email_verified_at DateTime?
+  /// Quando o e-mail de boas-vindas foi enviado, no primeiro login. Reivindicado de forma atômica para nunca sair duas vezes.
+  welcome_sent_at   DateTime?
+  xp                Int?
+  bits              Int?
+  /// Dicas instantâneas compradas e ainda não usadas.
+  instant_hints     Int                 @default(0)
+  /// Baús seguidos que não deram aula exclusiva (a garantia contra azar).
+  chest_misses      Int                 @default(0)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  user_lessons      user_lessons[]
+  user_achievements user_achievements[]
+  refresh_tokens    refresh_tokens[]
+  auth_tokens       auth_tokens[]
+  xp_boosts         xp_boosts[]
+  chest_lessons     user_chest_lessons[]
+}
+
+/// Janela de Dobro de XP: toda `lesson_completed` cujo `occurredAt` cai dentro de alguma janela do usuário paga o dobro.
+model xp_boosts {
+  id         Int      @id @default(autoincrement())
+  user_id    String   @db.Uuid
+  user       users    @relation(fields: [user_id], references: [id])
+  starts_at  DateTime
+  ends_at    DateTime
+  created_at DateTime @default(now())
+
+  @@index([user_id, ends_at])
+}
+
+/// Aulas exclusivas do baú que o usuário já revelou (a coleção). Única por usuário e lição.
+model user_chest_lessons {
+  id          Int      @id @default(autoincrement())
+  user_id     String   @db.Uuid
+  user        users    @relation(fields: [user_id], references: [id])
+  lesson_id   Int
+  lesson      lessons  @relation(fields: [lesson_id], references: [id])
+  revealed_at DateTime @default(now())
+
+  @@unique([user_id, lesson_id])
+}
+
+model user_lessons {
+  id           Int      @id @default(autoincrement())
+  user_id      String   @db.Uuid
+  user         users    @relation(fields: [user_id], references: [id])
+  lesson_id    Int
+  lesson       lessons  @relation(fields: [lesson_id], references: [id])
+  completed_at DateTime
+
+  @@unique([user_id, lesson_id])
+}
+
+model user_achievements {
+  id             Int          @id @default(autoincrement())
+  user_id        String       @db.Uuid
+  user           users        @relation(fields: [user_id], references: [id])
+  achievement_id Int
+  achievement    achievements @relation(fields: [achievement_id], references: [id])
+  completed_at   DateTime
+
+  @@unique([user_id, achievement_id])
+}
+
+// ---------------------------------------------------------------------------
+// Autenticação
+// ---------------------------------------------------------------------------
+
+model refresh_tokens {
+  id             String    @id @default(uuid()) @db.Uuid
+  user_id        String    @db.Uuid
+  user           users     @relation(fields: [user_id], references: [id])
+  token_hash     String    @unique @db.VarChar(64)
+  family_id      String    @db.Uuid
+  remember_me    Boolean   @default(false)
+  device_info    String?
+  created_by_ip  String?
+  created_at     DateTime  @default(now())
+  expires_at     DateTime
+  revoked_at     DateTime?
+  replaced_by_id String?   @db.Uuid
+
+  @@index([user_id])
+  @@index([family_id])
+}
+
+enum auth_token_type {
+  email_verification
+  password_reset
+}
+
+/// Tokens de uso único enviados por e-mail (confirmação de e-mail e redefinição de senha). Só o hash SHA-256 é guardado; o valor bruto existe apenas no link do e-mail.
+model auth_tokens {
+  id         String          @id @default(uuid()) @db.Uuid
+  user_id    String          @db.Uuid
+  user       users           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  type       auth_token_type
+  token_hash String          @unique @db.VarChar(64)
+  created_at DateTime        @default(now())
+  expires_at DateTime
+  used_at    DateTime?
+
+  @@index([user_id, type])
+}
+
+// ---------------------------------------------------------------------------
+// Gamificação
+// ---------------------------------------------------------------------------
+
+model achievements {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  description       String
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  user_achievements user_achievements[]
+}
+
+// ---------------------------------------------------------------------------
+// Estrutura Pedagógica
+// ---------------------------------------------------------------------------
+
+// `name` fica direto aqui (sem tabela de tradução, ao contrário de
+// modules/lessons/activities): os nomes das áreas são termos técnicos em inglês
+// — HTML, CSS, JavaScript — iguais em qualquer idioma, então area_translations
+// só guardava a mesma string duplicada por locale.
+model areas {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  modules    modules[]
+}
+
+model modules {
+  id           Int                   @id @default(autoincrement())
+  area_id      Int
+  area         areas                 @relation(fields: [area_id], references: [id])
+  index        Int
+  created_at   DateTime              @default(now())
+  updated_at   DateTime              @updatedAt
+  lessons      lessons[]
+  translations module_translations[]
+}
+
+model lessons {
+  id           Int                   @id @default(autoincrement())
+  module_id    Int
+  module       modules               @relation(fields: [module_id], references: [id])
+  index        Int
+  /// Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50).
+  min_level    Int?
+  /// XP pago ao concluir pela primeira vez. Nulo = 10 (`LESSON_XP_REWARD`).
+  xp_reward    Int?
+  /// Aula exclusiva do baú: fora do catálogo público, só chega a quem a revelou (`user_chest_lessons`). Nunca tem `min_level`.
+  is_chest     Boolean               @default(false)
+  created_at   DateTime              @default(now())
+  updated_at   DateTime              @updatedAt
+  activities   activities[]
+  translations lesson_translations[]
+  user_lessons user_lessons[]
+  chest_users  user_chest_lessons[]
+}
+
+model activities {
+  id           Int                     @id @default(autoincrement())
+  lesson_id    Int
+  lesson       lessons                 @relation(fields: [lesson_id], references: [id])
+  index        Int
+  type         String                  @db.VarChar(25)
+  created_at   DateTime                @default(now())
+  updated_at   DateTime                @updatedAt
+  translations activity_translations[]
+}
+
+// ---------------------------------------------------------------------------
+// Traduções i18n
+// ---------------------------------------------------------------------------
+
+model locales {
+  id                    Int                     @id @default(autoincrement())
+  locale                String                  @db.VarChar(8)
+  name                  String                  @db.VarChar(20)
+  content_versions      content_version[]
+  module_translations   module_translations[]
+  lesson_translations   lesson_translations[]
+  activity_translations activity_translations[]
+}
+
+model module_translations {
+  module_id  Int
+  module     modules  @relation(fields: [module_id], references: [id])
+  locale_id  Int
+  locale     locales  @relation(fields: [locale_id], references: [id])
+  name       String
+  subtitle   String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([module_id, locale_id])
+}
+
+model lesson_translations {
+  lesson_id  Int
+  lesson     lessons  @relation(fields: [lesson_id], references: [id])
+  locale_id  Int
+  locale     locales  @relation(fields: [locale_id], references: [id])
+  name       String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@id([lesson_id, locale_id])
+}
+
+model activity_translations {
+  activity_id Int
+  activity    activities @relation(fields: [activity_id], references: [id])
+  locale_id   Int
+  locale      locales    @relation(fields: [locale_id], references: [id])
+  content     Json       @db.JsonB
+  created_at  DateTime   @default(now())
+  updated_at  DateTime   @updatedAt
+
+  @@id([activity_id, locale_id])
+}

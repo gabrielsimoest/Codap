@@ -1,0 +1,440 @@
+{
+	"translation": {
+		"_comment info": "*********INFORMAÇÕES DO APP*********",
+		"changes": "- Aplicativo criado",
+		"dev": "Desenvolvedores:",
+		"GTS": "Gabriel Terra Simões - Software Engineering Student, UNAERP",
+		"GRP": "Gabriel Reverso Pereira - Computer Engineering Student, UNAERP",
+		"dev_note": "Developers Note:",
+		"dev_note2": "Codap was created by two computer engineering students from the University of Ribeirão Preto - UNAERP - being the winner of the 14th computer challenge at the university. Our intention with Codap is to expand the horizon of knowledge and, at the same time, bring part of what can be done with WEB development to people who are curious or want to start out as a WEB developer. We hope you have a good journey of getting to know each other with Cody, our faithful helper.",
+		"special thanks": "Special thanks:",
+		"names": "Thainá Cristina Covas - for creating the mascot",
+		"declaration": "Declaration of use of images:",
+		"pictures": "Some images used in the application are not our own and were obtained from the freepick website",
+
+		"_common*********": "*********COMUNS*********",
+		"close": "Close",
+		"showPassword": "Show password",
+		"hidePassword": "Hide password",
+		"change": "Change",
+		"Oops": "There are no classes for this module yet. We will bring new, better and more interactive classes soon!",
+
+		"codeBlank": {
+			"hintOne": "Tap a block to complete the code.",
+			"hintMany": "Tap the blocks in the order of the blanks. Tap a filled blank to undo.",
+			"emptySlot": "Blank {{n}}, empty",
+			"filledSlot": "Blank {{n}}: {{value}}. Tap to undo"
+		},
+
+		"reorder": {
+			"hint": "Tap the lines to build the code from top to bottom. Tap a placed line to send it back.",
+			"emptyLine": "Position {{n}}, empty",
+			"placedLine": "Position {{n}}: {{value}}. Tap to send back",
+			"chip": "{{value}}. Tap to add to the code",
+			"chipUsed": "{{value}}, already used"
+		},
+
+		"matching": {
+			"hint": "Tap one item from each column to form a pair.",
+			"done": "All pairs matched! Tap {{next}}.",
+			"paired": "Matched pair: {{value}}",
+			"leftColumn": "Left column",
+			"rightColumn": "Right column"
+		},
+
+		"fillBlank": {
+			"hint": "Type the missing word and tap {{next}}.",
+			"placeholder": "Your answer",
+			"inputLabel": "Answer for the blank"
+		},
+
+		"playground": {
+			"hiddenLines": "… {{count}} earlier lines hidden",
+			"loopInterrupted": "The loop was stopped: it never ended.",
+			"runFirst": "Fill in the blanks and tap {{run}} to test it; then tap {{next}}.",
+			"passed": "It works!",
+			"failed": "Not working yet.",
+			"noReport": "The exercise could not check the result."
+		},
+
+		"editor": {
+			"badge": "Module challenge",
+			"useInstantHint": "Use now ({{count}})",
+			"codeTab": "Code",
+			"resultTab": "Result",
+			"placeholder": "Write your code here",
+			"reset": "Start over",
+			"resetTitle": "Start the code over?",
+			"resetMessage": "What you wrote will be replaced by the starting code.",
+			"cancel": "Cancel",
+			"runFirst": "Write the code and tap {{run}} to test it; then tap {{next}}.",
+			"passed": "Challenge complete!",
+			"passedBefore": "The previous version of the code passed.",
+			"stale": "You changed the code after running it. Tap {{run}} again.",
+			"requirements": "Requirements",
+			"console": "Console",
+			"help": "Need help?",
+			"helpIntro": "If you get stuck, hints unlock little by little, and finally the solution.",
+			"hint": "Hint {{n}}",
+			"showHint": "Show hint {{n}}",
+			"hintLocked": "Hint {{n}}: unlocks in {{time}} or after {{count}} more run(s) that don't pass.",
+			"solution": "Solution",
+			"showSolution": "Show the solution",
+			"solutionLocked": "Solution: unlocks in {{time}} or after {{count}} more run(s) that don't pass.",
+			"solutionNote": "Write the solution in the editor and run it to complete the challenge.",
+			"indent": "Insert indent",
+			"insert": "Insert {{symbol}}"
+		},
+
+		"theory": {
+			"progress": "{{current}} of {{total}}",
+			"help": "Help"
+		},
+
+		"codeSection": {
+			"copy": "Copy",
+			"copied": "Copied!",
+			"consoleError": "Error",
+			"run": "Run",
+			"running": "Running...",
+			"noOutput": "No console output.",
+			"timeout": "This is taking longer than expected. There may be an infinite loop in the code."
+		},
+
+		"_comment*********": "*********CONFIGURAÇÃO*********",
+		"settings": "Settings",
+		"system": "System",
+		"notification": "Notification",
+		"info": "Informations",
+		"language": "Language",
+		"font": "Font",
+		"theme": "Dark mode",
+		"notifications": "Notifications",
+		"informations": "Informations",
+		"update": "Most recent update",
+		"version": "App version",
+		"about": "About",
+		"select the language:": "Select the language:",
+		"Change font size": "Change font size:",
+		"increase": "Increase size",
+		"decrease": "Decrease size",
+
+		"_comment2*********": "*********PERFIL*********",
+		"account": "Account",
+		"name": "Name",
+		"email": "Email",
+		"edit account": "Edit account",
+		"change password": "Change password",
+		"change picture": "Change picture",
+		"achievements": "Achievements",
+		"exit": "Exit",
+		"new name": "New name",
+		"successfully changed": "Successfully changed",
+		"success": "Success!",
+
+		"_comment3*********": "*********MARKET*********",
+		"market": "Market",
+		"buy using bits": "BUY USING BITS",
+		"double experience": "Double XP",
+		"surprise chest": "Surprise Chest",
+		"instant hint": "Instant Hint",
+		"buy": "BUY",
+		"active": "Active",
+		"inactive": "Inactive",
+
+		"_comment components": "*********COMPONENTS*********",
+		"next": "Next",
+		"congrats": "Congrats, you're right!",
+		"continue": "Continue",
+		"oh no": "Oh no, you were wrong!",
+		"try again": "Try again",
+
+		"login": {
+			"alert": {
+				"empty": {
+					"title": "Fields not filled!",
+					"message": "Please fill in all fields to proceed."
+				},
+				"invalid": {
+					"title": "Invalid data!",
+					"message": "Incorrect password or email, please check the data again."
+				},
+				"network": {
+					"title": "Connection error",
+					"message": "Could not connect to the server. Check your internet connection and try again."
+				},
+				"unexpected": {
+					"title": "Oops, something went wrong",
+					"message": "Could not sign in. Please try again shortly."
+				},
+				"sessionExpired": {
+					"title": "Session expired",
+					"message": "Your session has expired. Please sign in again to continue."
+				}
+			},
+			"password": "Password",
+			"register": "Click here to register",
+			"rememberMe": "Remember me"
+		},
+
+		"register": {
+			"alert": {
+				"empty": {
+					"title": "Warning!",
+					"message": "Please enter the data."
+				},
+				"invalid": {
+					"title": "Warning!",
+					"message": "Enter a valid email."
+				},
+				"success": {
+					"title": "Success!",
+					"message": "Registration completed. We sent you an email to confirm your address."
+				},
+				"not match": {
+					"title": "Warning!",
+					"message": "The confirmation password does not match the original password. Please check and try again."
+				},
+				"duplicate": {
+					"title": "Warning!",
+					"message": "This email is already registered. Try logging in instead."
+				},
+				"network": {
+					"title": "Connection error",
+					"message": "Could not connect to the server. Check your internet connection and try again."
+				},
+				"unexpected": {
+					"title": "Oops, something went wrong",
+					"message": "Could not complete the registration. Please try again shortly."
+				},
+				"shortPassword": {
+					"title": "Password too short",
+					"message": "Password must be at least 8 characters long."
+				},
+				"serverValidation": {
+					"title": "Invalid data",
+					"message": "Please check the entered data and try again."
+				},
+				"typo": {
+					"title": "Check your email",
+					"message": "This looks like a typo. Did you mean {{email}}?"
+				}
+			},
+			"name": "Name",
+			"confirm password": "Confirm password",
+			"password": "Password",
+			"invalid password": "Incorrect password",
+			"register": "Register",
+			"login": "Click here to return to login"
+		},
+
+		"emailStatus": {
+			"title": "Confirm your email",
+			"intro": "We sent a confirmation link to:",
+			"introPasswordChange": "To change your password, confirm your email first. We sent a confirmation link to:",
+			"why": "With your email confirmed you can recover and change your account password.",
+			"resend": "Resend email",
+			"resendIn": "Resend in {{seconds}}s",
+			"sent": "Done! We sent a new link. Check your spam folder too.",
+			"fix": "Fix email",
+			"fixTitle": "Fix email",
+			"fixHint": "Type the right address. The confirmation link will be sent to it.",
+			"newEmail": "Correct email",
+			"save": "Save and send link",
+			"cancel": "Cancel",
+			"useSuggestion": "Use {{email}}",
+			"confirmedTitle": "Email confirmed!",
+			"confirmedMessage": "All set: you can now recover and change your account password.",
+			"done": "Done",
+			"pending": "Pending",
+			"row": "Confirm email",
+			"verifiedLabel": "Email confirmed"
+		},
+
+		"passwordChange": {
+			"title": "Change password",
+			"intro": "We will send a link to:",
+			"note": "You create the new password on a secure page and, once saved, you are signed out of all your devices.",
+			"send": "Send link",
+			"cancel": "Cancel",
+			"sentTitle": "Link sent",
+			"sentMessage": "Open the email and tap the link to create your new password. It is valid for 1 hour.",
+			"done": "Got it"
+		},
+
+		"forgotPassword": {
+			"link": "Forgot my password",
+			"title": "Forgot my password",
+			"intro": "Type your account email. If it is registered and confirmed, we will send a link to create a new password.",
+			"send": "Send link",
+			"sentTitle": "Check your email",
+			"sentMessage": "If this email is registered and confirmed, the link is on its way. Check your spam folder too. It is valid for 1 hour.",
+			"done": "Got it"
+		},
+
+		"accountErrors": {
+			"offline": "No connection to the server. Check your internet and try again.",
+			"rate": "Too many requests in a row. Wait a moment and try again.",
+			"unavailable": "We could not send the email right now. Try again in a moment.",
+			"unexpected": "Something went wrong. Try again in a moment.",
+			"invalid": "Type a valid email.",
+			"taken": "An account with this email already exists.",
+			"same": "This is already your account email.",
+			"typo": "This looks like a typo. Did you mean {{email}}?"
+		},
+
+		"alert": {
+			"market": {
+				"title": "Warning!",
+				"message": {
+					"bits": "Insufficient Bits.",
+					"doubleXP": "Double Experience Disabled."
+				}
+			},
+			"notification": {
+				"title": "Notification Permission Denied",
+				"message": "Please enable notifications to receive reminders. You can enable them in your device's settings."
+			}
+		},
+
+		"shop": {
+			"success": "Done!",
+			"double_xp": {
+				"confirm": "Do you really want to buy Double XP for 5 minutes?",
+				"bought": "Double XP is on for 5 minutes!",
+				"active": "Active until {{time}}"
+			},
+			"instant_hint": {
+				"confirm": "Do you really want to buy an Instant Hint? It unlocks the next hint of a challenge right away.",
+				"bought": "Instant Hint bought! Use it in a challenge's help.",
+				"owned": "You have {{count}}"
+			},
+			"chest": {
+				"confirm": "Do you really want to open the Surprise Chest? It may reveal an exclusive, hard lesson that stays in your collection for good.",
+				"bought": "Chest opened!",
+				"collection": "Collection: {{revealed}} of {{total}}",
+				"areaCount": "{{revealed}} of {{total}}",
+				"empty": "There are no exclusive lessons in the chest yet.",
+				"lesson": "New exclusive lesson: {{name}}! Look for it at the end of its module.",
+				"hint": "You won an Instant Hint!",
+				"boost": "You won Double XP for 5 minutes!",
+				"bits": "You got {{amount}} Bits back!"
+			},
+			"errors": {
+				"offline": "No connection. Connect to the internet to use the shop.",
+				"pendingSync": "Connect to the internet to sync your progress before buying.",
+				"insufficient": "Not enough Bits. You have {{bits}}.",
+				"boostActive": "Your Double XP is already on.",
+				"generic": "The purchase could not be completed. Try again."
+			},
+			"noHints": "You have no Instant Hints left."
+		},
+
+		"levels": {
+			"level": "Level {{level}}",
+			"levelShort": "Lv. {{level}}",
+			"maxLevel": "Max level",
+			"xpProgress": "{{current}} / {{needed}} XP",
+			"totalXp": "{{xp}} XP in total",
+			"bits": "Bits",
+			"requiredLevel": "Level {{level}}",
+			"lockedLesson": {
+				"title": "Locked lesson",
+				"message": "This lesson opens at level {{level}}."
+			},
+			"complete": {
+				"title": "Lesson complete!",
+				"xpGained": "+{{xp}} XP",
+				"alreadyDone": "You had already completed this lesson. No XP this time.",
+				"boosted": "Double XP!",
+				"levelUp": "Level {{level}}!",
+				"bitsGained": "+{{bits}} Bits"
+			}
+		},
+
+		"achievement": {
+			"close": "Close",
+			"locked": "Locked",
+			"tapToClose": "Tap anywhere to close",
+			"html": {
+				"name": "HTML",
+				"hint": "Complete every HTML lesson.",
+				"description": "Completed every HTML lesson."
+			},
+			"css": {
+				"name": "CSS",
+				"hint": "Complete every CSS lesson.",
+				"description": "Completed every CSS lesson."
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"hint": "Complete every JavaScript lesson.",
+				"description": "Completed every JavaScript lesson."
+			},
+			"webTriad": {
+				"name": "Web Triad",
+				"hint": "Earn the HTML, CSS and JavaScript emblems.",
+				"description": "Mastered the web development basics: HTML, CSS and JavaScript."
+			}
+		},
+
+		"contentUpdate": {
+			"title": "Content updated!",
+			"version": "Version {{version}}",
+			"earlier": "Earlier updates",
+			"moreOne": "and 1 more update.",
+			"moreMany": "and {{count}} more updates.",
+			"ok": "Got it"
+		},
+
+		"comingSoon": {
+			"title": "COMING SOON!",
+			"message": "This feature is currently under development. Keep an eye out for future CODAP updates!"
+		},
+
+		"notificationService": {
+			"reminders": [
+				{
+					"title": "We miss you! 💙",
+					"body": "Cody is missing you. How about a quick lesson today?"
+				},
+				{
+					"title": "Your code is waiting 👋",
+					"body": "Just 5 minutes is enough to pick up where you left off."
+				},
+				{
+					"title": "Time for a Codap break?",
+					"body": "Come back and continue your journey at your own pace. We'll be here!"
+				},
+				{
+					"title": "Cody saved your spot 🌟",
+					"body": "How about doing an activity today? Every step counts."
+				},
+				{
+					"title": "Ready to code a little?",
+					"body": "A short lesson already makes a difference. We're rooting for you!"
+				},
+				{
+					"title": "It's been a little while… 😊",
+					"body": "Your lessons are right here, ready to go. Come back whenever you like!"
+				},
+				{
+					"title": "A new challenge awaits 🚀",
+					"body": "Come discover one more piece of HTML, CSS or JavaScript."
+				},
+				{
+					"title": "We miss you so much! ✨",
+					"body": "Codap isn't the same without you. Shall we learn something new today?"
+				},
+				{
+					"title": "Ease back in 🌱",
+					"body": "No need to rush: one activity at a time and you'll get there."
+				},
+				{
+					"title": "Cody says hi! 👾",
+					"body": "He wants to know how your learning is going. Come back and tell him!"
+				}
+			]
+		}
+	}
+}

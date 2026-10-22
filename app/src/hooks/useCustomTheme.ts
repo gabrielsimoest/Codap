@@ -1,0 +1,34 @@
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import DarkMode from "../theme/DarkMode";
+import LightMode from "../theme/LightMode";
+import { Theme } from "@react-navigation/native";
+
+const useCustomTheme = () => {
+	const [currentTheme, setCurrentTheme] = useState<Theme>();
+
+	useEffect(() => {
+		const getThemeFromStorage = async () => {
+			try {
+				const themeFromStorage = await AsyncStorage.getItem(
+					"CurrentTheme"
+				);
+				if (themeFromStorage) {
+					setCurrentTheme(
+						themeFromStorage === "dark" ? DarkMode : LightMode
+					);
+				} else {
+					setCurrentTheme(LightMode);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
+		getThemeFromStorage();
+	}, []);
+
+	return currentTheme;
+};
+
+export default useCustomTheme;

@@ -1,0 +1,178 @@
+export const listModulesQuerystringSchema = {
+  type: 'object',
+  required: ['areaId', 'locale'],
+  additionalProperties: false,
+  properties: {
+    areaId: { type: 'integer' },
+    locale: { type: 'string', enum: ['pt', 'en'] },
+    includeChest: {
+      type: 'boolean',
+      description: 'Só vale com NODE_ENV=development (é o que o dashboard usa para ver as aulas do baú); em qualquer outro ambiente é ignorado. As aulas do baú nunca saem deste catálogo: ele é igual para todos e cacheado, e elas são por usuário (ver GET /collection).'
+    }
+  }
+}
+
+export const activityResponseSchema = {
+  $id: 'activityResponse',
+  type: 'object',
+  properties: {
+    id: { type: 'integer' },
+    index: { type: 'integer' },
+    type: {
+      type: 'string',
+      description:
+        "Tipo da atividade (`activities.type`, VarChar(25) livre — não há enum no banco). Hoje o app renderiza 'theory' e 'option'; um tipo desconhecido é ignorado pelo app, não rejeitado aqui."
+    },
+    content: {
+      type: 'object',
+      // OBRIGATÓRIO: o fast-json-stringify remove toda propriedade que não
+      // esteja declarada em `properties`. Sem `additionalProperties: true` o
+      // `content` seria serializado como `{}` — silenciosamente, sem erro nem
+      // warning — e o JSONB inteiro se perderia no caminho.
+      //
+      // Também é de propósito que isto NÃO seja um `oneOf` por tipo de
+      // atividade: um `content` que não casasse com nenhuma variante faria o
+      // serializador lançar, derrubando o GET /modules inteiro com 500 para
+      // todos os clientes. Um tipo novo de atividade precisa ser transportado
+      // sem que a API precise conhecê-lo.
+      additionalProperties: true,
+      description:
+        "Conteúdo traduzido (`activity_translations.content`, JSONB). O formato depende de `type` — ver TheoryActivityContent / OptionActivityContent em src/types/contracts.ts. Objeto vazio quando não há tradução no idioma pedido."
+    }
+  },
+  required: ['id', 'index', 'type', 'content']
+}
+
+export const lessonResponseSchema = {
+  $id: 'lessonResponse',
+  type: 'object',
+  properties: {
+    id: { type: 'integer' },
+    index: { type: 'integer' },
+    name: { type: 'string' },
+    chest: {
+      type: 'boolean',
+      description: 'Aula exclusiva do baú. Sempre `false` no catálogo público.'
+    },
+    minLevel: {
+      type: ['integer', 'null'],
+      description: 'Nulo = lição da trilha principal. Preenchido = aula de aprofundamento (opcional), aberta a partir deste nível (2 a 50).'
+    },
+    xpReward: {
+      type: ['integer', 'null'],
+      description: 'XP pago ao concluir pela primeira vez. Nulo = 10, o valor padrão de uma lição.'
+    },
+    activities: { type: 'array', items: activityResponseSchema }
+  },
+  required: ['id', 'index', 'name', 'minLevel', 'xpReward', 'chest', 'activities']
+}
+
+export const moduleResponseSchema = {
+  $id: 'moduleResponse',
+  type: 'object',
+  properties: {
+    id: { type: 'integer' },
+    areaId: { type: 'integer' },
+    index: { type: 'integer' },
+    name: { type: 'string' },
+    subtitle: {
+      type: 'string',
+      description: "Nome descritivo do módulo (`module_translations.subtitle`) — ex.: 'Além do JavaScript'. `name` continua o genérico 'Módulo N'."
+    },
+    lessons: { type: 'array', items: lessonResponseSchema }
+  },
+  required: ['id', 'areaId', 'index', 'name', 'subtitle', 'lessons']
+}
+
+// ---------------------------------------------------------------------------
+// Escrita (dashboard) — só registrado com NODE_ENV=development
+// ---------------------------------------------------------------------------
+
+export const moduleIdParamsSchema = {
+  type: 'object',
+  required: ['id'],
+  properties: {
+    id: { type: 'integer' }
+  }
+}
+
+const moduleTranslationInputSchema = {
+  type: 'object',
+  required: ['name'],
+  additionalProperties: false,
+  properties: {
+    name: { type: 'string', minLength: 1 },
+    subtitle: {
+      type: ['string', 'null'],
+      description: "Nome descritivo do módulo — ex.: 'Além do JavaScript'. `name` continua o genérico 'Módulo N'."
+    }
+  }
+}
+
+/**
+ * Mapa de traduções por idioma, parcial de propósito: o conteúdo é escrito em
+ * português e traduzido depois, então exigir todos os idiomas travaria o fluxo
+ * real de autoria. `minProperties: 1` só impede um mapa completamente vazio.
+ */
+const moduleTranslationsSchema = {
+  type: 'object',
+  minProperties: 1,
+  additionalProperties: false,
+  properties: {
+    pt: moduleTranslationInputSchema,
+    en: moduleTranslationInputSchema
+  }
+}
+
+export const adminModuleResponseSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'integer' },
+    areaId: { type: 'integer' },
+    index: { type: 'integer' },
+    translations: {
+      type: 'object',
+      additionalProperties: false,
+      properties: {
+        pt: moduleTranslationInputSchema,
+        en: moduleTranslationInputSchema
+      },
+      description: 'Todas as traduções do módulo. Um idioma sem tradução simplesmente não aparece aqui — é assim que o dashboard distingue "sem tradução" de "tradução vazia", coisa que `GET /modules` não permite (resolve tudo para string vazia).'
+    }
+  },
+  required: ['id', 'areaId', 'index', 'translations']
+}
+
+export const createModuleBodySchema = {
+  type: 'object',
+  required: ['areaId', 'translations'],
+  additionalProperties: false,
+  properties: {
+    areaId: { type: 'integer' },
+    index: { type: 'integer', minimum: 0, description: 'Omitido = append no fim.' },
+    translations: moduleTranslationsSchema
+  }
+}
+
+export const updateModuleBodySchema = {
+  type: 'object',
+  required: ['translations'],
+  additionalProperties: false,
+  properties: {
+    translations: moduleTranslationsSchema
+  }
+}
+
+export const reorderModulesBodySchema = {
+  type: 'object',
+  required: ['areaId', 'orderedIds'],
+  additionalProperties: false,
+  properties: {
+    areaId: { type: 'integer' },
+    orderedIds: {
+      type: 'array',
+      items: { type: 'integer' },
+      description: 'Precisa ser exatamente o conjunto de módulos da área, na ordem desejada.'
+    }
+  }
+}

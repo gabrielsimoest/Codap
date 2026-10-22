@@ -1,6 +1,12 @@
 # CODAP, App de Aprendizado - HTML, CSS e JavaScript
 
-Este aplicativo foi desenvolvido com React Native com o objetivo de oferecer um ambiente interativo para ensinar os fundamentos do HTML, CSS e JavaScript.
+Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O repositório é um monorepo com workspace pnpm unificado, dividido em três pacotes:
+
+- **`/app`** — aplicativo mobile em Expo + React Native + TypeScript, com persistência local offline-first e autenticação/sincronização de progresso integradas com a API.
+- **`/api`** — API em Fastify + TypeScript, conectada a Prisma/PostgreSQL (NeonDB), com autenticação JWT (access + refresh token) e um endpoint de sincronização em lote.
+- **`/dashboard`** — dashboard web local (Vite + React) para gerenciar o conteúdo pedagógico: criar, editar, reordenar e exportar áreas, módulos, lições e atividades nos dois idiomas, sem precisar de Swagger ou Postman.
+
+Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md](app/CLAUDE.md), [api/CLAUDE.md](api/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
 
 ## Visite nosso site
 [codap.gabrielsimoesdeveloper.com.br](https://codap.gabrielsimoesdeveloper.com.br)
@@ -14,55 +20,60 @@ Este aplicativo foi desenvolvido com React Native com o objetivo de oferecer um 
 
 ## Tecnologias Utilizadas
 
-- React Native
-- JavaScript
-- SQLite
+**App (`/app`)**
+- Expo + React Native + TypeScript
+- Zustand (estado global)
+- SQLite + AsyncStorage (persistência local) + `expo-secure-store` (tokens de sessão)
+- `expo-notifications` (lembretes locais de inatividade, ligáveis em Configurações)
+- Axios + `@tanstack/react-query` (requisições à API)
+
+**API (`/api`)**
+- Fastify + TypeScript
+- Prisma + PostgreSQL/NeonDB
+- `@fastify/jwt` + `@fastify/rate-limit` (autenticação e proteção contra abuso)
+
+**Dashboard (`/dashboard`)**
+- Vite + React + TypeScript
+- Tailwind CSS v4 + shadcn/ui (tema escuro, com as cores do app)
+- `@tanstack/react-query` (dados) e react-hook-form + zod (formulários)
+- Playwright (validação de UI)
 
 ## Instalação
 
-Para executar o Projeto:
+Pré-requisitos: [Node.js](https://nodejs.org/) (LTS) e [pnpm](https://pnpm.io/installation).
 
-1. Instalação do chocolatey
-
-    https://chocolatey.org/
-
-2. Instalação do Java JDK
+1. Clone o repositório:
     ```bash
-    choco install -y nodejs-lts microsoft-openjdk11
+    git clone https://github.com/GtsSim0es/Codap.git
+    cd Codap
     ```
 
-3. Download do Android Studio 
-
-    https://developer.android.com/
-
-4. Criação do Ambiete Android Studio
-
-    a- Fazer o download R no SDK Manager
-    b- Criar um ambiente android com a versão mais recente pedida no site do react native
-    https://reactnative.dev/docs/environment-setup
-
-5. Variaveis de Ambiente ao PATH
-
-    a- %LOCALAPPDATA%\Android\Sdk
-
-6. Clone o repositório: git clone https://github.com/GtsSim0es/Codap.git
-
-7. Navegue até o diretório do projeto: cd Codap
-
-8. Instale as dependências:
+2. Instale as dependências **a partir da raiz** (o workspace é unificado — não rode `pnpm install` dentro de `api/`, `app/` ou `dashboard/`):
     ```bash
-    npm install ou yarn install
+    pnpm install
     ```
 
-9. Executar emulador
+3. Rodar o app (Expo):
     ```bash
-    npx react-native run-android
+    pnpm app:start     # abre o Metro/Expo; escaneie o QR code com o app Expo Go
+    pnpm app:android   # abre direto em um emulador/dispositivo Android
+    pnpm app:ios       # abre direto em um simulador/dispositivo iOS
+    pnpm app:web       # abre no navegador
+    ```
+    Para rodar em um emulador/dispositivo físico sem o Expo Go, é necessário configurar o ambiente nativo (Android Studio/Xcode) — veja o [guia oficial do Expo](https://docs.expo.dev/get-started/set-up-your-environment/).
+
+4. Rodar a API (Fastify):
+    ```bash
+    pnpm api:dev
     ```
 
-Em casos de erros tente:
+5. Rodar o dashboard de conteúdo (opcional, precisa da API no ar):
     ```bash
-    npx react-native doctor
+    pnpm dash:dev      # http://localhost:5173
     ```
+    O dashboard exige a API em modo de desenvolvimento (`pnpm api:dev`): as rotas de escrita do catálogo só existem nesse modo. Veja [dashboard/README.md](dashboard/README.md).
+
+Mais comandos (build, testes, etc.) estão documentados em [api/CLAUDE.md](api/CLAUDE.md), [app/CLAUDE.md](app/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
 
 ## Contribuição
 

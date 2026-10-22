@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "Codap",
+    "slug": "Codap",
+    "scheme": "codap",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/app-icon.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.gabrielreversopereira.Codap"
+    },
+    "web": {
+      "favicon": "./assets/icon.png"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-secure-store",
+      "expo-asset",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "resizeMode": "contain",
+          "imageWidth": 200,
+          "backgroundColor": "#000000"
+        }
+      ],
+      "expo-status-bar",
+      [
+        "expo-navigation-bar",
+        {
+          "hidden": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "color": "#5469D3",
+          "defaultChannel": "reminders"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "24d42c33-32f8-46af-a730-c1ae52d872a0"
+      }
+    }
+  }
+}

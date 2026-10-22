@@ -1,0 +1,440 @@
+{
+	"translation": {
+		"_comment info": "*********INFORMAÇÕES DO APP*********",
+		"changes": "- Aplicativo criado",
+		"dev": "Desenvolvedores:",
+		"GTS": "Gabriel Terra Simões - Estudante de engenharia de software, UNAERP",
+		"GRP": "Gabriel Reverso Pereira - Estudante de engenharia da computação, UNAERP",
+		"dev_note": "Nota dos desenvolvedores:",
+		"dev_note2": "Codap foi feito por dois estudates de engenharia da computação da Universidade de Ribeirão Preto - UNAERP - sendo o vencedor do 14º desafio da computação na universidade. Nosso intuíto com o Codap é expandir o horizonte de conhecimento e, ao mesmo tempo, trazer uma parte do que pode ser feito com o desenvolvimento WEB para pessoas curiosas ou que queiram estar iniciando como um desenvolvedor WEB. Esperamos que possam ter uma boa jornada deconhecimento com o Cody, o nosso fiel ajudante.",
+		"special thanks": "Agradecimentos especiais",
+		"names": "Thainá - pela criação do mascote",
+		"declaration": "Declaração de uso de imagens:",
+		"pictures": "Algumas imagens utilizadas no aplicativo não são de nossa autoria e foram obtidas pelo site do freepick",
+
+		"_common*********": "*********COMUNS*********",
+		"close": "Fechar",
+		"showPassword": "Mostrar senha",
+		"hidePassword": "Ocultar senha",
+		"change": "Alterar",
+		"Oops": "Ainda não há aulas pra esse módulo. Traremos novas aulas melhores e mais interativas em breve!",
+
+		"codeBlank": {
+			"hintOne": "Toque num bloco para completar o código.",
+			"hintMany": "Toque nos blocos na ordem das lacunas. Toque numa lacuna preenchida para desfazer.",
+			"emptySlot": "Lacuna {{n}}, vazia",
+			"filledSlot": "Lacuna {{n}}: {{value}}. Toque para desfazer"
+		},
+
+		"reorder": {
+			"hint": "Toque nas linhas para montar o código de cima para baixo. Toque numa linha montada para devolvê-la.",
+			"emptyLine": "Posição {{n}}, vazia",
+			"placedLine": "Posição {{n}}: {{value}}. Toque para devolver",
+			"chip": "{{value}}. Toque para adicionar ao código",
+			"chipUsed": "{{value}}, já usada"
+		},
+
+		"matching": {
+			"hint": "Toque num item de cada coluna para formar um par.",
+			"done": "Todos os pares ligados! Toque em {{next}}.",
+			"paired": "Par ligado: {{value}}",
+			"leftColumn": "Coluna da esquerda",
+			"rightColumn": "Coluna da direita"
+		},
+
+		"fillBlank": {
+			"hint": "Digite a palavra que falta e toque em {{next}}.",
+			"placeholder": "Sua resposta",
+			"inputLabel": "Resposta da lacuna"
+		},
+
+		"playground": {
+			"hiddenLines": "… {{count}} linhas anteriores omitidas",
+			"loopInterrupted": "O laço foi interrompido: ele não terminava.",
+			"runFirst": "Complete as lacunas e toque em {{run}} para testar; depois, em {{next}}.",
+			"passed": "Funcionou!",
+			"failed": "Ainda não funcionou.",
+			"noReport": "O exercício não conseguiu conferir o resultado."
+		},
+
+		"editor": {
+			"badge": "Desafio do módulo",
+			"useInstantHint": "Liberar agora ({{count}})",
+			"codeTab": "Código",
+			"resultTab": "Resultado",
+			"placeholder": "Escreva seu código aqui",
+			"reset": "Recomeçar",
+			"resetTitle": "Recomeçar o código?",
+			"resetMessage": "O que você escreveu será trocado pelo código inicial.",
+			"cancel": "Cancelar",
+			"runFirst": "Escreva o código e toque em {{run}} para testar; depois, em {{next}}.",
+			"passed": "Desafio concluído!",
+			"passedBefore": "A versão anterior do código passou.",
+			"stale": "Você mudou o código depois de executar. Toque em {{run}} de novo.",
+			"requirements": "Requisitos",
+			"console": "Console",
+			"help": "Precisa de ajuda?",
+			"helpIntro": "Se travar, dicas são liberadas aos poucos e, por fim, a solução.",
+			"hint": "Dica {{n}}",
+			"showHint": "Ver a dica {{n}}",
+			"hintLocked": "Dica {{n}}: libera em {{time}} ou depois de mais {{count}} execução(ões) sem passar.",
+			"solution": "Solução",
+			"showSolution": "Ver a solução",
+			"solutionLocked": "Solução: libera em {{time}} ou depois de mais {{count}} execução(ões) sem passar.",
+			"solutionNote": "Escreva a solução no editor e execute para concluir o desafio.",
+			"indent": "Inserir recuo",
+			"insert": "Inserir {{symbol}}"
+		},
+
+		"theory": {
+			"progress": "{{current}} de {{total}}",
+			"help": "Ajuda"
+		},
+
+		"codeSection": {
+			"copy": "Copiar",
+			"copied": "Copiado!",
+			"consoleError": "Erro",
+			"run": "Executar",
+			"running": "Executando...",
+			"noOutput": "Nenhuma saída de console.",
+			"timeout": "Isso está demorando mais que o esperado. Pode haver um loop infinito no código."
+		},
+
+		"_comment*********": "*********CONFIGURAÇÕES*********",
+		"settings": "Configurações",
+		"system": "Sistema",
+		"notification": "Notificação",
+		"info": "Informações",
+		"language": "Idioma",
+		"font": "Fonte",
+		"theme": "Modo escuro",
+		"notifications": "Notificações",
+		"informations": "Informações",
+		"update": "Atualização mais recente",
+		"version": "Versão do aplicativo",
+		"about": "Sobre",
+		"select the language:": "Selecione o idioma:",
+		"Change font size": "Mude o tamanho da fonte:",
+		"increase": "Aumentar tamanho",
+		"decrease": "Diminuir tamanho",
+
+		"_comment2*********": "*********PERFIL*********",
+		"account": "Perfil",
+		"name": "Nome",
+		"email": "Email",
+		"edit account": "Editar perfil",
+		"change password": "Alterar senha",
+		"change picture": "Alterar foto",
+		"achievements": "Conquistas",
+		"exit": "Sair",
+		"new name": "Novo nome",
+		"successfully changed": "Alterado com sucesso",
+		"success": "Sucesso!",
+
+		"_comment3*********": "*********MARKET*********",
+		"market": "Mercado",
+		"buy using bits": "COMPRE COM BITS",
+		"double experience": "Dobro de XP",
+		"surprise chest": "Baú Surpresa",
+		"instant hint": "Dica Instantânea",
+		"buy": "COMPRAR",
+		"active": "Ativo",
+		"inactive": "Inativo",
+
+		"_comment components": "*********COMPONENTS*********",
+		"next": "Seguinte",
+		"congrats": "Parabéns, você está certo!",
+		"continue": "Continuar",
+		"oh no": "Ah não, você errou!",
+		"try again": "Tentar novamente",
+
+		"login": {
+			"alert": {
+				"empty": {
+					"title": "Campos não preenchidos!",
+					"message": "Por favor, preencha todos os campos para prosseguir."
+				},
+				"invalid": {
+					"title": "Dados inválidos!",
+					"message": "Senha ou Email incorretos. Verifique os dados novamente!."
+				},
+				"network": {
+					"title": "Erro de conexão",
+					"message": "Não foi possível conectar ao servidor. Verifique sua internet e tente novamente."
+				},
+				"unexpected": {
+					"title": "Ops, algo deu errado",
+					"message": "Não foi possível entrar. Tente novamente em instantes."
+				},
+				"sessionExpired": {
+					"title": "Sessão expirada",
+					"message": "Sua sessão expirou. Entre novamente para continuar."
+				}
+			},
+			"password": "Senha",
+			"register": "Clique aqui para se registrar",
+			"rememberMe": "Lembrar-me"
+		},
+
+		"register": {
+			"alert": {
+				"empty": {
+					"title": "Aviso!",
+					"message": "Por favor insira os dados."
+				},
+				"invalid": {
+					"title": "Aviso!",
+					"message": "Insira um Email valido."
+				},
+				"success": {
+					"title": "Sucesso!",
+					"message": "Cadastro realizado. Enviamos um e-mail para você confirmar seu endereço."
+				},
+				"not match": {
+					"title": "Aviso!",
+					"message": "A senha de confirmação não corresponde à senha original. Por favor, verifique e tente novamente."
+				},
+				"duplicate": {
+					"title": "Aviso!",
+					"message": "Este e-mail já está cadastrado. Tente fazer login."
+				},
+				"network": {
+					"title": "Erro de conexão",
+					"message": "Não foi possível conectar ao servidor. Verifique sua internet e tente novamente."
+				},
+				"unexpected": {
+					"title": "Ops, algo deu errado",
+					"message": "Não foi possível concluir o cadastro. Tente novamente em instantes."
+				},
+				"shortPassword": {
+					"title": "Senha muito curta",
+					"message": "A senha precisa ter pelo menos 8 caracteres."
+				},
+				"serverValidation": {
+					"title": "Dados inválidos",
+					"message": "Verifique os dados informados e tente novamente."
+				},
+				"typo": {
+					"title": "Confira o e-mail",
+					"message": "Parece haver um erro de digitação. Você quis dizer {{email}}?"
+				}
+			},
+			"name": "Nome",
+			"confirm password": "Confirmar senha",
+			"password": "Senha",
+			"invalid password": "Senha incorreta",
+			"register": "Registrar",
+			"login": "Clique aqui para retornar ao login"
+		},
+
+		"emailStatus": {
+			"title": "Confirme seu e-mail",
+			"intro": "Enviamos um link de confirmação para:",
+			"introPasswordChange": "Para alterar a senha, confirme seu e-mail primeiro. Enviamos um link de confirmação para:",
+			"why": "Com o e-mail confirmado você pode recuperar e alterar a senha da sua conta.",
+			"resend": "Reenviar e-mail",
+			"resendIn": "Reenviar em {{seconds}}s",
+			"sent": "Pronto! Enviamos um novo link. Confira também a caixa de spam.",
+			"fix": "Corrigir e-mail",
+			"fixTitle": "Corrigir e-mail",
+			"fixHint": "Digite o endereço certo. O link de confirmação será enviado para ele.",
+			"newEmail": "E-mail correto",
+			"save": "Salvar e enviar link",
+			"cancel": "Cancelar",
+			"useSuggestion": "Usar {{email}}",
+			"confirmedTitle": "E-mail confirmado!",
+			"confirmedMessage": "Tudo certo: agora você pode recuperar e alterar a senha da sua conta.",
+			"done": "Pronto",
+			"pending": "Pendente",
+			"row": "Confirmar e-mail",
+			"verifiedLabel": "E-mail confirmado"
+		},
+
+		"passwordChange": {
+			"title": "Alterar senha",
+			"intro": "Enviaremos um link para:",
+			"note": "Você cria a nova senha numa página segura e, ao salvar, é desconectado de todos os aparelhos.",
+			"send": "Enviar link",
+			"cancel": "Cancelar",
+			"sentTitle": "Link enviado",
+			"sentMessage": "Abra o e-mail e toque no link para criar a nova senha. Ele vale por 1 hora.",
+			"done": "Entendi"
+		},
+
+		"forgotPassword": {
+			"link": "Esqueci minha senha",
+			"title": "Esqueci minha senha",
+			"intro": "Digite o e-mail da sua conta. Se ele estiver cadastrado e confirmado, enviamos um link para criar uma nova senha.",
+			"send": "Enviar link",
+			"sentTitle": "Confira seu e-mail",
+			"sentMessage": "Se este e-mail estiver cadastrado e confirmado, o link está a caminho. Confira também a caixa de spam. Ele vale por 1 hora.",
+			"done": "Entendi"
+		},
+
+		"accountErrors": {
+			"offline": "Sem conexão com o servidor. Verifique sua internet e tente de novo.",
+			"rate": "Muitos pedidos seguidos. Aguarde um pouco e tente de novo.",
+			"unavailable": "Não foi possível enviar o e-mail agora. Tente de novo em instantes.",
+			"unexpected": "Algo deu errado. Tente de novo em instantes.",
+			"invalid": "Digite um e-mail válido.",
+			"taken": "Já existe uma conta com este e-mail.",
+			"same": "Este já é o e-mail da sua conta.",
+			"typo": "Parece haver um erro de digitação. Você quis dizer {{email}}?"
+		},
+
+		"alert": {
+			"market": {
+				"title": "Aviso!",
+				"message": {
+					"bits": "Bits insuficientes.",
+					"doubleXP": "Dobro de Experiencia Desativado."
+				}
+			},
+			"notification": {
+				"title": "Permissão de Notificação Negada",
+				"message": "Por favor, ative as notificações para receber lembretes. Você pode ativá-las nas configurações do seu dispositivo."
+			}
+		},
+
+		"shop": {
+			"success": "Pronto!",
+			"double_xp": {
+				"confirm": "Você deseja realmente comprar o Dobro de XP por 5 minutos?",
+				"bought": "Dobro de XP ativo por 5 minutos!",
+				"active": "Ativo até {{time}}"
+			},
+			"instant_hint": {
+				"confirm": "Você deseja realmente comprar uma Dica Instantânea? Ela libera na hora a próxima dica de um desafio.",
+				"bought": "Dica Instantânea comprada! Use-a na ajuda de um desafio.",
+				"owned": "Você tem {{count}}"
+			},
+			"chest": {
+				"confirm": "Você deseja realmente abrir o Baú Surpresa? Ele pode revelar uma aula exclusiva e difícil, que fica para sempre na sua coleção.",
+				"bought": "Baú aberto!",
+				"collection": "Coleção: {{revealed}} de {{total}}",
+				"areaCount": "{{revealed}} de {{total}}",
+				"empty": "Ainda não há aulas exclusivas no baú.",
+				"lesson": "Nova aula exclusiva: {{name}}! Procure-a no fim do módulo dela.",
+				"hint": "Você ganhou uma Dica Instantânea!",
+				"boost": "Você ganhou o Dobro de XP por 5 minutos!",
+				"bits": "Você ganhou {{amount}} Bits de volta!"
+			},
+			"errors": {
+				"offline": "Sem conexão. Conecte-se à internet para usar a loja.",
+				"pendingSync": "Conecte-se à internet para sincronizar seu progresso antes de comprar.",
+				"insufficient": "Bits insuficientes. Você tem {{bits}}.",
+				"boostActive": "Seu Dobro de XP já está ativo.",
+				"generic": "Não foi possível concluir a compra. Tente de novo."
+			},
+			"noHints": "Você não tem mais Dicas Instantâneas."
+		},
+
+		"levels": {
+			"level": "Nível {{level}}",
+			"levelShort": "Nv. {{level}}",
+			"maxLevel": "Nível máximo",
+			"xpProgress": "{{current}} / {{needed}} XP",
+			"totalXp": "{{xp}} XP no total",
+			"bits": "Bits",
+			"requiredLevel": "Nível {{level}}",
+			"lockedLesson": {
+				"title": "Aula bloqueada",
+				"message": "Esta aula abre no nível {{level}}."
+			},
+			"complete": {
+				"title": "Lição concluída!",
+				"xpGained": "+{{xp}} XP",
+				"alreadyDone": "Você já tinha concluído esta lição. Sem XP desta vez.",
+				"boosted": "XP em dobro!",
+				"levelUp": "Nível {{level}}!",
+				"bitsGained": "+{{bits}} Bits"
+			}
+		},
+
+		"achievement": {
+			"close": "Fechar",
+			"locked": "Bloqueada",
+			"tapToClose": "Toque em qualquer lugar para fechar",
+			"html": {
+				"name": "HTML",
+				"hint": "Conclua todas as lições de HTML.",
+				"description": "Concluiu todas as lições de HTML."
+			},
+			"css": {
+				"name": "CSS",
+				"hint": "Conclua todas as lições de CSS.",
+				"description": "Concluiu todas as lições de CSS."
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"hint": "Conclua todas as lições de JavaScript.",
+				"description": "Concluiu todas as lições de JavaScript."
+			},
+			"webTriad": {
+				"name": "Tríade Web",
+				"hint": "Conquiste os emblemas de HTML, CSS e JavaScript.",
+				"description": "Dominou o básico do desenvolvimento web: HTML, CSS e JavaScript."
+			}
+		},
+
+		"contentUpdate": {
+			"title": "Conteúdo atualizado!",
+			"version": "Versão {{version}}",
+			"earlier": "Atualizações anteriores",
+			"moreOne": "e mais 1 atualização.",
+			"moreMany": "e mais {{count}} atualizações.",
+			"ok": "Entendi"
+		},
+
+		"comingSoon": {
+			"title": "EM BREVE!",
+			"message": "No momento esse recurso está em desenvolvimento. Fique de olho em futuras atualizações do CODAP!"
+		},
+
+		"notificationService": {
+			"reminders": [
+				{
+					"title": "Sentimos sua falta! 💙",
+					"body": "O Cody está com saudades. Que tal uma liçãozinha rápida hoje?"
+				},
+				{
+					"title": "Seu código te espera 👋",
+					"body": "Bastam 5 minutinhos para retomar de onde você parou."
+				},
+				{
+					"title": "Hora de uma pausa com o Codap?",
+					"body": "Volte e continue sua jornada, no seu ritmo. A gente te espera!"
+				},
+				{
+					"title": "O Cody guardou seu lugar 🌟",
+					"body": "Que tal fazer uma atividade hoje? Cada passo conta."
+				},
+				{
+					"title": "Bora programar um pouquinho?",
+					"body": "Uma lição curta já faz diferença. Estamos torcendo por você!"
+				},
+				{
+					"title": "Já faz um tempinho… 😊",
+					"body": "Suas lições estão aqui, prontinhas. Volte quando quiser!"
+				},
+				{
+					"title": "Um novo desafio te espera 🚀",
+					"body": "Venha descobrir mais um pedacinho de HTML, CSS ou JavaScript."
+				},
+				{
+					"title": "Que saudade de você! ✨",
+					"body": "O Codap não é o mesmo sem você. Vamos aprender algo novo hoje?"
+				},
+				{
+					"title": "Retome com calma 🌱",
+					"body": "Não precisa correr: uma atividade por vez e você chega lá."
+				},
+				{
+					"title": "O Cody mandou um oi! 👾",
+					"body": "Ele quer saber como está o seu aprendizado. Volte e conte pra ele!"
+				}
+			]
+		}
+	}
+}

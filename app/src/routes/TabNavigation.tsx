@@ -1,0 +1,198 @@
+import {
+	BottomTabBar,
+	BottomTabBarButtonProps,
+	createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
+import { ComponentType, useEffect, useRef } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { View } from "react-native-animatable";
+import Icon from "../components/Icon";
+import EdgeFade, { TAB_BAR_FADE } from "../components/layout/EdgeFade";
+import { TAB_BAR_BOTTOM, TAB_BAR_HEIGHT } from "../components/layout/tabBarMetrics";
+import { useTheme } from "@react-navigation/native";
+import Classes from "../screens/classes/Classes";
+import Config from "../screens/configurations/Config";
+import User from "../screens/user/User";
+import Market from "../screens/market/Market";
+import type { MainTabParamList } from "../types/navigation";
+import { useAppColors } from "../theme/appColors";
+
+const Tab = createBottomTabNavigator<MainTabParamList>();
+
+type IconType =
+	| "materialCommunity"
+	| "material"
+	| "ionicon"
+	| "feather"
+	| "fontawesome"
+	| "fontawesome5"
+	| "antdesign"
+	| "entypo"
+	| "simpleLineIcons"
+	| "octicons"
+	| "foundation";
+
+interface TabItem {
+	route: keyof MainTabParamList;
+	label: string;
+	type: IconType;
+	activeIcon: string;
+	inActiveIcon: string;
+	component: ComponentType<any>;
+}
+
+/* Tabs */
+const TabArr: TabItem[] = [
+	{
+		route: "Class",
+		label: "Class",
+		type: "ionicon",
+		activeIcon: "grid",
+		inActiveIcon: "grid-outline",
+		component: Classes,
+	},
+	/*{
+      route: 'Chat',
+      label: 'Chat',
+      type: Icons.MaterialCommunityIcons,
+      activeIcon: 'chat',
+      inActiveIcon: 'chat-outline',
+      component: Config,
+    },*/
+	{
+		route: "Market",
+		label: "market",
+		type: "materialCommunity",
+		activeIcon: "store-settings",
+		inActiveIcon: "store-settings-outline",
+		component: Market,
+	},
+
+	{
+		route: "Account",
+		label: "Account",
+		type: "fontawesome",
+		activeIcon: "user-circle",
+		inActiveIcon: "user-circle-o",
+		component: User,
+	},
+	{
+		route: "Settings",
+		label: "Settings",
+		type: "ionicon",
+		activeIcon: "settings",
+		inActiveIcon: "settings-outline",
+		component: Config,
+	},
+];
+
+type TabButtonProps = { item: TabItem } & BottomTabBarButtonProps;
+
+//Tab button
+const TabButton = (props: TabButtonProps) => {
+	const { item, onPress } = props;
+	const app = useAppColors();
+	const focused = props["aria-selected"];
+	const viewRef = useRef<View>(null);
+
+	useEffect(() => {
+		if (viewRef.current) {
+			if (focused) {
+				viewRef.current.animate({
+					/* 0: { scale: 0.5, rotate: "0deg" },
+					1: { scale: 1.5, rotate: "360deg" }, */
+					0: { transform: [{ scale: 0.5 }, { rotate: "0deg" }] },
+					1: { transform: [{ scale: 1.5 }, { rotate: "360deg" }] },
+				});
+			} else {
+				viewRef.current.animate({
+					/* 0: { scale: 1.5, rotate: "360deg" },
+					1: { scale: 1, rotate: "0deg" }, */
+					0: { transform: [{ scale: 1.5 }, { rotate: "360deg" }] },
+					1: { transform: [{ scale: 1 }, { rotate: "0deg" }] },
+				});
+			}
+		}
+	}, [focused]);
+
+	return (
+		<TouchableOpacity
+			onPress={onPress}
+			activeOpacity={1}
+			style={styles.container}
+		>
+			<View ref={viewRef} duration={1000} style={styles.container}>
+				<Icon
+					type={item.type}
+					name={focused ? item.activeIcon : item.inActiveIcon}
+					color={focused ? app.tabActive : app.tabIdle}
+				/>
+			</View>
+		</TouchableOpacity>
+	);
+};
+
+export function TabNavigation() {
+	const { colors } = useTheme();
+	const app = useAppColors();
+
+	return (
+		<Tab.Navigator
+			// O degradê vai por trás da barra e cobre a faixa dela: a rolagem some nele em
+			// vez de ser cortada por uma linha logo acima da barra.
+			tabBar={(props) => (
+				<>
+					<EdgeFade
+						edge="bottom"
+						height={TAB_BAR_BOTTOM + TAB_BAR_HEIGHT + TAB_BAR_FADE}
+						fade={TAB_BAR_FADE}
+					/>
+					<BottomTabBar {...props} />
+				</>
+			)}
+			screenOptions={{
+				headerShown: false,
+				tabBarHideOnKeyboard: false,
+				tabBarStyle: {
+					width: "90%",
+					marginHorizontal: "5%",
+					height: TAB_BAR_HEIGHT,
+					position: "absolute",
+					bottom: TAB_BAR_BOTTOM,
+					borderRadius: 16,
+					// No claro a barra é branca (superfície elevada) sobre a tela azul-gelo.
+					backgroundColor: app.isDark ? colors.background : colors.primary,
+					zIndex: 50,
+					overflow: "hidden",
+					borderTopWidth: 0,
+					alignItems: "center",
+					paddingBottom: 0
+				},
+			}}
+		>
+			{TabArr.map((item, index) => {
+				return (
+					<Tab.Screen
+						key={index}
+						name={item.route}
+						component={item.component}
+						options={{
+							tabBarShowLabel: false,
+							tabBarButton: (props: BottomTabBarButtonProps) => (
+								<TabButton {...props} item={item} />
+							),
+						}}
+					/>
+				);
+			})}
+		</Tab.Navigator>
+	);
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+});

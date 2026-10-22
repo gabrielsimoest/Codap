@@ -1,0 +1,332 @@
+import useCustomTheme from "./src/hooks/useCustomTheme";
+import useLanguage from "./src/hooks/useLanguage";
+import useFontSize from "./src/hooks/useFontSize";
+import useAuthSession from "./src/hooks/useAuthSession";
+import useNetworkSync from "./src/hooks/useNetworkSync";
+import useNotificationPreference from "./src/hooks/useNotificationPreference";
+import useInactivityReminder from "./src/hooks/useInactivityReminder";
+import useNotificationStore from "./src/stores/NotificationStore";
+import MainNavigation from "./src/routes/MainNavigation";
+import useThemeStore from "./src/stores/ThemeStore";
+import { useEffect, useMemo, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import useFontSizeStore from "./src/stores/FontSizeStore";
+import useLanguageStore from "./src/stores/LanguageStore";
+import useAuthStore from "./src/stores/AuthStore";
+import {
+	NavigationContainer,
+	useNavigationContainerRef,
+} from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
+import useUserStore from "./src/stores/UserStore";
+import type { RootStackParamList } from "./src/types/navigation";
+import type { User } from "./src/types/entities";
+import { Provider } from "react-native-paper";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import queryClient from "./src/services/queryClient";
+import queryPersister from "./src/services/queryPersister";
+import { areasQueryOptions } from "./src/hooks/queries/useAreasQuery";
+import useAlertStore from "./src/stores/AlertStore";
+import ThemedAlert from "./src/components/themed/ThemedAlert";
+import QueryDevTools from "./src/components/dev/QueryDevTools";
+import ContentVersionSync from "./src/components/ContentVersionSync";
+import EmailVerification from "./src/components/EmailVerification";
+import { LogBox } from "react-native";
+import * as Linking from "expo-linking";
+import { NavigationBar } from "expo-navigation-bar";
+
+//Enquanto não fizer um syntaxHighlight
+/* LogBox.ignoreLogs([
+	"Support for defaultProps will be removed from function components in a future major release. Use JavaScript default parameters instead",
+]);
+ */
+SplashScreen.preventAutoHideAsync();
+
+export default function App() {
+	const theme = useCustomTheme();
+	const language = useLanguage();
+	const fontSize = useFontSize();
+	const isLoggedIn = useAuthSession();
+	const notificationPreference = useNotificationPreference();
+	useNetworkSync();
+
+	const setTheme = useThemeStore((s) => s.setTheme);
+	const themeStored = useThemeStore((s) => s.theme);
+	const setFontSize = useFontSizeStore((s) => s.setFontSize);
+	const setLanguage = useLanguageStore((s) => s.setLanguage);
+	const hydrateNotifications = useNotificationStore((s) => s.hydrate);
+	const authIsLoggedIn = useAuthStore((s) => s.isLoggedIn);
+	const alertVisible = useAlertStore((S) => S.alertVisible);
+	const alertMessage = useAlertStore((S) => S.alertMessage);
+	const setAlertVisible = useAlertStore((S) => S.setAlertVisible);
+	const setAlertMessage = useAlertStore((S) => S.setAlertMessage);
+	const sessionExpired = useAuthStore((s) => s.sessionExpired);
+	const clearAuthSession = useAuthStore((s) => s.clearSession);
+	const acknowledgeSessionExpired = useAuthStore(
+		(s) => s.acknowledgeSessionExpired
+	);
+	const setUser = useUserStore((s) => s.setUser);
+	const { t } = useTranslation();
+	const navigationRef = useNavigationContainerRef<RootStackParamList>();
+	const [navigationReady, setNavigationReady] = useState(false);
+
+	const isReady =
+		theme !== undefined &&
+		fontSize !== undefined &&
+		language !== undefined &&
+		isLoggedIn !== undefined &&
+		notificationPreference !== undefined;
+
+	useEffect(() => {
+		if (isReady) {
+			setTheme(theme);
+			setFontSize(fontSize);
+			setLanguage(language);
+			hydrateNotifications(notificationPreference);
+			setTimeout(() => SplashScreen.hide(), 100);
+		}
+	}, [isReady]);
+
+	// Lembretes de inatividade (notificação local após 7/14/30 dias sem abrir o
+	// app). Chamado antes do `return null` abaixo para respeitar a ordem dos hooks.
+	useInactivityReminder(isReady);
+
+	// Sessão encerrada pelo servidor (ApiClient recebeu 401 no /auth/refresh e
+	// chamou expireSession): leva ao Login, limpando a pilha, com o aviso de
+	// sessão expirada. Espera a navegação montar — o 401 pode chegar durante
+	// o boot, antes do NavigationContainer existir; o flag fica de pé até
+	// ser tratado aqui. O clearSession de novo cobre a corrida em que a
+	// hidratação de useAuthSession, por ter lido o SecureStore antes de ele
+	// ser limpo, marcou a AuthStore como logada depois do expireSession.
+	// O logout manual (User.tsx) não passa por aqui: ele navega sozinho.
+	useEffect(() => {
+		if (!sessionExpired || !navigationReady) {
+			return;
+		}
+
+		clearAuthSession();
+		setUser({} as User);
+		navigationRef.reset({ index: 0, routes: [{ name: "Login" }] });
+		setAlertMessage({
+			title: t("login.alert.sessionExpired.title"),
+			message: t("login.alert.sessionExpired.message"),
+			buttonText: "ok",
+		});
+		setAlertVisible(true);
+		acknowledgeSessionExpired();
+	}, [sessionExpired, navigationReady]);
+
+	// Deep linking (teste via ADB e futuros links de e-mail/notificação) —
+	// as rotas de Home só entram na config quando logado, então um deep link
+	// pra uma tela protegida enquanto deslogado simplesmente não resolve (cai
+	// no estado padrão, que já é mostrar Login) em vez de pular a checagem.
+	// Usa a AuthStore (reativa, sincronizada por useAuthSession no boot e por
+	// login/logout depois disso) em vez do `isLoggedIn` local (congelado no
+	// boot, só serve pro initialRouteName do MainNavigation) — senão um
+	// logout em runtime nunca reconstruiria essa config e um deep link pra
+	// Home continuaria resolvendo mesmo deslogado.
+	const linking = useMemo(
+		() => ({
+			prefixes: [Linking.createURL("/"), "codap://"],
+			config: {
+				// Garante que Home fique embaixo de uma tela aberta direto por
+				// deep link — sem isso, fechar a lição num cold start deixaria
+				// a pilha vazia em vez de cair na aba de aulas.
+				initialRouteName: "Home" as const,
+				screens: authIsLoggedIn
+					? {
+							Home: {
+								path: "home",
+								screens: {
+									Class: "class",
+									Market: "market",
+									Account: "account",
+									Settings: "settings",
+								},
+							},
+							Lesson: {
+								path: "lesson/:areaId/:moduleId/:lessonId",
+								// Obrigatório: segmentos de URL chegam como
+								// string, e um areaId string montaria a key
+								// ["modules", "3", "pt"] — uma entrada de cache
+								// diferente de ["modules", 3, "pt"], órfã para
+								// sempre (gcTime Infinity) e com uma requisição
+								// extra. Mesmo problema que useModulesQuery já
+								// evita ao exigir areaId: number.
+								parse: {
+									areaId: Number,
+									moduleId: Number,
+									lessonId: Number,
+								},
+							},
+					  }
+					: {
+							Login: "login", // ?email=... vira route.params.email automaticamente
+							Register: "register",
+					  },
+			},
+		}),
+		[authIsLoggedIn]
+	);
+
+	// Só monta a navegação depois que já sabemos se o usuário está logado —
+	// Stack.Navigator só lê `initialRouteName` uma vez, no primeiro mount, e
+	// não reage a mudanças posteriores. Montar antes disso (com isLoggedIn
+	// ainda no valor padrão da store) trava a rota inicial errada mesmo que
+	// a sessão exista no SecureStore. A splash nativa cobre essa espera.
+	if (!isReady) {
+		return null;
+	}
+
+	return (
+		<PersistQueryClientProvider
+			client={queryClient}
+			persistOptions={{
+				persister: queryPersister,
+				// Descarta o cache persistido inteiro quando esta string muda.
+				//
+				// ATENÇÃO — o papel disto mudou. Mudança de **conteúdo** não
+				// exige mais bump: quem invalida o cache quando uma lição muda
+				// é a tabela `content_version`, comparada no boot por
+				// `useContentVersionSync`. O conteúdo chega ao usuário sem
+				// release do app, que era exatamente o custo dos 12 bumps
+				// abaixo (cada um deles exigiu publicar uma versão).
+				//
+				// O que ainda exige bump é mudança de **formato** — da query
+				// key ou do dado persistido —, porque aí o app foi recompilado
+				// de qualquer jeito e o cache antigo tem uma forma que o código
+				// novo não sabe ler. `gcTime` é Infinity, então uma entrada num
+				// formato morto nunca seria coletada sozinha.
+				//
+				// Regra prática: mexeu no seed/dashboard, publique uma
+				// `content_version`. Mexeu num tipo de `contracts.ts` ou numa
+				// query key, bumpe aqui.
+				//
+				// O histórico abaixo é anterior a esse mecanismo e fica como
+				// registro — vários desses bumps (5, 7, 9, 10, 12) hoje seriam
+				// uma publicação de versão, não um bump.
+				//   2 — áreas deixaram de ter idioma na key (["areas", lang]
+				//       -> ["areas"]), porque GET /areas não recebe mais locale.
+				//   3 — módulos deixaram de registrar entrada com areaId
+				//       indefinido (ver useModulesQuery/ModuleListSkeleton).
+				//   4 — GET /modules passou a devolver lessons[].activities[];
+				//       uma entrada do formato antigo não tem `activities` e a
+				//       lista de lições viria vazia para sempre. Primeiro bump
+				//       por mudança de dado, não de key (a key não mudou).
+				//   5 — as 2 lições de teste do primeiro módulo de HTML foram
+				//       substituídas pelas 8 lições reais do módulo básico
+				//       (mesmo formato de dado, conteúdo diferente); sem o
+				//       bump, quem já tinha aberto o app ficaria preso para
+				//       sempre nas lições antigas.
+				//   6 — os primeiros módulos de CSS e JavaScript ganharam
+				//       lições reais (antes vinham sem nenhuma); e
+				//       TheoryActivityContent ganhou o campo opcional
+				//       `additionalCode`, usado pelas novas lições de CSS.
+				//       Sem o bump, quem já tinha aberto o app ficaria com
+				//       CSS/JavaScript sem lições para sempre.
+				//   7 — os segundos módulos (intermediário) de HTML, CSS e
+				//       JavaScript ganharam lições reais (antes vinham sem
+				//       nenhuma). Mesmo motivo do bump 5/6: mesma key, mesmo
+				//       formato, conteúdo novo — sem o bump, quem já tinha
+				//       aberto o app ficaria com o módulo 2 vazio para sempre.
+				//   8 — os terceiros módulos (avançado) de HTML, CSS e
+				//       JavaScript ganharam lições reais (antes vinham sem
+				//       nenhuma); e `codeLanguage`/`additionalCode[].codeLanguage`
+				//       ganharam `'TypeScript'` como valor aceito. Mesmo motivo
+				//       do bump 7 — sem ele, quem já tinha aberto o app ficaria
+				//       com o módulo 3 vazio para sempre.
+				//   9 — o conteúdo do módulo 3 (avançado) das três áreas foi
+				//       reescrito do zero por seguir uma proposta curricular
+				//       errada na primeira versão (JavaScript incluía Node.js/
+				//       Express, que a proposta correta reserva para um módulo
+				//       futuro; HTML e CSS ganharam bem mais lições). Mesmo
+				//       motivo do bump 5: mesma key, mesmo formato, conteúdo
+				//       diferente — sem o bump, quem já tinha aberto o app
+				//       ficaria preso no conteúdo errado do módulo 3.
+				//   10 — o quarto módulo de JavaScript ("Além do JavaScript:
+				//        Node.js e Express") ganhou lições reais (antes vinha
+				//        com `lessons: []`). O `name` do módulo em si continua
+				//        genérico ("Módulo 4"/"Module 4", igual HTML/CSS, que
+				//        ainda não têm conteúdo nesse módulo). Mesmo motivo do
+				//        bump 5/7 — sem o bump, quem já tinha aberto o app
+				//        ficaria com o módulo 4 de JavaScript vazio para
+				//        sempre.
+				//   11 — `ModuleResponse` ganhou o campo `subtitle` (payload
+				//        muda, mesma key) — o nome descritivo de cada módulo
+				//        ("Além do JavaScript", "HTML avançado" etc.), que
+				//        antes vinha hardcoded no app (`areaMetadata.ts` +
+				//        i18n, por posição), agora vem de
+				//        `module_translations.subtitle`. Sem o bump, quem já
+				//        tinha aberto o app ficaria com o subtítulo de todo
+				//        módulo em branco (`?? ''` no backend) para sempre.
+				//   12 — os quartos módulos de HTML ("Além do HTML: introdução
+				//        ao React") e CSS ("Além do CSS: Tailwind CSS e
+				//        Ecossistema") ganharam lições reais (antes vinham com
+				//        `lessons: []`) — mesmo motivo do bump 10, agora para
+				//        as duas áreas que faltavam. Sem o bump, quem já tinha
+				//        aberto o app ficaria com esses dois módulos vazios
+				//        para sempre.
+				buster: "12",
+			}}
+			onSuccess={() => {
+				// Prefetch do catálogo de áreas no boot, para a tela de aulas
+				// já abrir com os dados em mãos em vez de disparar a busca no
+				// mount. Feito no onSuccess do provider (roda depois que o
+				// cache persistido termina de restaurar) e não num useEffect:
+				// prefetchar antes da restauração deixaria os dois escrevendo
+				// na mesma entrada de cache em ordem indefinida.
+				//
+				// Fire-and-forget de propósito — o retorno não é devolvido
+				// para o provider não esperar a rede antes de liberar o
+				// `isRestoring`. E, com staleTime infinito, isso vira no-op
+				// quando as áreas já vieram do cache: só busca de fato na
+				// primeira instalação.
+				void queryClient.prefetchQuery(areasQueryOptions());
+			}}
+		>
+			<NavigationContainer
+				ref={navigationRef}
+				theme={themeStored}
+				linking={linking}
+				onReady={() => setNavigationReady(true)}
+			>
+				<Provider>
+					{/*
+						Atualização de conteúdo sob demanda. Precisa ficar DENTRO
+						do PersistQueryClientProvider: o hook usa
+						useQueryClient/useIsRestoring, que não existem no corpo
+						de App (fora do provider), e invalidar antes da
+						restauração do cache seria corrida com ela.
+					*/}
+					<ContentVersionSync />
+					{/*
+						Confirmação de e-mail: pergunta ao servidor se o e-mail da conta
+						está confirmado e, se não, mostra o aviso uma vez por abertura do
+						app. Dentro do Provider porque o modal usa Portal.
+					*/}
+					<EmailVerification />
+					{/*
+						Barra de navegação do Android escondida por padrão (o deslize na
+						borda a mostra por um instante). Quando aparece, segue o tema do
+						aparelho: `userInterfaceStyle: "automatic"` no app.json e `style="auto"`.
+						No iOS o componente não faz nada.
+					*/}
+					<NavigationBar hidden style="auto" />
+					<MainNavigation isLoggedIn={isLoggedIn} />
+					{alertVisible && (
+						<ThemedAlert
+							title={alertMessage.title}
+							message={alertMessage.message}
+							buttonText={alertMessage.buttonText}
+							visible={alertVisible}
+							onDismiss={() => {
+								setAlertVisible(false);
+							}}
+						/>
+					)}
+				</Provider>
+			</NavigationContainer>
+			<QueryDevTools />
+		</PersistQueryClientProvider>
+	);
+}
