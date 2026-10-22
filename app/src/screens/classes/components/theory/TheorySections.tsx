@@ -28,7 +28,10 @@ function useLineHeight(base: number): number {
 export function TheorySection({ palette, highlight, title, text }: SectionProps) {
 	const titleLine = useLineHeight(TEXT_SIZE.sectionTitle);
 	const bodyLine = useLineHeight(TEXT_SIZE.body);
-	const highlightStyle = { color: palette.accent };
+	// O título mantém o destaque na cor de acento; no texto descritivo as palavras
+	// destacadas usam uma cor própria, mais clara, em Roboto medium.
+	const titleHighlight = { color: palette.accent };
+	const bodyHighlight = { color: palette.emphasis, fontFamily: "Roboto", fontWeight: "500" as const };
 
 	return (
 		<View style={styles.textColumn}>
@@ -38,7 +41,7 @@ export function TheorySection({ palette, highlight, title, text }: SectionProps)
 					highlight={highlight}
 					defaultSize={TEXT_SIZE.sectionTitle}
 					color={palette.text}
-					highlightStyle={highlightStyle}
+					highlightStyle={titleHighlight}
 					style={[styles.title, { lineHeight: titleLine }]}
 				/>
 			) : null}
@@ -47,7 +50,7 @@ export function TheorySection({ palette, highlight, title, text }: SectionProps)
 				highlight={highlight}
 				defaultSize={TEXT_SIZE.body}
 				color={palette.text}
-				highlightStyle={highlightStyle}
+				highlightStyle={bodyHighlight}
 				style={[styles.body, { lineHeight: bodyLine }]}
 			/>
 		</View>

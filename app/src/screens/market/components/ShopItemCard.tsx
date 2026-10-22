@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	titleRight: {
-		alignSelf: "center",
+		alignSelf: "flex-start",
 	},
 	price: {
 		color: BITS_COLOR,

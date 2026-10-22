@@ -13,8 +13,10 @@ export interface TheoryPalette {
 	codeArea: string;
 	/** Borda do editor, dos separadores e da trilha da barra de progresso. */
 	border: string;
-	/** Destaque: botão, aba ativa, barra de progresso, palavras destacadas. */
+	/** Destaque: botão, aba ativa, barra de progresso, palavras destacadas do título. */
 	accent: string;
+	/** Palavras destacadas dentro do texto descritivo: mais clara que `accent`, para ler bem sobre o fundo. */
+	emphasis: string;
 	/** Aba não selecionada. */
 	tabIdle: string;
 	/** Ícones de fechar, ajuda e copiar, e os textos "Copiar" e "2 de 5". */
@@ -40,6 +42,7 @@ const DARK: TheoryPalette = {
 	codeArea: "#0E121B",
 	border: "#1B2F4E",
 	accent: "#5368D6",
+	emphasis: "#8FA2FF",
 	tabIdle: "#1B2F4E",
 	icon: "#AFC3ED",
 	text: "rgba(255,255,255,0.95)",
@@ -58,6 +61,7 @@ const LIGHT: TheoryPalette = {
 	codeArea: "#FFFFFF",
 	border: "#C9D3EA",
 	accent: "#5368D6",
+	emphasis: "#3B4FC2",
 	tabIdle: "#DCE3F5",
 	icon: "#4A5A82",
 	text: "rgba(17,23,36,0.95)",

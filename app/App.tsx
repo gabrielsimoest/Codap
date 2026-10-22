@@ -32,6 +32,7 @@ import QueryDevTools from "./src/components/dev/QueryDevTools";
 import ContentVersionSync from "./src/components/ContentVersionSync";
 import { LogBox } from "react-native";
 import * as Linking from "expo-linking";
+import { NavigationBar } from "expo-navigation-bar";
 
 //Enquanto não fizer um syntaxHighlight
 /* LogBox.ignoreLogs([
@@ -297,6 +298,13 @@ export default function App() {
 						restauração do cache seria corrida com ela.
 					*/}
 					<ContentVersionSync />
+					{/*
+						Barra de navegação do Android escondida por padrão (o deslize na
+						borda a mostra por um instante). Quando aparece, segue o tema do
+						aparelho: `userInterfaceStyle: "automatic"` no app.json e `style="auto"`.
+						No iOS o componente não faz nada.
+					*/}
+					<NavigationBar hidden style="auto" />
 					<MainNavigation isLoggedIn={isLoggedIn} />
 					{alertVisible && (
 						<ThemedAlert
