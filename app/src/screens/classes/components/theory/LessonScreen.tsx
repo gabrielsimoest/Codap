@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode, Ref } from "react";
 import { DimensionValue, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import TheoryHeader from "./TheoryHeader";
@@ -38,6 +38,19 @@ interface Props {
 	onNext: () => void;
 	/** Para telas com campo de texto: tocar fora do teclado não pode engolir o toque dos botões. */
 	keyboardShouldPersistTaps?: "never" | "always" | "handled";
+	/**
+	 * Rodapé próprio no lugar do botão "Seguinte" e do degradê de baixo (a barra de
+	 * símbolos do editor, enquanto o teclado está aberto). Posicionado em relação à
+	 * casca inteira; a rolagem deixa de reservar o espaço do botão.
+	 */
+	footer?: ReactNode;
+	/** Espaço reservado embaixo da rolagem (o que o teclado cobre), além do rodapé. */
+	bottomInset?: number;
+	/** Refs da casca e da rolagem, para telas que medem o teclado ou rolam até um campo. */
+	rootRef?: Ref<View>;
+	/** A casca mudou de tamanho (a barra de navegação aparece com o teclado, por exemplo). */
+	onRootLayout?: () => void;
+	scrollRef?: Ref<ScrollView>;
 	children: ReactNode;
 }
 
@@ -58,6 +71,11 @@ export default function LessonScreen({
 	onHelp,
 	onNext,
 	keyboardShouldPersistTaps,
+	footer,
+	bottomInset = 0,
+	rootRef,
+	onRootLayout,
+	scrollRef,
 	children,
 }: Props) {
 	const { bottom } = useInsets();
@@ -67,9 +85,10 @@ export default function LessonScreen({
 	// O degradê usa a cor da tela com alfa 00 no fim, e não "transparent": no
 	// Android ele interpola por preto.
 	const screen = palette.screen;
+	const hasFooter = footer !== undefined;
 
 	return (
-		<View style={[styles.screen, { backgroundColor: screen }]}>
+		<View ref={rootRef} collapsable={false} onLayout={onRootLayout} style={[styles.screen, { backgroundColor: screen }]}>
 			<TheoryHeader
 				palette={palette}
 				title={title}
@@ -79,14 +98,15 @@ export default function LessonScreen({
 				onClose={onClose}
 				onHelp={onHelp}
 			/>
-			<View style={styles.scroll}>
+			<View style={[styles.scroll, { marginBottom: bottomInset }]}>
 				<ScrollView
+					ref={scrollRef}
 					style={styles.scroll}
 					keyboardShouldPersistTaps={keyboardShouldPersistTaps}
 					contentContainerStyle={{
 						paddingHorizontal: horizontal,
 						paddingTop: gap + 4,
-						paddingBottom: THEORY_BUTTON_HEIGHT + THEORY_BUTTON_MARGIN * 2 + bottom + gap,
+						paddingBottom: hasFooter ? gap : THEORY_BUTTON_HEIGHT + THEORY_BUTTON_MARGIN * 2 + bottom + gap,
 						gap,
 					}}
 				>
@@ -98,15 +118,19 @@ export default function LessonScreen({
 					colors={[screen, `${screen}00`]}
 					style={styles.headerFade}
 				/>
-				{/* E o que desce para baixo do botão: o degradê cobre a faixa do botão e começa um pouco acima dele. */}
-				<LinearGradient
-					pointerEvents="none"
-					colors={[`${screen}00`, screen, screen]}
-					locations={[0, BOTTOM_FADE / bottomFadeHeight, 1]}
-					style={[styles.bottomFade, { height: bottomFadeHeight }]}
-				/>
+				{hasFooter ? null : (
+					<>
+						{/* E o que desce para baixo do botão: o degradê cobre a faixa do botão e começa um pouco acima dele. */}
+						<LinearGradient
+							pointerEvents="none"
+							colors={[`${screen}00`, screen, screen]}
+							locations={[0, BOTTOM_FADE / bottomFadeHeight, 1]}
+							style={[styles.bottomFade, { height: bottomFadeHeight }]}
+						/>
+					</>
+				)}
 			</View>
-			<TheoryNextButton palette={palette} horizontalPadding={horizontal} onPress={onNext} />
+			{hasFooter ? footer : <TheoryNextButton palette={palette} horizontalPadding={horizontal} onPress={onNext} />}
 		</View>
 	);
 }

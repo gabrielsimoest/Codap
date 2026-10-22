@@ -21,7 +21,11 @@ interface QuestionProps {
 	paragraph?: string;
 }
 
-/** Enunciado no estilo de seção da teoria: `paragraph` como texto, `question` como título. */
+/**
+ * Enunciado no estilo de seção da teoria: `paragraph` como texto, `question` como
+ * título. As palavras de `highlight` usam nos dois a cor `emphasis`, a mesma do texto
+ * descritivo da teoria (mais clara que o acento, que no fundo escuro lê mal).
+ */
 export function ActivityQuestion({ palette, highlight, question, paragraph }: QuestionProps) {
 	const { textInset } = useLessonLayout();
 	const fontOffset = useFontSizeStore((s) => s.fontSize);
@@ -45,7 +49,7 @@ export function ActivityQuestion({ palette, highlight, question, paragraph }: Qu
 				highlight={highlight}
 				defaultSize={TEXT_SIZE.sectionTitle}
 				color={palette.text}
-				highlightStyle={{ color: palette.accent }}
+				highlightStyle={{ color: palette.emphasis }}
 				style={[styles.question, { lineHeight: questionLine }]}
 			/>
 		</View>

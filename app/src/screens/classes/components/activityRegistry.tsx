@@ -129,11 +129,14 @@ export const ACTIVITY_REGISTRY: Record<
 			/>
 		);
 	},
-	code_editor: ({ content, activityKey, progress, onProceed, onClose }) => {
+	code_editor: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		const c = content as CodeEditorActivityContent;
 		return (
 			<CodeEditorExercise
 				key={activityKey}
+				title={title}
+				step={step}
+				total={total}
 				question={c.question}
 				highlight={c.highlight}
 				codeLanguage={c.codeLanguage}

@@ -56,7 +56,7 @@ function shuffleColumns(count: number): { left: number[]; right: number[] } {
  * Ligar pares: duas colunas embaralhadas, e o aluno toca um item de cada lado.
  * O feedback é por par e imediato — par certo trava em verde nos dois lados,
  * par errado pisca em vermelho e a seleção é limpa para tentar de novo. Não há
- * pontuação de erros: o `NextButton` só libera quando todos os pares estão
+ * pontuação de erros: o "Seguinte" só libera quando todos os pares estão
  * feitos, e então o resultado é sempre `correct`.
  *
  * Os itens são identificados pelo índice do par em `pairs`, não pelo texto, e

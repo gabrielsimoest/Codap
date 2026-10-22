@@ -1,4 +1,3 @@
-import { useTheme } from "@react-navigation/native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
 	ActivityIndicator,
@@ -14,15 +13,10 @@ import {
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import type { WebViewMessageEvent } from "react-native-webview";
-import { LessonHeader, Progressbar } from "./LessonHeader";
-import ResizableHighlighter from "../../../components/ResizableHighlighter";
 import ResizableText from "../../../components/ResizableText";
-import NextButton from "./NextButton";
-import ThemedView from "../../../components/themed/ThemedView";
 import ValidationModal from "./ValidationModal";
 import CodeSnippet from "./CodeSnippet";
 import Icon from "../../../components/Icon";
-import DarkMode from "../../../theme/DarkMode";
 import useFontSizeStore from "../../../stores/FontSizeStore";
 import useShopStore from "../../../stores/ShopStore";
 import useUserStore from "../../../stores/UserStore";
@@ -30,9 +24,15 @@ import { refreshShop, spendHint } from "../../../services/ShopActions";
 import { showAlert } from "../../../utils/showAlert";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import SandboxWebView, { parseSandboxMessage, type SandboxRunResult } from "./SandboxWebView";
+import { ActivityHint, ActivityQuestion } from "./theory/ActivityParts";
+import GradientBar from "./theory/GradientBar";
+import LessonScreen, { useLessonLayout } from "./theory/LessonScreen";
+import { FIXED_UI, TEXT_SIZE, useTheoryPalette, type TheoryPalette } from "./theory/theoryTheme";
 
-/** Azul da marca: `colors.primary` deste app é quase a cor de fundo. */
-const BRAND = "#5469D3";
+/** Dourado do desafio de módulo: troféu, dicas e solução (a paleta não tem um). */
+const GOLD = "#E0B04C";
+/** Âmbar do "ainda não passou" (o mesmo do aviso de tempo esgotado do terminal da teoria). */
+const WARNING_COLOR = "#E0A552";
 /** Sem mensagem de volta nesse prazo, a execução é dada como travada. */
 const WATCHDOG_MS = 4000;
 /** Linhas de console mostradas (as últimas). */
@@ -89,6 +89,10 @@ interface Props {
 	checkScript: string;
 	hints: string[];
 	solution: string;
+	/** Título da lição (cabeçalho), posição na sessão e tamanho dela. */
+	title?: string;
+	step: number;
+	total: number;
 	progress: DimensionValue;
 	onProceed: () => void;
 	onClose: () => void;
@@ -105,6 +109,11 @@ interface Props {
  * só marca o resultado como desatualizado — e só um resultado do código atual
  * conclui o desafio. Trocar de aba não remonta a WebView, então a página não
  * roda de novo nem conta uma tentativa a mais.
+ *
+ * Visual: a casca da teoria (`LessonScreen`) e, no lugar das abas HTML/CSS/JS,
+ * um editor de duas abas — "Código" e "Resultado" — no mesmo cartão do editor da
+ * teoria. Com o teclado aberto, a barra de símbolos substitui o botão
+ * "Seguinte" (`footer` da casca) e a rolagem reserva o que o teclado cobre.
  */
 export default function CodeEditorExercise({
 	question,
@@ -117,12 +126,15 @@ export default function CodeEditorExercise({
 	checkScript,
 	hints,
 	solution,
+	title,
+	step,
+	total,
 	progress,
 	onProceed,
 	onClose,
 }: Props) {
-	const theme = useTheme();
-	const isDarkMode = theme === DarkMode;
+	const palette = useTheoryPalette();
+	const { textInset } = useLessonLayout();
 	const { t } = useTranslation();
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -137,6 +149,8 @@ export default function CodeEditorExercise({
 	const containerRef = useRef<View>(null);
 	const scrollRef = useRef<ScrollView>(null);
 	const editorY = useRef(0);
+	// Topo do teclado (coordenada de tela) enquanto ele está aberto; `null` fechado.
+	const keyboardTop = useRef<number | null>(null);
 	const inputRef = useRef<TextInput>(null);
 	const selection = useRef({ start: starterCode.length, end: starterCode.length });
 
@@ -156,16 +170,25 @@ export default function CodeEditorExercise({
 	};
 	useEffect(() => clearWatchdog, []);
 
+	/**
+	 * `screenY` vem em coordenadas de tela. `measure` (pageY) está na mesma
+	 * referência; `measureInWindow` não — no emulador ele descontava a barra de
+	 * status (41 dp) e a barra de símbolos ficava atrás do teclado. Repetida a cada
+	 * mudança de tamanho da casca: com o teclado, a barra de navegação (escondida
+	 * por padrão) reaparece e encolhe a janela depois do primeiro evento.
+	 */
+	const measureKeyboard = () => {
+		const top = keyboardTop.current;
+		if (top === null) return;
+		containerRef.current?.measure((_x, _y, _width, height, _pageX, pageY) => {
+			setKeyboardOffset(Math.max(0, pageY + height - top));
+		});
+	};
+
 	useEffect(() => {
 		const shown = Keyboard.addListener("keyboardDidShow", (event) => {
-			// `screenY` vem em coordenadas de tela. `measure` (pageY) está na
-			// mesma referência; `measureInWindow` não — no emulador ele
-			// descontava a barra de status (41 dp) e a barra de símbolos
-			// ficava atrás do teclado.
-			const keyboardTop = event.endCoordinates.screenY;
-			containerRef.current?.measure((_x, _y, _width, height, _pageX, pageY) => {
-				setKeyboardOffset(Math.max(0, pageY + height - keyboardTop));
-			});
+			keyboardTop.current = event.endCoordinates.screenY;
+			measureKeyboard();
 			setKeyboardVisible(true);
 			// Leva o editor para o topo da área visível: ele rola por dentro,
 			// então o cursor fica sempre acima do teclado.
@@ -174,6 +197,7 @@ export default function CodeEditorExercise({
 			}
 		});
 		const hidden = Keyboard.addListener("keyboardDidHide", () => {
+			keyboardTop.current = null;
 			setKeyboardVisible(false);
 			setKeyboardOffset(0);
 		});
@@ -280,27 +304,68 @@ export default function CodeEditorExercise({
 		return run.result.message ? `${t("playground.failed")} ${run.result.message}` : t("playground.failed");
 	})();
 
-	const editorColors = isDarkMode ? styles.editorDark : styles.editorLight;
 	// A barra de símbolos só aparece quando o teclado aberto é o do editor.
 	const typing = keyboardVisible && tab === "code";
+	const showResult = tab === "result";
 
 	return (
 		<>
-			<ThemedView theme="card" style={styles.container}>
-				<View ref={containerRef} style={styles.fill} collapsable={false}>
-					<Progressbar progress={progress} />
-					<ScrollView
-						ref={scrollRef}
-						style={typing ? { marginBottom: keyboardOffset + SYMBOL_BAR_HEIGHT } : styles.scroller}
-						keyboardShouldPersistTaps="handled"
-					>
-						<LessonHeader onClose={onClose} setTutorialVisible={() => undefined} />
-						<View style={styles.badge}>
-							<Icon type="ionicon" name="trophy-outline" color="#E0B04C" size={18} />
-							<Text style={styles.badgeText}>{t("editor.badge")}</Text>
-						</View>
-						<ResizableHighlighter style={styles.question} highlight={highlight} text={question} defaultSize={21} />
+			<LessonScreen
+				palette={palette}
+				title={title}
+				progress={progress}
+				step={step}
+				total={total}
+				onClose={onClose}
+				onHelp={() => undefined}
+				onNext={() => evaluated && setModalVisible(true)}
+				keyboardShouldPersistTaps="handled"
+				rootRef={containerRef}
+				onRootLayout={measureKeyboard}
+				scrollRef={scrollRef}
+				bottomInset={typing ? keyboardOffset + SYMBOL_BAR_HEIGHT : 0}
+				footer={
+					typing ? (
+						<ScrollView
+							horizontal
+							keyboardShouldPersistTaps="always"
+							showsHorizontalScrollIndicator={false}
+							style={[
+								styles.symbolBar,
+								{ bottom: keyboardOffset, backgroundColor: palette.gradientTo, borderTopColor: palette.border },
+							]}
+							contentContainerStyle={styles.symbolBarContent}
+						>
+							<SymbolKey palette={palette} label="⇥" accessibilityLabel={t("editor.indent")} onPress={() => insert(INDENT)} />
+							{SYMBOLS[codeLanguage].map((symbol) => (
+								<SymbolKey
+									key={symbol}
+									palette={palette}
+									label={symbol}
+									accessibilityLabel={t("editor.insert", { symbol })}
+									onPress={() => insert(symbol)}
+								/>
+							))}
+						</ScrollView>
+					) : undefined
+				}
+			>
+				<View style={styles.intro}>
+					<View style={[styles.badge, { paddingHorizontal: textInset }]}>
+						<Icon type="ionicon" name="trophy-outline" color={GOLD} size={18} />
+						<Text style={styles.badgeText}>{t("editor.badge")}</Text>
+					</View>
+					<ActivityQuestion palette={palette} highlight={highlight} question={question} />
+				</View>
 
+				<View
+					style={[styles.card, { borderColor: palette.border, backgroundColor: palette.codeArea }]}
+					onLayout={(event) => {
+						editorY.current = event.nativeEvent.layout.y;
+					}}
+				>
+					<View style={[styles.header, { borderBottomColor: palette.border }]}>
+						<GradientBar from={palette.gradientFrom} to={palette.gradientTo} />
 						<View style={styles.tabs} accessibilityRole="tablist">
 							{(["code", "result"] as Tab[]).map((value) => {
 								const disabled = value === "result" && status === "idle";
@@ -312,161 +377,160 @@ export default function CodeEditorExercise({
 										accessibilityState={{ selected, disabled }}
 										disabled={disabled}
 										onPress={() => setTab(value)}
-										style={[styles.tab, selected ? { backgroundColor: BRAND } : null, disabled ? styles.disabled : null]}
+										style={[
+											styles.tab,
+											{ backgroundColor: selected ? palette.accent : palette.tabIdle },
+											disabled ? styles.disabled : null,
+										]}
 									>
-										<Text style={styles.tabText}>{value === "code" ? t("editor.codeTab") : t("editor.resultTab")}</Text>
+										<Text
+											style={[
+												styles.tabText,
+												{ fontSize: FIXED_UI.tab, color: selected ? "#FFFFFF" : palette.text },
+											]}
+										>
+											{value === "code" ? t("editor.codeTab") : t("editor.resultTab")}
+										</Text>
 									</TouchableOpacity>
 								);
 							})}
 						</View>
+					</View>
 
-						{tab === "code" ? (
-							<>
-								<TextInput
-									ref={inputRef}
-									onLayout={(event) => {
-										editorY.current = event.nativeEvent.layout.y;
-									}}
-									value={code}
-									onChangeText={setCode}
-									onSelectionChange={(event) => {
-										selection.current = event.nativeEvent.selection;
-									}}
-									multiline
-									autoCorrect={false}
-									autoCapitalize="none"
-									autoComplete="off"
-									spellCheck={false}
-									importantForAutofill="no"
-									smartInsertDelete={false}
-									textAlignVertical="top"
-									placeholder={t("editor.placeholder")}
-									placeholderTextColor="#888888"
-									accessibilityLabel={t("editor.codeTab")}
-									style={[styles.editor, editorColors, { fontSize: 15 + fontSize }]}
-								/>
-								<View style={styles.actions}>
-									<TouchableOpacity accessibilityRole="button" onPress={reset} style={styles.secondaryButton}>
-										<Icon type="ionicon" name="refresh" color="#9AA9B8" size={16} />
-										<Text style={styles.secondaryText}>{t("editor.reset")}</Text>
-									</TouchableOpacity>
-									<RunButton status={status} onPress={execute} label={t("codeSection.run")} runningLabel={t("codeSection.running")} />
-								</View>
-							</>
-						) : null}
-
-						{/* Fora das abas, na mesma posição da árvore: trocar de aba só
-						    esconde a prévia, não remonta a página. Some no timeout —
-						    desmontar é o que mata uma página presa. */}
-						{webViewMounted && (
-							<View
-								style={[
-									tab === "result" && showPreview ? styles.preview : styles.hiddenWebView,
-									isDarkMode ? styles.boxDark : styles.boxLight,
-								]}
-								pointerEvents={tab === "result" && showPreview ? "auto" : "none"}
-							>
-								<SandboxWebView key={runKey} html={documentHtml} onMessage={handleMessage} />
-							</View>
-						)}
-
-						{tab === "result" ? (
-							<View style={[styles.output, isDarkMode ? styles.boxDark : styles.boxLight]}>
-								{status === "running" && <Text style={styles.mutedText}>{t("codeSection.running")}</Text>}
-								{resultText !== null && (
-									<Text
-										accessibilityLiveRegion="polite"
-										style={[styles.resultText, { color: passed ? "#2e9e5b" : "#e0a552" }]}
-									>
-										{resultText}
-									</Text>
-								)}
-								{stale && <Text style={styles.staleText}>{t("editor.stale", { run: t("codeSection.run") })}</Text>}
-								{checks.length > 0 && (
-									<View style={styles.checks}>
-										<Text style={styles.sectionLabel}>{t("editor.requirements")}</Text>
-										{checks.map((check, index) => (
-											<View key={index} style={styles.checkRow}>
-												<Icon
-													type="ionicon"
-													name={check.passed ? "checkmark-circle" : "close-circle"}
-													color={check.passed ? "#2e9e5b" : "#e05252"}
-													size={20}
-												/>
-												<Text
-													style={[styles.checkText, { color: isDarkMode ? "#dddddd" : "#333333" }]}
-													accessibilityLabel={`${check.passed ? "✓" : "✗"} ${check.label}`}
-												>
-													{check.label}
-												</Text>
-											</View>
-										))}
-									</View>
-								)}
-								{status === "done" && (
-									<>
-										<Text style={styles.sectionLabel}>{t("editor.console")}</Text>
-										{hiddenLines > 0 && (
-											<Text style={styles.mutedText}>{t("playground.hiddenLines", { count: hiddenLines })}</Text>
-										)}
-										{allEntries.length === 0 ? (
-											<Text style={styles.mutedText}>{t("codeSection.noOutput")}</Text>
-										) : (
-											shownEntries.map((entry, index) => (
-												<Text
-													key={index}
-													style={[
-														styles.line,
-														entry.type === "error"
-															? styles.errorLine
-															: { color: isDarkMode ? "#cccccc" : "#444444" },
-													]}
-												>
-													{entry.type === "error" ? `${t("codeSection.consoleError")}: ${entry.message}` : entry.message}
-												</Text>
-											))
-										)}
-									</>
-								)}
-							</View>
-						) : null}
-
-						<ChallengeHelp
-							hints={hints}
-							solution={solution}
-							codeLanguage={codeLanguage}
-							startedAt={startedAt}
-							failedRuns={failedRuns}
+					{tab === "code" ? (
+						<TextInput
+							ref={inputRef}
+							value={code}
+							onChangeText={setCode}
+							onSelectionChange={(event) => {
+								selection.current = event.nativeEvent.selection;
+							}}
+							multiline
+							autoCorrect={false}
+							autoCapitalize="none"
+							autoComplete="off"
+							spellCheck={false}
+							importantForAutofill="no"
+							smartInsertDelete={false}
+							textAlignVertical="top"
+							placeholder={t("editor.placeholder")}
+							placeholderTextColor={palette.icon}
+							accessibilityLabel={t("editor.codeTab")}
+							style={[styles.editor, { color: palette.codeText, fontSize: 15 + fontSize }]}
 						/>
+					) : null}
 
-						<ResizableText style={styles.hint} defaultSize={14}>
-							{evaluated ? "" : t("editor.runFirst", { run: t("codeSection.run"), next: t("next") })}
-						</ResizableText>
-					</ScrollView>
-
-					{typing ? (
-						<ScrollView
-							horizontal
-							keyboardShouldPersistTaps="always"
-							showsHorizontalScrollIndicator={false}
-							style={[styles.symbolBar, { bottom: keyboardOffset }, isDarkMode ? styles.boxDark : styles.boxLight]}
-							contentContainerStyle={styles.symbolBarContent}
+					{/* Fora das abas, na mesma posição da árvore: trocar de aba só
+					    esconde a prévia, não remonta a página. Some no timeout —
+					    desmontar é o que mata uma página presa. */}
+					{webViewMounted && (
+						<View
+							style={showResult && showPreview ? styles.preview : styles.hiddenWebView}
+							pointerEvents={showResult && showPreview ? "auto" : "none"}
 						>
-							<SymbolKey label="⇥" accessibilityLabel={t("editor.indent")} onPress={() => insert(INDENT)} />
-							{SYMBOLS[codeLanguage].map((symbol) => (
-								<SymbolKey
-									key={symbol}
-									label={symbol}
-									accessibilityLabel={t("editor.insert", { symbol })}
-									onPress={() => insert(symbol)}
-								/>
-							))}
-						</ScrollView>
-					) : (
-						<NextButton onPress={() => evaluated && setModalVisible(true)} />
+							<SandboxWebView key={runKey} html={documentHtml} onMessage={handleMessage} />
+						</View>
 					)}
+
+					{showResult ? (
+						<View style={[styles.output, { backgroundColor: palette.terminalBg, borderTopColor: palette.border }]}>
+							{status === "running" && (
+								<Text style={[styles.mutedText, { color: palette.icon }]}>{t("codeSection.running")}</Text>
+							)}
+							{resultText !== null && (
+								<Text
+									accessibilityLiveRegion="polite"
+									style={[styles.resultText, { color: passed ? palette.success : WARNING_COLOR }]}
+								>
+									{resultText}
+								</Text>
+							)}
+							{stale && (
+								<Text style={[styles.staleText, { color: WARNING_COLOR }]}>
+									{t("editor.stale", { run: t("codeSection.run") })}
+								</Text>
+							)}
+							{checks.length > 0 && (
+								<View style={styles.checks}>
+									<Text style={[styles.sectionLabel, { color: palette.icon }]}>{t("editor.requirements")}</Text>
+									{checks.map((check, index) => (
+										<View key={index} style={styles.checkRow}>
+											<Icon
+												type="ionicon"
+												name={check.passed ? "checkmark-circle" : "close-circle"}
+												color={check.passed ? palette.success : palette.danger}
+												size={20}
+											/>
+											<Text
+												style={[styles.checkText, { color: palette.codeText }]}
+												accessibilityLabel={`${check.passed ? "✓" : "✗"} ${check.label}`}
+											>
+												{check.label}
+											</Text>
+										</View>
+									))}
+								</View>
+							)}
+							{status === "done" && (
+								<>
+									<Text style={[styles.sectionLabel, { color: palette.icon }]}>{t("editor.console")}</Text>
+									{hiddenLines > 0 && (
+										<Text style={[styles.mutedText, { color: palette.icon }]}>
+											{t("playground.hiddenLines", { count: hiddenLines })}
+										</Text>
+									)}
+									{allEntries.length === 0 ? (
+										<Text style={[styles.mutedText, { color: palette.icon }]}>{t("codeSection.noOutput")}</Text>
+									) : (
+										shownEntries.map((entry, index) => (
+											<Text
+												key={index}
+												style={[
+													styles.line,
+													{ color: entry.type === "error" ? palette.danger : palette.codeText },
+												]}
+											>
+												{entry.type === "error" ? `${t("codeSection.consoleError")}: ${entry.message}` : entry.message}
+											</Text>
+										))
+									)}
+								</>
+							)}
+						</View>
+					) : null}
 				</View>
-			</ThemedView>
+
+				{tab === "code" ? (
+					<View style={styles.actions}>
+						<TouchableOpacity accessibilityRole="button" onPress={reset} style={styles.secondaryButton}>
+							<Icon type="ionicon" name="refresh" color={palette.icon} size={16} />
+							<Text style={[styles.secondaryText, { color: palette.icon }]}>{t("editor.reset")}</Text>
+						</TouchableOpacity>
+						<RunButton
+							palette={palette}
+							status={status}
+							onPress={execute}
+							label={t("codeSection.run")}
+							runningLabel={t("codeSection.running")}
+						/>
+					</View>
+				) : null}
+
+				<ChallengeHelp
+					palette={palette}
+					hints={hints}
+					solution={solution}
+					codeLanguage={codeLanguage}
+					startedAt={startedAt}
+					failedRuns={failedRuns}
+				/>
+
+				{evaluated ? null : (
+					<ActivityHint palette={palette}>
+						{t("editor.runFirst", { run: t("codeSection.run"), next: t("next") })}
+					</ActivityHint>
+				)}
+			</LessonScreen>
 			<ValidationModal
 				visible={modalVisible}
 				onDismiss={() => setModalVisible(false)}
@@ -478,11 +542,13 @@ export default function CodeEditorExercise({
 }
 
 function RunButton({
+	palette,
 	status,
 	onPress,
 	label,
 	runningLabel,
 }: {
+	palette: TheoryPalette;
 	status: RunStatus;
 	onPress: () => void;
 	label: string;
@@ -495,7 +561,7 @@ function RunButton({
 			accessibilityState={{ disabled: running }}
 			disabled={running}
 			onPress={onPress}
-			style={styles.runButton}
+			style={[styles.runButton, { backgroundColor: palette.accent }]}
 		>
 			<Icon type="ionicon" name="play" color="#fff" size={16} />
 			<Text style={styles.runText}>{running ? runningLabel : label}</Text>
@@ -505,10 +571,12 @@ function RunButton({
 }
 
 function SymbolKey({
+	palette,
 	label,
 	accessibilityLabel,
 	onPress,
 }: {
+	palette: TheoryPalette;
 	label: string;
 	accessibilityLabel: string;
 	onPress: () => void;
@@ -518,9 +586,9 @@ function SymbolKey({
 			accessibilityRole="button"
 			accessibilityLabel={accessibilityLabel}
 			onPress={onPress}
-			style={styles.symbolKey}
+			style={[styles.symbolKey, { backgroundColor: palette.tabIdle }]}
 		>
-			<Text style={styles.symbolText}>{label}</Text>
+			<Text style={[styles.symbolText, { color: palette.text }]}>{label}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -532,12 +600,14 @@ function SymbolKey({
  * re-renderizar a tela inteira.
  */
 function ChallengeHelp({
+	palette,
 	hints,
 	solution,
 	codeLanguage,
 	startedAt,
 	failedRuns,
 }: {
+	palette: TheoryPalette;
 	hints: string[];
 	solution: string;
 	codeLanguage: Language;
@@ -596,13 +666,22 @@ function ChallengeHelp({
 	const nextStep = unlocked < totalSteps ? unlocked + 1 : null;
 	const remainingRuns = nextStep === null ? 0 : nextStep * RUNS_PER_STEP - failedRuns;
 	const remainingMs = nextStep === null ? 0 : nextStep * MS_PER_STEP - (now - startedAt);
+	const card = { backgroundColor: palette.gradientTo, borderColor: palette.border };
 
 	return (
 		<View style={styles.help}>
-			<ResizableText style={styles.helpTitle} defaultSize={17}>
+			<ResizableText
+				useCustomColor
+				defaultSize={TEXT_SIZE.sectionTitle}
+				style={[styles.helpTitle, { color: palette.text }]}
+			>
 				{t("editor.help")}
 			</ResizableText>
-			<ResizableText style={styles.hint} defaultSize={14}>
+			<ResizableText
+				useCustomColor
+				defaultSize={TEXT_SIZE.card + 1}
+				style={[styles.helpIntro, { color: palette.icon }]}
+			>
 				{t("editor.helpIntro")}
 			</ResizableText>
 			{Array.from({ length: unlocked }, (_, index) => {
@@ -610,17 +689,17 @@ function ChallengeHelp({
 				const open = revealed.includes(index);
 				const title = isSolution ? t("editor.solution") : t("editor.hint", { n: index + 1 });
 				return (
-					<View key={index} style={styles.helpCard}>
+					<View key={index} style={[styles.helpCard, card]}>
 						{open ? (
 							<>
 								<Text style={styles.helpCardTitle}>{title}</Text>
 								{isSolution ? (
 									<>
-										<CodeSnippet code={solution} codeLanguage={codeLanguage} />
-										<Text style={styles.helpText}>{t("editor.solutionNote")}</Text>
+										<CodeSnippet code={solution} codeLanguage={codeLanguage} palette={palette} />
+										<Text style={[styles.helpText, { color: palette.cardText }]}>{t("editor.solutionNote")}</Text>
 									</>
 								) : (
-									<Text style={styles.helpText}>{hints[index]}</Text>
+									<Text style={[styles.helpText, { color: palette.cardText }]}>{hints[index]}</Text>
 								)}
 							</>
 						) : (
@@ -629,7 +708,7 @@ function ChallengeHelp({
 								onPress={() => setRevealed((list) => [...list, index])}
 								style={styles.revealButton}
 							>
-								<Icon type="ionicon" name={isSolution ? "key-outline" : "bulb-outline"} color="#E0B04C" size={18} />
+								<Icon type="ionicon" name={isSolution ? "key-outline" : "bulb-outline"} color={GOLD} size={18} />
 								<Text style={styles.revealText}>
 									{isSolution ? t("editor.showSolution") : t("editor.showHint", { n: index + 1 })}
 								</Text>
@@ -639,9 +718,9 @@ function ChallengeHelp({
 				);
 			})}
 			{nextStep !== null && (
-				<View style={[styles.helpCard, styles.lockedCard]}>
-					<Icon type="ionicon" name="lock-closed-outline" color="#7d8a97" size={16} />
-					<Text style={styles.lockedText}>
+				<View style={[styles.helpCard, styles.lockedCard, { borderColor: palette.border }]}>
+					<Icon type="ionicon" name="lock-closed-outline" color={palette.icon} size={16} />
+					<Text style={[styles.lockedText, { color: palette.icon }]}>
 						{t(nextStep === totalSteps ? "editor.solutionLocked" : "editor.hintLocked", {
 							n: nextStep,
 							time: formatTime(remainingMs),
@@ -651,14 +730,14 @@ function ChallengeHelp({
 				</View>
 			)}
 			{nextStep !== null && instantHints > 0 && (
-				<View style={styles.helpCard}>
+				<View style={[styles.helpCard, card]}>
 					<TouchableOpacity
 						accessibilityRole="button"
 						disabled={spending}
 						onPress={releaseNow}
 						style={[styles.revealButton, spending ? { opacity: 0.5 } : null]}
 					>
-						<Icon type="ionicon" name="flash-outline" color="#E0B04C" size={18} />
+						<Icon type="ionicon" name="flash-outline" color={GOLD} size={18} />
 						<Text style={styles.revealText}>{t("editor.useInstantHint", { count: instantHints })}</Text>
 					</TouchableOpacity>
 				</View>
@@ -668,58 +747,54 @@ function ChallengeHelp({
 }
 
 const styles = StyleSheet.create({
-	container: {
-		height: "100%",
-	},
-	fill: {
-		flex: 1,
-	},
-	scroller: {
-		marginBottom: "25%",
+	intro: {
+		gap: 8,
 	},
 	badge: {
 		flexDirection: "row",
 		alignItems: "center",
 		gap: 6,
-		marginHorizontal: 20,
-		marginTop: 4,
 	},
 	badgeText: {
-		color: "#E0B04C",
+		color: GOLD,
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 14,
+		fontWeight: "700",
+		fontSize: 13,
 		textTransform: "uppercase",
 		letterSpacing: 0.5,
 	},
-	question: {
-		marginHorizontal: 20,
-		marginTop: 8,
-		marginBottom: 16,
-		fontFamily: "Roboto",
-		color: "white",
-		fontWeight: "bold",
+	// O editor é o mesmo cartão do `CodeSection` da teoria: borda da paleta, cantos
+	// de 14 e um cabeçalho em degradê com as abas encostadas na linha da base.
+	card: {
+		width: "100%",
+		borderWidth: 2,
+		borderRadius: 14,
+		overflow: "hidden",
+	},
+	header: {
+		flexDirection: "row",
+		alignItems: "flex-end",
+		paddingLeft: 10,
+		paddingRight: 12,
+		paddingTop: 8,
+		borderBottomWidth: 2,
 	},
 	tabs: {
 		flexDirection: "row",
-		gap: 8,
-		marginHorizontal: 10,
-		marginBottom: 8,
+		alignItems: "flex-end",
 	},
 	tab: {
-		flex: 1,
-		minHeight: 40,
-		borderRadius: 12,
-		borderWidth: 1,
-		borderColor: BRAND,
+		minWidth: 96,
+		height: 36,
 		alignItems: "center",
 		justifyContent: "center",
+		paddingHorizontal: 16,
+		borderTopLeftRadius: 10,
+		borderTopRightRadius: 10,
 	},
 	tabText: {
-		color: "#fff",
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 15,
+		fontWeight: "600",
 	},
 	disabled: {
 		opacity: 0.4,
@@ -728,28 +803,13 @@ const styles = StyleSheet.create({
 	// cabe acima dele e o cursor nunca some.
 	editor: {
 		height: 240,
-		marginHorizontal: 10,
-		padding: 12,
-		borderWidth: 1,
-		borderRadius: 8,
+		padding: 14,
 		fontFamily: "monospace",
-	},
-	editorDark: {
-		backgroundColor: "#282c34",
-		borderColor: "#304D66",
-		color: "#e6e6e6",
-	},
-	editorLight: {
-		backgroundColor: "#fafafa",
-		borderColor: "#A5A5A5",
-		color: "#222222",
 	},
 	actions: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		marginHorizontal: 10,
-		marginTop: 12,
 	},
 	secondaryButton: {
 		flexDirection: "row",
@@ -759,33 +819,31 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 8,
 	},
 	secondaryText: {
-		color: "#9AA9B8",
 		fontFamily: "Roboto",
-		fontSize: 15,
+		fontWeight: "500",
+		fontSize: 14,
 	},
+	// Mesma pílula de "Executar" do terminal da teoria.
 	runButton: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
 		gap: 8,
-		paddingVertical: 10,
-		paddingHorizontal: 22,
+		minHeight: 40,
+		paddingVertical: 8,
+		paddingHorizontal: 18,
 		borderRadius: 20,
-		backgroundColor: BRAND,
-		minHeight: 44,
 	},
 	runText: {
 		color: "#fff",
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 16,
+		fontWeight: "600",
+		fontSize: 14,
 	},
+	// Prévia: o HTML/CSS do aluno renderizado em fundo branco, como a aba "Web" da teoria.
 	preview: {
 		height: 200,
-		marginHorizontal: 10,
-		borderWidth: 1,
-		borderRadius: 8,
-		overflow: "hidden",
+		backgroundColor: "#FFFFFF",
 	},
 	// Escondida sem desmontar: nunca tamanho 0 nem display:"none" (ver o mesmo
 	// estilo no `TerminalSection`), senão a página pode não rodar.
@@ -795,39 +853,28 @@ const styles = StyleSheet.create({
 		height: 1,
 		opacity: 0,
 	},
-	boxDark: {
-		backgroundColor: "#282c34",
-		borderColor: "#304D66",
-	},
-	boxLight: {
-		backgroundColor: "#fafafa",
-		borderColor: "#A5A5A5",
-	},
+	// Saída no painel escuro do terminal da teoria, colado à prévia.
 	output: {
-		marginTop: 8,
-		marginHorizontal: 10,
-		borderWidth: 1,
-		borderRadius: 8,
-		padding: 10,
+		borderTopWidth: 2,
+		padding: 14,
 		gap: 4,
 	},
 	resultText: {
 		fontFamily: "Roboto",
-		fontWeight: "bold",
+		fontWeight: "700",
 		fontSize: 15,
 		marginBottom: 4,
 	},
 	staleText: {
 		fontFamily: "Roboto",
+		fontWeight: "500",
 		fontSize: 14,
-		color: "#e0a552",
 		marginBottom: 4,
 	},
 	sectionLabel: {
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 13,
-		color: "#7d8a97",
+		fontWeight: "700",
+		fontSize: 12,
 		textTransform: "uppercase",
 		marginTop: 6,
 	},
@@ -843,54 +890,46 @@ const styles = StyleSheet.create({
 	checkText: {
 		flex: 1,
 		fontFamily: "Roboto",
-		fontSize: 15,
+		fontWeight: "500",
+		fontSize: 14,
 	},
 	line: {
 		fontFamily: "monospace",
 		fontSize: 13,
 	},
-	errorLine: {
-		color: "#e05252",
-	},
 	mutedText: {
 		fontFamily: "monospace",
 		fontSize: 13,
-		color: "#888888",
 		fontStyle: "italic",
 	},
-	hint: {
-		marginHorizontal: 12,
-		marginVertical: 8,
-		color: "#9AA9B8",
-	},
 	help: {
-		marginTop: 20,
-		marginHorizontal: 10,
-		gap: 8,
+		gap: 10,
 	},
 	helpTitle: {
-		marginHorizontal: 2,
 		fontFamily: "Roboto",
-		fontWeight: "bold",
+		fontWeight: "700",
+	},
+	helpIntro: {
+		fontFamily: "Roboto",
+		fontWeight: "500",
 	},
 	helpCard: {
-		borderRadius: 10,
-		borderWidth: 1,
-		borderColor: "#3a4a5a",
-		padding: 10,
-		gap: 6,
+		borderRadius: 14,
+		borderWidth: 2,
+		padding: 14,
+		gap: 8,
 	},
 	helpCardTitle: {
-		color: "#E0B04C",
+		color: GOLD,
 		fontFamily: "Roboto",
-		fontWeight: "bold",
+		fontWeight: "700",
 		fontSize: 15,
 	},
 	helpText: {
-		color: "#c8d1da",
 		fontFamily: "Roboto",
-		fontSize: 15,
-		lineHeight: 21,
+		fontWeight: "500",
+		fontSize: 14,
+		lineHeight: 20,
 	},
 	revealButton: {
 		flexDirection: "row",
@@ -899,10 +938,10 @@ const styles = StyleSheet.create({
 		minHeight: 36,
 	},
 	revealText: {
-		color: "#E0B04C",
+		color: GOLD,
 		fontFamily: "Roboto",
-		fontWeight: "bold",
-		fontSize: 15,
+		fontWeight: "700",
+		fontSize: 14,
 	},
 	lockedCard: {
 		flexDirection: "row",
@@ -911,16 +950,16 @@ const styles = StyleSheet.create({
 	},
 	lockedText: {
 		flex: 1,
-		color: "#7d8a97",
 		fontFamily: "Roboto",
-		fontSize: 14,
+		fontWeight: "500",
+		fontSize: 13,
 	},
 	symbolBar: {
 		position: "absolute",
 		left: 0,
 		right: 0,
 		maxHeight: SYMBOL_BAR_HEIGHT,
-		borderTopWidth: 1,
+		borderTopWidth: 2,
 	},
 	symbolBarContent: {
 		alignItems: "center",
@@ -932,15 +971,13 @@ const styles = StyleSheet.create({
 		minWidth: 40,
 		height: 40,
 		paddingHorizontal: 10,
-		borderRadius: 8,
-		backgroundColor: "#33445a",
+		borderRadius: 10,
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	symbolText: {
-		color: "#ffffff",
 		fontFamily: "monospace",
 		fontSize: 18,
-		fontWeight: "bold",
+		fontWeight: "700",
 	},
 });
