@@ -27,20 +27,46 @@ function gallery(all: string, items: GalleryItem[]): Content[] {
 
 const pt: GalleryItem[] = [
 	{
-		title: "Teoria · aba Web",
+		title: "Teoria · referência do Figma",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"Esta é a galeria de atividades: um exemplar de cada tela, para revisar o visual. Esta teoria usa os quatro parágrafos e um código com HTML, CSS e JavaScript.",
-				secondParagraph:
-					"Cada linguagem tem a sua aba. A aba Web junta as três e executa o JavaScript de verdade: toque no botão da prévia.",
-				thirdParagraph:
-					"As palavras em destaque, como HTML, CSS e JavaScript, vêm da lista highlight.",
-				endParagraph: "O último parágrafo aparece depois do código.",
-				highlight: ["galeria", "HTML", "CSS", "JavaScript", "Web"],
+				introduction: {
+					title: "Olá, aqui é o Cody!",
+					persona: "cody",
+					text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				},
+				explanation: {
+					title: "O que é o HTML?",
+					text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				},
+				closing:
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				highlight: ["Cody", "HTML", "pulvinar"],
 				codeLanguage: "HTML",
-				code: '<h1 id="titulo">Galeria</h1>\n<button id="botao">\n  Clique\n</button>',
+				code: "<!DOCTYPE html>\n\n<html>\n   <body>\n      <h1>Olá Mundo!</h1>\n      <p>Este é o HTML</p>\n   </body>\n</html>\n",
+			},
+		},
+	},
+	{
+		title: "Teoria · Cody completa",
+		activity: {
+			type: "theory",
+			lesson: {
+				introduction: {
+					title: "Como uma página sabe o que mostrar?",
+					persona: "cody",
+					text: "Você já reparou que toda página começa com a mesma estrutura, mesmo quando o conteúdo é totalmente diferente? Vamos descobrir como o HTML organiza títulos e botões, e como o CSS e o JavaScript entram nessa conversa.",
+				},
+				explanation: {
+					title: "Três linguagens, uma página",
+					text: "O HTML define a estrutura, o CSS cuida da aparência e o JavaScript adiciona comportamento. Cada uma tem a sua aba no editor; a aba Web junta as três e executa o JavaScript de verdade: toque no botão da prévia.",
+				},
+				closing:
+					"Repare que o HTML não mudou para o título ficar azul: o CSS fez isso sozinho. Separar as responsabilidades é o que mantém uma página fácil de mudar.",
+				highlight: ["HTML", "CSS", "JavaScript", "estrutura", "Web"],
+				codeLanguage: "HTML",
+				code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Galeria</title>\n  </head>\n  <body>\n    <h1 id="titulo">Galeria</h1>\n    <button id="botao">\n      Clique\n    </button>\n  </body>\n</html>',
 				additionalCode: [
 					{
 						codeLanguage: "CSS",
@@ -56,14 +82,21 @@ const pt: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Teoria · terminal",
+		title: "Teoria · neutra + terminal",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"Uma teoria só de JavaScript, sem HTML, ganha o botão Executar: a saída do console aparece logo abaixo do código.",
-				endParagraph: "Toque em Executar para ver as três linhas.",
-				highlight: ["Executar", "console"],
+				introduction: {
+					title: "Repetindo ações com for...of",
+					persona: "neutral",
+					text: "O laço for...of percorre cada item de uma lista, na ordem em que eles aparecem, e executa o mesmo bloco de código para cada um.",
+				},
+				explanation: {
+					title: "Do primeiro ao último item",
+					text: "A cada volta, a variável do laço guarda o item atual. Quando a lista acaba, o laço termina sozinho: não é preciso contar posições nem controlar o fim.",
+				},
+				closing: "Toque em Executar: o console mostra um item por linha, na mesma ordem da lista.",
+				highlight: ["for...of", "lista", "Executar"],
 				codeLanguage: "JavaScript",
 				code: 'const itens = ["HTML", "CSS", "JS"];\n\nfor (const item of itens) {\n  console.log(item);\n}',
 				onlyCode: true,
@@ -71,13 +104,18 @@ const pt: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Teoria · TypeScript",
+		title: "Teoria · Cody, TypeScript, sem explicação",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"TypeScript não roda no app. O terminalCode guarda a versão em JavaScript do mesmo código, e é ela que o Executar roda.",
-				highlight: ["terminalCode", "Executar"],
+				introduction: {
+					title: "O que muda quando o código ganha tipos?",
+					persona: "cody",
+					text: "Você já passou o valor errado para uma função sem perceber? O TypeScript avisa isso antes de o código rodar. Que tal ver como ele descreve o que cada parâmetro aceita?",
+				},
+				closing:
+					"O app não executa TypeScript: o terminalCode guarda a versão em JavaScript do mesmo código, e é ela que o Executar roda.",
+				highlight: ["TypeScript", "terminalCode", "Executar"],
 				codeLanguage: "TypeScript",
 				code: "function somar(a: number, b: number): number {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));",
 				terminalCode: "function somar(a, b) {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));",
@@ -86,17 +124,43 @@ const pt: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Teoria · sem terminal",
+		title: "Teoria · neutra mínima",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"Com noTerminal, um bloco de JavaScript fica sem o botão Executar: serve para código que não mostra nada no console, como um export.",
-				highlight: ["noTerminal"],
+				introduction: {
+					title: "Exportando uma função",
+					persona: "neutral",
+					text: "A palavra export deixa uma função disponível para outros arquivos. Esta é a teoria mais curta possível: sem explicação, sem card complementar e sem o botão Executar, por causa do noTerminal.",
+				},
+				highlight: ["export", "noTerminal"],
 				codeLanguage: "JavaScript",
 				code: "export function dobrar(n) {\n  return n * 2;\n}",
 				onlyCode: true,
 				noTerminal: true,
+			},
+		},
+	},
+	{
+		title: "Teoria · textos longos",
+		activity: {
+			type: "theory",
+			lesson: {
+				introduction: {
+					title: "Como o navegador transforma texto em uma página que você consegue usar",
+					persona: "cody",
+					text: "Quando você abre um endereço, o navegador recebe apenas texto: um arquivo cheio de marcas entre sinais de menor e maior. Mesmo assim, o que aparece na tela tem títulos, imagens, botões e cores. Você consegue imaginar como esse texto vira uma página? Vamos acompanhar esse caminho passo a passo, do primeiro caractere recebido até o último pixel desenhado.",
+				},
+				explanation: {
+					title: "Leitura, árvore e desenho",
+					text: "Primeiro o navegador lê o HTML de cima para baixo e monta uma árvore: cada tag vira um nó, e cada nó sabe quem são seus filhos. Depois aplica as regras de CSS sobre essa árvore para descobrir cor, tamanho e posição de cada nó. Por fim, desenha o resultado na tela e fica de olho no JavaScript, que pode mudar a árvore a qualquer momento e pedir um novo desenho.",
+				},
+				closing:
+					"Um erro comum é achar que o navegador mostra o arquivo como ele foi escrito. Ele mostra a árvore montada a partir dele, e é por isso que uma tag esquecida pode mudar a página inteira sem nenhum aviso. Quando algo parecer estranho, abra o código e confira se cada tag que foi aberta também foi fechada.",
+				highlight: ["navegador", "árvore", "CSS", "JavaScript", "tag"],
+				codeLanguage: "HTML",
+				code: '<!DOCTYPE html>\n<html lang="pt-BR">\n  <head>\n    <meta charset="UTF-8">\n    <title>Minha página</title>\n  </head>\n  <body>\n    <header>\n      <h1>Minha página</h1>\n      <nav>\n        <a href="/">Início</a>\n        <a href="/sobre">Sobre</a>\n      </nav>\n    </header>\n    <main>\n      <h2>Bem-vindo</h2>\n      <p>Este texto vira um nó.</p>\n      <ul>\n        <li>Primeiro</li>\n        <li>Segundo</li>\n      </ul>\n    </main>\n    <footer>\n      <p>Feito com HTML</p>\n    </footer>\n  </body>\n</html>',
+				onlyCode: true,
 			},
 		},
 	},
@@ -241,20 +305,46 @@ const pt: GalleryItem[] = [
 
 const en: GalleryItem[] = [
 	{
-		title: "Theory · Web tab",
+		title: "Theory · Figma reference",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"This is the activity gallery: one sample of each screen, to review the visuals. This theory uses all four paragraphs and code with HTML, CSS and JavaScript.",
-				secondParagraph:
-					"Each language has its own tab. The Web tab combines all three and really runs the JavaScript: tap the button in the preview.",
-				thirdParagraph:
-					"Highlighted words, like HTML, CSS and JavaScript, come from the highlight list.",
-				endParagraph: "The last paragraph shows up after the code.",
-				highlight: ["gallery", "HTML", "CSS", "JavaScript", "Web"],
+				introduction: {
+					title: "Olá, aqui é o Cody!",
+					persona: "cody",
+					text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				},
+				explanation: {
+					title: "O que é o HTML?",
+					text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				},
+				closing:
+					"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar, arcu quis congue maximus, augue quam eleifend risus, nec rhoncus metus dui sed elit. Donec sed semper lacus, sed varius.",
+				highlight: ["Cody", "HTML", "pulvinar"],
 				codeLanguage: "HTML",
-				code: '<h1 id="title">Gallery</h1>\n<button id="button">\n  Click\n</button>',
+				code: "<!DOCTYPE html>\n\n<html>\n   <body>\n      <h1>Olá Mundo!</h1>\n      <p>Este é o HTML</p>\n   </body>\n</html>\n",
+			},
+		},
+	},
+	{
+		title: "Theory · full Cody",
+		activity: {
+			type: "theory",
+			lesson: {
+				introduction: {
+					title: "How does a page know what to show?",
+					persona: "cody",
+					text: "Have you noticed that every page starts with the same structure, even when the content is completely different? Let's find out how HTML organizes headings and buttons, and how CSS and JavaScript join the conversation.",
+				},
+				explanation: {
+					title: "Three languages, one page",
+					text: "HTML defines the structure, CSS takes care of the look and JavaScript adds behavior. Each one has its own tab in the editor; the Web tab combines all three and really runs the JavaScript: tap the button in the preview.",
+				},
+				closing:
+					"Notice that the HTML did not change for the heading to turn blue: CSS did that on its own. Keeping responsibilities apart is what keeps a page easy to change.",
+				highlight: ["HTML", "CSS", "JavaScript", "structure", "Web"],
+				codeLanguage: "HTML",
+				code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Gallery</title>\n  </head>\n  <body>\n    <h1 id="title">Gallery</h1>\n    <button id="button">\n      Click\n    </button>\n  </body>\n</html>',
 				additionalCode: [
 					{
 						codeLanguage: "CSS",
@@ -270,14 +360,21 @@ const en: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Theory · terminal",
+		title: "Theory · neutral + terminal",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"A JavaScript-only theory, with no HTML, gets the Run button: the console output shows up right below the code.",
-				endParagraph: "Tap Run to see the three lines.",
-				highlight: ["Run", "console"],
+				introduction: {
+					title: "Repeating actions with for...of",
+					persona: "neutral",
+					text: "The for...of loop goes through each item of a list, in the order they appear, and runs the same block of code for each one.",
+				},
+				explanation: {
+					title: "From the first item to the last",
+					text: "On each turn, the loop variable holds the current item. When the list ends, the loop stops by itself: there is no need to count positions or control the end.",
+				},
+				closing: "Tap Run: the console shows one item per line, in the same order as the list.",
+				highlight: ["for...of", "list", "Run"],
 				codeLanguage: "JavaScript",
 				code: 'const items = ["HTML", "CSS", "JS"];\n\nfor (const item of items) {\n  console.log(item);\n}',
 				onlyCode: true,
@@ -285,13 +382,18 @@ const en: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Theory · TypeScript",
+		title: "Theory · Cody, TypeScript, no explanation",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"TypeScript does not run in the app. terminalCode keeps the JavaScript version of the same code, and that is what Run executes.",
-				highlight: ["terminalCode", "Run"],
+				introduction: {
+					title: "What changes when code gets types?",
+					persona: "cody",
+					text: "Have you ever passed the wrong value to a function without noticing? TypeScript warns you before the code runs. How about seeing how it describes what each parameter accepts?",
+				},
+				closing:
+					"The app does not run TypeScript: terminalCode keeps the JavaScript version of the same code, and that is what Run executes.",
+				highlight: ["TypeScript", "terminalCode", "Run"],
 				codeLanguage: "TypeScript",
 				code: "function sum(a: number, b: number): number {\n  return a + b;\n}\n\nconsole.log(sum(2, 3));",
 				terminalCode: "function sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3));",
@@ -300,17 +402,43 @@ const en: GalleryItem[] = [
 		},
 	},
 	{
-		title: "Theory · no terminal",
+		title: "Theory · minimal neutral",
 		activity: {
 			type: "theory",
 			lesson: {
-				firstParagraph:
-					"With noTerminal, a JavaScript block has no Run button: it is for code that shows nothing in the console, like an export.",
-				highlight: ["noTerminal"],
+				introduction: {
+					title: "Exporting a function",
+					persona: "neutral",
+					text: "The export keyword makes a function available to other files. This is the shortest possible theory: no explanation, no complementary card and no Run button, because of noTerminal.",
+				},
+				highlight: ["export", "noTerminal"],
 				codeLanguage: "JavaScript",
 				code: "export function double(n) {\n  return n * 2;\n}",
 				onlyCode: true,
 				noTerminal: true,
+			},
+		},
+	},
+	{
+		title: "Theory · long texts",
+		activity: {
+			type: "theory",
+			lesson: {
+				introduction: {
+					title: "How the browser turns text into a page you can actually use",
+					persona: "cody",
+					text: "When you open an address, the browser receives nothing but text: a file full of marks between less-than and greater-than signs. Even so, what shows up on screen has headings, images, buttons and colors. Can you imagine how that text becomes a page? Let's follow that path step by step, from the first character received to the last pixel drawn.",
+				},
+				explanation: {
+					title: "Reading, tree and painting",
+					text: "First the browser reads the HTML from top to bottom and builds a tree: each tag becomes a node, and each node knows who its children are. Then it applies the CSS rules over that tree to find out the color, size and position of every node. Finally it paints the result on screen and keeps an eye on JavaScript, which can change the tree at any moment and ask for a new painting.",
+				},
+				closing:
+					"A common mistake is to think the browser shows the file as it was written. It shows the tree built from it, which is why a forgotten tag can change the whole page without any warning. When something looks odd, open the code and check that every tag that was opened was also closed.",
+				highlight: ["browser", "tree", "CSS", "JavaScript", "tag"],
+				codeLanguage: "HTML",
+				code: '<!DOCTYPE html>\n<html lang="en">\n  <head>\n    <meta charset="UTF-8">\n    <title>My page</title>\n  </head>\n  <body>\n    <header>\n      <h1>My page</h1>\n      <nav>\n        <a href="/">Home</a>\n        <a href="/about">About</a>\n      </nav>\n    </header>\n    <main>\n      <h2>Welcome</h2>\n      <p>This text becomes a node.</p>\n      <ul>\n        <li>First</li>\n        <li>Second</li>\n      </ul>\n    </main>\n    <footer>\n      <p>Made with HTML</p>\n    </footer>\n  </body>\n</html>',
+				onlyCode: true,
 			},
 		},
 	},

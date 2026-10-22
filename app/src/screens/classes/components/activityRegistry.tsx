@@ -8,9 +8,9 @@ import type {
 	MatchingActivityContent,
 	OptionActivityContent,
 	ReorderActivityContent,
-	TheoryActivityContent,
 } from "codap-api/src/types/contracts";
 import TheoryView from "./TheoryLesson";
+import { normalizeTheoryContent } from "../../../utils/theoryContent";
 import OptionExercise from "./OptionExercise";
 import CodeBlankExercise from "./CodeBlankExercise";
 import CodePlaygroundExercise from "./CodePlaygroundExercise";
@@ -29,6 +29,11 @@ export interface ActivityRenderArgs {
 	 */
 	activityKey: number;
 	progress: DimensionValue;
+	/** Posição desta atividade na sessão (1-based) e o tamanho da sessão. */
+	step: number;
+	total: number;
+	/** Título da lição, quando quem monta a sessão o conhece. */
+	title?: string;
 	onProceed: () => void;
 	onClose: () => void;
 }
@@ -42,23 +47,14 @@ export const ACTIVITY_REGISTRY: Record<
 	string,
 	(args: ActivityRenderArgs) => ReactElement
 > = {
-	theory: ({ content, activityKey, progress, onProceed, onClose }) => {
-		const c = content as TheoryActivityContent;
+	theory: ({ content, activityKey, progress, step, total, title, onProceed, onClose }) => {
 		return (
 			<TheoryView
 				key={activityKey}
-				firstParagraph={c.firstParagraph}
-				secondParagraph={c.secondParagraph}
-				thirdParagraph={c.thirdParagraph}
-				endParagraph={c.endParagraph}
-				highlight={c.highlight}
-				codeLanguage={c.codeLanguage}
-				code={c.code}
-				additionalCode={c.additionalCode}
-				onlyCode={c.onlyCode}
-				noTerminal={c.noTerminal}
-				terminalCode={c.terminalCode}
-				tutorial={c.tutorial}
+				content={normalizeTheoryContent(content)}
+				title={title}
+				step={step}
+				total={total}
 				progress={progress}
 				onProceed={onProceed}
 				onClose={onClose}

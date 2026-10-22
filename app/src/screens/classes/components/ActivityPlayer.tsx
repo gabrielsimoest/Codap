@@ -20,6 +20,8 @@ interface Props {
 	onFinish: () => void;
 	/** Usuário saiu no meio. */
 	onClose: () => void;
+	/** Título da lição, mostrado no cabeçalho das telas de teoria. */
+	title?: string;
 }
 
 /**
@@ -32,6 +34,7 @@ export default function ActivityPlayer({
 	activities,
 	onFinish,
 	onClose,
+	title,
 }: Props) {
 	const [activityIndex, setActivityIndex] = useState(0);
 
@@ -58,6 +61,9 @@ export default function ActivityPlayer({
 		content: current.content,
 		activityKey: activityIndex,
 		progress,
+		step: activityIndex + 1,
+		total: activities.length,
+		title,
 		onProceed: advance,
 		onClose,
 	});

@@ -25,22 +25,57 @@ const additionalCodeSchema = z.object({
   code: z.string().min(1, 'O bloco de código não pode ficar vazio.')
 })
 
-export const theoryContentSchema = z.object({
-  firstParagraph: z.string().min(1, 'O primeiro parágrafo é obrigatório.'),
-  secondParagraph: z.string().optional(),
-  thirdParagraph: z.string().optional(),
-  endParagraph: z.string().optional(),
-  highlight: z.array(z.string().min(1)),
-  codeLanguage: codeLanguageSchema,
-  code: z.string().min(1, 'O bloco de código é obrigatório.'),
-  additionalCode: z.array(additionalCodeSchema).optional(),
-  onlyCode: z.boolean().optional(),
-  /** Esconde o botão "Executar" do terminal numa tela de JS sem saída de console. */
-  noTerminal: z.boolean().optional(),
-  /** JS que o terminal executa no lugar de `code` (TS pré-transpilado ou JS simulado). */
-  terminalCode: z.string().optional(),
-  tutorial: z.boolean().optional()
-})
+export const THEORY_PERSONAS = ['cody', 'neutral'] as const
+
+const blank = (message: string) => z.string().refine((value) => value.trim().length > 0, message)
+
+/**
+ * `theory`: quatro áreas — introdução, explicação, código e fechamento (ver
+ * `TheoryActivityContent`). A introdução é obrigatória e tem persona; a
+ * explicação e o fechamento são opcionais, mas, se a explicação existe, título e
+ * texto são obrigatórios. Títulos nunca são preenchidos sozinhos.
+ *
+ * `requireCody` vem do contexto da lição, não do conteúdo: é `true` quando esta
+ * é (ou será) a primeira atividade teórica dela. O backend repete a regra
+ * (`api/src/utils/theoryRules.ts`) — esta é só a primeira barreira, para o autor
+ * ver o erro antes de salvar.
+ */
+export function buildTheoryContentSchema ({ requireCody }: { requireCody: boolean }) {
+  return z.object({
+    introduction: z.object({
+      title: blank('O título da introdução é obrigatório.'),
+      text: blank('O texto da introdução é obrigatório.'),
+      persona: z.enum(THEORY_PERSONAS)
+    }),
+    explanation: z.object({
+      title: blank('O título da explicação é obrigatório.'),
+      text: blank('O texto da explicação é obrigatório.')
+    }).optional(),
+    /** Card depois do código; ausente = sem card. */
+    closing: z.string().optional(),
+    highlight: z.array(z.string().min(1)),
+    codeLanguage: codeLanguageSchema,
+    code: z.string().min(1, 'O bloco de código é obrigatório.'),
+    additionalCode: z.array(additionalCodeSchema).optional(),
+    onlyCode: z.boolean().optional(),
+    /** Esconde o botão "Executar" do terminal numa tela de JS sem saída de console. */
+    noTerminal: z.boolean().optional(),
+    /** JS que o terminal executa no lugar de `code` (TS pré-transpilado ou JS simulado). */
+    terminalCode: z.string().optional(),
+    tutorial: z.boolean().optional()
+  }).superRefine((content, ctx) => {
+    if (requireCody && content.introduction.persona !== 'cody') {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['introduction', 'persona'],
+        message: 'A primeira atividade teórica da lição precisa usar a persona Cody.'
+      })
+    }
+  })
+}
+
+/** Schema sem a regra da primeira teoria — para tipar e para contextos sem lição. */
+export const theoryContentSchema = buildTheoryContentSchema({ requireCody: false })
 
 export const optionContentSchema = z.object({
   question: z.string().min(1, 'A pergunta é obrigatória.'),
@@ -320,6 +355,7 @@ export const matchingContentSchema = z.object({
 })
 
 export type TheoryContentForm = z.infer<typeof theoryContentSchema>
+export type TheoryPersona = (typeof THEORY_PERSONAS)[number]
 export type OptionContentForm = z.infer<typeof optionContentSchema>
 export type CodeBlankContentForm = z.infer<typeof codeBlankContentSchema>
 export type FillBlankContentForm = z.infer<typeof fillBlankContentSchema>
@@ -337,14 +373,46 @@ export function isTypedActivity (type: string): type is TypedActivityType {
   return (TYPED_ACTIVITY_TYPES as readonly string[]).includes(type)
 }
 
-export function emptyTheoryContent (): TheoryContentForm {
+export function emptyTheoryContent ({ requireCody }: { requireCody: boolean }): TheoryContentForm {
   return {
-    firstParagraph: '',
+    introduction: { title: '', text: '', persona: requireCody ? 'cody' : 'neutral' },
     highlight: [],
     codeLanguage: 'HTML',
     code: '',
     onlyCode: false
   }
+}
+
+/**
+ * Leva um `content` de teoria ao formato do formulário. Um registro ainda no
+ * formato antigo (banco que não rodou `migrateTheoryV2.ts`) é convertido como a
+ * migração faria, para poder ser editado sem perder o texto; o título fica em
+ * branco, para o autor escrever.
+ */
+export function toTheoryForm (content: unknown, { requireCody }: { requireCody: boolean }): TheoryContentForm {
+  if (typeof content !== 'object' || content === null) {
+    return emptyTheoryContent({ requireCody })
+  }
+  const raw = content as Record<string, unknown>
+  if (typeof raw.introduction === 'object' && raw.introduction !== null) {
+    return content as TheoryContentForm
+  }
+
+  const { firstParagraph, secondParagraph, thirdParagraph, endParagraph, ...rest } = raw
+  const explanation = [secondParagraph, thirdParagraph]
+    .filter((part): part is string => typeof part === 'string' && part.trim() !== '')
+    .join('\n\n')
+
+  return {
+    introduction: {
+      title: '',
+      text: typeof firstParagraph === 'string' ? firstParagraph : '',
+      persona: requireCody ? 'cody' : 'neutral'
+    },
+    ...(explanation !== '' ? { explanation: { title: '', text: explanation } } : {}),
+    ...(typeof endParagraph === 'string' && endParagraph.trim() !== '' ? { closing: endParagraph } : {}),
+    ...rest
+  } as TheoryContentForm
 }
 
 export function emptyOptionContent (): OptionContentForm {

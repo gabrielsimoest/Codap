@@ -1,15 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import {
 	ActivityIndicator,
+	ScrollView,
+	type StyleProp,
 	StyleSheet,
 	Text,
 	View,
+	type ViewStyle,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 import Icon from "../../../components/Icon";
 import ThemedTouchableOpacity from "../../../components/themed/ThemedTouchableOpacity";
 import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
+import { FIXED_UI, type TheoryPalette } from "./theory/theoryTheme";
 
 interface ConsoleEntry {
 	type: "log" | "warn" | "error";
@@ -20,6 +24,12 @@ interface Props {
 	/** JavaScript puro a rodar — nunca DOM (sem `html`/`css` em `buildSandboxHtmlDocument`). */
 	code: string;
 	isDarkMode: boolean;
+	/**
+	 * Com a paleta da teoria, o terminal vira o rodapé do card do editor: fundo
+	 * mais escuro, uma linha de separação e sem borda própria — sem o gradiente
+	 * do cabeçalho. Sem ela, mantém o visual avulso de antes.
+	 */
+	palette?: TheoryPalette;
 }
 
 type RunStatus = "idle" | "running" | "done" | "timeout";
@@ -33,6 +43,9 @@ const WATCHDOG_MS = 4000;
 // antes do onLoadEnd pra qualquer script síncrono) — não é uma espera por
 // trabalho assíncrono real.
 const NO_OUTPUT_GRACE_MS = 250;
+
+/** Altura do rodapé quando embutido no card do editor: botão + ~3 linhas de saída. */
+const EMBEDDED_HEIGHT = 120;
 
 function parseTerminalMessage(data: string): ConsoleEntry[] | null {
 	try {
@@ -50,7 +63,26 @@ function parseTerminalMessage(data: string): ConsoleEntry[] | null {
 	return null;
 }
 
-export default function TerminalSection({ code, isDarkMode }: Props) {
+// Embutido, a saída rola dentro do rodapé de altura fixa; avulso, cresce com o conteúdo.
+function OutputContainer({
+	scrollable,
+	style,
+	children,
+}: {
+	scrollable: boolean;
+	style: StyleProp<ViewStyle>;
+	children: ReactNode;
+}) {
+	return scrollable ? (
+		<ScrollView nestedScrollEnabled style={style}>
+			{children}
+		</ScrollView>
+	) : (
+		<View style={style}>{children}</View>
+	);
+}
+
+export default function TerminalSection({ code, isDarkMode, palette }: Props) {
 	const { t } = useTranslation();
 	const [status, setStatus] = useState<RunStatus>("idle");
 	const [entries, setEntries] = useState<ConsoleEntry[]>([]);
@@ -103,16 +135,24 @@ export default function TerminalSection({ code, isDarkMode }: Props) {
 	const showOutput = status === "done" || status === "timeout";
 	const isRunning = status === "running";
 
+	const embedded = palette !== undefined;
+
 	return (
-		<View style={styles.container}>
+		<View
+			style={
+				embedded
+					? [styles.embedded, { backgroundColor: palette.terminalBg, borderTopColor: palette.border }]
+					: styles.container
+			}
+		>
 			<ThemedTouchableOpacity
 				theme="primary"
-				style={styles.button}
+				style={[styles.button, embedded ? { backgroundColor: palette.accent } : null]}
 				onPress={run}
 				disabled={isRunning}
 			>
 				<Icon type="ionicon" name="play" color="#fff" size={16} />
-				<Text style={styles.buttonText}>
+				<Text style={[styles.buttonText, embedded ? { fontSize: FIXED_UI.copy } : null]}>
 					{isRunning ? t("codeSection.running") : t("codeSection.run")}
 				</Text>
 				{isRunning && (
@@ -125,11 +165,13 @@ export default function TerminalSection({ code, isDarkMode }: Props) {
 			</ThemedTouchableOpacity>
 
 			{showOutput && (
-				<View
-					style={[
-						styles.output,
-						isDarkMode ? styles.outputDark : styles.outputLight,
-					]}
+				<OutputContainer
+					scrollable={embedded}
+					style={
+						embedded
+							? styles.outputEmbedded
+							: [styles.output, isDarkMode ? styles.outputDark : styles.outputLight]
+					}
 				>
 					{status === "timeout" ? (
 						<Text style={styles.timeoutText}>
@@ -147,14 +189,14 @@ export default function TerminalSection({ code, isDarkMode }: Props) {
 									styles.line,
 									entry.type === "error"
 										? styles.errorLine
-										: { color: isDarkMode ? "#cccccc" : "#444444" },
+										: { color: embedded ? palette.codeText : isDarkMode ? "#cccccc" : "#444444" },
 								]}
 							>
 								{entry.message}
 							</Text>
 						))
 					)}
-				</View>
+				</OutputContainer>
 			)}
 
 			{status !== "idle" && (
@@ -176,6 +218,20 @@ const styles = StyleSheet.create({
 	container: {
 		width: "100%",
 		marginTop: 12,
+	},
+	// Rodapé do card do editor (ver `palette`): o card já tem a borda externa.
+	// Altura fixa: o card do editor tem altura total padrão, então o rodapé não
+	// pode crescer com a saída — ela rola dentro de `outputEmbedded`.
+	embedded: {
+		width: "100%",
+		height: EMBEDDED_HEIGHT,
+		borderTopWidth: 2,
+		paddingHorizontal: 14,
+		paddingVertical: 12,
+	},
+	outputEmbedded: {
+		flex: 1,
+		marginTop: 10,
 	},
 	button: {
 		flexDirection: "row",

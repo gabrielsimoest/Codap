@@ -114,9 +114,11 @@ async function fetchLessons (areaName: string, moduleIndex: number): Promise<Les
 // --- Serialização: dump do banco -> literal TypeScript ---
 
 const THEORY_FIELD_ORDER = [
-  'firstParagraph', 'secondParagraph', 'thirdParagraph', 'endParagraph',
+  'introduction', 'explanation', 'closing',
   'highlight', 'codeLanguage', 'code', 'additionalCode', 'onlyCode', 'noTerminal', 'terminalCode', 'tutorial'
 ]
+// `introduction` e `explanation` de uma teoria: objetos aninhados, cada um com a sua ordem.
+const THEORY_SECTION_FIELD_ORDER = ['title', 'text', 'persona']
 const OPTION_FIELD_ORDER = [
   'question', 'aditionalParagraph', 'codeLanguage', 'code', 'highlight', 'tutorial', 'correctOption', 'options',
   'pool', 'draw', 'fixedOrder', 'optionsAsCode'
@@ -145,7 +147,7 @@ const MATCHING_FIELD_ORDER = [
   'pool', 'draw'
 ]
 /** Ordem candidata, na ordem em que deve ser testada — a primeira que "cobre" exatamente as chaves do objeto vence. */
-const FIELD_ORDER_TABLE = [['name', 'minLevel', 'xpReward', 'chest', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, OPTION_FIELD_ORDER, CODE_BLANK_FIELD_ORDER,
+const FIELD_ORDER_TABLE = [['name', 'minLevel', 'xpReward', 'chest', 'activities'], ['type', 'content'], ['pt', 'en'], THEORY_FIELD_ORDER, THEORY_SECTION_FIELD_ORDER, OPTION_FIELD_ORDER, CODE_BLANK_FIELD_ORDER,
   FILL_BLANK_FIELD_ORDER, CODE_PLAYGROUND_FIELD_ORDER, CODE_EDITOR_FIELD_ORDER, REORDER_FIELD_ORDER, MATCHING_FIELD_ORDER, ['left', 'right']]
 
 function orderedKeys (obj: Record<string, unknown>): string[] {

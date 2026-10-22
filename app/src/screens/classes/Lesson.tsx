@@ -140,6 +140,7 @@ export default function Lesson() {
 			<ActivityPlayer
 				key={`${lessonId}-${language}`}
 				activities={activities}
+				title={lesson?.name}
 				onFinish={finish}
 				onClose={goBack}
 			/>

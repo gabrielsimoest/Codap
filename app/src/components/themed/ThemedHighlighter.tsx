@@ -7,6 +7,10 @@ interface Props {
 	text: string;
 	highlight: string[];
 	style?: StyleProp<TextStyle>;
+	/** Cor do texto. Sem ela, a cor do tema. */
+	color?: string;
+	/** Estilo das palavras destacadas. Sem ele, o azul padrão do app. */
+	highlightStyle?: TextStyle;
 }
 
 /**
@@ -55,13 +59,13 @@ function patternFor(term: string): string {
 	return `(?<![${LETTER}])${term}(?![${LETTER}])`;
 }
 
-function ThemedHighlighter({ style = {}, highlight, text }: Props) {
+function ThemedHighlighter({ style = {}, highlight, text, color, highlightStyle }: Props) {
 	const { colors } = useTheme();
 
 	return (
 		<HighlightText
-			style={[style, { color: colors.text }]}
-			highlightStyle={{ color: "#637aff" }}
+			style={[style, { color: color ?? colors.text }]}
+			highlightStyle={highlightStyle ?? { color: "#637aff" }}
 			searchWords={highlight.map(patternFor)}
 			textToHighlight={text}
 		/>

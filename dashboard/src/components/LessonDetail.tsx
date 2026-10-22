@@ -11,7 +11,8 @@ import {
   useReorderActivitiesMutation
 } from '@/hooks/useContentMutations'
 import { moveWithin } from '@/lib/reorder'
-import type { AdminLessonResponse, ContentModule } from '@/types/api'
+import { CODY_RULE_MESSAGE, firstTheory, removalBreaksRule, reorderBreaksRule } from '@/lib/theoryRules'
+import type { AdminActivityResponse, AdminLessonResponse, ContentModule } from '@/types/api'
 
 interface LessonDetailProps {
   areaId: number | null;
@@ -37,12 +38,25 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
   const lessonName = lesson.translations.pt?.name ?? lesson.translations.en?.name ?? 'Sem nome'
   const moduleName = module.translations.pt?.name ?? module.translations.en?.name ?? ''
 
-  function move (position: number, direction: -1 | 1) {
-    const orderedIds = moveWithin(
+  const firstTheoryId = firstTheory(lesson.activities)?.id ?? null
+
+  /** A nova ordem de um movimento, ou `null` se ele sairia da lista. */
+  function movedOrder (position: number, direction: -1 | 1): number[] | null {
+    return moveWithin(
       lesson!.activities.map((activity) => activity.id),
       position,
       direction
     )
+  }
+
+  /** Mover deixaria uma teoria não-Cody como a primeira da lição? */
+  function moveBreaksRule (position: number, direction: -1 | 1): boolean {
+    const orderedIds = movedOrder(position, direction)
+    return orderedIds !== null && reorderBreaksRule(lesson!.activities, orderedIds)
+  }
+
+  function move (position: number, direction: -1 | 1) {
+    const orderedIds = movedOrder(position, direction)
     if (orderedIds) {
       reorderActivities.mutate({ lessonId: lesson!.id, orderedIds })
     }
@@ -65,6 +79,7 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
         <ActivityFormDialog
           areaId={areaId}
           lessonId={lesson.id}
+          lessonActivities={lesson.activities}
           trigger={
             <Button size="sm" className="gap-1.5">
               <Plus className="size-3.5" /> Nova atividade
@@ -90,6 +105,7 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
             <Badge variant="secondary" className="font-mono text-[10px]">
               {activity.type}
             </Badge>
+            {activity.type === 'theory' && <PersonaBadge activity={activity} first={activity.id === firstTheoryId} />}
             <LocaleBadges translations={activity.content} />
 
             <div className="ml-auto flex items-center gap-1">
@@ -97,8 +113,8 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
                 variant="ghost"
                 size="icon"
                 className="size-7"
-                title="Subir atividade"
-                disabled={position === 0}
+                title={moveBreaksRule(position, -1) ? CODY_RULE_MESSAGE : 'Subir atividade'}
+                disabled={position === 0 || moveBreaksRule(position, -1)}
                 onClick={() => { move(position, -1) }}
               >
                 <ChevronUp className="size-3.5" />
@@ -107,8 +123,8 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
                 variant="ghost"
                 size="icon"
                 className="size-7"
-                title="Descer atividade"
-                disabled={position === lesson.activities.length - 1}
+                title={moveBreaksRule(position, 1) ? CODY_RULE_MESSAGE : 'Descer atividade'}
+                disabled={position === lesson.activities.length - 1 || moveBreaksRule(position, 1)}
                 onClick={() => { move(position, 1) }}
               >
                 <ChevronDown className="size-3.5" />
@@ -117,6 +133,7 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
               <ActivityFormDialog
                 areaId={areaId}
                 lessonId={lesson.id}
+                lessonActivities={lesson.activities}
                 activity={activity}
                 trigger={
                   <Button variant="outline" size="sm" className="h-7 text-xs">
@@ -136,7 +153,13 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
                 }
                 onConfirm={() => { removeActivity.mutate(activity.id) }}
                 trigger={
-                  <Button variant="ghost" size="icon" className="size-7 text-destructive" title="Remover atividade">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="size-7 text-destructive"
+                    title={removalBreaksRule(lesson.activities, activity.id) ? CODY_RULE_MESSAGE : 'Remover atividade'}
+                    disabled={removalBreaksRule(lesson.activities, activity.id)}
+                  >
                     <Trash2 className="size-3.5" />
                   </Button>
                 }
@@ -150,5 +173,31 @@ export function LessonDetail ({ areaId, module, lesson }: LessonDetailProps) {
         </Card>
       ))}
     </div>
+  )
+}
+
+/**
+ * Persona de uma teoria, lida do `pt` (ou do `en`). A primeira teoria da lição
+ * mostra que Cody é obrigatório — é onde o autor esbarra na regra.
+ */
+function PersonaBadge ({ activity, first }: { activity: AdminActivityResponse; first: boolean }) {
+  const content = (activity.content.pt ?? activity.content.en) as { introduction?: { persona?: string } } | undefined
+  const persona = content?.introduction?.persona
+
+  if (persona === undefined) {
+    return null
+  }
+
+  return (
+    <>
+      <Badge variant="outline" className="text-[10px]" data-testid="persona-badge">
+        {persona === 'cody' ? 'Cody' : 'Neutra'}
+      </Badge>
+      {first && (
+        <Badge variant="outline" className="border-amber-500/60 text-[10px] text-amber-500" data-testid="cody-required-badge">
+          Cody obrigatório
+        </Badge>
+      )}
+    </>
   )
 }

@@ -65,3 +65,6 @@ test/types/index.js
 dist
 
 /src/generated/prisma
+
+# Backups das migrações de conteúdo (migrateTheoryV2.ts)
+prisma/backups/

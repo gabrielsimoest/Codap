@@ -84,7 +84,14 @@
 			"insert": "Insert {{symbol}}"
 		},
 
+		"theory": {
+			"progress": "{{current}} of {{total}}",
+			"help": "Help"
+		},
+
 		"codeSection": {
+			"copy": "Copy",
+			"copied": "Copied!",
 			"consoleError": "Error",
 			"run": "Run",
 			"running": "Running...",

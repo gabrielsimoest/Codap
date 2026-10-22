@@ -71,14 +71,50 @@ export interface AreaResponse {
   name: string;
 }
 
+/**
+ * Quem "fala" na introdução de uma teoria. É uma característica **do texto**, não
+ * da tela (o app não mostra avatar nem ilustração em nenhum dos dois): `cody` é o
+ * tom acolhedor, curioso e conversacional do mascote; `neutral` é a
+ * apresentação direta e didática do assunto, sem saudação. **A primeira teoria de cada lição
+ * (o "tópico") é obrigatoriamente `cody`**; as seguintes escolhem — a regra é
+ * `assertFirstTheoryIsCody` em `src/utils/theoryRules.ts`, aplicada nas rotas de
+ * escrita.
+ */
+export type TheoryPersona = 'cody' | 'neutral';
+
+/** Apresentação inicial do assunto da teoria. */
+export interface TheoryIntroduction {
+  /** Título contextualizado — nunca uma frase fixa repetida em todas as telas. */
+  title?: string;
+  text: string;
+  persona: TheoryPersona;
+}
+
+/** Explicação didática do conceito, com título que diz o que a seção ensina. */
+export interface TheoryExplanation {
+  title?: string;
+  text: string;
+}
+
 // Formato do `content` de uma atividade `theory`. Idêntico ao que o app já
 // usa em `Theory["lesson"]` — é isso que permite despachar o `content` direto
 // para os componentes de renderização, sem camada de adaptação.
+//
+// Quatro áreas, nesta ordem na tela: `introduction` → `explanation` → código
+// (`codeLanguage`/`code`/`additionalCode`...) → `closing`. Os campos antigos
+// `firstParagraph`/`secondParagraph`/`thirdParagraph`/`endParagraph` foram
+// substituídos por elas; `api/prisma/migrateTheoryV2.ts` converte o que já está
+// no banco, sem perder texto.
 export interface TheoryActivityContent {
-  firstParagraph: string;
-  secondParagraph?: string;
-  thirdParagraph?: string;
-  endParagraph?: string;
+  introduction: TheoryIntroduction;
+  /** Ausente = a tela vai direto da introdução para o código. */
+  explanation?: TheoryExplanation;
+  /**
+   * Bloco depois do código: recapitulação, conclusão, interpretação do código,
+   * erro comum, observação ou ponte para o próximo conceito. Ausente = sem o
+   * card complementar.
+   */
+  closing?: string;
   highlight: string[];
   codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
   code: string;

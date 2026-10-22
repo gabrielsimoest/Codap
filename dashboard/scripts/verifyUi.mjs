@@ -249,6 +249,67 @@ step('o formulário de atividade abre com o preview de highlight', async (page) 
 })
 
 /*
+ * Regra editorial das teorias: a primeira atividade teórica da lição usa a
+ * persona Cody. O formulário trava a persona neutra nela e libera nas
+ * seguintes; o título da introdução é obrigatório e nunca preenchido sozinho;
+ * a lista marca a primeira teoria. Nada é salvo — cada diálogo termina com
+ * Escape. (O backend repete a regra; ver api/test/routes/activities.)
+ */
+step('o formulário de teoria trava a persona na primeira teoria e libera nas seguintes', async (page) => {
+  await editActivityOfType(page, 'theory', { first: true }).click()
+  await page.locator('#persona-cody').waitFor({ timeout: 10_000 })
+  if (await page.locator('#persona-cody').getAttribute('aria-checked') !== 'true') {
+    throw new Error('a primeira teoria da lição devia vir com a persona Cody selecionada')
+  }
+  if (!(await page.locator('#persona-neutral').isDisabled())) {
+    throw new Error('a persona neutra devia estar desabilitada na primeira teoria da lição')
+  }
+  await page.getByTestId('cody-required').waitFor({ timeout: 10_000 })
+
+  // O título é digitado pelo autor: vazio, o formulário recusa e explica.
+  await page.locator('#introduction-title').fill('')
+  await page.getByRole('button', { name: 'Salvar' }).click()
+  await page.getByText('O título da introdução é obrigatório.').waitFor({ timeout: 10_000 })
+  await page.screenshot(shot('15-teoria-persona.png'))
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
+
+  // Uma teoria seguinte escolhe livremente.
+  const theories = page.locator('main [data-slot="card"]')
+    .filter({ has: page.getByText('theory', { exact: true }) })
+  if (await theories.count() >= 2) {
+    await editActivityOfType(page, 'theory').click()
+    await page.locator('#persona-neutral').waitFor({ timeout: 10_000 })
+    if (await page.locator('#persona-neutral').isDisabled()) {
+      throw new Error('a persona neutra devia estar liberada nas teorias seguintes à primeira')
+    }
+    if (await page.getByTestId('cody-required').count() !== 0) {
+      throw new Error('o aviso de Cody obrigatório só vale para a primeira teoria')
+    }
+    await page.keyboard.press('Escape')
+    await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
+  }
+
+  // Uma teoria nova nesta lição (que já tem teoria) também escolhe livremente.
+  await page.getByRole('button', { name: 'Nova atividade' }).click()
+  await page.locator('#persona-neutral').waitFor({ timeout: 10_000 })
+  if (await page.locator('#persona-neutral').isDisabled()) {
+    throw new Error('uma teoria nova numa lição que já tem teoria devia poder ser neutra')
+  }
+  await page.keyboard.press('Escape')
+  await page.locator('[data-slot="dialog-content"]').waitFor({ state: 'detached', timeout: 10_000 })
+
+  // Com o conteúdo migrado, a lista marca a persona de cada teoria e só a
+  // primeira leva "Cody obrigatório".
+  if (await page.getByTestId('persona-badge').count() > 0) {
+    const required = await page.getByTestId('cody-required-badge').count()
+    if (required !== 1) {
+      throw new Error(`esperava 1 selo "Cody obrigatório" na lição, vieram ${required}`)
+    }
+  }
+})
+
+/*
  * A primeira lição de HTML tem prática `option` com pool. Se o formulário não
  * carregar `pool` de volta, salvar pelo dashboard apaga o sorteio em silêncio.
  * A primeira `option` da lição, não a última: a última é o "ache o erro", que

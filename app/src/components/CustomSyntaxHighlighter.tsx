@@ -14,6 +14,10 @@ interface Props {
 	defaultSize?: number;
 	code: string;
 	language: string;
+	/** Tema do highlight.js no lugar do atomOne padrão (a tela de teoria usa o dela). */
+	themeStyle?: Record<string, Record<string, string | number>>;
+	/** Estilo do contêiner de rolagem horizontal do código (o `pre` do react-syntax-highlighter). */
+	containerStyle?: Record<string, string | number>;
 }
 
 // react-syntax-highlighter só aplica a gramática pedida se o nome bater
@@ -31,14 +35,15 @@ function toHljsLanguage(language: string): string {
 	return HLJS_LANGUAGE_ALIASES[normalized] ?? normalized;
 }
 
-function CustomSyntaxHighlighter({ defaultSize = 15, code, language }: Props) {
+function CustomSyntaxHighlighter({ defaultSize = 15, code, language, themeStyle, containerStyle }: Props) {
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 	const theme = useThemeStore((s) => s.theme);
 	return (
 		<>
 			<NativeSyntaxHighlighter
 				language={toHljsLanguage(language)}
-				style={theme === LightMode ? LightStyle : DarkStyle}
+				style={themeStyle ?? (theme === LightMode ? LightStyle : DarkStyle)}
+				customStyle={containerStyle}
 				fontSize={fontSize + defaultSize}
 			>
 				{code}

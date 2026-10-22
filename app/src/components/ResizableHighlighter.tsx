@@ -8,6 +8,9 @@ interface Props {
 	highlight: string[];
 	style?: StyleProp<TextStyle>;
 	defaultSize?: number;
+	/** Repassados ao `ThemedHighlighter`: cor do texto e estilo do destaque. */
+	color?: string;
+	highlightStyle?: TextStyle;
 }
 
 function ResizableHighlighter({
@@ -15,6 +18,8 @@ function ResizableHighlighter({
 	highlight,
 	text,
 	defaultSize = 20,
+	color,
+	highlightStyle,
 }: Props) {
 	const fontSize = useFontSizeStore((s) => s.fontSize);
 
@@ -23,6 +28,8 @@ function ResizableHighlighter({
 			style={[style, { fontSize: fontSize + defaultSize }]}
 			highlight={highlight}
 			text={text}
+			color={color}
+			highlightStyle={highlightStyle}
 		/>
 	);
 }

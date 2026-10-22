@@ -487,7 +487,7 @@ function createNativeElement({
 
 	if (type === "text") {
 		return (
-			<Text key={key} style={[{ color: defaultColor }, startingStyle]}>
+			<Text key={key} allowFontScaling={false} style={[{ color: defaultColor }, startingStyle]}>
 				{value}
 			</Text>
 		);
@@ -517,7 +517,7 @@ function createNativeElement({
 		);
 
 		return (
-			<Text key={key} style={style as StyleProp<TextStyle>}>
+			<Text key={key} allowFontScaling={false} style={style as StyleProp<TextStyle>}>
 				{children}
 			</Text>
 		);

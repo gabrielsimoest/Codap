@@ -214,20 +214,34 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Olá, aqui é o Cody! HTML é a linguagem usada para estruturar o conteúdo de uma página web. Ele informa ao navegador o que cada parte da página representa, como títulos, parágrafos, imagens e links.',
-            secondParagraph: 'HTML significa HyperText Markup Language. Apesar do nome, HTML não é uma linguagem de programação: ele é uma linguagem de marcação.',
-            endParagraph: 'O HTML define a estrutura e o significado do conteúdo. A aparência será trabalhada depois, com CSS.',
-            highlight: ['Cody', 'HTML', 'CSS', 'web'],
+            introduction: {
+              title: 'Como uma página sabe o que mostrar?',
+              text: 'Você já parou para pensar no que existe por trás de uma página web? Antes das cores e dos botões, existe um texto com marcas que dizem ao navegador o que cada pedaço significa. Vamos descobrir como isso funciona!',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O HTML e a estrutura do conteúdo',
+              text: 'HTML é a linguagem usada para estruturar o conteúdo de uma página web. Ele informa ao navegador o que cada parte da página representa, como títulos, parágrafos, imagens e links.\n\nHTML significa HyperText Markup Language. Apesar do nome, HTML não é uma linguagem de programação: ele é uma linguagem de marcação.'
+            },
+            closing: 'O HTML define a estrutura e o significado do conteúdo. A aparência será trabalhada depois, com CSS.',
+            highlight: ['HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
-            code: '<h1>Olá, mundo!</h1>\n<p>Minha primeira página web.</p>'
+            code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Minha primeira página</title>\n  </head>\n  <body>\n    <h1>Olá, mundo!</h1>\n    <p>Minha primeira página web.</p>\n  </body>\n</html>'
           },
           en: {
-            firstParagraph: 'Hi, it\'s Cody! HTML is the language used to structure the content of a web page. It tells the browser what each part of the page represents, like headings, paragraphs, images and links.',
-            secondParagraph: 'HTML stands for HyperText Markup Language. Despite the name, HTML is not a programming language: it is a markup language.',
-            endParagraph: 'HTML defines the structure and meaning of the content. Appearance comes later, with CSS.',
-            highlight: ['Cody', 'HTML', 'CSS', 'web'],
+            introduction: {
+              title: 'How does a page know what to show?',
+              text: 'Have you ever wondered what is behind a web page? Before the colors and the buttons, there is text with marks that tell the browser what each piece means. Let\'s find out how that works!',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'HTML and the structure of content',
+              text: 'HTML is the language used to structure the content of a web page. It tells the browser what each part of the page represents, like headings, paragraphs, images and links.\n\nHTML stands for HyperText Markup Language. Despite the name, HTML is not a programming language: it is a markup language.'
+            },
+            closing: 'HTML defines the structure and meaning of the content. Appearance comes later, with CSS.',
+            highlight: ['HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
-            code: '<h1>Hello, world!</h1>\n<p>My first web page.</p>'
+            code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>My first page</title>\n  </head>\n  <body>\n    <h1>Hello, world!</h1>\n    <p>My first web page.</p>\n  </body>\n</html>'
           }
         }
       },
@@ -235,17 +249,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um elemento HTML normalmente é formado por uma tag de abertura, seu conteúdo e uma tag de fechamento.',
-            secondParagraph: 'No exemplo abaixo, <p> indica o início de um parágrafo e </p> indica o fim dele.',
-            endParagraph: 'Tags informam ao navegador como interpretar cada parte do conteúdo. Combinando elementos diferentes, é possível montar uma página inteira.',
+            introduction: {
+              title: 'Tags de abertura e de fechamento',
+              text: 'Um elemento HTML normalmente é formado por uma tag de abertura, seu conteúdo e uma tag de fechamento.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Um exemplo com o elemento p',
+              text: 'No exemplo abaixo, <p> indica o início de um parágrafo e </p> indica o fim dele.'
+            },
+            closing: 'Tags informam ao navegador como interpretar cada parte do conteúdo. Combinando elementos diferentes, é possível montar uma página inteira.',
             highlight: ['HTML', 'p'],
             codeLanguage: 'HTML',
             code: '<p>Este é um parágrafo.</p>'
           },
           en: {
-            firstParagraph: 'An HTML element is usually made of an opening tag, its content, and a closing tag.',
-            secondParagraph: 'In the example below, <p> marks the start of a paragraph and </p> marks its end.',
-            endParagraph: 'Tags tell the browser how to interpret each part of the content. By combining different elements, you can build an entire page.',
+            introduction: {
+              title: 'Opening and closing tags',
+              text: 'An HTML element is usually made of an opening tag, its content, and a closing tag.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'An example with the p element',
+              text: 'In the example below, <p> marks the start of a paragraph and </p> marks its end.'
+            },
+            closing: 'Tags tell the browser how to interpret each part of the content. By combining different elements, you can build an entire page.',
             highlight: ['HTML', 'p'],
             codeLanguage: 'HTML',
             code: '<p>This is a paragraph.</p>'
@@ -466,15 +494,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma página HTML tem uma estrutura básica que organiza suas informações. O navegador usa essa estrutura para interpretar o documento corretamente.',
-            endParagraph: 'Todo documento HTML começa com uma estrutura parecida com essa. Dentro dela, cada parte tem uma função específica.',
+            introduction: {
+              title: 'O esqueleto de toda página',
+              text: 'Já reparou que toda página HTML começa quase igual, não importa o assunto? Existe um esqueleto que o navegador espera encontrar. Que tal conhecer cada parte dele?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como um documento HTML é organizado',
+              text: 'Uma página HTML tem uma estrutura básica que organiza suas informações. O navegador usa essa estrutura para interpretar o documento corretamente.'
+            },
+            closing: 'Todo documento HTML começa com uma estrutura parecida com essa. Dentro dela, cada parte tem uma função específica.',
             highlight: ['HTML'],
             codeLanguage: 'HTML',
             code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Minha página</title>\n  </head>\n  <body>\n    <h1>Olá!</h1>\n  </body>\n</html>'
           },
           en: {
-            firstParagraph: 'An HTML page has a basic structure that organizes its information. The browser uses this structure to interpret the document correctly.',
-            endParagraph: 'Every HTML document starts with a structure like this one. Inside it, each part has a specific role.',
+            introduction: {
+              title: 'The skeleton of every page',
+              text: 'Have you noticed that every HTML page starts almost the same, no matter the subject? There is a skeleton the browser expects to find. How about getting to know each part of it?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How an HTML document is organized',
+              text: 'An HTML page has a basic structure that organizes its information. The browser uses this structure to interpret the document correctly.'
+            },
+            closing: 'Every HTML document starts with a structure like this one. Inside it, each part has a specific role.',
             highlight: ['HTML'],
             codeLanguage: 'HTML',
             code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>My page</title>\n  </head>\n  <body>\n    <h1>Hello!</h1>\n  </body>\n</html>'
@@ -485,15 +529,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O <head> guarda informações sobre a página que não aparecem diretamente para quem visita, como o título mostrado na aba do navegador. Já o <body> reúne tudo que é exibido: textos, imagens, botões e o restante.',
-            endParagraph: 'Pense no <head> como dados sobre o documento, e no <body> como o conteúdo da página.',
+            introduction: {
+              title: 'Head e body: o que cada um guarda',
+              text: 'O <head> guarda informações sobre a página que não aparecem diretamente para quem visita, como o título mostrado na aba do navegador. Já o <body> reúne tudo que é exibido: textos, imagens, botões e o restante.',
+              persona: 'neutral'
+            },
+            closing: 'Pense no <head> como dados sobre o documento, e no <body> como o conteúdo da página.',
             highlight: ['head', 'body'],
             codeLanguage: 'HTML',
             code: '<head>\n  <title>Meu site</title>\n</head>\n\n<body>\n  <h1>Bem-vindo!</h1>\n  <p>Este conteúdo aparece na página.</p>\n</body>'
           },
           en: {
-            firstParagraph: 'The <head> holds information about the page that isn\'t shown directly to visitors, like the title shown on the browser tab. The <body> holds everything that\'s displayed: text, images, buttons, and more.',
-            endParagraph: 'Think of the <head> as data about the document, and the <body> as the page\'s content.',
+            introduction: {
+              title: 'Head and body: what each one holds',
+              text: 'The <head> holds information about the page that isn\'t shown directly to visitors, like the title shown on the browser tab. The <body> holds everything that\'s displayed: text, images, buttons, and more.',
+              persona: 'neutral'
+            },
+            closing: 'Think of the <head> as data about the document, and the <body> as the page\'s content.',
             highlight: ['head', 'body'],
             codeLanguage: 'HTML',
             code: '<head>\n  <title>My site</title>\n</head>\n\n<body>\n  <h1>Welcome!</h1>\n  <p>This content appears on the page.</p>\n</body>'
@@ -504,17 +556,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Elementos HTML podem ficar dentro de outros elementos. Chamamos isso de aninhamento.',
-            secondParagraph: 'No exemplo, o <body> contém uma <div>, que por sua vez contém um título e um parágrafo. O elemento de fora é o pai; os de dentro são os filhos.',
-            endParagraph: 'A indentação não muda o resultado no navegador, mas deixa o aninhamento visível para quem lê o código.',
+            introduction: {
+              title: 'Elementos dentro de elementos',
+              text: 'Elementos HTML podem ficar dentro de outros elementos. Chamamos isso de aninhamento.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Pais e filhos no documento',
+              text: 'No exemplo, o <body> contém uma <div>, que por sua vez contém um título e um parágrafo. O elemento de fora é o pai; os de dentro são os filhos.'
+            },
+            closing: 'A indentação não muda o resultado no navegador, mas deixa o aninhamento visível para quem lê o código.',
             highlight: ['aninhamento', 'body', 'div'],
             codeLanguage: 'HTML',
             code: '<body>\n  <div>\n    <h1>Título da página</h1>\n    <p>Um parágrafo dentro da div.</p>\n  </div>\n</body>'
           },
           en: {
-            firstParagraph: 'HTML elements can live inside other elements. This is called nesting.',
-            secondParagraph: 'In the example, the <body> contains a <div>, which in turn contains a heading and a paragraph. The outer element is the parent; the inner ones are its children.',
-            endParagraph: 'Indentation does not change the result in the browser, but it makes the nesting visible to anyone reading the code.',
+            introduction: {
+              title: 'Elements inside elements',
+              text: 'HTML elements can live inside other elements. This is called nesting.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Parents and children in the document',
+              text: 'In the example, the <body> contains a <div>, which in turn contains a heading and a paragraph. The outer element is the parent; the inner ones are its children.'
+            },
+            closing: 'Indentation does not change the result in the browser, but it makes the nesting visible to anyone reading the code.',
             highlight: ['nesting', 'body', 'div'],
             codeLanguage: 'HTML',
             code: '<body>\n  <div>\n    <h1>Page title</h1>\n    <p>A paragraph inside the div.</p>\n  </div>\n</body>'
@@ -847,17 +913,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Comentários são trechos que o navegador ignora. Eles servem para deixar anotações no código.',
-            secondParagraph: 'Um comentário começa com <!-- e termina com -->. Tudo que estiver entre os dois não aparece na página.',
-            endParagraph: 'Comentários ajudam a explicar decisões e a organizar o código para quem for lê-lo depois.',
+            introduction: {
+              title: 'Anotações que ninguém vê',
+              text: 'E se você pudesse deixar um recado dentro do código, que só quem lê o arquivo enxerga? Existe um jeito, e ele ajuda muito quando o código começa a crescer.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como escrever um comentário no HTML',
+              text: 'Comentários são trechos que o navegador ignora. Eles servem para deixar anotações no código.\n\nUm comentário começa com <!-- e termina com -->. Tudo que estiver entre os dois não aparece na página.'
+            },
+            closing: 'Comentários ajudam a explicar decisões e a organizar o código para quem for lê-lo depois.',
             highlight: ['Comentários', 'comentário'],
             codeLanguage: 'HTML',
             code: '<!-- Cabeçalho do site -->\n<h1>Minha página</h1>\n\n<p>Este texto aparece na página.</p>'
           },
           en: {
-            firstParagraph: 'Comments are snippets the browser ignores. They exist to leave notes in the code.',
-            secondParagraph: 'A comment starts with <!-- and ends with -->. Anything between the two does not show up on the page.',
-            endParagraph: 'Comments help explain decisions and organize the code for whoever reads it later.',
+            introduction: {
+              title: 'Notes nobody sees',
+              text: 'What if you could leave a note inside the code that only people reading the file can see? There is a way, and it helps a lot once the code starts to grow.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to write a comment in HTML',
+              text: 'Comments are snippets the browser ignores. They exist to leave notes in the code.\n\nA comment starts with <!-- and ends with -->. Anything between the two does not show up on the page.'
+            },
+            closing: 'Comments help explain decisions and organize the code for whoever reads it later.',
             highlight: ['Comments', 'comment'],
             codeLanguage: 'HTML',
             code: '<!-- Site header -->\n<h1>My page</h1>\n\n<p>This text shows up on the page.</p>'
@@ -868,17 +948,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Comentários também servem para desativar temporariamente um trecho de código, sem precisar apagá-lo.',
-            secondParagraph: 'Isso é útil para testar mudanças: basta comentar a parte que você quer esconder e depois tirá-la do comentário.',
-            endParagraph: 'Lembre-se de que comentários ficam visíveis para quem abrir o código-fonte da página. Não use comentários para guardar informações sensíveis.',
+            introduction: {
+              title: 'Comentários para desativar código',
+              text: 'Comentários também servem para desativar temporariamente um trecho de código, sem precisar apagá-lo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Testando mudanças com comentários',
+              text: 'Isso é útil para testar mudanças: basta comentar a parte que você quer esconder e depois tirá-la do comentário.'
+            },
+            closing: 'Lembre-se de que comentários ficam visíveis para quem abrir o código-fonte da página. Não use comentários para guardar informações sensíveis.',
             highlight: ['comentário', 'comentários', 'código-fonte'],
             codeLanguage: 'HTML',
             code: '<ul>\n  <li>Item ativo</li>\n  <!-- <li>Item desativado por enquanto</li> -->\n</ul>'
           },
           en: {
-            firstParagraph: 'Comments are also used to temporarily disable a snippet of code without deleting it.',
-            secondParagraph: 'This is handy when testing changes: comment out the part you want to hide, then take it back out of the comment.',
-            endParagraph: 'Keep in mind that comments are visible to anyone who opens the page source. Do not use comments to store sensitive information.',
+            introduction: {
+              title: 'Comments to disable code',
+              text: 'Comments are also used to temporarily disable a snippet of code without deleting it.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Testing changes with comments',
+              text: 'This is handy when testing changes: comment out the part you want to hide, then take it back out of the comment.'
+            },
+            closing: 'Keep in mind that comments are visible to anyone who opens the page source. Do not use comments to store sensitive information.',
             highlight: ['comment', 'comments', 'page source'],
             codeLanguage: 'HTML',
             code: '<ul>\n  <li>Active item</li>\n  <!-- <li>Item disabled for now</li> -->\n</ul>'
@@ -1101,15 +1195,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'HTML tem seis níveis de título, de <h1> a <h6>. Eles representam diferentes níveis de importância dentro da estrutura do conteúdo.',
-            endParagraph: 'Os títulos ajudam a organizar o conteúdo em uma hierarquia. Use o nível que representa a posição daquele conteúdo na página.',
+            introduction: {
+              title: 'Como organizar um texto em níveis',
+              text: 'Pense em um livro: ele tem título, capítulos e subcapítulos. Uma página também precisa dessa hierarquia, para quem lê e para quem usa um leitor de tela. Vamos ver como o HTML faz isso?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os seis níveis de título, de h1 a h6',
+              text: 'HTML tem seis níveis de título, de <h1> a <h6>. Eles representam diferentes níveis de importância dentro da estrutura do conteúdo.'
+            },
+            closing: 'Os títulos ajudam a organizar o conteúdo em uma hierarquia. Use o nível que representa a posição daquele conteúdo na página.',
             highlight: ['HTML', 'h1', 'h6'],
             codeLanguage: 'HTML',
             code: '<h1>Título principal</h1>\n<h2>Seção</h2>\n<h3>Subseção</h3>'
           },
           en: {
-            firstParagraph: 'HTML has six heading levels, from <h1> to <h6>. They represent different levels of importance within the structure of the content.',
-            endParagraph: 'Headings help organize content into a hierarchy. Use the level that matches that content\'s position on the page.',
+            introduction: {
+              title: 'How to organize text in levels',
+              text: 'Think of a book: it has a title, chapters and subchapters. A page also needs that hierarchy, for people who read it and for people who use a screen reader. Let\'s see how HTML does it?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The six heading levels, from h1 to h6',
+              text: 'HTML has six heading levels, from <h1> to <h6>. They represent different levels of importance within the structure of the content.'
+            },
+            closing: 'Headings help organize content into a hierarchy. Use the level that matches that content\'s position on the page.',
             highlight: ['HTML', 'h1', 'h6'],
             codeLanguage: 'HTML',
             code: '<h1>Main heading</h1>\n<h2>Section</h2>\n<h3>Subsection</h3>'
@@ -1120,15 +1230,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <p> representa um parágrafo. Para destacar uma informação, é possível usar elementos como <strong> e <em>.',
-            endParagraph: 'Use elementos de texto pensando no significado que você quer transmitir, e não só na aparência.',
+            introduction: {
+              title: 'Parágrafos e destaque de texto',
+              text: 'O elemento <p> representa um parágrafo. Para destacar uma informação, é possível usar elementos como <strong> e <em>.',
+              persona: 'neutral'
+            },
+            closing: 'Use elementos de texto pensando no significado que você quer transmitir, e não só na aparência.',
             highlight: ['p', 'strong'],
             codeLanguage: 'HTML',
             code: '<p>\n  Aprender <strong>HTML</strong> é importante\n  para criar páginas web.\n</p>\n\n<p>\n  Este texto tem <em>destaque</em>.\n</p>'
           },
           en: {
-            firstParagraph: 'The <p> element represents a paragraph. To emphasize information, you can use elements like <strong> and <em>.',
-            endParagraph: 'Choose text elements based on the meaning you want to convey, not just how they look.',
+            introduction: {
+              title: 'Paragraphs and text emphasis',
+              text: 'The <p> element represents a paragraph. To emphasize information, you can use elements like <strong> and <em>.',
+              persona: 'neutral'
+            },
+            closing: 'Choose text elements based on the meaning you want to convey, not just how they look.',
             highlight: ['p', 'strong'],
             codeLanguage: 'HTML',
             code: '<p>\n  Learning <strong>HTML</strong> is important\n  for building web pages.\n</p>\n\n<p>\n  This text has <em>emphasis</em>.\n</p>'
@@ -1402,17 +1520,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Alguns caracteres têm um significado especial no HTML. O sinal < abre uma tag, então, para mostrá-lo como texto, usamos uma entidade.',
-            secondParagraph: '&lt; mostra <, &gt; mostra > e &amp; mostra &. Toda entidade começa com & e termina com ponto e vírgula.',
-            endParagraph: 'Sem as entidades, o navegador pode confundir o texto com uma tag e esconder parte do conteúdo.',
+            introduction: {
+              title: 'Quando o < vira um problema',
+              text: 'O que acontece se você quiser mostrar o sinal < na tela, mas o navegador achar que ele abre uma tag? É um impasse curioso, e o HTML tem uma saída para ele.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como mostrar caracteres reservados com entidades',
+              text: 'Alguns caracteres têm um significado especial no HTML. O sinal < abre uma tag, então, para mostrá-lo como texto, usamos uma entidade.\n\n&lt; mostra <, &gt; mostra > e &amp; mostra &. Toda entidade começa com & e termina com ponto e vírgula.'
+            },
+            closing: 'Sem as entidades, o navegador pode confundir o texto com uma tag e esconder parte do conteúdo.',
             highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
             codeLanguage: 'HTML',
             code: '<p>Use &lt;p&gt; para criar parágrafos.</p>\n<p>Arroz &amp; feijão</p>'
           },
           en: {
-            firstParagraph: 'Some characters have a special meaning in HTML. The < sign opens a tag, so to show it as text, we use an entity.',
-            secondParagraph: '&lt; shows <, &gt; shows > and &amp; shows &. Every entity starts with & and ends with a semicolon.',
-            endParagraph: 'Without entities, the browser may mistake the text for a tag and hide part of the content.',
+            introduction: {
+              title: 'When < becomes a problem',
+              text: 'What happens if you want to show the < sign on screen, but the browser thinks it opens a tag? It is a curious deadlock, and HTML has a way out of it.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to show reserved characters with entities',
+              text: 'Some characters have a special meaning in HTML. The < sign opens a tag, so to show it as text, we use an entity.\n\n&lt; shows <, &gt; shows > and &amp; shows &. Every entity starts with & and ends with a semicolon.'
+            },
+            closing: 'Without entities, the browser may mistake the text for a tag and hide part of the content.',
             highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
             codeLanguage: 'HTML',
             code: '<p>Use &lt;p&gt; to create paragraphs.</p>\n<p>Salt &amp; pepper</p>'
@@ -1423,17 +1555,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O <br> cria uma quebra de linha dentro do mesmo bloco de texto, como num endereço ou num poema. Assim como o <img>, ele não tem tag de fechamento.',
-            secondParagraph: 'O <hr> representa uma mudança de assunto entre dois trechos, e o navegador o mostra como uma linha horizontal.',
-            endParagraph: 'Não use vários <br> seguidos para criar espaço entre blocos: isso é trabalho do CSS. O <br> é para quebras que fazem parte do conteúdo.',
+            introduction: {
+              title: 'Quebras de linha e elementos sem fechamento',
+              text: 'O <br> cria uma quebra de linha dentro do mesmo bloco de texto, como num endereço ou num poema. Assim como o <img>, ele não tem tag de fechamento.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Separando assuntos com hr',
+              text: 'O <hr> representa uma mudança de assunto entre dois trechos, e o navegador o mostra como uma linha horizontal.'
+            },
+            closing: 'Não use vários <br> seguidos para criar espaço entre blocos: isso é trabalho do CSS. O <br> é para quebras que fazem parte do conteúdo.',
             highlight: ['<br>', '<hr>', '<img>', 'CSS'],
             codeLanguage: 'HTML',
             code: '<p>\n  Rua das Flores, 123<br>\n  São Paulo - SP\n</p>\n\n<hr>\n\n<p>Outro assunto começa aqui.</p>'
           },
           en: {
-            firstParagraph: 'The <br> creates a line break inside the same block of text, like in an address or a poem. Like the <img>, it has no closing tag.',
-            secondParagraph: 'The <hr> represents a change of topic between two passages, and the browser shows it as a horizontal line.',
-            endParagraph: 'Don\'t stack several <br> to create space between blocks: that\'s CSS\'s job. The <br> is for breaks that are part of the content.',
+            introduction: {
+              title: 'Line breaks and elements with no closing tag',
+              text: 'The <br> creates a line break inside the same block of text, like in an address or a poem. Like the <img>, it has no closing tag.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Separating topics with hr',
+              text: 'The <hr> represents a change of topic between two passages, and the browser shows it as a horizontal line.'
+            },
+            closing: 'Don\'t stack several <br> to create space between blocks: that\'s CSS\'s job. The <br> is for breaks that are part of the content.',
             highlight: ['<br>', '<hr>', '<img>', 'CSS'],
             codeLanguage: 'HTML',
             code: '<p>\n  123 Flower Street<br>\n  Springfield\n</p>\n\n<hr>\n\n<p>Another topic starts here.</p>'
@@ -1656,15 +1802,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <a> cria links para outras páginas, arquivos ou endereços. O destino é definido pelo atributo href.',
-            endParagraph: 'O texto dentro do <a> é o que a pessoa vê. O atributo href informa para onde o link leva.',
+            introduction: {
+              title: 'O que faz a web ser uma teia',
+              text: 'A web tem esse nome porque tudo nela se conecta. Você já se perguntou como um toque em uma palavra leva a outra página? A resposta está em um elemento bem pequeno.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como o elemento a cria um link',
+              text: 'O elemento <a> cria links para outras páginas, arquivos ou endereços. O destino é definido pelo atributo href.'
+            },
+            closing: 'O texto dentro do <a> é o que a pessoa vê. O atributo href informa para onde o link leva.',
             highlight: ['href', 'link', 'links', '<a>'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com">\n  Visitar o site\n</a>'
           },
           en: {
-            firstParagraph: 'The <a> element creates links to other pages, files, or addresses. The destination is set by the href attribute.',
-            endParagraph: 'The text inside the <a> is what the reader sees. The href attribute tells the browser where the link goes.',
+            introduction: {
+              title: 'What makes the web a web',
+              text: 'The web has that name because everything on it is connected. Have you ever wondered how tapping a word takes you to another page? The answer is in a very small element.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How the a element creates a link',
+              text: 'The <a> element creates links to other pages, files, or addresses. The destination is set by the href attribute.'
+            },
+            closing: 'The text inside the <a> is what the reader sees. The href attribute tells the browser where the link goes.',
             highlight: ['href', 'link', 'links'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com">\n  Visit the site\n</a>'
@@ -1675,15 +1837,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Nem todo link aponta para outro site. Também é possível apontar para arquivos ou páginas que fazem parte do próprio projeto.',
-            endParagraph: 'Links relativos são úteis para conectar páginas diferentes de um mesmo site. O caminho é interpretado a partir da localização do arquivo atual.',
+            introduction: {
+              title: 'Links para arquivos e páginas do projeto',
+              text: 'Nem todo link aponta para outro site. Também é possível apontar para arquivos ou páginas que fazem parte do próprio projeto.',
+              persona: 'neutral'
+            },
+            closing: 'Links relativos são úteis para conectar páginas diferentes de um mesmo site. O caminho é interpretado a partir da localização do arquivo atual.',
             highlight: ['link', 'links'],
             codeLanguage: 'HTML',
             code: '<a href="sobre.html">\n  Sobre nós\n</a>'
           },
           en: {
-            firstParagraph: 'Not every link points to another site. You can also point to files or pages that are part of your own project.',
-            endParagraph: 'Relative links are useful for connecting different pages of the same site. The path is interpreted based on the location of the current file.',
+            introduction: {
+              title: 'Links to files and pages of the project',
+              text: 'Not every link points to another site. You can also point to files or pages that are part of your own project.',
+              persona: 'neutral'
+            },
+            closing: 'Relative links are useful for connecting different pages of the same site. The path is interpreted based on the location of the current file.',
             highlight: ['link', 'links'],
             codeLanguage: 'HTML',
             code: '<a href="about.html">\n  About us\n</a>'
@@ -1910,17 +2080,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um link também pode levar a uma parte da mesma página. Para isso, o elemento de destino recebe um id, e o href aponta para ele com # na frente.',
-            secondParagraph: 'No exemplo, tocar em "Ir para contato" leva direto à seção com id="contato".',
-            endParagraph: 'Links internos são comuns em páginas longas, como um índice no topo que leva a cada seção.',
+            introduction: {
+              title: 'Links que não saem da página',
+              text: 'Já viu um índice no topo de uma página longa que leva direto a cada parte? Ele não carrega nada novo: aponta para dentro da própria página. Vamos ver como se faz.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como criar um link para outra parte da mesma página',
+              text: 'Um link também pode levar a uma parte da mesma página. Para isso, o elemento de destino recebe um id, e o href aponta para ele com # na frente.\n\nNo exemplo, tocar em "Ir para contato" leva direto à seção com id="contato".'
+            },
+            closing: 'Links internos são comuns em páginas longas, como um índice no topo que leva a cada seção.',
             highlight: ['id', 'href'],
             codeLanguage: 'HTML',
             code: '<a href="#contato">Ir para contato</a>\n\n<p>Muito conteúdo aqui...</p>\n\n<h2 id="contato">Contato</h2>\n<p>Fale com a gente.</p>'
           },
           en: {
-            firstParagraph: 'A link can also lead to a part of the same page. For that, the target element gets an id, and the href points to it with a # in front.',
-            secondParagraph: 'In the example, tapping "Go to contact" jumps straight to the section with id="contact".',
-            endParagraph: 'Internal links are common on long pages, like a table of contents at the top that leads to each section.',
+            introduction: {
+              title: 'Links that stay on the page',
+              text: 'Ever seen a table of contents at the top of a long page that jumps straight to each part? It loads nothing new: it points inside the page itself. Let\'s see how it is done.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to link to another part of the same page',
+              text: 'A link can also lead to a part of the same page. For that, the target element gets an id, and the href points to it with a # in front.\n\nIn the example, tapping "Go to contact" jumps straight to the section with id="contact".'
+            },
+            closing: 'Internal links are common on long pages, like a table of contents at the top that leads to each section.',
             highlight: ['id', 'href'],
             codeLanguage: 'HTML',
             code: '<a href="#contact">Go to contact</a>\n\n<p>Lots of content here...</p>\n\n<h2 id="contact">Contact</h2>\n<p>Get in touch.</p>'
@@ -1931,18 +2115,32 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O atributo target="_blank" faz o link abrir em uma nova aba, em vez de substituir a página atual.',
-            secondParagraph: 'Já um href que começa com mailto: abre o aplicativo de e-mail da pessoa, com o destinatário preenchido.',
-            endParagraph: 'Use target="_blank" com moderação: abrir abas sem aviso pode confundir quem navega.',
+            introduction: {
+              title: 'Abrindo links em outra aba',
+              text: 'O atributo target="_blank" faz o link abrir em uma nova aba, em vez de substituir a página atual.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Links de e-mail com mailto',
+              text: 'Já um href que começa com mailto: abre o aplicativo de e-mail da pessoa, com o destinatário preenchido.'
+            },
+            closing: 'Use target="_blank" com moderação: abrir abas sem aviso pode confundir quem navega.',
             highlight: ['target', 'href', 'mailto'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com" target="_blank">\n  Abrir em nova aba\n</a>\n\n<a href="mailto:contato@exemplo.com">\n  Enviar e-mail\n</a>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The target="_blank" attribute makes the link open in a new tab instead of replacing the current page.',
-            secondParagraph: 'An href that starts with mailto: opens the person\'s email app, with the recipient already filled in.',
-            endParagraph: 'Use target="_blank" sparingly: opening tabs without warning can confuse people.',
+            introduction: {
+              title: 'Opening links in another tab',
+              text: 'The target="_blank" attribute makes the link open in a new tab instead of replacing the current page.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Email links with mailto',
+              text: 'An href that starts with mailto: opens the person\'s email app, with the recipient already filled in.'
+            },
+            closing: 'Use target="_blank" sparingly: opening tabs without warning can confuse people.',
             highlight: ['target', 'href', 'mailto'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com" target="_blank">\n  Open in a new tab\n</a>\n\n<a href="mailto:contact@example.com">\n  Send an email\n</a>',
@@ -2217,15 +2415,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <img> permite adicionar uma imagem à página. Diferente de muitos elementos HTML, ele não tem uma tag de fechamento.',
-            endParagraph: 'O atributo src indica onde está a imagem. O navegador usa esse caminho para carregá-la.',
+            introduction: {
+              title: 'Colocando uma imagem na página',
+              text: 'Uma página só de texto funciona, mas uma boa imagem conta muita coisa de uma vez. E se você quiser colocar uma foto na sua? Vamos ver qual elemento faz isso e por que ele tem uma particularidade curiosa.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como o elemento img carrega uma imagem',
+              text: 'O elemento <img> permite adicionar uma imagem à página. Diferente de muitos elementos HTML, ele não tem uma tag de fechamento.'
+            },
+            closing: 'O atributo src indica onde está a imagem. O navegador usa esse caminho para carregá-la.',
             highlight: ['img', 'src', 'HTML'],
             codeLanguage: 'HTML',
             code: '<img src="imagem.jpg" alt="Uma paisagem" />'
           },
           en: {
-            firstParagraph: 'The <img> element lets you add an image to the page. Unlike many HTML elements, it doesn\'t have a closing tag.',
-            endParagraph: 'The src attribute points to the image. The browser uses that path to load it.',
+            introduction: {
+              title: 'Putting an image on the page',
+              text: 'A page with only text works, but a good image says a lot at once. What if you want to put a photo on yours? Let\'s see which element does that, and why it has a curious quirk.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How the img element loads an image',
+              text: 'The <img> element lets you add an image to the page. Unlike many HTML elements, it doesn\'t have a closing tag.'
+            },
+            closing: 'The src attribute points to the image. The browser uses that path to load it.',
             highlight: ['img', 'src', 'HTML'],
             codeLanguage: 'HTML',
             code: '<img src="image.jpg" alt="A landscape" />'
@@ -2236,15 +2450,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O atributo alt traz uma descrição em texto da imagem. Ele é importante quando a imagem não carrega, e também para tecnologias assistivas.',
-            endParagraph: 'Escreva um alt que descreva o propósito ou o conteúdo relevante da imagem. Não deixe esse atributo de lado.',
+            introduction: {
+              title: 'O atributo alt e a descrição da imagem',
+              text: 'O atributo alt traz uma descrição em texto da imagem. Ele é importante quando a imagem não carrega, e também para tecnologias assistivas.',
+              persona: 'neutral'
+            },
+            closing: 'Escreva um alt que descreva o propósito ou o conteúdo relevante da imagem. Não deixe esse atributo de lado.',
             highlight: ['alt'],
             codeLanguage: 'HTML',
             code: '<img src="gato.jpg" alt="Gato sentado em uma cadeira" />'
           },
           en: {
-            firstParagraph: 'The alt attribute gives a text description of the image. It matters when the image fails to load, and also for assistive technologies.',
-            endParagraph: 'Write an alt that describes the image\'s purpose or relevant content. Don\'t skip this attribute.',
+            introduction: {
+              title: 'The alt attribute and the image description',
+              text: 'The alt attribute gives a text description of the image. It matters when the image fails to load, and also for assistive technologies.',
+              persona: 'neutral'
+            },
+            closing: 'Write an alt that describes the image\'s purpose or relevant content. Don\'t skip this attribute.',
             highlight: ['alt'],
             codeLanguage: 'HTML',
             code: '<img src="cat.jpg" alt="Cat sitting on a chair" />'
@@ -2467,15 +2689,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Use <ul> quando a ordem dos itens não for importante. Cada item da lista é representado por <li>.',
-            endParagraph: 'A estrutura é simples: <ul> representa a lista, e cada <li> representa um item.',
+            introduction: {
+              title: 'De uma lista de compras a um menu',
+              text: 'Listas estão em todo lugar: compras, passos de uma receita, o menu de um site. Você sabe como o HTML organiza itens que pertencem ao mesmo grupo?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como criar uma lista sem ordem',
+              text: 'Use <ul> quando a ordem dos itens não for importante. Cada item da lista é representado por <li>.'
+            },
+            closing: 'A estrutura é simples: <ul> representa a lista, e cada <li> representa um item.',
             highlight: ['ul', 'li'],
             codeLanguage: 'HTML',
             code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
           },
           en: {
-            firstParagraph: 'Use <ul> when the order of the items doesn\'t matter. Each list item is represented by <li>.',
-            endParagraph: 'The structure is simple: <ul> represents the list, and each <li> represents one item.',
+            introduction: {
+              title: 'From a shopping list to a menu',
+              text: 'Lists are everywhere: groceries, recipe steps, a website menu. Do you know how HTML organizes items that belong to the same group?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to create an unordered list',
+              text: 'Use <ul> when the order of the items doesn\'t matter. Each list item is represented by <li>.'
+            },
+            closing: 'The structure is simple: <ul> represents the list, and each <li> represents one item.',
             highlight: ['ul', 'li'],
             codeLanguage: 'HTML',
             code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
@@ -2486,15 +2724,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando a ordem dos itens importa, é possível usar <ol>. Os itens continuam sendo representados por <li>.',
-            endParagraph: 'A escolha entre <ul> e <ol> depende do significado da lista, não só da aparência.',
+            introduction: {
+              title: 'Listas ordenadas',
+              text: 'Quando a ordem dos itens importa, é possível usar <ol>. Os itens continuam sendo representados por <li>.',
+              persona: 'neutral'
+            },
+            closing: 'A escolha entre <ul> e <ol> depende do significado da lista, não só da aparência.',
             highlight: ['ol', 'li', 'ul'],
             codeLanguage: 'HTML',
             code: '<ol>\n  <li>Abrir o navegador</li>\n  <li>Acessar o site</li>\n  <li>Fazer login</li>\n</ol>'
           },
           en: {
-            firstParagraph: 'When the order of the items matters, you can use <ol>. Items are still represented by <li>.',
-            endParagraph: 'The choice between <ul> and <ol> depends on the meaning of the list, not just how it looks.',
+            introduction: {
+              title: 'Ordered lists',
+              text: 'When the order of the items matters, you can use <ol>. Items are still represented by <li>.',
+              persona: 'neutral'
+            },
+            closing: 'The choice between <ul> and <ol> depends on the meaning of the list, not just how it looks.',
             highlight: ['ol', 'li', 'ul'],
             codeLanguage: 'HTML',
             code: '<ol>\n  <li>Open the browser</li>\n  <li>Go to the site</li>\n  <li>Log in</li>\n</ol>'
@@ -2740,17 +2986,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Atributos trazem informações adicionais sobre um elemento HTML. Eles aparecem na tag de abertura e costumam ter um nome e um valor.',
-            secondParagraph: 'No exemplo abaixo, href é um atributo. Ele informa ao elemento <a> qual endereço deve ser aberto.',
-            endParagraph: 'Tags definem elementos. Atributos adicionam informações ou configurações a esses elementos.',
+            introduction: {
+              title: 'Detalhes que mudam o comportamento de um elemento',
+              text: 'Dois links podem usar a mesma tag e levar a lugares totalmente diferentes. O que muda entre eles? A resposta está em pequenas informações dentro da própria tag.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como os atributos descrevem um elemento',
+              text: 'Atributos trazem informações adicionais sobre um elemento HTML. Eles aparecem na tag de abertura e costumam ter um nome e um valor.\n\nNo exemplo abaixo, href é um atributo. Ele informa ao elemento <a> qual endereço deve ser aberto.'
+            },
+            closing: 'Tags definem elementos. Atributos adicionam informações ou configurações a esses elementos.',
             highlight: ['HTML', 'href'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com">\n  Acessar\n</a>'
           },
           en: {
-            firstParagraph: 'Attributes provide extra information about an HTML element. They appear in the opening tag and usually have a name and a value.',
-            secondParagraph: 'In the example below, href is an attribute. It tells the <a> element which address to open.',
-            endParagraph: 'Tags define elements. Attributes add information or settings to those elements.',
+            introduction: {
+              title: 'Details that change how an element behaves',
+              text: 'Two links can use the same tag and lead to completely different places. What changes between them? The answer is in small pieces of information inside the tag itself.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How attributes describe an element',
+              text: 'Attributes provide extra information about an HTML element. They appear in the opening tag and usually have a name and a value.\n\nIn the example below, href is an attribute. It tells the <a> element which address to open.'
+            },
+            closing: 'Tags define elements. Attributes add information or settings to those elements.',
             highlight: ['HTML', 'href'],
             codeLanguage: 'HTML',
             code: '<a href="https://example.com">\n  Access\n</a>'
@@ -2761,15 +3021,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Elementos diferentes têm atributos próprios, de acordo com sua necessidade.',
-            endParagraph: 'No <img>, src indica a imagem e alt traz uma descrição. No <a>, href indica o destino do link.',
+            introduction: {
+              title: 'Cada elemento tem seus atributos',
+              text: 'Elementos diferentes têm atributos próprios, de acordo com sua necessidade.',
+              persona: 'neutral'
+            },
+            closing: 'No <img>, src indica a imagem e alt traz uma descrição. No <a>, href indica o destino do link.',
             highlight: ['img', 'src', 'alt', 'href'],
             codeLanguage: 'HTML',
             code: '<img src="gato.jpg" alt="Gato sentado" />\n\n<a href="sobre.html">\n  Sobre\n</a>'
           },
           en: {
-            firstParagraph: 'Different elements have their own attributes, depending on what they need.',
-            endParagraph: 'In <img>, src points to the image and alt provides a description. In <a>, href points to the link\'s destination.',
+            introduction: {
+              title: 'Each element has its own attributes',
+              text: 'Different elements have their own attributes, depending on what they need.',
+              persona: 'neutral'
+            },
+            closing: 'In <img>, src points to the image and alt provides a description. In <a>, href points to the link\'s destination.',
             highlight: ['img', 'src', 'alt', 'href'],
             codeLanguage: 'HTML',
             code: '<img src="cat.jpg" alt="Cat sitting" />\n\n<a href="about.html">\n  About\n</a>'
@@ -3066,15 +3334,31 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <div> é um contêiner genérico usado para agrupar outros elementos. Ele é útil para organizar partes da página.',
-            endParagraph: 'O <div> não indica um significado específico para o conteúdo. Ele serve, principalmente, como um contêiner.',
+            introduction: {
+              title: 'Quando não existe uma tag pronta',
+              text: 'E se você precisar agrupar partes da página, mas nenhuma tag tem o significado certo para isso? O HTML tem elementos feitos exatamente para esse papel.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O div como contêiner genérico',
+              text: 'O elemento <div> é um contêiner genérico usado para agrupar outros elementos. Ele é útil para organizar partes da página.'
+            },
+            closing: 'O <div> não indica um significado específico para o conteúdo. Ele serve, principalmente, como um contêiner.',
             highlight: ['div'],
             codeLanguage: 'HTML',
             code: '<div>\n  <h2>Perfil</h2>\n  <p>Desenvolvedor web</p>\n</div>'
           },
           en: {
-            firstParagraph: 'The <div> element is a generic container used to group other elements. It\'s useful for organizing parts of the page.',
-            endParagraph: 'The <div> doesn\'t carry a specific meaning for the content. It mainly works as a container.',
+            introduction: {
+              title: 'When there is no ready-made tag',
+              text: 'What if you need to group parts of the page, but no tag has the right meaning for it? HTML has elements made exactly for that role.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The div as a generic container',
+              text: 'The <div> element is a generic container used to group other elements. It\'s useful for organizing parts of the page.'
+            },
+            closing: 'The <div> doesn\'t carry a specific meaning for the content. It mainly works as a container.',
             highlight: ['div'],
             codeLanguage: 'HTML',
             code: '<div>\n  <h2>Profile</h2>\n  <p>Web developer</p>\n</div>'
@@ -3085,15 +3369,23 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O <span> também é um contêiner genérico, mas costuma ser usado para pequenos trechos de conteúdo dentro de uma linha.',
-            endParagraph: 'A diferença principal está no uso: <div> costuma agrupar blocos maiores, enquanto <span> envolve pequenos trechos de conteúdo.',
+            introduction: {
+              title: 'Div ou span: quando usar cada um',
+              text: 'O <span> também é um contêiner genérico, mas costuma ser usado para pequenos trechos de conteúdo dentro de uma linha.',
+              persona: 'neutral'
+            },
+            closing: 'A diferença principal está no uso: <div> costuma agrupar blocos maiores, enquanto <span> envolve pequenos trechos de conteúdo.',
             highlight: ['div', 'span'],
             codeLanguage: 'HTML',
             code: '<p>\n  Meu nome é\n  <span>Gabriel</span>.\n</p>'
           },
           en: {
-            firstParagraph: 'The <span> is also a generic container, but it\'s typically used for small pieces of content inside a line of text.',
-            endParagraph: 'The key difference is in the use: <div> usually groups larger blocks, while <span> wraps small pieces of content.',
+            introduction: {
+              title: 'Div or span: when to use each',
+              text: 'The <span> is also a generic container, but it\'s typically used for small pieces of content inside a line of text.',
+              persona: 'neutral'
+            },
+            closing: 'The key difference is in the use: <div> usually groups larger blocks, while <span> wraps small pieces of content.',
             highlight: ['div', 'span'],
             codeLanguage: 'HTML',
             code: '<p>\n  My name is\n  <span>Gabriel</span>.\n</p>'
@@ -3430,9 +3722,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'CSS é a linguagem usada para definir a aparência de uma página web. Com ele, podemos controlar cores, tamanhos, espaçamentos, fontes e muitos outros aspectos visuais.',
-            secondParagraph: 'Enquanto o HTML organiza o conteúdo da página, o CSS define como esse conteúdo será apresentado.',
-            endParagraph: 'HTML fornece a estrutura. CSS acrescenta a apresentação visual. Os dois trabalham juntos para construir uma página web.',
+            introduction: {
+              title: 'Dando aparência ao conteúdo',
+              text: 'Uma página só com HTML funciona, mas parece um documento de texto puro. O que faz um site ter cores, espaçamento e personalidade? É disso que o CSS cuida.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como o CSS e o HTML trabalham juntos',
+              text: 'CSS é a linguagem usada para definir a aparência de uma página web. Com ele, podemos controlar cores, tamanhos, espaçamentos, fontes e muitos outros aspectos visuais.\n\nEnquanto o HTML organiza o conteúdo da página, o CSS define como esse conteúdo será apresentado.'
+            },
+            closing: 'HTML fornece a estrutura. CSS acrescenta a apresentação visual. Os dois trabalham juntos para construir uma página web.',
             highlight: ['CSS', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p class="destaque">Olá, mundo!</p>',
@@ -3444,9 +3743,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'CSS is the language used to define the appearance of a web page. With it, we can control colors, sizes, spacing, fonts and many other visual aspects.',
-            secondParagraph: 'While HTML organizes the page\'s content, CSS defines how that content will be presented.',
-            endParagraph: 'HTML provides the structure. CSS adds the visual presentation. The two work together to build a web page.',
+            introduction: {
+              title: 'Giving content a look',
+              text: 'A page with only HTML works, but it looks like a plain text document. What gives a site its colors, spacing and personality? That is what CSS takes care of.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How CSS and HTML work together',
+              text: 'CSS is the language used to define the appearance of a web page. With it, we can control colors, sizes, spacing, fonts and many other visual aspects.\n\nWhile HTML organizes the page\'s content, CSS defines how that content will be presented.'
+            },
+            closing: 'HTML provides the structure. CSS adds the visual presentation. The two work together to build a web page.',
             highlight: ['CSS', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p class="highlight">Hello, world!</p>',
@@ -3463,8 +3769,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Para aplicar CSS, precisamos selecionar um elemento HTML e definir quais propriedades queremos alterar.',
-            endParagraph: 'Uma regra CSS possui um seletor e um conjunto de declarações. O seletor indica o elemento que será estilizado.',
+            introduction: {
+              title: 'Seletor e declarações',
+              text: 'Para aplicar CSS, precisamos selecionar um elemento HTML e definir quais propriedades queremos alterar.',
+              persona: 'neutral'
+            },
+            closing: 'Uma regra CSS possui um seletor e um conjunto de declarações. O seletor indica o elemento que será estilizado.',
             highlight: ['CSS', 'seletor'],
             codeLanguage: 'HTML',
             code: '<h1>Meu site</h1>',
@@ -3476,8 +3786,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'To apply CSS, we need to select an HTML element and define which properties we want to change.',
-            endParagraph: 'A CSS rule has a selector and a set of declarations. The selector indicates which element will be styled.',
+            introduction: {
+              title: 'Selector and declarations',
+              text: 'To apply CSS, we need to select an HTML element and define which properties we want to change.',
+              persona: 'neutral'
+            },
+            closing: 'A CSS rule has a selector and a set of declarations. The selector indicates which element will be styled.',
             highlight: ['CSS', 'selector'],
             codeLanguage: 'HTML',
             code: '<h1>My website</h1>',
@@ -3714,17 +4028,31 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Existem três formas de adicionar CSS a uma página.',
-            secondParagraph: 'No CSS inline, o estilo vai direto no atributo style do elemento. No CSS interno, ele fica dentro de uma tag style, no próprio documento HTML.',
-            endParagraph: 'Essas duas formas funcionam, mas misturar muitos estilos ao HTML pode dificultar a manutenção da página.',
+            introduction: {
+              title: 'Três caminhos para o mesmo estilo',
+              text: 'Dá para estilizar uma página de mais de um jeito, e cada um tem o seu momento. Você consegue imaginar onde o CSS poderia ficar?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'CSS inline e CSS interno',
+              text: 'Existem três formas de adicionar CSS a uma página.\n\nNo CSS inline, o estilo vai direto no atributo style do elemento. No CSS interno, ele fica dentro de uma tag style, no próprio documento HTML.'
+            },
+            closing: 'Essas duas formas funcionam, mas misturar muitos estilos ao HTML pode dificultar a manutenção da página.',
             highlight: ['CSS', 'inline', 'interno'],
             codeLanguage: 'HTML',
             code: '<p style="color: blue;">\n  Texto com CSS inline.\n</p>\n\n<style>\n  p {\n    font-size: 20px;\n  }\n</style>'
           },
           en: {
-            firstParagraph: 'There are three ways to add CSS to a page.',
-            secondParagraph: 'With inline CSS, the style goes straight into the style attribute of the element. With internal CSS, it lives inside a style tag, in the HTML document itself.',
-            endParagraph: 'Both of these work, but mixing too many styles into the HTML can make the page harder to maintain.',
+            introduction: {
+              title: 'Three paths to the same style',
+              text: 'You can style a page in more than one way, and each has its moment. Can you imagine where the CSS could live?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Inline CSS and internal CSS',
+              text: 'There are three ways to add CSS to a page.\n\nWith inline CSS, the style goes straight into the style attribute of the element. With internal CSS, it lives inside a style tag, in the HTML document itself.'
+            },
+            closing: 'Both of these work, but mixing too many styles into the HTML can make the page harder to maintain.',
             highlight: ['CSS', 'inline', 'internal'],
             codeLanguage: 'HTML',
             code: '<p style="color: blue;">\n  Text with inline CSS.\n</p>\n\n<style>\n  p {\n    font-size: 20px;\n  }\n</style>'
@@ -3735,9 +4063,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A terceira forma é o CSS externo: os estilos ficam em um arquivo separado, ligado ao HTML por uma tag link.',
-            secondParagraph: 'Em projetos reais essa é a forma mais comum, porque mantém estrutura e apresentação organizadas em arquivos diferentes.',
-            endParagraph: 'Separar o CSS do HTML facilita a organização e permite reutilizar os mesmos estilos em várias páginas.',
+            introduction: {
+              title: 'CSS externo com a tag link',
+              text: 'A terceira forma é o CSS externo: os estilos ficam em um arquivo separado, ligado ao HTML por uma tag link.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Por que o CSS externo é o mais comum',
+              text: 'Em projetos reais essa é a forma mais comum, porque mantém estrutura e apresentação organizadas em arquivos diferentes.'
+            },
+            closing: 'Separar o CSS do HTML facilita a organização e permite reutilizar os mesmos estilos em várias páginas.',
             highlight: ['CSS', 'externo', 'link'],
             codeLanguage: 'HTML',
             code: '<link rel="stylesheet" href="style.css">\n\n<p>Texto do site</p>',
@@ -3749,9 +4084,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The third way is external CSS: the styles live in a separate file, linked to the HTML by a link tag.',
-            secondParagraph: 'In real projects this is the most common form, because it keeps structure and presentation organized in different files.',
-            endParagraph: 'Separating CSS from HTML makes organization easier and lets you reuse the same styles across several pages.',
+            introduction: {
+              title: 'External CSS with the link tag',
+              text: 'The third way is external CSS: the styles live in a separate file, linked to the HTML by a link tag.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Why external CSS is the most common',
+              text: 'In real projects this is the most common form, because it keeps structure and presentation organized in different files.'
+            },
+            closing: 'Separating CSS from HTML makes organization easier and lets you reuse the same styles across several pages.',
             highlight: ['CSS', 'external', 'link'],
             codeLanguage: 'HTML',
             code: '<link rel="stylesheet" href="style.css">\n\n<p>Site text</p>',
@@ -3980,8 +4322,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um seletor informa ao CSS quais elementos devem receber uma regra. O seletor mais simples é o seletor por elemento.',
-            endParagraph: 'Nesse exemplo, todos os elementos p recebem a cor definida pela regra.',
+            introduction: {
+              title: 'Escolhendo quem recebe o estilo',
+              text: 'Se você tem dez parágrafos e quer mudar só alguns, como o CSS sabe quais? Tudo começa com a escolha certa de quem vai receber a regra.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O seletor por elemento',
+              text: 'Um seletor informa ao CSS quais elementos devem receber uma regra. O seletor mais simples é o seletor por elemento.'
+            },
+            closing: 'Nesse exemplo, todos os elementos p recebem a cor definida pela regra.',
             highlight: ['CSS', 'seletor'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: blue;\n}',
@@ -3993,8 +4343,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A selector tells CSS which elements should receive a rule. The simplest selector is the element selector.',
-            endParagraph: 'In this example, every p element receives the color defined by the rule.',
+            introduction: {
+              title: 'Choosing who gets the style',
+              text: 'If you have ten paragraphs and want to change only some, how does CSS know which ones? It all starts with choosing the right target for the rule.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The element selector',
+              text: 'A selector tells CSS which elements should receive a rule. The simplest selector is the element selector.'
+            },
+            closing: 'In this example, every p element receives the color defined by the rule.',
             highlight: ['CSS', 'selector'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: blue;\n}',
@@ -4011,8 +4369,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma classe permite aplicar um mesmo estilo a vários elementos. Um ID identifica um elemento específico dentro da página.',
-            endParagraph: 'Use classe quando um estilo pode ser reutilizado. O ID representa uma identificação específica e deve ser utilizado com esse propósito.',
+            introduction: {
+              title: 'Classes e IDs',
+              text: 'Uma classe permite aplicar um mesmo estilo a vários elementos. Um ID identifica um elemento específico dentro da página.',
+              persona: 'neutral'
+            },
+            closing: 'Use classe quando um estilo pode ser reutilizado. O ID representa uma identificação específica e deve ser utilizado com esse propósito.',
             highlight: ['classe', 'ID'],
             codeLanguage: 'HTML',
             code: '<p class="destaque">Primeiro texto</p>\n<p class="destaque">Segundo texto</p>\n\n<h1 id="titulo">Meu site</h1>',
@@ -4024,8 +4386,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A class lets you apply the same style to several elements. An ID identifies one specific element on the page.',
-            endParagraph: 'Use a class when a style can be reused. An ID represents a specific identification and should be used for that purpose.',
+            introduction: {
+              title: 'Classes and IDs',
+              text: 'A class lets you apply the same style to several elements. An ID identifies one specific element on the page.',
+              persona: 'neutral'
+            },
+            closing: 'Use a class when a style can be reused. An ID represents a specific identification and should be used for that purpose.',
             highlight: ['class', 'ID'],
             codeLanguage: 'HTML',
             code: '<p class="highlight">First text</p>\n<p class="highlight">Second text</p>\n\n<h1 id="title">My website</h1>',
@@ -4293,9 +4659,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando várias regras têm as mesmas declarações, podemos agrupar os seletores separando-os por vírgula.',
-            secondParagraph: 'No exemplo, h1 e h2 recebem a mesma cor com uma única regra.',
-            endParagraph: 'Agrupar evita repetir o mesmo bloco de declarações para cada seletor.',
+            introduction: {
+              title: 'Uma regra para vários elementos',
+              text: 'Imagine escrever a mesma cor cinco vezes, uma para cada título. Dá para evitar essa repetição com um pequeno sinal entre os seletores.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como agrupar seletores com vírgula',
+              text: 'Quando várias regras têm as mesmas declarações, podemos agrupar os seletores separando-os por vírgula.\n\nNo exemplo, h1 e h2 recebem a mesma cor com uma única regra.'
+            },
+            closing: 'Agrupar evita repetir o mesmo bloco de declarações para cada seletor.',
             highlight: ['vírgula'],
             codeLanguage: 'CSS',
             code: 'h1, h2 {\n  color: #4a3aff;\n}',
@@ -4307,9 +4680,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'When several rules share the same declarations, we can group the selectors, separating them with commas.',
-            secondParagraph: 'In the example, h1 and h2 get the same color from a single rule.',
-            endParagraph: 'Grouping avoids repeating the same block of declarations for each selector.',
+            introduction: {
+              title: 'One rule for several elements',
+              text: 'Imagine writing the same color five times, once for each heading. You can avoid that repetition with a small sign between the selectors.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to group selectors with a comma',
+              text: 'When several rules share the same declarations, we can group the selectors, separating them with commas.\n\nIn the example, h1 and h2 get the same color from a single rule.'
+            },
+            closing: 'Grouping avoids repeating the same block of declarations for each selector.',
             highlight: ['commas'],
             codeLanguage: 'CSS',
             code: 'h1, h2 {\n  color: #4a3aff;\n}',
@@ -4326,9 +4706,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um espaço entre dois seletores cria um seletor descendente: nav a seleciona todo link que está dentro de um nav, em qualquer nível.',
-            secondParagraph: 'Já o sinal > cria um seletor de filho: .card > p seleciona só os p que são filhos diretos do .card.',
-            endParagraph: 'Combinar seletores permite estilizar um elemento pelo lugar onde ele está, sem dar uma classe para cada um.',
+            introduction: {
+              title: 'Seletores descendente e de filho',
+              text: 'Um espaço entre dois seletores cria um seletor descendente: nav a seleciona todo link que está dentro de um nav, em qualquer nível.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Seletor de filho direto',
+              text: 'Já o sinal > cria um seletor de filho: .card > p seleciona só os p que são filhos diretos do .card.'
+            },
+            closing: 'Combinar seletores permite estilizar um elemento pelo lugar onde ele está, sem dar uma classe para cada um.',
             highlight: ['descendente', 'filho'],
             codeLanguage: 'CSS',
             code: 'nav a {\n  color: green;\n}\n\n.card > p {\n  color: crimson;\n}',
@@ -4340,9 +4727,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A space between two selectors creates a descendant selector: nav a selects every link inside a nav, at any level.',
-            secondParagraph: 'The > sign creates a child selector: .card > p selects only the p elements that are direct children of .card.',
-            endParagraph: 'Combining selectors lets you style an element by where it is, without giving each one a class.',
+            introduction: {
+              title: 'Descendant and child selectors',
+              text: 'A space between two selectors creates a descendant selector: nav a selects every link inside a nav, at any level.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The direct child selector',
+              text: 'The > sign creates a child selector: .card > p selects only the p elements that are direct children of .card.'
+            },
+            closing: 'Combining selectors lets you style an element by where it is, without giving each one a class.',
             highlight: ['descendant', 'child'],
             codeLanguage: 'CSS',
             code: 'nav a {\n  color: green;\n}\n\n.card > p {\n  color: crimson;\n}',
@@ -4571,8 +4965,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade color define a cor do texto de um elemento.',
-            endParagraph: 'CSS permite representar cores de diferentes formas. Neste momento, basta conhecer nomes de cores e valores hexadecimais.',
+            introduction: {
+              title: 'Colorindo o texto',
+              text: 'Qual é a primeira coisa que muda quando uma página ganha identidade? Quase sempre, as cores. Vamos começar por uma delas: a cor do texto.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A propriedade color e as formas de escrever cores',
+              text: 'A propriedade color define a cor do texto de um elemento.'
+            },
+            closing: 'CSS permite representar cores de diferentes formas. Neste momento, basta conhecer nomes de cores e valores hexadecimais.',
             highlight: ['color', 'CSS'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  color: blue;\n}\n\np {\n  color: #333;\n}',
@@ -4584,8 +4986,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The color property defines the text color of an element.',
-            endParagraph: 'CSS lets you represent colors in different ways. For now, it\'s enough to know color names and hexadecimal values.',
+            introduction: {
+              title: 'Coloring the text',
+              text: 'What is the first thing that changes when a page gets an identity? Almost always, the colors. Let\'s start with one of them: the text color.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The color property and the ways to write colors',
+              text: 'The color property defines the text color of an element.'
+            },
+            closing: 'CSS lets you represent colors in different ways. For now, it\'s enough to know color names and hexadecimal values.',
             highlight: ['color', 'CSS'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  color: blue;\n}\n\np {\n  color: #333;\n}',
@@ -4602,8 +5012,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade background-color define a cor de fundo de um elemento.',
-            endParagraph: 'Podemos combinar color e background-color para controlar o contraste entre o conteúdo e o fundo.',
+            introduction: {
+              title: 'Cor de fundo',
+              text: 'A propriedade background-color define a cor de fundo de um elemento.',
+              persona: 'neutral'
+            },
+            closing: 'Podemos combinar color e background-color para controlar o contraste entre o conteúdo e o fundo.',
             highlight: ['background-color'],
             codeLanguage: 'CSS',
             code: '.card {\n  background-color: #f2f2f2;\n}',
@@ -4615,8 +5029,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The background-color property defines the background color of an element.',
-            endParagraph: 'We can combine color and background-color to control the contrast between content and background.',
+            introduction: {
+              title: 'Background color',
+              text: 'The background-color property defines the background color of an element.',
+              persona: 'neutral'
+            },
+            closing: 'We can combine color and background-color to control the contrast between content and background.',
             highlight: ['background-color'],
             codeLanguage: 'CSS',
             code: '.card {\n  background-color: #f2f2f2;\n}',
@@ -4845,9 +5263,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Além de nomes e hexadecimais, uma cor pode ser escrita com rgb, informando quanto de vermelho, verde e azul ela tem, de 0 a 255.',
-            secondParagraph: 'Com rgba, um quarto valor define a transparência: 0 é invisível e 1 é totalmente opaco.',
-            endParagraph: 'Já a propriedade opacity deixa o elemento inteiro transparente, incluindo o texto e tudo o que estiver dentro dele.',
+            introduction: {
+              title: 'Cores com transparência',
+              text: 'E se você quiser uma cor que deixe o fundo aparecer por trás? Com o que você já viu, não dá. Existe outra forma de escrever cores que resolve isso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'As cores rgb e rgba, e a diferença para opacity',
+              text: 'Além de nomes e hexadecimais, uma cor pode ser escrita com rgb, informando quanto de vermelho, verde e azul ela tem, de 0 a 255.\n\nCom rgba, um quarto valor define a transparência: 0 é invisível e 1 é totalmente opaco.'
+            },
+            closing: 'Já a propriedade opacity deixa o elemento inteiro transparente, incluindo o texto e tudo o que estiver dentro dele.',
             highlight: ['rgb', 'rgba', 'opacity'],
             codeLanguage: 'CSS',
             code: '.faixa {\n  background-color: rgba(74, 58, 255, 0.3);\n}\n\n.apagado {\n  opacity: 0.4;\n}',
@@ -4859,9 +5284,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Besides names and hex values, a color can be written with rgb, saying how much red, green and blue it has, from 0 to 255.',
-            secondParagraph: 'With rgba, a fourth value sets the transparency: 0 is invisible and 1 is fully opaque.',
-            endParagraph: 'The opacity property, on the other hand, makes the whole element transparent, including its text and everything inside it.',
+            introduction: {
+              title: 'Colors with transparency',
+              text: 'What if you want a color that lets the background show through? With what you have seen so far, you cannot. There is another way to write colors that solves it.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The rgb and rgba colors, and how opacity differs',
+              text: 'Besides names and hex values, a color can be written with rgb, saying how much red, green and blue it has, from 0 to 255.\n\nWith rgba, a fourth value sets the transparency: 0 is invisible and 1 is fully opaque.'
+            },
+            closing: 'The opacity property, on the other hand, makes the whole element transparent, including its text and everything inside it.',
             highlight: ['rgb', 'rgba', 'opacity'],
             codeLanguage: 'CSS',
             code: '.band {\n  background-color: rgba(74, 58, 255, 0.3);\n}\n\n.faded {\n  opacity: 0.4;\n}',
@@ -4878,9 +5310,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um gradiente é uma transição suave entre duas ou mais cores. Com linear-gradient, essa transição acontece em linha reta.',
-            secondParagraph: 'Gradientes vão na propriedade background, e não em background-color, porque o navegador os trata como uma imagem.',
-            endParagraph: 'A direção pode ser definida no início, como to right ou 45deg.',
+            introduction: {
+              title: 'Gradientes com linear-gradient',
+              text: 'Um gradiente é uma transição suave entre duas ou mais cores. Com linear-gradient, essa transição acontece em linha reta.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Onde aplicar um gradiente',
+              text: 'Gradientes vão na propriedade background, e não em background-color, porque o navegador os trata como uma imagem.'
+            },
+            closing: 'A direção pode ser definida no início, como to right ou 45deg.',
             highlight: ['linear-gradient', 'background', 'background-color'],
             codeLanguage: 'CSS',
             code: '.banner {\n  background: linear-gradient(to right, #4a3aff, #00c2ff);\n  color: white;\n  padding: 16px;\n}',
@@ -4892,9 +5331,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A gradient is a smooth transition between two or more colors. With linear-gradient, that transition happens in a straight line.',
-            secondParagraph: 'Gradients go in the background property, not in background-color, because the browser treats them as an image.',
-            endParagraph: 'The direction can be set at the start, like to right or 45deg.',
+            introduction: {
+              title: 'Gradients with linear-gradient',
+              text: 'A gradient is a smooth transition between two or more colors. With linear-gradient, that transition happens in a straight line.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Where to apply a gradient',
+              text: 'Gradients go in the background property, not in background-color, because the browser treats them as an image.'
+            },
+            closing: 'The direction can be set at the start, like to right or 45deg.',
             highlight: ['linear-gradient', 'background', 'background-color'],
             codeLanguage: 'CSS',
             code: '.banner {\n  background: linear-gradient(to right, #4a3aff, #00c2ff);\n  color: white;\n  padding: 16px;\n}',
@@ -5123,8 +5569,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'As propriedades font-size e font-weight controlam, respectivamente, o tamanho e o peso da fonte.',
-            endParagraph: 'Essas propriedades ajudam a criar uma hierarquia visual entre títulos, textos e outras informações.',
+            introduction: {
+              title: 'Dando destaque ao que importa',
+              text: 'Em quase todo site, o título chama mais atenção que o texto ao redor. Isso não é por acaso: é uma questão de tamanho e de peso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Tamanho e peso da fonte',
+              text: 'As propriedades font-size e font-weight controlam, respectivamente, o tamanho e o peso da fonte.'
+            },
+            closing: 'Essas propriedades ajudam a criar uma hierarquia visual entre títulos, textos e outras informações.',
             highlight: ['font-size', 'font-weight'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size: 32px;\n  font-weight: 700;\n}\n\np {\n  font-size: 16px;\n  font-weight: 400;\n}',
@@ -5136,8 +5590,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The font-size and font-weight properties control, respectively, the size and weight of the font.',
-            endParagraph: 'These properties help create a visual hierarchy between headings, text and other information.',
+            introduction: {
+              title: 'Highlighting what matters',
+              text: 'On almost every site, the heading grabs more attention than the text around it. That is no accident: it is a matter of size and weight.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Font size and weight',
+              text: 'The font-size and font-weight properties control, respectively, the size and weight of the font.'
+            },
+            closing: 'These properties help create a visual hierarchy between headings, text and other information.',
             highlight: ['font-size', 'font-weight'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size: 32px;\n  font-weight: 700;\n}\n\np {\n  font-size: 16px;\n  font-weight: 400;\n}',
@@ -5154,8 +5616,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'font-family define a família tipográfica utilizada. Já text-align controla o alinhamento horizontal do texto.',
-            endParagraph: 'Escolher uma fonte adequada e organizar o alinhamento ajuda a tornar o conteúdo mais legível.',
+            introduction: {
+              title: 'Família da fonte e alinhamento do texto',
+              text: 'font-family define a família tipográfica utilizada. Já text-align controla o alinhamento horizontal do texto.',
+              persona: 'neutral'
+            },
+            closing: 'Escolher uma fonte adequada e organizar o alinhamento ajuda a tornar o conteúdo mais legível.',
             highlight: ['font-family', 'text-align'],
             codeLanguage: 'CSS',
             code: 'body {\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  text-align: center;\n}',
@@ -5167,8 +5633,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'font-family defines the typeface used. text-align, in turn, controls the horizontal alignment of the text.',
-            endParagraph: 'Choosing a suitable font and organizing alignment helps make content more readable.',
+            introduction: {
+              title: 'Font family and text alignment',
+              text: 'font-family defines the typeface used. text-align, in turn, controls the horizontal alignment of the text.',
+              persona: 'neutral'
+            },
+            closing: 'Choosing a suitable font and organizing alignment helps make content more readable.',
             highlight: ['font-family', 'text-align'],
             codeLanguage: 'CSS',
             code: 'body {\n  font-family: Arial, sans-serif;\n}\n\nh1 {\n  text-align: center;\n}',
@@ -5185,9 +5655,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade text-decoration controla linhas aplicadas ao texto, como o sublinhado e o riscado.',
-            secondParagraph: 'Os valores mais comuns são underline, line-through e none.',
-            endParagraph: 'O valor none é bastante usado em links, que já vêm sublinhados por padrão no navegador.',
+            introduction: {
+              title: 'Sublinhado e riscado em textos',
+              text: 'A propriedade text-decoration controla linhas aplicadas ao texto, como o sublinhado e o riscado.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Os valores de text-decoration',
+              text: 'Os valores mais comuns são underline, line-through e none.'
+            },
+            closing: 'O valor none é bastante usado em links, que já vêm sublinhados por padrão no navegador.',
             highlight: ['text-decoration', 'underline', 'line-through', 'none'],
             codeLanguage: 'CSS',
             code: '.destaque {\n  text-decoration: underline;\n}\n\n.removido {\n  text-decoration: line-through;\n}\n\n.limpo {\n  text-decoration: none;\n}',
@@ -5199,9 +5676,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The text-decoration property controls lines applied to text, such as underline and strikethrough.',
-            secondParagraph: 'The most common values are underline, line-through and none.',
-            endParagraph: 'The value none is widely used on links, which come underlined by default in the browser.',
+            introduction: {
+              title: 'Underline and strikethrough on text',
+              text: 'The text-decoration property controls lines applied to text, such as underline and strikethrough.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The text-decoration values',
+              text: 'The most common values are underline, line-through and none.'
+            },
+            closing: 'The value none is widely used on links, which come underlined by default in the browser.',
             highlight: ['text-decoration', 'underline', 'line-through', 'none'],
             codeLanguage: 'CSS',
             code: '.destaque {\n  text-decoration: underline;\n}\n\n.removido {\n  text-decoration: line-through;\n}\n\n.limpo {\n  text-decoration: none;\n}',
@@ -5430,9 +5914,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'line-height define a altura de cada linha de texto, ou seja, o espaço entre uma linha e outra.',
-            secondParagraph: 'Um valor sem unidade, como 1.5, multiplica o tamanho da fonte: com fonte de 16px, cada linha ocupa 24px.',
-            endParagraph: 'Parágrafos longos ficam bem mais fáceis de ler com um line-height entre 1.4 e 1.6.',
+            introduction: {
+              title: 'Textos que dão gosto de ler',
+              text: 'Já tentou ler um parágrafo com as linhas coladas umas nas outras? Cansa rápido. Um pequeno ajuste de espaço entre as linhas muda tudo.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A altura da linha com line-height',
+              text: 'line-height define a altura de cada linha de texto, ou seja, o espaço entre uma linha e outra.\n\nUm valor sem unidade, como 1.5, multiplica o tamanho da fonte: com fonte de 16px, cada linha ocupa 24px.'
+            },
+            closing: 'Parágrafos longos ficam bem mais fáceis de ler com um line-height entre 1.4 e 1.6.',
             highlight: ['line-height'],
             codeLanguage: 'CSS',
             code: '.apertado {\n  line-height: 1;\n}\n\n.confortavel {\n  line-height: 1.6;\n}',
@@ -5444,9 +5935,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'line-height sets the height of each line of text, that is, the space between one line and the next.',
-            secondParagraph: 'A unitless value, like 1.5, multiplies the font size: with a 16px font, each line takes 24px.',
-            endParagraph: 'Long paragraphs are much easier to read with a line-height between 1.4 and 1.6.',
+            introduction: {
+              title: 'Text that is a pleasure to read',
+              text: 'Ever tried reading a paragraph with the lines stuck together? It gets tiring fast. A small adjustment to the space between lines changes everything.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Line height with line-height',
+              text: 'line-height sets the height of each line of text, that is, the space between one line and the next.\n\nA unitless value, like 1.5, multiplies the font size: with a 16px font, each line takes 24px.'
+            },
+            closing: 'Long paragraphs are much easier to read with a line-height between 1.4 and 1.6.',
             highlight: ['line-height'],
             codeLanguage: 'CSS',
             code: '.tight {\n  line-height: 1;\n}\n\n.comfy {\n  line-height: 1.6;\n}',
@@ -5463,9 +5961,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'letter-spacing ajusta o espaço entre as letras, e text-transform muda a caixa do texto sem mexer no HTML.',
-            secondParagraph: 'Os valores mais comuns de text-transform são uppercase (tudo maiúsculo), lowercase (tudo minúsculo) e capitalize (primeira letra de cada palavra).',
-            endParagraph: 'Como a mudança é só visual, o texto escrito no HTML continua o mesmo.',
+            introduction: {
+              title: 'Espaço entre letras e caixa do texto',
+              text: 'letter-spacing ajusta o espaço entre as letras, e text-transform muda a caixa do texto sem mexer no HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Os valores de text-transform',
+              text: 'Os valores mais comuns de text-transform são uppercase (tudo maiúsculo), lowercase (tudo minúsculo) e capitalize (primeira letra de cada palavra).'
+            },
+            closing: 'Como a mudança é só visual, o texto escrito no HTML continua o mesmo.',
             highlight: ['letter-spacing', 'text-transform', 'uppercase', 'lowercase', 'capitalize'],
             codeLanguage: 'CSS',
             code: '.rotulo {\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}',
@@ -5477,9 +5982,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'letter-spacing adjusts the space between letters, and text-transform changes the text\'s case without touching the HTML.',
-            secondParagraph: 'The most common text-transform values are uppercase (all capitals), lowercase (all small letters) and capitalize (first letter of each word).',
-            endParagraph: 'Since the change is only visual, the text written in the HTML stays the same.',
+            introduction: {
+              title: 'Letter spacing and text case',
+              text: 'letter-spacing adjusts the space between letters, and text-transform changes the text\'s case without touching the HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The text-transform values',
+              text: 'The most common text-transform values are uppercase (all capitals), lowercase (all small letters) and capitalize (first letter of each word).'
+            },
+            closing: 'Since the change is only visual, the text written in the HTML stays the same.',
             highlight: ['letter-spacing', 'text-transform', 'uppercase', 'lowercase', 'capitalize'],
             codeLanguage: 'CSS',
             code: '.label {\n  text-transform: uppercase;\n  letter-spacing: 2px;\n}',
@@ -5708,8 +6220,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'No CSS, os elementos são tratados como caixas. Cada caixa possui conteúdo, espaçamento interno, borda e espaço externo.',
-            endParagraph: 'Entender o Box Model é essencial para controlar o tamanho e o espaçamento dos elementos de uma página.',
+            introduction: {
+              title: 'Tudo no CSS é uma caixa',
+              text: 'Olhando por fora, uma página parece um monte de texto e imagens. Por baixo, o CSS enxerga tudo como caixas. Vamos descobrir como elas são feitas?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'As quatro camadas de uma caixa',
+              text: 'No CSS, os elementos são tratados como caixas. Cada caixa possui conteúdo, espaçamento interno, borda e espaço externo.'
+            },
+            closing: 'Entender o Box Model é essencial para controlar o tamanho e o espaçamento dos elementos de uma página.',
             highlight: ['Box Model', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n  margin: 10px;\n}',
@@ -5721,8 +6241,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'In CSS, elements are treated as boxes. Each box has content, inner spacing, a border and outer spacing.',
-            endParagraph: 'Understanding the Box Model is essential for controlling the size and spacing of a page\'s elements.',
+            introduction: {
+              title: 'Everything in CSS is a box',
+              text: 'From the outside, a page looks like a pile of text and images. Underneath, CSS sees everything as boxes. Let\'s find out how they are built?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The four layers of a box',
+              text: 'In CSS, elements are treated as boxes. Each box has content, inner spacing, a border and outer spacing.'
+            },
+            closing: 'Understanding the Box Model is essential for controlling the size and spacing of a page\'s elements.',
             highlight: ['Box Model', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n  margin: 10px;\n}',
@@ -5739,8 +6267,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'padding cria espaço entre o conteúdo e a borda. margin cria espaço ao redor da caixa. border define a borda do elemento.',
-            endParagraph: 'Uma forma simples de lembrar é: padding fica dentro da borda; margin fica fora dela.',
+            introduction: {
+              title: 'Padding, margin e border',
+              text: 'padding cria espaço entre o conteúdo e a borda. margin cria espaço ao redor da caixa. border define a borda do elemento.',
+              persona: 'neutral'
+            },
+            closing: 'Uma forma simples de lembrar é: padding fica dentro da borda; margin fica fora dela.',
             highlight: ['padding', 'margin', 'border'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 20px;\n  border: 2px solid black;\n  margin: 16px;\n}',
@@ -5752,8 +6284,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'padding creates space between the content and the border. margin creates space around the box. border defines the element\'s border.',
-            endParagraph: 'A simple way to remember it: padding stays inside the border; margin stays outside it.',
+            introduction: {
+              title: 'Padding, margin and border',
+              text: 'padding creates space between the content and the border. margin creates space around the box. border defines the element\'s border.',
+              persona: 'neutral'
+            },
+            closing: 'A simple way to remember it: padding stays inside the border; margin stays outside it.',
             highlight: ['padding', 'margin', 'border'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 20px;\n  border: 2px solid black;\n  margin: 16px;\n}',
@@ -6033,9 +6569,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade border pode ser escrita de forma abreviada, com espessura, estilo e cor numa só declaração.',
-            secondParagraph: 'O estilo pode ser solid (linha contínua), dashed (tracejada) ou dotted (pontilhada), entre outros.',
-            endParagraph: 'Sem o estilo, a borda não aparece, mesmo com espessura e cor definidas.',
+            introduction: {
+              title: 'Dando contorno a um elemento',
+              text: 'Um cartão sem borda se mistura ao fundo. Com um contorno bem escolhido, ele ganha forma. Dá para fazer isso em uma única linha.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A borda abreviada: espessura, estilo e cor',
+              text: 'A propriedade border pode ser escrita de forma abreviada, com espessura, estilo e cor numa só declaração.\n\nO estilo pode ser solid (linha contínua), dashed (tracejada) ou dotted (pontilhada), entre outros.'
+            },
+            closing: 'Sem o estilo, a borda não aparece, mesmo com espessura e cor definidas.',
             highlight: ['border', 'solid', 'dashed', 'dotted'],
             codeLanguage: 'CSS',
             code: '.cheia {\n  border: 2px solid #333;\n}\n\n.tracejada {\n  border: 2px dashed #4a3aff;\n}',
@@ -6047,9 +6590,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The border property can be written in shorthand, with width, style and color in a single declaration.',
-            secondParagraph: 'The style can be solid (a continuous line), dashed or dotted, among others.',
-            endParagraph: 'Without the style, the border doesn\'t show up, even with width and color set.',
+            introduction: {
+              title: 'Outlining an element',
+              text: 'A card with no border blends into the background. With a well-chosen outline, it takes shape. You can do it in a single line.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The border shorthand: width, style and color',
+              text: 'The border property can be written in shorthand, with width, style and color in a single declaration.\n\nThe style can be solid (a continuous line), dashed or dotted, among others.'
+            },
+            closing: 'Without the style, the border doesn\'t show up, even with width and color set.',
             highlight: ['border', 'solid', 'dashed', 'dotted'],
             codeLanguage: 'CSS',
             code: '.full {\n  border: 2px solid #333;\n}\n\n.dashed {\n  border: 2px dashed #4a3aff;\n}',
@@ -6066,9 +6616,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'border-radius arredonda os cantos de um elemento. Quanto maior o valor, mais arredondado; 50% numa caixa quadrada forma um círculo.',
-            secondParagraph: 'box-shadow adiciona uma sombra: os primeiros valores são o deslocamento horizontal e o vertical, depois vem o desfoque e, por fim, a cor.',
-            endParagraph: 'Cantos suaves e sombras discretas ajudam a destacar um cartão do fundo da página.',
+            introduction: {
+              title: 'Cantos arredondados e sombras',
+              text: 'border-radius arredonda os cantos de um elemento. Quanto maior o valor, mais arredondado; 50% numa caixa quadrada forma um círculo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Como funciona o box-shadow',
+              text: 'box-shadow adiciona uma sombra: os primeiros valores são o deslocamento horizontal e o vertical, depois vem o desfoque e, por fim, a cor.'
+            },
+            closing: 'Cantos suaves e sombras discretas ajudam a destacar um cartão do fundo da página.',
             highlight: ['border-radius', 'box-shadow'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 16px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\n}\n\n.avatar {\n  width: 60px;\n  height: 60px;\n  margin-top: 16px;\n  border-radius: 50%;\n  background-color: #4a3aff;\n}',
@@ -6080,9 +6637,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'border-radius rounds an element\'s corners. The bigger the value, the rounder; 50% on a square box makes a circle.',
-            secondParagraph: 'box-shadow adds a shadow: the first values are the horizontal and vertical offsets, then the blur and, finally, the color.',
-            endParagraph: 'Soft corners and subtle shadows help a card stand out from the page background.',
+            introduction: {
+              title: 'Rounded corners and shadows',
+              text: 'border-radius rounds an element\'s corners. The bigger the value, the rounder; 50% on a square box makes a circle.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'How box-shadow works',
+              text: 'box-shadow adds a shadow: the first values are the horizontal and vertical offsets, then the blur and, finally, the color.'
+            },
+            closing: 'Soft corners and subtle shadows help a card stand out from the page background.',
             highlight: ['border-radius', 'box-shadow'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 16px;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);\n}\n\n.avatar {\n  width: 60px;\n  height: 60px;\n  margin-top: 16px;\n  border-radius: 50%;\n  background-color: #4a3aff;\n}',
@@ -6311,9 +6875,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Por padrão, width define apenas a largura do conteúdo. O padding e a borda são somados por fora dela.',
-            secondParagraph: 'No exemplo, a caixa tem width de 200px, mas ocupa 250px na tela: 200 de conteúdo, mais 20 de padding de cada lado, mais 5 de borda de cada lado.',
-            endParagraph: 'Esse comportamento padrão se chama content-box, e é a causa mais comum de layouts que estouram o espaço previsto.',
+            introduction: {
+              title: 'Por que a caixa ficou maior que o esperado?',
+              text: 'Você define uma largura de 200px e a caixa ocupa mais que isso na tela. Parece um erro, mas é uma regra do CSS. Vamos entender de onde vem essa diferença.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como o tamanho de uma caixa é calculado',
+              text: 'Por padrão, width define apenas a largura do conteúdo. O padding e a borda são somados por fora dela.\n\nNo exemplo, a caixa tem width de 200px, mas ocupa 250px na tela: 200 de conteúdo, mais 20 de padding de cada lado, mais 5 de borda de cada lado.'
+            },
+            closing: 'Esse comportamento padrão se chama content-box, e é a causa mais comum de layouts que estouram o espaço previsto.',
             highlight: ['width', 'padding', 'content-box'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid #333;\n}',
@@ -6325,9 +6896,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'By default, width sets only the width of the content. Padding and border are added on top of it.',
-            secondParagraph: 'In the example, the box has a width of 200px but takes up 250px on screen: 200 of content, plus 20 of padding on each side, plus 5 of border on each side.',
-            endParagraph: 'This default behaviour is called content-box, and it is the most common cause of layouts that overflow their expected space.',
+            introduction: {
+              title: 'Why did the box end up bigger than expected?',
+              text: 'You set a width of 200px and the box takes up more than that on screen. It looks like a bug, but it is a CSS rule. Let\'s understand where that difference comes from.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How the size of a box is calculated',
+              text: 'By default, width sets only the width of the content. Padding and border are added on top of it.\n\nIn the example, the box has a width of 200px but takes up 250px on screen: 200 of content, plus 20 of padding on each side, plus 5 of border on each side.'
+            },
+            closing: 'This default behaviour is called content-box, and it is the most common cause of layouts that overflow their expected space.',
             highlight: ['width', 'padding', 'content-box'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid #333;\n}',
@@ -6344,9 +6922,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade box-sizing muda essa conta. Com o valor border-box, o width passa a incluir o padding e a borda.',
-            secondParagraph: 'No exemplo, a caixa ocupa exatamente 200px na tela, e o conteúdo se ajusta ao espaço que sobra.',
-            endParagraph: 'border-box costuma ser aplicado a todos os elementos da página, porque torna os tamanhos muito mais previsíveis.',
+            introduction: {
+              title: 'A propriedade box-sizing',
+              text: 'A propriedade box-sizing muda essa conta. Com o valor border-box, o width passa a incluir o padding e a borda.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'O mesmo exemplo com border-box',
+              text: 'No exemplo, a caixa ocupa exatamente 200px na tela, e o conteúdo se ajusta ao espaço que sobra.'
+            },
+            closing: 'border-box costuma ser aplicado a todos os elementos da página, porque torna os tamanhos muito mais previsíveis.',
             highlight: ['box-sizing', 'border-box', 'width'],
             codeLanguage: 'CSS',
             code: '* {\n  box-sizing: border-box;\n}\n\n.caixa {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid #333;\n}',
@@ -6358,9 +6943,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The box-sizing property changes that math. With the value border-box, width starts including padding and border.',
-            secondParagraph: 'In the example, the box takes up exactly 200px on screen, and the content adjusts to the space left over.',
-            endParagraph: 'border-box is usually applied to every element on the page, because it makes sizes far more predictable.',
+            introduction: {
+              title: 'The box-sizing property',
+              text: 'The box-sizing property changes that math. With the value border-box, width starts including padding and border.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The same example with border-box',
+              text: 'In the example, the box takes up exactly 200px on screen, and the content adjusts to the space left over.'
+            },
+            closing: 'border-box is usually applied to every element on the page, because it makes sizes far more predictable.',
             highlight: ['box-sizing', 'border-box', 'width'],
             codeLanguage: 'CSS',
             code: '* {\n  box-sizing: border-box;\n}\n\n.caixa {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid #333;\n}',
@@ -6589,8 +7181,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'As propriedades width e height definem a largura e a altura de um elemento.',
-            endParagraph: 'As dimensões podem ser definidas utilizando diferentes unidades. Neste exemplo, usamos pixels.',
+            introduction: {
+              title: 'Definindo o tamanho de um elemento',
+              text: 'Até aqui, os elementos tinham o tamanho que o navegador escolhia. E se você quiser decidir? Duas propriedades cuidam disso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'As propriedades width e height',
+              text: 'As propriedades width e height definem a largura e a altura de um elemento.'
+            },
+            closing: 'As dimensões podem ser definidas utilizando diferentes unidades. Neste exemplo, usamos pixels.',
             highlight: ['width', 'height'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  height: 150px;\n}',
@@ -6602,8 +7202,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The width and height properties define an element\'s width and height.',
-            endParagraph: 'Dimensions can be defined using different units. In this example, we used pixels.',
+            introduction: {
+              title: 'Setting the size of an element',
+              text: 'So far, elements have had whatever size the browser chose. What if you want to decide? Two properties take care of that.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The width and height properties',
+              text: 'The width and height properties define an element\'s width and height.'
+            },
+            closing: 'Dimensions can be defined using different units. In this example, we used pixels.',
             highlight: ['width', 'height'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  height: 150px;\n}',
@@ -6620,18 +7228,32 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'CSS possui diferentes unidades para definir tamanhos. px representa uma medida em pixels, enquanto % utiliza uma proporção em relação ao elemento de referência.',
-            secondParagraph: 'Também existem unidades como em, rem, vh e vw. Elas serão exploradas conforme avançarmos no CSS.',
-            endParagraph: 'Escolher a unidade adequada ajuda a criar interfaces que se adaptam melhor a diferentes tamanhos de tela.',
+            introduction: {
+              title: 'Unidades de medida: px e %',
+              text: 'CSS possui diferentes unidades para definir tamanhos. px representa uma medida em pixels, enquanto % utiliza uma proporção em relação ao elemento de referência.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Outras unidades de tamanho',
+              text: 'Também existem unidades como em, rem, vh e vw. Elas serão exploradas conforme avançarmos no CSS.'
+            },
+            closing: 'Escolher a unidade adequada ajuda a criar interfaces que se adaptam melhor a diferentes tamanhos de tela.',
             highlight: ['px', 'CSS'],
             codeLanguage: 'CSS',
             code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'CSS has different units for defining sizes. px represents a measurement in pixels, while % uses a proportion relative to the reference element.',
-            secondParagraph: 'There are also units like em, rem, vh and vw. We\'ll explore them as we go further into CSS.',
-            endParagraph: 'Choosing the right unit helps create interfaces that adapt better to different screen sizes.',
+            introduction: {
+              title: 'Units of measure: px and %',
+              text: 'CSS has different units for defining sizes. px represents a measurement in pixels, while % uses a proportion relative to the reference element.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Other size units',
+              text: 'There are also units like em, rem, vh and vw. We\'ll explore them as we go further into CSS.'
+            },
+            closing: 'Choosing the right unit helps create interfaces that adapt better to different screen sizes.',
             highlight: ['px', 'CSS'],
             codeLanguage: 'CSS',
             code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
@@ -6855,9 +7477,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'max-width define uma largura máxima: o elemento pode encolher em telas pequenas, mas nunca passa desse limite em telas grandes.',
-            secondParagraph: 'Já min-width define uma largura mínima, abaixo da qual o elemento não encolhe.',
-            endParagraph: 'Uma regra muito usada em imagens é max-width: 100%, que impede a imagem de ficar maior que o espaço disponível.',
+            introduction: {
+              title: 'Um tamanho que se adapta',
+              text: 'Uma largura fixa pode ficar ótima no computador e estourar no celular. Existe uma forma de dizer ao elemento até onde ele pode crescer.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Largura máxima e mínima',
+              text: 'max-width define uma largura máxima: o elemento pode encolher em telas pequenas, mas nunca passa desse limite em telas grandes.\n\nJá min-width define uma largura mínima, abaixo da qual o elemento não encolhe.'
+            },
+            closing: 'Uma regra muito usada em imagens é max-width: 100%, que impede a imagem de ficar maior que o espaço disponível.',
             highlight: ['max-width', 'min-width'],
             codeLanguage: 'CSS',
             code: '.texto {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
@@ -6869,9 +7498,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'max-width sets a maximum width: the element can shrink on small screens, but never goes past that limit on large ones.',
-            secondParagraph: 'min-width sets a minimum width, below which the element won\'t shrink.',
-            endParagraph: 'A rule used all the time on images is max-width: 100%, which stops the image from getting bigger than the available space.',
+            introduction: {
+              title: 'A size that adapts',
+              text: 'A fixed width can look great on a computer and overflow on a phone. There is a way to tell the element how far it may grow.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Maximum and minimum width',
+              text: 'max-width sets a maximum width: the element can shrink on small screens, but never goes past that limit on large ones.\n\nmin-width sets a minimum width, below which the element won\'t shrink.'
+            },
+            closing: 'A rule used all the time on images is max-width: 100%, which stops the image from getting bigger than the available space.',
             highlight: ['max-width', 'min-width'],
             codeLanguage: 'CSS',
             code: '.text {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
@@ -6888,9 +7524,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Para centralizar na horizontal um bloco com largura definida, usamos margin: 0 auto.',
-            secondParagraph: 'O 0 zera as margens de cima e de baixo, e o auto divide igualmente o espaço que sobra entre a esquerda e a direita.',
-            endParagraph: 'Combinado com max-width, é o jeito clássico de criar um contêiner centralizado para o conteúdo da página.',
+            introduction: {
+              title: 'Centralizando um bloco na horizontal',
+              text: 'Para centralizar na horizontal um bloco com largura definida, usamos margin: 0 auto.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Como o margin auto divide o espaço',
+              text: 'O 0 zera as margens de cima e de baixo, e o auto divide igualmente o espaço que sobra entre a esquerda e a direita.'
+            },
+            closing: 'Combinado com max-width, é o jeito clássico de criar um contêiner centralizado para o conteúdo da página.',
             highlight: ['margin', 'auto', 'max-width'],
             codeLanguage: 'CSS',
             code: '.container {\n  max-width: 200px;\n  margin: 0 auto;\n  padding: 12px;\n  background-color: #cfe8ff;\n}',
@@ -6902,9 +7545,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'To center a block with a set width horizontally, we use margin: 0 auto.',
-            secondParagraph: 'The 0 zeroes the top and bottom margins, and auto splits the leftover space equally between left and right.',
-            endParagraph: 'Combined with max-width, it\'s the classic way to build a centered container for the page content.',
+            introduction: {
+              title: 'Centering a block horizontally',
+              text: 'To center a block with a set width horizontally, we use margin: 0 auto.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'How margin auto splits the space',
+              text: 'The 0 zeroes the top and bottom margins, and auto splits the leftover space equally between left and right.'
+            },
+            closing: 'Combined with max-width, it\'s the classic way to build a centered container for the page content.',
             highlight: ['margin', 'auto', 'max-width'],
             codeLanguage: 'CSS',
             code: '.container {\n  max-width: 200px;\n  margin: 0 auto;\n  padding: 12px;\n  background-color: #cfe8ff;\n}',
@@ -7158,9 +7808,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Além de px e de porcentagem, o CSS tem unidades que se apoiam no tamanho da fonte.',
-            secondParagraph: 'A unidade rem toma como referência a fonte raiz da página, definida no elemento html. Já a unidade em toma como referência a fonte do próprio elemento.',
-            endParagraph: 'Como rem parte sempre da mesma referência, ela é mais previsível quando há elementos aninhados.',
+            introduction: {
+              title: 'Medidas que acompanham a fonte',
+              text: 'Pixels são exatos, mas nem sempre são a melhor escolha. Já pensou em tamanhos que se adaptam quando a pessoa aumenta a fonte do navegador?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'As unidades rem e em',
+              text: 'Além de px e de porcentagem, o CSS tem unidades que se apoiam no tamanho da fonte.\n\nA unidade rem toma como referência a fonte raiz da página, definida no elemento html. Já a unidade em toma como referência a fonte do próprio elemento.'
+            },
+            closing: 'Como rem parte sempre da mesma referência, ela é mais previsível quando há elementos aninhados.',
             highlight: ['px', 'rem'],
             codeLanguage: 'CSS',
             code: 'html {\n  font-size: 16px;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
@@ -7172,9 +7829,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Besides px and percentages, CSS has units based on font size.',
-            secondParagraph: 'The rem unit uses the page root font as its reference, set on the html element. The em unit uses the font of the element itself.',
-            endParagraph: 'Because rem always starts from the same reference, it is more predictable when elements are nested.',
+            introduction: {
+              title: 'Measurements that follow the font',
+              text: 'Pixels are exact, but they are not always the best choice. Ever thought about sizes that adapt when a person increases the browser font?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The rem and em units',
+              text: 'Besides px and percentages, CSS has units based on font size.\n\nThe rem unit uses the page root font as its reference, set on the html element. The em unit uses the font of the element itself.'
+            },
+            closing: 'Because rem always starts from the same reference, it is more predictable when elements are nested.',
             highlight: ['px', 'rem'],
             codeLanguage: 'CSS',
             code: 'html {\n  font-size: 16px;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
@@ -7191,9 +7855,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'As unidades vh e vw são relativas ao tamanho da janela do navegador.',
-            secondParagraph: 'Uma unidade vh equivale a 1% da altura da janela, e uma unidade vw equivale a 1% da largura. Assim, uma altura de 100vh ocupa exatamente a altura visível da tela.',
-            endParagraph: 'Essas unidades são úteis para seções que precisam preencher a tela inteira, seja qual for o tamanho do dispositivo.',
+            introduction: {
+              title: 'Unidades relativas à janela',
+              text: 'As unidades vh e vw são relativas ao tamanho da janela do navegador.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Como vh e vw se comportam',
+              text: 'Uma unidade vh equivale a 1% da altura da janela, e uma unidade vw equivale a 1% da largura. Assim, uma altura de 100vh ocupa exatamente a altura visível da tela.'
+            },
+            closing: 'Essas unidades são úteis para seções que precisam preencher a tela inteira, seja qual for o tamanho do dispositivo.',
             highlight: ['vh', 'vw'],
             codeLanguage: 'CSS',
             code: '.banner {\n  width: 100vw;\n  height: 100vh;\n  background-color: #cfe8ff;\n}',
@@ -7205,9 +7876,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The vh and vw units are relative to the size of the browser window.',
-            secondParagraph: 'One vh unit equals 1% of the window height, and one vw unit equals 1% of its width. So a height of 100vh takes up exactly the visible height of the screen.',
-            endParagraph: 'These units are useful for sections that need to fill the whole screen, whatever the device size.',
+            introduction: {
+              title: 'Units relative to the window',
+              text: 'The vh and vw units are relative to the size of the browser window.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'How vh and vw behave',
+              text: 'One vh unit equals 1% of the window height, and one vw unit equals 1% of its width. So a height of 100vh takes up exactly the visible height of the screen.'
+            },
+            closing: 'These units are useful for sections that need to fill the whole screen, whatever the device size.',
             highlight: ['vh', 'vw'],
             codeLanguage: 'CSS',
             code: '.banner {\n  width: 100vw;\n  height: 100vh;\n  background-color: #cfe8ff;\n}',
@@ -7491,8 +8169,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade display define como um elemento participa do fluxo da página. Os valores block e inline são dois comportamentos fundamentais.',
-            endParagraph: 'Elementos block normalmente ocupam toda a largura disponível e começam em uma nova linha. Elementos inline permanecem na mesma linha quando existe espaço.',
+            introduction: {
+              title: 'Como um elemento se comporta na página',
+              text: 'Por que um parágrafo ocupa a linha toda enquanto um link fica no meio do texto? Não é mágica: cada elemento tem um comportamento de exibição.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os comportamentos block e inline',
+              text: 'A propriedade display define como um elemento participa do fluxo da página. Os valores block e inline são dois comportamentos fundamentais.'
+            },
+            closing: 'Elementos block normalmente ocupam toda a largura disponível e começam em uma nova linha. Elementos inline permanecem na mesma linha quando existe espaço.',
             highlight: ['display', 'block', 'inline'],
             codeLanguage: 'CSS',
             code: 'div {\n  display: block;\n}\n\nspan {\n  display: inline;\n}',
@@ -7504,8 +8190,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The display property defines how an element takes part in the page\'s flow. The values block and inline are two fundamental behaviors.',
-            endParagraph: 'Block elements usually take up the full available width and start on a new line. Inline elements stay on the same line when there\'s space.',
+            introduction: {
+              title: 'How an element behaves on the page',
+              text: 'Why does a paragraph take the whole line while a link stays in the middle of the text? It is not magic: every element has a display behavior.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The block and inline behaviors',
+              text: 'The display property defines how an element takes part in the page\'s flow. The values block and inline are two fundamental behaviors.'
+            },
+            closing: 'Block elements usually take up the full available width and start on a new line. Inline elements stay on the same line when there\'s space.',
             highlight: ['display', 'block', 'inline'],
             codeLanguage: 'CSS',
             code: 'div {\n  display: block;\n}\n\nspan {\n  display: inline;\n}',
@@ -7522,8 +8216,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'inline-block combina características dos elementos inline e block. Já none remove o elemento da renderização da página.',
-            endParagraph: 'O display controla como o elemento participa do layout. No módulo intermediário, veremos recursos mais poderosos para organizar layouts.',
+            introduction: {
+              title: 'Inline-block e none',
+              text: 'inline-block combina características dos elementos inline e block. Já none remove o elemento da renderização da página.',
+              persona: 'neutral'
+            },
+            closing: 'O display controla como o elemento participa do layout. No módulo intermediário, veremos recursos mais poderosos para organizar layouts.',
             highlight: ['inline-block', 'display'],
             codeLanguage: 'CSS',
             code: '.button {\n  display: inline-block;\n}\n\n.hidden {\n  display: none;\n}',
@@ -7535,8 +8233,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'inline-block combines characteristics of inline and block elements. none, in turn, removes the element from the page rendering.',
-            endParagraph: 'display controls how the element takes part in the layout. In the intermediate module, we\'ll see more powerful layout resources.',
+            introduction: {
+              title: 'Inline-block and none',
+              text: 'inline-block combines characteristics of inline and block elements. none, in turn, removes the element from the page rendering.',
+              persona: 'neutral'
+            },
+            closing: 'display controls how the element takes part in the layout. In the intermediate module, we\'ll see more powerful layout resources.',
             highlight: ['inline-block', 'display'],
             codeLanguage: 'CSS',
             code: '.button {\n  display: inline-block;\n}\n\n.hidden {\n  display: none;\n}',
@@ -7845,8 +8547,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma regra CSS pode combinar várias propriedades para criar um estilo completo.',
-            endParagraph: 'CSS fica mais poderoso quando combinamos pequenas regras para construir componentes visuais completos.',
+            introduction: {
+              title: 'Juntando tudo em um componente',
+              text: 'Você já conhece cores, texto, bordas e espaçamento. O que acontece quando todos eles trabalham em conjunto em uma mesma regra?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Combinando propriedades em uma só regra',
+              text: 'Uma regra CSS pode combinar várias propriedades para criar um estilo completo.'
+            },
+            closing: 'CSS fica mais poderoso quando combinamos pequenas regras para construir componentes visuais completos.',
             highlight: ['CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  background-color: #f2f2f2;\n  border: 1px solid #ccc;\n}\n\n.card h2 {\n  color: #222;\n}',
@@ -7858,8 +8568,16 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A CSS rule can combine several properties to create a complete style.',
-            endParagraph: 'CSS becomes more powerful when we combine small rules to build complete visual components.',
+            introduction: {
+              title: 'Putting it all together in a component',
+              text: 'You already know colors, text, borders and spacing. What happens when they all work together in a single rule?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Combining properties in a single rule',
+              text: 'A CSS rule can combine several properties to create a complete style.'
+            },
+            closing: 'CSS becomes more powerful when we combine small rules to build complete visual components.',
             highlight: ['CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  background-color: #f2f2f2;\n  border: 1px solid #ccc;\n}\n\n.card h2 {\n  color: #222;\n}',
@@ -7876,18 +8594,32 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Neste módulo, você conheceu os fundamentos necessários para começar a estilizar páginas HTML com CSS.',
-            secondParagraph: 'Você aprendeu a criar regras CSS, utilizar seletores, trabalhar com cores e textos, controlar dimensões, entender o Box Model e modificar o comportamento básico dos elementos.',
-            endParagraph: 'Agora você já consegue transformar uma estrutura HTML simples em uma interface com aparência organizada. No próximo nível, o foco será construir layouts com Flexbox, Grid e outros recursos de posicionamento.',
+            introduction: {
+              title: 'O que você aprendeu no módulo',
+              text: 'Neste módulo, você conheceu os fundamentos necessários para começar a estilizar páginas HTML com CSS.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Uma visão geral do módulo',
+              text: 'Você aprendeu a criar regras CSS, utilizar seletores, trabalhar com cores e textos, controlar dimensões, entender o Box Model e modificar o comportamento básico dos elementos.'
+            },
+            closing: 'Agora você já consegue transformar uma estrutura HTML simples em uma interface com aparência organizada. No próximo nível, o foco será construir layouts com Flexbox, Grid e outros recursos de posicionamento.',
             highlight: ['CSS', 'Box Model'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  margin: 16px;\n  color: #222;\n  background-color: #f2f2f2;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In this module, you learned the fundamentals needed to start styling HTML pages with CSS.',
-            secondParagraph: 'You learned how to write CSS rules, use selectors, work with colors and text, control dimensions, understand the Box Model and change the basic behavior of elements.',
-            endParagraph: 'Now you can turn a simple HTML structure into an interface with an organized appearance. In the next level, the focus will be building layouts with Flexbox, Grid and other positioning resources.',
+            introduction: {
+              title: 'What you learned in this module',
+              text: 'In this module, you learned the fundamentals needed to start styling HTML pages with CSS.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'An overview of the module',
+              text: 'You learned how to write CSS rules, use selectors, work with colors and text, control dimensions, understand the Box Model and change the basic behavior of elements.'
+            },
+            closing: 'Now you can turn a simple HTML structure into an interface with an organized appearance. In the next level, the focus will be building layouts with Flexbox, Grid and other positioning resources.',
             highlight: ['CSS', 'Box Model'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  margin: 16px;\n  color: #222;\n  background-color: #f2f2f2;\n}',
@@ -8140,18 +8872,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript é uma linguagem de programação usada para criar comportamentos e interações em aplicações. No desenvolvimento web, ele pode fazer uma página responder às ações do usuário e processar informações.',
-            secondParagraph: 'HTML define a estrutura, CSS define a aparência e JavaScript permite adicionar comportamento.',
-            endParagraph: 'JavaScript permite que o programa receba informações, tome decisões, repita ações e transforme dados. Neste módulo, vamos começar pelos fundamentos da linguagem.',
+            introduction: {
+              title: 'O que faz uma página reagir?',
+              text: 'Você toca em um botão e algo acontece: um menu abre, um número muda. Quem faz isso? HTML e CSS montam e enfeitam a página, mas é outra linguagem que dá vida a ela.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Estrutura, aparência e comportamento',
+              text: 'JavaScript é uma linguagem de programação usada para criar comportamentos e interações em aplicações. No desenvolvimento web, ele pode fazer uma página responder às ações do usuário e processar informações.\n\nHTML define a estrutura, CSS define a aparência e JavaScript permite adicionar comportamento.'
+            },
+            closing: 'JavaScript permite que o programa receba informações, tome decisões, repita ações e transforme dados. Neste módulo, vamos começar pelos fundamentos da linguagem.',
             highlight: ['JavaScript', 'HTML', 'CSS'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Mundo";\n\nconsole.log("Olá, " + nome + "!");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript is a programming language used to create behaviors and interactions in applications. In web development, it can make a page respond to user actions and process information.',
-            secondParagraph: 'HTML defines the structure, CSS defines the appearance and JavaScript lets you add behavior.',
-            endParagraph: 'JavaScript lets a program receive information, make decisions, repeat actions and transform data. In this module, we\'ll start with the fundamentals of the language.',
+            introduction: {
+              title: 'What makes a page react?',
+              text: 'You tap a button and something happens: a menu opens, a number changes. Who does that? HTML and CSS build and style the page, but it is another language that brings it to life.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Structure, appearance and behavior',
+              text: 'JavaScript is a programming language used to create behaviors and interactions in applications. In web development, it can make a page respond to user actions and process information.\n\nHTML defines the structure, CSS defines the appearance and JavaScript lets you add behavior.'
+            },
+            closing: 'JavaScript lets a program receive information, make decisions, repeat actions and transform data. In this module, we\'ll start with the fundamentals of the language.',
             highlight: ['JavaScript', 'HTML', 'CSS'],
             codeLanguage: 'JavaScript',
             code: 'const name = "World";\n\nconsole.log("Hello, " + name + "!");',
@@ -8163,16 +8909,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript pode ser executado no navegador. O código abaixo utiliza console.log() para mostrar uma informação no console.',
-            endParagraph: 'O console.log() é uma ferramenta muito útil para visualizar valores durante o desenvolvimento. Agora vamos começar a trabalhar com dados.',
+            introduction: {
+              title: 'Mostrando valores no console',
+              text: 'JavaScript pode ser executado no navegador. O código abaixo utiliza console.log() para mostrar uma informação no console.',
+              persona: 'neutral'
+            },
+            closing: 'O console.log() é uma ferramenta muito útil para visualizar valores durante o desenvolvimento. Agora vamos começar a trabalhar com dados.',
             highlight: ['JavaScript', 'console.log'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Olá, mundo!");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript can run in the browser. The code below uses console.log() to show information in the console.',
-            endParagraph: 'console.log() is a very useful tool for viewing values during development. Now let\'s start working with data.',
+            introduction: {
+              title: 'Showing values in the console',
+              text: 'JavaScript can run in the browser. The code below uses console.log() to show information in the console.',
+              persona: 'neutral'
+            },
+            closing: 'console.log() is a very useful tool for viewing values during development. Now let\'s start working with data.',
             highlight: ['JavaScript', 'console.log'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Hello, world!");',
@@ -8398,18 +9152,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma variável permite armazenar um valor para utilizá-lo posteriormente no programa.',
-            secondParagraph: 'Aqui, idade é o nome da variável e 20 é o valor armazenado.',
-            endParagraph: 'Variáveis permitem dar nomes aos dados que o programa precisa utilizar.',
+            introduction: {
+              title: 'Guardando um valor para usar depois',
+              text: 'Como um programa lembra o seu nome, a sua idade ou a pontuação de um jogo? Ele guarda esses valores em um espaço com nome. Vamos ver como se cria um?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como declarar uma variável',
+              text: 'Uma variável permite armazenar um valor para utilizá-lo posteriormente no programa.\n\nAqui, idade é o nome da variável e 20 é o valor armazenado.'
+            },
+            closing: 'Variáveis permitem dar nomes aos dados que o programa precisa utilizar.',
             highlight: ['variável'],
             codeLanguage: 'JavaScript',
             code: 'let idade = 20;\n\nconsole.log(idade);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A variable lets you store a value to use later in the program.',
-            secondParagraph: 'Here, age is the variable\'s name and 20 is the stored value.',
-            endParagraph: 'Variables let you give names to the data your program needs to use.',
+            introduction: {
+              title: 'Keeping a value to use later',
+              text: 'How does a program remember your name, your age or a game score? It stores those values in a named space. Shall we see how to create one?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to declare a variable',
+              text: 'A variable lets you store a value to use later in the program.\n\nHere, age is the variable\'s name and 20 is the stored value.'
+            },
+            closing: 'Variables let you give names to the data your program needs to use.',
             highlight: ['variable'],
             codeLanguage: 'JavaScript',
             code: 'let age = 20;\n\nconsole.log(age);',
@@ -8421,16 +9189,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript possui diferentes formas de declarar variáveis. let permite atribuir um novo valor posteriormente, enquanto const deve permanecer com a mesma referência após sua criação.',
-            endParagraph: 'Prefira const quando o valor não precisar ser reatribuído e use let quando precisar alterá-lo.',
+            introduction: {
+              title: 'let e const',
+              text: 'JavaScript possui diferentes formas de declarar variáveis. let permite atribuir um novo valor posteriormente, enquanto const deve permanecer com a mesma referência após sua criação.',
+              persona: 'neutral'
+            },
+            closing: 'Prefira const quando o valor não precisar ser reatribuído e use let quando precisar alterá-lo.',
             highlight: ['let', 'const'],
             codeLanguage: 'JavaScript',
             code: 'let idade = 20;\nidade = 21;\n\nconst nome = "Ana";\n\nconsole.log(idade, nome);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript has different ways to declare variables. let lets you assign a new value later, while const must keep the same reference after it is created.',
-            endParagraph: 'Prefer const when the value doesn\'t need to be reassigned, and use let when you need to change it.',
+            introduction: {
+              title: 'let and const',
+              text: 'JavaScript has different ways to declare variables. let lets you assign a new value later, while const must keep the same reference after it is created.',
+              persona: 'neutral'
+            },
+            closing: 'Prefer const when the value doesn\'t need to be reassigned, and use let when you need to change it.',
             highlight: ['let', 'const'],
             codeLanguage: 'JavaScript',
             code: 'let age = 20;\nage = 21;\n\nconst name = "Ana";\n\nconsole.log(age, name);',
@@ -8656,16 +9432,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um programa trabalha com diferentes tipos de valores. JavaScript possui tipos como string, number, boolean, null e undefined.',
-            endParagraph: 'O tipo de um valor indica que tipo de informação ele representa. Conhecer esses tipos é essencial para trabalhar com dados.',
+            introduction: {
+              title: 'Nem todo valor é do mesmo tipo',
+              text: 'O número 10 e o texto "10" parecem iguais, mas o programa os trata de formas muito diferentes. Você sabe por quê?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os principais tipos de valores',
+              text: 'Um programa trabalha com diferentes tipos de valores. JavaScript possui tipos como string, number, boolean, null e undefined.'
+            },
+            closing: 'O tipo de um valor indica que tipo de informação ele representa. Conhecer esses tipos é essencial para trabalhar com dados.',
             highlight: ['string', 'number', 'boolean'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Ana";\nconst idade = 20;\nconst estudante = true;\n\nconsole.log(nome);\nconsole.log(idade);\nconsole.log(estudante);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A program works with different types of values. JavaScript has types like string, number, boolean, null and undefined.',
-            endParagraph: 'A value\'s type indicates what kind of information it represents. Knowing these types is essential for working with data.',
+            introduction: {
+              title: 'Not every value is the same type',
+              text: 'The number 10 and the text "10" look the same, but the program treats them very differently. Do you know why?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The main types of values',
+              text: 'A program works with different types of values. JavaScript has types like string, number, boolean, null and undefined.'
+            },
+            closing: 'A value\'s type indicates what kind of information it represents. Knowing these types is essential for working with data.',
             highlight: ['string', 'number', 'boolean'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Ana";\nconst age = 20;\nconst student = true;\n\nconsole.log(name);\nconsole.log(age);\nconsole.log(student);',
@@ -8677,18 +9469,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Strings representam textos, numbers representam valores numéricos e booleans representam apenas dois estados: true ou false.',
-            secondParagraph: 'Também existem null, usado para representar uma ausência intencional de valor, e undefined, normalmente associado a um valor que ainda não foi definido.',
-            endParagraph: 'Identificar o tipo de dado correto ajuda o programa a trabalhar com cada informação da maneira esperada.',
+            introduction: {
+              title: 'Strings, numbers e booleans',
+              text: 'Strings representam textos, numbers representam valores numéricos e booleans representam apenas dois estados: true ou false.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Null e undefined',
+              text: 'Também existem null, usado para representar uma ausência intencional de valor, e undefined, normalmente associado a um valor que ainda não foi definido.'
+            },
+            closing: 'Identificar o tipo de dado correto ajuda o programa a trabalhar com cada informação da maneira esperada.',
             highlight: ['strings', 'numbers', 'booleans'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Gabriel";\nconst idade = 21;\nconst aprovado = true;\n\nconsole.log(nome, idade, aprovado);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Strings represent text, numbers represent numeric values and booleans represent just two states: true or false.',
-            secondParagraph: 'There\'s also null, used to represent an intentional absence of value, and undefined, usually associated with a value that hasn\'t been defined yet.',
-            endParagraph: 'Identifying the correct data type helps the program work with each piece of information as expected.',
+            introduction: {
+              title: 'Strings, numbers and booleans',
+              text: 'Strings represent text, numbers represent numeric values and booleans represent just two states: true or false.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Null and undefined',
+              text: 'There\'s also null, used to represent an intentional absence of value, and undefined, usually associated with a value that hasn\'t been defined yet.'
+            },
+            closing: 'Identifying the correct data type helps the program work with each piece of information as expected.',
             highlight: ['strings', 'numbers', 'booleans'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Gabriel";\nconst age = 21;\nconst approved = true;\n\nconsole.log(name, age, approved);',
@@ -8961,18 +9767,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Strings têm propriedades e métodos próprios. length informa quantos caracteres há no texto.',
-            secondParagraph: 'toUpperCase e toLowerCase devolvem o texto em maiúsculas ou minúsculas, e includes verifica se um trecho aparece dentro dele.',
-            endParagraph: 'Esses métodos devolvem um valor novo: a string original não muda.',
+            introduction: {
+              title: 'O que dá para fazer com um texto?',
+              text: 'Texto aparece em todo programa: nomes, mensagens, endereços. E se você precisar saber o tamanho de um nome ou mudá-lo para maiúsculas? Strings já vêm com ferramentas prontas para isso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Propriedades e métodos de strings',
+              text: 'Strings têm propriedades e métodos próprios. length informa quantos caracteres há no texto.\n\ntoUpperCase e toLowerCase devolvem o texto em maiúsculas ou minúsculas, e includes verifica se um trecho aparece dentro dele.'
+            },
+            closing: 'Esses métodos devolvem um valor novo: a string original não muda.',
             highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "JavaScript";\n\nconsole.log(nome.length);\nconsole.log(nome.toUpperCase());\nconsole.log(nome.includes("Script"));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Strings have their own properties and methods. length tells you how many characters the text has.',
-            secondParagraph: 'toUpperCase and toLowerCase return the text in upper or lower case, and includes checks whether a piece of text appears inside it.',
-            endParagraph: 'These methods return a new value: the original string doesn\'t change.',
+            introduction: {
+              title: 'What can you do with a piece of text?',
+              text: 'Text shows up in every program: names, messages, addresses. What if you need to know the length of a name or turn it into capital letters? Strings come with ready-made tools for that.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'String properties and methods',
+              text: 'Strings have their own properties and methods. length tells you how many characters the text has.\n\ntoUpperCase and toLowerCase return the text in upper or lower case, and includes checks whether a piece of text appears inside it.'
+            },
+            closing: 'These methods return a new value: the original string doesn\'t change.',
             highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
             codeLanguage: 'JavaScript',
             code: 'const name = "JavaScript";\n\nconsole.log(name.length);\nconsole.log(name.toUpperCase());\nconsole.log(name.includes("Script"));',
@@ -8984,18 +9804,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'slice recorta um pedaço da string, do índice inicial até antes do final. Assim como nos arrays, o primeiro caractere fica no índice 0.',
-            secondParagraph: 'trim remove os espaços do começo e do fim, e split divide a string em um array usando um separador.',
-            endParagraph: 'split é muito útil para transformar uma lista escrita em texto em um array de verdade.',
+            introduction: {
+              title: 'Recortando e dividindo strings',
+              text: 'slice recorta um pedaço da string, do índice inicial até antes do final. Assim como nos arrays, o primeiro caractere fica no índice 0.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Limpando e separando texto',
+              text: 'trim remove os espaços do começo e do fim, e split divide a string em um array usando um separador.'
+            },
+            closing: 'split é muito útil para transformar uma lista escrita em texto em um array de verdade.',
             highlight: ['slice', 'trim', 'split'],
             codeLanguage: 'JavaScript',
             code: 'const frase = "  aprender JavaScript  ";\n\nconsole.log(frase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("maçã,banana,uva".split(","));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'slice cuts out a piece of the string, from the start index up to just before the end one. Just like arrays, the first character is at index 0.',
-            secondParagraph: 'trim removes spaces from the start and end, and split breaks the string into an array using a separator.',
-            endParagraph: 'split is very handy for turning a list written as text into a real array.',
+            introduction: {
+              title: 'Slicing and splitting strings',
+              text: 'slice cuts out a piece of the string, from the start index up to just before the end one. Just like arrays, the first character is at index 0.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Cleaning and separating text',
+              text: 'trim removes spaces from the start and end, and split breaks the string into an array using a separator.'
+            },
+            closing: 'split is very handy for turning a list written as text into a real array.',
             highlight: ['slice', 'trim', 'split'],
             codeLanguage: 'JavaScript',
             code: 'const phrase = "  learning JavaScript  ";\n\nconsole.log(phrase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("apple,banana,grape".split(","));',
@@ -9223,16 +10057,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Operadores permitem realizar operações com valores. Os operadores +, -, * e / são utilizados para cálculos matemáticos.',
-            endParagraph: 'Operadores permitem que o programa transforme e combine valores para produzir novos resultados.',
+            introduction: {
+              title: 'Fazendo contas com o código',
+              text: 'Somar uma compra, calcular um desconto, comparar duas pontuações. O que está por trás dessas contas em um programa?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Operadores matemáticos',
+              text: 'Operadores permitem realizar operações com valores. Os operadores +, -, * e / são utilizados para cálculos matemáticos.'
+            },
+            closing: 'Operadores permitem que o programa transforme e combine valores para produzir novos resultados.',
             highlight: ['operadores'],
             codeLanguage: 'JavaScript',
             code: 'const soma = 10 + 5;\nconst subtracao = 10 - 5;\nconst multiplicacao = 10 * 5;\nconst divisao = 10 / 5;\n\nconsole.log(soma, subtracao, multiplicacao, divisao);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Operators let you perform operations with values. The +, -, * and / operators are used for mathematical calculations.',
-            endParagraph: 'Operators let the program transform and combine values to produce new results.',
+            introduction: {
+              title: 'Doing math with code',
+              text: 'Adding up a purchase, calculating a discount, comparing two scores. What is behind these calculations in a program?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Math operators',
+              text: 'Operators let you perform operations with values. The +, -, * and / operators are used for mathematical calculations.'
+            },
+            closing: 'Operators let the program transform and combine values to produce new results.',
             highlight: ['operators'],
             codeLanguage: 'JavaScript',
             code: 'const sum = 10 + 5;\nconst subtraction = 10 - 5;\nconst multiplication = 10 * 5;\nconst division = 10 / 5;\n\nconsole.log(sum, subtraction, multiplication, division);',
@@ -9244,18 +10094,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Operadores de comparação verificam uma relação entre valores e produzem um resultado booleano.',
-            secondParagraph: '> significa "maior que", === verifica igualdade estrita e !== verifica diferença.',
-            endParagraph: 'Como comparações produzem true ou false, elas são especialmente úteis para tomar decisões no programa.',
+            introduction: {
+              title: 'Operadores de comparação',
+              text: 'Operadores de comparação verificam uma relação entre valores e produzem um resultado booleano.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Os símbolos de comparação',
+              text: '> significa "maior que", === verifica igualdade estrita e !== verifica diferença.'
+            },
+            closing: 'Como comparações produzem true ou false, elas são especialmente úteis para tomar decisões no programa.',
             highlight: ['booleano'],
             codeLanguage: 'JavaScript',
             code: 'console.log(10 > 5);\nconsole.log(10 === 10);\nconsole.log(10 !== 5);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Comparison operators check a relationship between values and produce a boolean result.',
-            secondParagraph: '> means "greater than", === checks strict equality and !== checks difference.',
-            endParagraph: 'Since comparisons produce true or false, they are especially useful for making decisions in the program.',
+            introduction: {
+              title: 'Comparison operators',
+              text: 'Comparison operators check a relationship between values and produce a boolean result.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The comparison symbols',
+              text: '> means "greater than", === checks strict equality and !== checks difference.'
+            },
+            closing: 'Since comparisons produce true or false, they are especially useful for making decisions in the program.',
             highlight: ['boolean'],
             codeLanguage: 'JavaScript',
             code: 'console.log(10 > 5);\nconsole.log(10 === 10);\nconsole.log(10 !== 5);',
@@ -9481,18 +10345,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O operador && (e) só é verdadeiro quando os dois lados são verdadeiros. O operador || (ou) é verdadeiro quando pelo menos um lado é verdadeiro.',
-            secondParagraph: 'Já o ! (não) inverte um valor booleano: !true vira false.',
-            endParagraph: 'Esses operadores combinam comparações para montar condições mais completas.',
+            introduction: {
+              title: 'Combinando condições',
+              text: '"Só entra quem tem ingresso E documento." Frases assim aparecem o tempo todo, e o código também sabe combinar condições desse jeito.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os operadores &&, || e !',
+              text: 'O operador && (e) só é verdadeiro quando os dois lados são verdadeiros. O operador || (ou) é verdadeiro quando pelo menos um lado é verdadeiro.\n\nJá o ! (não) inverte um valor booleano: !true vira false.'
+            },
+            closing: 'Esses operadores combinam comparações para montar condições mais completas.',
             highlight: ['booleano'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 20;\nconst temIngresso = true;\n\nconsole.log(idade >= 18 && temIngresso);\nconsole.log(idade < 12 || temIngresso);\nconsole.log(!temIngresso);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The && (and) operator is only true when both sides are true. The || (or) operator is true when at least one side is true.',
-            secondParagraph: 'The ! (not) operator flips a boolean value: !true becomes false.',
-            endParagraph: 'These operators combine comparisons to build more complete conditions.',
+            introduction: {
+              title: 'Combining conditions',
+              text: '"Only people with a ticket AND an ID get in." Sentences like this come up all the time, and code can combine conditions that way too.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The &&, || and ! operators',
+              text: 'The && (and) operator is only true when both sides are true. The || (or) operator is true when at least one side is true.\n\nThe ! (not) operator flips a boolean value: !true becomes false.'
+            },
+            closing: 'These operators combine comparisons to build more complete conditions.',
             highlight: ['boolean'],
             codeLanguage: 'JavaScript',
             code: 'const age = 20;\nconst hasTicket = true;\n\nconsole.log(age >= 18 && hasTicket);\nconsole.log(age < 12 || hasTicket);\nconsole.log(!hasTicket);',
@@ -9504,18 +10382,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Numa condição, todo valor é tratado como verdadeiro ou falso. Os valores tratados como falsos são chamados de falsy.',
-            secondParagraph: 'São falsy: false, 0, "" (string vazia), null, undefined e NaN. Todo o resto é truthy, inclusive "0" e arrays vazios.',
-            endParagraph: 'Por isso, um if (nome) só entra no bloco quando nome não é uma string vazia.',
+            introduction: {
+              title: 'Valores verdadeiros e falsos em condições',
+              text: 'Numa condição, todo valor é tratado como verdadeiro ou falso. Os valores tratados como falsos são chamados de falsy.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A lista de valores falsy',
+              text: 'São falsy: false, 0, "" (string vazia), null, undefined e NaN. Todo o resto é truthy, inclusive "0" e arrays vazios.'
+            },
+            closing: 'Por isso, um if (nome) só entra no bloco quando nome não é uma string vazia.',
             highlight: ['falsy', 'truthy'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n} else {\n  console.log("Nome vazio");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In a condition, every value is treated as true or false. The values treated as false are called falsy.',
-            secondParagraph: 'These are falsy: false, 0, "" (empty string), null, undefined and NaN. Everything else is truthy, including "0" and empty arrays.',
-            endParagraph: 'That\'s why an if (name) only runs its block when name isn\'t an empty string.',
+            introduction: {
+              title: 'True and false values in conditions',
+              text: 'In a condition, every value is treated as true or false. The values treated as false are called falsy.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The list of falsy values',
+              text: 'These are falsy: false, 0, "" (empty string), null, undefined and NaN. Everything else is truthy, including "0" and empty arrays.'
+            },
+            closing: 'That\'s why an if (name) only runs its block when name isn\'t an empty string.',
             highlight: ['falsy', 'truthy'],
             codeLanguage: 'JavaScript',
             code: 'const name = "";\n\nif (name) {\n  console.log("Hello, " + name);\n} else {\n  console.log("Empty name");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
@@ -9784,16 +10676,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um programa pode executar diferentes códigos dependendo de uma condição. O if permite executar um bloco quando uma condição é verdadeira.',
-            endParagraph: 'A condição dentro do if é avaliada como verdadeira ou falsa. Isso permite que o programa escolha quando executar determinado código.',
+            introduction: {
+              title: 'Fazendo o programa escolher',
+              text: 'E se o programa precisasse decidir entre dois caminhos, dependendo de uma resposta? Um programa que só segue em linha reta é bem limitado. Vamos ensiná-lo a escolher.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A estrutura if',
+              text: 'Um programa pode executar diferentes códigos dependendo de uma condição. O if permite executar um bloco quando uma condição é verdadeira.'
+            },
+            closing: 'A condição dentro do if é avaliada como verdadeira ou falsa. Isso permite que o programa escolha quando executar determinado código.',
             highlight: ['if'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 20;\n\nif (idade >= 18) {\n  console.log("Maior de idade");\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A program can run different code depending on a condition. if lets you run a block when a condition is true.',
-            endParagraph: 'The condition inside an if is evaluated as true or false. This lets the program choose when to run certain code.',
+            introduction: {
+              title: 'Making the program choose',
+              text: 'What if the program had to decide between two paths, depending on an answer? A program that only goes in a straight line is very limited. Let\'s teach it to choose.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The if structure',
+              text: 'A program can run different code depending on a condition. if lets you run a block when a condition is true.'
+            },
+            closing: 'The condition inside an if is evaluated as true or false. This lets the program choose when to run certain code.',
             highlight: ['if'],
             codeLanguage: 'JavaScript',
             code: 'const age = 20;\n\nif (age >= 18) {\n  console.log("Adult");\n}',
@@ -9805,16 +10713,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O else permite definir o que deve acontecer quando a condição do if não for verdadeira.',
-            endParagraph: 'Com if e else, o programa pode seguir caminhos diferentes de acordo com os dados que recebe.',
+            introduction: {
+              title: 'O else: o caminho alternativo',
+              text: 'O else permite definir o que deve acontecer quando a condição do if não for verdadeira.',
+              persona: 'neutral'
+            },
+            closing: 'Com if e else, o programa pode seguir caminhos diferentes de acordo com os dados que recebe.',
             highlight: ['if', 'else'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 16;\n\nif (idade >= 18) {\n  console.log("Maior de idade");\n} else {\n  console.log("Menor de idade");\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'else lets you define what should happen when the if condition isn\'t true.',
-            endParagraph: 'With if and else, the program can follow different paths depending on the data it receives.',
+            introduction: {
+              title: 'The else: the alternative path',
+              text: 'else lets you define what should happen when the if condition isn\'t true.',
+              persona: 'neutral'
+            },
+            closing: 'With if and else, the program can follow different paths depending on the data it receives.',
             highlight: ['if', 'else'],
             codeLanguage: 'JavaScript',
             code: 'const age = 16;\n\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}',
@@ -10044,18 +10960,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando precisamos comparar um mesmo valor com várias opções, o switch costuma ficar mais legível do que uma sequência de if e else.',
-            secondParagraph: 'Cada case testa um valor. O break encerra o bloco, e o default cobre os casos que não combinaram com nenhum case.',
-            endParagraph: 'Sem o break, a execução continua nos casos seguintes, o que quase nunca é o resultado desejado.',
+            introduction: {
+              title: 'Muitas opções, uma comparação',
+              text: 'Se você precisa comparar um valor com cinco possibilidades, escrever cinco if seguidos fica cansativo. Existe uma estrutura pensada para esse caso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como funciona o switch',
+              text: 'Quando precisamos comparar um mesmo valor com várias opções, o switch costuma ficar mais legível do que uma sequência de if e else.\n\nCada case testa um valor. O break encerra o bloco, e o default cobre os casos que não combinaram com nenhum case.'
+            },
+            closing: 'Sem o break, a execução continua nos casos seguintes, o que quase nunca é o resultado desejado.',
             highlight: ['switch', 'case', 'break', 'default'],
             codeLanguage: 'JavaScript',
             code: 'const dia = "sabado";\n\nswitch (dia) {\n  case "sabado":\n    console.log("Fim de semana");\n    break;\n  case "domingo":\n    console.log("Fim de semana");\n    break;\n  default:\n    console.log("Dia de semana");\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When we need to compare one value against several options, switch is usually more readable than a chain of if and else.',
-            secondParagraph: 'Each case tests a value. break ends the block, and default covers the cases that did not match any case.',
-            endParagraph: 'Without break, execution keeps going into the following cases, which is almost never the desired result.',
+            introduction: {
+              title: 'Many options, one comparison',
+              text: 'If you need to compare one value against five possibilities, writing five ifs in a row gets tiring. There is a structure designed for that case.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How switch works',
+              text: 'When we need to compare one value against several options, switch is usually more readable than a chain of if and else.\n\nEach case tests a value. break ends the block, and default covers the cases that did not match any case.'
+            },
+            closing: 'Without break, execution keeps going into the following cases, which is almost never the desired result.',
             highlight: ['switch', 'case', 'break', 'default'],
             codeLanguage: 'JavaScript',
             code: 'const day = "saturday";\n\nswitch (day) {\n  case "saturday":\n    console.log("Weekend");\n    break;\n  case "sunday":\n    console.log("Weekend");\n    break;\n  default:\n    console.log("Weekday");\n}',
@@ -10067,18 +10997,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O operador ternário é uma forma curta de escrever uma condição que devolve um valor.',
-            secondParagraph: 'A estrutura tem três partes: a condição, o valor usado quando ela é verdadeira e o valor usado quando é falsa.',
-            endParagraph: 'Ele é útil para decisões simples. Para lógicas maiores, o if e o else continuam sendo mais legíveis.',
+            introduction: {
+              title: 'O operador ternário',
+              text: 'O operador ternário é uma forma curta de escrever uma condição que devolve um valor.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'As três partes do ternário',
+              text: 'A estrutura tem três partes: a condição, o valor usado quando ela é verdadeira e o valor usado quando é falsa.'
+            },
+            closing: 'Ele é útil para decisões simples. Para lógicas maiores, o if e o else continuam sendo mais legíveis.',
             highlight: ['ternário', 'if', 'else'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 20;\n\nconst situacao = idade >= 18 ? "maior de idade" : "menor de idade";\n\nconsole.log(situacao);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The ternary operator is a short way to write a condition that returns a value.',
-            secondParagraph: 'It has three parts: the condition, the value used when it is true, and the value used when it is false.',
-            endParagraph: 'It is useful for simple decisions. For larger logic, if and else are still more readable.',
+            introduction: {
+              title: 'The ternary operator',
+              text: 'The ternary operator is a short way to write a condition that returns a value.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The three parts of the ternary',
+              text: 'It has three parts: the condition, the value used when it is true, and the value used when it is false.'
+            },
+            closing: 'It is useful for simple decisions. For larger logic, if and else are still more readable.',
             highlight: ['ternary', 'if', 'else'],
             codeLanguage: 'JavaScript',
             code: 'const age = 20;\n\nconst status = age >= 18 ? "adult" : "minor";\n\nconsole.log(status);',
@@ -10304,18 +11248,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando precisamos executar uma ação várias vezes, podemos utilizar estruturas de repetição. O for é uma das formas mais comuns de fazer isso.',
-            secondParagraph: 'Nesse exemplo, o código dentro do for é executado enquanto i for menor que 5.',
-            endParagraph: 'Loops evitam que precisemos escrever a mesma instrução várias vezes manualmente.',
+            introduction: {
+              title: 'Repetindo sem escrever tudo de novo',
+              text: 'Imagine mostrar os números de 1 a 100. Você escreveria cem linhas? Um programa pode repetir uma ação sozinho, quantas vezes for preciso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O laço for',
+              text: 'Quando precisamos executar uma ação várias vezes, podemos utilizar estruturas de repetição. O for é uma das formas mais comuns de fazer isso.\n\nNesse exemplo, o código dentro do for é executado enquanto i for menor que 5.'
+            },
+            closing: 'Loops evitam que precisemos escrever a mesma instrução várias vezes manualmente.',
             highlight: ['for'],
             codeLanguage: 'JavaScript',
             code: 'for (let i = 0; i < 5; i++) {\n  console.log(i);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When we need to run an action several times, we can use loop structures. for is one of the most common ways to do this.',
-            secondParagraph: 'In this example, the code inside for runs as long as i is less than 5.',
-            endParagraph: 'Loops let you avoid writing the same instruction several times manually.',
+            introduction: {
+              title: 'Repeating without writing it all again',
+              text: 'Imagine showing the numbers from 1 to 100. Would you write a hundred lines? A program can repeat an action by itself, as many times as needed.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The for loop',
+              text: 'When we need to run an action several times, we can use loop structures. for is one of the most common ways to do this.\n\nIn this example, the code inside for runs as long as i is less than 5.'
+            },
+            closing: 'Loops let you avoid writing the same instruction several times manually.',
             highlight: ['for'],
             codeLanguage: 'JavaScript',
             code: 'for (let i = 0; i < 5; i++) {\n  console.log(i);\n}',
@@ -10327,16 +11285,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O while repete um bloco de código enquanto sua condição for verdadeira.',
-            endParagraph: 'Escolher entre diferentes estruturas de repetição depende da situação. O importante é entender que elas permitem automatizar ações repetitivas.',
+            introduction: {
+              title: 'O laço while',
+              text: 'O while repete um bloco de código enquanto sua condição for verdadeira.',
+              persona: 'neutral'
+            },
+            closing: 'Escolher entre diferentes estruturas de repetição depende da situação. O importante é entender que elas permitem automatizar ações repetitivas.',
             highlight: ['while'],
             codeLanguage: 'JavaScript',
             code: 'let contador = 0;\n\nwhile (contador < 3) {\n  console.log(contador);\n  contador++;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'while repeats a block of code for as long as its condition is true.',
-            endParagraph: 'Choosing between different loop structures depends on the situation. What matters is understanding that they let you automate repetitive actions.',
+            introduction: {
+              title: 'The while loop',
+              text: 'while repeats a block of code for as long as its condition is true.',
+              persona: 'neutral'
+            },
+            closing: 'Choosing between different loop structures depends on the situation. What matters is understanding that they let you automate repetitive actions.',
             highlight: ['while'],
             codeLanguage: 'JavaScript',
             code: 'let counter = 0;\n\nwhile (counter < 3) {\n  console.log(counter);\n  counter++;\n}',
@@ -10348,18 +11314,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O laço do while é parecido com o while, mas testa a condição depois de executar o bloco.',
-            secondParagraph: 'Isso garante que o bloco rode pelo menos uma vez, mesmo que a condição já comece falsa.',
-            endParagraph: 'Use o do while quando a primeira execução precisa acontecer de qualquer forma, como ao pedir um dado à pessoa usuária.',
+            introduction: {
+              title: 'O laço do while',
+              text: 'O laço do while é parecido com o while, mas testa a condição depois de executar o bloco.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Executar pelo menos uma vez',
+              text: 'Isso garante que o bloco rode pelo menos uma vez, mesmo que a condição já comece falsa.'
+            },
+            closing: 'Use o do while quando a primeira execução precisa acontecer de qualquer forma, como ao pedir um dado à pessoa usuária.',
             highlight: ['do while'],
             codeLanguage: 'JavaScript',
             code: 'let contador = 5;\n\ndo {\n  console.log("Executou ao menos uma vez");\n  contador++;\n} while (contador < 3);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The do while loop is similar to while, but it tests the condition after running the block.',
-            secondParagraph: 'That guarantees the block runs at least once, even if the condition starts out false.',
-            endParagraph: 'Use do while when the first run has to happen no matter what, such as when asking the user for input.',
+            introduction: {
+              title: 'The do while loop',
+              text: 'The do while loop is similar to while, but it tests the condition after running the block.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Run at least once',
+              text: 'That guarantees the block runs at least once, even if the condition starts out false.'
+            },
+            closing: 'Use do while when the first run has to happen no matter what, such as when asking the user for input.',
             highlight: ['do while'],
             codeLanguage: 'JavaScript',
             code: 'let counter = 5;\n\ndo {\n  console.log("Ran at least once");\n  counter++;\n} while (counter < 3);',
@@ -10589,16 +11569,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um array permite armazenar vários valores em uma única estrutura. Os elementos são organizados por posições chamadas índices.',
-            endParagraph: 'Arrays são úteis quando precisamos trabalhar com uma coleção de valores relacionados.',
+            introduction: {
+              title: 'Uma lista de valores em uma variável só',
+              text: 'Como guardar os nomes de toda uma turma sem criar uma variável para cada pessoa? Existe uma estrutura feita para coleções.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como um array organiza os valores',
+              text: 'Um array permite armazenar vários valores em uma única estrutura. Os elementos são organizados por posições chamadas índices.'
+            },
+            closing: 'Arrays são úteis quando precisamos trabalhar com uma coleção de valores relacionados.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
             code: 'const frutas = [\n  "maçã",\n  "banana",\n  "laranja"\n];\n\nconsole.log(frutas);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An array lets you store several values in a single structure. The elements are organized by positions called indexes.',
-            endParagraph: 'Arrays are useful when we need to work with a collection of related values.',
+            introduction: {
+              title: 'A list of values in a single variable',
+              text: 'How do you store the names of a whole class without creating a variable for each person? There is a structure made for collections.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How an array organizes values',
+              text: 'An array lets you store several values in a single structure. The elements are organized by positions called indexes.'
+            },
+            closing: 'Arrays are useful when we need to work with a collection of related values.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
             code: 'const fruits = [\n  "apple",\n  "banana",\n  "orange"\n];\n\nconsole.log(fruits);',
@@ -10610,16 +11606,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Os índices de um array começam em 0. Por isso, o primeiro elemento está na posição 0, o segundo na posição 1 e assim por diante.',
-            endParagraph: 'Saber acessar os elementos de um array é fundamental para trabalhar com listas de dados.',
+            introduction: {
+              title: 'Os índices começam em zero',
+              text: 'Os índices de um array começam em 0. Por isso, o primeiro elemento está na posição 0, o segundo na posição 1 e assim por diante.',
+              persona: 'neutral'
+            },
+            closing: 'Saber acessar os elementos de um array é fundamental para trabalhar com listas de dados.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
             code: 'const frutas = [\n  "maçã",\n  "banana",\n  "laranja"\n];\n\nconsole.log(frutas[0]);\nconsole.log(frutas[1]);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An array\'s indexes start at 0. That\'s why the first element is at position 0, the second at position 1, and so on.',
-            endParagraph: 'Knowing how to access an array\'s elements is essential for working with lists of data.',
+            introduction: {
+              title: 'Indexes start at zero',
+              text: 'An array\'s indexes start at 0. That\'s why the first element is at position 0, the second at position 1, and so on.',
+              persona: 'neutral'
+            },
+            closing: 'Knowing how to access an array\'s elements is essential for working with lists of data.',
             highlight: ['array'],
             codeLanguage: 'JavaScript',
             code: 'const fruits = [\n  "apple",\n  "banana",\n  "orange"\n];\n\nconsole.log(fruits[0]);\nconsole.log(fruits[1]);',
@@ -10847,18 +11851,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'length informa quantos elementos o array tem. push adiciona um elemento no final, e pop remove o último.',
-            secondParagraph: 'Diferente dos métodos de string, push e pop alteram o próprio array.',
-            endParagraph: 'Como o primeiro índice é 0, o último elemento fica sempre em length - 1.',
+            introduction: {
+              title: 'Mudando uma lista depois de criada',
+              text: 'Uma lista de tarefas cresce e diminui o tempo todo. O array também pode mudar: dá para colocar e tirar itens a qualquer momento.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Tamanho, adição e remoção de elementos',
+              text: 'length informa quantos elementos o array tem. push adiciona um elemento no final, e pop remove o último.\n\nDiferente dos métodos de string, push e pop alteram o próprio array.'
+            },
+            closing: 'Como o primeiro índice é 0, o último elemento fica sempre em length - 1.',
             highlight: ['length', 'push', 'pop'],
             codeLanguage: 'JavaScript',
             code: 'const frutas = ["maçã", "banana"];\n\nfrutas.push("uva");\nconsole.log(frutas.length);\n\nfrutas.pop();\nconsole.log(frutas);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'length tells you how many elements the array has. push adds an element at the end, and pop removes the last one.',
-            secondParagraph: 'Unlike string methods, push and pop change the array itself.',
-            endParagraph: 'Since the first index is 0, the last element is always at length - 1.',
+            introduction: {
+              title: 'Changing a list after it is created',
+              text: 'A to-do list grows and shrinks all the time. An array can change too: you can add and remove items at any moment.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Length, adding and removing elements',
+              text: 'length tells you how many elements the array has. push adds an element at the end, and pop removes the last one.\n\nUnlike string methods, push and pop change the array itself.'
+            },
+            closing: 'Since the first index is 0, the last element is always at length - 1.',
             highlight: ['length', 'push', 'pop'],
             codeLanguage: 'JavaScript',
             code: 'const fruits = ["apple", "banana"];\n\nfruits.push("grape");\nconsole.log(fruits.length);\n\nfruits.pop();\nconsole.log(fruits);',
@@ -10870,18 +11888,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'includes verifica se um valor está no array e devolve true ou false.',
-            secondParagraph: 'Para percorrer todos os elementos, o laço for of entrega um elemento por vez, sem precisar lidar com índices.',
-            endParagraph: 'Use o for of quando só importa o valor de cada elemento, e o for clássico quando precisar do índice.',
+            introduction: {
+              title: 'Verificando e percorrendo um array',
+              text: 'includes verifica se um valor está no array e devolve true ou false.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'O laço for of',
+              text: 'Para percorrer todos os elementos, o laço for of entrega um elemento por vez, sem precisar lidar com índices.'
+            },
+            closing: 'Use o for of quando só importa o valor de cada elemento, e o for clássico quando precisar do índice.',
             highlight: ['includes'],
             codeLanguage: 'JavaScript',
             code: 'const frutas = ["maçã", "banana", "uva"];\n\nconsole.log(frutas.includes("banana"));\n\nfor (const fruta of frutas) {\n  console.log(fruta);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'includes checks whether a value is in the array and returns true or false.',
-            secondParagraph: 'To go through every element, the for of loop hands you one element at a time, with no need to deal with indexes.',
-            endParagraph: 'Use for of when only each element\'s value matters, and the classic for when you need the index.',
+            introduction: {
+              title: 'Checking and looping through an array',
+              text: 'includes checks whether a value is in the array and returns true or false.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The for of loop',
+              text: 'To go through every element, the for of loop hands you one element at a time, with no need to deal with indexes.'
+            },
+            closing: 'Use for of when only each element\'s value matters, and the classic for when you need the index.',
             highlight: ['includes'],
             codeLanguage: 'JavaScript',
             code: 'const fruits = ["apple", "banana", "grape"];\n\nconsole.log(fruits.includes("banana"));\n\nfor (const fruit of fruits) {\n  console.log(fruit);\n}',
@@ -11183,18 +12215,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um objeto permite agrupar informações relacionadas por meio de propriedades. Cada propriedade possui um nome e um valor.',
-            secondParagraph: 'Nesse exemplo, nome e idade são propriedades do objeto pessoa.',
-            endParagraph: 'Objetos são muito utilizados para representar entidades e agrupar informações que pertencem umas às outras.',
+            introduction: {
+              title: 'Agrupando informações de uma mesma coisa',
+              text: 'Uma pessoa tem nome, idade, cidade. Guardar tudo isso em variáveis soltas bagunça rápido. Como juntar essas informações em um só lugar?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como um objeto agrupa propriedades',
+              text: 'Um objeto permite agrupar informações relacionadas por meio de propriedades. Cada propriedade possui um nome e um valor.\n\nNesse exemplo, nome e idade são propriedades do objeto pessoa.'
+            },
+            closing: 'Objetos são muito utilizados para representar entidades e agrupar informações que pertencem umas às outras.',
             highlight: ['objeto'],
             codeLanguage: 'JavaScript',
             code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconsole.log(pessoa);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An object lets you group related information through properties. Each property has a name and a value.',
-            secondParagraph: 'In this example, name and age are properties of the person object.',
-            endParagraph: 'Objects are widely used to represent entities and group information that belongs together.',
+            introduction: {
+              title: 'Grouping information about the same thing',
+              text: 'A person has a name, an age, a city. Keeping all of that in loose variables gets messy fast. How do you bring that information together in one place?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How an object groups properties',
+              text: 'An object lets you group related information through properties. Each property has a name and a value.\n\nIn this example, name and age are properties of the person object.'
+            },
+            closing: 'Objects are widely used to represent entities and group information that belongs together.',
             highlight: ['object'],
             codeLanguage: 'JavaScript',
             code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconsole.log(person);',
@@ -11206,16 +12252,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos acessar uma propriedade utilizando a notação de ponto.',
-            endParagraph: 'A notação de ponto permite acessar diretamente uma propriedade pelo seu nome.',
+            introduction: {
+              title: 'Acessando propriedades com a notação de ponto',
+              text: 'Podemos acessar uma propriedade utilizando a notação de ponto.',
+              persona: 'neutral'
+            },
+            closing: 'A notação de ponto permite acessar diretamente uma propriedade pelo seu nome.',
             highlight: ['propriedade'],
             codeLanguage: 'JavaScript',
             code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconsole.log(pessoa.nome);\nconsole.log(pessoa.idade);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can access a property using dot notation.',
-            endParagraph: 'Dot notation lets you access a property directly by its name.',
+            introduction: {
+              title: 'Accessing properties with dot notation',
+              text: 'We can access a property using dot notation.',
+              persona: 'neutral'
+            },
+            closing: 'Dot notation lets you access a property directly by its name.',
             highlight: ['property'],
             codeLanguage: 'JavaScript',
             code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconsole.log(person.name);\nconsole.log(person.age);',
@@ -11443,16 +12497,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma função é um bloco de código que pode ser executado quando necessário. Ela permite organizar e reutilizar comportamentos.',
-            endParagraph: 'Primeiro definimos a função. Depois podemos chamá-la sempre que quisermos executar seu código.',
+            introduction: {
+              title: 'Escrevendo uma vez, usando várias',
+              text: 'Se você precisa repetir a mesma sequência de passos em vários pontos do programa, vale copiar o código cada vez? Existe um jeito de dar um nome a esse bloco e chamá-lo quando quiser.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como definir e chamar uma função',
+              text: 'Uma função é um bloco de código que pode ser executado quando necessário. Ela permite organizar e reutilizar comportamentos.'
+            },
+            closing: 'Primeiro definimos a função. Depois podemos chamá-la sempre que quisermos executar seu código.',
             highlight: ['função'],
             codeLanguage: 'JavaScript',
             code: 'function saudacao() {\n  console.log("Olá!");\n}\n\nsaudacao();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A function is a block of code that can run whenever needed. It lets you organize and reuse behaviors.',
-            endParagraph: 'First we define the function. Then we can call it whenever we want to run its code.',
+            introduction: {
+              title: 'Writing once, using many times',
+              text: 'If you need to repeat the same sequence of steps at several points in the program, is it worth copying the code every time? There is a way to give that block a name and call it whenever you want.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to define and call a function',
+              text: 'A function is a block of code that can run whenever needed. It lets you organize and reuse behaviors.'
+            },
+            closing: 'First we define the function. Then we can call it whenever we want to run its code.',
             highlight: ['function'],
             codeLanguage: 'JavaScript',
             code: 'function greeting() {\n  console.log("Hello!");\n}\n\ngreeting();',
@@ -11464,18 +12534,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma função pode receber informações por meio de parâmetros e devolver um resultado utilizando return.',
-            secondParagraph: 'Nesse exemplo, a e b são parâmetros. A função retorna o resultado da soma.',
-            endParagraph: 'Parâmetros tornam as funções mais flexíveis, enquanto return permite utilizar o resultado produzido por elas.',
+            introduction: {
+              title: 'Parâmetros e retorno',
+              text: 'Uma função pode receber informações por meio de parâmetros e devolver um resultado utilizando return.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Um exemplo com soma',
+              text: 'Nesse exemplo, a e b são parâmetros. A função retorna o resultado da soma.'
+            },
+            closing: 'Parâmetros tornam as funções mais flexíveis, enquanto return permite utilizar o resultado produzido por elas.',
             highlight: ['parâmetros', 'return'],
             codeLanguage: 'JavaScript',
             code: 'function somar(a, b) {\n  return a + b;\n}\n\nconst resultado = somar(5, 3);\n\nconsole.log(resultado);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A function can receive information through parameters and give back a result using return.',
-            secondParagraph: 'In this example, a and b are parameters. The function gives back the result of the sum.',
-            endParagraph: 'Parameters make functions more flexible, while return lets you use the result they produce.',
+            introduction: {
+              title: 'Parameters and return',
+              text: 'A function can receive information through parameters and give back a result using return.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'An example with a sum',
+              text: 'In this example, a and b are parameters. The function gives back the result of the sum.'
+            },
+            closing: 'Parameters make functions more flexible, while return lets you use the result they produce.',
             highlight: ['parameters', 'return'],
             codeLanguage: 'JavaScript',
             code: 'function add(a, b) {\n  return a + b;\n}\n\nconst result = add(5, 3);\n\nconsole.log(result);',
@@ -11724,18 +12808,32 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Arrow functions são uma sintaxe alternativa para criar funções em JavaScript. Elas são muito utilizadas no desenvolvimento moderno.',
-            secondParagraph: 'Para funções simples, a sintaxe pode ser ainda mais curta.',
-            endParagraph: 'Arrow functions não criam um novo tipo de função. Elas oferecem uma sintaxe diferente e muito comum em projetos JavaScript modernos.',
+            introduction: {
+              title: 'Uma forma mais curta de escrever funções',
+              text: 'Você vai encontrar, em quase todo projeto moderno, funções escritas com uma seta. Elas parecem diferentes, mas o que fazem é conhecido. Vamos ver como se leem?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A sintaxe da arrow function',
+              text: 'Arrow functions são uma sintaxe alternativa para criar funções em JavaScript. Elas são muito utilizadas no desenvolvimento moderno.\n\nPara funções simples, a sintaxe pode ser ainda mais curta.'
+            },
+            closing: 'Arrow functions não criam um novo tipo de função. Elas oferecem uma sintaxe diferente e muito comum em projetos JavaScript modernos.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const somar = (a, b) => {\n  return a + b;\n};\n\nconsole.log(somar(2, 3));\n\nconst dobrar = numero => numero * 2;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Arrow functions are an alternative syntax for creating functions in JavaScript. They are widely used in modern development.',
-            secondParagraph: 'For simple functions, the syntax can be even shorter.',
-            endParagraph: 'Arrow functions do not create a new type of function. They offer a different syntax that is very common in modern JavaScript projects.',
+            introduction: {
+              title: 'A shorter way to write functions',
+              text: 'You will find, in almost every modern project, functions written with an arrow. They look different, but what they do is familiar. Let\'s see how to read them?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The arrow function syntax',
+              text: 'Arrow functions are an alternative syntax for creating functions in JavaScript. They are widely used in modern development.\n\nFor simple functions, the syntax can be even shorter.'
+            },
+            closing: 'Arrow functions do not create a new type of function. They offer a different syntax that is very common in modern JavaScript projects.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const add = (a, b) => {\n  return a + b;\n};\n\nconsole.log(add(2, 3));\n\nconst double = number => number * 2;',
@@ -11747,16 +12845,24 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Escopo define onde uma variável pode ser acessada. Variáveis declaradas dentro de um bloco com let ou const ficam disponíveis apenas naquele bloco.',
-            endParagraph: 'Entender escopo ajuda a evitar conflitos entre variáveis e prepara o caminho para conceitos mais avançados da linguagem.',
+            introduction: {
+              title: 'Escopo de variáveis',
+              text: 'Escopo define onde uma variável pode ser acessada. Variáveis declaradas dentro de um bloco com let ou const ficam disponíveis apenas naquele bloco.',
+              persona: 'neutral'
+            },
+            closing: 'Entender escopo ajuda a evitar conflitos entre variáveis e prepara o caminho para conceitos mais avançados da linguagem.',
             highlight: ['escopo'],
             codeLanguage: 'JavaScript',
             code: 'if (true) {\n  const mensagem = "Olá";\n  console.log(mensagem);\n}\n\n// mensagem não está disponível aqui',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Scope defines where a variable can be accessed. Variables declared inside a block with let or const are only available within that block.',
-            endParagraph: 'Understanding scope helps avoid conflicts between variables and prepares the way for more advanced concepts of the language.',
+            introduction: {
+              title: 'Variable scope',
+              text: 'Scope defines where a variable can be accessed. Variables declared inside a block with let or const are only available within that block.',
+              persona: 'neutral'
+            },
+            closing: 'Understanding scope helps avoid conflicts between variables and prepares the way for more advanced concepts of the language.',
             highlight: ['scope'],
             codeLanguage: 'JavaScript',
             code: 'if (true) {\n  const message = "Hello";\n  console.log(message);\n}\n\n// message is not available here',
@@ -12045,9 +13151,11 @@ async function seedJsBasicLessons (localeIds: Map<LocaleCode, number>): Promise<
 //
 // Duas limitações do componente existente moldaram a apresentação (a
 // arquitetura foi preservada, o conteúdo é que se adaptou a ela):
-//   - `TheoryActivityContent` não tem campo de título — os títulos de tela da
-//     proposta pedagógica viram a ideia central do `firstParagraph`, não um
-//     campo novo.
+//   - (Histórico) `TheoryActivityContent` não tinha campo de título — os
+//     títulos de tela da proposta pedagógica viraram a ideia central do
+//     primeiro parágrafo. Hoje a teoria tem `introduction.title` e
+//     `explanation.title`; as linhas migradas ficam sem título até o autor
+//     escrevê-lo no dashboard (ver `migrateTheoryV2.ts`).
 //   - `CodeSection` monta a aba "Web" com HTML + CSS apenas (`buildPreviewHtml`
 //     ignora JavaScript de propósito). Por isso toda atividade de JavaScript é
 //     `onlyCode: true`, mesmo onde a proposta pedia WebView — ver Fase 3 do
@@ -12110,15 +13218,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma página pode ser dividida em regiões com diferentes responsabilidades. <header> representa uma introdução ou cabeçalho e <nav> representa uma área de navegação.',
-            endParagraph: 'Usar elementos específicos torna a estrutura mais clara do que agrupar tudo em <div>.',
+            introduction: {
+              text: 'Uma página pode ser dividida em regiões com diferentes responsabilidades. <header> representa uma introdução ou cabeçalho e <nav> representa uma área de navegação.',
+              persona: 'cody'
+            },
+            closing: 'Usar elementos específicos torna a estrutura mais clara do que agrupar tudo em <div>.',
             highlight: ['header', 'nav', 'div'],
             codeLanguage: 'HTML',
             code: '<header>\n  <h1>Meu site</h1>\n\n  <nav>\n    <a href="/">Início</a>\n    <a href="/sobre">Sobre</a>\n  </nav>\n</header>'
           },
           en: {
-            firstParagraph: 'A page can be split into regions with different responsibilities. <header> represents an introduction or heading area, and <nav> represents a navigation area.',
-            endParagraph: 'Using specific elements makes the structure clearer than wrapping everything in <div>.',
+            introduction: {
+              text: 'A page can be split into regions with different responsibilities. <header> represents an introduction or heading area, and <nav> represents a navigation area.',
+              persona: 'cody'
+            },
+            closing: 'Using specific elements makes the structure clearer than wrapping everything in <div>.',
             highlight: ['header', 'nav', 'div'],
             codeLanguage: 'HTML',
             code: '<header>\n  <h1>My site</h1>\n\n  <nav>\n    <a href="/">Home</a>\n    <a href="/about">About</a>\n  </nav>\n</header>'
@@ -12129,15 +13243,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<main> representa o conteúdo principal da página. <section> agrupa uma seção temática e <footer> representa informações de rodapé.',
-            endParagraph: 'Uma boa estrutura semântica cria uma hierarquia que pode ser compreendida tanto por pessoas quanto por tecnologias.',
+            introduction: {
+              text: '<main> representa o conteúdo principal da página. <section> agrupa uma seção temática e <footer> representa informações de rodapé.',
+              persona: 'neutral'
+            },
+            closing: 'Uma boa estrutura semântica cria uma hierarquia que pode ser compreendida tanto por pessoas quanto por tecnologias.',
             highlight: ['main', 'section', 'footer', 'semântica'],
             codeLanguage: 'HTML',
             code: '<main>\n  <section>\n    <h2>Produtos</h2>\n    <p>Confira nossos produtos.</p>\n  </section>\n</main>\n\n<footer>\n  <p>Todos os direitos reservados.</p>\n</footer>'
           },
           en: {
-            firstParagraph: '<main> represents the primary content of the page. <section> groups a thematic part of it and <footer> represents information shown at the bottom.',
-            endParagraph: 'A good semantic structure creates a hierarchy that both people and technologies can understand.',
+            introduction: {
+              text: '<main> represents the primary content of the page. <section> groups a thematic part of it and <footer> represents information shown at the bottom.',
+              persona: 'neutral'
+            },
+            closing: 'A good semantic structure creates a hierarchy that both people and technologies can understand.',
             highlight: ['main', 'section', 'footer', 'semantic'],
             codeLanguage: 'HTML',
             code: '<main>\n  <section>\n    <h2>Products</h2>\n    <p>Check out our products.</p>\n  </section>\n</main>\n\n<footer>\n  <p>All rights reserved.</p>\n</footer>'
@@ -12358,17 +13478,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'HTML semântico significa utilizar elementos que descrevem o significado do conteúdo. Em vez de usar qualquer elemento como contêiner, escolhemos aquele que representa melhor sua função.',
-            secondParagraph: 'Uma estrutura semântica ajuda navegadores, mecanismos de busca, tecnologias assistivas e outros desenvolvedores a compreenderem a página.',
-            endParagraph: 'O código funciona, mas não comunica claramente a estrutura da página. Elementos semânticos resolvem esse problema.',
+            introduction: {
+              text: 'HTML semântico significa utilizar elementos que descrevem o significado do conteúdo. Em vez de usar qualquer elemento como contêiner, escolhemos aquele que representa melhor sua função.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Uma estrutura semântica ajuda navegadores, mecanismos de busca, tecnologias assistivas e outros desenvolvedores a compreenderem a página.'
+            },
+            closing: 'O código funciona, mas não comunica claramente a estrutura da página. Elementos semânticos resolvem esse problema.',
             highlight: ['HTML', 'semântico', 'semântica', 'semânticos'],
             codeLanguage: 'HTML',
             code: '<div>\n  <div>Meu site</div>\n  <div>Conteúdo principal</div>\n</div>'
           },
           en: {
-            firstParagraph: 'Semantic HTML means using elements that describe the meaning of the content. Instead of using any element as a container, we choose the one that best represents its role.',
-            secondParagraph: 'A semantic structure helps browsers, search engines, assistive technologies and other developers understand the page.',
-            endParagraph: 'The code works, but it does not clearly communicate the structure of the page. Semantic elements solve that problem.',
+            introduction: {
+              text: 'Semantic HTML means using elements that describe the meaning of the content. Instead of using any element as a container, we choose the one that best represents its role.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'A semantic structure helps browsers, search engines, assistive technologies and other developers understand the page.'
+            },
+            closing: 'The code works, but it does not clearly communicate the structure of the page. Semantic elements solve that problem.',
             highlight: ['HTML', 'semantic'],
             codeLanguage: 'HTML',
             code: '<div>\n  <div>My site</div>\n  <div>Main content</div>\n</div>'
@@ -12379,15 +13509,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Elementos como <header>, <nav>, <main>, <section>, <article>, <aside> e <footer> representam partes diferentes de uma página.',
-            endParagraph: 'A semântica não serve apenas para organizar visualmente. Ela comunica a estrutura e o significado do conteúdo.',
+            introduction: {
+              text: 'Elementos como <header>, <nav>, <main>, <section>, <article>, <aside> e <footer> representam partes diferentes de uma página.',
+              persona: 'neutral'
+            },
+            closing: 'A semântica não serve apenas para organizar visualmente. Ela comunica a estrutura e o significado do conteúdo.',
             highlight: ['header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'semântica'],
             codeLanguage: 'HTML',
             code: '<header>Meu site</header>\n\n<nav>Menu</nav>\n\n<main>\n  <section>\n    <h1>Notícias</h1>\n  </section>\n</main>\n\n<footer>Contato</footer>'
           },
           en: {
-            firstParagraph: 'Elements like <header>, <nav>, <main>, <section>, <article>, <aside> and <footer> represent different parts of a page.',
-            endParagraph: 'Semantics is not only about visual organization. It communicates the structure and the meaning of the content.',
+            introduction: {
+              text: 'Elements like <header>, <nav>, <main>, <section>, <article>, <aside> and <footer> represent different parts of a page.',
+              persona: 'neutral'
+            },
+            closing: 'Semantics is not only about visual organization. It communicates the structure and the meaning of the content.',
             highlight: ['header', 'nav', 'main', 'section', 'article', 'aside', 'footer', 'semantics'],
             codeLanguage: 'HTML',
             code: '<header>My site</header>\n\n<nav>Menu</nav>\n\n<main>\n  <section>\n    <h1>News</h1>\n  </section>\n</main>\n\n<footer>Contact</footer>'
@@ -12600,15 +13736,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <article> representa um conteúdo que pode fazer sentido de forma independente, como uma notícia, postagem ou comentário.',
-            endParagraph: 'Uma boa pergunta para identificar um <article> é: esse conteúdo poderia ser distribuído ou reutilizado como uma unidade independente?',
+            introduction: {
+              text: 'O elemento <article> representa um conteúdo que pode fazer sentido de forma independente, como uma notícia, postagem ou comentário.',
+              persona: 'cody'
+            },
+            closing: 'Uma boa pergunta para identificar um <article> é: esse conteúdo poderia ser distribuído ou reutilizado como uma unidade independente?',
             highlight: ['article'],
             codeLanguage: 'HTML',
             code: '<article>\n  <h2>Nova versão disponível</h2>\n  <p>\n    Uma nova versão do aplicativo foi lançada.\n  </p>\n</article>'
           },
           en: {
-            firstParagraph: 'The <article> element represents content that can make sense on its own, like a news item, a post or a comment.',
-            endParagraph: 'A good question to identify an <article> is: could this content be distributed or reused as an independent unit?',
+            introduction: {
+              text: 'The <article> element represents content that can make sense on its own, like a news item, a post or a comment.',
+              persona: 'cody'
+            },
+            closing: 'A good question to identify an <article> is: could this content be distributed or reused as an independent unit?',
             highlight: ['article'],
             codeLanguage: 'HTML',
             code: '<article>\n  <h2>New version available</h2>\n  <p>\n    A new version of the app has been released.\n  </p>\n</article>'
@@ -12619,15 +13761,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O <aside> representa conteúdo relacionado ao conteúdo principal, mas que não faz parte diretamente dele.',
-            endParagraph: '<article> representa conteúdo independente; <aside> representa conteúdo complementar.',
+            introduction: {
+              text: 'O <aside> representa conteúdo relacionado ao conteúdo principal, mas que não faz parte diretamente dele.',
+              persona: 'neutral'
+            },
+            closing: '<article> representa conteúdo independente; <aside> representa conteúdo complementar.',
             highlight: ['aside', 'article'],
             codeLanguage: 'HTML',
             code: '<main>\n  <article>\n    <h1>Aprendendo HTML</h1>\n    <p>Conteúdo principal.</p>\n  </article>\n\n  <aside>\n    <h2>Leia também</h2>\n    <p>Outros conteúdos relacionados.</p>\n  </aside>\n</main>'
           },
           en: {
-            firstParagraph: 'The <aside> element represents content related to the primary content, but not directly part of it.',
-            endParagraph: '<article> represents independent content; <aside> represents complementary content.',
+            introduction: {
+              text: 'The <aside> element represents content related to the primary content, but not directly part of it.',
+              persona: 'neutral'
+            },
+            closing: '<article> represents independent content; <aside> represents complementary content.',
             highlight: ['aside', 'article'],
             codeLanguage: 'HTML',
             code: '<main>\n  <article>\n    <h1>Learning HTML</h1>\n    <p>Main content.</p>\n  </article>\n\n  <aside>\n    <h2>Read also</h2>\n    <p>Other related content.</p>\n  </aside>\n</main>'
@@ -12787,17 +13935,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<figure> envolve um conteúdo ilustrativo, como uma imagem, um gráfico ou um trecho de código, e <figcaption> dá a legenda dele.',
-            secondParagraph: 'A legenda fica ligada à figura na estrutura do documento, não só visualmente abaixo dela.',
-            endParagraph: 'O alt continua necessário: ele descreve a imagem, e o <figcaption> é a legenda que todos veem.',
+            introduction: {
+              text: '<figure> envolve um conteúdo ilustrativo, como uma imagem, um gráfico ou um trecho de código, e <figcaption> dá a legenda dele.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'A legenda fica ligada à figura na estrutura do documento, não só visualmente abaixo dela.'
+            },
+            closing: 'O alt continua necessário: ele descreve a imagem, e o <figcaption> é a legenda que todos veem.',
             highlight: ['<figure>', '<figcaption>', 'alt'],
             codeLanguage: 'HTML',
             code: '<figure>\n  <img src="grafico.png" alt="Vendas subindo de janeiro a março">\n  <figcaption>Vendas do primeiro trimestre</figcaption>\n</figure>'
           },
           en: {
-            firstParagraph: '<figure> wraps illustrative content, like an image, a chart or a code snippet, and <figcaption> gives it a caption.',
-            secondParagraph: 'The caption is tied to the figure in the document structure, not just placed visually below it.',
-            endParagraph: 'The alt is still needed: it describes the image, while the <figcaption> is the caption everyone sees.',
+            introduction: {
+              text: '<figure> wraps illustrative content, like an image, a chart or a code snippet, and <figcaption> gives it a caption.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'The caption is tied to the figure in the document structure, not just placed visually below it.'
+            },
+            closing: 'The alt is still needed: it describes the image, while the <figcaption> is the caption everyone sees.',
             highlight: ['<figure>', '<figcaption>', 'alt'],
             codeLanguage: 'HTML',
             code: '<figure>\n  <img src="chart.png" alt="Sales rising from January to March">\n  <figcaption>First quarter sales</figcaption>\n</figure>'
@@ -12808,18 +13966,28 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Nem toda tela precisa da mesma imagem. O atributo srcset oferece versões de tamanhos diferentes, e o navegador escolhe a mais adequada.',
-            secondParagraph: 'O atributo loading="lazy" adia o carregamento de imagens que ainda estão longe da área visível, deixando a página mais rápida.',
-            endParagraph: 'Assim, quem está no celular não baixa uma imagem enorme feita para monitores grandes.',
+            introduction: {
+              text: 'Nem toda tela precisa da mesma imagem. O atributo srcset oferece versões de tamanhos diferentes, e o navegador escolhe a mais adequada.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O atributo loading="lazy" adia o carregamento de imagens que ainda estão longe da área visível, deixando a página mais rápida.'
+            },
+            closing: 'Assim, quem está no celular não baixa uma imagem enorme feita para monitores grandes.',
             highlight: ['srcset', 'loading'],
             codeLanguage: 'HTML',
             code: '<img\n  src="foto-800.jpg"\n  srcset="foto-400.jpg 400w, foto-800.jpg 800w"\n  alt="Praia ao entardecer"\n  loading="lazy"\n>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Not every screen needs the same image. The srcset attribute offers versions in different sizes, and the browser picks the best fit.',
-            secondParagraph: 'The loading="lazy" attribute delays loading images that are still far from the visible area, making the page faster.',
-            endParagraph: 'That way, someone on a phone doesn\'t download a huge image made for large monitors.',
+            introduction: {
+              text: 'Not every screen needs the same image. The srcset attribute offers versions in different sizes, and the browser picks the best fit.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The loading="lazy" attribute delays loading images that are still far from the visible area, making the page faster.'
+            },
+            closing: 'That way, someone on a phone doesn\'t download a huge image made for large monitors.',
             highlight: ['srcset', 'loading'],
             codeLanguage: 'HTML',
             code: '<img\n  src="photo-800.jpg"\n  srcset="photo-400.jpg 400w, photo-800.jpg 800w"\n  alt="Beach at sunset"\n  loading="lazy"\n>',
@@ -12980,15 +14148,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Formulários permitem coletar informações fornecidas pelo usuário. O elemento <form> representa o formulário e pode conter diferentes campos de entrada.',
-            endParagraph: 'Um formulário deve deixar claro o que cada campo representa e qual ação o usuário pode realizar.',
+            introduction: {
+              text: 'Formulários permitem coletar informações fornecidas pelo usuário. O elemento <form> representa o formulário e pode conter diferentes campos de entrada.',
+              persona: 'cody'
+            },
+            closing: 'Um formulário deve deixar claro o que cada campo representa e qual ação o usuário pode realizar.',
             highlight: ['form', 'formulário', 'Formulários'],
             codeLanguage: 'HTML',
             code: '<form>\n  <label for="nome">Nome</label>\n\n  <input\n    id="nome"\n    name="nome"\n    type="text"\n  >\n\n  <button type="submit">\n    Enviar\n  </button>\n</form>'
           },
           en: {
-            firstParagraph: 'Forms let you collect information provided by the user. The <form> element represents the form and can hold different input fields.',
-            endParagraph: 'A form should make clear what each field represents and which action the user can take.',
+            introduction: {
+              text: 'Forms let you collect information provided by the user. The <form> element represents the form and can hold different input fields.',
+              persona: 'cody'
+            },
+            closing: 'A form should make clear what each field represents and which action the user can take.',
             highlight: ['form', 'Forms', 'input'],
             codeLanguage: 'HTML',
             code: '<form>\n  <label for="name">Name</label>\n\n  <input\n    id="name"\n    name="name"\n    type="text"\n  >\n\n  <button type="submit">\n    Submit\n  </button>\n</form>'
@@ -12999,15 +14173,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <input> possui diferentes tipos para representar diferentes informações.',
-            endParagraph: 'Escolher o tipo adequado ajuda o navegador a interpretar corretamente a informação e pode melhorar a experiência do usuário.',
+            introduction: {
+              text: 'O elemento <input> possui diferentes tipos para representar diferentes informações.',
+              persona: 'neutral'
+            },
+            closing: 'Escolher o tipo adequado ajuda o navegador a interpretar corretamente a informação e pode melhorar a experiência do usuário.',
             highlight: ['input'],
             codeLanguage: 'HTML',
             code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
           },
           en: {
-            firstParagraph: 'The <input> element has different types to represent different kinds of information.',
-            endParagraph: 'Choosing the right type helps the browser interpret the information correctly and can improve the user experience.',
+            introduction: {
+              text: 'The <input> element has different types to represent different kinds of information.',
+              persona: 'neutral'
+            },
+            closing: 'Choosing the right type helps the browser interpret the information correctly and can improve the user experience.',
             highlight: ['input'],
             codeLanguage: 'HTML',
             code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
@@ -13281,15 +14461,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O <label> identifica um campo do formulário. O atributo for deve corresponder ao id do campo relacionado.',
-            endParagraph: 'Relacionar corretamente o label ao campo melhora a usabilidade e a acessibilidade do formulário.',
+            introduction: {
+              text: 'O <label> identifica um campo do formulário. O atributo for deve corresponder ao id do campo relacionado.',
+              persona: 'cody'
+            },
+            closing: 'Relacionar corretamente o label ao campo melhora a usabilidade e a acessibilidade do formulário.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
             code: '<label for="email">\n  E-mail\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
           },
           en: {
-            firstParagraph: 'The <label> element identifies a form field. Its for attribute must match the id of the related field.',
-            endParagraph: 'Linking the label to the field correctly improves the usability and the accessibility of the form.',
+            introduction: {
+              text: 'The <label> element identifies a form field. Its for attribute must match the id of the related field.',
+              persona: 'cody'
+            },
+            closing: 'Linking the label to the field correctly improves the usability and the accessibility of the form.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
             code: '<label for="email">\n  Email\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
@@ -13300,17 +14486,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Alguns atributos permitem indicar regras básicas para os campos antes que o formulário seja enviado.',
-            secondParagraph: 'required indica que o campo é obrigatório. minlength define um tamanho mínimo para o texto.',
-            endParagraph: 'Esses recursos oferecem uma primeira camada de validação diretamente no HTML.',
+            introduction: {
+              text: 'Alguns atributos permitem indicar regras básicas para os campos antes que o formulário seja enviado.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'required indica que o campo é obrigatório. minlength define um tamanho mínimo para o texto.'
+            },
+            closing: 'Esses recursos oferecem uma primeira camada de validação diretamente no HTML.',
             highlight: ['required', 'minlength', 'HTML'],
             codeLanguage: 'HTML',
             code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="nome"\n  minlength="3"\n>'
           },
           en: {
-            firstParagraph: 'Some attributes let you define basic rules for the fields before the form is submitted.',
-            secondParagraph: 'required marks the field as mandatory. minlength sets a minimum length for the text.',
-            endParagraph: 'These features provide a first layer of validation directly in HTML.',
+            introduction: {
+              text: 'Some attributes let you define basic rules for the fields before the form is submitted.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'required marks the field as mandatory. minlength sets a minimum length for the text.'
+            },
+            closing: 'These features provide a first layer of validation directly in HTML.',
             highlight: ['required', 'minlength', 'HTML'],
             codeLanguage: 'HTML',
             code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="name"\n  minlength="3"\n>'
@@ -13472,17 +14668,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Nem todo campo de formulário é um input. Para textos longos, existe o textarea.',
-            secondParagraph: 'Diferente do input, o textarea tem tag de abertura e de fechamento, e aceita várias linhas de texto.',
-            endParagraph: 'O atributo rows define a altura inicial do campo, em número de linhas.',
+            introduction: {
+              text: 'Nem todo campo de formulário é um input. Para textos longos, existe o textarea.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Diferente do input, o textarea tem tag de abertura e de fechamento, e aceita várias linhas de texto.'
+            },
+            closing: 'O atributo rows define a altura inicial do campo, em número de linhas.',
             highlight: ['input', 'textarea', 'rows'],
             codeLanguage: 'HTML',
             code: '<label for="mensagem">Mensagem</label>\n<textarea id="mensagem" name="mensagem" rows="4"></textarea>'
           },
           en: {
-            firstParagraph: 'Not every form field is an input. For long text, there is the textarea.',
-            secondParagraph: 'Unlike input, textarea has an opening and a closing tag, and it accepts multiple lines of text.',
-            endParagraph: 'The rows attribute sets the initial height of the field, in number of lines.',
+            introduction: {
+              text: 'Not every form field is an input. For long text, there is the textarea.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Unlike input, textarea has an opening and a closing tag, and it accepts multiple lines of text.'
+            },
+            closing: 'The rows attribute sets the initial height of the field, in number of lines.',
             highlight: ['input', 'textarea', 'rows'],
             codeLanguage: 'HTML',
             code: '<label for="message">Message</label>\n<textarea id="message" name="message" rows="4"></textarea>'
@@ -13493,17 +14699,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O select cria uma lista de opções, e cada alternativa é um option.',
-            secondParagraph: 'O texto dentro de option é o que a pessoa vê na tela. O atributo value é o que o formulário envia.',
-            endParagraph: 'Listas de opções reduzem erros de digitação, porque limitam a resposta a valores previstos.',
+            introduction: {
+              text: 'O select cria uma lista de opções, e cada alternativa é um option.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O texto dentro de option é o que a pessoa vê na tela. O atributo value é o que o formulário envia.'
+            },
+            closing: 'Listas de opções reduzem erros de digitação, porque limitam a resposta a valores previstos.',
             highlight: ['select', 'option', 'value'],
             codeLanguage: 'HTML',
             code: '<label for="estado">Estado</label>\n<select id="estado" name="estado">\n  <option value="sp">São Paulo</option>\n  <option value="rj">Rio de Janeiro</option>\n</select>'
           },
           en: {
-            firstParagraph: 'The select element creates a list of options, and each alternative is an option.',
-            secondParagraph: 'The text inside option is what the person sees on screen. The value attribute is what the form sends.',
-            endParagraph: 'Option lists reduce typing mistakes, because they limit the answer to expected values.',
+            introduction: {
+              text: 'The select element creates a list of options, and each alternative is an option.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The text inside option is what the person sees on screen. The value attribute is what the form sends.'
+            },
+            closing: 'Option lists reduce typing mistakes, because they limit the answer to expected values.',
             highlight: ['select', 'option', 'value'],
             codeLanguage: 'HTML',
             code: '<label for="state">State</label>\n<select id="state" name="state">\n  <option value="ny">New York</option>\n  <option value="ca">California</option>\n</select>'
@@ -13692,17 +14908,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando a pessoa deve escolher só uma opção entre várias, usamos um input com type="radio".',
-            secondParagraph: 'Os radios de um mesmo grupo compartilham o mesmo name. É isso que faz marcar um desmarcar o outro.',
-            endParagraph: 'Já o type="checkbox" permite marcar várias opções ao mesmo tempo, ou nenhuma.',
+            introduction: {
+              text: 'Quando a pessoa deve escolher só uma opção entre várias, usamos um input com type="radio".',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Os radios de um mesmo grupo compartilham o mesmo name. É isso que faz marcar um desmarcar o outro.'
+            },
+            closing: 'Já o type="checkbox" permite marcar várias opções ao mesmo tempo, ou nenhuma.',
             highlight: ['radio', 'radios', 'name', 'checkbox'],
             codeLanguage: 'HTML',
             code: '<p>Tamanho:</p>\n<input type="radio" id="p" name="tamanho" value="p">\n<label for="p">P</label>\n<input type="radio" id="m" name="tamanho" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="gelo" name="gelo">\n<label for="gelo">Gelo</label>'
           },
           en: {
-            firstParagraph: 'When the person must pick just one option among several, we use an input with type="radio".',
-            secondParagraph: 'Radios in the same group share the same name. That\'s what makes checking one uncheck the other.',
-            endParagraph: 'A type="checkbox", on the other hand, lets the person check several options at once, or none.',
+            introduction: {
+              text: 'When the person must pick just one option among several, we use an input with type="radio".',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Radios in the same group share the same name. That\'s what makes checking one uncheck the other.'
+            },
+            closing: 'A type="checkbox", on the other hand, lets the person check several options at once, or none.',
             highlight: ['radio', 'Radios', 'name', 'checkbox'],
             codeLanguage: 'HTML',
             code: '<p>Size:</p>\n<input type="radio" id="s" name="size" value="s">\n<label for="s">S</label>\n<input type="radio" id="m" name="size" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="ice" name="ice">\n<label for="ice">Ice</label>'
@@ -13713,17 +14939,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<fieldset> agrupa campos relacionados, e <legend> dá um título a esse grupo.',
-            secondParagraph: 'É o jeito semântico de dizer "estas opções respondem à mesma pergunta": leitores de tela anunciam a legenda junto com cada opção.',
-            endParagraph: 'Grupos de radio e checkbox quase sempre ficam melhores dentro de um <fieldset>.',
+            introduction: {
+              text: '<fieldset> agrupa campos relacionados, e <legend> dá um título a esse grupo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'É o jeito semântico de dizer "estas opções respondem à mesma pergunta": leitores de tela anunciam a legenda junto com cada opção.'
+            },
+            closing: 'Grupos de radio e checkbox quase sempre ficam melhores dentro de um <fieldset>.',
             highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
             codeLanguage: 'HTML',
             code: '<fieldset>\n  <legend>Forma de pagamento</legend>\n\n  <input type="radio" id="pix" name="pagamento" value="pix">\n  <label for="pix">Pix</label>\n\n  <input type="radio" id="cartao" name="pagamento" value="cartao">\n  <label for="cartao">Cartão</label>\n</fieldset>'
           },
           en: {
-            firstParagraph: '<fieldset> groups related fields, and <legend> gives that group a title.',
-            secondParagraph: 'It\'s the semantic way to say "these options answer the same question": screen readers announce the legend along with each option.',
-            endParagraph: 'Groups of radio and checkbox inputs almost always work better inside a <fieldset>.',
+            introduction: {
+              text: '<fieldset> groups related fields, and <legend> gives that group a title.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'It\'s the semantic way to say "these options answer the same question": screen readers announce the legend along with each option.'
+            },
+            closing: 'Groups of radio and checkbox inputs almost always work better inside a <fieldset>.',
             highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
             codeLanguage: 'HTML',
             code: '<fieldset>\n  <legend>Payment method</legend>\n\n  <input type="radio" id="card" name="payment" value="card">\n  <label for="card">Card</label>\n\n  <input type="radio" id="cash" name="payment" value="cash">\n  <label for="cash">Cash</label>\n</fieldset>'
@@ -13969,15 +15205,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tabelas são utilizadas para representar dados organizados em linhas e colunas.',
-            endParagraph: '<table> representa a tabela, <tr> uma linha, <th> uma célula de cabeçalho e <td> uma célula de dados.',
+            introduction: {
+              text: 'Tabelas são utilizadas para representar dados organizados em linhas e colunas.',
+              persona: 'cody'
+            },
+            closing: '<table> representa a tabela, <tr> uma linha, <th> uma célula de cabeçalho e <td> uma célula de dados.',
             highlight: ['table', 'tr', 'th', 'td'],
             codeLanguage: 'HTML',
             code: '<table>\n  <thead>\n    <tr>\n      <th>Produto</th>\n      <th>Preço</th>\n    </tr>\n  </thead>\n\n  <tbody>\n    <tr>\n      <td>Mouse</td>\n      <td>R$ 50</td>\n    </tr>\n  </tbody>\n</table>'
           },
           en: {
-            firstParagraph: 'Tables are used to represent data organized into rows and columns.',
-            endParagraph: '<table> represents the table, <tr> a row, <th> a header cell and <td> a data cell.',
+            introduction: {
+              text: 'Tables are used to represent data organized into rows and columns.',
+              persona: 'cody'
+            },
+            closing: '<table> represents the table, <tr> a row, <th> a header cell and <td> a data cell.',
             highlight: ['table', 'tr', 'th', 'td'],
             codeLanguage: 'HTML',
             code: '<table>\n  <thead>\n    <tr>\n      <th>Product</th>\n      <th>Price</th>\n    </tr>\n  </thead>\n\n  <tbody>\n    <tr>\n      <td>Mouse</td>\n      <td>$ 50</td>\n    </tr>\n  </tbody>\n</table>'
@@ -13988,15 +15230,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tabelas podem ser divididas semanticamente em <thead>, <tbody> e <tfoot>.',
-            endParagraph: 'Separar as partes da tabela melhora sua organização e deixa sua estrutura mais compreensível.',
+            introduction: {
+              text: 'Tabelas podem ser divididas semanticamente em <thead>, <tbody> e <tfoot>.',
+              persona: 'neutral'
+            },
+            closing: 'Separar as partes da tabela melhora sua organização e deixa sua estrutura mais compreensível.',
             highlight: ['thead', 'tbody', 'tfoot'],
             codeLanguage: 'HTML',
             code: '<table>\n  <thead>\n    <tr>\n      <th>Produto</th>\n      <th>Preço</th>\n    </tr>\n  </thead>\n\n  <tbody>\n    <tr>\n      <td>Teclado</td>\n      <td>R$ 100</td>\n    </tr>\n  </tbody>\n\n  <tfoot>\n    <tr>\n      <td>Total</td>\n      <td>R$ 100</td>\n    </tr>\n  </tfoot>\n</table>'
           },
           en: {
-            firstParagraph: 'Tables can be split semantically into <thead>, <tbody> and <tfoot>.',
-            endParagraph: 'Splitting a table into parts improves its organization and makes its structure easier to understand.',
+            introduction: {
+              text: 'Tables can be split semantically into <thead>, <tbody> and <tfoot>.',
+              persona: 'neutral'
+            },
+            closing: 'Splitting a table into parts improves its organization and makes its structure easier to understand.',
             highlight: ['thead', 'tbody', 'tfoot'],
             codeLanguage: 'HTML',
             code: '<table>\n  <thead>\n    <tr>\n      <th>Product</th>\n      <th>Price</th>\n    </tr>\n  </thead>\n\n  <tbody>\n    <tr>\n      <td>Keyboard</td>\n      <td>$ 100</td>\n    </tr>\n  </tbody>\n\n  <tfoot>\n    <tr>\n      <td>Total</td>\n      <td>$ 100</td>\n    </tr>\n  </tfoot>\n</table>'
@@ -14007,17 +15255,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Às vezes uma célula precisa ocupar mais de uma coluna ou mais de uma linha.',
-            secondParagraph: 'O atributo colspan estende a célula por várias colunas. O rowspan faz o mesmo na vertical, por várias linhas.',
-            endParagraph: 'Esses atributos permitem montar cabeçalhos agrupados sem quebrar a estrutura de linhas e colunas da tabela.',
+            introduction: {
+              text: 'Às vezes uma célula precisa ocupar mais de uma coluna ou mais de uma linha.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O atributo colspan estende a célula por várias colunas. O rowspan faz o mesmo na vertical, por várias linhas.'
+            },
+            closing: 'Esses atributos permitem montar cabeçalhos agrupados sem quebrar a estrutura de linhas e colunas da tabela.',
             highlight: ['colspan', 'rowspan'],
             codeLanguage: 'HTML',
             code: '<table>\n  <tr>\n    <th colspan="2">Contato</th>\n  </tr>\n  <tr>\n    <td>E-mail</td>\n    <td>ana@exemplo.com</td>\n  </tr>\n</table>'
           },
           en: {
-            firstParagraph: 'Sometimes a cell needs to span more than one column or more than one row.',
-            secondParagraph: 'The colspan attribute stretches the cell across several columns. rowspan does the same vertically, across several rows.',
-            endParagraph: 'These attributes let you build grouped headers without breaking the table row and column structure.',
+            introduction: {
+              text: 'Sometimes a cell needs to span more than one column or more than one row.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The colspan attribute stretches the cell across several columns. rowspan does the same vertically, across several rows.'
+            },
+            closing: 'These attributes let you build grouped headers without breaking the table row and column structure.',
             highlight: ['colspan', 'rowspan'],
             codeLanguage: 'HTML',
             code: '<table>\n  <tr>\n    <th colspan="2">Contact</th>\n  </tr>\n  <tr>\n    <td>E-mail</td>\n    <td>ana@example.com</td>\n  </tr>\n</table>'
@@ -14316,16 +15574,22 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Metadados são informações sobre o documento que não aparecem diretamente como conteúdo da página.',
-            endParagraph: 'O <head> concentra informações importantes para o navegador interpretar e apresentar corretamente o documento.',
+            introduction: {
+              text: 'Metadados são informações sobre o documento que não aparecem diretamente como conteúdo da página.',
+              persona: 'cody'
+            },
+            closing: 'O <head> concentra informações importantes para o navegador interpretar e apresentar corretamente o documento.',
             highlight: ['Metadados', 'head'],
             codeLanguage: 'HTML',
             code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>Meu site</title>\n</head>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Metadata is information about the document that does not appear directly as page content.',
-            endParagraph: 'The <head> gathers information the browser needs to interpret and present the document correctly.',
+            introduction: {
+              text: 'Metadata is information about the document that does not appear directly as page content.',
+              persona: 'cody'
+            },
+            closing: 'The <head> gathers information the browser needs to interpret and present the document correctly.',
             highlight: ['Metadata', 'head'],
             codeLanguage: 'HTML',
             code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>My site</title>\n</head>',
@@ -14337,16 +15601,22 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A meta tag description fornece uma descrição do conteúdo da página.',
-            endParagraph: 'Metadados não são apenas detalhes técnicos. Eles ajudam diferentes ferramentas a compreenderem a página.',
+            introduction: {
+              text: 'A meta tag description fornece uma descrição do conteúdo da página.',
+              persona: 'neutral'
+            },
+            closing: 'Metadados não são apenas detalhes técnicos. Eles ajudam diferentes ferramentas a compreenderem a página.',
             highlight: ['meta', 'description', 'Metadados'],
             codeLanguage: 'HTML',
             code: '<meta\n  name="description"\n  content="Aprenda desenvolvimento web."\n>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The description meta tag provides a description of the page content.',
-            endParagraph: 'Metadata is not just a technical detail. It helps different tools understand the page.',
+            introduction: {
+              text: 'The description meta tag provides a description of the page content.',
+              persona: 'neutral'
+            },
+            closing: 'Metadata is not just a technical detail. It helps different tools understand the page.',
             highlight: ['meta', 'description', 'Metadata'],
             codeLanguage: 'HTML',
             code: '<meta\n  name="description"\n  content="Learn web development."\n>',
@@ -14358,17 +15628,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O favicon é o ícone que aparece na aba do navegador, ao lado do título da página.',
-            secondParagraph: 'Ele é declarado no head por um link, e o atributo rel com o valor icon indica a função desse arquivo.',
-            endParagraph: 'É um detalhe pequeno, mas é o que ajuda a reconhecer a página quando há muitas abas abertas.',
+            introduction: {
+              text: 'O favicon é o ícone que aparece na aba do navegador, ao lado do título da página.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Ele é declarado no head por um link, e o atributo rel com o valor icon indica a função desse arquivo.'
+            },
+            closing: 'É um detalhe pequeno, mas é o que ajuda a reconhecer a página quando há muitas abas abertas.',
             highlight: ['favicon', 'head', 'link', 'rel'],
             codeLanguage: 'HTML',
             code: '<head>\n  <title>Meu site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
           },
           en: {
-            firstParagraph: 'The favicon is the icon shown on the browser tab, next to the page title.',
-            secondParagraph: 'It is declared in the head by a link, and the rel attribute with the value icon states what that file is for.',
-            endParagraph: 'It is a small detail, but it is what helps people recognize the page when many tabs are open.',
+            introduction: {
+              text: 'The favicon is the icon shown on the browser tab, next to the page title.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'It is declared in the head by a link, and the rel attribute with the value icon states what that file is for.'
+            },
+            closing: 'It is a small detail, but it is what helps people recognize the page when many tabs are open.',
             highlight: ['favicon', 'head', 'link', 'rel'],
             codeLanguage: 'HTML',
             code: '<head>\n  <title>My site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
@@ -14581,17 +15861,27 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Acessibilidade significa construir páginas que possam ser utilizadas por pessoas com diferentes necessidades e formas de interação.',
-            secondParagraph: 'HTML semântico, textos alternativos e formulários corretamente identificados são exemplos de práticas que melhoram a acessibilidade.',
-            endParagraph: 'Antes de procurar soluções complexas, utilize corretamente os recursos semânticos que o próprio HTML oferece.',
+            introduction: {
+              text: 'Acessibilidade significa construir páginas que possam ser utilizadas por pessoas com diferentes necessidades e formas de interação.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'HTML semântico, textos alternativos e formulários corretamente identificados são exemplos de práticas que melhoram a acessibilidade.'
+            },
+            closing: 'Antes de procurar soluções complexas, utilize corretamente os recursos semânticos que o próprio HTML oferece.',
             highlight: ['Acessibilidade', 'acessibilidade', 'HTML', 'semântico', 'semânticos'],
             codeLanguage: 'HTML',
             code: '<main>\n  <h1>Perfil</h1>\n\n  <img\n    src="perfil.jpg"\n    alt="Foto de perfil"\n  >\n\n  <button type="button">\n    Seguir\n  </button>\n</main>'
           },
           en: {
-            firstParagraph: 'Accessibility means building pages that can be used by people with different needs and ways of interacting.',
-            secondParagraph: 'Semantic HTML, alternative text and properly labeled form fields are examples of practices that improve accessibility.',
-            endParagraph: 'Before looking for complex solutions, use the semantic resources HTML already offers.',
+            introduction: {
+              text: 'Accessibility means building pages that can be used by people with different needs and ways of interacting.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Semantic HTML, alternative text and properly labeled form fields are examples of practices that improve accessibility.'
+            },
+            closing: 'Before looking for complex solutions, use the semantic resources HTML already offers.',
             highlight: ['Accessibility', 'accessibility', 'HTML', 'semantic'],
             codeLanguage: 'HTML',
             code: '<main>\n  <h1>Profile</h1>\n\n  <img\n    src="profile.jpg"\n    alt="Profile photo"\n  >\n\n  <button type="button">\n    Follow\n  </button>\n</main>'
@@ -14602,15 +15892,21 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Os títulos devem representar a hierarquia do conteúdo. Um <h2> representa uma seção dentro de um contexto, enquanto <h3> representa uma subseção.',
-            endParagraph: 'A hierarquia de títulos ajuda usuários e tecnologias assistivas a entenderem a organização do conteúdo.',
+            introduction: {
+              text: 'Os títulos devem representar a hierarquia do conteúdo. Um <h2> representa uma seção dentro de um contexto, enquanto <h3> representa uma subseção.',
+              persona: 'neutral'
+            },
+            closing: 'A hierarquia de títulos ajuda usuários e tecnologias assistivas a entenderem a organização do conteúdo.',
             highlight: ['h2', 'h3', 'hierarquia'],
             codeLanguage: 'HTML',
             code: '<h1>Curso de HTML</h1>\n\n<h2>Fundamentos</h2>\n<h3>Elementos</h3>\n\n<h2>Formulários</h2>\n<h3>Inputs</h3>'
           },
           en: {
-            firstParagraph: 'Headings should represent the hierarchy of the content. An <h2> represents a section inside a context, while <h3> represents a subsection.',
-            endParagraph: 'A heading hierarchy helps users and assistive technologies understand how the content is organized.',
+            introduction: {
+              text: 'Headings should represent the hierarchy of the content. An <h2> represents a section inside a context, while <h3> represents a subsection.',
+              persona: 'neutral'
+            },
+            closing: 'A heading hierarchy helps users and assistive technologies understand how the content is organized.',
             highlight: ['h2', 'h3', 'hierarchy'],
             codeLanguage: 'HTML',
             code: '<h1>HTML course</h1>\n\n<h2>Fundamentals</h2>\n<h3>Elements</h3>\n\n<h2>Forms</h2>\n<h3>Inputs</h3>'
@@ -14880,8 +16176,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Flexbox é um modelo de layout criado para organizar elementos em uma dimensão. Ele facilita o alinhamento e a distribuição dos itens dentro de um contêiner.',
-            endParagraph: 'Ao utilizar display: flex, o elemento se torna um flex container e seus filhos passam a ser flex items.',
+            introduction: {
+              text: 'Flexbox é um modelo de layout criado para organizar elementos em uma dimensão. Ele facilita o alinhamento e a distribuição dos itens dentro de um contêiner.',
+              persona: 'cody'
+            },
+            closing: 'Ao utilizar display: flex, o elemento se torna um flex container e seus filhos passam a ser flex items.',
             highlight: ['Flexbox', 'flex', 'display', 'container'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n}',
@@ -14893,8 +16192,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Flexbox is a layout model created to organize elements along one dimension. It makes it easier to align and distribute items inside a container.',
-            endParagraph: 'When you use display: flex, the element becomes a flex container and its children become flex items.',
+            introduction: {
+              text: 'Flexbox is a layout model created to organize elements along one dimension. It makes it easier to align and distribute items inside a container.',
+              persona: 'cody'
+            },
+            closing: 'When you use display: flex, the element becomes a flex container and its children become flex items.',
             highlight: ['Flexbox', 'flex', 'display', 'container'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n}',
@@ -14911,16 +16213,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'flex-direction define a direção dos itens. justify-content e align-items controlam o alinhamento em diferentes eixos.',
-            endParagraph: 'Essas propriedades formam a base do Flexbox e permitem criar muitos layouts sem depender de posicionamento manual.',
+            introduction: {
+              text: 'flex-direction define a direção dos itens. justify-content e align-items controlam o alinhamento em diferentes eixos.',
+              persona: 'neutral'
+            },
+            closing: 'Essas propriedades formam a base do Flexbox e permitem criar muitos layouts sem depender de posicionamento manual.',
             highlight: ['flex-direction', 'justify-content', 'align-items', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'flex-direction defines the direction of the items. justify-content and align-items control alignment along different axes.',
-            endParagraph: 'These properties are the base of Flexbox and let you build many layouts without manual positioning.',
+            introduction: {
+              text: 'flex-direction defines the direction of the items. justify-content and align-items control alignment along different axes.',
+              persona: 'neutral'
+            },
+            closing: 'These properties are the base of Flexbox and let you build many layouts without manual positioning.',
             highlight: ['flex-direction', 'justify-content', 'align-items', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}',
@@ -15195,8 +16503,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade gap define o espaço entre os itens de um flex container.',
-            endParagraph: 'gap é uma forma simples de controlar o espaço entre itens sem precisar adicionar margens individualmente.',
+            introduction: {
+              text: 'A propriedade gap define o espaço entre os itens de um flex container.',
+              persona: 'cody'
+            },
+            closing: 'gap é uma forma simples de controlar o espaço entre itens sem precisar adicionar margens individualmente.',
             highlight: ['gap', 'flex'],
             codeLanguage: 'CSS',
             code: '.menu {\n  display: flex;\n  gap: 16px;\n}',
@@ -15208,8 +16519,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The gap property defines the space between the items of a flex container.',
-            endParagraph: 'gap is a simple way to control the space between items without adding individual margins.',
+            introduction: {
+              text: 'The gap property defines the space between the items of a flex container.',
+              persona: 'cody'
+            },
+            closing: 'gap is a simple way to control the space between items without adding individual margins.',
             highlight: ['gap', 'flex'],
             codeLanguage: 'CSS',
             code: '.menu {\n  display: flex;\n  gap: 16px;\n}',
@@ -15226,16 +16540,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Por padrão, os itens podem permanecer na mesma linha. flex-wrap permite que eles ocupem novas linhas quando necessário.',
-            endParagraph: 'Combinar flex-wrap com gap é útil para criar grupos de elementos que precisam se adaptar ao espaço disponível.',
+            introduction: {
+              text: 'Por padrão, os itens podem permanecer na mesma linha. flex-wrap permite que eles ocupem novas linhas quando necessário.',
+              persona: 'neutral'
+            },
+            closing: 'Combinar flex-wrap com gap é útil para criar grupos de elementos que precisam se adaptar ao espaço disponível.',
             highlight: ['flex-wrap', 'gap'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'By default, the items can stay on the same line. flex-wrap lets them move to new lines when needed.',
-            endParagraph: 'Combining flex-wrap with gap is useful for groups of elements that need to adapt to the available space.',
+            introduction: {
+              text: 'By default, the items can stay on the same line. flex-wrap lets them move to new lines when needed.',
+              persona: 'neutral'
+            },
+            closing: 'Combining flex-wrap with gap is useful for groups of elements that need to adapt to the available space.',
             highlight: ['flex-wrap', 'gap'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 16px;\n}',
@@ -15398,9 +16718,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Dentro de um contêiner flex, os itens podem crescer ou encolher para acompanhar o espaço disponível.',
-            secondParagraph: 'A propriedade flex-grow define quanto um item cresce em relação aos outros. A flex-shrink define o quanto ele pode encolher, e a flex-basis define o tamanho inicial antes da distribuição.',
-            endParagraph: 'No exemplo, o item em destaque cresce o dobro dos demais, porque tem flex-grow maior.',
+            introduction: {
+              text: 'Dentro de um contêiner flex, os itens podem crescer ou encolher para acompanhar o espaço disponível.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'A propriedade flex-grow define quanto um item cresce em relação aos outros. A flex-shrink define o quanto ele pode encolher, e a flex-basis define o tamanho inicial antes da distribuição.'
+            },
+            closing: 'No exemplo, o item em destaque cresce o dobro dos demais, porque tem flex-grow maior.',
             highlight: ['flex-grow', 'flex-shrink', 'flex-basis'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.item {\n  flex-grow: 1;\n  flex-basis: 80px;\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.item.destaque {\n  flex-grow: 2;\n  background-color: #ffd9a0;\n}',
@@ -15412,9 +16737,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Inside a flex container, items can grow or shrink to follow the available space.',
-            secondParagraph: 'The flex-grow property sets how much an item grows compared to the others. flex-shrink sets how much it can shrink, and flex-basis sets the starting size before distribution.',
-            endParagraph: 'In the example, the highlighted item grows twice as much as the others, because it has a larger flex-grow.',
+            introduction: {
+              text: 'Inside a flex container, items can grow or shrink to follow the available space.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'The flex-grow property sets how much an item grows compared to the others. flex-shrink sets how much it can shrink, and flex-basis sets the starting size before distribution.'
+            },
+            closing: 'In the example, the highlighted item grows twice as much as the others, because it has a larger flex-grow.',
             highlight: ['flex-grow', 'flex-shrink', 'flex-basis'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.item {\n  flex-grow: 1;\n  flex-basis: 80px;\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.item.destaque {\n  flex-grow: 2;\n  background-color: #ffd9a0;\n}',
@@ -15431,9 +16761,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade order muda a ordem visual dos itens, sem alterar o HTML.',
-            secondParagraph: 'Por padrão, todos os itens têm order igual a zero. Um valor menor faz o item aparecer antes; um valor maior faz aparecer depois.',
-            endParagraph: 'Use com cuidado: a ordem de leitura por tecnologias assistivas continua sendo a do HTML, e não a visual.',
+            introduction: {
+              text: 'A propriedade order muda a ordem visual dos itens, sem alterar o HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Por padrão, todos os itens têm order igual a zero. Um valor menor faz o item aparecer antes; um valor maior faz aparecer depois.'
+            },
+            closing: 'Use com cuidado: a ordem de leitura por tecnologias assistivas continua sendo a do HTML, e não a visual.',
             highlight: ['order', 'HTML'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.lista div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.primeiro {\n  order: -1;\n}',
@@ -15445,9 +16780,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The order property changes the visual position of the items, without changing the HTML.',
-            secondParagraph: 'By default, every item has order equal to zero. A smaller value makes the item appear earlier; a larger value makes it appear later.',
-            endParagraph: 'Use it carefully: assistive technology still follows the HTML sequence, not the visual one.',
+            introduction: {
+              text: 'The order property changes the visual position of the items, without changing the HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'By default, every item has order equal to zero. A smaller value makes the item appear earlier; a larger value makes it appear later.'
+            },
+            closing: 'Use it carefully: assistive technology still follows the HTML sequence, not the visual one.',
             highlight: ['order', 'HTML'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.lista div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.primeiro {\n  order: -1;\n}',
@@ -15615,8 +16955,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'CSS Grid é um modelo de layout que permite organizar elementos em linhas e colunas.',
-            endParagraph: 'Enquanto Flexbox é especialmente útil para uma dimensão, Grid facilita a organização simultânea de linhas e colunas.',
+            introduction: {
+              text: 'CSS Grid é um modelo de layout que permite organizar elementos em linhas e colunas.',
+              persona: 'cody'
+            },
+            closing: 'Enquanto Flexbox é especialmente útil para uma dimensão, Grid facilita a organização simultânea de linhas e colunas.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 16px;\n}',
@@ -15628,8 +16971,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'CSS Grid is a layout model that lets you organize elements into rows and columns.',
-            endParagraph: 'While Flexbox is especially useful for one dimension, Grid makes it easier to organize rows and columns at the same time.',
+            introduction: {
+              text: 'CSS Grid is a layout model that lets you organize elements into rows and columns.',
+              persona: 'cody'
+            },
+            closing: 'While Flexbox is especially useful for one dimension, Grid makes it easier to organize rows and columns at the same time.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 16px;\n}',
@@ -15646,8 +16992,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A função repeat() permite repetir uma definição de coluna ou linha sem escrever a mesma regra várias vezes.',
-            endParagraph: 'Grid permite criar estruturas organizadas com poucas regras, tornando-se uma ferramenta importante para layouts modernos.',
+            introduction: {
+              text: 'A função repeat() permite repetir uma definição de coluna ou linha sem escrever a mesma regra várias vezes.',
+              persona: 'neutral'
+            },
+            closing: 'Grid permite criar estruturas organizadas com poucas regras, tornando-se uma ferramenta importante para layouts modernos.',
             highlight: ['repeat', 'Grid'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}',
@@ -15659,8 +17008,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The repeat() function lets you repeat a column or row definition without writing the same rule several times.',
-            endParagraph: 'Grid lets you build organized structures with few rules, which makes it an important tool for modern layouts.',
+            introduction: {
+              text: 'The repeat() function lets you repeat a column or row definition without writing the same rule several times.',
+              persona: 'neutral'
+            },
+            closing: 'Grid lets you build organized structures with few rules, which makes it an important tool for modern layouts.',
             highlight: ['repeat', 'Grid'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}',
@@ -15893,9 +17245,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Assim como grid-template-columns define as colunas, grid-template-rows define as linhas da grade.',
-            secondParagraph: 'A função minmax define um tamanho mínimo e um máximo para a faixa. No exemplo, a primeira linha tem no mínimo 80px e cresce conforme o conteúdo.',
-            endParagraph: 'Combinar minmax com a unidade fr permite criar grades que se adaptam sem quebrar.',
+            introduction: {
+              text: 'Assim como grid-template-columns define as colunas, grid-template-rows define as linhas da grade.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'A função minmax define um tamanho mínimo e um máximo para a faixa. No exemplo, a primeira linha tem no mínimo 80px e cresce conforme o conteúdo.'
+            },
+            closing: 'Combinar minmax com a unidade fr permite criar grades que se adaptam sem quebrar.',
             highlight: ['grid-template-columns', 'grid-template-rows', 'minmax', 'fr'],
             codeLanguage: 'CSS',
             code: '.grade {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: minmax(80px, auto) 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}',
@@ -15907,9 +17264,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Just as grid-template-columns defines the columns, grid-template-rows defines the rows of the grid.',
-            secondParagraph: 'The minmax function sets a minimum and a maximum size for the track. In the example, the first row is at least 80px and grows with the content.',
-            endParagraph: 'Combining minmax with the fr unit lets you build grids that adapt without breaking.',
+            introduction: {
+              text: 'Just as grid-template-columns defines the columns, grid-template-rows defines the rows of the grid.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'The minmax function sets a minimum and a maximum size for the track. In the example, the first row is at least 80px and grows with the content.'
+            },
+            closing: 'Combining minmax with the fr unit lets you build grids that adapt without breaking.',
             highlight: ['grid-template-columns', 'grid-template-rows', 'minmax', 'fr'],
             codeLanguage: 'CSS',
             code: '.grade {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  grid-template-rows: minmax(80px, auto) 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}',
@@ -15926,9 +17288,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um item pode ocupar mais de uma faixa da grade com as propriedades grid-column e grid-row.',
-            secondParagraph: 'O valor indica onde o item começa e onde termina. No exemplo, o cabeçalho vai da primeira até a terceira linha vertical, ou seja, ocupa as duas colunas.',
-            endParagraph: 'Com essas duas propriedades é possível montar layouts em que alguns blocos são maiores que os outros.',
+            introduction: {
+              text: 'Um item pode ocupar mais de uma faixa da grade com as propriedades grid-column e grid-row.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O valor indica onde o item começa e onde termina. No exemplo, o cabeçalho vai da primeira até a terceira linha vertical, ou seja, ocupa as duas colunas.'
+            },
+            closing: 'Com essas duas propriedades é possível montar layouts em que alguns blocos são maiores que os outros.',
             highlight: ['grid-column', 'grid-row'],
             codeLanguage: 'CSS',
             code: '.grade {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.cabecalho {\n  grid-column: 1 / 3;\n}',
@@ -15940,9 +17307,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'An item can span more than one track of the grid using the grid-column and grid-row properties.',
-            secondParagraph: 'The value states where the item starts and where it ends. In the example, the header runs from the first to the third vertical line, so it covers both columns.',
-            endParagraph: 'With these two properties you can build layouts where some blocks are larger than the others.',
+            introduction: {
+              text: 'An item can span more than one track of the grid using the grid-column and grid-row properties.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The value states where the item starts and where it ends. In the example, the header runs from the first to the third vertical line, so it covers both columns.'
+            },
+            closing: 'With these two properties you can build layouts where some blocks are larger than the others.',
             highlight: ['grid-column', 'grid-row'],
             codeLanguage: 'CSS',
             code: '.grade {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.cabecalho {\n  grid-column: 1 / 3;\n}',
@@ -16110,8 +17482,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade position altera a forma como um elemento é posicionado. relative cria um contexto de posicionamento, enquanto absolute permite posicionar um elemento em relação a esse contexto.',
-            endParagraph: 'Um uso comum de absolute é posicionar pequenos elementos dentro de um contêiner relative.',
+            introduction: {
+              text: 'A propriedade position altera a forma como um elemento é posicionado. relative cria um contexto de posicionamento, enquanto absolute permite posicionar um elemento em relação a esse contexto.',
+              persona: 'cody'
+            },
+            closing: 'Um uso comum de absolute é posicionar pequenos elementos dentro de um contêiner relative.',
             highlight: ['position', 'relative', 'absolute'],
             codeLanguage: 'CSS',
             code: '.card {\n  position: relative;\n}\n\n.badge {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}',
@@ -16123,8 +17498,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The position property changes how an element is placed. relative creates a positioning context, while absolute lets you place an element in relation to that context.',
-            endParagraph: 'A common use of absolute is placing small elements inside a relative container.',
+            introduction: {
+              text: 'The position property changes how an element is placed. relative creates a positioning context, while absolute lets you place an element in relation to that context.',
+              persona: 'cody'
+            },
+            closing: 'A common use of absolute is placing small elements inside a relative container.',
             highlight: ['position', 'relative', 'absolute'],
             codeLanguage: 'CSS',
             code: '.card {\n  position: relative;\n}\n\n.badge {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}',
@@ -16141,16 +17519,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'fixed posiciona um elemento em relação à janela de visualização. sticky combina características do posicionamento normal com um comportamento de fixação durante a rolagem.',
-            endParagraph: 'Esses valores são úteis em elementos como cabeçalhos, barras de navegação e controles que precisam permanecer visíveis.',
+            introduction: {
+              text: 'fixed posiciona um elemento em relação à janela de visualização. sticky combina características do posicionamento normal com um comportamento de fixação durante a rolagem.',
+              persona: 'neutral'
+            },
+            closing: 'Esses valores são úteis em elementos como cabeçalhos, barras de navegação e controles que precisam permanecer visíveis.',
             highlight: ['fixed', 'sticky'],
             codeLanguage: 'CSS',
             code: '.header {\n  position: sticky;\n  top: 0;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'fixed places an element in relation to the viewport. sticky combines normal positioning with a pinning behavior during scrolling.',
-            endParagraph: 'These values are useful for headers, navigation bars and controls that need to stay visible.',
+            introduction: {
+              text: 'fixed places an element in relation to the viewport. sticky combines normal positioning with a pinning behavior during scrolling.',
+              persona: 'neutral'
+            },
+            closing: 'These values are useful for headers, navigation bars and controls that need to stay visible.',
             highlight: ['fixed', 'sticky'],
             codeLanguage: 'CSS',
             code: '.header {\n  position: sticky;\n  top: 0;\n}',
@@ -16162,9 +17546,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Todo elemento começa com position no valor static, que é o comportamento normal do fluxo da página.',
-            secondParagraph: 'Quando elementos posicionados se sobrepõem, a propriedade z-index define qual deles fica na frente. O valor maior aparece por cima.',
-            endParagraph: 'z-index só tem efeito em elementos cujo position seja diferente de static.',
+            introduction: {
+              text: 'Todo elemento começa com position no valor static, que é o comportamento normal do fluxo da página.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Quando elementos posicionados se sobrepõem, a propriedade z-index define qual deles fica na frente. O valor maior aparece por cima.'
+            },
+            closing: 'z-index só tem efeito em elementos cujo position seja diferente de static.',
             highlight: ['position', 'static', 'z-index'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  position: absolute;\n  width: 140px;\n  padding: 12px;\n}\n\n.atras {\n  z-index: 1;\n  background-color: #cfe8ff;\n}\n\n.frente {\n  z-index: 2;\n  top: 24px;\n  left: 24px;\n  background-color: #ffd9a0;\n}',
@@ -16176,9 +17565,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Every element starts with position set to static, which is the normal behaviour of the page flow.',
-            secondParagraph: 'When positioned elements overlap, the z-index property decides which one sits in front. The larger value goes on top.',
-            endParagraph: 'z-index only has an effect on elements whose position is something other than static.',
+            introduction: {
+              text: 'Every element starts with position set to static, which is the normal behaviour of the page flow.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'When positioned elements overlap, the z-index property decides which one sits in front. The larger value goes on top.'
+            },
+            closing: 'z-index only has an effect on elements whose position is something other than static.',
             highlight: ['position', 'static', 'z-index'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  position: absolute;\n  width: 140px;\n  padding: 12px;\n}\n\n.atras {\n  z-index: 1;\n  background-color: #cfe8ff;\n}\n\n.frente {\n  z-index: 2;\n  top: 24px;\n  left: 24px;\n  background-color: #ffd9a0;\n}',
@@ -16458,9 +17852,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando o conteúdo é maior que a caixa, ele transborda e invade o que vem depois. A propriedade overflow decide o que fazer com essa sobra.',
-            secondParagraph: 'hidden corta o que passa do limite, scroll sempre mostra barras de rolagem e auto mostra a rolagem só quando é preciso.',
-            endParagraph: 'auto costuma ser a escolha mais equilibrada para áreas com conteúdo de tamanho variável.',
+            introduction: {
+              text: 'Quando o conteúdo é maior que a caixa, ele transborda e invade o que vem depois. A propriedade overflow decide o que fazer com essa sobra.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'hidden corta o que passa do limite, scroll sempre mostra barras de rolagem e auto mostra a rolagem só quando é preciso.'
+            },
+            closing: 'auto costuma ser a escolha mais equilibrada para áreas com conteúdo de tamanho variável.',
             highlight: ['overflow', 'hidden', 'scroll', 'auto'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  height: 60px;\n  border: 1px solid #999;\n  overflow: auto;\n}',
@@ -16472,9 +17871,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'When the content is bigger than its box, it overflows onto whatever comes next. The overflow property decides what to do with the excess.',
-            secondParagraph: 'hidden clips whatever goes past the edge, scroll always shows scrollbars and auto shows scrolling only when needed.',
-            endParagraph: 'auto is usually the most balanced choice for areas whose content size varies.',
+            introduction: {
+              text: 'When the content is bigger than its box, it overflows onto whatever comes next. The overflow property decides what to do with the excess.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'hidden clips whatever goes past the edge, scroll always shows scrollbars and auto shows scrolling only when needed.'
+            },
+            closing: 'auto is usually the most balanced choice for areas whose content size varies.',
             highlight: ['overflow', 'hidden', 'scroll', 'auto'],
             codeLanguage: 'CSS',
             code: '.box {\n  height: 60px;\n  border: 1px solid #999;\n  overflow: auto;\n}',
@@ -16491,9 +17895,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Para cortar uma linha de texto com reticências, três propriedades trabalham juntas.',
-            secondParagraph: 'white-space: nowrap impede a quebra de linha, overflow: hidden esconde a sobra e text-overflow: ellipsis troca o corte por reticências.',
-            endParagraph: 'É o padrão de títulos em cartões e listas, onde o espaço é limitado.',
+            introduction: {
+              text: 'Para cortar uma linha de texto com reticências, três propriedades trabalham juntas.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'white-space: nowrap impede a quebra de linha, overflow: hidden esconde a sobra e text-overflow: ellipsis troca o corte por reticências.'
+            },
+            closing: 'É o padrão de títulos em cartões e listas, onde o espaço é limitado.',
             highlight: ['white-space', 'nowrap', 'overflow', 'text-overflow', 'ellipsis'],
             codeLanguage: 'CSS',
             code: '.titulo {\n  width: 180px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}',
@@ -16505,9 +17914,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'To cut a line of text with an ellipsis, three properties work together.',
-            secondParagraph: 'white-space: nowrap prevents line breaks, overflow: hidden hides the excess and text-overflow: ellipsis replaces the cut with an ellipsis.',
-            endParagraph: 'It\'s the usual pattern for titles in cards and lists, where space is limited.',
+            introduction: {
+              text: 'To cut a line of text with an ellipsis, three properties work together.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'white-space: nowrap prevents line breaks, overflow: hidden hides the excess and text-overflow: ellipsis replaces the cut with an ellipsis.'
+            },
+            closing: 'It\'s the usual pattern for titles in cards and lists, where space is limited.',
             highlight: ['white-space', 'nowrap', 'overflow', 'text-overflow', 'ellipsis'],
             codeLanguage: 'CSS',
             code: '.title {\n  width: 180px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}',
@@ -16726,16 +18140,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Pseudo-classes permitem aplicar estilos de acordo com um estado ou condição do elemento.',
-            endParagraph: ':hover representa o estado de passar o cursor sobre o elemento. :focus representa um elemento que recebeu foco.',
+            introduction: {
+              text: 'Pseudo-classes permitem aplicar estilos de acordo com um estado ou condição do elemento.',
+              persona: 'cody'
+            },
+            closing: ':hover representa o estado de passar o cursor sobre o elemento. :focus representa um elemento que recebeu foco.',
             highlight: ['Pseudo-classes', 'hover', 'focus'],
             codeLanguage: 'CSS',
             code: 'button:hover {\n  transform: scale(1.05);\n}\n\nbutton:focus {\n  outline: 2px solid black;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Pseudo-classes let you apply styles based on a state or condition of the element.',
-            endParagraph: ':hover represents the state of moving the cursor over the element. :focus represents an element that received focus.',
+            introduction: {
+              text: 'Pseudo-classes let you apply styles based on a state or condition of the element.',
+              persona: 'cody'
+            },
+            closing: ':hover represents the state of moving the cursor over the element. :focus represents an element that received focus.',
             highlight: ['Pseudo-classes', 'hover', 'focus'],
             codeLanguage: 'CSS',
             code: 'button:hover {\n  transform: scale(1.05);\n}\n\nbutton:focus {\n  outline: 2px solid black;\n}',
@@ -16747,9 +18167,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Algumas pseudo-classes permitem selecionar elementos com base em sua posição ou relação com outros elementos.',
-            secondParagraph: 'first-child seleciona o primeiro elemento de um grupo e last-child seleciona o último.',
-            endParagraph: 'Pseudo-classes permitem criar regras mais específicas sem precisar adicionar uma classe para cada situação.',
+            introduction: {
+              text: 'Algumas pseudo-classes permitem selecionar elementos com base em sua posição ou relação com outros elementos.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'first-child seleciona o primeiro elemento de um grupo e last-child seleciona o último.'
+            },
+            closing: 'Pseudo-classes permitem criar regras mais específicas sem precisar adicionar uma classe para cada situação.',
             highlight: ['Pseudo-classes', 'pseudo-classes', 'first-child', 'last-child'],
             codeLanguage: 'CSS',
             code: 'li:first-child {\n  font-weight: bold;\n}\n\nli:last-child {\n  margin-bottom: 0;\n}',
@@ -16761,9 +18186,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A few pseudo-classes let you select elements based on their position or their relation to other elements.',
-            secondParagraph: 'first-child selects the first element of a group and last-child selects the last one.',
-            endParagraph: 'Pseudo-classes let you write more specific rules without adding a class for every situation.',
+            introduction: {
+              text: 'A few pseudo-classes let you select elements based on their position or their relation to other elements.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'first-child selects the first element of a group and last-child selects the last one.'
+            },
+            closing: 'Pseudo-classes let you write more specific rules without adding a class for every situation.',
             highlight: ['Pseudo-classes', 'pseudo-classes', 'first-child', 'last-child'],
             codeLanguage: 'CSS',
             code: 'li:first-child {\n  font-weight: bold;\n}\n\nli:last-child {\n  margin-bottom: 0;\n}',
@@ -16780,9 +18210,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A pseudo-classe active aplica um estilo enquanto o elemento está sendo clicado, e a disabled aplica um estilo em campos desativados.',
-            secondParagraph: 'Já a nth-child seleciona elementos pela posição. No exemplo, o valor even seleciona os itens de posição par.',
-            endParagraph: 'Essas pseudo-classes reagem ao estado e à posição dos elementos, sem precisar de classes extras no HTML.',
+            introduction: {
+              text: 'A pseudo-classe active aplica um estilo enquanto o elemento está sendo clicado, e a disabled aplica um estilo em campos desativados.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Já a nth-child seleciona elementos pela posição. No exemplo, o valor even seleciona os itens de posição par.'
+            },
+            closing: 'Essas pseudo-classes reagem ao estado e à posição dos elementos, sem precisar de classes extras no HTML.',
             highlight: ['active', 'disabled', 'nth-child', 'even'],
             codeLanguage: 'CSS',
             code: 'button:active {\n  background-color: #ffd9a0;\n}\n\ninput:disabled {\n  opacity: 0.5;\n}\n\nli:nth-child(even) {\n  background-color: #f2f2f2;\n}',
@@ -16794,9 +18229,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The active pseudo-class applies a style while the element is being clicked, and disabled applies a style to fields that are turned off.',
-            secondParagraph: 'The nth-child pseudo-class selects elements by position. In the example, the value even selects the items in positions two, four, six, and so on.',
-            endParagraph: 'These pseudo-classes react to the state and the position of elements, with no extra classes in the HTML.',
+            introduction: {
+              text: 'The active pseudo-class applies a style while the element is being clicked, and disabled applies a style to fields that are turned off.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The nth-child pseudo-class selects elements by position. In the example, the value even selects the items in positions two, four, six, and so on.'
+            },
+            closing: 'These pseudo-classes react to the state and the position of elements, with no extra classes in the HTML.',
             highlight: ['active', 'disabled', 'nth-child', 'even'],
             codeLanguage: 'CSS',
             code: 'button:active {\n  background-color: #ffd9a0;\n}\n\ninput:disabled {\n  opacity: 0.5;\n}\n\nli:nth-child(even) {\n  background-color: #f2f2f2;\n}',
@@ -17076,8 +18516,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Pseudo-elementos permitem estilizar uma parte específica de um elemento ou criar conteúdo visual relacionado a ele.',
-            endParagraph: '::before cria conteúdo antes do conteúdo do elemento e ::after cria conteúdo depois dele.',
+            introduction: {
+              text: 'Pseudo-elementos permitem estilizar uma parte específica de um elemento ou criar conteúdo visual relacionado a ele.',
+              persona: 'cody'
+            },
+            closing: '::before cria conteúdo antes do conteúdo do elemento e ::after cria conteúdo depois dele.',
             highlight: ['Pseudo-elementos', 'before', 'after'],
             codeLanguage: 'CSS',
             code: '.title::before {\n  content: "→ ";\n}',
@@ -17089,8 +18532,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Pseudo-elements let you style a specific part of an element or create visual content related to it.',
-            endParagraph: '::before creates content placed ahead of the element own content, and ::after creates content placed at the end of it.',
+            introduction: {
+              text: 'Pseudo-elements let you style a specific part of an element or create visual content related to it.',
+              persona: 'cody'
+            },
+            closing: '::before creates content placed ahead of the element own content, and ::after creates content placed at the end of it.',
             highlight: ['Pseudo-elements', 'before', 'after'],
             codeLanguage: 'CSS',
             code: '.title::before {\n  content: "→ ";\n}',
@@ -17107,8 +18553,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Pseudo-elementos também podem ser utilizados para criar detalhes visuais sem adicionar elementos extras ao HTML.',
-            endParagraph: 'Esse recurso é muito utilizado para criar detalhes decorativos e componentes visuais.',
+            introduction: {
+              text: 'Pseudo-elementos também podem ser utilizados para criar detalhes visuais sem adicionar elementos extras ao HTML.',
+              persona: 'neutral'
+            },
+            closing: 'Esse recurso é muito utilizado para criar detalhes decorativos e componentes visuais.',
             highlight: ['Pseudo-elementos', 'HTML'],
             codeLanguage: 'CSS',
             code: '.card::before {\n  content: "";\n  display: block;\n  height: 4px;\n  background: black;\n}',
@@ -17120,8 +18569,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Pseudo-elements can also be used to create visual details without adding extra elements to the HTML.',
-            endParagraph: 'This resource is widely used to create decorative details and visual components.',
+            introduction: {
+              text: 'Pseudo-elements can also be used to create visual details without adding extra elements to the HTML.',
+              persona: 'neutral'
+            },
+            closing: 'This resource is widely used to create decorative details and visual components.',
             highlight: ['Pseudo-elements', 'HTML'],
             codeLanguage: 'CSS',
             code: '.card::before {\n  content: "";\n  display: block;\n  height: 4px;\n  background: black;\n}',
@@ -17314,8 +18766,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Variáveis CSS, também chamadas de custom properties, permitem armazenar valores para reutilizá-los em diferentes regras.',
-            endParagraph: 'Uma variável pode centralizar valores que aparecem em diferentes partes da interface.',
+            introduction: {
+              text: 'Variáveis CSS, também chamadas de custom properties, permitem armazenar valores para reutilizá-los em diferentes regras.',
+              persona: 'cody'
+            },
+            closing: 'Uma variável pode centralizar valores que aparecem em diferentes partes da interface.',
             highlight: ['CSS', 'Variáveis', 'variável', 'custom properties'],
             codeLanguage: 'CSS',
             code: ':root {\n  --cor-principal: #2563eb;\n}\n\nbutton {\n  background-color: var(--cor-principal);\n}',
@@ -17327,8 +18782,11 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'CSS variables, also called custom properties, let you store values to reuse them in different rules.',
-            endParagraph: 'A variable can centralize values that appear in different parts of the interface.',
+            introduction: {
+              text: 'CSS variables, also called custom properties, let you store values to reuse them in different rules.',
+              persona: 'cody'
+            },
+            closing: 'A variable can centralize values that appear in different parts of the interface.',
             highlight: ['CSS', 'variables', 'variable', 'custom properties'],
             codeLanguage: 'CSS',
             code: ':root {\n  --main-color: #2563eb;\n}\n\nbutton {\n  background-color: var(--main-color);\n}',
@@ -17345,16 +18803,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando várias regras utilizam a mesma variável, alterar seu valor pode atualizar todos esses pontos.',
-            endParagraph: 'Variáveis tornam estilos mais consistentes e facilitam alterações futuras.',
+            introduction: {
+              text: 'Quando várias regras utilizam a mesma variável, alterar seu valor pode atualizar todos esses pontos.',
+              persona: 'neutral'
+            },
+            closing: 'Variáveis tornam estilos mais consistentes e facilitam alterações futuras.',
             highlight: ['Variáveis', 'variável'],
             codeLanguage: 'CSS',
             code: ':root {\n  --espacamento: 16px;\n}\n\n.card {\n  padding: var(--espacamento);\n}\n\n.menu {\n  gap: var(--espacamento);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When several rules use the same variable, changing its value can update all of those places.',
-            endParagraph: 'Variables make styles more consistent and make future changes easier.',
+            introduction: {
+              text: 'When several rules use the same variable, changing its value can update all of those places.',
+              persona: 'neutral'
+            },
+            closing: 'Variables make styles more consistent and make future changes easier.',
             highlight: ['Variables', 'variable'],
             codeLanguage: 'CSS',
             code: ':root {\n  --spacing: 16px;\n}\n\n.card {\n  padding: var(--spacing);\n}\n\n.menu {\n  gap: var(--spacing);\n}',
@@ -17542,16 +19006,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Flexbox é especialmente adequado quando precisamos organizar elementos em uma única direção: uma linha ou uma coluna.',
-            endParagraph: 'Menus, grupos de botões e alinhamentos em linha são exemplos comuns de situações em que Flexbox funciona muito bem.',
+            introduction: {
+              text: 'Flexbox é especialmente adequado quando precisamos organizar elementos em uma única direção: uma linha ou uma coluna.',
+              persona: 'cody'
+            },
+            closing: 'Menus, grupos de botões e alinhamentos em linha são exemplos comuns de situações em que Flexbox funciona muito bem.',
             highlight: ['Flexbox'],
             codeLanguage: 'CSS',
             code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Flexbox is especially suited for organizing elements in a single direction: a row or a column.',
-            endParagraph: 'Menus, button groups and inline alignments are common examples where Flexbox works very well.',
+            introduction: {
+              text: 'Flexbox is especially suited for organizing elements in a single direction: a row or a column.',
+              persona: 'cody'
+            },
+            closing: 'Menus, button groups and inline alignments are common examples where Flexbox works very well.',
             highlight: ['Flexbox'],
             codeLanguage: 'CSS',
             code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
@@ -17563,16 +19033,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Grid é especialmente útil quando o layout precisa controlar linhas e colunas ao mesmo tempo.',
-            endParagraph: 'Flexbox e Grid não competem entre si. Eles podem ser combinados para construir layouts mais completos.',
+            introduction: {
+              text: 'Grid é especialmente útil quando o layout precisa controlar linhas e colunas ao mesmo tempo.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox e Grid não competem entre si. Eles podem ser combinados para construir layouts mais completos.',
             highlight: ['Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Grid is especially useful when the layout needs to control rows and columns at the same time.',
-            endParagraph: 'Flexbox and Grid do not compete with each other. They can be combined to build more complete layouts.',
+            introduction: {
+              text: 'Grid is especially useful when the layout needs to control rows and columns at the same time.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox and Grid do not compete with each other. They can be combined to build more complete layouts.',
             highlight: ['Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
@@ -17760,16 +19236,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Layouts reais normalmente combinam diferentes recursos do CSS. Um contêiner pode utilizar Grid enquanto um componente interno utiliza Flexbox.',
-            endParagraph: 'Não existe uma única ferramenta para todos os layouts. A escolha depende da estrutura que queremos construir.',
+            introduction: {
+              text: 'Layouts reais normalmente combinam diferentes recursos do CSS. Um contêiner pode utilizar Grid enquanto um componente interno utiliza Flexbox.',
+              persona: 'cody'
+            },
+            closing: 'Não existe uma única ferramenta para todos os layouts. A escolha depende da estrutura que queremos construir.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.page {\n  display: grid;\n  grid-template-columns: 2fr 1fr;\n  gap: 20px;\n}\n\n.card {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Real layouts usually combine different CSS resources. A container can use Grid while an inner component uses Flexbox.',
-            endParagraph: 'There is no single tool for every layout. The choice depends on the structure we want to build.',
+            introduction: {
+              text: 'Real layouts usually combine different CSS resources. A container can use Grid while an inner component uses Flexbox.',
+              persona: 'cody'
+            },
+            closing: 'There is no single tool for every layout. The choice depends on the structure we want to build.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
             codeLanguage: 'CSS',
             code: '.page {\n  display: grid;\n  grid-template-columns: 2fr 1fr;\n  gap: 20px;\n}\n\n.card {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}',
@@ -17781,16 +19263,22 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Agora você já conhece ferramentas importantes para construir layouts modernos. O próximo nível será adaptar interfaces a diferentes telas e explorar recursos mais avançados do CSS.',
-            endParagraph: 'Flexbox, Grid, posicionamento, pseudo-classes, pseudo-elementos e variáveis formam uma base sólida para interfaces mais completas.',
+            introduction: {
+              text: 'Agora você já conhece ferramentas importantes para construir layouts modernos. O próximo nível será adaptar interfaces a diferentes telas e explorar recursos mais avançados do CSS.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox, Grid, posicionamento, pseudo-classes, pseudo-elementos e variáveis formam uma base sólida para interfaces mais completas.',
             highlight: ['CSS', 'Flexbox', 'Grid', 'pseudo-classes', 'pseudo-elementos', 'variáveis'],
             codeLanguage: 'CSS',
             code: ':root {\n  --espacamento: 20px;\n}\n\n.page {\n  display: grid;\n  gap: var(--espacamento);\n}\n\n.card {\n  position: relative;\n  display: flex;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'You now know important tools for building modern layouts. The next level will be adapting interfaces to different screens and exploring more advanced CSS resources.',
-            endParagraph: 'Flexbox, Grid, positioning, pseudo-classes, pseudo-elements and variables form a solid base for more complete interfaces.',
+            introduction: {
+              text: 'You now know important tools for building modern layouts. The next level will be adapting interfaces to different screens and exploring more advanced CSS resources.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox, Grid, positioning, pseudo-classes, pseudo-elements and variables form a solid base for more complete interfaces.',
             highlight: ['CSS', 'Flexbox', 'Grid', 'pseudo-classes', 'pseudo-elements', 'variables'],
             codeLanguage: 'CSS',
             code: ':root {\n  --spacing: 20px;\n}\n\n.page {\n  display: grid;\n  gap: var(--spacing);\n}\n\n.card {\n  position: relative;\n  display: flex;\n}',
@@ -18049,8 +19537,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Métodos de array permitem realizar operações comuns sem precisar escrever manualmente todos os loops.',
-            endParagraph: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição.',
+            introduction: {
+              text: 'Métodos de array permitem realizar operações comuns sem precisar escrever manualmente todos os loops.',
+              persona: 'cody'
+            },
+            closing: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição.',
             highlight: ['map', 'filter', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);\n\nconsole.log(dobrados, pares);',
@@ -18058,8 +19549,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Array methods let you perform common operations without writing all the loops by hand.',
-            endParagraph: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition.',
+            introduction: {
+              text: 'Array methods let you perform common operations without writing all the loops by hand.',
+              persona: 'cody'
+            },
+            closing: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition.',
             highlight: ['map', 'filter', 'array', 'Array'],
             codeLanguage: 'JavaScript',
             code: 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);\n\nconsole.log(doubled, even);',
@@ -18072,8 +19566,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Alguns métodos permitem procurar elementos ou verificar condições em uma lista.',
-            endParagraph: 'find procura um elemento, some verifica se pelo menos um atende à condição e every verifica se todos atendem.',
+            introduction: {
+              text: 'Alguns métodos permitem procurar elementos ou verificar condições em uma lista.',
+              persona: 'neutral'
+            },
+            closing: 'find procura um elemento, some verifica se pelo menos um atende à condição e every verifica se todos atendem.',
             highlight: ['find', 'some', 'every'],
             codeLanguage: 'JavaScript',
             code: 'const numeros = [2, 4, 6, 8];\n\nconst encontrado = numeros.find(\n  numero => numero > 5\n);\n\nconst existeImpar = numeros.some(\n  numero => numero % 2 !== 0\n);\n\nconst todosPares = numeros.every(\n  numero => numero % 2 === 0\n);\n\nconsole.log(encontrado, existeImpar, todosPares);',
@@ -18081,8 +19578,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'A few methods let you search for elements or check conditions in a list.',
-            endParagraph: 'find looks for an element, some checks whether at least one matches the condition, and every checks whether all of them match.',
+            introduction: {
+              text: 'A few methods let you search for elements or check conditions in a list.',
+              persona: 'neutral'
+            },
+            closing: 'find looks for an element, some checks whether at least one matches the condition, and every checks whether all of them match.',
             highlight: ['find', 'some', 'every'],
             codeLanguage: 'JavaScript',
             code: 'const numbers = [2, 4, 6, 8];\n\nconst found = numbers.find(\n  number => number > 5\n);\n\nconst hasOdd = numbers.some(\n  number => number % 2 !== 0\n);\n\nconst allEven = numbers.every(\n  number => number % 2 === 0\n);\n\nconsole.log(found, hasOdd, allEven);',
@@ -18374,16 +19874,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'reduce percorre um array e combina seus elementos para produzir um único resultado.',
-            endParagraph: 'O valor acumulado passa de uma iteração para outra até que todos os elementos tenham sido processados.',
+            introduction: {
+              text: 'reduce percorre um array e combina seus elementos para produzir um único resultado.',
+              persona: 'cody'
+            },
+            closing: 'O valor acumulado passa de uma iteração para outra até que todos os elementos tenham sido processados.',
             highlight: ['reduce', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const numeros = [10, 20, 30];\n\nconst total = numeros.reduce(\n  (soma, numero) => soma + numero,\n  0\n);\n\nconsole.log(total);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'reduce goes through an array and combines its elements to produce a single result.',
-            endParagraph: 'The accumulated value is passed from one iteration to the next until all the elements have been processed.',
+            introduction: {
+              text: 'reduce goes through an array and combines its elements to produce a single result.',
+              persona: 'cody'
+            },
+            closing: 'The accumulated value is passed from one iteration to the next until all the elements have been processed.',
             highlight: ['reduce', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const numbers = [10, 20, 30];\n\nconst total = numbers.reduce(\n  (sum, number) => sum + number,\n  0\n);\n\nconsole.log(total);',
@@ -18395,8 +19901,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Cada método possui uma finalidade. map transforma, filter seleciona, find procura e reduce combina valores.',
-            endParagraph: 'Escolher o método adequado deixa o código mais expressivo e diminui a necessidade de loops manuais.',
+            introduction: {
+              text: 'Cada método possui uma finalidade. map transforma, filter seleciona, find procura e reduce combina valores.',
+              persona: 'neutral'
+            },
+            closing: 'Escolher o método adequado deixa o código mais expressivo e diminui a necessidade de loops manuais.',
             highlight: ['map', 'filter', 'find', 'reduce'],
             codeLanguage: 'JavaScript',
             code: 'const produtos = [\n  { nome: "Mouse", preco: 50 },\n  { nome: "Teclado", preco: 100 }\n];\n\nconst nomes = produtos.map(\n  produto => produto.nome\n);\n\nconst caros = produtos.filter(\n  produto => produto.preco > 60\n);\n\nconsole.log(nomes, caros);',
@@ -18404,8 +19913,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Each method has its own purpose. map transforms, filter selects, find searches and reduce combines values.',
-            endParagraph: 'Choosing the right method makes the code more expressive and cuts down the need for manual loops.',
+            introduction: {
+              text: 'Each method has its own purpose. map transforms, filter selects, find searches and reduce combines values.',
+              persona: 'neutral'
+            },
+            closing: 'Choosing the right method makes the code more expressive and cuts down the need for manual loops.',
             highlight: ['map', 'filter', 'find', 'reduce'],
             codeLanguage: 'JavaScript',
             code: 'const products = [\n  { name: "Mouse", price: 50 },\n  { name: "Keyboard", price: 100 }\n];\n\nconst names = products.map(\n  product => product.name\n);\n\nconst expensive = products.filter(\n  product => product.price > 60\n);\n\nconsole.log(names, expensive);',
@@ -18573,8 +20085,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Destructuring permite extrair valores de objetos diretamente para variáveis.',
-            endParagraph: 'Em vez de acessar cada propriedade separadamente, podemos extrair os valores que precisamos de forma direta.',
+            introduction: {
+              text: 'Destructuring permite extrair valores de objetos diretamente para variáveis.',
+              persona: 'cody'
+            },
+            closing: 'Em vez de acessar cada propriedade separadamente, podemos extrair os valores que precisamos de forma direta.',
             highlight: ['Destructuring'],
             codeLanguage: 'JavaScript',
             code: 'const pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { nome, idade } = pessoa;\n\nconsole.log(nome, idade);',
@@ -18582,8 +20097,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Destructuring lets you extract values from objects directly into variables.',
-            endParagraph: 'Instead of accessing each property separately, we can pull out the values we need in one step.',
+            introduction: {
+              text: 'Destructuring lets you extract values from objects directly into variables.',
+              persona: 'cody'
+            },
+            closing: 'Instead of accessing each property separately, we can pull out the values we need in one step.',
             highlight: ['Destructuring'],
             codeLanguage: 'JavaScript',
             code: 'const person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { name, age } = person;\n\nconsole.log(name, age);',
@@ -18596,8 +20114,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Também podemos utilizar destructuring com arrays.',
-            endParagraph: 'No array, a posição determina qual valor será extraído. No objeto, utilizamos o nome da propriedade.',
+            introduction: {
+              text: 'Também podemos utilizar destructuring com arrays.',
+              persona: 'neutral'
+            },
+            closing: 'No array, a posição determina qual valor será extraído. No objeto, utilizamos o nome da propriedade.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
             code: 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [primeira, segunda] = cores;\n\nconsole.log(primeira, segunda);',
@@ -18605,8 +20126,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'We can also use destructuring with arrays.',
-            endParagraph: 'In an array, the position determines which value is extracted. In an object, we use the property name.',
+            introduction: {
+              text: 'We can also use destructuring with arrays.',
+              persona: 'neutral'
+            },
+            closing: 'In an array, the position determines which value is extracted. In an object, we use the property name.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
             code: 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [first, second] = colors;\n\nconsole.log(first, second);',
@@ -18776,8 +20300,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O spread operator ... permite expandir os elementos de um array ou as propriedades de um objeto.',
-            endParagraph: 'Spread é muito utilizado para criar novas estruturas a partir de valores existentes sem modificar diretamente a estrutura original.',
+            introduction: {
+              text: 'O spread operator ... permite expandir os elementos de um array ou as propriedades de um objeto.',
+              persona: 'cody'
+            },
+            closing: 'Spread é muito utilizado para criar novas estruturas a partir de valores existentes sem modificar diretamente a estrutura original.',
             highlight: ['spread', 'Spread', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const frutas = ["maçã", "banana"];\n\nconst novasFrutas = [\n  ...frutas,\n  "laranja"\n];\n\nconsole.log(novasFrutas);',
@@ -18785,8 +20312,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'The spread operator ... lets you expand the elements of an array or the properties of an object.',
-            endParagraph: 'Spread is widely used to create new structures from existing values without changing the original structure.',
+            introduction: {
+              text: 'The spread operator ... lets you expand the elements of an array or the properties of an object.',
+              persona: 'cody'
+            },
+            closing: 'Spread is widely used to create new structures from existing values without changing the original structure.',
             highlight: ['spread', 'Spread', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const fruits = ["apple", "banana"];\n\nconst newFruits = [\n  ...fruits,\n  "orange"\n];\n\nconsole.log(newFruits);',
@@ -18799,16 +20329,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Em determinados contextos, ... pode ser utilizado para reunir vários valores em uma única estrutura. Nesse caso, ele é chamado de rest.',
-            endParagraph: 'Spread expande valores; rest reúne valores. A mesma sintaxe pode ter funções diferentes dependendo do contexto.',
+            introduction: {
+              text: 'Em determinados contextos, ... pode ser utilizado para reunir vários valores em uma única estrutura. Nesse caso, ele é chamado de rest.',
+              persona: 'neutral'
+            },
+            closing: 'Spread expande valores; rest reúne valores. A mesma sintaxe pode ter funções diferentes dependendo do contexto.',
             highlight: ['rest', 'Spread'],
             codeLanguage: 'JavaScript',
             code: 'function somar(...numeros) {\n  return numeros.reduce(\n    (total, numero) => total + numero,\n    0\n  );\n}\n\nconsole.log(somar(1, 2, 3));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In certain contexts, ... can be used to gather several values into a single structure. In that case, it is called rest.',
-            endParagraph: 'Spread expands values; rest gathers values. The same syntax can play different roles depending on the context.',
+            introduction: {
+              text: 'In certain contexts, ... can be used to gather several values into a single structure. In that case, it is called rest.',
+              persona: 'neutral'
+            },
+            closing: 'Spread expands values; rest gathers values. The same syntax can play different roles depending on the context.',
             highlight: ['rest', 'Spread'],
             codeLanguage: 'JavaScript',
             code: 'function add(...numbers) {\n  return numbers.reduce(\n    (total, number) => total + number,\n    0\n  );\n}\n\nconsole.log(add(1, 2, 3));',
@@ -18977,8 +20513,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Template literals permitem criar strings utilizando crases e inserir expressões diretamente no texto.',
-            endParagraph: 'Eles tornam a criação de textos dinâmicos mais simples e legível.',
+            introduction: {
+              text: 'Template literals permitem criar strings utilizando crases e inserir expressões diretamente no texto.',
+              persona: 'cody'
+            },
+            closing: 'Eles tornam a criação de textos dinâmicos mais simples e legível.',
             highlight: ['Template literals', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Ana";\nconst idade = 20;\n\nconst mensagem =\n  `Olá, ${nome}! Você tem ${idade} anos.`;\n\nconsole.log(mensagem);',
@@ -18986,8 +20525,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Template literals let you create strings using backticks and insert expressions directly into the text.',
-            endParagraph: 'They make building dynamic text simpler and easier to read.',
+            introduction: {
+              text: 'Template literals let you create strings using backticks and insert expressions directly into the text.',
+              persona: 'cody'
+            },
+            closing: 'They make building dynamic text simpler and easier to read.',
             highlight: ['Template literals', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Ana";\nconst age = 20;\n\nconst message =\n  `Hello, ${name}! You are ${age} years old.`;\n\nconsole.log(message);',
@@ -19000,9 +20542,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Optional chaining permite acessar propriedades sem gerar um erro quando uma parte do caminho não existe.',
-            secondParagraph: 'O nullish coalescing fornece um valor alternativo quando o resultado é null ou undefined.',
-            endParagraph: 'Esses recursos ajudam a escrever código mais seguro ao trabalhar com dados que podem estar incompletos.',
+            introduction: {
+              text: 'Optional chaining permite acessar propriedades sem gerar um erro quando uma parte do caminho não existe.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O nullish coalescing fornece um valor alternativo quando o resultado é null ou undefined.'
+            },
+            closing: 'Esses recursos ajudam a escrever código mais seguro ao trabalhar com dados que podem estar incompletos.',
             highlight: ['Optional chaining', 'nullish coalescing', 'null', 'undefined'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {};\n\nconst cidade =\n  usuario.endereco?.cidade ?? "Não informada";\n\nconsole.log(cidade);',
@@ -19010,9 +20557,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Optional chaining lets you access properties without raising an error when part of the path does not exist.',
-            secondParagraph: 'Nullish coalescing provides an alternative value when the result is null or undefined.',
-            endParagraph: 'These features help you write safer code when working with data that may be incomplete.',
+            introduction: {
+              text: 'Optional chaining lets you access properties without raising an error when part of the path does not exist.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Nullish coalescing provides an alternative value when the result is null or undefined.'
+            },
+            closing: 'These features help you write safer code when working with data that may be incomplete.',
             highlight: ['Optional chaining', 'Nullish coalescing', 'null', 'undefined'],
             codeLanguage: 'JavaScript',
             code: 'const user = {};\n\nconst city =\n  user.address?.city ?? "Not provided";\n\nconsole.log(city);',
@@ -19184,8 +20736,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Módulos permitem dividir o código em arquivos menores e reutilizáveis. Para disponibilizar uma função, podemos utilizar export.',
-            endParagraph: 'Separar responsabilidades em arquivos diferentes ajuda a organizar aplicações maiores.',
+            introduction: {
+              text: 'Módulos permitem dividir o código em arquivos menores e reutilizáveis. Para disponibilizar uma função, podemos utilizar export.',
+              persona: 'cody'
+            },
+            closing: 'Separar responsabilidades em arquivos diferentes ajuda a organizar aplicações maiores.',
             highlight: ['Módulos', 'export'],
             codeLanguage: 'JavaScript',
             code: 'export function somar(a, b) {\n  return a + b;\n}',
@@ -19194,8 +20749,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             terminalCode: 'function somar(a, b) {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));'
           },
           en: {
-            firstParagraph: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.',
-            endParagraph: 'Splitting responsibilities across different files helps organize larger applications.',
+            introduction: {
+              text: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.',
+              persona: 'cody'
+            },
+            closing: 'Splitting responsibilities across different files helps organize larger applications.',
             highlight: ['Modules', 'export'],
             codeLanguage: 'JavaScript',
             code: 'export function add(a, b) {\n  return a + b;\n}',
@@ -19209,16 +20767,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'import permite utilizar código exportado por outro módulo.',
-            endParagraph: 'Com import e export, diferentes partes de uma aplicação podem compartilhar funcionalidades de maneira organizada.',
+            introduction: {
+              text: 'import permite utilizar código exportado por outro módulo.',
+              persona: 'neutral'
+            },
+            closing: 'Com import e export, diferentes partes de uma aplicação podem compartilhar funcionalidades de maneira organizada.',
             highlight: ['import', 'export', 'módulo'],
             codeLanguage: 'JavaScript',
             code: 'import { somar } from "./math.js";\n\nconst resultado = somar(2, 3);\n\nconsole.log(resultado);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'import lets you use code exported by another module.',
-            endParagraph: 'With import and export, different parts of an application can share features in an organized way.',
+            introduction: {
+              text: 'import lets you use code exported by another module.',
+              persona: 'neutral'
+            },
+            closing: 'With import and export, different parts of an application can share features in an organized way.',
             highlight: ['import', 'export', 'module'],
             codeLanguage: 'JavaScript',
             code: 'import { add } from "./math.js";\n\nconst result = add(2, 3);\n\nconsole.log(result);',
@@ -19379,8 +20943,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O DOM representa a estrutura da página como objetos que podem ser acessados e modificados por JavaScript.',
-            endParagraph: 'O DOM permite que JavaScript interaja com elementos que foram definidos no HTML.',
+            introduction: {
+              text: 'O DOM representa a estrutura da página como objetos que podem ser acessados e modificados por JavaScript.',
+              persona: 'cody'
+            },
+            closing: 'O DOM permite que JavaScript interaja com elementos que foram definidos no HTML.',
             highlight: ['DOM', 'JavaScript', 'HTML'],
             codeLanguage: 'HTML',
             code: '<h1 id="titulo">\n  Olá!\n</h1>',
@@ -19392,8 +20959,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript.',
-            endParagraph: 'The DOM lets JavaScript interact with elements that were defined in the HTML.',
+            introduction: {
+              text: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript.',
+              persona: 'cody'
+            },
+            closing: 'The DOM lets JavaScript interact with elements that were defined in the HTML.',
             highlight: ['DOM', 'JavaScript', 'HTML'],
             codeLanguage: 'HTML',
             code: '<h1 id="title">\n  Hello!\n</h1>',
@@ -19410,8 +20980,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript também pode criar novos elementos e adicioná-los ao documento.',
-            endParagraph: 'Toque no botão abaixo: cada toque cria um novo item de lista e o adiciona à página, ao vivo.',
+            introduction: {
+              text: 'JavaScript também pode criar novos elementos e adicioná-los ao documento.',
+              persona: 'neutral'
+            },
+            closing: 'Toque no botão abaixo: cada toque cria um novo item de lista e o adiciona à página, ao vivo.',
             highlight: ['JavaScript', 'DOM'],
             codeLanguage: 'HTML',
             code: '<ul id="lista">\n  <li>JavaScript</li>\n</ul>\n\n<button id="botao-adicionar">\n  Adicionar item\n</button>',
@@ -19423,8 +20996,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'JavaScript can also create new elements and add them to the document.',
-            endParagraph: 'Tap the button below: each tap creates a new list item and adds it to the page, live.',
+            introduction: {
+              text: 'JavaScript can also create new elements and add them to the document.',
+              persona: 'neutral'
+            },
+            closing: 'Tap the button below: each tap creates a new list item and adds it to the page, live.',
             highlight: ['JavaScript', 'DOM'],
             codeLanguage: 'HTML',
             code: '<ul id="list">\n  <li>JavaScript</li>\n</ul>\n\n<button id="add-button">\n  Add item\n</button>',
@@ -19590,8 +21166,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript pode modificar classes e atributos de elementos existentes no DOM.',
-            endParagraph: 'Toque no botão: classList.toggle() liga e desliga a classe "ativo" a cada toque, mudando o visual do cartão. Atributos (como aria-label) mudam da mesma forma, com setAttribute.',
+            introduction: {
+              text: 'JavaScript pode modificar classes e atributos de elementos existentes no DOM.',
+              persona: 'cody'
+            },
+            closing: 'Toque no botão: classList.toggle() liga e desliga a classe "ativo" a cada toque, mudando o visual do cartão. Atributos (como aria-label) mudam da mesma forma, com setAttribute.',
             highlight: ['JavaScript', 'DOM', 'classes'],
             codeLanguage: 'HTML',
             code: '<div id="cartao" class="cartao">\n  Cartão\n</div>\n\n<button id="botao-destaque">\n  Alternar destaque\n</button>',
@@ -19607,8 +21186,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'JavaScript can change classes and attributes of elements that already exist in the DOM.',
-            endParagraph: 'Tap the button: classList.toggle() switches the "active" class on and off on every tap, changing how the card looks. Attributes (like aria-label) change the same way, with setAttribute.',
+            introduction: {
+              text: 'JavaScript can change classes and attributes of elements that already exist in the DOM.',
+              persona: 'cody'
+            },
+            closing: 'Tap the button: classList.toggle() switches the "active" class on and off on every tap, changing how the card looks. Attributes (like aria-label) change the same way, with setAttribute.',
             highlight: ['JavaScript', 'DOM', 'classes'],
             codeLanguage: 'HTML',
             code: '<div id="card" class="card">\n  Card\n</div>\n\n<button id="highlight-button">\n  Toggle highlight\n</button>',
@@ -19629,8 +21211,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Eventos representam acontecimentos como cliques, teclas pressionadas ou alterações em campos. addEventListener permite executar uma função quando um evento acontece.',
-            endParagraph: 'Toque no botão abaixo para ver a função do evento mudando a mensagem na tela.',
+            introduction: {
+              text: 'Eventos representam acontecimentos como cliques, teclas pressionadas ou alterações em campos. addEventListener permite executar uma função quando um evento acontece.',
+              persona: 'neutral'
+            },
+            closing: 'Toque no botão abaixo para ver a função do evento mudando a mensagem na tela.',
             highlight: ['Eventos', 'evento', 'addEventListener', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button id="botao-clique">\n  Clique aqui\n</button>\n\n<p id="mensagem">\n  Aguardando clique...\n</p>',
@@ -19642,8 +21227,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Events represent things that happen, like clicks, key presses or changes in fields. addEventListener lets you run a function when an event happens.',
-            endParagraph: 'Tap the button below to see the event function change the message on the screen.',
+            introduction: {
+              text: 'Events represent things that happen, like clicks, key presses or changes in fields. addEventListener lets you run a function when an event happens.',
+              persona: 'neutral'
+            },
+            closing: 'Tap the button below to see the event function change the message on the screen.',
             highlight: ['Events', 'event', 'addEventListener', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button id="click-button">\n  Click here\n</button>\n\n<p id="message">\n  Waiting for a click...\n</p>',
@@ -19809,8 +21397,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'localStorage permite armazenar pequenos valores no navegador para que possam ser recuperados posteriormente.',
-            endParagraph: 'Os valores armazenados no localStorage são strings. Para estruturas maiores, precisamos trabalhar com JSON.',
+            introduction: {
+              text: 'localStorage permite armazenar pequenos valores no navegador para que possam ser recuperados posteriormente.',
+              persona: 'cody'
+            },
+            closing: 'Os valores armazenados no localStorage são strings. Para estruturas maiores, precisamos trabalhar com JSON.',
             highlight: ['localStorage', 'JSON', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'localStorage.setItem(\n  "nome",\n  "Ana"\n);\n\nconst nome =\n  localStorage.getItem("nome");',
@@ -19818,8 +21409,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'localStorage lets you store small values in the browser so they can be retrieved later.',
-            endParagraph: 'The values stored in localStorage are strings. For larger structures, we need to work with JSON.',
+            introduction: {
+              text: 'localStorage lets you store small values in the browser so they can be retrieved later.',
+              persona: 'cody'
+            },
+            closing: 'The values stored in localStorage are strings. For larger structures, we need to work with JSON.',
             highlight: ['localStorage', 'JSON', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'localStorage.setItem(\n  "name",\n  "Ana"\n);\n\nconst name =\n  localStorage.getItem("name");',
@@ -19832,8 +21426,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JSON permite transformar objetos JavaScript em strings e depois reconstruí-los.',
-            endParagraph: 'JSON.stringify() transforma um valor em JSON. JSON.parse() faz o caminho inverso.',
+            introduction: {
+              text: 'JSON permite transformar objetos JavaScript em strings e depois reconstruí-los.',
+              persona: 'neutral'
+            },
+            closing: 'JSON.stringify() transforma um valor em JSON. JSON.parse() faz o caminho inverso.',
             highlight: ['JSON', 'JavaScript', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  idade: 20\n};\n\nlocalStorage.setItem(\n  "usuario",\n  JSON.stringify(usuario)\n);\n\nconst salvo =\n  JSON.parse(\n    localStorage.getItem("usuario")\n  );',
@@ -19841,8 +21438,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'JSON lets you turn JavaScript objects into strings and then rebuild them.',
-            endParagraph: 'JSON.stringify() turns a value into JSON. JSON.parse() does the opposite.',
+            introduction: {
+              text: 'JSON lets you turn JavaScript objects into strings and then rebuild them.',
+              persona: 'neutral'
+            },
+            closing: 'JSON.stringify() turns a value into JSON. JSON.parse() does the opposite.',
             highlight: ['JSON', 'JavaScript', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const user = {\n  name: "Ana",\n  age: 20\n};\n\nlocalStorage.setItem(\n  "user",\n  JSON.stringify(user)\n);\n\nconst saved =\n  JSON.parse(\n    localStorage.getItem("user")\n  );',
@@ -20008,18 +21608,28 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando um trecho pode falhar, colocamos ele dentro de um try. Se acontecer um erro, a execução pula para o catch, em vez de parar o programa.',
-            secondParagraph: 'No exemplo, JSON.parse recebe um texto que não é JSON válido e lança um erro, que o catch captura.',
-            endParagraph: 'O bloco finally, quando existe, roda sempre, com erro ou sem erro.',
+            introduction: {
+              text: 'Quando um trecho pode falhar, colocamos ele dentro de um try. Se acontecer um erro, a execução pula para o catch, em vez de parar o programa.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'No exemplo, JSON.parse recebe um texto que não é JSON válido e lança um erro, que o catch captura.'
+            },
+            closing: 'O bloco finally, quando existe, roda sempre, com erro ou sem erro.',
             highlight: ['try', 'catch', 'finally'],
             codeLanguage: 'JavaScript',
             code: 'try {\n  const dados = JSON.parse("isso não é JSON");\n  console.log(dados);\n} catch (erro) {\n  console.log("Não deu para ler:", erro.name);\n} finally {\n  console.log("Fim da leitura");\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When a piece of code can fail, we put it inside a try. If an error happens, execution jumps to the catch instead of stopping the program.',
-            secondParagraph: 'In the example, JSON.parse gets text that isn\'t valid JSON and throws an error, which the catch captures.',
-            endParagraph: 'The finally block, when present, always runs, with or without an error.',
+            introduction: {
+              text: 'When a piece of code can fail, we put it inside a try. If an error happens, execution jumps to the catch instead of stopping the program.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'In the example, JSON.parse gets text that isn\'t valid JSON and throws an error, which the catch captures.'
+            },
+            closing: 'The finally block, when present, always runs, with or without an error.',
             highlight: ['try', 'catch', 'finally'],
             codeLanguage: 'JavaScript',
             code: 'try {\n  const data = JSON.parse("this is not JSON");\n  console.log(data);\n} catch (error) {\n  console.log("Could not read:", error.name);\n} finally {\n  console.log("Done reading");\n}',
@@ -20031,18 +21641,28 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Também podemos lançar um erro de propósito com throw, quando um valor não faz sentido para o programa.',
-            secondParagraph: 'new Error recebe uma mensagem, que fica disponível na propriedade message do erro dentro do catch.',
-            endParagraph: 'Lançar um erro claro logo cedo evita que um valor errado se espalhe pelo resto do código.',
+            introduction: {
+              text: 'Também podemos lançar um erro de propósito com throw, quando um valor não faz sentido para o programa.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'new Error recebe uma mensagem, que fica disponível na propriedade message do erro dentro do catch.'
+            },
+            closing: 'Lançar um erro claro logo cedo evita que um valor errado se espalhe pelo resto do código.',
             highlight: ['throw', 'catch', 'message'],
             codeLanguage: 'JavaScript',
             code: 'function dividir(a, b) {\n  if (b === 0) {\n    throw new Error("Não dá para dividir por zero");\n  }\n  return a / b;\n}\n\ntry {\n  console.log(dividir(10, 0));\n} catch (erro) {\n  console.log(erro.message);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can also throw an error on purpose with throw, when a value makes no sense for the program.',
-            secondParagraph: 'new Error takes a message, which is available in the error\'s message property inside the catch.',
-            endParagraph: 'Throwing a clear error early keeps a wrong value from spreading through the rest of the code.',
+            introduction: {
+              text: 'We can also throw an error on purpose with throw, when a value makes no sense for the program.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'new Error takes a message, which is available in the error\'s message property inside the catch.'
+            },
+            closing: 'Throwing a clear error early keeps a wrong value from spreading through the rest of the code.',
             highlight: ['throw', 'catch', 'message'],
             codeLanguage: 'JavaScript',
             code: 'function divide(a, b) {\n  if (b === 0) {\n    throw new Error("Can\'t divide by zero");\n  }\n  return a / b;\n}\n\ntry {\n  console.log(divide(10, 0));\n} catch (error) {\n  console.log(error.message);\n}',
@@ -20287,9 +21907,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Aplicações web frequentemente precisam buscar ou enviar dados para um servidor. HTTP é um protocolo utilizado para essa comunicação.',
-            secondParagraph: 'Uma requisição possui informações como método e endereço. O servidor devolve uma resposta contendo dados ou informações sobre o resultado da operação.',
-            endParagraph: 'JavaScript oferece fetch() para realizar requisições HTTP de forma programática.',
+            introduction: {
+              text: 'Aplicações web frequentemente precisam buscar ou enviar dados para um servidor. HTTP é um protocolo utilizado para essa comunicação.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Uma requisição possui informações como método e endereço. O servidor devolve uma resposta contendo dados ou informações sobre o resultado da operação.'
+            },
+            closing: 'JavaScript oferece fetch() para realizar requisições HTTP de forma programática.',
             highlight: ['HTTP', 'fetch', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users");',
@@ -20298,9 +21923,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
           },
           en: {
-            firstParagraph: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.',
-            secondParagraph: 'A request carries information such as a method and an address. The server returns a response with data or information about the result of the operation.',
-            endParagraph: 'JavaScript provides fetch() to make HTTP requests programmatically.',
+            introduction: {
+              text: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'A request carries information such as a method and an address. The server returns a response with data or information about the result of the operation.'
+            },
+            closing: 'JavaScript provides fetch() to make HTTP requests programmatically.',
             highlight: ['HTTP', 'fetch', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users");',
@@ -20314,16 +21944,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma resposta HTTP pode conter dados que precisamos transformar em JavaScript para utilizar na aplicação.',
-            endParagraph: 'O resultado de uma requisição é assíncrono. Por isso, precisamos entender como o JavaScript trabalha com operações que terminam posteriormente.',
+            introduction: {
+              text: 'Uma resposta HTTP pode conter dados que precisamos transformar em JavaScript para utilizar na aplicação.',
+              persona: 'neutral'
+            },
+            closing: 'O resultado de uma requisição é assíncrono. Por isso, precisamos entender como o JavaScript trabalha com operações que terminam posteriormente.',
             highlight: ['HTTP', 'JavaScript', 'assíncrono'],
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An HTTP response can carry data that we need to turn into JavaScript values to use in the application.',
-            endParagraph: 'The result of a request is asynchronous. That is why we need to understand how JavaScript deals with operations that finish later.',
+            introduction: {
+              text: 'An HTTP response can carry data that we need to turn into JavaScript values to use in the application.',
+              persona: 'neutral'
+            },
+            closing: 'The result of a request is asynchronous. That is why we need to understand how JavaScript deals with operations that finish later.',
             highlight: ['HTTP', 'JavaScript', 'asynchronous'],
             codeLanguage: 'JavaScript',
             code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
@@ -20484,10 +22120,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Em JavaScript, funções podem ser passadas como argumento para outras funções. Uma função passada dessa forma é chamada de callback.',
-            secondParagraph: 'Quem recebe o callback decide quando executá-lo. No exemplo, a função só é chamada depois que a mensagem é montada.',
-            thirdParagraph: 'Toque no botão abaixo para executar saudar() de verdade: o callback roda depois que a mensagem é montada, e atualiza o texto na tela.',
-            endParagraph: 'Você já usou callbacks antes: o que é passado para map, para filter e para addEventListener é exatamente isso.',
+            introduction: {
+              text: 'Em JavaScript, funções podem ser passadas como argumento para outras funções. Uma função passada dessa forma é chamada de callback.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Quem recebe o callback decide quando executá-lo. No exemplo, a função só é chamada depois que a mensagem é montada.\n\nToque no botão abaixo para executar saudar() de verdade: o callback roda depois que a mensagem é montada, e atualiza o texto na tela.'
+            },
+            closing: 'Você já usou callbacks antes: o que é passado para map, para filter e para addEventListener é exatamente isso.',
             highlight: ['callback', 'callbacks', 'map', 'filter', 'addEventListener'],
             codeLanguage: 'HTML',
             code: '<button id="botao-saudar">\n  Cumprimentar\n</button>\n\n<p id="saida"></p>',
@@ -20499,10 +22139,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'In JavaScript, functions can be passed as arguments to other functions. A function passed this way is called a callback.',
-            secondParagraph: 'Whoever receives the callback decides when to run it. In the example, the function is only called after the message is built.',
-            thirdParagraph: 'Tap the button below to actually run greet(): the callback runs after the message is built, and updates the text on the screen.',
-            endParagraph: 'You have used callbacks before: what you pass to map, to filter and to addEventListener is exactly that.',
+            introduction: {
+              text: 'In JavaScript, functions can be passed as arguments to other functions. A function passed this way is called a callback.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Whoever receives the callback decides when to run it. In the example, the function is only called after the message is built.\n\nTap the button below to actually run greet(): the callback runs after the message is built, and updates the text on the screen.'
+            },
+            closing: 'You have used callbacks before: what you pass to map, to filter and to addEventListener is exactly that.',
             highlight: ['callback', 'callbacks', 'map', 'filter', 'addEventListener'],
             codeLanguage: 'HTML',
             code: '<button id="greet-button">\n  Greet\n</button>\n\n<p id="output"></p>',
@@ -20519,18 +22163,28 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Callbacks são a base do código assíncrono em JavaScript: eles permitem executar algo depois que uma tarefa termina.',
-            secondParagraph: 'O problema aparece quando uma tarefa depende da anterior. Os callbacks vão se aninhando e o código fica difícil de acompanhar.',
-            endParagraph: 'Esse encadeamento ficou conhecido como callback hell. É justamente o problema que as Promises, a seguir, vieram resolver.',
+            introduction: {
+              text: 'Callbacks são a base do código assíncrono em JavaScript: eles permitem executar algo depois que uma tarefa termina.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O problema aparece quando uma tarefa depende da anterior. Os callbacks vão se aninhando e o código fica difícil de acompanhar.'
+            },
+            closing: 'Esse encadeamento ficou conhecido como callback hell. É justamente o problema que as Promises, a seguir, vieram resolver.',
             highlight: ['Callbacks', 'callbacks', 'callback hell', 'Promises'],
             codeLanguage: 'JavaScript',
             code: 'buscarUsuario(1, function (usuario) {\n  buscarPedidos(usuario, function (pedidos) {\n    buscarDetalhes(pedidos[0], function (detalhes) {\n      console.log(detalhes);\n    });\n  });\n});',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Callbacks are the foundation of asynchronous code in JavaScript: they let you run something after a task finishes.',
-            secondParagraph: 'The problem shows up when one task depends on the previous one. Callbacks keep nesting and the code becomes hard to follow.',
-            endParagraph: 'This chaining became known as callback hell. It is exactly the problem that Promises, coming next, were made to solve.',
+            introduction: {
+              text: 'Callbacks are the foundation of asynchronous code in JavaScript: they let you run something after a task finishes.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The problem shows up when one task depends on the previous one. Callbacks keep nesting and the code becomes hard to follow.'
+            },
+            closing: 'This chaining became known as callback hell. It is exactly the problem that Promises, coming next, were made to solve.',
             highlight: ['Callbacks', 'callbacks', 'callback hell', 'Promises'],
             codeLanguage: 'JavaScript',
             code: 'fetchUser(1, function (user) {\n  fetchOrders(user, function (orders) {\n    fetchDetails(orders[0], function (details) {\n      console.log(details);\n    });\n  });\n});',
@@ -20714,16 +22368,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Algumas operações não produzem um resultado imediatamente. Uma Promise representa uma operação que poderá ser concluída ou falhar no futuro.',
-            endParagraph: 'Uma Promise pode representar uma operação pendente, concluída com sucesso ou concluída com erro.',
+            introduction: {
+              text: 'Algumas operações não produzem um resultado imediatamente. Uma Promise representa uma operação que poderá ser concluída ou falhar no futuro.',
+              persona: 'cody'
+            },
+            closing: 'Uma Promise pode representar uma operação pendente, concluída com sucesso ou concluída com erro.',
             highlight: ['Promise'],
             codeLanguage: 'JavaScript',
             code: 'const promessa = fetch(\n  "/api/users"\n);\n\npromessa.then(response => {\n  console.log("Resposta recebida");\n});',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Some operations do not produce a result immediately. A Promise represents an operation that may be completed or fail in the future.',
-            endParagraph: 'A Promise can represent a pending operation, one completed successfully, or one completed with an error.',
+            introduction: {
+              text: 'Some operations do not produce a result immediately. A Promise represents an operation that may be completed or fail in the future.',
+              persona: 'cody'
+            },
+            closing: 'A Promise can represent a pending operation, one completed successfully, or one completed with an error.',
             highlight: ['Promise'],
             codeLanguage: 'JavaScript',
             code: 'const promise = fetch(\n  "/api/users"\n);\n\npromise.then(response => {\n  console.log("Response received");\n});',
@@ -20735,9 +22395,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos encadear .then() para tratar o resultado e .catch() para lidar com erros.',
-            secondParagraph: 'Aqui, buscarUsuarios() simula uma requisição (como um fetch de verdade faria) com um atraso e uma chance de falhar, para o exemplo funcionar sem depender de rede.',
-            endParagraph: 'Toque no botão algumas vezes: às vezes o pedido terá sucesso, às vezes vai falhar — e você verá .then() e .catch() tratando cada caso.',
+            introduction: {
+              text: 'Podemos encadear .then() para tratar o resultado e .catch() para lidar com erros.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Aqui, buscarUsuarios() simula uma requisição (como um fetch de verdade faria) com um atraso e uma chance de falhar, para o exemplo funcionar sem depender de rede.'
+            },
+            closing: 'Toque no botão algumas vezes: às vezes o pedido terá sucesso, às vezes vai falhar — e você verá .then() e .catch() tratando cada caso.',
             highlight: ['then', 'catch'],
             codeLanguage: 'HTML',
             code: '<button id="botao-buscar">\n  Buscar usuários\n</button>\n\n<p id="resultado">\n  Aguardando...\n</p>',
@@ -20749,9 +22414,14 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'We can chain .then() to handle the result and .catch() to deal with errors.',
-            secondParagraph: 'Here, fetchUsers() simulates a request (like a real fetch would) with a delay and a chance to fail, so the example works without depending on the network.',
-            endParagraph: 'Tap the button a few times: sometimes the request will succeed, sometimes it will fail — and you will see .then() and .catch() handling each case.',
+            introduction: {
+              text: 'We can chain .then() to handle the result and .catch() to deal with errors.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Here, fetchUsers() simulates a request (like a real fetch would) with a delay and a chance to fail, so the example works without depending on the network.'
+            },
+            closing: 'Tap the button a few times: sometimes the request will succeed, sometimes it will fail — and you will see .then() and .catch() handling each case.',
             highlight: ['then', 'catch'],
             codeLanguage: 'HTML',
             code: '<button id="fetch-button">\n  Fetch users\n</button>\n\n<p id="result">\n  Waiting...\n</p>',
@@ -21001,8 +22671,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'async/await permite escrever código assíncrono com uma estrutura semelhante à de código sequencial.',
-            endParagraph: 'Toque no botão: await pausa carregarUsuarios() até buscarUsuarios() terminar, e só então a tela é atualizada — sem nenhum .then().',
+            introduction: {
+              text: 'async/await permite escrever código assíncrono com uma estrutura semelhante à de código sequencial.',
+              persona: 'cody'
+            },
+            closing: 'Toque no botão: await pausa carregarUsuarios() até buscarUsuarios() terminar, e só então a tela é atualizada — sem nenhum .then().',
             highlight: ['async', 'await'],
             codeLanguage: 'HTML',
             code: '<button id="botao-carregar">\n  Carregar usuários\n</button>\n\n<p id="resultado">\n  Aguardando...\n</p>',
@@ -21014,8 +22687,11 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'async/await lets you write asynchronous code with a structure similar to sequential code.',
-            endParagraph: 'Tap the button: await pauses loadUsers() until fetchUsers() finishes, and only then is the screen updated — with no .then() at all.',
+            introduction: {
+              text: 'async/await lets you write asynchronous code with a structure similar to sequential code.',
+              persona: 'cody'
+            },
+            closing: 'Tap the button: await pauses loadUsers() until fetchUsers() finishes, and only then is the screen updated — with no .then() at all.',
             highlight: ['async', 'await'],
             codeLanguage: 'HTML',
             code: '<button id="load-button">\n  Load users\n</button>\n\n<p id="result">\n  Waiting...\n</p>',
@@ -21032,16 +22708,22 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos utilizar try/catch para tratar erros durante uma operação assíncrona.',
-            endParagraph: 'async/await e try/catch formam uma combinação comum para trabalhar com operações assíncronas de maneira clara.',
+            introduction: {
+              text: 'Podemos utilizar try/catch para tratar erros durante uma operação assíncrona.',
+              persona: 'neutral'
+            },
+            closing: 'async/await e try/catch formam uma combinação comum para trabalhar com operações assíncronas de maneira clara.',
             highlight: ['try', 'catch', 'async', 'await'],
             codeLanguage: 'JavaScript',
             code: 'async function carregarUsuarios() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can use try/catch to handle errors during an asynchronous operation.',
-            endParagraph: 'async/await and try/catch are a common combination for working with asynchronous operations clearly.',
+            introduction: {
+              text: 'We can use try/catch to handle errors during an asynchronous operation.',
+              persona: 'neutral'
+            },
+            closing: 'async/await and try/catch are a common combination for working with asynchronous operations clearly.',
             highlight: ['try', 'catch', 'async', 'await'],
             codeLanguage: 'JavaScript',
             code: 'async function loadUsers() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}',
@@ -21397,15 +23079,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O HTML possui elementos específicos para representar diferentes tipos de informação textual. <abbr> representa uma abreviação e <cite> identifica o título de uma obra ou referência.',
-            endParagraph: 'Elementos semânticos não mudam necessariamente a aparência do texto, mas acrescentam significado à estrutura do documento.',
+            introduction: {
+              text: 'O HTML possui elementos específicos para representar diferentes tipos de informação textual. <abbr> representa uma abreviação e <cite> identifica o título de uma obra ou referência.',
+              persona: 'cody'
+            },
+            closing: 'Elementos semânticos não mudam necessariamente a aparência do texto, mas acrescentam significado à estrutura do documento.',
             highlight: ['HTML', 'abbr', 'cite'],
             codeLanguage: 'HTML',
             code: '<p>\n  A <abbr title="Application Programming Interface">\n    API\n  </abbr>\n  permite a comunicação entre sistemas.\n</p>\n\n<p>\n  <cite>O Pequeno Príncipe</cite>\n  é uma obra conhecida mundialmente.\n</p>'
           },
           en: {
-            firstParagraph: 'HTML has specific elements to represent different kinds of textual information. <abbr> represents an abbreviation and <cite> identifies the title of a work or reference.',
-            endParagraph: 'Semantic elements do not necessarily change how the text looks, but they add meaning to the structure of the document.',
+            introduction: {
+              text: 'HTML has specific elements to represent different kinds of textual information. <abbr> represents an abbreviation and <cite> identifies the title of a work or reference.',
+              persona: 'cody'
+            },
+            closing: 'Semantic elements do not necessarily change how the text looks, but they add meaning to the structure of the document.',
             highlight: ['HTML', 'abbr', 'cite'],
             codeLanguage: 'HTML',
             code: '<p>\n  The <abbr title="Application Programming Interface">\n    API\n  </abbr>\n  allows communication between systems.\n</p>\n\n<p>\n  <cite>The Little Prince</cite>\n  is a world-famous work.\n</p>'
@@ -21416,15 +23104,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<q> representa uma pequena citação incorporada ao texto. <blockquote> representa uma citação mais extensa.',
-            endParagraph: 'Quando o conteúdo possui um significado específico, utilizar o elemento apropriado é melhor do que tentar representar tudo com <div> ou <span>.',
+            introduction: {
+              text: '<q> representa uma pequena citação incorporada ao texto. <blockquote> representa uma citação mais extensa.',
+              persona: 'neutral'
+            },
+            closing: 'Quando o conteúdo possui um significado específico, utilizar o elemento apropriado é melhor do que tentar representar tudo com <div> ou <span>.',
             highlight: ['q', 'blockquote', 'div', 'span'],
             codeLanguage: 'HTML',
             code: '<p>\n  Como dizia um antigo provérbio:\n  <q>Conhecimento é poder.</q>\n</p>\n\n<blockquote>\n  Uma citação longa pode ser representada\n  usando este elemento.\n</blockquote>'
           },
           en: {
-            firstParagraph: '<q> represents a short quotation embedded in the text. <blockquote> represents a longer quotation.',
-            endParagraph: 'When content has a specific meaning, using the appropriate element is better than trying to represent everything with <div> or <span>.',
+            introduction: {
+              text: '<q> represents a short quotation embedded in the text. <blockquote> represents a longer quotation.',
+              persona: 'neutral'
+            },
+            closing: 'When content has a specific meaning, using the appropriate element is better than trying to represent everything with <div> or <span>.',
             highlight: ['q', 'blockquote', 'div', 'span'],
             codeLanguage: 'HTML',
             code: '<p>\n  As an old proverb says:\n  <q>Knowledge is power.</q>\n</p>\n\n<blockquote>\n  A long quotation can be represented\n  using this element.\n</blockquote>'
@@ -21586,15 +23280,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O HTML possui elementos próprios para representar código e conteúdo relacionado à programação.',
-            endParagraph: '<code> representa um trecho de código. <pre> preserva espaços e quebras de linha, sendo útil para blocos de código.',
+            introduction: {
+              text: 'O HTML possui elementos próprios para representar código e conteúdo relacionado à programação.',
+              persona: 'cody'
+            },
+            closing: '<code> representa um trecho de código. <pre> preserva espaços e quebras de linha, sendo útil para blocos de código.',
             highlight: ['code', 'pre'],
             codeLanguage: 'HTML',
             code: '<p>Use a função <code>console.log()</code>.</p>\n\n<pre><code>\nconst nome = "Ana";\n\nconsole.log(nome);\n</code></pre>'
           },
           en: {
-            firstParagraph: 'HTML has its own elements to represent code and content related to programming.',
-            endParagraph: '<code> represents a piece of code. <pre> preserves spaces and line breaks, which is useful for code blocks.',
+            introduction: {
+              text: 'HTML has its own elements to represent code and content related to programming.',
+              persona: 'cody'
+            },
+            closing: '<code> represents a piece of code. <pre> preserves spaces and line breaks, which is useful for code blocks.',
             highlight: ['code', 'pre'],
             codeLanguage: 'HTML',
             code: '<p>Use the <code>console.log()</code> function.</p>\n\n<pre><code>\nconst name = "Ana";\n\nconsole.log(name);\n</code></pre>'
@@ -21605,15 +23305,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<kbd> representa uma entrada fornecida pelo usuário, como uma tecla. <samp> representa uma saída produzida por um programa.',
-            endParagraph: 'Esses elementos são pouco utilizados em páginas comuns, mas permitem representar informações técnicas com significado apropriado.',
+            introduction: {
+              text: '<kbd> representa uma entrada fornecida pelo usuário, como uma tecla. <samp> representa uma saída produzida por um programa.',
+              persona: 'neutral'
+            },
+            closing: 'Esses elementos são pouco utilizados em páginas comuns, mas permitem representar informações técnicas com significado apropriado.',
             highlight: ['kbd', 'samp'],
             codeLanguage: 'HTML',
             code: '<p>\n  Pressione <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  para salvar.\n</p>\n\n<p>\n  Resultado:\n  <samp>Arquivo salvo.</samp>\n</p>'
           },
           en: {
-            firstParagraph: '<kbd> represents input provided by the user, such as a key. <samp> represents output produced by a program.',
-            endParagraph: 'These elements are rarely used on common pages, but they let you represent technical information with the appropriate meaning.',
+            introduction: {
+              text: '<kbd> represents input provided by the user, such as a key. <samp> represents output produced by a program.',
+              persona: 'neutral'
+            },
+            closing: 'These elements are rarely used on common pages, but they let you represent technical information with the appropriate meaning.',
             highlight: ['kbd', 'samp'],
             codeLanguage: 'HTML',
             code: '<p>\n  Press <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  to save.\n</p>\n\n<p>\n  Result:\n  <samp>File saved.</samp>\n</p>'
@@ -21826,15 +23532,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<mark> destaca um trecho relevante do texto. <small> representa um texto secundário, como um aviso legal ou uma nota de rodapé.',
-            endParagraph: 'Esses elementos mudam o significado do texto, não só a aparência — mesmo que o navegador também aplique um estilo padrão a eles.',
+            introduction: {
+              text: '<mark> destaca um trecho relevante do texto. <small> representa um texto secundário, como um aviso legal ou uma nota de rodapé.',
+              persona: 'cody'
+            },
+            closing: 'Esses elementos mudam o significado do texto, não só a aparência — mesmo que o navegador também aplique um estilo padrão a eles.',
             highlight: ['mark', 'small'],
             codeLanguage: 'HTML',
             code: '<p>\n  O prazo termina em\n  <mark>3 dias</mark>.\n</p>\n\n<p>\n  <small>Termos sujeitos a alteração.</small>\n</p>'
           },
           en: {
-            firstParagraph: '<mark> highlights a relevant part of the text. <small> represents secondary text, such as a legal notice or a footnote.',
-            endParagraph: 'These elements change the meaning of the text, not just its appearance — even though the browser also applies a default style to them.',
+            introduction: {
+              text: '<mark> highlights a relevant part of the text. <small> represents secondary text, such as a legal notice or a footnote.',
+              persona: 'cody'
+            },
+            closing: 'These elements change the meaning of the text, not just its appearance — even though the browser also applies a default style to them.',
             highlight: ['mark', 'small'],
             codeLanguage: 'HTML',
             code: '<p>\n  The deadline ends in\n  <mark>3 days</mark>.\n</p>\n\n<p>\n  <small>Terms subject to change.</small>\n</p>'
@@ -21845,17 +23557,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<del> indica um trecho removido e <ins> indica um trecho inserido, geralmente usados juntos para mostrar uma edição.',
-            secondParagraph: '<sub> e <sup> deslocam o texto para baixo ou para cima, úteis em fórmulas e notações.',
-            endParagraph: 'Cada um desses elementos comunica uma intenção específica que vai além do estilo visual.',
+            introduction: {
+              text: '<del> indica um trecho removido e <ins> indica um trecho inserido, geralmente usados juntos para mostrar uma edição.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: '<sub> e <sup> deslocam o texto para baixo ou para cima, úteis em fórmulas e notações.'
+            },
+            closing: 'Cada um desses elementos comunica uma intenção específica que vai além do estilo visual.',
             highlight: ['del', 'ins', 'sub', 'sup'],
             codeLanguage: 'HTML',
             code: '<p>\n  De <del>R$ 100</del>\n  <ins>R$ 80</ins>\n</p>\n\n<p>\n  H<sub>2</sub>O e 10<sup>2</sup>\n</p>'
           },
           en: {
-            firstParagraph: '<del> marks removed content and <ins> marks inserted content, usually shown together to represent an edit.',
-            secondParagraph: '<sub> and <sup> shift text below or above the baseline, useful for formulas and notations.',
-            endParagraph: 'Each of these elements communicates a specific intent that goes beyond visual styling.',
+            introduction: {
+              text: '<del> marks removed content and <ins> marks inserted content, usually shown together to represent an edit.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: '<sub> and <sup> shift text below or above the baseline, useful for formulas and notations.'
+            },
+            closing: 'Each of these elements communicates a specific intent that goes beyond visual styling.',
             highlight: ['del', 'ins', 'sub', 'sup'],
             codeLanguage: 'HTML',
             code: '<p>\n  From <del>$100</del>\n  <ins>$80</ins>\n</p>\n\n<p>\n  H<sub>2</sub>O and 10<sup>2</sup>\n</p>'
@@ -22068,15 +23790,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<time> representa um horário de forma que máquinas também conseguem interpretar, por meio do atributo datetime.',
-            endParagraph: 'O texto exibido pode ser amigável para pessoas, enquanto o atributo datetime guarda um valor estruturado para máquinas.',
+            introduction: {
+              text: '<time> representa um horário de forma que máquinas também conseguem interpretar, por meio do atributo datetime.',
+              persona: 'cody'
+            },
+            closing: 'O texto exibido pode ser amigável para pessoas, enquanto o atributo datetime guarda um valor estruturado para máquinas.',
             highlight: ['time', 'datetime'],
             codeLanguage: 'HTML',
             code: '<p>\n  Publicado em\n  <time datetime="2026-09-10">\n    10 de setembro\n  </time>\n</p>'
           },
           en: {
-            firstParagraph: '<time> represents a moment in a way machines can also interpret, through the datetime attribute.',
-            endParagraph: 'The displayed text can be friendly for people, while the datetime attribute holds a structured value for machines.',
+            introduction: {
+              text: '<time> represents a moment in a way machines can also interpret, through the datetime attribute.',
+              persona: 'cody'
+            },
+            closing: 'The displayed text can be friendly for people, while the datetime attribute holds a structured value for machines.',
             highlight: ['time', 'datetime'],
             codeLanguage: 'HTML',
             code: '<p>\n  Published on\n  <time datetime="2026-09-10">\n    September 10th\n  </time>\n</p>'
@@ -22087,16 +23815,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <data> funciona de forma parecida com <time>, mas serve para qualquer tipo de valor, não só para quando algo aconteceu.',
-            endParagraph: 'Assim como datetime em <time>, o atributo value em <data> não muda o que aparece na tela — só o que outros sistemas conseguem ler.',
+            introduction: {
+              text: 'O elemento <data> funciona de forma parecida com <time>, mas serve para qualquer tipo de valor, não só para quando algo aconteceu.',
+              persona: 'neutral'
+            },
+            closing: 'Assim como datetime em <time>, o atributo value em <data> não muda o que aparece na tela — só o que outros sistemas conseguem ler.',
             highlight: ['data', 'time', 'value'],
             codeLanguage: 'HTML',
             code: '<p>\n  <data value="42">\n    Produto #42\n  </data>\n</p>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The <data> element works similarly to <time>, but it fits any kind of value, not only a moment in time.',
-            endParagraph: 'Just like datetime on <time>, the value attribute on <data> doesn\'t change what appears on screen — only what other systems can read.',
+            introduction: {
+              text: 'The <data> element works similarly to <time>, but it fits any kind of value, not only a moment in time.',
+              persona: 'neutral'
+            },
+            closing: 'Just like datetime on <time>, the value attribute on <data> doesn\'t change what appears on screen — only what other systems can read.',
             highlight: ['data', 'time', 'value'],
             codeLanguage: 'HTML',
             code: '<p>\n  <data value="42">\n    Product #42\n  </data>\n</p>',
@@ -22261,15 +23995,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'HTML possui os elementos <video> e <audio> nativos para incorporar mídia, sem depender de componentes externos.',
-            endParagraph: 'Esses elementos fornecem controles e uma estrutura semântica diretamente no HTML.',
+            introduction: {
+              text: 'HTML possui os elementos <video> e <audio> nativos para incorporar mídia, sem depender de componentes externos.',
+              persona: 'cody'
+            },
+            closing: 'Esses elementos fornecem controles e uma estrutura semântica diretamente no HTML.',
             highlight: ['video', 'audio', 'HTML'],
             codeLanguage: 'HTML',
             code: '<video controls width="320">\n  <source\n    src="video.mp4"\n    type="video/mp4"\n  >\n</video>\n\n<audio controls>\n  <source\n    src="audio.mp3"\n    type="audio/mpeg"\n  >\n</audio>'
           },
           en: {
-            firstParagraph: 'HTML has native <video> and <audio> elements to embed media, without depending on external components.',
-            endParagraph: 'These elements provide controls and a semantic structure directly in HTML.',
+            introduction: {
+              text: 'HTML has native <video> and <audio> elements to embed media, without depending on external components.',
+              persona: 'cody'
+            },
+            closing: 'These elements provide controls and a semantic structure directly in HTML.',
             highlight: ['video', 'audio', 'HTML'],
             codeLanguage: 'HTML',
             code: '<video controls width="320">\n  <source\n    src="video.mp4"\n    type="video/mp4"\n  >\n</video>\n\n<audio controls>\n  <source\n    src="audio.mp3"\n    type="audio/mpeg"\n  >\n</audio>'
@@ -22280,17 +24020,27 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento track adiciona legendas a um vídeo, sem depender de nenhum recurso externo.',
-            secondParagraph: 'O atributo kind indica o tipo da faixa, srclang informa o idioma e label é o nome que aparece para quem escolhe a legenda.',
-            endParagraph: 'Legendas beneficiam quem tem deficiência auditiva, quem não fala o idioma do vídeo e quem simplesmente está sem som — por isso são parte da acessibilidade, e não um extra.',
+            introduction: {
+              text: 'O elemento track adiciona legendas a um vídeo, sem depender de nenhum recurso externo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O atributo kind indica o tipo da faixa, srclang informa o idioma e label é o nome que aparece para quem escolhe a legenda.'
+            },
+            closing: 'Legendas beneficiam quem tem deficiência auditiva, quem não fala o idioma do vídeo e quem simplesmente está sem som — por isso são parte da acessibilidade, e não um extra.',
             highlight: ['track', 'kind', 'srclang', 'label'],
             codeLanguage: 'HTML',
             code: '<video controls width="320">\n  <source\n    src="video.mp4"\n    type="video/mp4"\n  >\n  <track\n    src="legendas.vtt"\n    kind="captions"\n    srclang="pt"\n    label="Português"\n    default\n  >\n</video>'
           },
           en: {
-            firstParagraph: 'The track element adds captions to a video, without relying on any external resource.',
-            secondParagraph: 'The kind attribute states the type of the track, srclang gives the language, and label is the name shown to whoever picks the caption.',
-            endParagraph: 'Captions help people who are deaf or hard of hearing, people who do not speak the language of the video, and anyone watching without sound — which is why they are part of accessibility, not an extra.',
+            introduction: {
+              text: 'The track element adds captions to a video, without relying on any external resource.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The kind attribute states the type of the track, srclang gives the language, and label is the name shown to whoever picks the caption.'
+            },
+            closing: 'Captions help people who are deaf or hard of hearing, people who do not speak the language of the video, and anyone watching without sound — which is why they are part of accessibility, not an extra.',
             highlight: ['track', 'kind', 'srclang', 'label'],
             codeLanguage: 'HTML',
             code: '<video controls width="320">\n  <source\n    src="video.mp4"\n    type="video/mp4"\n  >\n  <track\n    src="captions.vtt"\n    kind="captions"\n    srclang="en"\n    label="English"\n    default\n  >\n</video>'
@@ -22452,16 +24202,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<iframe> incorpora outra página dentro da página atual, como um documento dentro do documento.',
-            endParagraph: 'O atributo title é importante para acessibilidade: ele descreve o conteúdo incorporado para quem usa leitor de tela.',
+            introduction: {
+              text: '<iframe> incorpora outra página dentro da página atual, como um documento dentro do documento.',
+              persona: 'cody'
+            },
+            closing: 'O atributo title é importante para acessibilidade: ele descreve o conteúdo incorporado para quem usa leitor de tela.',
             highlight: ['iframe', 'title'],
             codeLanguage: 'HTML',
             code: '<iframe\n  src="https://example.com"\n  width="300"\n  height="200"\n  title="Página incorporada"\n>\n</iframe>',
             onlyCode: true
           },
           en: {
-            firstParagraph: '<iframe> embeds another page inside the current page, like a document within the document.',
-            endParagraph: 'The title attribute matters for accessibility: it describes the embedded content for someone using a screen reader.',
+            introduction: {
+              text: '<iframe> embeds another page inside the current page, like a document within the document.',
+              persona: 'cody'
+            },
+            closing: 'The title attribute matters for accessibility: it describes the embedded content for someone using a screen reader.',
             highlight: ['iframe', 'title'],
             codeLanguage: 'HTML',
             code: '<iframe\n  src="https://example.com"\n  width="300"\n  height="200"\n  title="Embedded page"\n>\n</iframe>',
@@ -22473,18 +24229,28 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Excesso de iframes pode deixar a página mais lenta e trazer riscos de segurança, já que o conteúdo vem de outra origem.',
-            secondParagraph: 'O atributo sandbox permite restringir o que o conteúdo incorporado pode fazer.',
-            endParagraph: 'Use iframe apenas quando for realmente necessário incorporar conteúdo externo.',
+            introduction: {
+              text: 'Excesso de iframes pode deixar a página mais lenta e trazer riscos de segurança, já que o conteúdo vem de outra origem.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O atributo sandbox permite restringir o que o conteúdo incorporado pode fazer.'
+            },
+            closing: 'Use iframe apenas quando for realmente necessário incorporar conteúdo externo.',
             highlight: ['iframe', 'sandbox'],
             codeLanguage: 'HTML',
             code: '<iframe\n  src="https://example.com"\n  sandbox="allow-scripts"\n>\n</iframe>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Too many iframes can slow the page down and bring security risks, since the content comes from another origin.',
-            secondParagraph: 'The sandbox attribute lets you restrict what the embedded content is allowed to do.',
-            endParagraph: 'Use iframe only when embedding external content is really necessary.',
+            introduction: {
+              text: 'Too many iframes can slow the page down and bring security risks, since the content comes from another origin.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The sandbox attribute lets you restrict what the embedded content is allowed to do.'
+            },
+            closing: 'Use iframe only when embedding external content is really necessary.',
             highlight: ['iframe', 'sandbox'],
             codeLanguage: 'HTML',
             code: '<iframe\n  src="https://example.com"\n  sandbox="allow-scripts"\n>\n</iframe>',
@@ -22647,15 +24413,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'SVG permite representar gráficos vetoriais diretamente no documento HTML. Diferentemente de uma imagem comum, seus elementos podem ser manipulados individualmente.',
-            endParagraph: 'SVG é especialmente útil para ícones, ilustrações e gráficos que precisam manter sua qualidade em diferentes tamanhos.',
+            introduction: {
+              text: 'SVG permite representar gráficos vetoriais diretamente no documento HTML. Diferentemente de uma imagem comum, seus elementos podem ser manipulados individualmente.',
+              persona: 'cody'
+            },
+            closing: 'SVG é especialmente útil para ícones, ilustrações e gráficos que precisam manter sua qualidade em diferentes tamanhos.',
             highlight: ['SVG', 'HTML'],
             codeLanguage: 'HTML',
             code: '<svg\n  width="120"\n  height="80"\n  viewBox="0 0 120 80"\n>\n  <circle\n    cx="40"\n    cy="40"\n    r="30"\n    fill="black"\n  />\n</svg>'
           },
           en: {
-            firstParagraph: 'SVG lets you represent vector graphics directly in the HTML document. Unlike a regular image, its elements can be manipulated individually.',
-            endParagraph: 'SVG is especially useful for icons, illustrations and graphics that need to keep their quality at different sizes.',
+            introduction: {
+              text: 'SVG lets you represent vector graphics directly in the HTML document. Unlike a regular image, its elements can be manipulated individually.',
+              persona: 'cody'
+            },
+            closing: 'SVG is especially useful for icons, illustrations and graphics that need to keep their quality at different sizes.',
             highlight: ['SVG', 'HTML'],
             codeLanguage: 'HTML',
             code: '<svg\n  width="120"\n  height="80"\n  viewBox="0 0 120 80"\n>\n  <circle\n    cx="40"\n    cy="40"\n    r="30"\n    fill="black"\n  />\n</svg>'
@@ -22666,8 +24438,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<canvas> fornece uma área de desenho que pode ser manipulada principalmente por JavaScript.',
-            endParagraph: 'SVG descreve elementos vetoriais. Canvas fornece uma área de desenho controlada por código.',
+            introduction: {
+              text: '<canvas> fornece uma área de desenho que pode ser manipulada principalmente por JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'SVG descreve elementos vetoriais. Canvas fornece uma área de desenho controlada por código.',
             highlight: ['canvas', 'SVG', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<canvas\n  id="canvas"\n  width="200"\n  height="100"\n></canvas>',
@@ -22680,8 +24455,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             onlyCode: true
           },
           en: {
-            firstParagraph: '<canvas> provides a drawing area that can be manipulated mainly through JavaScript.',
-            endParagraph: 'SVG describes vector elements. Canvas provides a drawing area controlled by code.',
+            introduction: {
+              text: '<canvas> provides a drawing area that can be manipulated mainly through JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'SVG describes vector elements. Canvas provides a drawing area controlled by code.',
             highlight: ['canvas', 'SVG', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<canvas\n  id="canvas"\n  width="200"\n  height="100"\n></canvas>',
@@ -22850,15 +24628,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<details> cria uma seção que pode ser expandida ou recolhida. <summary> define o título que o usuário toca para abrir essa seção.',
-            endParagraph: 'Esse recurso cria uma interface expansível usando só HTML, sem precisar implementar toda a interação manualmente com JavaScript.',
+            introduction: {
+              text: '<details> cria uma seção que pode ser expandida ou recolhida. <summary> define o título que o usuário toca para abrir essa seção.',
+              persona: 'cody'
+            },
+            closing: 'Esse recurso cria uma interface expansível usando só HTML, sem precisar implementar toda a interação manualmente com JavaScript.',
             highlight: ['details', 'summary', 'HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<details>\n  <summary>\n    O que é HTML?\n  </summary>\n\n  <p>\n    HTML define a estrutura\n    de uma página web.\n  </p>\n</details>'
           },
           en: {
-            firstParagraph: '<details> creates a section that can be expanded or collapsed. <summary> defines the title the user taps to open that section.',
-            endParagraph: 'This feature builds an expandable interface using only HTML, without having to implement the whole interaction manually with JavaScript.',
+            introduction: {
+              text: '<details> creates a section that can be expanded or collapsed. <summary> defines the title the user taps to open that section.',
+              persona: 'cody'
+            },
+            closing: 'This feature builds an expandable interface using only HTML, without having to implement the whole interaction manually with JavaScript.',
             highlight: ['details', 'summary', 'HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<details>\n  <summary>\n    What is HTML?\n  </summary>\n\n  <p>\n    HTML defines the structure\n    of a web page.\n  </p>\n</details>'
@@ -22869,15 +24653,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O elemento <dialog> representa uma caixa de diálogo nativa do HTML.',
-            endParagraph: 'Antes de implementar um componente complexo manualmente, vale verificar se o HTML já oferece um elemento nativo adequado — reduz código e costuma melhorar a acessibilidade.',
+            introduction: {
+              text: 'O elemento <dialog> representa uma caixa de diálogo nativa do HTML.',
+              persona: 'neutral'
+            },
+            closing: 'Antes de implementar um componente complexo manualmente, vale verificar se o HTML já oferece um elemento nativo adequado — reduz código e costuma melhorar a acessibilidade.',
             highlight: ['dialog', 'HTML'],
             codeLanguage: 'HTML',
             code: '<dialog open>\n  <h2>Olá!</h2>\n  <p>Esta é uma caixa de diálogo.</p>\n\n  <button>Fechar</button>\n</dialog>'
           },
           en: {
-            firstParagraph: 'The <dialog> element represents a native HTML dialog box.',
-            endParagraph: 'Before building a complex component manually, it is worth checking whether HTML already offers a suitable native element — it reduces code and tends to improve accessibility.',
+            introduction: {
+              text: 'The <dialog> element represents a native HTML dialog box.',
+              persona: 'neutral'
+            },
+            closing: 'Before building a complex component manually, it is worth checking whether HTML already offers a suitable native element — it reduces code and tends to improve accessibility.',
             highlight: ['dialog', 'HTML'],
             codeLanguage: 'HTML',
             code: '<dialog open>\n  <h2>Hello!</h2>\n  <p>This is a dialog box.</p>\n\n  <button>Close</button>\n</dialog>'
@@ -23039,15 +24829,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Atributos globais podem ser usados em praticamente qualquer elemento HTML. hidden esconde um elemento completamente, como se ele não existisse na página.',
-            endParagraph: 'hidden é diferente de só estilizar com CSS: o elemento realmente some da apresentação e da leitura por tecnologias assistivas.',
+            introduction: {
+              text: 'Atributos globais podem ser usados em praticamente qualquer elemento HTML. hidden esconde um elemento completamente, como se ele não existisse na página.',
+              persona: 'cody'
+            },
+            closing: 'hidden é diferente de só estilizar com CSS: o elemento realmente some da apresentação e da leitura por tecnologias assistivas.',
             highlight: ['hidden', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p>Este texto aparece normalmente.</p>\n\n<p hidden>Este texto fica escondido.</p>'
           },
           en: {
-            firstParagraph: 'Global attributes can be used on practically any HTML element. hidden hides an element completely, as if it did not exist on the page.',
-            endParagraph: 'hidden is different from just styling with CSS: the element really disappears from the presentation and from assistive technology.',
+            introduction: {
+              text: 'Global attributes can be used on practically any HTML element. hidden hides an element completely, as if it did not exist on the page.',
+              persona: 'cody'
+            },
+            closing: 'hidden is different from just styling with CSS: the element really disappears from the presentation and from assistive technology.',
             highlight: ['hidden', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p>This text shows up normally.</p>\n\n<p hidden>This text stays hidden.</p>'
@@ -23058,15 +24854,21 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'lang identifica o idioma do conteúdo, e dir identifica a direção do texto — da esquerda para a direita ou o contrário.',
-            endParagraph: 'Esses atributos ajudam navegadores e leitores de tela a apresentar o conteúdo corretamente.',
+            introduction: {
+              text: 'lang identifica o idioma do conteúdo, e dir identifica a direção do texto — da esquerda para a direita ou o contrário.',
+              persona: 'neutral'
+            },
+            closing: 'Esses atributos ajudam navegadores e leitores de tela a apresentar o conteúdo corretamente.',
             highlight: ['lang', 'dir'],
             codeLanguage: 'HTML',
             code: '<p lang="en">\n  This paragraph is in English.\n</p>\n\n<p dir="rtl">\n  نص باللغة العربية\n</p>'
           },
           en: {
-            firstParagraph: 'lang identifies the language of the content, and dir identifies the text direction — left-to-right or the other way around.',
-            endParagraph: 'These attributes help browsers and screen readers present the content correctly.',
+            introduction: {
+              text: 'lang identifies the language of the content, and dir identifies the text direction — left-to-right or the other way around.',
+              persona: 'neutral'
+            },
+            closing: 'These attributes help browsers and screen readers present the content correctly.',
             highlight: ['lang', 'dir'],
             codeLanguage: 'HTML',
             code: '<p lang="pt">\n  Este parágrafo está em português.\n</p>\n\n<p dir="rtl">\n  نص باللغة العربية\n</p>'
@@ -23269,16 +25071,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Atributos data-* permitem associar informações personalizadas a elementos HTML sem criar atributos próprios.',
-            endParagraph: 'Esses dados podem ser utilizados posteriormente por JavaScript ou outras ferramentas que processem o documento.',
+            introduction: {
+              text: 'Atributos data-* permitem associar informações personalizadas a elementos HTML sem criar atributos próprios.',
+              persona: 'cody'
+            },
+            closing: 'Esses dados podem ser utilizados posteriormente por JavaScript ou outras ferramentas que processem o documento.',
             highlight: ['HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button\n  data-product-id="42"\n  data-category="books"\n>\n  Comprar\n</button>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'data-* attributes let you attach custom information to HTML elements without creating attributes of your own.',
-            endParagraph: 'That data can later be used by JavaScript or other tools that process the document.',
+            introduction: {
+              text: 'data-* attributes let you attach custom information to HTML elements without creating attributes of your own.',
+              persona: 'cody'
+            },
+            closing: 'That data can later be used by JavaScript or other tools that process the document.',
             highlight: ['HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button\n  data-product-id="42"\n  data-category="books"\n>\n  Buy\n</button>',
@@ -23290,16 +25098,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript pode acessar esses atributos por meio da propriedade dataset.',
-            endParagraph: 'data-* é útil quando precisamos associar pequenas informações personalizadas a elementos da página.',
+            introduction: {
+              text: 'JavaScript pode acessar esses atributos por meio da propriedade dataset.',
+              persona: 'neutral'
+            },
+            closing: 'data-* é útil quando precisamos associar pequenas informações personalizadas a elementos da página.',
             highlight: ['JavaScript', 'dataset'],
             codeLanguage: 'JavaScript',
             code: 'const botao =\n  document.querySelector("button");\n\nconsole.log(\n  botao.dataset.productId\n);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript can access those attributes through the dataset property.',
-            endParagraph: 'data-* is useful whenever we need to attach small pieces of custom information to elements on the page.',
+            introduction: {
+              text: 'JavaScript can access those attributes through the dataset property.',
+              persona: 'neutral'
+            },
+            closing: 'data-* is useful whenever we need to attach small pieces of custom information to elements on the page.',
             highlight: ['JavaScript', 'dataset'],
             codeLanguage: 'JavaScript',
             code: 'const button =\n  document.querySelector("button");\n\nconsole.log(\n  button.dataset.productId\n);',
@@ -23487,16 +25301,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'contenteditable permite que o usuário edite o conteúdo de um elemento diretamente na página. draggable indica que um elemento pode ser arrastado.',
-            endParagraph: 'Esses atributos criam comportamentos interativos sem precisar de JavaScript para o comportamento básico.',
+            introduction: {
+              text: 'contenteditable permite que o usuário edite o conteúdo de um elemento diretamente na página. draggable indica que um elemento pode ser arrastado.',
+              persona: 'cody'
+            },
+            closing: 'Esses atributos criam comportamentos interativos sem precisar de JavaScript para o comportamento básico.',
             highlight: ['contenteditable', 'draggable'],
             codeLanguage: 'HTML',
             code: '<p contenteditable="true">\n  Clique e edite este texto.\n</p>\n\n<div draggable="true">\n  Arraste este elemento.\n</div>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'contenteditable lets the user edit the content of an element directly on the page. draggable marks an element as something that can be dragged.',
-            endParagraph: 'These attributes create interactive behavior without needing JavaScript for the basic behavior.',
+            introduction: {
+              text: 'contenteditable lets the user edit the content of an element directly on the page. draggable marks an element as something that can be dragged.',
+              persona: 'cody'
+            },
+            closing: 'These attributes create interactive behavior without needing JavaScript for the basic behavior.',
             highlight: ['contenteditable', 'draggable'],
             codeLanguage: 'HTML',
             code: '<p contenteditable="true">\n  Tap and edit this text.\n</p>\n\n<div draggable="true">\n  Drag this element.\n</div>',
@@ -23508,16 +25328,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '<template> guarda um trecho de HTML que não é exibido diretamente. Esse conteúdo só aparece quando é clonado e inserido na página, geralmente por JavaScript.',
-            endParagraph: 'template é útil para preparar pedaços de HTML reutilizáveis sem precisar montá-los inteiramente via código.',
+            introduction: {
+              text: '<template> guarda um trecho de HTML que não é exibido diretamente. Esse conteúdo só aparece quando é clonado e inserido na página, geralmente por JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'template é útil para preparar pedaços de HTML reutilizáveis sem precisar montá-los inteiramente via código.',
             highlight: ['template', 'HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<template id="cartao">\n  <li>Novo item</li>\n</template>',
             onlyCode: true
           },
           en: {
-            firstParagraph: '<template> holds a piece of HTML that is not displayed directly. That content only shows up once it is cloned and inserted into the page, usually by JavaScript.',
-            endParagraph: 'template is useful for preparing reusable pieces of HTML without having to assemble them entirely through code.',
+            introduction: {
+              text: '<template> holds a piece of HTML that is not displayed directly. That content only shows up once it is cloned and inserted into the page, usually by JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'template is useful for preparing reusable pieces of HTML without having to assemble them entirely through code.',
             highlight: ['template', 'HTML', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<template id="cartao">\n  <li>Novo item</li>\n</template>',
@@ -23705,18 +25531,28 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Nem todo mundo usa mouse ou toque. Uma interface acessível precisa funcionar também pelo teclado, navegando entre elementos com Tab.',
-            secondParagraph: 'Elementos como links, botões e campos de formulário já recebem foco pelo teclado automaticamente.',
-            endParagraph: 'Um elemento genérico como div ou span não recebe foco pelo teclado, a menos que isso seja adicionado manualmente.',
+            introduction: {
+              text: 'Nem todo mundo usa mouse ou toque. Uma interface acessível precisa funcionar também pelo teclado, navegando entre elementos com Tab.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Elementos como links, botões e campos de formulário já recebem foco pelo teclado automaticamente.'
+            },
+            closing: 'Um elemento genérico como div ou span não recebe foco pelo teclado, a menos que isso seja adicionado manualmente.',
             highlight: ['Tab', 'div', 'span'],
             codeLanguage: 'HTML',
             code: '<button>Comprar</button>\n<a href="/perfil">Perfil</a>\n<input type="text" />',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Not everyone uses a mouse or touch. An accessible interface also needs to work by keyboard, moving between elements with Tab.',
-            secondParagraph: 'Elements like links, buttons and form fields already receive keyboard focus automatically.',
-            endParagraph: 'A generic element like div or span does not receive keyboard focus, unless that is added manually.',
+            introduction: {
+              text: 'Not everyone uses a mouse or touch. An accessible interface also needs to work by keyboard, moving between elements with Tab.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Elements like links, buttons and form fields already receive keyboard focus automatically.'
+            },
+            closing: 'A generic element like div or span does not receive keyboard focus, unless that is added manually.',
             highlight: ['Tab', 'div', 'span'],
             codeLanguage: 'HTML',
             code: '<button>Buy</button>\n<a href="/profile">Profile</a>\n<input type="text" />',
@@ -23728,16 +25564,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O atributo tabindex controla se e quando um elemento entra na navegação por teclado.',
-            endParagraph: 'tabindex="0" adiciona um elemento à ordem natural de navegação. Valores maiores que zero raramente são uma boa ideia, porque bagunçam essa ordem.',
+            introduction: {
+              text: 'O atributo tabindex controla se e quando um elemento entra na navegação por teclado.',
+              persona: 'neutral'
+            },
+            closing: 'tabindex="0" adiciona um elemento à ordem natural de navegação. Valores maiores que zero raramente são uma boa ideia, porque bagunçam essa ordem.',
             highlight: ['tabindex'],
             codeLanguage: 'HTML',
             code: '<div tabindex="0">\n  Este div agora recebe foco.\n</div>\n\n<button tabindex="-1">\n  Este botão foi removido da navegação.\n</button>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The tabindex attribute controls whether and when an element enters keyboard navigation.',
-            endParagraph: 'tabindex="0" adds an element to the natural navigation order. Values greater than zero are rarely a good idea, because they mess up that order.',
+            introduction: {
+              text: 'The tabindex attribute controls whether and when an element enters keyboard navigation.',
+              persona: 'neutral'
+            },
+            closing: 'tabindex="0" adds an element to the natural navigation order. Values greater than zero are rarely a good idea, because they mess up that order.',
             highlight: ['tabindex'],
             codeLanguage: 'HTML',
             code: '<div tabindex="0">\n  This div now receives focus.\n</div>\n\n<button tabindex="-1">\n  This button was removed from navigation.\n</button>',
@@ -23923,16 +25765,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Elementos como header, nav e main não organizam só visualmente — eles funcionam como landmarks, pontos de navegação rápida para quem usa leitor de tela.',
-            endParagraph: 'Um leitor de tela pode pular direto para o main, por exemplo, sem precisar passar por todo o cabeçalho.',
+            introduction: {
+              text: 'Elementos como header, nav e main não organizam só visualmente — eles funcionam como landmarks, pontos de navegação rápida para quem usa leitor de tela.',
+              persona: 'cody'
+            },
+            closing: 'Um leitor de tela pode pular direto para o main, por exemplo, sem precisar passar por todo o cabeçalho.',
             highlight: ['header', 'nav', 'main'],
             codeLanguage: 'HTML',
             code: '<header>...</header>\n<nav>...</nav>\n<main>...</main>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Elements like header, nav and main are not only visual organization — they work as landmarks, quick navigation points for someone using a screen reader.',
-            endParagraph: 'A screen reader can jump straight to main, for example, without going through the whole header first.',
+            introduction: {
+              text: 'Elements like header, nav and main are not only visual organization — they work as landmarks, quick navigation points for someone using a screen reader.',
+              persona: 'cody'
+            },
+            closing: 'A screen reader can jump straight to main, for example, without going through the whole header first.',
             highlight: ['header', 'nav', 'main'],
             codeLanguage: 'HTML',
             code: '<header>...</header>\n<nav>...</nav>\n<main>...</main>',
@@ -23944,16 +25792,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um formulário acessível associa corretamente cada label ao seu campo, usando for e id.',
-            endParagraph: 'Essa associação permite que tecnologias assistivas anunciem o propósito de cada campo corretamente.',
+            introduction: {
+              text: 'Um formulário acessível associa corretamente cada label ao seu campo, usando for e id.',
+              persona: 'neutral'
+            },
+            closing: 'Essa associação permite que tecnologias assistivas anunciem o propósito de cada campo corretamente.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
             code: '<label for="email">E-mail</label>\n<input id="email" type="email" />',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An accessible form correctly links each label to its field, using for and id.',
-            endParagraph: 'That link lets assistive technology announce the purpose of each field correctly.',
+            introduction: {
+              text: 'An accessible form correctly links each label to its field, using for and id.',
+              persona: 'neutral'
+            },
+            closing: 'That link lets assistive technology announce the purpose of each field correctly.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
             code: '<label for="email">Email</label>\n<input id="email" type="email" />',
@@ -24137,16 +25991,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'ARIA fornece atributos que ajudam tecnologias assistivas a compreenderem interfaces que não podem ser descritas adequadamente apenas com HTML semântico.',
-            endParagraph: 'ARIA é uma ferramenta complementar. A primeira escolha deve ser sempre utilizar o elemento HTML semântico apropriado.',
+            introduction: {
+              text: 'ARIA fornece atributos que ajudam tecnologias assistivas a compreenderem interfaces que não podem ser descritas adequadamente apenas com HTML semântico.',
+              persona: 'cody'
+            },
+            closing: 'ARIA é uma ferramenta complementar. A primeira escolha deve ser sempre utilizar o elemento HTML semântico apropriado.',
             highlight: ['ARIA', 'HTML'],
             codeLanguage: 'HTML',
             code: '<button\n  aria-label="Fechar janela"\n>\n  ×\n</button>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'ARIA provides attributes that help assistive technologies understand interfaces that cannot be adequately described with semantic HTML alone.',
-            endParagraph: 'ARIA is a complementary tool. The first choice should always be to use the appropriate semantic HTML element.',
+            introduction: {
+              text: 'ARIA provides attributes that help assistive technologies understand interfaces that cannot be adequately described with semantic HTML alone.',
+              persona: 'cody'
+            },
+            closing: 'ARIA is a complementary tool. The first choice should always be to use the appropriate semantic HTML element.',
             highlight: ['ARIA', 'HTML'],
             codeLanguage: 'HTML',
             code: '<button\n  aria-label="Close window"\n>\n  ×\n</button>',
@@ -24158,16 +26018,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Não devemos substituir elementos HTML nativos por elementos genéricos com ARIA quando o HTML já possui uma solução adequada.',
-            endParagraph: 'Acessibilidade começa com uma estrutura HTML correta. ARIA deve complementar essa estrutura, não substituí-la.',
+            introduction: {
+              text: 'Não devemos substituir elementos HTML nativos por elementos genéricos com ARIA quando o HTML já possui uma solução adequada.',
+              persona: 'neutral'
+            },
+            closing: 'Acessibilidade começa com uma estrutura HTML correta. ARIA deve complementar essa estrutura, não substituí-la.',
             highlight: ['HTML', 'ARIA'],
             codeLanguage: 'HTML',
             code: '<!-- Preferível -->\n<button>\n  Salvar\n</button>\n\n<!-- Evite quando não há necessidade -->\n<div role="button">\n  Salvar\n</div>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We should not replace native HTML elements with generic elements plus ARIA when HTML already has an adequate solution.',
-            endParagraph: 'Accessibility starts with a correct HTML structure. ARIA should complement that structure, not replace it.',
+            introduction: {
+              text: 'We should not replace native HTML elements with generic elements plus ARIA when HTML already has an adequate solution.',
+              persona: 'neutral'
+            },
+            closing: 'Accessibility starts with a correct HTML structure. ARIA should complement that structure, not replace it.',
             highlight: ['HTML', 'ARIA'],
             codeLanguage: 'HTML',
             code: '<!-- Preferable -->\n<button>\n  Save\n</button>\n\n<!-- Avoid when there is no need -->\n<div role="button">\n  Save\n</div>',
@@ -24363,16 +26229,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Dados estruturados descrevem o significado de uma página para máquinas, como os buscadores. O formato recomendado pelos buscadores é o JSON-LD: um bloco de JSON dentro de um script.',
-            endParagraph: 'A página continua igual para quem a lê: o bloco não aparece na tela.',
+            introduction: {
+              text: 'Dados estruturados descrevem o significado de uma página para máquinas, como os buscadores. O formato recomendado pelos buscadores é o JSON-LD: um bloco de JSON dentro de um script.',
+              persona: 'cody'
+            },
+            closing: 'A página continua igual para quem a lê: o bloco não aparece na tela.',
             highlight: ['dados estruturados', 'JSON-LD'],
             codeLanguage: 'HTML',
             code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Aprendendo HTML",\n  "author": "Ana Souza"\n}\n</script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Structured data describes the meaning of a page to machines, like search engines. The format search engines recommend is JSON-LD: a block of JSON inside a script.',
-            endParagraph: 'The page looks the same to people reading it: the block does not show on screen.',
+            introduction: {
+              text: 'Structured data describes the meaning of a page to machines, like search engines. The format search engines recommend is JSON-LD: a block of JSON inside a script.',
+              persona: 'cody'
+            },
+            closing: 'The page looks the same to people reading it: the block does not show on screen.',
             highlight: ['structured data', 'JSON-LD'],
             codeLanguage: 'HTML',
             code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Learning HTML",\n  "author": "Ana Souza"\n}\n</script>',
@@ -24384,16 +26256,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Cada objeto tem um @type, que diz o que ele é, e propriedades definidas pelo vocabulário schema.org. O @context aponta para esse vocabulário.',
-            endParagraph: 'Um valor também pode ser outro objeto, com o seu próprio @type.',
+            introduction: {
+              text: 'Cada objeto tem um @type, que diz o que ele é, e propriedades definidas pelo vocabulário schema.org. O @context aponta para esse vocabulário.',
+              persona: 'neutral'
+            },
+            closing: 'Um valor também pode ser outro objeto, com o seu próprio @type.',
             highlight: ['@type', '@context', 'schema.org'],
             codeLanguage: 'HTML',
             code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Aprendendo HTML",\n  "author": {\n    "@type": "Person",\n    "name": "Ana Souza"\n  }\n}\n</script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Each object has a @type, which says what it is, and properties defined by the schema.org vocabulary. The @context points to that vocabulary.',
-            endParagraph: 'A value can also be another object, with its own @type.',
+            introduction: {
+              text: 'Each object has a @type, which says what it is, and properties defined by the schema.org vocabulary. The @context points to that vocabulary.',
+              persona: 'neutral'
+            },
+            closing: 'A value can also be another object, with its own @type.',
             highlight: ['@type', '@context', 'schema.org'],
             codeLanguage: 'HTML',
             code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Learning HTML",\n  "author": {\n    "@type": "Person",\n    "name": "Ana Souza"\n  }\n}\n</script>',
@@ -24405,16 +26283,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Os microdados dizem a mesma coisa de outro jeito: marcam o próprio HTML visível com os atributos itemscope, itemtype e itemprop.',
-            endParagraph: 'A diferença é onde a descrição mora. No JSON-LD ela fica num bloco à parte; nos microdados, misturada ao conteúdo da página.',
+            introduction: {
+              text: 'Os microdados dizem a mesma coisa de outro jeito: marcam o próprio HTML visível com os atributos itemscope, itemtype e itemprop.',
+              persona: 'neutral'
+            },
+            closing: 'A diferença é onde a descrição mora. No JSON-LD ela fica num bloco à parte; nos microdados, misturada ao conteúdo da página.',
             highlight: ['itemscope', 'itemtype', 'itemprop', 'microdados'],
             codeLanguage: 'HTML',
             code: '<article itemscope\n  itemtype="https://schema.org/Book">\n  <h2 itemprop="name">\n    Aprendendo HTML\n  </h2>\n  <p>Autora:\n    <span itemprop="author">\n      Ana Souza\n    </span>\n  </p>\n</article>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Microdata says the same thing another way: it marks up the visible HTML itself with the itemscope, itemtype and itemprop attributes.',
-            endParagraph: 'The difference is where the description lives. In JSON-LD it sits in a separate block; in microdata, mixed into the page content.',
+            introduction: {
+              text: 'Microdata says the same thing another way: it marks up the visible HTML itself with the itemscope, itemtype and itemprop attributes.',
+              persona: 'neutral'
+            },
+            closing: 'The difference is where the description lives. In JSON-LD it sits in a separate block; in microdata, mixed into the page content.',
             highlight: ['itemscope', 'itemtype', 'itemprop', 'microdata'],
             codeLanguage: 'HTML',
             code: '<article itemscope\n  itemtype="https://schema.org/Book">\n  <h2 itemprop="name">\n    Learning HTML\n  </h2>\n  <p>Author:\n    <span itemprop="author">\n      Ana Souza\n    </span>\n  </p>\n</article>',
@@ -24512,16 +26396,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um elemento personalizado é uma tag nova, criada por você: uma classe que estende HTMLElement e é registrada com customElements.define. O nome precisa ter um hífen.',
-            endParagraph: 'O método connectedCallback roda quando o elemento entra no documento.',
+            introduction: {
+              text: 'Um elemento personalizado é uma tag nova, criada por você: uma classe que estende HTMLElement e é registrada com customElements.define. O nome precisa ter um hífen.',
+              persona: 'cody'
+            },
+            closing: 'O método connectedCallback roda quando o elemento entra no documento.',
             highlight: ['customElements.define', 'hífen', 'connectedCallback'],
             codeLanguage: 'HTML',
             code: '<my-card title="A"></my-card>\n\n<script>\nclass MyCard extends HTMLElement {\n  connectedCallback() {\n    this.textContent =\n      this.getAttribute("title");\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A custom element is a new tag made by you: a class that extends HTMLElement and is registered with customElements.define. The name must contain a hyphen.',
-            endParagraph: 'The connectedCallback method runs when the element enters the document.',
+            introduction: {
+              text: 'A custom element is a new tag made by you: a class that extends HTMLElement and is registered with customElements.define. The name must contain a hyphen.',
+              persona: 'cody'
+            },
+            closing: 'The connectedCallback method runs when the element enters the document.',
             highlight: ['customElements.define', 'hyphen', 'connectedCallback'],
             codeLanguage: 'HTML',
             code: '<my-card title="A"></my-card>\n\n<script>\nclass MyCard extends HTMLElement {\n  connectedCallback() {\n    this.textContent =\n      this.getAttribute("title");\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
@@ -24533,16 +26423,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Para reagir a mudanças de atributos, liste-os em observedAttributes. Só os atributos dessa lista chamam o attributeChangedCallback.',
-            endParagraph: 'Um atributo fora da lista muda no HTML, mas o método não é chamado.',
+            introduction: {
+              text: 'Para reagir a mudanças de atributos, liste-os em observedAttributes. Só os atributos dessa lista chamam o attributeChangedCallback.',
+              persona: 'neutral'
+            },
+            closing: 'Um atributo fora da lista muda no HTML, mas o método não é chamado.',
             highlight: ['observedAttributes', 'attributeChangedCallback'],
             codeLanguage: 'HTML',
             code: '<script>\nclass MyCard extends HTMLElement {\n  static observedAttributes = ["title"];\n\n  attributeChangedCallback(name, old, now) {\n    this.textContent = now;\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'To react to attribute changes, list them in observedAttributes. Only the attributes on that list call attributeChangedCallback.',
-            endParagraph: 'An attribute outside the list changes in the HTML, but the method is not called.',
+            introduction: {
+              text: 'To react to attribute changes, list them in observedAttributes. Only the attributes on that list call attributeChangedCallback.',
+              persona: 'neutral'
+            },
+            closing: 'An attribute outside the list changes in the HTML, but the method is not called.',
             highlight: ['observedAttributes', 'attributeChangedCallback'],
             codeLanguage: 'HTML',
             code: '<script>\nclass MyCard extends HTMLElement {\n  static observedAttributes = ["title"];\n\n  attributeChangedCallback(name, old, now) {\n    this.textContent = now;\n  }\n}\ncustomElements.define("my-card", MyCard);\n</script>',
@@ -24640,16 +26536,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O próprio HTML valida formulários: required, pattern, minlength e type="email". Com um campo inválido, o navegador barra o envio e mostra a mensagem.',
-            endParagraph: 'O pattern precisa casar com o valor inteiro, e um campo vazio só é recusado por required.',
+            introduction: {
+              text: 'O próprio HTML valida formulários: required, pattern, minlength e type="email". Com um campo inválido, o navegador barra o envio e mostra a mensagem.',
+              persona: 'cody'
+            },
+            closing: 'O pattern precisa casar com o valor inteiro, e um campo vazio só é recusado por required.',
             highlight: ['required', 'pattern', 'minlength'],
             codeLanguage: 'HTML',
             code: '<form>\n  <input name="zip" required\n    pattern="[0-9]{5}-[0-9]{3}">\n  <button>Enviar</button>\n</form>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'HTML itself validates forms: required, pattern, minlength and type="email". With an invalid field, the browser blocks the submit and shows the message.',
-            endParagraph: 'The pattern must match the whole value, and an empty field is only rejected by required.',
+            introduction: {
+              text: 'HTML itself validates forms: required, pattern, minlength and type="email". With an invalid field, the browser blocks the submit and shows the message.',
+              persona: 'cody'
+            },
+            closing: 'The pattern must match the whole value, and an empty field is only rejected by required.',
             highlight: ['required', 'pattern', 'minlength'],
             codeLanguage: 'HTML',
             code: '<form>\n  <input name="zip" required\n    pattern="[0-9]{5}-[0-9]{3}">\n  <button>Send</button>\n</form>',
@@ -24661,8 +26563,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A API de validação deixa o JavaScript participar: checkValidity() diz se o campo é válido e setCustomValidity() define uma mensagem própria.',
-            endParagraph: 'Uma mensagem não vazia torna o campo inválido; só uma string vazia o torna válido de novo.',
+            introduction: {
+              text: 'A API de validação deixa o JavaScript participar: checkValidity() diz se o campo é válido e setCustomValidity() define uma mensagem própria.',
+              persona: 'neutral'
+            },
+            closing: 'Uma mensagem não vazia torna o campo inválido; só uma string vazia o torna válido de novo.',
             highlight: ['checkValidity', 'setCustomValidity'],
             codeLanguage: 'JavaScript',
             code: 'const field =\n  document.querySelector("#pass");\n\nfield.addEventListener("input", () => {\n  field.setCustomValidity(\n    field.value.length < 8 ? "Mínimo de 8" : ""\n  );\n});',
@@ -24670,8 +26575,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'The validation API lets JavaScript take part: checkValidity() says whether the field is valid and setCustomValidity() sets a message of your own.',
-            endParagraph: 'A non-empty message makes the field invalid; only an empty string makes it valid again.',
+            introduction: {
+              text: 'The validation API lets JavaScript take part: checkValidity() says whether the field is valid and setCustomValidity() sets a message of your own.',
+              persona: 'neutral'
+            },
+            closing: 'A non-empty message makes the field invalid; only an empty string makes it valid again.',
             highlight: ['checkValidity', 'setCustomValidity'],
             codeLanguage: 'JavaScript',
             code: 'const field =\n  document.querySelector("#pass");\n\nfield.addEventListener("input", () => {\n  field.setCustomValidity(\n    field.value.length < 8 ? "At least 8" : ""\n  );\n});',
@@ -24766,16 +26674,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O atributo popover transforma um elemento em uma camada flutuante, escondida até ser aberta. Um botão com popovertarget abre o elemento cujo id ele aponta, sem nenhum JavaScript.',
-            endParagraph: 'Com popover (ou popover="auto"), clicar fora da camada ou apertar Esc a fecha.',
+            introduction: {
+              text: 'O atributo popover transforma um elemento em uma camada flutuante, escondida até ser aberta. Um botão com popovertarget abre o elemento cujo id ele aponta, sem nenhum JavaScript.',
+              persona: 'cody'
+            },
+            closing: 'Com popover (ou popover="auto"), clicar fora da camada ou apertar Esc a fecha.',
             highlight: ['popover', 'popovertarget', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button popovertarget="menu">\n  Menu\n</button>\n\n<div id="menu" popover>\n  Conteúdo do menu\n</div>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The popover attribute turns an element into a floating layer, hidden until it is opened. A button with popovertarget opens the element whose id it points to, with no JavaScript at all.',
-            endParagraph: 'With popover (or popover="auto"), clicking outside the layer or pressing Esc closes it.',
+            introduction: {
+              text: 'The popover attribute turns an element into a floating layer, hidden until it is opened. A button with popovertarget opens the element whose id it points to, with no JavaScript at all.',
+              persona: 'cody'
+            },
+            closing: 'With popover (or popover="auto"), clicking outside the layer or pressing Esc closes it.',
             highlight: ['popover', 'popovertarget', 'JavaScript'],
             codeLanguage: 'HTML',
             code: '<button popovertarget="menu">\n  Menu\n</button>\n\n<div id="menu" popover>\n  Menu content\n</div>',
@@ -24787,16 +26701,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Com popover="manual", nada fecha a camada sozinho. Só os botões com popovertargetaction mexem nela: show abre, hide fecha e toggle alterna (o padrão).',
-            endParagraph: 'Use manual para dicas e avisos que devem ficar na tela até a pessoa decidir.',
+            introduction: {
+              text: 'Com popover="manual", nada fecha a camada sozinho. Só os botões com popovertargetaction mexem nela: show abre, hide fecha e toggle alterna (o padrão).',
+              persona: 'neutral'
+            },
+            closing: 'Use manual para dicas e avisos que devem ficar na tela até a pessoa decidir.',
             highlight: ['manual', 'popovertargetaction', 'show', 'hide', 'toggle'],
             codeLanguage: 'HTML',
             code: '<button popovertarget="tip"\n  popovertargetaction="show">\n  Abrir\n</button>\n<button popovertarget="tip"\n  popovertargetaction="hide">\n  Fechar\n</button>\n\n<p id="tip" popover="manual">\n  Dica fixa\n</p>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'With popover="manual", nothing closes the layer on its own. Only buttons with popovertargetaction change it: show opens, hide closes and toggle switches (the default).',
-            endParagraph: 'Use manual for tips and notices that must stay on screen until the person decides.',
+            introduction: {
+              text: 'With popover="manual", nothing closes the layer on its own. Only buttons with popovertargetaction change it: show opens, hide closes and toggle switches (the default).',
+              persona: 'neutral'
+            },
+            closing: 'Use manual for tips and notices that must stay on screen until the person decides.',
             highlight: ['manual', 'popovertargetaction', 'show', 'hide', 'toggle'],
             codeLanguage: 'HTML',
             code: '<button popovertarget="tip"\n  popovertargetaction="show">\n  Open\n</button>\n<button popovertarget="tip"\n  popovertargetaction="hide">\n  Close\n</button>\n\n<p id="tip" popover="manual">\n  Pinned tip\n</p>',
@@ -24808,8 +26728,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Pelo JavaScript, showPopover(), hidePopover() e togglePopover() fazem o mesmo que os botões. O evento toggle avisa a mudança, e newState vale open ou closed.',
-            endParagraph: 'O evento toggle dispara depois que o estado já mudou.',
+            introduction: {
+              text: 'Pelo JavaScript, showPopover(), hidePopover() e togglePopover() fazem o mesmo que os botões. O evento toggle avisa a mudança, e newState vale open ou closed.',
+              persona: 'neutral'
+            },
+            closing: 'O evento toggle dispara depois que o estado já mudou.',
             highlight: ['showPopover', 'hidePopover', 'togglePopover', 'toggle', 'newState'],
             codeLanguage: 'JavaScript',
             code: 'const menu =\n  document.querySelector("#menu");\n\nmenu.showPopover();\nmenu.hidePopover();\nmenu.togglePopover();\n\nmenu.addEventListener("toggle", (e) => {\n  console.log(e.newState);\n});',
@@ -24817,8 +26740,11 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'From JavaScript, showPopover(), hidePopover() and togglePopover() do the same as the buttons. The toggle event reports the change, and newState is open or closed.',
-            endParagraph: 'The toggle event fires after the state has already changed.',
+            introduction: {
+              text: 'From JavaScript, showPopover(), hidePopover() and togglePopover() do the same as the buttons. The toggle event reports the change, and newState is open or closed.',
+              persona: 'neutral'
+            },
+            closing: 'The toggle event fires after the state has already changed.',
             highlight: ['showPopover', 'hidePopover', 'togglePopover', 'toggle', 'newState'],
             codeLanguage: 'JavaScript',
             code: 'const menu =\n  document.querySelector("#menu");\n\nmenu.showPopover();\nmenu.hidePopover();\nmenu.togglePopover();\n\nmenu.addEventListener("toggle", (e) => {\n  console.log(e.newState);\n});',
@@ -24917,16 +26843,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um script comum no head faz o navegador parar de ler o HTML até ele ser baixado e executado. Nesse momento, os elementos do body ainda não existem para ele.',
-            endParagraph: 'Por isso os scripts ficavam no fim do body. Hoje existem defer e async.',
+            introduction: {
+              text: 'Um script comum no head faz o navegador parar de ler o HTML até ele ser baixado e executado. Nesse momento, os elementos do body ainda não existem para ele.',
+              persona: 'cody'
+            },
+            closing: 'Por isso os scripts ficavam no fim do body. Hoje existem defer e async.',
             highlight: ['head', 'body', 'defer', 'async'],
             codeLanguage: 'HTML',
             code: '<head>\n  <script src="app.js"></script>\n</head>\n<body>\n  <h1>Olá</h1>\n</body>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A plain script in the head makes the browser stop reading the HTML until it has been downloaded and run. At that point, the elements of the body do not exist for it yet.',
-            endParagraph: 'That is why scripts used to sit at the end of the body. Today there are defer and async.',
+            introduction: {
+              text: 'A plain script in the head makes the browser stop reading the HTML until it has been downloaded and run. At that point, the elements of the body do not exist for it yet.',
+              persona: 'cody'
+            },
+            closing: 'That is why scripts used to sit at the end of the body. Today there are defer and async.',
             highlight: ['head', 'body', 'defer', 'async'],
             codeLanguage: 'HTML',
             code: '<head>\n  <script src="app.js"></script>\n</head>\n<body>\n  <h1>Hello</h1>\n</body>',
@@ -24938,16 +26870,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Com defer, o script baixa em paralelo e só roda depois de o HTML ser lido, na ordem em que aparecem. Com async, ele roda assim que termina de baixar, em qualquer ordem.',
-            endParagraph: 'Use defer para scripts que mexem no DOM ou dependem uns dos outros, e async para os independentes, como métricas.',
+            introduction: {
+              text: 'Com defer, o script baixa em paralelo e só roda depois de o HTML ser lido, na ordem em que aparecem. Com async, ele roda assim que termina de baixar, em qualquer ordem.',
+              persona: 'neutral'
+            },
+            closing: 'Use defer para scripts que mexem no DOM ou dependem uns dos outros, e async para os independentes, como métricas.',
             highlight: ['defer', 'async'],
             codeLanguage: 'HTML',
             code: '<script src="a.js" defer></script>\n<script src="b.js" defer></script>\n\n<script src="c.js" async></script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'With defer, the script downloads in parallel and only runs after the HTML has been read, in the order they appear. With async, it runs as soon as it finishes downloading, in any order.',
-            endParagraph: 'Use defer for scripts that touch the DOM or depend on each other, and async for independent ones, such as analytics.',
+            introduction: {
+              text: 'With defer, the script downloads in parallel and only runs after the HTML has been read, in the order they appear. With async, it runs as soon as it finishes downloading, in any order.',
+              persona: 'neutral'
+            },
+            closing: 'Use defer for scripts that touch the DOM or depend on each other, and async for independent ones, such as analytics.',
             highlight: ['defer', 'async'],
             codeLanguage: 'HTML',
             code: '<script src="a.js" defer></script>\n<script src="b.js" defer></script>\n\n<script src="c.js" async></script>',
@@ -24959,16 +26897,22 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um script type="module" já é adiado, como se tivesse defer, sem precisar escrever o atributo. É o jeito moderno de organizar o JavaScript em arquivos.',
-            endParagraph: 'Se o script é um módulo, ele também só roda depois de o HTML ser lido.',
+            introduction: {
+              text: 'Um script type="module" já é adiado, como se tivesse defer, sem precisar escrever o atributo. É o jeito moderno de organizar o JavaScript em arquivos.',
+              persona: 'neutral'
+            },
+            closing: 'Se o script é um módulo, ele também só roda depois de o HTML ser lido.',
             highlight: ['module', 'defer'],
             codeLanguage: 'HTML',
             code: '<script type="module"\n  src="app.js"></script>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A script type="module" is already deferred, as if it had defer, with no need to write the attribute. It is the modern way to organize JavaScript into files.',
-            endParagraph: 'When the script is a module, it also only runs after the HTML has been read.',
+            introduction: {
+              text: 'A script type="module" is already deferred, as if it had defer, with no need to write the attribute. It is the modern way to organize JavaScript into files.',
+              persona: 'neutral'
+            },
+            closing: 'When the script is a module, it also only runs after the HTML has been read.',
             highlight: ['module', 'defer'],
             codeLanguage: 'HTML',
             code: '<script type="module"\n  src="app.js"></script>',
@@ -25114,16 +27058,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Media queries permitem aplicar regras CSS apenas quando certas condições são atendidas, como a largura da tela.',
-            endParagraph: 'Elas são a base para criar interfaces que se adaptam a diferentes tamanhos de tela.',
+            introduction: {
+              text: 'Media queries permitem aplicar regras CSS apenas quando certas condições são atendidas, como a largura da tela.',
+              persona: 'cody'
+            },
+            closing: 'Elas são a base para criar interfaces que se adaptam a diferentes tamanhos de tela.',
             highlight: ['media queries', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n}\n\n@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Media queries let you apply CSS rules only when certain conditions are met, like the width of the screen.',
-            endParagraph: 'They are the foundation for building interfaces that adapt to different screen sizes.',
+            introduction: {
+              text: 'Media queries let you apply CSS rules only when certain conditions are met, like the width of the screen.',
+              persona: 'cody'
+            },
+            closing: 'They are the foundation for building interfaces that adapt to different screen sizes.',
             highlight: ['media queries', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n}\n\n@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
@@ -25290,16 +27240,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'No desenvolvimento mobile-first, começamos criando a interface para telas menores e adicionamos ajustes para telas maiores.',
-            endParagraph: 'A abordagem mobile-first começa com uma experiência simples e amplia o layout conforme existe mais espaço disponível.',
+            introduction: {
+              text: 'No desenvolvimento mobile-first, começamos criando a interface para telas menores e adicionamos ajustes para telas maiores.',
+              persona: 'cody'
+            },
+            closing: 'A abordagem mobile-first começa com uma experiência simples e amplia o layout conforme existe mais espaço disponível.',
             highlight: ['mobile-first'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 768px) {\n  .container {\n    flex-direction: row;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In mobile-first development, we start by building the interface for smaller screens and add adjustments for larger screens.',
-            endParagraph: 'The mobile-first approach starts with a simple experience and expands the layout as more space becomes available.',
+            introduction: {
+              text: 'In mobile-first development, we start by building the interface for smaller screens and add adjustments for larger screens.',
+              persona: 'cody'
+            },
+            closing: 'The mobile-first approach starts with a simple experience and expands the layout as more space becomes available.',
             highlight: ['mobile-first'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-direction: column;\n}\n\n@media (min-width: 768px) {\n  .container {\n    flex-direction: row;\n  }\n}',
@@ -25311,16 +27267,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Breakpoints são os pontos em que o layout muda de comportamento. Projetos costumam definir alguns breakpoints padrão, como celular, tablet e desktop.',
-            endParagraph: 'Não é preciso um breakpoint para cada tamanho possível — só para os pontos em que o layout realmente precisa mudar.',
+            introduction: {
+              text: 'Breakpoints são os pontos em que o layout muda de comportamento. Projetos costumam definir alguns breakpoints padrão, como celular, tablet e desktop.',
+              persona: 'neutral'
+            },
+            closing: 'Não é preciso um breakpoint para cada tamanho possível — só para os pontos em que o layout realmente precisa mudar.',
             highlight: ['breakpoints'],
             codeLanguage: 'CSS',
             code: '@media (min-width: 480px) {\n  /* tablet pequeno */\n}\n\n@media (min-width: 768px) {\n  /* tablet */\n}\n\n@media (min-width: 1024px) {\n  /* desktop */\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Breakpoints are the points where the layout changes behavior. Projects usually define a few standard breakpoints, like phone, tablet and desktop.',
-            endParagraph: 'You do not need a breakpoint for every possible size — only for the points where the layout really needs to change.',
+            introduction: {
+              text: 'Breakpoints are the points where the layout changes behavior. Projects usually define a few standard breakpoints, like phone, tablet and desktop.',
+              persona: 'neutral'
+            },
+            closing: 'You do not need a breakpoint for every possible size — only for the points where the layout really needs to change.',
             highlight: ['breakpoints'],
             codeLanguage: 'CSS',
             code: '@media (min-width: 480px) {\n  /* tablet pequeno */\n}\n\n@media (min-width: 768px) {\n  /* tablet */\n}\n\n@media (min-width: 1024px) {\n  /* desktop */\n}',
@@ -25483,8 +27445,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'clamp() define um valor com um mínimo, um valor preferido e um máximo. É útil para texto que precisa acompanhar o tamanho da tela sem ficar pequeno ou gigante demais.',
-            endParagraph: 'O texto cresce com a tela, mas nunca passa dos limites definidos em clamp().',
+            introduction: {
+              text: 'clamp() define um valor com um mínimo, um valor preferido e um máximo. É útil para texto que precisa acompanhar o tamanho da tela sem ficar pequeno ou gigante demais.',
+              persona: 'cody'
+            },
+            closing: 'O texto cresce com a tela, mas nunca passa dos limites definidos em clamp().',
             highlight: ['clamp'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size: clamp(2rem, 5vw, 4rem);\n}',
@@ -25496,8 +27461,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'clamp() sets a value with a minimum, a preferred value and a maximum. It is useful for text that needs to follow the screen size without becoming too small or too huge.',
-            endParagraph: 'The text grows with the screen, but never crosses the limits defined in clamp().',
+            introduction: {
+              text: 'clamp() sets a value with a minimum, a preferred value and a maximum. It is useful for text that needs to follow the screen size without becoming too small or too huge.',
+              persona: 'cody'
+            },
+            closing: 'The text grows with the screen, but never crosses the limits defined in clamp().',
             highlight: ['clamp'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size: clamp(2rem, 5vw, 4rem);\n}',
@@ -25665,16 +27633,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'transition permite suavizar a mudança entre dois estados de uma propriedade CSS.',
-            endParagraph: 'Transições são úteis para tornar mudanças de estado mais naturais sem precisar criar uma animação completa.',
+            introduction: {
+              text: 'transition permite suavizar a mudança entre dois estados de uma propriedade CSS.',
+              persona: 'cody'
+            },
+            closing: 'Transições são úteis para tornar mudanças de estado mais naturais sem precisar criar uma animação completa.',
             highlight: ['transition', 'CSS'],
             codeLanguage: 'CSS',
             code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'transition lets you smooth the change between two states of a CSS property.',
-            endParagraph: 'Transitions are useful for making state changes feel more natural without having to build a full animation.',
+            introduction: {
+              text: 'transition lets you smooth the change between two states of a CSS property.',
+              persona: 'cody'
+            },
+            closing: 'Transitions are useful for making state changes feel more natural without having to build a full animation.',
             highlight: ['transition', 'CSS'],
             codeLanguage: 'CSS',
             code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
@@ -25837,16 +27811,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A propriedade transform permite mover, girar, aumentar ou inclinar elementos visualmente.',
-            endParagraph: 'Transformações alteram a apresentação visual do elemento sem modificar sua posição original no fluxo do documento.',
+            introduction: {
+              text: 'A propriedade transform permite mover, girar, aumentar ou inclinar elementos visualmente.',
+              persona: 'cody'
+            },
+            closing: 'Transformações alteram a apresentação visual do elemento sem modificar sua posição original no fluxo do documento.',
             highlight: ['transform'],
             codeLanguage: 'CSS',
             code: '.card:hover {\n  transform:\n    translateY(-4px)\n    scale(1.02);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The transform property lets you move, rotate, scale or skew elements visually.',
-            endParagraph: 'Transforms change how the element looks without changing its original position in the flow of the document.',
+            introduction: {
+              text: 'The transform property lets you move, rotate, scale or skew elements visually.',
+              persona: 'cody'
+            },
+            closing: 'Transforms change how the element looks without changing its original position in the flow of the document.',
             highlight: ['transform'],
             codeLanguage: 'CSS',
             code: '.card:hover {\n  transform:\n    translateY(-4px)\n    scale(1.02);\n}',
@@ -25858,16 +27838,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos combinar diferentes valores em transform para criar efeitos visuais variados.',
-            endParagraph: 'Transformações simples podem produzir interfaces mais interativas quando usadas com moderação.',
+            introduction: {
+              text: 'Podemos combinar diferentes valores em transform para criar efeitos visuais variados.',
+              persona: 'neutral'
+            },
+            closing: 'Transformações simples podem produzir interfaces mais interativas quando usadas com moderação.',
             highlight: ['transform'],
             codeLanguage: 'CSS',
             code: '.icon:hover {\n  transform:\n    rotate(10deg)\n    scale(1.1);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can combine different values in transform to create varied visual effects.',
-            endParagraph: 'Simple transforms can make interfaces feel more interactive when used with restraint.',
+            introduction: {
+              text: 'We can combine different values in transform to create varied visual effects.',
+              persona: 'neutral'
+            },
+            closing: 'Simple transforms can make interfaces feel more interactive when used with restraint.',
             highlight: ['transform'],
             codeLanguage: 'CSS',
             code: '.icon:hover {\n  transform:\n    rotate(10deg)\n    scale(1.1);\n}',
@@ -26081,16 +28067,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: '@keyframes define os estados que uma animação deve percorrer ao longo do tempo.',
-            endParagraph: 'Keyframes descrevem a evolução visual de um elemento entre diferentes estados.',
+            introduction: {
+              text: '@keyframes define os estados que uma animação deve percorrer ao longo do tempo.',
+              persona: 'cody'
+            },
+            closing: 'Keyframes descrevem a evolução visual de um elemento entre diferentes estados.',
             highlight: ['keyframes'],
             codeLanguage: 'CSS',
             code: '@keyframes aparecer {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: '@keyframes defines the states an animation should move through over time.',
-            endParagraph: 'Keyframes describe how an element visually evolves between different states.',
+            introduction: {
+              text: '@keyframes defines the states an animation should move through over time.',
+              persona: 'cody'
+            },
+            closing: 'Keyframes describe how an element visually evolves between different states.',
             highlight: ['keyframes'],
             codeLanguage: 'CSS',
             code: '@keyframes appear {\n  from {\n    opacity: 0;\n  }\n\n  to {\n    opacity: 1;\n  }\n}',
@@ -26102,8 +28094,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Depois de criar os keyframes, usamos animation para aplicar a animação a um elemento.',
-            endParagraph: '@keyframes define o que acontece. animation define como essa sequência será aplicada.',
+            introduction: {
+              text: 'Depois de criar os keyframes, usamos animation para aplicar a animação a um elemento.',
+              persona: 'neutral'
+            },
+            closing: '@keyframes define o que acontece. animation define como essa sequência será aplicada.',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.card {\n  animation:\n    aparecer 0.5s ease;\n}',
@@ -26115,8 +28110,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'After creating the keyframes, we use animation to apply the animation to an element.',
-            endParagraph: '@keyframes defines what happens. animation defines how that sequence gets applied.',
+            introduction: {
+              text: 'After creating the keyframes, we use animation to apply the animation to an element.',
+              persona: 'neutral'
+            },
+            closing: '@keyframes defines what happens. animation defines how that sequence gets applied.',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.card {\n  animation:\n    appear 0.5s ease;\n}',
@@ -26284,16 +28282,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos combinar várias propriedades dentro do mesmo @keyframes. Aqui, opacity e transform mudam juntos.',
-            endParagraph: 'Combinar propriedades cria animações mais ricas sem precisar de várias animações separadas.',
+            introduction: {
+              text: 'Podemos combinar várias propriedades dentro do mesmo @keyframes. Aqui, opacity e transform mudam juntos.',
+              persona: 'cody'
+            },
+            closing: 'Combinar propriedades cria animações mais ricas sem precisar de várias animações separadas.',
             highlight: ['keyframes', 'opacity', 'transform'],
             codeLanguage: 'CSS',
             code: '@keyframes entrar {\n  from {\n    opacity: 0;\n    transform: translateY(20px);\n  }\n\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can combine several properties inside the same @keyframes. Here, opacity and transform change together.',
-            endParagraph: 'Combining properties creates richer animations without needing several separate animations.',
+            introduction: {
+              text: 'We can combine several properties inside the same @keyframes. Here, opacity and transform change together.',
+              persona: 'cody'
+            },
+            closing: 'Combining properties creates richer animations without needing several separate animations.',
             highlight: ['keyframes', 'opacity', 'transform'],
             codeLanguage: 'CSS',
             code: '@keyframes enter {\n  from {\n    opacity: 0;\n    transform: translateY(20px);\n  }\n\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}',
@@ -26305,8 +28309,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Depois de definir o @keyframes, aplicamos com animation, como em qualquer outra animação.',
-            endParagraph: 'Uma boa animação geralmente combina poucas propriedades bem escolhidas, em vez de muitos efeitos ao mesmo tempo.',
+            introduction: {
+              text: 'Depois de definir o @keyframes, aplicamos com animation, como em qualquer outra animação.',
+              persona: 'neutral'
+            },
+            closing: 'Uma boa animação geralmente combina poucas propriedades bem escolhidas, em vez de muitos efeitos ao mesmo tempo.',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.box {\n  animation:\n    entrar 0.6s ease;\n}',
@@ -26318,8 +28325,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'After defining the @keyframes, we apply it with animation, just like any other animation.',
-            endParagraph: 'A good animation usually combines a few well-chosen properties, instead of many effects at once.',
+            introduction: {
+              text: 'After defining the @keyframes, we apply it with animation, just like any other animation.',
+              persona: 'neutral'
+            },
+            closing: 'A good animation usually combines a few well-chosen properties, instead of many effects at once.',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.box {\n  animation:\n    enter 0.6s ease;\n}',
@@ -26485,16 +28495,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'calc() permite combinar diferentes unidades em um único cálculo, como porcentagem com pixels.',
-            endParagraph: 'calc() é útil quando um valor fixo precisa conviver com um valor relativo na mesma conta.',
+            introduction: {
+              text: 'calc() permite combinar diferentes unidades em um único cálculo, como porcentagem com pixels.',
+              persona: 'cody'
+            },
+            closing: 'calc() é útil quando um valor fixo precisa conviver com um valor relativo na mesma conta.',
             highlight: ['calc'],
             codeLanguage: 'CSS',
             code: '.sidebar {\n  width: calc(100% - 240px);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'calc() lets you combine different units in a single calculation, like a percentage with pixels.',
-            endParagraph: 'calc() is useful when a fixed value needs to coexist with a relative value in the same calculation.',
+            introduction: {
+              text: 'calc() lets you combine different units in a single calculation, like a percentage with pixels.',
+              persona: 'cody'
+            },
+            closing: 'calc() is useful when a fixed value needs to coexist with a relative value in the same calculation.',
             highlight: ['calc'],
             codeLanguage: 'CSS',
             code: '.sidebar {\n  width: calc(100% - 240px);\n}',
@@ -26506,16 +28522,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'min() escolhe o menor entre os valores informados, e max() escolhe o maior. clamp() combina os dois com um valor preferido no meio.',
-            endParagraph: 'Essas funções deixam o CSS reagir ao contexto sem precisar de uma media query para cada caso.',
+            introduction: {
+              text: 'min() escolhe o menor entre os valores informados, e max() escolhe o maior. clamp() combina os dois com um valor preferido no meio.',
+              persona: 'neutral'
+            },
+            closing: 'Essas funções deixam o CSS reagir ao contexto sem precisar de uma media query para cada caso.',
             highlight: ['min', 'max', 'clamp'],
             codeLanguage: 'CSS',
             code: '.box {\n  width: min(90%, 400px);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'min() picks the smallest of the given values, and max() picks the largest. clamp() combines both with a preferred value in the middle.',
-            endParagraph: 'These functions let CSS react to context without needing a media query for every case.',
+            introduction: {
+              text: 'min() picks the smallest of the given values, and max() picks the largest. clamp() combines both with a preferred value in the middle.',
+              persona: 'neutral'
+            },
+            closing: 'These functions let CSS react to context without needing a media query for every case.',
             highlight: ['min', 'max', 'clamp'],
             codeLanguage: 'CSS',
             code: '.box {\n  width: min(90%, 400px);\n}',
@@ -26729,8 +28751,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Alguns seletores modernos ajudam a escrever CSS mais direto. :not() seleciona elementos que não correspondem a um seletor. :is() e :where() agrupam vários seletores em um só, evitando repetição.',
-            endParagraph: 'A diferença entre :is() e :where() é sutil: :where() nunca aumenta a especificidade do seletor.',
+            introduction: {
+              text: 'Alguns seletores modernos ajudam a escrever CSS mais direto. :not() seleciona elementos que não correspondem a um seletor. :is() e :where() agrupam vários seletores em um só, evitando repetição.',
+              persona: 'cody'
+            },
+            closing: 'A diferença entre :is() e :where() é sutil: :where() nunca aumenta a especificidade do seletor.',
             highlight: ['seletor', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p:not(.destaque) {\n  color: gray;\n}\n\n:is(h1, h2, h3) {\n  font-weight: bold;\n}',
@@ -26742,8 +28767,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A few modern selectors help write more direct CSS. :not() selects elements that do not match a selector. :is() and :where() group several selectors into one, avoiding repetition.',
-            endParagraph: 'The difference between :is() and :where() is subtle: :where() never adds to the specificity of the selector.',
+            introduction: {
+              text: 'A few modern selectors help write more direct CSS. :not() selects elements that do not match a selector. :is() and :where() group several selectors into one, avoiding repetition.',
+              persona: 'cody'
+            },
+            closing: 'The difference between :is() and :where() is subtle: :where() never adds to the specificity of the selector.',
             highlight: ['selector', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p:not(.destaque) {\n  color: gray;\n}\n\n:is(h1, h2, h3) {\n  font-weight: bold;\n}',
@@ -26760,8 +28788,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: ':has() permite selecionar um elemento com base no que existe dentro dele — algo que o CSS não conseguia fazer antes.',
-            endParagraph: 'Esse seletor abre espaço para estilizar um componente de forma condicional, sem precisar de JavaScript.',
+            introduction: {
+              text: ':has() permite selecionar um elemento com base no que existe dentro dele — algo que o CSS não conseguia fazer antes.',
+              persona: 'neutral'
+            },
+            closing: 'Esse seletor abre espaço para estilizar um componente de forma condicional, sem precisar de JavaScript.',
             highlight: ['CSS', 'JavaScript'],
             codeLanguage: 'CSS',
             code: '.card:has(img) {\n  border: 1px solid gray;\n}',
@@ -26773,8 +28804,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: ':has() lets you select an element based on what exists inside it — something CSS could not do before.',
-            endParagraph: 'This selector opens the door to styling a component conditionally, without needing JavaScript.',
+            introduction: {
+              text: ':has() lets you select an element based on what exists inside it — something CSS could not do before.',
+              persona: 'neutral'
+            },
+            closing: 'This selector opens the door to styling a component conditionally, without needing JavaScript.',
             highlight: ['CSS', 'JavaScript'],
             codeLanguage: 'CSS',
             code: '.card:has(img) {\n  border: 1px solid gray;\n}',
@@ -26985,9 +29019,14 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando duas regras CSS competem pelo mesmo elemento, o navegador segue critérios para decidir qual vale — isso é a cascata.',
-            secondParagraph: 'Entre regras com a mesma especificidade, a que aparece por último no CSS vence.',
-            endParagraph: 'Nesse exemplo, o parágrafo fica azul, porque essa regra aparece depois.',
+            introduction: {
+              text: 'Quando duas regras CSS competem pelo mesmo elemento, o navegador segue critérios para decidir qual vale — isso é a cascata.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Entre regras com a mesma especificidade, a que aparece por último no CSS vence.'
+            },
+            closing: 'Nesse exemplo, o parágrafo fica azul, porque essa regra aparece depois.',
             highlight: ['cascata', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
@@ -26999,9 +29038,14 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'When two CSS rules compete for the same element, the browser follows criteria to decide which one wins — that is the cascade.',
-            secondParagraph: 'Between rules with the same specificity, the one that appears last in the CSS wins.',
-            endParagraph: 'In this example, the paragraph turns blue, because that rule appears later.',
+            introduction: {
+              text: 'When two CSS rules compete for the same element, the browser follows criteria to decide which one wins — that is the cascade.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Between rules with the same specificity, the one that appears last in the CSS wins.'
+            },
+            closing: 'In this example, the paragraph turns blue, because that rule appears later.',
             highlight: ['cascade', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
@@ -27171,8 +29215,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Especificidade é o peso que o navegador dá a cada seletor. Um id pesa mais que uma classe, e uma classe pesa mais que uma tag.',
-            endParagraph: 'Mesmo que a regra da tag venha depois, a classe vence porque tem mais especificidade.',
+            introduction: {
+              text: 'Especificidade é o peso que o navegador dá a cada seletor. Um id pesa mais que uma classe, e uma classe pesa mais que uma tag.',
+              persona: 'cody'
+            },
+            closing: 'Mesmo que a regra da tag venha depois, a classe vence porque tem mais especificidade.',
             highlight: ['especificidade'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
@@ -27184,8 +29231,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Specificity is the weight the browser gives to each selector. An id weighs more than a class, and a class weighs more than a tag.',
-            endParagraph: 'Even though the tag rule comes later, the class wins because it has more specificity.',
+            introduction: {
+              text: 'Specificity is the weight the browser gives to each selector. An id weighs more than a class, and a class weighs more than a tag.',
+              persona: 'cody'
+            },
+            closing: 'Even though the tag rule comes later, the class wins because it has more specificity.',
             highlight: ['specificity'],
             codeLanguage: 'CSS',
             code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
@@ -27202,18 +29252,28 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Algumas propriedades, como color e font-family, são herdadas pelos elementos filhos automaticamente.',
-            secondParagraph: '!important ignora a especificidade normal e deve ser usado com cautela — costuma dificultar a manutenção do CSS.',
-            endParagraph: 'Prefira ajustar a especificidade da regra a recorrer a !important.',
+            introduction: {
+              text: 'Algumas propriedades, como color e font-family, são herdadas pelos elementos filhos automaticamente.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: '!important ignora a especificidade normal e deve ser usado com cautela — costuma dificultar a manutenção do CSS.'
+            },
+            closing: 'Prefira ajustar a especificidade da regra a recorrer a !important.',
             highlight: ['herdadas', 'important'],
             codeLanguage: 'CSS',
             code: '.container {\n  color: blue !important;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Some properties, like color and font-family, are inherited by child elements automatically.',
-            secondParagraph: '!important ignores normal specificity and should be used with caution — it tends to make CSS harder to maintain.',
-            endParagraph: 'Prefer adjusting the specificity of the rule over reaching for !important.',
+            introduction: {
+              text: 'Some properties, like color and font-family, are inherited by child elements automatically.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: '!important ignores normal specificity and should be used with caution — it tends to make CSS harder to maintain.'
+            },
+            closing: 'Prefer adjusting the specificity of the rule over reaching for !important.',
             highlight: ['inherited', 'important'],
             codeLanguage: 'CSS',
             code: '.container {\n  color: blue !important;\n}',
@@ -27374,16 +29434,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Media queries reagem ao tamanho da tela inteira. Container queries reagem ao tamanho do elemento pai, não importa o tamanho da tela.',
-            endParagraph: 'Isso é útil para um componente que precisa se adaptar dependendo de onde é usado, não só do tamanho da tela.',
+            introduction: {
+              text: 'Media queries reagem ao tamanho da tela inteira. Container queries reagem ao tamanho do elemento pai, não importa o tamanho da tela.',
+              persona: 'cody'
+            },
+            closing: 'Isso é útil para um componente que precisa se adaptar dependendo de onde é usado, não só do tamanho da tela.',
             highlight: ['container queries', 'media queries'],
             codeLanguage: 'CSS',
             code: '.card-container {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card {\n    display: flex;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Media queries react to the size of the whole screen. Container queries react to the size of the parent element, no matter the screen size.',
-            endParagraph: 'This is useful for a component that needs to adapt depending on where it is used, not just the screen size.',
+            introduction: {
+              text: 'Media queries react to the size of the whole screen. Container queries react to the size of the parent element, no matter the screen size.',
+              persona: 'cody'
+            },
+            closing: 'This is useful for a component that needs to adapt depending on where it is used, not just the screen size.',
             highlight: ['container queries', 'media queries'],
             codeLanguage: 'CSS',
             code: '.card-container {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card {\n    display: flex;\n  }\n}',
@@ -27546,8 +29612,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'aspect-ratio define a proporção entre largura e altura de um elemento, sem precisar calcular a altura manualmente.',
-            endParagraph: 'A altura se ajusta automaticamente para manter a proporção, mesmo que a largura mude.',
+            introduction: {
+              text: 'aspect-ratio define a proporção entre largura e altura de um elemento, sem precisar calcular a altura manualmente.',
+              persona: 'cody'
+            },
+            closing: 'A altura se ajusta automaticamente para manter a proporção, mesmo que a largura mude.',
             highlight: ['aspect-ratio'],
             codeLanguage: 'CSS',
             code: '.thumb {\n  width: 200px;\n  aspect-ratio: 16 / 9;\n  background: gray;\n}',
@@ -27559,8 +29628,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'aspect-ratio sets the proportion between the width and the height of an element, without manually calculating the height.',
-            endParagraph: 'The height adjusts automatically to keep the proportion, even if the width changes.',
+            introduction: {
+              text: 'aspect-ratio sets the proportion between the width and the height of an element, without manually calculating the height.',
+              persona: 'cody'
+            },
+            closing: 'The height adjusts automatically to keep the proportion, even if the width changes.',
             highlight: ['aspect-ratio'],
             codeLanguage: 'CSS',
             code: '.thumb {\n  width: 200px;\n  aspect-ratio: 16 / 9;\n  background: gray;\n}',
@@ -27577,16 +29649,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'object-fit controla como uma imagem preenche a caixa quando a proporção da imagem não é igual à da caixa.',
-            endParagraph: 'cover preenche o espaço cortando o excesso; contain encaixa a imagem inteira, podendo deixar espaço vazio.',
+            introduction: {
+              text: 'object-fit controla como uma imagem preenche a caixa quando a proporção da imagem não é igual à da caixa.',
+              persona: 'neutral'
+            },
+            closing: 'cover preenche o espaço cortando o excesso; contain encaixa a imagem inteira, podendo deixar espaço vazio.',
             highlight: ['object-fit', 'cover', 'contain'],
             codeLanguage: 'CSS',
             code: 'img {\n  width: 200px;\n  height: 120px;\n  object-fit: cover;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'object-fit controls how an image fills the box when the proportion of the image does not match the proportion of the box.',
-            endParagraph: 'cover fills the space by cropping the excess; contain fits the whole image, which can leave empty space.',
+            introduction: {
+              text: 'object-fit controls how an image fills the box when the proportion of the image does not match the proportion of the box.',
+              persona: 'neutral'
+            },
+            closing: 'cover fills the space by cropping the excess; contain fits the whole image, which can leave empty space.',
             highlight: ['object-fit', 'cover', 'contain'],
             codeLanguage: 'CSS',
             code: 'img {\n  width: 200px;\n  height: 120px;\n  object-fit: cover;\n}',
@@ -27774,18 +29852,28 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'scroll-behavior: smooth transforma uma rolagem brusca em uma rolagem suave ao navegar para uma âncora da página.',
-            secondParagraph: 'accent-color muda a cor de controles nativos, como checkbox e radio, sem precisar recriar o componente do zero.',
-            endParagraph: 'São ajustes pequenos que aproveitam comportamento e componentes que o navegador já oferece.',
+            introduction: {
+              text: 'scroll-behavior: smooth transforma uma rolagem brusca em uma rolagem suave ao navegar para uma âncora da página.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'accent-color muda a cor de controles nativos, como checkbox e radio, sem precisar recriar o componente do zero.'
+            },
+            closing: 'São ajustes pequenos que aproveitam comportamento e componentes que o navegador já oferece.',
             highlight: ['scroll-behavior', 'accent-color'],
             codeLanguage: 'CSS',
             code: 'html {\n  scroll-behavior: smooth;\n}\n\ninput[type="checkbox"] {\n  accent-color: blue;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'scroll-behavior: smooth turns an abrupt jump into a smooth scroll when navigating to an anchor on the page.',
-            secondParagraph: 'accent-color changes the color of native controls, like checkbox and radio, without having to rebuild the component from scratch.',
-            endParagraph: 'These are small adjustments that take advantage of behavior and components the browser already offers.',
+            introduction: {
+              text: 'scroll-behavior: smooth turns an abrupt jump into a smooth scroll when navigating to an anchor on the page.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'accent-color changes the color of native controls, like checkbox and radio, without having to rebuild the component from scratch.'
+            },
+            closing: 'These are small adjustments that take advantage of behavior and components the browser already offers.',
             highlight: ['scroll-behavior', 'accent-color'],
             codeLanguage: 'CSS',
             code: 'html {\n  scroll-behavior: smooth;\n}\n\ninput[type="checkbox"] {\n  accent-color: blue;\n}',
@@ -27797,16 +29885,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'backdrop-filter aplica um efeito visual, como desfoque, no conteúdo que fica atrás de um elemento — útil para painéis semitransparentes.',
-            endParagraph: 'O suporte a backdrop-filter varia entre navegadores, então vale sempre ter um visual razoável mesmo sem esse efeito.',
+            introduction: {
+              text: 'backdrop-filter aplica um efeito visual, como desfoque, no conteúdo que fica atrás de um elemento — útil para painéis semitransparentes.',
+              persona: 'neutral'
+            },
+            closing: 'O suporte a backdrop-filter varia entre navegadores, então vale sempre ter um visual razoável mesmo sem esse efeito.',
             highlight: ['backdrop-filter'],
             codeLanguage: 'CSS',
             code: '.painel {\n  background: rgba(255, 255, 255, 0.5);\n  backdrop-filter: blur(8px);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'backdrop-filter applies a visual effect, like blur, to the content behind an element — useful for semi-transparent panels.',
-            endParagraph: 'Support for backdrop-filter varies between browsers, so it is worth always having a reasonable look even without that effect.',
+            introduction: {
+              text: 'backdrop-filter applies a visual effect, like blur, to the content behind an element — useful for semi-transparent panels.',
+              persona: 'neutral'
+            },
+            closing: 'Support for backdrop-filter varies between browsers, so it is worth always having a reasonable look even without that effect.',
             highlight: ['backdrop-filter'],
             codeLanguage: 'CSS',
             code: '.painel {\n  background: rgba(255, 255, 255, 0.5);\n  backdrop-filter: blur(8px);\n}',
@@ -27994,18 +30088,28 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando um elemento recebe foco pelo teclado, o navegador desenha um contorno ao redor dele por padrão — o anel de foco.',
-            secondParagraph: 'Remover esse contorno com outline: none sem colocar nada no lugar deixa quem navega pelo teclado sem saber onde está.',
-            endParagraph: 'Se for personalizar o visual do foco, troque o outline por outro indicador visível, nunca remova sem substituir.',
+            introduction: {
+              text: 'Quando um elemento recebe foco pelo teclado, o navegador desenha um contorno ao redor dele por padrão — o anel de foco.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Remover esse contorno com outline: none sem colocar nada no lugar deixa quem navega pelo teclado sem saber onde está.'
+            },
+            closing: 'Se for personalizar o visual do foco, troque o outline por outro indicador visível, nunca remova sem substituir.',
             highlight: ['foco', 'outline'],
             codeLanguage: 'CSS',
             code: '/* Evite isto sem um substituto */\nbutton:focus {\n  outline: none;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When an element receives keyboard focus, the browser draws an outline around it by default — the focus ring.',
-            secondParagraph: 'Removing that outline with outline: none without putting anything in its place leaves someone navigating by keyboard without knowing where they are.',
-            endParagraph: 'If you want to customize the look of focus, swap the outline for another visible indicator — never remove it without replacing it.',
+            introduction: {
+              text: 'When an element receives keyboard focus, the browser draws an outline around it by default — the focus ring.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Removing that outline with outline: none without putting anything in its place leaves someone navigating by keyboard without knowing where they are.'
+            },
+            closing: 'If you want to customize the look of focus, swap the outline for another visible indicator — never remove it without replacing it.',
             highlight: ['focus', 'outline'],
             codeLanguage: 'CSS',
             code: '/* Evite isto sem um substituto */\nbutton:focus {\n  outline: none;\n}',
@@ -28193,16 +30297,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Algumas pessoas preferem reduzir movimentos na interface. CSS oferece a media query prefers-reduced-motion para respeitar essa preferência.',
-            endParagraph: 'Uma interface avançada também precisa considerar acessibilidade. Animações devem melhorar a experiência, não prejudicá-la.',
+            introduction: {
+              text: 'Algumas pessoas preferem reduzir movimentos na interface. CSS oferece a media query prefers-reduced-motion para respeitar essa preferência.',
+              persona: 'cody'
+            },
+            closing: 'Uma interface avançada também precisa considerar acessibilidade. Animações devem melhorar a experiência, não prejudicá-la.',
             highlight: ['prefers-reduced-motion', 'CSS'],
             codeLanguage: 'CSS',
             code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Some people prefer to reduce motion in the interface. CSS offers a specific media query, prefers-reduced-motion, to respect that preference.',
-            endParagraph: 'An advanced interface also needs to consider accessibility. Animations should improve the experience, not harm it.',
+            introduction: {
+              text: 'Some people prefer to reduce motion in the interface. CSS offers a specific media query, prefers-reduced-motion, to respect that preference.',
+              persona: 'cody'
+            },
+            closing: 'An advanced interface also needs to consider accessibility. Animations should improve the experience, not harm it.',
             highlight: ['prefers-reduced-motion', 'CSS'],
             codeLanguage: 'CSS',
             code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n  }\n}',
@@ -28214,16 +30324,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'prefers-color-scheme detecta se o usuário prefere um tema claro ou escuro no sistema, permitindo que o CSS reaja a essa preferência.',
-            endParagraph: 'Assim, a interface já nasce no tema que a pessoa já escolheu no sistema, sem precisar de um botão extra.',
+            introduction: {
+              text: 'prefers-color-scheme detecta se o usuário prefere um tema claro ou escuro no sistema, permitindo que o CSS reaja a essa preferência.',
+              persona: 'neutral'
+            },
+            closing: 'Assim, a interface já nasce no tema que a pessoa já escolheu no sistema, sem precisar de um botão extra.',
             highlight: ['prefers-color-scheme'],
             codeLanguage: 'CSS',
             code: 'body {\n  background: white;\n  color: black;\n}\n\n@media (prefers-color-scheme: dark) {\n  body {\n    background: black;\n    color: white;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'prefers-color-scheme detects whether the user prefers a light or dark theme at the system level, letting CSS react to that preference.',
-            endParagraph: 'That way, the interface already starts in the theme the person already chose at the system level, without needing an extra toggle.',
+            introduction: {
+              text: 'prefers-color-scheme detects whether the user prefers a light or dark theme at the system level, letting CSS react to that preference.',
+              persona: 'neutral'
+            },
+            closing: 'That way, the interface already starts in the theme the person already chose at the system level, without needing an extra toggle.',
             highlight: ['prefers-color-scheme'],
             codeLanguage: 'CSS',
             code: 'body {\n  background: white;\n  color: black;\n}\n\n@media (prefers-color-scheme: dark) {\n  body {\n    background: black;\n    color: white;\n  }\n}',
@@ -28384,16 +30500,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Contraste suficiente entre texto e fundo, foco visível e navegação por teclado formam a base da acessibilidade em CSS.',
-            endParagraph: 'Esses três pontos resolvem boa parte dos problemas de acessibilidade sem exigir uma auditoria completa de WCAG.',
+            introduction: {
+              text: 'Contraste suficiente entre texto e fundo, foco visível e navegação por teclado formam a base da acessibilidade em CSS.',
+              persona: 'cody'
+            },
+            closing: 'Esses três pontos resolvem boa parte dos problemas de acessibilidade sem exigir uma auditoria completa de WCAG.',
             highlight: ['contraste', 'WCAG'],
             codeLanguage: 'CSS',
             code: '/* Bom contraste: texto escuro em fundo claro */\n.texto {\n  color: #222;\n  background: #fff;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Enough contrast between text and background, visible focus and keyboard navigation form the basis of accessibility in CSS.',
-            endParagraph: 'These three points solve most accessibility problems without requiring a full WCAG audit.',
+            introduction: {
+              text: 'Enough contrast between text and background, visible focus and keyboard navigation form the basis of accessibility in CSS.',
+              persona: 'cody'
+            },
+            closing: 'These three points solve most accessibility problems without requiring a full WCAG audit.',
             highlight: ['contrast', 'WCAG'],
             codeLanguage: 'CSS',
             code: '/* Bom contraste: texto escuro em fundo claro */\n.texto {\n  color: #222;\n  background: #fff;\n}',
@@ -28616,16 +30738,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O @layer agrupa regras em camadas. Quando duas regras disputam a mesma propriedade, vence a camada declarada por último, e a especificidade nem entra na conta.',
-            endParagraph: 'Aqui o link fica verde: a regra a.link é mais específica, mas está numa camada anterior.',
+            introduction: {
+              text: 'O @layer agrupa regras em camadas. Quando duas regras disputam a mesma propriedade, vence a camada declarada por último, e a especificidade nem entra na conta.',
+              persona: 'cody'
+            },
+            closing: 'Aqui o link fica verde: a regra a.link é mais específica, mas está numa camada anterior.',
             highlight: ['@layer', 'camadas', 'especificidade'],
             codeLanguage: 'CSS',
             code: '@layer base, tema;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer tema {\n  a { color: green; }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The @layer rule groups rules into layers. When two rules compete for the same property, the layer declared last wins, and specificity does not even count.',
-            endParagraph: 'Here the link turns green: the a.link rule is more specific, but it sits in an earlier layer.',
+            introduction: {
+              text: 'The @layer rule groups rules into layers. When two rules compete for the same property, the layer declared last wins, and specificity does not even count.',
+              persona: 'cody'
+            },
+            closing: 'Here the link turns green: the a.link rule is more specific, but it sits in an earlier layer.',
             highlight: ['@layer', 'layers', 'specificity'],
             codeLanguage: 'CSS',
             code: '@layer base, theme;\n\n@layer base {\n  a.link { color: blue; }\n}\n\n@layer theme {\n  a { color: green; }\n}',
@@ -28637,16 +30765,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A ordem das camadas é definida na primeira vez que o nome aparece. Declarar @layer reset, base, tema; no começo fixa a ordem de uma vez.',
-            endParagraph: 'Por isso o parágrafo fica verde, mesmo com o bloco reset escrito depois do bloco tema.',
+            introduction: {
+              text: 'A ordem das camadas é definida na primeira vez que o nome aparece. Declarar @layer reset, base, tema; no começo fixa a ordem de uma vez.',
+              persona: 'neutral'
+            },
+            closing: 'Por isso o parágrafo fica verde, mesmo com o bloco reset escrito depois do bloco tema.',
             highlight: ['@layer', 'ordem'],
             codeLanguage: 'CSS',
             code: '@layer reset, base, tema;\n\n@layer tema {\n  p { color: green; }\n}\n\n@layer reset {\n  p { color: black; }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The order of the layers is set the first time each name appears. Declaring @layer reset, base, theme; at the top fixes the order at once.',
-            endParagraph: 'That is why the paragraph turns green, even with the reset block written after the theme block.',
+            introduction: {
+              text: 'The order of the layers is set the first time each name appears. Declaring @layer reset, base, theme; at the top fixes the order at once.',
+              persona: 'neutral'
+            },
+            closing: 'That is why the paragraph turns green, even with the reset block written after the theme block.',
             highlight: ['@layer', 'order'],
             codeLanguage: 'CSS',
             code: '@layer reset, base, theme;\n\n@layer theme {\n  p { color: green; }\n}\n\n@layer reset {\n  p { color: black; }\n}',
@@ -28658,16 +30792,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Estilos fora de qualquer camada vencem os que estão dentro delas, sem precisar de !important. Aqui o parágrafo fica vermelho.',
-            endParagraph: 'Com !important a ordem se inverte: a camada declarada primeiro passa a vencer a declarada depois.',
+            introduction: {
+              text: 'Estilos fora de qualquer camada vencem os que estão dentro delas, sem precisar de !important. Aqui o parágrafo fica vermelho.',
+              persona: 'neutral'
+            },
+            closing: 'Com !important a ordem se inverte: a camada declarada primeiro passa a vencer a declarada depois.',
             highlight: ['fora de qualquer camada', '!important'],
             codeLanguage: 'CSS',
             code: '@layer base {\n  p { color: blue; }\n}\n\np { color: red; }',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Styles outside any layer beat the ones inside layers, with no need for !important. Here the paragraph turns red.',
-            endParagraph: 'With !important the order flips: the layer declared first now beats the one declared later.',
+            introduction: {
+              text: 'Styles outside any layer beat the ones inside layers, with no need for !important. Here the paragraph turns red.',
+              persona: 'neutral'
+            },
+            closing: 'With !important the order flips: the layer declared first now beats the one declared later.',
             highlight: ['outside any layer', '!important'],
             codeLanguage: 'CSS',
             code: '@layer base {\n  p { color: blue; }\n}\n\np { color: red; }',
@@ -28765,16 +30905,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O @property registra uma variável CSS com tipo: syntax diz o tipo, inherits diz se ela é herdada e initial-value dá o valor de partida.',
-            endParagraph: 'Com o tipo, o navegador sabe que --angle é um ângulo, e não só texto.',
+            introduction: {
+              text: 'O @property registra uma variável CSS com tipo: syntax diz o tipo, inherits diz se ela é herdada e initial-value dá o valor de partida.',
+              persona: 'cody'
+            },
+            closing: 'Com o tipo, o navegador sabe que --angle é um ângulo, e não só texto.',
             highlight: ['@property', 'syntax', 'inherits', 'initial-value'],
             codeLanguage: 'CSS',
             code: '@property --angle {\n  syntax: "<angle>";\n  inherits: false;\n  initial-value: 0deg;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The @property rule registers a CSS variable with a type: syntax says the type, inherits says whether it is inherited and initial-value gives the starting value.',
-            endParagraph: 'With the type, the browser knows that --angle is an angle, not just text.',
+            introduction: {
+              text: 'The @property rule registers a CSS variable with a type: syntax says the type, inherits says whether it is inherited and initial-value gives the starting value.',
+              persona: 'cody'
+            },
+            closing: 'With the type, the browser knows that --angle is an angle, not just text.',
             highlight: ['@property', 'syntax', 'inherits', 'initial-value'],
             codeLanguage: 'CSS',
             code: '@property --angle {\n  syntax: "<angle>";\n  inherits: false;\n  initial-value: 0deg;\n}',
@@ -28786,16 +30932,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma variável registrada pode ser animada. Sem o registro, o navegador a trata como texto, e a transição troca o valor de uma vez.',
-            endParagraph: 'Aqui o gradiente gira suavemente quando o mouse passa por cima.',
+            introduction: {
+              text: 'Uma variável registrada pode ser animada. Sem o registro, o navegador a trata como texto, e a transição troca o valor de uma vez.',
+              persona: 'neutral'
+            },
+            closing: 'Aqui o gradiente gira suavemente quando o mouse passa por cima.',
             highlight: ['animada', 'transição'],
             codeLanguage: 'CSS',
             code: '.card {\n  background: conic-gradient(\n    from var(--angle), red, blue\n  );\n  transition: --angle 1s;\n}\n\n.card:hover {\n  --angle: 180deg;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A registered variable can be animated. Without the registration, the browser treats it as text, and the transition swaps the value at once.',
-            endParagraph: 'Here the gradient turns smoothly when the mouse goes over it.',
+            introduction: {
+              text: 'A registered variable can be animated. Without the registration, the browser treats it as text, and the transition swaps the value at once.',
+              persona: 'neutral'
+            },
+            closing: 'Here the gradient turns smoothly when the mouse goes over it.',
             highlight: ['animated', 'transition'],
             codeLanguage: 'CSS',
             code: '.card {\n  background: conic-gradient(\n    from var(--angle), red, blue\n  );\n  transition: --angle 1s;\n}\n\n.card:hover {\n  --angle: 180deg;\n}',
@@ -28889,16 +31041,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma grade dentro de outra não conhece as trilhas da grade de fora. Com subgrid, o item passa a usar as colunas ou as linhas da grade pai.',
-            endParagraph: 'Assim os filhos de cada item se alinham com as colunas da grade externa.',
+            introduction: {
+              text: 'Uma grade dentro de outra não conhece as trilhas da grade de fora. Com subgrid, o item passa a usar as colunas ou as linhas da grade pai.',
+              persona: 'cody'
+            },
+            closing: 'Assim os filhos de cada item se alinham com as colunas da grade externa.',
             highlight: ['subgrid'],
             codeLanguage: 'CSS',
             code: '.list {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n}\n\n.item {\n  display: grid;\n  grid-column: span 3;\n  grid-template-columns: subgrid;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A grid inside another one does not know the tracks of the outer grid. With subgrid, the item uses the columns or the rows of the parent grid.',
-            endParagraph: 'That way the children of each item line up with the columns of the outer grid.',
+            introduction: {
+              text: 'A grid inside another one does not know the tracks of the outer grid. With subgrid, the item uses the columns or the rows of the parent grid.',
+              persona: 'cody'
+            },
+            closing: 'That way the children of each item line up with the columns of the outer grid.',
             highlight: ['subgrid'],
             codeLanguage: 'CSS',
             code: '.list {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n}\n\n.item {\n  display: grid;\n  grid-column: span 3;\n  grid-template-columns: subgrid;\n}',
@@ -28910,16 +31068,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Para alinhar partes de cartões diferentes (título, texto e rodapé), o subgrid também vale para as linhas. Ele herda o gap do pai, a menos que defina o próprio.',
-            endParagraph: 'O elemento precisa ser filho direto de uma grade e ter display grid.',
+            introduction: {
+              text: 'Para alinhar partes de cartões diferentes (título, texto e rodapé), o subgrid também vale para as linhas. Ele herda o gap do pai, a menos que defina o próprio.',
+              persona: 'neutral'
+            },
+            closing: 'O elemento precisa ser filho direto de uma grade e ter display grid.',
             highlight: ['gap', 'filho direto'],
             codeLanguage: 'CSS',
             code: '.cards {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 1fr auto;\n  gap: 16px;\n}\n\n.card {\n  display: grid;\n  grid-row: span 3;\n  grid-template-rows: subgrid;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'To line up parts of different cards (title, text and footer), subgrid works for rows too. It inherits the gap of the parent, unless it sets its own.',
-            endParagraph: 'The element must be a direct child of a grid and have display grid.',
+            introduction: {
+              text: 'To line up parts of different cards (title, text and footer), subgrid works for rows too. It inherits the gap of the parent, unless it sets its own.',
+              persona: 'neutral'
+            },
+            closing: 'The element must be a direct child of a grid and have display grid.',
             highlight: ['gap', 'direct child'],
             codeLanguage: 'CSS',
             code: '.cards {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto 1fr auto;\n  gap: 16px;\n}\n\n.card {\n  display: grid;\n  grid-row: span 3;\n  grid-template-rows: subgrid;\n}',
@@ -29013,16 +31177,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O aninhamento deixa escrever uma regra dentro de outra. Os seletores de dentro valem só para os elementos que estão dentro do de fora, sem repetir o nome da classe.',
-            endParagraph: 'O resultado é o mesmo de escrever .card h2 e .card p em regras separadas.',
+            introduction: {
+              text: 'O aninhamento deixa escrever uma regra dentro de outra. Os seletores de dentro valem só para os elementos que estão dentro do de fora, sem repetir o nome da classe.',
+              persona: 'cody'
+            },
+            closing: 'O resultado é o mesmo de escrever .card h2 e .card p em regras separadas.',
             highlight: ['aninhamento', 'seletores'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 16px;\n\n  h2 {\n    color: tomato;\n  }\n\n  p {\n    margin: 0;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Nesting lets you write one rule inside another. The inner selectors only apply to elements inside the outer one, without repeating the class name.',
-            endParagraph: 'The result is the same as writing .card h2 and .card p as separate rules.',
+            introduction: {
+              text: 'Nesting lets you write one rule inside another. The inner selectors only apply to elements inside the outer one, without repeating the class name.',
+              persona: 'cody'
+            },
+            closing: 'The result is the same as writing .card h2 and .card p as separate rules.',
             highlight: ['Nesting', 'selectors'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 16px;\n\n  h2 {\n    color: tomato;\n  }\n\n  p {\n    margin: 0;\n  }\n}',
@@ -29034,16 +31204,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O símbolo & representa o seletor de fora. &:hover vira .btn:hover e &.big vira .btn.big, sem espaço: o elemento que tem as duas coisas ao mesmo tempo.',
-            endParagraph: 'Sem o &, um seletor de dentro vale para os descendentes, e não para o próprio elemento.',
+            introduction: {
+              text: 'O símbolo & representa o seletor de fora. &:hover vira .btn:hover e &.big vira .btn.big, sem espaço: o elemento que tem as duas coisas ao mesmo tempo.',
+              persona: 'neutral'
+            },
+            closing: 'Sem o &, um seletor de dentro vale para os descendentes, e não para o próprio elemento.',
             highlight: ['&', 'hover', 'descendentes'],
             codeLanguage: 'CSS',
             code: '.btn {\n  background: navy;\n\n  &:hover {\n    background: royalblue;\n  }\n\n  &.big {\n    font-size: 24px;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The & symbol stands for the outer selector. &:hover becomes .btn:hover and &.big becomes .btn.big, with no space: the element that has both things at once.',
-            endParagraph: 'Without the &, an inner selector applies to descendants, not to the element itself.',
+            introduction: {
+              text: 'The & symbol stands for the outer selector. &:hover becomes .btn:hover and &.big becomes .btn.big, with no space: the element that has both things at once.',
+              persona: 'neutral'
+            },
+            closing: 'Without the &, an inner selector applies to descendants, not to the element itself.',
             highlight: ['&', 'hover', 'descendants'],
             codeLanguage: 'CSS',
             code: '.btn {\n  background: navy;\n\n  &:hover {\n    background: royalblue;\n  }\n\n  &.big {\n    font-size: 24px;\n  }\n}',
@@ -29055,16 +31231,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma @media também pode ir dentro da regra, e o & pode ficar depois de outro seletor. .dark & vale para .card quando algum elemento de fora tem a classe dark.',
-            endParagraph: 'Assim as variações de uma regra ficam juntas, no mesmo bloco.',
+            introduction: {
+              text: 'Uma @media também pode ir dentro da regra, e o & pode ficar depois de outro seletor. .dark & vale para .card quando algum elemento de fora tem a classe dark.',
+              persona: 'neutral'
+            },
+            closing: 'Assim as variações de uma regra ficam juntas, no mesmo bloco.',
             highlight: ['@media', 'dark'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A @media can also go inside the rule, and the & can come after another selector. .dark & applies to .card when some outer element has the class dark.',
-            endParagraph: 'That way the variations of a rule stay together, in the same block.',
+            introduction: {
+              text: 'A @media can also go inside the rule, and the & can come after another selector. .dark & applies to .card when some outer element has the class dark.',
+              persona: 'neutral'
+            },
+            closing: 'That way the variations of a rule stay together, in the same block.',
             highlight: ['@media', 'dark'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
@@ -29166,16 +31348,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'scroll-snap-type, no contêiner, diz o eixo e o rigor do encaixe, e scroll-snap-align, em cada filho, diz onde ele para. Ao terminar a rolagem, ela fica alinhada a um item.',
-            endParagraph: 'É o que faz carrosséis e galerias pararem certinho em cada slide, sem JavaScript.',
+            introduction: {
+              text: 'scroll-snap-type, no contêiner, diz o eixo e o rigor do encaixe, e scroll-snap-align, em cada filho, diz onde ele para. Ao terminar a rolagem, ela fica alinhada a um item.',
+              persona: 'cody'
+            },
+            closing: 'É o que faz carrosséis e galerias pararem certinho em cada slide, sem JavaScript.',
             highlight: ['scroll-snap-type', 'scroll-snap-align', 'contêiner'],
             codeLanguage: 'CSS',
             code: '.carousel {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n}\n\n.slide {\n  flex: 0 0 100%;\n  scroll-snap-align: start;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'scroll-snap-type, on the container, sets the axis and how strict the snapping is, and scroll-snap-align, on each child, sets where it stops. When the scroll ends, it lines up with an item.',
-            endParagraph: 'This is what makes carousels and galleries stop exactly on each slide, with no JavaScript.',
+            introduction: {
+              text: 'scroll-snap-type, on the container, sets the axis and how strict the snapping is, and scroll-snap-align, on each child, sets where it stops. When the scroll ends, it lines up with an item.',
+              persona: 'cody'
+            },
+            closing: 'This is what makes carousels and galleries stop exactly on each slide, with no JavaScript.',
             highlight: ['scroll-snap-type', 'scroll-snap-align', 'container'],
             codeLanguage: 'CSS',
             code: '.carousel {\n  display: flex;\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n}\n\n.slide {\n  flex: 0 0 100%;\n  scroll-snap-align: start;\n}',
@@ -29187,16 +31375,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'mandatory sempre encaixa: a rolagem nunca termina entre dois itens. proximity só encaixa quando a rolagem para perto de um ponto. O primeiro valor é o eixo: x, y ou both.',
-            endParagraph: 'Prefira proximity em listas longas, onde forçar o encaixe atrapalharia a leitura.',
+            introduction: {
+              text: 'mandatory sempre encaixa: a rolagem nunca termina entre dois itens. proximity só encaixa quando a rolagem para perto de um ponto. O primeiro valor é o eixo: x, y ou both.',
+              persona: 'neutral'
+            },
+            closing: 'Prefira proximity em listas longas, onde forçar o encaixe atrapalharia a leitura.',
             highlight: ['mandatory', 'proximity', 'eixo'],
             codeLanguage: 'CSS',
             code: '/* sempre encaixa */\nscroll-snap-type: x mandatory;\n\n/* só encaixa se estiver perto */\nscroll-snap-type: y proximity;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'mandatory always snaps: the scroll never ends between two items. proximity only snaps when the scroll stops near a point. The first value is the axis: x, y or both.',
-            endParagraph: 'Prefer proximity on long lists, where forcing the snap would get in the way of reading.',
+            introduction: {
+              text: 'mandatory always snaps: the scroll never ends between two items. proximity only snaps when the scroll stops near a point. The first value is the axis: x, y or both.',
+              persona: 'neutral'
+            },
+            closing: 'Prefer proximity on long lists, where forcing the snap would get in the way of reading.',
             highlight: ['mandatory', 'proximity', 'axis'],
             codeLanguage: 'CSS',
             code: '/* always snaps */\nscroll-snap-type: x mandatory;\n\n/* snaps only when close */\nscroll-snap-type: y proximity;',
@@ -29208,16 +31402,22 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'center encaixa o item pelo meio. scroll-snap-stop: always impede de passar direto por um item numa rolagem rápida, e scroll-padding deixa uma folga entre o ponto de encaixe e a borda do contêiner.',
-            endParagraph: 'A folga do scroll-padding é útil quando há um cabeçalho fixo cobrindo o topo.',
+            introduction: {
+              text: 'center encaixa o item pelo meio. scroll-snap-stop: always impede de passar direto por um item numa rolagem rápida, e scroll-padding deixa uma folga entre o ponto de encaixe e a borda do contêiner.',
+              persona: 'neutral'
+            },
+            closing: 'A folga do scroll-padding é útil quando há um cabeçalho fixo cobrindo o topo.',
             highlight: ['center', 'scroll-snap-stop', 'scroll-padding'],
             codeLanguage: 'CSS',
             code: '.slide {\n  scroll-snap-align: center;\n  scroll-snap-stop: always;\n}\n\n.carousel {\n  scroll-padding: 0 16px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'center snaps the item by its middle. scroll-snap-stop: always stops a fast scroll from skipping an item, and scroll-padding leaves a gap between the snap point and the edge of the container.',
-            endParagraph: 'The scroll-padding gap is useful when a fixed header covers the top.',
+            introduction: {
+              text: 'center snaps the item by its middle. scroll-snap-stop: always stops a fast scroll from skipping an item, and scroll-padding leaves a gap between the snap point and the edge of the container.',
+              persona: 'neutral'
+            },
+            closing: 'The scroll-padding gap is useful when a fixed header covers the top.',
             highlight: ['center', 'scroll-snap-stop', 'scroll-padding'],
             codeLanguage: 'CSS',
             code: '.slide {\n  scroll-snap-align: center;\n  scroll-snap-stop: always;\n}\n\n.carousel {\n  scroll-padding: 0 16px;\n}',
@@ -29383,16 +31583,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Toda variável existe dentro de um escopo. Quando o JavaScript não encontra uma variável no escopo atual, ele procura no escopo de fora, e assim por diante — isso é a scope chain.',
-            endParagraph: 'A busca sempre vai de dentro para fora, nunca o contrário — uma função externa não enxerga variáveis criadas dentro de uma função interna.',
+            introduction: {
+              text: 'Toda variável existe dentro de um escopo. Quando o JavaScript não encontra uma variável no escopo atual, ele procura no escopo de fora, e assim por diante — isso é a scope chain.',
+              persona: 'cody'
+            },
+            closing: 'A busca sempre vai de dentro para fora, nunca o contrário — uma função externa não enxerga variáveis criadas dentro de uma função interna.',
             highlight: ['scope chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Ana";\n\nfunction saudacao() {\n  console.log(nome);\n}\n\nsaudacao();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Every variable exists inside a scope. When JavaScript cannot find a variable in the current scope, it looks in the scope outside it, and so on — that is the scope chain.',
-            endParagraph: 'The search always goes from inside out, never the other way around — an outer function cannot see variables created inside an inner function.',
+            introduction: {
+              text: 'Every variable exists inside a scope. When JavaScript cannot find a variable in the current scope, it looks in the scope outside it, and so on — that is the scope chain.',
+              persona: 'cody'
+            },
+            closing: 'The search always goes from inside out, never the other way around — an outer function cannot see variables created inside an inner function.',
             highlight: ['scope chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Ana";\n\nfunction greet() {\n  console.log(name);\n}\n\ngreet();',
@@ -29555,8 +31761,11 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma closure acontece quando uma função guarda acesso ao escopo em que foi criada, mesmo depois que esse escopo já terminou de executar.',
-            endParagraph: 'Toque no botão várias vezes: o número sobe a cada toque, porque a função retornada continua acessando o mesmo total, mesmo que criarContador já tenha terminado.',
+            introduction: {
+              text: 'Uma closure acontece quando uma função guarda acesso ao escopo em que foi criada, mesmo depois que esse escopo já terminou de executar.',
+              persona: 'cody'
+            },
+            closing: 'Toque no botão várias vezes: o número sobe a cada toque, porque a função retornada continua acessando o mesmo total, mesmo que criarContador já tenha terminado.',
             highlight: ['closure'],
             codeLanguage: 'HTML',
             code: '<button id="botao-contar">\n  Contar\n</button>\n\n<p id="total">\n  Total: 0\n</p>',
@@ -29568,8 +31777,11 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'A closure happens when a function keeps access to the scope it was created in, even after that scope has already finished running.',
-            endParagraph: 'Tap the button several times: the number goes up on every tap, because the returned function keeps accessing the same total, even though createCounter has already finished.',
+            introduction: {
+              text: 'A closure happens when a function keeps access to the scope it was created in, even after that scope has already finished running.',
+              persona: 'cody'
+            },
+            closing: 'Tap the button several times: the number goes up on every tap, because the returned function keeps accessing the same total, even though createCounter has already finished.',
             highlight: ['closure'],
             codeLanguage: 'HTML',
             code: '<button id="count-button">\n  Count\n</button>\n\n<p id="total">\n  Total: 0\n</p>',
@@ -29586,18 +31798,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Cada chamada da função externa cria um escopo novo. Por isso, duas closures criadas a partir da mesma função não compartilham estado.',
-            secondParagraph: 'No exemplo, contadorA e contadorB têm cada um o seu próprio total, mesmo tendo vindo da mesma função.',
-            endParagraph: 'Esse isolamento é o que permite usar closures para guardar dados privados, acessíveis apenas pelas funções que a closure devolve.',
+            introduction: {
+              text: 'Cada chamada da função externa cria um escopo novo. Por isso, duas closures criadas a partir da mesma função não compartilham estado.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'No exemplo, contadorA e contadorB têm cada um o seu próprio total, mesmo tendo vindo da mesma função.'
+            },
+            closing: 'Esse isolamento é o que permite usar closures para guardar dados privados, acessíveis apenas pelas funções que a closure devolve.',
             highlight: ['closure', 'closures'],
             codeLanguage: 'JavaScript',
             code: 'const contadorA = criarContador();\nconst contadorB = criarContador();\n\nconsole.log(contadorA()); // 1\nconsole.log(contadorA()); // 2\nconsole.log(contadorB()); // 1',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Each call to the outer function creates a new scope. That is why two closures created from the same function do not share state.',
-            secondParagraph: 'In the example, counterA and counterB each have their own total, even though they came from the same function.',
-            endParagraph: 'This isolation is what lets closures hold private data, reachable only through the functions the closure returns.',
+            introduction: {
+              text: 'Each call to the outer function creates a new scope. That is why two closures created from the same function do not share state.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'In the example, counterA and counterB each have their own total, even though they came from the same function.'
+            },
+            closing: 'This isolation is what lets closures hold private data, reachable only through the functions the closure returns.',
             highlight: ['closure', 'closures'],
             codeLanguage: 'JavaScript',
             code: 'const counterA = createCounter();\nconst counterB = createCounter();\n\nconsole.log(counterA()); // 1\nconsole.log(counterA()); // 2\nconsole.log(counterB()); // 1',
@@ -29762,16 +31984,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Antes de executar o código, o JavaScript prepara o escopo e já reserva espaço para as declarações — isso é o hoisting.',
-            endParagraph: 'var é içada e inicializada como undefined. let e const também são içadas, mas não podem ser usadas antes da linha em que são declaradas.',
+            introduction: {
+              text: 'Antes de executar o código, o JavaScript prepara o escopo e já reserva espaço para as declarações — isso é o hoisting.',
+              persona: 'cody'
+            },
+            closing: 'var é içada e inicializada como undefined. let e const também são içadas, mas não podem ser usadas antes da linha em que são declaradas.',
             highlight: ['hoisting', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log(nome); // undefined\nvar nome = "Ana";\n\nconsole.log(idade); // erro\nlet idade = 20;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Before running the code, JavaScript prepares the scope and already reserves space for declarations — that is hoisting.',
-            endParagraph: 'var is hoisted and initialized as undefined. let and const are also hoisted, but cannot be used before the line where they are declared.',
+            introduction: {
+              text: 'Before running the code, JavaScript prepares the scope and already reserves space for declarations — that is hoisting.',
+              persona: 'cody'
+            },
+            closing: 'var is hoisted and initialized as undefined. let and const are also hoisted, but cannot be used before the line where they are declared.',
             highlight: ['hoisting', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log(name); // undefined\nvar name = "Ana";\n\nconsole.log(age); // error\nlet age = 20;',
@@ -29936,16 +32164,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O valor de this depende do contexto em que a função foi chamada, não de onde ela foi escrita.',
-            endParagraph: 'Aqui, this é usuario, porque a função foi chamada como um método de usuario.',
+            introduction: {
+              text: 'O valor de this depende do contexto em que a função foi chamada, não de onde ela foi escrita.',
+              persona: 'cody'
+            },
+            closing: 'Aqui, this é usuario, porque a função foi chamada como um método de usuario.',
             highlight: ['contexto'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The value of this depends on the context the function was called in, not on where it was written.',
-            endParagraph: 'Here, this is user, because the function was called as a method of user.',
+            introduction: {
+              text: 'The value of this depends on the context the function was called in, not on where it was written.',
+              persona: 'cody'
+            },
+            closing: 'Here, this is user, because the function was called as a method of user.',
             highlight: ['context'],
             codeLanguage: 'JavaScript',
             code: 'const user = {\n  name: "Ana",\n  greet() {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // "Ana"',
@@ -29957,18 +32191,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Como this depende de como a função é chamada, a mesma função pode ter um this diferente a cada chamada.',
-            secondParagraph: 'Ao guardar o método numa variável e chamá-lo solto, ele deixa de ser chamado a partir de usuario — e this deixa de apontar para ele.',
-            endParagraph: 'É por isso que se diz que this é definido no momento da chamada, e não no momento em que a função é escrita.',
+            introduction: {
+              text: 'Como this depende de como a função é chamada, a mesma função pode ter um this diferente a cada chamada.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Ao guardar o método numa variável e chamá-lo solto, ele deixa de ser chamado a partir de usuario — e this deixa de apontar para ele.'
+            },
+            closing: 'É por isso que se diz que this é definido no momento da chamada, e não no momento em que a função é escrita.',
             highlight: ['this'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"\n\nconst solta = usuario.saudar;\nsolta(); // undefined',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Because this depends on how the function is called, the same function can have a different this on each call.',
-            secondParagraph: 'Storing the method in a variable and calling it on its own means it is no longer called from usuario — and this stops pointing to it.',
-            endParagraph: 'That is why this is said to be decided at call time, not when the function is written.',
+            introduction: {
+              text: 'Because this depends on how the function is called, the same function can have a different this on each call.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Storing the method in a variable and calling it on its own means it is no longer called from usuario — and this stops pointing to it.'
+            },
+            closing: 'That is why this is said to be decided at call time, not when the function is written.',
             highlight: ['this'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"\n\nconst loose = usuario.saudar;\nloose(); // undefined',
@@ -30135,16 +32379,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Arrow functions não têm seu próprio this — elas usam o this do escopo onde foram criadas.',
-            endParagraph: 'Por isso, arrow functions não são uma boa escolha para métodos de objeto que dependem de this.',
+            introduction: {
+              text: 'Arrow functions não têm seu próprio this — elas usam o this do escopo onde foram criadas.',
+              persona: 'cody'
+            },
+            closing: 'Por isso, arrow functions não são uma boa escolha para métodos de objeto que dependem de this.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar: () => {\n    console.log(this.nome); // undefined\n  }\n};\n\nusuario.saudar();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Arrow functions do not have their own this — they use the this from the scope where they were created.',
-            endParagraph: 'That is why arrow functions are not a good choice for object methods that depend on this.',
+            introduction: {
+              text: 'Arrow functions do not have their own this — they use the this from the scope where they were created.',
+              persona: 'cody'
+            },
+            closing: 'That is why arrow functions are not a good choice for object methods that depend on this.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const user = {\n  name: "Ana",\n  greet: () => {\n    console.log(this.name); // undefined\n  }\n};\n\nuser.greet();',
@@ -30156,18 +32406,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O mesmo comportamento que atrapalha em métodos é justamente o que ajuda dentro deles.',
-            secondParagraph: 'No exemplo, a arrow function dentro do map herda o this do método listar, então this.nome continua acessível.',
-            endParagraph: 'A regra prática é curta: arrow function como método de objeto, não; arrow function dentro de um método, sim.',
+            introduction: {
+              text: 'O mesmo comportamento que atrapalha em métodos é justamente o que ajuda dentro deles.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'No exemplo, a arrow function dentro do map herda o this do método listar, então this.nome continua acessível.'
+            },
+            closing: 'A regra prática é curta: arrow function como método de objeto, não; arrow function dentro de um método, sim.',
             highlight: ['arrow function', 'this', 'map'],
             codeLanguage: 'JavaScript',
             code: 'const time = {\n  nome: "Equipe",\n  membros: ["Ana", "Bruno"],\n  listar() {\n    return this.membros.map((m) => m + " faz parte de " + this.nome);\n  }\n};\n\nconsole.log(time.listar());',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The same behaviour that gets in the way on methods is exactly what helps inside them.',
-            secondParagraph: 'In the example, the arrow function inside map inherits this from the listar method, so this.nome stays reachable.',
-            endParagraph: 'The rule of thumb is short: arrow function as an object method, no; arrow function inside a method, yes.',
+            introduction: {
+              text: 'The same behaviour that gets in the way on methods is exactly what helps inside them.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'In the example, the arrow function inside map inherits this from the listar method, so this.nome stays reachable.'
+            },
+            closing: 'The rule of thumb is short: arrow function as an object method, no; arrow function inside a method, yes.',
             highlight: ['arrow function', 'this', 'map'],
             codeLanguage: 'JavaScript',
             code: 'const time = {\n  nome: "Team",\n  membros: ["Ana", "Bruno"],\n  listar() {\n    return this.membros.map((m) => m + " belongs to " + this.nome);\n  }\n};\n\nconsole.log(time.listar());',
@@ -30328,16 +32588,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Todo objeto em JavaScript tem um prototype — um outro objeto de onde ele pode herdar propriedades e métodos.',
-            endParagraph: 'Quando uma propriedade não existe no próprio objeto, o JavaScript procura no prototype — essa busca é a prototype chain.',
+            introduction: {
+              text: 'Todo objeto em JavaScript tem um prototype — um outro objeto de onde ele pode herdar propriedades e métodos.',
+              persona: 'cody'
+            },
+            closing: 'Quando uma propriedade não existe no próprio objeto, o JavaScript procura no prototype — essa busca é a prototype chain.',
             highlight: ['prototype', 'prototype chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const animal = {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n};\n\nconst cachorro = Object.create(animal);\ncachorro.emitirSom(); // "Som genérico"',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Every object in JavaScript has a prototype — another object it can inherit properties and methods from.',
-            endParagraph: 'When a property does not exist on the object itself, JavaScript looks in the prototype — that search is the prototype chain.',
+            introduction: {
+              text: 'Every object in JavaScript has a prototype — another object it can inherit properties and methods from.',
+              persona: 'cody'
+            },
+            closing: 'When a property does not exist on the object itself, JavaScript looks in the prototype — that search is the prototype chain.',
             highlight: ['prototype', 'prototype chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const animal = {\n  makeSound() {\n    console.log("Generic sound");\n  }\n};\n\nconst dog = Object.create(animal);\ndog.makeSound(); // "Generic sound"',
@@ -30349,18 +32615,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A busca pela prototype chain não é infinita: ela termina quando chega a null.',
-            secondParagraph: 'No exemplo, cachorro não tem emitirSom, então o JavaScript sobe para animal. Se também não encontrasse lá, continuaria subindo até o fim da cadeia.',
-            endParagraph: 'Quando a busca chega ao fim sem encontrar a propriedade, o resultado é undefined — e não um erro.',
+            introduction: {
+              text: 'A busca pela prototype chain não é infinita: ela termina quando chega a null.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'No exemplo, cachorro não tem emitirSom, então o JavaScript sobe para animal. Se também não encontrasse lá, continuaria subindo até o fim da cadeia.'
+            },
+            closing: 'Quando a busca chega ao fim sem encontrar a propriedade, o resultado é undefined — e não um erro.',
             highlight: ['prototype chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const animal = {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n};\n\nconst cachorro = Object.create(animal);\n\ncachorro.emitirSom(); // encontrado em animal\nconsole.log(cachorro.cor); // undefined\nconsole.log(Object.getPrototypeOf(cachorro) === animal); // true',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The lookup along the prototype chain is not endless: it stops when it reaches null.',
-            secondParagraph: 'In the example, cachorro has no emitirSom, so JavaScript moves up to animal. If it were not there either, the lookup would keep climbing to the end of the chain.',
-            endParagraph: 'When the lookup reaches the end without finding the property, the result is undefined — not an error.',
+            introduction: {
+              text: 'The lookup along the prototype chain is not endless: it stops when it reaches null.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'In the example, cachorro has no emitirSom, so JavaScript moves up to animal. If it were not there either, the lookup would keep climbing to the end of the chain.'
+            },
+            closing: 'When the lookup reaches the end without finding the property, the result is undefined — not an error.',
             highlight: ['prototype chain', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const animal = {\n  emitirSom() {\n    console.log("Generic sound");\n  }\n};\n\nconst cachorro = Object.create(animal);\n\ncachorro.emitirSom(); // found on animal\nconsole.log(cachorro.cor); // undefined\nconsole.log(Object.getPrototypeOf(cachorro) === animal); // true',
@@ -30523,16 +32799,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'class oferece uma sintaxe mais familiar para trabalhar com o mesmo sistema de prototypes por trás dos panos.',
-            endParagraph: 'extends cria herança entre classes, e o método na classe filha sobrescreve o da classe pai.',
+            introduction: {
+              text: 'class oferece uma sintaxe mais familiar para trabalhar com o mesmo sistema de prototypes por trás dos panos.',
+              persona: 'cody'
+            },
+            closing: 'extends cria herança entre classes, e o método na classe filha sobrescreve o da classe pai.',
             highlight: ['class', 'extends', 'prototypes'],
             codeLanguage: 'JavaScript',
             code: 'class Animal {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n}\n\nclass Cachorro extends Animal {\n  emitirSom() {\n    console.log("Au au!");\n  }\n}\n\nnew Cachorro().emitirSom();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'class offers a more familiar syntax for working with the same prototype system behind the scenes.',
-            endParagraph: 'extends creates inheritance between classes, and the method in the child class overrides the one in the parent class.',
+            introduction: {
+              text: 'class offers a more familiar syntax for working with the same prototype system behind the scenes.',
+              persona: 'cody'
+            },
+            closing: 'extends creates inheritance between classes, and the method in the child class overrides the one in the parent class.',
             highlight: ['class', 'extends', 'prototype'],
             codeLanguage: 'JavaScript',
             code: 'class Animal {\n  makeSound() {\n    console.log("Generic sound");\n  }\n}\n\nclass Dog extends Animal {\n  makeSound() {\n    console.log("Woof!");\n  }\n}\n\nnew Dog().makeSound();',
@@ -30544,18 +32826,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Dentro de uma classe filha, super chama o comportamento da classe pai.',
-            secondParagraph: 'Isso permite estender o que o pai faz, em vez de substituir por completo. No exemplo, o cachorro emite o som genérico e depois o seu próprio.',
-            endParagraph: 'Apesar da sintaxe diferente, tudo isso continua usando prototypes por baixo: class é uma forma mais legível de escrever a mesma coisa.',
+            introduction: {
+              text: 'Dentro de uma classe filha, super chama o comportamento da classe pai.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Isso permite estender o que o pai faz, em vez de substituir por completo. No exemplo, o cachorro emite o som genérico e depois o seu próprio.'
+            },
+            closing: 'Apesar da sintaxe diferente, tudo isso continua usando prototypes por baixo: class é uma forma mais legível de escrever a mesma coisa.',
             highlight: ['super', 'class', 'prototypes'],
             codeLanguage: 'JavaScript',
             code: 'class Animal {\n  emitirSom() {\n    console.log("Som genérico");\n  }\n}\n\nclass Cachorro extends Animal {\n  emitirSom() {\n    super.emitirSom();\n    console.log("Au au");\n  }\n}\n\nnew Cachorro().emitirSom();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Inside a child class, super calls the behaviour of the parent class.',
-            secondParagraph: 'That lets you extend what the parent does instead of replacing it entirely. In the example, the dog makes the generic sound and then its own.',
-            endParagraph: 'Despite the different syntax, all of this still runs on prototypes underneath: class is a more readable way to write the same thing.',
+            introduction: {
+              text: 'Inside a child class, super calls the behaviour of the parent class.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'That lets you extend what the parent does instead of replacing it entirely. In the example, the dog makes the generic sound and then its own.'
+            },
+            closing: 'Despite the different syntax, all of this still runs on prototypes underneath: class is a more readable way to write the same thing.',
             highlight: ['super', 'class', 'prototypes'],
             codeLanguage: 'JavaScript',
             code: 'class Animal {\n  emitirSom() {\n    console.log("Generic sound");\n  }\n}\n\nclass Cachorro extends Animal {\n  emitirSom() {\n    super.emitirSom();\n    console.log("Woof");\n  }\n}\n\nnew Cachorro().emitirSom();',
@@ -30716,16 +33008,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A call stack guarda as funções que estão sendo executadas, uma em cima da outra. Quando uma função termina, ela sai do topo da pilha.',
-            endParagraph: 'O event loop é quem verifica, constantemente, se a call stack está vazia para poder executar o que está esperando, como código assíncrono.',
+            introduction: {
+              text: 'A call stack guarda as funções que estão sendo executadas, uma em cima da outra. Quando uma função termina, ela sai do topo da pilha.',
+              persona: 'cody'
+            },
+            closing: 'O event loop é quem verifica, constantemente, se a call stack está vazia para poder executar o que está esperando, como código assíncrono.',
             highlight: ['call stack', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'function um() {\n  console.log("um");\n}\n\nfunction dois() {\n  um();\n  console.log("dois");\n}\n\ndois();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The call stack holds the functions currently running, one on top of the other. When a function finishes, it comes off the top of the stack.',
-            endParagraph: 'The event loop is what constantly checks whether the call stack is empty, so it can run what is waiting, like asynchronous code.',
+            introduction: {
+              text: 'The call stack holds the functions currently running, one on top of the other. When a function finishes, it comes off the top of the stack.',
+              persona: 'cody'
+            },
+            closing: 'The event loop is what constantly checks whether the call stack is empty, so it can run what is waiting, like asynchronous code.',
             highlight: ['call stack', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'function one() {\n  console.log("one");\n}\n\nfunction two() {\n  one();\n  console.log("two");\n}\n\ntwo();',
@@ -30892,9 +33190,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Promises resolvidas entram numa fila de microtasks. setTimeout entra numa fila de macrotasks. As duas filas só rodam depois que a call stack esvazia.',
-            secondParagraph: 'Antes de tocar no botão, tente prever em que ordem os números vão aparecer no console abaixo.',
-            endParagraph: 'Microtasks sempre rodam antes das macrotasks, mesmo quando o setTimeout usa 0 milissegundos — por isso a ordem real é 1, 4, 3, 2.',
+            introduction: {
+              text: 'Promises resolvidas entram numa fila de microtasks. setTimeout entra numa fila de macrotasks. As duas filas só rodam depois que a call stack esvazia.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Antes de tocar no botão, tente prever em que ordem os números vão aparecer no console abaixo.'
+            },
+            closing: 'Microtasks sempre rodam antes das macrotasks, mesmo quando o setTimeout usa 0 milissegundos — por isso a ordem real é 1, 4, 3, 2.',
             highlight: ['microtasks', 'macrotasks', 'call stack'],
             codeLanguage: 'HTML',
             code: '<button id="botao-executar">\n  Executar\n</button>',
@@ -30906,9 +33209,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Resolved Promises go into a microtask queue. setTimeout goes into a macrotask queue. Both queues only run after the call stack is empty.',
-            secondParagraph: 'Before tapping the button, try to predict what order the numbers will show up in the console below.',
-            endParagraph: 'Microtasks always run before macrotasks, even when setTimeout uses 0 milliseconds — that is why the real order is 1, 4, 3, 2.',
+            introduction: {
+              text: 'Resolved Promises go into a microtask queue. setTimeout goes into a macrotask queue. Both queues only run after the call stack is empty.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Before tapping the button, try to predict what order the numbers will show up in the console below.'
+            },
+            closing: 'Microtasks always run before macrotasks, even when setTimeout uses 0 milliseconds — that is why the real order is 1, 4, 3, 2.',
             highlight: ['microtasks', 'macrotasks', 'call stack'],
             codeLanguage: 'HTML',
             code: '<button id="run-button">\n  Run\n</button>',
@@ -31076,16 +33384,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando uma Promise é resolvida, seu .then() não executa na hora — ele entra na fila de microtasks e espera a call stack ficar livre.',
-            endParagraph: 'Por isso o texto síncrono aparece antes do resultado da Promise, mesmo que ela já esteja resolvida.',
+            introduction: {
+              text: 'Quando uma Promise é resolvida, seu .then() não executa na hora — ele entra na fila de microtasks e espera a call stack ficar livre.',
+              persona: 'cody'
+            },
+            closing: 'Por isso o texto síncrono aparece antes do resultado da Promise, mesmo que ela já esteja resolvida.',
             highlight: ['Promise', 'microtasks'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve("ok").then((valor) => {\n  console.log(valor);\n});\n\nconsole.log("Executado primeiro");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When a Promise is resolved, its .then() does not run right away — it goes into the microtask queue and waits for the call stack to be free.',
-            endParagraph: 'That is why the synchronous text shows up before the Promise result, even though it is already resolved.',
+            introduction: {
+              text: 'When a Promise is resolved, its .then() does not run right away — it goes into the microtask queue and waits for the call stack to be free.',
+              persona: 'cody'
+            },
+            closing: 'That is why the synchronous text shows up before the Promise result, even though it is already resolved.',
             highlight: ['Promise', 'microtask'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve("ok").then((value) => {\n  console.log(value);\n});\n\nconsole.log("Runs first");',
@@ -31252,16 +33566,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tipos primitivos, como number e string, são copiados por valor. Objetos e arrays são copiados por referência.',
-            endParagraph: 'Mudar obj2 também muda obj1, porque as duas variáveis apontam para o mesmo objeto na memória.',
+            introduction: {
+              text: 'Tipos primitivos, como number e string, são copiados por valor. Objetos e arrays são copiados por referência.',
+              persona: 'cody'
+            },
+            closing: 'Mudar obj2 também muda obj1, porque as duas variáveis apontam para o mesmo objeto na memória.',
             highlight: ['valor', 'referência'],
             codeLanguage: 'JavaScript',
             code: 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a); // 10\n\nconst obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;\nconsole.log(obj1.total); // 20',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Primitive types, like number and string, are copied by value. Objects and arrays are copied by reference.',
-            endParagraph: 'Changing obj2 also changes obj1, because both variables point to the same object in memory.',
+            introduction: {
+              text: 'Primitive types, like number and string, are copied by value. Objects and arrays are copied by reference.',
+              persona: 'cody'
+            },
+            closing: 'Changing obj2 also changes obj1, because both variables point to the same object in memory.',
             highlight: ['value', 'reference'],
             codeLanguage: 'JavaScript',
             code: 'let a = 10;\nlet b = a;\nb = 20;\nconsole.log(a); // 10\n\nconst obj1 = { total: 10 };\nconst obj2 = obj1;\nobj2.total = 20;\nconsole.log(obj1.total); // 20',
@@ -31273,18 +33593,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A mesma regra vale quando passamos valores para uma função.',
-            secondParagraph: 'Um primitivo chega como cópia, então alterá-lo dentro da função não afeta o original. Um objeto chega como referência, então alterá-lo afeta quem o passou.',
-            endParagraph: 'Esse é um dos motivos mais comuns de um valor parecer mudar sozinho em outro ponto do código.',
+            introduction: {
+              text: 'A mesma regra vale quando passamos valores para uma função.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Um primitivo chega como cópia, então alterá-lo dentro da função não afeta o original. Um objeto chega como referência, então alterá-lo afeta quem o passou.'
+            },
+            closing: 'Esse é um dos motivos mais comuns de um valor parecer mudar sozinho em outro ponto do código.',
             highlight: ['referência'],
             codeLanguage: 'JavaScript',
             code: 'function dobrar(numero) {\n  numero = numero * 2;\n}\n\nfunction encarecer(produto) {\n  produto.preco = produto.preco * 2;\n}\n\nlet preco = 10;\nconst produto = { preco: 10 };\n\ndobrar(preco);\nencarecer(produto);\n\nconsole.log(preco); // 10\nconsole.log(produto.preco); // 20',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The same rule applies when we pass values into a function.',
-            secondParagraph: 'A primitive arrives as a copy, so changing it inside the function does not affect the original. An object arrives as a reference, so changing it affects whoever passed it.',
-            endParagraph: 'This is one of the most common reasons a value seems to change on its own somewhere else in the code.',
+            introduction: {
+              text: 'The same rule applies when we pass values into a function.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'A primitive arrives as a copy, so changing it inside the function does not affect the original. An object arrives as a reference, so changing it affects whoever passed it.'
+            },
+            closing: 'This is one of the most common reasons a value seems to change on its own somewhere else in the code.',
             highlight: ['reference'],
             codeLanguage: 'JavaScript',
             code: 'function dobrar(numero) {\n  numero = numero * 2;\n}\n\nfunction encarecer(produto) {\n  produto.preco = produto.preco * 2;\n}\n\nlet preco = 10;\nconst produto = { preco: 10 };\n\ndobrar(preco);\nencarecer(produto);\n\nconsole.log(preco); // 10\nconsole.log(produto.preco); // 20',
@@ -31478,16 +33808,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma shallow copy duplica só o primeiro nível de um objeto. Propriedades que são, elas mesmas, objetos continuam compartilhadas.',
-            endParagraph: 'Para copiar todos os níveis de verdade, é preciso uma deep copy, como structuredClone().',
+            introduction: {
+              text: 'Uma shallow copy duplica só o primeiro nível de um objeto. Propriedades que são, elas mesmas, objetos continuam compartilhadas.',
+              persona: 'cody'
+            },
+            closing: 'Para copiar todos os níveis de verdade, é preciso uma deep copy, como structuredClone().',
             highlight: ['shallow copy', 'deep copy'],
             codeLanguage: 'JavaScript',
             code: 'const original = {\n  nome: "Ana",\n  endereco: { cidade: "SP" }\n};\n\nconst copia = { ...original };\ncopia.endereco.cidade = "RJ";\n\nconsole.log(original.endereco.cidade); // "RJ"',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A shallow copy duplicates only the first level of an object. Properties that are themselves objects stay shared.',
-            endParagraph: 'To copy every level for real, you need a deep copy, like structuredClone().',
+            introduction: {
+              text: 'A shallow copy duplicates only the first level of an object. Properties that are themselves objects stay shared.',
+              persona: 'cody'
+            },
+            closing: 'To copy every level for real, you need a deep copy, like structuredClone().',
             highlight: ['shallow copy', 'deep copy'],
             codeLanguage: 'JavaScript',
             code: 'const original = {\n  name: "Ana",\n  address: { city: "SP" }\n};\n\nconst copy = { ...original };\ncopy.address.city = "RJ";\n\nconsole.log(original.address.city); // "RJ"',
@@ -31499,18 +33835,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O risco da shallow copy aparece quando alteramos um nível mais profundo.',
-            secondParagraph: 'No exemplo, mudar a cidade da cópia também muda a do original, porque o objeto endereco é o mesmo nos dois.',
-            endParagraph: 'Já com structuredClone, todos os níveis são duplicados, e as alterações ficam isoladas de verdade.',
+            introduction: {
+              text: 'O risco da shallow copy aparece quando alteramos um nível mais profundo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'No exemplo, mudar a cidade da cópia também muda a do original, porque o objeto endereco é o mesmo nos dois.'
+            },
+            closing: 'Já com structuredClone, todos os níveis são duplicados, e as alterações ficam isoladas de verdade.',
             highlight: ['shallow copy', 'structuredClone'],
             codeLanguage: 'JavaScript',
             code: 'const original = { nome: "Ana", endereco: { cidade: "SP" } };\n\nconst rasa = { ...original };\nrasa.endereco.cidade = "RJ";\nconsole.log(original.endereco.cidade); // "RJ"\n\nconst profunda = structuredClone(original);\nprofunda.endereco.cidade = "MG";\nconsole.log(original.endereco.cidade); // "RJ"',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The risk of a shallow copy shows up when we change a deeper level.',
-            secondParagraph: 'In the example, changing the city on the copy also changes it on the original, because the endereco object is the same in both.',
-            endParagraph: 'With structuredClone, every level is duplicated, and the changes are truly isolated.',
+            introduction: {
+              text: 'The risk of a shallow copy shows up when we change a deeper level.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'In the example, changing the city on the copy also changes it on the original, because the endereco object is the same in both.'
+            },
+            closing: 'With structuredClone, every level is duplicated, and the changes are truly isolated.',
             highlight: ['shallow copy', 'structuredClone'],
             codeLanguage: 'JavaScript',
             code: 'const original = { nome: "Ana", endereco: { cidade: "SP" } };\n\nconst shallow = { ...original };\nshallow.endereco.cidade = "RJ";\nconsole.log(original.endereco.cidade); // "RJ"\n\nconst deep = structuredClone(original);\ndeep.endereco.cidade = "MG";\nconsole.log(original.endereco.cidade); // "RJ"',
@@ -31696,9 +34042,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tratar um valor como imutável significa nunca alterá-lo no lugar: em vez disso, cria-se um valor novo com a mudança aplicada.',
-            secondParagraph: 'No exemplo, push altera o array original e afeta quem mais o estiver usando. Já o spread produz um array novo, e o original continua intacto.',
-            endParagraph: 'Não é uma regra da linguagem, e sim uma disciplina de escrita — o JavaScript permite os dois caminhos.',
+            introduction: {
+              text: 'Tratar um valor como imutável significa nunca alterá-lo no lugar: em vez disso, cria-se um valor novo com a mudança aplicada.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'No exemplo, push altera o array original e afeta quem mais o estiver usando. Já o spread produz um array novo, e o original continua intacto.'
+            },
+            closing: 'Não é uma regra da linguagem, e sim uma disciplina de escrita — o JavaScript permite os dois caminhos.',
             highlight: ['imutável', 'push', 'spread'],
             codeLanguage: 'JavaScript',
             code: 'const original = [1, 2, 3];\n\n// Mutação: altera o array original\noriginal.push(4);\n\n// Imutabilidade: cria um array novo\nconst novo = [...original, 5];\n\nconsole.log(original, novo);',
@@ -31706,9 +34057,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             noTerminal: false
           },
           en: {
-            firstParagraph: 'Treating a value as immutable means never changing it in place: instead, you create a new value with the change applied.',
-            secondParagraph: 'In the example, push changes the original array and affects anyone else using it. The spread produces a new array, and the original stays intact.',
-            endParagraph: 'This is not a rule of the language but a writing discipline — JavaScript allows both paths.',
+            introduction: {
+              text: 'Treating a value as immutable means never changing it in place: instead, you create a new value with the change applied.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'In the example, push changes the original array and affects anyone else using it. The spread produces a new array, and the original stays intact.'
+            },
+            closing: 'This is not a rule of the language but a writing discipline — JavaScript allows both paths.',
             highlight: ['immutable', 'push', 'spread'],
             codeLanguage: 'JavaScript',
             code: 'const original = [1, 2, 3];\n\n// Mutation: changes the original array\noriginal.push(4);\n\n// Immutability: creates a new array\nconst novo = [...original, 5];\n\nconsole.log(original, novo);',
@@ -31721,18 +34077,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A vantagem da imutabilidade aparece quando um valor é compartilhado por várias partes do código.',
-            secondParagraph: 'Se ninguém altera o objeto no lugar, comparar o antes e o depois basta para saber que algo mudou — não é preciso vasculhar cada propriedade.',
-            endParagraph: 'É por isso que bibliotecas de interface, como o React, pedem que o estado seja tratado de forma imutável: elas usam essa comparação para decidir o que precisa ser atualizado na tela.',
+            introduction: {
+              text: 'A vantagem da imutabilidade aparece quando um valor é compartilhado por várias partes do código.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Se ninguém altera o objeto no lugar, comparar o antes e o depois basta para saber que algo mudou — não é preciso vasculhar cada propriedade.'
+            },
+            closing: 'É por isso que bibliotecas de interface, como o React, pedem que o estado seja tratado de forma imutável: elas usam essa comparação para decidir o que precisa ser atualizado na tela.',
             highlight: ['imutabilidade', 'imutável', 'React'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = { nome: "Ana", idade: 30 };\n\n// Mutação: o objeto continua sendo o mesmo\nusuario.idade = 31;\n\n// Imutabilidade: um objeto novo, fácil de comparar\nconst atualizado = { ...usuario, idade: 31 };\n\nconsole.log(usuario === atualizado); // false',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The advantage of immutability shows up when a value is shared by several parts of the code.',
-            secondParagraph: 'If nobody changes the object in place, comparing before and after is enough to know something changed — there is no need to inspect every property.',
-            endParagraph: 'That is why interface libraries such as React ask for state to be treated immutably: they use that comparison to decide what needs updating on screen.',
+            introduction: {
+              text: 'The advantage of immutability shows up when a value is shared by several parts of the code.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'If nobody changes the object in place, comparing before and after is enough to know something changed — there is no need to inspect every property.'
+            },
+            closing: 'That is why interface libraries such as React ask for state to be treated immutably: they use that comparison to decide what needs updating on screen.',
             highlight: ['immutability', 'immutably', 'React'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = { nome: "Ana", idade: 30 };\n\n// Mutation: it is still the same object\nusuario.idade = 31;\n\n// Immutability: a new object, easy to compare\nconst atualizado = { ...usuario, idade: 31 };\n\nconsole.log(usuario === atualizado); // false',
@@ -31922,9 +34288,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Em vez de adicionar um listener em cada item de uma lista, podemos adicionar um único listener no elemento pai.',
-            secondParagraph: 'Toque em qualquer item da lista para ver o listener único capturando o clique.',
-            endParagraph: 'Agora toque em "Adicionar item" e depois toque no item novo: o mesmo listener funciona nele também, mesmo tendo sido criado depois — é isso que economiza um listener por item.',
+            introduction: {
+              text: 'Em vez de adicionar um listener em cada item de uma lista, podemos adicionar um único listener no elemento pai.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Toque em qualquer item da lista para ver o listener único capturando o clique.'
+            },
+            closing: 'Agora toque em "Adicionar item" e depois toque no item novo: o mesmo listener funciona nele também, mesmo tendo sido criado depois — é isso que economiza um listener por item.',
             highlight: ['event delegation', 'listener'],
             codeLanguage: 'HTML',
             code: '<ul id="lista">\n  <li>Item 1</li>\n  <li>Item 2</li>\n  <li>Item 3</li>\n</ul>\n\n<button id="botao-adicionar">\n  Adicionar item\n</button>\n\n<p id="saida">\n  Toque em um item\n</p>',
@@ -31940,9 +34311,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Instead of adding a listener to every item in a list, we can add a single listener to the parent element.',
-            secondParagraph: 'Tap any item in the list to see the single listener capturing the click.',
-            endParagraph: 'Now tap "Add item" and then tap the new item: the same listener works on it too, even though it was created afterward — that is exactly what saves a listener per item.',
+            introduction: {
+              text: 'Instead of adding a listener to every item in a list, we can add a single listener to the parent element.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Tap any item in the list to see the single listener capturing the click.'
+            },
+            closing: 'Now tap "Add item" and then tap the new item: the same listener works on it too, even though it was created afterward — that is exactly what saves a listener per item.',
             highlight: ['event delegation', 'listener'],
             codeLanguage: 'HTML',
             code: '<ul id="list">\n  <li>Item 1</li>\n  <li>Item 2</li>\n  <li>Item 3</li>\n</ul>\n\n<button id="add-button">\n  Add item\n</button>\n\n<p id="output">\n  Tap an item\n</p>',
@@ -32137,9 +34513,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'debounce espera o usuário parar de disparar um evento antes de executar a função. throttle executa a função no máximo uma vez a cada intervalo.',
-            secondParagraph: 'Toque várias vezes seguidas no botão abaixo: "Cliques" sobe a cada toque, mas "Debounced" só sobe uma vez, 500ms depois do seu último toque.',
-            endParagraph: 'debounce é comum em campos de busca; throttle é comum em eventos de scroll, que disparam com muita frequência.',
+            introduction: {
+              text: 'debounce espera o usuário parar de disparar um evento antes de executar a função. throttle executa a função no máximo uma vez a cada intervalo.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Toque várias vezes seguidas no botão abaixo: "Cliques" sobe a cada toque, mas "Debounced" só sobe uma vez, 500ms depois do seu último toque.'
+            },
+            closing: 'debounce é comum em campos de busca; throttle é comum em eventos de scroll, que disparam com muita frequência.',
             highlight: ['debounce', 'throttle'],
             codeLanguage: 'HTML',
             code: '<button id="botao-teste">\n  Toque várias vezes rápido\n</button>\n\n<p id="saida">\n  Cliques: 0 | Debounced: 0\n</p>',
@@ -32151,9 +34532,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'debounce waits for the user to stop triggering an event before running the function. throttle runs the function at most once per interval.',
-            secondParagraph: 'Tap the button below several times in a row: "Clicks" goes up on every tap, but "Debounced" only goes up once, 500ms after your last tap.',
-            endParagraph: 'debounce is common in search fields; throttle is common in scroll events, which fire very frequently.',
+            introduction: {
+              text: 'debounce waits for the user to stop triggering an event before running the function. throttle runs the function at most once per interval.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Tap the button below several times in a row: "Clicks" goes up on every tap, but "Debounced" only goes up once, 500ms after your last tap.'
+            },
+            closing: 'debounce is common in search fields; throttle is common in scroll events, which fire very frequently.',
             highlight: ['debounce', 'throttle'],
             codeLanguage: 'HTML',
             code: '<button id="test-button">\n  Tap fast, several times\n</button>\n\n<p id="output">\n  Clicks: 0 | Debounced: 0\n</p>',
@@ -32362,18 +34748,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Até aqui você olhou para dentro da linguagem: como o JavaScript decide onde uma variável existe, como ele resolve this, como objetos herdam uns dos outros e em que ordem o código realmente executa.',
-            secondParagraph: 'Escopo, closures, prototypes e event loop não são assuntos separados. Juntos, eles explicam por que um trecho de código se comporta de um jeito que às vezes parece inesperado.',
-            endParagraph: 'Esses conceitos costumam ficar escondidos no dia a dia e aparecem justamente quando algo dá errado — é aí que entender o funcionamento por baixo faz diferença.',
+            introduction: {
+              text: 'Até aqui você olhou para dentro da linguagem: como o JavaScript decide onde uma variável existe, como ele resolve this, como objetos herdam uns dos outros e em que ordem o código realmente executa.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Escopo, closures, prototypes e event loop não são assuntos separados. Juntos, eles explicam por que um trecho de código se comporta de um jeito que às vezes parece inesperado.'
+            },
+            closing: 'Esses conceitos costumam ficar escondidos no dia a dia e aparecem justamente quando algo dá errado — é aí que entender o funcionamento por baixo faz diferença.',
             highlight: ['JavaScript', 'this', 'closures', 'prototypes', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve().then(() => console.log("2 - microtask"));\n\nsetTimeout(() => console.log("3 - macrotask"), 0);\n\nconsole.log("1 - agora");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'So far you have looked inside the language: how JavaScript decides where a variable exists, how it resolves this, how objects inherit from one another, and in what order the code actually runs.',
-            secondParagraph: 'Scope, closures, prototypes and the event loop are not separate subjects. Together they explain why a piece of code behaves in a way that sometimes looks unexpected.',
-            endParagraph: 'These concepts usually stay hidden day to day and show up exactly when something goes wrong — that is when understanding the machinery underneath pays off.',
+            introduction: {
+              text: 'So far you have looked inside the language: how JavaScript decides where a variable exists, how it resolves this, how objects inherit from one another, and in what order the code actually runs.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Scope, closures, prototypes and the event loop are not separate subjects. Together they explain why a piece of code behaves in a way that sometimes looks unexpected.'
+            },
+            closing: 'These concepts usually stay hidden day to day and show up exactly when something goes wrong — that is when understanding the machinery underneath pays off.',
             highlight: ['JavaScript', 'this', 'closures', 'prototypes', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve().then(() => console.log("2 - microtask"));\n\nsetTimeout(() => console.log("3 - macrotask"), 0);\n\nconsole.log("1 - now");',
@@ -32385,18 +34781,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A partir da próxima lição o foco muda: em vez de olhar mais fundo para o JavaScript, você vai conhecer o TypeScript.',
-            secondParagraph: 'TypeScript não substitui o que você aprendeu. Ele é uma camada de tipos sobre esse mesmo JavaScript, e todo código escrito até aqui continua válido.',
-            endParagraph: 'O objetivo não é dominar a ferramenta, e sim reconhecer o TypeScript em projetos reais e entender o que os tipos estão comunicando.',
+            introduction: {
+              text: 'A partir da próxima lição o foco muda: em vez de olhar mais fundo para o JavaScript, você vai conhecer o TypeScript.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'TypeScript não substitui o que você aprendeu. Ele é uma camada de tipos sobre esse mesmo JavaScript, e todo código escrito até aqui continua válido.'
+            },
+            closing: 'O objetivo não é dominar a ferramenta, e sim reconhecer o TypeScript em projetos reais e entender o que os tipos estão comunicando.',
             highlight: ['JavaScript', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: '// JavaScript\nfunction somar(a, b) {\n  return a + b;\n}\n\n// TypeScript: a mesma ideia, com tipos\nfunction somarTipado(a: number, b: number): number {\n  return a + b;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'From the next lesson on, the focus shifts: instead of looking deeper into JavaScript, you will get to know TypeScript.',
-            secondParagraph: 'TypeScript does not replace what you have learned. It is a layer of types over that same JavaScript, and every piece of code written so far is still valid.',
-            endParagraph: 'The goal is not to master the tool, but to recognize TypeScript in real projects and understand what the types are communicating.',
+            introduction: {
+              text: 'From the next lesson on, the focus shifts: instead of looking deeper into JavaScript, you will get to know TypeScript.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'TypeScript does not replace what you have learned. It is a layer of types over that same JavaScript, and every piece of code written so far is still valid.'
+            },
+            closing: 'The goal is not to master the tool, but to recognize TypeScript in real projects and understand what the types are communicating.',
             highlight: ['JavaScript', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: '// JavaScript\nfunction somar(a, b) {\n  return a + b;\n}\n\n// TypeScript: the same idea, with types\nfunction somarTipado(a: number, b: number): number {\n  return a + b;\n}',
@@ -32590,16 +34996,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript é flexível, mas essa flexibilidade pode dificultar a manutenção de aplicações maiores. TypeScript adiciona recursos de tipagem ao desenvolvimento JavaScript para ajudar a detectar determinados problemas antes da execução.',
-            endParagraph: 'Esse tipo de erro só apareceria em tempo de execução no JavaScript puro — o TypeScript aponta antes.',
+            introduction: {
+              text: 'JavaScript é flexível, mas essa flexibilidade pode dificultar a manutenção de aplicações maiores. TypeScript adiciona recursos de tipagem ao desenvolvimento JavaScript para ajudar a detectar determinados problemas antes da execução.',
+              persona: 'cody'
+            },
+            closing: 'Esse tipo de erro só apareceria em tempo de execução no JavaScript puro — o TypeScript aponta antes.',
             highlight: ['TypeScript', 'JavaScript'],
             codeLanguage: 'TypeScript',
             code: 'function somar(a: number, b: number) {\n  return a + b;\n}\n\nsomar(2, "3"); // erro detectado antes de rodar',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript is flexible, but that flexibility can make larger applications harder to maintain. TypeScript adds typing features to JavaScript development to help catch certain problems before the code even runs.',
-            endParagraph: 'This kind of error would only show up at runtime in plain JavaScript — TypeScript points it out beforehand.',
+            introduction: {
+              text: 'JavaScript is flexible, but that flexibility can make larger applications harder to maintain. TypeScript adds typing features to JavaScript development to help catch certain problems before the code even runs.',
+              persona: 'cody'
+            },
+            closing: 'This kind of error would only show up at runtime in plain JavaScript — TypeScript points it out beforehand.',
             highlight: ['TypeScript', 'JavaScript'],
             codeLanguage: 'TypeScript',
             code: 'function add(a: number, b: number) {\n  return a + b;\n}\n\nadd(2, "3"); // error caught before it runs',
@@ -32762,18 +35174,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'TypeScript é um superset de JavaScript: todo código JavaScript válido também é código TypeScript válido.',
-            secondParagraph: 'O código TypeScript é convertido (transpilado) em JavaScript comum antes de rodar.',
-            endParagraph: 'Depois da transpilação, o resultado é só JavaScript — sem tipos, sem interfaces, sem nada que só existe em tempo de desenvolvimento.',
+            introduction: {
+              text: 'TypeScript é um superset de JavaScript: todo código JavaScript válido também é código TypeScript válido.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'O código TypeScript é convertido (transpilado) em JavaScript comum antes de rodar.'
+            },
+            closing: 'Depois da transpilação, o resultado é só JavaScript — sem tipos, sem interfaces, sem nada que só existe em tempo de desenvolvimento.',
             highlight: ['TypeScript', 'JavaScript', 'transpilado'],
             codeLanguage: 'TypeScript',
             code: 'let idade: number = 20;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'TypeScript is a superset of JavaScript: every valid JavaScript code is also valid TypeScript code.',
-            secondParagraph: 'TypeScript code gets converted (transpiled) into plain JavaScript before it runs.',
-            endParagraph: 'After transpilation, the result is just JavaScript — no types, no interfaces, nothing that only exists at development time.',
+            introduction: {
+              text: 'TypeScript is a superset of JavaScript: every valid JavaScript code is also valid TypeScript code.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'TypeScript code gets converted (transpiled) into plain JavaScript before it runs.'
+            },
+            closing: 'After transpilation, the result is just JavaScript — no types, no interfaces, nothing that only exists at development time.',
             highlight: ['TypeScript', 'JavaScript', 'transpiled'],
             codeLanguage: 'TypeScript',
             code: 'let age: number = 20;',
@@ -32785,16 +35207,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Navegadores sabem executar JavaScript, não TypeScript diretamente. Por isso o TypeScript precisa ser transpilado antes de chegar ao navegador.',
-            endParagraph: 'Ferramentas de build costumam fazer essa transpilação automaticamente, então o processo geralmente é invisível no dia a dia.',
+            introduction: {
+              text: 'Navegadores sabem executar JavaScript, não TypeScript diretamente. Por isso o TypeScript precisa ser transpilado antes de chegar ao navegador.',
+              persona: 'neutral'
+            },
+            closing: 'Ferramentas de build costumam fazer essa transpilação automaticamente, então o processo geralmente é invisível no dia a dia.',
             highlight: ['JavaScript', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let idade: number = 20;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Browsers know how to run JavaScript, not TypeScript directly. That is why TypeScript needs to be transpiled before it reaches the browser.',
-            endParagraph: 'Build tools usually do this transpilation automatically, so the process is normally invisible day to day.',
+            introduction: {
+              text: 'Browsers know how to run JavaScript, not TypeScript directly. That is why TypeScript needs to be transpiled before it reaches the browser.',
+              persona: 'neutral'
+            },
+            closing: 'Build tools usually do this transpilation automatically, so the process is normally invisible day to day.',
             highlight: ['JavaScript', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let age: number = 20;',
@@ -32955,16 +35383,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'TypeScript consegue inferir o tipo de uma variável a partir do valor atribuído, sem precisar de uma anotação explícita.',
-            endParagraph: 'Anotações explícitas são úteis quando o valor inicial não deixa claro qual tipo se pretende usar.',
+            introduction: {
+              text: 'TypeScript consegue inferir o tipo de uma variável a partir do valor atribuído, sem precisar de uma anotação explícita.',
+              persona: 'cody'
+            },
+            closing: 'Anotações explícitas são úteis quando o valor inicial não deixa claro qual tipo se pretende usar.',
             highlight: ['inferir', 'anotação', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let nome = "Ana"; // inferido como string\nlet idade = 20; // inferido como number\n\nlet cidade: string = "São Paulo"; // anotação explícita',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'TypeScript can infer the type of a variable from the assigned value, without needing an explicit annotation.',
-            endParagraph: 'Explicit annotations are useful when the initial value does not make it clear which type is intended.',
+            introduction: {
+              text: 'TypeScript can infer the type of a variable from the assigned value, without needing an explicit annotation.',
+              persona: 'cody'
+            },
+            closing: 'Explicit annotations are useful when the initial value does not make it clear which type is intended.',
             highlight: ['infer', 'annotation', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let name = "Ana"; // inferred as string\nlet age = 20; // inferred as number\n\nlet city: string = "São Paulo"; // explicit annotation',
@@ -33131,16 +35565,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'interface e type descrevem a estrutura esperada de um objeto.',
-            endParagraph: 'As duas formas resolvem o mesmo problema; a diferença prática entre elas aparece mais adiante, na lição sobre type vs interface.',
+            introduction: {
+              text: 'interface e type descrevem a estrutura esperada de um objeto.',
+              persona: 'cody'
+            },
+            closing: 'As duas formas resolvem o mesmo problema; a diferença prática entre elas aparece mais adiante, na lição sobre type vs interface.',
             highlight: ['interface', 'type'],
             codeLanguage: 'TypeScript',
             code: 'interface Usuario {\n  nome: string;\n  idade: number;\n}\n\ntype Produto = {\n  nome: string;\n  preco: number;\n};',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'interface and type describe the expected structure of an object.',
-            endParagraph: 'Both forms solve the same problem; the practical difference between them shows up later, in the type vs interface lesson.',
+            introduction: {
+              text: 'interface and type describe the expected structure of an object.',
+              persona: 'cody'
+            },
+            closing: 'Both forms solve the same problem; the practical difference between them shows up later, in the type vs interface lesson.',
             highlight: ['interface', 'type'],
             codeLanguage: 'TypeScript',
             code: 'interface User {\n  name: string;\n  age: number;\n}\n\ntype Product = {\n  name: string;\n  price: number;\n};',
@@ -33303,16 +35743,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um union type permite que uma variável aceite mais de um tipo possível.',
-            endParagraph: 'Isso é útil quando um valor legitimamente pode vir em mais de um formato, como um id que às vezes é numérico e às vezes é um texto.',
+            introduction: {
+              text: 'Um union type permite que uma variável aceite mais de um tipo possível.',
+              persona: 'cody'
+            },
+            closing: 'Isso é útil quando um valor legitimamente pode vir em mais de um formato, como um id que às vezes é numérico e às vezes é um texto.',
             highlight: ['union type'],
             codeLanguage: 'TypeScript',
             code: 'let id: string | number;\n\nid = "abc123";\nid = 42;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A union type lets a variable accept more than one possible type.',
-            endParagraph: 'This is useful when a value can legitimately come in more than one shape, like an id that is sometimes numeric and sometimes text.',
+            introduction: {
+              text: 'A union type lets a variable accept more than one possible type.',
+              persona: 'cody'
+            },
+            closing: 'This is useful when a value can legitimately come in more than one shape, like an id that is sometimes numeric and sometimes text.',
             highlight: ['union type'],
             codeLanguage: 'TypeScript',
             code: 'let id: string | number;\n\nid = "abc123";\nid = 42;',
@@ -33479,16 +35925,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos tipar os parâmetros, o retorno e até objetos inteiros usados por uma função.',
-            endParagraph: 'Com os tipos declarados, o TypeScript avisa se a função for chamada com argumentos errados ou se o retorno não bater com o esperado.',
+            introduction: {
+              text: 'Podemos tipar os parâmetros, o retorno e até objetos inteiros usados por uma função.',
+              persona: 'cody'
+            },
+            closing: 'Com os tipos declarados, o TypeScript avisa se a função for chamada com argumentos errados ou se o retorno não bater com o esperado.',
             highlight: ['TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'function criar(\n  nome: string,\n  idade: number\n): { nome: string; idade: number } {\n  return { nome, idade };\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can type the parameters, the return value and even whole objects used by a function.',
-            endParagraph: 'With the types declared, TypeScript warns if the function is called with the wrong arguments or if the return does not match what is expected.',
+            introduction: {
+              text: 'We can type the parameters, the return value and even whole objects used by a function.',
+              persona: 'cody'
+            },
+            closing: 'With the types declared, TypeScript warns if the function is called with the wrong arguments or if the return does not match what is expected.',
             highlight: ['TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'function create(\n  name: string,\n  age: number\n): { name: string; age: number } {\n  return { name, age };\n}',
@@ -33649,9 +36101,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'any desliga a verificação de tipos para aquele valor — o TypeScript deixa de ajudar ali.',
-            secondParagraph: 'unknown também aceita qualquer valor, mas exige uma verificação antes de deixar usá-lo, o que é mais seguro.',
-            endParagraph: 'Prefira unknown a any sempre que o tipo ainda não for conhecido.',
+            introduction: {
+              text: 'any desliga a verificação de tipos para aquele valor — o TypeScript deixa de ajudar ali.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'unknown também aceita qualquer valor, mas exige uma verificação antes de deixar usá-lo, o que é mais seguro.'
+            },
+            closing: 'Prefira unknown a any sempre que o tipo ainda não for conhecido.',
             highlight: ['unknown', 'any', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let valor: unknown = "texto";\n\nif (typeof valor === "string") {\n  console.log(valor.toUpperCase());\n}',
@@ -33659,9 +36116,14 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             terminalCode: 'let valor = "texto";\nif (typeof valor === "string") {\n    console.log(valor.toUpperCase());\n}'
           },
           en: {
-            firstParagraph: 'any turns off type checking for that value — TypeScript stops helping there.',
-            secondParagraph: 'unknown also accepts any value, but requires a check before letting you use it, which is safer.',
-            endParagraph: 'Prefer unknown over any whenever the type is not known yet.',
+            introduction: {
+              text: 'any turns off type checking for that value — TypeScript stops helping there.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'unknown also accepts any value, but requires a check before letting you use it, which is safer.'
+            },
+            closing: 'Prefer unknown over any whenever the type is not known yet.',
             highlight: ['unknown', 'any', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: 'let value: unknown = "text";\n\nif (typeof value === "string") {\n  console.log(value.toUpperCase());\n}',
@@ -33866,16 +36328,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'generics permitem criar funções e estruturas reutilizáveis sem perder informações sobre os tipos utilizados.',
-            endParagraph: 'O mesmo código pode trabalhar com diferentes tipos mantendo informações sobre o tipo utilizado.',
+            introduction: {
+              text: 'generics permitem criar funções e estruturas reutilizáveis sem perder informações sobre os tipos utilizados.',
+              persona: 'cody'
+            },
+            closing: 'O mesmo código pode trabalhar com diferentes tipos mantendo informações sobre o tipo utilizado.',
             highlight: ['generics'],
             codeLanguage: 'TypeScript',
             code: 'function primeiro<T>(\n  itens: T[]\n): T {\n  return itens[0];\n}\n\nconst numero =\n  primeiro([1, 2, 3]);\n\nconst nome =\n  primeiro(["Ana", "João"]);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Generics let you create reusable functions and structures without losing information about the types used.',
-            endParagraph: 'The same code can work with different types while keeping information about the type used.',
+            introduction: {
+              text: 'Generics let you create reusable functions and structures without losing information about the types used.',
+              persona: 'cody'
+            },
+            closing: 'The same code can work with different types while keeping information about the type used.',
             highlight: ['generics'],
             codeLanguage: 'TypeScript',
             code: 'function first<T>(\n  items: T[]\n): T {\n  return items[0];\n}\n\nconst number =\n  first([1, 2, 3]);\n\nconst name =\n  first(["Ana", "John"]);',
@@ -33887,18 +36355,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um generic pode ser restringido para aceitar apenas tipos que tenham certas propriedades.',
-            secondParagraph: 'Com extends, dizemos que T precisa ter pelo menos um campo nome. Assim a função continua genérica, mas o acesso a item.nome fica seguro.',
-            endParagraph: 'Restringir generics é o que permite escrever código reutilizável sem abrir mão da verificação de tipos.',
+            introduction: {
+              text: 'Um generic pode ser restringido para aceitar apenas tipos que tenham certas propriedades.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Com extends, dizemos que T precisa ter pelo menos um campo nome. Assim a função continua genérica, mas o acesso a item.nome fica seguro.'
+            },
+            closing: 'Restringir generics é o que permite escrever código reutilizável sem abrir mão da verificação de tipos.',
             highlight: ['generic', 'generics', 'extends'],
             codeLanguage: 'TypeScript',
             code: 'interface ComNome {\n  nome: string;\n}\n\nfunction descrever<T extends ComNome>(item: T): string {\n  return "Nome: " + item.nome;\n}\n\ndescrever({ nome: "Ana", idade: 30 });',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A generic can be constrained so it only accepts types that have certain properties.',
-            secondParagraph: 'With extends, we say that T must have at least a nome field. The function stays generic, but reading item.nome becomes safe.',
-            endParagraph: 'Constraining generics is what lets you write reusable code without giving up type checking.',
+            introduction: {
+              text: 'A generic can be constrained so it only accepts types that have certain properties.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'With extends, we say that T must have at least a nome field. The function stays generic, but reading item.nome becomes safe.'
+            },
+            closing: 'Constraining generics is what lets you write reusable code without giving up type checking.',
             highlight: ['generic', 'generics', 'extends'],
             codeLanguage: 'TypeScript',
             code: 'interface ComNome {\n  nome: string;\n}\n\nfunction descrever<T extends ComNome>(item: T): string {\n  return "Name: " + item.nome;\n}\n\ndescrever({ nome: "Ana", idade: 30 });',
@@ -34069,18 +36547,28 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Na prática, interface e type resolvem o mesmo problema na maioria dos casos do dia a dia.',
-            secondParagraph: 'Uma diferença real: interface pode ser estendida depois no mesmo nome (declaration merging), e type pode representar union types, o que interface não consegue.',
-            endParagraph: 'Para objetos simples, a escolha costuma ser mais uma questão de convenção do time do que uma regra técnica rígida.',
+            introduction: {
+              text: 'Na prática, interface e type resolvem o mesmo problema na maioria dos casos do dia a dia.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Uma diferença real: interface pode ser estendida depois no mesmo nome (declaration merging), e type pode representar union types, o que interface não consegue.'
+            },
+            closing: 'Para objetos simples, a escolha costuma ser mais uma questão de convenção do time do que uma regra técnica rígida.',
             highlight: ['interface', 'type', 'union types'],
             codeLanguage: 'TypeScript',
             code: 'interface A {\n  nome: string;\n}\ninterface A {\n  idade: number;\n}\n// A agora tem nome e idade\n\ntype Status = "ativo" | "inativo";',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In practice, interface and type solve the same problem in most everyday cases.',
-            secondParagraph: 'One real difference: interface can be extended later under the same name (declaration merging), and type can represent union types, which interface cannot.',
-            endParagraph: 'For simple objects, the choice is usually more a matter of team convention than a strict technical rule.',
+            introduction: {
+              text: 'In practice, interface and type solve the same problem in most everyday cases.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'One real difference: interface can be extended later under the same name (declaration merging), and type can represent union types, which interface cannot.'
+            },
+            closing: 'For simple objects, the choice is usually more a matter of team convention than a strict technical rule.',
             highlight: ['interface', 'type', 'union types'],
             codeLanguage: 'TypeScript',
             code: 'interface A {\n  name: string;\n}\ninterface A {\n  age: number;\n}\n// A now has name and age\n\ntype Status = "active" | "inactive";',
@@ -34241,16 +36729,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'tsconfig.json configura como o TypeScript deve transpilar o projeto: para qual versão de JavaScript, quais arquivos incluir, e quão rígidas são as checagens de tipo.',
-            endParagraph: 'Não é preciso decorar todas as opções — o importante é saber que esse arquivo existe e é ele quem controla a transpilação.',
+            introduction: {
+              text: 'tsconfig.json configura como o TypeScript deve transpilar o projeto: para qual versão de JavaScript, quais arquivos incluir, e quão rígidas são as checagens de tipo.',
+              persona: 'cody'
+            },
+            closing: 'Não é preciso decorar todas as opções — o importante é saber que esse arquivo existe e é ele quem controla a transpilação.',
             highlight: ['tsconfig', 'transpilação', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: '{\n  "compilerOptions": {\n    "target": "es2022",\n    "strict": true\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'tsconfig.json configures how TypeScript should transpile the project: which JavaScript version to target, which files to include, and how strict the type checks are.',
-            endParagraph: 'You don\'t need to memorize every option — what matters is knowing this file exists and is what controls the transpilation.',
+            introduction: {
+              text: 'tsconfig.json configures how TypeScript should transpile the project: which JavaScript version to target, which files to include, and how strict the type checks are.',
+              persona: 'cody'
+            },
+            closing: 'You don\'t need to memorize every option — what matters is knowing this file exists and is what controls the transpilation.',
             highlight: ['tsconfig', 'transpilation', 'TypeScript'],
             codeLanguage: 'TypeScript',
             code: '{\n  "compilerOptions": {\n    "target": "es2022",\n    "strict": true\n  }\n}',
@@ -34413,16 +36907,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um iterador é um objeto com um método next() que devolve { value, done }. Arrays, strings, Map e Set já são iteráveis, e o for...of usa isso por baixo.',
-            endParagraph: 'Quando os valores acabam, next() devolve done: true.',
+            introduction: {
+              text: 'Um iterador é um objeto com um método next() que devolve { value, done }. Arrays, strings, Map e Set já são iteráveis, e o for...of usa isso por baixo.',
+              persona: 'cody'
+            },
+            closing: 'Quando os valores acabam, next() devolve done: true.',
             highlight: ['iterador', 'next', 'done'],
             codeLanguage: 'JavaScript',
             code: 'const it = [10, 20][Symbol.iterator]();\n\nconsole.log(it.next());\nconsole.log(it.next());\nconsole.log(it.next());',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'An iterator is an object with a next() method that returns { value, done }. Arrays, strings, Map and Set are already iterable, and for...of relies on that under the hood.',
-            endParagraph: 'When the values run out, next() returns done: true.',
+            introduction: {
+              text: 'An iterator is an object with a next() method that returns { value, done }. Arrays, strings, Map and Set are already iterable, and for...of relies on that under the hood.',
+              persona: 'cody'
+            },
+            closing: 'When the values run out, next() returns done: true.',
             highlight: ['iterator', 'next', 'done'],
             codeLanguage: 'JavaScript',
             code: 'const it = [10, 20][Symbol.iterator]();\n\nconsole.log(it.next());\nconsole.log(it.next());\nconsole.log(it.next());',
@@ -34434,16 +36934,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma função geradora (function*) devolve um iterador. Cada yield pausa a função e entrega um valor; o próximo next() continua de onde ela parou.',
-            endParagraph: 'O valor de return aparece uma única vez, junto com done: true.',
+            introduction: {
+              text: 'Uma função geradora (function*) devolve um iterador. Cada yield pausa a função e entrega um valor; o próximo next() continua de onde ela parou.',
+              persona: 'neutral'
+            },
+            closing: 'O valor de return aparece uma única vez, junto com done: true.',
             highlight: ['geradora', 'yield', 'return'],
             codeLanguage: 'JavaScript',
             code: 'function* contar() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst g = contar();\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A generator function (function*) returns an iterator. Each yield pauses the function and hands out a value; the next next() resumes where it stopped.',
-            endParagraph: 'The return value shows up only once, together with done: true.',
+            introduction: {
+              text: 'A generator function (function*) returns an iterator. Each yield pauses the function and hands out a value; the next next() resumes where it stopped.',
+              persona: 'neutral'
+            },
+            closing: 'The return value shows up only once, together with done: true.',
             highlight: ['generator', 'yield', 'return'],
             codeLanguage: 'JavaScript',
             code: 'function* count() {\n  yield 1;\n  yield 2;\n  return 3;\n}\n\nconst g = count();\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());\nconsole.log(g.next());',
@@ -34455,16 +36961,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Geradores são preguiçosos: só calculam o próximo valor quando alguém pede. Isso permite sequências infinitas, desde que você pare de pedir.',
-            endParagraph: 'Aqui o laço do gerador nunca termina sozinho, mas o for...of para no break.',
+            introduction: {
+              text: 'Geradores são preguiçosos: só calculam o próximo valor quando alguém pede. Isso permite sequências infinitas, desde que você pare de pedir.',
+              persona: 'neutral'
+            },
+            closing: 'Aqui o laço do gerador nunca termina sozinho, mas o for...of para no break.',
             highlight: ['preguiçosos', 'infinitas', 'break'],
             codeLanguage: 'JavaScript',
             code: 'function* naturais() {\n  let n = 1;\n  while (true) yield n++;\n}\n\nfor (const n of naturais()) {\n  if (n > 3) break;\n  console.log(n);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Generators are lazy: they only compute the next value when someone asks for it. That allows infinite sequences, as long as you stop asking.',
-            endParagraph: 'Here the generator loop never ends on its own, but the for...of stops at the break.',
+            introduction: {
+              text: 'Generators are lazy: they only compute the next value when someone asks for it. That allows infinite sequences, as long as you stop asking.',
+              persona: 'neutral'
+            },
+            closing: 'Here the generator loop never ends on its own, but the for...of stops at the break.',
             highlight: ['lazy', 'infinite', 'break'],
             codeLanguage: 'JavaScript',
             code: 'function* naturals() {\n  let n = 1;\n  while (true) yield n++;\n}\n\nfor (const n of naturals()) {\n  if (n > 3) break;\n  console.log(n);\n}',
@@ -34566,16 +37078,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um Proxy envolve um objeto e intercepta operações com funções chamadas traps. O trap get decide o que sai quando alguém lê uma propriedade.',
-            endParagraph: 'Aqui, ler uma propriedade que não existe devolve "?" em vez de undefined.',
+            introduction: {
+              text: 'Um Proxy envolve um objeto e intercepta operações com funções chamadas traps. O trap get decide o que sai quando alguém lê uma propriedade.',
+              persona: 'cody'
+            },
+            closing: 'Aqui, ler uma propriedade que não existe devolve "?" em vez de undefined.',
             highlight: ['Proxy', 'traps', 'get'],
             codeLanguage: 'JavaScript',
             code: 'const base = { name: "Ana" };\n\nconst p = new Proxy(base, {\n  get(target, key) {\n    return key in target ? target[key] : "?";\n  }\n});\n\nconsole.log(p.name);\nconsole.log(p.age);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A Proxy wraps an object and intercepts operations with functions called traps. The get trap decides what comes out when someone reads a property.',
-            endParagraph: 'Here, reading a property that does not exist returns "?" instead of undefined.',
+            introduction: {
+              text: 'A Proxy wraps an object and intercepts operations with functions called traps. The get trap decides what comes out when someone reads a property.',
+              persona: 'cody'
+            },
+            closing: 'Here, reading a property that does not exist returns "?" instead of undefined.',
             highlight: ['Proxy', 'traps', 'get'],
             codeLanguage: 'JavaScript',
             code: 'const base = { name: "Ana" };\n\nconst p = new Proxy(base, {\n  get(target, key) {\n    return key in target ? target[key] : "?";\n  }\n});\n\nconsole.log(p.name);\nconsole.log(p.age);',
@@ -34587,16 +37105,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O trap set intercepta atribuições, e Reflect.set faz a atribuição padrão no objeto alvo. Em modo estrito, um trap set que devolve um valor falso lança TypeError.',
-            endParagraph: 'O Reflect tem um método para cada trap, com os mesmos argumentos.',
+            introduction: {
+              text: 'O trap set intercepta atribuições, e Reflect.set faz a atribuição padrão no objeto alvo. Em modo estrito, um trap set que devolve um valor falso lança TypeError.',
+              persona: 'neutral'
+            },
+            closing: 'O Reflect tem um método para cada trap, com os mesmos argumentos.',
             highlight: ['set', 'Reflect', 'TypeError'],
             codeLanguage: 'JavaScript',
             code: '"use strict";\n\nconst ages = new Proxy({}, {\n  set(target, key, value) {\n    if (value < 0) throw new RangeError("neg");\n    return Reflect.set(target, key, value);\n  }\n});\n\nages.a = 30;\nconsole.log(ages.a);\ntry { ages.a = -1; } catch (e) { console.log(e.message); }',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The set trap intercepts assignments, and Reflect.set does the default assignment on the target object. In strict mode, a set trap that returns a falsy value throws TypeError.',
-            endParagraph: 'Reflect has one method for each trap, with the same arguments.',
+            introduction: {
+              text: 'The set trap intercepts assignments, and Reflect.set does the default assignment on the target object. In strict mode, a set trap that returns a falsy value throws TypeError.',
+              persona: 'neutral'
+            },
+            closing: 'Reflect has one method for each trap, with the same arguments.',
             highlight: ['set', 'Reflect', 'TypeError'],
             codeLanguage: 'JavaScript',
             code: '"use strict";\n\nconst ages = new Proxy({}, {\n  set(target, key, value) {\n    if (value < 0) throw new RangeError("neg");\n    return Reflect.set(target, key, value);\n  }\n});\n\nages.a = 30;\nconsole.log(ages.a);\ntry { ages.a = -1; } catch (e) { console.log(e.message); }',
@@ -34694,16 +37218,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma tagged template chama uma função com a template literal, sem parênteses. A função recebe o array de textos e, depois, cada valor interpolado como um argumento.',
-            endParagraph: 'Com n valores, o array de textos tem n + 1 itens.',
+            introduction: {
+              text: 'Uma tagged template chama uma função com a template literal, sem parênteses. A função recebe o array de textos e, depois, cada valor interpolado como um argumento.',
+              persona: 'cody'
+            },
+            closing: 'Com n valores, o array de textos tem n + 1 itens.',
             highlight: ['tagged template', 'array de textos'],
             codeLanguage: 'JavaScript',
             code: 'function tag(parts, name, age) {\n  console.log(parts);\n  console.log(name, age);\n}\n\ntag`Olá ${"Ana"}, ${30} anos`;',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A tagged template calls a function with the template literal, without parentheses. The function receives the array of strings and then each interpolated value as an argument.',
-            endParagraph: 'With n values, the array of strings has n + 1 items.',
+            introduction: {
+              text: 'A tagged template calls a function with the template literal, without parentheses. The function receives the array of strings and then each interpolated value as an argument.',
+              persona: 'cody'
+            },
+            closing: 'With n values, the array of strings has n + 1 items.',
             highlight: ['tagged template', 'array of strings'],
             codeLanguage: 'JavaScript',
             code: 'function tag(parts, name, age) {\n  console.log(parts);\n  console.log(name, age);\n}\n\ntag`Hi ${"Ana"}, ${30} years`;',
@@ -34715,16 +37245,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'String.raw é uma tag pronta que devolve o texto sem processar as barras invertidas. A função também pode ler strings.raw, a versão crua de cada pedaço.',
-            endParagraph: 'Por isso String.raw é útil para caminhos de arquivo e expressões regulares.',
+            introduction: {
+              text: 'String.raw é uma tag pronta que devolve o texto sem processar as barras invertidas. A função também pode ler strings.raw, a versão crua de cada pedaço.',
+              persona: 'neutral'
+            },
+            closing: 'Por isso String.raw é útil para caminhos de arquivo e expressões regulares.',
             highlight: ['String.raw', 'barras invertidas'],
             codeLanguage: 'JavaScript',
             code: 'console.log(String.raw`a\\nb`);\nconsole.log(`a\\nb`);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'String.raw is a ready-made tag that returns the text without processing backslashes. A function can also read strings.raw, the raw version of each piece.',
-            endParagraph: 'That is why String.raw is useful for file paths and regular expressions.',
+            introduction: {
+              text: 'String.raw is a ready-made tag that returns the text without processing backslashes. A function can also read strings.raw, the raw version of each piece.',
+              persona: 'neutral'
+            },
+            closing: 'That is why String.raw is useful for file paths and regular expressions.',
             highlight: ['String.raw', 'backslashes'],
             codeLanguage: 'JavaScript',
             code: 'console.log(String.raw`a\\nb`);\nconsole.log(`a\\nb`);',
@@ -34822,16 +37358,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Map guarda pares chave-valor, como um objeto, mas qualquer valor serve de chave, inclusive um objeto, e ele lembra a ordem em que as chaves entraram. Os métodos principais são set, get, has e delete, além de size.',
-            endParagraph: 'O size é uma propriedade, não um método: sem parênteses.',
+            introduction: {
+              text: 'Map guarda pares chave-valor, como um objeto, mas qualquer valor serve de chave, inclusive um objeto, e ele lembra a ordem em que as chaves entraram. Os métodos principais são set, get, has e delete, além de size.',
+              persona: 'cody'
+            },
+            closing: 'O size é uma propriedade, não um método: sem parênteses.',
             highlight: ['Map', 'set', 'get', 'size'],
             codeLanguage: 'JavaScript',
             code: 'const notas = new Map();\n\nnotas.set("Ana", 9);\nnotas.set("Bia", 7);\n\nconsole.log(notas.get("Ana"));\nconsole.log(notas.has("Caio"));\nconsole.log(notas.size);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Map stores key-value pairs, like an object, but any value works as a key, even an object, and it remembers the order the keys came in. The main methods are set, get, has and delete, plus size.',
-            endParagraph: 'The size is a property, not a method: no parentheses.',
+            introduction: {
+              text: 'Map stores key-value pairs, like an object, but any value works as a key, even an object, and it remembers the order the keys came in. The main methods are set, get, has and delete, plus size.',
+              persona: 'cody'
+            },
+            closing: 'The size is a property, not a method: no parentheses.',
             highlight: ['Map', 'set', 'get', 'size'],
             codeLanguage: 'JavaScript',
             code: 'const notas = new Map();\n\nnotas.set("Ana", 9);\nnotas.set("Bia", 7);\n\nconsole.log(notas.get("Ana"));\nconsole.log(notas.has("Caio"));\nconsole.log(notas.size);',
@@ -34843,16 +37385,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Set guarda valores sem repetição. Passar um array ao construtor remove os duplicados, e o spread [...set] devolve um array de novo.',
-            endParagraph: 'Os valores ficam na ordem em que entraram, e has confere se um valor está lá.',
+            introduction: {
+              text: 'Set guarda valores sem repetição. Passar um array ao construtor remove os duplicados, e o spread [...set] devolve um array de novo.',
+              persona: 'neutral'
+            },
+            closing: 'Os valores ficam na ordem em que entraram, e has confere se um valor está lá.',
             highlight: ['Set', 'spread'],
             codeLanguage: 'JavaScript',
             code: 'const ids = [3, 1, 3, 2, 1];\nconst unicos = new Set(ids);\n\nconsole.log(unicos.size);\nconsole.log([...unicos]);\nconsole.log(unicos.has(2));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Set stores values with no repetition. Passing an array to the constructor removes the duplicates, and the spread [...set] gives an array back.',
-            endParagraph: 'The values stay in the order they came in, and has checks whether a value is there.',
+            introduction: {
+              text: 'Set stores values with no repetition. Passing an array to the constructor removes the duplicates, and the spread [...set] gives an array back.',
+              persona: 'neutral'
+            },
+            closing: 'The values stay in the order they came in, and has checks whether a value is there.',
             highlight: ['Set', 'spread'],
             codeLanguage: 'JavaScript',
             code: 'const ids = [3, 1, 3, 2, 1];\nconst unicos = new Set(ids);\n\nconsole.log(unicos.size);\nconsole.log([...unicos]);\nconsole.log(unicos.has(2));',
@@ -34864,16 +37412,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um Map é iterável: for...of entrega cada par como [chave, valor], na ordem de inserção. Object.fromEntries(map) converte o Map em um objeto comum.',
-            endParagraph: 'O contrário também existe: new Map(Object.entries(obj)).',
+            introduction: {
+              text: 'Um Map é iterável: for...of entrega cada par como [chave, valor], na ordem de inserção. Object.fromEntries(map) converte o Map em um objeto comum.',
+              persona: 'neutral'
+            },
+            closing: 'O contrário também existe: new Map(Object.entries(obj)).',
             highlight: ['iterável', 'Object.fromEntries'],
             codeLanguage: 'JavaScript',
             code: 'const preco = new Map([\n  ["pão", 5],\n  ["leite", 8]\n]);\n\nfor (const [item, valor] of preco) {\n  console.log(item, valor);\n}\n\nconsole.log(Object.fromEntries(preco));',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A Map is iterable: for...of hands over each pair as [key, value], in insertion order. Object.fromEntries(map) converts the Map into a plain object.',
-            endParagraph: 'The opposite also exists: new Map(Object.entries(obj)).',
+            introduction: {
+              text: 'A Map is iterable: for...of hands over each pair as [key, value], in insertion order. Object.fromEntries(map) converts the Map into a plain object.',
+              persona: 'neutral'
+            },
+            closing: 'The opposite also exists: new Map(Object.entries(obj)).',
             highlight: ['iterable', 'Object.fromEntries'],
             codeLanguage: 'JavaScript',
             code: 'const preco = new Map([\n  ["bread", 5],\n  ["milk", 8]\n]);\n\nfor (const [item, valor] of preco) {\n  console.log(item, valor);\n}\n\nconsole.log(Object.fromEntries(preco));',
@@ -34975,16 +37529,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um campo com # no nome é privado: só o código de dentro da classe lê e escreve. O get cria um acessor, que se usa como uma propriedade, sem parênteses.',
-            endParagraph: 'Quem usa a classe lê c.saldo, e nunca mexe direto no campo.',
+            introduction: {
+              text: 'Um campo com # no nome é privado: só o código de dentro da classe lê e escreve. O get cria um acessor, que se usa como uma propriedade, sem parênteses.',
+              persona: 'cody'
+            },
+            closing: 'Quem usa a classe lê c.saldo, e nunca mexe direto no campo.',
             highlight: ['privado', 'get', 'acessor'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 0;\n\n  depositar(valor) {\n    this.#saldo += valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.depositar(50);\nconsole.log(c.saldo);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A field with # in its name is private: only code inside the class reads and writes it. The get creates an accessor, which is used like a property, with no parentheses.',
-            endParagraph: 'Whoever uses the class reads c.saldo, and never touches the field directly.',
+            introduction: {
+              text: 'A field with # in its name is private: only code inside the class reads and writes it. The get creates an accessor, which is used like a property, with no parentheses.',
+              persona: 'cody'
+            },
+            closing: 'Whoever uses the class reads c.saldo, and never touches the field directly.',
             highlight: ['private', 'get', 'accessor'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 0;\n\n  depositar(valor) {\n    this.#saldo += valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.depositar(50);\nconsole.log(c.saldo);',
@@ -34996,16 +37556,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O set valida antes de gravar: quem escreve c.saldo = -5 recebe o erro, e o campo privado nunca guarda um valor inválido. Um get e um set com o mesmo nome formam uma propriedade só.',
-            endParagraph: 'Atribuir passa pelo set; ler passa pelo get.',
+            introduction: {
+              text: 'O set valida antes de gravar: quem escreve c.saldo = -5 recebe o erro, e o campo privado nunca guarda um valor inválido. Um get e um set com o mesmo nome formam uma propriedade só.',
+              persona: 'neutral'
+            },
+            closing: 'Atribuir passa pelo set; ler passa pelo get.',
             highlight: ['set', 'valida'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 0;\n\n  set saldo(valor) {\n    if (valor < 0) {\n      throw new Error("negativo");\n    }\n    this.#saldo = valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.saldo = 30;\nconsole.log(c.saldo);\n\ntry {\n  c.saldo = -5;\n} catch (e) {\n  console.log(e.message);\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The set validates before saving: whoever writes c.saldo = -5 gets the error, and the private field never stores an invalid value. A get and a set with the same name make a single property.',
-            endParagraph: 'Assigning goes through the set; reading goes through the get.',
+            introduction: {
+              text: 'The set validates before saving: whoever writes c.saldo = -5 gets the error, and the private field never stores an invalid value. A get and a set with the same name make a single property.',
+              persona: 'neutral'
+            },
+            closing: 'Assigning goes through the set; reading goes through the get.',
             highlight: ['set', 'validates'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 0;\n\n  set saldo(valor) {\n    if (valor < 0) {\n      throw new Error("negative");\n    }\n    this.#saldo = valor;\n  }\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\nc.saldo = 30;\nconsole.log(c.saldo);\n\ntry {\n  c.saldo = -5;\n} catch (e) {\n  console.log(e.message);\n}',
@@ -35017,16 +37583,22 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O campo privado não aparece em Object.keys nem em JSON.stringify, e ler c.#saldo de fora é erro de sintaxe, não só undefined. Por isso ele protege o dado de verdade.',
-            endParagraph: 'O erro acontece antes de o código rodar, quando o arquivo é lido.',
+            introduction: {
+              text: 'O campo privado não aparece em Object.keys nem em JSON.stringify, e ler c.#saldo de fora é erro de sintaxe, não só undefined. Por isso ele protege o dado de verdade.',
+              persona: 'neutral'
+            },
+            closing: 'O erro acontece antes de o código rodar, quando o arquivo é lido.',
             highlight: ['Object.keys', 'JSON.stringify', 'erro de sintaxe'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 50;\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\n\nconsole.log(Object.keys(c));\nconsole.log(JSON.stringify(c));\nconsole.log(c.saldo);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The private field does not show up in Object.keys or JSON.stringify, and reading c.#saldo from outside is a syntax error, not just undefined. That is why it really protects the data.',
-            endParagraph: 'The error happens before the code runs, when the file is read.',
+            introduction: {
+              text: 'The private field does not show up in Object.keys or JSON.stringify, and reading c.#saldo from outside is a syntax error, not just undefined. That is why it really protects the data.',
+              persona: 'neutral'
+            },
+            closing: 'The error happens before the code runs, when the file is read.',
             highlight: ['Object.keys', 'JSON.stringify', 'syntax error'],
             codeLanguage: 'JavaScript',
             code: 'class Conta {\n  #saldo = 50;\n\n  get saldo() {\n    return this.#saldo;\n  }\n}\n\nconst c = new Conta();\n\nconsole.log(Object.keys(c));\nconsole.log(JSON.stringify(c));\nconsole.log(c.saldo);',
@@ -35181,16 +37753,22 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JavaScript é muito conhecido por executar código no navegador, mas a linguagem também pode ser executada em outros ambientes. Node.js permite utilizar JavaScript fora do navegador, inclusive para criar aplicações no servidor.',
-            endParagraph: 'O código continua sendo JavaScript. O que mudou foi o ambiente em que ele está sendo executado.',
+            introduction: {
+              text: 'JavaScript é muito conhecido por executar código no navegador, mas a linguagem também pode ser executada em outros ambientes. Node.js permite utilizar JavaScript fora do navegador, inclusive para criar aplicações no servidor.',
+              persona: 'cody'
+            },
+            closing: 'O código continua sendo JavaScript. O que mudou foi o ambiente em que ele está sendo executado.',
             highlight: ['JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Olá, Node.js!");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JavaScript is well known for running code in the browser, but the language can also run in other environments. Node.js lets you use JavaScript outside the browser, including to build server applications.',
-            endParagraph: 'The code is still JavaScript. What changed was the environment it runs in.',
+            introduction: {
+              text: 'JavaScript is well known for running code in the browser, but the language can also run in other environments. Node.js lets you use JavaScript outside the browser, including to build server applications.',
+              persona: 'cody'
+            },
+            closing: 'The code is still JavaScript. What changed was the environment it runs in.',
             highlight: ['JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Hello, Node.js!");',
@@ -35202,16 +37780,22 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Node.js é um runtime que permite executar JavaScript fora do navegador. Ele fornece recursos próprios para criar diferentes tipos de aplicações.',
-            endParagraph: 'Com Node.js, JavaScript pode ser utilizado também em ferramentas, scripts e aplicações de servidor.',
+            introduction: {
+              text: 'Node.js é um runtime que permite executar JavaScript fora do navegador. Ele fornece recursos próprios para criar diferentes tipos de aplicações.',
+              persona: 'neutral'
+            },
+            closing: 'Com Node.js, JavaScript pode ser utilizado também em ferramentas, scripts e aplicações de servidor.',
             highlight: ['Node.js', 'runtime', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Olá, Node.js!");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Node.js is a runtime that lets you run JavaScript outside the browser. It provides its own resources for building different kinds of applications.',
-            endParagraph: 'With Node.js, JavaScript can also be used in tools, scripts and server applications.',
+            introduction: {
+              text: 'Node.js is a runtime that lets you run JavaScript outside the browser. It provides its own resources for building different kinds of applications.',
+              persona: 'neutral'
+            },
+            closing: 'With Node.js, JavaScript can also be used in tools, scripts and server applications.',
             highlight: ['Node.js', 'runtime', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Hello, Node.js!");',
@@ -35372,8 +37956,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'runtime é o ambiente responsável por executar um programa. O navegador fornece um ambiente JavaScript voltado para a web. Node.js fornece outro ambiente, com recursos próprios.',
-            endParagraph: 'Por isso, JavaScript executado no navegador e JavaScript executado no Node.js podem ter APIs disponíveis diferentes.',
+            introduction: {
+              text: 'runtime é o ambiente responsável por executar um programa. O navegador fornece um ambiente JavaScript voltado para a web. Node.js fornece outro ambiente, com recursos próprios.',
+              persona: 'cody'
+            },
+            closing: 'Por isso, JavaScript executado no navegador e JavaScript executado no Node.js podem ter APIs disponíveis diferentes.',
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// No navegador\nwindow.location.href;\n\n// No Node.js\nprocess.env;',
@@ -35381,8 +37968,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'A runtime is the environment responsible for running a program. The browser provides a JavaScript environment aimed at the web. Node.js provides another environment, with its own resources.',
-            endParagraph: 'That is why JavaScript running in the browser and JavaScript running in Node.js can have different APIs available.',
+            introduction: {
+              text: 'A runtime is the environment responsible for running a program. The browser provides a JavaScript environment aimed at the web. Node.js provides another environment, with its own resources.',
+              persona: 'cody'
+            },
+            closing: 'That is why JavaScript running in the browser and JavaScript running in Node.js can have different APIs available.',
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// In the browser\nwindow.location.href;\n\n// In Node.js\nprocess.env;',
@@ -35595,16 +38185,22 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A linguagem continua sendo JavaScript, mas cada ambiente oferece recursos diferentes.',
-            endParagraph: 'document pertence às APIs do navegador. Já console está disponível também no ambiente Node.js.',
+            introduction: {
+              text: 'A linguagem continua sendo JavaScript, mas cada ambiente oferece recursos diferentes.',
+              persona: 'cody'
+            },
+            closing: 'document pertence às APIs do navegador. Já console está disponível também no ambiente Node.js.',
             highlight: ['document', 'console', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Navegador\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Executando no servidor");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The language is still JavaScript, but each environment offers different resources.',
-            endParagraph: 'document belongs to the APIs of the browser. console, on the other hand, is also available in the Node.js environment.',
+            introduction: {
+              text: 'The language is still JavaScript, but each environment offers different resources.',
+              persona: 'cody'
+            },
+            closing: 'document belongs to the APIs of the browser. console, on the other hand, is also available in the Node.js environment.',
             highlight: ['document', 'console', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Browser\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Running on the server");',
@@ -35616,16 +38212,22 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando trabalhamos com frontend, normalmente utilizamos APIs oferecidas pelo navegador. No backend, podemos utilizar APIs fornecidas pelo Node.js.',
-            endParagraph: 'Entender essa diferença ajuda a compreender por que um mesmo código JavaScript pode funcionar em um ambiente e não em outro.',
+            introduction: {
+              text: 'Quando trabalhamos com frontend, normalmente utilizamos APIs oferecidas pelo navegador. No backend, podemos utilizar APIs fornecidas pelo Node.js.',
+              persona: 'neutral'
+            },
+            closing: 'Entender essa diferença ajuda a compreender por que um mesmo código JavaScript pode funcionar em um ambiente e não em outro.',
             highlight: ['frontend', 'backend', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Navegador\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Executando no servidor");',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When working on the frontend, we normally use APIs offered by the browser. On the backend, we can use APIs provided by Node.js.',
-            endParagraph: 'Understanding that difference helps explain why the same JavaScript code can work in one environment and not in another.',
+            introduction: {
+              text: 'When working on the frontend, we normally use APIs offered by the browser. On the backend, we can use APIs provided by Node.js.',
+              persona: 'neutral'
+            },
+            closing: 'Understanding that difference helps explain why the same JavaScript code can work in one environment and not in another.',
             highlight: ['frontend', 'backend', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Browser\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Running on the server");',
@@ -35786,8 +38388,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um projeto Node.js possui arquivos e configurações que descrevem sua aplicação e suas dependências.',
-            endParagraph: 'O arquivo package.json é uma peça importante do ecossistema Node.js e será utilizado para gerenciar informações e dependências do projeto.',
+            introduction: {
+              text: 'Um projeto Node.js possui arquivos e configurações que descrevem sua aplicação e suas dependências.',
+              persona: 'cody'
+            },
+            closing: 'O arquivo package.json é uma peça importante do ecossistema Node.js e será utilizado para gerenciar informações e dependências do projeto.',
             highlight: ['package.json', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '{\n  "name": "minha-api",\n  "version": "1.0.0"\n}',
@@ -35795,8 +38400,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'A Node.js project has files and configuration that describe its application and its dependencies.',
-            endParagraph: 'The package.json file is an important piece of the Node.js ecosystem, and it will be used to manage the project\'s information and dependencies.',
+            introduction: {
+              text: 'A Node.js project has files and configuration that describe its application and its dependencies.',
+              persona: 'cody'
+            },
+            closing: 'The package.json file is an important piece of the Node.js ecosystem, and it will be used to manage the project\'s information and dependencies.',
             highlight: ['package.json', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '{\n  "name": "my-api",\n  "version": "1.0.0"\n}',
@@ -35962,8 +38570,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'NPM é uma das principais ferramentas utilizadas para instalar e gerenciar pacotes no ecossistema JavaScript e Node.js.',
-            endParagraph: 'Com NPM, podemos adicionar bibliotecas e ferramentas prontas ao nosso projeto.',
+            introduction: {
+              text: 'NPM é uma das principais ferramentas utilizadas para instalar e gerenciar pacotes no ecossistema JavaScript e Node.js.',
+              persona: 'cody'
+            },
+            closing: 'Com NPM, podemos adicionar bibliotecas e ferramentas prontas ao nosso projeto.',
             highlight: ['NPM', 'JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// npm install express',
@@ -35971,8 +38582,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'NPM is one of the main tools used to install and manage packages in the JavaScript and Node.js ecosystem.',
-            endParagraph: 'With NPM, we can add ready-made libraries and tools to our project.',
+            introduction: {
+              text: 'NPM is one of the main tools used to install and manage packages in the JavaScript and Node.js ecosystem.',
+              persona: 'cody'
+            },
+            closing: 'With NPM, we can add ready-made libraries and tools to our project.',
             highlight: ['NPM', 'JavaScript', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// npm install express',
@@ -35985,8 +38599,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando instalamos um pacote, ele passa a fazer parte das dependências do projeto.',
-            endParagraph: 'Isso permite que o projeto registre quais pacotes precisa para funcionar.',
+            introduction: {
+              text: 'Quando instalamos um pacote, ele passa a fazer parte das dependências do projeto.',
+              persona: 'neutral'
+            },
+            closing: 'Isso permite que o projeto registre quais pacotes precisa para funcionar.',
             highlight: ['dependências'],
             codeLanguage: 'JavaScript',
             code: '{\n  "dependencies": {\n    "express": "^5.0.0"\n  }\n}',
@@ -35994,8 +38611,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'When we install a package, it becomes part of the dependencies of the project.',
-            endParagraph: 'This lets the project record which packages it needs to work.',
+            introduction: {
+              text: 'When we install a package, it becomes part of the dependencies of the project.',
+              persona: 'neutral'
+            },
+            closing: 'This lets the project record which packages it needs to work.',
             highlight: ['dependencies'],
             codeLanguage: 'JavaScript',
             code: '{\n  "dependencies": {\n    "express": "^5.0.0"\n  }\n}',
@@ -36157,8 +38777,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Assim como aplicações frontend podem ser divididas em módulos, aplicações Node.js também podem separar responsabilidades em diferentes arquivos.',
-            endParagraph: 'Módulos ajudam a organizar o código e reutilizar funcionalidades.',
+            introduction: {
+              text: 'Assim como aplicações frontend podem ser divididas em módulos, aplicações Node.js também podem separar responsabilidades em diferentes arquivos.',
+              persona: 'cody'
+            },
+            closing: 'Módulos ajudam a organizar o código e reutilizar funcionalidades.',
             highlight: ['módulos', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// math.js\nexport function somar(a, b) {\n  return a + b;\n}',
@@ -36172,8 +38795,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Just like frontend applications can be split into modules, Node.js applications can also separate responsibilities across different files.',
-            endParagraph: 'Modules help organize code and reuse functionality.',
+            introduction: {
+              text: 'Just like frontend applications can be split into modules, Node.js applications can also separate responsibilities across different files.',
+              persona: 'cody'
+            },
+            closing: 'Modules help organize code and reuse functionality.',
             highlight: ['modules', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// math.js\nexport function add(a, b) {\n  return a + b;\n}',
@@ -36341,8 +38967,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Node.js possui APIs nativas para realizar tarefas comuns, como trabalhar com arquivos, caminhos, processos e comunicação de rede.',
-            endParagraph: 'Antes de instalar um pacote, vale conhecer os recursos que o próprio Node.js oferece.',
+            introduction: {
+              text: 'Node.js possui APIs nativas para realizar tarefas comuns, como trabalhar com arquivos, caminhos, processos e comunicação de rede.',
+              persona: 'cody'
+            },
+            closing: 'Antes de instalar um pacote, vale conhecer os recursos que o próprio Node.js oferece.',
             highlight: ['Node.js', 'APIs nativas'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nconst texto =\n  fs.readFileSync(\n    "arquivo.txt",\n    "utf8"\n  );\n\nconsole.log(texto);',
@@ -36350,8 +38979,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Node.js has native APIs for common tasks, like working with files, paths, processes and network communication.',
-            endParagraph: 'Before installing a package, it is worth knowing the resources Node.js itself already offers.',
+            introduction: {
+              text: 'Node.js has native APIs for common tasks, like working with files, paths, processes and network communication.',
+              persona: 'cody'
+            },
+            closing: 'Before installing a package, it is worth knowing the resources Node.js itself already offers.',
             highlight: ['Node.js', 'native APIs'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nconst text =\n  fs.readFileSync(\n    "file.txt",\n    "utf8"\n  );\n\nconsole.log(text);',
@@ -36513,8 +39145,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A API de sistema de arquivos do Node.js permite ler, criar e modificar arquivos diretamente pelo programa.',
-            endParagraph: 'Esse tipo de acesso é possível porque Node.js executa fora do ambiente restrito de uma página web.',
+            introduction: {
+              text: 'A API de sistema de arquivos do Node.js permite ler, criar e modificar arquivos diretamente pelo programa.',
+              persona: 'cody'
+            },
+            closing: 'Esse tipo de acesso é possível porque Node.js executa fora do ambiente restrito de uma página web.',
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "mensagem.txt",\n  "Olá!"\n);',
@@ -36522,8 +39157,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'The Node.js file system API lets you read, create and modify files directly from the program.',
-            endParagraph: 'This kind of access is possible because Node.js runs outside the restricted environment of a web page.',
+            introduction: {
+              text: 'The Node.js file system API lets you read, create and modify files directly from the program.',
+              persona: 'cody'
+            },
+            closing: 'This kind of access is possible because Node.js runs outside the restricted environment of a web page.',
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "message.txt",\n  "Hello!"\n);',
@@ -36685,8 +39323,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O próprio Node.js possui recursos para criar servidores HTTP. Isso permite receber requisições e enviar respostas sem utilizar um framework.',
-            endParagraph: 'É possível criar um servidor diretamente com Node.js, mas aplicações maiores podem se beneficiar de ferramentas que simplificam esse trabalho.',
+            introduction: {
+              text: 'O próprio Node.js possui recursos para criar servidores HTTP. Isso permite receber requisições e enviar respostas sem utilizar um framework.',
+              persona: 'cody'
+            },
+            closing: 'É possível criar um servidor diretamente com Node.js, mas aplicações maiores podem se beneficiar de ferramentas que simplificam esse trabalho.',
             highlight: ['Node.js', 'HTTP', 'framework'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
@@ -36694,8 +39335,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework.',
-            endParagraph: 'It\'s possible to create a server directly with Node.js, but larger applications can benefit from tools that simplify that work.',
+            introduction: {
+              text: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework.',
+              persona: 'cody'
+            },
+            closing: 'It\'s possible to create a server directly with Node.js, but larger applications can benefit from tools that simplify that work.',
             highlight: ['Node.js', 'HTTP', 'framework'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
@@ -36857,8 +39501,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'HTTP é um protocolo utilizado para comunicação entre clientes e servidores na web. O cliente envia uma requisição e o servidor devolve uma resposta.',
-            endParagraph: 'Essa troca de requisições e respostas é a base de muitas aplicações web e APIs.',
+            introduction: {
+              text: 'HTTP é um protocolo utilizado para comunicação entre clientes e servidores na web. O cliente envia uma requisição e o servidor devolve uma resposta.',
+              persona: 'cody'
+            },
+            closing: 'Essa troca de requisições e respostas é a base de muitas aplicações web e APIs.',
             highlight: ['HTTP'],
             codeLanguage: 'JavaScript',
             code: 'const resposta =\n  await fetch("/users");\n\nconsole.log(resposta.status); // 200',
@@ -36866,8 +39513,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'HTTP is a protocol used for communication between clients and servers on the web. The client sends a request and the server sends back a response.',
-            endParagraph: 'This exchange of requests and responses is the foundation of many web applications and APIs.',
+            introduction: {
+              text: 'HTTP is a protocol used for communication between clients and servers on the web. The client sends a request and the server sends back a response.',
+              persona: 'cody'
+            },
+            closing: 'This exchange of requests and responses is the foundation of many web applications and APIs.',
             highlight: ['HTTP'],
             codeLanguage: 'JavaScript',
             code: 'const response =\n  await fetch("/users");\n\nconsole.log(response.status); // 200',
@@ -37029,8 +39679,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Os métodos HTTP ajudam a indicar o que queremos fazer com um recurso.',
-            endParagraph: 'GET, POST, PUT e DELETE são alguns dos métodos mais comuns encontrados em APIs.',
+            introduction: {
+              text: 'Os métodos HTTP ajudam a indicar o que queremos fazer com um recurso.',
+              persona: 'cody'
+            },
+            closing: 'GET, POST, PUT e DELETE são alguns dos métodos mais comuns encontrados em APIs.',
             highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: '// GET    /users     -> listar usuários\n// POST   /users     -> criar um usuário\n// PUT    /users/1   -> atualizar o usuário 1\n// DELETE /users/1   -> remover o usuário 1',
@@ -37038,8 +39691,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'HTTP methods help indicate what we want to do with a resource.',
-            endParagraph: 'GET, POST, PUT and DELETE are some of the most common methods found in APIs.',
+            introduction: {
+              text: 'HTTP methods help indicate what we want to do with a resource.',
+              persona: 'cody'
+            },
+            closing: 'GET, POST, PUT and DELETE are some of the most common methods found in APIs.',
             highlight: ['GET', 'POST', 'PUT', 'DELETE', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: '// GET    /users     -> list users\n// POST   /users     -> create a user\n// PUT    /users/1   -> update user 1\n// DELETE /users/1   -> remove user 1',
@@ -37254,8 +39910,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Além dos dados, uma resposta HTTP possui um status que indica como a requisição foi processada.',
-            endParagraph: 'Os códigos de status ajudam o cliente a entender o resultado de uma requisição.',
+            introduction: {
+              text: 'Além dos dados, uma resposta HTTP possui um status que indica como a requisição foi processada.',
+              persona: 'cody'
+            },
+            closing: 'Os códigos de status ajudam o cliente a entender o resultado de uma requisição.',
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> deu certo\n// 201 Created                  -> recurso criado\n// 400 Bad Request               -> requisição malformada\n// 404 Not Found                  -> recurso não existe\n// 500 Internal Server Error       -> erro no servidor',
@@ -37263,8 +39922,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Besides the data, an HTTP response has a status that indicates how the request was processed.',
-            endParagraph: 'Status codes help the client understand the result of a request.',
+            introduction: {
+              text: 'Besides the data, an HTTP response has a status that indicates how the request was processed.',
+              persona: 'cody'
+            },
+            closing: 'Status codes help the client understand the result of a request.',
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> worked fine\n// 201 Created                  -> resource created\n// 400 Bad Request               -> malformed request\n// 404 Not Found                  -> resource does not exist\n// 500 Internal Server Error       -> server error',
@@ -37477,8 +40139,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Node.js permite criar servidores HTTP diretamente, mas uma aplicação pode rapidamente acumular rotas, validações e outras responsabilidades. Frameworks ajudam a organizar esse trabalho.',
-            endParagraph: 'Express é uma ferramenta popular para facilitar a criação de aplicações web e APIs com Node.js.',
+            introduction: {
+              text: 'Node.js permite criar servidores HTTP diretamente, mas uma aplicação pode rapidamente acumular rotas, validações e outras responsabilidades. Frameworks ajudam a organizar esse trabalho.',
+              persona: 'cody'
+            },
+            closing: 'Express é uma ferramenta popular para facilitar a criação de aplicações web e APIs com Node.js.',
             highlight: ['Node.js', 'frameworks', 'Express'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
@@ -37486,8 +40151,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work.',
-            endParagraph: 'Express is a popular tool for making it easier to build web applications and APIs with Node.js.',
+            introduction: {
+              text: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work.',
+              persona: 'cody'
+            },
+            closing: 'Express is a popular tool for making it easier to build web applications and APIs with Node.js.',
             highlight: ['Node.js', 'frameworks', 'Express'],
             codeLanguage: 'JavaScript',
             code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
@@ -37649,8 +40317,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Express é um framework para Node.js utilizado para criar aplicações web e APIs HTTP de forma mais simples.',
-            endParagraph: 'Node.js fornece o ambiente de execução. Express adiciona recursos que facilitam a construção da aplicação HTTP.',
+            introduction: {
+              text: 'Express é um framework para Node.js utilizado para criar aplicações web e APIs HTTP de forma mais simples.',
+              persona: 'cody'
+            },
+            closing: 'Node.js fornece o ambiente de execução. Express adiciona recursos que facilitam a construção da aplicação HTTP.',
             highlight: ['Express', 'Node.js', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);',
@@ -37658,8 +40329,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Express is a framework for Node.js used to create web applications and HTTP APIs more simply.',
-            endParagraph: 'Node.js provides the runtime. Express adds resources that make it easier to build the HTTP application.',
+            introduction: {
+              text: 'Express is a framework for Node.js used to create web applications and HTTP APIs more simply.',
+              persona: 'cody'
+            },
+            closing: 'Node.js provides the runtime. Express adds resources that make it easier to build the HTTP application.',
             highlight: ['Express', 'Node.js', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.listen(3000);',
@@ -37821,8 +40495,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma rota associa um método HTTP e um caminho a uma função que será executada quando aquela requisição chegar.',
-            endParagraph: 'A rota define como a aplicação responderá a uma determinada requisição.',
+            introduction: {
+              text: 'Uma rota associa um método HTTP e um caminho a uma função que será executada quando aquela requisição chegar.',
+              persona: 'cody'
+            },
+            closing: 'A rota define como a aplicação responderá a uma determinada requisição.',
             highlight: ['rota', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Lista de usuários");\n});',
@@ -37830,8 +40507,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'A route associates an HTTP method and a path with a function that runs when that request arrives.',
-            endParagraph: 'The route defines how the application will respond to a given request.',
+            introduction: {
+              text: 'A route associates an HTTP method and a path with a function that runs when that request arrives.',
+              persona: 'cody'
+            },
+            closing: 'The route defines how the application will respond to a given request.',
             highlight: ['route', 'HTTP'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("User list");\n});',
@@ -37993,8 +40673,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'No Express, req representa as informações da requisição recebida e res representa a resposta que será enviada ao cliente.',
-            endParagraph: 'O servidor recebe uma requisição e precisa produzir uma resposta adequada para o cliente.',
+            introduction: {
+              text: 'No Express, req representa as informações da requisição recebida e res representa a resposta que será enviada ao cliente.',
+              persona: 'cody'
+            },
+            closing: 'O servidor recebe uma requisição e precisa produzir uma resposta adequada para o cliente.',
             highlight: ['Express', 'req', 'res'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Usuários");\n});',
@@ -38002,8 +40685,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'In Express, req represents the information from the incoming request, and res represents the response that will be sent to the client.',
-            endParagraph: 'The server receives a request and needs to produce a suitable response for the client.',
+            introduction: {
+              text: 'In Express, req represents the information from the incoming request, and res represents the response that will be sent to the client.',
+              persona: 'cody'
+            },
+            closing: 'The server receives a request and needs to produce a suitable response for the client.',
             highlight: ['Express', 'req', 'res'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users", (req, res) => {\n  res.send("Users");\n});',
@@ -38208,8 +40894,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JSON é um formato muito utilizado para representar dados em APIs porque permite estruturar informações de maneira simples.',
-            endParagraph: 'APIs frequentemente utilizam JSON para transportar dados entre cliente e servidor.',
+            introduction: {
+              text: 'JSON é um formato muito utilizado para representar dados em APIs porque permite estruturar informações de maneira simples.',
+              persona: 'cody'
+            },
+            closing: 'APIs frequentemente utilizam JSON para transportar dados entre cliente e servidor.',
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    nome: "Ana"\n  });\n});',
@@ -38217,8 +40906,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'JSON is a widely used format for representing data in APIs because it lets you structure information in a simple way.',
-            endParagraph: 'APIs frequently use JSON to transport data between client and server.',
+            introduction: {
+              text: 'JSON is a widely used format for representing data in APIs because it lets you structure information in a simple way.',
+              persona: 'cody'
+            },
+            closing: 'APIs frequently use JSON to transport data between client and server.',
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    name: "Ana"\n  });\n});',
@@ -38380,8 +41072,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Rotas podem possuir parâmetros. Eles permitem identificar recursos específicos a partir da própria URL.',
-            endParagraph: 'O parâmetro :id funciona como uma parte variável da rota.',
+            introduction: {
+              text: 'Rotas podem possuir parâmetros. Eles permitem identificar recursos específicos a partir da própria URL.',
+              persona: 'cody'
+            },
+            closing: 'O parâmetro :id funciona como uma parte variável da rota.',
             highlight: ['parâmetros', 'rota'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users/:id", (req, res) => {\n  res.json({\n    id: req.params.id\n  });\n});',
@@ -38389,8 +41084,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Routes can have parameters. They let you identify specific resources directly from the URL.',
-            endParagraph: 'The :id parameter works as a variable part of the route.',
+            introduction: {
+              text: 'Routes can have parameters. They let you identify specific resources directly from the URL.',
+              persona: 'cody'
+            },
+            closing: 'The :id parameter works as a variable part of the route.',
             highlight: ['parameters', 'route'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/users/:id", (req, res) => {\n  res.json({\n    id: req.params.id\n  });\n});',
@@ -38552,8 +41250,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Uma API também pode receber dados enviados pelo cliente. O Express possui middleware para interpretar requisições contendo JSON.',
-            endParagraph: 'Com isso, o servidor consegue receber objetos JSON enviados pelo cliente.',
+            introduction: {
+              text: 'Uma API também pode receber dados enviados pelo cliente. O Express possui middleware para interpretar requisições contendo JSON.',
+              persona: 'cody'
+            },
+            closing: 'Com isso, o servidor consegue receber objetos JSON enviados pelo cliente.',
             highlight: ['Express', 'JSON', 'middleware'],
             codeLanguage: 'JavaScript',
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
@@ -38561,8 +41262,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'An API can also receive data sent by the client. Express has middleware to parse requests containing JSON.',
-            endParagraph: 'With that, the server can receive JSON objects sent by the client.',
+            introduction: {
+              text: 'An API can also receive data sent by the client. Express has middleware to parse requests containing JSON.',
+              persona: 'cody'
+            },
+            closing: 'With that, the server can receive JSON objects sent by the client.',
             highlight: ['Express', 'JSON', 'middleware'],
             codeLanguage: 'JavaScript',
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
@@ -38728,8 +41432,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Agora podemos combinar Node.js, Express, rotas, métodos HTTP e JSON para construir uma pequena API.',
-            endParagraph: 'Essa aplicação já possui os principais elementos de uma API HTTP simples.',
+            introduction: {
+              text: 'Agora podemos combinar Node.js, Express, rotas, métodos HTTP e JSON para construir uma pequena API.',
+              persona: 'cody'
+            },
+            closing: 'Essa aplicação já possui os principais elementos de uma API HTTP simples.',
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
@@ -38737,8 +41444,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Now we can combine Node.js, Express, routes, HTTP methods and JSON to build a small API.',
-            endParagraph: 'This application already has the main elements of a simple HTTP API.',
+            introduction: {
+              text: 'Now we can combine Node.js, Express, routes, HTTP methods and JSON to build a small API.',
+              persona: 'cody'
+            },
+            closing: 'This application already has the main elements of a simple HTTP API.',
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
@@ -38900,8 +41610,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando um cliente acessa uma rota, o Express identifica o método e o caminho da requisição e executa o código correspondente.',
-            endParagraph: 'Esse fluxo é a base do funcionamento de muitas APIs utilizadas por aplicações web e mobile.',
+            introduction: {
+              text: 'Quando um cliente acessa uma rota, o Express identifica o método e o caminho da requisição e executa o código correspondente.',
+              persona: 'cody'
+            },
+            closing: 'Esse fluxo é a base do funcionamento de muitas APIs utilizadas por aplicações web e mobile.',
             highlight: ['Express', 'rota'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
@@ -38909,8 +41622,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code.',
-            endParagraph: 'This flow is the foundation of how many APIs used by web and mobile applications work.',
+            introduction: {
+              text: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code.',
+              persona: 'cody'
+            },
+            closing: 'This flow is the foundation of how many APIs used by web and mobile applications work.',
             highlight: ['Express', 'route'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
@@ -39072,8 +41788,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Node.js fornece o ambiente para executar JavaScript. Express simplifica a criação do servidor HTTP. HTTP define a comunicação entre cliente e servidor. JSON permite transportar dados estruturados.',
-            endParagraph: 'Cada tecnologia possui uma função diferente, mas elas podem trabalhar juntas para construir uma API.',
+            introduction: {
+              text: 'Node.js fornece o ambiente para executar JavaScript. Express simplifica a criação do servidor HTTP. HTTP define a comunicação entre cliente e servidor. JSON permite transportar dados estruturados.',
+              persona: 'cody'
+            },
+            closing: 'Cada tecnologia possui uma função diferente, mas elas podem trabalhar juntas para construir uma API.',
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
@@ -39081,8 +41800,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'Node.js provides the environment to run JavaScript. Express simplifies creating the HTTP server. HTTP defines communication between client and server. JSON lets you transport structured data.',
-            endParagraph: 'Each technology has a different role, but they can work together to build an API.',
+            introduction: {
+              text: 'Node.js provides the environment to run JavaScript. Express simplifies creating the HTTP server. HTTP defines communication between client and server. JSON lets you transport structured data.',
+              persona: 'cody'
+            },
+            closing: 'Each technology has a different role, but they can work together to build an API.',
             highlight: ['Node.js', 'Express', 'HTTP', 'JSON'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
@@ -39095,8 +41817,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Você começou aprendendo JavaScript no navegador. Agora consegue utilizá-lo também no desenvolvimento de servidores e APIs.',
-            endParagraph: 'Esse é o objetivo do módulo: mostrar que aprender JavaScript não significa aprender apenas uma linguagem para interfaces, mas conhecer uma base que pode levar a diferentes áreas do desenvolvimento.',
+            introduction: {
+              text: 'Você começou aprendendo JavaScript no navegador. Agora consegue utilizá-lo também no desenvolvimento de servidores e APIs.',
+              persona: 'neutral'
+            },
+            closing: 'Esse é o objetivo do módulo: mostrar que aprender JavaScript não significa aprender apenas uma linguagem para interfaces, mas conhecer uma base que pode levar a diferentes áreas do desenvolvimento.',
             highlight: ['JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, nome: "Ana" },\n    { id: 2, nome: "João" }\n  ]);\n});\n\napp.listen(3000);',
@@ -39104,8 +41829,11 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             noTerminal: true
           },
           en: {
-            firstParagraph: 'You started out learning JavaScript in the browser. Now you can also use it to build servers and APIs.',
-            endParagraph: 'That is the goal of this module: to show that learning JavaScript does not mean learning only a language for interfaces, but gaining a foundation that can lead to different areas of development.',
+            introduction: {
+              text: 'You started out learning JavaScript in the browser. Now you can also use it to build servers and APIs.',
+              persona: 'neutral'
+            },
+            closing: 'That is the goal of this module: to show that learning JavaScript does not mean learning only a language for interfaces, but gaining a foundation that can lead to different areas of development.',
             highlight: ['JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'import express from "express";\n\nconst app = express();\n\napp.use(express.json());\n\napp.get("/users", (req, res) => {\n  res.json([\n    { id: 1, name: "Ana" },\n    { id: 2, name: "John" }\n  ]);\n});\n\napp.listen(3000);',
@@ -39369,16 +42097,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'React é uma biblioteca JavaScript utilizada para construir interfaces de usuário. Em vez de pensar em uma página inteira de uma vez, podemos dividir a interface em partes menores chamadas componentes.',
-            endParagraph: 'React utiliza JavaScript para descrever e controlar partes da interface.',
+            introduction: {
+              text: 'React é uma biblioteca JavaScript utilizada para construir interfaces de usuário. Em vez de pensar em uma página inteira de uma vez, podemos dividir a interface em partes menores chamadas componentes.',
+              persona: 'cody'
+            },
+            closing: 'React utiliza JavaScript para descrever e controlar partes da interface.',
             highlight: ['React', 'JavaScript', 'componentes'],
             codeLanguage: 'JavaScript',
             code: 'function App() {\n  return <h1>Olá!</h1>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'React is a JavaScript library used to build user interfaces. Instead of thinking about a whole page at once, we can split the interface into smaller pieces called components.',
-            endParagraph: 'React uses JavaScript to describe and control parts of the interface.',
+            introduction: {
+              text: 'React is a JavaScript library used to build user interfaces. Instead of thinking about a whole page at once, we can split the interface into smaller pieces called components.',
+              persona: 'cody'
+            },
+            closing: 'React uses JavaScript to describe and control parts of the interface.',
             highlight: ['React', 'JavaScript', 'components'],
             codeLanguage: 'JavaScript',
             code: 'function App() {\n  return <h1>Hello!</h1>;\n}',
@@ -39390,16 +42124,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Os elementos utilizados na interface continuam familiares. A diferença está em como eles são organizados e utilizados dentro dos componentes React.',
-            endParagraph: 'O conhecimento de HTML continua sendo uma base importante para entender React.',
+            introduction: {
+              text: 'Os elementos utilizados na interface continuam familiares. A diferença está em como eles são organizados e utilizados dentro dos componentes React.',
+              persona: 'neutral'
+            },
+            closing: 'O conhecimento de HTML continua sendo uma base importante para entender React.',
             highlight: ['HTML', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Titulo() {\n  return <h1>Meu site</h1>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The elements used in the interface are still familiar. The difference is in how they are organized and used inside React components.',
-            endParagraph: 'Your HTML knowledge is still an important foundation for understanding React.',
+            introduction: {
+              text: 'The elements used in the interface are still familiar. The difference is in how they are organized and used inside React components.',
+              persona: 'neutral'
+            },
+            closing: 'Your HTML knowledge is still an important foundation for understanding React.',
             highlight: ['HTML', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Title() {\n  return <h1>My site</h1>;\n}',
@@ -39560,16 +42300,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um componente representa uma parte da interface. Ele pode conter sua própria estrutura e ser reutilizado em diferentes partes de uma aplicação.',
-            endParagraph: 'Componentes permitem dividir interfaces grandes em partes menores.',
+            introduction: {
+              text: 'Um componente representa uma parte da interface. Ele pode conter sua própria estrutura e ser reutilizado em diferentes partes de uma aplicação.',
+              persona: 'cody'
+            },
+            closing: 'Componentes permitem dividir interfaces grandes em partes menores.',
             highlight: ['componente', 'componentes'],
             codeLanguage: 'JavaScript',
             code: 'function Botao() {\n  return <button>Clique aqui</button>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A component represents a part of the interface. It can hold its own structure and be reused in different parts of an application.',
-            endParagraph: 'Components let you split large interfaces into smaller pieces.',
+            introduction: {
+              text: 'A component represents a part of the interface. It can hold its own structure and be reused in different parts of an application.',
+              persona: 'cody'
+            },
+            closing: 'Components let you split large interfaces into smaller pieces.',
             highlight: ['component', 'components'],
             codeLanguage: 'JavaScript',
             code: 'function Button() {\n  return <button>Click here</button>;\n}',
@@ -39581,16 +42327,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um componente pode utilizar outros componentes para formar uma interface maior.',
-            endParagraph: 'Essa composição é uma das ideias fundamentais do React.',
+            introduction: {
+              text: 'Um componente pode utilizar outros componentes para formar uma interface maior.',
+              persona: 'neutral'
+            },
+            closing: 'Essa composição é uma das ideias fundamentais do React.',
             highlight: ['composição', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Botao() {\n  return <button>Entrar</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Botao />\n    </main>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A component can use other components to form a larger interface.',
-            endParagraph: 'This composition is one of the fundamental ideas of React.',
+            introduction: {
+              text: 'A component can use other components to form a larger interface.',
+              persona: 'neutral'
+            },
+            closing: 'This composition is one of the fundamental ideas of React.',
             highlight: ['composition', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Button() {\n  return <button>Sign in</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Button />\n    </main>\n  );\n}',
@@ -39749,16 +42501,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'JSX permite escrever uma sintaxe parecida com HTML dentro do código JavaScript. Isso facilita a descrição da estrutura da interface.',
-            endParagraph: 'JSX se parece com HTML, mas não é HTML puro. Ele é uma sintaxe utilizada para descrever a interface dentro do código JavaScript.',
+            introduction: {
+              text: 'JSX permite escrever uma sintaxe parecida com HTML dentro do código JavaScript. Isso facilita a descrição da estrutura da interface.',
+              persona: 'cody'
+            },
+            closing: 'JSX se parece com HTML, mas não é HTML puro. Ele é uma sintaxe utilizada para descrever a interface dentro do código JavaScript.',
             highlight: ['JSX', 'HTML', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'function App() {\n  return (\n    <main>\n      <h1>Olá!</h1>\n      <p>Bem-vindo.</p>\n    </main>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'JSX lets you write a syntax similar to HTML inside JavaScript code. This makes it easier to describe the structure of the interface.',
-            endParagraph: 'JSX looks like HTML, but it is not plain HTML. It is a syntax used to describe the interface inside JavaScript code.',
+            introduction: {
+              text: 'JSX lets you write a syntax similar to HTML inside JavaScript code. This makes it easier to describe the structure of the interface.',
+              persona: 'cody'
+            },
+            closing: 'JSX looks like HTML, but it is not plain HTML. It is a syntax used to describe the interface inside JavaScript code.',
             highlight: ['JSX', 'HTML', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'function App() {\n  return (\n    <main>\n      <h1>Hello!</h1>\n      <p>Welcome.</p>\n    </main>\n  );\n}',
@@ -39770,18 +42528,28 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Como JSX vive dentro do JavaScript, alguns atributos do HTML mudam de nome para não colidir com palavras reservadas da linguagem.',
-            secondParagraph: 'O caso mais comum é o class do HTML, que no JSX se escreve className. O for de um label vira htmlFor pelo mesmo motivo.',
-            endParagraph: 'Os demais atributos passam a usar camelCase: onclick vira onClick, e tabindex vira tabIndex.',
+            introduction: {
+              text: 'Como JSX vive dentro do JavaScript, alguns atributos do HTML mudam de nome para não colidir com palavras reservadas da linguagem.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'O caso mais comum é o class do HTML, que no JSX se escreve className. O for de um label vira htmlFor pelo mesmo motivo.'
+            },
+            closing: 'Os demais atributos passam a usar camelCase: onclick vira onClick, e tabindex vira tabIndex.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
             codeLanguage: 'JavaScript',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Nome</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Because JSX lives inside JavaScript, some HTML attributes change names so they do not clash with reserved words of the language.',
-            secondParagraph: 'The most common case is the HTML class, written as className in JSX. The for of a label becomes htmlFor for the same reason.',
-            endParagraph: 'The remaining attributes switch to camelCase: onclick becomes onClick, and tabindex becomes tabIndex.',
+            introduction: {
+              text: 'Because JSX lives inside JavaScript, some HTML attributes change names so they do not clash with reserved words of the language.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'The most common case is the HTML class, written as className in JSX. The for of a label becomes htmlFor for the same reason.'
+            },
+            closing: 'The remaining attributes switch to camelCase: onclick becomes onClick, and tabindex becomes tabIndex.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
             codeLanguage: 'JavaScript',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Name</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
@@ -39993,16 +42761,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'As chaves {} permitem inserir expressões JavaScript dentro do JSX.',
-            endParagraph: 'Essa integração permite que a interface utilize dados definidos pelo JavaScript.',
+            introduction: {
+              text: 'As chaves {} permitem inserir expressões JavaScript dentro do JSX.',
+              persona: 'cody'
+            },
+            closing: 'Essa integração permite que a interface utilize dados definidos pelo JavaScript.',
             highlight: ['JSX', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Ana";\n\nfunction App() {\n  return <h1>Olá, {nome}!</h1>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Curly braces {} let you insert JavaScript expressions inside JSX.',
-            endParagraph: 'This integration lets the interface use data defined by JavaScript.',
+            introduction: {
+              text: 'Curly braces {} let you insert JavaScript expressions inside JSX.',
+              persona: 'cody'
+            },
+            closing: 'This integration lets the interface use data defined by JavaScript.',
             highlight: ['JSX', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Ana";\n\nfunction App() {\n  return <h1>Hello, {name}!</h1>;\n}',
@@ -40014,16 +42788,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos utilizar expressões JavaScript para produzir conteúdos diferentes na interface.',
-            endParagraph: 'JSX permite aproximar os dados da estrutura visual que será exibida.',
+            introduction: {
+              text: 'Podemos utilizar expressões JavaScript para produzir conteúdos diferentes na interface.',
+              persona: 'neutral'
+            },
+            closing: 'JSX permite aproximar os dados da estrutura visual que será exibida.',
             highlight: ['JSX'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 20;\n\nfunction App() {\n  return <p>Idade: {idade}</p>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can use JavaScript expressions to produce different content in the interface.',
-            endParagraph: 'JSX lets you bring the data closer to the visual structure that will be shown.',
+            introduction: {
+              text: 'We can use JavaScript expressions to produce different content in the interface.',
+              persona: 'neutral'
+            },
+            closing: 'JSX lets you bring the data closer to the visual structure that will be shown.',
             highlight: ['JSX'],
             codeLanguage: 'JavaScript',
             code: 'const age = 20;\n\nfunction App() {\n  return <p>Age: {age}</p>;\n}',
@@ -40188,16 +42968,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'props são informações fornecidas a um componente por quem o utiliza.',
-            endParagraph: 'props permitem que o mesmo componente trabalhe com diferentes informações.',
+            introduction: {
+              text: 'props são informações fornecidas a um componente por quem o utiliza.',
+              persona: 'cody'
+            },
+            closing: 'props permitem que o mesmo componente trabalhe com diferentes informações.',
             highlight: ['props'],
             codeLanguage: 'JavaScript',
             code: 'function Saudacao({ nome }) {\n  return <h2>Olá, {nome}!</h2>;\n}\n\nfunction App() {\n  return <Saudacao nome="Ana" />;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'props are information provided to a component by whoever uses it.',
-            endParagraph: 'props let the same component work with different information.',
+            introduction: {
+              text: 'props are information provided to a component by whoever uses it.',
+              persona: 'cody'
+            },
+            closing: 'props let the same component work with different information.',
             highlight: ['props'],
             codeLanguage: 'JavaScript',
             code: 'function Greeting({ name }) {\n  return <h2>Hello, {name}!</h2>;\n}\n\nfunction App() {\n  return <Greeting name="Ana" />;\n}',
@@ -40362,16 +43148,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Um componente pode ser utilizado várias vezes recebendo diferentes valores por meio de props.',
-            endParagraph: 'A estrutura do componente é reutilizada enquanto os dados podem mudar.',
+            introduction: {
+              text: 'Um componente pode ser utilizado várias vezes recebendo diferentes valores por meio de props.',
+              persona: 'cody'
+            },
+            closing: 'A estrutura do componente é reutilizada enquanto os dados podem mudar.',
             highlight: ['componente', 'props'],
             codeLanguage: 'JavaScript',
             code: 'function Usuario({ nome }) {\n  return <p>Usuário: {nome}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Usuario nome="Ana" />\n      <Usuario nome="João" />\n    </>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'A component can be used several times, receiving different values through props.',
-            endParagraph: 'The structure of the component is reused while the data can change.',
+            introduction: {
+              text: 'A component can be used several times, receiving different values through props.',
+              persona: 'cody'
+            },
+            closing: 'The structure of the component is reused while the data can change.',
             highlight: ['component', 'props'],
             codeLanguage: 'JavaScript',
             code: 'function User({ name }) {\n  return <p>User: {name}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <User name="Ana" />\n      <User name="John" />\n    </>\n  );\n}',
@@ -40469,16 +43261,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'React permite associar funções a eventos da interface, como cliques e alterações em campos.',
-            endParagraph: 'Eventos conectam as ações do usuário à lógica do componente.',
+            introduction: {
+              text: 'React permite associar funções a eventos da interface, como cliques e alterações em campos.',
+              persona: 'cody'
+            },
+            closing: 'Eventos conectam as ações do usuário à lógica do componente.',
             highlight: ['eventos', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Botao() {\n  function clicar() {\n    console.log("Clicou!");\n  }\n\n  return (\n    <button onClick={clicar}>\n      Clique\n    </button>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'React lets you attach functions to interface events, like clicks and field changes.',
-            endParagraph: 'Events connect the user\'s actions to the component\'s logic.',
+            introduction: {
+              text: 'React lets you attach functions to interface events, like clicks and field changes.',
+              persona: 'cody'
+            },
+            closing: 'Events connect the user\'s actions to the component\'s logic.',
             highlight: ['events', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Button() {\n  function handleClick() {\n    console.log("Clicked!");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click\n    </button>\n  );\n}',
@@ -40578,16 +43376,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Algumas informações mudam enquanto o usuário utiliza uma aplicação. O componente precisa manter esses valores para que a interface possa acompanhar essas mudanças.',
-            endParagraph: 'No React, essas informações podem ser controladas por meio de estado.',
+            introduction: {
+              text: 'Algumas informações mudam enquanto o usuário utiliza uma aplicação. O componente precisa manter esses valores para que a interface possa acompanhar essas mudanças.',
+              persona: 'cody'
+            },
+            closing: 'No React, essas informações podem ser controladas por meio de estado.',
             highlight: ['estado', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Contador() {\n  // Precisamos lembrar quantas vezes\n  // o botão foi clicado\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Some information changes while the user interacts with an application. The component needs to keep track of these values so the interface can follow those changes.',
-            endParagraph: 'In React, this information can be controlled through state.',
+            introduction: {
+              text: 'Some information changes while the user interacts with an application. The component needs to keep track of these values so the interface can follow those changes.',
+              persona: 'cody'
+            },
+            closing: 'In React, this information can be controlled through state.',
             highlight: ['state', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Counter() {\n  // We need to remember how many times\n  // the button was clicked\n}',
@@ -40599,18 +43403,28 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando o estado de um componente muda, o React executa a função desse componente outra vez. Esse ciclo é chamado de re-renderização.',
-            secondParagraph: 'Executar de novo não significa refazer a página inteira: o React compara o resultado novo com o anterior e altera no navegador apenas o que de fato mudou.',
-            endParagraph: 'É por isso que a interface acompanha o estado sozinha. Você descreve como a tela deve ser para cada valor, e a re-renderização cuida de manter as duas coisas em sincronia.',
+            introduction: {
+              text: 'Quando o estado de um componente muda, o React executa a função desse componente outra vez. Esse ciclo é chamado de re-renderização.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Executar de novo não significa refazer a página inteira: o React compara o resultado novo com o anterior e altera no navegador apenas o que de fato mudou.'
+            },
+            closing: 'É por isso que a interface acompanha o estado sozinha. Você descreve como a tela deve ser para cada valor, e a re-renderização cuida de manter as duas coisas em sincronia.',
             highlight: ['estado', 'React', 're-renderização'],
             codeLanguage: 'JavaScript',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // A cada clique o estado muda, a função roda de novo\n  // e o React atualiza apenas o texto do parágrafo.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Somar</button>\n    </div>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When the state of a component changes, React runs that component function again. This cycle is called re-rendering.',
-            secondParagraph: 'Running again does not mean rebuilding the whole page: React compares the new result with the previous one and changes in the browser only what actually differs.',
-            endParagraph: 'That is why the interface follows the state on its own. You describe how the screen should look for each value, and re-rendering keeps the two in sync.',
+            introduction: {
+              text: 'When the state of a component changes, React runs that component function again. This cycle is called re-rendering.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Running again does not mean rebuilding the whole page: React compares the new result with the previous one and changes in the browser only what actually differs.'
+            },
+            closing: 'That is why the interface follows the state on its own. You describe how the screen should look for each value, and re-rendering keeps the two in sync.',
             highlight: ['state', 'React', 're-rendering'],
             codeLanguage: 'JavaScript',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // On each click the state changes, the function runs again\n  // and React updates only the paragraph text.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Add</button>\n    </div>\n  );\n}',
@@ -40771,16 +43585,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'useState permite criar um valor de estado e uma função responsável por atualizá-lo.',
-            endParagraph: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo.',
+            introduction: {
+              text: 'useState permite criar um valor de estado e uma função responsável por atualizá-lo.',
+              persona: 'cody'
+            },
+            closing: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo.',
             highlight: ['useState', 'estado'],
             codeLanguage: 'JavaScript',
             code: 'const [contador, setContador] =\n  useState(0);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'useState lets you create a state value and a function responsible for updating it.',
-            endParagraph: 'The first value represents the current state. The second part is the function used to update it.',
+            introduction: {
+              text: 'useState lets you create a state value and a function responsible for updating it.',
+              persona: 'cody'
+            },
+            closing: 'The first value represents the current state. The second part is the function used to update it.',
             highlight: ['useState', 'state'],
             codeLanguage: 'JavaScript',
             code: 'const [count, setCount] =\n  useState(0);',
@@ -40792,16 +43612,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Podemos atualizar o estado chamando a função retornada por useState com um novo valor.',
-            endParagraph: 'Quando o estado é atualizado, o React pode renderizar novamente o componente para refletir o novo valor.',
+            introduction: {
+              text: 'Podemos atualizar o estado chamando a função retornada por useState com um novo valor.',
+              persona: 'neutral'
+            },
+            closing: 'Quando o estado é atualizado, o React pode renderizar novamente o componente para refletir o novo valor.',
             highlight: ['estado', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Contador() {\n  const [contador, setContador] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setContador(contador + 1)\n      }\n    >\n      {contador}\n    </button>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'We can update the state by calling the function returned by useState with a new value.',
-            endParagraph: 'When the state is updated, React can render the component again to reflect the new value.',
+            introduction: {
+              text: 'We can update the state by calling the function returned by useState with a new value.',
+              persona: 'neutral'
+            },
+            closing: 'When the state is updated, React can render the component again to reflect the new value.',
             highlight: ['state', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Counter() {\n  const [count, setCount] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setCount(count + 1)\n      }\n    >\n      {count}\n    </button>\n  );\n}',
@@ -40901,16 +43727,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'props são informações recebidas pelo componente. estado representa informações que o componente precisa controlar e atualizar.',
-            endParagraph: 'Pensar na origem e no comportamento de uma informação ajuda a diferenciar props de estado.',
+            introduction: {
+              text: 'props são informações recebidas pelo componente. estado representa informações que o componente precisa controlar e atualizar.',
+              persona: 'cody'
+            },
+            closing: 'Pensar na origem e no comportamento de uma informação ajuda a diferenciar props de estado.',
             highlight: ['props', 'estado'],
             codeLanguage: 'JavaScript',
             code: 'function Contador({ titulo }) {\n  const [valor, setValor] =\n    useState(0);\n\n  return (\n    <button>\n      {titulo}: {valor}\n    </button>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'props are information received by the component. state represents information the component needs to control and update.',
-            endParagraph: 'Thinking about the origin and behavior of a piece of information helps tell props apart from state.',
+            introduction: {
+              text: 'props are information received by the component. state represents information the component needs to control and update.',
+              persona: 'cody'
+            },
+            closing: 'Thinking about the origin and behavior of a piece of information helps tell props apart from state.',
             highlight: ['props', 'state'],
             codeLanguage: 'JavaScript',
             code: 'function Counter({ title }) {\n  const [value, setValue] =\n    useState(0);\n\n  return (\n    <button>\n      {title}: {value}\n    </button>\n  );\n}',
@@ -41071,16 +43903,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Eventos permitem que um componente reaja às alterações feitas pelo usuário em um campo de formulário.',
-            endParagraph: 'onChange permite acompanhar alterações realizadas em um campo.',
+            introduction: {
+              text: 'Eventos permitem que um componente reaja às alterações feitas pelo usuário em um campo de formulário.',
+              persona: 'cody'
+            },
+            closing: 'onChange permite acompanhar alterações realizadas em um campo.',
             highlight: ['onChange'],
             codeLanguage: 'JavaScript',
             code: 'function Campo() {\n  function alterar(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={alterar} />\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Events let a component react to changes the user makes in a form field.',
-            endParagraph: 'onChange lets you track changes made to a field.',
+            introduction: {
+              text: 'Events let a component react to changes the user makes in a form field.',
+              persona: 'cody'
+            },
+            closing: 'onChange lets you track changes made to a field.',
             highlight: ['onChange'],
             codeLanguage: 'JavaScript',
             code: 'function Field() {\n  function handleChange(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={handleChange} />\n  );\n}',
@@ -41180,16 +44018,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Hooks são funções fornecidas pelo React que permitem utilizar recursos do React dentro de componentes funcionais.',
-            endParagraph: 'useState é um Hook. O React possui outros Hooks para diferentes necessidades.',
+            introduction: {
+              text: 'Hooks são funções fornecidas pelo React que permitem utilizar recursos do React dentro de componentes funcionais.',
+              persona: 'cody'
+            },
+            closing: 'useState é um Hook. O React possui outros Hooks para diferentes necessidades.',
             highlight: ['Hooks', 'useState', 'React'],
             codeLanguage: 'JavaScript',
             code: 'useState();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Hooks are functions provided by React that let you use React features inside function components.',
-            endParagraph: 'useState is a Hook. React has other Hooks for different needs.',
+            introduction: {
+              text: 'Hooks are functions provided by React that let you use React features inside function components.',
+              persona: 'cody'
+            },
+            closing: 'useState is a Hook. React has other Hooks for different needs.',
             highlight: ['Hooks', 'useState', 'React'],
             codeLanguage: 'JavaScript',
             code: 'useState();',
@@ -41201,16 +44045,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Além de useState, existem Hooks como useEffect e useRef, que serão apresentados separadamente.',
-            endParagraph: 'Cada Hook possui uma finalidade específica. Agora vamos conhecer alguns dos mais utilizados.',
+            introduction: {
+              text: 'Além de useState, existem Hooks como useEffect e useRef, que serão apresentados separadamente.',
+              persona: 'neutral'
+            },
+            closing: 'Cada Hook possui uma finalidade específica. Agora vamos conhecer alguns dos mais utilizados.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
             codeLanguage: 'JavaScript',
             code: 'useState();',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Besides useState, there are Hooks like useEffect and useRef, which will be presented separately.',
-            endParagraph: 'Each Hook has a specific purpose. Now let\'s meet some of the most used ones.',
+            introduction: {
+              text: 'Besides useState, there are Hooks like useEffect and useRef, which will be presented separately.',
+              persona: 'neutral'
+            },
+            closing: 'Each Hook has a specific purpose. Now let\'s meet some of the most used ones.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
             codeLanguage: 'JavaScript',
             code: 'useState();',
@@ -41414,16 +44264,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'useEffect permite executar código relacionado a efeitos depois da renderização de um componente.',
-            endParagraph: 'Ele é utilizado quando o componente precisa realizar alguma ação relacionada a algo externo à renderização.',
+            introduction: {
+              text: 'useEffect permite executar código relacionado a efeitos depois da renderização de um componente.',
+              persona: 'cody'
+            },
+            closing: 'Ele é utilizado quando o componente precisa realizar alguma ação relacionada a algo externo à renderização.',
             highlight: ['useEffect'],
             codeLanguage: 'JavaScript',
             code: 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Renderizado");\n}, []);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'useEffect lets you run code related to effects after a component renders.',
-            endParagraph: 'It is used when the component needs to perform some action related to something outside of rendering.',
+            introduction: {
+              text: 'useEffect lets you run code related to effects after a component renders.',
+              persona: 'cody'
+            },
+            closing: 'It is used when the component needs to perform some action related to something outside of rendering.',
             highlight: ['useEffect'],
             codeLanguage: 'JavaScript',
             code: 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Rendered");\n}, []);',
@@ -41435,18 +44291,28 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O array de dependências do useEffect indica os valores que devem ser observados pelo efeito.',
-            secondParagraph: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
-            endParagraph: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
+            introduction: {
+              text: 'O array de dependências do useEffect indica os valores que devem ser observados pelo efeito.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'Nesse exemplo, o efeito acompanha mudanças em nome.'
+            },
+            closing: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
             highlight: ['dependências', 'useEffect'],
             codeLanguage: 'JavaScript',
             code: 'useEffect(() => {\n  console.log(nome);\n}, [nome]);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The dependency array of useEffect indicates the values that should be watched by the effect.',
-            secondParagraph: 'In this example, the effect follows changes to name.',
-            endParagraph: 'In this example, the effect follows changes to name.',
+            introduction: {
+              text: 'The dependency array of useEffect indicates the values that should be watched by the effect.',
+              persona: 'neutral'
+            },
+            explanation: {
+              text: 'In this example, the effect follows changes to name.'
+            },
+            closing: 'In this example, the effect follows changes to name.',
             highlight: ['dependency', 'useEffect'],
             codeLanguage: 'JavaScript',
             code: 'useEffect(() => {\n  console.log(name);\n}, [name]);',
@@ -41546,16 +44412,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'useRef permite manter uma referência entre renderizações sem provocar uma nova renderização quando seu valor é alterado.',
-            endParagraph: 'Refs podem ser úteis quando precisamos manter uma referência que não controla diretamente a interface.',
+            introduction: {
+              text: 'useRef permite manter uma referência entre renderizações sem provocar uma nova renderização quando seu valor é alterado.',
+              persona: 'cody'
+            },
+            closing: 'Refs podem ser úteis quando precisamos manter uma referência que não controla diretamente a interface.',
             highlight: ['useRef', 'Refs'],
             codeLanguage: 'JavaScript',
             code: 'import { useRef } from "react";\n\nconst inputRef = useRef(null);',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'useRef lets you keep a reference between renders without causing a new render when its value changes.',
-            endParagraph: 'Refs can be useful when we need to keep a reference that does not directly control the interface.',
+            introduction: {
+              text: 'useRef lets you keep a reference between renders without causing a new render when its value changes.',
+              persona: 'cody'
+            },
+            closing: 'Refs can be useful when we need to keep a reference that does not directly control the interface.',
             highlight: ['useRef', 'Refs'],
             codeLanguage: 'JavaScript',
             code: 'import { useRef } from "react";\n\nconst inputRef = useRef(null);',
@@ -41657,16 +44529,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Como JSX utiliza JavaScript, podemos utilizar condições para determinar qual conteúdo será exibido.',
-            endParagraph: 'A renderização condicional permite adaptar a interface de acordo com os dados.',
+            introduction: {
+              text: 'Como JSX utiliza JavaScript, podemos utilizar condições para determinar qual conteúdo será exibido.',
+              persona: 'cody'
+            },
+            closing: 'A renderização condicional permite adaptar a interface de acordo com os dados.',
             highlight: ['renderização condicional', 'JSX'],
             codeLanguage: 'JavaScript',
             code: 'function Status({ logado }) {\n  return logado\n    ? <p>Bem-vindo!</p>\n    : <p>Faça login.</p>;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Since JSX uses JavaScript, we can use conditions to decide which content will be shown.',
-            endParagraph: 'Conditional rendering lets you adapt the interface based on the data.',
+            introduction: {
+              text: 'Since JSX uses JavaScript, we can use conditions to decide which content will be shown.',
+              persona: 'cody'
+            },
+            closing: 'Conditional rendering lets you adapt the interface based on the data.',
             highlight: ['conditional rendering', 'JSX'],
             codeLanguage: 'JavaScript',
             code: 'function Status({ loggedIn }) {\n  return loggedIn\n    ? <p>Welcome!</p>\n    : <p>Please log in.</p>;\n}',
@@ -41766,16 +44644,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Arrays podem ser transformados em elementos de interface utilizando métodos JavaScript como map().',
-            endParagraph: 'Essa abordagem permite construir interfaces a partir de conjuntos de dados.',
+            introduction: {
+              text: 'Arrays podem ser transformados em elementos de interface utilizando métodos JavaScript como map().',
+              persona: 'cody'
+            },
+            closing: 'Essa abordagem permite construir interfaces a partir de conjuntos de dados.',
             highlight: ['map', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const nomes = ["Ana", "João"];\n\nfunction Lista() {\n  return (\n    <ul>\n      {nomes.map(nome => (\n        <li>{nome}</li>\n      ))}\n    </ul>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Arrays can be transformed into interface elements using JavaScript methods like map().',
-            endParagraph: 'This approach lets you build interfaces from sets of data.',
+            introduction: {
+              text: 'Arrays can be transformed into interface elements using JavaScript methods like map().',
+              persona: 'cody'
+            },
+            closing: 'This approach lets you build interfaces from sets of data.',
             highlight: ['map', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'const names = ["Ana", "John"];\n\nfunction List() {\n  return (\n    <ul>\n      {names.map(name => (\n        <li>{name}</li>\n      ))}\n    </ul>\n  );\n}',
@@ -41875,16 +44759,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Quando o React renderiza uma lista, cada elemento precisa possuir uma key que permita identificá-lo de maneira estável.',
-            endParagraph: 'Um identificador estável ajuda o React a acompanhar corretamente os elementos da lista.',
+            introduction: {
+              text: 'Quando o React renderiza uma lista, cada elemento precisa possuir uma key que permita identificá-lo de maneira estável.',
+              persona: 'cody'
+            },
+            closing: 'Um identificador estável ajuda o React a acompanhar corretamente os elementos da lista.',
             highlight: ['React', 'key'],
             codeLanguage: 'JavaScript',
             code: 'const usuarios = [\n  { id: 1, nome: "Ana" },\n  { id: 2, nome: "João" }\n];\n\nfunction Lista() {\n  return usuarios.map(usuario => (\n    <p key={usuario.id}>\n      {usuario.nome}\n    </p>\n  ));\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When React renders a list, each element needs to have a key that lets it be identified in a stable way.',
-            endParagraph: 'A stable identifier helps React correctly track the elements in the list.',
+            introduction: {
+              text: 'When React renders a list, each element needs to have a key that lets it be identified in a stable way.',
+              persona: 'cody'
+            },
+            closing: 'A stable identifier helps React correctly track the elements in the list.',
             highlight: ['React', 'key'],
             codeLanguage: 'JavaScript',
             code: 'const users = [\n  { id: 1, name: "Ana" },\n  { id: 2, name: "John" }\n];\n\nfunction List() {\n  return users.map(user => (\n    <p key={user.id}>\n      {user.name}\n    </p>\n  ));\n}',
@@ -41984,16 +44874,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Interfaces maiores podem ser construídas combinando vários componentes menores e independentes.',
-            endParagraph: 'Interfaces podem ser construídas combinando componentes menores e independentes.',
+            introduction: {
+              text: 'Interfaces maiores podem ser construídas combinando vários componentes menores e independentes.',
+              persona: 'cody'
+            },
+            closing: 'Interfaces podem ser construídas combinando componentes menores e independentes.',
             highlight: ['componentes'],
             codeLanguage: 'JavaScript',
             code: 'function Header() {\n  return <header>Meu site</header>;\n}\n\nfunction Conteudo() {\n  return <main>Conteúdo</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Conteudo />\n    </>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Larger interfaces can be built by combining several smaller, independent components.',
-            endParagraph: 'Interfaces can be built by combining smaller, independent components.',
+            introduction: {
+              text: 'Larger interfaces can be built by combining several smaller, independent components.',
+              persona: 'cody'
+            },
+            closing: 'Interfaces can be built by combining smaller, independent components.',
             highlight: ['components'],
             codeLanguage: 'JavaScript',
             code: 'function Header() {\n  return <header>My site</header>;\n}\n\nfunction Content() {\n  return <main>Content</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Content />\n    </>\n  );\n}',
@@ -42091,16 +44987,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Ao utilizar React, continuamos trabalhando com elementos como h1, p, button, input, ul e article.',
-            endParagraph: 'React não elimina a importância do HTML. O conhecimento de estrutura e semântica continua sendo fundamental.',
+            introduction: {
+              text: 'Ao utilizar React, continuamos trabalhando com elementos como h1, p, button, input, ul e article.',
+              persona: 'cody'
+            },
+            closing: 'React não elimina a importância do HTML. O conhecimento de estrutura e semântica continua sendo fundamental.',
             highlight: ['HTML', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Produto</h2>\n      <p>Descrição</p>\n      <button>Comprar</button>\n    </article>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'When using React, we keep working with elements like h1, p, button, input, ul and article.',
-            endParagraph: 'React does not remove the importance of HTML. Knowing structure and semantics is still fundamental.',
+            introduction: {
+              text: 'When using React, we keep working with elements like h1, p, button, input, ul and article.',
+              persona: 'cody'
+            },
+            closing: 'React does not remove the importance of HTML. Knowing structure and semantics is still fundamental.',
             highlight: ['HTML', 'React'],
             codeLanguage: 'JavaScript',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}',
@@ -42112,16 +45014,22 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'A principal mudança está na forma de organizar a interface. Em React, estruturas de interface podem ser transformadas em componentes reutilizáveis e receber dados ou comportamento.',
-            endParagraph: 'Por isso, aprender HTML antes de React fornece uma base importante para compreender a construção de interfaces modernas.',
+            introduction: {
+              text: 'A principal mudança está na forma de organizar a interface. Em React, estruturas de interface podem ser transformadas em componentes reutilizáveis e receber dados ou comportamento.',
+              persona: 'neutral'
+            },
+            closing: 'Por isso, aprender HTML antes de React fornece uma base importante para compreender a construção de interfaces modernas.',
             highlight: ['React', 'HTML', 'componentes'],
             codeLanguage: 'JavaScript',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Produto</h2>\n      <p>Descrição</p>\n      <button>Comprar</button>\n    </article>\n  );\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'The main change is in how the interface gets organized. In React, interface structures can be turned into reusable components that receive data or behavior.',
-            endParagraph: 'That is why learning HTML before React gives you an important foundation for understanding how modern interfaces are built.',
+            introduction: {
+              text: 'The main change is in how the interface gets organized. In React, interface structures can be turned into reusable components that receive data or behavior.',
+              persona: 'neutral'
+            },
+            closing: 'That is why learning HTML before React gives you an important foundation for understanding how modern interfaces are built.',
             highlight: ['React', 'HTML', 'components'],
             codeLanguage: 'JavaScript',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}',
@@ -42321,18 +45229,28 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'CSS continua sendo a base da estilização na web. Porém, existem ferramentas e tecnologias que ajudam a organizar, acelerar ou ampliar a forma como escrevemos estilos.',
-            secondParagraph: 'Esse ecossistema inclui CSS tradicional, Tailwind CSS, Bootstrap, Sass e PostCSS.',
-            endParagraph: 'Essas ferramentas não são todas do mesmo tipo. Cada uma possui uma proposta diferente.',
+            introduction: {
+              text: 'CSS continua sendo a base da estilização na web. Porém, existem ferramentas e tecnologias que ajudam a organizar, acelerar ou ampliar a forma como escrevemos estilos.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'Esse ecossistema inclui CSS tradicional, Tailwind CSS, Bootstrap, Sass e PostCSS.'
+            },
+            closing: 'Essas ferramentas não são todas do mesmo tipo. Cada uma possui uma proposta diferente.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* CSS tradicional */\n.botao {\n  padding: 8px 16px;\n  border-radius: 8px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'CSS is still the foundation of styling on the web. However, there are tools and technologies that help organize, speed up or extend the way we write styles.',
-            secondParagraph: 'This ecosystem includes traditional CSS, Tailwind CSS, Bootstrap, Sass and PostCSS.',
-            endParagraph: 'These tools are not all the same type. Each one has a different proposal.',
+            introduction: {
+              text: 'CSS is still the foundation of styling on the web. However, there are tools and technologies that help organize, speed up or extend the way we write styles.',
+              persona: 'cody'
+            },
+            explanation: {
+              text: 'This ecosystem includes traditional CSS, Tailwind CSS, Bootstrap, Sass and PostCSS.'
+            },
+            closing: 'These tools are not all the same type. Each one has a different proposal.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* Traditional CSS */\n.button {\n  padding: 8px 16px;\n  border-radius: 8px;\n}',
@@ -42344,16 +45262,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Frameworks fornecem estruturas e recursos prontos para o desenvolvimento. Pré-processadores adicionam recursos à escrita de CSS. Ferramentas de processamento transformam arquivos CSS durante o desenvolvimento.',
-            endParagraph: 'Esse contexto ajuda a entender onde o Tailwind CSS se encaixa nesse ecossistema.',
+            introduction: {
+              text: 'Frameworks fornecem estruturas e recursos prontos para o desenvolvimento. Pré-processadores adicionam recursos à escrita de CSS. Ferramentas de processamento transformam arquivos CSS durante o desenvolvimento.',
+              persona: 'neutral'
+            },
+            closing: 'Esse contexto ajuda a entender onde o Tailwind CSS se encaixa nesse ecossistema.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* CSS tradicional */\n.botao {\n  padding: 8px 16px;\n  border-radius: 8px;\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Frameworks provide ready-made structures and features for development. Pre-processors add features to writing CSS. Processing tools transform CSS files during development.',
-            endParagraph: 'This context helps explain where Tailwind CSS fits in this ecosystem.',
+            introduction: {
+              text: 'Frameworks provide ready-made structures and features for development. Pre-processors add features to writing CSS. Processing tools transform CSS files during development.',
+              persona: 'neutral'
+            },
+            closing: 'This context helps explain where Tailwind CSS fits in this ecosystem.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* Traditional CSS */\n.button {\n  padding: 8px 16px;\n  border-radius: 8px;\n}',
@@ -42516,8 +45440,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind CSS é uma abordagem de estilização baseada em classes utilitárias. Em vez de criar uma classe própria para cada componente e escrever todas as propriedades CSS dentro dela, podemos combinar classes que representam estilos específicos.',
-            endParagraph: 'O objetivo do Tailwind é permitir a construção de interfaces combinando pequenas classes de estilo.',
+            introduction: {
+              text: 'Tailwind CSS é uma abordagem de estilização baseada em classes utilitárias. Em vez de criar uma classe própria para cada componente e escrever todas as propriedades CSS dentro dela, podemos combinar classes que representam estilos específicos.',
+              persona: 'cody'
+            },
+            closing: 'O objetivo do Tailwind é permitir a construção de interfaces combinando pequenas classes de estilo.',
             highlight: ['Tailwind', 'CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white px-4 py-2 rounded-lg">\n  Comprar\n</button>',
@@ -42529,8 +45456,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Tailwind CSS is a styling approach based on utility classes. Instead of creating your own class for each component and writing every CSS property inside it, we can combine classes that represent specific styles.',
-            endParagraph: 'The goal of Tailwind is to let you build interfaces by combining small style classes.',
+            introduction: {
+              text: 'Tailwind CSS is a styling approach based on utility classes. Instead of creating your own class for each component and writing every CSS property inside it, we can combine classes that represent specific styles.',
+              persona: 'cody'
+            },
+            closing: 'The goal of Tailwind is to let you build interfaces by combining small style classes.',
             highlight: ['Tailwind', 'CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white px-4 py-2 rounded-lg">\n  Buy\n</button>',
@@ -42696,8 +45626,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'No modelo utility-first, cada classe representa uma pequena responsabilidade de estilo, como espaçamento, cor, tamanho ou alinhamento.',
-            endParagraph: 'Em vez de criar uma classe que representa todo o componente, o Tailwind combina utilitários para construir sua aparência.',
+            introduction: {
+              text: 'No modelo utility-first, cada classe representa uma pequena responsabilidade de estilo, como espaçamento, cor, tamanho ou alinhamento.',
+              persona: 'cody'
+            },
+            closing: 'Em vez de criar uma classe que representa todo o componente, o Tailwind combina utilitários para construir sua aparência.',
             highlight: ['utility-first', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 1rem;\n}',
@@ -42710,8 +45643,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             onlyCode: true
           },
           en: {
-            firstParagraph: 'In the utility-first model, each class represents a small styling responsibility, like spacing, color, size or alignment.',
-            endParagraph: 'Instead of creating a class that represents the whole component, Tailwind combines utilities to build its appearance.',
+            introduction: {
+              text: 'In the utility-first model, each class represents a small styling responsibility, like spacing, color, size or alignment.',
+              persona: 'cody'
+            },
+            closing: 'Instead of creating a class that represents the whole component, Tailwind combines utilities to build its appearance.',
             highlight: ['utility-first', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '.card {\n  padding: 1rem;\n}',
@@ -42878,8 +45814,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'As classes utilitárias do Tailwind representam pequenas decisões de estilo, relacionadas a espaçamento, tamanho, cor e tipografia.',
-            endParagraph: 'A combinação dessas pequenas classes permite construir estilos diretamente na marcação.',
+            introduction: {
+              text: 'As classes utilitárias do Tailwind representam pequenas decisões de estilo, relacionadas a espaçamento, tamanho, cor e tipografia.',
+              persona: 'cody'
+            },
+            closing: 'A combinação dessas pequenas classes permite construir estilos diretamente na marcação.',
             highlight: ['Tailwind'],
             codeLanguage: 'HTML',
             code: '<p class="text-lg font-bold">\n  Olá!\n</p>',
@@ -42891,8 +45830,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Tailwind utility classes represent small styling decisions, related to spacing, size, color and typography.',
-            endParagraph: 'Combining these small classes lets you build styles directly in the markup.',
+            introduction: {
+              text: 'Tailwind utility classes represent small styling decisions, related to spacing, size, color and typography.',
+              persona: 'cody'
+            },
+            closing: 'Combining these small classes lets you build styles directly in the markup.',
             highlight: ['Tailwind'],
             codeLanguage: 'HTML',
             code: '<p class="text-lg font-bold">\n  Hello!\n</p>',
@@ -43109,8 +46051,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'No Tailwind, classes utilitárias podem representar propriedades relacionadas a margin e padding.',
-            endParagraph: 'p-4 representa padding e mt-4 representa margin-top — o aluno já conhece essas propriedades do CSS.',
+            introduction: {
+              text: 'No Tailwind, classes utilitárias podem representar propriedades relacionadas a margin e padding.',
+              persona: 'cody'
+            },
+            closing: 'p-4 representa padding e mt-4 representa margin-top — o aluno já conhece essas propriedades do CSS.',
             highlight: ['padding', 'margin-top', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="p-4 mt-4">\n  Conteúdo\n</div>',
@@ -43122,8 +46067,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'In Tailwind, utility classes can represent properties related to margin and padding.',
-            endParagraph: 'p-4 represents padding and mt-4 represents margin-top — you already know these properties from CSS.',
+            introduction: {
+              text: 'In Tailwind, utility classes can represent properties related to margin and padding.',
+              persona: 'cody'
+            },
+            closing: 'p-4 represents padding and mt-4 represents margin-top — you already know these properties from CSS.',
             highlight: ['padding', 'margin-top', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="p-4 mt-4">\n  Content\n</div>',
@@ -43289,8 +46237,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind fornece classes utilitárias para definir cores de elementos e textos.',
-            endParagraph: 'bg-* define a cor de fundo e text-* define a cor do texto — em vez de escrever uma declaração CSS para cada cor, usamos classes utilitárias.',
+            introduction: {
+              text: 'Tailwind fornece classes utilitárias para definir cores de elementos e textos.',
+              persona: 'cody'
+            },
+            closing: 'bg-* define a cor de fundo e text-* define a cor do texto — em vez de escrever uma declaração CSS para cada cor, usamos classes utilitárias.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white">\n  Salvar\n</button>',
@@ -43302,8 +46253,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Tailwind provides utility classes to set colors for elements and text.',
-            endParagraph: 'bg-* sets the background color and text-* sets the text color — instead of writing a CSS declaration for every color, we use utility classes.',
+            introduction: {
+              text: 'Tailwind provides utility classes to set colors for elements and text.',
+              persona: 'cody'
+            },
+            closing: 'bg-* sets the background color and text-* sets the text color — instead of writing a CSS declaration for every color, we use utility classes.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white">\n  Save\n</button>',
@@ -43469,8 +46423,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Assim como no CSS, podemos controlar características como tamanho, peso e alinhamento do texto.',
-            endParagraph: 'O aluno continua trabalhando com conceitos de tipografia que já conhece do CSS.',
+            introduction: {
+              text: 'Assim como no CSS, podemos controlar características como tamanho, peso e alinhamento do texto.',
+              persona: 'cody'
+            },
+            closing: 'O aluno continua trabalhando com conceitos de tipografia que já conhece do CSS.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<h1 class="text-2xl font-bold">\n  Título\n</h1>',
@@ -43482,8 +46439,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Just like in CSS, we can control characteristics like text size, weight and alignment.',
-            endParagraph: 'You keep working with typography concepts you already know from CSS.',
+            introduction: {
+              text: 'Just like in CSS, we can control characteristics like text size, weight and alignment.',
+              persona: 'cody'
+            },
+            closing: 'You keep working with typography concepts you already know from CSS.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<h1 class="text-2xl font-bold">\n  Title\n</h1>',
@@ -43649,8 +46609,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind não cria um novo sistema de layout. Ele fornece classes utilitárias que representam propriedades do CSS.',
-            endParagraph: 'flex equivale a display: flex, items-center a align-items: center e justify-between a justify-content: space-between — o conhecimento de Flexbox continua diretamente útil.',
+            introduction: {
+              text: 'Tailwind não cria um novo sistema de layout. Ele fornece classes utilitárias que representam propriedades do CSS.',
+              persona: 'cody'
+            },
+            closing: 'flex equivale a display: flex, items-center a align-items: center e justify-between a justify-content: space-between — o conhecimento de Flexbox continua diretamente útil.',
             highlight: ['Flexbox', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="flex items-center justify-between">\n  <span>Item 1</span>\n  <span>Item 2</span>\n</div>',
@@ -43662,8 +46625,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Tailwind does not create a new layout system. It provides utility classes that represent CSS properties.',
-            endParagraph: 'flex maps to display: flex, items-center to align-items: center and justify-between to justify-content: space-between — your Flexbox knowledge is still directly useful.',
+            introduction: {
+              text: 'Tailwind does not create a new layout system. It provides utility classes that represent CSS properties.',
+              persona: 'cody'
+            },
+            closing: 'flex maps to display: flex, items-center to align-items: center and justify-between to justify-content: space-between — your Flexbox knowledge is still directly useful.',
             highlight: ['Flexbox', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="flex items-center justify-between">\n  <span>Item 1</span>\n  <span>Item 2</span>\n</div>',
@@ -43880,8 +46846,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O mesmo princípio pode ser aplicado ao CSS Grid.',
-            endParagraph: 'Tailwind fornece uma forma mais direta de aplicar propriedades do Grid sem abandonar o modelo do CSS.',
+            introduction: {
+              text: 'O mesmo princípio pode ser aplicado ao CSS Grid.',
+              persona: 'cody'
+            },
+            closing: 'Tailwind fornece uma forma mais direta de aplicar propriedades do Grid sem abandonar o modelo do CSS.',
             highlight: ['Grid', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="grid grid-cols-3 gap-4">\n  <div>1</div>\n  <div>2</div>\n  <div>3</div>\n</div>',
@@ -43893,8 +46862,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'The same principle can be applied to CSS Grid.',
-            endParagraph: 'Tailwind provides a more direct way to apply Grid properties without abandoning the CSS model.',
+            introduction: {
+              text: 'The same principle can be applied to CSS Grid.',
+              persona: 'cody'
+            },
+            closing: 'Tailwind provides a more direct way to apply Grid properties without abandoning the CSS model.',
             highlight: ['Grid', 'CSS'],
             codeLanguage: 'HTML',
             code: '<div class="grid grid-cols-3 gap-4">\n  <div>1</div>\n  <div>2</div>\n  <div>3</div>\n</div>',
@@ -44060,16 +47032,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind permite aplicar classes diferentes de acordo com o tamanho da tela, utilizando seus breakpoints.',
-            endParagraph: 'text-sm representa o comportamento padrão, e md:text-lg entra em vigor a partir do breakpoint md — o conceito continua sendo responsividade.',
+            introduction: {
+              text: 'Tailwind permite aplicar classes diferentes de acordo com o tamanho da tela, utilizando seus breakpoints.',
+              persona: 'cody'
+            },
+            closing: 'text-sm representa o comportamento padrão, e md:text-lg entra em vigor a partir do breakpoint md — o conceito continua sendo responsividade.',
             highlight: ['responsividade'],
             codeLanguage: 'HTML',
             code: '<div class="text-sm md:text-lg">\n  Texto responsivo\n</div>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tailwind lets you apply different classes depending on the screen size, using its breakpoints.',
-            endParagraph: 'text-sm represents the default behavior, and md:text-lg kicks in from the md breakpoint onward — the concept is still responsiveness.',
+            introduction: {
+              text: 'Tailwind lets you apply different classes depending on the screen size, using its breakpoints.',
+              persona: 'cody'
+            },
+            closing: 'text-sm represents the default behavior, and md:text-lg kicks in from the md breakpoint onward — the concept is still responsiveness.',
             highlight: ['responsiveness'],
             codeLanguage: 'HTML',
             code: '<div class="text-sm md:text-lg">\n  Responsive text\n</div>',
@@ -44234,16 +47212,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind permite aplicar utilitários quando um elemento está em determinado estado, como hover ou focus.',
-            endParagraph: 'Os prefixos de estado permitem expressar comportamentos que no CSS tradicional seriam escritos com pseudo-classes.',
+            introduction: {
+              text: 'Tailwind permite aplicar utilitários quando um elemento está em determinado estado, como hover ou focus.',
+              persona: 'cody'
+            },
+            closing: 'Os prefixos de estado permitem expressar comportamentos que no CSS tradicional seriam escritos com pseudo-classes.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 hover:bg-blue-700 focus:ring-2">\n  Enviar\n</button>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tailwind lets you apply utilities when an element is in a certain state, like hover or focus.',
-            endParagraph: 'State prefixes let you express behavior that traditional CSS would write with pseudo-classes.',
+            introduction: {
+              text: 'Tailwind lets you apply utilities when an element is in a certain state, like hover or focus.',
+              persona: 'cody'
+            },
+            closing: 'State prefixes let you express behavior that traditional CSS would write with pseudo-classes.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 hover:bg-blue-700 focus:ring-2">\n  Submit\n</button>',
@@ -44455,16 +47439,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind permite definir estilos específicos para o modo escuro utilizando o modificador dark:.',
-            endParagraph: 'O mesmo elemento pode possuir estilos diferentes dependendo do modo de exibição.',
+            introduction: {
+              text: 'Tailwind permite definir estilos específicos para o modo escuro utilizando o modificador dark:.',
+              persona: 'cody'
+            },
+            closing: 'O mesmo elemento pode possuir estilos diferentes dependendo do modo de exibição.',
             highlight: ['modo escuro'],
             codeLanguage: 'HTML',
             code: '<div class="bg-white text-black dark:bg-gray-900 dark:text-white">\n  Conteúdo\n</div>',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tailwind lets you define specific styles for dark mode using the dark: modifier.',
-            endParagraph: 'The same element can have different styles depending on the display mode.',
+            introduction: {
+              text: 'Tailwind lets you define specific styles for dark mode using the dark: modifier.',
+              persona: 'cody'
+            },
+            closing: 'The same element can have different styles depending on the display mode.',
             highlight: ['dark mode'],
             codeLanguage: 'HTML',
             code: '<div class="bg-white text-black dark:bg-gray-900 dark:text-white">\n  Content\n</div>',
@@ -44625,16 +47615,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Projetos reais podem possuir cores, espaçamentos, fontes e outros valores próprios. O Tailwind permite adaptar seu sistema às necessidades da aplicação.',
-            endParagraph: 'A ideia é utilizar o Tailwind como parte do projeto, e não ficar limitado apenas aos valores padrão.',
+            introduction: {
+              text: 'Projetos reais podem possuir cores, espaçamentos, fontes e outros valores próprios. O Tailwind permite adaptar seu sistema às necessidades da aplicação.',
+              persona: 'cody'
+            },
+            closing: 'A ideia é utilizar o Tailwind como parte do projeto, e não ficar limitado apenas aos valores padrão.',
             highlight: ['Tailwind'],
             codeLanguage: 'JavaScript',
             code: '// tailwind.config.js (conceitual)\ntheme: {\n  colors: {\n    marca: "#2563eb"\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Real projects can have their own colors, spacing, fonts and other values. Tailwind lets you adapt its system to the needs of the application.',
-            endParagraph: 'The idea is to use Tailwind as part of the project, instead of being limited to just the default values.',
+            introduction: {
+              text: 'Real projects can have their own colors, spacing, fonts and other values. Tailwind lets you adapt its system to the needs of the application.',
+              persona: 'cody'
+            },
+            closing: 'The idea is to use Tailwind as part of the project, instead of being limited to just the default values.',
             highlight: ['Tailwind'],
             codeLanguage: 'JavaScript',
             code: '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}',
@@ -44795,16 +47791,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Ferramentas como Tailwind precisam saber como o projeto será processado e quais recursos devem ser utilizados.',
-            endParagraph: 'Configuração permite integrar o Tailwind às necessidades do projeto.',
+            introduction: {
+              text: 'Ferramentas como Tailwind precisam saber como o projeto será processado e quais recursos devem ser utilizados.',
+              persona: 'cody'
+            },
+            closing: 'Configuração permite integrar o Tailwind às necessidades do projeto.',
             highlight: ['Tailwind', 'Configuração'],
             codeLanguage: 'JavaScript',
             code: '// tailwind.config.js (conceitual)\ntheme: {\n  colors: {\n    marca: "#2563eb"\n  }\n}',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tools like Tailwind need to know how the project will be processed and which features should be used.',
-            endParagraph: 'Configuration lets you integrate Tailwind with the needs of the project.',
+            introduction: {
+              text: 'Tools like Tailwind need to know how the project will be processed and which features should be used.',
+              persona: 'cody'
+            },
+            closing: 'Configuration lets you integrate Tailwind with the needs of the project.',
             highlight: ['Tailwind', 'Configuration'],
             codeLanguage: 'JavaScript',
             code: '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}',
@@ -44965,8 +47967,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Interfaces reais possuem elementos que aparecem várias vezes, como botões, cards e campos. Podemos combinar classes utilitárias dentro de componentes reutilizáveis.',
-            endParagraph: 'Tailwind fornece os estilos. A tecnologia da aplicação pode organizar esses estilos em componentes reutilizáveis.',
+            introduction: {
+              text: 'Interfaces reais possuem elementos que aparecem várias vezes, como botões, cards e campos. Podemos combinar classes utilitárias dentro de componentes reutilizáveis.',
+              persona: 'cody'
+            },
+            closing: 'Tailwind fornece os estilos. A tecnologia da aplicação pode organizar esses estilos em componentes reutilizáveis.',
             highlight: ['Tailwind', 'componentes'],
             codeLanguage: 'HTML',
             code: '<button class="rounded-lg px-4 py-2 font-medium">\n  Salvar\n</button>',
@@ -44978,8 +47983,11 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             ]
           },
           en: {
-            firstParagraph: 'Real interfaces have elements that show up several times, like buttons, cards and fields. We can combine utility classes inside reusable components.',
-            endParagraph: 'Tailwind provides the styles. The application\'s technology can organize those styles into reusable components.',
+            introduction: {
+              text: 'Real interfaces have elements that show up several times, like buttons, cards and fields. We can combine utility classes inside reusable components.',
+              persona: 'cody'
+            },
+            closing: 'Tailwind provides the styles. The application\'s technology can organize those styles into reusable components.',
             highlight: ['Tailwind', 'components'],
             codeLanguage: 'HTML',
             code: '<button class="rounded-lg px-4 py-2 font-medium">\n  Save\n</button>',
@@ -45145,16 +48153,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'Tailwind não elimina os conceitos fundamentais de CSS. As classes utilitárias representam propriedades e conceitos que continuam pertencendo ao CSS.',
-            endParagraph: 'Quanto melhor o conhecimento de CSS, mais fácil é compreender o que as classes utilitárias do Tailwind estão fazendo.',
+            introduction: {
+              text: 'Tailwind não elimina os conceitos fundamentais de CSS. As classes utilitárias representam propriedades e conceitos que continuam pertencendo ao CSS.',
+              persona: 'cody'
+            },
+            closing: 'Quanto melhor o conhecimento de CSS, mais fácil é compreender o que as classes utilitárias do Tailwind estão fazendo.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* CSS tradicional */\n.card {\n  padding: 1rem;\n}\n\n/* Tailwind equivalente: class="p-4" */',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tailwind does not remove the fundamental concepts of CSS. Utility classes represent properties and concepts that still belong to CSS.',
-            endParagraph: 'The better your CSS knowledge, the easier it is to understand what Tailwind utility classes are doing.',
+            introduction: {
+              text: 'Tailwind does not remove the fundamental concepts of CSS. Utility classes represent properties and concepts that still belong to CSS.',
+              persona: 'cody'
+            },
+            closing: 'The better your CSS knowledge, the easier it is to understand what Tailwind utility classes are doing.',
             highlight: ['CSS', 'Tailwind'],
             codeLanguage: 'CSS',
             code: '/* Traditional CSS */\n.card {\n  padding: 1rem;\n}\n\n/* Tailwind equivalent: class="p-4" */',
@@ -45166,16 +48180,22 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'theory',
         content: {
           pt: {
-            firstParagraph: 'O Tailwind pode ser entendido como outra forma de aplicar conceitos que você já aprendeu em CSS.',
-            endParagraph: 'Por isso, aprender CSS antes de Tailwind continua sendo importante.',
+            introduction: {
+              text: 'O Tailwind pode ser entendido como outra forma de aplicar conceitos que você já aprendeu em CSS.',
+              persona: 'neutral'
+            },
+            closing: 'Por isso, aprender CSS antes de Tailwind continua sendo importante.',
             highlight: ['Tailwind', 'CSS'],
             codeLanguage: 'CSS',
             code: '/* CSS tradicional */\n.card {\n  padding: 1rem;\n}\n\n/* Tailwind equivalente: class="p-4" */',
             onlyCode: true
           },
           en: {
-            firstParagraph: 'Tailwind can be understood as another way to apply concepts you already learned in CSS.',
-            endParagraph: 'That is why learning CSS before Tailwind is still important.',
+            introduction: {
+              text: 'Tailwind can be understood as another way to apply concepts you already learned in CSS.',
+              persona: 'neutral'
+            },
+            closing: 'That is why learning CSS before Tailwind is still important.',
             highlight: ['Tailwind', 'CSS'],
             codeLanguage: 'CSS',
             code: '/* Traditional CSS */\n.card {\n  padding: 1rem;\n}\n\n/* Tailwind equivalent: class="p-4" */',

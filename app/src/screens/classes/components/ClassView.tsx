@@ -40,6 +40,7 @@ export default function ClassView({ classes, title }: Props) {
 					{visible && (
 						<ActivityPlayer
 							activities={activities}
+							title={title}
 							onFinish={() => setVisible(false)}
 							onClose={() => setVisible(false)}
 						/>

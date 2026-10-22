@@ -25,6 +25,7 @@ import { ReorderFields } from './ReorderFields'
 import { MatchingFields } from './MatchingFields'
 import { useCreateActivityMutation, useUpdateActivityMutation } from '@/hooks/useContentMutations'
 import {
+  buildTheoryContentSchema,
   codeBlankContentSchema,
   fillBlankContentSchema,
   codePlaygroundContentSchema,
@@ -36,13 +37,13 @@ import {
   emptyMatchingContent,
   emptyOptionContent,
   emptyReorderContent,
-  emptyTheoryContent,
   isTypedActivity,
   matchingContentSchema,
   optionContentSchema,
   reorderContentSchema,
-  theoryContentSchema
+  toTheoryForm
 } from '@/lib/activitySchemas'
+import { firstTheory } from '@/lib/theoryRules'
 import { LOCALE_LABELS, LOCALES, type AdminActivityResponse, type LocaleCode, type TranslationMap } from '@/types/api'
 
 interface ActivityFormDialogProps {
@@ -51,6 +52,8 @@ interface ActivityFormDialogProps {
   trigger: ReactNode;
   /** Ausente = criação. */
   activity?: AdminActivityResponse;
+  /** Todas as atividades da lição, na ordem: a regra da persona depende da posição. */
+  lessonActivities: AdminActivityResponse[];
 }
 
 /**
@@ -61,13 +64,28 @@ interface ActivityFormDialogProps {
  * alternativas) — mostrar dois em paralelo tornaria o formulário ilegível. A
  * requisição envia só o idioma editado, e a API preserva o outro.
  */
-export function ActivityFormDialog ({ areaId, lessonId, trigger, activity }: ActivityFormDialogProps) {
+export function ActivityFormDialog ({ areaId, lessonId, trigger, activity, lessonActivities }: ActivityFormDialogProps) {
   const [open, setOpen] = useState(false)
   const [type, setType] = useState(activity?.type ?? 'theory')
   const [locale, setLocale] = useState<LocaleCode>('pt')
 
   const createActivity = useCreateActivityMutation(areaId)
   const updateActivity = useUpdateActivityMutation(areaId)
+
+  // A primeira teoria da lição precisa ser Cody. Esta atividade é a primeira
+  // teoria quando não há outra teoria antes dela — uma atividade nova entra no
+  // fim, então só é a primeira se a lição ainda não tem teoria. Vale também
+  // para trocar o tipo de uma atividade já existente para `theory`.
+  const theoryRequiresCody = useMemo(() => {
+    if (type !== 'theory') {
+      return false
+    }
+    const others = lessonActivities.filter((other) => other.id !== activity?.id)
+    if (!activity) {
+      return firstTheory(others) === undefined
+    }
+    return !others.some((other) => other.type === 'theory' && other.index < activity.index)
+  }, [type, lessonActivities, activity])
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -115,6 +133,7 @@ export function ActivityFormDialog ({ areaId, lessonId, trigger, activity }: Act
                 // documentos diferentes, com campos diferentes.
                 key={`${code}-${type}`}
                 type={type}
+                theoryRequiresCody={theoryRequiresCody}
                 content={activity?.content[code]}
                 submitLabel={activity ? 'Salvar' : 'Criar atividade'}
                 onCancel={() => { setOpen(false) }}
@@ -143,6 +162,7 @@ export function ActivityFormDialog ({ areaId, lessonId, trigger, activity }: Act
 
 interface ActivityContentFormProps {
   type: string;
+  theoryRequiresCody: boolean;
   content: unknown;
   submitLabel: string;
   onCancel: () => void;
@@ -151,6 +171,7 @@ interface ActivityContentFormProps {
 
 function ActivityContentForm ({
   type,
+  theoryRequiresCody,
   content,
   submitLabel,
   onCancel,
@@ -158,15 +179,13 @@ function ActivityContentForm ({
 }: ActivityContentFormProps) {
   if (type === 'theory') {
     return (
-      <TypedContentForm
-        schema={theoryContentSchema}
-        defaults={(content as object) ?? emptyTheoryContent()}
+      <TheoryContentForm
+        requireCody={theoryRequiresCody}
+        content={content}
         submitLabel={submitLabel}
         onCancel={onCancel}
         onSubmit={onSubmit}
-      >
-        <TheoryFields />
-      </TypedContentForm>
+      />
     )
   }
 
@@ -275,6 +294,39 @@ function ActivityContentForm ({
       onCancel={onCancel}
       onSubmit={onSubmit}
     />
+  )
+}
+
+/**
+ * Formulário de teoria: o schema depende da lição (`requireCody`), então é
+ * montado aqui, por render, e não importado pronto como os dos outros tipos.
+ */
+function TheoryContentForm ({
+  requireCody,
+  content,
+  submitLabel,
+  onCancel,
+  onSubmit
+}: {
+  requireCody: boolean;
+  content: unknown;
+  submitLabel: string;
+  onCancel: () => void;
+  onSubmit: (content: unknown) => Promise<void>;
+}) {
+  const schema = useMemo(() => buildTheoryContentSchema({ requireCody }), [requireCody])
+  const defaults = useMemo(() => toTheoryForm(content, { requireCody }), [content, requireCody])
+
+  return (
+    <TypedContentForm
+      schema={schema}
+      defaults={defaults}
+      submitLabel={submitLabel}
+      onCancel={onCancel}
+      onSubmit={onSubmit}
+    >
+      <TheoryFields requireCody={requireCody} />
+    </TypedContentForm>
   )
 }
 

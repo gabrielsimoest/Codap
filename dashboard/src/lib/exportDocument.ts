@@ -12,7 +12,7 @@ import type {
   TheoryActivityContent
 } from '@/types/api'
 import { LOCALE_LABELS } from '@/types/api'
-import { isTypedActivity } from './activitySchemas'
+import { isTypedActivity, toTheoryForm } from './activitySchemas'
 
 /**
  * Modelo intermediário da exportação.
@@ -95,6 +95,13 @@ function buildTheory (content: TheoryActivityContent): Partial<ExportActivity> {
   }
 
   const notes: string[] = []
+  // Um registro ainda no formato antigo (banco não migrado) é convertido como a
+  // migração faria, para a exportação não perder o texto dele.
+  const migrated = typeof (content as unknown as Record<string, unknown>).introduction === 'object'
+  const { introduction, explanation, closing } = toTheoryForm(content, { requireCody: false })
+  if (migrated) {
+    notes.push(`Persona da introdução: ${introduction.persona === 'cody' ? 'Cody' : 'neutra'}`)
+  }
   if (content.onlyCode) {
     notes.push('Sem pré-visualização web (onlyCode)')
   }
@@ -102,13 +109,18 @@ function buildTheory (content: TheoryActivityContent): Partial<ExportActivity> {
     notes.push('Marcada como tutorial')
   }
 
+  // Na ordem da tela. Os títulos das seções entram como uma linha própria
+  // antes do texto, para quem revisa ver o que cada seção anuncia.
+  const paragraphs: (string | undefined)[] = [
+    introduction?.title ? `Introdução — ${introduction.title}` : undefined,
+    introduction?.text,
+    explanation?.title ? `Explicação — ${explanation.title}` : undefined,
+    explanation?.text,
+    closing ? `Fechamento — ${closing}` : undefined
+  ]
+
   return {
-    paragraphs: [
-      content.firstParagraph,
-      content.secondParagraph,
-      content.thirdParagraph,
-      content.endParagraph
-    ].filter((paragraph): paragraph is string => Boolean(paragraph)),
+    paragraphs: paragraphs.filter((paragraph): paragraph is string => Boolean(paragraph)),
     highlight: content.highlight ?? [],
     codeBlocks,
     notes
