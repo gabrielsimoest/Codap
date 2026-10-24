@@ -2,6 +2,7 @@ import { test } from 'node:test'
 import * as assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
 import { build, useDevelopmentEnv } from '../../helper'
+import { findAppVersionHistory } from '../../../src/utils/appVersion'
 
 type App = Awaited<ReturnType<typeof build>>
 
@@ -189,4 +190,70 @@ test('POST /app-version recusa um idioma repetido e uma versão malformada com 4
     payload: { version: '1.0.0', changelogs: [] }
   })
   assert.equal(empty.statusCode, 400)
+})
+
+test('findAppVersionHistory usa o texto da reserva, por versão, quando o idioma não tem o daquela versão', async (t) => {
+  const app = await build(t)
+  const fallback = await scratchLocale(app, t)
+  const spanish = await scratchLocale(app, t)
+
+  // A reserva tem as duas versões; o outro idioma só traz o texto da antiga.
+  for (const version of ['1.0.0', '1.1.0']) {
+    await app.prisma.app_version.create({
+      data: { locale_id: fallback.id, version, changelog: `reserva ${version}`, need_update: version === '1.1.0', released_at: new Date() }
+    })
+  }
+  await app.prisma.app_version.create({
+    data: { locale_id: spanish.id, version: '1.0.0', changelog: 'texto próprio 1.0.0', released_at: new Date() }
+  })
+
+  const history = await findAppVersionHistory(app.prisma, spanish.locale, 20, fallback.locale)
+
+  assert.deepEqual(history.map((entry) => entry.version), ['1.1.0', '1.0.0'], 'a versão nova aparece mesmo sem texto no idioma')
+  assert.equal(history[0].changelog, 'reserva 1.1.0')
+  assert.equal(history[0].locale, fallback.locale, 'a entrada diz de qual idioma veio o texto')
+  assert.equal(history[0].needUpdate, true, 'o "importante" vem junto')
+  assert.equal(history[1].changelog, 'texto próprio 1.0.0', 'o idioma pedido sempre vence a reserva')
+  assert.equal(history[1].locale, spanish.locale)
+})
+
+test('findAppVersionHistory sem texto nenhum no idioma devolve a reserva inteira, e respeita o limite', async (t) => {
+  const app = await build(t)
+  const fallback = await scratchLocale(app, t)
+  const spanish = await scratchLocale(app, t)
+
+  for (const version of ['1.0.0', '1.1.0', '1.2.0']) {
+    await app.prisma.app_version.create({
+      data: { locale_id: fallback.id, version, changelog: `reserva ${version}`, released_at: new Date() }
+    })
+  }
+
+  const all = await findAppVersionHistory(app.prisma, spanish.locale, 20, fallback.locale)
+  assert.deepEqual(all.map((entry) => entry.version), ['1.2.0', '1.1.0', '1.0.0'])
+
+  const limited = await findAppVersionHistory(app.prisma, spanish.locale, 2, fallback.locale)
+  assert.deepEqual(limited.map((entry) => entry.version), ['1.2.0', '1.1.0'])
+})
+
+test('findAppVersionHistory não mistura idiomas quando o pedido é a própria reserva', async (t) => {
+  const app = await build(t)
+  const fallback = await scratchLocale(app, t)
+
+  await app.prisma.app_version.create({
+    data: { locale_id: fallback.id, version: '1.0.0', changelog: 'só este', released_at: new Date() }
+  })
+
+  const history = await findAppVersionHistory(app.prisma, fallback.locale, 20, fallback.locale)
+  assert.equal(history.length, 1)
+})
+
+test('GET /app-version?locale= de um idioma sem texto responde 200 com o que a reserva tem', async (t) => {
+  const app = await build(t)
+  const locale = await scratchLocale(app, t)
+
+  const res = await app.inject({ url: `/app-version?locale=${locale.locale}` })
+  const reserva = await app.inject({ url: '/app-version?locale=en' })
+
+  assert.equal(res.statusCode, 200)
+  assert.deepEqual(JSON.parse(res.payload), JSON.parse(reserva.payload), 'sem texto próprio, vale o do inglês')
 })
