@@ -128,36 +128,34 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		height: 63,
+		// Altura mínima, não fixa, e respiro lateral generoso: um título comprido
+		// quebra em duas linhas (e o cartão cresce) em vez de encostar nas bordas.
+		minHeight: 63,
+		paddingVertical: 8,
+		paddingHorizontal: 22,
 		width: "75%",
 		borderRadius: 10,
 		elevation: 2,
 		gap: 10,
 	},
-	// Respiro para o troféu e o título não encostarem na borda; com fonte
-	// maior, o título quebra em vez de vazar.
+	// O troféu, o foguete e a caveira ocupam espaço no cartão; o respiro lateral
+	// é o do botão base.
 	challenge: {
 		borderWidth: 2,
 		borderColor: CHALLENGE_GOLD,
-		paddingHorizontal: 12,
 	},
 	deepening: {
 		borderWidth: 2,
 		borderColor: DEEPENING_PURPLE,
-		paddingHorizontal: 12,
 	},
 	chest: {
 		borderWidth: 2,
 		borderColor: CHEST_MAGENTA,
-		paddingHorizontal: 12,
 	},
 	// Bloqueada: apagada e tracejada. Altura mínima em vez de fixa, porque o
 	// cartão ganha uma segunda linha ("Nível N") e a fonte pode estar aumentada.
 	locked: {
-		height: undefined,
-		minHeight: 63,
 		paddingVertical: 6,
-		paddingHorizontal: 12,
 		borderWidth: 2,
 		borderStyle: "dashed",
 		borderColor: LOCKED_GREY,

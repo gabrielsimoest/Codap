@@ -17,6 +17,10 @@ interface Props {
 export default function EmailAddress({ email }: Props) {
 	const { colors } = useTheme();
 	const app = useAppColors();
+	// Um endereço comprido sem espaços quebrava no meio de uma palavra. O espaço
+	// de largura zero (invisível) antes de `@`, `.`, `_` e `-` dá à linha onde
+	// quebrar de forma legível; o rótulo de acessibilidade continua o e-mail limpo.
+	const breakable = email.replace(/([@._-])/g, "\u200b$1");
 
 	return (
 		<View
@@ -27,8 +31,8 @@ export default function EmailAddress({ email }: Props) {
 		>
 			<Icon type="ionicon" name="mail-outline" size={22} color={app.muted} />
 			<View style={styles.address}>
-				<ResizableText style={styles.text} defaultSize={17}>
-					{email}
+				<ResizableText style={styles.text} defaultSize={16}>
+					{breakable}
 				</ResizableText>
 			</View>
 		</View>

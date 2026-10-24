@@ -4,6 +4,7 @@ import type {
   AdminAreaResponse,
   AdminLessonResponse,
   AdminModuleResponse,
+  AppVersionResponse,
   AreaResponse,
   ContentVersionResponse,
   CreateActivityBody,
@@ -12,6 +13,7 @@ import type {
   CreateModuleBody,
   LocaleCode,
   ModuleResponse,
+  PublishAppVersionBody,
   PublishContentVersionBody,
   UpdateActivityBody,
   UpdateAreaBody,
@@ -62,6 +64,14 @@ export const activitiesApi = {
   remove: (id: number) => request<void>(`/activities/${id}`, { method: 'DELETE' }),
   reorder: (lessonId: number, orderedIds: number[]) =>
     request<void>('/activities/reorder', { method: 'PATCH', body: { lessonId, orderedIds } })
+}
+
+export const appVersionApi = {
+  /** Versão vigente do app em cada idioma. */
+  list: () => request<AppVersionResponse[]>('/app-version'),
+  /** Publica a versão do app com um texto por idioma (uma linha por idioma, numa transação). */
+  publish: (body: PublishAppVersionBody) =>
+    request<AppVersionResponse[]>('/app-version', { method: 'POST', body })
 }
 
 export const contentVersionApi = {

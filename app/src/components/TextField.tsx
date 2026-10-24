@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleProp, StyleSheet, Text, TextInput, TextInputProps, TouchableOpacity, View, ViewStyle } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import Icon from "./Icon";
+import { FocusScrollContext } from "../hooks/useFocusScroll";
 import { useAppColors } from "../theme/appColors";
 import { useTheoryPalette } from "../screens/classes/components/theory/theoryTheme";
 
@@ -28,6 +29,8 @@ export default function TextField({ label, error = false, revealable = false, co
 	const { t } = useTranslation();
 	const [focused, setFocused] = useState(false);
 	const [hidden, setHidden] = useState(true);
+	// Dentro de uma rolagem com teclado (login, cadastro, modais), leva o campo para a parte visível ao focar.
+	const scrollToFocused = useContext(FocusScrollContext);
 
 	const border = error ? palette.danger : focused ? app.action : app.fieldBorder;
 
@@ -43,6 +46,7 @@ export default function TextField({ label, error = false, revealable = false, co
 					secureTextEntry={revealable ? hidden : input.secureTextEntry}
 					onFocus={(event) => {
 						setFocused(true);
+						if (scrollToFocused) setTimeout(scrollToFocused, 120);
 						input.onFocus?.(event);
 					}}
 					onBlur={(event) => {

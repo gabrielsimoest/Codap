@@ -257,6 +257,7 @@ export function TheoryFields ({ requireCody }: { requireCody: boolean }) {
           <p className="text-xs text-muted-foreground">
             JavaScript que o botão "Executar" roda no lugar do código exibido: TypeScript já
             transpilado, ou JS que simula o que não roda direto no app. Vazio = roda o próprio código.
+            Em JSX o botão não aparece, a não ser que haja um JS aqui.
           </p>
         </div>
         <Textarea

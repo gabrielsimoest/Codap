@@ -286,6 +286,51 @@ export default class DatabaseClient {
 		return changes > 0 ? this.getLocalProfile(userId) : null;
 	}
 
+	/**
+	 * Aplica o progresso que veio da nuvem (`GET /sync/progress`): é a **união** do
+	 * que o servidor tem com o que já existe aqui — nunca apaga nada, e o que a pessoa
+	 * fez offline e ainda não foi enviado continua esperando na fila.
+	 *
+	 * **Não enfileira nenhum evento**: o servidor já conhece cada item, então
+	 * reenviá-los só geraria `duplicate` e tráfego. Por isso não passa por
+	 * `completeLesson`/`unlockAchievement`, que gravam a fila e pagam XP — aqui o
+	 * XP e os Bits já vieram do servidor no login.
+	 *
+	 * Devolve quantos itens eram novos neste aparelho.
+	 */
+	restoreProgress(
+		userId: string,
+		progress: {
+			lessons: Array<{ lessonId: number }>;
+			achievements: Array<{ achievementId: number; unlockedAt: string }>;
+		}
+	): { lessonsAdded: number; achievementsAdded: number } {
+		let lessonsAdded = 0;
+		let achievementsAdded = 0;
+
+		this.database.withTransactionSync(() => {
+			for (const { lessonId } of progress.lessons) {
+				// `UserLessons` não tem constraint única (userId, lessonId): a checagem
+				// de existência é o que evita duplicar.
+				const { changes } = this.database.runSync(
+					"INSERT INTO UserLessons (userId, lessonId) " +
+						"SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM UserLessons WHERE userId = ? AND lessonId = ?);",
+					[userId, lessonId, userId, lessonId]
+				);
+				lessonsAdded += changes;
+			}
+			for (const { achievementId, unlockedAt } of progress.achievements) {
+				const { changes } = this.database.runSync(
+					"INSERT OR IGNORE INTO UserAchievements (userId, achievementId, unlockedAt) VALUES (?, ?, ?);",
+					[userId, achievementId, unlockedAt]
+				);
+				achievementsAdded += changes;
+			}
+		});
+
+		return { lessonsAdded, achievementsAdded };
+	}
+
 	/** Idempotente localmente: uma conquista já desbloqueada por esse usuário não é enfileirada de novo. */
 	unlockAchievement(userId: string, achievementId: number) {
 		const occurredAt = new Date().toISOString();

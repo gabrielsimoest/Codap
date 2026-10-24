@@ -220,6 +220,34 @@ step('o diálogo de publicação mostra a versão vigente', async (page) => {
   await page.keyboard.press('Escape')
 })
 
+step('o diálogo da versão do app tem um texto por idioma e a opção de atualização importante', async (page) => {
+  await page.getByRole('button', { name: 'Versão do app' }).click()
+  await page.getByText('Publicar versão do aplicativo').waitFor({ timeout: 10_000 })
+  await page.getByText('Versão vigente').waitFor({ timeout: 10_000 })
+
+  // Um campo de texto por idioma (pt e en): a API grava uma linha por idioma.
+  const textos = await page.getByRole('dialog').locator('textarea').count()
+  if (textos !== 2) {
+    throw new Error(`esperava 2 campos de texto (pt e en), achei ${textos}`)
+  }
+
+  // "Atualização importante" nasce desligada: é só uma recomendação, e ligá-la
+  // por engano deixaria o aviso do app mais enfático do que deveria. Só confere
+  // o estado — não publica nada, para não criar versões de verdade no banco.
+  const importante = page.getByRole('dialog').getByRole('switch')
+  await importante.waitFor({ timeout: 10_000 })
+  if (await importante.getAttribute('aria-checked') !== 'false') {
+    throw new Error('"Atualização importante" deveria começar desligada')
+  }
+
+  // Enviar vazio não pode publicar: os dois idiomas são obrigatórios.
+  await page.getByRole('dialog').getByRole('button', { name: 'Publicar', exact: true }).click()
+  await page.getByText('Descreva o que mudou neste idioma.').first().waitFor({ timeout: 10_000 })
+
+  await page.screenshot(shot('07b-versao-do-app.png'))
+  await page.keyboard.press('Escape')
+})
+
 step('a bolha do React Query aparece em desenvolvimento', async (page) => {
   const bubble = page.getByLabel('Open Tanstack query devtools')
   await bubble.waitFor({ timeout: 10_000 })

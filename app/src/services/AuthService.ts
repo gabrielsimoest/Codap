@@ -11,6 +11,9 @@ import type { User } from "../types/entities";
 
 const CACHED_PROFILE_KEY = "CachedProfile";
 
+/** Chamadas "melhor esforço" (revogar a sessão no servidor) desistem rápido. */
+const BEST_EFFORT_TIMEOUT_MS = 8 * 1000;
+
 /**
  * Persiste os tokens (SecureStore) e atualiza o cache local do perfil
  * (SQLite, via DatabaseClient.upsertLocalProfile) + AsyncStorage — é esse
@@ -41,7 +44,12 @@ export async function register(body: RegisterBody): Promise<void> {
 	// para que ele escolha "lembrar-me" — revoga essa sessão automática em
 	// vez de deixar um refresh token válido e nunca usado parado no servidor.
 	try {
-		await apiClient.post("/auth/logout", { refreshToken: data.refreshToken });
+		await apiClient.post(
+			"/auth/logout",
+			{ refreshToken: data.refreshToken },
+			// Melhor esforço: não espera o servidor acordar nem segura o cadastro.
+			{ noWait: true, timeout: BEST_EFFORT_TIMEOUT_MS }
+		);
 	} catch (error) {
 		console.warn(
 			"Falha ao revogar a sessão automática do registro (best effort)",
@@ -51,7 +59,12 @@ export async function register(body: RegisterBody): Promise<void> {
 }
 
 export async function login(body: LoginBody): Promise<User> {
-	const { data } = await apiClient.post<AuthResponse>("/auth/login", body);
+	// Entrar é seguro de repetir (só cria uma sessão nova), então tenta de novo
+	// sozinho se o servidor ainda estiver acordando: 5 s, depois 10 s.
+	const { data } = await apiClient.post<AuthResponse>("/auth/login", body, {
+		retries: 2,
+		retryDelayMs: 5000,
+	});
 	return applySession(data);
 }
 
@@ -67,7 +80,12 @@ export async function logout(): Promise<void> {
 	}
 
 	try {
-		await apiClient.post("/auth/logout", { refreshToken: session.refreshToken });
+		await apiClient.post(
+			"/auth/logout",
+			{ refreshToken: session.refreshToken },
+			// A pessoa já saiu localmente: não espera o servidor acordar nem fica presa nele.
+			{ noWait: true, timeout: BEST_EFFORT_TIMEOUT_MS }
+		);
 	} catch (error) {
 		console.warn(
 			"Falha ao revogar o refresh token no servidor durante o logout (best effort)",

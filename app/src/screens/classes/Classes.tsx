@@ -3,12 +3,14 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import EdgeFade, { HEADER_FADE } from "../../components/layout/EdgeFade";
 import { HEADER_ROW_HEIGHT, useHeaderTopPadding } from "../../components/layout/ScreenHeader";
 import AreaModules from "./components/AreaModules";
+import AppUpdateModal from "./components/AppUpdateModal";
 import AreaSelector from "./components/AreaSelector";
 import ClassHeader from "./components/ClassHeader";
 import ModuleListSkeleton from "./components/ModuleListSkeleton";
 import ThemedSkeleton from "../../components/themed/ThemedSkeleton";
 import ThemedView from "../../components/themed/ThemedView";
 import useAreasQuery from "../../hooks/queries/useAreasQuery";
+import useAppUpdateNotice from "../../hooks/useAppUpdateNotice";
 import useContentAnnouncement from "../../hooks/useContentAnnouncement";
 import areaMetadata, { getAreaIndex } from "./areaMetadata";
 import ContentUpdateModal from "./components/ContentUpdateModal";
@@ -25,6 +27,11 @@ export default function Class() {
 	// `useContentAnnouncement`.
 	const { announcement, dismiss: dismissAnnouncement } =
 		useContentAnnouncement();
+
+	// Aviso de nova versão do app. Informa e nunca bloqueia; um aviso por vez: o
+	// de conteúdo vai primeiro, e este espera ele ser fechado.
+	const { notice: updateNotice, dismiss: dismissUpdate, openDownload } =
+		useAppUpdateNotice();
 
 	// Área padrão = a primeira retornada por GET /areas (HTML, sempre a
 	// primeira criada pelo seeder). Derivado, não sincronizado por useEffect:
@@ -80,6 +87,13 @@ export default function Class() {
 				<ContentUpdateModal
 					entries={announcement.entries}
 					onDismiss={dismissAnnouncement}
+				/>
+			) : null}
+			{announcement === null && updateNotice !== null ? (
+				<AppUpdateModal
+					update={updateNotice}
+					onUpdate={openDownload}
+					onLater={dismissUpdate}
 				/>
 			) : null}
 		</ThemedView>

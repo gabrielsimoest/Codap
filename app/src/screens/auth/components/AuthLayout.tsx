@@ -1,7 +1,6 @@
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import {
 	Image,
-	Keyboard,
 	KeyboardAvoidingView,
 	Platform,
 	ScrollView,
@@ -12,37 +11,53 @@ import {
 import Images from "../../../utils/imageIndexer";
 import { useAppColors } from "../../../theme/appColors";
 import { useInsets } from "../../classes/components/theory/useInsets";
+import useKeyboardHeight from "../../../hooks/useKeyboardHeight";
+import useFocusScroll, { FocusScrollContext } from "../../../hooks/useFocusScroll";
+import ServerWakingNotice from "../../../components/ServerWakingNotice";
 
 /**
  * Casca do login e do cadastro: fundo da tela, marca no topo e a folha do
- * formulário, que rola quando o teclado come a altura. A folha tem largura
- * máxima (440 dp) e os campos ocupam a largura dela inteira, em vez de medidas
- * fixas que quebravam em telas estreitas.
+ * formulário. A folha tem largura máxima (440 dp) e os campos ocupam a largura
+ * dela inteira, em vez de medidas fixas que quebravam em telas estreitas.
+ *
+ * **Teclado:** no Android a janela não redimensiona com ele, então a área da
+ * rolagem é encurtada na altura do teclado (`paddingBottom`) e o campo focado é
+ * levado para a parte visível. O conteúdo sobe junto, sem ser espremido — nada de
+ * layout achatado. No iOS quem faz isso é o `KeyboardAvoidingView`.
  */
 export default function AuthLayout({ children }: { children: ReactNode }) {
 	const app = useAppColors();
 	const { top, bottom } = useInsets();
+	const scrollRef = useRef<ScrollView>(null);
+	const keyboardHeight = useKeyboardHeight();
+	const scrollToFocused = useFocusScroll(scrollRef, keyboardHeight);
 
 	return (
 		<KeyboardAvoidingView
 			behavior={Platform.OS === "ios" ? "padding" : undefined}
 			style={[styles.screen, { backgroundColor: app.canvas }]}
 		>
-			<ScrollView
-				contentContainerStyle={[
-					styles.content,
-					{ paddingTop: top + 24, paddingBottom: bottom + 24 },
-				]}
-				keyboardShouldPersistTaps="handled"
-				showsVerticalScrollIndicator={false}
-				onScrollBeginDrag={Keyboard.dismiss}
-			>
-				<View style={styles.brand}>
-					<Image style={styles.logo} source={Images.icon} />
-					<Text style={[styles.wordmark, { color: app.authAccent }]}>Codap</Text>
-				</View>
-				<View style={[styles.sheet, { backgroundColor: app.sheet }]}>{children}</View>
-			</ScrollView>
+			<View style={[styles.screen, { paddingBottom: Platform.OS === "android" ? keyboardHeight : 0 }]}>
+				<ScrollView
+					ref={scrollRef}
+					contentContainerStyle={[
+						styles.content,
+						{ paddingTop: top + 24, paddingBottom: bottom + 24 },
+					]}
+					keyboardShouldPersistTaps="handled"
+					keyboardDismissMode={Platform.OS === "ios" ? "interactive" : "none"}
+					showsVerticalScrollIndicator={false}
+				>
+					<View style={styles.brand}>
+						<Image style={styles.logo} source={Images.icon} />
+						<Text style={[styles.wordmark, { color: app.authAccent }]}>Codap</Text>
+					</View>
+					<ServerWakingNotice />
+					<FocusScrollContext.Provider value={scrollToFocused}>
+						<View style={[styles.sheet, { backgroundColor: app.sheet }]}>{children}</View>
+					</FocusScrollContext.Provider>
+				</ScrollView>
+			</View>
 		</KeyboardAvoidingView>
 	);
 }

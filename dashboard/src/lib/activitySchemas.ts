@@ -16,7 +16,8 @@ import { z } from 'zod'
  * contratos, mude os dois.
  */
 
-export const CODE_LANGUAGES = ['HTML', 'CSS', 'JavaScript', 'TypeScript'] as const
+// JSX e TypeScript nunca executam no app (sem botão "Executar"): só mostram o código.
+export const CODE_LANGUAGES = ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'JSX'] as const
 
 const codeLanguageSchema = z.enum(CODE_LANGUAGES)
 

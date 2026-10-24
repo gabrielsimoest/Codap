@@ -11,15 +11,16 @@ import { buildSandboxHtmlDocument } from "../../../utils/codeSandboxDocument";
 import GradientBar from "./theory/GradientBar";
 import { FIXED_UI, useTheoryPalette } from "./theory/theoryTheme";
 import TerminalSection from "./TerminalSection";
+import type { CodeLanguage } from "codap-api/src/types/contracts";
 
 interface CodeBlock {
-	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
+	codeLanguage: CodeLanguage;
 	code: string;
 }
 
 // Rótulo da aba, não a linguagem em si — CustomSyntaxHighlighter continua
 // recebendo `codeLanguage` sem abreviar. Existe porque "JavaScript"/"TypeScript"
-// deixariam a aba larga demais para caber várias na mesma linha.
+// deixariam a aba larga demais para caber várias na mesma linha. "JSX" já é curto.
 const TAB_LABELS: Partial<Record<CodeBlock["codeLanguage"], string>> = {
 	JavaScript: "JS",
 	TypeScript: "TS",
@@ -27,7 +28,7 @@ const TAB_LABELS: Partial<Record<CodeBlock["codeLanguage"], string>> = {
 
 interface Props {
 	onlyCode: boolean;
-	codeLanguage: "HTML" | "CSS" | "JavaScript" | "TypeScript";
+	codeLanguage: CodeLanguage;
 	code: string;
 	/** Blocos extras no mesmo trecho (ex.: HTML + CSS juntos), cada um com sua própria aba. */
 	additionalCode?: CodeBlock[];

@@ -99,6 +99,15 @@ vazar para o app.
   navegador e a edição seguinte partiria de uma foto antiga do banco, sem nada
   na tela indicando isso. **Não adicione um persister a este pacote.**
 
+### Versão do app (`AppVersionDialog`, botão "Versão do app")
+
+Publica uma versão **do aplicativo** (não do conteúdo): quem tem uma instalação mais antiga vê, ao abrir o app, um aviso "nova versão disponível" que leva à página oficial de download. Grava em `app_version` via `POST /app-version` — **uma linha por idioma, numa transação só**, por isso o formulário tem **um texto por idioma** (todos obrigatórios, pt e en) e uma única versão.
+
+- **A versão publicada precisa ser a do `version` do `app.json` do build que você distribui** — o app compara a versão instalada com ela, por semver. Publicar `1.2.0` sem ter gerado o build `1.2.0` avisa as pessoas de uma versão que ainda não existe para baixar.
+- **"Atualização importante" nasce desligada.** Ligada, o app mostra o aviso com mais ênfase (título e nota) e o repete a cada abertura até a pessoa atualizar; desligada, é uma recomendação mostrada uma vez por versão. **Nenhuma das duas bloqueia o uso.** Use para segurança, idioma novo ou um bug sério.
+- Reaproveita `suggestNextVersion` e `VERSION_PATTERN` de `lib/contentVersion.ts` (mesmo formato `X.Y.Z`). A versão de referência para a sugestão é a mais alta entre os idiomas publicados.
+- `pnpm dash:verify` cobre o diálogo (2 campos de texto, interruptor desligado, validação de envio vazio) **sem publicar nada**.
+
 ### Publicar versão é o que faz o conteúdo chegar ao usuário
 
 Editar conteúdo no dashboard **não basta**: o app guarda o catálogo em cache por

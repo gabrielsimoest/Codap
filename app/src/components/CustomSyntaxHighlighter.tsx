@@ -26,8 +26,11 @@ interface Props {
 // "html" como apelido, que essa checagem não resolve). Sem isso, qualquer
 // `codeLanguage` que não coincida cai silenciosamente em detecção automática,
 // que erra fácil em trechos curtos.
+// JSX também não é uma chave do highlight.js: a gramática de `javascript` já
+// realça JSX (as tags viram `xml` por dentro), então "jsx" aponta para ela.
 const HLJS_LANGUAGE_ALIASES: Record<string, string> = {
 	html: "xml",
+	jsx: "javascript",
 };
 
 function toHljsLanguage(language: string): string {

@@ -1,5 +1,5 @@
 import { useAppColors } from "../../theme/appColors";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -26,6 +26,9 @@ export default function Register() {
 	const [alertTitle, setAlertTitle] = useState("");
 	const [alertMessage, setAlertMessage] = useState("");
 	const [pendingLoginRedirect, setPendingLoginRedirect] = useState(false);
+	// E-mail de um cadastro enviado cuja resposta nunca chegou (servidor lento ou rede
+	// caindo): a conta pode ter sido criada mesmo assim — ver o tratamento do 409.
+	const lostResponseFor = useRef<string | null>(null);
 	const [name, setName] = useState("");
 	const [senha, setSenha] = useState("");
 	const [email, setEmail] = useState("");
@@ -68,12 +71,21 @@ export default function Register() {
 							setAlertMessage(
 								t("register.alert.typo.message", { email: classified.suggestion })
 							);
+						} else if (axios.isAxiosError(error) && error.response?.status === 409 && lostResponseFor.current === email) {
+							// A tentativa anterior chegou ao servidor e criou a conta, só a resposta
+							// se perdeu: para quem cadastrou, isto é um sucesso, não um "já existe".
+							lostResponseFor.current = null;
+							setAlertTitle(t("register.alert.success.title"));
+							setAlertMessage(t("register.alert.success.message"));
+							setPendingLoginRedirect(true);
+
 						} else if (axios.isAxiosError(error) && error.response?.status === 409) {
 							setAlertTitle(t("register.alert.duplicate.title"));
 							setAlertMessage(t("register.alert.duplicate.message"));
 						} else if (axios.isAxiosError(error) && !error.response) {
 							// Sem resposta nenhuma do servidor = falha de rede/conexão
 							// (API fora do ar, URL errada, sem internet), não um dado inválido.
+							lostResponseFor.current = email;
 							setAlertTitle(t("register.alert.network.title"));
 							setAlertMessage(t("register.alert.network.message"));
 						} else if (axios.isAxiosError(error) && error.response?.status === 400) {

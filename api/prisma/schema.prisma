@@ -30,12 +30,23 @@ model content_version {
   announce    Boolean  @default(false)
 }
 
+/// Versão publicada do **aplicativo** (não confundir com `content_version`, que é o conteúdo
+/// das aulas). Uma linha por idioma, como em `content_version`. O app compara por semver
+/// com a versão instalada; a ordem de publicação é pelo `id`.
 model app_version {
   id          Int      @id @default(autoincrement())
-  version     String   @db.VarChar(5)
+  locale_id   Int
+  locale      locales  @relation(fields: [locale_id], references: [id])
+  version     String   @db.VarChar(20)
+  /// Escrito para quem usa o app: é o texto do aviso de nova versão e do histórico em Configurações.
   changelog   String
-  need_update Boolean?
+  /// Verdadeiro = a versão traz algo sem o qual o app não funciona direito (correção de segurança,
+  /// mudança de idioma, bug sério) e a pessoa é avisada com mais ênfase. Falso = recomendada, mas
+  /// dá para continuar usando. Em nenhum dos dois casos o app bloqueia o uso.
+  need_update Boolean  @default(false)
   released_at DateTime @db.Date
+
+  @@index([locale_id])
 }
 
 // ---------------------------------------------------------------------------
@@ -233,6 +244,7 @@ model locales {
   locale                String                  @db.VarChar(8)
   name                  String                  @db.VarChar(20)
   content_versions      content_version[]
+  app_versions          app_version[]
   module_translations   module_translations[]
   lesson_translations   lesson_translations[]
   activity_translations activity_translations[]

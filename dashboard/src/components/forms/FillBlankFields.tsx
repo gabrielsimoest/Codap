@@ -177,7 +177,7 @@ export function FillBlankFields () {
           <Label htmlFor="fill-ignore-case" className="text-sm">Ignorar maiúsculas (ignoreCase)</Label>
           <p className="text-xs text-muted-foreground">
             Ligue em HTML e CSS, onde <code>H1</code> vale como <code>h1</code>. Deixe desligado em
-            JavaScript e TypeScript: lá <code>push</code> e <code>Push</code> são coisas diferentes.
+            JavaScript, TypeScript e JSX: lá <code>push</code> e <code>Push</code> são coisas diferentes.
           </p>
         </div>
       </div>

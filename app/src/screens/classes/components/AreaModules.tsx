@@ -13,6 +13,7 @@ import useModulesQuery from "../../../hooks/queries/useModulesQuery";
 import useCollectionQuery from "../../../hooks/queries/useCollectionQuery";
 import useNavigate from "../../../hooks/useNavigate";
 import useLanguageStore from "../../../stores/LanguageStore";
+import useProgressStore from "../../../stores/ProgressStore";
 import useUserStore from "../../../stores/UserStore";
 import DatabaseClient from "../../../services/DatabaseClient";
 import areaMetadata, { getAreaIndex } from "../areaMetadata";
@@ -43,6 +44,9 @@ export default function AreaModules({ areaId }: Props) {
 	// junto do catálogo). Relido a cada foco para o check aparecer assim que a
 	// tela de lição devolve o usuário para cá.
 	const [completed, setCompleted] = useState<number[]>([]);
+	// Muda quando o progresso da nuvem é aplicado (aparelho novo, reinstalação): sem
+	// isto a lista só releria o SQLite no próximo foco da tela.
+	const progressRevision = useProgressStore((state) => state.revision);
 	useFocusEffect(
 		useCallback(() => {
 			const remoteId = user?.remoteId;
@@ -54,7 +58,7 @@ export default function AreaModules({ areaId }: Props) {
 			setCompleted(
 				database.getClasses(remoteId).map((row) => row.lessonId)
 			);
-		}, [user?.remoteId])
+		}, [user?.remoteId, progressRevision])
 	);
 
 	// O nível vem do XP local, então a lista reage na hora (e funciona offline).

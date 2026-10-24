@@ -43548,7 +43548,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'React utiliza JavaScript para descrever e controlar partes da interface.',
             highlight: ['React', 'JavaScript', 'componentes'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return <h1>Olá!</h1>;\n}',
             onlyCode: true
           },
@@ -43564,7 +43564,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'React uses JavaScript to describe and control parts of the interface.',
             highlight: ['React', 'JavaScript', 'components'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return <h1>Hello!</h1>;\n}',
             onlyCode: true
           }
@@ -43581,7 +43581,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'O conhecimento de HTML continua sendo uma base importante para entender React.',
             highlight: ['HTML', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Titulo() {\n  return <h1>Meu site</h1>;\n}',
             onlyCode: true
           },
@@ -43593,7 +43593,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Your HTML knowledge is still an important foundation for understanding React.',
             highlight: ['HTML', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Title() {\n  return <h1>My site</h1>;\n}',
             onlyCode: true
           }
@@ -43666,7 +43666,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o componente que mostra um título.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  ___ <h1>Olá!</h1>;\n}',
             answers: ['return'],
             distractors: ['render', 'print', 'show']
@@ -43674,7 +43674,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the component that shows a heading.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  ___ <h1>Hello!</h1>;\n}',
             answers: ['return'],
             distractors: ['render', 'print', 'show']
@@ -43687,14 +43687,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o componente App, que devolve o título h1 "Olá!".',
             highlight: ['componente'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function App() {', '  return <h1>Olá!</h1>;', '}'],
             distractors: ['  print <h1>Olá!</h1>;', 'function App {']
           },
           en: {
             question: 'Build the App component, which returns the h1 heading "Hello!".',
             highlight: ['component'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function App() {', '  return <h1>Hello!</h1>;', '}'],
             distractors: ['  print <h1>Hello!</h1>;', 'function App {']
           }
@@ -43705,7 +43705,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual componente React mostra o título na tela?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['componente'],
             correctOption: 1,
             options: ['function Titulo() {\n  return <h1>Oi</h1>;\n}', 'function Titulo() {\n  <h1>Oi</h1>;\n}', 'function Titulo {\n  return <h1>Oi</h1>;\n}', 'function Titulo() {\n  return h1(Oi);\n}'],
@@ -43713,7 +43713,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which React component shows the heading on screen?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['component'],
             correctOption: 1,
             options: ['function Title() {\n  return <h1>Hi</h1>;\n}', 'function Title() {\n  <h1>Hi</h1>;\n}', 'function Title {\n  return <h1>Hi</h1>;\n}', 'function Title() {\n  return h1(Hi);\n}'],
@@ -43727,14 +43727,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a palavra que cria o componente App.',
             highlight: ['componente'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '___ App() {\n  return <h1>Oi</h1>;\n}',
             answers: ['function']
           },
           en: {
             question: 'Type the word that creates the App component.',
             highlight: ['component'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '___ App() {\n  return <h1>Hi</h1>;\n}',
             answers: ['function']
           }
@@ -43763,7 +43763,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Componentes permitem dividir interfaces grandes em partes menores.',
             highlight: ['componente', 'componentes'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Botao() {\n  return <button>Clique aqui</button>;\n}',
             onlyCode: true
           },
@@ -43779,7 +43779,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Components let you split large interfaces into smaller pieces.',
             highlight: ['component', 'components'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Button() {\n  return <button>Click here</button>;\n}',
             onlyCode: true
           }
@@ -43796,7 +43796,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Essa composição é uma das ideias fundamentais do React.',
             highlight: ['composição', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Botao() {\n  return <button>Entrar</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Botao />\n    </main>\n  );\n}',
             onlyCode: true
           },
@@ -43808,7 +43808,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'This composition is one of the fundamental ideas of React.',
             highlight: ['composition', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Button() {\n  return <button>Sign in</button>;\n}\n\nfunction App() {\n  return (\n    <main>\n      <h1>Login</h1>\n      <Button />\n    </main>\n  );\n}',
             onlyCode: true
           }
@@ -43881,7 +43881,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Use o componente Botao dentro do App.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return (\n    <main>\n      <___ />\n    </main>\n  );\n}',
             answers: ['Botao'],
             distractors: ['botao', 'button', 'Main']
@@ -43889,7 +43889,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Use the Button component inside App.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return (\n    <main>\n      <___ />\n    </main>\n  );\n}',
             answers: ['Button'],
             distractors: ['button', 'btn', 'Main']
@@ -43902,13 +43902,13 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o retorno do App: um main com o título h1 "Login" e, abaixo dele, o componente Botao.',
             highlight: ['main', 'Botao'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <main>', '    <h1>Login</h1>', '    <Botao />', '  </main>', ');']
           },
           en: {
             question: 'Build the return of App: a main with the h1 heading "Login" and, below it, the Button component.',
             highlight: ['main', 'Button'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <main>', '    <h1>Login</h1>', '    <Button />', '  </main>', ');']
           }
         }
@@ -43918,7 +43918,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Como usar o componente Botao dentro de outro componente?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['Botao'],
             correctOption: 1,
             options: ['<Botao />', '<botao />', '<Botao>', '{Botao}'],
@@ -43926,7 +43926,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'How do you use the Button component inside another component?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['Button'],
             correctOption: 1,
             options: ['<Button />', '<button />', '<Button>', '{Button}'],
@@ -43940,14 +43940,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite como o componente Titulo é usado dentro do App.',
             highlight: ['componente Titulo'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return <___ />;\n}',
             answers: ['Titulo']
           },
           en: {
             question: 'Type how the Title component is used inside App.',
             highlight: ['Title component'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return <___ />;\n}',
             answers: ['Title']
           }
@@ -43976,7 +43976,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'JSX se parece com HTML, mas não é HTML puro. Ele é uma sintaxe utilizada para descrever a interface dentro do código JavaScript.',
             highlight: ['JSX', 'HTML', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return (\n    <main>\n      <h1>Olá!</h1>\n      <p>Bem-vindo.</p>\n    </main>\n  );\n}',
             onlyCode: true
           },
@@ -43992,7 +43992,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'JSX looks like HTML, but it is not plain HTML. It is a syntax used to describe the interface inside JavaScript code.',
             highlight: ['JSX', 'HTML', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function App() {\n  return (\n    <main>\n      <h1>Hello!</h1>\n      <p>Welcome.</p>\n    </main>\n  );\n}',
             onlyCode: true
           }
@@ -44013,7 +44013,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Os demais atributos passam a usar camelCase: onclick vira onClick, e tabindex vira tabIndex.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Nome</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
             onlyCode: true
           },
@@ -44029,7 +44029,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'The remaining attributes switch to camelCase: onclick becomes onClick, and tabindex becomes tabIndex.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Name</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
             onlyCode: true
           }
@@ -44102,7 +44102,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete os atributos do jeito do JSX.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<label ___="nome">\n  Nome\n</label>\n<p ___="aviso">Oi</p>',
             answers: ['htmlFor', 'className'],
             distractors: ['for', 'class']
@@ -44110,7 +44110,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the attributes the JSX way.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<label ___="name">\n  Name\n</label>\n<p ___="notice">Hi</p>',
             answers: ['htmlFor', 'className'],
             distractors: ['for', 'class']
@@ -44123,14 +44123,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o JSX: uma div com a classe aviso e, dentro dela, o label "Nome" ligado ao campo nome.',
             highlight: ['classe', 'label'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<div className="aviso">', '  <label htmlFor="nome">', '    Nome', '  </label>', '</div>'],
             distractors: ['<div class="aviso">', '  <label for="nome">']
           },
           en: {
             question: 'Build the JSX: a div with the class notice and, inside it, the label "Name" linked to the name field.',
             highlight: ['class', 'label'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<div className="notice">', '  <label htmlFor="name">', '    Name', '  </label>', '</div>'],
             distractors: ['<div class="notice">', '  <label for="name">']
           }
@@ -44141,7 +44141,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual trecho de JSX está correto?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['JSX'],
             correctOption: 1,
             options: ['<p className="aviso">Oi</p>', '<p class="aviso">Oi</p>', '<label for="x">Oi</label>', '<p style="color: red">Oi</p>'],
@@ -44149,7 +44149,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which JSX snippet is correct?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['JSX'],
             correctOption: 1,
             options: ['<p className="note">Hi</p>', '<p class="note">Hi</p>', '<label for="x">Hi</label>', '<p style="color: red">Hi</p>'],
@@ -44214,14 +44214,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite como se escreve no JSX, em camelCase, o atributo tabindex do input.',
             highlight: ['camelCase'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input ___={0} />',
             answers: ['tabIndex']
           },
           en: {
             question: 'Type how the input tabindex attribute is written in JSX, in camelCase.',
             highlight: ['camelCase'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input ___={0} />',
             answers: ['tabIndex']
           }
@@ -44250,7 +44250,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Essa integração permite que a interface utilize dados definidos pelo JavaScript.',
             highlight: ['JSX', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const nome = "Ana";\n\nfunction App() {\n  return <h1>Olá, {nome}!</h1>;\n}',
             onlyCode: true
           },
@@ -44266,7 +44266,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'This integration lets the interface use data defined by JavaScript.',
             highlight: ['JSX', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const name = "Ana";\n\nfunction App() {\n  return <h1>Hello, {name}!</h1>;\n}',
             onlyCode: true
           }
@@ -44283,7 +44283,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'JSX permite aproximar os dados da estrutura visual que será exibida.',
             highlight: ['JSX'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const idade = 20;\n\nfunction App() {\n  return <p>Idade: {idade}</p>;\n}',
             onlyCode: true
           },
@@ -44295,7 +44295,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'JSX lets you bring the data closer to the visual structure that will be shown.',
             highlight: ['JSX'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const age = 20;\n\nfunction App() {\n  return <p>Age: {age}</p>;\n}',
             onlyCode: true
           }
@@ -44325,7 +44325,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'O que este JSX mostra?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const idade = 20;\n\nreturn <p>Idade: {idade}</p>;',
             highlight: [],
             correctOption: 1,
@@ -44334,7 +44334,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'What does this JSX show?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const age = 20;\n\nreturn <p>Age: {age}</p>;',
             highlight: [],
             correctOption: 1,
@@ -44372,7 +44372,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete para mostrar o valor de nome.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const nome = "Ana";\n\nreturn <h1>Olá, ___nome___</h1>;',
             answers: ['{', '}'],
             distractors: ['(', ')', '"']
@@ -44380,7 +44380,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete to show the value of name.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const name = "Ana";\n\nreturn <h1>Hi, ___name___</h1>;',
             answers: ['{', '}'],
             distractors: ['(', ')', '"']
@@ -44393,14 +44393,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o código: nome vale "Ana", e o App devolve o parágrafo "Olá, Ana!" usando a variável nome.',
             highlight: ['nome'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const nome = "Ana";', 'function App() {', '  return <p>Olá, {nome}!</p>;', '}'],
             distractors: ['  return <p>Olá, nome!</p>;']
           },
           en: {
             question: 'Build the code: name is "Ana", and App returns the paragraph "Hi, Ana!" using the name variable.',
             highlight: ['name'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const name = "Ana";', 'function App() {', '  return <p>Hi, {name}!</p>;', '}'],
             distractors: ['  return <p>Hi, name!</p>;']
           }
@@ -44411,7 +44411,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual linha mostra o valor guardado na variável idade?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['idade'],
             correctOption: 1,
             options: ['<p>Idade: {idade}</p>', '<p>Idade: idade</p>', '<p>Idade: (idade)</p>', '<p>Idade: "idade"</p>'],
@@ -44419,7 +44419,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which line shows the value stored in the age variable?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['age'],
             correctOption: 1,
             options: ['<p>Age: {age}</p>', '<p>Age: age</p>', '<p>Age: (age)</p>', '<p>Age: "age"</p>'],
@@ -44433,14 +44433,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a variável que mostra a idade dentro das chaves.',
             highlight: ['chaves'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const idade = 20;\nreturn <p>{___}</p>;',
             answers: ['idade']
           },
           en: {
             question: 'Type the variable that shows the age inside the braces.',
             highlight: ['braces'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const age = 20;\nreturn <p>{___}</p>;',
             answers: ['age']
           }
@@ -44469,7 +44469,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'props permitem que o mesmo componente trabalhe com diferentes informações.',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Saudacao({ nome }) {\n  return <h2>Olá, {nome}!</h2>;\n}\n\nfunction App() {\n  return <Saudacao nome="Ana" />;\n}',
             onlyCode: true
           },
@@ -44485,7 +44485,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'props let the same component work with different information.',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Greeting({ name }) {\n  return <h2>Hello, {name}!</h2>;\n}\n\nfunction App() {\n  return <Greeting name="Ana" />;\n}',
             onlyCode: true
           }
@@ -44515,7 +44515,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Neste uso do componente, qual é o nome da prop?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Saudacao nome="Ana" />',
             highlight: [],
             correctOption: 1,
@@ -44524,7 +44524,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'In this use of the component, what is the prop\'s name?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Greeting name="Ana" />',
             highlight: [],
             correctOption: 1,
@@ -44562,7 +44562,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Passe o nome para o componente.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Saudacao ___="Ana" />',
             answers: ['nome'],
             distractors: ['props', 'value', 'key']
@@ -44570,7 +44570,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Pass the name to the component.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Greeting ___="Ana" />',
             answers: ['name'],
             distractors: ['props', 'value', 'key']
@@ -44583,14 +44583,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o componente Saudacao, que recebe nome por props e devolve o parágrafo "Olá, {nome}!"; depois, use-o com nome "Ana".',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function Saudacao({ nome }) {', '  return <p>Olá, {nome}!</p>;', '}', '<Saudacao nome="Ana" />'],
             distractors: ['<Saudacao props="Ana" />']
           },
           en: {
             question: 'Build the Greeting component, which takes name through props and returns the paragraph "Hi, {name}!"; then use it with name "Ana".',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function Greeting({ name }) {', '  return <p>Hi, {name}!</p>;', '}', '<Greeting name="Ana" />'],
             distractors: ['<Greeting props="Ana" />']
           }
@@ -44601,7 +44601,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Como o componente Card recebe a prop nome?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['prop'],
             correctOption: 1,
             options: ['function Card({ nome }) {', 'function Card({ p.nome }) {', 'function Card[nome] {', 'function Card(nome: prop) {'],
@@ -44609,7 +44609,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'How does the Card component take the name prop?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['prop'],
             correctOption: 1,
             options: ['function Card({ name }) {', 'function Card({ p.name }) {', 'function Card[name] {', 'function Card(name: prop) {'],
@@ -44623,14 +44623,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o nome do parâmetro que recebe todas as props, para ler props.nome.',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card(___) {\n  return <p>{props.nome}</p>;\n}',
             answers: ['props']
           },
           en: {
             question: 'Type the name of the parameter that takes all the props, to read props.name.',
             highlight: ['props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card(___) {\n  return <p>{props.name}</p>;\n}',
             answers: ['props']
           }
@@ -44659,7 +44659,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'A estrutura do componente é reutilizada enquanto os dados podem mudar.',
             highlight: ['componente', 'props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Usuario({ nome }) {\n  return <p>Usuário: {nome}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Usuario nome="Ana" />\n      <Usuario nome="João" />\n    </>\n  );\n}',
             onlyCode: true
           },
@@ -44675,7 +44675,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'The structure of the component is reused while the data can change.',
             highlight: ['component', 'props'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function User({ name }) {\n  return <p>User: {name}</p>;\n}\n\nfunction App() {\n  return (\n    <>\n      <User name="Ana" />\n      <User name="John" />\n    </>\n  );\n}',
             onlyCode: true
           }
@@ -44687,7 +44687,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Reaproveite o componente com outro nome.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Usuario nome="Ana" />\n<___ nome="João" />',
             answers: ['Usuario'],
             distractors: ['usuario', 'Nome', 'Ana']
@@ -44695,7 +44695,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Reuse the component with another name.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<User name="Ana" />\n<___ name="John" />',
             answers: ['User'],
             distractors: ['user', 'Name', 'Ana']
@@ -44708,13 +44708,13 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o retorno do App: um fragmento com o Usuario de nome "Ana" e, depois dele, o Usuario de nome "João".',
             highlight: ['fragmento', 'Usuario'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <>', '    <Usuario nome="Ana" />', '    <Usuario nome="João" />', '  </>', ');']
           },
           en: {
             question: 'Build the return of App: a fragment with the User named "Ana" and, after it, the User named "John".',
             highlight: ['fragment', 'User'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <>', '    <User name="Ana" />', '    <User name="John" />', '  </>', ');']
           }
         }
@@ -44724,7 +44724,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual trecho reutiliza o mesmo componente com dados diferentes?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['reutiliza'],
             correctOption: 1,
             options: ['<Usuario nome="Ana" />\n<Usuario nome="Bia" />', '<Usuario nome="Ana" />\n<Usuario nome="Ana" />', '<Ana />\n<Bia />', '<Usuario />\n<Pessoa />'],
@@ -44732,7 +44732,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which snippet reuses the same component with different data?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['reuses'],
             correctOption: 1,
             options: ['<User name="Ana" />\n<User name="Bia" />', '<User name="Ana" />\n<User name="Ana" />', '<Ana />\n<Bia />', '<User />\n<Person />'],
@@ -44746,14 +44746,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o nome da prop que leva "João" para o componente Usuario.',
             highlight: ['prop'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<Usuario ___="João" />',
             answers: ['nome']
           },
           en: {
             question: 'Type the name of the prop that carries "John" into the User component.',
             highlight: ['prop'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<User ___="John" />',
             answers: ['name']
           }
@@ -44782,7 +44782,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Eventos conectam as ações do usuário à lógica do componente.',
             highlight: ['eventos', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Botao() {\n  function clicar() {\n    console.log("Clicou!");\n  }\n\n  return (\n    <button onClick={clicar}>\n      Clique\n    </button>\n  );\n}',
             onlyCode: true
           },
@@ -44798,7 +44798,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Events connect the user\'s actions to the component\'s logic.',
             highlight: ['events', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Button() {\n  function handleClick() {\n    console.log("Clicked!");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click\n    </button>\n  );\n}',
             onlyCode: true
           }
@@ -44810,7 +44810,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o evento de clique.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<button ___={clicar}>\n  Clique\n</button>',
             answers: ['onClick'],
             distractors: ['onclick', 'click', 'onPress']
@@ -44818,7 +44818,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the click event.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<button ___={handleClick}>\n  Click\n</button>',
             answers: ['onClick'],
             distractors: ['onclick', 'click', 'onPress']
@@ -44831,14 +44831,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o botão "Clique", que chama a função clicar quando é clicado.',
             highlight: ['clicar'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<button onClick={clicar}>', '  Clique', '</button>'],
             distractors: ['<button onclick="clicar()">', '<button onClick={clicar()}>']
           },
           en: {
             question: 'Build the "Click" button, which calls the click function when it is clicked.',
             highlight: ['click function'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<button onClick={click}>', '  Click', '</button>'],
             distractors: ['<button onclick="click()">', '<button onClick={click()}>']
           }
@@ -44849,7 +44849,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual trecho passa a função ao evento, sem chamá-la na hora?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['sem chamá-la'],
             correctOption: 1,
             options: ['onClick={clicar}', 'onClick={clicar()}', 'onClick="clicar"', 'onclick={clicar}'],
@@ -44857,7 +44857,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which snippet passes the function to the event, without calling it right away?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['without calling it'],
             correctOption: 1,
             options: ['onClick={click}', 'onClick={click()}', 'onClick="click"', 'onclick={click}'],
@@ -44871,14 +44871,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a função que o botão chama quando é clicado, sem parênteses.',
             highlight: ['sem parênteses'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function clicar() {\n  console.log("Oi");\n}\n<button onClick={___}>',
             answers: ['clicar']
           },
           en: {
             question: 'Type the function the button calls when clicked, without parentheses.',
             highlight: ['without parentheses'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function click() {\n  console.log("Hi");\n}\n<button onClick={___}>',
             answers: ['click']
           }
@@ -44907,7 +44907,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'No React, essas informações podem ser controladas por meio de estado.',
             highlight: ['estado', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Contador() {\n  // Precisamos lembrar quantas vezes\n  // o botão foi clicado\n}',
             onlyCode: true
           },
@@ -44923,7 +44923,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'In React, this information can be controlled through state.',
             highlight: ['state', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Counter() {\n  // We need to remember how many times\n  // the button was clicked\n}',
             onlyCode: true
           }
@@ -44944,7 +44944,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'É por isso que a interface acompanha o estado sozinha. Você descreve como a tela deve ser para cada valor, e a re-renderização cuida de manter as duas coisas em sincronia.',
             highlight: ['estado', 'React', 're-renderização'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // A cada clique o estado muda, a função roda de novo\n  // e o React atualiza apenas o texto do parágrafo.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Somar</button>\n    </div>\n  );\n}',
             onlyCode: true
           },
@@ -44960,7 +44960,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'That is why the interface follows the state on its own. You describe how the screen should look for each value, and re-rendering keeps the two in sync.',
             highlight: ['state', 'React', 're-rendering'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // On each click the state changes, the function runs again\n  // and React updates only the paragraph text.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Add</button>\n    </div>\n  );\n}',
             onlyCode: true
           }
@@ -45033,7 +45033,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete para somar 1 ao total.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [total, setTotal] =\n  useState(0);\n\nfunction somar() {\n  ___(total + 1);\n}',
             answers: ['setTotal'],
             distractors: ['total', 'useState', 'setState']
@@ -45041,7 +45041,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete to add 1 to the total.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [total, setTotal] =\n  useState(0);\n\nfunction add() {\n  ___(total + 1);\n}',
             answers: ['setTotal'],
             distractors: ['total', 'useState', 'setState']
@@ -45054,14 +45054,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o código: total começa em 0 com useState, e a função somar aumenta total em 1 com setTotal.',
             highlight: ['useState', 'setTotal'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const [total, setTotal] =', '  useState(0);', 'function somar() {', '  setTotal(total + 1);', '}'],
             distractors: ['  total = total + 1;']
           },
           en: {
             question: 'Build the code: total starts at 0 with useState, and the add function increases total by 1 with setTotal.',
             highlight: ['useState', 'setTotal'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const [total, setTotal] =', '  useState(0);', 'function add() {', '  setTotal(total + 1);', '}'],
             distractors: ['  total = total + 1;']
           }
@@ -45072,7 +45072,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual linha atualiza o estado do jeito certo?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['estado'],
             correctOption: 1,
             options: ['setTotal(total + 1);', 'total = total + 1;', 'total++;', 'useState(total + 1);'],
@@ -45080,7 +45080,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which line updates the state the right way?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['state'],
             correctOption: 1,
             options: ['setTotal(total + 1);', 'total = total + 1;', 'total++;', 'useState(total + 1);'],
@@ -45094,14 +45094,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o estado que é somado a 1 nesta atualização.',
             highlight: ['estado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [total, setTotal] =\n  useState(0);\nsetTotal(___ + 1);',
             answers: ['total']
           },
           en: {
             question: 'Type the state that gets 1 added to it in this update.',
             highlight: ['state'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [total, setTotal] =\n  useState(0);\nsetTotal(___ + 1);',
             answers: ['total']
           }
@@ -45130,7 +45130,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo.',
             highlight: ['useState', 'estado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [contador, setContador] =\n  useState(0);',
             onlyCode: true
           },
@@ -45146,7 +45146,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'The first value represents the current state. The second part is the function used to update it.',
             highlight: ['useState', 'state'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [count, setCount] =\n  useState(0);',
             onlyCode: true
           }
@@ -45163,7 +45163,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Quando o estado é atualizado, o React pode renderizar novamente o componente para refletir o novo valor.',
             highlight: ['estado', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Contador() {\n  const [contador, setContador] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setContador(contador + 1)\n      }\n    >\n      {contador}\n    </button>\n  );\n}',
             onlyCode: true
           },
@@ -45175,7 +45175,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'When the state is updated, React can render the component again to reflect the new value.',
             highlight: ['state', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Counter() {\n  const [count, setCount] =\n    useState(0);\n\n  return (\n    <button\n      onClick={() =>\n        setCount(count + 1)\n      }\n    >\n      {count}\n    </button>\n  );\n}',
             onlyCode: true
           }
@@ -45187,7 +45187,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete a criação do estado.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [n, ___] =\n  ___(0);',
             answers: ['setN', 'useState'],
             distractors: ['useEffect', 'n', 'setState']
@@ -45195,7 +45195,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the state creation.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [n, ___] =\n  ___(0);',
             answers: ['setN', 'useState'],
             distractors: ['useEffect', 'n', 'setState']
@@ -45208,14 +45208,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o estado n, que começa em 0, e o botão que mostra n e soma 1 a cada clique.',
             highlight: ['estado', 'botão'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const [n, setN] = useState(0);', '<button onClick={() =>', '  setN(n + 1)}>', '  {n}', '</button>'],
             distractors: ['  n = n + 1}>']
           },
           en: {
             question: 'Build the state n, which starts at 0, and the button that shows n and adds 1 on each click.',
             highlight: ['state', 'button'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const [n, setN] = useState(0);', '<button onClick={() =>', '  setN(n + 1)}>', '  {n}', '</button>'],
             distractors: ['  n = n + 1}>']
           }
@@ -45226,7 +45226,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual linha cria o estado c começando em 0?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['estado'],
             correctOption: 1,
             options: ['const [c, setC] = useState(0);', 'const c = useState(0);', 'const [c, setC] = useState;', 'const {c, setC} = useState(0);'],
@@ -45234,7 +45234,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which line creates the state c starting at 0?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['state'],
             correctOption: 1,
             options: ['const [c, setC] = useState(0);', 'const c = useState(0);', 'const [c, setC] = useState;', 'const {c, setC} = useState(0);'],
@@ -45248,14 +45248,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o valor inicial do estado n: zero.',
             highlight: ['valor inicial'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [n, setN] =\n  useState(___);',
             answers: ['0']
           },
           en: {
             question: 'Type the initial value of the state n: zero.',
             highlight: ['initial value'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const [n, setN] =\n  useState(___);',
             answers: ['0']
           }
@@ -45284,7 +45284,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Pensar na origem e no comportamento de uma informação ajuda a diferenciar props de estado.',
             highlight: ['props', 'estado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Contador({ titulo }) {\n  const [valor, setValor] =\n    useState(0);\n\n  return (\n    <button>\n      {titulo}: {valor}\n    </button>\n  );\n}',
             onlyCode: true
           },
@@ -45300,7 +45300,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Thinking about the origin and behavior of a piece of information helps tell props apart from state.',
             highlight: ['props', 'state'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Counter({ title }) {\n  const [value, setValue] =\n    useState(0);\n\n  return (\n    <button>\n      {title}: {value}\n    </button>\n  );\n}',
             onlyCode: true
           }
@@ -45373,7 +45373,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete: o título vem por props e o valor é estado.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card({ ___ }) {\n  const [valor] =\n    ___(0);\n}',
             answers: ['titulo', 'useState'],
             distractors: ['state', 'props', 'useRef']
@@ -45381,7 +45381,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete: the title comes from props and the value is state.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card({ ___ }) {\n  const [value] =\n    ___(0);\n}',
             answers: ['title', 'useState'],
             distractors: ['state', 'props', 'useRef']
@@ -45394,14 +45394,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o Card: recebe titulo por props, guarda v no estado começando em 0 e devolve um parágrafo "titulo: v".',
             highlight: ['props', 'estado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function Card({ titulo }) {', '  const [v] = useState(0);', '  return <p>{titulo}: {v}</p>;', '}'],
             distractors: ['  const [titulo] = useState();']
           },
           en: {
             question: 'Build Card: takes title through props, keeps v in state starting at 0 and returns a paragraph "title: v".',
             highlight: ['props', 'state'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function Card({ title }) {', '  const [v] = useState(0);', '  return <p>{title}: {v}</p>;', '}'],
             distractors: ['  const [title] = useState(0);']
           }
@@ -45412,7 +45412,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual componente guarda o próprio contador no estado?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['estado'],
             correctOption: 1,
             options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
@@ -45420,7 +45420,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which component keeps its own counter in state?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['state'],
             correctOption: 1,
             options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
@@ -45434,14 +45434,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o nome da função que atualiza v, no padrão set + nome do estado.',
             highlight: ['set'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card({ titulo }) {\n  const [v, ___] =\n    useState(0);\n}',
             answers: ['setV']
           },
           en: {
             question: 'Type the name of the function that updates v, following set + state name.',
             highlight: ['set'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card({ title }) {\n  const [v, ___] =\n    useState(0);\n}',
             answers: ['setV']
           }
@@ -45470,7 +45470,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'onChange permite acompanhar alterações realizadas em um campo.',
             highlight: ['onChange'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Campo() {\n  function alterar(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={alterar} />\n  );\n}',
             onlyCode: true
           },
@@ -45486,7 +45486,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'onChange lets you track changes made to a field.',
             highlight: ['onChange'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Field() {\n  function handleChange(event) {\n    console.log(event.target.value);\n  }\n\n  return (\n    <input onChange={handleChange} />\n  );\n}',
             onlyCode: true
           }
@@ -45498,7 +45498,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete para acompanhar o que é digitado.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input\n  ___={alterar}\n/>',
             answers: ['onChange'],
             distractors: ['onClick', 'change', 'onSubmit']
@@ -45506,7 +45506,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete to follow what is typed.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input\n  ___={handleChange}\n/>',
             answers: ['onChange'],
             distractors: ['onClick', 'change', 'onSubmit']
@@ -45519,14 +45519,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte a função alterar, que mostra no console o valor digitado, e o input que chama alterar a cada mudança.',
             highlight: ['alterar'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function alterar(event) {', '  console.log(', '    event.target.value);', '}', '<input onChange={alterar} />'],
             distractors: ['<input onchange="alterar" />']
           },
           en: {
             question: 'Build the change function, which logs the typed value, and the input that calls change on every edit.',
             highlight: ['change function'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['function change(event) {', '  console.log(', '    event.target.value);', '}', '<input onChange={change} />'],
             distractors: ['<input onchange="change" />']
           }
@@ -45537,7 +45537,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual expressão lê o texto digitado no campo?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['texto digitado'],
             correctOption: 1,
             options: ['event.target.value', 'event.value', 'event.target.text', 'input.value()'],
@@ -45545,7 +45545,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which expression reads the text typed in the field?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['text typed'],
             correctOption: 1,
             options: ['event.target.value', 'event.value', 'event.target.text', 'input.value()'],
@@ -45559,14 +45559,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a propriedade que traz o texto digitado no campo.',
             highlight: ['texto digitado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input onChange={e =>\n  console.log(e.target.___)\n} />',
             answers: ['value']
           },
           en: {
             question: 'Type the property that holds the text typed in the field.',
             highlight: ['text typed'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<input onChange={e =>\n  console.log(e.target.___)\n} />',
             answers: ['value']
           }
@@ -45595,7 +45595,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'useState é um Hook. O React possui outros Hooks para diferentes necessidades.',
             highlight: ['Hooks', 'useState', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useState();',
             onlyCode: true
           },
@@ -45611,7 +45611,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'useState is a Hook. React has other Hooks for different needs.',
             highlight: ['Hooks', 'useState', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useState();',
             onlyCode: true
           }
@@ -45628,7 +45628,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Cada Hook possui uma finalidade específica. Agora vamos conhecer alguns dos mais utilizados.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useState();',
             onlyCode: true
           },
@@ -45640,7 +45640,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Each Hook has a specific purpose. Now let\'s meet some of the most used ones.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useState();',
             onlyCode: true
           }
@@ -45713,7 +45713,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o import do Hook de estado.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
             answers: ['useState'],
             distractors: ['setState', 'state', 'useHook']
@@ -45721,7 +45721,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the import of the state Hook.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
             answers: ['useState'],
             distractors: ['setState', 'state', 'useHook']
@@ -45734,14 +45734,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o import do useState e, depois dele, do useEffect, vindos de "react".',
             highlight: ['import'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['import {', '  useState,', '  useEffect', '} from "react";'],
             distractors: ['} from "useState";']
           },
           en: {
             question: 'Build the import of useState and, after it, useEffect, coming from "react".',
             highlight: ['import'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['import {', '  useState,', '  useEffect', '} from "react";'],
             distractors: ['} from "useState";']
           }
@@ -45752,7 +45752,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual destes é um Hook do React?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['Hook'],
             correctOption: 1,
             options: ['useState()', 'setState()', 'getState()', 'stateHook()'],
@@ -45760,7 +45760,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which of these is a React Hook?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['Hook'],
             correctOption: 1,
             options: ['useState()', 'setState()', 'getState()', 'stateHook()'],
@@ -45817,14 +45817,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o Hook que roda um efeito depois da renderização.',
             highlight: ['Hook'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
             answers: ['useEffect']
           },
           en: {
             question: 'Type the Hook that runs an effect after rendering.',
             highlight: ['Hook'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
             answers: ['useEffect']
           }
@@ -45853,7 +45853,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Ele é utilizado quando o componente precisa realizar alguma ação relacionada a algo externo à renderização.',
             highlight: ['useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Renderizado");\n}, []);',
             onlyCode: true
           },
@@ -45869,7 +45869,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'It is used when the component needs to perform some action related to something outside of rendering.',
             highlight: ['useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import { useEffect } from "react";\n\nuseEffect(() => {\n  console.log("Rendered");\n}, []);',
             onlyCode: true
           }
@@ -45886,7 +45886,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
             highlight: ['dependências', 'useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(nome);\n}, [nome]);',
             onlyCode: true
           },
@@ -45898,7 +45898,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'In this example, the effect follows changes to name.',
             highlight: ['dependency', 'useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(name);\n}, [name]);',
             onlyCode: true
           }
@@ -45910,7 +45910,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete: o efeito roda quando nome muda.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(nome);\n}, [___]);',
             answers: ['nome'],
             distractors: ['valor', 'useState', 'log']
@@ -45918,7 +45918,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete: the effect runs when name changes.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(name);\n}, [___]);',
             answers: ['name'],
             distractors: ['value', 'useState', 'log']
@@ -45931,14 +45931,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o useEffect que mostra nome no console sempre que nome mudar.',
             highlight: ['useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['useEffect(() => {', '  console.log(nome);', '}, [nome]);'],
             distractors: ['}, []);']
           },
           en: {
             question: 'Build the useEffect that logs name every time name changes.',
             highlight: ['useEffect'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['useEffect(() => {', '  console.log(name);', '}, [name]);'],
             distractors: ['}, []);']
           }
@@ -45949,7 +45949,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual useEffect roda só uma vez, depois da primeira renderização?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['uma vez'],
             correctOption: 1,
             options: ['useEffect(() => {\n  iniciar();\n}, []);', 'useEffect(() => {\n  iniciar();\n}, [nome]);', 'useEffect(() => {\n  iniciar();\n});', 'useEffect(() => {\n  iniciar();\n}, once);'],
@@ -45957,7 +45957,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which useEffect runs only once, after the first render?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['only once'],
             correctOption: 1,
             options: ['useEffect(() => {\n  start();\n}, []);', 'useEffect(() => {\n  start();\n}, [name]);', 'useEffect(() => {\n  start();\n});', 'useEffect(() => {\n  start();\n}, once);'],
@@ -45971,14 +45971,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o Hook que roda o efeito sempre que nome muda.',
             highlight: ['Hook'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '___(() => {\n  console.log(nome);\n}, [nome]);',
             answers: ['useEffect']
           },
           en: {
             question: 'Type the Hook that runs the effect every time name changes.',
             highlight: ['Hook'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '___(() => {\n  console.log(name);\n}, [name]);',
             answers: ['useEffect']
           }
@@ -46007,7 +46007,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Refs podem ser úteis quando precisamos manter uma referência que não controla diretamente a interface.',
             highlight: ['useRef', 'Refs'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import { useRef } from "react";\n\nconst inputRef = useRef(null);',
             onlyCode: true
           },
@@ -46023,7 +46023,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Refs can be useful when we need to keep a reference that does not directly control the interface.',
             highlight: ['useRef', 'Refs'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'import { useRef } from "react";\n\nconst inputRef = useRef(null);',
             onlyCode: true
           }
@@ -46035,7 +46035,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete a referência que começa vazia.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const inputRef =\n  ___(null);',
             answers: ['useRef'],
             distractors: ['useState', 'useEffect', 'ref']
@@ -46043,7 +46043,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the reference that starts empty.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const inputRef =\n  ___(null);',
             answers: ['useRef'],
             distractors: ['useState', 'useEffect', 'ref']
@@ -46056,14 +46056,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o código: importe useRef de "react" e, depois, crie inputRef começando em null.',
             highlight: ['useRef'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['import { useRef }', '  from "react";', 'const inputRef =', '  useRef(null);'],
             distractors: ['  useState(null);']
           },
           en: {
             question: 'Build the code: import useRef from "react" and then create inputRef starting at null.',
             highlight: ['useRef'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['import { useRef }', '  from "react";', 'const inputRef =', '  useRef(null);'],
             distractors: ['  useState(null);']
           }
@@ -46074,7 +46074,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual linha muda o valor guardado na ref?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const contador = useRef(0);',
             highlight: ['ref'],
             correctOption: 1,
@@ -46083,7 +46083,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which line changes the value stored in the ref?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const counter = useRef(0);',
             highlight: ['ref'],
             correctOption: 1,
@@ -46098,14 +46098,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a propriedade da ref que guarda o valor.',
             highlight: ['ref'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const ref = useRef(0);\nref.___ = 5;',
             answers: ['current']
           },
           en: {
             question: 'Type the property of the ref that holds the value.',
             highlight: ['ref'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const ref = useRef(0);\nref.___ = 5;',
             answers: ['current']
           }
@@ -46134,7 +46134,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'A renderização condicional permite adaptar a interface de acordo com os dados.',
             highlight: ['renderização condicional', 'JSX'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Status({ logado }) {\n  return logado\n    ? <p>Bem-vindo!</p>\n    : <p>Faça login.</p>;\n}',
             onlyCode: true
           },
@@ -46150,7 +46150,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Conditional rendering lets you adapt the interface based on the data.',
             highlight: ['conditional rendering', 'JSX'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Status({ loggedIn }) {\n  return loggedIn\n    ? <p>Welcome!</p>\n    : <p>Please log in.</p>;\n}',
             onlyCode: true
           }
@@ -46162,7 +46162,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o ternário que escolhe a mensagem.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return logado\n  ___ <p>Bem-vindo!</p>\n  ___ <p>Faça login.</p>;',
             answers: ['?', ':'],
             distractors: ['&&', '||']
@@ -46170,7 +46170,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the ternary that picks the message.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return loggedIn\n  ___ <p>Welcome!</p>\n  ___ <p>Please log in.</p>;',
             answers: ['?', ':'],
             distractors: ['&&', '||']
@@ -46183,14 +46183,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o retorno: se logado for verdadeiro, o parágrafo "Bem-vindo!"; senão, o parágrafo "Faça login.".',
             highlight: ['logado'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return logado', '  ? <p>Bem-vindo!</p>', '  : <p>Faça login.</p>;'],
             distractors: ['  else <p>Faça login.</p>;']
           },
           en: {
             question: 'Build the return: if loggedIn is true, the paragraph "Welcome!"; otherwise, the paragraph "Log in.".',
             highlight: ['loggedIn'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return loggedIn', '  ? <p>Welcome!</p>', '  : <p>Log in.</p>;'],
             distractors: ['  else <p>Log in.</p>;']
           }
@@ -46201,7 +46201,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual trecho mostra o aviso só quando erro é verdadeiro?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['erro'],
             correctOption: 1,
             options: ['{erro && <p>Erro!</p>}', '{erro || <p>Erro!</p>}', '{if (erro) <p>Erro!</p>}', '{erro ? <p>Erro!</p>}'],
@@ -46209,7 +46209,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which snippet shows the warning only when error is true?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['error'],
             correctOption: 1,
             options: ['{error && <p>Error!</p>}', '{error || <p>Error!</p>}', '{if (error) <p>Error!</p>}', '{error ? <p>Error!</p>}'],
@@ -46223,14 +46223,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o nome da prop que decide se o parágrafo "Oi!" aparece.',
             highlight: ['prop'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Status({ ___ }) {\n  return logado\n    ? <p>Oi!</p> : null;\n}',
             answers: ['logado']
           },
           en: {
             question: 'Type the name of the prop that decides whether the paragraph "Hi!" shows up.',
             highlight: ['prop'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Status({ ___ }) {\n  return logged\n    ? <p>Hi!</p> : null;\n}',
             answers: ['logged']
           }
@@ -46259,7 +46259,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Essa abordagem permite construir interfaces a partir de conjuntos de dados.',
             highlight: ['map', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const nomes = ["Ana", "João"];\n\nfunction Lista() {\n  return (\n    <ul>\n      {nomes.map(nome => (\n        <li>{nome}</li>\n      ))}\n    </ul>\n  );\n}',
             onlyCode: true
           },
@@ -46275,7 +46275,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'This approach lets you build interfaces from sets of data.',
             highlight: ['map', 'JavaScript'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const names = ["Ana", "John"];\n\nfunction List() {\n  return (\n    <ul>\n      {names.map(name => (\n        <li>{name}</li>\n      ))}\n    </ul>\n  );\n}',
             onlyCode: true
           }
@@ -46287,7 +46287,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete para criar um li por nome.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<ul>\n  {nomes.___(nome => (\n    <li>{nome}</li>\n  ))}\n</ul>',
             answers: ['map'],
             distractors: ['filter', 'forEach', 'find']
@@ -46295,7 +46295,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete to create one li per name.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<ul>\n  {names.___(name => (\n    <li>{name}</li>\n  ))}\n</ul>',
             answers: ['map'],
             distractors: ['filter', 'forEach', 'find']
@@ -46308,14 +46308,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte a lista ul que transforma cada nome do array nomes em um li.',
             highlight: ['ul', 'li'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<ul>', '  {nomes.map(nome => (', '    <li>{nome}</li>', '  ))}', '</ul>'],
             distractors: ['  {nomes.forEach(nome => (']
           },
           en: {
             question: 'Build the ul list that turns each name in the names array into an li.',
             highlight: ['ul', 'li'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['<ul>', '  {names.map(name => (', '    <li>{name}</li>', '  ))}', '</ul>'],
             distractors: ['  {names.forEach(name => (']
           }
@@ -46326,7 +46326,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual método transforma o array em elementos da interface?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['método'],
             correctOption: 1,
             options: ['nomes.map(...)', 'nomes.forEach(...)', 'nomes.push(...)', 'nomes.includes(...)'],
@@ -46334,7 +46334,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which method turns the array into interface elements?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['method'],
             correctOption: 1,
             options: ['names.map(...)', 'names.forEach(...)', 'names.push(...)', 'names.includes(...)'],
@@ -46348,14 +46348,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o método que mantém só os itens ativos antes de mostrar a lista.',
             highlight: ['método'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'itens.___(i => i.ativo)',
             answers: ['filter']
           },
           en: {
             question: 'Type the method that keeps only the active items before showing the list.',
             highlight: ['method'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'items.___(i => i.active)',
             answers: ['filter']
           }
@@ -46384,7 +46384,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Um identificador estável ajuda o React a acompanhar corretamente os elementos da lista.',
             highlight: ['React', 'key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const usuarios = [\n  { id: 1, nome: "Ana" },\n  { id: 2, nome: "João" }\n];\n\nfunction Lista() {\n  return usuarios.map(usuario => (\n    <p key={usuario.id}>\n      {usuario.nome}\n    </p>\n  ));\n}',
             onlyCode: true
           },
@@ -46400,7 +46400,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'A stable identifier helps React correctly track the elements in the list.',
             highlight: ['React', 'key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const users = [\n  { id: 1, name: "Ana" },\n  { id: 2, name: "John" }\n];\n\nfunction List() {\n  return users.map(user => (\n    <p key={user.id}>\n      {user.name}\n    </p>\n  ));\n}',
             onlyCode: true
           }
@@ -46412,7 +46412,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete com o identificador estável de cada item.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'usuarios.map(u => (\n  <p ___={u.id}>\n    {u.nome}\n  </p>\n))',
             answers: ['key'],
             distractors: ['id', 'ref', 'index']
@@ -46420,7 +46420,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete with each item\'s stable identifier.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'users.map(u => (\n  <p ___={u.id}>\n    {u.name}\n  </p>\n))',
             answers: ['key'],
             distractors: ['id', 'ref', 'index']
@@ -46433,14 +46433,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte a lista: cada usuário u vira um parágrafo com u.nome e a key igual a u.id.',
             highlight: ['key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['usuarios.map(u => (', '  <p key={u.id}>', '    {u.nome}', '  </p>', '))'],
             distractors: ['  <p id={u.key}>']
           },
           en: {
             question: 'Build the list: each user u becomes a paragraph with u.name and the key equal to u.id.',
             highlight: ['key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['users.map(u => (', '  <p key={u.id}>', '    {u.name}', '  </p>', '))'],
             distractors: ['  <p id={u.key}>']
           }
@@ -46451,7 +46451,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual key é a mais adequada para itens que podem mudar de ordem?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['key'],
             correctOption: 1,
             options: ['key={produto.id}', 'key={Math.random()}', 'key="item"', 'key={indice}'],
@@ -46459,7 +46459,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which key fits best for items that can change order?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['key'],
             correctOption: 1,
             options: ['key={product.id}', 'key={Math.random()}', 'key="item"', 'key={index}'],
@@ -46473,14 +46473,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a propriedade estável usada como key: o identificador do usuário.',
             highlight: ['key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'usuarios.map(u =>\n  <p key={u.___}>{u.nome}</p>)',
             answers: ['id']
           },
           en: {
             question: 'Type the stable property used as the key: the user identifier.',
             highlight: ['key'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'users.map(u =>\n  <p key={u.___}>{u.name}</p>)',
             answers: ['id']
           }
@@ -46508,7 +46508,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               text: 'Interfaces maiores podem ser construídas combinando vários componentes menores e independentes.'
             },
             highlight: ['componentes'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Header() {\n  return <header>Meu site</header>;\n}\n\nfunction Conteudo() {\n  return <main>Conteúdo</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Conteudo />\n    </>\n  );\n}',
             onlyCode: true
           },
@@ -46523,7 +46523,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               text: 'Larger interfaces can be built by combining several smaller, independent components.'
             },
             highlight: ['components'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Header() {\n  return <header>My site</header>;\n}\n\nfunction Content() {\n  return <main>Content</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Header />\n      <Content />\n    </>\n  );\n}',
             onlyCode: true
           }
@@ -46535,7 +46535,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o App com o componente de cabeçalho.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <>\n    <___ />\n    <Conteudo />\n  </>\n);',
             answers: ['Header'],
             distractors: ['header', 'Main', 'App']
@@ -46543,7 +46543,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Build the App with the header component.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <>\n    <___ />\n    <Content />\n  </>\n);',
             answers: ['Header'],
             distractors: ['header', 'Main', 'App']
@@ -46556,13 +46556,13 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o retorno do App: um fragmento com o Header e, depois dele, o Conteudo.',
             highlight: ['fragmento'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <>', '    <Header />', '    <Conteudo />', '  </>', ');']
           },
           en: {
             question: 'Build the return of App: a fragment with the Header and, after it, the Content.',
             highlight: ['fragment'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <>', '    <Header />', '    <Content />', '  </>', ');']
           }
         }
@@ -46572,7 +46572,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual retorno agrupa dois componentes sem criar um elemento extra?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['elemento extra'],
             correctOption: 1,
             options: ['<>\n  <A />\n  <B />\n</>', '<div>\n  <A />\n  <B />\n</div>', '<A /><B />', '<group>\n  <A />\n  <B />\n</group>'],
@@ -46580,7 +46580,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which return groups two components without creating an extra element?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['extra element'],
             correctOption: 1,
             options: ['<>\n  <A />\n  <B />\n</>', '<div>\n  <A />\n  <B />\n</div>', '<A /><B />', '<group>\n  <A />\n  <B />\n</group>'],
@@ -46594,14 +46594,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o componente que vem depois do Header: o Conteudo.',
             highlight: ['Conteudo'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <>\n    <Header />\n    <___ />\n  </>\n);',
             answers: ['Conteudo']
           },
           en: {
             question: 'Type the component that comes after the Header: the Content.',
             highlight: ['Content'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <>\n    <Header />\n    <___ />\n  </>\n);',
             answers: ['Content']
           }
@@ -46630,7 +46630,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'React não elimina a importância do HTML. O conhecimento de estrutura e semântica continua sendo fundamental.',
             highlight: ['HTML', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Produto</h2>\n      <p>Descrição</p>\n      <button>Comprar</button>\n    </article>\n  );\n}',
             onlyCode: true
           },
@@ -46646,7 +46646,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'React does not remove the importance of HTML. Knowing structure and semantics is still fundamental.',
             highlight: ['HTML', 'React'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}',
             onlyCode: true
           }
@@ -46663,7 +46663,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'Por isso, aprender HTML antes de React fornece uma base importante para compreender a construção de interfaces modernas.',
             highlight: ['React', 'HTML', 'componentes'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Produto</h2>\n      <p>Descrição</p>\n      <button>Comprar</button>\n    </article>\n  );\n}',
             onlyCode: true
           },
@@ -46675,7 +46675,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             closing: 'That is why learning HTML before React gives you an important foundation for understanding how modern interfaces are built.',
             highlight: ['React', 'HTML', 'components'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Card() {\n  return (\n    <article>\n      <h2>Product</h2>\n      <p>Description</p>\n      <button>Buy</button>\n    </article>\n  );\n}',
             onlyCode: true
           }
@@ -46748,7 +46748,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o cartão com o elemento semântico certo.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <___>\n    <h2>Produto</h2>\n  </article>\n);',
             answers: ['article'],
             distractors: ['div', 'span', 'aside']
@@ -46756,7 +46756,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the card with the right semantic element.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'return (\n  <___>\n    <h2>Product</h2>\n  </article>\n);',
             answers: ['article'],
             distractors: ['div', 'span', 'aside']
@@ -46769,13 +46769,13 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o retorno do Card: um article com o título h2 "Produto" e, abaixo dele, o botão "Comprar".',
             highlight: ['article'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <article>', '    <h2>Produto</h2>', '    <button>Comprar</button>', '  </article>', ');']
           },
           en: {
             question: 'Build the return of Card: an article with the h2 heading "Product" and, below it, the "Buy" button.',
             highlight: ['article'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['return (', '  <article>', '    <h2>Product</h2>', '    <button>Buy</button>', '  </article>', ');']
           }
         }
@@ -46785,7 +46785,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Qual JSX é o mais semântico para o cartão de um produto?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['semântico'],
             correctOption: 1,
             options: ['<article>\n  <h2>Produto</h2>\n</article>', '<div>\n  <div>Produto</div>\n</div>', '<span>\n  <b>Produto</b>\n</span>', '<produto>\n  Produto\n</produto>'],
@@ -46793,7 +46793,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'Which JSX is the most semantic for a product card?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['semantic'],
             correctOption: 1,
             options: ['<article>\n  <h2>Product</h2>\n</article>', '<div>\n  <div>Product</div>\n</div>', '<span>\n  <b>Product</b>\n</span>', '<product>\n  Product\n</product>'],
@@ -46807,14 +46807,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite o nome da tag do botão "Comprar", dentro do article.',
             highlight: ['botão'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<article>\n  <h2>Produto</h2>\n  <___>Comprar</button>\n</article>',
             answers: ['button']
           },
           en: {
             question: 'Type the name of the tag for the "Buy" button, inside the article.',
             highlight: ['button'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: '<article>\n  <h2>Product</h2>\n  <___>Buy</button>\n</article>',
             answers: ['button']
           }
@@ -49857,7 +49857,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Complete o botão reutilizável em JSX.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Botao() {\n  return (\n    <button\n      ___="rounded-lg">\n      Salvar\n    </button>\n  );\n}',
             answers: ['className'],
             distractors: ['class', 'style', 'tw']
@@ -49865,7 +49865,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             question: 'Complete the reusable button in JSX.',
             highlight: [],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'function Button() {\n  return (\n    <button\n      ___="rounded-lg">\n      Save\n    </button>\n  );\n}',
             answers: ['className'],
             distractors: ['class', 'style', 'tw']
@@ -49878,14 +49878,14 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Monte o componente Botao, que devolve o botão "Salvar" com a classe rounded-lg (className).',
             highlight: ['className'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const Botao = () => (', '  <button', '    className="rounded-lg">', '    Salvar', '  </button>', ');'],
             distractors: ['    class="rounded-lg">']
           },
           en: {
             question: 'Build the Button component, which returns the "Save" button with the rounded-lg class (className).',
             highlight: ['className'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             lines: ['const Button = () => (', '  <button', '    className="rounded-lg">', '    Save', '  </button>', ');'],
             distractors: ['    class="rounded-lg">']
           }
@@ -49896,7 +49896,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'No JSX, como se escreve a classe rounded-lg?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['JSX'],
             correctOption: 1,
             options: ['className="rounded-lg"', 'class="rounded-lg"', 'classes="rounded-lg"', 'className={rounded-lg}'],
@@ -49904,7 +49904,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'In JSX, how do you write the rounded-lg class?',
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             highlight: ['JSX'],
             correctOption: 1,
             options: ['className="rounded-lg"', 'class="rounded-lg"', 'classes="rounded-lg"', 'className={rounded-lg}'],
@@ -49918,14 +49918,14 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             question: 'Digite a classe que arredonda os cantos do botão no tamanho lg.',
             highlight: ['arredonda'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const Botao = () => (\n  <button\n    className="___">\n    Salvar\n  </button>\n);',
             answers: ['rounded-lg']
           },
           en: {
             question: 'Type the class that rounds the button corners at size lg.',
             highlight: ['rounds'],
-            codeLanguage: 'JavaScript',
+            codeLanguage: 'JSX',
             code: 'const Button = () => (\n  <button\n    className="___">\n    Save\n  </button>\n);',
             answers: ['rounded-lg']
           }

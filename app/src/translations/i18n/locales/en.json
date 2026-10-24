@@ -1,7 +1,6 @@
 {
 	"translation": {
 		"_comment info": "*********INFORMAÇÕES DO APP*********",
-		"changes": "- Aplicativo criado",
 		"dev": "Desenvolvedores:",
 		"GTS": "Gabriel Terra Simões - Software Engineering Student, UNAERP",
 		"GRP": "Gabriel Reverso Pereira - Computer Engineering Student, UNAERP",
@@ -111,7 +110,6 @@
 		"theme": "Dark mode",
 		"notifications": "Notifications",
 		"informations": "Informations",
-		"update": "Most recent update",
 		"version": "App version",
 		"about": "About",
 		"select the language:": "Select the language:",
@@ -148,6 +146,28 @@
 		"continue": "Continue",
 		"oh no": "Oh no, you were wrong!",
 		"try again": "Try again",
+
+		"server": {
+			"waking": "The server is waking up. This can take up to 1 minute — you can wait, the app will keep trying."
+		},
+
+		"appUpdate": {
+			"title": "New version available",
+			"titleImportant": "Important update",
+			"message": "You are using version {{installed}}. Version {{latest}} is now available.",
+			"importantNote": "This update includes something the app may need to work properly. We recommend updating as soon as you can.",
+			"update": "Update",
+			"later": "Not now",
+			"moreOne": "and 1 earlier version",
+			"moreMany": "and {{count}} earlier versions",
+			"installed": "Installed version",
+			"upToDate": "You are on the latest version.",
+			"available": "Version {{latest}} is available.",
+			"unknown": "Connect to the internet to check for a new version.",
+			"whatsNew": "What's new",
+			"empty": "No release notes published yet.",
+			"version": "Version {{version}}"
+		},
 
 		"login": {
 			"alert": {

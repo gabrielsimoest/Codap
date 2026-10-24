@@ -81,6 +81,7 @@ function fenceLanguage (codeLanguage: string): string {
     case 'CSS': return 'css'
     case 'JavaScript': return 'javascript'
     case 'TypeScript': return 'typescript'
+    case 'JSX': return 'jsx'
     default: return ''
   }
 }

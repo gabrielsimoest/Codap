@@ -3,6 +3,7 @@ import * as assert from 'node:assert'
 import { randomUUID, createHash } from 'node:crypto'
 import { build } from '../../helper'
 import { createSession, RefreshTokenAlreadyRotatedError } from '../../../src/utils/session'
+import { REFRESH_REUSE_GRACE_MS } from '../../../src/routes/auth/refresh'
 
 async function registerUser (app: Awaited<ReturnType<typeof build>>) {
   const email = `refresh-${randomUUID()}@example.com`
@@ -42,33 +43,79 @@ test('POST /auth/refresh rotates the token pair and revokes the previous refresh
   await cleanupUser(app, registered.user.id)
 })
 
-test('POST /auth/refresh reusing an already-rotated token revokes the whole family and rejects further use', async (t) => {
+async function refreshWith (app: Awaited<ReturnType<typeof build>>, refreshToken: string) {
+  return await app.inject({ method: 'POST', url: '/auth/refresh', payload: { refreshToken } })
+}
+
+async function activeTokens (app: Awaited<ReturnType<typeof build>>, userId: string) {
+  return await app.prisma.refresh_tokens.count({ where: { user_id: userId, revoked_at: null } })
+}
+
+test('POST /auth/refresh tolerates a just-rotated token (lost response) and hands out a fresh pair from the live token', async (t) => {
   const app = await build(t)
   const registered = await registerUser(app)
 
-  const firstRefresh = await app.inject({
-    method: 'POST',
-    url: '/auth/refresh',
-    payload: { refreshToken: registered.refreshToken }
-  })
-  assert.equal(firstRefresh.statusCode, 200)
-  const rotated = JSON.parse(firstRefresh.payload)
+  const first = await refreshWith(app, registered.refreshToken)
+  assert.equal(first.statusCode, 200)
+  const second = JSON.parse(first.payload)
 
-  // Reusing the original (now-revoked) token is a reuse/replay signal.
-  const reuseAttempt = await app.inject({
-    method: 'POST',
-    url: '/auth/refresh',
-    payload: { refreshToken: registered.refreshToken }
+  // O app desistiu por lentidão e reapresenta o token original: dentro da janela
+  // isso é "resposta perdida", não roubo.
+  const retry = await refreshWith(app, registered.refreshToken)
+  assert.equal(retry.statusCode, 200)
+  const third = JSON.parse(retry.payload)
+  assert.notEqual(third.refreshToken, second.refreshToken)
+
+  // Nunca mais de um token vigente na família: o par que o app perdeu foi substituído.
+  assert.equal(await activeTokens(app, registered.user.id), 1)
+
+  // Quem recebeu o par intermediário também segue funcionando, dentro da janela.
+  const viaSecond = await refreshWith(app, second.refreshToken)
+  assert.equal(viaSecond.statusCode, 200)
+  assert.equal(await activeTokens(app, registered.user.id), 1)
+
+  await cleanupUser(app, registered.user.id)
+})
+
+test('POST /auth/refresh reusing a token rotated outside the grace window revokes the whole family', async (t) => {
+  const app = await build(t)
+  const registered = await registerUser(app)
+
+  const first = await refreshWith(app, registered.refreshToken)
+  assert.equal(first.statusCode, 200)
+  const rotated = JSON.parse(first.payload)
+
+  // Envelhece a revogação para além da janela de tolerância.
+  const oldHash = createHash('sha256').update(registered.refreshToken).digest('hex')
+  await app.prisma.refresh_tokens.update({
+    where: { token_hash: oldHash },
+    data: { revoked_at: new Date(Date.now() - REFRESH_REUSE_GRACE_MS - 60 * 1000) }
   })
+
+  const reuseAttempt = await refreshWith(app, registered.refreshToken)
   assert.equal(reuseAttempt.statusCode, 401)
 
-  // The whole family — including the token issued by the legitimate first refresh — must now be revoked.
-  const followUp = await app.inject({
-    method: 'POST',
-    url: '/auth/refresh',
-    payload: { refreshToken: rotated.refreshToken }
-  })
+  // A família inteira — inclusive o token legítimo da primeira rotação — foi revogada.
+  const followUp = await refreshWith(app, rotated.refreshToken)
   assert.equal(followUp.statusCode, 401)
+  assert.equal(await activeTokens(app, registered.user.id), 0)
+
+  await cleanupUser(app, registered.user.id)
+})
+
+test('POST /auth/refresh never resurrects a token that was revoked without a rotation', async (t) => {
+  const app = await build(t)
+  const registered = await registerUser(app)
+
+  // Revogação de família ou de logout: `revoked_at` preenchido, sem `replaced_by_id`.
+  await app.prisma.refresh_tokens.updateMany({
+    where: { user_id: registered.user.id },
+    data: { revoked_at: new Date() }
+  })
+
+  const res = await refreshWith(app, registered.refreshToken)
+  assert.equal(res.statusCode, 401)
+  assert.equal(await activeTokens(app, registered.user.id), 0)
 
   await cleanupUser(app, registered.user.id)
 })
@@ -77,21 +124,15 @@ test('POST /auth/refresh with the same token concurrently never leaves two valid
   const app = await build(t)
   const registered = await registerUser(app)
 
-  const responses = await Promise.all([1, 2].map(() => app.inject({
-    method: 'POST',
-    url: '/auth/refresh',
-    payload: { refreshToken: registered.refreshToken }
-  })))
+  const responses = await Promise.all([1, 2].map(async () => await refreshWith(app, registered.refreshToken)))
 
-  // Sobrepostas ou em sequência, o resultado é o mesmo: uma rotaciona e a
-  // outra é tratada como reuso, o que revoga a família inteira.
-  const statusCodes = responses.map((res) => res.statusCode).sort()
-  assert.deepEqual(statusCodes, [200, 401])
+  // Sobrepostas ou em sequência, o resultado é o mesmo: uma rotaciona e a outra
+  // (o app que tentou de novo enquanto a primeira rodava) segue a cadeia até o
+  // token vigente. Nenhuma das duas desloga a pessoa.
+  assert.deepEqual(responses.map((res) => res.statusCode), [200, 200])
 
-  const activeTokens = await app.prisma.refresh_tokens.count({
-    where: { user_id: registered.user.id, revoked_at: null }
-  })
-  assert.equal(activeTokens, 0)
+  // E a família termina com exatamente um token vigente.
+  assert.equal(await activeTokens(app, registered.user.id), 1)
 
   await cleanupUser(app, registered.user.id)
 })

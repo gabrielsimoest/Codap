@@ -1,7 +1,6 @@
 {
 	"translation": {
 		"_comment info": "*********INFORMAÇÕES DO APP*********",
-		"changes": "- Aplicativo criado",
 		"dev": "Desenvolvedores:",
 		"GTS": "Gabriel Terra Simões - Estudante de engenharia de software, UNAERP",
 		"GRP": "Gabriel Reverso Pereira - Estudante de engenharia da computação, UNAERP",
@@ -111,7 +110,6 @@
 		"theme": "Modo escuro",
 		"notifications": "Notificações",
 		"informations": "Informações",
-		"update": "Atualização mais recente",
 		"version": "Versão do aplicativo",
 		"about": "Sobre",
 		"select the language:": "Selecione o idioma:",
@@ -148,6 +146,28 @@
 		"continue": "Continuar",
 		"oh no": "Ah não, você errou!",
 		"try again": "Tentar novamente",
+
+		"server": {
+			"waking": "O servidor está acordando. Isso pode levar até 1 minuto — pode esperar, o app tenta sozinho."
+		},
+
+		"appUpdate": {
+			"title": "Nova versão disponível",
+			"titleImportant": "Atualização importante",
+			"message": "Você está usando a versão {{installed}}. A versão {{latest}} já está disponível.",
+			"importantNote": "Esta atualização traz algo sem o qual o app pode não funcionar direito. Recomendamos atualizar assim que puder.",
+			"update": "Atualizar",
+			"later": "Agora não",
+			"moreOne": "e mais 1 versão anterior",
+			"moreMany": "e mais {{count}} versões anteriores",
+			"installed": "Versão instalada",
+			"upToDate": "Você está na versão mais recente.",
+			"available": "A versão {{latest}} está disponível.",
+			"unknown": "Conecte-se à internet para ver se há uma versão nova.",
+			"whatsNew": "Novidades",
+			"empty": "Nenhuma novidade publicada ainda.",
+			"version": "Versão {{version}}"
+		},
 
 		"login": {
 			"alert": {

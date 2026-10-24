@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/select'
 import { ExportDialog } from '@/components/export/ExportDialog'
 import { AreaManagerDialog } from '@/components/AreaManagerDialog'
+import { AppVersionDialog } from '@/components/AppVersionDialog'
 import { ContentVersionDialog } from '@/components/ContentVersionDialog'
 import type { AreaResponse, ContentModule } from '@/types/api'
 import type { ExportDocument } from '@/lib/exportDocument'
@@ -57,6 +58,7 @@ export function AppHeader ({
       <div className="ml-auto flex items-center gap-2">
         <AreaManagerDialog areas={areas} />
         <ContentVersionDialog />
+        <AppVersionDialog />
         <ExportDialog
           areaName={areaName}
           modules={modules}

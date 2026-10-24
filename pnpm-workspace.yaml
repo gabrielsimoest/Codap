@@ -6,6 +6,8 @@ allowBuilds:
   '@prisma/engines': true
   esbuild: true
   prisma: true
+minimumReleaseAgeExclude:
+  - expo-notifications@57.0.24
 publicHoistPattern:
   - "*expo*"
   - "*react-native*"

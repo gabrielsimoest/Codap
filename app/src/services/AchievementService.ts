@@ -154,6 +154,21 @@ export function loadAchievements(userId: string) {
 }
 
 /**
+ * Recarrega as conquistas do SQLite para a store **mesmo que já estejam
+ * carregadas**, e refaz a conferência. Usado depois de `restoreProgress`
+ * (`ProgressService`), que grava no SQLite conquistas vindas da nuvem: sem isto
+ * a tela de emblemas continuaria mostrando o que a store carregou antes.
+ */
+export function reloadAchievements(userId: string) {
+	const rows = new DatabaseClient().getUnlockedAchievements(userId);
+	useAchievementStore.getState().setUnlocked(
+		userId,
+		Object.fromEntries(rows.map((row) => [row.achievementId, row.unlockedAt]))
+	);
+	evaluate(userId);
+}
+
+/**
  * Chamado ao concluir uma lição — o único momento em que o status pode mudar.
  * Só confere a área daquela lição (e a Tríade). Síncrono, como o resto do
  * acesso ao SQLite: o evento entra na fila no mesmo tick que o da lição, e os

@@ -94,6 +94,18 @@ export interface SyncResponseBody {
   profile?: { xp: number; bits: number };
 }
 
+/**
+ * O progresso do usuário na nuvem (`GET /sync/progress`): o caminho de volta do
+ * `POST /sync`. O app o aplica ao entrar numa conta para um aparelho novo, ou um
+ * reinstalado, nascer com tudo o que a pessoa já fez.
+ */
+export interface ProgressResponse {
+  /** Todas as lições concluídas (da trilha, de aprofundamento e do baú), da mais antiga para a mais nova. */
+  lessons: Array<{ lessonId: number; completedAt: string }>;
+  /** Todas as conquistas desbloqueadas, da mais antiga para a mais nova. */
+  achievements: Array<{ achievementId: number; unlockedAt: string }>;
+}
+
 export interface AreaResponse {
   id: number;
   name: string;
@@ -133,6 +145,19 @@ export interface TheoryExplanation {
 // `firstParagraph`/`secondParagraph`/`thirdParagraph`/`endParagraph` foram
 // substituídos por elas; `api/prisma/migrateTheoryV2.ts` converte o que já está
 // no banco, sem perder texto.
+
+/**
+ * Linguagem de um trecho de código nas atividades.
+ *
+ * - `HTML`, `CSS` e `JavaScript` são executáveis (aba "Web" e terminal).
+ * - `TypeScript` e `JSX` **nunca executam**: o app só mostra o código, com a
+ *   aba própria e o realce certo. O terminal de TypeScript roda o JavaScript
+ *   pré-transpilado de `terminalCode`; JSX não tem esse equivalente — o
+ *   navegador/Hermes não entende `<Componente />` sem um transpilador, e rodar
+ *   o código como JavaScript dava "erro de sintaxe" no botão Executar.
+ */
+export type CodeLanguage = 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript' | 'JSX'
+
 export interface TheoryActivityContent {
   introduction: TheoryIntroduction;
   /** Ausente = a tela vai direto da introdução para o código. */
@@ -144,7 +169,7 @@ export interface TheoryActivityContent {
    */
   closing?: string;
   highlight: string[];
-  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  codeLanguage: CodeLanguage;
   code: string;
   /**
    * Blocos de código extras no mesmo trecho (ex.: HTML + CSS juntos), cada um
@@ -152,7 +177,7 @@ export interface TheoryActivityContent {
    * / `code`). Usado sobretudo em CSS, onde a aba "Web" precisa do HTML e do
    * CSS juntos para renderizar a demonstração.
    */
-  additionalCode?: { codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript'; code: string }[];
+  additionalCode?: { codeLanguage: CodeLanguage; code: string }[];
   onlyCode?: boolean;
   /**
    * Opt-out do terminal (botão "Executar" abaixo do CodeSection, ver
@@ -205,7 +230,7 @@ export interface OptionActivityContent {
    */
   code?: string;
   /** Linguagem do `code`; default `'JavaScript'`. */
-  codeLanguage?: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  codeLanguage?: CodeLanguage;
   /**
    * Banco de perguntas dentro da lição: atividades práticas com o mesmo `pool`
    * são alternativas entre si, e o app sorteia `draw` delas por sessão.
@@ -238,7 +263,7 @@ export interface FillBlankActivityContent {
   /** Instrução explícita, ex.: 'Digite a tag de parágrafo que fecha o texto "Oi".' */
   question: string;
   highlight: string[];
-  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  codeLanguage: CodeLanguage;
   /**
    * Trecho com **exatamente uma** lacuna marcada por `___` (a mesma marca do
    * `code_blank`). No máximo 30 caracteres por linha com a resposta encaixada.
@@ -252,7 +277,7 @@ export interface FillBlankActivityContent {
   answers: string[];
   /**
    * Aceita a resposta com qualquer combinação de maiúsculas e minúsculas. Use em
-   * HTML e CSS (`H1` vale como `h1`); deixe ausente em JavaScript e TypeScript,
+   * HTML e CSS (`H1` vale como `h1`); deixe ausente em JavaScript, TypeScript e JSX,
    * onde `push` e `Push` são coisas diferentes.
    */
   ignoreCase?: boolean;
@@ -356,7 +381,7 @@ export interface ReorderActivityContent {
   /** Instrução curta, ex.: "Monte um parágrafo dentro do body." */
   question: string;
   highlight: string[];
-  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  codeLanguage: CodeLanguage;
   /**
    * As linhas na ordem correta, de 3 a 6, cada uma com a indentação que terá
    * no código montado (espaços à esquerda). No máximo 30 caracteres por linha.
@@ -400,7 +425,7 @@ export interface CodeBlankActivityContent {
   /** Instrução curta, ex.: "Complete para centralizar o texto." */
   question: string;
   highlight: string[];
-  codeLanguage: 'HTML' | 'CSS' | 'JavaScript' | 'TypeScript';
+  codeLanguage: CodeLanguage;
   /**
    * Trecho com cada lacuna marcada por `___` (três sublinhados), de 1 a 3.
    * Este arquivo é importado só como tipo pelo app e pelo dashboard, então a
@@ -626,6 +651,47 @@ export interface PublishContentVersionBody {
   changelog: string;
   /** Omitido = `false`: a publicação atualiza o conteúdo em silêncio. */
   announce?: boolean;
+}
+
+// ---------------------------------------------------------------------------
+// Versão do aplicativo (não confundir com a do conteúdo, acima).
+// ---------------------------------------------------------------------------
+
+/**
+ * Versão publicada do **app** num idioma. O app compara `version` com a que está
+ * instalada **por semver** (`1.0.10` > `1.0.9`), nunca como texto.
+ */
+export interface AppVersionResponse {
+  /** Autoincrement: ordem de publicação (a mais nova tem o maior `id`). */
+  id: number;
+  /** Código do idioma (`locales.locale`), ex.: `pt`. */
+  locale: string;
+  /** Três segmentos numéricos, ex.: `1.2.0`. */
+  version: string;
+  /** Escrito para quem usa o app: aparece no aviso de nova versão e no histórico. */
+  changelog: string;
+  /**
+   * Verdadeiro = a versão traz algo sem o qual o app não funciona direito
+   * (segurança, idioma, bug sério): o aviso é mais enfático. Falso = recomendada.
+   * Nenhum dos dois bloqueia o uso.
+   */
+  needUpdate: boolean;
+  /** `YYYY-MM-DD` — a coluna é `@db.Date`, sem hora. */
+  releasedAt: string;
+}
+
+/** O texto de uma publicação num idioma. */
+export interface PublishAppVersionChangelog {
+  locale: string;
+  changelog: string;
+}
+
+export interface PublishAppVersionBody {
+  version: string;
+  /** Omitido = `false` (recomendada). */
+  needUpdate?: boolean;
+  /** Um texto por idioma; a publicação cria uma linha por item, numa transação só. */
+  changelogs: PublishAppVersionChangelog[];
 }
 
 // ---------------------------------------------------------------------------

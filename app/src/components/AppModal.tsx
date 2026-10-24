@@ -1,6 +1,8 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import EdgeFade from "./layout/EdgeFade";
+import useKeyboardHeight from "../hooks/useKeyboardHeight";
+import useFocusScroll, { FocusScrollContext } from "../hooks/useFocusScroll";
 import { Modal, Portal } from "react-native-paper";
 import { useTheme } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -42,6 +44,10 @@ export default function AppModal({
 	const { colors } = useTheme();
 	const app = useAppColors();
 	const { t } = useTranslation();
+	// Com o teclado aberto o cartão sobe junto (a área útil encolhe), sem ser espremido.
+	const keyboardHeight = useKeyboardHeight();
+	const scrollRef = useRef<ScrollView>(null);
+	const scrollToFocused = useFocusScroll(scrollRef, keyboardHeight);
 	// Posição da rolagem, para o degradê aparecer só do lado que ainda tem conteúdo.
 	const [scrollY, setScrollY] = useState(0);
 	const [contentHeight, setContentHeight] = useState(0);
@@ -62,7 +68,7 @@ export default function AppModal({
 				style={{ backgroundColor: app.scrim }}
 				dismissableBackButton
 			>
-				<View style={styles.center}>
+				<View style={[styles.center, { paddingBottom: keyboardHeight }]}>
 					{/* Tocar fora do cartão fecha o modal. O fundo é um irmão do cartão, e não o
 					    pai dele: com o cartão dentro de um `Pressable`, o toque era tomado por ele
 					    e a rolagem do corpo (Sobre, Conquistas) não pegava no aparelho. */}
@@ -73,6 +79,7 @@ export default function AppModal({
 							{ backgroundColor: colors.primary, borderColor: colors.border },
 						]}
 					>
+						<FocusScrollContext.Provider value={scrollToFocused}>
 						{title !== undefined || !hideClose ? (
 							<View style={styles.header}>
 								<View style={styles.titleBox}>
@@ -98,6 +105,7 @@ export default function AppModal({
 						{scroll ? (
 							<View style={styles.body}>
 								<ScrollView
+									ref={scrollRef}
 									style={styles.scroll}
 									showsVerticalScrollIndicator={false}
 									nestedScrollEnabled
@@ -119,6 +127,7 @@ export default function AppModal({
 							<View style={styles.body}>{children}</View>
 						)}
 						{footer ? <View style={styles.footer}>{footer}</View> : null}
+						</FocusScrollContext.Provider>
 					</View>
 				</View>
 			</Modal>

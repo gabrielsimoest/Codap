@@ -14,5 +14,6 @@ export const queryKeys = {
   /** Prefixo que cobre as duas queries de idioma de uma mesma área. */
   modulesByArea: (areaId: number) => ['modules', areaId] as const,
   lessons: (moduleId: number) => ['lessons', moduleId] as const,
-  contentVersions: () => ['content-version'] as const
+  contentVersions: () => ['content-version'] as const,
+  appVersions: () => ['app-version'] as const
 }

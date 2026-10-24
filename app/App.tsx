@@ -3,6 +3,9 @@ import useLanguage from "./src/hooks/useLanguage";
 import useFontSize from "./src/hooks/useFontSize";
 import useAuthSession from "./src/hooks/useAuthSession";
 import useNetworkSync from "./src/hooks/useNetworkSync";
+import useServerWarmup from "./src/hooks/useServerWarmup";
+import useAppVersionSync from "./src/hooks/useAppVersionSync";
+import useProgressSync from "./src/hooks/useProgressSync";
 import useNotificationPreference from "./src/hooks/useNotificationPreference";
 import useInactivityReminder from "./src/hooks/useInactivityReminder";
 import useNotificationStore from "./src/stores/NotificationStore";
@@ -48,7 +51,13 @@ export default function App() {
 	const fontSize = useFontSize();
 	const isLoggedIn = useAuthSession();
 	const notificationPreference = useNotificationPreference();
+	// Acorda a API antes de qualquer outra coisa falar com ela (ver ServerWarmup).
+	useServerWarmup();
 	useNetworkSync();
+	// Mantém o histórico de versões do app (aviso de nova versão e Configurações).
+	useAppVersionSync();
+	// Traz da nuvem as lições concluídas e as conquistas (aparelho novo ou reinstalado).
+	useProgressSync();
 
 	const setTheme = useThemeStore((s) => s.setTheme);
 	const themeStored = useThemeStore((s) => s.theme);

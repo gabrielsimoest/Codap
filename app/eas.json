@@ -3,19 +3,32 @@
 		"preview": {
 			"android": {
 				"buildType": "apk"
+			},
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://codap.onrender.com"
 			}
 		},
 		"preview2": {
 			"android": {
 				"gradleCommand": ":app:assembleRelease"
+			},
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://codap.onrender.com"
 			}
 		},
 		"preview3": {
 			"developmentClient": true
 		},
 		"preview4": {
-			"distribution": "internal"
+			"distribution": "internal",
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://codap.onrender.com"
+			}
 		},
-		"production": {}
+		"production": {
+			"env": {
+				"EXPO_PUBLIC_API_URL": "https://codap.onrender.com"
+			}
+		}
 	}
 }
