@@ -1,7 +1,10 @@
 import type { ReactNode, Ref } from "react";
 import { DimensionValue, ScrollView, StyleSheet, View, useWindowDimensions } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
 import TheoryHeader from "./TheoryHeader";
+import ActivityTutorial from "../tutorial/ActivityTutorial";
+import type { TutorialType } from "../tutorial/tutorials";
 import TheoryNextButton, { THEORY_BUTTON_HEIGHT, THEORY_BUTTON_MARGIN } from "./TheoryNextButton";
 import type { TheoryPalette } from "./theoryTheme";
 import { useInsets } from "./useInsets";
@@ -33,7 +36,10 @@ interface Props {
 	total: number;
 	progress: DimensionValue;
 	onClose: () => void;
-	onHelp: () => void;
+	/** Qual tutorial o "?" do cabeçalho abre. */
+	tutorial: TutorialType;
+	/** Abre o tutorial já na entrada da atividade (o campo `tutorial` do conteúdo). */
+	tutorialOpen?: boolean;
 	/** Toque no botão fixo do rodapé. */
 	onNext: () => void;
 	/** Para telas com campo de texto: tocar fora do teclado não pode engolir o toque dos botões. */
@@ -68,7 +74,8 @@ export default function LessonScreen({
 	total,
 	progress,
 	onClose,
-	onHelp,
+	tutorial,
+	tutorialOpen = false,
 	onNext,
 	keyboardShouldPersistTaps,
 	footer,
@@ -80,6 +87,7 @@ export default function LessonScreen({
 }: Props) {
 	const { bottom } = useInsets();
 	const { horizontal, gap } = useLessonLayout();
+	const [tutorialVisible, setTutorialVisible] = useState(tutorialOpen);
 	// Do botão (e da área segura embaixo) até BOTTOM_FADE acima do topo dele.
 	const bottomFadeHeight = bottom + THEORY_BUTTON_MARGIN + THEORY_BUTTON_HEIGHT + BOTTOM_FADE;
 	// O degradê usa a cor da tela com alfa 00 no fim, e não "transparent": no
@@ -96,7 +104,7 @@ export default function LessonScreen({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={onHelp}
+				onHelp={() => setTutorialVisible(true)}
 			/>
 			<View style={[styles.scroll, { marginBottom: bottomInset }]}>
 				<ScrollView
@@ -131,6 +139,12 @@ export default function LessonScreen({
 				)}
 			</View>
 			{hasFooter ? footer : <TheoryNextButton palette={palette} horizontalPadding={horizontal} onPress={onNext} />}
+			<ActivityTutorial
+				visible={tutorialVisible}
+				onClose={() => setTutorialVisible(false)}
+				type={tutorial}
+				palette={palette}
+			/>
 		</View>
 	);
 }

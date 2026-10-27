@@ -313,7 +313,7 @@ export default function CodeEditorExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => undefined}
+				tutorial="code_editor"
 				onNext={() => evaluated && setModalVisible(true)}
 				keyboardShouldPersistTaps="handled"
 				rootRef={containerRef}
@@ -332,7 +332,7 @@ export default function CodeEditorExercise({
 							]}
 							contentContainerStyle={styles.symbolBarContent}
 						>
-							<SymbolKey palette={palette} label="⇥" accessibilityLabel={t("editor.indent")} onPress={() => insert(INDENT)} />
+							<SymbolKey palette={palette} label="Tab" wide accessibilityLabel={t("editor.indent")} onPress={() => insert(INDENT)} />
 							{SYMBOLS[codeLanguage].map((symbol) => (
 								<SymbolKey
 									key={symbol}
@@ -583,20 +583,23 @@ function SymbolKey({
 	label,
 	accessibilityLabel,
 	onPress,
+	wide = false,
 }: {
 	palette: TheoryPalette;
 	label: string;
 	accessibilityLabel: string;
 	onPress: () => void;
+	/** Tecla com palavra (Tab), mais larga e com letra menor que a dos símbolos. */
+	wide?: boolean;
 }) {
 	return (
 		<TouchableOpacity
 			accessibilityRole="button"
 			accessibilityLabel={accessibilityLabel}
 			onPress={onPress}
-			style={[styles.symbolKey, { backgroundColor: palette.tabIdle }]}
+			style={[styles.symbolKey, { backgroundColor: palette.tabIdle }, wide ? styles.symbolKeyWide : null]}
 		>
-			<Text style={[styles.symbolText, { color: palette.text }]}>{label}</Text>
+			<Text style={[styles.symbolText, { color: palette.text }, wide ? styles.symbolTextWide : null]}>{label}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -967,6 +970,10 @@ const styles = StyleSheet.create({
 		borderTopWidth: 2,
 	},
 	symbolBarContent: {
+		// flexGrow + justifyContent: com poucas teclas (HTML) o conjunto fica centralizado; com
+		// muitas (JavaScript) o conteúdo passa da largura e a barra rola.
+		flexGrow: 1,
+		justifyContent: "center",
 		alignItems: "center",
 		gap: 6,
 		paddingHorizontal: 8,
@@ -980,9 +987,15 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
+	symbolKeyWide: {
+		minWidth: 52,
+	},
 	symbolText: {
 		fontFamily: "monospace",
 		fontSize: 18,
 		fontWeight: "700",
+	},
+	symbolTextWide: {
+		fontSize: 14,
 	},
 });

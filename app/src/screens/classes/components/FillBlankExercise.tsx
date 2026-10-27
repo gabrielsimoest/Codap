@@ -78,7 +78,6 @@ export default function FillBlankExercise({
 	const palette = useTheoryPalette();
 	const { t } = useTranslation();
 	const fontSize = useFontSizeStore((s) => s.fontSize);
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [typed, setTyped] = useState("");
 	const [focused, setFocused] = useState(false);
@@ -103,7 +102,8 @@ export default function FillBlankExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="fill_blank"
+				tutorialOpen={tutorial}
 				onNext={check}
 				keyboardShouldPersistTaps="handled"
 			>

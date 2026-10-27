@@ -90,6 +90,157 @@
 			"help": "Ajuda"
 		},
 
+		"tutorial": {
+			"back": "Voltar",
+			"next": "Próximo",
+			"done": "Entendi",
+			"titles": {
+				"theory": "Como ler a teoria",
+				"option": "Como responder",
+				"code_blank": "Como completar o código",
+				"fill_blank": "Como digitar a resposta",
+				"reorder": "Como montar o código",
+				"matching": "Como ligar os pares",
+				"code_playground": "Como usar o playground",
+				"code_editor": "Como fazer o desafio"
+			},
+			"theory": {
+				"read": {
+					"title": "Leia com calma",
+					"text": "O Cody apresenta a ideia e a explicação vem logo depois. As palavras coloridas são as mais importantes."
+				},
+				"tabs": {
+					"title": "Explore o código",
+					"text": "Toque nas abas para ver cada arquivo. A aba Web mostra o resultado de verdade, como no navegador."
+				},
+				"run": {
+					"title": "Execute e veja",
+					"text": "Quando houver o botão Executar, toque nele para rodar o código. A saída aparece logo abaixo."
+				},
+				"next": {
+					"title": "Toque em Seguinte",
+					"text": "Terminou de ler? Avance para a próxima tela. A barra no topo mostra quanto falta."
+				}
+			},
+			"option": {
+				"read": {
+					"title": "Leia o enunciado",
+					"text": "Alguns trazem um trecho de código. Leia com atenção antes de escolher."
+				},
+				"choose": {
+					"title": "Escolha uma alternativa",
+					"text": "Toque na que você acha certa. Mudou de ideia? É só tocar em outra."
+				},
+				"check": {
+					"title": "Confirme em Seguinte",
+					"text": "O app confere a resposta na hora e mostra se você acertou."
+				}
+			},
+			"code_blank": {
+				"see": {
+					"title": "Ache as lacunas",
+					"text": "O código tem espaços vazios (___). Cada um espera um bloco."
+				},
+				"fill": {
+					"title": "Toque nos blocos",
+					"text": "Cada toque preenche a próxima lacuna, na ordem do código. Cuidado: alguns blocos são armadilha!"
+				},
+				"undo": {
+					"title": "Trocou de ideia?",
+					"text": "Toque numa lacuna preenchida para devolver o bloco. Quando tudo estiver certo, toque em Seguinte."
+				}
+			},
+			"fill_blank": {
+				"see": {
+					"title": "Descubra o que falta",
+					"text": "O código tem uma lacuna (___). O enunciado diz o que digitar."
+				},
+				"type": {
+					"title": "Digite a resposta",
+					"text": "Escreva no campo abaixo do código e veja a lacuna se completar. O teclado não corrige nem põe maiúsculas sozinho."
+				},
+				"check": {
+					"title": "Confira",
+					"text": "Toque em Seguinte, ou no Enter do teclado, para conferir."
+				}
+			},
+			"reorder": {
+				"see": {
+					"title": "Linhas fora de ordem",
+					"text": "As linhas do código aparecem embaralhadas. O enunciado diz o que montar e em que ordem. Algumas linhas podem sobrar!"
+				},
+				"place": {
+					"title": "Toque na ordem certa",
+					"text": "Cada toque leva a linha para a próxima posição. A indentação aparece sozinha."
+				},
+				"undo": {
+					"title": "Corrija quando precisar",
+					"text": "Toque numa linha já posta para devolvê-la: as de baixo sobem. Com a ordem certa, toque em Seguinte."
+				}
+			},
+			"matching": {
+				"see": {
+					"title": "Dois lados, pares certos",
+					"text": "Cada item de um lado combina com um item do outro."
+				},
+				"pair": {
+					"title": "Toque em um de cada lado",
+					"text": "Pode começar por qualquer coluna. Par certo fica verde e trava."
+				},
+				"wrong": {
+					"title": "Errou? Tente de novo",
+					"text": "O par errado pisca em vermelho e a seleção é limpa. Ligue todos os pares para seguir."
+				}
+			},
+			"code_playground": {
+				"fill": {
+					"title": "Complete as lacunas",
+					"text": "Toque nos blocos para montar o código, como no exercício de completar."
+				},
+				"run": {
+					"title": "Toque em Executar",
+					"text": "O código roda de verdade. Você vê a prévia da página e o console logo abaixo."
+				},
+				"verdict": {
+					"title": "Veja se funcionou",
+					"text": "O app confere o que o código faz. Se ainda não funcionou, troque os blocos e execute de novo: qualquer combinação que funcione vale."
+				}
+			},
+			"code_editor": {
+				"read": {
+					"title": "Leia os requisitos",
+					"text": "O desafio lista o que o seu código precisa fazer. Cada requisito vira um item conferido."
+				},
+				"type": {
+					"title": "Digite o código",
+					"text": "O editor já vem com um começo. A barra de símbolos acima do teclado ajuda com < > / = e o recuo."
+				},
+				"run": {
+					"title": "Execute e confira",
+					"text": "Toque em Executar: a aba Resultado mostra ✓ ou ✗ em cada requisito. Passe em todos para concluir."
+				},
+				"hints": {
+					"title": "Precisa de ajuda?",
+					"text": "As dicas e a solução abrem a cada 2 tentativas que não passaram ou a cada 90 segundos. A Dica Instantânea, comprada no Mercado, abre na hora."
+				}
+			},
+			"demo": {
+				"challenge": "Desafio do módulo",
+				"heading": "Título",
+				"paragraph": "Parágrafo",
+				"link": "Link",
+				"preview": "Prévia",
+				"worked": "Funcionou!",
+				"notYet": "Ainda não funcionou",
+				"code": "Código",
+				"result": "Resultado",
+				"hint": "Dica {{n}}",
+				"solution": "Solução",
+				"attempts": "{{n}} de 2 tentativas",
+				"instant": "Dica Instantânea"
+			}
+		},
+
 		"codeSection": {
 			"copy": "Copiar",
 			"copied": "Copiado!",

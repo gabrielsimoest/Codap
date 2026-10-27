@@ -107,7 +107,6 @@ export default function ReorderExercise({
 	// cima do número do gutter, que é centralizado na linha.
 	const codeHeight = CODE_SIZE + fontSize + 5;
 	const codeTheme = palette.isDark ? codapDark : codapLight;
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
 	// Embaralhado uma vez por atividade: o `ActivityPlayer` remonta este
@@ -142,7 +141,8 @@ export default function ReorderExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="reorder"
+				tutorialOpen={tutorial}
 				onNext={() => allFilled && setModalVisible(true)}
 			>
 				<ActivityQuestion palette={palette} highlight={highlight} question={question} />

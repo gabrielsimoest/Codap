@@ -39,9 +39,6 @@ interface Props {
 export default function TheoryView({ content, title, step, total, progress, onProceed, onClose }: Props) {
 	const palette = useTheoryPalette();
 	const { textInset } = useLessonLayout();
-	// O botão "?" já existia e alternava este estado (o tutorial em si está
-	// desligado); o comportamento foi preservado.
-	const [isTutorialVisible, setTutorialVisible] = useState(content.tutorial ?? false);
 
 	const highlight = content.highlight ?? [];
 	const { introduction, explanation, closing } = content;
@@ -54,7 +51,8 @@ export default function TheoryView({ content, title, step, total, progress, onPr
 			step={step}
 			total={total}
 			onClose={onClose}
-			onHelp={() => setTutorialVisible(!isTutorialVisible)}
+			tutorial="theory"
+			tutorialOpen={content.tutorial ?? false}
 			onNext={onProceed}
 		>
 			<View style={{ paddingHorizontal: textInset }}>

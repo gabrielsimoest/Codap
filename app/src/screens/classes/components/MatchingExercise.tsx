@@ -77,7 +77,6 @@ export default function MatchingExercise({
 }: Props) {
 	const palette = useTheoryPalette();
 	const { t } = useTranslation();
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
 	// Embaralhado uma vez por atividade: o `ActivityPlayer` remonta este
@@ -169,7 +168,8 @@ export default function MatchingExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="matching"
+				tutorialOpen={tutorial}
 				onNext={() => allMatched && setModalVisible(true)}
 			>
 				<ActivityQuestion palette={palette} highlight={highlight} question={question} />

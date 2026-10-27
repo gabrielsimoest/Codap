@@ -58,9 +58,6 @@ export default function OptionExercise({
 	onProceed,
 }: Props) {
 	const palette = useTheoryPalette();
-	// O botão "?" já existia e alternava este estado (o tutorial em si está
-	// desligado); o comportamento foi preservado.
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 
 	const [selectedOption, setSelectedOption] = useState<number>();
 
@@ -81,7 +78,8 @@ export default function OptionExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="option"
+				tutorialOpen={tutorial}
 				onNext={Validate}
 			>
 				<ActivityQuestion
@@ -115,12 +113,6 @@ export default function OptionExercise({
 				correct={selectedOption === correctOption - 1}
 				onProceed={onProceed}
 			/>
-			{/* <TutorialOption
-					visible={TutorialVisible}
-					setModalVisible={setTutorialVisible}
-				/>
-				<Timer navigation={navigation} seconds={sec} />
-				<SaveClass AulaId={aulaSalvar} Salvar={Salvar} /> */}
 		</>
 	);
 }

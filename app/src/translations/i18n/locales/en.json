@@ -90,6 +90,157 @@
 			"help": "Help"
 		},
 
+		"tutorial": {
+			"back": "Back",
+			"next": "Next",
+			"done": "Got it",
+			"titles": {
+				"theory": "How to read the theory",
+				"option": "How to answer",
+				"code_blank": "How to complete the code",
+				"fill_blank": "How to type the answer",
+				"reorder": "How to build the code",
+				"matching": "How to match the pairs",
+				"code_playground": "How to use the playground",
+				"code_editor": "How to do the challenge"
+			},
+			"theory": {
+				"read": {
+					"title": "Read it calmly",
+					"text": "Cody introduces the idea and the explanation follows. The colored words are the most important ones."
+				},
+				"tabs": {
+					"title": "Explore the code",
+					"text": "Tap the tabs to see each file. The Web tab shows the real result, like in a browser."
+				},
+				"run": {
+					"title": "Run it and see",
+					"text": "When there is a Run button, tap it to run the code. The output shows up right below."
+				},
+				"next": {
+					"title": "Tap Next",
+					"text": "Done reading? Move on to the next screen. The bar at the top shows how much is left."
+				}
+			},
+			"option": {
+				"read": {
+					"title": "Read the question",
+					"text": "Some come with a code snippet. Read carefully before choosing."
+				},
+				"choose": {
+					"title": "Pick an answer",
+					"text": "Tap the one you think is right. Changed your mind? Just tap another."
+				},
+				"check": {
+					"title": "Confirm with Next",
+					"text": "The app checks your answer right away and shows whether you got it."
+				}
+			},
+			"code_blank": {
+				"see": {
+					"title": "Find the blanks",
+					"text": "The code has empty spaces (___). Each one waits for a block."
+				},
+				"fill": {
+					"title": "Tap the blocks",
+					"text": "Each tap fills the next blank, in code order. Careful: some blocks are traps!"
+				},
+				"undo": {
+					"title": "Changed your mind?",
+					"text": "Tap a filled blank to give the block back. When everything is right, tap Next."
+				}
+			},
+			"fill_blank": {
+				"see": {
+					"title": "Find what is missing",
+					"text": "The code has one blank (___). The question tells you what to type."
+				},
+				"type": {
+					"title": "Type the answer",
+					"text": "Write in the field below the code and watch the blank fill in. The keyboard does not autocorrect or capitalize."
+				},
+				"check": {
+					"title": "Check it",
+					"text": "Tap Next, or the keyboard Enter, to check."
+				}
+			},
+			"reorder": {
+				"see": {
+					"title": "Lines out of order",
+					"text": "The code lines show up shuffled. The question tells you what to build and in what order. Some lines may be extra!"
+				},
+				"place": {
+					"title": "Tap in the right order",
+					"text": "Each tap sends the line to the next position. Indentation appears on its own."
+				},
+				"undo": {
+					"title": "Fix it when needed",
+					"text": "Tap a placed line to give it back: the ones below move up. With the right order, tap Next."
+				}
+			},
+			"matching": {
+				"see": {
+					"title": "Two sides, right pairs",
+					"text": "Each item on one side matches an item on the other."
+				},
+				"pair": {
+					"title": "Tap one on each side",
+					"text": "You can start from either column. A right pair turns green and locks."
+				},
+				"wrong": {
+					"title": "Wrong? Try again",
+					"text": "A wrong pair flashes red and the selection clears. Match every pair to move on."
+				}
+			},
+			"code_playground": {
+				"fill": {
+					"title": "Complete the blanks",
+					"text": "Tap the blocks to build the code, just like the completing exercise."
+				},
+				"run": {
+					"title": "Tap Run",
+					"text": "The code really runs. You see the page preview and the console right below."
+				},
+				"verdict": {
+					"title": "See if it worked",
+					"text": "The app checks what the code does. If it has not worked yet, swap the blocks and run again: any combination that works counts."
+				}
+			},
+			"code_editor": {
+				"read": {
+					"title": "Read the requirements",
+					"text": "The challenge lists what your code must do. Each requirement becomes a checked item."
+				},
+				"type": {
+					"title": "Type the code",
+					"text": "The editor starts with a head start. The symbol bar above the keyboard helps with < > / = and indentation."
+				},
+				"run": {
+					"title": "Run and check",
+					"text": "Tap Run: the Result tab shows ✓ or ✗ for each requirement. Pass them all to finish."
+				},
+				"hints": {
+					"title": "Need help?",
+					"text": "Hints and the solution open after every 2 failed attempts or every 90 seconds. The Instant Hint, bought in the Market, opens right away."
+				}
+			},
+			"demo": {
+				"challenge": "Module challenge",
+				"heading": "Heading",
+				"paragraph": "Paragraph",
+				"link": "Link",
+				"preview": "Preview",
+				"worked": "It worked!",
+				"notYet": "Not working yet",
+				"code": "Code",
+				"result": "Result",
+				"hint": "Hint {{n}}",
+				"solution": "Solution",
+				"attempts": "{{n}} of 2 attempts",
+				"instant": "Instant Hint"
+			}
+		},
+
 		"codeSection": {
 			"copy": "Copy",
 			"copied": "Copied!",

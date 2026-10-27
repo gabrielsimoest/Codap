@@ -86,7 +86,6 @@ export default function CodePlaygroundExercise({
 }: Props) {
 	const palette = useTheoryPalette();
 	const { t } = useTranslation();
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
 	// Embaralhado uma vez por atividade (o `ActivityPlayer` remonta a cada uma).
@@ -200,7 +199,8 @@ export default function CodePlaygroundExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="code_playground"
+				tutorialOpen={tutorial}
 				onNext={() => evaluated && setModalVisible(true)}
 			>
 				<ActivityQuestion palette={palette} highlight={highlight} question={question} />

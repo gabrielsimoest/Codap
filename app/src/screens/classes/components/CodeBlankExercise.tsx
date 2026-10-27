@@ -59,7 +59,6 @@ export default function CodeBlankExercise({
 	onClose,
 }: Props) {
 	const palette = useTheoryPalette();
-	const [tutorialVisible, setTutorialVisible] = useState(tutorial);
 	const [modalVisible, setModalVisible] = useState(false);
 
 	// Embaralhado uma vez por atividade: o `ActivityPlayer` remonta este
@@ -104,7 +103,8 @@ export default function CodeBlankExercise({
 				step={step}
 				total={total}
 				onClose={onClose}
-				onHelp={() => setTutorialVisible(!tutorialVisible)}
+				tutorial="code_blank"
+				tutorialOpen={tutorial}
 				onNext={() => allFilled && setModalVisible(true)}
 			>
 				<ActivityQuestion palette={palette} highlight={highlight} question={question} />
