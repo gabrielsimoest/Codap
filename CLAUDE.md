@@ -37,7 +37,31 @@ Nunca inclua autoria, assinatura ou referência a IA, Claude ou qualquer ferrame
 
 ## 3. Documentação
 
-O `README.md` e os arquivos `CLAUDE.md` (raiz, `api/` e `app/`) fazem parte da documentação oficial do projeto. Sempre que uma alteração solicitada modificar comportamento, arquitetura, estrutura, configuração, comandos ou dependências documentadas, atualize a documentação correspondente como parte da mesma tarefa. Não deixe a documentação descrevendo um estado que já não corresponde ao código.
+**A documentação oficial do projeto está em [`/docs`](docs/README.md).** É escrita para pessoas — quem entra no time, quem dá continuidade ao projeto, quem só quer entender como o sistema funciona — e cobre visão geral, arquitetura, modelo de dados, referência da API, app, dashboard, os fluxos de ponta a ponta (autenticação, sincronização, lições, gamificação, loja, versionamento, servidor lento), guias de autoria e de publicação, e as limitações conhecidas. Comece pelo [`docs/README.md`](docs/README.md), que tem o índice.
+
+O `README.md`, a pasta `/docs` e os arquivos `CLAUDE.md` (raiz, `api/`, `app/` e `dashboard/`) fazem parte da documentação do projeto, com papéis diferentes: `/docs` e o `README.md` são a documentação **oficial, para pessoas**; os `CLAUDE.md` são instruções de trabalho para o assistente de código e guardam o detalhe fino (armadilhas, histórico de decisões). Sempre que uma alteração solicitada modificar comportamento, arquitetura, estrutura, configuração, comandos, rotas, tabelas, fluxos ou dependências documentadas, atualize a documentação correspondente — **inclusive o documento afetado em `/docs`** — como parte da mesma tarefa. Não deixe a documentação descrevendo um estado que já não corresponde ao código.
+
+Mapa rápido de qual documento de `/docs` atualizar:
+
+| Mudou… | Atualize |
+|---|---|
+| Rota, parâmetro, limite de requisições ou código de erro | [docs/api.md](docs/api.md) (e o Swagger, no `schema` da rota) |
+| Tabela, coluna ou o SQLite do aparelho | [docs/modelo-de-dados.md](docs/modelo-de-dados.md) |
+| Login, sessão ou renovação de token | [docs/fluxos/autenticacao-e-sessao.md](docs/fluxos/autenticacao-e-sessao.md) |
+| E-mails, confirmação ou senha | [docs/fluxos/contas-e-emails.md](docs/fluxos/contas-e-emails.md) |
+| Fila de sync, `/sync`, restauração de progresso | [docs/fluxos/sincronizacao-e-progresso.md](docs/fluxos/sincronizacao-e-progresso.md) |
+| Player, sessão de lição, sandbox, tipo de atividade | [docs/fluxos/licao-e-atividades.md](docs/fluxos/licao-e-atividades.md) e [docs/referencia/tipos-de-atividade.md](docs/referencia/tipos-de-atividade.md) |
+| XP, nível, Bits, conquistas, aprofundamento | [docs/fluxos/gamificacao.md](docs/fluxos/gamificacao.md) |
+| Loja, baú, coleção | [docs/fluxos/loja-e-bau.md](docs/fluxos/loja-e-bau.md) |
+| `content_version`, cache do catálogo | [docs/fluxos/conteudo-e-versionamento.md](docs/fluxos/conteudo-e-versionamento.md) |
+| Servidor lento, `app_version`, aviso de nova versão | [docs/fluxos/servidor-lento-e-nova-versao.md](docs/fluxos/servidor-lento-e-nova-versao.md) |
+| Estrutura, temas ou componentes do app | [docs/app.md](docs/app.md) |
+| Dashboard | [docs/dashboard.md](docs/dashboard.md) |
+| Comandos, variáveis de ambiente, instalação | [docs/primeiros-passos.md](docs/primeiros-passos.md) |
+| Processo de autoria ou de publicação | [docs/guias/](docs/guias/autoria-de-conteudo.md) |
+| Uma limitação foi resolvida ou aceita | [docs/roadmap.md](docs/roadmap.md) |
+
+Não crie documentação paralela fora de `/docs` (planos e specs avulsos, por exemplo): o que merece ficar entra no documento certo; o resto é rascunho e pertence ao histórico do Git.
 
 ## 4. Verificação antes de finalizar
 

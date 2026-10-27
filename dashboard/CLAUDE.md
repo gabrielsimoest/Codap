@@ -3,7 +3,10 @@
 Este arquivo complementa o [CLAUDE.md](../CLAUDE.md) da raiz (regras globais do
 projeto, sempre válidas aqui) com o contexto específico do dashboard de
 conteúdo. Leia os dois antes de trabalhar em `/dashboard`. Quando o trabalho
-tocar endpoints, leia também [api/CLAUDE.md](../api/CLAUDE.md).
+tocar endpoints, leia também [api/CLAUDE.md](../api/CLAUDE.md). A documentação oficial,
+para pessoas, está em [`/docs`](../docs/README.md) ([docs/dashboard.md](../docs/dashboard.md)
+e [docs/guias/autoria-de-conteudo.md](../docs/guias/autoria-de-conteudo.md)); ao mudar
+comportamento, atualize o documento afetado lá também.
 
 ## O que é
 
@@ -182,7 +185,7 @@ O formulário da lição tem também **Aula do baú** (`lessons.is_chest`): uma 
 `theory`, `option`, `code_blank`, `fill_blank`, `code_playground`, `code_editor`, `reorder` e `matching` têm formulário tipado; qualquer outro `type` é editado como
 JSON cru. É a mesma postura da API (transportar fielmente o que não se sabe
 interpretar) e já serve os tipos previstos em
-[docs/roadmap-atividades-praticas.md](../docs/roadmap-atividades-praticas.md)
+[docs/referencia/tipos-de-atividade.md](../docs/referencia/tipos-de-atividade.md)
 sem retrabalho.
 
 ### `highlight.ts` precisa ser cópia fiel do app

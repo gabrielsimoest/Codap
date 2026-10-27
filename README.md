@@ -6,7 +6,20 @@ Codap é um aplicativo de aprendizado gamificado de HTML, CSS e JavaScript. O re
 - **`/api`** — API em Fastify + TypeScript, conectada a Prisma/PostgreSQL (NeonDB), com autenticação JWT (access + refresh token) e um endpoint de sincronização em lote.
 - **`/dashboard`** — dashboard web local (Vite + React) para gerenciar o conteúdo pedagógico: criar, editar, reordenar e exportar áreas, módulos, lições e atividades nos dois idiomas, sem precisar de Swagger ou Postman.
 
-Para detalhes de arquitetura e convenções de cada pacote, veja [app/CLAUDE.md](app/CLAUDE.md), [api/CLAUDE.md](api/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
+## Documentação
+
+A documentação oficial está na pasta [`docs/`](docs/README.md): visão geral, arquitetura, modelo de dados, referência da API, os fluxos de ponta a ponta (autenticação, sincronização, lições, gamificação, loja, versionamento) e guias de autoria de conteúdo e de publicação.
+
+| Quero… | Leia |
+|---|---|
+| Entender o projeto | [Visão geral](docs/visao-geral.md) e [Arquitetura](docs/arquitetura.md) |
+| Rodar tudo | [Primeiros passos](docs/primeiros-passos.md) |
+| Consultar rotas | [Referência da API](docs/api.md) |
+| Editar o currículo | [Dashboard](docs/dashboard.md) e [Autoria de conteúdo](docs/guias/autoria-de-conteudo.md) |
+| Publicar uma versão | [Publicação](docs/guias/publicacao.md) |
+| Contribuir | [Contribuindo](docs/contribuindo.md) |
+
+Os arquivos [app/CLAUDE.md](app/CLAUDE.md), [api/CLAUDE.md](api/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md) são instruções de trabalho para o assistente de código e guardam o detalhe fino de cada pacote.
 
 ## Visite nosso site
 [codap.gabrielsimoesdeveloper.com.br](https://codap.gabrielsimoesdeveloper.com.br)
@@ -73,7 +86,7 @@ Pré-requisitos: [Node.js](https://nodejs.org/) (LTS) e [pnpm](https://pnpm.io/i
     ```
     O dashboard exige a API em modo de desenvolvimento (`pnpm api:dev`): as rotas de escrita do catálogo só existem nesse modo. Veja [dashboard/README.md](dashboard/README.md).
 
-Mais comandos (build, testes, etc.) estão documentados em [api/CLAUDE.md](api/CLAUDE.md), [app/CLAUDE.md](app/CLAUDE.md) e [dashboard/CLAUDE.md](dashboard/CLAUDE.md).
+Variáveis de ambiente, banco de dados, mais comandos (build, testes, seed) e problemas comuns estão em [docs/primeiros-passos.md](docs/primeiros-passos.md).
 
 ## Contribuição
 

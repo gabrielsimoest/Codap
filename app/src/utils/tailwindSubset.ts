@@ -2,7 +2,7 @@
  * Mapa curado de classes utilitárias Tailwind → CSS resolvido, cobrindo
  * exatamente o que é ensinado no módulo "Além do CSS: Tailwind CSS e
  * Ecossistema" (`api/prisma/seed.ts`). Não é um motor Tailwind (sem JIT,
- * sem CDN — inviável offline, ver `docs/roadmap-atividades-praticas.md`),
+ * sem CDN — inviável offline, ver `docs/roadmap.md`),
  * só a centralização do CSS que já era resolvido manualmente por lição via
  * `additionalCode`. Uma classe ensinada fora deste mapa simplesmente não
  * gera regra — mesmo comportamento de "falha silenciosa" que já existia

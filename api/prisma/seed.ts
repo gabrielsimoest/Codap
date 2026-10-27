@@ -8840,7 +8840,7 @@ async function seedCssBasicLessons (localeIds: Map<LocaleCode, number>): Promise
 // Básico"): 10 lições cobrindo os fundamentos da linguagem e conceitos
 // básicos de programação, cada uma com até 2 atividades teóricas. Nenhuma
 // tela usa WebView aqui — este módulo ainda não executa JS de verdade (ver
-// Fase 3 do roadmap em docs/roadmap-atividades-praticas.md), então todas as
+// Fase 3 do roadmap em docs/referencia/tipos-de-atividade.md), então todas as
 // atividades são `onlyCode: true`.
 
 
@@ -13159,7 +13159,7 @@ async function seedJsBasicLessons (localeIds: Map<LocaleCode, number>): Promise<
 //   - `CodeSection` monta a aba "Web" com HTML + CSS apenas (`buildPreviewHtml`
 //     ignora JavaScript de propósito). Por isso toda atividade de JavaScript é
 //     `onlyCode: true`, mesmo onde a proposta pedia WebView — ver Fase 3 do
-//     roadmap em docs/roadmap-atividades-praticas.md.
+//     roadmap em docs/referencia/tipos-de-atividade.md.
 // ============================================================
 
 // --- HTML Intermediário: trechos de código ---
@@ -46836,7 +46836,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
 // `additionalCode` já resolve o valor real de cada classe usada no exemplo
 // (ex.: `.p-4 { padding: 1rem; }`) — não é preciso carregar o Tailwind de
 // verdade (CDN, incompatível com o app ser offline-first; motor JIT, pesado
-// demais para o device — ver docs/roadmap-atividades-praticas.md) para
+// demais para o device — ver docs/roadmap.md) para
 // mostrar o resultado correto de um exemplo pequeno e controlado. Fica
 // `onlyCode: true` só onde o efeito depende de largura de tela grande
 // (`md:`, mesmo problema de breakpoint das media queries em CSS Avançado),
