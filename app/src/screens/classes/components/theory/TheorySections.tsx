@@ -28,9 +28,10 @@ function useLineHeight(base: number): number {
 export function TheorySection({ palette, highlight, title, text }: SectionProps) {
 	const titleLine = useLineHeight(TEXT_SIZE.sectionTitle);
 	const bodyLine = useLineHeight(TEXT_SIZE.body);
-	// O título mantém o destaque na cor de acento; no texto descritivo as palavras
-	// destacadas usam uma cor própria, mais clara, em Roboto medium.
-	const titleHighlight = { color: palette.accent };
+	// As palavras destacadas usam `emphasis` (mais clara que o acento, que no fundo
+	// escuro lê mal) no título e no texto — a mesma cor das atividades práticas
+	// (`ActivityQuestion`). No texto descritivo vão em Roboto medium; o título já é bold.
+	const titleHighlight = { color: palette.emphasis };
 	const bodyHighlight = { color: palette.emphasis, fontFamily: "Roboto", fontWeight: "500" as const };
 
 	return (
