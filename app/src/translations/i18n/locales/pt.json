@@ -302,6 +302,12 @@
 			"waking": "O servidor está acordando. Isso pode levar até 1 minuto — pode esperar, o app tenta sozinho."
 		},
 
+		"logout": {
+			"title": "Sair da conta?",
+			"message": "Você poderá entrar de novo quando quiser, com o mesmo e-mail e a mesma senha.",
+			"confirm": "Sair",
+			"cancel": "Cancelar"
+		},
 		"appUpdate": {
 			"title": "Nova versão disponível",
 			"titleImportant": "Atualização importante",

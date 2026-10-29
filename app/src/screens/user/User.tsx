@@ -20,6 +20,7 @@ import * as AuthService from "../../services/AuthService";
 import useNavigate from "../../hooks/useNavigate";
 import { User as UserEntity } from "../../types/entities";
 import AchievementsModal from "./components/achievements/AchievementsModal";
+import LogoutConfirmModal from "./components/LogoutConfirmModal";
 import { useAppColors } from "../../theme/appColors";
 import { useCallback, useState } from "react";
 
@@ -43,14 +44,28 @@ export default function User() {
 	const { user, setUser } = useUserStore();
 	const clearAuthSession = useAuthStore((s) => s.clearSession);
 
+	const [visible, setVisible] = useState(false);
+	const [confirmingLogout, setConfirmingLogout] = useState(false);
+	const [loggingOut, setLoggingOut] = useState(false);
+
+	// Sair pede confirmação e mostra o carregamento: revogar a sessão no servidor
+	// pode demorar (ele dorme e acorda), e um segundo toque não pode sair duas vezes.
 	const logout = async () => {
-		await AuthService.logout();
+		if (loggingOut) return;
+		setLoggingOut(true);
+		try {
+			await AuthService.logout();
+		} catch (error) {
+			console.warn("Falha ao sair da conta", error);
+			setLoggingOut(false);
+			return;
+		}
+		setConfirmingLogout(false);
+		setLoggingOut(false);
 		clearAuthSession();
 		setUser({} as UserEntity);
 		navigation.navigate("Login");
 	};
-
-	const [visible, setVisible] = useState(false);
 
 	return (
 		<>
@@ -116,7 +131,7 @@ export default function User() {
 								icon={{ type: "ionicon", name: "log-out-outline" }}
 								danger
 								noChevron
-								onPress={logout}
+								onPress={() => setConfirmingLogout(true)}
 							/>
 						</View>
 					</ScrollView>
@@ -126,6 +141,12 @@ export default function User() {
 			<AchievementsModal
 				visible={visible}
 				onDismiss={() => setVisible(false)}
+			/>
+			<LogoutConfirmModal
+				visible={confirmingLogout}
+				onDismiss={() => setConfirmingLogout(false)}
+				onConfirm={logout}
+				loading={loggingOut}
 			/>
 		</>
 	);

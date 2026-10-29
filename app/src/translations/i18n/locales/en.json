@@ -302,6 +302,12 @@
 			"waking": "The server is waking up. This can take up to 1 minute — you can wait, the app will keep trying."
 		},
 
+		"logout": {
+			"title": "Sign out?",
+			"message": "You can sign back in whenever you like, with the same email and password.",
+			"confirm": "Sign out",
+			"cancel": "Cancel"
+		},
 		"appUpdate": {
 			"title": "New version available",
 			"titleImportant": "Important update",

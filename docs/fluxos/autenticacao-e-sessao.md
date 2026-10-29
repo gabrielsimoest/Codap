@@ -117,6 +117,10 @@ não mostra aviso.
 melhor esforço, sem esperar o servidor acordar). O app limpa o SecureStore e cancela os
 lembretes.
 
+No Perfil, **Sair** abre antes uma confirmação ("Sair da conta?", com Cancelar). Ao confirmar, o
+botão mostra o carregamento e o modal não fecha nem aceita um segundo toque até a saída terminar
+(`LogoutConfirmModal`), porque revogar a sessão pode demorar com o servidor dormindo.
+
 ## Redefinir ou trocar a senha
 
 `POST /auth/reset-password` troca a senha e **revoga todos os refresh tokens da conta**,

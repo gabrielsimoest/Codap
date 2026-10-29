@@ -3,7 +3,7 @@
     "name": "Codap",
     "slug": "Codap",
     "scheme": "codap",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/app-icon.png",
     "userInterfaceStyle": "automatic",
