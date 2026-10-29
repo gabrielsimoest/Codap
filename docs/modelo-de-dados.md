@@ -68,7 +68,7 @@ Decisões:
 
 | Tabela | Colunas relevantes | Observações |
 |---|---|---|
-| `users` | `id` (UUID), `name`, `email` (único), `password` (bcrypt), `email_verified_at`, `welcome_sent_at`, `xp`, `bits`, `instant_hints`, `chest_misses` | `xp`/`bits` são `Int?` (normalizados para 0). `email_verified_at` nulo = não confirmado. |
+| `users` | `id` (UUID), `name`, `email` (único), `password` (bcrypt), `email_verified_at`, `welcome_sent_at`, `xp`, `bits`, `instant_hints`, `chest_misses`, `is_master` | `xp`/`bits` são `Int?` (normalizados para 0). `email_verified_at` nulo = não confirmado. `is_master` (padrão falso) liga a [conta mestra](fluxos/gamificacao.md#conta-mestra); só se altera por SQL. |
 | `user_lessons` | `user_id`, `lesson_id`, `completed_at`; **unique** `(user_id, lesson_id)` | A constraint é o que torna o `/sync` idempotente. |
 | `user_achievements` | `user_id`, `achievement_id`, `completed_at`; **unique** `(user_id, achievement_id)` | |
 | `achievements` | `name`, `description` | **Ids fixos**: 1 = HTML, 2 = CSS, 3 = JavaScript, 4 = Tríade Web. Contrato com o app. |

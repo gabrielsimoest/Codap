@@ -1,5 +1,6 @@
 import { type FastifyPluginAsync } from 'fastify'
 import type { ProgressResponse } from '../../types/contracts.js'
+import { ensureMasterGrants } from '../../utils/masterAccount.js'
 
 const progress: FastifyPluginAsync = async (fastify): Promise<void> => {
   fastify.get('/progress', {
@@ -45,6 +46,10 @@ const progress: FastifyPluginAsync = async (fastify): Promise<void> => {
     }
   }, async (request): Promise<ProgressResponse> => {
     const userId = request.user.id
+
+    // Conta mestra: garante tudo concluído antes de ler (ver utils/masterAccount.ts).
+    const { is_master: isMaster } = await fastify.prisma.users.findUniqueOrThrow({ where: { id: userId }, select: { is_master: true } })
+    if (isMaster) await ensureMasterGrants(fastify, userId)
 
     const [lessons, achievements] = await Promise.all([
       fastify.prisma.user_lessons.findMany({

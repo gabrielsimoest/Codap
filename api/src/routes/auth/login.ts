@@ -4,6 +4,7 @@ import { createSession } from '../../utils/session.js'
 import { sendWelcomeEmailOnce } from '../../utils/authEmails.js'
 import { emailVerifiedAt } from '../../utils/emailConfirmation.js'
 import { isEmailAllowed } from '../../utils/testAccount.js'
+import { ensureMasterGrants } from '../../utils/masterAccount.js'
 import { authResponseSchema, loginBodySchema } from './auth.schema.js'
 
 interface LoginBody {
@@ -39,6 +40,11 @@ const login: FastifyPluginAsync = async (fastify): Promise<void> => {
     // Mesma mensagem para "usuário não existe" e "senha errada" — evita enumeração de contas.
     if (!existingUser || !(await comparePassword(password, existingUser.password))) {
       throw fastify.httpErrors.unauthorized('E-mail ou senha inválidos.')
+    }
+
+    // Conta mestra: as concessões são garantidas antes de montar a resposta, para o app já receber o XP final.
+    if (existingUser.is_master) {
+      existingUser.xp = (await ensureMasterGrants(fastify, existingUser.id)).xp
     }
 
     const session = await createSession(fastify, existingUser.id, rememberMe ?? false)

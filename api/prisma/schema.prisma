@@ -68,6 +68,8 @@ model users {
   instant_hints     Int                 @default(0)
   /// Baús seguidos que não deram aula exclusiva (a garantia contra azar).
   chest_misses      Int                 @default(0)
+  /// Conta mestra (só por SQL direto no banco; nenhuma rota escreve este campo): a cada login e a cada GET /sync/progress o servidor garante todas as lições e conquistas, os baús revelados e o XP do nível máximo. Ver utils/masterAccount.ts.
+  is_master         Boolean             @default(false)
   created_at        DateTime            @default(now())
   updated_at        DateTime            @updatedAt
   user_lessons      user_lessons[]

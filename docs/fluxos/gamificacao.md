@@ -119,6 +119,25 @@ Quatro emblemas, numa grade 2×2 aberta pelo Perfil: **HTML**, **CSS**, **JavaSc
 Conquistas também voltam do servidor ao entrar numa conta nova
 ([Sincronização](sincronizacao-e-progresso.md#volta-restaurar-o-progresso)).
 
+## Conta mestra
+
+Uma conta de testes com tudo liberado, para demonstrar e testar o app inteiro sem jogar:
+nível máximo, todas as aulas concluídas (inclusive as de aprofundamento e do baú), todas as
+conquistas e todos os baús revelados.
+
+- **Liga-se só por SQL**: `UPDATE users SET is_master = true WHERE email = '…'`. A coluna
+  `users.is_master` (padrão falso) não aparece em nenhuma resposta da API, nenhuma rota a escreve
+  e o app não sabe que ela existe. Não há "código secreto" no app, que seria extraível do APK.
+- **Concessões reais, não respostas falsas**: a cada `POST /auth/login` e `GET /sync/progress`
+  de uma conta mestra, o servidor garante (idempotente, `createMany` com `skipDuplicates`) as linhas
+  de `user_lessons`, `user_achievements` e `user_chest_lessons` e eleva `users.xp` ao XP do nível 50.
+  Por isso loja, coleção e restauração de progresso funcionam sem caso especial, e aula ou
+  conquista nova aparece concluída na próxima abertura. Código em `api/src/utils/masterAccount.ts`.
+- **Bits não são concedidos pela função**: o saldo de teste (3 000) é dado uma única vez, direto
+  no banco, quando a conta é preparada. Gastou na loja? Ajuste `users.bits` por SQL.
+- A conta é criada normalmente pelo app (ou direto no banco, sem disparar e-mail, para ainda
+  poder demonstrar a confirmação de e-mail e as boas-vindas). Troque a senha logo em seguida.
+
 ## Perfil
 
 Cartão de identidade (avatar, nome, e-mail) com **Nível N**, "atual / necessário XP" e a
