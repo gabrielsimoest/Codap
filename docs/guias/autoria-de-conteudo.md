@@ -65,6 +65,19 @@ Detalhes que importam:
   (bancos de ~3 perguntas, ~1 verdadeiro/falso por banco). Tipos complexos (playground,
   desafio) aparecem **pouco no começo e mais no fim** do módulo e nos módulos avançados.
 - A pergunta só pode cobrar o que a teoria **da própria lição** ensinou.
+- **Nada é usado antes de ser apresentado.** Um termo, uma tag, uma propriedade ou uma
+  sintaxe só pode aparecer num exemplo ou numa pergunta se já foi explicado em lição anterior
+  *na ordem atual*. A exceção é um aviso curto ("você vai ver isso em breve"), e só para o
+  que não é cobrado na prática. Mudou a ordem das lições? Releia as frases de ponte ("na
+  próxima lição…", "daqui a pouco…") de quem foi movido.
+- **Cada pergunta tem uma única leitura e uma única resposta certa** (ou todas as respostas
+  válidas aceitas, como `send` e `end` numa lacuna de Express). Antes de fechar um exercício,
+  procure uma alternativa errada que também funcione, o enunciado que entrega a resposta e o
+  valor cobrado em formato que o aluno não saberia adivinhar.
+- O que a revisão do 1.0.0 repetiu e deve ser evitado em conteúdo novo: usar `if`, arrays ou
+  `class` antes das lições que os ensinam; cobrar `fr`, `space-between`, `px`, hexadecimal,
+  `:root` ou `constructor` sem tê-los explicado; mostrar `<img ... />` e dizer que "não tem
+  tag de fechamento"; exemplos de React/Tailwind que dependem de JavaScript não ensinado.
 - Termos técnicos (HTML, CSS, JavaScript) não se traduzem; `areas.name` não tem tradução.
 - Um módulo tem `name` genérico ("Módulo N") e `subtitle` descritivo ("Além do
   JavaScript"). Nunca sobrescreva `name` com o descritivo.
@@ -136,6 +149,20 @@ descartáveis** que:
 Referência: `prisma/migrateTheoryV2.ts` (`pnpm --filter codap-api theory:migrate`,
 `--apply`, `--revert <arquivo>`). Depois de aplicar: `seed:generate`, `seed:check` e
 publicar `content_version`.
+
+## Revisão do currículo (como foi feita a 1.0.0)
+
+Antes de declarar o currículo estável, ele passou por duas leituras independentes, cada uma
+por área: um **especialista web** (rigor técnico: cada afirmação, cada resposta marcada,
+cada exercício executado quando possível) e um **leigo iniciante** (lê na ordem do app,
+mantém um "caderno do aluno" do que já foi apresentado e aponta uso antes da apresentação,
+perguntas que cobram o que não foi ensinado e lições sem impacto). As duas listas de
+correção foram cruzadas: o fato técnico vale o do especialista; a clareza do texto, a do
+leigo. Depois disso, a **ordem das lições** foi ajustada, as correções foram aplicadas em
+português e inglês e as lacunas maiores ganharam telas de teoria novas. O método vale para
+qualquer revisão grande: analisar em paralelo, **aplicar de forma centralizada** (para
+duas revisões não editarem o mesmo trecho), validar tudo nos schemas do dashboard, regenerar
+o `seed.ts` e só então publicar a `content_version`.
 
 ## Exportar para revisão
 

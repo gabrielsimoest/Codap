@@ -38,6 +38,17 @@ decidido *não* fazer, e por quê, está registrado junto da funcionalidade corr
 | Realce de sintaxe **dentro** do editor livre do desafio | Analisado e adiado; o caminho seria `<Text>` aninhados no `TextInput`, testado em aparelho. |
 | Código de realce: o `highlight` tem a classe de letras restrita ao português | Outro alfabeto exigiria estender (`À-ÿ` hoje). |
 
+### Conteúdo (pendências da revisão da 1.0.0)
+
+| Pendência | Detalhe |
+|---|---|
+| O módulo de Tailwind ensina o formato do **v3** (`tailwind.config.js`, `export default`) | O v4 configura no CSS (`@theme`); a diferença é citada numa frase, não ensinada. |
+| Os módulos "Além de" (React, Node/Express) não têm prática livre nem desafio final | Os módulos 2 e 3 de cada área têm "Testando seus conhecimentos"; o 4 só tem leitura e reconhecimento. |
+| As telas de teoria novas da 1.0.0 não vieram com prática própria | Quem as cobre são as perguntas já existentes da lição; falta, por exemplo, uma prática de JSON e de `pattern`. |
+| As perguntas de verdadeiro/falso tendem a "Verdadeiro" (JavaScript) | Equilibrar exige reescrever enunciados, não só trocar a ordem. |
+| Express: `/users/:id` e `req.query` aparecem antes de serem ensinados; as lições 299 e 300 repetem o mesmo servidor | Pontual; reescrever essas duas lições. |
+| Lição 719 (JS): a notação de tipos aparece antes das lições de TypeScript | Mover as práticas de TS para a lição seguinte. |
+
 ### Dashboard
 
 - Sem autenticação nem multiusuário (ferramenta local, uma pessoa por vez).

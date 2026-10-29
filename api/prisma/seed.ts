@@ -221,9 +221,9 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O HTML e a estrutura do conteúdo',
-              text: 'HTML é a linguagem usada para estruturar o conteúdo de uma página web. Ele informa ao navegador o que cada parte da página representa, como títulos, parágrafos, imagens e links.\n\nHTML significa HyperText Markup Language. Apesar do nome, HTML não é uma linguagem de programação: ele é uma linguagem de marcação.'
+              text: 'HTML é a linguagem usada para estruturar o conteúdo de uma página web. Ele informa ao navegador o que cada parte da página representa, como títulos, parágrafos, imagens e links.\n\nHTML significa HyperText Markup Language. Apesar do nome, HTML não é uma linguagem de programação (que dá ordens e faz contas): ele é uma linguagem de marcação, ou seja, serve para marcar cada pedaço do texto com uma etiqueta que diz o que ele é.'
             },
-            closing: 'O HTML define a estrutura e o significado do conteúdo. A aparência será trabalhada depois, com CSS.',
+            closing: 'O HTML define a estrutura e o significado do conteúdo. Não se preocupe em entender todo o código acima agora: vamos ver cada parte dele nas próximas lições. A aparência será trabalhada depois, com CSS (a linguagem das cores e das fontes).',
             highlight: ['HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
             code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>Minha primeira página</title>\n  </head>\n  <body>\n    <h1>Olá, mundo!</h1>\n    <p>Minha primeira página web.</p>\n  </body>\n</html>'
@@ -236,12 +236,47 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'HTML and the structure of content',
-              text: 'HTML is the language used to structure the content of a web page. It tells the browser what each part of the page represents, like headings, paragraphs, images and links.\n\nHTML stands for HyperText Markup Language. Despite the name, HTML is not a programming language: it is a markup language.'
+              text: 'HTML is the language used to structure the content of a web page. It tells the browser what each part of the page represents, like headings, paragraphs, images and links.\n\nHTML stands for HyperText Markup Language. Despite the name, HTML is not a programming language (one that gives orders and does calculations): it is a markup language, meaning it marks each piece of text with a label that says what it is.'
             },
-            closing: 'HTML defines the structure and meaning of the content. Appearance comes later, with CSS.',
+            closing: 'HTML defines the structure and meaning of the content. Don\'t worry about understanding all the code above yet: we will go through each part of it in the next lessons. Appearance comes later, with CSS (the language of colors and fonts).',
             highlight: ['HTML', 'CSS', 'web'],
             codeLanguage: 'HTML',
             code: '<!DOCTYPE html>\n<html>\n  <head>\n    <title>My first page</title>\n  </head>\n  <body>\n    <h1>Hello, world!</h1>\n    <p>My first web page.</p>\n  </body>\n</html>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Onde se escreve HTML?',
+              text: 'HTML é só texto. Você pode escrevê-lo em qualquer editor de texto e salvar num arquivo com final .html. Quando o navegador abre esse arquivo, ele lê as marcas e mostra a página.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Um arquivo de texto que o navegador lê',
+              text: 'Nos exemplos do app, a aba Web faz o papel do navegador: ela lê o HTML da aba ao lado e mostra o resultado. Toque na aba Web para ver o que este código desenha.'
+            },
+            closing: 'No computador, o fluxo é o mesmo: você escreve o texto, salva como pagina.html e abre o arquivo no navegador.',
+            highlight: ['HTML', 'navegador', 'Web'],
+            codeLanguage: 'HTML',
+            code: '<h1>Minha página</h1>\n<p>Isto é HTML.</p>'
+          },
+          en: {
+            introduction: {
+              title: 'Where do you write HTML?',
+              text: 'HTML is just text. You can write it in any text editor and save it in a file ending in .html. When the browser opens that file, it reads the marks and shows the page.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A text file the browser reads',
+              text: 'In the app\'s examples, the Web tab plays the role of the browser: it reads the HTML in the neighboring tab and shows the result. Tap the Web tab to see what this code draws.'
+            },
+            closing: 'On a computer, the flow is the same: you write the text, save it as page.html and open the file in the browser.',
+            highlight: ['HTML', 'browser', 'Web'],
+            codeLanguage: 'HTML',
+            code: '<h1>My page</h1>\n<p>This is HTML.</p>'
           }
         }
       },
@@ -326,17 +361,17 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'HTML significa HyperText Markup Language. O que "Markup" indica?',
+            question: 'HTML significa HyperText Markup Language, e "Markup" quer dizer "marcação". O que isso diz sobre o HTML?',
             highlight: ['HTML', 'Markup'],
             correctOption: 1,
-            options: ['Que é uma linguagem de marcação', 'Que é uma linguagem de programação', 'Que cuida da aparência da página', 'Que só funciona no celular'],
+            options: ['Que ele marca o texto com etiquetas (tags) que dizem o que cada parte é', 'Que é uma linguagem de programação', 'Que cuida da aparência da página', 'Que só funciona no celular'],
             pool: 'html-markup'
           },
           en: {
-            question: 'HTML stands for HyperText Markup Language. What does "Markup" tell you?',
+            question: 'HTML stands for HyperText Markup Language, and "Markup" means "marking up". What does that say about HTML?',
             highlight: ['HTML', 'Markup'],
             correctOption: 1,
-            options: ['That it is a markup language', 'That it is a programming language', 'That it handles the page\'s appearance', 'That it only works on phones'],
+            options: ['That it marks up the text with labels (tags) that say what each part is', 'That it is a programming language', 'That it handles the page\'s appearance', 'That it only works on phones'],
             pool: 'html-markup'
           }
         }
@@ -501,7 +536,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como um documento HTML é organizado',
-              text: 'Uma página HTML tem uma estrutura básica que organiza suas informações. O navegador usa essa estrutura para interpretar o documento corretamente.'
+              text: 'Uma página HTML tem uma estrutura básica que organiza suas informações. O navegador usa essa estrutura para interpretar o documento corretamente.\n\nA primeira linha, <!DOCTYPE html>, avisa o navegador de que o documento é HTML moderno (ela é sempre igual). O <html> envolve a página inteira, e dentro dele ficam duas partes: o <head> e o <body>.'
             },
             closing: 'Todo documento HTML começa com uma estrutura parecida com essa. Dentro dela, cada parte tem uma função específica.',
             highlight: ['HTML'],
@@ -516,7 +551,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How an HTML document is organized',
-              text: 'An HTML page has a basic structure that organizes its information. The browser uses this structure to interpret the document correctly.'
+              text: 'An HTML page has a basic structure that organizes its information. The browser uses this structure to interpret the document correctly.\n\nThe first line, <!DOCTYPE html>, tells the browser that the document is modern HTML (it is always the same). The <html> element wraps the whole page, and inside it there are two parts: the <head> and the <body>.'
             },
             closing: 'Every HTML document starts with a structure like this one. Inside it, each part has a specific role.',
             highlight: ['HTML'],
@@ -563,7 +598,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Pais e filhos no documento',
-              text: 'No exemplo, o <body> contém uma <div>, que por sua vez contém um título e um parágrafo. O elemento de fora é o pai; os de dentro são os filhos.'
+              text: 'No exemplo, o <body> contém uma <div> (uma caixa genérica que serve para agrupar coisas; você a verá daqui a pouco), que por sua vez contém um título e um parágrafo. O elemento de fora é o pai; os de dentro são os filhos.'
             },
             closing: 'A indentação não muda o resultado no navegador, mas deixa o aninhamento visível para quem lê o código.',
             highlight: ['aninhamento', 'body', 'div'],
@@ -578,7 +613,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Parents and children in the document',
-              text: 'In the example, the <body> contains a <div>, which in turn contains a heading and a paragraph. The outer element is the parent; the inner ones are its children.'
+              text: 'In the example, the <body> contains a <div> (a generic box used to group things; you will see it shortly), which in turn contains a heading and a paragraph. The outer element is the parent; the inner ones are its children.'
             },
             closing: 'Indentation does not change the result in the browser, but it makes the nesting visible to anyone reading the code.',
             highlight: ['nesting', 'body', 'div'],
@@ -716,14 +751,14 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             question: 'Qual trecho está aninhado corretamente?',
             highlight: [],
             correctOption: 1,
-            options: ['<div><p>Oi</p></div>', '<div><p>Oi</div></p>', '<p><div>Oi</p></div>', '<div><p>Oi</div>'],
+            options: ['<div><p>Oi</p></div>', '<div><p>Oi</div></p>', '<p><div>Oi</p></div>', '<div><p>Oi</p>'],
             pool: 'nesting'
           },
           en: {
             question: 'Which snippet is nested correctly?',
             highlight: [],
             correctOption: 1,
-            options: ['<div><p>Hi</p></div>', '<div><p>Hi</div></p>', '<p><div>Hi</p></div>', '<div><p>Hi</div>'],
+            options: ['<div><p>Hi</p></div>', '<div><p>Hi</div></p>', '<p><div>Hi</p></div>', '<div><p>Hi</p>'],
             pool: 'nesting'
           }
         }
@@ -898,6 +933,1182 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             code: '<head>\n  <___>Site</title>\n</head>',
             answers: ['title'],
             ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Texto e títulos',
+      en: 'Text and headings'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Como organizar um texto em níveis',
+              text: 'Pense em um livro: ele tem título, capítulos e subcapítulos. Uma página também precisa dessa hierarquia, para quem lê e para quem usa um leitor de tela. Vamos ver como o HTML faz isso?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os seis níveis de título, de h1 a h6',
+              text: 'HTML tem seis níveis de título, de <h1> a <h6>. Eles representam diferentes níveis de importância: o <h1> é o título principal da página, e os números maiores são subtítulos cada vez menos importantes.'
+            },
+            closing: 'Os títulos ajudam a organizar o conteúdo em uma hierarquia. Use o nível que representa a posição daquele conteúdo na página.',
+            highlight: ['HTML', 'h1', 'h6'],
+            codeLanguage: 'HTML',
+            code: '<h1>Título principal</h1>\n<h2>Seção</h2>\n<h3>Subseção</h3>'
+          },
+          en: {
+            introduction: {
+              title: 'How to organize text in levels',
+              text: 'Think of a book: it has a title, chapters and subchapters. A page also needs that hierarchy, for people who read it and for people who use a screen reader. Let\'s see how HTML does it?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The six heading levels, from h1 to h6',
+              text: 'HTML has six heading levels, from <h1> to <h6>. They represent different levels of importance: the <h1> is the main title of the page, and higher numbers are subtitles of decreasing importance.'
+            },
+            closing: 'Headings help organize content into a hierarchy. Use the level that matches that content\'s position on the page.',
+            highlight: ['HTML', 'h1', 'h6'],
+            codeLanguage: 'HTML',
+            code: '<h1>Main heading</h1>\n<h2>Section</h2>\n<h3>Subsection</h3>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Parágrafos e destaque de texto',
+              text: 'O elemento <p> representa um parágrafo. Para destacar uma informação, é possível usar elementos como <strong> (algo muito importante, que o navegador costuma mostrar em negrito) e <em> (uma ênfase, como quando você realça uma palavra ao falar, em itálico).',
+              persona: 'neutral'
+            },
+            closing: 'Use elementos de texto pensando no significado que você quer transmitir, e não só na aparência.',
+            highlight: ['p', 'strong'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Aprender <strong>HTML</strong> é importante\n  para criar páginas web.\n</p>\n\n<p>\n  Este texto tem <em>destaque</em>.\n</p>'
+          },
+          en: {
+            introduction: {
+              title: 'Paragraphs and text emphasis',
+              text: 'The <p> element represents a paragraph. To emphasize information, you can use elements like <strong> (something very important, which the browser usually shows in bold) and <em> (emphasis, like when you stress a word as you speak, in italics).',
+              persona: 'neutral'
+            },
+            closing: 'Choose text elements based on the meaning you want to convey, not just how they look.',
+            highlight: ['p', 'strong'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Learning <strong>HTML</strong> is important\n  for building web pages.\n</p>\n\n<p>\n  This text has <em>emphasis</em>.\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Quantos níveis de título existem no HTML?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Seis, de <h1> a <h6>', 'Três, de <h1> a <h3>', 'Dez, de <h1> a <h10>', 'Só um, o <h1>'],
+            pool: 'headings'
+          },
+          en: {
+            question: 'How many heading levels does HTML have?',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Six, from <h1> to <h6>', 'Three, from <h1> to <h3>', 'Ten, from <h1> to <h10>', 'Just one, the <h1>'],
+            pool: 'headings'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual título representa o assunto principal da página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h1>', '<h6>', '<h3>', '<p>'],
+            pool: 'headings'
+          },
+          en: {
+            question: 'Which heading represents the page\'s main topic?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<h1>', '<h6>', '<h3>', '<p>'],
+            pool: 'headings'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Devo escolher o nível do título pelo tamanho da letra que eu quero.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'headings',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'I should pick the heading level based on how big I want the text.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'headings',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<strong> e <em> devem ser escolhidos pelo significado, não só pela aparência.',
+            highlight: ['<strong>', '<em>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'text-meaning',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<strong> and <em> should be chosen for their meaning, not just their looks.',
+            highlight: ['<strong>', '<em>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'text-meaning',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa um parágrafo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>', '<para>', '<text>', '<h1>'],
+            pool: 'text-meaning'
+          },
+          en: {
+            question: 'Which element represents a paragraph?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<p>', '<para>', '<text>', '<h1>'],
+            pool: 'text-meaning'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Numa frase, você quer marcar uma palavra como importante. Qual elemento usa?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<strong>', '<h1>', '<div>', '<title>'],
+            pool: 'text-meaning'
+          },
+          en: {
+            question: 'In a sentence, you want to mark one word as important. Which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<strong>', '<h1>', '<div>', '<title>'],
+            pool: 'text-meaning'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com o título principal e uma palavra importante.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Receitas</h1>\n<p>\n  Use <___>sal</strong>.\n</p>',
+            answers: ['h1', 'strong'],
+            distractors: ['h6', 'b', 'title']
+          },
+          en: {
+            question: 'Complete with the main heading and an important word.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>Recipes</h1>\n<p>\n  Add <___>salt</strong>.\n</p>',
+            answers: ['h1', 'strong'],
+            distractors: ['h6', 'b', 'title']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um título h2 "Receita" e, abaixo dele, um parágrafo "Use sal" com a palavra sal marcada como importante.',
+            highlight: ['título', 'parágrafo', 'importante'],
+            codeLanguage: 'HTML',
+            lines: ['<h2>Receita</h2>', '<p>', '  Use <strong>sal</strong>', '</p>'],
+            distractors: ['<h7>Receita</h7>', '  Use <bold>sal</bold>']
+          },
+          en: {
+            question: 'Build an h2 heading "Recipe" and, below it, a paragraph "Add salt" with the word salt marked as important.',
+            highlight: ['heading', 'paragraph', 'important'],
+            codeLanguage: 'HTML',
+            lines: ['<h2>Recipe</h2>', '<p>', '  Add <strong>salt</strong>', '</p>'],
+            distractors: ['<h7>Recipe</h7>', '  Add <bold>salt</bold>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'HTML',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['<h7>Título</h7>', '<h6>Título</h6>', '<p>Um <em>destaque</em></p>', '<h2>Seção</h2>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'HTML',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['<h7>Title</h7>', '<h6>Title</h6>', '<p>An <em>emphasis</em></p>', '<h2>Section</h2>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento ao seu significado.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<h1>',
+                right: 'Título principal da página'
+              },
+              {
+                left: '<p>',
+                right: 'Parágrafo de texto'
+              },
+              {
+                left: '<strong>',
+                right: 'Texto de grande importância'
+              },
+              {
+                left: '<em>',
+                right: 'Ênfase em um trecho'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to its meaning.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<h1>',
+                right: 'Main heading of the page'
+              },
+              {
+                left: '<p>',
+                right: 'Paragraph of text'
+              },
+              {
+                left: '<strong>',
+                right: 'Text of strong importance'
+              },
+              {
+                left: '<em>',
+                right: 'Emphasis on a passage'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que dá ênfase à palavra "sal".',
+            highlight: ['ênfase'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Use <___>sal</em>\n</p>',
+            answers: ['em'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that gives emphasis to the word "salt".',
+            highlight: ['emphasis'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Add <___>salt</em>\n</p>',
+            answers: ['em'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Div e Span',
+      en: 'Div and Span'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quando não existe uma tag pronta',
+              text: 'E se você precisar agrupar partes da página, mas nenhuma tag tem o significado certo para isso? O HTML tem elementos feitos exatamente para esse papel.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O div como contêiner genérico',
+              text: 'O elemento <div> é um contêiner genérico usado para agrupar outros elementos. Ele é útil para organizar partes da página.'
+            },
+            closing: 'O <div> não indica um significado específico para o conteúdo. Ele serve, principalmente, como um contêiner. Mais adiante, com CSS, você poderá dar cor ou espaço a um grupo inteiro de uma vez.',
+            highlight: ['div'],
+            codeLanguage: 'HTML',
+            code: '<div>\n  <h2>Perfil</h2>\n  <p>Desenvolvedor web</p>\n</div>'
+          },
+          en: {
+            introduction: {
+              title: 'When there is no ready-made tag',
+              text: 'What if you need to group parts of the page, but no tag has the right meaning for it? HTML has elements made exactly for that role.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The div as a generic container',
+              text: 'The <div> element is a generic container used to group other elements. It\'s useful for organizing parts of the page.'
+            },
+            closing: 'The <div> doesn\'t carry a specific meaning for the content. It mainly works as a container. Later on, with CSS, you will be able to give color or spacing to a whole group at once.',
+            highlight: ['div'],
+            codeLanguage: 'HTML',
+            code: '<div>\n  <h2>Profile</h2>\n  <p>Web developer</p>\n</div>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Div ou span: quando usar cada um',
+              text: 'O <span> também é um contêiner genérico, mas costuma ser usado para pequenos trechos de conteúdo dentro de uma linha.',
+              persona: 'neutral'
+            },
+            closing: 'A diferença principal está no uso: <div> costuma agrupar blocos maiores, enquanto <span> envolve pequenos trechos de conteúdo. Por isso, um <div> não deve ficar dentro de um <p> nem de um <span>.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Meu nome é\n  <span>Gabriel</span>.\n</p>'
+          },
+          en: {
+            introduction: {
+              title: 'Div or span: when to use each',
+              text: 'The <span> is also a generic container, but it\'s typically used for small pieces of content inside a line of text.',
+              persona: 'neutral'
+            },
+            closing: 'The key difference is in the use: <div> usually groups larger blocks, while <span> wraps small pieces of content. For that reason, a <div> should not go inside a <p> or a <span>.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  My name is\n  <span>Gabriel</span>.\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para agrupar um título e um parágrafo num bloco de perfil, qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div>', '<span>', '<li>', '<a>'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'To group a heading and a paragraph into a profile block, which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<div>', '<span>', '<li>', '<a>'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para envolver só uma palavra no meio de uma frase, qual elemento usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<span>', '<div>', '<h1>', '<ul>'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'To wrap just one word in the middle of a sentence, which element do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<span>', '<div>', '<h1>', '<ul>'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual é a principal diferença de uso entre <div> e <span>?',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['<div> agrupa blocos; <span> envolve trechos numa linha', '<div> é para textos; <span> é para imagens', '<span> agrupa blocos; <div> envolve palavras', 'Não há diferença, são iguais'],
+            pool: 'div-span'
+          },
+          en: {
+            question: 'What is the main difference in use between <div> and <span>?',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['<div> groups blocks; <span> wraps bits within a line', '<div> is for text; <span> is for images', '<span> groups blocks; <div> wraps words', 'There is no difference'],
+            pool: 'div-span'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<div> e <span> são contêineres genéricos: não dão um significado específico ao conteúdo.',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'generic-container',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<div> and <span> are generic containers: they give the content no specific meaning.',
+            highlight: ['<div>', '<span>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'generic-container',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar <div> deixa claro que o conteúdo é um título.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'generic-container',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using a <div> makes it clear that the content is a heading.',
+            highlight: ['<div>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'generic-container',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que a <div> diz sobre o conteúdo dentro dela?',
+            highlight: ['<div>'],
+            correctOption: 1,
+            options: ['Nada específico, ela só agrupa', 'Que ele é o título principal', 'Que ele é um link', 'Que ele é uma lista'],
+            pool: 'generic-container'
+          },
+          en: {
+            question: 'What does a <div> say about the content inside it?',
+            highlight: ['<div>'],
+            correctOption: 1,
+            options: ['Nothing specific, it just groups', 'That it is the main heading', 'That it is a link', 'That it is a list'],
+            pool: 'generic-container'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: um bloco que agrupa e um trecho dentro da linha.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>Meu nome é\n    <___>Ana</span>\n  </p>\n</div>',
+            answers: ['div', 'span'],
+            distractors: ['p', 'section']
+          },
+          en: {
+            question: 'Complete: a block that groups and a bit inside the line.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <p>My name is\n    <___>Ana</span>\n  </p>\n</div>',
+            answers: ['div', 'span'],
+            distractors: ['p', 'section']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma div com o título h2 "Perfil" e, abaixo dele, um parágrafo "Sou Ana" com o nome Ana dentro de um span.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>Perfil</h2>', '  <p>', '    Sou <span>Ana</span>', '  </p>', '</div>']
+          },
+          en: {
+            question: 'Build a div with the h2 heading "Profile" and, below it, a paragraph "I am Ana" with the name Ana inside a span.',
+            highlight: ['div', 'span'],
+            codeLanguage: 'HTML',
+            lines: ['<div>', '  <h2>Profile</h2>', '  <p>', '    I am <span>Ana</span>', '  </p>', '</div>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos está escrito corretamente?',
+            codeLanguage: 'HTML',
+            highlight: ['div', 'span'],
+            correctOption: 1,
+            options: ['<p>Oi, <span>Ana</span></p>', '<span>\n  <div>Bloco</div>\n</span>', '<p>Oi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets is written correctly?',
+            codeLanguage: 'HTML',
+            highlight: ['div', 'span'],
+            correctOption: 1,
+            options: ['<p>Hi, <span>Ana</span></p>', '<span>\n  <div>Block</div>\n</span>', '<p>Hi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que envolve só o nome "Ana", dentro da linha do parágrafo.',
+            highlight: ['dentro da linha'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Sou <___>Ana</span>\n</p>',
+            answers: ['span'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that wraps only the name "Ana", inside the line of the paragraph.',
+            highlight: ['inside the line'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  I am <___>Ana</span>\n</p>',
+            answers: ['span'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Caracteres especiais e quebras',
+      en: 'Special characters and breaks'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quando o < vira um problema',
+              text: 'O que acontece se você quiser mostrar o sinal < na tela, mas o navegador achar que ele abre uma tag? É um impasse curioso, e o HTML tem uma saída para ele.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como mostrar caracteres reservados com entidades',
+              text: 'Alguns caracteres têm um significado especial no HTML. O sinal < abre uma tag, então, para mostrá-lo como texto, usamos uma entidade.\n\n&lt; mostra <, &gt; mostra > e &amp; mostra &. Toda entidade começa com & e termina com ponto e vírgula.'
+            },
+            closing: 'Sem as entidades, o navegador pode confundir o texto com uma tag e esconder parte do conteúdo.',
+            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
+            codeLanguage: 'HTML',
+            code: '<p>Use &lt;p&gt; para criar parágrafos.</p>\n<p>Arroz &amp; feijão</p>'
+          },
+          en: {
+            introduction: {
+              title: 'When < becomes a problem',
+              text: 'What happens if you want to show the < sign on screen, but the browser thinks it opens a tag? It is a curious deadlock, and HTML has a way out of it.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to show reserved characters with entities',
+              text: 'Some characters have a special meaning in HTML. The < sign opens a tag, so to show it as text, we use an entity.\n\n&lt; shows <, &gt; shows > and &amp; shows &. Every entity starts with & and ends with a semicolon.'
+            },
+            closing: 'Without entities, the browser may mistake the text for a tag and hide part of the content.',
+            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
+            codeLanguage: 'HTML',
+            code: '<p>Use &lt;p&gt; to create paragraphs.</p>\n<p>Salt &amp; pepper</p>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quebras de linha e elementos sem fechamento',
+              text: 'O <br> cria uma quebra de linha dentro do mesmo bloco de texto, como num endereço ou num poema. Assim como o <img>, ele não tem tag de fechamento.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Separando assuntos com hr',
+              text: 'O <hr> representa uma mudança de assunto entre dois trechos, e o navegador o mostra como uma linha horizontal.'
+            },
+            closing: 'Não use vários <br> seguidos para criar espaço entre blocos: isso é trabalho do CSS. O <br> é para quebras que fazem parte do conteúdo.',
+            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Rua das Flores, 123<br>\n  São Paulo - SP\n</p>\n\n<hr>\n\n<p>Outro assunto começa aqui.</p>'
+          },
+          en: {
+            introduction: {
+              title: 'Line breaks and elements with no closing tag',
+              text: 'The <br> creates a line break inside the same block of text, like in an address or a poem. Like the <img>, it has no closing tag.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Separating topics with hr',
+              text: 'The <hr> represents a change of topic between two passages, and the browser shows it as a horizontal line.'
+            },
+            closing: 'Don\'t stack several <br> to create space between blocks: that\'s CSS\'s job. The <br> is for breaks that are part of the content.',
+            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  123 Flower Street<br>\n  Springfield\n</p>\n\n<hr>\n\n<p>Another topic starts here.</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Como mostrar o sinal < como texto na página?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&lt;', '&gt;', '<<', '\\<'],
+            pool: 'entities'
+          },
+          en: {
+            question: 'How do you show the < sign as text on the page?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&lt;', '&gt;', '<<', '\\<'],
+            pool: 'entities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual entidade mostra o caractere &?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&amp;', '&&', '&e;', '&ec;'],
+            pool: 'entities'
+          },
+          en: {
+            question: 'Which entity shows the & character?',
+            highlight: [],
+            correctOption: 1,
+            options: ['&amp;', '&&', '&e;', '&ec;'],
+            pool: 'entities'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Toda entidade HTML começa com & e termina com ponto e vírgula.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'entities',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Every HTML entity starts with & and ends with a semicolon.',
+            highlight: ['HTML'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'entities',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Num endereço, você quer a cidade na linha de baixo, no mesmo parágrafo. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<br>', '<hr>', 'Um novo <h2>', 'Um <p></p> vazio'],
+            pool: 'br-hr'
+          },
+          en: {
+            question: 'In an address, you want the city on the next line, in the same paragraph. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<br>', '<hr>', 'A new <h2>', 'An empty <p></p>'],
+            pool: 'br-hr'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar vários <br> seguidos é o jeito certo de criar espaço entre blocos.',
+            highlight: ['<br>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'br-hr',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Stacking several <br> is the right way to create space between blocks.',
+            highlight: ['<br>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'br-hr',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que o <hr> representa?',
+            highlight: ['<hr>'],
+            correctOption: 1,
+            options: ['Uma mudança de assunto entre trechos', 'Uma quebra de linha no meio da frase', 'Um título de seção', 'Um link para o topo'],
+            pool: 'br-hr'
+          },
+          en: {
+            question: 'What does the <hr> represent?',
+            highlight: ['<hr>'],
+            correctOption: 1,
+            options: ['A change of topic between passages', 'A line break mid-sentence', 'A section heading', 'A link back to the top'],
+            pool: 'br-hr'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar < e & como texto.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Use ___p&gt;</p>\n<p>Arroz ___ feijão</p>',
+            answers: ['&lt;', '&amp;'],
+            distractors: ['&gt;', '<', '&e;']
+          },
+          en: {
+            question: 'Complete to show < and & as text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Use ___p&gt;</p>\n<p>Salt ___ pepper</p>',
+            answers: ['&lt;', '&amp;'],
+            distractors: ['&gt;', '<', '&e;']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um parágrafo com o endereço em duas linhas: "Rua A, 10", uma quebra de linha e "Recife - PE".',
+            highlight: ['quebra de linha'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Rua A, 10<br>', '  Recife - PE', '</p>'],
+            distractors: ['  Rua A, 10<hr>']
+          },
+          en: {
+            question: 'Build a paragraph with the address on two lines: "12 Main St", a line break and "Boston - MA".',
+            highlight: ['line break'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  12 Main St<br>', '  Boston - MA', '</p>'],
+            distractors: ['  12 Main St<hr>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho mostra o texto <p> na tela, sem criar um parágrafo?',
+            codeLanguage: 'HTML',
+            highlight: ['texto'],
+            correctOption: 1,
+            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &menor;p&maior;', 'Use \\<p\\>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet shows the text <p> on screen, without creating a paragraph?',
+            codeLanguage: 'HTML',
+            highlight: ['text'],
+            correctOption: 1,
+            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &less;p&more;', 'Use \\<p\\>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que quebra a linha entre "Rua A, 10" e "Recife".',
+            highlight: ['quebra a linha'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Rua A, 10<___>\n  Recife\n</p>',
+            answers: ['br'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that breaks the line between "12 Main St" and "Boston".',
+            highlight: ['breaks the line'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  12 Main St<___>\n  Boston\n</p>',
+            answers: ['br'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Listas',
+      en: 'Lists'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'De uma lista de compras a um menu',
+              text: 'Listas estão em todo lugar: compras, passos de uma receita, o menu de um site. Você sabe como o HTML organiza itens que pertencem ao mesmo grupo?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Como criar uma lista sem ordem',
+              text: 'Use <ul> (lista sem ordem; o navegador mostra bolinhas) quando a ordem dos itens não for importante. Cada item da lista é representado por <li>.'
+            },
+            closing: 'A estrutura é simples: <ul> representa a lista, e cada <li> representa um item.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'HTML',
+            code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
+          },
+          en: {
+            introduction: {
+              title: 'From a shopping list to a menu',
+              text: 'Lists are everywhere: groceries, recipe steps, a website menu. Do you know how HTML organizes items that belong to the same group?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'How to create an unordered list',
+              text: 'Use <ul> (an unordered list; the browser shows bullets) when the order of the items doesn\'t matter. Each list item is represented by <li>.'
+            },
+            closing: 'The structure is simple: <ul> represents the list, and each <li> represents one item.',
+            highlight: ['ul', 'li'],
+            codeLanguage: 'HTML',
+            code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Listas ordenadas',
+              text: 'Quando a ordem dos itens importa, é possível usar <ol> (lista ordenada; o navegador numera os itens: 1, 2, 3...). Os itens continuam sendo representados por <li>.',
+              persona: 'neutral'
+            },
+            closing: 'A escolha entre <ul> e <ol> depende do significado da lista, não só da aparência.',
+            highlight: ['ol', 'li', 'ul'],
+            codeLanguage: 'HTML',
+            code: '<ol>\n  <li>Abrir o navegador</li>\n  <li>Acessar o site</li>\n  <li>Fazer login</li>\n</ol>'
+          },
+          en: {
+            introduction: {
+              title: 'Ordered lists',
+              text: 'When the order of the items matters, you can use <ol> (an ordered list; the browser numbers the items: 1, 2, 3...). Items are still represented by <li>.',
+              persona: 'neutral'
+            },
+            closing: 'The choice between <ul> and <ol> depends on the meaning of the list, not just how it looks.',
+            highlight: ['ol', 'li', 'ul'],
+            codeLanguage: 'HTML',
+            code: '<ol>\n  <li>Open the browser</li>\n  <li>Go to the site</li>\n  <li>Log in</li>\n</ol>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Os passos de uma receita precisam seguir uma ordem. Qual lista usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ol>', '<ul>', '<li>', '<div>'],
+            pool: 'ul-ol'
+          },
+          en: {
+            question: 'A recipe\'s steps must follow an order. Which list do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ol>', '<ul>', '<li>', '<div>'],
+            pool: 'ul-ol'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma lista de linguagens que você conhece, em qualquer ordem. Qual usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul>', '<ol>', '<li>', '<p>'],
+            pool: 'ul-ol'
+          },
+          en: {
+            question: 'A list of languages you know, in any order. Which one do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul>', '<ol>', '<li>', '<p>'],
+            pool: 'ul-ol'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A escolha entre <ul> e <ol> depende só da aparência.',
+            highlight: ['<ul>', '<ol>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'ul-ol',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Choosing between <ul> and <ol> is only about looks.',
+            highlight: ['<ul>', '<ol>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'ul-ol',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Tanto em <ul> quanto em <ol>, cada item é um <li>.',
+            highlight: ['<ul>', '<ol>', '<li>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'list-items',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'In both <ul> and <ol>, each item is an <li>.',
+            highlight: ['<ul>', '<ol>', '<li>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'list-items',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa um item de lista?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<li>', '<item>', '<ul>', '<p>'],
+            pool: 'list-items'
+          },
+          en: {
+            question: 'Which element represents a list item?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<li>', '<item>', '<ul>', '<p>'],
+            pool: 'list-items'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho monta uma lista corretamente?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
+            pool: 'list-items'
+          },
+          en: {
+            question: 'Which snippet builds a list correctly?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
+            pool: 'list-items'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a lista de passos, que precisa de ordem.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>Abrir o site</li>\n  <li>Fazer login</li>\n</ol>',
+            answers: ['ol', 'li'],
+            distractors: ['ul', 'item']
+          },
+          en: {
+            question: 'Complete the list of steps, which needs an order.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>Open the site</li>\n  <li>Log in</li>\n</ol>',
+            answers: ['ol', 'li'],
+            distractors: ['ul', 'item']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte uma lista numerada com o item "Lavar" e, depois dele, o item "Secar".',
+            highlight: ['lista numerada'],
+            codeLanguage: 'HTML',
+            lines: ['<ol>', '  <li>Lavar</li>', '  <li>Secar</li>', '</ol>'],
+            distractors: ['<ul>', '</ul>']
+          },
+          en: {
+            question: 'Build a numbered list with the item "Wash" and, after it, the item "Dry".',
+            highlight: ['numbered list'],
+            codeLanguage: 'HTML',
+            lines: ['<ol>', '  <li>Wash</li>', '  <li>Dry</li>', '</ol>'],
+            distractors: ['<ul>', '</ul>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes trechos tem um erro?',
+            codeLanguage: 'HTML',
+            highlight: ['erro'],
+            correctOption: 1,
+            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>Um</li>\n  <li>Dois</li>\n</ol>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these snippets has an error?',
+            codeLanguage: 'HTML',
+            highlight: ['error'],
+            correctOption: 1,
+            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>One</li>\n  <li>Two</li>\n</ol>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que abre esta lista sem numeração, em que a ordem não importa.',
+            highlight: ['sem numeração'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
+            answers: ['ul'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that opens this unnumbered list, where the order does not matter.',
+            highlight: ['unnumbered'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
+            answers: ['ul'],
+            ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Crie uma lista numerada com os passos "Misture" e "Asse", seguida do parágrafo "Bom apetite!".',
+            highlight: ['numerada'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>Misture</li>\n  <li>Asse</li>\n</___>\n<p>Bom apetite!</p>',
+            blocks: ['ol', 'ol', 'ul', 'ul'],
+            solution: ['ol', 'ol'],
+            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "A lista precisa ser numerada.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Abra e feche a lista com a mesma tag.");\n})();'
+          },
+          en: {
+            question: 'Create a numbered list with the steps "Mix" and "Bake", followed by the paragraph "Enjoy!".',
+            highlight: ['numbered'],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <li>Mix</li>\n  <li>Bake</li>\n</___>\n<p>Enjoy!</p>',
+            blocks: ['ol', 'ol', 'ul', 'ul'],
+            solution: ['ol', 'ol'],
+            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "The list needs to be numbered.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Open and close the list with the same tag.");\n})();'
           }
         }
       }
@@ -1187,613 +2398,6 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Texto e títulos',
-      en: 'Text and headings'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Como organizar um texto em níveis',
-              text: 'Pense em um livro: ele tem título, capítulos e subcapítulos. Uma página também precisa dessa hierarquia, para quem lê e para quem usa um leitor de tela. Vamos ver como o HTML faz isso?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Os seis níveis de título, de h1 a h6',
-              text: 'HTML tem seis níveis de título, de <h1> a <h6>. Eles representam diferentes níveis de importância dentro da estrutura do conteúdo.'
-            },
-            closing: 'Os títulos ajudam a organizar o conteúdo em uma hierarquia. Use o nível que representa a posição daquele conteúdo na página.',
-            highlight: ['HTML', 'h1', 'h6'],
-            codeLanguage: 'HTML',
-            code: '<h1>Título principal</h1>\n<h2>Seção</h2>\n<h3>Subseção</h3>'
-          },
-          en: {
-            introduction: {
-              title: 'How to organize text in levels',
-              text: 'Think of a book: it has a title, chapters and subchapters. A page also needs that hierarchy, for people who read it and for people who use a screen reader. Let\'s see how HTML does it?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The six heading levels, from h1 to h6',
-              text: 'HTML has six heading levels, from <h1> to <h6>. They represent different levels of importance within the structure of the content.'
-            },
-            closing: 'Headings help organize content into a hierarchy. Use the level that matches that content\'s position on the page.',
-            highlight: ['HTML', 'h1', 'h6'],
-            codeLanguage: 'HTML',
-            code: '<h1>Main heading</h1>\n<h2>Section</h2>\n<h3>Subsection</h3>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Parágrafos e destaque de texto',
-              text: 'O elemento <p> representa um parágrafo. Para destacar uma informação, é possível usar elementos como <strong> e <em>.',
-              persona: 'neutral'
-            },
-            closing: 'Use elementos de texto pensando no significado que você quer transmitir, e não só na aparência.',
-            highlight: ['p', 'strong'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Aprender <strong>HTML</strong> é importante\n  para criar páginas web.\n</p>\n\n<p>\n  Este texto tem <em>destaque</em>.\n</p>'
-          },
-          en: {
-            introduction: {
-              title: 'Paragraphs and text emphasis',
-              text: 'The <p> element represents a paragraph. To emphasize information, you can use elements like <strong> and <em>.',
-              persona: 'neutral'
-            },
-            closing: 'Choose text elements based on the meaning you want to convey, not just how they look.',
-            highlight: ['p', 'strong'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Learning <strong>HTML</strong> is important\n  for building web pages.\n</p>\n\n<p>\n  This text has <em>emphasis</em>.\n</p>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Quantos níveis de título existem no HTML?',
-            highlight: ['HTML'],
-            correctOption: 1,
-            options: ['Seis, de <h1> a <h6>', 'Três, de <h1> a <h3>', 'Dez, de <h1> a <h10>', 'Só um, o <h1>'],
-            pool: 'headings'
-          },
-          en: {
-            question: 'How many heading levels does HTML have?',
-            highlight: ['HTML'],
-            correctOption: 1,
-            options: ['Six, from <h1> to <h6>', 'Three, from <h1> to <h3>', 'Ten, from <h1> to <h10>', 'Just one, the <h1>'],
-            pool: 'headings'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual título representa o assunto principal da página?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<h1>', '<h6>', '<h3>', '<p>'],
-            pool: 'headings'
-          },
-          en: {
-            question: 'Which heading represents the page\'s main topic?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<h1>', '<h6>', '<h3>', '<p>'],
-            pool: 'headings'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Devo escolher o nível do título pelo tamanho da letra que eu quero.',
-            highlight: [],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'headings',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'I should pick the heading level based on how big I want the text.',
-            highlight: [],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'headings',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: '<strong> e <em> devem ser escolhidos pelo significado, não só pela aparência.',
-            highlight: ['<strong>', '<em>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'text-meaning',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: '<strong> and <em> should be chosen for their meaning, not just their looks.',
-            highlight: ['<strong>', '<em>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'text-meaning',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento representa um parágrafo?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<p>', '<para>', '<text>', '<h1>'],
-            pool: 'text-meaning'
-          },
-          en: {
-            question: 'Which element represents a paragraph?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<p>', '<para>', '<text>', '<h1>'],
-            pool: 'text-meaning'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Numa frase, você quer marcar uma palavra como importante. Qual elemento usa?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<strong>', '<h1>', '<div>', '<title>'],
-            pool: 'text-meaning'
-          },
-          en: {
-            question: 'In a sentence, you want to mark one word as important. Which element do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<strong>', '<h1>', '<div>', '<title>'],
-            pool: 'text-meaning'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete com o título principal e uma palavra importante.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>Receitas</h1>\n<p>\n  Use <___>sal</strong>.\n</p>',
-            answers: ['h1', 'strong'],
-            distractors: ['h6', 'b', 'title']
-          },
-          en: {
-            question: 'Complete with the main heading and an important word.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>Recipes</h1>\n<p>\n  Add <___>salt</strong>.\n</p>',
-            answers: ['h1', 'strong'],
-            distractors: ['h6', 'b', 'title']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte um título h2 "Receita" e, abaixo dele, um parágrafo "Use sal" com a palavra sal marcada como importante.',
-            highlight: ['título', 'parágrafo', 'importante'],
-            codeLanguage: 'HTML',
-            lines: ['<h2>Receita</h2>', '<p>', '  Use <strong>sal</strong>', '</p>'],
-            distractors: ['<h7>Receita</h7>', '  Use <bold>sal</bold>']
-          },
-          en: {
-            question: 'Build an h2 heading "Recipe" and, below it, a paragraph "Add salt" with the word salt marked as important.',
-            highlight: ['heading', 'paragraph', 'important'],
-            codeLanguage: 'HTML',
-            lines: ['<h2>Recipe</h2>', '<p>', '  Add <strong>salt</strong>', '</p>'],
-            distractors: ['<h7>Recipe</h7>', '  Add <bold>salt</bold>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual destes trechos tem um erro?',
-            codeLanguage: 'HTML',
-            highlight: ['erro'],
-            correctOption: 1,
-            options: ['<h7>Título</h7>', '<h6>Título</h6>', '<p>Um <em>destaque</em></p>', '<h2>Seção</h2>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which of these snippets has an error?',
-            codeLanguage: 'HTML',
-            highlight: ['error'],
-            correctOption: 1,
-            options: ['<h7>Title</h7>', '<h6>Title</h6>', '<p>An <em>emphasis</em></p>', '<h2>Section</h2>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'matching',
-        content: {
-          pt: {
-            question: 'Ligue cada elemento ao seu significado.',
-            highlight: ['elemento'],
-            pairs: [
-              {
-                left: '<h1>',
-                right: 'Título principal da página'
-              },
-              {
-                left: '<p>',
-                right: 'Parágrafo de texto'
-              },
-              {
-                left: '<strong>',
-                right: 'Texto de grande importância'
-              },
-              {
-                left: '<em>',
-                right: 'Ênfase em um trecho'
-              }
-            ],
-            leftAsCode: true
-          },
-          en: {
-            question: 'Match each element to its meaning.',
-            highlight: ['element'],
-            pairs: [
-              {
-                left: '<h1>',
-                right: 'Main heading of the page'
-              },
-              {
-                left: '<p>',
-                right: 'Paragraph of text'
-              },
-              {
-                left: '<strong>',
-                right: 'Text of strong importance'
-              },
-              {
-                left: '<em>',
-                right: 'Emphasis on a passage'
-              }
-            ],
-            leftAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que dá ênfase à palavra "sal".',
-            highlight: ['ênfase'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Use <___>sal</em>\n</p>',
-            answers: ['em'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that gives emphasis to the word "salt".',
-            highlight: ['emphasis'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Add <___>salt</em>\n</p>',
-            answers: ['em'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Caracteres especiais e quebras',
-      en: 'Special characters and breaks'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quando o < vira um problema',
-              text: 'O que acontece se você quiser mostrar o sinal < na tela, mas o navegador achar que ele abre uma tag? É um impasse curioso, e o HTML tem uma saída para ele.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Como mostrar caracteres reservados com entidades',
-              text: 'Alguns caracteres têm um significado especial no HTML. O sinal < abre uma tag, então, para mostrá-lo como texto, usamos uma entidade.\n\n&lt; mostra <, &gt; mostra > e &amp; mostra &. Toda entidade começa com & e termina com ponto e vírgula.'
-            },
-            closing: 'Sem as entidades, o navegador pode confundir o texto com uma tag e esconder parte do conteúdo.',
-            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
-            codeLanguage: 'HTML',
-            code: '<p>Use &lt;p&gt; para criar parágrafos.</p>\n<p>Arroz &amp; feijão</p>'
-          },
-          en: {
-            introduction: {
-              title: 'When < becomes a problem',
-              text: 'What happens if you want to show the < sign on screen, but the browser thinks it opens a tag? It is a curious deadlock, and HTML has a way out of it.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'How to show reserved characters with entities',
-              text: 'Some characters have a special meaning in HTML. The < sign opens a tag, so to show it as text, we use an entity.\n\n&lt; shows <, &gt; shows > and &amp; shows &. Every entity starts with & and ends with a semicolon.'
-            },
-            closing: 'Without entities, the browser may mistake the text for a tag and hide part of the content.',
-            highlight: ['HTML', '&lt;', '&gt;', '&amp;'],
-            codeLanguage: 'HTML',
-            code: '<p>Use &lt;p&gt; to create paragraphs.</p>\n<p>Salt &amp; pepper</p>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quebras de linha e elementos sem fechamento',
-              text: 'O <br> cria uma quebra de linha dentro do mesmo bloco de texto, como num endereço ou num poema. Assim como o <img>, ele não tem tag de fechamento.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Separando assuntos com hr',
-              text: 'O <hr> representa uma mudança de assunto entre dois trechos, e o navegador o mostra como uma linha horizontal.'
-            },
-            closing: 'Não use vários <br> seguidos para criar espaço entre blocos: isso é trabalho do CSS. O <br> é para quebras que fazem parte do conteúdo.',
-            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Rua das Flores, 123<br>\n  São Paulo - SP\n</p>\n\n<hr>\n\n<p>Outro assunto começa aqui.</p>'
-          },
-          en: {
-            introduction: {
-              title: 'Line breaks and elements with no closing tag',
-              text: 'The <br> creates a line break inside the same block of text, like in an address or a poem. Like the <img>, it has no closing tag.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Separating topics with hr',
-              text: 'The <hr> represents a change of topic between two passages, and the browser shows it as a horizontal line.'
-            },
-            closing: 'Don\'t stack several <br> to create space between blocks: that\'s CSS\'s job. The <br> is for breaks that are part of the content.',
-            highlight: ['<br>', '<hr>', '<img>', 'CSS'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  123 Flower Street<br>\n  Springfield\n</p>\n\n<hr>\n\n<p>Another topic starts here.</p>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Como mostrar o sinal < como texto na página?',
-            highlight: [],
-            correctOption: 1,
-            options: ['&lt;', '&gt;', '<<', '\\<'],
-            pool: 'entities'
-          },
-          en: {
-            question: 'How do you show the < sign as text on the page?',
-            highlight: [],
-            correctOption: 1,
-            options: ['&lt;', '&gt;', '<<', '\\<'],
-            pool: 'entities'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual entidade mostra o caractere &?',
-            highlight: [],
-            correctOption: 1,
-            options: ['&amp;', '&&', '&e;', '&ec;'],
-            pool: 'entities'
-          },
-          en: {
-            question: 'Which entity shows the & character?',
-            highlight: [],
-            correctOption: 1,
-            options: ['&amp;', '&&', '&e;', '&ec;'],
-            pool: 'entities'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Toda entidade HTML começa com & e termina com ponto e vírgula.',
-            highlight: ['HTML'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'entities',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Every HTML entity starts with & and ends with a semicolon.',
-            highlight: ['HTML'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'entities',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Num endereço, você quer a cidade na linha de baixo, no mesmo parágrafo. O que usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<br>', '<hr>', 'Um novo <h2>', 'Um <p></p> vazio'],
-            pool: 'br-hr'
-          },
-          en: {
-            question: 'In an address, you want the city on the next line, in the same paragraph. What do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<br>', '<hr>', 'A new <h2>', 'An empty <p></p>'],
-            pool: 'br-hr'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Usar vários <br> seguidos é o jeito certo de criar espaço entre blocos.',
-            highlight: ['<br>'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'br-hr',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Stacking several <br> is the right way to create space between blocks.',
-            highlight: ['<br>'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'br-hr',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que o <hr> representa?',
-            highlight: ['<hr>'],
-            correctOption: 1,
-            options: ['Uma mudança de assunto entre trechos', 'Uma quebra de linha no meio da frase', 'Um título de seção', 'Um link para o topo'],
-            pool: 'br-hr'
-          },
-          en: {
-            question: 'What does the <hr> represent?',
-            highlight: ['<hr>'],
-            correctOption: 1,
-            options: ['A change of topic between passages', 'A line break mid-sentence', 'A section heading', 'A link back to the top'],
-            pool: 'br-hr'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete para mostrar < e & como texto.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<p>Use ___p&gt;</p>\n<p>Arroz ___ feijão</p>',
-            answers: ['&lt;', '&amp;'],
-            distractors: ['&gt;', '<', '&']
-          },
-          en: {
-            question: 'Complete to show < and & as text.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<p>Use ___p&gt;</p>\n<p>Salt ___ pepper</p>',
-            answers: ['&lt;', '&amp;'],
-            distractors: ['&gt;', '<', '&']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte um parágrafo com o endereço em duas linhas: "Rua A, 10", uma quebra de linha e "Recife - PE".',
-            highlight: ['quebra de linha'],
-            codeLanguage: 'HTML',
-            lines: ['<p>', '  Rua A, 10<br>', '  Recife - PE', '</p>'],
-            distractors: ['  Rua A, 10<hr>']
-          },
-          en: {
-            question: 'Build a paragraph with the address on two lines: "12 Main St", a line break and "Boston - MA".',
-            highlight: ['line break'],
-            codeLanguage: 'HTML',
-            lines: ['<p>', '  12 Main St<br>', '  Boston - MA', '</p>'],
-            distractors: ['  12 Main St<hr>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual trecho mostra o texto <p> na tela, sem criar um parágrafo?',
-            codeLanguage: 'HTML',
-            highlight: ['texto'],
-            correctOption: 1,
-            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &menor;p&maior;', 'Use \\<p\\>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which snippet shows the text <p> on screen, without creating a paragraph?',
-            codeLanguage: 'HTML',
-            highlight: ['text'],
-            correctOption: 1,
-            options: ['Use &lt;p&gt;', 'Use <p>', 'Use &less;p&more;', 'Use \\<p\\>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que quebra a linha entre "Rua A, 10" e "Recife".',
-            highlight: ['quebra a linha'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Rua A, 10<___>\n  Recife\n</p>',
-            answers: ['br'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that breaks the line between "12 Main St" and "Boston".',
-            highlight: ['breaks the line'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  12 Main St<___>\n  Boston\n</p>',
-            answers: ['br'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Links',
       en: 'Links'
     },
@@ -1809,7 +2413,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como o elemento a cria um link',
-              text: 'O elemento <a> cria links para outras páginas, arquivos ou endereços. O destino é definido pelo atributo href.'
+              text: 'O elemento <a> cria links para outras páginas, arquivos ou endereços. O destino é definido pelo atributo href (um atributo é uma informação extra escrita dentro da tag de abertura; vamos explicar melhor em breve).'
             },
             closing: 'O texto dentro do <a> é o que a pessoa vê. O atributo href informa para onde o link leva.',
             highlight: ['href', 'link', 'links', '<a>'],
@@ -1824,7 +2428,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How the a element creates a link',
-              text: 'The <a> element creates links to other pages, files, or addresses. The destination is set by the href attribute.'
+              text: 'The <a> element creates links to other pages, files, or addresses. The destination is set by the href attribute (an attribute is an extra piece of information written inside the opening tag; we will explain it better soon).'
             },
             closing: 'The text inside the <a> is what the reader sees. The href attribute tells the browser where the link goes.',
             highlight: ['href', 'link', 'links'],
@@ -1839,7 +2443,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Links para arquivos e páginas do projeto',
-              text: 'Nem todo link aponta para outro site. Também é possível apontar para arquivos ou páginas que fazem parte do próprio projeto.',
+              text: 'Nem todo link aponta para outro site. Também é possível apontar para arquivos ou páginas que fazem parte do próprio projeto, isto é, da pasta com todos os arquivos do seu site.',
               persona: 'neutral'
             },
             closing: 'Links relativos são úteis para conectar páginas diferentes de um mesmo site. O caminho é interpretado a partir da localização do arquivo atual.',
@@ -1850,7 +2454,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Links to files and pages of the project',
-              text: 'Not every link points to another site. You can also point to files or pages that are part of your own project.',
+              text: 'Not every link points to another site. You can also point to files or pages that are part of your own project, that is, the folder with all the files of your site.',
               persona: 'neutral'
             },
             closing: 'Relative links are useful for connecting different pages of the same site. The path is interpreted based on the location of the current file.',
@@ -2427,7 +3031,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'O atributo src indica onde está a imagem. O navegador usa esse caminho para carregá-la.',
             highlight: ['img', 'src', 'HTML'],
             codeLanguage: 'HTML',
-            code: '<img src="imagem.jpg" alt="Uma paisagem" />'
+            code: '<img src="imagem.jpg" alt="Uma paisagem">'
           },
           en: {
             introduction: {
@@ -2442,7 +3046,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'The src attribute points to the image. The browser uses that path to load it.',
             highlight: ['img', 'src', 'HTML'],
             codeLanguage: 'HTML',
-            code: '<img src="image.jpg" alt="A landscape" />'
+            code: '<img src="image.jpg" alt="A landscape">'
           }
         }
       },
@@ -2458,7 +3062,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'Escreva um alt que descreva o propósito ou o conteúdo relevante da imagem. Não deixe esse atributo de lado.',
             highlight: ['alt'],
             codeLanguage: 'HTML',
-            code: '<img src="gato.jpg" alt="Gato sentado em uma cadeira" />'
+            code: '<img src="gato.jpg" alt="Gato sentado em uma cadeira">'
           },
           en: {
             introduction: {
@@ -2469,7 +3073,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'Write an alt that describes the image\'s purpose or relevant content. Don\'t skip this attribute.',
             highlight: ['alt'],
             codeLanguage: 'HTML',
-            code: '<img src="cat.jpg" alt="Cat sitting on a chair" />'
+            code: '<img src="cat.jpg" alt="Cat sitting on a chair">'
           }
         }
       },
@@ -2522,14 +3126,14 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             question: 'Qual trecho adiciona uma imagem corretamente?',
             highlight: [],
             correctOption: 1,
-            options: ['<img src="gato.jpg" alt="Gato" />', '<img>gato.jpg</img>', '<image href="gato.jpg">', '<img alt="gato.jpg" />'],
+            options: ['<img src="gato.jpg" alt="Gato">', '<img>gato.jpg</img>', '<image href="gato.jpg">', '<img alt="gato.jpg">'],
             pool: 'img-tag'
           },
           en: {
             question: 'Which snippet adds an image correctly?',
             highlight: [],
             correctOption: 1,
-            options: ['<img src="cat.jpg" alt="Cat" />', '<img>cat.jpg</img>', '<image href="cat.jpg">', '<img alt="cat.jpg" />'],
+            options: ['<img src="cat.jpg" alt="Cat">', '<img>cat.jpg</img>', '<image href="cat.jpg">', '<img alt="cat.jpg">'],
             pool: 'img-tag'
           }
         }
@@ -2681,303 +3285,6 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Listas',
-      en: 'Lists'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'De uma lista de compras a um menu',
-              text: 'Listas estão em todo lugar: compras, passos de uma receita, o menu de um site. Você sabe como o HTML organiza itens que pertencem ao mesmo grupo?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Como criar uma lista sem ordem',
-              text: 'Use <ul> quando a ordem dos itens não for importante. Cada item da lista é representado por <li>.'
-            },
-            closing: 'A estrutura é simples: <ul> representa a lista, e cada <li> representa um item.',
-            highlight: ['ul', 'li'],
-            codeLanguage: 'HTML',
-            code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
-          },
-          en: {
-            introduction: {
-              title: 'From a shopping list to a menu',
-              text: 'Lists are everywhere: groceries, recipe steps, a website menu. Do you know how HTML organizes items that belong to the same group?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'How to create an unordered list',
-              text: 'Use <ul> when the order of the items doesn\'t matter. Each list item is represented by <li>.'
-            },
-            closing: 'The structure is simple: <ul> represents the list, and each <li> represents one item.',
-            highlight: ['ul', 'li'],
-            codeLanguage: 'HTML',
-            code: '<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Listas ordenadas',
-              text: 'Quando a ordem dos itens importa, é possível usar <ol>. Os itens continuam sendo representados por <li>.',
-              persona: 'neutral'
-            },
-            closing: 'A escolha entre <ul> e <ol> depende do significado da lista, não só da aparência.',
-            highlight: ['ol', 'li', 'ul'],
-            codeLanguage: 'HTML',
-            code: '<ol>\n  <li>Abrir o navegador</li>\n  <li>Acessar o site</li>\n  <li>Fazer login</li>\n</ol>'
-          },
-          en: {
-            introduction: {
-              title: 'Ordered lists',
-              text: 'When the order of the items matters, you can use <ol>. Items are still represented by <li>.',
-              persona: 'neutral'
-            },
-            closing: 'The choice between <ul> and <ol> depends on the meaning of the list, not just how it looks.',
-            highlight: ['ol', 'li', 'ul'],
-            codeLanguage: 'HTML',
-            code: '<ol>\n  <li>Open the browser</li>\n  <li>Go to the site</li>\n  <li>Log in</li>\n</ol>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Os passos de uma receita precisam seguir uma ordem. Qual lista usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ol>', '<ul>', '<li>', '<div>'],
-            pool: 'ul-ol'
-          },
-          en: {
-            question: 'A recipe\'s steps must follow an order. Which list do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ol>', '<ul>', '<li>', '<div>'],
-            pool: 'ul-ol'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Uma lista de linguagens que você conhece, em qualquer ordem. Qual usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ul>', '<ol>', '<li>', '<p>'],
-            pool: 'ul-ol'
-          },
-          en: {
-            question: 'A list of languages you know, in any order. Which one do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ul>', '<ol>', '<li>', '<p>'],
-            pool: 'ul-ol'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'A escolha entre <ul> e <ol> depende só da aparência.',
-            highlight: ['<ul>', '<ol>'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'ul-ol',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Choosing between <ul> and <ol> is only about looks.',
-            highlight: ['<ul>', '<ol>'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'ul-ol',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Tanto em <ul> quanto em <ol>, cada item é um <li>.',
-            highlight: ['<ul>', '<ol>', '<li>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'list-items',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'In both <ul> and <ol>, each item is an <li>.',
-            highlight: ['<ul>', '<ol>', '<li>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'list-items',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento representa um item de lista?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<li>', '<item>', '<ul>', '<p>'],
-            pool: 'list-items'
-          },
-          en: {
-            question: 'Which element represents a list item?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<li>', '<item>', '<ul>', '<p>'],
-            pool: 'list-items'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual trecho monta uma lista corretamente?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
-            pool: 'list-items'
-          },
-          en: {
-            question: 'Which snippet builds a list correctly?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<ul><li>HTML</li></ul>', '<li><ul>HTML</ul></li>', '<ul>HTML</ul>', '<ul><p>HTML</p></ul>'],
-            pool: 'list-items'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete a lista de passos, que precisa de ordem.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <___>Abrir o site</li>\n  <li>Fazer login</li>\n</ol>',
-            answers: ['ol', 'li'],
-            distractors: ['ul', 'item']
-          },
-          en: {
-            question: 'Complete the list of steps, which needs an order.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <___>Open the site</li>\n  <li>Log in</li>\n</ol>',
-            answers: ['ol', 'li'],
-            distractors: ['ul', 'item']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte uma lista numerada com o item "Lavar" e, depois dele, o item "Secar".',
-            highlight: ['lista numerada'],
-            codeLanguage: 'HTML',
-            lines: ['<ol>', '  <li>Lavar</li>', '  <li>Secar</li>', '</ol>'],
-            distractors: ['<ul>', '</ul>']
-          },
-          en: {
-            question: 'Build a numbered list with the item "Wash" and, after it, the item "Dry".',
-            highlight: ['numbered list'],
-            codeLanguage: 'HTML',
-            lines: ['<ol>', '  <li>Wash</li>', '  <li>Dry</li>', '</ol>'],
-            distractors: ['<ul>', '</ul>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual destes trechos tem um erro?',
-            codeLanguage: 'HTML',
-            highlight: ['erro'],
-            correctOption: 1,
-            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>Um</li>\n  <li>Dois</li>\n</ol>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which of these snippets has an error?',
-            codeLanguage: 'HTML',
-            highlight: ['error'],
-            correctOption: 1,
-            options: ['<ul>\n  <p>Item</p>\n</ul>', '<ul>\n  <li>Item</li>\n</ul>', '<ol>\n  <li>Item</li>\n</ol>', '<ol>\n  <li>One</li>\n  <li>Two</li>\n</ol>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que abre esta lista sem numeração, em que a ordem não importa.',
-            highlight: ['sem numeração'],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
-            answers: ['ul'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that opens this unnumbered list, where the order does not matter.',
-            highlight: ['unnumbered'],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <li>HTML</li>\n  <li>CSS</li>\n</ul>',
-            answers: ['ul'],
-            ignoreCase: true
-          }
-        }
-      },
-      {
-        type: 'code_playground',
-        content: {
-          pt: {
-            question: 'Crie uma lista numerada com os passos "Misture" e "Asse", seguida do parágrafo "Bom apetite!".',
-            highlight: ['numerada'],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <li>Misture</li>\n  <li>Asse</li>\n</___>\n<p>Bom apetite!</p>',
-            blocks: ['ol', 'ol', 'ul', 'ul'],
-            solution: ['ol', 'ol'],
-            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "A lista precisa ser numerada.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Abra e feche a lista com a mesma tag.");\n})();'
-          },
-          en: {
-            question: 'Create a numbered list with the steps "Mix" and "Bake", followed by the paragraph "Enjoy!".',
-            highlight: ['numbered'],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <li>Mix</li>\n  <li>Bake</li>\n</___>\n<p>Enjoy!</p>',
-            blocks: ['ol', 'ol', 'ul', 'ul'],
-            solution: ['ol', 'ol'],
-            checkScript: '(function () {\n  var ol = document.querySelector("ol");\n  var p = document.querySelector("p");\n  if (!ol) {\n    __codap_report(false, "The list needs to be numbered.");\n    return;\n  }\n  var ok = ol.parentElement === document.body && ol.children.length === 2 && !!p && p.parentElement === document.body;\n  __codap_report(ok, "Open and close the list with the same tag.");\n})();'
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Atributos',
       en: 'Attributes'
     },
@@ -2993,7 +3300,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como os atributos descrevem um elemento',
-              text: 'Atributos trazem informações adicionais sobre um elemento HTML. Eles aparecem na tag de abertura e costumam ter um nome e um valor.\n\nNo exemplo abaixo, href é um atributo. Ele informa ao elemento <a> qual endereço deve ser aberto.'
+              text: 'Atributos trazem informações adicionais sobre um elemento HTML. Eles aparecem na tag de abertura e costumam ter um nome e um valor, escritos assim: nome="valor" (o nome, o sinal de igual e o valor entre aspas).\n\nNo exemplo abaixo, href é um atributo. Ele informa ao elemento <a> qual endereço deve ser aberto.'
             },
             closing: 'Tags definem elementos. Atributos adicionam informações ou configurações a esses elementos.',
             highlight: ['HTML', 'href'],
@@ -3008,7 +3315,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How attributes describe an element',
-              text: 'Attributes provide extra information about an HTML element. They appear in the opening tag and usually have a name and a value.\n\nIn the example below, href is an attribute. It tells the <a> element which address to open.'
+              text: 'Attributes provide extra information about an HTML element. They appear in the opening tag and usually have a name and a value, written like this: name="value" (the name, the equals sign and the value in quotes).\n\nIn the example below, href is an attribute. It tells the <a> element which address to open.'
             },
             closing: 'Tags define elements. Attributes add information or settings to those elements.',
             highlight: ['HTML', 'href'],
@@ -3029,7 +3336,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'No <img>, src indica a imagem e alt traz uma descrição. No <a>, href indica o destino do link.',
             highlight: ['img', 'src', 'alt', 'href'],
             codeLanguage: 'HTML',
-            code: '<img src="gato.jpg" alt="Gato sentado" />\n\n<a href="sobre.html">\n  Sobre\n</a>'
+            code: '<img src="gato.jpg" alt="Gato sentado">\n\n<a href="sobre.html">\n  Sobre\n</a>'
           },
           en: {
             introduction: {
@@ -3040,7 +3347,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             closing: 'In <img>, src points to the image and alt provides a description. In <a>, href points to the link\'s destination.',
             highlight: ['img', 'src', 'alt', 'href'],
             codeLanguage: 'HTML',
-            code: '<img src="cat.jpg" alt="Cat sitting" />\n\n<a href="about.html">\n  About\n</a>'
+            code: '<img src="cat.jpg" alt="Cat sitting">\n\n<a href="about.html">\n  About\n</a>'
           }
         }
       },
@@ -3306,7 +3613,7 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             question: 'A imagem gato.jpg não carrega aqui. Complete para ela apontar para gato.jpg e mostrar o texto "Gato sentado" no lugar.',
             highlight: ['Gato sentado'],
             codeLanguage: 'HTML',
-            code: '<img\n  ___="gato.jpg"\n  ___="Gato sentado"\n/>',
+            code: '<img\n  ___="gato.jpg"\n  ___="Gato sentado"\n>',
             blocks: ['src', 'alt', 'href', 'class'],
             solution: ['src', 'alt'],
             checkScript: '(function () {\n  var img = document.querySelector("img");\n  if (!img || img.getAttribute("src") !== "gato.jpg") {\n    __codap_report(false, "O endereço da imagem vai no src.");\n    return;\n  }\n  __codap_report(img.getAttribute("alt") === "Gato sentado", "O texto que aparece no lugar da imagem vai no alt.");\n})();'
@@ -3315,282 +3622,10 @@ export const HTML_BASIC_LESSONS: LessonSeed[] = [
             question: 'The image cat.jpg does not load here. Complete it so it points to cat.jpg and shows the text "Sitting cat" in its place.',
             highlight: ['Sitting cat'],
             codeLanguage: 'HTML',
-            code: '<img\n  ___="cat.jpg"\n  ___="Sitting cat"\n/>',
+            code: '<img\n  ___="cat.jpg"\n  ___="Sitting cat"\n>',
             blocks: ['src', 'alt', 'href', 'class'],
             solution: ['src', 'alt'],
             checkScript: '(function () {\n  var img = document.querySelector("img");\n  if (!img || img.getAttribute("src") !== "cat.jpg") {\n    __codap_report(false, "The image address goes in src.");\n    return;\n  }\n  __codap_report(img.getAttribute("alt") === "Sitting cat", "The text shown in place of the image goes in alt.");\n})();'
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Div e Span',
-      en: 'Div and Span'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quando não existe uma tag pronta',
-              text: 'E se você precisar agrupar partes da página, mas nenhuma tag tem o significado certo para isso? O HTML tem elementos feitos exatamente para esse papel.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'O div como contêiner genérico',
-              text: 'O elemento <div> é um contêiner genérico usado para agrupar outros elementos. Ele é útil para organizar partes da página.'
-            },
-            closing: 'O <div> não indica um significado específico para o conteúdo. Ele serve, principalmente, como um contêiner.',
-            highlight: ['div'],
-            codeLanguage: 'HTML',
-            code: '<div>\n  <h2>Perfil</h2>\n  <p>Desenvolvedor web</p>\n</div>'
-          },
-          en: {
-            introduction: {
-              title: 'When there is no ready-made tag',
-              text: 'What if you need to group parts of the page, but no tag has the right meaning for it? HTML has elements made exactly for that role.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The div as a generic container',
-              text: 'The <div> element is a generic container used to group other elements. It\'s useful for organizing parts of the page.'
-            },
-            closing: 'The <div> doesn\'t carry a specific meaning for the content. It mainly works as a container.',
-            highlight: ['div'],
-            codeLanguage: 'HTML',
-            code: '<div>\n  <h2>Profile</h2>\n  <p>Web developer</p>\n</div>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Div ou span: quando usar cada um',
-              text: 'O <span> também é um contêiner genérico, mas costuma ser usado para pequenos trechos de conteúdo dentro de uma linha.',
-              persona: 'neutral'
-            },
-            closing: 'A diferença principal está no uso: <div> costuma agrupar blocos maiores, enquanto <span> envolve pequenos trechos de conteúdo.',
-            highlight: ['div', 'span'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Meu nome é\n  <span>Gabriel</span>.\n</p>'
-          },
-          en: {
-            introduction: {
-              title: 'Div or span: when to use each',
-              text: 'The <span> is also a generic container, but it\'s typically used for small pieces of content inside a line of text.',
-              persona: 'neutral'
-            },
-            closing: 'The key difference is in the use: <div> usually groups larger blocks, while <span> wraps small pieces of content.',
-            highlight: ['div', 'span'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  My name is\n  <span>Gabriel</span>.\n</p>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Para agrupar um título e um parágrafo num bloco de perfil, qual elemento usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<div>', '<span>', '<li>', '<a>'],
-            pool: 'div-span'
-          },
-          en: {
-            question: 'To group a heading and a paragraph into a profile block, which element do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<div>', '<span>', '<li>', '<a>'],
-            pool: 'div-span'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Para envolver só uma palavra no meio de uma frase, qual elemento usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<span>', '<div>', '<h1>', '<ul>'],
-            pool: 'div-span'
-          },
-          en: {
-            question: 'To wrap just one word in the middle of a sentence, which element do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<span>', '<div>', '<h1>', '<ul>'],
-            pool: 'div-span'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual é a principal diferença de uso entre <div> e <span>?',
-            highlight: ['<div>', '<span>'],
-            correctOption: 1,
-            options: ['<div> agrupa blocos; <span> envolve trechos numa linha', '<div> é para textos; <span> é para imagens', '<span> agrupa blocos; <div> envolve palavras', 'Não há diferença, são iguais'],
-            pool: 'div-span'
-          },
-          en: {
-            question: 'What is the main difference in use between <div> and <span>?',
-            highlight: ['<div>', '<span>'],
-            correctOption: 1,
-            options: ['<div> groups blocks; <span> wraps bits within a line', '<div> is for text; <span> is for images', '<span> groups blocks; <div> wraps words', 'There is no difference'],
-            pool: 'div-span'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: '<div> e <span> são contêineres genéricos: não dão um significado específico ao conteúdo.',
-            highlight: ['<div>', '<span>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'generic-container',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: '<div> and <span> are generic containers: they give the content no specific meaning.',
-            highlight: ['<div>', '<span>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'generic-container',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Usar <div> deixa claro que o conteúdo é um título.',
-            highlight: ['<div>'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'generic-container',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Using a <div> makes it clear that the content is a heading.',
-            highlight: ['<div>'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'generic-container',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que a <div> diz sobre o conteúdo dentro dela?',
-            highlight: ['<div>'],
-            correctOption: 1,
-            options: ['Nada específico, ela só agrupa', 'Que ele é o título principal', 'Que ele é um link', 'Que ele é uma lista'],
-            pool: 'generic-container'
-          },
-          en: {
-            question: 'What does a <div> say about the content inside it?',
-            highlight: ['<div>'],
-            correctOption: 1,
-            options: ['Nothing specific, it just groups', 'That it is the main heading', 'That it is a link', 'That it is a list'],
-            pool: 'generic-container'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: um bloco que agrupa e um trecho dentro da linha.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <p>Meu nome é\n    <___>Ana</span>\n  </p>\n</div>',
-            answers: ['div', 'span'],
-            distractors: ['p', 'section']
-          },
-          en: {
-            question: 'Complete: a block that groups and a bit inside the line.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <p>My name is\n    <___>Ana</span>\n  </p>\n</div>',
-            answers: ['div', 'span'],
-            distractors: ['p', 'section']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte uma div com o título h2 "Perfil" e, abaixo dele, um parágrafo "Sou Ana" com o nome Ana dentro de um span.',
-            highlight: ['div', 'span'],
-            codeLanguage: 'HTML',
-            lines: ['<div>', '  <h2>Perfil</h2>', '  <p>', '    Sou <span>Ana</span>', '  </p>', '</div>']
-          },
-          en: {
-            question: 'Build a div with the h2 heading "Profile" and, below it, a paragraph "I am Ana" with the name Ana inside a span.',
-            highlight: ['div', 'span'],
-            codeLanguage: 'HTML',
-            lines: ['<div>', '  <h2>Profile</h2>', '  <p>', '    I am <span>Ana</span>', '  </p>', '</div>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual trecho usa div e span corretamente?',
-            codeLanguage: 'HTML',
-            highlight: ['div', 'span'],
-            correctOption: 1,
-            options: ['<p>Oi, <span>Ana</span></p>', '<span>\n  <div>Bloco</div>\n</span>', '<p>Oi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which snippet uses div and span correctly?',
-            codeLanguage: 'HTML',
-            highlight: ['div', 'span'],
-            correctOption: 1,
-            options: ['<p>Hi, <span>Ana</span></p>', '<span>\n  <div>Block</div>\n</span>', '<p>Hi, <div>Ana</div></p>', '<p>\n  <div>Ana</div>\n</p>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que envolve só o nome "Ana", dentro da linha do parágrafo.',
-            highlight: ['dentro da linha'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Sou <___>Ana</span>\n</p>',
-            answers: ['span'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that wraps only the name "Ana", inside the line of the paragraph.',
-            highlight: ['inside the line'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  I am <___>Ana</span>\n</p>',
-            answers: ['span'],
-            ignoreCase: true
           }
         }
       }
@@ -3799,6 +3834,53 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               {
                 codeLanguage: 'CSS',
                 code: 'h1 {\n  color: blue;\n  font-size: 32px;\n}'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Lendo uma regra CSS',
+              text: 'Uma regra CSS parece código difícil, mas tem sempre as mesmas peças. Vamos ler uma, parte por parte.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'As peças de uma regra',
+              text: 'O seletor (h1) diz quem recebe o estilo. As chaves { } guardam as declarações. Cada declaração tem uma propriedade (o que mudar, como color), dois-pontos, um valor (como mudar, como blue) e termina com ponto e vírgula (;).\n\nOs nomes das propriedades e das cores são em inglês. Tudo entre /* e */ é comentário: o navegador ignora. E 32px quer dizer 32 pixels, uma medida; as unidades você vê adiante.'
+            },
+            closing: 'Lendo de cima para baixo: o seletor h1 escolhe os títulos; color: blue pinta o texto de azul; font-size: 32px aumenta a letra.',
+            highlight: ['seletor', 'propriedade', 'valor', 'declaração'],
+            codeLanguage: 'CSS',
+            code: '/* título grande e azul */\nh1 {\n  color: blue;\n  font-size: 32px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>Meu site</h1>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Reading a CSS rule',
+              text: 'A CSS rule looks like hard code, but it always has the same pieces. Let us read one, part by part.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The pieces of a rule',
+              text: 'The selector (h1) says who gets the style. The braces { } hold the declarations. Each declaration has a property (what to change, like color), a colon, a value (how to change it, like blue) and ends with a semicolon (;).\n\nProperty and color names are in English. Everything between /* and */ is a comment: the browser ignores it. And 32px means 32 pixels, a measurement; you will see units ahead.'
+            },
+            closing: 'Reading from top to bottom: the h1 selector picks the titles; color: blue paints the text blue; font-size: 32px makes the letters bigger.',
+            highlight: ['selector', 'property', 'value', 'declaration'],
+            codeLanguage: 'CSS',
+            code: '/* big blue title */\nh1 {\n  color: blue;\n  font-size: 32px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>My site</h1>'
               }
             ]
           }
@@ -4371,7 +4453,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Classes e IDs',
-              text: 'Uma classe permite aplicar um mesmo estilo a vários elementos. Um ID identifica um elemento específico dentro da página.',
+              text: 'Uma classe, dada no HTML pelo atributo class, permite aplicar um mesmo estilo a vários elementos. Um ID identifica um elemento específico dentro da página.',
               persona: 'neutral'
             },
             closing: 'Use classe quando um estilo pode ser reutilizado. O ID representa uma identificação específica e deve ser utilizado com esse propósito.',
@@ -4388,7 +4470,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Classes and IDs',
-              text: 'A class lets you apply the same style to several elements. An ID identifies one specific element on the page.',
+              text: 'A class, set in HTML with the class attribute, lets you apply the same style to several elements. An ID identifies one specific element on the page.',
               persona: 'neutral'
             },
             closing: 'Use a class when a style can be reused. An ID represents a specific identification and should be used for that purpose.',
@@ -4399,6 +4481,53 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               {
                 codeLanguage: 'CSS',
                 code: '.highlight {\n  color: blue;\n}\n\n#title {\n  font-size: 32px;\n}'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O atributo class (e id)',
+              text: 'Para o CSS achar um elemento pela classe ou pelo id, o HTML precisa marcá-lo. Essa marca é um atributo: uma informação extra escrita dentro da tag de abertura.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'class e id no HTML, ponto e # no CSS',
+              text: 'No HTML, você escreve class="aviso" ou id="topo" dentro da tag. No CSS, a classe começa com ponto (.aviso) e o id com cerquilha (#topo).\n\nVários elementos podem ter a mesma classe. Já o id é único: cada id só pode aparecer uma vez na página.'
+            },
+            closing: 'Classe: vários elementos, ponto no CSS. Id: um elemento só, # no CSS.',
+            highlight: ['atributo', 'class', 'id', 'ponto', 'cerquilha'],
+            codeLanguage: 'HTML',
+            code: '<p class="aviso">Atenção!</p>\n<p class="aviso">Cuidado!</p>\n<p id="topo">Início</p>',
+            additionalCode: [
+              {
+                codeLanguage: 'CSS',
+                code: '.aviso {\n  color: red;\n}\n\n#topo {\n  font-size: 28px;\n}'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'The class (and id) attribute',
+              text: 'For CSS to find an element by class or id, the HTML has to mark it. That mark is an attribute: an extra piece of information written inside the opening tag.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'class and id in HTML, dot and # in CSS',
+              text: 'In HTML, you write class="aviso" or id="topo" inside the tag. In CSS, a class starts with a dot (.aviso) and an id with a hash (#topo).\n\nSeveral elements can share the same class. An id, however, is unique: each id can only appear once on the page.'
+            },
+            closing: 'Class: many elements, a dot in CSS. Id: a single element, # in CSS.',
+            highlight: ['attribute', 'class', 'id', 'dot', 'hash'],
+            codeLanguage: 'HTML',
+            code: '<p class="aviso">Warning!</p>\n<p class="aviso">Careful!</p>\n<p id="topo">Start</p>',
+            additionalCode: [
+              {
+                codeLanguage: 'CSS',
+                code: '.aviso {\n  color: red;\n}\n\n#topo {\n  font-size: 28px;\n}'
               }
             ]
           }
@@ -4750,6 +4879,53 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         }
       },
       {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Duas classes no mesmo elemento',
+              text: 'Um elemento pode ter mais de uma classe. Basta escrever as duas no class, separadas por espaço.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'class="card destaque" e .card.destaque',
+              text: 'No HTML, class="card destaque" dá duas classes ao mesmo elemento. No CSS, .card.destaque (sem espaço entre elas) seleciona só quem tem as duas classes.\n\nCom um espaço, .card .destaque já seria outra coisa: um elemento dentro do outro. E p.aviso, também sem espaço, pega só os p que têm a classe aviso.'
+            },
+            closing: 'Sem espaço: o mesmo elemento precisa atender às duas partes. Com espaço: um dentro do outro.',
+            highlight: ['classes', 'espaço'],
+            codeLanguage: 'CSS',
+            code: '.card.destaque {\n  color: red;\n}\n\np.aviso {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="card">Só card</p>\n<p class="card destaque">\n  Os dois\n</p>\n<p class="aviso">Aviso</p>\n<div class="aviso">Aviso</div>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Two classes on the same element',
+              text: 'An element can have more than one class. Just write both in class, separated by a space.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'class="card destaque" and .card.destaque',
+              text: 'In HTML, class="card destaque" gives the same element two classes. In CSS, .card.destaque (no space between them) selects only what has both classes.\n\nWith a space, .card .destaque would be something else: one element inside the other. And p.aviso, also with no space, picks only the p elements that have the class aviso.'
+            },
+            closing: 'No space: the same element must match both parts. With a space: one inside the other.',
+            highlight: ['classes', 'space'],
+            codeLanguage: 'CSS',
+            code: '.card.destaque {\n  color: red;\n}\n\np.aviso {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="card">Only card</p>\n<p class="card destaque">\n  Both\n</p>\n<p class="aviso">Note</p>\n<div class="aviso">Note</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
         type: 'option',
         content: {
           pt: {
@@ -5003,6 +5179,53 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               {
                 codeLanguage: 'HTML',
                 code: '<h1>Heading</h1>\n<p>Paragraph text.</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Cores em hexadecimal',
+              text: 'Além dos nomes em inglês (como blue e red), o CSS aceita cores em hexadecimal: um # seguido de 3 ou 6 caracteres.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Lendo um valor hexadecimal',
+              text: 'Os caracteres vão de 0 a 9 e de a até f. Quanto maior o valor, mais clara a cor: #000 é preto, #fff é branco e #333 é um cinza bem escuro.\n\nCom 3 caracteres é a forma curta (#333 é o mesmo que #333333). Com 6, são três pares: vermelho, verde e azul (#ff0000 é vermelho puro).\n\nAtenção: aqui o # faz parte da cor. Não é o # do id.'
+            },
+            closing: '#000 e #fff são os extremos: o mais escuro e o mais claro. Tudo o que fica entre eles são tons de cinza (ou de cor).',
+            highlight: ['hexadecimal', 'preto', 'branco', '#000', '#fff'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  color: #000;\n  background: #fff;\n}\n\np {\n  color: #fff;\n  background: #333;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>Preto no branco</h1>\n<p>Branco no cinza escuro</p>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Hexadecimal colors',
+              text: 'Besides names in English (like blue and red), CSS accepts colors in hexadecimal: a # followed by 3 or 6 characters.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Reading a hexadecimal value',
+              text: 'The characters go from 0 to 9 and from a to f. The higher the value, the lighter the color: #000 is black, #fff is white and #333 is a very dark gray.\n\n3 characters is the short form (#333 is the same as #333333). With 6, there are three pairs: red, green and blue (#ff0000 is pure red).\n\nHeads-up: here the # is part of the color. It is not the # of an id.'
+            },
+            closing: '#000 and #fff are the extremes: the darkest and the lightest. Everything in between is shades of gray (or of color).',
+            highlight: ['hexadecimal', 'black', 'white', '#000', '#fff'],
+            codeLanguage: 'CSS',
+            code: 'h1 {\n  color: #000;\n  background: #fff;\n}\n\np {\n  color: #fff;\n  background: #333;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<h1>Black on white</h1>\n<p>White on dark gray</p>'
               }
             ]
           }
@@ -5484,7 +5707,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.faixa {\n  background-color:\n    ___(0, 0, 255, ___);\n}',
             answers: ['rgba', '0.5'],
-            distractors: ['rgb', '50', '5']
+            distractors: ['alpha', '50', '5']
           },
           en: {
             question: 'Complete a blue background, 50% transparent.',
@@ -5492,7 +5715,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.band {\n  background-color:\n    ___(0, 0, 255, ___);\n}',
             answers: ['rgba', '0.5'],
-            distractors: ['rgb', '50', '5']
+            distractors: ['alpha', '50', '5']
           }
         }
       },
@@ -5500,14 +5723,14 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte o fundo do .banner: um gradiente de red para blue, da esquerda para a direita (to right).',
+            question: 'Monte o fundo do .banner: um gradiente de red para blue, da esquerda para a direita (to right). A declaração vem quebrada em várias linhas: a direção fica antes das cores.',
             highlight: ['gradiente'],
             codeLanguage: 'CSS',
             lines: ['.banner {', '  background:', '    linear-gradient(', '      to right,', '      red, blue);', '}'],
             distractors: ['  background-color:']
           },
           en: {
-            question: 'Build the background of .banner: a gradient from red to blue, from left to right (to right).',
+            question: 'Build the background of .banner: a gradient from red to blue, from left to right (to right). The declaration comes split across several lines: the direction goes before the colors.',
             highlight: ['gradient'],
             codeLanguage: 'CSS',
             lines: ['.banner {', '  background:', '    linear-gradient(', '      to right,', '      red, blue);', '}'],
@@ -5576,7 +5799,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Tamanho e peso da fonte',
-              text: 'As propriedades font-size e font-weight controlam, respectivamente, o tamanho e o peso da fonte.'
+              text: 'As propriedades font-size e font-weight controlam o tamanho e o peso (a espessura) da fonte. O px é a unidade de pixels, os pontinhos da tela: 32px é bem maior que 16px. No peso, 400 é o normal e 700 é negrito (também dá para escrever bold).'
             },
             closing: 'Essas propriedades ajudam a criar uma hierarquia visual entre títulos, textos e outras informações.',
             highlight: ['font-size', 'font-weight'],
@@ -5597,7 +5820,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Font size and weight',
-              text: 'The font-size and font-weight properties control, respectively, the size and weight of the font.'
+              text: 'The font-size and font-weight properties control the size and the weight (the thickness) of the font. px is the pixel unit, the tiny dots of the screen: 32px is much bigger than 16px. For weight, 400 is normal and 700 is bold (you can also write bold).'
             },
             closing: 'These properties help create a visual hierarchy between headings, text and other information.',
             highlight: ['font-size', 'font-weight'],
@@ -6047,7 +6270,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Um line-height maior costuma deixar parágrafos longos mais fáceis de ler.',
+            aditionalParagraph: 'Um line-height em torno de 1.5 costuma deixar parágrafos longos mais fáceis de ler.',
             highlight: ['line-height'],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
@@ -6056,7 +6279,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'A larger line-height usually makes long paragraphs easier to read.',
+            aditionalParagraph: 'A line-height of around 1.5 usually makes long paragraphs easier to read.',
             highlight: ['line-height'],
             correctOption: 1,
             options: ['True', 'False'],
@@ -6204,6 +6427,302 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.label {\n  ___: 2px;\n}',
             answers: ['letter-spacing'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Largura e altura',
+      en: 'Width and height'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Definindo o tamanho de um elemento',
+              text: 'Até aqui, os elementos tinham o tamanho que o navegador escolhia. E se você quiser decidir? Duas propriedades cuidam disso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'As propriedades width e height',
+              text: 'As propriedades width e height definem a largura e a altura de um elemento.'
+            },
+            closing: 'As dimensões podem ser definidas utilizando diferentes unidades. Neste exemplo, usamos pixels.',
+            highlight: ['width', 'height'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  width: 300px;\n  height: 150px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="card">Caixa</div>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Setting the size of an element',
+              text: 'So far, elements have had whatever size the browser chose. What if you want to decide? Two properties take care of that.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The width and height properties',
+              text: 'The width and height properties define an element\'s width and height.'
+            },
+            closing: 'Dimensions can be defined using different units. In this example, we used pixels.',
+            highlight: ['width', 'height'],
+            codeLanguage: 'CSS',
+            code: '.card {\n  width: 300px;\n  height: 150px;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="card">Box</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Unidades de medida: px e %',
+              text: 'CSS possui diferentes unidades para definir tamanhos. px representa uma medida em pixels, enquanto % utiliza uma proporção em relação ao elemento de referência, que normalmente é o elemento pai (o que está em volta).',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Outras unidades de tamanho',
+              text: 'Também existem unidades como em, rem, vh e vw. Elas serão exploradas conforme avançarmos no CSS.'
+            },
+            closing: 'Escolher a unidade adequada ajuda a criar interfaces que se adaptam melhor a diferentes tamanhos de tela.',
+            highlight: ['px', 'CSS'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Units of measure: px and %',
+              text: 'CSS has different units for defining sizes. px represents a measurement in pixels, while % uses a proportion relative to the reference element, which is usually the parent element (the one around it).',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Other size units',
+              text: 'There are also units like em, rem, vh and vw. We\'ll explore them as we go further into CSS.'
+            },
+            closing: 'Choosing the right unit helps create interfaces that adapt better to different screen sizes.',
+            highlight: ['px', 'CSS'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual propriedade define a altura de um elemento?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height', 'width', 'size', 'length'],
+            pool: 'width-height'
+          },
+          en: {
+            question: 'Which property sets an element\'s height?',
+            highlight: [],
+            correctOption: 1,
+            options: ['height', 'width', 'size', 'length'],
+            pool: 'width-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'width define a largura de um elemento.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'width-height',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'width sets an element\'s width.',
+            highlight: ['width'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'width-height',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual declaração deixa o cartão com 300 pixels de largura?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
+            pool: 'width-height'
+          },
+          en: {
+            question: 'Which declaration makes the card 300 pixels wide?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
+            pool: 'width-height'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'width: 80% é calculado em relação a quê?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Ao elemento de referência, como o pai', 'À tela inteira, sempre', 'Ao tamanho da fonte', 'A 80 pixels fixos'],
+            pool: 'px-percent'
+          },
+          en: {
+            question: 'What is width: 80% calculated against?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The reference element, like the parent', 'The whole screen, always', 'The font size', 'A fixed 80 pixels'],
+            pool: 'px-percent'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'px é uma medida em pixels, e % é uma proporção.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'px-percent',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'px is a measure in pixels, and % is a proportion.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'px-percent',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um contêiner deve ocupar 80% do espaço do pai em qualquer tela. O que usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
+            pool: 'px-percent'
+          },
+          en: {
+            question: 'A container must take 80% of its parent\'s space on any screen. What do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
+            pool: 'px-percent'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: cartão com 300px de largura e 150px de altura.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
+            answers: ['width', 'height'],
+            distractors: ['size', 'length']
+          },
+          en: {
+            question: 'Complete: a card 300px wide and 150px tall.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
+            answers: ['width', 'height'],
+            distractors: ['size', 'length']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que dá ao .container 80% da largura.',
+            highlight: ['largura'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  width: 80%;', '}'],
+            distractors: ['  height: 80%;', '  width: 80;']
+          },
+          en: {
+            question: 'Build the rule that gives .container 80% of the width.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            lines: ['.container {', '  width: 80%;', '}'],
+            distractors: ['  height: 80%;', '  width: 80;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra cria um cartão de 300px de largura?',
+            codeLanguage: 'CSS',
+            highlight: ['largura'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule creates a card 300px wide?',
+            codeLanguage: 'CSS',
+            highlight: ['wide'],
+            correctOption: 1,
+            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que dá ao .container 80% da largura.',
+            highlight: ['largura'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: 80%;\n}',
+            answers: ['width'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property that gives .container 80% of the width.',
+            highlight: ['width'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: 80%;\n}',
+            answers: ['width'],
             ignoreCase: true
           }
         }
@@ -6623,7 +7142,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como funciona o box-shadow',
-              text: 'box-shadow adiciona uma sombra: os primeiros valores são o deslocamento horizontal e o vertical, depois vem o desfoque e, por fim, a cor.'
+              text: 'box-shadow adiciona uma sombra: os primeiros valores são o deslocamento horizontal e o vertical (valores positivos empurram a sombra para a direita e para baixo), depois vem o desfoque (quanto maior, mais suave) e, por fim, a cor.'
             },
             closing: 'Cantos suaves e sombras discretas ajudam a destacar um cartão do fundo da página.',
             highlight: ['border-radius', 'box-shadow'],
@@ -6644,7 +7163,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How box-shadow works',
-              text: 'box-shadow adds a shadow: the first values are the horizontal and vertical offsets, then the blur and, finally, the color.'
+              text: 'box-shadow adds a shadow: the first values are the horizontal and vertical offsets (positive values push the shadow right and down), then the blur (the larger, the softer) and, finally, the color.'
             },
             closing: 'Soft corners and subtle shadows help a card stand out from the page background.',
             highlight: ['border-radius', 'box-shadow'],
@@ -6929,7 +7448,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O mesmo exemplo com border-box',
-              text: 'No exemplo, a caixa ocupa exatamente 200px na tela, e o conteúdo se ajusta ao espaço que sobra.'
+              text: 'No exemplo, a caixa ocupa exatamente 200px na tela, e o conteúdo se ajusta ao espaço que sobra. O * do exemplo é um seletor que significa todos os elementos da página.'
             },
             closing: 'border-box costuma ser aplicado a todos os elementos da página, porque torna os tamanhos muito mais previsíveis.',
             highlight: ['box-sizing', 'border-box', 'width'],
@@ -6950,7 +7469,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The same example with border-box',
-              text: 'In the example, the box takes up exactly 200px on screen, and the content adjusts to the space left over.'
+              text: 'In the example, the box takes up exactly 200px on screen, and the content adjusts to the space left over. The * in the example is a selector that means all the elements on the page.'
             },
             closing: 'border-box is usually applied to every element on the page, because it makes sizes far more predictable.',
             highlight: ['box-sizing', 'border-box', 'width'],
@@ -6969,14 +7488,14 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'width: 200px, padding: 20px e border: 5px, sem box-sizing. Quanto a caixa ocupa?',
+            question: 'width: 200px, padding: 20px e border: 5px solid, sem box-sizing. Quanto a caixa ocupa?',
             highlight: [],
             correctOption: 1,
             options: ['250px', '200px', '225px', '210px'],
             pool: 'content-box'
           },
           en: {
-            question: 'width: 200px, padding: 20px and border: 5px, without box-sizing. How wide is the box?',
+            question: 'width: 200px, padding: 20px and border: 5px solid, without box-sizing. How wide is the box?',
             highlight: [],
             correctOption: 1,
             options: ['250px', '200px', '225px', '210px'],
@@ -7049,14 +7568,14 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Com border-box, width: 200px, padding: 20px e border: 5px. Quanto a caixa ocupa?',
+            question: 'Com border-box, width: 200px, padding: 20px e border: 5px solid. Quanto a caixa ocupa?',
             highlight: [],
             correctOption: 1,
             options: ['200px', '250px', '240px', '210px'],
             pool: 'border-box'
           },
           en: {
-            question: 'With border-box, width: 200px, padding: 20px and border: 5px. How wide is the box?',
+            question: 'With border-box, width: 200px, padding: 20px and border: 5px solid. How wide is the box?',
             highlight: [],
             correctOption: 1,
             options: ['200px', '250px', '240px', '210px'],
@@ -7173,302 +7692,6 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Largura e altura',
-      en: 'Width and height'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Definindo o tamanho de um elemento',
-              text: 'Até aqui, os elementos tinham o tamanho que o navegador escolhia. E se você quiser decidir? Duas propriedades cuidam disso.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'As propriedades width e height',
-              text: 'As propriedades width e height definem a largura e a altura de um elemento.'
-            },
-            closing: 'As dimensões podem ser definidas utilizando diferentes unidades. Neste exemplo, usamos pixels.',
-            highlight: ['width', 'height'],
-            codeLanguage: 'CSS',
-            code: '.card {\n  width: 300px;\n  height: 150px;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<div class="card">Caixa</div>'
-              }
-            ]
-          },
-          en: {
-            introduction: {
-              title: 'Setting the size of an element',
-              text: 'So far, elements have had whatever size the browser chose. What if you want to decide? Two properties take care of that.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The width and height properties',
-              text: 'The width and height properties define an element\'s width and height.'
-            },
-            closing: 'Dimensions can be defined using different units. In this example, we used pixels.',
-            highlight: ['width', 'height'],
-            codeLanguage: 'CSS',
-            code: '.card {\n  width: 300px;\n  height: 150px;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<div class="card">Box</div>'
-              }
-            ]
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Unidades de medida: px e %',
-              text: 'CSS possui diferentes unidades para definir tamanhos. px representa uma medida em pixels, enquanto % utiliza uma proporção em relação ao elemento de referência.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Outras unidades de tamanho',
-              text: 'Também existem unidades como em, rem, vh e vw. Elas serão exploradas conforme avançarmos no CSS.'
-            },
-            closing: 'Escolher a unidade adequada ajuda a criar interfaces que se adaptam melhor a diferentes tamanhos de tela.',
-            highlight: ['px', 'CSS'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Units of measure: px and %',
-              text: 'CSS has different units for defining sizes. px represents a measurement in pixels, while % uses a proportion relative to the reference element.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Other size units',
-              text: 'There are also units like em, rem, vh and vw. We\'ll explore them as we go further into CSS.'
-            },
-            closing: 'Choosing the right unit helps create interfaces that adapt better to different screen sizes.',
-            highlight: ['px', 'CSS'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  width: 80%;\n}\n\n.card {\n  width: 300px;\n}',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual propriedade define a altura de um elemento?',
-            highlight: [],
-            correctOption: 1,
-            options: ['height', 'width', 'size', 'length'],
-            pool: 'width-height'
-          },
-          en: {
-            question: 'Which property sets an element\'s height?',
-            highlight: [],
-            correctOption: 1,
-            options: ['height', 'width', 'size', 'length'],
-            pool: 'width-height'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'width define a largura de um elemento.',
-            highlight: ['width'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'width-height',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'width sets an element\'s width.',
-            highlight: ['width'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'width-height',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual declaração deixa o cartão com 300 pixels de largura?',
-            highlight: [],
-            correctOption: 1,
-            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
-            pool: 'width-height'
-          },
-          en: {
-            question: 'Which declaration makes the card 300 pixels wide?',
-            highlight: [],
-            correctOption: 1,
-            options: ['width: 300px;', 'height: 300px;', 'width: 300;', 'size: 300px;'],
-            pool: 'width-height'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'width: 80% é calculado em relação a quê?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Ao elemento de referência, como o pai', 'À tela inteira, sempre', 'Ao tamanho da fonte', 'A 80 pixels fixos'],
-            pool: 'px-percent'
-          },
-          en: {
-            question: 'What is width: 80% calculated against?',
-            highlight: [],
-            correctOption: 1,
-            options: ['The reference element, like the parent', 'The whole screen, always', 'The font size', 'A fixed 80 pixels'],
-            pool: 'px-percent'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'px é uma medida em pixels, e % é uma proporção.',
-            highlight: [],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'px-percent',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'px is a measure in pixels, and % is a proportion.',
-            highlight: [],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'px-percent',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Um contêiner deve ocupar 80% do espaço do pai em qualquer tela. O que usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
-            pool: 'px-percent'
-          },
-          en: {
-            question: 'A container must take 80% of its parent\'s space on any screen. What do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['width: 80%;', 'width: 80px;', 'width: 800px;', 'height: 80%;'],
-            pool: 'px-percent'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: cartão com 300px de largura e 150px de altura.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
-            answers: ['width', 'height'],
-            distractors: ['size', 'length']
-          },
-          en: {
-            question: 'Complete: a card 300px wide and 150px tall.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.card {\n  ___: 300px;\n  ___: 150px;\n}',
-            answers: ['width', 'height'],
-            distractors: ['size', 'length']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte a regra que dá ao .container 80% da largura.',
-            highlight: ['largura'],
-            codeLanguage: 'CSS',
-            lines: ['.container {', '  width: 80%;', '}'],
-            distractors: ['  height: 80%;', '  width: 80;']
-          },
-          en: {
-            question: 'Build the rule that gives .container 80% of the width.',
-            highlight: ['width'],
-            codeLanguage: 'CSS',
-            lines: ['.container {', '  width: 80%;', '}'],
-            distractors: ['  height: 80%;', '  width: 80;']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual regra cria um cartão de 300px de largura?',
-            codeLanguage: 'CSS',
-            highlight: ['largura'],
-            correctOption: 1,
-            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which rule creates a card 300px wide?',
-            codeLanguage: 'CSS',
-            highlight: ['wide'],
-            correctOption: 1,
-            options: ['.card {\n  width: 300px;\n}', '.card {\n  height: 300px;\n}', '.card {\n  width: 300;\n}', '.card {\n  size: 300px;\n}'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite a propriedade que dá ao .container 80% da largura.',
-            highlight: ['largura'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  ___: 80%;\n}',
-            answers: ['width'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the property that gives .container 80% of the width.',
-            highlight: ['width'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  ___: 80%;\n}',
-            answers: ['width'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Limites e centralização',
       en: 'Limits and centering'
     },
@@ -7486,7 +7709,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Largura máxima e mínima',
               text: 'max-width define uma largura máxima: o elemento pode encolher em telas pequenas, mas nunca passa desse limite em telas grandes.\n\nJá min-width define uma largura mínima, abaixo da qual o elemento não encolhe.'
             },
-            closing: 'Uma regra muito usada em imagens é max-width: 100%, que impede a imagem de ficar maior que o espaço disponível.',
+            closing: 'Uma regra muito usada em imagens é max-width: 100%, que impede a imagem de ficar maior que o espaço disponível. Junte height: auto para a imagem não ficar esticada.',
             highlight: ['max-width', 'min-width'],
             codeLanguage: 'CSS',
             code: '.texto {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
@@ -7507,7 +7730,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Maximum and minimum width',
               text: 'max-width sets a maximum width: the element can shrink on small screens, but never goes past that limit on large ones.\n\nmin-width sets a minimum width, below which the element won\'t shrink.'
             },
-            closing: 'A rule used all the time on images is max-width: 100%, which stops the image from getting bigger than the available space.',
+            closing: 'A rule used all the time on images is max-width: 100%, which stops the image from getting bigger than the available space. Add height: auto so the image doesn\'t get stretched.',
             highlight: ['max-width', 'min-width'],
             codeLanguage: 'CSS',
             code: '.text {\n  max-width: 240px;\n  background-color: #cfe8ff;\n}',
@@ -7531,7 +7754,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como o margin auto divide o espaço',
-              text: 'O 0 zera as margens de cima e de baixo, e o auto divide igualmente o espaço que sobra entre a esquerda e a direita.'
+              text: 'O 0 zera as margens de cima e de baixo, e o auto divide igualmente o espaço que sobra entre a esquerda e a direita. Por isso o bloco precisa ter uma largura definida: se ele já ocupa a linha toda, não sobra espaço para dividir.'
             },
             closing: 'Combinado com max-width, é o jeito clássico de criar um contêiner centralizado para o conteúdo da página.',
             highlight: ['margin', 'auto', 'max-width'],
@@ -7552,7 +7775,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How margin auto splits the space',
-              text: 'The 0 zeroes the top and bottom margins, and auto splits the leftover space equally between left and right.'
+              text: 'The 0 zeroes the top and bottom margins, and auto splits the leftover space equally between left and right. That is why the block needs a defined width: if it already fills the whole line, there is no space left to share.'
             },
             closing: 'Combined with max-width, it\'s the classic way to build a centered container for the page content.',
             highlight: ['margin', 'auto', 'max-width'],
@@ -7671,7 +7894,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'margin: 0 auto centraliza um bloco mesmo sem largura definida, ocupando a linha inteira.',
+            aditionalParagraph: 'margin: 0 auto faz um bloco sem largura definida ficar menor e centralizado.',
             highlight: [],
             correctOption: 2,
             options: ['Verdadeiro', 'Falso'],
@@ -7680,7 +7903,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'margin: 0 auto centers a block even without a set width, when it fills the whole line.',
+            aditionalParagraph: 'margin: 0 auto makes a block with no set width smaller and centered.',
             highlight: [],
             correctOption: 2,
             options: ['True', 'False'],
@@ -7815,12 +8038,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'As unidades rem e em',
-              text: 'Além de px e de porcentagem, o CSS tem unidades que se apoiam no tamanho da fonte.\n\nA unidade rem toma como referência a fonte raiz da página, definida no elemento html. Já a unidade em toma como referência a fonte do próprio elemento.'
+              text: 'Além de px e de porcentagem, o CSS tem unidades que se apoiam no tamanho da fonte.\n\nA unidade rem toma como referência a fonte raiz da página, definida no elemento html (16px por padrão no navegador). Já a unidade em toma como referência a fonte do próprio elemento (no font-size, a do elemento pai).'
             },
             closing: 'Como rem parte sempre da mesma referência, ela é mais previsível quando há elementos aninhados.',
             highlight: ['px', 'rem'],
             codeLanguage: 'CSS',
-            code: 'html {\n  font-size: 16px;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
+            code: 'html {\n  font-size: 100%;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
             additionalCode: [
               {
                 codeLanguage: 'HTML',
@@ -7836,12 +8059,12 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The rem and em units',
-              text: 'Besides px and percentages, CSS has units based on font size.\n\nThe rem unit uses the page root font as its reference, set on the html element. The em unit uses the font of the element itself.'
+              text: 'Besides px and percentages, CSS has units based on font size.\n\nThe rem unit uses the page root font as its reference, set on the html element (16px by default in the browser). The em unit uses the font of the element itself (in font-size, that of the parent element).'
             },
             closing: 'Because rem always starts from the same reference, it is more predictable when elements are nested.',
             highlight: ['px', 'rem'],
             codeLanguage: 'CSS',
-            code: 'html {\n  font-size: 16px;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
+            code: 'html {\n  font-size: 100%;\n}\n\n.titulo {\n  font-size: 2rem;\n}\n\n.aviso {\n  padding: 1em;\n}',
             additionalCode: [
               {
                 codeLanguage: 'HTML',
@@ -7862,7 +8085,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como vh e vw se comportam',
-              text: 'Uma unidade vh equivale a 1% da altura da janela, e uma unidade vw equivale a 1% da largura. Assim, uma altura de 100vh ocupa exatamente a altura visível da tela.'
+              text: 'Uma unidade vh equivale a 1% da altura da janela, e uma unidade vw equivale a 1% da largura. Assim, uma altura de 100vh ocupa a altura da janela. Em celulares, a barra do navegador pode fazer o 100vh passar da área visível; para isso existe a unidade dvh.'
             },
             closing: 'Essas unidades são úteis para seções que precisam preencher a tela inteira, seja qual for o tamanho do dispositivo.',
             highlight: ['vh', 'vw'],
@@ -7883,7 +8106,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How vh and vw behave',
-              text: 'One vh unit equals 1% of the window height, and one vw unit equals 1% of its width. So a height of 100vh takes up exactly the visible height of the screen.'
+              text: 'One vh unit equals 1% of the window height, and one vw unit equals 1% of its width. So a height of 100vh takes up the height of the window. On phones, the browser bar can make 100vh go past the visible area; that is what the dvh unit is for.'
             },
             closing: 'These units are useful for sections that need to fill the whole screen, whatever the device size.',
             highlight: ['vh', 'vw'],
@@ -8176,9 +8399,9 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Os comportamentos block e inline',
-              text: 'A propriedade display define como um elemento participa do fluxo da página. Os valores block e inline são dois comportamentos fundamentais.'
+              text: 'A propriedade display define como um elemento participa do fluxo da página. Os valores block e inline são dois comportamentos fundamentais. A div já nasce block e o span já nasce inline; o display serve para trocar isso.'
             },
-            closing: 'Elementos block normalmente ocupam toda a largura disponível e começam em uma nova linha. Elementos inline permanecem na mesma linha quando existe espaço.',
+            closing: 'Elementos block normalmente ocupam toda a largura disponível e começam em uma nova linha. Elementos inline permanecem na mesma linha quando existe espaço, e ignoram width e height.',
             highlight: ['display', 'block', 'inline'],
             codeLanguage: 'CSS',
             code: 'div {\n  display: block;\n}\n\nspan {\n  display: inline;\n}',
@@ -8197,9 +8420,9 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The block and inline behaviors',
-              text: 'The display property defines how an element takes part in the page\'s flow. The values block and inline are two fundamental behaviors.'
+              text: 'The display property defines how an element takes part in the page\'s flow. The values block and inline are two fundamental behaviors. A div is born block and a span is born inline; display is used to change that.'
             },
-            closing: 'Block elements usually take up the full available width and start on a new line. Inline elements stay on the same line when there\'s space.',
+            closing: 'Block elements usually take up the full available width and start on a new line. Inline elements stay on the same line when there\'s space, and they ignore width and height.',
             highlight: ['display', 'block', 'inline'],
             codeLanguage: 'CSS',
             code: 'div {\n  display: block;\n}\n\nspan {\n  display: inline;\n}',
@@ -8218,7 +8441,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Inline-block e none',
-              text: 'inline-block combina características dos elementos inline e block. Já none remove o elemento da renderização da página.',
+              text: 'inline-block fica na mesma linha, como o inline, mas aceita width e height, como o block. Já none remove o elemento da renderização da página.',
               persona: 'neutral'
             },
             closing: 'O display controla como o elemento participa do layout. No módulo intermediário, veremos recursos mais poderosos para organizar layouts.',
@@ -8235,7 +8458,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Inline-block and none',
-              text: 'inline-block combines characteristics of inline and block elements. none, in turn, removes the element from the page rendering.',
+              text: 'inline-block stays on the same line, like inline, but accepts width and height, like block. none, in turn, removes the element from the page rendering.',
               persona: 'neutral'
             },
             closing: 'display controls how the element takes part in the layout. In the intermediate module, we\'ll see more powerful layout resources.',
@@ -8321,7 +8544,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.oculto {\n  display: none;\n}',
             highlight: [],
             correctOption: 1,
-            options: ['Remove o elemento da página', 'Deixa o elemento transparente', 'Coloca o elemento na mesma linha', 'Diminui o elemento'],
+            options: ['Esconde o elemento, sem ocupar espaço', 'Deixa o elemento transparente', 'Coloca o elemento na mesma linha', 'Diminui o elemento'],
             pool: 'inline-block-none'
           },
           en: {
@@ -8330,7 +8553,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
             code: '.hidden {\n  display: none;\n}',
             highlight: [],
             correctOption: 1,
-            options: ['Removes the element from the page', 'Makes the element transparent', 'Puts the element on the same line', 'Shrinks the element'],
+            options: ['Hides the element, taking up no space', 'Makes the element transparent', 'Puts the element on the same line', 'Shrinks the element'],
             pool: 'inline-block-none'
           }
         }
@@ -8455,7 +8678,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               },
               {
                 left: 'none',
-                right: 'Remove o elemento da página'
+                right: 'Esconde, sem ocupar espaço'
               },
               {
                 left: 'inline-block',
@@ -8478,7 +8701,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               },
               {
                 left: 'none',
-                right: 'Removes the element from the page'
+                right: 'Hides it, taking up no space'
               },
               {
                 left: 'inline-block',
@@ -8556,7 +8779,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Combinando propriedades em uma só regra',
               text: 'Uma regra CSS pode combinar várias propriedades para criar um estilo completo.'
             },
-            closing: 'CSS fica mais poderoso quando combinamos pequenas regras para construir componentes visuais completos.',
+            closing: 'CSS fica mais poderoso quando combinamos pequenas regras para construir componentes visuais completos. E lembre: cada declaração termina com ponto e vírgula (;), e as declarações ficam entre chaves { }.',
             highlight: ['CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  background-color: #f2f2f2;\n  border: 1px solid #ccc;\n}\n\n.card h2 {\n  color: #222;\n}',
@@ -8577,7 +8800,7 @@ export const CSS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Combining properties in a single rule',
               text: 'A CSS rule can combine several properties to create a complete style.'
             },
-            closing: 'CSS becomes more powerful when we combine small rules to build complete visual components.',
+            closing: 'CSS becomes more powerful when we combine small rules to build complete visual components. And remember: each declaration ends with a semicolon (;), and declarations go between braces { }.',
             highlight: ['CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 300px;\n  padding: 20px;\n  background-color: #f2f2f2;\n  border: 1px solid #ccc;\n}\n\n.card h2 {\n  color: #222;\n}',
@@ -8881,7 +9104,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Estrutura, aparência e comportamento',
               text: 'JavaScript é uma linguagem de programação usada para criar comportamentos e interações em aplicações. No desenvolvimento web, ele pode fazer uma página responder às ações do usuário e processar informações.\n\nHTML define a estrutura, CSS define a aparência e JavaScript permite adicionar comportamento.'
             },
-            closing: 'JavaScript permite que o programa receba informações, tome decisões, repita ações e transforme dados. Neste módulo, vamos começar pelos fundamentos da linguagem.',
+            closing: 'JavaScript permite que o programa receba informações, tome decisões, repita ações e transforme dados. Neste módulo, vamos começar pelos fundamentos da linguagem. No exemplo, o + junta dois textos e o console.log mostra o resultado. Não precisa decorar nada agora: cada peça será explicada nas próximas lições.',
             highlight: ['JavaScript', 'HTML', 'CSS'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Mundo";\n\nconsole.log("Olá, " + nome + "!");',
@@ -8897,7 +9120,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Structure, appearance and behavior',
               text: 'JavaScript is a programming language used to create behaviors and interactions in applications. In web development, it can make a page respond to user actions and process information.\n\nHTML defines the structure, CSS defines the appearance and JavaScript lets you add behavior.'
             },
-            closing: 'JavaScript lets a program receive information, make decisions, repeat actions and transform data. In this module, we\'ll start with the fundamentals of the language.',
+            closing: 'JavaScript lets a program receive information, make decisions, repeat actions and transform data. In this module, we\'ll start with the fundamentals of the language. In the example, the + joins two texts and console.log shows the result. No need to memorize anything now: each piece will be explained in the next lessons.',
             highlight: ['JavaScript', 'HTML', 'CSS'],
             codeLanguage: 'JavaScript',
             code: 'const name = "World";\n\nconsole.log("Hello, " + name + "!");',
@@ -8911,7 +9134,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Mostrando valores no console',
-              text: 'JavaScript pode ser executado no navegador. O código abaixo utiliza console.log() para mostrar uma informação no console.',
+              text: 'JavaScript pode ser executado no navegador. O código abaixo utiliza console.log() para mostrar uma informação no console, a área onde o programa escreve mensagens para quem está programando.',
               persona: 'neutral'
             },
             closing: 'O console.log() é uma ferramenta muito útil para visualizar valores durante o desenvolvimento. Agora vamos começar a trabalhar com dados.',
@@ -8923,13 +9146,50 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Showing values in the console',
-              text: 'JavaScript can run in the browser. The code below uses console.log() to show information in the console.',
+              text: 'JavaScript can run in the browser. The code below uses console.log() to show information in the console, the area where the program writes messages for the person programming.',
               persona: 'neutral'
             },
             closing: 'console.log() is a very useful tool for viewing values during development. Now let\'s start working with data.',
             highlight: ['JavaScript', 'console.log'],
             codeLanguage: 'JavaScript',
             code: 'console.log("Hello, world!");',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Como ler o código e ver a saída',
+              text: 'Daqui para a frente, cada exemplo mostra o que o código escreve. Vamos combinar como ler isso.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Console e comentários',
+              text: 'O console é a área onde o programa escreve mensagens para quem está programando; o console.log() manda um valor para lá. Tudo o que vem depois de // é um comentário: o computador ignora, e ele serve só para você ler.\n\nNos exemplos, um comentário // mostra: ... diz o que aparece no console quando o código roda.'
+            },
+            closing: 'Apagar um comentário não muda o que o código faz. Nos exercícios, você verá // saída: ___ : é o mesmo tipo de comentário, e o espaço a preencher é o resultado que você deve digitar.',
+            highlight: ['console', 'comentário'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Olá");\n// mostra: Olá\n\nconsole.log(2 + 3);\n// mostra: 5',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'How to read the code and see the output',
+              text: 'From now on, each example shows what the code writes. Let us agree on how to read that.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Console and comments',
+              text: 'The console is the area where the program writes messages for the person programming; console.log() sends a value there. Everything after // is a comment: the computer ignores it, and it is only there for you to read.\n\nIn the examples, a comment // shows: ... tells what appears in the console when the code runs.'
+            },
+            closing: 'Deleting a comment does not change what the code does. In the exercises, you will see // output: ___ : it is the same kind of comment, and the blank to fill in is the result you have to type.',
+            highlight: ['console', 'comment'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Hello");\n// shows: Hello\n\nconsole.log(2 + 3);\n// shows: 5',
             onlyCode: true
           }
         }
@@ -9125,14 +9385,14 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o nome do objeto que mostra o nome no console, antes do .log.',
+            question: 'Digite a palavra que vem antes do .log para mostrar o nome no console.',
             highlight: ['console'],
             codeLanguage: 'JavaScript',
             code: 'const nome = "Ana";\n___.log(nome);',
             answers: ['console']
           },
           en: {
-            question: 'Type the name of the object that shows the name in the console, before .log.',
+            question: 'Type the word that comes before .log to show the name in the console.',
             highlight: ['console'],
             codeLanguage: 'JavaScript',
             code: 'const name = "Ana";\n___.log(name);',
@@ -9191,7 +9451,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'let e const',
-              text: 'JavaScript possui diferentes formas de declarar variáveis. let permite atribuir um novo valor posteriormente, enquanto const deve permanecer com a mesma referência após sua criação.',
+              text: 'JavaScript possui diferentes formas de declarar variáveis. let permite atribuir um novo valor posteriormente, enquanto const cria uma variável que não pode receber outro valor depois.',
               persona: 'neutral'
             },
             closing: 'Prefira const quando o valor não precisar ser reatribuído e use let quando precisar alterá-lo.',
@@ -9203,7 +9463,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'let and const',
-              text: 'JavaScript has different ways to declare variables. let lets you assign a new value later, while const must keep the same reference after it is created.',
+              text: 'JavaScript has different ways to declare variables. let lets you assign a new value later, while const creates a variable that cannot be given another value later.',
               persona: 'neutral'
             },
             closing: 'Prefer const when the value doesn\'t need to be reassigned, and use let when you need to change it.',
@@ -9439,7 +9699,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Os principais tipos de valores',
-              text: 'Um programa trabalha com diferentes tipos de valores. JavaScript possui tipos como string, number, boolean, null e undefined.'
+              text: 'Um programa trabalha com diferentes tipos de valores. JavaScript possui tipos como string (texto), number (número), boolean (verdadeiro ou falso), null e undefined. O tipo muda o que o programa faz: 10 + 5 dá 15, mas "10" + "5" junta os textos e dá "105". Para descobrir o tipo de um valor, use typeof: typeof 10 devolve "number" e typeof "Ana" devolve "string".'
             },
             closing: 'O tipo de um valor indica que tipo de informação ele representa. Conhecer esses tipos é essencial para trabalhar com dados.',
             highlight: ['string', 'number', 'boolean'],
@@ -9455,7 +9715,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The main types of values',
-              text: 'A program works with different types of values. JavaScript has types like string, number, boolean, null and undefined.'
+              text: 'A program works with different types of values. JavaScript has types like string (text), number, boolean (true or false), null and undefined. The type changes what the program does: 10 + 5 gives 15, but "10" + "5" joins the texts and gives "105". To find out the type of a value, use typeof: typeof 10 returns "number" and typeof "Ana" returns "string".'
             },
             closing: 'A value\'s type indicates what kind of information it represents. Knowing these types is essential for working with data.',
             highlight: ['string', 'number', 'boolean'],
@@ -9759,296 +10019,6 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Strings',
-      en: 'Strings'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'O que dá para fazer com um texto?',
-              text: 'Texto aparece em todo programa: nomes, mensagens, endereços. E se você precisar saber o tamanho de um nome ou mudá-lo para maiúsculas? Strings já vêm com ferramentas prontas para isso.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Propriedades e métodos de strings',
-              text: 'Strings têm propriedades e métodos próprios. length informa quantos caracteres há no texto.\n\ntoUpperCase e toLowerCase devolvem o texto em maiúsculas ou minúsculas, e includes verifica se um trecho aparece dentro dele.'
-            },
-            closing: 'Esses métodos devolvem um valor novo: a string original não muda.',
-            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
-            codeLanguage: 'JavaScript',
-            code: 'const nome = "JavaScript";\n\nconsole.log(nome.length);\nconsole.log(nome.toUpperCase());\nconsole.log(nome.includes("Script"));',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'What can you do with a piece of text?',
-              text: 'Text shows up in every program: names, messages, addresses. What if you need to know the length of a name or turn it into capital letters? Strings come with ready-made tools for that.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'String properties and methods',
-              text: 'Strings have their own properties and methods. length tells you how many characters the text has.\n\ntoUpperCase and toLowerCase return the text in upper or lower case, and includes checks whether a piece of text appears inside it.'
-            },
-            closing: 'These methods return a new value: the original string doesn\'t change.',
-            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
-            codeLanguage: 'JavaScript',
-            code: 'const name = "JavaScript";\n\nconsole.log(name.length);\nconsole.log(name.toUpperCase());\nconsole.log(name.includes("Script"));',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Recortando e dividindo strings',
-              text: 'slice recorta um pedaço da string, do índice inicial até antes do final. Assim como nos arrays, o primeiro caractere fica no índice 0.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Limpando e separando texto',
-              text: 'trim remove os espaços do começo e do fim, e split divide a string em um array usando um separador.'
-            },
-            closing: 'split é muito útil para transformar uma lista escrita em texto em um array de verdade.',
-            highlight: ['slice', 'trim', 'split'],
-            codeLanguage: 'JavaScript',
-            code: 'const frase = "  aprender JavaScript  ";\n\nconsole.log(frase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("maçã,banana,uva".split(","));',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Slicing and splitting strings',
-              text: 'slice cuts out a piece of the string, from the start index up to just before the end one. Just like arrays, the first character is at index 0.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Cleaning and separating text',
-              text: 'trim removes spaces from the start and end, and split breaks the string into an array using a separator.'
-            },
-            closing: 'split is very handy for turning a list written as text into a real array.',
-            highlight: ['slice', 'trim', 'split'],
-            codeLanguage: 'JavaScript',
-            code: 'const phrase = "  learning JavaScript  ";\n\nconsole.log(phrase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("apple,banana,grape".split(","));',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que este código mostra?',
-            codeLanguage: 'JavaScript',
-            code: 'console.log("Olá".length);',
-            highlight: [],
-            correctOption: 1,
-            options: ['3', '2', '4', '"Olá"'],
-            pool: 'string-basics'
-          },
-          en: {
-            question: 'What does this code show?',
-            codeLanguage: 'JavaScript',
-            code: 'console.log("Hi!".length);',
-            highlight: [],
-            correctOption: 1,
-            options: ['3', '2', '4', '"Hi!"'],
-            pool: 'string-basics'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual método deixa o texto todo em maiúsculas?',
-            highlight: [],
-            correctOption: 1,
-            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
-            pool: 'string-basics'
-          },
-          en: {
-            question: 'Which method makes the whole text uppercase?',
-            highlight: [],
-            correctOption: 1,
-            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
-            pool: 'string-basics'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'toUpperCase altera a string original.',
-            highlight: ['toUpperCase'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'string-basics',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'toUpperCase changes the original string.',
-            highlight: ['toUpperCase'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'string-basics',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que "JavaScript".slice(0, 4) devolve?',
-            highlight: [],
-            correctOption: 1,
-            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
-            pool: 'string-methods'
-          },
-          en: {
-            question: 'What does "JavaScript".slice(0, 4) return?',
-            highlight: [],
-            correctOption: 1,
-            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
-            pool: 'string-methods'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que "a,b,c".split(",") devolve?',
-            highlight: [],
-            correctOption: 1,
-            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
-            pool: 'string-methods'
-          },
-          en: {
-            question: 'What does "a,b,c".split(",") return?',
-            highlight: [],
-            correctOption: 1,
-            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
-            pool: 'string-methods'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'trim remove os espaços do começo e do fim da string.',
-            highlight: ['trim'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'string-methods',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'trim removes the spaces at the start and end of the string.',
-            highlight: ['trim'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'string-methods',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete para mostrar o nome em maiúsculas.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const nome = "ana";\n\nconsole.log(\n  nome.___()\n);',
-            answers: ['toUpperCase'],
-            distractors: ['toLowerCase', 'upper', 'length']
-          },
-          en: {
-            question: 'Complete to show the name in uppercase.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const name = "ana";\n\nconsole.log(\n  name.___()\n);',
-            answers: ['toUpperCase'],
-            distractors: ['toLowerCase', 'upper', 'length']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o código: guarde "  Ana  " em nome, guarde em limpo o nome sem os espaços das pontas (trim) e mostre limpo.',
-            highlight: ['espaços'],
-            codeLanguage: 'JavaScript',
-            lines: ['const nome = "  Ana  ";', 'const limpo = nome.trim();', 'console.log(limpo);'],
-            distractors: ['const limpo = trim(nome);']
-          },
-          en: {
-            question: 'Build the code: store "  Ana  " in name, store in clean the name without the surrounding spaces (trim) and show clean.',
-            highlight: ['spaces'],
-            codeLanguage: 'JavaScript',
-            lines: ['const name = "  Ana  ";', 'const clean = name.trim();', 'console.log(clean);'],
-            distractors: ['const clean = trim(name);']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual expressão devolve "Java"?',
-            codeLanguage: 'JavaScript',
-            code: 'const s = "JavaScript";',
-            highlight: ['expressão'],
-            correctOption: 1,
-            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which expression returns "Java"?',
-            codeLanguage: 'JavaScript',
-            code: 'const s = "JavaScript";',
-            highlight: ['expression'],
-            correctOption: 1,
-            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o método que tira os espaços das pontas de s.',
-            highlight: ['método'],
-            codeLanguage: 'JavaScript',
-            code: 'const s = "  oi  ";\nconsole.log(s.___());',
-            answers: ['trim']
-          },
-          en: {
-            question: 'Type the method that removes the spaces around s.',
-            highlight: ['method'],
-            codeLanguage: 'JavaScript',
-            code: 'const s = "  hi  ";\nconsole.log(s.___());',
-            answers: ['trim']
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Operadores',
       en: 'Operators'
     },
@@ -10064,7 +10034,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Operadores matemáticos',
-              text: 'Operadores permitem realizar operações com valores. Os operadores +, -, * e / são utilizados para cálculos matemáticos.'
+              text: 'Operadores permitem realizar operações com valores. Os operadores +, -, * e / são utilizados para cálculos matemáticos. O % devolve o resto de uma divisão (7 % 2 dá 1). Com textos, o + junta os pedaços: "Olá, " + "Ana" vira "Olá, Ana".'
             },
             closing: 'Operadores permitem que o programa transforme e combine valores para produzir novos resultados.',
             highlight: ['operadores'],
@@ -10080,7 +10050,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Math operators',
-              text: 'Operators let you perform operations with values. The +, -, * and / operators are used for mathematical calculations.'
+              text: 'Operators let you perform operations with values. The +, -, * and / operators are used for mathematical calculations. The % returns the remainder of a division (7 % 2 gives 1). With texts, the + joins the pieces: "Hello, " + "Ana" becomes "Hello, Ana".'
             },
             closing: 'Operators let the program transform and combine values to produce new results.',
             highlight: ['operators'],
@@ -10101,7 +10071,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Os símbolos de comparação',
-              text: '> significa "maior que", === verifica igualdade estrita e !== verifica diferença.'
+              text: '> significa "maior que", === verifica igualdade estrita (mesmo valor e mesmo tipo) e !== verifica diferença. Atenção: um único = guarda um valor; não compara. Prefira === e !==: o == converte os tipos antes de comparar e pode surpreender (10 == "10" dá true).'
             },
             closing: 'Como comparações produzem true ou false, elas são especialmente úteis para tomar decisões no programa.',
             highlight: ['booleano'],
@@ -10117,12 +10087,49 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The comparison symbols',
-              text: '> means "greater than", === checks strict equality and !== checks difference.'
+              text: '> means "greater than", === checks strict equality (same value and same type) and !== checks difference. Careful: a single = stores a value; it does not compare. Prefer === and !==: == converts the types before comparing and can surprise you (10 == "10" is true).'
             },
             closing: 'Since comparisons produce true or false, they are especially useful for making decisions in the program.',
             highlight: ['boolean'],
             codeLanguage: 'JavaScript',
             code: 'console.log(10 > 5);\nconsole.log(10 === 10);\nconsole.log(10 !== 5);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Juntando textos e atalhos',
+              text: 'Operadores também juntam textos, comparam de outros jeitos e guardam contas de forma curta.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Mais operadores',
+              text: 'Com textos, o + junta os pedaços: "Olá, " + "Ana" vira "Olá, Ana".\n\nAlém do >, existem < (menor que), >= (maior ou igual) e <= (menor ou igual).\n\nPara atualizar uma variável, há atalhos: total += 5 é o mesmo que total = total + 5 (o -=, *= e /= funcionam igual), e total++ e total-- somam ou subtraem 1.'
+            },
+            closing: 'Os atalhos só funcionam em variáveis criadas com let, porque const não aceita um novo valor.',
+            highlight: ['junta', 'atalhos', 'let'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Olá, " + "Ana");\n// mostra: Olá, Ana\n\nconsole.log(3 < 5);\n// mostra: true\nconsole.log(5 >= 5, 3 <= 2);\n// mostra: true false\n\nlet total = 10;\ntotal += 5; // 15\ntotal *= 2; // 30\ntotal++; // 31\ntotal--; // 30\nconsole.log(total);\n// mostra: 30',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Joining texts and shortcuts',
+              text: 'Operators also join texts, compare in other ways and store calculations in a short form.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'More operators',
+              text: 'With texts, the + joins the pieces: "Hi, " + "Ana" becomes "Hi, Ana".\n\nBesides >, there are < (less than), >= (greater than or equal) and <= (less than or equal).\n\nTo update a variable, there are shortcuts: total += 5 is the same as total = total + 5 (-=, *= and /= work the same way), and total++ and total-- add or subtract 1.'
+            },
+            closing: 'The shortcuts only work on variables created with let, because const does not accept a new value.',
+            highlight: ['joins', 'shortcuts', 'let'],
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Hi, " + "Ana");\n// shows: Hi, Ana\n\nconsole.log(3 < 5);\n// shows: true\nconsole.log(5 >= 5, 3 <= 2);\n// shows: true false\n\nlet total = 10;\ntotal += 5; // 15\ntotal *= 2; // 30\ntotal++; // 31\ntotal--; // 30\nconsole.log(total);\n// shows: 30',
             onlyCode: true
           }
         }
@@ -10337,337 +10344,6 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Operadores lógicos',
-      en: 'Logical operators'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Combinando condições',
-              text: '"Só entra quem tem ingresso E documento." Frases assim aparecem o tempo todo, e o código também sabe combinar condições desse jeito.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Os operadores &&, || e !',
-              text: 'O operador && (e) só é verdadeiro quando os dois lados são verdadeiros. O operador || (ou) é verdadeiro quando pelo menos um lado é verdadeiro.\n\nJá o ! (não) inverte um valor booleano: !true vira false.'
-            },
-            closing: 'Esses operadores combinam comparações para montar condições mais completas.',
-            highlight: ['booleano'],
-            codeLanguage: 'JavaScript',
-            code: 'const idade = 20;\nconst temIngresso = true;\n\nconsole.log(idade >= 18 && temIngresso);\nconsole.log(idade < 12 || temIngresso);\nconsole.log(!temIngresso);',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Combining conditions',
-              text: '"Only people with a ticket AND an ID get in." Sentences like this come up all the time, and code can combine conditions that way too.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The &&, || and ! operators',
-              text: 'The && (and) operator is only true when both sides are true. The || (or) operator is true when at least one side is true.\n\nThe ! (not) operator flips a boolean value: !true becomes false.'
-            },
-            closing: 'These operators combine comparisons to build more complete conditions.',
-            highlight: ['boolean'],
-            codeLanguage: 'JavaScript',
-            code: 'const age = 20;\nconst hasTicket = true;\n\nconsole.log(age >= 18 && hasTicket);\nconsole.log(age < 12 || hasTicket);\nconsole.log(!hasTicket);',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Valores verdadeiros e falsos em condições',
-              text: 'Numa condição, todo valor é tratado como verdadeiro ou falso. Os valores tratados como falsos são chamados de falsy.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'A lista de valores falsy',
-              text: 'São falsy: false, 0, "" (string vazia), null, undefined e NaN. Todo o resto é truthy, inclusive "0" e arrays vazios.'
-            },
-            closing: 'Por isso, um if (nome) só entra no bloco quando nome não é uma string vazia.',
-            highlight: ['falsy', 'truthy'],
-            codeLanguage: 'JavaScript',
-            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n} else {\n  console.log("Nome vazio");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'True and false values in conditions',
-              text: 'In a condition, every value is treated as true or false. The values treated as false are called falsy.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'The list of falsy values',
-              text: 'These are falsy: false, 0, "" (empty string), null, undefined and NaN. Everything else is truthy, including "0" and empty arrays.'
-            },
-            closing: 'That\'s why an if (name) only runs its block when name isn\'t an empty string.',
-            highlight: ['falsy', 'truthy'],
-            codeLanguage: 'JavaScript',
-            code: 'const name = "";\n\nif (name) {\n  console.log("Hello, " + name);\n} else {\n  console.log("Empty name");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual o resultado de true && false?',
-            highlight: [],
-            correctOption: 1,
-            options: ['false', 'true', 'undefined', 'Erro'],
-            pool: 'and-or-not'
-          },
-          en: {
-            question: 'What is the result of true && false?',
-            highlight: [],
-            correctOption: 1,
-            options: ['false', 'true', 'undefined', 'Error'],
-            pool: 'and-or-not'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual o resultado de false || true?',
-            highlight: [],
-            correctOption: 1,
-            options: ['true', 'false', 'null', 'Erro'],
-            pool: 'and-or-not'
-          },
-          en: {
-            question: 'What is the result of false || true?',
-            highlight: [],
-            correctOption: 1,
-            options: ['true', 'false', 'null', 'Error'],
-            pool: 'and-or-not'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'O operador ! inverte um valor booleano.',
-            highlight: ['booleano'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'and-or-not',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'The ! operator flips a boolean value.',
-            highlight: ['boolean'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'and-or-not',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual destes valores é falsy?',
-            highlight: ['falsy'],
-            correctOption: 1,
-            options: ['0', '"0"', '[]', '"false"'],
-            pool: 'truthy-falsy'
-          },
-          en: {
-            question: 'Which of these values is falsy?',
-            highlight: ['falsy'],
-            correctOption: 1,
-            options: ['0', '"0"', '[]', '"false"'],
-            pool: 'truthy-falsy'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O bloco deste if roda?',
-            codeLanguage: 'JavaScript',
-            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n}',
-            highlight: [],
-            correctOption: 1,
-            options: ['Não, porque string vazia é falsy', 'Sim, porque a variável existe', 'Sim, porque "" é truthy', 'Dá erro, nome não tem valor'],
-            pool: 'truthy-falsy'
-          },
-          en: {
-            question: 'Does this if block run?',
-            codeLanguage: 'JavaScript',
-            code: 'const name = "";\n\nif (name) {\n  console.log(\n    "Hello, " + name\n  );\n}',
-            highlight: [],
-            correctOption: 1,
-            options: ['No, because an empty string is falsy', 'Yes, because the variable exists', 'Yes, because "" is truthy', 'It errors, name has no value'],
-            pool: 'truthy-falsy'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Um array vazio [] é falsy.',
-            highlight: ['falsy'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'truthy-falsy',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'An empty array [] is falsy.',
-            highlight: ['falsy'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'truthy-falsy',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: entra quem é maior de idade e tem ingresso.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const idade = 20;\nconst ingresso = true;\n\nconsole.log(\n  idade >= 18 ___ ingresso\n);',
-            answers: ['&&'],
-            distractors: ['||', '!', '&']
-          },
-          en: {
-            question: 'Complete: only adults who have a ticket get in.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const age = 20;\nconst ticket = true;\n\nconsole.log(\n  age >= 18 ___ ticket\n);',
-            answers: ['&&'],
-            distractors: ['||', '!', '&']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o if: se idade for 18 ou mais e vip for verdadeiro, mostre "Entra"; senão, mostre "Espera".',
-            highlight: ['if'],
-            codeLanguage: 'JavaScript',
-            lines: ['if (idade >= 18 && vip) {', '  console.log("Entra");', '} else {', '  console.log("Espera");', '}'],
-            distractors: ['if (idade >= 18 || vip) {']
-          },
-          en: {
-            question: 'Build the if: when age is 18 or more and vip is true, show "Come in"; otherwise, show "Wait".',
-            highlight: ['if'],
-            codeLanguage: 'JavaScript',
-            lines: ['if (age >= 18 && vip) {', '  console.log("Come in");', '} else {', '  console.log("Wait");', '}'],
-            distractors: ['if (age >= 18 || vip) {']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual destes valores é truthy?',
-            codeLanguage: 'JavaScript',
-            highlight: ['truthy'],
-            correctOption: 1,
-            options: ['"0"', '0', '""', 'null'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which of these values is truthy?',
-            codeLanguage: 'JavaScript',
-            highlight: ['truthy'],
-            correctOption: 1,
-            options: ['"0"', '0', '""', 'null'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'matching',
-        content: {
-          pt: {
-            question: 'Ligue cada operador ao que ele faz.',
-            highlight: ['operador'],
-            pairs: [
-              {
-                left: '&&',
-                right: 'Verdadeiro se os dois lados forem'
-              },
-              {
-                left: '||',
-                right: 'Verdadeiro se ao menos um lado for'
-              },
-              {
-                left: '!',
-                right: 'Inverte o valor booleano'
-              }
-            ],
-            leftAsCode: true
-          },
-          en: {
-            question: 'Match each operator to what it does.',
-            highlight: ['operator'],
-            pairs: [
-              {
-                left: '&&',
-                right: 'True when both sides are'
-              },
-              {
-                left: '||',
-                right: 'True when at least one side is'
-              },
-              {
-                left: '!',
-                right: 'Flips the boolean value'
-              }
-            ],
-            leftAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o que aparece no console: o ! inverte o valor de ativo, que é false.',
-            highlight: ['inverte'],
-            codeLanguage: 'JavaScript',
-            code: 'const ativo = false;\nconsole.log(!ativo);\n// saída: ___',
-            answers: ['true']
-          },
-          en: {
-            question: 'Type what shows in the console: the ! flips the value of active, which is false.',
-            highlight: ['flips'],
-            codeLanguage: 'JavaScript',
-            code: 'const active = false;\nconsole.log(!active);\n// output: ___',
-            answers: ['true']
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Condicionais',
       en: 'Conditionals'
     },
@@ -10683,7 +10359,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'A estrutura if',
-              text: 'Um programa pode executar diferentes códigos dependendo de uma condição. O if permite executar um bloco quando uma condição é verdadeira.'
+              text: 'Um programa pode executar diferentes códigos dependendo de uma condição. O if permite executar um bloco (o trecho entre chaves { }) quando uma condição é verdadeira.'
             },
             closing: 'A condição dentro do if é avaliada como verdadeira ou falsa. Isso permite que o programa escolha quando executar determinado código.',
             highlight: ['if'],
@@ -10699,7 +10375,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The if structure',
-              text: 'A program can run different code depending on a condition. if lets you run a block when a condition is true.'
+              text: 'A program can run different code depending on a condition. if lets you run a block (the part between braces { }) when a condition is true.'
             },
             closing: 'The condition inside an if is evaluated as true or false. This lets the program choose when to run certain code.',
             highlight: ['if'],
@@ -10734,6 +10410,43 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             highlight: ['if', 'else'],
             codeLanguage: 'JavaScript',
             code: 'const age = 16;\n\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Mais de dois caminhos',
+              text: 'E se houver mais de dois caminhos? Por exemplo: uma nota pode ser alta, média ou baixa.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'else if: condições encadeadas',
+              text: 'O else if testa uma nova condição quando a anterior deu falsa. O programa lê de cima para baixo e executa só o primeiro bloco cuja condição for verdadeira; se nenhuma for, roda o else.'
+            },
+            closing: 'Aqui, nota vale 7: o primeiro if é falso, o else if é verdadeiro e o else nem chega a rodar. A ordem das condições importa: a primeira verdadeira vence.',
+            highlight: ['else if', 'else'],
+            codeLanguage: 'JavaScript',
+            code: 'const nota = 7;\n\nif (nota >= 9) {\n  console.log("Ótimo");\n} else if (nota >= 7) {\n  console.log("Bom");\n} else {\n  console.log("Estude mais");\n}\n// mostra: Bom',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'More than two paths',
+              text: 'What if there are more than two paths? For example: a grade can be high, medium or low.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'else if: chained conditions',
+              text: 'else if tests a new condition when the previous one was false. The program reads from top to bottom and runs only the first block whose condition is true; if none is, the else runs.'
+            },
+            closing: 'Here, grade is 7: the first if is false, the else if is true and the else does not even run. The order of the conditions matters: the first true one wins.',
+            highlight: ['else if', 'else'],
+            codeLanguage: 'JavaScript',
+            code: 'const grade = 7;\n\nif (grade >= 9) {\n  console.log("Great");\n} else if (grade >= 7) {\n  console.log("Good");\n} else {\n  console.log("Study more");\n}\n// shows: Good',
             onlyCode: true
           }
         }
@@ -10933,18 +10646,349 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite exatamente o texto que aparece no console quando idade vale 16.',
+            question: 'Digite exatamente o texto que aparece no console (sem aspas) quando idade vale 16.',
             highlight: ['exatamente'],
             codeLanguage: 'JavaScript',
             code: 'const idade = 16;\nif (idade >= 18) {\n  console.log("Maior");\n} else {\n  console.log("Menor");\n}\n// saída: ___',
             answers: ['Menor']
           },
           en: {
-            question: 'Type exactly the text shown in the console when age is 16.',
+            question: 'Type exactly the text shown in the console (without quotes) when age is 16.',
             highlight: ['exactly'],
             codeLanguage: 'JavaScript',
             code: 'const age = 16;\nif (age >= 18) {\n  console.log("Adult");\n} else {\n  console.log("Minor");\n}\n// output: ___',
             answers: ['Minor']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Operadores lógicos',
+      en: 'Logical operators'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Combinando condições',
+              text: '"Só entra quem tem ingresso E documento." Frases assim aparecem o tempo todo, e o código também sabe combinar condições desse jeito.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Os operadores &&, || e !',
+              text: 'O operador && (e) só é verdadeiro quando os dois lados são verdadeiros. O operador || (ou) é verdadeiro quando pelo menos um lado é verdadeiro.\n\nJá o ! (não) inverte um valor booleano: !true vira false.'
+            },
+            closing: 'Esses operadores combinam comparações para montar condições mais completas.',
+            highlight: ['booleano'],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\nconst temIngresso = true;\n\nconsole.log(idade >= 18 && temIngresso);\nconsole.log(idade < 12 || temIngresso);\nconsole.log(!temIngresso);',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Combining conditions',
+              text: '"Only people with a ticket AND an ID get in." Sentences like this come up all the time, and code can combine conditions that way too.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The &&, || and ! operators',
+              text: 'The && (and) operator is only true when both sides are true. The || (or) operator is true when at least one side is true.\n\nThe ! (not) operator flips a boolean value: !true becomes false.'
+            },
+            closing: 'These operators combine comparisons to build more complete conditions.',
+            highlight: ['boolean'],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\nconst hasTicket = true;\n\nconsole.log(age >= 18 && hasTicket);\nconsole.log(age < 12 || hasTicket);\nconsole.log(!hasTicket);',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Valores verdadeiros e falsos em condições',
+              text: 'Numa condição, todo valor é tratado como verdadeiro ou falso. Os valores tratados como falsos são chamados de falsy.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A lista de valores falsy',
+              text: 'São falsy: false, 0, "" (string vazia), null, undefined e NaN (o resultado de uma conta sem sentido). Todo o resto é truthy, inclusive o texto "0" e o texto "false" (qualquer texto com algo escrito).'
+            },
+            closing: 'Por isso, um if (nome) só entra no bloco quando nome não é uma string vazia. (Boolean(valor) mostra como o valor é tratado: true ou false.)',
+            highlight: ['falsy', 'truthy'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n} else {\n  console.log("Nome vazio");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'True and false values in conditions',
+              text: 'In a condition, every value is treated as true or false. The values treated as false are called falsy.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The list of falsy values',
+              text: 'These are falsy: false, 0, "" (empty string), null, undefined and NaN (the result of a calculation that makes no sense). Everything else is truthy, including the text "0" and the text "false" (any text with something written in it).'
+            },
+            closing: 'That\'s why an if (name) only runs its block when name isn\'t an empty string. (Boolean(value) shows how the value is treated: true or false.)',
+            highlight: ['falsy', 'truthy'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "";\n\nif (name) {\n  console.log("Hello, " + name);\n} else {\n  console.log("Empty name");\n}\n\nconsole.log(Boolean(0), Boolean("0"));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o resultado de true && false?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'Erro'],
+            pool: 'and-or-not'
+          },
+          en: {
+            question: 'What is the result of true && false?',
+            highlight: [],
+            correctOption: 1,
+            options: ['false', 'true', 'undefined', 'Error'],
+            pool: 'and-or-not'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual o resultado de false || true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', 'null', 'Erro'],
+            pool: 'and-or-not'
+          },
+          en: {
+            question: 'What is the result of false || true?',
+            highlight: [],
+            correctOption: 1,
+            options: ['true', 'false', 'null', 'Error'],
+            pool: 'and-or-not'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O operador ! inverte um valor booleano.',
+            highlight: ['booleano'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'and-or-not',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The ! operator flips a boolean value.',
+            highlight: ['boolean'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'and-or-not',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes valores é falsy?',
+            highlight: ['falsy'],
+            correctOption: 1,
+            options: ['0', '"0"', '"abc"', '"false"'],
+            pool: 'truthy-falsy'
+          },
+          en: {
+            question: 'Which of these values is falsy?',
+            highlight: ['falsy'],
+            correctOption: 1,
+            options: ['0', '"0"', '"abc"', '"false"'],
+            pool: 'truthy-falsy'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O bloco deste if roda?',
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "";\n\nif (nome) {\n  console.log("Olá, " + nome);\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Não, porque string vazia é falsy', 'Sim, porque a variável existe', 'Sim, porque "" é truthy', 'Dá erro, nome não tem valor'],
+            pool: 'truthy-falsy'
+          },
+          en: {
+            question: 'Does this if block run?',
+            codeLanguage: 'JavaScript',
+            code: 'const name = "";\n\nif (name) {\n  console.log(\n    "Hello, " + name\n  );\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['No, because an empty string is falsy', 'Yes, because the variable exists', 'Yes, because "" is truthy', 'It errors, name has no value'],
+            pool: 'truthy-falsy'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O texto "0" (entre aspas) é falsy.',
+            highlight: ['falsy'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'truthy-falsy',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The text "0" (in quotes) is falsy.',
+            highlight: ['falsy'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'truthy-falsy',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: entra quem é maior de idade e tem ingresso.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const idade = 20;\nconst ingresso = true;\n\nconsole.log(\n  idade >= 18 ___ ingresso\n);',
+            answers: ['&&'],
+            distractors: ['||', '!', '&']
+          },
+          en: {
+            question: 'Complete: only adults who have a ticket get in.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const age = 20;\nconst ticket = true;\n\nconsole.log(\n  age >= 18 ___ ticket\n);',
+            answers: ['&&'],
+            distractors: ['||', '!', '&']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o if: se idade for 18 ou mais e vip for verdadeiro, mostre "Entra"; senão, mostre "Espera".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (idade >= 18 && vip) {', '  console.log("Entra");', '} else {', '  console.log("Espera");', '}'],
+            distractors: ['if (idade >= 18 || vip) {']
+          },
+          en: {
+            question: 'Build the if: when age is 18 or more and vip is true, show "Come in"; otherwise, show "Wait".',
+            highlight: ['if'],
+            codeLanguage: 'JavaScript',
+            lines: ['if (age >= 18 && vip) {', '  console.log("Come in");', '} else {', '  console.log("Wait");', '}'],
+            distractors: ['if (age >= 18 || vip) {']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes valores é truthy?',
+            codeLanguage: 'JavaScript',
+            highlight: ['truthy'],
+            correctOption: 1,
+            options: ['"0"', '0', '""', 'null'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these values is truthy?',
+            codeLanguage: 'JavaScript',
+            highlight: ['truthy'],
+            correctOption: 1,
+            options: ['"0"', '0', '""', 'null'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada operador ao que ele faz.',
+            highlight: ['operador'],
+            pairs: [
+              {
+                left: '&&',
+                right: 'Verdadeiro se os dois lados forem'
+              },
+              {
+                left: '||',
+                right: 'Verdadeiro se ao menos um lado for'
+              },
+              {
+                left: '!',
+                right: 'Inverte o valor booleano'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each operator to what it does.',
+            highlight: ['operator'],
+            pairs: [
+              {
+                left: '&&',
+                right: 'True when both sides are'
+              },
+              {
+                left: '||',
+                right: 'True when at least one side is'
+              },
+              {
+                left: '!',
+                right: 'Flips the boolean value'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o que aparece no console: o ! inverte o valor de ativo, que é false.',
+            highlight: ['inverte'],
+            codeLanguage: 'JavaScript',
+            code: 'const ativo = false;\nconsole.log(!ativo);\n// saída: ___',
+            answers: ['true']
+          },
+          en: {
+            question: 'Type what shows in the console: the ! flips the value of active, which is false.',
+            highlight: ['flips'],
+            codeLanguage: 'JavaScript',
+            code: 'const active = false;\nconsole.log(!active);\n// output: ___',
+            answers: ['true']
           }
         }
       }
@@ -10969,7 +11013,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
               title: 'Como funciona o switch',
               text: 'Quando precisamos comparar um mesmo valor com várias opções, o switch costuma ficar mais legível do que uma sequência de if e else.\n\nCada case testa um valor. O break encerra o bloco, e o default cobre os casos que não combinaram com nenhum case.'
             },
-            closing: 'Sem o break, a execução continua nos casos seguintes, o que quase nunca é o resultado desejado.',
+            closing: 'Sem o break, a execução "escorrega" para o caso seguinte: se faltasse o primeiro break, "Fim de semana" apareceria duas vezes. Quase nunca é o que se quer.',
             highlight: ['switch', 'case', 'break', 'default'],
             codeLanguage: 'JavaScript',
             code: 'const dia = "sabado";\n\nswitch (dia) {\n  case "sabado":\n    console.log("Fim de semana");\n    break;\n  case "domingo":\n    console.log("Fim de semana");\n    break;\n  default:\n    console.log("Dia de semana");\n}',
@@ -10985,7 +11029,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
               title: 'How switch works',
               text: 'When we need to compare one value against several options, switch is usually more readable than a chain of if and else.\n\nEach case tests a value. break ends the block, and default covers the cases that did not match any case.'
             },
-            closing: 'Without break, execution keeps going into the following cases, which is almost never the desired result.',
+            closing: 'Without break, execution "slips" into the next case: if the first break were missing, "Weekend" would appear twice. It is almost never what you want.',
             highlight: ['switch', 'case', 'break', 'default'],
             codeLanguage: 'JavaScript',
             code: 'const day = "saturday";\n\nswitch (day) {\n  case "saturday":\n    console.log("Weekend");\n    break;\n  case "sunday":\n    console.log("Weekend");\n    break;\n  default:\n    console.log("Weekday");\n}',
@@ -11004,7 +11048,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'As três partes do ternário',
-              text: 'A estrutura tem três partes: a condição, o valor usado quando ela é verdadeira e o valor usado quando é falsa.'
+              text: 'A estrutura tem três partes: a condição, o valor usado quando ela é verdadeira e o valor usado quando é falsa. O ? vem logo depois da condição e o : separa os dois valores.'
             },
             closing: 'Ele é útil para decisões simples. Para lógicas maiores, o if e o else continuam sendo mais legíveis.',
             highlight: ['ternário', 'if', 'else'],
@@ -11020,7 +11064,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The three parts of the ternary',
-              text: 'It has three parts: the condition, the value used when it is true, and the value used when it is false.'
+              text: 'It has three parts: the condition, the value used when it is true, and the value used when it is false. The ? comes right after the condition and the : separates the two values.'
             },
             closing: 'It is useful for simple decisions. For larger logic, if and else are still more readable.',
             highlight: ['ternary', 'if', 'else'],
@@ -11037,14 +11081,14 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             question: 'No switch, o que o break faz?',
             highlight: ['switch', 'break'],
             correctOption: 1,
-            options: ['Encerra o bloco do case', 'Pula para o próximo case', 'Reinicia o switch', 'Cria um novo case'],
+            options: ['Sai do switch, sem rodar os cases seguintes', 'Pula para o próximo case', 'Reinicia o switch', 'Cria um novo case'],
             pool: 'switch'
           },
           en: {
             question: 'In a switch, what does break do?',
             highlight: ['switch', 'break'],
             correctOption: 1,
-            options: ['Ends the case block', 'Jumps to the next case', 'Restarts the switch', 'Creates a new case'],
+            options: ['Leaves the switch, without running the following cases', 'Jumps to the next case', 'Restarts the switch', 'Creates a new case'],
             pool: 'switch'
           }
         }
@@ -11255,7 +11299,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O laço for',
-              text: 'Quando precisamos executar uma ação várias vezes, podemos utilizar estruturas de repetição. O for é uma das formas mais comuns de fazer isso.\n\nNesse exemplo, o código dentro do for é executado enquanto i for menor que 5.'
+              text: 'Quando precisamos executar uma ação várias vezes, podemos utilizar estruturas de repetição. O for é uma das formas mais comuns de fazer isso.\n\nNos parênteses do for há três partes: onde começa (let i = 0), até quando repete (i < 5) e como avança a cada volta (i++ soma 1 a i). Assim, o código dentro do for roda enquanto i for menor que 5.'
             },
             closing: 'Loops evitam que precisemos escrever a mesma instrução várias vezes manualmente.',
             highlight: ['for'],
@@ -11271,7 +11315,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The for loop',
-              text: 'When we need to run an action several times, we can use loop structures. for is one of the most common ways to do this.\n\nIn this example, the code inside for runs as long as i is less than 5.'
+              text: 'When we need to run an action several times, we can use loop structures. for is one of the most common ways to do this.\n\nInside the for parentheses there are three parts: where it starts (let i = 0), until when it repeats (i < 5) and how it advances on each turn (i++ adds 1 to i). So the code inside the for runs as long as i is less than 5.'
             },
             closing: 'Loops let you avoid writing the same instruction several times manually.',
             highlight: ['for'],
@@ -11287,7 +11331,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'O laço while',
-              text: 'O while repete um bloco de código enquanto sua condição for verdadeira.',
+              text: 'O while repete um bloco de código enquanto sua condição for verdadeira. Aqui, contador++ soma 1 ao contador a cada volta; sem isso, a repetição nunca terminaria.',
               persona: 'neutral'
             },
             closing: 'Escolher entre diferentes estruturas de repetição depende da situação. O importante é entender que elas permitem automatizar ações repetitivas.',
@@ -11299,7 +11343,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'The while loop',
-              text: 'while repeats a block of code for as long as its condition is true.',
+              text: 'while repeats a block of code for as long as its condition is true. Here, counter++ adds 1 to the counter on each turn; without it, the repetition would never end.',
               persona: 'neutral'
             },
             closing: 'Choosing between different loop structures depends on the situation. What matters is understanding that they let you automate repetitive actions.',
@@ -11858,7 +11902,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Tamanho, adição e remoção de elementos',
-              text: 'length informa quantos elementos o array tem. push adiciona um elemento no final, e pop remove o último.\n\nDiferente dos métodos de string, push e pop alteram o próprio array.'
+              text: 'length informa quantos elementos o array tem. push adiciona um elemento no final, e pop remove o último.\n\nOs dois alteram o próprio array, em vez de criar um novo. Por isso, mesmo com const o array pode crescer: const impede trocar a variável por outro valor, mas não impede mexer dentro do array.'
             },
             closing: 'Como o primeiro índice é 0, o último elemento fica sempre em length - 1.',
             highlight: ['length', 'push', 'pop'],
@@ -11874,7 +11918,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Length, adding and removing elements',
-              text: 'length tells you how many elements the array has. push adds an element at the end, and pop removes the last one.\n\nUnlike string methods, push and pop change the array itself.'
+              text: 'length tells you how many elements the array has. push adds an element at the end, and pop removes the last one.\n\nBoth change the array itself instead of creating a new one. That is why, even with const, the array can grow: const prevents replacing the variable with another value, but does not prevent changing what is inside the array.'
             },
             closing: 'Since the first index is 0, the last element is always at length - 1.',
             highlight: ['length', 'push', 'pop'],
@@ -12200,6 +12244,296 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             blocks: ['push', 'pop', 'length', 'includes'],
             solution: ['push', 'length'],
             checkScript: '(function () {\n  var e = window.__codapConsoleEntries;\n  __codap_report(e.length === 1 && e[0].message === "3", "The console needs to show 3: the scores 7, 9 and 8.");\n})();'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Strings',
+      en: 'Strings'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O que dá para fazer com um texto?',
+              text: 'Texto aparece em todo programa: nomes, mensagens, endereços. E se você precisar saber o tamanho de um nome ou mudá-lo para maiúsculas? Strings já vêm com ferramentas prontas para isso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Propriedades e métodos de strings',
+              text: 'Strings têm recursos prontos, chamados propriedades e métodos, que se usam com um ponto depois do texto: nome.length, nome.toUpperCase(). Um método é uma ação pronta e leva parênteses (funções, que são parecidas, vêm em breve); length é uma propriedade e não leva. length informa quantos caracteres há no texto.\n\ntoUpperCase e toLowerCase devolvem o texto em maiúsculas ou minúsculas, e includes verifica se um trecho aparece dentro dele.'
+            },
+            closing: 'Esses métodos devolvem um valor novo: a string original não muda (ao contrário de push e pop, que mudam o array).',
+            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "JavaScript";\n\nconsole.log(nome.length);\nconsole.log(nome.toUpperCase());\nconsole.log(nome.includes("Script"));',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'What can you do with a piece of text?',
+              text: 'Text shows up in every program: names, messages, addresses. What if you need to know the length of a name or turn it into capital letters? Strings come with ready-made tools for that.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'String properties and methods',
+              text: 'Strings have ready-made features, called properties and methods, used with a dot after the text: name.length, name.toUpperCase(). A method is a ready-made action and takes parentheses (functions, which are similar, come soon); length is a property and does not. length tells you how many characters the text has.\n\ntoUpperCase and toLowerCase return the text in upper or lower case, and includes checks whether a piece of text appears inside it.'
+            },
+            closing: 'These methods return a new value: the original string doesn\'t change (unlike push and pop, which change the array).',
+            highlight: ['length', 'toUpperCase', 'toLowerCase', 'includes'],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "JavaScript";\n\nconsole.log(name.length);\nconsole.log(name.toUpperCase());\nconsole.log(name.includes("Script"));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Recortando e dividindo strings',
+              text: 'slice recorta um pedaço da string, do índice inicial até antes do final. Por exemplo, "JavaScript".slice(0, 4) devolve "Java". Assim como nos arrays, o primeiro caractere fica no índice 0.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Limpando e separando texto',
+              text: 'trim remove os espaços do começo e do fim, e split divide a string em um array usando um separador.'
+            },
+            closing: 'split é muito útil para transformar uma lista escrita em texto em um array de verdade.',
+            highlight: ['slice', 'trim', 'split'],
+            codeLanguage: 'JavaScript',
+            code: 'const frase = "  aprender JavaScript  ";\n\nconsole.log(frase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("maçã,banana,uva".split(","));',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Slicing and splitting strings',
+              text: 'slice cuts out a piece of the string, from the start index up to just before the end one. For example, "JavaScript".slice(0, 4) returns "Java". Just like arrays, the first character is at index 0.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Cleaning and separating text',
+              text: 'trim removes spaces from the start and end, and split breaks the string into an array using a separator.'
+            },
+            closing: 'split is very handy for turning a list written as text into a real array.',
+            highlight: ['slice', 'trim', 'split'],
+            codeLanguage: 'JavaScript',
+            code: 'const phrase = "  learning JavaScript  ";\n\nconsole.log(phrase.trim());\nconsole.log("JavaScript".slice(0, 4));\nconsole.log("apple,banana,grape".split(","));',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que este código mostra?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Olá".length);',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '"Olá"'],
+            pool: 'string-basics'
+          },
+          en: {
+            question: 'What does this code show?',
+            codeLanguage: 'JavaScript',
+            code: 'console.log("Hi!".length);',
+            highlight: [],
+            correctOption: 1,
+            options: ['3', '2', '4', '"Hi!"'],
+            pool: 'string-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual método deixa o texto todo em maiúsculas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
+            pool: 'string-basics'
+          },
+          en: {
+            question: 'Which method makes the whole text uppercase?',
+            highlight: [],
+            correctOption: 1,
+            options: ['toUpperCase', 'toLowerCase', 'upper', 'capitalize'],
+            pool: 'string-basics'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'toUpperCase altera a string original.',
+            highlight: ['toUpperCase'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'string-basics',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'toUpperCase changes the original string.',
+            highlight: ['toUpperCase'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'string-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que "JavaScript".slice(0, 4) devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
+            pool: 'string-methods'
+          },
+          en: {
+            question: 'What does "JavaScript".slice(0, 4) return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['"Java"', '"JavaS"', '"Script"', '"ava"'],
+            pool: 'string-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que "a,b,c".split(",") devolve?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
+            pool: 'string-methods'
+          },
+          en: {
+            question: 'What does "a,b,c".split(",") return?',
+            highlight: [],
+            correctOption: 1,
+            options: ['["a", "b", "c"]', '"abc"', '["a,b,c"]', '3'],
+            pool: 'string-methods'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'trim remove os espaços do começo e do fim da string.',
+            highlight: ['trim'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'string-methods',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'trim removes the spaces at the start and end of the string.',
+            highlight: ['trim'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'string-methods',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para mostrar o nome em maiúsculas.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const nome = "ana";\n\nconsole.log(\n  nome.___()\n);',
+            answers: ['toUpperCase'],
+            distractors: ['toLowerCase', 'upper', 'length']
+          },
+          en: {
+            question: 'Complete to show the name in uppercase.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const name = "ana";\n\nconsole.log(\n  name.___()\n);',
+            answers: ['toUpperCase'],
+            distractors: ['toLowerCase', 'upper', 'length']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: guarde "  Ana  " em nome, guarde em limpo o nome sem os espaços das pontas (trim) e mostre limpo.',
+            highlight: ['espaços'],
+            codeLanguage: 'JavaScript',
+            lines: ['const nome = "  Ana  ";', 'const limpo = nome.trim();', 'console.log(limpo);'],
+            distractors: ['const limpo = trim(nome);']
+          },
+          en: {
+            question: 'Build the code: store "  Ana  " in name, store in clean the name without the surrounding spaces (trim) and show clean.',
+            highlight: ['spaces'],
+            codeLanguage: 'JavaScript',
+            lines: ['const name = "  Ana  ";', 'const clean = name.trim();', 'console.log(clean);'],
+            distractors: ['const clean = trim(name);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual expressão devolve "Java"?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = "JavaScript";',
+            highlight: ['expressão'],
+            correctOption: 1,
+            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which expression returns "Java"?',
+            codeLanguage: 'JavaScript',
+            code: 'const s = "JavaScript";',
+            highlight: ['expression'],
+            correctOption: 1,
+            options: ['s.slice(0, 4)', 's.slice(1, 4)', 's.slice(0, 3)', 's.split(4)'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método que tira os espaços das pontas de s.',
+            highlight: ['método'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = "  oi  ";\nconsole.log(s.___());',
+            answers: ['trim']
+          },
+          en: {
+            question: 'Type the method that removes the spaces around s.',
+            highlight: ['method'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = "  hi  ";\nconsole.log(s.___());',
+            answers: ['trim']
           }
         }
       }
@@ -12541,7 +12875,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Um exemplo com soma',
-              text: 'Nesse exemplo, a e b são parâmetros. A função retorna o resultado da soma.'
+              text: 'Nesse exemplo, a e b são parâmetros: valores que a função recebe. O return devolve o resultado da soma para quem chamou a função, que o guarda em resultado. Já console.log só mostra um valor na tela, sem devolvê-lo.'
             },
             closing: 'Parâmetros tornam as funções mais flexíveis, enquanto return permite utilizar o resultado produzido por elas.',
             highlight: ['parâmetros', 'return'],
@@ -12557,7 +12891,7 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'An example with a sum',
-              text: 'In this example, a and b are parameters. The function gives back the result of the sum.'
+              text: 'In this example, a and b are parameters: values the function receives. The return gives the result of the sum back to whoever called the function, which stores it in result. console.log, on the other hand, only shows a value on the screen, without giving it back.'
             },
             closing: 'Parameters make functions more flexible, while return lets you use the result they produce.',
             highlight: ['parameters', 'return'],
@@ -12718,14 +13052,14 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte a função dobro, que devolve n vezes 2, e mostre dobro(4) no console.',
+            question: 'Monte a função dobro, que devolve n vezes 2, e depois mostre dobro(4) no console.',
             highlight: ['função'],
             codeLanguage: 'JavaScript',
             lines: ['function dobro(n) {', '  return n * 2;', '}', 'console.log(dobro(4));'],
             distractors: ['  return: n * 2;']
           },
           en: {
-            question: 'Build the double function, which returns n times 2, and show double(4) in the console.',
+            question: 'Build the double function, which returns n times 2, and then show double(4) in the console.',
             highlight: ['function'],
             codeLanguage: 'JavaScript',
             lines: ['function double(n) {', '  return n * 2;', '}', 'console.log(double(4));'],
@@ -12815,9 +13149,9 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'A sintaxe da arrow function',
-              text: 'Arrow functions são uma sintaxe alternativa para criar funções em JavaScript. Elas são muito utilizadas no desenvolvimento moderno.\n\nPara funções simples, a sintaxe pode ser ainda mais curta.'
+              text: 'Arrow functions são uma sintaxe alternativa para criar funções em JavaScript. Elas são muito utilizadas no desenvolvimento moderno.\n\nPara funções simples, a sintaxe pode ser ainda mais curta: sem chaves e sem return, o valor depois da seta já é o resultado. Em numero => numero * 2, a seta liga o parâmetro ao que a função devolve.'
             },
-            closing: 'Arrow functions não criam um novo tipo de função. Elas oferecem uma sintaxe diferente e muito comum em projetos JavaScript modernos.',
+            closing: 'Arrow functions são uma sintaxe mais curta, muito comum em projetos modernos. Elas também se comportam diferente das funções comuns em alguns pontos, como o valor de this, que você vai ver mais à frente.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const somar = (a, b) => {\n  return a + b;\n};\n\nconsole.log(somar(2, 3));\n\nconst dobrar = numero => numero * 2;',
@@ -12831,9 +13165,9 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The arrow function syntax',
-              text: 'Arrow functions are an alternative syntax for creating functions in JavaScript. They are widely used in modern development.\n\nFor simple functions, the syntax can be even shorter.'
+              text: 'Arrow functions are an alternative syntax for creating functions in JavaScript. They are widely used in modern development.\n\nFor simple functions, the syntax can be even shorter: with no braces and no return, the value after the arrow is already the result. In number => number * 2, the arrow links the parameter to what the function gives back.'
             },
-            closing: 'Arrow functions do not create a new type of function. They offer a different syntax that is very common in modern JavaScript projects.',
+            closing: 'Arrow functions are a shorter syntax, very common in modern projects. They also behave differently from regular functions in a few ways, such as the value of this, which you will see later on.',
             highlight: ['arrow functions'],
             codeLanguage: 'JavaScript',
             code: 'const add = (a, b) => {\n  return a + b;\n};\n\nconsole.log(add(2, 3));\n\nconst double = number => number * 2;',
@@ -12866,6 +13200,43 @@ export const JS_BASIC_LESSONS: LessonSeed[] = [
             highlight: ['scope'],
             codeLanguage: 'JavaScript',
             code: 'if (true) {\n  const message = "Hello";\n  console.log(message);\n}\n\n// message is not available here',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Funções como valores',
+              text: 'Uma função também é um valor: dá para guardá-la numa variável e entregá-la a outra função.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Chamar ou entregar',
+              text: 'Chamar é usar parênteses: dobrar(4) roda a função agora.\n\nEntregar é escrever só o nome, sem parênteses: aplicar(dobrar, 5) passa a função para que outra a chame quando quiser, como fn(valor) dentro de aplicar. É assim que você vai usar a função que vem dentro de map e filter, no próximo módulo.'
+            },
+            closing: 'Uma última peça: o % devolve o resto de uma divisão. 7 % 2 dá 1 e 4 % 2 dá 0; por isso numero % 2 === 0 é verdade para números pares, e é com ele que o filter vai separar pares e ímpares.',
+            highlight: ['Chamar', 'Entregar', 'resto'],
+            codeLanguage: 'JavaScript',
+            code: 'const dobrar = n => n * 2;\n\nfunction aplicar(fn, valor) {\n  return fn(valor);\n}\n\nconsole.log(dobrar(4));\n// mostra: 8\n\nconst r = aplicar(dobrar, 5);\nconsole.log(r);\n// mostra: 10\n\nconsole.log(7 % 2, 4 % 2);\n// mostra: 1 0',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Functions as values',
+              text: 'A function is also a value: you can store it in a variable and hand it to another function.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Call or hand over',
+              text: 'To call is to use parentheses: double(4) runs the function now.\n\nTo hand over is to write just the name, without parentheses: apply(double, 5) gives the function to another one so it can call it whenever it wants, like fn(value) inside apply. That is how you will use the function that goes inside map and filter, in the next module.'
+            },
+            closing: 'One last piece: the % returns the remainder of a division. 7 % 2 gives 1 and 4 % 2 gives 0; that is why number % 2 === 0 is true for even numbers, and it is what filter will use to separate evens from odds.',
+            highlight: ['call', 'hand over', 'remainder'],
+            codeLanguage: 'JavaScript',
+            code: 'const double = n => n * 2;\n\nfunction apply(fn, value) {\n  return fn(value);\n}\n\nconsole.log(double(4));\n// shows: 8\n\nconst r = apply(double, 5);\nconsole.log(r);\n// shows: 10\n\nconsole.log(7 % 2, 4 % 2);\n// shows: 1 0',
             onlyCode: true
           }
         }
@@ -13497,7 +13868,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é HTML semântico',
-              text: 'HTML semântico significa usar elementos que descrevem o significado do conteúdo. Em vez de usar qualquer elemento como contêiner, escolhemos o que melhor representa sua função.\n\nUma estrutura semântica ajuda navegadores, mecanismos de busca, tecnologias assistivas e outros desenvolvedores a compreender a página.'
+              text: 'HTML semântico significa usar elementos que descrevem o significado do conteúdo. Em vez de usar qualquer elemento como contêiner, escolhemos o que melhor representa sua função.\n\nUma estrutura semântica ajuda navegadores, mecanismos de busca (como o Google), tecnologias assistivas (como os leitores de tela, que leem a página em voz alta) e outros desenvolvedores a compreender a página.'
             },
             closing: 'O código funciona, mas não comunica claramente a estrutura da página. Elementos semânticos resolvem esse problema.',
             highlight: ['HTML', 'semântico', 'semântica', 'semânticos'],
@@ -13512,7 +13883,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What semantic HTML is',
-              text: 'Semantic HTML means using elements that describe the meaning of the content. Instead of using any element as a container, we choose the one that best represents its role.\n\nA semantic structure helps browsers, search engines, assistive technologies and other developers understand the page.'
+              text: 'Semantic HTML means using elements that describe the meaning of the content. Instead of using any element as a container, we choose the one that best represents its role.\n\nA semantic structure helps browsers, search engines (like Google), assistive technologies (like screen readers, which read the page aloud) and other developers understand the page.'
             },
             closing: 'The code works, but it does not clearly communicate the structure of the page. Semantic elements solve that problem.',
             highlight: ['HTML', 'semantic'],
@@ -13763,7 +14134,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'O elemento article',
               text: '<article> representa um conteúdo que faz sentido de forma independente, como uma notícia, uma postagem ou um comentário.'
             },
-            closing: 'Uma boa pergunta para identificar um <article> é: esse conteúdo poderia ser distribuído ou reutilizado como uma unidade independente?',
+            closing: 'Uma boa pergunta para identificar um <article> é: esse conteúdo faria sentido sozinho, copiado para outro site? Uma notícia faria, então é um <article>; já a parte "Produtos" de uma página só faz sentido ali dentro, e por isso é uma <section>.',
             highlight: ['article'],
             codeLanguage: 'HTML',
             code: '<article>\n  <h2>Nova versão disponível</h2>\n  <p>\n    Uma nova versão do aplicativo foi lançada.\n  </p>\n</article>'
@@ -13778,7 +14149,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'The article element',
               text: '<article> represents content that makes sense on its own, like a news item, a post or a comment.'
             },
-            closing: 'A good question to identify an <article> is: could this content be distributed or reused as an independent unit?',
+            closing: 'A good question to identify an <article> is: would this content make sense on its own, copied to another site? A news item would, so it is an <article>; the "Products" part of a page only makes sense there, so it is a <section>.',
             highlight: ['article'],
             codeLanguage: 'HTML',
             code: '<article>\n  <h2>New version available</h2>\n  <p>\n    A new version of the app has been released.\n  </p>\n</article>'
@@ -14002,7 +14373,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Uma imagem para cada tela',
-              text: 'Nem toda tela precisa da mesma imagem. O atributo srcset oferece versões de tamanhos diferentes, e o navegador escolhe a mais adequada.',
+              text: 'Nem toda tela precisa da mesma imagem. O atributo srcset oferece versões de tamanhos diferentes, e o navegador escolhe a mais adequada. Em "foto-400.jpg 400w", o 400w diz que aquele arquivo tem 400 pixels de largura.',
               persona: 'neutral'
             },
             explanation: {
@@ -14018,7 +14389,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'One image for each screen',
-              text: 'Not every screen needs the same image. The srcset attribute offers versions in different sizes, and the browser picks the best fit.',
+              text: 'Not every screen needs the same image. The srcset attribute offers versions in different sizes, and the browser picks the best fit. In "photo-400.jpg 400w", the 400w says that file is 400 pixels wide.',
               persona: 'neutral'
             },
             explanation: {
@@ -14178,8 +14549,8 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Formulários',
-      en: 'Forms'
+      pt: 'Metadados',
+      en: 'Metadata'
     },
     activities: [
       {
@@ -14187,33 +14558,35 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
-              title: 'Coletando informações',
-              text: 'Login, cadastro, busca: quase todo site precisa receber algo de quem o usa. É para isso que existem os formulários.',
+              title: 'Informações nos bastidores',
+              text: 'Algumas informações da página não aparecem na tela, mas fazem diferença. Onde elas ficam?',
               persona: 'cody'
             },
             explanation: {
-              title: 'O elemento form',
-              text: 'Formulários permitem coletar informações fornecidas pelo usuário. O elemento <form> representa o formulário e pode conter diferentes campos de entrada.'
+              title: 'O que são metadados',
+              text: 'Metadados são informações sobre o documento que não aparecem como conteúdo da página.\n\nNo exemplo, o charset="UTF-8" define a codificação dos caracteres: é ele que faz acentos e ç aparecerem certos. O viewport faz a página se ajustar à largura da tela do celular. Na maioria das páginas, você pode copiar os dois assim.'
             },
-            closing: 'Um formulário deve deixar claro o que cada campo representa e qual ação o usuário pode realizar.',
-            highlight: ['form', 'formulário', 'Formulários'],
+            closing: 'O <head> concentra informações importantes para o navegador interpretar e apresentar corretamente o documento.',
+            highlight: ['Metadados', 'head'],
             codeLanguage: 'HTML',
-            code: '<form>\n  <label for="nome">Nome</label>\n\n  <input\n    id="nome"\n    name="nome"\n    type="text"\n  >\n\n  <button type="submit">\n    Enviar\n  </button>\n</form>'
+            code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>Meu site</title>\n</head>',
+            onlyCode: true
           },
           en: {
             introduction: {
-              title: 'Collecting information',
-              text: 'Login, sign-up, search: almost every site needs to receive something from the people using it. That is what forms are for.',
+              title: 'Information behind the scenes',
+              text: 'Some information about the page does not show on screen, but it matters. Where does it live?',
               persona: 'cody'
             },
             explanation: {
-              title: 'The form element',
-              text: 'Forms let you collect information provided by the user. The <form> element represents the form and can hold different input fields.'
+              title: 'What metadata is',
+              text: 'Metadata is information about the document that does not appear as page content.\n\nIn the example, charset="UTF-8" sets the character encoding: it is what makes accents and special symbols show up correctly. The viewport makes the page fit the width of the phone screen. In most pages, you can copy both as they are.'
             },
-            closing: 'A form should make clear what each field represents and which action the user can take.',
-            highlight: ['form', 'Forms', 'input'],
+            closing: 'The <head> gathers information the browser needs to interpret and present the document correctly.',
+            highlight: ['Metadata', 'head'],
             codeLanguage: 'HTML',
-            code: '<form>\n  <label for="name">Name</label>\n\n  <input\n    id="name"\n    name="name"\n    type="text"\n  >\n\n  <button type="submit">\n    Submit\n  </button>\n</form>'
+            code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>My site</title>\n</head>',
+            onlyCode: true
           }
         }
       },
@@ -14222,25 +14595,62 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
-              title: 'Tipos de input',
-              text: 'O elemento <input> possui diferentes tipos para representar diferentes informações.',
+              title: 'A meta tag description',
+              text: 'A meta tag description fornece uma descrição do conteúdo da página, que os buscadores (como o Google) costumam mostrar abaixo do nome do site nos resultados.',
               persona: 'neutral'
             },
-            closing: 'Escolher o tipo adequado ajuda o navegador a interpretar corretamente a informação e pode melhorar a experiência do usuário.',
-            highlight: ['input'],
+            closing: 'Metadados não são apenas detalhes técnicos. Eles ajudam diferentes ferramentas a compreenderem a página.',
+            highlight: ['meta', 'description', 'Metadados'],
             codeLanguage: 'HTML',
-            code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
+            code: '<meta\n  name="description"\n  content="Aprenda desenvolvimento web."\n>',
+            onlyCode: true
           },
           en: {
             introduction: {
-              title: 'Input types',
-              text: 'The <input> element has different types to represent different kinds of information.',
+              title: 'The description meta tag',
+              text: 'The description meta tag provides a description of the page content, which search engines (like Google) often show below the site name in the results.',
               persona: 'neutral'
             },
-            closing: 'Choosing the right type helps the browser interpret the information correctly and can improve the user experience.',
-            highlight: ['input'],
+            closing: 'Metadata is not just a technical detail. It helps different tools understand the page.',
+            highlight: ['meta', 'description', 'Metadata'],
             codeLanguage: 'HTML',
-            code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
+            code: '<meta\n  name="description"\n  content="Learn web development."\n>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O ícone da aba',
+              text: 'O favicon é o ícone que aparece na aba do navegador, ao lado do título da página.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Declarando o favicon',
+              text: 'Ele é declarado no head por um link, e o atributo rel com o valor icon indica a função desse arquivo.'
+            },
+            closing: 'É um detalhe pequeno, mas é o que ajuda a reconhecer a página quando há muitas abas abertas.',
+            highlight: ['favicon', 'head', 'link', 'rel'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <title>Meu site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
+          },
+          en: {
+            introduction: {
+              title: 'The tab icon',
+              text: 'The favicon is the icon shown on the browser tab, next to the page title.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Declaring the favicon',
+              text: 'It is declared in the head by a link, and the rel attribute with the value icon states what that file is for.'
+            },
+            closing: 'It is a small detail, but it is what helps people recognize the page when many tabs are open.',
+            highlight: ['favicon', 'head', 'link', 'rel'],
+            codeLanguage: 'HTML',
+            code: '<head>\n  <title>My site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
           }
         }
       },
@@ -14248,18 +14658,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual elemento representa o formulário inteiro?',
+            question: 'Onde ficam os metadados de uma página?',
             highlight: [],
             correctOption: 1,
-            options: ['<form>', '<input>', '<label>', '<submit>'],
-            pool: 'form-basics'
+            options: ['No <head>', 'No <body>', 'No <footer>', 'No <main>'],
+            pool: 'meta'
           },
           en: {
-            question: 'Which element represents the whole form?',
+            question: 'Where does a page\'s metadata go?',
             highlight: [],
             correctOption: 1,
-            options: ['<form>', '<input>', '<label>', '<submit>'],
-            pool: 'form-basics'
+            options: ['In the <head>', 'In the <body>', 'In the <footer>', 'In the <main>'],
+            pool: 'meta'
           }
         }
       },
@@ -14267,79 +14677,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual botão envia o formulário?',
+            question: 'Qual metadado traz uma descrição do conteúdo da página?',
             highlight: [],
             correctOption: 1,
-            options: ['<button type="submit">', '<button type="text">', '<input type="email">', '<label for="enviar">'],
-            pool: 'form-basics'
+            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
+            pool: 'meta'
           },
           en: {
-            question: 'Which button submits the form?',
+            question: 'Which metadata gives a description of the page\'s content?',
             highlight: [],
             correctOption: 1,
-            options: ['<button type="submit">', '<button type="text">', '<input type="email">', '<label for="send">'],
-            pool: 'form-basics'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Um <form> pode conter vários campos de entrada.',
-            highlight: ['<form>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'form-basics',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'A <form> can contain several input fields.',
-            highlight: ['<form>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'form-basics',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Campo para o e-mail da pessoa. Qual type é o mais adequado?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
-            pool: 'input-types'
-          },
-          en: {
-            question: 'A field for the person\'s email. Which type fits best?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
-            pool: 'input-types'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Campo para a data de nascimento. Qual type é o mais adequado?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
-            pool: 'input-types'
-          },
-          en: {
-            question: 'A field for the date of birth. Which type fits best?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
-            pool: 'input-types'
+            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
+            pool: 'meta'
           }
         }
       },
@@ -14348,20 +14697,20 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Escolher o type certo do <input> ajuda o navegador a interpretar a informação.',
-            highlight: ['<input>'],
+            aditionalParagraph: 'O favicon é declarado no <head> com um <link rel="icon">.',
+            highlight: ['<head>', 'favicon'],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
-            pool: 'input-types',
+            pool: 'meta',
             fixedOrder: true
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'Picking the right type for an <input> helps the browser interpret the information.',
-            highlight: ['<input>'],
+            aditionalParagraph: 'The favicon is declared in the <head> with a <link rel="icon">.',
+            highlight: ['<head>', 'favicon'],
             correctOption: 1,
             options: ['True', 'False'],
-            pool: 'input-types',
+            pool: 'meta',
             fixedOrder: true
           }
         }
@@ -14370,20 +14719,20 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete o campo de e-mail e o botão de envio.',
+            question: 'Complete a codificação e o título da aba.',
             highlight: [],
             codeLanguage: 'HTML',
-            code: '<input type="___">\n<button type="___">\n  Enviar\n</button>',
-            answers: ['email', 'submit'],
-            distractors: ['text', 'button', 'send']
+            code: '<head>\n  <meta ___="UTF-8">\n  <___>Meu site</title>\n</head>',
+            answers: ['charset', 'title'],
+            distractors: ['name', 'h1', 'lang']
           },
           en: {
-            question: 'Complete the email field and the submit button.',
+            question: 'Complete the encoding and the tab title.',
             highlight: [],
             codeLanguage: 'HTML',
-            code: '<input type="___">\n<button type="___">\n  Send\n</button>',
-            answers: ['email', 'submit'],
-            distractors: ['text', 'button', 'send']
+            code: '<head>\n  <meta ___="UTF-8">\n  <___>My site</title>\n</head>',
+            answers: ['charset', 'title'],
+            distractors: ['name', 'h1', 'lang']
           }
         }
       },
@@ -14391,18 +14740,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte um form com um campo de e-mail (input type email) e, depois dele, o botão "Enviar" do tipo submit.',
-            highlight: ['form', 'botão'],
+            question: 'Monte o head com o charset UTF-8 e, depois dele, o título "Meu site".',
+            highlight: ['head', 'charset'],
             codeLanguage: 'HTML',
-            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Enviar', '  </button>', '</form>'],
-            distractors: ['  <input type="mail">']
+            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>Meu site</title>', '</head>'],
+            distractors: ['  <charset="UTF-8">']
           },
           en: {
-            question: 'Build a form with an email field (input type email) and, after it, the submit button "Send".',
-            highlight: ['form', 'button'],
+            question: 'Build the head with the UTF-8 charset and, after it, the title "My site".',
+            highlight: ['head', 'charset'],
             codeLanguage: 'HTML',
-            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Send', '  </button>', '</form>'],
-            distractors: ['  <input type="mail">']
+            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>My site</title>', '</head>'],
+            distractors: ['  <charset="UTF-8">']
           }
         }
       },
@@ -14410,19 +14759,19 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual input é o mais adequado para uma data de nascimento?',
+            question: 'Qual trecho declara o favicon da página?',
             codeLanguage: 'HTML',
-            highlight: ['data de nascimento'],
+            highlight: ['favicon'],
             correctOption: 1,
-            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
+            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
             optionsAsCode: true
           },
           en: {
-            question: 'Which input is the best fit for a date of birth?',
+            question: 'Which snippet declares the favicon of the page?',
             codeLanguage: 'HTML',
-            highlight: ['date of birth'],
+            highlight: ['favicon'],
             correctOption: 1,
-            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
+            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
             optionsAsCode: true
           }
         }
@@ -14431,47 +14780,47 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'matching',
         content: {
           pt: {
-            question: 'Ligue cada tipo de input à informação que ele recebe.',
-            highlight: ['tipo de input'],
+            question: 'Ligue cada metadado à sua função.',
+            highlight: ['metadado'],
             pairs: [
               {
-                left: 'type="text"',
-                right: 'Texto curto, como um nome'
+                left: 'charset',
+                right: 'Codificação dos caracteres'
               },
               {
-                left: 'type="email"',
-                right: 'Endereço de e-mail'
+                left: 'viewport',
+                right: 'Ajuste da página à tela'
               },
               {
-                left: 'type="number"',
-                right: 'Valor numérico'
+                left: 'description',
+                right: 'Resumo da página para buscadores'
               },
               {
-                left: 'type="checkbox"',
-                right: 'Caixa de marcar'
+                left: '<title>',
+                right: 'Texto mostrado na aba'
               }
             ],
             leftAsCode: true
           },
           en: {
-            question: 'Match each input type to the information it takes.',
-            highlight: ['input type'],
+            question: 'Match each piece of metadata to its role.',
+            highlight: ['metadata'],
             pairs: [
               {
-                left: 'type="text"',
-                right: 'Short text, like a name'
+                left: 'charset',
+                right: 'Character encoding'
               },
               {
-                left: 'type="email"',
-                right: 'Email address'
+                left: 'viewport',
+                right: 'Fits the page to the screen'
               },
               {
-                left: 'type="number"',
-                right: 'Numeric value'
+                left: 'description',
+                right: 'Page summary for search engines'
               },
               {
-                left: 'type="checkbox"',
-                right: 'Tick box'
+                left: '<title>',
+                right: 'Text shown on the tab'
               }
             ],
             leftAsCode: true
@@ -14482,794 +14831,20 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o nome da tag que agrupa os campos do formulário.',
-            highlight: ['formulário'],
+            question: 'Digite o nome do metadado que resume a página para os buscadores.',
+            highlight: ['buscadores'],
             codeLanguage: 'HTML',
-            code: '<___>\n  <input type="text">\n</form>',
-            answers: ['form'],
+            code: '<meta name="___"\n  content="Aprenda web.">',
+            answers: ['description'],
             ignoreCase: true
           },
           en: {
-            question: 'Type the name of the tag that groups the fields of the form.',
-            highlight: ['form'],
+            question: 'Type the name of the metadata that sums up the page for search engines.',
+            highlight: ['search engines'],
             codeLanguage: 'HTML',
-            code: '<___>\n  <input type="text">\n</form>',
-            answers: ['form'],
+            code: '<meta name="___"\n  content="Learn the web.">',
+            answers: ['description'],
             ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Formulários melhores',
-      en: 'Better forms'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Ligando o rótulo ao campo',
-              text: 'Como o navegador sabe que um texto é o nome de um campo? Quem faz essa ligação é o label.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'label, for e id',
-              text: 'O <label> identifica um campo do formulário. O atributo for deve corresponder ao id do campo relacionado.'
-            },
-            closing: 'Relacionar corretamente o label ao campo melhora a usabilidade e a acessibilidade do formulário.',
-            highlight: ['label', 'id'],
-            codeLanguage: 'HTML',
-            code: '<label for="email">\n  E-mail\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
-          },
-          en: {
-            introduction: {
-              title: 'Linking the label to the field',
-              text: 'How does the browser know that a piece of text is the name of a field? The label makes that link.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'label, for and id',
-              text: 'The <label> element identifies a form field. Its for attribute must match the id of the related field.'
-            },
-            closing: 'Linking the label to the field correctly improves the usability and the accessibility of the form.',
-            highlight: ['label', 'id'],
-            codeLanguage: 'HTML',
-            code: '<label for="email">\n  Email\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Regras básicas nos campos',
-              text: 'Alguns atributos permitem indicar regras básicas para os campos antes que o formulário seja enviado.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'required e minlength',
-              text: 'required indica que o campo é obrigatório. minlength define um tamanho mínimo para o texto.'
-            },
-            closing: 'Esses recursos oferecem uma primeira camada de validação diretamente no HTML.',
-            highlight: ['required', 'minlength', 'HTML'],
-            codeLanguage: 'HTML',
-            code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="nome"\n  minlength="3"\n>'
-          },
-          en: {
-            introduction: {
-              title: 'Basic rules for fields',
-              text: 'Some attributes let you define basic rules for the fields before the form is submitted.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'required and minlength',
-              text: 'required marks the field as mandatory. minlength sets a minimum length for the text.'
-            },
-            closing: 'These features provide a first layer of validation directly in HTML.',
-            highlight: ['required', 'minlength', 'HTML'],
-            codeLanguage: 'HTML',
-            code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="name"\n  minlength="3"\n>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O atributo for do <label> precisa ser igual a qual atributo do campo?',
-            highlight: ['<label>'],
-            correctOption: 1,
-            options: ['id', 'name', 'type', 'value'],
-            pool: 'label-validation'
-          },
-          en: {
-            question: 'The for attribute of a <label> must match which attribute of the field?',
-            highlight: ['<label>'],
-            correctOption: 1,
-            options: ['id', 'name', 'type', 'value'],
-            pool: 'label-validation'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual atributo torna um campo obrigatório?',
-            highlight: [],
-            correctOption: 1,
-            options: ['required', 'minlength', 'type', 'for'],
-            pool: 'label-validation'
-          },
-          en: {
-            question: 'Which attribute makes a field mandatory?',
-            highlight: [],
-            correctOption: 1,
-            options: ['required', 'minlength', 'type', 'for'],
-            pool: 'label-validation'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'minlength="3" exige pelo menos 3 caracteres no campo.',
-            highlight: ['minlength'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'label-validation',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'minlength="3" requires at least 3 characters in the field.',
-            highlight: ['minlength'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'label-validation',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Ligue o label ao campo e torne-o obrigatório.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<label for="email">\n  E-mail\n</label>\n<input id="___"\n       ___>',
-            answers: ['email', 'required'],
-            distractors: ['name', 'for', 'min']
-          },
-          en: {
-            question: 'Link the label to the field and make it mandatory.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<label for="email">\n  Email\n</label>\n<input id="___"\n       ___>',
-            answers: ['email', 'required'],
-            distractors: ['name', 'for', 'min']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o label "E-mail" ligado ao campo de id email e, depois dele, esse campo como obrigatório (required).',
-            highlight: ['label', 'obrigatório'],
-            codeLanguage: 'HTML',
-            lines: ['<label for="email">', '  E-mail', '</label>', '<input id="email"', '  required>'],
-            distractors: ['<label id="email">']
-          },
-          en: {
-            question: 'Build the label "Email" linked to the field with id email and, after it, that field as required.',
-            highlight: ['label', 'required'],
-            codeLanguage: 'HTML',
-            lines: ['<label for="email">', '  Email', '</label>', '<input id="email"', '  required>'],
-            distractors: ['<label id="email">']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Em qual trecho o label está ligado ao campo?',
-            codeLanguage: 'HTML',
-            highlight: ['label'],
-            correctOption: 1,
-            options: ['<label for="nome">Nome</label>\n<input id="nome">', '<label for="nome">Nome</label>\n<input name="x">', '<label id="nome">Nome</label>\n<input for="nome">', '<label>Nome</label>\n<input id="nome">'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'In which snippet is the label linked to the field?',
-            codeLanguage: 'HTML',
-            highlight: ['label'],
-            correctOption: 1,
-            options: ['<label for="name">Name</label>\n<input id="name">', '<label for="name">Name</label>\n<input name="x">', '<label id="name">Name</label>\n<input for="name">', '<label>Name</label>\n<input id="name">'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o atributo que exige pelo menos 3 caracteres no campo.',
-            highlight: ['pelo menos 3'],
-            codeLanguage: 'HTML',
-            code: '<input type="text"\n  ___="3">',
-            answers: ['minlength'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the attribute that requires at least 3 characters in the field.',
-            highlight: ['at least 3'],
-            codeLanguage: 'HTML',
-            code: '<input type="text"\n  ___="3">',
-            answers: ['minlength'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Outros campos de formulário',
-      en: 'Other form fields'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Além do input',
-              text: 'Já escreveu um comentário longo em um site? Aquele campo grande não é um input.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'O textarea',
-              text: 'Nem todo campo de formulário é um input. Para textos longos, existe o textarea: diferente do input, ele tem tag de abertura e de fechamento e aceita várias linhas de texto.'
-            },
-            closing: 'O atributo rows define a altura inicial do campo, em número de linhas.',
-            highlight: ['input', 'textarea', 'rows'],
-            codeLanguage: 'HTML',
-            code: '<label for="mensagem">Mensagem</label>\n<textarea id="mensagem" name="mensagem" rows="4"></textarea>'
-          },
-          en: {
-            introduction: {
-              title: 'Beyond input',
-              text: 'Ever written a long comment on a website? That big field is not an input.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The textarea',
-              text: 'Not every form field is an input. For long text, there is the textarea: unlike input, it has an opening and a closing tag and accepts multiple lines of text.'
-            },
-            closing: 'The rows attribute sets the initial height of the field, in number of lines.',
-            highlight: ['input', 'textarea', 'rows'],
-            codeLanguage: 'HTML',
-            code: '<label for="message">Message</label>\n<textarea id="message" name="message" rows="4"></textarea>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Listas de opções com select',
-              text: 'O select cria uma lista de opções, e cada alternativa é um option.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'O texto e o value de cada opção',
-              text: 'O texto dentro de option é o que a pessoa vê na tela. O atributo value é o que o formulário envia.'
-            },
-            closing: 'Listas de opções reduzem erros de digitação, porque limitam a resposta a valores previstos.',
-            highlight: ['select', 'option', 'value'],
-            codeLanguage: 'HTML',
-            code: '<label for="estado">Estado</label>\n<select id="estado" name="estado">\n  <option value="sp">São Paulo</option>\n  <option value="rj">Rio de Janeiro</option>\n</select>'
-          },
-          en: {
-            introduction: {
-              title: 'Option lists with select',
-              text: 'The select element creates a list of options, and each alternative is an option.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'The text and the value of each option',
-              text: 'The text inside option is what the person sees on screen. The value attribute is what the form sends.'
-            },
-            closing: 'Option lists reduce typing mistakes, because they limit the answer to expected values.',
-            highlight: ['select', 'option', 'value'],
-            codeLanguage: 'HTML',
-            code: '<label for="state">State</label>\n<select id="state" name="state">\n  <option value="ny">New York</option>\n  <option value="ca">California</option>\n</select>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Para uma mensagem longa, com várias linhas, qual campo usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
-            pool: 'textarea-select'
-          },
-          en: {
-            question: 'For a long, multi-line message, which field do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
-            pool: 'textarea-select'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Com esta opção escolhida, o que o formulário envia?',
-            codeLanguage: 'HTML',
-            code: '<option value="sp">\n  São Paulo\n</option>',
-            highlight: [],
-            correctOption: 1,
-            options: ['sp', 'São Paulo', 'option', 'value'],
-            pool: 'textarea-select'
-          },
-          en: {
-            question: 'With this option selected, what does the form send?',
-            codeLanguage: 'HTML',
-            code: '<option value="ca">\n  California\n</option>',
-            highlight: [],
-            correctOption: 1,
-            options: ['ca', 'California', 'option', 'value'],
-            pool: 'textarea-select'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'O <textarea>, assim como o <input>, não tem tag de fechamento.',
-            highlight: ['<textarea>', '<input>'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'textarea-select',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Like the <input>, the <textarea> has no closing tag.',
-            highlight: ['<textarea>', '<input>'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'textarea-select',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete o campo para textos longos.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___ rows="4">\n</textarea>',
-            answers: ['textarea'],
-            distractors: ['input', 'select', 'text']
-          },
-          en: {
-            question: 'Complete the field for long text.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___ rows="4">\n</textarea>',
-            answers: ['textarea'],
-            distractors: ['input', 'select', 'text']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte um select com uma única opção: o texto "São Paulo", com value sp.',
-            highlight: ['select', 'value'],
-            codeLanguage: 'HTML',
-            lines: ['<select>', '  <option value="sp">', '    São Paulo', '  </option>', '</select>'],
-            distractors: ['  <option text="sp">', '  <input value="sp">']
-          },
-          en: {
-            question: 'Build a select with a single option: the text "New York", with value ny.',
-            highlight: ['select', 'value'],
-            codeLanguage: 'HTML',
-            lines: ['<select>', '  <option value="ny">', '    New York', '  </option>', '</select>'],
-            distractors: ['  <option text="ny">', '  <input value="ny">']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual campo aceita um texto longo, de várias linhas?',
-            codeLanguage: 'HTML',
-            highlight: ['texto longo'],
-            correctOption: 1,
-            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which field takes a long text, with several lines?',
-            codeLanguage: 'HTML',
-            highlight: ['long text'],
-            correctOption: 1,
-            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que cria a lista de opções do campo estado.',
-            highlight: ['lista de opções'],
-            codeLanguage: 'HTML',
-            code: '<___ name="estado">\n  <option>SP</option>\n</select>',
-            answers: ['select'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that creates the list of options for the state field.',
-            highlight: ['list of options'],
-            codeLanguage: 'HTML',
-            code: '<___ name="state">\n  <option>NY</option>\n</select>',
-            answers: ['select'],
-            ignoreCase: true
-          }
-        }
-      },
-      {
-        type: 'code_playground',
-        content: {
-          pt: {
-            question: 'Complete a caixa de mensagem: o nome "mensagem", usado no envio do formulário, e altura de 4 linhas.',
-            highlight: ['nome', '4 linhas'],
-            codeLanguage: 'HTML',
-            code: '<textarea\n  ___="mensagem"\n  ___="4"\n></textarea>',
-            blocks: ['name', 'rows', 'id', 'cols'],
-            solution: ['name', 'rows'],
-            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "mensagem") { __codap_report(false, "O nome usado no envio vai no atributo name."); return; }\n  __codap_report(ta.rows === 4, "A altura em linhas vai no atributo rows.");\n})();'
-          },
-          en: {
-            question: 'Complete the message box: the name "message", used when the form is sent, and a height of 4 lines.',
-            highlight: ['name', '4 lines'],
-            codeLanguage: 'HTML',
-            code: '<textarea\n  ___="message"\n  ___="4"\n></textarea>',
-            blocks: ['name', 'rows', 'id', 'cols'],
-            solution: ['name', 'rows'],
-            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "message") { __codap_report(false, "The name used when sending goes in the name attribute."); return; }\n  __codap_report(ta.rows === 4, "The height in lines goes in the rows attribute.");\n})();'
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Escolhas no formulário',
-      en: 'Choices in forms'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Uma opção ou várias',
-              text: 'Algumas perguntas aceitam uma única resposta; outras, várias. O HTML tem um campo para cada caso.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Radios e seus grupos',
-              text: 'Quando a pessoa deve escolher só uma opção entre várias, usamos um input com type="radio".\n\nOs radios de um mesmo grupo compartilham o mesmo name. É isso que faz marcar um desmarcar o outro.'
-            },
-            closing: 'Já o type="checkbox" permite marcar várias opções ao mesmo tempo, ou nenhuma.',
-            highlight: ['radio', 'radios', 'name', 'checkbox'],
-            codeLanguage: 'HTML',
-            code: '<p>Tamanho:</p>\n<input type="radio" id="p" name="tamanho" value="p">\n<label for="p">P</label>\n<input type="radio" id="m" name="tamanho" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="gelo" name="gelo">\n<label for="gelo">Gelo</label>'
-          },
-          en: {
-            introduction: {
-              title: 'One option or several',
-              text: 'Some questions accept a single answer; others, several. HTML has a field for each case.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Radios and their groups',
-              text: 'When the person must pick just one option among several, we use an input with type="radio".\n\nRadios in the same group share the same name. That is what makes checking one uncheck the other.'
-            },
-            closing: 'A type="checkbox", on the other hand, lets the person check several options at once, or none.',
-            highlight: ['radio', 'Radios', 'name', 'checkbox'],
-            codeLanguage: 'HTML',
-            code: '<p>Size:</p>\n<input type="radio" id="s" name="size" value="s">\n<label for="s">S</label>\n<input type="radio" id="m" name="size" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="ice" name="ice">\n<label for="ice">Ice</label>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Agrupando campos relacionados',
-              text: '<fieldset> agrupa campos relacionados, e <legend> dá um título a esse grupo.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Por que agrupar',
-              text: 'É o jeito semântico de dizer "estas opções respondem à mesma pergunta": leitores de tela anunciam a legenda junto com cada opção.'
-            },
-            closing: 'Grupos de radio e checkbox quase sempre ficam melhores dentro de um <fieldset>.',
-            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
-            codeLanguage: 'HTML',
-            code: '<fieldset>\n  <legend>Forma de pagamento</legend>\n\n  <input type="radio" id="pix" name="pagamento" value="pix">\n  <label for="pix">Pix</label>\n\n  <input type="radio" id="cartao" name="pagamento" value="cartao">\n  <label for="cartao">Cartão</label>\n</fieldset>'
-          },
-          en: {
-            introduction: {
-              title: 'Grouping related fields',
-              text: '<fieldset> groups related fields, and <legend> gives that group a title.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Why group',
-              text: 'It\'s the semantic way to say "these options answer the same question": screen readers announce the legend along with each option.'
-            },
-            closing: 'Groups of radio and checkbox inputs almost always work better inside a <fieldset>.',
-            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
-            codeLanguage: 'HTML',
-            code: '<fieldset>\n  <legend>Payment method</legend>\n\n  <input type="radio" id="card" name="payment" value="card">\n  <label for="card">Card</label>\n\n  <input type="radio" id="cash" name="payment" value="cash">\n  <label for="cash">Cash</label>\n</fieldset>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'A pessoa deve escolher só um tamanho: P, M ou G. Qual type usar?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
-            pool: 'radio-checkbox'
-          },
-          en: {
-            question: 'The person must pick just one size: S, M or L. Which type do you use?',
-            highlight: [],
-            correctOption: 1,
-            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
-            pool: 'radio-checkbox'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Marcar um radio desmarca o outro. O que liga os dois?',
-            highlight: ['radio'],
-            correctOption: 1,
-            options: ['O mesmo name', 'O mesmo id', 'O mesmo value', 'O mesmo label'],
-            pool: 'radio-checkbox'
-          },
-          en: {
-            question: 'Checking one radio unchecks the other. What links the two?',
-            highlight: ['radio'],
-            correctOption: 1,
-            options: ['The same name', 'The same id', 'The same value', 'The same label'],
-            pool: 'radio-checkbox'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Com checkbox, a pessoa pode marcar várias opções ao mesmo tempo.',
-            highlight: ['checkbox'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'radio-checkbox',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'With checkbox inputs, the person can check several options at once.',
-            highlight: ['checkbox'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'radio-checkbox',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento dá um título a um grupo de campos?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<legend>', '<label>', '<caption>', '<summary>'],
-            pool: 'fieldset-legend'
-          },
-          en: {
-            question: 'Which element gives a group of fields a title?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<legend>', '<label>', '<caption>', '<summary>'],
-            pool: 'fieldset-legend'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento agrupa campos relacionados de um formulário?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
-            pool: 'fieldset-legend'
-          },
-          en: {
-            question: 'Which element groups related fields in a form?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
-            pool: 'fieldset-legend'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Leitores de tela anunciam o <legend> junto com as opções do grupo.',
-            highlight: ['<legend>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'fieldset-legend',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Screen readers announce the <legend> along with the group\'s options.',
-            highlight: ['<legend>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'fieldset-legend',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: título do grupo e uma opção única.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<fieldset>\n  <___>Tamanho</legend>\n  <input type="___"\n         name="t">\n</fieldset>',
-            answers: ['legend', 'radio'],
-            distractors: ['label', 'checkbox', 'caption']
-          },
-          en: {
-            question: 'Complete: the group title and a single-choice option.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<fieldset>\n  <___>Size</legend>\n  <input type="___"\n         name="s">\n</fieldset>',
-            answers: ['legend', 'radio'],
-            distractors: ['label', 'checkbox', 'caption']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte um fieldset com a legenda "Tamanho" e, depois dela, um radio do grupo t (name t).',
-            highlight: ['fieldset', 'radio'],
-            codeLanguage: 'HTML',
-            lines: ['<fieldset>', '  <legend>Tamanho</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
-            distractors: ['  <input type="checkbox"']
-          },
-          en: {
-            question: 'Build a fieldset with the legend "Size" and, after it, a radio of group t (name t).',
-            highlight: ['fieldset', 'radio'],
-            codeLanguage: 'HTML',
-            lines: ['<fieldset>', '  <legend>Size</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
-            distractors: ['  <input type="checkbox"']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual par de radios deixa marcar só um dos dois?',
-            codeLanguage: 'HTML',
-            highlight: ['só um'],
-            correctOption: 1,
-            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which pair of radios lets you tick only one of the two?',
-            codeLanguage: 'HTML',
-            highlight: ['only one'],
-            correctOption: 1,
-            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o tipo de input que deixa marcar várias opções ao mesmo tempo.',
-            highlight: ['várias opções'],
-            codeLanguage: 'HTML',
-            code: '<input type="___"\n  name="extras">',
-            answers: ['checkbox'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the input type that lets you tick several options at once.',
-            highlight: ['several options'],
-            codeLanguage: 'HTML',
-            code: '<input type="___"\n  name="extras">',
-            answers: ['checkbox'],
-            ignoreCase: true
-          }
-        }
-      },
-      {
-        type: 'code_playground',
-        content: {
-          pt: {
-            question: 'Complete para que P e M sejam de escolha única: marcar uma opção desmarca a outra.',
-            highlight: ['escolha única'],
-            codeLanguage: 'HTML',
-            code: '<input type="radio"\n  name="tamanho" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
-            blocks: ['tamanho', 'm', 'p', 'radio'],
-            solution: ['tamanho'],
-            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Marcar M precisa desmarcar P: as duas opções precisam do mesmo name.");\n})();'
-          },
-          en: {
-            question: 'Complete it so P and M are single choice: checking one option unchecks the other.',
-            highlight: ['single choice'],
-            codeLanguage: 'HTML',
-            code: '<input type="radio"\n  name="size" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
-            blocks: ['size', 'm', 'p', 'radio'],
-            solution: ['size'],
-            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Checking M needs to uncheck P: both options need the same name.");\n})();'
           }
         }
       }
@@ -15662,8 +15237,8 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Metadados',
-      en: 'Metadata'
+      pt: 'Formulários',
+      en: 'Forms'
     },
     activities: [
       {
@@ -15671,35 +15246,33 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
-              title: 'Informações nos bastidores',
-              text: 'Algumas informações da página não aparecem na tela, mas fazem diferença. Onde elas ficam?',
+              title: 'Coletando informações',
+              text: 'Login, cadastro, busca: quase todo site precisa receber algo de quem o usa. É para isso que existem os formulários.',
               persona: 'cody'
             },
             explanation: {
-              title: 'O que são metadados',
-              text: 'Metadados são informações sobre o documento que não aparecem como conteúdo da página.'
+              title: 'O elemento form',
+              text: 'Formulários permitem coletar informações fornecidas pelo usuário. O elemento <form> representa o formulário e pode conter diferentes campos de entrada. No exemplo há um rótulo (<label>), um campo de texto (<input>) e um botão de envio (<button>); vamos ver cada um com calma nas próximas telas e lições. Cada campo leva um atributo name: é o nome com que o dado viaja quando o formulário é enviado.'
             },
-            closing: 'O <head> concentra informações importantes para o navegador interpretar e apresentar corretamente o documento.',
-            highlight: ['Metadados', 'head'],
+            closing: 'Um formulário deve deixar claro o que cada campo representa e qual ação o usuário pode realizar.',
+            highlight: ['form', 'formulário', 'Formulários'],
             codeLanguage: 'HTML',
-            code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>Meu site</title>\n</head>',
-            onlyCode: true
+            code: '<form>\n  <label for="nome">Nome</label>\n\n  <input\n    id="nome"\n    name="nome"\n    type="text"\n  >\n\n  <button type="submit">\n    Enviar\n  </button>\n</form>'
           },
           en: {
             introduction: {
-              title: 'Information behind the scenes',
-              text: 'Some information about the page does not show on screen, but it matters. Where does it live?',
+              title: 'Collecting information',
+              text: 'Login, sign-up, search: almost every site needs to receive something from the people using it. That is what forms are for.',
               persona: 'cody'
             },
             explanation: {
-              title: 'What metadata is',
-              text: 'Metadata is information about the document that does not appear as page content.'
+              title: 'The form element',
+              text: 'Forms let you collect information provided by the user. The <form> element represents the form and can hold different input fields. In the example there is a label (<label>), a text field (<input>) and a submit button (<button>); we will look at each one calmly in the next screens and lessons. Each field has a name attribute: it is the name the data travels under when the form is submitted.'
             },
-            closing: 'The <head> gathers information the browser needs to interpret and present the document correctly.',
-            highlight: ['Metadata', 'head'],
+            closing: 'A form should make clear what each field represents and which action the user can take.',
+            highlight: ['form', 'Forms', 'input'],
             codeLanguage: 'HTML',
-            code: '<head>\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1"\n  >\n\n  <title>My site</title>\n</head>',
-            onlyCode: true
+            code: '<form>\n  <label for="name">Name</label>\n\n  <input\n    id="name"\n    name="name"\n    type="text"\n  >\n\n  <button type="submit">\n    Submit\n  </button>\n</form>'
           }
         }
       },
@@ -15708,62 +15281,25 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
-              title: 'A meta tag description',
-              text: 'A meta tag description fornece uma descrição do conteúdo da página.',
+              title: 'Tipos de input',
+              text: 'O elemento <input> possui diferentes tipos para representar diferentes informações.',
               persona: 'neutral'
             },
-            closing: 'Metadados não são apenas detalhes técnicos. Eles ajudam diferentes ferramentas a compreenderem a página.',
-            highlight: ['meta', 'description', 'Metadados'],
+            closing: 'Escolher o tipo adequado ajuda o navegador a interpretar corretamente a informação e pode melhorar a experiência do usuário.',
+            highlight: ['input'],
             codeLanguage: 'HTML',
-            code: '<meta\n  name="description"\n  content="Aprenda desenvolvimento web."\n>',
-            onlyCode: true
+            code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
           },
           en: {
             introduction: {
-              title: 'The description meta tag',
-              text: 'The description meta tag provides a description of the page content.',
+              title: 'Input types',
+              text: 'The <input> element has different types to represent different kinds of information.',
               persona: 'neutral'
             },
-            closing: 'Metadata is not just a technical detail. It helps different tools understand the page.',
-            highlight: ['meta', 'description', 'Metadata'],
+            closing: 'Choosing the right type helps the browser interpret the information correctly and can improve the user experience.',
+            highlight: ['input'],
             codeLanguage: 'HTML',
-            code: '<meta\n  name="description"\n  content="Learn web development."\n>',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'O ícone da aba',
-              text: 'O favicon é o ícone que aparece na aba do navegador, ao lado do título da página.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Declarando o favicon',
-              text: 'Ele é declarado no head por um link, e o atributo rel com o valor icon indica a função desse arquivo.'
-            },
-            closing: 'É um detalhe pequeno, mas é o que ajuda a reconhecer a página quando há muitas abas abertas.',
-            highlight: ['favicon', 'head', 'link', 'rel'],
-            codeLanguage: 'HTML',
-            code: '<head>\n  <title>Meu site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
-          },
-          en: {
-            introduction: {
-              title: 'The tab icon',
-              text: 'The favicon is the icon shown on the browser tab, next to the page title.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Declaring the favicon',
-              text: 'It is declared in the head by a link, and the rel attribute with the value icon states what that file is for.'
-            },
-            closing: 'It is a small detail, but it is what helps people recognize the page when many tabs are open.',
-            highlight: ['favicon', 'head', 'link', 'rel'],
-            codeLanguage: 'HTML',
-            code: '<head>\n  <title>My site</title>\n  <link rel="icon" href="/favicon.png">\n</head>'
+            code: '<input type="text">\n<input type="email">\n<input type="number">\n<input type="date">\n<input type="checkbox">'
           }
         }
       },
@@ -15771,18 +15307,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Onde ficam os metadados de uma página?',
+            question: 'Qual elemento representa o formulário inteiro?',
             highlight: [],
             correctOption: 1,
-            options: ['No <head>', 'No <body>', 'No <footer>', 'No <main>'],
-            pool: 'meta'
+            options: ['<form>', '<input>', '<label>', '<submit>'],
+            pool: 'form-basics'
           },
           en: {
-            question: 'Where does a page\'s metadata go?',
+            question: 'Which element represents the whole form?',
             highlight: [],
             correctOption: 1,
-            options: ['In the <head>', 'In the <body>', 'In the <footer>', 'In the <main>'],
-            pool: 'meta'
+            options: ['<form>', '<input>', '<label>', '<submit>'],
+            pool: 'form-basics'
           }
         }
       },
@@ -15790,18 +15326,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual metadado traz uma descrição do conteúdo da página?',
+            question: 'Qual botão envia o formulário?',
             highlight: [],
             correctOption: 1,
-            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
-            pool: 'meta'
+            options: ['<button type="submit">', '<input type="text">', '<input type="email">', '<label for="enviar">'],
+            pool: 'form-basics'
           },
           en: {
-            question: 'Which metadata gives a description of the page\'s content?',
+            question: 'Which button submits the form?',
             highlight: [],
             correctOption: 1,
-            options: ['<meta name="description">', '<meta charset="UTF-8">', '<link rel="icon">', '<h1>'],
-            pool: 'meta'
+            options: ['<button type="submit">', '<input type="text">', '<input type="email">', '<label for="send">'],
+            pool: 'form-basics'
           }
         }
       },
@@ -15810,20 +15346,81 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'O favicon é declarado no <head> com um <link rel="icon">.',
-            highlight: ['<head>', 'favicon'],
+            aditionalParagraph: 'Um <form> pode conter vários campos de entrada.',
+            highlight: ['<form>'],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
-            pool: 'meta',
+            pool: 'form-basics',
             fixedOrder: true
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'The favicon is declared in the <head> with a <link rel="icon">.',
-            highlight: ['<head>', 'favicon'],
+            aditionalParagraph: 'A <form> can contain several input fields.',
+            highlight: ['<form>'],
             correctOption: 1,
             options: ['True', 'False'],
-            pool: 'meta',
+            pool: 'form-basics',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Campo para o e-mail da pessoa. Qual type é o mais adequado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
+            pool: 'input-types'
+          },
+          en: {
+            question: 'A field for the person\'s email. Which type fits best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="email"', 'type="number"', 'type="date"', 'type="checkbox"'],
+            pool: 'input-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Campo para a data de nascimento. Qual type é o mais adequado?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
+            pool: 'input-types'
+          },
+          en: {
+            question: 'A field for the date of birth. Which type fits best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="date"', 'type="number"', 'type="email"', 'type="checkbox"'],
+            pool: 'input-types'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Escolher o type certo do <input> ajuda o navegador a interpretar a informação.',
+            highlight: ['<input>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'input-types',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Picking the right type for an <input> helps the browser interpret the information.',
+            highlight: ['<input>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'input-types',
             fixedOrder: true
           }
         }
@@ -15832,20 +15429,20 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete a codificação e o título da aba.',
+            question: 'Complete o campo de e-mail e o botão de envio.',
             highlight: [],
             codeLanguage: 'HTML',
-            code: '<head>\n  <meta ___="UTF-8">\n  <___>Meu site</title>\n</head>',
-            answers: ['charset', 'title'],
-            distractors: ['name', 'h1', 'lang']
+            code: '<input type="___">\n<button type="___">\n  Enviar\n</button>',
+            answers: ['email', 'submit'],
+            distractors: ['text', 'button', 'reset']
           },
           en: {
-            question: 'Complete the encoding and the tab title.',
+            question: 'Complete the email field and the submit button.',
             highlight: [],
             codeLanguage: 'HTML',
-            code: '<head>\n  <meta ___="UTF-8">\n  <___>My site</title>\n</head>',
-            answers: ['charset', 'title'],
-            distractors: ['name', 'h1', 'lang']
+            code: '<input type="___">\n<button type="___">\n  Send\n</button>',
+            answers: ['email', 'submit'],
+            distractors: ['text', 'button', 'reset']
           }
         }
       },
@@ -15853,18 +15450,18 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte o head com o charset UTF-8 e, depois dele, o título "Meu site".',
-            highlight: ['head', 'charset'],
+            question: 'Monte um form com um campo de e-mail (input type email) e, depois dele, o botão "Enviar" do tipo submit.',
+            highlight: ['form', 'botão'],
             codeLanguage: 'HTML',
-            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>Meu site</title>', '</head>'],
-            distractors: ['  <charset="UTF-8">']
+            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Enviar', '  </button>', '</form>'],
+            distractors: ['  <input type="mail">']
           },
           en: {
-            question: 'Build the head with the UTF-8 charset and, after it, the title "My site".',
-            highlight: ['head', 'charset'],
+            question: 'Build a form with an email field (input type email) and, after it, the submit button "Send".',
+            highlight: ['form', 'button'],
             codeLanguage: 'HTML',
-            lines: ['<head>', '  <meta charset="UTF-8">', '  <title>My site</title>', '</head>'],
-            distractors: ['  <charset="UTF-8">']
+            lines: ['<form>', '  <input type="email">', '  <button type="submit">', '    Send', '  </button>', '</form>'],
+            distractors: ['  <input type="mail">']
           }
         }
       },
@@ -15872,19 +15469,19 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual trecho declara o favicon da página?',
+            question: 'Qual input é o mais adequado para uma data de nascimento?',
             codeLanguage: 'HTML',
-            highlight: ['favicon'],
+            highlight: ['data de nascimento'],
             correctOption: 1,
-            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
+            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
             optionsAsCode: true
           },
           en: {
-            question: 'Which snippet declares the favicon of the page?',
+            question: 'Which input is the best fit for a date of birth?',
             codeLanguage: 'HTML',
-            highlight: ['favicon'],
+            highlight: ['date of birth'],
             correctOption: 1,
-            options: ['<link rel="icon"\n  href="/favicon.png">', '<meta rel="icon"\n  href="/favicon.png">', '<link rel="stylesheet"\n  href="/favicon.png">', '<icon src="/favicon.png">'],
+            options: ['<input type="date">', '<input type="number">', '<input type="birthday">', '<input type="calendar">'],
             optionsAsCode: true
           }
         }
@@ -15893,47 +15490,47 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'matching',
         content: {
           pt: {
-            question: 'Ligue cada metadado à sua função.',
-            highlight: ['metadado'],
+            question: 'Ligue cada tipo de input à informação que ele recebe.',
+            highlight: ['tipo de input'],
             pairs: [
               {
-                left: 'charset',
-                right: 'Codificação dos caracteres'
+                left: 'type="text"',
+                right: 'Texto curto, como um nome'
               },
               {
-                left: 'viewport',
-                right: 'Ajuste da página à tela'
+                left: 'type="email"',
+                right: 'Endereço de e-mail'
               },
               {
-                left: 'description',
-                right: 'Resumo da página para buscadores'
+                left: 'type="number"',
+                right: 'Valor numérico'
               },
               {
-                left: '<title>',
-                right: 'Texto mostrado na aba'
+                left: 'type="checkbox"',
+                right: 'Caixa de marcar'
               }
             ],
             leftAsCode: true
           },
           en: {
-            question: 'Match each piece of metadata to its role.',
-            highlight: ['metadata'],
+            question: 'Match each input type to the information it takes.',
+            highlight: ['input type'],
             pairs: [
               {
-                left: 'charset',
-                right: 'Character encoding'
+                left: 'type="text"',
+                right: 'Short text, like a name'
               },
               {
-                left: 'viewport',
-                right: 'Fits the page to the screen'
+                left: 'type="email"',
+                right: 'Email address'
               },
               {
-                left: 'description',
-                right: 'Page summary for search engines'
+                left: 'type="number"',
+                right: 'Numeric value'
               },
               {
-                left: '<title>',
-                right: 'Text shown on the tab'
+                left: 'type="checkbox"',
+                right: 'Tick box'
               }
             ],
             leftAsCode: true
@@ -15944,20 +15541,794 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o nome do metadado que resume a página para os buscadores.',
-            highlight: ['buscadores'],
+            question: 'Digite o nome da tag que agrupa os campos do formulário.',
+            highlight: ['formulário'],
             codeLanguage: 'HTML',
-            code: '<meta name="___"\n  content="Aprenda web.">',
-            answers: ['description'],
+            code: '<___>\n  <input type="text">\n</form>',
+            answers: ['form'],
             ignoreCase: true
           },
           en: {
-            question: 'Type the name of the metadata that sums up the page for search engines.',
-            highlight: ['search engines'],
+            question: 'Type the name of the tag that groups the fields of the form.',
+            highlight: ['form'],
             codeLanguage: 'HTML',
-            code: '<meta name="___"\n  content="Learn the web.">',
-            answers: ['description'],
+            code: '<___>\n  <input type="text">\n</form>',
+            answers: ['form'],
             ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Formulários melhores',
+      en: 'Better forms'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Ligando o rótulo ao campo',
+              text: 'Como o navegador sabe que um texto é o nome de um campo? Quem faz essa ligação é o label.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'label, for e id',
+              text: 'O <label> identifica um campo do formulário. O atributo for deve corresponder ao id do campo relacionado.'
+            },
+            closing: 'Relacionar corretamente o label ao campo faz com que tocar no texto "E-mail" leve o cursor direto ao campo, e leitores de tela leiam o rótulo junto com ele.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  E-mail\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
+          },
+          en: {
+            introduction: {
+              title: 'Linking the label to the field',
+              text: 'How does the browser know that a piece of text is the name of a field? The label makes that link.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'label, for and id',
+              text: 'The <label> element identifies a form field. Its for attribute must match the id of the related field.'
+            },
+            closing: 'Linking the label to the field correctly means tapping the text "Email" takes the cursor straight to the field, and screen readers read the label along with it.',
+            highlight: ['label', 'id'],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  Email\n</label>\n\n<input\n  id="email"\n  name="email"\n  type="email"\n>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Regras básicas nos campos',
+              text: 'Alguns atributos permitem indicar regras básicas para os campos antes que o formulário seja enviado.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'required e minlength',
+              text: 'required indica que o campo é obrigatório. minlength define um tamanho mínimo para o texto.'
+            },
+            closing: 'Esses recursos oferecem uma primeira camada de validação diretamente no HTML.',
+            highlight: ['required', 'minlength', 'HTML'],
+            codeLanguage: 'HTML',
+            code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="nome"\n  minlength="3"\n>'
+          },
+          en: {
+            introduction: {
+              title: 'Basic rules for fields',
+              text: 'Some attributes let you define basic rules for the fields before the form is submitted.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'required and minlength',
+              text: 'required marks the field as mandatory. minlength sets a minimum length for the text.'
+            },
+            closing: 'These features provide a first layer of validation directly in HTML.',
+            highlight: ['required', 'minlength', 'HTML'],
+            codeLanguage: 'HTML',
+            code: '<input\n  type="email"\n  name="email"\n  required\n>\n\n<input\n  type="text"\n  name="name"\n  minlength="3"\n>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O atributo for do <label> precisa ser igual a qual atributo do campo?',
+            highlight: ['<label>'],
+            correctOption: 1,
+            options: ['id', 'name', 'type', 'value'],
+            pool: 'label-validation'
+          },
+          en: {
+            question: 'The for attribute of a <label> must match which attribute of the field?',
+            highlight: ['<label>'],
+            correctOption: 1,
+            options: ['id', 'name', 'type', 'value'],
+            pool: 'label-validation'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual atributo torna um campo obrigatório?',
+            highlight: [],
+            correctOption: 1,
+            options: ['required', 'minlength', 'type', 'for'],
+            pool: 'label-validation'
+          },
+          en: {
+            question: 'Which attribute makes a field mandatory?',
+            highlight: [],
+            correctOption: 1,
+            options: ['required', 'minlength', 'type', 'for'],
+            pool: 'label-validation'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'minlength="3" exige pelo menos 3 caracteres no campo.',
+            highlight: ['minlength'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'label-validation',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'minlength="3" requires at least 3 characters in the field.',
+            highlight: ['minlength'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'label-validation',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Ligue o label ao campo e torne-o obrigatório.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  E-mail\n</label>\n<input id="___"\n       ___>',
+            answers: ['email', 'required'],
+            distractors: ['name', 'for', 'min']
+          },
+          en: {
+            question: 'Link the label to the field and make it mandatory.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<label for="email">\n  Email\n</label>\n<input id="___"\n       ___>',
+            answers: ['email', 'required'],
+            distractors: ['name', 'for', 'min']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o label "E-mail" ligado ao campo de id email e, depois dele, esse campo como obrigatório (required).',
+            highlight: ['label', 'obrigatório'],
+            codeLanguage: 'HTML',
+            lines: ['<label for="email">', '  E-mail', '</label>', '<input id="email"', '  required>'],
+            distractors: ['<label id="email">']
+          },
+          en: {
+            question: 'Build the label "Email" linked to the field with id email and, after it, that field as required.',
+            highlight: ['label', 'required'],
+            codeLanguage: 'HTML',
+            lines: ['<label for="email">', '  Email', '</label>', '<input id="email"', '  required>'],
+            distractors: ['<label id="email">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em qual trecho o label está ligado ao campo?',
+            codeLanguage: 'HTML',
+            highlight: ['label'],
+            correctOption: 1,
+            options: ['<label for="nome">Nome</label>\n<input id="nome">', '<label for="nome">Nome</label>\n<input name="x">', '<label id="nome">Nome</label>\n<input for="nome">', '<label>Nome</label>\n<input id="nome">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'In which snippet is the label linked to the field?',
+            codeLanguage: 'HTML',
+            highlight: ['label'],
+            correctOption: 1,
+            options: ['<label for="name">Name</label>\n<input id="name">', '<label for="name">Name</label>\n<input name="x">', '<label id="name">Name</label>\n<input for="name">', '<label>Name</label>\n<input id="name">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o atributo que exige pelo menos 3 caracteres no campo.',
+            highlight: ['pelo menos 3'],
+            codeLanguage: 'HTML',
+            code: '<input type="text"\n  ___="3">',
+            answers: ['minlength'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the attribute that requires at least 3 characters in the field.',
+            highlight: ['at least 3'],
+            codeLanguage: 'HTML',
+            code: '<input type="text"\n  ___="3">',
+            answers: ['minlength'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Outros campos de formulário',
+      en: 'Other form fields'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Além do input',
+              text: 'Já escreveu um comentário longo em um site? Aquele campo grande não é um input.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O textarea',
+              text: 'Nem todo campo de formulário é um input. Para textos longos, existe o textarea: diferente do input, ele tem tag de abertura e de fechamento e aceita várias linhas de texto.'
+            },
+            closing: 'O atributo rows define a altura inicial do campo, em número de linhas.',
+            highlight: ['input', 'textarea', 'rows'],
+            codeLanguage: 'HTML',
+            code: '<label for="mensagem">Mensagem</label>\n<textarea id="mensagem" name="mensagem" rows="4"></textarea>'
+          },
+          en: {
+            introduction: {
+              title: 'Beyond input',
+              text: 'Ever written a long comment on a website? That big field is not an input.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The textarea',
+              text: 'Not every form field is an input. For long text, there is the textarea: unlike input, it has an opening and a closing tag and accepts multiple lines of text.'
+            },
+            closing: 'The rows attribute sets the initial height of the field, in number of lines.',
+            highlight: ['input', 'textarea', 'rows'],
+            codeLanguage: 'HTML',
+            code: '<label for="message">Message</label>\n<textarea id="message" name="message" rows="4"></textarea>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Listas de opções com select',
+              text: 'O select cria uma lista de opções, e cada alternativa é um option.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'O texto e o value de cada opção',
+              text: 'O texto dentro de option é o que a pessoa vê na tela. O atributo value é o que o formulário envia.'
+            },
+            closing: 'Listas de opções reduzem erros de digitação, porque limitam a resposta a valores previstos.',
+            highlight: ['select', 'option', 'value'],
+            codeLanguage: 'HTML',
+            code: '<label for="estado">Estado</label>\n<select id="estado" name="estado">\n  <option value="sp">São Paulo</option>\n  <option value="rj">Rio de Janeiro</option>\n</select>'
+          },
+          en: {
+            introduction: {
+              title: 'Option lists with select',
+              text: 'The select element creates a list of options, and each alternative is an option.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The text and the value of each option',
+              text: 'The text inside option is what the person sees on screen. The value attribute is what the form sends.'
+            },
+            closing: 'Option lists reduce typing mistakes, because they limit the answer to expected values.',
+            highlight: ['select', 'option', 'value'],
+            codeLanguage: 'HTML',
+            code: '<label for="state">State</label>\n<select id="state" name="state">\n  <option value="ny">New York</option>\n  <option value="ca">California</option>\n</select>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para uma mensagem longa, com várias linhas, qual campo usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
+            pool: 'textarea-select'
+          },
+          en: {
+            question: 'For a long, multi-line message, which field do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<textarea>', '<input type="text">', '<select>', '<label>'],
+            pool: 'textarea-select'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com esta opção escolhida, o que o formulário envia?',
+            codeLanguage: 'HTML',
+            code: '<option value="sp">\n  São Paulo\n</option>',
+            highlight: [],
+            correctOption: 1,
+            options: ['sp', 'São Paulo', 'option', 'value'],
+            pool: 'textarea-select'
+          },
+          en: {
+            question: 'With this option selected, what does the form send?',
+            codeLanguage: 'HTML',
+            code: '<option value="ca">\n  California\n</option>',
+            highlight: [],
+            correctOption: 1,
+            options: ['ca', 'California', 'option', 'value'],
+            pool: 'textarea-select'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O <textarea> não tem tag de fechamento.',
+            highlight: ['<textarea>'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'textarea-select',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The <textarea> has no closing tag.',
+            highlight: ['<textarea>'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'textarea-select',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o campo para textos longos.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ rows="4">\n</textarea>',
+            answers: ['textarea'],
+            distractors: ['input', 'select', 'text']
+          },
+          en: {
+            question: 'Complete the field for long text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___ rows="4">\n</textarea>',
+            answers: ['textarea'],
+            distractors: ['input', 'select', 'text']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um select com uma única opção: o texto "São Paulo", com value sp.',
+            highlight: ['select', 'value'],
+            codeLanguage: 'HTML',
+            lines: ['<select>', '  <option value="sp">', '    São Paulo', '  </option>', '</select>'],
+            distractors: ['  <option text="sp">', '  <input value="sp">']
+          },
+          en: {
+            question: 'Build a select with a single option: the text "New York", with value ny.',
+            highlight: ['select', 'value'],
+            codeLanguage: 'HTML',
+            lines: ['<select>', '  <option value="ny">', '    New York', '  </option>', '</select>'],
+            distractors: ['  <option text="ny">', '  <input value="ny">']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual campo aceita um texto longo, de várias linhas?',
+            codeLanguage: 'HTML',
+            highlight: ['texto longo'],
+            correctOption: 1,
+            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which field takes a long text, with several lines?',
+            codeLanguage: 'HTML',
+            highlight: ['long text'],
+            correctOption: 1,
+            options: ['<textarea rows="4"></textarea>', '<input rows="4">', '<input type="long">', '<text rows="4"></text>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que cria a lista de opções do campo estado.',
+            highlight: ['lista de opções'],
+            codeLanguage: 'HTML',
+            code: '<___ name="estado">\n  <option>SP</option>\n</select>',
+            answers: ['select'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that creates the list of options for the state field.',
+            highlight: ['list of options'],
+            codeLanguage: 'HTML',
+            code: '<___ name="state">\n  <option>NY</option>\n</select>',
+            answers: ['select'],
+            ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete a caixa de mensagem: o name (o nome com que a resposta viaja no envio do formulário) "mensagem" e a altura de 4 linhas.',
+            highlight: ['nome', '4 linhas'],
+            codeLanguage: 'HTML',
+            code: '<textarea\n  ___="mensagem"\n  ___="4"\n></textarea>',
+            blocks: ['name', 'rows', 'id', 'cols'],
+            solution: ['name', 'rows'],
+            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "mensagem") { __codap_report(false, "O nome usado no envio vai no atributo name."); return; }\n  __codap_report(ta.rows === 4, "A altura em linhas vai no atributo rows.");\n})();'
+          },
+          en: {
+            question: 'Complete the message box: the name (the name the answer travels under when the form is sent) "message" and a height of 4 lines.',
+            highlight: ['name', '4 lines'],
+            codeLanguage: 'HTML',
+            code: '<textarea\n  ___="message"\n  ___="4"\n></textarea>',
+            blocks: ['name', 'rows', 'id', 'cols'],
+            solution: ['name', 'rows'],
+            checkScript: '(function () {\n  var ta = document.querySelector("textarea");\n  if (!ta || ta.name !== "message") { __codap_report(false, "The name used when sending goes in the name attribute."); return; }\n  __codap_report(ta.rows === 4, "The height in lines goes in the rows attribute.");\n})();'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Escolhas no formulário',
+      en: 'Choices in forms'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Uma opção ou várias',
+              text: 'Algumas perguntas aceitam uma única resposta; outras, várias. O HTML tem um campo para cada caso.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Radios e seus grupos',
+              text: 'Quando a pessoa deve escolher só uma opção entre várias, usamos um input com type="radio".\n\nOs radios de um mesmo grupo compartilham o mesmo name. É isso que faz marcar um desmarcar o outro.'
+            },
+            closing: 'Já o type="checkbox" permite marcar várias opções ao mesmo tempo, ou nenhuma.',
+            highlight: ['radio', 'radios', 'name', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<p>Tamanho:</p>\n<input type="radio" id="p" name="tamanho" value="p">\n<label for="p">P</label>\n<input type="radio" id="m" name="tamanho" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="gelo" name="gelo">\n<label for="gelo">Gelo</label>'
+          },
+          en: {
+            introduction: {
+              title: 'One option or several',
+              text: 'Some questions accept a single answer; others, several. HTML has a field for each case.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Radios and their groups',
+              text: 'When the person must pick just one option among several, we use an input with type="radio".\n\nRadios in the same group share the same name. That is what makes checking one uncheck the other.'
+            },
+            closing: 'A type="checkbox", on the other hand, lets the person check several options at once, or none.',
+            highlight: ['radio', 'Radios', 'name', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<p>Size:</p>\n<input type="radio" id="s" name="size" value="s">\n<label for="s">S</label>\n<input type="radio" id="m" name="size" value="m">\n<label for="m">M</label>\n\n<p>Extras:</p>\n<input type="checkbox" id="ice" name="ice">\n<label for="ice">Ice</label>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Agrupando campos relacionados',
+              text: '<fieldset> agrupa campos relacionados, e <legend> dá um título a esse grupo.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Por que agrupar',
+              text: 'É o jeito semântico de dizer "estas opções respondem à mesma pergunta": leitores de tela anunciam a legenda junto com cada opção.'
+            },
+            closing: 'Grupos de radio e checkbox quase sempre ficam melhores dentro de um <fieldset>.',
+            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <legend>Forma de pagamento</legend>\n\n  <input type="radio" id="pix" name="pagamento" value="pix">\n  <label for="pix">Pix</label>\n\n  <input type="radio" id="cartao" name="pagamento" value="cartao">\n  <label for="cartao">Cartão</label>\n</fieldset>'
+          },
+          en: {
+            introduction: {
+              title: 'Grouping related fields',
+              text: '<fieldset> groups related fields, and <legend> gives that group a title.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Why group',
+              text: 'It\'s the semantic way to say "these options answer the same question": screen readers announce the legend along with each option.'
+            },
+            closing: 'Groups of radio and checkbox inputs almost always work better inside a <fieldset>.',
+            highlight: ['<fieldset>', '<legend>', 'radio', 'checkbox'],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <legend>Payment method</legend>\n\n  <input type="radio" id="card" name="payment" value="card">\n  <label for="card">Card</label>\n\n  <input type="radio" id="cash" name="payment" value="cash">\n  <label for="cash">Cash</label>\n</fieldset>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'A pessoa deve escolher só um tamanho: P, M ou G. Qual type usar?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
+            pool: 'radio-checkbox'
+          },
+          en: {
+            question: 'The person must pick just one size: S, M or L. Which type do you use?',
+            highlight: [],
+            correctOption: 1,
+            options: ['type="radio"', 'type="checkbox"', 'type="text"', 'type="number"'],
+            pool: 'radio-checkbox'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Marcar um radio desmarca o outro. O que liga os dois?',
+            highlight: ['radio'],
+            correctOption: 1,
+            options: ['O mesmo name', 'O mesmo id', 'O mesmo value', 'O mesmo label'],
+            pool: 'radio-checkbox'
+          },
+          en: {
+            question: 'Checking one radio unchecks the other. What links the two?',
+            highlight: ['radio'],
+            correctOption: 1,
+            options: ['The same name', 'The same id', 'The same value', 'The same label'],
+            pool: 'radio-checkbox'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Com checkbox, a pessoa pode marcar várias opções ao mesmo tempo.',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'radio-checkbox',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'With checkbox inputs, the person can check several options at once.',
+            highlight: ['checkbox'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'radio-checkbox',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento dá um título a um grupo de campos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<legend>', '<label>', '<caption>', '<summary>'],
+            pool: 'fieldset-legend'
+          },
+          en: {
+            question: 'Which element gives a group of fields a title?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<legend>', '<label>', '<caption>', '<summary>'],
+            pool: 'fieldset-legend'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento agrupa campos relacionados de um formulário?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
+            pool: 'fieldset-legend'
+          },
+          en: {
+            question: 'Which element groups related fields in a form?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<fieldset>', '<legend>', '<select>', '<option>'],
+            pool: 'fieldset-legend'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Leitores de tela anunciam o <legend> junto com as opções do grupo.',
+            highlight: ['<legend>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'fieldset-legend',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Screen readers announce the <legend> along with the group\'s options.',
+            highlight: ['<legend>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'fieldset-legend',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: o título do grupo e um campo de escolha única (só uma opção marcada por vez).',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <___>Tamanho</legend>\n  <input type="___"\n         name="t">\n</fieldset>',
+            answers: ['legend', 'radio'],
+            distractors: ['label', 'checkbox', 'caption']
+          },
+          en: {
+            question: 'Complete: the group title and a single-choice field (only one option checked at a time).',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<fieldset>\n  <___>Size</legend>\n  <input type="___"\n         name="s">\n</fieldset>',
+            answers: ['legend', 'radio'],
+            distractors: ['label', 'checkbox', 'caption']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um fieldset com a legenda "Tamanho" e, depois dela, um radio do grupo t (name t).',
+            highlight: ['fieldset', 'radio'],
+            codeLanguage: 'HTML',
+            lines: ['<fieldset>', '  <legend>Tamanho</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
+            distractors: ['  <input type="checkbox"']
+          },
+          en: {
+            question: 'Build a fieldset with the legend "Size" and, after it, a radio of group t (name t).',
+            highlight: ['fieldset', 'radio'],
+            codeLanguage: 'HTML',
+            lines: ['<fieldset>', '  <legend>Size</legend>', '  <input type="radio"', '    name="t">', '</fieldset>'],
+            distractors: ['  <input type="checkbox"']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual par de radios deixa marcar só um dos dois?',
+            codeLanguage: 'HTML',
+            highlight: ['só um'],
+            correctOption: 1,
+            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which pair of radios lets you tick only one of the two?',
+            codeLanguage: 'HTML',
+            highlight: ['only one'],
+            correctOption: 1,
+            options: ['<input type="radio" name="a">\n<input type="radio" name="a">', '<input type="radio" name="a">\n<input type="radio" name="b">', '<input type="radio">\n<input type="radio">', '<input type="check" name="a">\n<input type="check" name="a">'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o tipo de input que deixa marcar várias opções ao mesmo tempo.',
+            highlight: ['várias opções'],
+            codeLanguage: 'HTML',
+            code: '<input type="___"\n  name="extras">',
+            answers: ['checkbox'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the input type that lets you tick several options at once.',
+            highlight: ['several options'],
+            codeLanguage: 'HTML',
+            code: '<input type="___"\n  name="extras">',
+            answers: ['checkbox'],
+            ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'Complete para que P e M sejam de escolha única: marcar uma opção desmarca a outra.',
+            highlight: ['escolha única'],
+            codeLanguage: 'HTML',
+            code: '<input type="radio"\n  name="tamanho" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
+            blocks: ['tamanho', 'm', 'p', 'radio'],
+            solution: ['tamanho'],
+            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Marcar M precisa desmarcar P: as duas opções precisam do mesmo name.");\n})();'
+          },
+          en: {
+            question: 'Complete it so P and M are single choice: checking one option unchecks the other.',
+            highlight: ['single choice'],
+            codeLanguage: 'HTML',
+            code: '<input type="radio"\n  name="size" id="p">\n<label for="p">P</label>\n<input type="radio"\n  name="___" id="m">\n<label for="m">M</label>',
+            blocks: ['size', 'm', 'p', 'radio'],
+            solution: ['size'],
+            checkScript: '(function () {\n  var p = document.querySelector("#p"), m = document.querySelector("#m");\n  p.checked = false; m.checked = false;\n  p.click(); m.click();\n  var unica = !p.checked && m.checked;\n  p.checked = false; m.checked = false;\n  __codap_report(unica, "Checking M needs to uncheck P: both options need the same name.");\n})();'
           }
         }
       }
@@ -15982,7 +16353,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'O que é acessibilidade',
               text: 'Acessibilidade significa construir páginas que possam ser usadas por pessoas com necessidades e formas de interação diferentes.\n\nHTML semântico, textos alternativos e formulários bem identificados são práticas que melhoram a acessibilidade.'
             },
-            closing: 'Antes de procurar soluções complexas, utilize corretamente os recursos semânticos que o próprio HTML oferece.',
+            closing: 'Antes de procurar soluções complexas, utilize corretamente os recursos semânticos que o próprio HTML oferece. Por exemplo, para algo que funciona como botão, use o <button>, e não um <div> com cara de botão.',
             highlight: ['Acessibilidade', 'acessibilidade', 'HTML', 'semântico', 'semânticos'],
             codeLanguage: 'HTML',
             code: '<main>\n  <h1>Perfil</h1>\n\n  <img\n    src="perfil.jpg"\n    alt="Foto de perfil"\n  >\n\n  <button type="button">\n    Seguir\n  </button>\n</main>'
@@ -15997,7 +16368,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'What accessibility is',
               text: 'Accessibility means building pages that can be used by people with different needs and ways of interacting.\n\nSemantic HTML, alternative text and properly labeled form fields are practices that improve accessibility.'
             },
-            closing: 'Before looking for complex solutions, use the semantic resources HTML already offers.',
+            closing: 'Before looking for complex solutions, use the semantic resources HTML already offers. For example, for something that works as a button, use <button>, not a <div> made to look like a button.',
             highlight: ['Accessibility', 'accessibility', 'HTML', 'semantic'],
             codeLanguage: 'HTML',
             code: '<main>\n  <h1>Profile</h1>\n\n  <img\n    src="profile.jpg"\n    alt="Profile photo"\n  >\n\n  <button type="button">\n    Follow\n  </button>\n</main>'
@@ -16117,14 +16488,14 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte a hierarquia: título h1 "Curso", depois o h2 "Fundamentos" e, dentro dessa seção, o h3 "Elementos".',
+            question: 'Monte a hierarquia: título h1 "Curso", depois o h2 "Fundamentos" e, logo depois, o h3 "Elementos" (uma subseção do h2).',
             highlight: ['hierarquia'],
             codeLanguage: 'HTML',
             lines: ['<h1>Curso</h1>', '<h2>Fundamentos</h2>', '<h3>Elementos</h3>'],
             distractors: ['<h4>Elementos</h4>']
           },
           en: {
-            question: 'Build the hierarchy: h1 heading "Course", then the h2 "Basics" and, inside that section, the h3 "Elements".',
+            question: 'Build the hierarchy: h1 heading "Course", then the h2 "Basics" and, right after, the h3 "Elements" (a subsection of the h2).',
             highlight: ['hierarchy'],
             codeLanguage: 'HTML',
             lines: ['<h1>Course</h1>', '<h2>Basics</h2>', '<h3>Elements</h3>'],
@@ -16136,17 +16507,17 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual imagem é acessível?',
+            question: 'Qual imagem tem um texto alternativo (alt) correto?',
             codeLanguage: 'HTML',
-            highlight: ['acessível'],
+            highlight: ['alt'],
             correctOption: 1,
             options: ['<img src="a.jpg"\n  alt="Foto da Ana">', '<img src="a.jpg">', '<img src="a.jpg"\n  title="Foto">', '<img alt="a.jpg">'],
             optionsAsCode: true
           },
           en: {
-            question: 'Which image is accessible?',
+            question: 'Which image has a correct alternative text (alt)?',
             codeLanguage: 'HTML',
-            highlight: ['accessible'],
+            highlight: ['alt'],
             correctOption: 1,
             options: ['<img src="a.jpg"\n  alt="Photo of Ana">', '<img src="a.jpg">', '<img src="a.jpg"\n  title="Photo">', '<img alt="a.jpg">'],
             optionsAsCode: true
@@ -16190,7 +16561,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['obrigatório', 'ligado'],
             codeLanguage: 'HTML',
             starterCode: '<header>\n  <h1>Contato</h1>\n</header>\n\n\n\n<footer>\n  <p>Até breve!</p>\n</footer>',
-            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("Um formulário dentro de um <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("Um campo de e-mail (type=\\"email\\") no formulário", !!input);\n  __codap_check("O campo de e-mail é obrigatório (required)", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("Um <label> \\"E-mail\\" ligado ao campo", !!label && label.textContent.trim() === "E-mail");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("Um botão \\"Enviar\\" no formulário", text === "Enviar");\n})();',
+            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("Um formulário dentro de um <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("Um campo de e-mail (type=\\"email\\") no formulário", !!input);\n  __codap_check("O campo de e-mail é obrigatório (required)", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("Um <label> \\"E-mail\\" ligado ao campo", !!label && label.textContent.trim().replace(/:$/, "") === "E-mail");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("Um botão \\"Enviar\\" no formulário", text === "Enviar");\n})();',
             hints: ['O <main> fica entre o </header> e o <footer>, e o <form> vai dentro dele. Os campos e o botão vão dentro do <form>.', 'O <label> se liga ao campo quando o for dele tem o mesmo valor do id do <input>: for="email" e id="email".', 'O campo precisa de type="email" e do atributo required, que não leva valor. O botão é <button>Enviar</button>, antes do </form>.'],
             solution: '<header>\n  <h1>Contato</h1>\n</header>\n\n<main>\n  <form>\n    <label for="email">\n      E-mail\n    </label>\n    <input\n      id="email"\n      type="email"\n      required\n    >\n    <button>Enviar</button>\n  </form>\n</main>\n\n<footer>\n  <p>Até breve!</p>\n</footer>'
           },
@@ -16199,7 +16570,7 @@ export const HTML_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['required', 'linked'],
             codeLanguage: 'HTML',
             starterCode: '<header>\n  <h1>Contact</h1>\n</header>\n\n\n\n<footer>\n  <p>See you soon!</p>\n</footer>',
-            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("A form inside a <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("An email field (type=\\"email\\") in the form", !!input);\n  __codap_check("The email field is required", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("A <label> \\"Email\\" linked to the field", !!label && label.textContent.trim() === "Email");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("A \\"Send\\" button in the form", text === "Send");\n})();',
+            checkScript: '(function () {\n  var form = document.querySelector("main form");\n  __codap_check("A form inside a <main>", !!form);\n  var input = form ? form.querySelector(\'input[type="email"]\') : null;\n  __codap_check("An email field (type=\\"email\\") in the form", !!input);\n  __codap_check("The email field is required", !!input && input.required);\n  var label = input && input.labels ? input.labels[0] : null;\n  __codap_check("A <label> \\"Email\\" linked to the field", !!label && label.textContent.trim().replace(/:$/, "") === "Email");\n  var button = form ? form.querySelector("button, input[type=submit]") : null;\n  var text = button ? (button.textContent || button.value || "").trim() : "";\n  __codap_check("A \\"Send\\" button in the form", text === "Send");\n})();',
             hints: ['The <main> goes between </header> and <footer>, and the <form> goes inside it. The field and the button go inside the <form>.', 'A <label> is linked to a field when its for has the same value as the <input> id: for="email" and id="email".', 'The field needs type="email" and the required attribute, which takes no value. The button is <button>Send</button>, before </form>.'],
             solution: '<header>\n  <h1>Contact</h1>\n</header>\n\n<main>\n  <form>\n    <label for="email">\n      Email\n    </label>\n    <input\n      id="email"\n      type="email"\n      required\n    >\n    <button>Send</button>\n  </form>\n</main>\n\n<footer>\n  <p>See you soon!</p>\n</footer>'
           }
@@ -16303,7 +16674,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'O que é Flexbox',
               text: 'Flexbox é um modelo de layout criado para organizar elementos em uma dimensão. Ele facilita o alinhamento e a distribuição dos itens dentro de um contêiner.'
             },
-            closing: 'Ao utilizar display: flex, o elemento se torna um flex container e seus filhos passam a ser flex items.',
+            closing: 'Ao utilizar display: flex, o elemento se torna um flex container e seus filhos passam a ser flex items. O efeito mais visível: os itens ficam lado a lado, em linha. (Contêiner é só o elemento que guarda outros dentro dele.)',
             highlight: ['Flexbox', 'flex', 'display', 'container'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n}',
@@ -16324,7 +16695,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'What Flexbox is',
               text: 'Flexbox is a layout model created to organize elements along one dimension. It makes it easier to align and distribute items inside a container.'
             },
-            closing: 'When you use display: flex, the element becomes a flex container and its children become flex items.',
+            closing: 'When you use display: flex, the element becomes a flex container and its children become flex items. The most visible effect: the items sit side by side, in a row. (A container is just the element that holds others inside it.)',
             highlight: ['Flexbox', 'flex', 'display', 'container'],
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n}',
@@ -16343,7 +16714,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Direção e alinhamento',
-              text: 'flex-direction define a direção dos itens. justify-content e align-items controlam o alinhamento em diferentes eixos.',
+              text: 'flex-direction define a direção dos itens: row é lado a lado e column é um embaixo do outro. Essa direção é o eixo principal; o outro é o eixo cruzado. justify-content alinha os itens no eixo principal e align-items, no cruzado.',
               persona: 'neutral'
             },
             closing: 'Essas propriedades formam a base do Flexbox e permitem criar muitos layouts sem depender de posicionamento manual.',
@@ -16355,7 +16726,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Direction and alignment',
-              text: 'flex-direction defines the direction of the items. justify-content and align-items control alignment along different axes.',
+              text: 'flex-direction defines the direction of the items: row is side by side and column is one below the other. That direction is the main axis; the other one is the cross axis. justify-content aligns the items on the main axis and align-items on the cross axis.',
               persona: 'neutral'
             },
             closing: 'These properties are the base of Flexbox and let you build many layouts without manual positioning.',
@@ -16363,6 +16734,53 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.container {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n  align-items: center;\n}',
             onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Os eixos do Flexbox',
+              text: 'O Flexbox trabalha com dois eixos: o principal, na direção dos itens, e o cruzado, perpendicular a ele.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Principal e cruzado',
+              text: 'Com flex-direction: row, os itens ficam lado a lado e o eixo principal é horizontal. Com column, ficam um embaixo do outro e o principal vira vertical.\n\njustify-content alinha ao longo do eixo principal; align-items, no eixo cruzado. Os valores mais usados são flex-start (no início), center (no meio), flex-end (no fim) e, no justify-content, também space-between (o primeiro no início, o último no fim e o espaço que sobra entre os itens).'
+            },
+            closing: 'Troque row por column e os papéis se invertem: o justify-content passa a agir na vertical e o align-items, na horizontal.',
+            highlight: ['eixo principal', 'eixo cruzado', 'justify-content', 'align-items', 'flex-direction'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  display: flex;\n  flex-direction: row;\n  justify-content:\n    space-between;\n  align-items: center;\n  height: 100px;\n  background: #eee;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="container">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'The Flexbox axes',
+              text: 'Flexbox works with two axes: the main one, in the direction of the items, and the cross axis, perpendicular to it.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Main and cross',
+              text: 'With flex-direction: row, the items sit side by side and the main axis is horizontal. With column, they stack and the main axis becomes vertical.\n\njustify-content aligns along the main axis; align-items, on the cross axis. The most used values are flex-start (at the start), center (in the middle), flex-end (at the end) and, for justify-content, also space-between (the first at the start, the last at the end and the leftover space between the items).'
+            },
+            closing: 'Swap row for column and the roles flip: justify-content now works vertically and align-items horizontally.',
+            highlight: ['main axis', 'cross axis', 'justify-content', 'align-items', 'flex-direction'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  display: flex;\n  flex-direction: row;\n  justify-content:\n    space-between;\n  align-items: center;\n  height: 100px;\n  background: #eee;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="container">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>'
+              }
+            ]
           }
         }
       },
@@ -16497,7 +16915,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.box {\n  display: ___;\n  justify-content:\n    ___;\n}',
             answers: ['flex', 'center'],
-            distractors: ['block', 'grid', 'middle']
+            distractors: ['block', 'inline', 'middle']
           },
           en: {
             question: 'Complete to center the items on the row.',
@@ -16505,7 +16923,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.box {\n  display: ___;\n  justify-content:\n    ___;\n}',
             answers: ['flex', 'center'],
-            distractors: ['block', 'grid', 'middle']
+            distractors: ['block', 'inline', 'middle']
           }
         }
       },
@@ -16682,7 +17100,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Quebrando em novas linhas',
-              text: 'Por padrão, os itens podem permanecer na mesma linha. flex-wrap permite que eles ocupem novas linhas quando necessário.',
+              text: 'Por padrão (flex-wrap: nowrap), todos os itens ficam na mesma linha, mesmo sem espaço. Com flex-wrap: wrap, eles descem para novas linhas quando necessário.',
               persona: 'neutral'
             },
             closing: 'Combinar flex-wrap com gap é útil para criar grupos de elementos que precisam se adaptar ao espaço disponível.',
@@ -16694,7 +17112,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Wrapping onto new lines',
-              text: 'By default, the items can stay on the same line. flex-wrap lets them move to new lines when needed.',
+              text: 'By default (flex-wrap: nowrap), all the items stay on the same line, even without room. With flex-wrap: wrap, they drop to new lines when needed.',
               persona: 'neutral'
             },
             closing: 'Combining flex-wrap with gap is useful for groups of elements that need to adapt to the available space.',
@@ -16709,14 +17127,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual propriedade cria espaço entre os itens de um flex container?',
+            question: 'Qual propriedade do contêiner cria espaço entre os itens, sem usar margem em cada um?',
             highlight: [],
             correctOption: 1,
             options: ['gap', 'margin', 'padding', 'space'],
             pool: 'gap-wrap'
           },
           en: {
-            question: 'Which property creates space between the items of a flex container?',
+            question: 'Which container property creates space between the items, without using a margin on each one?',
             highlight: [],
             correctOption: 1,
             options: ['gap', 'margin', 'padding', 'space'],
@@ -16869,7 +17287,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'flex-grow, flex-shrink e flex-basis',
               text: 'Dentro de um contêiner flex, os itens podem crescer ou encolher para acompanhar o espaço disponível.\n\nA propriedade flex-grow define quanto um item cresce em relação aos outros. A flex-shrink define o quanto ele pode encolher, e a flex-basis define o tamanho inicial antes da distribuição.'
             },
-            closing: 'No exemplo, o item em destaque cresce o dobro dos demais, porque tem flex-grow maior.',
+            closing: 'No exemplo, o item em destaque recebe o dobro da sobra de espaço que os demais recebem, porque tem flex-grow maior.',
             highlight: ['flex-grow', 'flex-shrink', 'flex-basis'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.item {\n  flex-grow: 1;\n  flex-basis: 80px;\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.item.destaque {\n  flex-grow: 2;\n  background-color: #ffd9a0;\n}',
@@ -16890,7 +17308,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'flex-grow, flex-shrink and flex-basis',
               text: 'Inside a flex container, items can grow or shrink to follow the available space.\n\nThe flex-grow property sets how much an item grows compared to the others. flex-shrink sets how much it can shrink, and flex-basis sets the starting size before distribution.'
             },
-            closing: 'In the example, the highlighted item grows twice as much as the others, because it has a larger flex-grow.',
+            closing: 'In the example, the highlighted item gets twice the leftover space that the others get, because it has a larger flex-grow.',
             highlight: ['flex-grow', 'flex-shrink', 'flex-basis'],
             codeLanguage: 'CSS',
             code: '.lista {\n  display: flex;\n  gap: 8px;\n}\n\n.item {\n  flex-grow: 1;\n  flex-basis: 80px;\n  background-color: #cfe8ff;\n  padding: 12px;\n}\n\n.item.destaque {\n  flex-grow: 2;\n  background-color: #ffd9a0;\n}',
@@ -17036,14 +17454,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte a regra que faz o .destaque crescer o dobro dos outros itens (flex-grow 2).',
+            question: 'Monte a regra que faz o .destaque receber o dobro da sobra de espaço dos outros itens (flex-grow 2).',
             highlight: ['flex-grow'],
             codeLanguage: 'CSS',
             lines: ['.destaque {', '  flex-grow: 2;', '}'],
             distractors: ['  flex-shrink: 2;', '  flex-size: 2;']
           },
           en: {
-            question: 'Build the rule that makes .featured grow twice as much as the other items (flex-grow 2).',
+            question: 'Build the rule that makes .featured get twice the leftover space of the other items (flex-grow 2).',
             highlight: ['flex-grow'],
             codeLanguage: 'CSS',
             lines: ['.featured {', '  flex-grow: 2;', '}'],
@@ -17076,7 +17494,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite a propriedade que define o tamanho inicial do item: 80px.',
+            question: 'Digite a propriedade do Flexbox (ela começa com flex-) que define o tamanho inicial do item, antes de ele crescer ou encolher: 80px.',
             highlight: ['tamanho inicial'],
             codeLanguage: 'CSS',
             code: '.item {\n  ___: 80px;\n}',
@@ -17084,7 +17502,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ignoreCase: true
           },
           en: {
-            question: 'Type the property that sets the starting size of the item: 80px.',
+            question: 'Type the Flexbox property (it starts with flex-) that sets the item\'s starting size, before it grows or shrinks: 80px.',
             highlight: ['starting size'],
             codeLanguage: 'CSS',
             code: '.item {\n  ___: 80px;\n}',
@@ -17112,7 +17530,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é CSS Grid',
-              text: 'CSS Grid é um modelo de layout que permite organizar elementos em linhas e colunas.'
+              text: 'CSS Grid é um modelo de layout que permite organizar elementos em linhas e colunas. No exemplo, 1fr 1fr cria duas colunas: a unidade fr é uma fração do espaço livre, então as duas ficam com a mesma largura.'
             },
             closing: 'Enquanto Flexbox é especialmente útil para uma dimensão, Grid facilita a organização simultânea de linhas e colunas.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
@@ -17133,7 +17551,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What CSS Grid is',
-              text: 'CSS Grid is a layout model that lets you organize elements into rows and columns.'
+              text: 'CSS Grid is a layout model that lets you organize elements into rows and columns. In the example, 1fr 1fr creates two columns: the fr unit is a fraction of the free space, so both get the same width.'
             },
             closing: 'While Flexbox is especially useful for one dimension, Grid makes it easier to organize rows and columns at the same time.',
             highlight: ['CSS', 'Grid', 'Flexbox'],
@@ -17143,6 +17561,53 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               {
                 codeLanguage: 'HTML',
                 code: '<div class="container">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n  <div>D</div>\n</div>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'A unidade fr',
+              text: 'No Grid, as colunas costumam ser medidas em fr: uma fração do espaço livre.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Dividindo o espaço em partes',
+              text: 'Cada 1fr é uma parte do espaço que sobra. Em 1fr 1fr, o espaço se divide em duas partes iguais: duas colunas de mesma largura. Em 2fr 1fr, a primeira coluna recebe o dobro da segunda.\n\nE repeat(3, 1fr) é um atalho para 1fr 1fr 1fr: três colunas iguais.'
+            },
+            closing: 'Troque por repeat(3, 1fr) e a mesma grade passa a ter três colunas iguais.',
+            highlight: ['fr', 'fração', 'repeat'],
+            codeLanguage: 'CSS',
+            code: '.grade {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background: #ddd;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="grade">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n  <div>D</div>\n</div>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'The fr unit',
+              text: 'In Grid, columns are usually measured in fr: a fraction of the free space.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Splitting the space into parts',
+              text: 'Each 1fr is one part of the space left over. In 1fr 1fr, the space splits into two equal parts: two columns of the same width. In 2fr 1fr, the first column gets twice as much as the second.\n\nAnd repeat(3, 1fr) is a shortcut for 1fr 1fr 1fr: three equal columns.'
+            },
+            closing: 'Swap it for repeat(3, 1fr) and the same grid gets three equal columns.',
+            highlight: ['fr', 'fraction', 'repeat'],
+            codeLanguage: 'CSS',
+            code: '.grade {\n  display: grid;\n  grid-template-columns:\n    2fr 1fr;\n  gap: 8px;\n}\n\n.grade div {\n  background: #ddd;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<div class="grade">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n  <div>D</div>\n</div>'
               }
             ]
           }
@@ -17338,14 +17803,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte a regra que divide a .grade em 3 colunas iguais, usando repeat(3, 1fr).',
+            question: 'Monte a regra que divide a .grade (que já é um grid) em 3 colunas iguais, usando repeat(3, 1fr).',
             highlight: ['colunas'],
             codeLanguage: 'CSS',
             lines: ['.grade {', '  grid-template-columns:', '    repeat(3, 1fr);', '}'],
             distractors: ['    repeat(1fr, 3);']
           },
           en: {
-            question: 'Build the rule that splits .grid into 3 equal columns, using repeat(3, 1fr).',
+            question: 'Build the rule that splits .grid (which is already a grid) into 3 equal columns, using repeat(3, 1fr).',
             highlight: ['columns'],
             codeLanguage: 'CSS',
             lines: ['.grid {', '  grid-template-columns:', '    repeat(3, 1fr);', '}'],
@@ -17461,7 +17926,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Onde o item começa e termina',
-              text: 'O valor indica onde o item começa e onde termina. No exemplo, o cabeçalho vai da primeira até a terceira linha vertical, ou seja, ocupa as duas colunas.'
+              text: 'O valor indica onde o item começa e onde termina. As linhas da grade são as divisórias, numeradas a partir do 1: duas colunas têm três divisórias (1, 2 e 3). No exemplo, 1 / 3 leva o cabeçalho da primeira até a terceira divisória, ou seja, ele ocupa as duas colunas.'
             },
             closing: 'Com essas duas propriedades é possível montar layouts em que alguns blocos são maiores que os outros.',
             highlight: ['grid-column', 'grid-row'],
@@ -17482,7 +17947,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Where the item starts and ends',
-              text: 'The value states where the item starts and where it ends. In the example, the header runs from the first to the third vertical line, so it covers both columns.'
+              text: 'The value states where the item starts and where it ends. Grid lines are the dividers, numbered from 1: two columns have three dividers (1, 2 and 3). In the example, 1 / 3 takes the header from the first to the third divider, so it covers both columns.'
             },
             closing: 'With these two properties you can build layouts where some blocks are larger than the others.',
             highlight: ['grid-column', 'grid-row'],
@@ -17644,6 +18109,248 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Flexbox ou Grid?',
+      en: 'Flexbox or Grid?'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quando usar Flexbox',
+              text: 'Flexbox ou Grid? Para escolher bem, vale saber no que cada um é melhor.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Flexbox para uma direção',
+              text: 'Flexbox é especialmente adequado quando precisamos organizar elementos em uma única direção: uma linha ou uma coluna. No exemplo, justify-content: space-between põe o primeiro item numa ponta, o último na outra e reparte o espaço que sobra entre eles.'
+            },
+            closing: 'Menus, grupos de botões e alinhamentos em linha são exemplos comuns de situações em que Flexbox funciona muito bem.',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'When to use Flexbox',
+              text: 'Flexbox or Grid? To choose well, it helps to know what each does best.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Flexbox for one direction',
+              text: 'Flexbox is especially suited for organizing elements in a single direction: a row or a column. In the example, justify-content: space-between puts the first item at one end, the last at the other and shares the leftover space between them.'
+            },
+            closing: 'Menus, button groups and inline alignments are common examples where Flexbox works very well.',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quando usar Grid',
+              text: 'Grid é especialmente útil quando o layout precisa controlar linhas e colunas ao mesmo tempo.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox e Grid não competem entre si. Eles podem ser combinados para construir layouts mais completos.',
+            highlight: ['Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'When to use Grid',
+              text: 'Grid is especially useful when the layout needs to control rows and columns at the same time.',
+              persona: 'neutral'
+            },
+            closing: 'Flexbox and Grid do not compete with each other. They can be combined to build more complete layouts.',
+            highlight: ['Grid', 'Flexbox'],
+            codeLanguage: 'CSS',
+            code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Um menu com links numa única linha. O que costuma funcionar melhor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
+            pool: 'flex-or-grid'
+          },
+          en: {
+            question: 'A menu with links on a single line. What usually works best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
+            pool: 'flex-or-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma vitrine de produtos em linhas e colunas. O que costuma funcionar melhor?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
+            pool: 'flex-or-grid'
+          },
+          en: {
+            question: 'A product showcase in rows and columns. What usually works best?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
+            pool: 'flex-or-grid'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Flexbox e Grid competem entre si: um layout deve usar só um deles.',
+            highlight: ['Flexbox', 'Grid'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'flex-or-grid',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Flexbox and Grid compete with each other: a layout should use only one.',
+            highlight: ['Flexbox', 'Grid'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'flex-or-grid',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: menu em linha e vitrine em grade.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n}\n.vitrine {\n  display: ___;\n}',
+            answers: ['flex', 'grid'],
+            distractors: ['block', 'inline']
+          },
+          en: {
+            question: 'Complete: a menu in a row and a showcase in a grid.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n}\n.showcase {\n  display: ___;\n}',
+            answers: ['flex', 'grid'],
+            distractors: ['block', 'inline']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que organiza o .menu em uma única direção, com Flexbox (display flex).',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            lines: ['.menu {', '  display: flex;', '}'],
+            distractors: ['  display: grid;', '  display: row;']
+          },
+          en: {
+            question: 'Build the rule that lays out .menu in a single direction, with Flexbox (display flex).',
+            highlight: ['Flexbox'],
+            codeLanguage: 'CSS',
+            lines: ['.menu {', '  display: flex;', '}'],
+            distractors: ['  display: grid;', '  display: row;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra controla linhas e colunas ao mesmo tempo?',
+            codeLanguage: 'CSS',
+            highlight: ['linhas e colunas'],
+            correctOption: 1,
+            options: ['.vitrine {\n  display: grid;\n}', '.vitrine {\n  display: flex;\n}', '.vitrine {\n  display: block;\n}', '.vitrine {\n  display: inline;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule controls rows and columns at the same time?',
+            codeLanguage: 'CSS',
+            highlight: ['rows and columns'],
+            correctOption: 1,
+            options: ['.shop {\n  display: grid;\n}', '.shop {\n  display: flex;\n}', '.shop {\n  display: block;\n}', '.shop {\n  display: inline;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o valor que espalha os itens do menu, com o espaço que sobra entre eles.',
+            highlight: ['espalha'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
+            answers: ['space-between'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the value that spreads the menu items, with the leftover space between them.',
+            highlight: ['spreads'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
+            answers: ['space-between'],
+            ignoreCase: true
+          }
+        }
+      },
+      {
+        type: 'code_playground',
+        content: {
+          pt: {
+            question: 'No menu, deixe "Logo" encostado na esquerda e "Entrar" encostado na direita, na mesma linha.',
+            highlight: ['esquerda', 'direita'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            blocks: ['flex', 'grid', 'space-between', 'center'],
+            solution: ['flex', 'space-between'],
+            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Entrar</span>\n</nav>',
+            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Os dois precisam ficar na mesma linha, um em cada ponta do menu.");\n})();'
+          },
+          en: {
+            question: 'In the menu, put "Logo" against the left edge and "Sign in" against the right edge, on the same line.',
+            highlight: ['left edge', 'right edge'],
+            codeLanguage: 'CSS',
+            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
+            blocks: ['flex', 'grid', 'space-between', 'center'],
+            solution: ['flex', 'space-between'],
+            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Sign in</span>\n</nav>',
+            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Both need to be on the same line, one at each end of the menu.");\n})();'
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Posicionamento',
       en: 'Positioning'
     },
@@ -17701,7 +18408,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'fixed e sticky',
-              text: 'fixed posiciona um elemento em relação à janela de visualização. sticky combina características do posicionamento normal com um comportamento de fixação durante a rolagem.',
+              text: 'fixed posiciona um elemento em relação à janela de visualização. sticky combina características do posicionamento normal com um comportamento de fixação durante a rolagem. Ele só gruda se tiver um deslocamento, como top: 0.',
               persona: 'neutral'
             },
             closing: 'Esses valores são úteis em elementos como cabeçalhos, barras de navegação e controles que precisam permanecer visíveis.',
@@ -17713,7 +18420,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'fixed and sticky',
-              text: 'fixed places an element in relation to the viewport. sticky combines normal positioning with a pinning behavior during scrolling.',
+              text: 'fixed places an element in relation to the viewport. sticky combines normal positioning with a pinning behavior during scrolling. It only sticks if it has an offset, like top: 0.',
               persona: 'neutral'
             },
             closing: 'These values are useful for headers, navigation bars and controls that need to stay visible.',
@@ -17737,7 +18444,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'Qual elemento fica na frente',
               text: 'Quando elementos posicionados se sobrepõem, a propriedade z-index define qual deles fica na frente. O valor maior aparece por cima.'
             },
-            closing: 'z-index só tem efeito em elementos cujo position seja diferente de static.',
+            closing: 'Em elementos comuns, z-index só tem efeito quando o position é diferente de static (itens de Flexbox e Grid são uma exceção: neles o z-index funciona mesmo com position static).',
             highlight: ['position', 'static', 'z-index'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  position: absolute;\n  width: 140px;\n  padding: 12px;\n}\n\n.atras {\n  z-index: 1;\n  background-color: #cfe8ff;\n}\n\n.frente {\n  z-index: 2;\n  top: 24px;\n  left: 24px;\n  background-color: #ffd9a0;\n}',
@@ -17758,7 +18465,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'Which element sits in front',
               text: 'When positioned elements overlap, the z-index property decides which one sits in front. The larger value goes on top.'
             },
-            closing: 'z-index only has an effect on elements whose position is something other than static.',
+            closing: 'On regular elements, z-index only has an effect when position is something other than static (Flexbox and Grid items are an exception: for them, z-index works even with position static).',
             highlight: ['position', 'static', 'z-index'],
             codeLanguage: 'CSS',
             code: '.caixa {\n  position: absolute;\n  width: 140px;\n  padding: 12px;\n}\n\n.atras {\n  z-index: 1;\n  background-color: #cfe8ff;\n}\n\n.frente {\n  z-index: 2;\n  top: 24px;\n  left: 24px;\n  background-color: #ffd9a0;\n}',
@@ -17875,7 +18582,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'z-index funciona mesmo em elementos com position: static.',
+            aditionalParagraph: 'z-index funciona em um parágrafo comum, com position: static.',
             highlight: ['z-index'],
             correctOption: 2,
             options: ['Verdadeiro', 'Falso'],
@@ -17884,7 +18591,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'z-index works even on elements with position: static.',
+            aditionalParagraph: 'z-index works on a regular paragraph, with position: static.',
             highlight: ['z-index'],
             correctOption: 2,
             options: ['True', 'False'],
@@ -17918,14 +18625,14 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte a regra que deixa o .header grudado no topo durante a rolagem (position sticky).',
+            question: 'Monte a regra que dá ao .header o position sticky (para grudar de fato, ele ainda precisaria de um top).',
             highlight: ['position sticky'],
             codeLanguage: 'CSS',
             lines: ['.header {', '  position: sticky;', '}'],
             distractors: ['  position: static;', '  position: stuck;']
           },
           en: {
-            question: 'Build the rule that keeps .header stuck to the top while scrolling (position sticky).',
+            question: 'Build the rule that gives .header position sticky (to really stick, it would still need a top).',
             highlight: ['position sticky'],
             codeLanguage: 'CSS',
             lines: ['.header {', '  position: sticky;', '}'],
@@ -18737,7 +19444,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'O que são pseudo-elementos',
               text: 'Pseudo-elementos permitem estilizar uma parte específica de um elemento ou criar conteúdo visual relacionado a ele.'
             },
-            closing: '::before cria conteúdo antes do conteúdo do elemento e ::after cria conteúdo depois dele.',
+            closing: '::before cria conteúdo antes do conteúdo do elemento e ::after cria conteúdo depois dele. O :: (dois pontos duplos) indica um pseudo-elemento, e ele só aparece se tiver a propriedade content.',
             highlight: ['Pseudo-elementos', 'before', 'after'],
             codeLanguage: 'CSS',
             code: '.title::before {\n  content: "→ ";\n}',
@@ -18758,7 +19465,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'What pseudo-elements are',
               text: 'Pseudo-elements let you style a specific part of an element or create visual content related to it.'
             },
-            closing: '::before creates content placed ahead of the element own content, and ::after creates content placed at the end of it.',
+            closing: '::before creates content placed ahead of the element own content, and ::after creates content placed at the end of it. The :: (double colon) marks a pseudo-element, and it only shows up if it has the content property.',
             highlight: ['Pseudo-elements', 'before', 'after'],
             codeLanguage: 'CSS',
             code: '.title::before {\n  content: "→ ";\n}',
@@ -18777,7 +19484,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Detalhes visuais sem HTML extra',
-              text: 'Pseudo-elementos também podem ser utilizados para criar detalhes visuais sem adicionar elementos extras ao HTML.',
+              text: 'Pseudo-elementos também podem ser utilizados para criar detalhes visuais sem adicionar elementos extras ao HTML. Repare no content: "". Mesmo vazio, ele precisa existir para o ::before ou o ::after aparecer.',
               persona: 'neutral'
             },
             closing: 'Esse recurso é muito utilizado para criar detalhes decorativos e componentes visuais.',
@@ -18794,7 +19501,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Visual details without extra HTML',
-              text: 'Pseudo-elements can also be used to create visual details without adding extra elements to the HTML.',
+              text: 'Pseudo-elements can also be used to create visual details without adding extra elements to the HTML. Notice content: "". Even empty, it must be there for ::before or ::after to appear.',
               persona: 'neutral'
             },
             closing: 'This resource is widely used to create decorative details and visual components.',
@@ -18997,9 +19704,9 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que são variáveis CSS',
-              text: 'Variáveis CSS, também chamadas de custom properties, permitem armazenar valores para reutilizá-los em diferentes regras.'
+              text: 'Variáveis CSS, também chamadas de custom properties, permitem armazenar valores para reutilizá-los em diferentes regras. O nome começa com dois hífens (--cor-principal) e a variável é usada com var(...).'
             },
-            closing: 'Uma variável pode centralizar valores que aparecem em diferentes partes da interface.',
+            closing: 'Uma variável pode centralizar valores que aparecem em diferentes partes da interface. O :root representa o elemento html (a raiz da página), então a variável criada nele fica disponível na página toda.',
             highlight: ['CSS', 'Variáveis', 'variável', 'custom properties'],
             codeLanguage: 'CSS',
             code: ':root {\n  --cor-principal: #2563eb;\n}\n\nbutton {\n  background-color: var(--cor-principal);\n}',
@@ -19018,9 +19725,9 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What CSS variables are',
-              text: 'CSS variables, also called custom properties, let you store values to reuse them in different rules.'
+              text: 'CSS variables, also called custom properties, let you store values to reuse them in different rules. The name starts with two hyphens (--main-color) and the variable is used with var(...).'
             },
-            closing: 'A variable can centralize values that appear in different parts of the interface.',
+            closing: 'A variable can centralize values that appear in different parts of the interface. The :root is the html element (the root of the page), so a variable created there is available across the whole page.',
             highlight: ['CSS', 'variables', 'variable', 'custom properties'],
             codeLanguage: 'CSS',
             code: ':root {\n  --main-color: #2563eb;\n}\n\nbutton {\n  background-color: var(--main-color);\n}',
@@ -19234,248 +19941,6 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Flexbox ou Grid?',
-      en: 'Flexbox or Grid?'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quando usar Flexbox',
-              text: 'Flexbox ou Grid? Para escolher bem, vale saber no que cada um é melhor.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Flexbox para uma direção',
-              text: 'Flexbox é especialmente adequado quando precisamos organizar elementos em uma única direção: uma linha ou uma coluna.'
-            },
-            closing: 'Menus, grupos de botões e alinhamentos em linha são exemplos comuns de situações em que Flexbox funciona muito bem.',
-            highlight: ['Flexbox'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'When to use Flexbox',
-              text: 'Flexbox or Grid? To choose well, it helps to know what each does best.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Flexbox for one direction',
-              text: 'Flexbox is especially suited for organizing elements in a single direction: a row or a column.'
-            },
-            closing: 'Menus, button groups and inline alignments are common examples where Flexbox works very well.',
-            highlight: ['Flexbox'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: flex;\n  justify-content: space-between;\n}',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quando usar Grid',
-              text: 'Grid é especialmente útil quando o layout precisa controlar linhas e colunas ao mesmo tempo.',
-              persona: 'neutral'
-            },
-            closing: 'Flexbox e Grid não competem entre si. Eles podem ser combinados para construir layouts mais completos.',
-            highlight: ['Grid', 'Flexbox'],
-            codeLanguage: 'CSS',
-            code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'When to use Grid',
-              text: 'Grid is especially useful when the layout needs to control rows and columns at the same time.',
-              persona: 'neutral'
-            },
-            closing: 'Flexbox and Grid do not compete with each other. They can be combined to build more complete layouts.',
-            highlight: ['Grid', 'Flexbox'],
-            codeLanguage: 'CSS',
-            code: '.products {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;\n}',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Um menu com links numa única linha. O que costuma funcionar melhor?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
-            pool: 'flex-or-grid'
-          },
-          en: {
-            question: 'A menu with links on a single line. What usually works best?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Flexbox', 'Grid', 'position: absolute', 'text-align: center'],
-            pool: 'flex-or-grid'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Uma vitrine de produtos em linhas e colunas. O que costuma funcionar melhor?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
-            pool: 'flex-or-grid'
-          },
-          en: {
-            question: 'A product showcase in rows and columns. What usually works best?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Grid', 'Flexbox', 'display: inline', 'text-align: center'],
-            pool: 'flex-or-grid'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Flexbox e Grid competem entre si: um layout deve usar só um deles.',
-            highlight: ['Flexbox', 'Grid'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'flex-or-grid',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Flexbox and Grid compete with each other: a layout should use only one.',
-            highlight: ['Flexbox', 'Grid'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'flex-or-grid',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: menu em linha e vitrine em grade.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: ___;\n}\n.vitrine {\n  display: ___;\n}',
-            answers: ['flex', 'grid'],
-            distractors: ['block', 'inline']
-          },
-          en: {
-            question: 'Complete: a menu in a row and a showcase in a grid.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: ___;\n}\n.showcase {\n  display: ___;\n}',
-            answers: ['flex', 'grid'],
-            distractors: ['block', 'inline']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte a regra que organiza o .menu em uma única direção, com Flexbox (display flex).',
-            highlight: ['Flexbox'],
-            codeLanguage: 'CSS',
-            lines: ['.menu {', '  display: flex;', '}'],
-            distractors: ['  display: grid;', '  display: row;']
-          },
-          en: {
-            question: 'Build the rule that lays out .menu in a single direction, with Flexbox (display flex).',
-            highlight: ['Flexbox'],
-            codeLanguage: 'CSS',
-            lines: ['.menu {', '  display: flex;', '}'],
-            distractors: ['  display: grid;', '  display: row;']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual regra controla linhas e colunas ao mesmo tempo?',
-            codeLanguage: 'CSS',
-            highlight: ['linhas e colunas'],
-            correctOption: 1,
-            options: ['.vitrine {\n  display: grid;\n}', '.vitrine {\n  display: flex;\n}', '.vitrine {\n  display: block;\n}', '.vitrine {\n  display: inline;\n}'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which rule controls rows and columns at the same time?',
-            codeLanguage: 'CSS',
-            highlight: ['rows and columns'],
-            correctOption: 1,
-            options: ['.shop {\n  display: grid;\n}', '.shop {\n  display: flex;\n}', '.shop {\n  display: block;\n}', '.shop {\n  display: inline;\n}'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o valor que espalha os itens do menu, com o espaço que sobra entre eles.',
-            highlight: ['espalha'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
-            answers: ['space-between'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the value that spreads the menu items, with the leftover space between them.',
-            highlight: ['spreads'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: flex;\n  justify-content:\n    ___;\n}',
-            answers: ['space-between'],
-            ignoreCase: true
-          }
-        }
-      },
-      {
-        type: 'code_playground',
-        content: {
-          pt: {
-            question: 'No menu, deixe "Logo" encostado na esquerda e "Entrar" encostado na direita, na mesma linha.',
-            highlight: ['esquerda', 'direita'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
-            blocks: ['flex', 'grid', 'space-between', 'center'],
-            solution: ['flex', 'space-between'],
-            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Entrar</span>\n</nav>',
-            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Os dois precisam ficar na mesma linha, um em cada ponta do menu.");\n})();'
-          },
-          en: {
-            question: 'In the menu, put "Logo" against the left edge and "Sign in" against the right edge, on the same line.',
-            highlight: ['left edge', 'right edge'],
-            codeLanguage: 'CSS',
-            code: '.menu {\n  display: ___;\n  justify-content:\n    ___;\n}',
-            blocks: ['flex', 'grid', 'space-between', 'center'],
-            solution: ['flex', 'space-between'],
-            html: '<nav class="menu">\n  <span>Logo</span>\n  <span>Sign in</span>\n</nav>',
-            checkScript: '(function () {\n  var menu = document.querySelector(".menu").getBoundingClientRect();\n  var s = document.querySelectorAll(".menu span");\n  var a = s[0].getBoundingClientRect(), b = s[1].getBoundingClientRect();\n  var linha = Math.abs(a.top - b.top) < 1;\n  __codap_report(linha && a.left - menu.left < 1 && menu.right - b.right < 1, "Both need to be on the same line, one at each end of the menu.");\n})();'
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Construindo um layout',
       en: 'Building a layout'
     },
@@ -19676,7 +20141,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite a fração da segunda coluna, que tem a metade da largura da primeira (2fr).',
+            question: 'Digite o valor em fr da segunda coluna, que tem a metade da largura da primeira (que vale 2fr).',
             highlight: ['segunda coluna'],
             codeLanguage: 'CSS',
             code: '.pagina {\n  grid-template-columns:\n    2fr ___;\n}',
@@ -19684,7 +20149,7 @@ export const CSS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             ignoreCase: true
           },
           en: {
-            question: 'Type the fraction for the second column, half as wide as the first (2fr).',
+            question: 'Type the fr value for the second column, which is half as wide as the first (which is 2fr).',
             highlight: ['second column'],
             codeLanguage: 'CSS',
             code: '.page {\n  grid-template-columns:\n    2fr ___;\n}',
@@ -19804,9 +20269,9 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Métodos de array',
-              text: 'Métodos de array permitem realizar operações comuns sem escrever manualmente todos os loops.'
+              text: 'Métodos de array permitem realizar operações comuns sem escrever manualmente todos os loops. Cada um recebe uma função (como numero => numero * 2) e a chama uma vez para cada elemento; numero é o elemento da vez. O % dá o resto da divisão: 4 % 2 é 0, então um número é par quando numero % 2 === 0.'
             },
-            closing: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição.',
+            closing: 'map cria um novo array transformando cada elemento. filter cria um novo array contendo apenas os elementos que atendem à condição. Já o forEach só percorre a lista, fazendo algo com cada item, e não cria array novo.',
             highlight: ['map', 'filter', 'array'],
             codeLanguage: 'JavaScript',
             code: 'const numeros = [1, 2, 3, 4];\n\nconst dobrados = numeros.map(\n  numero => numero * 2\n);\n\nconst pares = numeros.filter(\n  numero => numero % 2 === 0\n);\n\nconsole.log(dobrados, pares);',
@@ -19821,9 +20286,9 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Array methods',
-              text: 'Array methods let you perform common operations without writing all the loops by hand.'
+              text: 'Array methods let you perform common operations without writing all the loops by hand. Each one receives a function (like number => number * 2) and calls it once for each element; number is the element of the moment. The % gives the remainder of a division: 4 % 2 is 0, so a number is even when number % 2 === 0.'
             },
-            closing: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition.',
+            closing: 'map creates a new array by transforming each element. filter creates a new array containing only the elements that match the condition. forEach, on the other hand, only goes through the list, doing something with each item, and does not create a new array.',
             highlight: ['map', 'filter', 'array', 'Array'],
             codeLanguage: 'JavaScript',
             code: 'const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(\n  number => number * 2\n);\n\nconst even = numbers.filter(\n  number => number % 2 === 0\n);\n\nconsole.log(doubled, even);',
@@ -20153,7 +20618,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O método reduce',
-              text: 'reduce percorre um array e combina seus elementos para produzir um único resultado.'
+              text: 'reduce percorre um array e combina seus elementos para produzir um único resultado. No exemplo, soma é o acumulado até agora e numero é o item da vez. O segundo argumento do reduce, aqui 0, é o valor inicial do acumulado. Passo a passo: 0 + 10 = 10, depois 10 + 20 = 30, depois 30 + 30 = 60.'
             },
             closing: 'O valor acumulado passa de uma iteração para outra até que todos os elementos tenham sido processados.',
             highlight: ['reduce', 'array'],
@@ -20169,7 +20634,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The reduce method',
-              text: 'reduce goes through an array and combines its elements to produce a single result.'
+              text: 'reduce goes through an array and combines its elements to produce a single result. In the example, sum is the total so far and number is the item of the moment. The second argument of reduce, here 0, is the starting value of the total. Step by step: 0 + 10 = 10, then 10 + 20 = 30, then 30 + 30 = 60.'
             },
             closing: 'The accumulated value is passed from one iteration to the next until all the elements have been processed.',
             highlight: ['reduce', 'array'],
@@ -20413,7 +20878,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               text: 'Também podemos utilizar destructuring com arrays.',
               persona: 'neutral'
             },
-            closing: 'No array, a posição determina qual valor será extraído. No objeto, utilizamos o nome da propriedade.',
+            closing: 'No array, a posição determina qual valor será extraído; para pular uma posição, deixe a vírgula vazia: const [, segunda] = cores guarda "verde". No objeto, utilizamos o nome da propriedade.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
             code: 'const cores = [\n  "azul",\n  "verde",\n  "vermelho"\n];\n\nconst [primeira, segunda] = cores;\n\nconsole.log(primeira, segunda);',
@@ -20426,7 +20891,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               text: 'We can also use destructuring with arrays.',
               persona: 'neutral'
             },
-            closing: 'In an array, the position determines which value is extracted. In an object, we use the property name.',
+            closing: 'In an array, the position determines which value is extracted; to skip a position, leave the comma empty: const [, second] = colors stores "green". In an object, we use the property name.',
             highlight: ['destructuring', 'array', 'arrays'],
             codeLanguage: 'JavaScript',
             code: 'const colors = [\n  "blue",\n  "green",\n  "red"\n];\n\nconst [first, second] = colors;\n\nconsole.log(first, second);',
@@ -20637,7 +21102,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'O rest: reunindo valores',
-              text: 'Em determinados contextos, ... pode ser utilizado para reunir vários valores em uma única estrutura. Nesse caso, ele é chamado de rest.',
+              text: 'Na lista de parâmetros de uma função, os três pontinhos (...) reúnem os valores recebidos em um único array. Nesse caso, ele é chamado de rest.',
               persona: 'neutral'
             },
             closing: 'Spread expande valores; rest reúne valores. A mesma sintaxe pode ter funções diferentes dependendo do contexto.',
@@ -20649,7 +21114,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'The rest: gathering values',
-              text: 'In certain contexts, ... can be used to gather several values into a single structure. In that case, it is called rest.',
+              text: 'In a function\'s parameter list, the three dots (...) gather the values received into a single array. In that case, it is called rest.',
               persona: 'neutral'
             },
             closing: 'Spread expands values; rest gathers values. The same syntax can play different roles depending on the context.',
@@ -20867,7 +21332,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Um valor alternativo com nullish coalescing',
-              text: 'O nullish coalescing fornece um valor alternativo quando o resultado é null ou undefined.'
+              text: 'O ?. (optional chaining) para e devolve undefined se o que vem antes dele for null ou undefined. O ?? (nullish coalescing) fornece um valor alternativo quando o resultado é null ou undefined; diferente do ||, ele mantém valores como 0 e "".'
             },
             closing: 'Esses recursos ajudam a escrever código mais seguro ao trabalhar com dados que podem estar incompletos.',
             highlight: ['Optional chaining', 'nullish coalescing', 'null', 'undefined'],
@@ -20884,7 +21349,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'An alternative value with nullish coalescing',
-              text: 'Nullish coalescing provides an alternative value when the result is null or undefined.'
+              text: 'The ?. (optional chaining) stops and returns undefined if what comes before it is null or undefined. The ?? (nullish coalescing) provides an alternative value when the result is null or undefined; unlike ||, it keeps values like 0 and "".'
             },
             closing: 'These features help you write safer code when working with data that may be incomplete.',
             highlight: ['Optional chaining', 'Nullish coalescing', 'null', 'undefined'],
@@ -20892,6 +21357,43 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             code: 'const user = {};\n\nconst city =\n  user.address?.city ?? "Not provided";\n\nconsole.log(city);',
             onlyCode: true,
             noTerminal: false
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Dados que podem faltar',
+              text: 'Nem sempre o dado que o programa espera existe. O que acontece quando ele falta?',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Quando falta um pedaço do caminho',
+              text: 'Ler uma propriedade de algo que não existe causa erro. Se usuario não tem endereco, escrever usuario.endereco.cidade tenta ler cidade de undefined e para o programa com o erro "Cannot read properties of undefined".\n\nO ?. (optional chaining) evita o erro: se o que vem antes dele for null ou undefined, ele para e devolve undefined. Depois, o ?? (nullish coalescing) troca esse undefined por um valor alternativo.'
+            },
+            closing: 'O ?? só troca null e undefined. O || também trocaria 0 e "" (texto vazio): 0 ?? 10 dá 0, mas 0 || 10 dá 10.',
+            highlight: ['erro', 'undefined', 'valor alternativo'],
+            codeLanguage: 'JavaScript',
+            code: 'const usuario = {};\n\n// usuario.endereco.cidade\n// daria erro, sem endereco\n\nconst a =\n  usuario.endereco?.cidade;\nconsole.log(a);\n// mostra: undefined\n\nconst b = a ?? "Sem cidade";\nconsole.log(b);\n// mostra: Sem cidade',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Data that may be missing',
+              text: 'The data the program expects does not always exist. What happens when it is missing?',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'When a piece of the path is missing',
+              text: 'Reading a property of something that does not exist causes an error. If user has no address, writing user.address.city tries to read city from undefined and stops the program with the error "Cannot read properties of undefined".\n\nThe ?. (optional chaining) avoids the error: if what comes before it is null or undefined, it stops and returns undefined. Then, the ?? (nullish coalescing) swaps that undefined for an alternative value.'
+            },
+            closing: 'The ?? only swaps null and undefined. The || would also swap 0 and "" (empty text): 0 ?? 10 gives 0, but 0 || 10 gives 10.',
+            highlight: ['error', 'undefined', 'alternative value'],
+            codeLanguage: 'JavaScript',
+            code: 'const user = {};\n\n// user.address.city\n// would fail, no address\n\nconst a =\n  user.address?.city;\nconsole.log(a);\n// shows: undefined\n\nconst b = a ?? "No city";\nconsole.log(b);\n// shows: No city',
+            onlyCode: true
           }
         }
       },
@@ -21050,225 +21552,6 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Módulos',
-      en: 'Modules'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Dividindo o código em arquivos',
-              text: 'Um arquivo gigante é difícil de manter. Dá para dividir o código em partes.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'O que são módulos',
-              text: 'Módulos permitem dividir o código em arquivos menores e reutilizáveis. Para disponibilizar uma função, podemos usar export.'
-            },
-            closing: 'Separar responsabilidades em arquivos diferentes ajuda a organizar aplicações maiores.',
-            highlight: ['Módulos', 'export'],
-            codeLanguage: 'JavaScript',
-            code: 'export function somar(a, b) {\n  return a + b;\n}',
-            onlyCode: true,
-            noTerminal: false,
-            terminalCode: 'function somar(a, b) {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));'
-          },
-          en: {
-            introduction: {
-              title: 'Splitting the code into files',
-              text: 'A giant file is hard to maintain. You can split the code into parts.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'What modules are',
-              text: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.'
-            },
-            closing: 'Splitting responsibilities across different files helps organize larger applications.',
-            highlight: ['Modules', 'export'],
-            codeLanguage: 'JavaScript',
-            code: 'export function add(a, b) {\n  return a + b;\n}',
-            onlyCode: true,
-            noTerminal: false,
-            terminalCode: 'function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3));'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Usando código de outro módulo',
-              text: 'import permite utilizar código exportado por outro módulo.',
-              persona: 'neutral'
-            },
-            closing: 'Com import e export, diferentes partes de uma aplicação podem compartilhar funcionalidades de maneira organizada.',
-            highlight: ['import', 'export', 'módulo'],
-            codeLanguage: 'JavaScript',
-            code: 'import { somar } from "./math.js";\n\nconst resultado = somar(2, 3);\n\nconsole.log(resultado);',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Using code from another module',
-              text: 'import lets you use code exported by another module.',
-              persona: 'neutral'
-            },
-            closing: 'With import and export, different parts of an application can share features in an organized way.',
-            highlight: ['import', 'export', 'module'],
-            codeLanguage: 'JavaScript',
-            code: 'import { add } from "./math.js";\n\nconst result = add(2, 3);\n\nconsole.log(result);',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual palavra disponibiliza uma função para outros arquivos?',
-            highlight: [],
-            correctOption: 1,
-            options: ['export', 'import', 'return', 'public'],
-            pool: 'modules'
-          },
-          en: {
-            question: 'Which keyword makes a function available to other files?',
-            highlight: [],
-            correctOption: 1,
-            options: ['export', 'import', 'return', 'public'],
-            pool: 'modules'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual linha usa a função somar exportada por math.js?',
-            highlight: [],
-            correctOption: 1,
-            options: ['import { somar } from "./math.js";', 'export { somar } from "./math.js";', 'require somar from math;', 'include "./math.js";'],
-            pool: 'modules'
-          },
-          en: {
-            question: 'Which line uses the add function exported by math.js?',
-            highlight: [],
-            correctOption: 1,
-            options: ['import { add } from "./math.js";', 'export { add } from "./math.js";', 'require add from math;', 'include "./math.js";'],
-            pool: 'modules'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Módulos ajudam a dividir o código em arquivos menores e reutilizáveis.',
-            highlight: [],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'modules',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Modules help split code into smaller, reusable files.',
-            highlight: [],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'modules',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete para importar somar de math.js.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: '___ { somar }\n  ___ "./math.js";',
-            answers: ['import', 'from'],
-            distractors: ['export', 'require', 'in']
-          },
-          en: {
-            question: 'Complete to import add from math.js.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: '___ { add }\n  ___ "./math.js";',
-            answers: ['import', 'from'],
-            distractors: ['export', 'require', 'in']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o código: importe somar de "./math.js", guarde em r o resultado de somar(2, 3) e mostre r.',
-            highlight: ['importe'],
-            codeLanguage: 'JavaScript',
-            lines: ['import { somar }', '  from "./math.js";', 'const r = somar(2, 3);', 'console.log(r);'],
-            distractors: ['require { somar }']
-          },
-          en: {
-            question: 'Build the code: import sum from "./math.js", store in r the result of sum(2, 3) and show r.',
-            highlight: ['import'],
-            codeLanguage: 'JavaScript',
-            lines: ['import { sum }', '  from "./math.js";', 'const r = sum(2, 3);', 'console.log(r);'],
-            distractors: ['require { sum }']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual linha deixa a função somar disponível para outros arquivos?',
-            codeLanguage: 'JavaScript',
-            highlight: ['outros arquivos'],
-            correctOption: 1,
-            options: ['export function somar() {}', 'import function somar() {}', 'public function somar() {}', 'module function somar() {}'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which line makes the sum function available to other files?',
-            codeLanguage: 'JavaScript',
-            highlight: ['other files'],
-            correctOption: 1,
-            options: ['export function sum() {}', 'import function sum() {}', 'public function sum() {}', 'module function sum() {}'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite a palavra que deixa somar disponível para outros arquivos.',
-            highlight: ['outros arquivos'],
-            codeLanguage: 'JavaScript',
-            code: '___ function somar(a, b) {\n  return a + b;\n}',
-            answers: ['export']
-          },
-          en: {
-            question: 'Type the word that makes sum available to other files.',
-            highlight: ['other files'],
-            codeLanguage: 'JavaScript',
-            code: '___ function sum(a, b) {\n  return a + b;\n}',
-            answers: ['export']
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'DOM',
       en: 'DOM'
     },
@@ -21284,7 +21567,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é o DOM',
-              text: 'O DOM representa a estrutura da página como objetos que podem ser acessados e modificados por JavaScript.'
+              text: 'O DOM representa a estrutura da página como objetos que podem ser acessados e modificados por JavaScript. O objeto document é a própria página, e querySelector busca um elemento usando o mesmo seletor do CSS: "#titulo" é o elemento de id titulo.'
             },
             closing: 'O DOM permite que JavaScript interaja com elementos que foram definidos no HTML.',
             highlight: ['DOM', 'JavaScript', 'HTML'],
@@ -21305,7 +21588,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What the DOM is',
-              text: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript.'
+              text: 'The DOM represents the structure of the page as objects that can be accessed and changed by JavaScript. The document object is the page itself, and querySelector looks for an element using the same selector as CSS: "#title" is the element with id title.'
             },
             closing: 'The DOM lets JavaScript interact with elements that were defined in the HTML.',
             highlight: ['DOM', 'JavaScript', 'HTML'],
@@ -21326,7 +21609,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Criando elementos',
-              text: 'JavaScript também pode criar novos elementos e adicioná-los ao documento.',
+              text: 'JavaScript também pode criar novos elementos e adicioná-los ao documento. O botão usa addEventListener, que a próxima lição explica: por enquanto, leia como "quando clicar, faça isto".',
               persona: 'neutral'
             },
             closing: 'Toque no botão abaixo: cada toque cria um novo item de lista e o adiciona à página, ao vivo.',
@@ -21343,7 +21626,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Creating elements',
-              text: 'JavaScript can also create new elements and add them to the document.',
+              text: 'JavaScript can also create new elements and add them to the document. The button uses addEventListener, which the next lesson explains: for now, read it as "when clicked, do this".',
               persona: 'neutral'
             },
             closing: 'Tap the button below: each tap creates a new list item and adds it to the page, live.',
@@ -21521,7 +21804,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'Classes e atributos',
               text: 'JavaScript pode modificar classes e atributos de elementos que já existem no DOM.'
             },
-            closing: 'Toque no botão: classList.toggle() liga e desliga a classe "ativo" a cada toque, mudando o visual do cartão. Atributos (como aria-label) mudam da mesma forma, com setAttribute.',
+            closing: 'Toque no botão: classList.toggle() liga e desliga a classe "ativo" a cada toque, mudando o visual do cartão. Atributos (como aria-label) mudam da mesma forma, com setAttribute, por exemplo: botao.setAttribute("aria-label", "Fechar").',
             highlight: ['JavaScript', 'DOM', 'classes'],
             codeLanguage: 'HTML',
             code: '<div id="cartao" class="cartao">\n  Cartão\n</div>\n\n<button id="botao-destaque">\n  Alternar destaque\n</button>',
@@ -21546,7 +21829,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'Classes and attributes',
               text: 'JavaScript can change classes and attributes of elements that already exist in the DOM.'
             },
-            closing: 'Tap the button: classList.toggle() switches the "active" class on and off on every tap, changing how the card looks. Attributes (like aria-label) change the same way, with setAttribute.',
+            closing: 'Tap the button: classList.toggle() switches the "active" class on and off on every tap, changing how the card looks. Attributes (like aria-label) change the same way, with setAttribute, for example: button.setAttribute("aria-label", "Close").',
             highlight: ['JavaScript', 'DOM', 'classes'],
             codeLanguage: 'HTML',
             code: '<div id="card" class="card">\n  Card\n</div>\n\n<button id="highlight-button">\n  Toggle highlight\n</button>',
@@ -21569,7 +21852,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Reagindo a eventos',
-              text: 'Eventos representam acontecimentos como cliques, teclas pressionadas ou alterações em campos. addEventListener permite executar uma função quando um evento acontece.',
+              text: 'Eventos representam acontecimentos como cliques, teclas pressionadas ou alterações em campos. addEventListener permite executar uma função quando um evento acontece. Repare: a função é entregue sem parênteses (ou escrita ali mesmo, como () => { ... }). Com parênteses, ela rodaria na hora, e não no clique.',
               persona: 'neutral'
             },
             closing: 'Toque no botão abaixo para ver a função do evento mudando a mensagem na tela.',
@@ -21586,7 +21869,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Reacting to events',
-              text: 'Events represent things that happen, like clicks, key presses or changes in fields. addEventListener lets you run a function when an event happens.',
+              text: 'Events represent things that happen, like clicks, key presses or changes in fields. addEventListener lets you run a function when an event happens. Notice: the function is handed over without parentheses (or written right there, like () => { ... }). With parentheses, it would run right away, not on the click.',
               persona: 'neutral'
             },
             closing: 'Tap the button below to see the event function change the message on the screen.',
@@ -21762,7 +22045,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é localStorage',
-              text: 'localStorage permite guardar pequenos valores no navegador para recuperá-los depois.'
+              text: 'localStorage permite guardar pequenos valores no navegador para recuperá-los depois. Cada valor tem um nome (a chave): setItem("nome", "Ana") guarda "Ana" na chave "nome", e getItem("nome") traz de volta.'
             },
             closing: 'Os valores armazenados no localStorage são strings. Para estruturas maiores, precisamos trabalhar com JSON.',
             highlight: ['localStorage', 'JSON', 'strings'],
@@ -21779,7 +22062,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What localStorage is',
-              text: 'localStorage lets you store small values in the browser so they can be retrieved later.'
+              text: 'localStorage lets you store small values in the browser so they can be retrieved later. Each value has a name (the key): setItem("name", "Ana") stores "Ana" under the key "name", and getItem("name") brings it back.'
             },
             closing: 'The values stored in localStorage are strings. For larger structures, we need to work with JSON.',
             highlight: ['localStorage', 'JSON', 'strings'],
@@ -21799,7 +22082,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               text: 'JSON permite transformar objetos JavaScript em strings e depois reconstruí-los.',
               persona: 'neutral'
             },
-            closing: 'JSON.stringify() transforma um valor em JSON. JSON.parse() faz o caminho inverso.',
+            closing: 'JSON.stringify() transforma um valor em JSON. JSON.parse() faz o caminho inverso. O JSON é um texto: JSON.stringify({ a: 1 }) vira {"a":1}, com o nome da propriedade entre aspas.',
             highlight: ['JSON', 'JavaScript', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  idade: 20\n};\n\nlocalStorage.setItem(\n  "usuario",\n  JSON.stringify(usuario)\n);\n\nconst salvo =\n  JSON.parse(\n    localStorage.getItem("usuario")\n  );',
@@ -21812,7 +22095,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               text: 'JSON lets you turn JavaScript objects into strings and then rebuild them.',
               persona: 'neutral'
             },
-            closing: 'JSON.stringify() turns a value into JSON. JSON.parse() does the opposite.',
+            closing: 'JSON.stringify() turns a value into JSON. JSON.parse() does the opposite. JSON is text: JSON.stringify({ a: 1 }) becomes {"a":1}, with the property name in quotes.',
             highlight: ['JSON', 'JavaScript', 'strings'],
             codeLanguage: 'JavaScript',
             code: 'const user = {\n  name: "Ana",\n  age: 20\n};\n\nlocalStorage.setItem(\n  "user",\n  JSON.stringify(user)\n);\n\nconst saved =\n  JSON.parse(\n    localStorage.getItem("user")\n  );',
@@ -22277,225 +22560,6 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'HTTP e fetch',
-      en: 'HTTP and fetch'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Conversando com um servidor',
-              text: 'Apps buscam e enviam dados o tempo todo. Como o navegador conversa com um servidor?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'HTTP: pedido e resposta',
-              text: 'Aplicações web frequentemente precisam buscar ou enviar dados para um servidor. HTTP é um protocolo usado para essa comunicação.\n\nUma requisição tem informações como método e endereço. O servidor devolve uma resposta com dados ou informações sobre o resultado da operação.'
-            },
-            closing: 'JavaScript oferece fetch() para realizar requisições HTTP de forma programática.',
-            highlight: ['HTTP', 'fetch', 'JavaScript'],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users");',
-            onlyCode: true,
-            noTerminal: false,
-            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
-          },
-          en: {
-            introduction: {
-              title: 'Talking to a server',
-              text: 'Apps fetch and send data all the time. How does the browser talk to a server?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'HTTP: request and response',
-              text: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.\n\nA request carries information such as a method and an address. The server returns a response with data or information about the result of the operation.'
-            },
-            closing: 'JavaScript provides fetch() to make HTTP requests programmatically.',
-            highlight: ['HTTP', 'fetch', 'JavaScript'],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users");',
-            onlyCode: true,
-            noTerminal: false,
-            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Usando a resposta do servidor',
-              text: 'Uma resposta HTTP pode conter dados que precisamos transformar em JavaScript para utilizar na aplicação.',
-              persona: 'neutral'
-            },
-            closing: 'O resultado de uma requisição é assíncrono. Por isso, precisamos entender como o JavaScript trabalha com operações que terminam posteriormente.',
-            highlight: ['HTTP', 'JavaScript', 'assíncrono'],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Using the server response',
-              text: 'An HTTP response can carry data that we need to turn into JavaScript values to use in the application.',
-              persona: 'neutral'
-            },
-            closing: 'The result of a request is asynchronous. That is why we need to understand how JavaScript deals with operations that finish later.',
-            highlight: ['HTTP', 'JavaScript', 'asynchronous'],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Na comunicação HTTP, o que o cliente envia ao servidor?',
-            highlight: ['HTTP'],
-            correctOption: 1,
-            options: ['Uma requisição', 'Uma resposta', 'Um arquivo CSS', 'Uma variável'],
-            pool: 'http-fetch'
-          },
-          en: {
-            question: 'In HTTP communication, what does the client send to the server?',
-            highlight: ['HTTP'],
-            correctOption: 1,
-            options: ['A request', 'A response', 'A CSS file', 'A variable'],
-            pool: 'http-fetch'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Por que o resultado do fetch precisa de um tratamento especial?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Porque ele é assíncrono: termina depois', 'Porque ele trava a página', 'Porque ele só funciona offline', 'Porque ele sempre devolve HTML'],
-            pool: 'http-fetch'
-          },
-          en: {
-            question: 'Why does the fetch result need special handling?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Because it\'s asynchronous: it finishes later', 'Because it freezes the page', 'Because it only works offline', 'Because it always returns HTML'],
-            pool: 'http-fetch'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'O JavaScript oferece o fetch para fazer requisições HTTP.',
-            highlight: ['fetch', 'HTTP'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'http-fetch',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'JavaScript provides fetch for making HTTP requests.',
-            highlight: ['fetch', 'HTTP'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'http-fetch',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete a conversão da resposta e o encadeamento.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
-            answers: ['json', 'then'],
-            distractors: ['parse', 'catch', 'data']
-          },
-          en: {
-            question: 'Complete the response conversion and the chaining.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
-            answers: ['json', 'then'],
-            distractors: ['parse', 'catch', 'data']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o código: busque "/api/users" com fetch, transforme a resposta em JSON e mostre os dados no console.',
-            highlight: ['fetch'],
-            codeLanguage: 'JavaScript',
-            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(dados =>', '    console.log(dados));'],
-            distractors: ['  .then(r => r.data)']
-          },
-          en: {
-            question: 'Build the code: get "/api/users" with fetch, turn the response into JSON and show the data in the console.',
-            highlight: ['fetch'],
-            codeLanguage: 'JavaScript',
-            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(data =>', '    console.log(data));'],
-            distractors: ['  .then(r => r.data)']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual trecho transforma a resposta do fetch em dados JavaScript?',
-            codeLanguage: 'JavaScript',
-            highlight: ['resposta'],
-            correctOption: 1,
-            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which snippet turns the fetch response into JavaScript data?',
-            codeLanguage: 'JavaScript',
-            highlight: ['response'],
-            correctOption: 1,
-            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite a função que faz a requisição HTTP para "/api/users".',
-            highlight: ['requisição HTTP'],
-            codeLanguage: 'JavaScript',
-            code: 'const r =\n  await ___("/api/users");',
-            answers: ['fetch']
-          },
-          en: {
-            question: 'Type the function that makes the HTTP request to "/api/users".',
-            highlight: ['HTTP request'],
-            codeLanguage: 'JavaScript',
-            code: 'const r =\n  await ___("/api/users");',
-            answers: ['fetch']
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Callbacks',
       en: 'Callbacks'
     },
@@ -22511,7 +22575,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é um callback',
-              text: 'Em JavaScript, funções podem ser passadas como argumento para outras funções. Uma função passada assim é chamada de callback.\n\nQuem recebe o callback decide quando executá-lo. No exemplo, a função só é chamada depois que a mensagem é montada.\n\nToque no botão abaixo para executar saudar() de verdade: o callback roda depois que a mensagem é montada e atualiza o texto na tela.'
+              text: 'Em JavaScript, funções podem ser passadas como argumento para outras funções. Uma função passada assim é chamada de callback: você a entrega pronta e a outra função a chama quando quiser. Repare: a função é entregue sem ser chamada (sem parênteses depois dela); quem a recebe é que a chama, como em callback(mensagem).\n\nQuem recebe o callback decide quando executá-lo. No exemplo, a função só é chamada depois que a mensagem é montada.\n\nToque no botão abaixo para executar saudar() de verdade: o callback roda depois que a mensagem é montada e atualiza o texto na tela.'
             },
             closing: 'Você já usou callbacks antes: o que é passado para map, para filter e para addEventListener é exatamente isso.',
             highlight: ['callback', 'callbacks', 'map', 'filter', 'addEventListener'],
@@ -22532,7 +22596,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What a callback is',
-              text: 'In JavaScript, functions can be passed as arguments to other functions. A function passed this way is called a callback.\n\nWhoever receives the callback decides when to run it. In the example, the function is only called after the message is built.\n\nTap the button below to actually run greet(): the callback runs after the message is built and updates the text on the screen.'
+              text: 'In JavaScript, functions can be passed as arguments to other functions. A function passed this way is called a callback: you hand it over ready, and the other function calls it whenever it wants. Notice: the function is handed over without being called (no parentheses after it); whoever receives it is the one that calls it, as in callback(message).\n\nWhoever receives the callback decides when to run it. In the example, the function is only called after the message is built.\n\nTap the button below to actually run greet(): the callback runs after the message is built and updates the text on the screen.'
             },
             closing: 'You have used callbacks before: what you pass to map, to filter and to addEventListener is exactly that.',
             highlight: ['callback', 'callbacks', 'map', 'filter', 'addEventListener'],
@@ -22564,7 +22628,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['Callbacks', 'callbacks', 'callback hell', 'Promises'],
             codeLanguage: 'JavaScript',
             code: 'buscarUsuario(1, function (usuario) {\n  buscarPedidos(usuario, function (pedidos) {\n    buscarDetalhes(pedidos[0], function (detalhes) {\n      console.log(detalhes);\n    });\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'function buscarUsuario(id, cb) {\n  cb({ id: id });\n}\nfunction buscarPedidos(usuario, cb) {\n  cb(["Pedido 1", "Pedido 2"]);\n}\nfunction buscarDetalhes(pedido, cb) {\n  cb("Detalhes do " + pedido);\n}\n\nbuscarUsuario(1, function (usuario) {\n  buscarPedidos(usuario, function (pedidos) {\n    buscarDetalhes(pedidos[0], function (detalhes) {\n      console.log(detalhes);\n    });\n  });\n});'
           },
           en: {
             introduction: {
@@ -22580,7 +22645,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['Callbacks', 'callbacks', 'callback hell', 'Promises'],
             codeLanguage: 'JavaScript',
             code: 'fetchUser(1, function (user) {\n  fetchOrders(user, function (orders) {\n    fetchDetails(orders[0], function (details) {\n      console.log(details);\n    });\n  });\n});',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'function fetchUser(id, cb) {\n  cb({ id: id });\n}\nfunction fetchOrders(user, cb) {\n  cb(["Order 1", "Order 2"]);\n}\nfunction fetchDetails(order, cb) {\n  cb("Details of " + order);\n}\n\nfetchUser(1, function (user) {\n  fetchOrders(user, function (orders) {\n    fetchDetails(orders[0], function (details) {\n      console.log(details);\n    });\n  });\n});'
           }
         }
       },
@@ -22769,11 +22835,12 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'O que é uma Promise',
               text: 'Algumas operações não produzem um resultado imediatamente. Uma Promise representa uma operação que poderá ser concluída ou falhar no futuro.'
             },
-            closing: 'Uma Promise pode representar uma operação pendente, concluída com sucesso ou concluída com erro.',
+            closing: 'Uma Promise tem três estados: pendente (pending), cumprida com sucesso (fulfilled) ou rejeitada com erro (rejected).',
             highlight: ['Promise'],
             codeLanguage: 'JavaScript',
             code: 'const promessa = fetch(\n  "/api/users"\n);\n\npromessa.then(response => {\n  console.log("Resposta recebida");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             introduction: {
@@ -22785,11 +22852,12 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
               title: 'What a Promise is',
               text: 'Some operations do not produce a result immediately. A Promise represents an operation that may be completed or fail in the future.'
             },
-            closing: 'A Promise can represent a pending operation, one completed successfully, or one completed with an error.',
+            closing: 'A Promise has three states: pending, fulfilled (completed successfully) or rejected (completed with an error).',
             highlight: ['Promise'],
             codeLanguage: 'JavaScript',
             code: 'const promise = fetch(\n  "/api/users"\n);\n\npromise.then(response => {\n  console.log("Response received");\n});',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -22799,12 +22867,12 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Encadeando com then e catch',
-              text: 'Podemos encadear .then() para tratar o resultado e .catch() para lidar com erros.',
+              text: 'Podemos encadear .then() para tratar o resultado e .catch() para lidar com erros. Cada .then() devolve uma nova Promise com o valor que sua função retornar; por isso o segundo .then() recebe o que o primeiro devolveu.',
               persona: 'neutral'
             },
             explanation: {
               title: 'Uma requisição simulada',
-              text: 'Aqui, buscarUsuarios() simula uma requisição (como um fetch de verdade faria) com um atraso e uma chance de falhar, para o exemplo funcionar sem depender de rede.'
+              text: 'Aqui, buscarUsuarios() simula uma requisição (como um fetch de verdade faria) com um atraso e uma chance de falhar, para o exemplo funcionar sem depender de rede. Não precisa entender o interior dela: dentro, resolve(valor) marca o sucesso e reject(motivo) marca a falha; o .then() recebe o valor de resolve e o .catch() recebe o motivo de reject.'
             },
             closing: 'Toque no botão algumas vezes: às vezes o pedido terá sucesso, às vezes vai falhar — e você verá .then() e .catch() tratando cada caso.',
             highlight: ['then', 'catch'],
@@ -22820,12 +22888,12 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Chaining with then and catch',
-              text: 'We can chain .then() to handle the result and .catch() to deal with errors.',
+              text: 'We can chain .then() to handle the result and .catch() to deal with errors. Each .then() returns a new Promise with the value its function returns; that is why the second .then() receives what the first one returned.',
               persona: 'neutral'
             },
             explanation: {
               title: 'A simulated request',
-              text: 'Here, fetchUsers() simulates a request (like a real fetch would) with a delay and a chance to fail, so the example works without depending on the network.'
+              text: 'Here, fetchUsers() simulates a request (like a real fetch would) with a delay and a chance to fail, so the example works without depending on the network. You do not need to understand its inside: in there, resolve(value) marks success and reject(reason) marks failure; .then() receives the value from resolve and .catch() receives the reason from reject.'
             },
             closing: 'Tap the button a few times: sometimes the request will succeed, sometimes it will fail — and you will see .then() and .catch() handling each case.',
             highlight: ['then', 'catch'],
@@ -23069,6 +23137,227 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'HTTP e fetch',
+      en: 'HTTP and fetch'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Conversando com um servidor',
+              text: 'Apps buscam e enviam dados o tempo todo. Como o navegador conversa com um servidor?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'HTTP: pedido e resposta',
+              text: 'Aplicações web frequentemente precisam buscar ou enviar dados para um servidor. HTTP é um protocolo usado para essa comunicação.\n\nUma requisição tem informações como método e endereço. O servidor devolve uma resposta com dados ou informações sobre o resultado da operação. Um servidor é um computador que guarda dados e responde a pedidos; aqui, "/api/users" é o endereço de onde pedimos a lista de usuários. O Módulo 4 volta a esse assunto com calma.'
+            },
+            closing: 'JavaScript oferece fetch() para realizar requisições HTTP de forma programática.',
+            highlight: ['HTTP', 'fetch', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users");',
+            onlyCode: true,
+            noTerminal: false,
+            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
+          },
+          en: {
+            introduction: {
+              title: 'Talking to a server',
+              text: 'Apps fetch and send data all the time. How does the browser talk to a server?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'HTTP: request and response',
+              text: 'Web applications often need to request or send data to a server. HTTP is a protocol used for that communication.\n\nA request carries information such as a method and an address. The server returns a response with data or information about the result of the operation. A server is a computer that stores data and answers requests; here, "/api/users" is the address we ask for the list of users from. Module 4 comes back to this topic in detail.'
+            },
+            closing: 'JavaScript provides fetch() to make HTTP requests programmatically.',
+            highlight: ['HTTP', 'fetch', 'JavaScript'],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users");',
+            onlyCode: true,
+            noTerminal: false,
+            terminalCode: 'function fetch(url) {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n      resolve({ status: 200, ok: true });\n    }, 500);\n  });\n}\n\nfetch("/api/users");'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Usando a resposta do servidor',
+              text: 'Uma resposta HTTP pode conter dados que precisamos transformar em JavaScript para utilizar na aplicação.',
+              persona: 'neutral'
+            },
+            closing: 'O resultado de uma requisição é assíncrono: não chega na hora, e o programa segue em frente enquanto espera. O .then(...) diz o que fazer quando ele chegar. Por isso, precisamos entender como o JavaScript trabalha com operações que terminam posteriormente, o que as próximas lições mostram com calma.',
+            highlight: ['HTTP', 'JavaScript', 'assíncrono'],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            introduction: {
+              title: 'Using the server response',
+              text: 'An HTTP response can carry data that we need to turn into JavaScript values to use in the application.',
+              persona: 'neutral'
+            },
+            closing: 'The result of a request is asynchronous: it does not arrive right away, and the program moves on while it waits. The .then(...) says what to do when it arrives. That is why we need to understand how JavaScript deals with operations that finish later, which the next lessons cover in detail.',
+            highlight: ['HTTP', 'JavaScript', 'asynchronous'],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(response => response.json())\n  .then(users => {\n    console.log(users);\n  });',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Na comunicação HTTP, o que o cliente envia ao servidor?',
+            highlight: ['HTTP'],
+            correctOption: 1,
+            options: ['Uma requisição', 'Uma resposta', 'Um arquivo CSS', 'Uma variável'],
+            pool: 'http-fetch'
+          },
+          en: {
+            question: 'In HTTP communication, what does the client send to the server?',
+            highlight: ['HTTP'],
+            correctOption: 1,
+            options: ['A request', 'A response', 'A CSS file', 'A variable'],
+            pool: 'http-fetch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Por que o resultado do fetch precisa de um tratamento especial?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Porque ele é assíncrono: termina depois', 'Porque ele trava a página', 'Porque ele só funciona offline', 'Porque ele sempre devolve HTML'],
+            pool: 'http-fetch'
+          },
+          en: {
+            question: 'Why does the fetch result need special handling?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Because it\'s asynchronous: it finishes later', 'Because it freezes the page', 'Because it only works offline', 'Because it always returns HTML'],
+            pool: 'http-fetch'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'O JavaScript oferece o fetch para fazer requisições HTTP.',
+            highlight: ['fetch', 'HTTP'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'http-fetch',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'JavaScript provides fetch for making HTTP requests.',
+            highlight: ['fetch', 'HTTP'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'http-fetch',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a conversão da resposta e o encadeamento.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
+            answers: ['json', 'then'],
+            distractors: ['parse', 'catch', 'data']
+          },
+          en: {
+            question: 'Complete the response conversion and the chaining.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'fetch("/api/users")\n  .then(r => r.___())\n  .___(console.log);',
+            answers: ['json', 'then'],
+            distractors: ['parse', 'catch', 'data']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: busque "/api/users" com fetch, transforme a resposta em JSON e mostre os dados no console.',
+            highlight: ['fetch'],
+            codeLanguage: 'JavaScript',
+            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(dados =>', '    console.log(dados));'],
+            distractors: ['  .then(r => r.data)']
+          },
+          en: {
+            question: 'Build the code: get "/api/users" with fetch, turn the response into JSON and show the data in the console.',
+            highlight: ['fetch'],
+            codeLanguage: 'JavaScript',
+            lines: ['fetch("/api/users")', '  .then(r => r.json())', '  .then(data =>', '    console.log(data));'],
+            distractors: ['  .then(r => r.data)']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho transforma a resposta do fetch em dados JavaScript?',
+            codeLanguage: 'JavaScript',
+            highlight: ['resposta'],
+            correctOption: 1,
+            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet turns the fetch response into JavaScript data?',
+            codeLanguage: 'JavaScript',
+            highlight: ['response'],
+            correctOption: 1,
+            options: ['response.json()', 'response.data', 'JSON(response)', 'response.parse()'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a função que faz a requisição HTTP para "/api/users".',
+            highlight: ['requisição HTTP'],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  ___("/api/users");',
+            answers: ['fetch']
+          },
+          en: {
+            question: 'Type the function that makes the HTTP request to "/api/users".',
+            highlight: ['HTTP request'],
+            codeLanguage: 'JavaScript',
+            code: 'const r =\n  ___("/api/users");',
+            answers: ['fetch']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Async e await',
       en: 'Async and await'
     },
@@ -23133,7 +23422,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['try', 'catch', 'async', 'await'],
             codeLanguage: 'JavaScript',
             code: 'async function carregarUsuarios() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             introduction: {
@@ -23145,7 +23435,8 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             highlight: ['try', 'catch', 'async', 'await'],
             codeLanguage: 'JavaScript',
             code: 'async function loadUsers() {\n  try {\n    const response =\n      await fetch("/api/users");\n\n    const users =\n      await response.json();\n\n    console.log(users);\n  } catch (error) {\n    console.error(error);\n  }\n}',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -23234,7 +23525,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Com async/await, o código do exemplo atualiza a tela sem nenhum .then().',
+            aditionalParagraph: 'Com async/await, dá para esperar uma Promise e usar o resultado na linha seguinte, sem escrever .then().',
             highlight: [],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
@@ -23243,7 +23534,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'With async/await, the example updates the screen without any .then().',
+            aditionalParagraph: 'With async/await, you can wait for a Promise and use the result on the next line, without writing .then().',
             highlight: [],
             correctOption: 1,
             options: ['True', 'False'],
@@ -23355,6 +23646,227 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Módulos',
+      en: 'Modules'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Dividindo o código em arquivos',
+              text: 'Um arquivo gigante é difícil de manter. Dá para dividir o código em partes.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O que são módulos',
+              text: 'Módulos permitem dividir o código em arquivos menores e reutilizáveis. Para disponibilizar uma função, podemos usar export.'
+            },
+            closing: 'Separar responsabilidades em arquivos diferentes ajuda a organizar aplicações maiores.',
+            highlight: ['Módulos', 'export'],
+            codeLanguage: 'JavaScript',
+            code: 'export function somar(a, b) {\n  return a + b;\n}',
+            onlyCode: true,
+            noTerminal: false,
+            terminalCode: 'function somar(a, b) {\n  return a + b;\n}\n\nconsole.log(somar(2, 3));'
+          },
+          en: {
+            introduction: {
+              title: 'Splitting the code into files',
+              text: 'A giant file is hard to maintain. You can split the code into parts.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'What modules are',
+              text: 'Modules let you split the code into smaller, reusable files. To make a function available, we can use export.'
+            },
+            closing: 'Splitting responsibilities across different files helps organize larger applications.',
+            highlight: ['Modules', 'export'],
+            codeLanguage: 'JavaScript',
+            code: 'export function add(a, b) {\n  return a + b;\n}',
+            onlyCode: true,
+            noTerminal: false,
+            terminalCode: 'function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3));'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Usando código de outro módulo',
+              text: 'import permite utilizar código exportado por outro módulo. As chaves { } dizem quais nomes trazer, e o from diz de qual arquivo: "./math.js" é o arquivo math.js, na mesma pasta.',
+              persona: 'neutral'
+            },
+            closing: 'Com import e export, diferentes partes de uma aplicação podem compartilhar funcionalidades de maneira organizada. No navegador, o script que usa import precisa ser carregado como módulo: <script type="module">.',
+            highlight: ['import', 'export', 'módulo'],
+            codeLanguage: 'JavaScript',
+            code: 'import { somar } from "./math.js";\n\nconst resultado = somar(2, 3);\n\nconsole.log(resultado);',
+            onlyCode: true,
+            terminalCode: 'function somar(a, b) {\n  return a + b;\n}\n\nconst resultado = somar(2, 3);\n\nconsole.log(resultado);'
+          },
+          en: {
+            introduction: {
+              title: 'Using code from another module',
+              text: 'import lets you use code exported by another module. The braces { } say which names to bring in, and from says which file: "./math.js" is the file math.js, in the same folder.',
+              persona: 'neutral'
+            },
+            closing: 'With import and export, different parts of an application can share features in an organized way. In the browser, the script that uses import must be loaded as a module: <script type="module">.',
+            highlight: ['import', 'export', 'module'],
+            codeLanguage: 'JavaScript',
+            code: 'import { add } from "./math.js";\n\nconst result = add(2, 3);\n\nconsole.log(result);',
+            onlyCode: true,
+            terminalCode: 'function add(a, b) {\n  return a + b;\n}\n\nconst result = add(2, 3);\n\nconsole.log(result);'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual palavra disponibiliza uma função para outros arquivos?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'return', 'public'],
+            pool: 'modules'
+          },
+          en: {
+            question: 'Which keyword makes a function available to other files?',
+            highlight: [],
+            correctOption: 1,
+            options: ['export', 'import', 'return', 'public'],
+            pool: 'modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha usa a função somar exportada por math.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['import { somar } from "./math.js";', 'export { somar } from "./math.js";', 'require somar from math;', 'include "./math.js";'],
+            pool: 'modules'
+          },
+          en: {
+            question: 'Which line uses the add function exported by math.js?',
+            highlight: [],
+            correctOption: 1,
+            options: ['import { add } from "./math.js";', 'export { add } from "./math.js";', 'require add from math;', 'include "./math.js";'],
+            pool: 'modules'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Módulos ajudam a dividir o código em arquivos menores e reutilizáveis.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'modules',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Modules help split code into smaller, reusable files.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'modules',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete para importar somar de math.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ { somar }\n  ___ "./math.js";',
+            answers: ['import', 'from'],
+            distractors: ['export', 'require', 'in']
+          },
+          en: {
+            question: 'Complete to import add from math.js.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: '___ { add }\n  ___ "./math.js";',
+            answers: ['import', 'from'],
+            distractors: ['export', 'require', 'in']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o código: importe somar de "./math.js", guarde em r o resultado de somar(2, 3) e mostre r.',
+            highlight: ['importe'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { somar }', '  from "./math.js";', 'const r = somar(2, 3);', 'console.log(r);'],
+            distractors: ['require { somar }']
+          },
+          en: {
+            question: 'Build the code: import sum from "./math.js", store in r the result of sum(2, 3) and show r.',
+            highlight: ['import'],
+            codeLanguage: 'JavaScript',
+            lines: ['import { sum }', '  from "./math.js";', 'const r = sum(2, 3);', 'console.log(r);'],
+            distractors: ['require { sum }']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha deixa a função somar disponível para outros arquivos?',
+            codeLanguage: 'JavaScript',
+            highlight: ['outros arquivos'],
+            correctOption: 1,
+            options: ['export function somar() {}', 'import function somar() {}', 'public function somar() {}', 'module function somar() {}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line makes the sum function available to other files?',
+            codeLanguage: 'JavaScript',
+            highlight: ['other files'],
+            correctOption: 1,
+            options: ['export function sum() {}', 'import function sum() {}', 'public function sum() {}', 'module function sum() {}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a palavra que deixa somar disponível para outros arquivos.',
+            highlight: ['outros arquivos'],
+            codeLanguage: 'JavaScript',
+            code: '___ function somar(a, b) {\n  return a + b;\n}',
+            answers: ['export']
+          },
+          en: {
+            question: 'Type the word that makes sum available to other files.',
+            highlight: ['other files'],
+            codeLanguage: 'JavaScript',
+            code: '___ function sum(a, b) {\n  return a + b;\n}',
+            answers: ['export']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Testando seus conhecimentos',
       en: 'Test your knowledge'
     },
@@ -23363,7 +23875,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
         type: 'code_editor',
         content: {
           pt: {
-            question: 'Mostre no #total o texto "Total: R$ 150", somando os preços de produtos. Quando o botão #cabo for clicado, acrescente { nome: "Cabo", preco: 20 } a produtos e recalcule o #total a partir do array (fica "Total: R$ 170").',
+            question: 'O HTML já está pronto (um parágrafo #total e um botão #cabo). Faça em duas etapas. Primeiro: mostre no #total o texto "Total: R$ 150", somando os preços de produtos. Depois: quando o botão #cabo for clicado, acrescente { nome: "Cabo", preco: 20 } a produtos e recalcule o #total a partir do array (fica "Total: R$ 170").',
             highlight: ['somando', 'recalcule'],
             codeLanguage: 'JavaScript',
             starterCode: 'const produtos = [\n  { nome: "Fone", preco: 50 },\n  { nome: "Capa", preco: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst botao = document\n  .querySelector("#cabo");\n',
@@ -23373,7 +23885,7 @@ export const JS_INTERMEDIATE_LESSONS: LessonSeed[] = [
             solution: 'const produtos = [\n  { nome: "Fone", preco: 50 },\n  { nome: "Capa", preco: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst botao = document\n  .querySelector("#cabo");\n\nfunction atualizar() {\n  const soma =\n    produtos.reduce(\n      (t, p) => t + p.preco,\n      0\n    );\n  total.textContent =\n    `Total: R$ ${soma}`;\n}\n\natualizar();\n\nbotao.addEventListener(\n  "click",\n  () => {\n    produtos.push({\n      nome: "Cabo",\n      preco: 20\n    });\n    atualizar();\n  }\n);'
           },
           en: {
-            question: 'Show the text "Total: $150" in #total, adding up the prices in products. When the #cable button is clicked, add { name: "Cable", price: 20 } to products and recalculate #total from the array (it becomes "Total: $170").',
+            question: 'The HTML is already there (a #total paragraph and a #cable button). Do it in two steps. First: show the text "Total: $150" in #total, adding up the prices in products. Then: when the #cable button is clicked, add { name: "Cable", price: 20 } to products and recalculate #total from the array (it becomes "Total: $170").',
             highlight: ['adding up', 'recalculate'],
             codeLanguage: 'JavaScript',
             starterCode: 'const products = [\n  { name: "Mug", price: 50 },\n  { name: "Lamp", price: 100 }\n];\n\nconst total = document\n  .querySelector("#total");\nconst button = document\n  .querySelector("#cable");\n',
@@ -23504,7 +24016,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'abbr e cite',
-              text: 'O HTML tem elementos específicos para diferentes tipos de informação textual. <abbr> representa uma abreviação e <cite> identifica o título de uma obra ou referência.'
+              text: 'O HTML tem elementos específicos para diferentes tipos de informação textual. <abbr> representa uma abreviação (o atributo title guarda o significado completo, que aparece ao passar o mouse no computador) e <cite> identifica o título de uma obra ou referência.'
             },
             closing: 'Elementos semânticos não mudam necessariamente a aparência do texto, mas acrescentam significado à estrutura do documento.',
             highlight: ['HTML', 'abbr', 'cite'],
@@ -23519,7 +24031,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'abbr and cite',
-              text: 'HTML has specific elements for different kinds of textual information. <abbr> represents an abbreviation and <cite> identifies the title of a work or reference.'
+              text: 'HTML has specific elements for different kinds of textual information. <abbr> represents an abbreviation (the title attribute holds the full meaning, which shows up when you hover the mouse on a computer) and <cite> identifies the title of a work or reference.'
             },
             closing: 'Semantic elements do not necessarily change how the text looks, but they add meaning to the structure of the document.',
             highlight: ['HTML', 'abbr', 'cite'],
@@ -23694,270 +24206,6 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'HTML',
             code: '<p>\n  <___>Moby Dick</cite>\n</p>',
             answers: ['cite'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Conteúdo técnico',
-      en: 'Technical content'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Código dentro da página',
-              text: 'Como mostrar um trecho de código em uma página sem que ele perca a forma?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'code e pre',
-              text: 'O HTML tem elementos próprios para representar código e conteúdo relacionado à programação.'
-            },
-            closing: '<code> representa um trecho de código. <pre> preserva espaços e quebras de linha, sendo útil para blocos de código.',
-            highlight: ['code', 'pre'],
-            codeLanguage: 'HTML',
-            code: '<p>Use a função <code>console.log()</code>.</p>\n\n<pre><code>\nconst nome = "Ana";\n\nconsole.log(nome);\n</code></pre>'
-          },
-          en: {
-            introduction: {
-              title: 'Code inside the page',
-              text: 'How do you show a piece of code on a page without losing its shape?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'code and pre',
-              text: 'HTML has its own elements to represent code and content related to programming.'
-            },
-            closing: '<code> represents a piece of code. <pre> preserves spaces and line breaks, which is useful for code blocks.',
-            highlight: ['code', 'pre'],
-            codeLanguage: 'HTML',
-            code: '<p>Use the <code>console.log()</code> function.</p>\n\n<pre><code>\nconst name = "Ana";\n\nconsole.log(name);\n</code></pre>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Teclas e saídas de programa',
-              text: '<kbd> representa uma entrada fornecida pelo usuário, como uma tecla. <samp> representa uma saída produzida por um programa.',
-              persona: 'neutral'
-            },
-            closing: 'Esses elementos são pouco utilizados em páginas comuns, mas permitem representar informações técnicas com significado apropriado.',
-            highlight: ['kbd', 'samp'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Pressione <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  para salvar.\n</p>\n\n<p>\n  Resultado:\n  <samp>Arquivo salvo.</samp>\n</p>'
-          },
-          en: {
-            introduction: {
-              title: 'Keys and program output',
-              text: '<kbd> represents input provided by the user, such as a key. <samp> represents output produced by a program.',
-              persona: 'neutral'
-            },
-            closing: 'These elements are rarely used on common pages, but they let you represent technical information with the appropriate meaning.',
-            highlight: ['kbd', 'samp'],
-            codeLanguage: 'HTML',
-            code: '<p>\n  Press <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  to save.\n</p>\n\n<p>\n  Result:\n  <samp>File saved.</samp>\n</p>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: '"Pressione Ctrl + S para salvar." Qual elemento representa as teclas?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
-            pool: 'code-kbd'
-          },
-          en: {
-            question: '"Press Ctrl + S to save." Which element represents the keys?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
-            pool: 'code-kbd'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento representa a saída de um programa, como "Arquivo salvo."?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<samp>', '<kbd>', '<code>', '<q>'],
-            pool: 'code-kbd'
-          },
-          en: {
-            question: 'Which element represents a program\'s output, like "File saved."?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<samp>', '<kbd>', '<code>', '<q>'],
-            pool: 'code-kbd'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: '<pre> preserva os espaços e as quebras de linha do texto.',
-            highlight: ['<pre>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'code-kbd',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: '<pre> keeps the text\'s spaces and line breaks.',
-            highlight: ['<pre>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'code-kbd',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete: uma tecla e um trecho de código no texto.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<p>Aperte <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
-            answers: ['kbd', 'code'],
-            distractors: ['samp', 'pre']
-          },
-          en: {
-            question: 'Complete: a key and a bit of code in the text.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<p>Press <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
-            answers: ['kbd', 'code'],
-            distractors: ['samp', 'pre']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o parágrafo "Aperte Ctrl" com Ctrl marcado como tecla e, abaixo dele, um parágrafo com a saída de programa "Salvo.".',
-            highlight: ['tecla', 'saída'],
-            codeLanguage: 'HTML',
-            lines: ['<p>', '  Aperte <kbd>Ctrl</kbd>', '</p>', '<p><samp>Salvo.</samp></p>'],
-            distractors: ['  Aperte <key>Ctrl</key>']
-          },
-          en: {
-            question: 'Build the paragraph "Press Ctrl" with Ctrl marked as a key and, below it, a paragraph with the program output "Saved.".',
-            highlight: ['key', 'output'],
-            codeLanguage: 'HTML',
-            lines: ['<p>', '  Press <kbd>Ctrl</kbd>', '</p>', '<p><samp>Saved.</samp></p>'],
-            distractors: ['  Press <key>Ctrl</key>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento preserva os espaços e as quebras de linha do texto?',
-            codeLanguage: 'HTML',
-            highlight: ['preserva'],
-            correctOption: 1,
-            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which element keeps the spaces and line breaks of the text?',
-            codeLanguage: 'HTML',
-            highlight: ['keeps'],
-            correctOption: 1,
-            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'matching',
-        content: {
-          pt: {
-            question: 'Ligue cada elemento ao conteúdo técnico que ele representa.',
-            highlight: ['elemento'],
-            pairs: [
-              {
-                left: '<code>',
-                right: 'Trecho de código'
-              },
-              {
-                left: '<pre>',
-                right: 'Mantém espaços e quebras de linha'
-              },
-              {
-                left: '<kbd>',
-                right: 'Tecla ou entrada do usuário'
-              },
-              {
-                left: '<samp>',
-                right: 'Saída de um programa'
-              }
-            ],
-            leftAsCode: true
-          },
-          en: {
-            question: 'Match each element to the technical content it represents.',
-            highlight: ['element'],
-            pairs: [
-              {
-                left: '<code>',
-                right: 'Piece of code'
-              },
-              {
-                left: '<pre>',
-                right: 'Keeps spaces and line breaks'
-              },
-              {
-                left: '<kbd>',
-                right: 'Key or user input'
-              },
-              {
-                left: '<samp>',
-                right: 'Output of a program'
-              }
-            ],
-            leftAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag que marca "OK" como saída de um programa.',
-            highlight: ['saída'],
-            codeLanguage: 'HTML',
-            code: '<p>Saída: <___>OK</samp></p>',
-            answers: ['samp'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag that marks "OK" as the output of a program.',
-            highlight: ['output'],
-            codeLanguage: 'HTML',
-            code: '<p>Result: <___>OK</samp></p>',
-            answers: ['samp'],
             ignoreCase: true
           }
         }
@@ -24238,6 +24486,270 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Conteúdo técnico',
+      en: 'Technical content'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Código dentro da página',
+              text: 'Como mostrar um trecho de código em uma página sem que ele perca a forma?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'code e pre',
+              text: 'O HTML tem elementos próprios para representar código e conteúdo relacionado à programação.'
+            },
+            closing: '<code> representa um trecho de código. <pre> preserva espaços e quebras de linha, sendo útil para blocos de código.',
+            highlight: ['code', 'pre'],
+            codeLanguage: 'HTML',
+            code: '<p>Use a função <code>console.log()</code>.</p>\n\n<pre><code>const nome = "Ana";\n\nconsole.log(nome);\n</code></pre>'
+          },
+          en: {
+            introduction: {
+              title: 'Code inside the page',
+              text: 'How do you show a piece of code on a page without losing its shape?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'code and pre',
+              text: 'HTML has its own elements to represent code and content related to programming.'
+            },
+            closing: '<code> represents a piece of code. <pre> preserves spaces and line breaks, which is useful for code blocks.',
+            highlight: ['code', 'pre'],
+            codeLanguage: 'HTML',
+            code: '<p>Use the <code>console.log()</code> function.</p>\n\n<pre><code>const name = "Ana";\n\nconsole.log(name);\n</code></pre>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Teclas e saídas de programa',
+              text: '<kbd> representa uma entrada fornecida pelo usuário, como uma tecla. <samp> representa uma saída produzida por um programa.',
+              persona: 'neutral'
+            },
+            closing: 'Esses elementos são pouco utilizados em páginas comuns, mas permitem representar informações técnicas com significado apropriado.',
+            highlight: ['kbd', 'samp'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Pressione <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  para salvar.\n</p>\n\n<p>\n  Resultado:\n  <samp>Arquivo salvo.</samp>\n</p>'
+          },
+          en: {
+            introduction: {
+              title: 'Keys and program output',
+              text: '<kbd> represents input provided by the user, such as a key. <samp> represents output produced by a program.',
+              persona: 'neutral'
+            },
+            closing: 'These elements are rarely used on common pages, but they let you represent technical information with the appropriate meaning.',
+            highlight: ['kbd', 'samp'],
+            codeLanguage: 'HTML',
+            code: '<p>\n  Press <kbd>Ctrl</kbd> + <kbd>S</kbd>\n  to save.\n</p>\n\n<p>\n  Result:\n  <samp>File saved.</samp>\n</p>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: '"Pressione Ctrl + S para salvar." Qual elemento representa as teclas?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
+            pool: 'code-kbd'
+          },
+          en: {
+            question: '"Press Ctrl + S to save." Which element represents the keys?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<kbd>', '<samp>', '<code>', '<pre>'],
+            pool: 'code-kbd'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento representa a saída de um programa, como "Arquivo salvo."?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<samp>', '<kbd>', '<code>', '<q>'],
+            pool: 'code-kbd'
+          },
+          en: {
+            question: 'Which element represents a program\'s output, like "File saved."?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<samp>', '<kbd>', '<code>', '<q>'],
+            pool: 'code-kbd'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<pre> preserva os espaços e as quebras de linha do texto.',
+            highlight: ['<pre>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'code-kbd',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<pre> keeps the text\'s spaces and line breaks.',
+            highlight: ['<pre>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'code-kbd',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete: uma tecla e um trecho de código no texto.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Aperte <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
+            answers: ['kbd', 'code'],
+            distractors: ['samp', 'pre']
+          },
+          en: {
+            question: 'Complete: a key and a bit of code in the text.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<p>Press <___>Ctrl</kbd></p>\n<p>Use <___>let</code></p>',
+            answers: ['kbd', 'code'],
+            distractors: ['samp', 'pre']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o parágrafo "Aperte Ctrl" com Ctrl marcado como tecla e, abaixo dele, um parágrafo com a saída de programa "Salvo.".',
+            highlight: ['tecla', 'saída'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Aperte <kbd>Ctrl</kbd>', '</p>', '<p><samp>Salvo.</samp></p>'],
+            distractors: ['  Aperte <key>Ctrl</key>']
+          },
+          en: {
+            question: 'Build the paragraph "Press Ctrl" with Ctrl marked as a key and, below it, a paragraph with the program output "Saved.".',
+            highlight: ['key', 'output'],
+            codeLanguage: 'HTML',
+            lines: ['<p>', '  Press <kbd>Ctrl</kbd>', '</p>', '<p><samp>Saved.</samp></p>'],
+            distractors: ['  Press <key>Ctrl</key>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento preserva os espaços e as quebras de linha do texto?',
+            codeLanguage: 'HTML',
+            highlight: ['preserva'],
+            correctOption: 1,
+            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which element keeps the spaces and line breaks of the text?',
+            codeLanguage: 'HTML',
+            highlight: ['keeps'],
+            correctOption: 1,
+            options: ['<pre>', '<code>', '<kbd>', '<samp>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'matching',
+        content: {
+          pt: {
+            question: 'Ligue cada elemento ao conteúdo técnico que ele representa.',
+            highlight: ['elemento'],
+            pairs: [
+              {
+                left: '<code>',
+                right: 'Trecho de código'
+              },
+              {
+                left: '<pre>',
+                right: 'Mantém espaços e quebras de linha'
+              },
+              {
+                left: '<kbd>',
+                right: 'Tecla ou entrada do usuário'
+              },
+              {
+                left: '<samp>',
+                right: 'Saída de um programa'
+              }
+            ],
+            leftAsCode: true
+          },
+          en: {
+            question: 'Match each element to the technical content it represents.',
+            highlight: ['element'],
+            pairs: [
+              {
+                left: '<code>',
+                right: 'Piece of code'
+              },
+              {
+                left: '<pre>',
+                right: 'Keeps spaces and line breaks'
+              },
+              {
+                left: '<kbd>',
+                right: 'Key or user input'
+              },
+              {
+                left: '<samp>',
+                right: 'Output of a program'
+              }
+            ],
+            leftAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag que marca "OK" como saída de um programa.',
+            highlight: ['saída'],
+            codeLanguage: 'HTML',
+            code: '<p>Saída: <___>OK</samp></p>',
+            answers: ['samp'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag that marks "OK" as the output of a program.',
+            highlight: ['output'],
+            codeLanguage: 'HTML',
+            code: '<p>Result: <___>OK</samp></p>',
+            answers: ['samp'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Datas e dados',
       en: 'Dates and data'
     },
@@ -24253,7 +24765,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O elemento time',
-              text: '<time> representa um horário de um jeito que as máquinas também conseguem interpretar, por meio do atributo datetime.'
+              text: '<time> representa um horário de um jeito que as máquinas também conseguem interpretar, por meio do atributo datetime, escrito como ano-mês-dia (2026-09-10 é 10 de setembro de 2026). Assim, buscadores e agendas conseguem entender a data.'
             },
             closing: 'O texto exibido pode ser amigável para pessoas, enquanto o atributo datetime guarda um valor estruturado para máquinas.',
             highlight: ['time', 'datetime'],
@@ -24268,7 +24780,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The time element',
-              text: '<time> represents a moment in a way machines can also interpret, through the datetime attribute.'
+              text: '<time> represents a moment in a way machines can also interpret, through the datetime attribute, written as year-month-day (2026-09-10 is September 10, 2026). That way, search engines and calendars can understand the date.'
             },
             closing: 'The displayed text can be friendly for people, while the datetime attribute holds a structured value for machines.',
             highlight: ['time', 'datetime'],
@@ -24470,7 +24982,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'video e audio',
-              text: 'O HTML tem os elementos nativos <video> e <audio> para incorporar mídia, sem depender de componentes externos.'
+              text: 'O HTML tem os elementos nativos <video> e <audio> para incorporar mídia, sem depender de programas extras. O atributo controls mostra os botões de tocar e pausar, e o <source> diz onde está o arquivo e de que tipo ele é.'
             },
             closing: 'Esses elementos fornecem controles e uma estrutura semântica diretamente no HTML.',
             highlight: ['video', 'audio', 'HTML'],
@@ -24485,7 +24997,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'video and audio',
-              text: 'HTML has the native <video> and <audio> elements to embed media, without depending on external components.'
+              text: 'HTML has the native <video> and <audio> elements to embed media, without depending on extra programs. The controls attribute shows the play and pause buttons, and <source> says where the file is and what type it is.'
             },
             closing: 'These elements provide controls and a semantic structure directly in HTML.',
             highlight: ['video', 'audio', 'HTML'],
@@ -24676,6 +25188,219 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Interatividade nativa',
+      en: 'Native interactivity'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Abrir e fechar sem JavaScript',
+              text: 'Seções que abrem e fecham ao toque costumam dar trabalho. Com o HTML, é só marcar.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'details e summary',
+              text: '<details> cria uma seção que pode ser expandida ou recolhida. <summary> define o título em que o usuário toca para abri-la.'
+            },
+            closing: 'Esse recurso cria uma interface expansível usando só HTML, sem precisar implementar toda a interação manualmente com JavaScript.',
+            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: '<details>\n  <summary>\n    O que é HTML?\n  </summary>\n\n  <p>\n    HTML define a estrutura\n    de uma página web.\n  </p>\n</details>'
+          },
+          en: {
+            introduction: {
+              title: 'Open and close without JavaScript',
+              text: 'Sections that open and close on tap usually take work. With HTML, you just mark them up.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'details and summary',
+              text: '<details> creates a section that can be expanded or collapsed. <summary> defines the title the user taps to open it.'
+            },
+            closing: 'This feature builds an expandable interface using only HTML, without having to implement the whole interaction manually with JavaScript.',
+            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
+            codeLanguage: 'HTML',
+            code: '<details>\n  <summary>\n    What is HTML?\n  </summary>\n\n  <p>\n    HTML defines the structure\n    of a web page.\n  </p>\n</details>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Caixas de diálogo nativas',
+              text: 'O elemento <dialog> representa uma caixa de diálogo nativa do HTML. O atributo open faz a caixa aparecer já aberta; sem ele, ela fica escondida até algum código mandar abri-la. Um botão dentro de um <form method="dialog"> a fecha, sem JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'Antes de implementar um componente complexo manualmente, vale verificar se o HTML já oferece um elemento nativo adequado — reduz código e costuma melhorar a acessibilidade.',
+            highlight: ['dialog', 'HTML'],
+            codeLanguage: 'HTML',
+            code: '<dialog open>\n  <h2>Olá!</h2>\n  <p>Esta é uma caixa de diálogo.</p>\n\n  <form method="dialog">\n    <button>Fechar</button>\n  </form>\n</dialog>'
+          },
+          en: {
+            introduction: {
+              title: 'Native dialog boxes',
+              text: 'The <dialog> element represents a native HTML dialog box. The open attribute makes the box show up already open; without it, it stays hidden until some code opens it. A button inside a <form method="dialog"> closes it, with no JavaScript.',
+              persona: 'neutral'
+            },
+            closing: 'Before building a complex component manually, it is worth checking whether HTML already offers a suitable native element — it reduces code and tends to improve accessibility.',
+            highlight: ['dialog', 'HTML'],
+            codeLanguage: 'HTML',
+            code: '<dialog open>\n  <h2>Hello!</h2>\n  <p>This is a dialog box.</p>\n\n  <form method="dialog">\n    <button>Close</button>\n  </form>\n</dialog>'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento define o título que abre um <details>?',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
+            pool: 'details-dialog'
+          },
+          en: {
+            question: 'Which element sets the title that opens a <details>?',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
+            pool: 'details-dialog'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: '<details> cria uma seção expansível sem precisar de JavaScript.',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'details-dialog',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: '<details> creates an expandable section without needing JavaScript.',
+            highlight: ['<details>'],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'details-dialog',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual elemento nativo representa uma caixa de diálogo?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
+            pool: 'details-dialog'
+          },
+          en: {
+            question: 'Which native element represents a dialog box?',
+            highlight: [],
+            correctOption: 1,
+            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
+            pool: 'details-dialog'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a seção que abre e fecha.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>\n    Ver mais\n  </summary>\n  <p>Detalhes.</p>\n</details>',
+            answers: ['details', 'summary'],
+            distractors: ['dialog', 'label', 'title']
+          },
+          en: {
+            question: 'Complete the section that opens and closes.',
+            highlight: [],
+            codeLanguage: 'HTML',
+            code: '<___>\n  <___>\n    See more\n  </summary>\n  <p>Details.</p>\n</details>',
+            answers: ['details', 'summary'],
+            distractors: ['dialog', 'label', 'title']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte um details com o resumo "Ver mais" e, depois dele, o parágrafo "Detalhes.".',
+            highlight: ['details', 'resumo'],
+            codeLanguage: 'HTML',
+            lines: ['<details>', '  <summary>Ver mais</summary>', '  <p>Detalhes.</p>', '</details>'],
+            distractors: ['  <title>Ver mais</title>']
+          },
+          en: {
+            question: 'Build a details element with the summary "See more" and, after it, the paragraph "Details.".',
+            highlight: ['details', 'summary'],
+            codeLanguage: 'HTML',
+            lines: ['<details>', '  <summary>See more</summary>', '  <p>Details.</p>', '</details>'],
+            distractors: ['  <title>See more</title>']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual trecho cria uma caixa de diálogo já aberta?',
+            codeLanguage: 'HTML',
+            highlight: ['caixa de diálogo'],
+            correctOption: 1,
+            options: ['<dialog open>\n  <p>Olá!</p>\n</dialog>', '<dialog>\n  <p>Olá!</p>\n</dialog>', '<modal open>\n  <p>Olá!</p>\n</modal>', '<details open>\n  <p>Olá!</p>\n</details>'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which snippet creates a dialog box that is already open?',
+            codeLanguage: 'HTML',
+            highlight: ['dialog box'],
+            correctOption: 1,
+            options: ['<dialog open>\n  <p>Hello!</p>\n</dialog>', '<dialog>\n  <p>Hello!</p>\n</dialog>', '<modal open>\n  <p>Hello!</p>\n</modal>', '<details open>\n  <p>Hello!</p>\n</details>'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o nome da tag da caixa de diálogo nativa, que aqui já está aberta.',
+            highlight: ['caixa de diálogo'],
+            codeLanguage: 'HTML',
+            code: '<___ open>\n  <p>Olá!</p>\n</dialog>',
+            answers: ['dialog'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the name of the tag for the native dialog box, which is already open here.',
+            highlight: ['dialog box'],
+            codeLanguage: 'HTML',
+            code: '<___ open>\n  <p>Hello!</p>\n</dialog>',
+            answers: ['dialog'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Conteúdo incorporado',
       en: 'Embedded content'
     },
@@ -24728,7 +25453,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Restringindo com sandbox',
-              text: 'O atributo sandbox permite restringir o que o conteúdo incorporado pode fazer.'
+              text: 'O atributo sandbox ("caixa de areia") permite restringir o que o conteúdo incorporado pode fazer. Sozinho, ele bloqueia quase tudo (scripts, formulários, janelas novas); cada valor, como allow-scripts, libera uma permissão. No exemplo, allow-scripts libera apenas os scripts.'
             },
             closing: 'Use iframe apenas quando for realmente necessário incorporar conteúdo externo.',
             highlight: ['iframe', 'sandbox'],
@@ -24744,7 +25469,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Restricting with sandbox',
-              text: 'The sandbox attribute lets you restrict what the embedded content is allowed to do.'
+              text: 'The sandbox attribute (a "safe play area") lets you restrict what the embedded content is allowed to do. On its own, it blocks almost everything (scripts, forms, new windows); each value, like allow-scripts, grants one permission. In the example, allow-scripts allows only scripts.'
             },
             closing: 'Use iframe only when embedding external content is really necessary.',
             highlight: ['iframe', 'sandbox'],
@@ -24916,7 +25641,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é SVG',
-              text: 'SVG permite representar gráficos vetoriais direto no documento HTML. Diferente de uma imagem comum, seus elementos podem ser manipulados individualmente.'
+              text: 'SVG permite desenhar gráficos vetoriais direto no documento HTML. Um gráfico vetorial é feito de formas (círculos, linhas...) descritas por medidas, e não de pontinhos coloridos (pixels), por isso não fica borrado ao ampliar. No exemplo, cx e cy são o centro do círculo e r é o raio. Diferente de uma imagem comum, seus elementos podem ser manipulados individualmente.'
             },
             closing: 'SVG é especialmente útil para ícones, ilustrações e gráficos que precisam manter sua qualidade em diferentes tamanhos.',
             highlight: ['SVG', 'HTML'],
@@ -24931,7 +25656,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What SVG is',
-              text: 'SVG lets you represent vector graphics directly in the HTML document. Unlike a regular image, its elements can be manipulated individually.'
+              text: 'SVG lets you draw vector graphics directly in the HTML document. A vector graphic is made of shapes (circles, lines...) described by measurements, not of colored dots (pixels), so it does not blur when enlarged. In the example, cx and cy are the center of the circle and r is the radius. Unlike a regular image, its elements can be manipulated individually.'
             },
             closing: 'SVG is especially useful for icons, illustrations and graphics that need to keep their quality at different sizes.',
             highlight: ['SVG', 'HTML'],
@@ -24945,8 +25670,43 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
+              title: 'Um pouco de JavaScript',
+              text: 'Até aqui, o HTML só descreve a página. Para a página reagir e mudar, entra o JavaScript, a linguagem que dá comportamento a ela. Ele tem uma área própria no app, com calma; aqui basta reconhecer como ele aparece dentro de um HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A tag script',
+              text: 'O código JavaScript fica dentro da tag <script>. Ali, document.querySelector("#msg") procura na página o elemento com id msg, e .textContent é o texto de dentro dele. Já console.log() escreve uma mensagem no console, um painel que ajuda a conferir o que o código fez. Veja na aba Web: o texto mudou e a mensagem apareceu.'
+            },
+            closing: 'Não precisa decorar nada: basta reconhecer a tag <script> e saber que é ali que mora o comportamento da página. O JavaScript será visto com calma na área JavaScript.',
+            highlight: ['JavaScript', 'script', 'querySelector', 'console'],
+            codeLanguage: 'HTML',
+            code: '<p id="msg">Texto inicial</p>\n\n<script>\n  console.log("Olá!");\n\n  const msg =\n    document.querySelector(\n      "#msg"\n    );\n\n  msg.textContent = "Mudou!";\n</script>'
+          },
+          en: {
+            introduction: {
+              title: 'A bit of JavaScript',
+              text: 'So far, HTML only describes the page. For the page to react and change, JavaScript comes in: the language that gives it behavior. It has an area of its own in the app, taken slowly; here you only need to recognize how it shows up inside an HTML file.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The script tag',
+              text: 'JavaScript code goes inside the <script> tag. There, document.querySelector("#msg") looks in the page for the element with id msg, and .textContent is the text inside it. As for console.log(), it writes a message to the console, a panel that helps you check what the code did. See it in the Web tab: the text changed and the message appeared.'
+            },
+            closing: 'You don\'t need to memorize anything: just recognize the <script> tag and know that this is where the page\'s behavior lives. JavaScript will be covered slowly in the JavaScript area.',
+            highlight: ['JavaScript', 'script', 'querySelector', 'console'],
+            codeLanguage: 'HTML',
+            code: '<p id="msg">Initial text</p>\n\n<script>\n  console.log("Hello!");\n\n  const msg =\n    document.querySelector(\n      "#msg"\n    );\n\n  msg.textContent = "Changed!";\n</script>'
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
               title: 'Desenhando com canvas',
-              text: '<canvas> fornece uma área de desenho que pode ser manipulada principalmente por JavaScript.',
+              text: '<canvas> fornece uma área de desenho que pode ser controlada principalmente por JavaScript. Não precisa entender o código abaixo agora: ele só mostra que o desenho é feito por programação.',
               persona: 'neutral'
             },
             closing: 'SVG descreve elementos vetoriais. Canvas fornece uma área de desenho controlada por código.',
@@ -24964,7 +25724,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Drawing with canvas',
-              text: '<canvas> provides a drawing area that can be manipulated mainly through JavaScript.',
+              text: '<canvas> provides a drawing area that can be controlled mainly through JavaScript. You don\'t need to understand the code below yet: it only shows that the drawing is made by programming.',
               persona: 'neutral'
             },
             closing: 'SVG describes vector elements. Canvas provides a drawing area controlled by code.',
@@ -25128,219 +25888,6 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Interatividade nativa',
-      en: 'Native interactivity'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Abrir e fechar sem JavaScript',
-              text: 'Seções que abrem e fecham ao toque costumam dar trabalho. Com o HTML, é só marcar.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'details e summary',
-              text: '<details> cria uma seção que pode ser expandida ou recolhida. <summary> define o título em que o usuário toca para abri-la.'
-            },
-            closing: 'Esse recurso cria uma interface expansível usando só HTML, sem precisar implementar toda a interação manualmente com JavaScript.',
-            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
-            codeLanguage: 'HTML',
-            code: '<details>\n  <summary>\n    O que é HTML?\n  </summary>\n\n  <p>\n    HTML define a estrutura\n    de uma página web.\n  </p>\n</details>'
-          },
-          en: {
-            introduction: {
-              title: 'Open and close without JavaScript',
-              text: 'Sections that open and close on tap usually take work. With HTML, you just mark them up.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'details and summary',
-              text: '<details> creates a section that can be expanded or collapsed. <summary> defines the title the user taps to open it.'
-            },
-            closing: 'This feature builds an expandable interface using only HTML, without having to implement the whole interaction manually with JavaScript.',
-            highlight: ['details', 'summary', 'HTML', 'JavaScript'],
-            codeLanguage: 'HTML',
-            code: '<details>\n  <summary>\n    What is HTML?\n  </summary>\n\n  <p>\n    HTML defines the structure\n    of a web page.\n  </p>\n</details>'
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Caixas de diálogo nativas',
-              text: 'O elemento <dialog> representa uma caixa de diálogo nativa do HTML.',
-              persona: 'neutral'
-            },
-            closing: 'Antes de implementar um componente complexo manualmente, vale verificar se o HTML já oferece um elemento nativo adequado — reduz código e costuma melhorar a acessibilidade.',
-            highlight: ['dialog', 'HTML'],
-            codeLanguage: 'HTML',
-            code: '<dialog open>\n  <h2>Olá!</h2>\n  <p>Esta é uma caixa de diálogo.</p>\n\n  <button>Fechar</button>\n</dialog>'
-          },
-          en: {
-            introduction: {
-              title: 'Native dialog boxes',
-              text: 'The <dialog> element represents a native HTML dialog box.',
-              persona: 'neutral'
-            },
-            closing: 'Before building a complex component manually, it is worth checking whether HTML already offers a suitable native element — it reduces code and tends to improve accessibility.',
-            highlight: ['dialog', 'HTML'],
-            codeLanguage: 'HTML',
-            code: '<dialog open>\n  <h2>Hello!</h2>\n  <p>This is a dialog box.</p>\n\n  <button>Close</button>\n</dialog>'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento define o título que abre um <details>?',
-            highlight: ['<details>'],
-            correctOption: 1,
-            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
-            pool: 'details-dialog'
-          },
-          en: {
-            question: 'Which element sets the title that opens a <details>?',
-            highlight: ['<details>'],
-            correctOption: 1,
-            options: ['<summary>', '<h2>', '<dialog>', '<label>'],
-            pool: 'details-dialog'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: '<details> cria uma seção expansível sem precisar de JavaScript.',
-            highlight: ['<details>'],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'details-dialog',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: '<details> creates an expandable section without needing JavaScript.',
-            highlight: ['<details>'],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'details-dialog',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual elemento nativo representa uma caixa de diálogo?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
-            pool: 'details-dialog'
-          },
-          en: {
-            question: 'Which native element represents a dialog box?',
-            highlight: [],
-            correctOption: 1,
-            options: ['<dialog>', '<details>', '<aside>', '<iframe>'],
-            pool: 'details-dialog'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete a seção que abre e fecha.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <___>\n    Ver mais\n  </summary>\n  <p>Detalhes.</p>\n</details>',
-            answers: ['details', 'summary'],
-            distractors: ['dialog', 'label', 'title']
-          },
-          en: {
-            question: 'Complete the section that opens and closes.',
-            highlight: [],
-            codeLanguage: 'HTML',
-            code: '<___>\n  <___>\n    See more\n  </summary>\n  <p>Details.</p>\n</details>',
-            answers: ['details', 'summary'],
-            distractors: ['dialog', 'label', 'title']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte um details com o resumo "Ver mais" e, depois dele, o parágrafo "Detalhes.".',
-            highlight: ['details', 'resumo'],
-            codeLanguage: 'HTML',
-            lines: ['<details>', '  <summary>Ver mais</summary>', '  <p>Detalhes.</p>', '</details>'],
-            distractors: ['  <title>Ver mais</title>']
-          },
-          en: {
-            question: 'Build a details element with the summary "See more" and, after it, the paragraph "Details.".',
-            highlight: ['details', 'summary'],
-            codeLanguage: 'HTML',
-            lines: ['<details>', '  <summary>See more</summary>', '  <p>Details.</p>', '</details>'],
-            distractors: ['  <title>See more</title>']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual trecho cria uma caixa de diálogo já aberta?',
-            codeLanguage: 'HTML',
-            highlight: ['caixa de diálogo'],
-            correctOption: 1,
-            options: ['<dialog open>\n  <p>Olá!</p>\n</dialog>', '<dialog>\n  <p>Olá!</p>\n</dialog>', '<modal open>\n  <p>Olá!</p>\n</modal>', '<details open>\n  <p>Olá!</p>\n</details>'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which snippet creates a dialog box that is already open?',
-            codeLanguage: 'HTML',
-            highlight: ['dialog box'],
-            correctOption: 1,
-            options: ['<dialog open>\n  <p>Hello!</p>\n</dialog>', '<dialog>\n  <p>Hello!</p>\n</dialog>', '<modal open>\n  <p>Hello!</p>\n</modal>', '<details open>\n  <p>Hello!</p>\n</details>'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o nome da tag da caixa de diálogo nativa, que aqui já está aberta.',
-            highlight: ['caixa de diálogo'],
-            codeLanguage: 'HTML',
-            code: '<___ open>\n  <p>Olá!</p>\n</dialog>',
-            answers: ['dialog'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the name of the tag for the native dialog box, which is already open here.',
-            highlight: ['dialog box'],
-            codeLanguage: 'HTML',
-            code: '<___ open>\n  <p>Hello!</p>\n</dialog>',
-            answers: ['dialog'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Atributos globais',
       en: 'Global attributes'
     },
@@ -25358,7 +25905,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'O atributo hidden',
               text: 'Atributos globais podem ser usados em praticamente qualquer elemento HTML. hidden esconde um elemento por completo, como se ele não existisse na página.'
             },
-            closing: 'hidden é diferente de só estilizar com CSS: o elemento realmente some da apresentação e da leitura por tecnologias assistivas.',
+            closing: 'O atributo hidden esconde o elemento sem precisar de CSS: ele some da tela e também da leitura por tecnologias assistivas. Apenas deixá-lo transparente ou empurrá-lo para fora da tela não faria isso.',
             highlight: ['hidden', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p>Este texto aparece normalmente.</p>\n\n<p hidden>Este texto fica escondido.</p>'
@@ -25373,7 +25920,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'The hidden attribute',
               text: 'Global attributes can be used on practically any HTML element. hidden hides an element completely, as if it did not exist on the page.'
             },
-            closing: 'hidden is different from just styling with CSS: the element really disappears from the presentation and from assistive technology.',
+            closing: 'The hidden attribute hides the element without needing CSS: it disappears from the screen and from assistive technology too. Merely making it transparent or pushing it off screen would not do that.',
             highlight: ['hidden', 'HTML'],
             codeLanguage: 'HTML',
             code: '<p>This text shows up normally.</p>\n\n<p hidden>This text stays hidden.</p>'
@@ -25386,10 +25933,10 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Idioma e direção do texto',
-              text: 'lang identifica o idioma do conteúdo, e dir identifica a direção do texto — da esquerda para a direita ou o contrário.',
+              text: 'lang identifica o idioma do conteúdo, e dir identifica a direção do texto — da esquerda para a direita (ltr) ou o contrário (rtl, de right-to-left, usado em árabe e hebraico).',
               persona: 'neutral'
             },
-            closing: 'Esses atributos ajudam navegadores e leitores de tela a apresentar o conteúdo corretamente.',
+            closing: 'Esses atributos ajudam navegadores e leitores de tela a apresentar o conteúdo corretamente. Para a página inteira, o idioma vai no <html>, como em <html lang="pt-BR">.',
             highlight: ['lang', 'dir'],
             codeLanguage: 'HTML',
             code: '<p lang="en">\n  This paragraph is in English.\n</p>\n\n<p dir="rtl">\n  نص باللغة العربية\n</p>'
@@ -25397,10 +25944,10 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Language and text direction',
-              text: 'lang identifies the language of the content, and dir identifies the text direction — left-to-right or the other way around.',
+              text: 'lang identifies the language of the content, and dir identifies the text direction — left-to-right (ltr) or the other way around (rtl, for right-to-left, used in Arabic and Hebrew).',
               persona: 'neutral'
             },
-            closing: 'These attributes help browsers and screen readers present the content correctly.',
+            closing: 'These attributes help browsers and screen readers present the content correctly. For the whole page, the language goes on the <html> element, as in <html lang="en">.',
             highlight: ['lang', 'dir'],
             codeLanguage: 'HTML',
             code: '<p lang="pt">\n  Este parágrafo está em português.\n</p>\n\n<p dir="rtl">\n  نص باللغة العربية\n</p>'
@@ -25642,10 +26189,10 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Lendo os dados com JavaScript',
-              text: 'JavaScript pode acessar esses atributos por meio da propriedade dataset.',
+              text: 'JavaScript pode acessar esses atributos por meio da propriedade dataset. Aqui basta reconhecer a ideia; o JavaScript tem uma área própria no app.',
               persona: 'neutral'
             },
-            closing: 'data-* é útil quando precisamos associar pequenas informações personalizadas a elementos da página.',
+            closing: 'data-* é útil quando precisamos associar pequenas informações personalizadas a elementos da página. O nome com hífens vira camelCase: data-product-id é lido como dataset.productId.',
             highlight: ['JavaScript', 'dataset'],
             codeLanguage: 'JavaScript',
             code: 'const botao =\n  document.querySelector("button");\n\nconsole.log(\n  botao.dataset.productId\n);',
@@ -25654,10 +26201,10 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Reading the data with JavaScript',
-              text: 'JavaScript can access those attributes through the dataset property.',
+              text: 'JavaScript can access those attributes through the dataset property. Here you only need to recognize the idea; JavaScript has an area of its own in the app.',
               persona: 'neutral'
             },
-            closing: 'data-* is useful whenever we need to attach small pieces of custom information to elements on the page.',
+            closing: 'data-* is useful whenever we need to attach small pieces of custom information to elements on the page. A name with hyphens becomes camelCase: data-product-id is read as dataset.productId.',
             highlight: ['JavaScript', 'dataset'],
             codeLanguage: 'JavaScript',
             code: 'const button =\n  document.querySelector("button");\n\nconsole.log(\n  button.dataset.productId\n);',
@@ -25884,7 +26431,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Modelos de HTML com template',
-              text: '<template> guarda um trecho de HTML que não é exibido diretamente. Esse conteúdo só aparece quando é clonado e inserido na página, geralmente por JavaScript.',
+              text: '<template> guarda um trecho de HTML que não é exibido diretamente. Esse conteúdo só aparece quando é clonado e inserido na página, geralmente por JavaScript: o código pega o conteúdo do modelo com .content, faz uma cópia dele com cloneNode(true) e a coloca dentro da lista com appendChild.',
               persona: 'neutral'
             },
             closing: 'template é útil para preparar pedaços de HTML reutilizáveis sem precisar montá-los inteiramente via código.',
@@ -25896,7 +26443,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'HTML models with template',
-              text: '<template> holds a piece of HTML that is not displayed directly. That content only shows up once it is cloned and inserted into the page, usually by JavaScript.',
+              text: '<template> holds a piece of HTML that is not displayed directly. That content only shows up once it is cloned and inserted into the page, usually by JavaScript: the code gets the content of the model with .content, makes a copy of it with cloneNode(true) and puts it inside the list with appendChild.',
               persona: 'neutral'
             },
             closing: 'template is useful for preparing reusable pieces of HTML without having to assemble them entirely through code.',
@@ -26094,12 +26641,12 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Foco e a tecla Tab',
-              text: 'Nem todo mundo usa mouse ou toque: uma interface acessível também precisa funcionar pelo teclado, navegando entre os elementos com Tab.\n\nLinks, botões e campos de formulário já recebem foco pelo teclado automaticamente.'
+              text: 'Nem todo mundo usa mouse ou toque: uma interface acessível também precisa funcionar pelo teclado, navegando entre os elementos com Tab. O elemento que está selecionado no momento, pronto para receber o teclado, é o que tem o foco.\n\nLinks, botões e campos de formulário já recebem foco pelo teclado automaticamente.'
             },
             closing: 'Um elemento genérico como div ou span não recebe foco pelo teclado, a menos que isso seja adicionado manualmente.',
             highlight: ['Tab', 'div', 'span'],
             codeLanguage: 'HTML',
-            code: '<button>Comprar</button>\n<a href="/perfil">Perfil</a>\n<input type="text" />',
+            code: '<button>Comprar</button>\n<a href="/perfil">Perfil</a>\n<input type="text">',
             onlyCode: true
           },
           en: {
@@ -26110,12 +26657,12 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Focus and the Tab key',
-              text: 'Not everyone uses a mouse or touch: an accessible interface also needs to work by keyboard, moving between elements with Tab.\n\nLinks, buttons and form fields already receive keyboard focus automatically.'
+              text: 'Not everyone uses a mouse or touch: an accessible interface also needs to work by keyboard, moving between elements with Tab. The element that is selected at the moment, ready to receive the keyboard, is the one that has focus.\n\nLinks, buttons and form fields already receive keyboard focus automatically.'
             },
             closing: 'A generic element like div or span does not receive keyboard focus, unless that is added manually.',
             highlight: ['Tab', 'div', 'span'],
             codeLanguage: 'HTML',
-            code: '<button>Buy</button>\n<a href="/profile">Profile</a>\n<input type="text" />',
+            code: '<button>Buy</button>\n<a href="/profile">Profile</a>\n<input type="text">',
             onlyCode: true
           }
         }
@@ -26129,7 +26676,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
               text: 'O atributo tabindex controla se e quando um elemento entra na navegação por teclado.',
               persona: 'neutral'
             },
-            closing: 'tabindex="0" adiciona um elemento à ordem natural de navegação. Valores maiores que zero raramente são uma boa ideia, porque bagunçam essa ordem.',
+            closing: 'tabindex="0" adiciona um elemento à ordem natural de navegação. Valores maiores que zero raramente são uma boa ideia, porque bagunçam essa ordem. Já o -1 tira o elemento do Tab, o que prejudica quem navega só pelo teclado: use-o apenas quando houver outro caminho até ele.',
             highlight: ['tabindex'],
             codeLanguage: 'HTML',
             code: '<div tabindex="0">\n  Este div agora recebe foco.\n</div>\n\n<button tabindex="-1">\n  Este botão foi removido da navegação.\n</button>',
@@ -26141,7 +26688,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
               text: 'The tabindex attribute controls whether and when an element enters keyboard navigation.',
               persona: 'neutral'
             },
-            closing: 'tabindex="0" adds an element to the natural navigation order. Values greater than zero are rarely a good idea, because they mess up that order.',
+            closing: 'tabindex="0" adds an element to the natural navigation order. Values greater than zero are rarely a good idea, because they mess up that order. Meanwhile, -1 takes the element out of Tab, which hurts people who navigate only by keyboard: use it only when there is another way to reach it.',
             highlight: ['tabindex'],
             codeLanguage: 'HTML',
             code: '<div tabindex="0">\n  This div now receives focus.\n</div>\n\n<button tabindex="-1">\n  This button was removed from navigation.\n</button>',
@@ -26275,7 +26822,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o valor de tabindex que tira o botão da navegação pelo teclado.',
+            question: 'Digite o valor usual de tabindex que tira o botão da navegação pelo teclado.',
             highlight: ['teclado'],
             codeLanguage: 'HTML',
             code: '<button tabindex="___">\n  Sair\n</button>',
@@ -26283,7 +26830,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             ignoreCase: true
           },
           en: {
-            question: 'Type the tabindex value that takes the button out of keyboard navigation.',
+            question: 'Type the usual tabindex value that takes the button out of keyboard navigation.',
             highlight: ['keyboard'],
             codeLanguage: 'HTML',
             code: '<button tabindex="___">\n  Exit\n</button>',
@@ -26372,7 +26919,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'Essa associação permite que tecnologias assistivas anunciem o propósito de cada campo corretamente.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
-            code: '<label for="email">E-mail</label>\n<input id="email" type="email" />',
+            code: '<label for="email">E-mail</label>\n<input id="email" type="email">',
             onlyCode: true
           },
           en: {
@@ -26384,7 +26931,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'That link lets assistive technology announce the purpose of each field correctly.',
             highlight: ['label', 'id'],
             codeLanguage: 'HTML',
-            code: '<label for="email">Email</label>\n<input id="email" type="email" />',
+            code: '<label for="email">Email</label>\n<input id="email" type="email">',
             onlyCode: true
           }
         }
@@ -26567,7 +27114,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Quando o HTML sozinho não basta',
-              text: 'Alguns componentes são complexos demais para o HTML semântico descrever sozinho. É aí que entra o ARIA.',
+              text: 'Alguns componentes são complexos demais para o HTML semântico descrever sozinho. É aí que entra o ARIA, um conjunto de atributos que dá nomes e papéis aos elementos para quem usa leitor de tela. Um botão só com o símbolo × não diz nada a quem não o enxerga.',
               persona: 'cody'
             },
             explanation: {
@@ -26583,7 +27130,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'When HTML alone is not enough',
-              text: 'Some components are too complex for semantic HTML to describe on its own. That is where ARIA comes in.',
+              text: 'Some components are too complex for semantic HTML to describe on its own. That is where ARIA comes in: a set of attributes that gives names and roles to elements for people who use a screen reader. A button with only the × symbol tells nothing to someone who cannot see it.',
               persona: 'cody'
             },
             explanation: {
@@ -26822,7 +27369,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Dados estruturados e JSON-LD',
-              text: 'Dados estruturados descrevem o significado de uma página para máquinas, como os buscadores. O formato recomendado por eles é o JSON-LD: um bloco de JSON dentro de um script.'
+              text: 'Dados estruturados descrevem o significado de uma página para máquinas, como os buscadores. O formato recomendado por eles é o JSON-LD: um bloco de JSON (dados escritos como "nome": valor, entre chaves; a próxima tela explica) dentro de um <script> (a tag que guarda código ou dados que não aparecem na tela).'
             },
             closing: 'A página continua igual para quem a lê: o bloco não aparece na tela.',
             highlight: ['dados estruturados', 'JSON-LD'],
@@ -26838,12 +27385,49 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Structured data and JSON-LD',
-              text: 'Structured data describes the meaning of a page to machines, like search engines. The format they recommend is JSON-LD: a block of JSON inside a script.'
+              text: 'Structured data describes the meaning of a page to machines, like search engines. The format they recommend is JSON-LD: a block of JSON (data written as "name": value, inside braces; the next screen explains) inside a <script> (the tag that holds code or data that does not show on screen).'
             },
             closing: 'The page looks the same to people reading it: the block does not show on screen.',
             highlight: ['structured data', 'JSON-LD'],
             codeLanguage: 'HTML',
             code: '<script type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "Book",\n  "name": "Learning HTML",\n  "author": "Ana Souza"\n}\n</script>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O que é JSON',
+              text: 'JSON é um jeito de escrever dados como texto: uma lista de pares nome: valor. É isso que vive dentro do <script> do exemplo anterior.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Pares nome: valor',
+              text: 'Um JSON fica entre chaves { }. Cada dado é um par: o nome entre aspas, dois-pontos e o valor. Textos levam aspas; números e true/false não. Os pares são separados por vírgula, e o último não leva vírgula.'
+            },
+            closing: 'Um erro de aspas ou de vírgula invalida o JSON inteiro, por isso vale conferir cada detalhe.',
+            highlight: ['JSON', 'aspas', 'vírgula'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "name": "Ana Souza",\n  "age": 30,\n  "student": true\n}\n</script>',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'What JSON is',
+              text: 'JSON is a way of writing data as text: a list of name: value pairs. That is what lives inside the <script> of the previous example.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Name: value pairs',
+              text: 'A JSON sits between braces { }. Each piece of data is a pair: the name in quotes, a colon and the value. Text takes quotes; numbers and true/false do not. Pairs are separated by commas, and the last one has no comma.'
+            },
+            closing: 'A mistake with quotes or commas breaks the whole JSON, so it pays to check every detail.',
+            highlight: ['JSON', 'quotes', 'commas'],
+            codeLanguage: 'HTML',
+            code: '<script type="application/ld+json">\n{\n  "name": "Ana Souza",\n  "age": 30,\n  "student": true\n}\n</script>',
             onlyCode: true
           }
         }
@@ -26998,7 +27582,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Criando a sua própria tag',
-              text: 'E se o HTML tivesse uma tag feita por você, do jeito que precisa? Dá para criar.',
+              text: 'E se o HTML tivesse uma tag feita por você, do jeito que precisa? Dá para criar. Esta aula usa JavaScript (classes e métodos); se você ainda não estudou essa área, leia pela ideia geral, sem se preocupar com cada linha.',
               persona: 'cody'
             },
             explanation: {
@@ -27014,7 +27598,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Creating your own tag',
-              text: 'What if HTML had a tag made by you, the way you need it? You can build one.',
+              text: 'What if HTML had a tag made by you, the way you need it? You can build one. This lesson uses JavaScript (classes and methods); if you haven\'t studied that area yet, read it for the general idea, without worrying about every line.',
               persona: 'cody'
             },
             explanation: {
@@ -27155,7 +27739,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Atributos de validação',
-              text: 'O próprio HTML valida formulários: required, pattern, minlength e type="email". Com um campo inválido, o navegador barra o envio e mostra a mensagem.'
+              text: 'O próprio HTML valida formulários: required, pattern, minlength e type="email". Com um campo inválido, o navegador barra o envio e mostra a mensagem. No exemplo, o pattern="[0-9]{5}-[0-9]{3}" é uma regra de formato (uma expressão regular, que a próxima tela explica): cinco dígitos, um hífen e mais três dígitos, como num CEP.'
             },
             closing: 'O pattern precisa casar com o valor inteiro, e um campo vazio só é recusado por required.',
             highlight: ['required', 'pattern', 'minlength'],
@@ -27171,7 +27755,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Validation attributes',
-              text: 'HTML itself validates forms: required, pattern, minlength and type="email". With an invalid field, the browser blocks the submit and shows the message.'
+              text: 'HTML itself validates forms: required, pattern, minlength and type="email". With an invalid field, the browser blocks the submit and shows the message. In the example, pattern="[0-9]{5}-[0-9]{3}" is a format rule (a regular expression, explained on the next screen): five digits, a hyphen and three more digits, like a Brazilian postal code (CEP).'
             },
             closing: 'The pattern must match the whole value, and an empty field is only rejected by required.',
             highlight: ['required', 'pattern', 'minlength'],
@@ -27186,8 +27770,45 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             introduction: {
+              title: 'O que é uma expressão regular',
+              text: 'Uma expressão regular é um padrão que descreve como um texto deve ser: quais caracteres, quantos e em que ordem. O atributo pattern usa uma delas.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Lendo um padrão',
+              text: 'Aqui basta reconhecer. [0-9] significa um dígito de 0 a 9, e {3} significa três vezes. Então [0-9]{3} é o padrão de três dígitos seguidos, como 123 ou 482. Já [0-9]{5}-[0-9]{3} pede cinco dígitos, um hífen e mais três dígitos.'
+            },
+            closing: 'Expressões regulares têm muitos outros símbolos; nesta aula basta reconhecer estes.',
+            highlight: ['expressão regular', 'pattern', 'dígito'],
+            codeLanguage: 'HTML',
+            code: '<input\n  name="codigo"\n  pattern="[0-9]{3}"\n>',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'What a regular expression is',
+              text: 'A regular expression is a pattern that describes what a text must look like: which characters, how many and in what order. The pattern attribute uses one.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Reading a pattern',
+              text: 'Here you only need to recognize it. [0-9] means one digit from 0 to 9, and {3} means three times. So [0-9]{3} is the pattern for three digits in a row, like 123 or 482. And [0-9]{5}-[0-9]{3} asks for five digits, a hyphen and three more digits.'
+            },
+            closing: 'Regular expressions have many other symbols; in this lesson you only need to recognize these.',
+            highlight: ['regular expression', 'pattern', 'digit'],
+            codeLanguage: 'HTML',
+            code: '<input\n  name="code"\n  pattern="[0-9]{3}"\n>',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
               title: 'Validação pelo JavaScript',
-              text: 'A API de validação deixa o JavaScript participar: checkValidity() diz se o campo é válido e setCustomValidity() define uma mensagem própria.',
+              text: 'Esta parte usa JavaScript; basta captar a ideia. A API de validação deixa o JavaScript participar: checkValidity() diz se o campo é válido e setCustomValidity() define uma mensagem própria.',
               persona: 'neutral'
             },
             closing: 'Uma mensagem não vazia torna o campo inválido; só uma string vazia o torna válido de novo.',
@@ -27200,7 +27821,7 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Validation through JavaScript',
-              text: 'The validation API lets JavaScript take part: checkValidity() says whether the field is valid and setCustomValidity() sets a message of your own.',
+              text: 'This part uses JavaScript; you only need to get the idea. The validation API lets JavaScript take part: checkValidity() says whether the field is valid and setCustomValidity() sets a message of your own.',
               persona: 'neutral'
             },
             closing: 'A non-empty message makes the field invalid; only an empty string makes it valid again.',
@@ -27233,13 +27854,13 @@ export const HTML_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'O pattern [0-9]{3} aceita o valor 1234?',
+            question: 'O pattern [0-9]{3} (três dígitos, de 0 a 9) aceita o valor 1234?',
             highlight: [],
             correctOption: 1,
             options: ['Não: o pattern precisa casar com o valor inteiro', 'Sim: basta conter três dígitos', 'Sim, se o campo não for required', 'Só se o type for number']
           },
           en: {
-            question: 'Does the pattern [0-9]{3} accept the value 1234?',
+            question: 'Does the pattern [0-9]{3} (three digits, from 0 to 9) accept the value 1234?',
             highlight: [],
             correctOption: 1,
             options: ['No: the pattern must match the whole value', 'Yes: it only needs to contain three digits', 'Yes, if the field is not required', 'Only if the type is number']
@@ -27717,9 +28338,9 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que são media queries',
-              text: 'Media queries permitem aplicar regras CSS só quando certas condições são atendidas, como a largura da tela.'
+              text: 'Media queries permitem aplicar regras CSS só quando certas condições são atendidas, como a largura da tela. Aqui, (min-width: 768px) quer dizer telas com pelo menos 768px de largura; (max-width: 768px) seria até 768px. As regras dentro das chaves só valem nessa condição.'
             },
-            closing: 'Elas são a base para criar interfaces que se adaptam a diferentes tamanhos de tela.',
+            closing: 'Elas são a base para criar interfaces que se adaptam a diferentes tamanhos de tela. No celular, a página também precisa da meta viewport (width=device-width) no head, como você viu no HTML; sem ela, as media queries agem como se a tela fosse bem larga.',
             highlight: ['media queries', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n}\n\n@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
@@ -27733,9 +28354,9 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What media queries are',
-              text: 'Media queries let you apply CSS rules only when certain conditions are met, like the width of the screen.'
+              text: 'Media queries let you apply CSS rules only when certain conditions are met, like the width of the screen. Here, (min-width: 768px) means screens at least 768px wide; (max-width: 768px) would be up to 768px. The rules inside the braces only apply under that condition.'
             },
-            closing: 'They are the foundation for building interfaces that adapt to different screen sizes.',
+            closing: 'They are the foundation for building interfaces that adapt to different screen sizes. On a phone, the page also needs the viewport meta tag (width=device-width) in the head, as you saw in HTML; without it, media queries act as if the screen were very wide.',
             highlight: ['media queries', 'CSS'],
             codeLanguage: 'CSS',
             code: '.card {\n  width: 100%;\n}\n\n@media (min-width: 768px) {\n  .card {\n    width: 50%;\n  }\n}',
@@ -28288,7 +28909,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o valor preferido do clamp: 5% da largura da janela.',
+            question: 'Digite o valor preferido do clamp, com a unidade vw: 5% da largura da janela.',
             highlight: ['valor preferido'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size:\n    clamp(2rem, ___, 4rem);\n}',
@@ -28296,199 +28917,11 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             ignoreCase: true
           },
           en: {
-            question: 'Type the preferred value of the clamp: 5% of the window width.',
+            question: 'Type the preferred value of the clamp, with the unit vw: 5% of the window width.',
             highlight: ['preferred value'],
             codeLanguage: 'CSS',
             code: 'h1 {\n  font-size:\n    clamp(2rem, ___, 4rem);\n}',
             answers: ['5vw'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Transições',
-      en: 'Transitions'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Mudanças suaves',
-              text: 'Um botão que muda de cor de uma vez parece brusco. Dá para suavizar a troca.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'A propriedade transition',
-              text: 'transition permite suavizar a mudança entre dois estados de uma propriedade CSS.'
-            },
-            closing: 'Transições são úteis para tornar mudanças de estado mais naturais sem precisar criar uma animação completa.',
-            highlight: ['transition', 'CSS'],
-            codeLanguage: 'CSS',
-            code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Smooth changes',
-              text: 'A button that changes color all at once feels abrupt. You can smooth the switch.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The transition property',
-              text: 'transition lets you smooth the change between two states of a CSS property.'
-            },
-            closing: 'Transitions are useful for making state changes feel more natural without having to build a full animation.',
-            highlight: ['transition', 'CSS'],
-            codeLanguage: 'CSS',
-            code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Para que serve transition?',
-            highlight: ['transition'],
-            correctOption: 1,
-            options: ['Suavizar a mudança entre dois estados', 'Criar uma animação em loop', 'Mudar o elemento de lugar no HTML', 'Trocar de página'],
-            pool: 'transition'
-          },
-          en: {
-            question: 'What is transition for?',
-            highlight: ['transition'],
-            correctOption: 1,
-            options: ['Smoothing the change between two states', 'Creating a looping animation', 'Moving the element within the HTML', 'Switching pages'],
-            pool: 'transition'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'transition precisa de um @keyframes para funcionar.',
-            highlight: ['transition'],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'transition',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'transition needs a @keyframes to work.',
-            highlight: ['transition'],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'transition',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Em transition: transform 0.2s;, o que é 0.2s?',
-            highlight: [],
-            correctOption: 1,
-            options: ['A duração da transição', 'O atraso até começar', 'O tamanho do elemento', 'O número de repetições'],
-            pool: 'transition'
-          },
-          en: {
-            question: 'In transition: transform 0.2s;, what is 0.2s?',
-            highlight: [],
-            correctOption: 1,
-            options: ['The transition\'s duration', 'The delay before it starts', 'The element\'s size', 'The number of repeats'],
-            pool: 'transition'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete a mudança suave do transform.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.botao {\n  ___: transform 0.2s;\n}',
-            answers: ['transition'],
-            distractors: ['animation', 'transform', 'delay']
-          },
-          en: {
-            question: 'Complete the smooth change of transform.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.button {\n  ___: transform 0.2s;\n}',
-            answers: ['transition'],
-            distractors: ['animation', 'transform', 'delay']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte a regra que suaviza a mudança de transform do .botao em 0.2s (transition).',
-            highlight: ['transition'],
-            codeLanguage: 'CSS',
-            lines: ['.botao {', '  transition:', '    transform 0.2s;', '}'],
-            distractors: ['  animation:', '    transform: 0.2s;']
-          },
-          en: {
-            question: 'Build the rule that smooths the transform change of .button over 0.2s (transition).',
-            highlight: ['transition'],
-            codeLanguage: 'CSS',
-            lines: ['.button {', '  transition:', '    transform 0.2s;', '}'],
-            distractors: ['  animation:', '    transform: 0.2s;']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual regra deixa suave a troca de cor do botão?',
-            codeLanguage: 'CSS',
-            highlight: ['suave'],
-            correctOption: 1,
-            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which rule makes the button color change smooth?',
-            codeLanguage: 'CSS',
-            highlight: ['smooth'],
-            correctOption: 1,
-            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite a propriedade que a transição suaviza: a cor de fundo.',
-            highlight: ['cor de fundo'],
-            codeLanguage: 'CSS',
-            code: '.botao {\n  transition:\n    ___ 0.2s;\n}',
-            answers: ['background-color', 'background'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Type the property the transition smooths: the background color.',
-            highlight: ['background color'],
-            codeLanguage: 'CSS',
-            code: '.button {\n  transition:\n    ___ 0.2s;\n}',
-            answers: ['background-color', 'background'],
             ignoreCase: true
           }
         }
@@ -28512,7 +28945,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'A propriedade transform',
-              text: 'A propriedade transform permite mover, girar, aumentar ou inclinar elementos visualmente.'
+              text: 'A propriedade transform permite mover, girar, aumentar ou inclinar elementos visualmente. Em translateY(-4px), valor negativo sobe e positivo desce. Em scale(1.02), 1 é o tamanho normal: 1.02 aumenta 2%.'
             },
             closing: 'Transformações alteram a apresentação visual do elemento sem modificar sua posição original no fluxo do documento.',
             highlight: ['transform'],
@@ -28528,7 +28961,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The transform property',
-              text: 'The transform property lets you move, rotate, scale or skew elements visually.'
+              text: 'The transform property lets you move, rotate, scale or skew elements visually. In translateY(-4px), a negative value moves up and a positive one moves down. In scale(1.02), 1 is the normal size: 1.02 makes it 2% bigger.'
             },
             closing: 'Transforms change how the element looks without changing its original position in the flow of the document.',
             highlight: ['transform'],
@@ -28765,6 +29198,194 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Transições',
+      en: 'Transitions'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Mudanças suaves',
+              text: 'Um botão que muda de cor de uma vez parece brusco. Dá para suavizar a troca.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A propriedade transition',
+              text: 'transition permite suavizar a mudança entre dois estados de uma propriedade CSS. Em transition: transform 0.2s, o primeiro valor é a propriedade que muda suavemente e o segundo é a duração (s = segundos). O transform e o :hover do exemplo você já conhece.'
+            },
+            closing: 'Transições são úteis para tornar mudanças de estado mais naturais sem precisar criar uma animação completa.',
+            highlight: ['transition', 'CSS'],
+            codeLanguage: 'CSS',
+            code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Smooth changes',
+              text: 'A button that changes color all at once feels abrupt. You can smooth the switch.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The transition property',
+              text: 'transition lets you smooth the change between two states of a CSS property. In transition: transform 0.2s, the first value is the property that changes smoothly and the second is the duration (s = seconds). You already know the transform and :hover in the example.'
+            },
+            closing: 'Transitions are useful for making state changes feel more natural without having to build a full animation.',
+            highlight: ['transition', 'CSS'],
+            codeLanguage: 'CSS',
+            code: '.button {\n  transition:\n    transform 0.2s;\n}\n\n.button:hover {\n  transform: scale(1.05);\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para que serve transition?',
+            highlight: ['transition'],
+            correctOption: 1,
+            options: ['Suavizar a mudança entre dois estados', 'Criar uma animação em loop', 'Mudar o elemento de lugar no HTML', 'Trocar de página'],
+            pool: 'transition'
+          },
+          en: {
+            question: 'What is transition for?',
+            highlight: ['transition'],
+            correctOption: 1,
+            options: ['Smoothing the change between two states', 'Creating a looping animation', 'Moving the element within the HTML', 'Switching pages'],
+            pool: 'transition'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'transition precisa de um @keyframes (as etapas de uma animação, que você verá adiante) para funcionar.',
+            highlight: ['transition'],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'transition',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'transition needs a @keyframes (the steps of an animation, which you will see ahead) to work.',
+            highlight: ['transition'],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'transition',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Em transition: transform 0.2s;, o que é 0.2s?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A duração da transição', 'O atraso até começar', 'O tamanho do elemento', 'O número de repetições'],
+            pool: 'transition'
+          },
+          en: {
+            question: 'In transition: transform 0.2s;, what is 0.2s?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The transition\'s duration', 'The delay before it starts', 'The element\'s size', 'The number of repeats'],
+            pool: 'transition'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete a mudança suave do transform.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  ___: transform 0.2s;\n}',
+            answers: ['transition'],
+            distractors: ['animation', 'transform', 'delay']
+          },
+          en: {
+            question: 'Complete the smooth change of transform.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.button {\n  ___: transform 0.2s;\n}',
+            answers: ['transition'],
+            distractors: ['animation', 'transform', 'delay']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte a regra que suaviza a mudança de transform do .botao em 0.2s (transition).',
+            highlight: ['transition'],
+            codeLanguage: 'CSS',
+            lines: ['.botao {', '  transition:', '    transform 0.2s;', '}'],
+            distractors: ['  animation:', '    transform: 0.2s;']
+          },
+          en: {
+            question: 'Build the rule that smooths the transform change of .button over 0.2s (transition).',
+            highlight: ['transition'],
+            codeLanguage: 'CSS',
+            lines: ['.button {', '  transition:', '    transform 0.2s;', '}'],
+            distractors: ['  animation:', '    transform: 0.2s;']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual regra deixa suave a troca de cor do botão?',
+            codeLanguage: 'CSS',
+            highlight: ['suave'],
+            correctOption: 1,
+            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which rule makes the button color change smooth?',
+            codeLanguage: 'CSS',
+            highlight: ['smooth'],
+            correctOption: 1,
+            options: ['.b {\n  transition: color 0.3s;\n}', '.b {\n  transition: color;\n}', '.b {\n  color: 0.3s;\n}', '.b {\n  smooth: color;\n}'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite a propriedade que a transição suaviza: a cor de fundo.',
+            highlight: ['cor de fundo'],
+            codeLanguage: 'CSS',
+            code: '.botao {\n  transition:\n    ___ 0.2s;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Type the property the transition smooths: the background color.',
+            highlight: ['background color'],
+            codeLanguage: 'CSS',
+            code: '.button {\n  transition:\n    ___ 0.2s;\n}',
+            answers: ['background-color', 'background'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Keyframes',
       en: 'Keyframes'
     },
@@ -28815,7 +29436,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               text: 'Depois de criar os keyframes, usamos animation para aplicar a animação a um elemento.',
               persona: 'neutral'
             },
-            closing: '@keyframes define o que acontece. animation define como essa sequência será aplicada.',
+            closing: '@keyframes define o que acontece. animation define como essa sequência será aplicada. Em animation: aparecer 0.5s ease, aparecer é o nome do @keyframes, 0.5s é a duração e ease é o ritmo (começa devagar, acelera e termina devagar).',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.card {\n  animation:\n    aparecer 0.5s ease;\n}',
@@ -28832,7 +29453,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               text: 'After creating the keyframes, we use animation to apply the animation to an element.',
               persona: 'neutral'
             },
-            closing: '@keyframes defines what happens. animation defines how that sequence gets applied.',
+            closing: '@keyframes defines what happens. animation defines how that sequence gets applied. In animation: appear 0.5s ease, appear is the name of the @keyframes, 0.5s is the duration and ease is the pace (starts slowly, speeds up and ends slowly).',
             highlight: ['keyframes', 'animation'],
             codeLanguage: 'CSS',
             code: '.card {\n  animation:\n    appear 0.5s ease;\n}',
@@ -29007,7 +29628,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'opacity e transform juntos',
-              text: 'Podemos combinar várias propriedades dentro do mesmo @keyframes. Aqui, opacity e transform mudam juntos.'
+              text: 'Podemos combinar várias propriedades dentro do mesmo @keyframes. Aqui, opacity e transform mudam juntos. Em vez de from e to, também dá para usar porcentagens: from é 0% e to é 100%, e dá para marcar etapas no meio, como 50%.'
             },
             closing: 'Combinar propriedades cria animações mais ricas sem precisar de várias animações separadas.',
             highlight: ['keyframes', 'opacity', 'transform'],
@@ -29023,7 +29644,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'opacity and transform together',
-              text: 'We can combine several properties inside the same @keyframes. Here, opacity and transform change together.'
+              text: 'We can combine several properties inside the same @keyframes. Here, opacity and transform change together. Instead of from and to, you can also use percentages: from is 0% and to is 100%, and you can mark steps in the middle, like 50%.'
             },
             closing: 'Combining properties creates richer animations without needing several separate animations.',
             highlight: ['keyframes', 'opacity', 'transform'],
@@ -29264,7 +29885,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'min(), max() e clamp()',
-              text: 'min() escolhe o menor entre os valores informados, e max() escolhe o maior. clamp() combina os dois com um valor preferido no meio.',
+              text: 'min() escolhe o menor entre os valores informados, e max() escolhe o maior. Em min(90%, 400px), a largura acompanha os 90%, mas, como vale o menor, nunca passa de 400px. clamp() combina os dois com um valor preferido no meio.',
               persona: 'neutral'
             },
             closing: 'Essas funções deixam o CSS reagir ao contexto sem precisar de uma media query para cada caso.',
@@ -29276,7 +29897,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'min(), max() and clamp()',
-              text: 'min() picks the smallest of the given values, and max() picks the largest. clamp() combines both with a preferred value in the middle.',
+              text: 'min() picks the smallest of the given values, and max() picks the largest. In min(90%, 400px), the width follows the 90%, but since the smaller one wins, it never goes past 400px. clamp() combines both with a preferred value in the middle.',
               persona: 'neutral'
             },
             closing: 'These functions let CSS react to context without needing a media query for every case.',
@@ -29357,7 +29978,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.conteudo {\n  width:\n    ___(100% - 240px);\n}',
             answers: ['calc'],
-            distractors: ['clamp', 'min', 'sum']
+            distractors: ['clamp', 'minus', 'sum']
           },
           en: {
             question: 'Complete: the full width minus the sidebar.',
@@ -29365,7 +29986,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             codeLanguage: 'CSS',
             code: '.content {\n  width:\n    ___(100% - 240px);\n}',
             answers: ['calc'],
-            distractors: ['clamp', 'min', 'sum']
+            distractors: ['clamp', 'minus', 'sum']
           }
         }
       },
@@ -29485,6 +30106,439 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'Como o CSS decide',
+      en: 'How CSS decides'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Quando duas regras brigam',
+              text: 'Duas regras mandam no mesmo elemento. Qual delas vence?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'A cascata',
+              text: 'Quando duas regras CSS competem pelo mesmo elemento, o navegador segue critérios para decidir qual vale. Isso é a cascata.\n\nEntre regras com a mesma especificidade (o mesmo peso de seletor; a próxima lição explica isso), a que aparece por último no CSS vence.'
+            },
+            closing: 'Nesse exemplo, o parágrafo fica azul, porque essa regra aparece depois.',
+            highlight: ['cascata', 'CSS'],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p>Texto</p>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'When two rules clash',
+              text: 'Two rules control the same element. Which one wins?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'The cascade',
+              text: 'When two CSS rules compete for the same element, the browser follows criteria to decide which one wins. That is the cascade.\n\nBetween rules with the same specificity (the same selector weight; the next lesson explains it), the one that appears last in the CSS wins.'
+            },
+            closing: 'In this example, the paragraph turns blue, because that rule appears later.',
+            highlight: ['cascade', 'CSS'],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p>Text</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Duas regras com a mesma especificidade disputam o mesmo elemento. Qual vale?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A que aparece por último', 'A que aparece primeiro', 'A mais curta', 'Nenhuma das duas'],
+            pool: 'cascade'
+          },
+          en: {
+            question: 'Two rules with the same specificity target the same element. Which one applies?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The one that comes last', 'The one that comes first', 'The shorter one', 'Neither'],
+            pool: 'cascade'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'A cascata decide qual regra vale quando duas competem pelo mesmo elemento.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'cascade',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'The cascade decides which rule applies when two compete for the same element.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'cascade',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Com estas duas regras, de que cor fica o parágrafo?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Azul', 'Preto', 'Roxo, uma mistura', 'Sem cor'],
+            pool: 'cascade'
+          },
+          en: {
+            question: 'With these two rules, what color is the paragraph?',
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
+            highlight: [],
+            correctOption: 1,
+            options: ['Blue', 'Black', 'Purple, a mix', 'No color'],
+            pool: 'cascade'
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'O parágrafo deve ficar azul. Complete a regra que vem por último.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['body', 'html', '*']
+          },
+          en: {
+            question: 'The paragraph should end up blue. Complete the rule that comes last.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
+            answers: ['p'],
+            distractors: ['body', 'html', '*']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte duas regras para p: primeiro a de color black e, depois, a de color blue, que vence por vir por último.',
+            highlight: ['por último'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
+          },
+          en: {
+            question: 'Build two rules for p: first the one with color black and, then, the one with color blue, which wins by coming last.',
+            highlight: ['coming last'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual destes pares de regras deixa o parágrafo azul?',
+            codeLanguage: 'CSS',
+            highlight: ['azul'],
+            correctOption: 1,
+            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which of these pairs of rules makes the paragraph blue?',
+            codeLanguage: 'CSS',
+            highlight: ['blue'],
+            correctOption: 1,
+            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'As duas regras usam o mesmo seletor. Digite a cor final do parágrafo.',
+            highlight: ['cor final'],
+            codeLanguage: 'CSS',
+            code: 'p { color: black; }\np { color: blue; }\n/* cor final: ___ */',
+            answers: ['blue'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'Both rules use the same selector. Type the final color of the paragraph.',
+            highlight: ['final color'],
+            codeLanguage: 'CSS',
+            code: 'p { color: black; }\np { color: blue; }\n/* final color: ___ */',
+            answers: ['blue'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
+      pt: 'Especificidade e herança',
+      en: 'Specificity and inheritance'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O peso de cada seletor',
+              text: 'Por que uma regra vence a outra mesmo vindo antes no arquivo?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'O que é especificidade',
+              text: 'Especificidade é o peso que o navegador dá a cada seletor. Um id pesa mais que uma classe, e uma classe pesa mais que uma tag.'
+            },
+            closing: 'Mesmo que a regra da tag venha depois, a classe vence porque tem mais especificidade.',
+            highlight: ['especificidade'],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="destaque">Texto</p>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'The weight of each selector',
+              text: 'Why does one rule beat another even when it comes first in the file?',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'What specificity is',
+              text: 'Specificity is the weight the browser gives to each selector. An id weighs more than a class, and a class weighs more than a tag.'
+            },
+            closing: 'Even though the tag rule comes later, the class wins because it has more specificity.',
+            highlight: ['specificity'],
+            codeLanguage: 'CSS',
+            code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="destaque">Text</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Herança e !important',
+              text: 'Algumas propriedades, como color e font-family, são herdadas pelos elementos filhos automaticamente: um color no body vale para os parágrafos dentro dele. Já border, margin e padding não são herdadas.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Cuidado com !important',
+              text: '!important ignora a especificidade normal e deve ser usado com cautela — costuma dificultar a manutenção do CSS.'
+            },
+            closing: 'Prefira ajustar a especificidade da regra a recorrer a !important.',
+            highlight: ['herdadas', 'important'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  color: blue !important;\n}',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Inheritance and !important',
+              text: 'Some properties, like color and font-family, are inherited by child elements automatically: a color on the body applies to the paragraphs inside it. border, margin and padding, however, are not inherited.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Careful with !important',
+              text: '!important ignores normal specificity and should be used with caution — it tends to make CSS harder to maintain.'
+            },
+            closing: 'Prefer adjusting the specificity of the rule over reaching for !important.',
+            highlight: ['inherited', 'important'],
+            codeLanguage: 'CSS',
+            code: '.container {\n  color: blue !important;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual seletor tem mais especificidade?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#titulo', '.titulo', 'h1', 'body h1'],
+            pool: 'specificity'
+          },
+          en: {
+            question: 'Which selector has the highest specificity?',
+            highlight: [],
+            correctOption: 1,
+            options: ['#title', '.title', 'h1', 'body h1'],
+            pool: 'specificity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Uma regra de tag vem depois de uma regra de classe. Qual vence?',
+            highlight: [],
+            correctOption: 1,
+            options: ['A de classe', 'A de tag, por vir depois', 'As duas se misturam', 'Nenhuma'],
+            pool: 'specificity'
+          },
+          en: {
+            question: 'A tag rule comes after a class rule. Which one wins?',
+            highlight: [],
+            correctOption: 1,
+            options: ['The class rule', 'The tag rule, for coming later', 'They blend together', 'Neither'],
+            pool: 'specificity'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Usar !important é a melhor forma de resolver conflitos entre regras.',
+            highlight: [],
+            correctOption: 2,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'specificity',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'Using !important is the best way to resolve conflicts between rules.',
+            highlight: [],
+            correctOption: 2,
+            options: ['True', 'False'],
+            pool: 'specificity',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete com uma propriedade que os filhos herdam.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: blue;\n}',
+            answers: ['color'],
+            distractors: ['border', 'margin', 'padding']
+          },
+          en: {
+            question: 'Complete with a property the children inherit.',
+            highlight: [],
+            codeLanguage: 'CSS',
+            code: '.container {\n  ___: blue;\n}',
+            answers: ['color'],
+            distractors: ['border', 'margin', 'padding']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte as regras: primeiro a tag p com color black e, depois, a classe .destaque com color blue.',
+            highlight: ['classe'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', '.destaque {', '  color: blue;', '}']
+          },
+          en: {
+            question: 'Build the rules: first the p tag with color black and, then, the .highlight class with color blue.',
+            highlight: ['class'],
+            codeLanguage: 'CSS',
+            lines: ['p {', '  color: black;', '}', '.highlight {', '  color: blue;', '}']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Para <p class="aviso" id="topo">, qual seletor tem mais peso?',
+            codeLanguage: 'CSS',
+            highlight: ['mais peso'],
+            correctOption: 1,
+            options: ['#topo', '.aviso', 'p', 'p.aviso'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'For <p class="note" id="top">, which selector has the most weight?',
+            codeLanguage: 'CSS',
+            highlight: ['most weight'],
+            correctOption: 1,
+            options: ['#top', '.note', 'p', 'p.note'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Para <p class="aviso">, a classe pesa mais que a tag. Digite a cor que fica.',
+            highlight: ['pesa mais'],
+            codeLanguage: 'CSS',
+            code: '.aviso { color: red; }\np { color: black; }\n/* fica: ___ */',
+            answers: ['red'],
+            ignoreCase: true
+          },
+          en: {
+            question: 'For <p class="note">, the class weighs more than the tag. Type the color that wins.',
+            highlight: ['weighs more'],
+            codeLanguage: 'CSS',
+            code: '.note { color: red; }\np { color: black; }\n/* wins: ___ */',
+            answers: ['red'],
+            ignoreCase: true
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Seletores modernos',
       en: 'Modern selectors'
     },
@@ -29502,7 +30556,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: ':not(), :is() e :where()',
               text: ':not() seleciona elementos que não correspondem a um seletor. :is() e :where() agrupam vários seletores em um só, evitando repetição.'
             },
-            closing: 'A diferença entre :is() e :where() é sutil: :where() nunca aumenta a especificidade do seletor.',
+            closing: 'A diferença entre :is() e :where() é sutil: :where() nunca aumenta a especificidade do seletor, o peso dele na disputa entre regras (você viu isso em Especificidade e herança).',
             highlight: ['seletor', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p:not(.destaque) {\n  color: gray;\n}\n\n:is(h1, h2, h3) {\n  font-weight: bold;\n}',
@@ -29523,7 +30577,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: ':not(), :is() and :where()',
               text: ':not() selects elements that do not match a selector. :is() and :where() group several selectors into one, avoiding repetition.'
             },
-            closing: 'The difference between :is() and :where() is subtle: :where() never adds to the specificity of the selector.',
+            closing: 'The difference between :is() and :where() is subtle: :where() never adds to the specificity of the selector, its weight in the competition between rules (you saw this in Specificity and inheritance).',
             highlight: ['selector', 'CSS'],
             codeLanguage: 'CSS',
             code: 'p:not(.destaque) {\n  color: gray;\n}\n\n:is(h1, h2, h3) {\n  font-weight: bold;\n}',
@@ -29765,439 +30819,6 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
   },
   {
     name: {
-      pt: 'Como o CSS decide',
-      en: 'How CSS decides'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Quando duas regras brigam',
-              text: 'Duas regras mandam no mesmo elemento. Qual delas vence?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'A cascata',
-              text: 'Quando duas regras CSS competem pelo mesmo elemento, o navegador segue critérios para decidir qual vale. Isso é a cascata.\n\nEntre regras com a mesma especificidade, a que aparece por último no CSS vence.'
-            },
-            closing: 'Nesse exemplo, o parágrafo fica azul, porque essa regra aparece depois.',
-            highlight: ['cascata', 'CSS'],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<p>Texto</p>'
-              }
-            ]
-          },
-          en: {
-            introduction: {
-              title: 'When two rules clash',
-              text: 'Two rules control the same element. Which one wins?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'The cascade',
-              text: 'When two CSS rules compete for the same element, the browser follows criteria to decide which one wins. That is the cascade.\n\nBetween rules with the same specificity, the one that appears last in the CSS wins.'
-            },
-            closing: 'In this example, the paragraph turns blue, because that rule appears later.',
-            highlight: ['cascade', 'CSS'],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<p>Text</p>'
-              }
-            ]
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Duas regras com a mesma especificidade disputam o mesmo elemento. Qual vale?',
-            highlight: [],
-            correctOption: 1,
-            options: ['A que aparece por último', 'A que aparece primeiro', 'A mais curta', 'Nenhuma das duas'],
-            pool: 'cascade'
-          },
-          en: {
-            question: 'Two rules with the same specificity target the same element. Which one applies?',
-            highlight: [],
-            correctOption: 1,
-            options: ['The one that comes last', 'The one that comes first', 'The shorter one', 'Neither'],
-            pool: 'cascade'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'A cascata decide qual regra vale quando duas competem pelo mesmo elemento.',
-            highlight: [],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'cascade',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'The cascade decides which rule applies when two compete for the same element.',
-            highlight: [],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'cascade',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Com estas duas regras, de que cor fica o parágrafo?',
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
-            highlight: [],
-            correctOption: 1,
-            options: ['Azul', 'Preto', 'Roxo, uma mistura', 'Sem cor'],
-            pool: 'cascade'
-          },
-          en: {
-            question: 'With these two rules, what color is the paragraph?',
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\np {\n  color: blue;\n}',
-            highlight: [],
-            correctOption: 1,
-            options: ['Blue', 'Black', 'Purple, a mix', 'No color'],
-            pool: 'cascade'
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'O parágrafo deve ficar azul. Complete a regra que vem por último.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
-            answers: ['p'],
-            distractors: ['body', 'html', '*']
-          },
-          en: {
-            question: 'The paragraph should end up blue. Complete the rule that comes last.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n___ {\n  color: blue;\n}',
-            answers: ['p'],
-            distractors: ['body', 'html', '*']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte duas regras para p: primeiro a de color black e, depois, a de color blue, que vence por vir por último.',
-            highlight: ['por último'],
-            codeLanguage: 'CSS',
-            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
-          },
-          en: {
-            question: 'Build two rules for p: first the one with color black and, then, the one with color blue, which wins by coming last.',
-            highlight: ['coming last'],
-            codeLanguage: 'CSS',
-            lines: ['p {', '  color: black;', '}', 'p {', '  color: blue;', '}']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual destes pares de regras deixa o parágrafo azul?',
-            codeLanguage: 'CSS',
-            highlight: ['azul'],
-            correctOption: 1,
-            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which of these pairs of rules makes the paragraph blue?',
-            codeLanguage: 'CSS',
-            highlight: ['blue'],
-            correctOption: 1,
-            options: ['p { color: black; }\np { color: blue; }', 'p { color: blue; }\np { color: black; }', 'p { color: blue; }\np { color: red; }', 'p { color = blue; }\np { }'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'As duas regras usam o mesmo seletor. Digite a cor final do parágrafo.',
-            highlight: ['cor final'],
-            codeLanguage: 'CSS',
-            code: 'p { color: black; }\np { color: blue; }\n/* cor final: ___ */',
-            answers: ['blue'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'Both rules use the same selector. Type the final color of the paragraph.',
-            highlight: ['final color'],
-            codeLanguage: 'CSS',
-            code: 'p { color: black; }\np { color: blue; }\n/* final color: ___ */',
-            answers: ['blue'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'Especificidade e herança',
-      en: 'Specificity and inheritance'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'O peso de cada seletor',
-              text: 'Por que uma regra vence a outra mesmo vindo antes no arquivo?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'O que é especificidade',
-              text: 'Especificidade é o peso que o navegador dá a cada seletor. Um id pesa mais que uma classe, e uma classe pesa mais que uma tag.'
-            },
-            closing: 'Mesmo que a regra da tag venha depois, a classe vence porque tem mais especificidade.',
-            highlight: ['especificidade'],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<p class="destaque">Texto</p>'
-              }
-            ]
-          },
-          en: {
-            introduction: {
-              title: 'The weight of each selector',
-              text: 'Why does one rule beat another even when it comes first in the file?',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'What specificity is',
-              text: 'Specificity is the weight the browser gives to each selector. An id weighs more than a class, and a class weighs more than a tag.'
-            },
-            closing: 'Even though the tag rule comes later, the class wins because it has more specificity.',
-            highlight: ['specificity'],
-            codeLanguage: 'CSS',
-            code: 'p {\n  color: black;\n}\n\n.destaque {\n  color: blue;\n}',
-            additionalCode: [
-              {
-                codeLanguage: 'HTML',
-                code: '<p class="destaque">Text</p>'
-              }
-            ]
-          }
-        }
-      },
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Herança e !important',
-              text: 'Algumas propriedades, como color e font-family, são herdadas pelos elementos filhos automaticamente.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Cuidado com !important',
-              text: '!important ignora a especificidade normal e deve ser usado com cautela — costuma dificultar a manutenção do CSS.'
-            },
-            closing: 'Prefira ajustar a especificidade da regra a recorrer a !important.',
-            highlight: ['herdadas', 'important'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  color: blue !important;\n}',
-            onlyCode: true
-          },
-          en: {
-            introduction: {
-              title: 'Inheritance and !important',
-              text: 'Some properties, like color and font-family, are inherited by child elements automatically.',
-              persona: 'neutral'
-            },
-            explanation: {
-              title: 'Careful with !important',
-              text: '!important ignores normal specificity and should be used with caution — it tends to make CSS harder to maintain.'
-            },
-            closing: 'Prefer adjusting the specificity of the rule over reaching for !important.',
-            highlight: ['inherited', 'important'],
-            codeLanguage: 'CSS',
-            code: '.container {\n  color: blue !important;\n}',
-            onlyCode: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual seletor tem mais especificidade?',
-            highlight: [],
-            correctOption: 1,
-            options: ['#titulo', '.titulo', 'h1', 'body h1'],
-            pool: 'specificity'
-          },
-          en: {
-            question: 'Which selector has the highest specificity?',
-            highlight: [],
-            correctOption: 1,
-            options: ['#title', '.title', 'h1', 'body h1'],
-            pool: 'specificity'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Uma regra de tag vem depois de uma regra de classe. Qual vence?',
-            highlight: [],
-            correctOption: 1,
-            options: ['A de classe', 'A de tag, por vir depois', 'As duas se misturam', 'Nenhuma'],
-            pool: 'specificity'
-          },
-          en: {
-            question: 'A tag rule comes after a class rule. Which one wins?',
-            highlight: [],
-            correctOption: 1,
-            options: ['The class rule', 'The tag rule, for coming later', 'They blend together', 'Neither'],
-            pool: 'specificity'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Usar !important é a melhor forma de resolver conflitos entre regras.',
-            highlight: [],
-            correctOption: 2,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'specificity',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'Using !important is the best way to resolve conflicts between rules.',
-            highlight: [],
-            correctOption: 2,
-            options: ['True', 'False'],
-            pool: 'specificity',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete com uma propriedade que os filhos herdam.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.container {\n  ___: blue;\n}',
-            answers: ['color'],
-            distractors: ['border', 'margin', 'padding']
-          },
-          en: {
-            question: 'Complete with a property the children inherit.',
-            highlight: [],
-            codeLanguage: 'CSS',
-            code: '.container {\n  ___: blue;\n}',
-            answers: ['color'],
-            distractors: ['border', 'margin', 'padding']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte as regras: primeiro a tag p com color black e, depois, a classe .destaque com color blue.',
-            highlight: ['classe'],
-            codeLanguage: 'CSS',
-            lines: ['p {', '  color: black;', '}', '.destaque {', '  color: blue;', '}']
-          },
-          en: {
-            question: 'Build the rules: first the p tag with color black and, then, the .highlight class with color blue.',
-            highlight: ['class'],
-            codeLanguage: 'CSS',
-            lines: ['p {', '  color: black;', '}', '.highlight {', '  color: blue;', '}']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Para <p class="aviso" id="topo">, qual seletor tem mais peso?',
-            codeLanguage: 'CSS',
-            highlight: ['mais peso'],
-            correctOption: 1,
-            options: ['#topo', '.aviso', 'p', 'p.aviso'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'For <p class="note" id="top">, which selector has the most weight?',
-            codeLanguage: 'CSS',
-            highlight: ['most weight'],
-            correctOption: 1,
-            options: ['#top', '.note', 'p', 'p.note'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Para <p class="aviso">, a classe pesa mais que a tag. Digite a cor que fica.',
-            highlight: ['pesa mais'],
-            codeLanguage: 'CSS',
-            code: '.aviso { color: red; }\np { color: black; }\n/* fica: ___ */',
-            answers: ['red'],
-            ignoreCase: true
-          },
-          en: {
-            question: 'For <p class="note">, the class weighs more than the tag. Type the color that wins.',
-            highlight: ['weighs more'],
-            codeLanguage: 'CSS',
-            code: '.note { color: red; }\np { color: black; }\n/* wins: ___ */',
-            answers: ['red'],
-            ignoreCase: true
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
       pt: 'Container queries',
       en: 'Container queries'
     },
@@ -30215,7 +30836,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'O que são container queries',
               text: 'Media queries reagem ao tamanho da tela inteira. Container queries reagem ao tamanho do elemento pai, independentemente do tamanho da tela.'
             },
-            closing: 'Isso é útil para um componente que precisa se adaptar dependendo de onde é usado, não só do tamanho da tela.',
+            closing: 'Isso é útil para um componente que precisa se adaptar dependendo de onde é usado, não só do tamanho da tela. O container-type: inline-size marca o elemento como contêiner e faz a largura dele ser medida (inline-size é a largura).',
             highlight: ['container queries', 'media queries'],
             codeLanguage: 'CSS',
             code: '.card-container {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card {\n    display: flex;\n  }\n}',
@@ -30231,7 +30852,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'What container queries are',
               text: 'Media queries react to the size of the whole screen. Container queries react to the size of the parent element, regardless of the screen size.'
             },
-            closing: 'This is useful for a component that needs to adapt depending on where it is used, not just the screen size.',
+            closing: 'This is useful for a component that needs to adapt depending on where it is used, not just the screen size. The container-type: inline-size marks the element as a container and makes its width be measured (inline-size is the width).',
             highlight: ['container queries', 'media queries'],
             codeLanguage: 'CSS',
             code: '.card-container {\n  container-type: inline-size;\n}\n\n@container (min-width: 300px) {\n  .card {\n    display: flex;\n  }\n}',
@@ -30653,7 +31274,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'scroll-behavior e accent-color',
-              text: 'scroll-behavior: smooth transforma um salto brusco em uma rolagem suave ao navegar para uma âncora da página.\n\naccent-color muda a cor de controles nativos, como checkbox e radio, sem precisar recriar o componente do zero.'
+              text: 'scroll-behavior: smooth transforma um salto brusco em uma rolagem suave ao navegar para uma âncora da página.\n\naccent-color muda a cor de controles nativos, como checkbox e radio, sem precisar recriar o componente do zero. O input[type="checkbox"] do exemplo escolhe só os inputs desse tipo.'
             },
             closing: 'São ajustes pequenos que aproveitam comportamento e componentes que o navegador já oferece.',
             highlight: ['scroll-behavior', 'accent-color'],
@@ -30669,7 +31290,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'scroll-behavior and accent-color',
-              text: 'scroll-behavior: smooth turns an abrupt jump into a smooth scroll when navigating to an anchor on the page.\n\naccent-color changes the color of native controls, like checkbox and radio, without having to rebuild the component from scratch.'
+              text: 'scroll-behavior: smooth turns an abrupt jump into a smooth scroll when navigating to an anchor on the page.\n\naccent-color changes the color of native controls, like checkbox and radio, without having to rebuild the component from scratch. The input[type="checkbox"] in the example picks only the inputs of that type.'
             },
             closing: 'These are small adjustments that take advantage of behavior and components the browser already offers.',
             highlight: ['scroll-behavior', 'accent-color'],
@@ -30751,18 +31372,18 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'backdrop-filter funciona igual em todos os navegadores.',
+            aditionalParagraph: 'backdrop-filter aplica o efeito ao conteúdo que está atrás do elemento.',
             highlight: ['backdrop-filter'],
-            correctOption: 2,
+            correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
             pool: 'visual-xp',
             fixedOrder: true
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'backdrop-filter works the same in every browser.',
+            aditionalParagraph: 'backdrop-filter applies the effect to the content behind the element.',
             highlight: ['backdrop-filter'],
-            correctOption: 2,
+            correctOption: 1,
             options: ['True', 'False'],
             pool: 'visual-xp',
             fixedOrder: true
@@ -30897,7 +31518,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'O anel de foco e o outline',
               text: 'Quando um elemento recebe foco pelo teclado, o navegador desenha um contorno ao redor dele por padrão: o anel de foco.\n\nRemover esse contorno com outline: none, sem colocar nada no lugar, deixa quem navega pelo teclado sem saber onde está.'
             },
-            closing: 'Se for personalizar o visual do foco, troque o outline por outro indicador visível, nunca remova sem substituir.',
+            closing: 'Se for personalizar o visual do foco, troque o outline por outro indicador visível, nunca remova sem substituir. Para mostrar o anel só a quem navega pelo teclado, existe a pseudo-classe :focus-visible.',
             highlight: ['foco', 'outline'],
             codeLanguage: 'CSS',
             code: '/* Evite isto sem um substituto */\nbutton:focus {\n  outline: none;\n}',
@@ -30913,7 +31534,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'The focus ring and the outline',
               text: 'When an element receives keyboard focus, the browser draws an outline around it by default: the focus ring.\n\nRemoving that outline with outline: none, without putting anything in its place, leaves someone navigating by keyboard without knowing where they are.'
             },
-            closing: 'If you want to customize the look of focus, swap the outline for another visible indicator — never remove it without replacing it.',
+            closing: 'If you want to customize the look of focus, swap the outline for another visible indicator — never remove it without replacing it. To show the ring only to people navigating by keyboard, there is the :focus-visible pseudo-class.',
             highlight: ['focus', 'outline'],
             codeLanguage: 'CSS',
             code: '/* Evite isto sem um substituto */\nbutton:focus {\n  outline: none;\n}',
@@ -31113,7 +31734,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'Uma interface avançada também precisa considerar acessibilidade. Animações devem melhorar a experiência, não prejudicá-la.',
             highlight: ['prefers-reduced-motion', 'CSS'],
             codeLanguage: 'CSS',
-            code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n  }\n}',
+            code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n    scroll-behavior: auto;\n  }\n}',
             onlyCode: true
           },
           en: {
@@ -31129,7 +31750,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'An advanced interface also needs to consider accessibility. Animations should improve the experience, not harm it.',
             highlight: ['prefers-reduced-motion', 'CSS'],
             codeLanguage: 'CSS',
-            code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n  }\n}',
+            code: '@media (prefers-reduced-motion: reduce) {\n  * {\n    animation: none;\n    transition: none;\n    scroll-behavior: auto;\n  }\n}',
             onlyCode: true
           }
         }
@@ -31350,6 +31971,53 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         }
       },
       {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Contraste: como ler claro e escuro',
+              text: 'Contraste é a diferença de brilho entre o texto e o fundo. Dá para ler o brilho direto de um valor hexadecimal.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Perto de #000 é escuro, perto de #fff é claro',
+              text: 'Em #222, o brilho é baixo (quase preto); em #fff é o máximo (branco); #999 fica no meio-claro. Texto e fundo com brilho parecido são difíceis de ler.\n\nA WCAG, as regras de acessibilidade da web, mede o contraste numa razão: de 1:1 (nenhuma diferença) a 21:1 (preto no branco). Para texto comum, o mínimo é 4,5:1; para texto grande, 3:1.'
+            },
+            closing: 'Texto #222 sobre #fff passa com folga (cerca de 16:1). #999 sobre #fff fica abaixo de 4,5:1: o texto é claro demais para o fundo.',
+            highlight: ['contraste', 'brilho', 'WCAG', '4,5:1'],
+            codeLanguage: 'CSS',
+            code: '/* bom: cerca de 16:1 */\n.bom {\n  color: #222;\n  background: #fff;\n}\n\n/* ruim: cerca de 2,8:1 */\n.ruim {\n  color: #999;\n  background: #fff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="bom">\n  Fácil de ler\n</p>\n<p class="ruim">\n  Difícil de ler\n</p>'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Contrast: reading light and dark',
+              text: 'Contrast is the difference in brightness between the text and the background. You can read the brightness straight from a hexadecimal value.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Near #000 is dark, near #fff is light',
+              text: 'In #222, the brightness is low (almost black); #fff is the maximum (white); #999 sits in the light middle. Text and background with similar brightness are hard to read.\n\nWCAG, the web accessibility rules, measures contrast as a ratio: from 1:1 (no difference) to 21:1 (black on white). For regular text, the minimum is 4.5:1; for large text, 3:1.'
+            },
+            closing: 'Text #222 on #fff passes with room to spare (about 16:1). #999 on #fff falls below 4.5:1: the text is too light for the background.',
+            highlight: ['contrast', 'brightness', 'WCAG', '4.5:1'],
+            codeLanguage: 'CSS',
+            code: '/* good: about 16:1 */\n.bom {\n  color: #222;\n  background: #fff;\n}\n\n/* bad: about 2.8:1 */\n.ruim {\n  color: #999;\n  background: #fff;\n}',
+            additionalCode: [
+              {
+                codeLanguage: 'HTML',
+                code: '<p class="bom">\n  Easy to read\n</p>\n<p class="ruim">\n  Hard to read\n</p>'
+              }
+            ]
+          }
+        }
+      },
+      {
         type: 'option',
         content: {
           pt: {
@@ -31414,7 +32082,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete com texto escuro sobre fundo claro.',
+            question: 'Complete com texto escuro (#222) sobre fundo branco (#fff).',
             highlight: [],
             codeLanguage: 'CSS',
             code: '.texto {\n  color: ___;\n  background: ___;\n}',
@@ -31422,7 +32090,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             distractors: ['#eee', '#ccc']
           },
           en: {
-            question: 'Complete with dark text on a light background.',
+            question: 'Complete with dark text (#222) on a white background (#fff).',
             highlight: [],
             codeLanguage: 'CSS',
             code: '.text {\n  color: ___;\n  background: ___;\n}',
@@ -32115,7 +32783,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'Assim as variações de uma regra ficam juntas, no mesmo bloco.',
             highlight: ['@media', 'dark'],
             codeLanguage: 'CSS',
-            code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
+            code: '.card {\n  width: 100%;\n\n  @media (min-width: 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
             onlyCode: true
           },
           en: {
@@ -32127,7 +32795,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
             closing: 'That way the variations of a rule stay together, in the same block.',
             highlight: ['@media', 'dark'],
             codeLanguage: 'CSS',
-            code: '.card {\n  width: 100%;\n\n  @media (width >= 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
+            code: '.card {\n  width: 100%;\n\n  @media (min-width: 600px) {\n    width: 50%;\n  }\n\n  .dark & {\n    background: black;\n  }\n}',
             onlyCode: true
           }
         }
@@ -32265,7 +32933,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'mandatory e proximity',
-              text: 'mandatory sempre encaixa: a rolagem nunca termina entre dois itens. proximity só encaixa quando a rolagem para perto de um ponto. O primeiro valor é o eixo: x, y ou both.',
+              text: 'mandatory sempre encaixa: a rolagem nunca termina entre dois itens. proximity só encaixa quando a rolagem para perto de um ponto. O primeiro valor é o eixo: x (horizontal), y (vertical) ou both (os dois).',
               persona: 'neutral'
             },
             closing: 'Prefira proximity em listas longas, onde forçar o encaixe atrapalharia a leitura.',
@@ -32277,7 +32945,7 @@ export const CSS_ADVANCED_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'mandatory and proximity',
-              text: 'mandatory always snaps: the scroll never ends between two items. proximity only snaps when the scroll stops near a point. The first value is the axis: x, y or both.',
+              text: 'mandatory always snaps: the scroll never ends between two items. proximity only snaps when the scroll stops near a point. The first value is the axis: x (horizontal), y (vertical) or both (the two).',
               persona: 'neutral'
             },
             closing: 'Prefer proximity on long lists, where forcing the snap would get in the way of reading.',
@@ -32482,7 +33150,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Escopo e a scope chain',
-              text: 'Toda variável existe dentro de um escopo. Quando o JavaScript não encontra uma variável no escopo atual, ele procura no escopo de fora, e assim por diante: isso é a scope chain.'
+              text: 'Toda variável existe dentro de um escopo. Quando o JavaScript não encontra uma variável no escopo atual, ele procura no escopo de fora, e assim por diante: isso é a scope chain. Há o escopo global (fora de qualquer função ou bloco), o de função e o de bloco (entre chaves, para let e const).'
             },
             closing: 'A busca sempre vai de dentro para fora, nunca o contrário — uma função externa não enxerga variáveis criadas dentro de uma função interna.',
             highlight: ['scope chain', 'JavaScript'],
@@ -32498,7 +33166,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Scope and the scope chain',
-              text: 'Every variable exists inside a scope. When JavaScript cannot find a variable in the current scope, it looks in the scope outside it, and so on: that is the scope chain.'
+              text: 'Every variable exists inside a scope. When JavaScript cannot find a variable in the current scope, it looks in the scope outside it, and so on: that is the scope chain. There is the global scope (outside any function or block), the function scope and the block scope (between braces, for let and const).'
             },
             closing: 'The search always goes from inside out, never the other way around — an outer function cannot see variables created inside an inner function.',
             highlight: ['scope chain', 'JavaScript'],
@@ -32719,11 +33387,12 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'Contadores independentes',
               text: 'No exemplo, contadorA e contadorB têm cada um o seu próprio total, mesmo tendo vindo da mesma função.'
             },
-            closing: 'Esse isolamento é o que permite usar closures para guardar dados privados, acessíveis apenas pelas funções que a closure devolve.',
+            closing: 'Esse isolamento é o que permite usar closures para guardar dados privados, acessíveis apenas pelas funções que a closure devolve. Nos exercícios, ++total soma 1 e já entrega o novo valor, como total++ seguido de return total.',
             highlight: ['closure', 'closures'],
             codeLanguage: 'JavaScript',
             code: 'const contadorA = criarContador();\nconst contadorB = criarContador();\n\nconsole.log(contadorA()); // 1\nconsole.log(contadorA()); // 2\nconsole.log(contadorB()); // 1',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'function criarContador() {\n  let total = 0;\n\n  return function () {\n    total++;\n    return total;\n  };\n}\n\nconst contadorA = criarContador();\nconst contadorB = criarContador();\n\nconsole.log(contadorA()); // 1\nconsole.log(contadorA()); // 2\nconsole.log(contadorB()); // 1'
           },
           en: {
             introduction: {
@@ -32735,11 +33404,12 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'Independent counters',
               text: 'In the example, counterA and counterB each have their own total, even though they came from the same function.'
             },
-            closing: 'This isolation is what lets closures hold private data, reachable only through the functions the closure returns.',
+            closing: 'This isolation is what lets closures hold private data, reachable only through the functions the closure returns. In the exercises, ++total adds 1 and already gives the new value, like total++ followed by return total.',
             highlight: ['closure', 'closures'],
             codeLanguage: 'JavaScript',
             code: 'const counterA = createCounter();\nconst counterB = createCounter();\n\nconsole.log(counterA()); // 1\nconsole.log(counterA()); // 2\nconsole.log(counterB()); // 1',
-            onlyCode: true
+            onlyCode: true,
+            terminalCode: 'function createCounter() {\n  let total = 0;\n\n  return function () {\n    total++;\n    return total;\n  };\n}\n\nconst counterA = createCounter();\nconst counterB = createCounter();\n\nconsole.log(counterA()); // 1\nconsole.log(counterA()); // 2\nconsole.log(counterB()); // 1'
           }
         }
       },
@@ -32907,9 +33577,9 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é hoisting',
-              text: 'Antes de executar o código, o JavaScript prepara o escopo e já reserva espaço para as declarações: isso é o hoisting.'
+              text: 'Antes de executar o código, o JavaScript prepara o escopo e já reserva espaço para as declarações: isso é o hoisting. O var é a forma antiga de declarar variáveis (de antes do let e do const): você ainda o encontrará em códigos antigos, por isso vale conhecer o comportamento dele.'
             },
-            closing: 'var é içada e inicializada como undefined. let e const também são içadas, mas não podem ser usadas antes da linha em que são declaradas.',
+            closing: 'var é içada e inicializada como undefined. let e const também são içadas, mas não podem ser usadas antes da linha em que são declaradas. Já function nome() {} é içada por inteiro e pode ser chamada antes da linha onde aparece. Hoje se prefere let e const, porque var ignora blocos e vale na função inteira.',
             highlight: ['hoisting', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log(nome); // undefined\nvar nome = "Ana";\n\nconsole.log(idade); // erro\nlet idade = 20;',
@@ -32923,9 +33593,9 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What hoisting is',
-              text: 'Before running the code, JavaScript prepares the scope and already reserves space for declarations: that is hoisting.'
+              text: 'Before running the code, JavaScript prepares the scope and already reserves space for declarations: that is hoisting. var is the old way of declaring variables (from before let and const): you will still find it in old code, so it is worth knowing how it behaves.'
             },
-            closing: 'var is hoisted and initialized as undefined. let and const are also hoisted, but cannot be used before the line where they are declared.',
+            closing: 'var is hoisted and initialized as undefined. let and const are also hoisted, but cannot be used before the line where they are declared. A function declaration like function name() {} is hoisted whole and can be called before the line where it appears. Today let and const are preferred, because var ignores blocks and is valid in the whole function.',
             highlight: ['hoisting', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: 'console.log(name); // undefined\nvar name = "Ana";\n\nconsole.log(age); // error\nlet age = 20;',
@@ -33097,7 +33767,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'this depende do contexto',
-              text: 'O valor de this depende do contexto em que a função foi chamada, não de onde ela foi escrita.'
+              text: 'O valor de this depende do contexto em que a função foi chamada, não de onde ela foi escrita. Um método é uma função guardada dentro de um objeto (como saudar, abaixo); quando o chamamos com usuario.saudar(), o this é o objeto usuario.'
             },
             closing: 'Aqui, this é usuario, porque a função foi chamada como um método de usuario.',
             highlight: ['contexto'],
@@ -33113,7 +33783,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'this depends on the context',
-              text: 'The value of this depends on the context the function was called in, not on where it was written.'
+              text: 'The value of this depends on the context the function was called in, not on where it was written. A method is a function stored inside an object (like greet, below); when we call it with user.greet(), this is the user object.'
             },
             closing: 'Here, this is user, because the function was called as a method of user.',
             highlight: ['context'],
@@ -33136,7 +33806,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'Perdendo o this',
               text: 'Ao guardar o método numa variável e chamá-lo solto, ele deixa de ser chamado a partir de usuario — e this deixa de apontar para ele.'
             },
-            closing: 'É por isso que se diz que this é definido no momento da chamada, e não no momento em que a função é escrita.',
+            closing: 'É por isso que se diz que this é definido no momento da chamada, e não no momento em que a função é escrita. Para fixar o this, dá para usar bind: usuario.saudar.bind(usuario). Em modo estrito (módulos e classes), o this solto seria undefined e a linha daria erro.',
             highlight: ['this'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"\n\nconst solta = usuario.saudar;\nsolta(); // undefined',
@@ -33152,7 +33822,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'Losing this',
               text: 'Storing the method in a variable and calling it on its own means it is no longer called from usuario — and this stops pointing to it.'
             },
-            closing: 'That is why this is said to be decided at call time, not when the function is written.',
+            closing: 'That is why this is said to be decided at call time, not when the function is written. To fix this, you can use bind: usuario.saudar.bind(usuario). In strict mode (modules and classes), a loose this would be undefined and the line would throw an error.',
             highlight: ['this'],
             codeLanguage: 'JavaScript',
             code: 'const usuario = {\n  nome: "Ana",\n  saudar() {\n    console.log(this.nome);\n  }\n};\n\nusuario.saudar(); // "Ana"\n\nconst loose = usuario.saudar;\nloose(); // undefined',
@@ -33549,7 +34219,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é prototype',
-              text: 'Todo objeto em JavaScript tem um prototype: outro objeto de onde ele pode herdar propriedades e métodos.'
+              text: 'Todo objeto em JavaScript tem um prototype: outro objeto de onde ele pode herdar propriedades e métodos. Object.create(animal) cria um objeto novo cujo prototype é animal.'
             },
             closing: 'Quando uma propriedade não existe no próprio objeto, o JavaScript procura no prototype — essa busca é a prototype chain.',
             highlight: ['prototype', 'prototype chain', 'JavaScript'],
@@ -33565,7 +34235,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What a prototype is',
-              text: 'Every object in JavaScript has a prototype: another object it can inherit properties and methods from.'
+              text: 'Every object in JavaScript has a prototype: another object it can inherit properties and methods from. Object.create(animal) creates a new object whose prototype is animal.'
             },
             closing: 'When a property does not exist on the object itself, JavaScript looks in the prototype — that search is the prototype chain.',
             highlight: ['prototype', 'prototype chain', 'JavaScript'],
@@ -33774,7 +34444,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'class e extends',
-              text: 'class oferece uma sintaxe mais familiar para trabalhar com o mesmo sistema de prototypes por trás dos panos.'
+              text: 'class oferece uma sintaxe mais familiar para trabalhar com o mesmo sistema de prototypes por trás dos panos. Com new Cachorro() criamos um objeto (uma instância) a partir da classe, e extends faz Cachorro herdar de Animal. Mais adiante nesta lição, você vê como dar dados a cada objeto.'
             },
             closing: 'extends cria herança entre classes, e o método na classe filha sobrescreve o da classe pai.',
             highlight: ['class', 'extends', 'prototypes'],
@@ -33790,7 +34460,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'class and extends',
-              text: 'class offers a more familiar syntax for working with the same prototype system behind the scenes.'
+              text: 'class offers a more familiar syntax for working with the same prototype system behind the scenes. With new Dog() we create an object (an instance) from the class, and extends makes Dog inherit from Animal. Later in this lesson, you see how to give data to each object.'
             },
             closing: 'extends creates inheritance between classes, and the method in the child class overrides the one in the parent class.',
             highlight: ['class', 'extends', 'prototype'],
@@ -33833,6 +34503,43 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['super', 'class', 'prototypes'],
             codeLanguage: 'JavaScript',
             code: 'class Animal {\n  emitirSom() {\n    console.log("Generic sound");\n  }\n}\n\nclass Cachorro extends Animal {\n  emitirSom() {\n    super.emitirSom();\n    console.log("Woof");\n  }\n}\n\nnew Cachorro().emitirSom();',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Dando dados à classe',
+              text: 'Até aqui, os objetos criados pelas classes eram todos iguais. E se cada cachorro precisar do seu próprio nome?',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'constructor e new',
+              text: 'O constructor é um método especial que roda sozinho quando criamos um objeto com new. Dentro dele, this é o objeto novo, e this.nome = nome guarda nele o valor recebido.\n\nnew Cachorro("Rex") cria uma instância: um objeto feito a partir da classe, com o seu próprio nome.'
+            },
+            closing: 'O constructor também pode não receber nada: constructor() { this.saldo = 0; } cria todo objeto com saldo 0. Se a classe filha não escreve um constructor, ela usa o da classe pai; se escreve, a primeira linha precisa ser super(...), que chama o constructor da classe pai.',
+            highlight: ['constructor', 'new', 'instância'],
+            codeLanguage: 'JavaScript',
+            code: 'class Cachorro {\n  constructor(nome) {\n    this.nome = nome;\n  }\n\n  apresentar() {\n    console.log(this.nome);\n  }\n}\n\nconst rex =\n  new Cachorro("Rex");\nrex.apresentar();\n// mostra: Rex\n\nconst bolt =\n  new Cachorro("Bolt");\nbolt.apresentar();\n// mostra: Bolt',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Giving data to the class',
+              text: 'So far, the objects created by classes were all the same. What if each dog needs its own name?',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'constructor and new',
+              text: 'The constructor is a special method that runs by itself when we create an object with new. Inside it, this is the new object, and this.name = name stores the received value in it.\n\nnew Dog("Rex") creates an instance: an object made from the class, with its own name.'
+            },
+            closing: 'The constructor can also receive nothing: constructor() { this.balance = 0; } creates every object with balance 0. If the child class does not write a constructor, it uses the parent\'s; if it does, the first line must be super(...), which calls the parent class constructor.',
+            highlight: ['constructor', 'new', 'instance'],
+            codeLanguage: 'JavaScript',
+            code: 'class Dog {\n  constructor(name) {\n    this.name = name;\n  }\n\n  introduce() {\n    console.log(this.name);\n  }\n}\n\nconst rex =\n  new Dog("Rex");\nrex.introduce();\n// shows: Rex\n\nconst bolt =\n  new Dog("Bolt");\nbolt.introduce();\n// shows: Bolt',
             onlyCode: true
           }
         }
@@ -34389,7 +35096,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'O .then() espera a vez',
               text: 'Quando uma Promise é resolvida, seu .then() não executa na hora: ele entra na fila de microtasks e espera a call stack ficar livre.'
             },
-            closing: 'Por isso o texto síncrono aparece antes do resultado da Promise, mesmo que ela já esteja resolvida.',
+            closing: 'Por isso o texto síncrono aparece antes do resultado da Promise, mesmo que ela já esteja resolvida. O mesmo vale para o que vem depois de um await: esse trecho só continua quando a call stack esvazia, como uma microtask.',
             highlight: ['Promise', 'microtasks'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve("ok").then((valor) => {\n  console.log(valor);\n});\n\nconsole.log("Executado primeiro");',
@@ -34405,7 +35112,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
               title: 'The .then() waits its turn',
               text: 'When a Promise is resolved, its .then() does not run right away: it goes into the microtask queue and waits for the call stack to be free.'
             },
-            closing: 'That is why the synchronous text shows up before the Promise result, even though it is already resolved.',
+            closing: 'That is why the synchronous text shows up before the Promise result, even though it is already resolved. The same goes for what comes after an await: that part only continues when the call stack is empty, like a microtask.',
             highlight: ['Promise', 'microtask'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve("ok").then((value) => {\n  console.log(value);\n});\n\nconsole.log("Runs first");',
@@ -34579,7 +35286,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Valor e referência',
-              text: 'Tipos primitivos, como number e string, são copiados por valor. Objetos e arrays são copiados por referência.'
+              text: 'Tipos primitivos, como number e string, são copiados por valor. Objetos e arrays guardam uma referência: copiar a variável copia só esse endereço, e as duas passam a apontar para o mesmo objeto.'
             },
             closing: 'Mudar obj2 também muda obj1, porque as duas variáveis apontam para o mesmo objeto na memória.',
             highlight: ['valor', 'referência'],
@@ -34595,7 +35302,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Value and reference',
-              text: 'Primitive types, like number and string, are copied by value. Objects and arrays are copied by reference.'
+              text: 'Primitive types, like number and string, are copied by value. Objects and arrays hold a reference: copying the variable copies only that address, and both end up pointing to the same object.'
             },
             closing: 'Changing obj2 also changes obj1, because both variables point to the same object in memory.',
             highlight: ['value', 'reference'],
@@ -34616,7 +35323,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Primitivo ou objeto',
-              text: 'Um primitivo chega como cópia, então alterá-lo dentro da função não afeta o original. Um objeto chega como referência, então alterá-lo afeta quem o passou.'
+              text: 'Um primitivo chega como cópia, então alterá-lo dentro da função não afeta o original. Um objeto chega como uma cópia da referência, então alterar suas propriedades afeta quem o passou (mas trocar a variável por outro objeto, não).'
             },
             closing: 'Esse é um dos motivos mais comuns de um valor parecer mudar sozinho em outro ponto do código.',
             highlight: ['referência'],
@@ -34632,7 +35339,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Primitive or object',
-              text: 'A primitive arrives as a copy, so changing it inside the function does not affect the original. An object arrives as a reference, so changing it affects whoever passed it.'
+              text: 'A primitive arrives as a copy, so changing it inside the function does not affect the original. An object arrives as a copy of the reference, so changing its properties affects whoever passed it (but replacing the variable with another object does not).'
             },
             closing: 'This is one of the most common reasons a value seems to change on its own somewhere else in the code.',
             highlight: ['reference'],
@@ -34693,7 +35400,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         content: {
           pt: {
             question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Objetos e arrays são copiados por referência.',
+            aditionalParagraph: 'Copiar uma variável que guarda um objeto não duplica o objeto: as duas variáveis apontam para o mesmo.',
             highlight: [],
             correctOption: 1,
             options: ['Verdadeiro', 'Falso'],
@@ -34702,7 +35409,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
           },
           en: {
             question: 'True or false?',
-            aditionalParagraph: 'Objects and arrays are copied by reference.',
+            aditionalParagraph: 'Copying a variable that holds an object does not duplicate the object: both variables point to the same one.',
             highlight: [],
             correctOption: 1,
             options: ['True', 'False'],
@@ -34797,7 +35504,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'code_playground',
         content: {
           pt: {
-            question: 'Complete as chamadas para o console mostrar 20 10: o objeto muda dentro da função, o número passado não.',
+            question: 'Complete as chamadas para o console mostrar 20 10 (p.preco *= 2 é o mesmo que p.preco = p.preco * 2): o objeto muda dentro da função, o número passado não.',
             highlight: ['objeto muda'],
             codeLanguage: 'JavaScript',
             code: 'function encarecer(p) {\n  p.preco *= 2;\n}\n\nfunction dobrar(n) {\n  n *= 2;\n}\n\nconst item = { preco: 10 };\nlet total = 10;\nencarecer(___);\ndobrar(___);\nconsole.log(\n  item.preco,\n  total\n);',
@@ -34806,7 +35513,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             checkScript: '(function () {\n  var e = window.__codapConsoleEntries.filter(function (x) { return x.type === "log"; });\n  var last = e.length ? e[e.length - 1].message : "";\n  __codap_report(last === "20 10", "O console precisa mostrar 20 10.");\n})();'
           },
           en: {
-            question: 'Complete the calls so the console shows 20 10: the object changes inside the function, the number passed does not.',
+            question: 'Complete the calls so the console shows 20 10 (p.price *= 2 is the same as p.price = p.price * 2): the object changes inside the function, the number passed does not.',
             highlight: ['object changes'],
             codeLanguage: 'JavaScript',
             code: 'function raise(p) {\n  p.price *= 2;\n}\n\nfunction double(n) {\n  n *= 2;\n}\n\nconst item = { price: 10 };\nlet total = 10;\nraise(___);\ndouble(___);\nconsole.log(\n  item.price,\n  total\n);',
@@ -34835,7 +35542,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Shallow copy e deep copy',
-              text: 'Uma shallow copy duplica só o primeiro nível de um objeto. Propriedades que são, elas mesmas, objetos continuam compartilhadas.'
+              text: 'O { ...original } copia as propriedades de um objeto para um objeto novo. Uma shallow copy duplica só o primeiro nível de um objeto. Propriedades que são, elas mesmas, objetos continuam compartilhadas.'
             },
             closing: 'Para copiar todos os níveis de verdade, é preciso uma deep copy, como structuredClone().',
             highlight: ['shallow copy', 'deep copy'],
@@ -34851,7 +35558,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Shallow copy and deep copy',
-              text: 'A shallow copy duplicates only the first level of an object. Properties that are themselves objects stay shared.'
+              text: '{ ...original } copies the properties of an object into a new object. A shallow copy duplicates only the first level of an object. Properties that are themselves objects stay shared.'
             },
             closing: 'To copy every level for real, you need a deep copy, like structuredClone().',
             highlight: ['shallow copy', 'deep copy'],
@@ -35122,7 +35829,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Comparar o antes e o depois',
-              text: 'Se ninguém altera o objeto no lugar, comparar o antes e o depois basta para saber que algo mudou — não é preciso vasculhar cada propriedade.'
+              text: 'Se ninguém altera o objeto no lugar, comparar o antes e o depois basta para saber que algo mudou — não é preciso vasculhar cada propriedade. O === entre objetos pergunta se são exatamente o mesmo objeto, não se têm o mesmo conteúdo; por isso um objeto novo dá false.'
             },
             closing: 'É por isso que bibliotecas de interface, como o React, pedem que o estado seja tratado de forma imutável: elas usam essa comparação para decidir o que precisa ser atualizado na tela.',
             highlight: ['imutabilidade', 'imutável', 'React'],
@@ -35138,7 +35845,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Comparing before and after',
-              text: 'If nobody changes the object in place, comparing before and after is enough to know something changed — there is no need to inspect every property.'
+              text: 'If nobody changes the object in place, comparing before and after is enough to know something changed — there is no need to inspect every property. The === between objects asks whether they are exactly the same object, not whether they have the same content; that is why a new object gives false.'
             },
             closing: 'That is why interface libraries such as React ask for state to be treated immutably: they use that comparison to decide what needs updating on screen.',
             highlight: ['immutability', 'immutably', 'React'],
@@ -35337,7 +36044,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Event delegation',
-              text: 'Em vez de adicionar um listener em cada item de uma lista, podemos adicionar um único listener no elemento pai.\n\nToque em qualquer item da lista para ver o listener único capturando o clique.'
+              text: 'Na event delegation, em vez de adicionar um listener (um "ouvinte" criado com addEventListener) em cada item de uma lista, adicionamos um único listener no elemento pai. Isso funciona porque o evento borbulha: o toque no item também sobe até o pai, e a propriedade target do evento indica qual elemento foi tocado (currentTarget é o elemento que tem o listener).\n\nToque em qualquer item da lista para ver o listener único capturando o clique.'
             },
             closing: 'Agora toque em "Adicionar item" e depois toque no item novo: o mesmo listener funciona nele também, mesmo tendo sido criado depois — é isso que economiza um listener por item.',
             highlight: ['event delegation', 'listener'],
@@ -35362,7 +36069,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Event delegation',
-              text: 'Instead of adding a listener to every item in a list, we can add a single listener to the parent element.\n\nTap any item in the list to see the single listener capturing the click.'
+              text: 'In event delegation, instead of adding a listener (created with addEventListener) to every item in a list, we add a single listener to the parent element. This works because the event bubbles: a tap on the item also travels up to the parent, and the target property of the event says which element was tapped (currentTarget is the element that has the listener).\n\nTap any item in the list to see the single listener capturing the click.'
             },
             closing: 'Now tap "Add item" and then tap the new item: the same listener works on it too, even though it was created afterward — that is exactly what saves a listener per item.',
             highlight: ['event delegation', 'listener'],
@@ -35811,7 +36518,8 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['JavaScript', 'this', 'closures', 'prototypes', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve().then(() => console.log("2 - microtask"));\n\nsetTimeout(() => console.log("3 - macrotask"), 0);\n\nconsole.log("1 - agora");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             introduction: {
@@ -35827,7 +36535,8 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             highlight: ['JavaScript', 'this', 'closures', 'prototypes', 'event loop'],
             codeLanguage: 'JavaScript',
             code: 'Promise.resolve().then(() => console.log("2 - microtask"));\n\nsetTimeout(() => console.log("3 - macrotask"), 0);\n\nconsole.log("1 - now");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -35842,7 +36551,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Uma camada de tipos',
-              text: 'TypeScript não substitui o que você aprendeu. Ele é uma camada de tipos sobre esse mesmo JavaScript, e todo código escrito até aqui continua válido.'
+              text: 'TypeScript não substitui o que você aprendeu. Ele é uma camada de tipos sobre esse mesmo JavaScript, e todo código escrito até aqui continua válido. Em a: number, a parte : number diz que a precisa ser um número; o : number depois dos parênteses diz que a função devolve um número.'
             },
             closing: 'O objetivo não é dominar a ferramenta, e sim reconhecer o TypeScript em projetos reais e entender o que os tipos estão comunicando.',
             highlight: ['JavaScript', 'TypeScript'],
@@ -35858,7 +36567,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'A layer of types',
-              text: 'TypeScript does not replace what you have learned. It is a layer of types over that same JavaScript, and every piece of code written so far is still valid.'
+              text: 'TypeScript does not replace what you have learned. It is a layer of types over that same JavaScript, and every piece of code written so far is still valid. In a: number, the : number part says that a must be a number; the : number after the parentheses says the function returns a number.'
             },
             closing: 'The goal is not to master the tool, but to recognize TypeScript in real projects and understand what the types are communicating.',
             highlight: ['JavaScript', 'TypeScript'],
@@ -36023,21 +36732,21 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
         type: 'code_editor',
         content: {
           pt: {
-            question: 'Crie a classe Conta, com saldo começando em 0 e o método depositar(valor), que soma ao saldo e devolve o saldo novo. Crie a classe Poupanca, que estende Conta e tem o método render(), que acrescenta 10% ao saldo. Por fim, crie criarContador(): ela devolve uma função que, a cada chamada, devolve o próximo número (1, 2, 3…), e cada contador conta separado.',
+            question: 'Crie a classe Conta, com saldo começando em 0 (o constructor() dá os valores iniciais de cada objeto) e o método depositar(valor), que soma ao saldo e devolve o saldo novo. Crie a classe Poupanca, que estende Conta e tem o método render(), que acrescenta 10% ao saldo. Por fim, crie criarContador(): ela devolve uma função que, a cada chamada, devolve o próximo número (1, 2, 3…), e cada contador conta separado.',
             highlight: ['estende', 'separado'],
             codeLanguage: 'JavaScript',
             starterCode: '// 1. Conta\n\n// 2. Poupanca\n\n// 3. criarContador\n',
             checkScript: '(function () {\n  function attempt(fn) { try { return fn(); } catch (e) { return false; } }\n  __codap_check("Uma Conta nova começa com saldo 0", attempt(function () { return new Conta().saldo === 0; }));\n  __codap_check("depositar soma ao saldo e devolve o saldo novo", attempt(function () {\n    var c = new Conta();\n    return c.depositar(50) === 50 && c.depositar(25) === 75 && c.saldo === 75;\n  }));\n  __codap_check("Poupanca estende Conta", attempt(function () { return new Poupanca() instanceof Conta; }));\n  __codap_check("render() acrescenta 10% ao saldo da Poupanca", attempt(function () {\n    var p = new Poupanca();\n    p.depositar(200);\n    p.render();\n    return Math.abs(p.saldo - 220) < 0.000001;\n  }));\n  __codap_check("criarContador() devolve uma função que conta 1, 2, 3…", attempt(function () {\n    var a = criarContador();\n    return a() === 1 && a() === 2 && a() === 3;\n  }));\n  __codap_check("Cada contador conta separado (closure)", attempt(function () {\n    var a = criarContador(), b = criarContador();\n    a(); a();\n    return b() === 1 && a() === 3;\n  }));\n})();',
-            hints: ['No constructor() da Conta, this.saldo = 0. O método depositar(valor) faz this.saldo += valor e devolve this.saldo.', 'class Poupanca extends Conta já herda depositar; render() só precisa de this.saldo *= 1.1;', 'criarContador() guarda let n = 0 dentro dela e devolve uma função que faz n++ e return n. Como cada chamada de criarContador() cria o próprio n, os contadores não se misturam.'],
+            hints: ['No constructor() da Conta, this.saldo = 0. O método depositar(valor) faz this.saldo += valor (o mesmo que this.saldo = this.saldo + valor) e devolve this.saldo.', 'class Poupanca extends Conta já herda depositar; render() só precisa de this.saldo *= 1.1; (o mesmo que this.saldo = this.saldo * 1.1)', 'criarContador() guarda let n = 0 dentro dela e devolve uma função que faz n++ e return n. Como cada chamada de criarContador() cria o próprio n, os contadores não se misturam.'],
             solution: 'class Conta {\n  constructor() {\n    this.saldo = 0;\n  }\n\n  depositar(valor) {\n    this.saldo += valor;\n    return this.saldo;\n  }\n}\n\nclass Poupanca extends Conta {\n  render() {\n    this.saldo *= 1.1;\n  }\n}\n\nfunction criarContador() {\n  let n = 0;\n  return () => {\n    n++;\n    return n;\n  };\n}'
           },
           en: {
-            question: 'Create the Wallet class, with balance starting at 0 and the method deposit(amount), which adds to the balance and returns the new balance. Create the Savings class, which extends Wallet and has the method addInterest(), which adds 10% to the balance. Finally, create createCounter(): it returns a function that, on each call, returns the next number (1, 2, 3…), and each counter counts on its own.',
+            question: 'Create the Wallet class, with balance starting at 0 (the constructor() gives each object its starting values) and the method deposit(amount), which adds to the balance and returns the new balance. Create the Savings class, which extends Wallet and has the method addInterest(), which adds 10% to the balance. Finally, create createCounter(): it returns a function that, on each call, returns the next number (1, 2, 3…), and each counter counts on its own.',
             highlight: ['extends', 'on its own'],
             codeLanguage: 'JavaScript',
             starterCode: '// 1. Wallet\n\n// 2. Savings\n\n// 3. createCounter\n',
             checkScript: '(function () {\n  function attempt(fn) { try { return fn(); } catch (e) { return false; } }\n  __codap_check("A new Wallet starts with balance 0", attempt(function () { return new Wallet().balance === 0; }));\n  __codap_check("deposit adds to the balance and returns the new balance", attempt(function () {\n    var c = new Wallet();\n    return c.deposit(50) === 50 && c.deposit(25) === 75 && c.balance === 75;\n  }));\n  __codap_check("Savings extends Wallet", attempt(function () { return new Savings() instanceof Wallet; }));\n  __codap_check("addInterest() adds 10% to the Savings balance", attempt(function () {\n    var p = new Savings();\n    p.deposit(200);\n    p.addInterest();\n    return Math.abs(p.balance - 220) < 0.000001;\n  }));\n  __codap_check("createCounter() returns a function that counts 1, 2, 3…", attempt(function () {\n    var a = createCounter();\n    return a() === 1 && a() === 2 && a() === 3;\n  }));\n  __codap_check("Each counter counts on its own (closure)", attempt(function () {\n    var a = createCounter(), b = createCounter();\n    a(); a();\n    return b() === 1 && a() === 3;\n  }));\n})();',
-            hints: ['In Wallet\'s constructor(), this.balance = 0. The deposit(amount) method does this.balance += amount and returns this.balance.', 'class Savings extends Wallet already inherits deposit; addInterest() only needs this.balance *= 1.1;', 'createCounter() keeps let n = 0 inside it and returns a function that does n++ and return n. Since each call to createCounter() makes its own n, the counters do not mix.'],
+            hints: ['In Wallet\'s constructor(), this.balance = 0. The deposit(amount) method does this.balance += amount (the same as this.balance = this.balance + amount) and returns this.balance.', 'class Savings extends Wallet already inherits deposit; addInterest() only needs this.balance *= 1.1; (the same as this.balance = this.balance * 1.1)', 'createCounter() keeps let n = 0 inside it and returns a function that does n++ and return n. Since each call to createCounter() makes its own n, the counters do not mix.'],
             solution: 'class Wallet {\n  constructor() {\n    this.balance = 0;\n  }\n\n  deposit(amount) {\n    this.balance += amount;\n    return this.balance;\n  }\n}\n\nclass Savings extends Wallet {\n  addInterest() {\n    this.balance *= 1.1;\n  }\n}\n\nfunction createCounter() {\n  let n = 0;\n  return () => {\n    n++;\n    return n;\n  };\n}'
           }
         }
@@ -36061,7 +36770,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que o TypeScript traz',
-              text: 'JavaScript é flexível, mas essa flexibilidade pode dificultar a manutenção de aplicações maiores. O TypeScript adiciona recursos de tipagem ao desenvolvimento JavaScript para ajudar a detectar certos problemas antes da execução.'
+              text: 'JavaScript é flexível, mas essa flexibilidade pode dificultar a manutenção de aplicações maiores. O TypeScript adiciona recursos de tipagem ao desenvolvimento JavaScript para ajudar a detectar certos problemas antes da execução. Em a: number, a parte : number diz que a precisa ser um número. Sem essa checagem, o JavaScript puro faria 2 + "3" resultar em "23", sem avisar.'
             },
             closing: 'Esse tipo de erro só apareceria em tempo de execução no JavaScript puro — o TypeScript aponta antes.',
             highlight: ['TypeScript', 'JavaScript'],
@@ -36077,7 +36786,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What TypeScript brings',
-              text: 'JavaScript is flexible, but that flexibility can make larger applications harder to maintain. TypeScript adds typing features to JavaScript development to help catch certain problems before the code even runs.'
+              text: 'JavaScript is flexible, but that flexibility can make larger applications harder to maintain. TypeScript adds typing features to JavaScript development to help catch certain problems before the code even runs. In a: number, the : number part says that a must be a number. Without that check, plain JavaScript would make 2 + "3" result in "23", without warning.'
             },
             closing: 'This kind of error would only show up at runtime in plain JavaScript — TypeScript points it out beforehand.',
             highlight: ['TypeScript', 'JavaScript'],
@@ -36464,7 +37173,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Inferência e anotação',
-              text: 'O TypeScript consegue inferir o tipo de uma variável a partir do valor atribuído, sem precisar de uma anotação explícita.'
+              text: 'O TypeScript consegue inferir o tipo de uma variável a partir do valor atribuído, sem precisar de uma anotação explícita. Para listas, o tipo do item vem seguido de []: string[] é um array de textos.'
             },
             closing: 'Anotações explícitas são úteis quando o valor inicial não deixa claro qual tipo se pretende usar.',
             highlight: ['inferir', 'anotação', 'TypeScript'],
@@ -36480,7 +37189,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Inference and annotation',
-              text: 'TypeScript can infer the type of a variable from the assigned value, without needing an explicit annotation.'
+              text: 'TypeScript can infer the type of a variable from the assigned value, without needing an explicit annotation. For lists, the item type is followed by []: string[] is an array of texts.'
             },
             closing: 'Explicit annotations are useful when the initial value does not make it clear which type is intended.',
             highlight: ['infer', 'annotation', 'TypeScript'],
@@ -37036,7 +37745,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Tipos em parâmetros e retorno',
-              text: 'Podemos tipar os parâmetros, o retorno e até objetos inteiros usados por uma função.'
+              text: 'Podemos tipar os parâmetros, o retorno e até objetos inteiros usados por uma função. O tipo do retorno vem depois dos parênteses, com dois-pontos: function dobro(n: number): number.'
             },
             closing: 'Com os tipos declarados, o TypeScript avisa se a função for chamada com argumentos errados ou se o retorno não bater com o esperado.',
             highlight: ['TypeScript'],
@@ -37052,7 +37761,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Types on parameters and return',
-              text: 'We can type the parameters, the return value and even whole objects used by a function.'
+              text: 'We can type the parameters, the return value and even whole objects used by a function. The return type comes after the parentheses, with a colon: function double(n: number): number.'
             },
             closing: 'With the types declared, TypeScript warns if the function is called with the wrong arguments or if the return does not match what is expected.',
             highlight: ['TypeScript'],
@@ -37222,7 +37931,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Verificando antes de usar',
-              text: 'any desliga a verificação de tipos para aquele valor: o TypeScript deixa de ajudar ali.\n\nunknown também aceita qualquer valor, mas exige uma verificação antes de deixar usá-lo, o que é mais seguro.'
+              text: 'any desliga a verificação de tipos para aquele valor: o TypeScript deixa de ajudar ali.\n\nunknown também aceita qualquer valor, mas exige uma verificação antes de deixar usá-lo, o que é mais seguro. A verificação usa typeof valor === "string", que pergunta qual é o tipo do valor; dentro do if, o TypeScript já sabe que é um texto.'
             },
             closing: 'Prefira unknown a any sempre que o tipo ainda não for conhecido.',
             highlight: ['unknown', 'any', 'TypeScript'],
@@ -37239,7 +37948,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Checking before using',
-              text: 'any turns off type checking for that value: TypeScript stops helping there.\n\nunknown also accepts any value, but requires a check before letting you use it, which is safer.'
+              text: 'any turns off type checking for that value: TypeScript stops helping there.\n\nunknown also accepts any value, but requires a check before letting you use it, which is safer. The check uses typeof value === "string", which asks what the type of the value is; inside the if, TypeScript already knows it is a text.'
             },
             closing: 'Prefer unknown over any whenever the type is not known yet.',
             highlight: ['unknown', 'any', 'TypeScript'],
@@ -37453,7 +38162,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que são generics',
-              text: 'generics permitem criar funções e estruturas reutilizáveis sem perder informações sobre os tipos utilizados.'
+              text: 'generics permitem criar funções e estruturas reutilizáveis sem perder informações sobre os tipos utilizados. O <T> é um nome de tipo que só é decidido quando a função é chamada: com [1, 2, 3], T vira number; com textos, vira string. T[] quer dizer "array de T".'
             },
             closing: 'O mesmo código pode trabalhar com diferentes tipos mantendo informações sobre o tipo utilizado.',
             highlight: ['generics'],
@@ -37469,7 +38178,7 @@ export const JS_ADVANCED_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What generics are',
-              text: 'Generics let you create reusable functions and structures without losing information about the types used.'
+              text: 'Generics let you create reusable functions and structures without losing information about the types used. The <T> is a type name that is only decided when the function is called: with [1, 2, 3], T becomes number; with texts, it becomes string. T[] means "array of T".'
             },
             closing: 'The same code can work with different types while keeping information about the type used.',
             highlight: ['generics'],
@@ -39028,6 +39737,43 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         }
       },
       {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O terminal',
+              text: 'Para rodar um arquivo com o Node.js, você precisa de um lugar onde dar a ordem. Esse lugar é o terminal.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Dando ordens ao computador',
+              text: 'O terminal é uma janela de texto em que você dá ordens ao computador digitando comandos. Para rodar um arquivo JavaScript com o Node.js, abra o terminal na pasta do arquivo e digite node app.js: o node lê o arquivo e executa o código.\n\nO que o console.log escreve aparece ali mesmo, no terminal.'
+            },
+            closing: 'Os comentários mostram o que você digitaria e o que apareceria. Quem executa o arquivo é o Node.js, não o navegador.',
+            highlight: ['terminal', 'node'],
+            codeLanguage: 'JavaScript',
+            code: '// app.js\nconsole.log("Olá, Node!");\n\n// terminal: node app.js\n// mostra: Olá, Node!',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'The terminal',
+              text: 'To run a file with Node.js, you need a place to give the order. That place is the terminal.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Giving orders to the computer',
+              text: 'The terminal is a text window where you give orders to the computer by typing commands. To run a JavaScript file with Node.js, open the terminal in the file\'s folder and type node app.js: node reads the file and runs the code.\n\nWhat console.log writes shows up right there, in the terminal.'
+            },
+            closing: 'The comments show what you would type and what would appear. The one running the file is Node.js, not the browser.',
+            highlight: ['terminal', 'node'],
+            codeLanguage: 'JavaScript',
+            code: '// app.js\nconsole.log("Hi, Node!");\n\n// terminal: node app.js\n// shows: Hi, Node!',
+            onlyCode: true
+          }
+        }
+      },
+      {
         type: 'option',
         content: {
           pt: {
@@ -39113,14 +39859,14 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte: o arquivo app.js tem console.log("Olá, Node!") e, depois, o comentário de como rodar no terminal: node app.js.',
+            question: 'Monte: o comentário // app.js, depois console.log("Olá, Node!") e, por fim, o comentário de como rodar no terminal: node app.js.',
             highlight: ['terminal'],
             codeLanguage: 'JavaScript',
             lines: ['// app.js', 'console.log("Olá, Node!");', '// terminal: node app.js'],
             distractors: ['// terminal: run app.js']
           },
           en: {
-            question: 'Build: the app.js file has console.log("Hi, Node!") and, after it, the comment on how to run it in the terminal: node app.js.',
+            question: 'Build: the comment // app.js, then console.log("Hi, Node!") and, finally, the comment on how to run it in the terminal: node app.js.',
             highlight: ['terminal'],
             codeLanguage: 'JavaScript',
             lines: ['// app.js', 'console.log("Hi, Node!");', '// terminal: node app.js'],
@@ -39189,7 +39935,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'O que é um runtime',
               text: 'Um runtime é o ambiente responsável por executar um programa. O navegador fornece um ambiente JavaScript voltado para a web. O Node.js fornece outro, com recursos próprios.'
             },
-            closing: 'Por isso, JavaScript executado no navegador e JavaScript executado no Node.js podem ter APIs disponíveis diferentes.',
+            closing: 'Por isso, JavaScript executado no navegador e JavaScript executado no Node.js podem ter APIs disponíveis diferentes. As variáveis de ambiente, como process.env.PORT, são configurações do computador onde o programa roda, por exemplo o número da porta do servidor.',
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// No navegador\nwindow.location.href;\n\n// No Node.js\nprocess.env;',
@@ -39206,12 +39952,49 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'What a runtime is',
               text: 'A runtime is the environment responsible for running a program. The browser provides a JavaScript environment aimed at the web. Node.js provides another one, with its own resources.'
             },
-            closing: 'That is why JavaScript running in the browser and JavaScript running in Node.js can have different APIs available.',
+            closing: 'That is why JavaScript running in the browser and JavaScript running in Node.js can have different APIs available. Environment variables, like process.env.PORT, are settings of the computer where the program runs, for example the server\'s port number.',
             highlight: ['runtime', 'Node.js', 'JavaScript'],
             codeLanguage: 'JavaScript',
             code: '// In the browser\nwindow.location.href;\n\n// In Node.js\nprocess.env;',
             onlyCode: true,
             noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'O que é uma API',
+              text: 'Imagine um restaurante: você olha o cardápio, faz o pedido e recebe o prato, sem entrar na cozinha.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A API é o cardápio',
+              text: 'Uma API é o cardápio de um programa: a lista de pedidos que outro programa pode fazer e como fazê-los, sem precisar saber como tudo é feito por dentro. Quem pede só conhece o nome do pedido e recebe o resultado.\n\nNo exemplo, cardapio.suco() é um pedido; como o suco é preparado fica escondido. Na web é igual: o pedido pode viajar pela internet, como "me dê a lista de usuários".'
+            },
+            closing: 'Por isso cada ambiente tem o seu cardápio: o navegador oferece window e document; o Node.js oferece process e fs.',
+            highlight: ['API', 'cardápio', 'pedido'],
+            codeLanguage: 'JavaScript',
+            code: 'const cardapio = {\n  suco: () => "Suco pronto",\n  pao: () => "Pão na chapa"\n};\n\nconsole.log(cardapio.suco());\n// mostra: Suco pronto',
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'What an API is',
+              text: 'Imagine a restaurant: you look at the menu, place the order and get the dish, without going into the kitchen.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The API is the menu',
+              text: 'An API is the menu of a program: the list of requests another program can make and how to make them, without needing to know how everything is done inside. Whoever orders only knows the name of the order and gets the result.\n\nIn the example, menu.juice() is an order; how the juice is made stays hidden. On the web it is the same: the order can travel over the internet, like "give me the list of users".'
+            },
+            closing: 'That is why each environment has its own menu: the browser offers window and document; Node.js offers process and fs.',
+            highlight: ['API', 'menu', 'order'],
+            codeLanguage: 'JavaScript',
+            code: 'const menu = {\n  juice: () => "Juice ready",\n  bread: () => "Toasted bread"\n};\n\nconsole.log(menu.juice());\n// shows: Juice ready',
+            onlyCode: true
           }
         }
       },
@@ -39432,7 +40215,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['document', 'console', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Navegador\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Executando no servidor");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             introduction: {
@@ -39448,7 +40232,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['document', 'console', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Browser\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Running on the server");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -39465,7 +40250,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['frontend', 'backend', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Navegador\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Executando no servidor");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           },
           en: {
             introduction: {
@@ -39477,7 +40263,8 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['frontend', 'backend', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// Browser\ndocument.querySelector("button");\n\n// Node.js\nconsole.log("Running on the server");',
-            onlyCode: true
+            onlyCode: true,
+            noTerminal: true
           }
         }
       },
@@ -39778,7 +40565,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual arquivo descreve o projeto Node.js e suas dependências?',
+            question: 'Qual destes arquivos guarda o nome, a versão e as dependências do projeto?',
             codeLanguage: 'JavaScript',
             highlight: ['dependências'],
             correctOption: 1,
@@ -39786,7 +40573,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             optionsAsCode: true
           },
           en: {
-            question: 'Which file describes the Node.js project and its dependencies?',
+            question: 'Which of these files holds the name, the version and the dependencies of the project?',
             codeLanguage: 'JavaScript',
             highlight: ['dependencies'],
             correctOption: 1,
@@ -40054,7 +40841,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Módulos no Node.js',
               text: 'Assim como aplicações frontend podem ser divididas em módulos, aplicações Node.js também podem separar responsabilidades em arquivos diferentes.'
             },
-            closing: 'Módulos ajudam a organizar o código e reutilizar funcionalidades.',
+            closing: 'Módulos ajudam a organizar o código e reutilizar funcionalidades. Para o Node.js tratar seus arquivos .js como módulos (import/export), coloque "type": "module" no package.json; o padrão é o formato antigo, o CommonJS (require e module.exports).',
             highlight: ['módulos', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// math.js\nexport function somar(a, b) {\n  return a + b;\n}',
@@ -40077,7 +40864,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Modules in Node.js',
               text: 'Just like frontend applications can be split into modules, Node.js applications can also separate responsibilities across different files.'
             },
-            closing: 'Modules help organize code and reuse functionality.',
+            closing: 'Modules help organize code and reuse functionality. For Node.js to treat your .js files as modules (import/export), put "type": "module" in package.json; the default is the old format, CommonJS (require and module.exports).',
             highlight: ['modules', 'Node.js'],
             codeLanguage: 'JavaScript',
             code: '// math.js\nexport function add(a, b) {\n  return a + b;\n}',
@@ -40385,19 +41172,19 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual módulo nativo do Node.js trabalha com arquivos?',
+            question: 'Qual módulo nativo do Node.js cria servidores HTTP?',
             codeLanguage: 'JavaScript',
-            highlight: ['arquivos'],
+            highlight: ['servidores HTTP'],
             correctOption: 1,
-            options: ['node:fs', 'node:http', 'node:files', 'node:os'],
+            options: ['node:http', 'node:fs', 'node:files', 'node:os'],
             optionsAsCode: true
           },
           en: {
-            question: 'Which native Node.js module works with files?',
+            question: 'Which native Node.js module creates HTTP servers?',
             codeLanguage: 'JavaScript',
-            highlight: ['files'],
+            highlight: ['HTTP servers'],
             correctOption: 1,
-            options: ['node:fs', 'node:http', 'node:files', 'node:os'],
+            options: ['node:http', 'node:fs', 'node:files', 'node:os'],
             optionsAsCode: true
           }
         }
@@ -40442,7 +41229,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'A API de sistema de arquivos',
               text: 'A API de sistema de arquivos do Node.js permite ler, criar e modificar arquivos diretamente pelo programa.'
             },
-            closing: 'Esse tipo de acesso é possível porque Node.js executa fora do ambiente restrito de uma página web.',
+            closing: 'Esse tipo de acesso é possível porque Node.js executa fora do ambiente restrito de uma página web. As funções terminadas em Sync param o programa até acabar; em servidores, prefira as versões assíncronas (node:fs/promises).',
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "mensagem.txt",\n  "Olá!"\n);',
@@ -40459,7 +41246,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'The file system API',
               text: 'The Node.js file system API lets you read, create and modify files directly from the program.'
             },
-            closing: 'This kind of access is possible because Node.js runs outside the restricted environment of a web page.',
+            closing: 'This kind of access is possible because Node.js runs outside the restricted environment of a web page. Functions ending in Sync stop the program until they finish; in servers, prefer the asynchronous versions (node:fs/promises).',
             highlight: ['Node.js'],
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:fs";\n\nfs.writeFileSync(\n  "message.txt",\n  "Hello!"\n);',
@@ -40606,194 +41393,6 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JavaScript',
             code: 'import fs from "node:___";',
             answers: ['fs']
-          }
-        }
-      }
-    ]
-  },
-  {
-    name: {
-      pt: 'HTTP com Node.js',
-      en: 'HTTP with Node.js'
-    },
-    activities: [
-      {
-        type: 'theory',
-        content: {
-          pt: {
-            introduction: {
-              title: 'Um servidor sem framework',
-              text: 'Dá para criar um servidor só com o que o Node.js oferece.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'Servidores HTTP no Node.js',
-              text: 'O próprio Node.js tem recursos para criar servidores HTTP. Isso permite receber requisições e enviar respostas sem usar um framework.'
-            },
-            closing: 'É possível criar um servidor diretamente com Node.js, mas aplicações maiores podem se beneficiar de ferramentas que simplificam esse trabalho.',
-            highlight: ['Node.js', 'HTTP', 'framework'],
-            codeLanguage: 'JavaScript',
-            code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true,
-            noTerminal: true
-          },
-          en: {
-            introduction: {
-              title: 'A server without a framework',
-              text: 'You can create a server with just what Node.js offers.',
-              persona: 'cody'
-            },
-            explanation: {
-              title: 'HTTP servers in Node.js',
-              text: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework.'
-            },
-            closing: 'It\'s possible to create a server directly with Node.js, but larger applications can benefit from tools that simplify that work.',
-            highlight: ['Node.js', 'HTTP', 'framework'],
-            codeLanguage: 'JavaScript',
-            code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
-            onlyCode: true,
-            noTerminal: true
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que createServer, do node:http, cria?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Um servidor HTTP', 'Um banco de dados', 'Uma página HTML', 'Um pacote npm'],
-            pool: 'node-http'
-          },
-          en: {
-            question: 'What does createServer, from node:http, create?',
-            highlight: [],
-            correctOption: 1,
-            options: ['An HTTP server', 'A database', 'An HTML page', 'An npm package'],
-            pool: 'node-http'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'O que server.listen(3000) faz?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Faz o servidor escutar na porta 3000', 'Espera 3000 milissegundos', 'Limita a 3000 requisições', 'Cria 3000 rotas'],
-            pool: 'node-http'
-          },
-          en: {
-            question: 'What does server.listen(3000) do?',
-            highlight: [],
-            correctOption: 1,
-            options: ['Makes the server listen on port 3000', 'Waits 3000 milliseconds', 'Limits it to 3000 requests', 'Creates 3000 routes'],
-            pool: 'node-http'
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Verdadeiro ou falso?',
-            aditionalParagraph: 'Dá para criar um servidor HTTP com o Node.js sem nenhum framework.',
-            highlight: [],
-            correctOption: 1,
-            options: ['Verdadeiro', 'Falso'],
-            pool: 'node-http',
-            fixedOrder: true
-          },
-          en: {
-            question: 'True or false?',
-            aditionalParagraph: 'You can build an HTTP server with Node.js without any framework.',
-            highlight: [],
-            correctOption: 1,
-            options: ['True', 'False'],
-            pool: 'node-http',
-            fixedOrder: true
-          }
-        }
-      },
-      {
-        type: 'code_blank',
-        content: {
-          pt: {
-            question: 'Complete o servidor que escuta na porta 3000.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const server = ___(\n  (req, res) => res.end("Oi")\n);\nserver.___(3000);',
-            answers: ['createServer', 'listen'],
-            distractors: ['express', 'start', 'open']
-          },
-          en: {
-            question: 'Complete the server that listens on port 3000.',
-            highlight: [],
-            codeLanguage: 'JavaScript',
-            code: 'const server = ___(\n  (req, res) => res.end("Hi")\n);\nserver.___(3000);',
-            answers: ['createServer', 'listen'],
-            distractors: ['express', 'start', 'open']
-          }
-        }
-      },
-      {
-        type: 'reorder',
-        content: {
-          pt: {
-            question: 'Monte o servidor: createServer responde "Oi" com res.end, e o servidor escuta a porta 3000.',
-            highlight: ['createServer'],
-            codeLanguage: 'JavaScript',
-            lines: ['const server = createServer(', '  (req, res) => res.end("Oi")', ');', 'server.listen(3000);'],
-            distractors: ['server.start(3000);']
-          },
-          en: {
-            question: 'Build the server: createServer answers "Hi" with res.end, and the server listens on port 3000.',
-            highlight: ['createServer'],
-            codeLanguage: 'JavaScript',
-            lines: ['const server = createServer(', '  (req, res) => res.end("Hi")', ');', 'server.listen(3000);'],
-            distractors: ['server.start(3000);']
-          }
-        }
-      },
-      {
-        type: 'option',
-        content: {
-          pt: {
-            question: 'Qual linha faz o servidor receber requisições na porta 3000?',
-            codeLanguage: 'JavaScript',
-            highlight: ['porta 3000'],
-            correctOption: 1,
-            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
-            optionsAsCode: true
-          },
-          en: {
-            question: 'Which line makes the server take requests on port 3000?',
-            codeLanguage: 'JavaScript',
-            highlight: ['port 3000'],
-            correctOption: 1,
-            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
-            optionsAsCode: true
-          }
-        }
-      },
-      {
-        type: 'fill_blank',
-        content: {
-          pt: {
-            question: 'Digite o método da resposta que envia "Oi" e encerra.',
-            highlight: ['encerra'],
-            codeLanguage: 'JavaScript',
-            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Oi")\n);',
-            answers: ['end']
-          },
-          en: {
-            question: 'Type the response method that sends "Hi" and finishes.',
-            highlight: ['finishes'],
-            codeLanguage: 'JavaScript',
-            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Hi")\n);',
-            answers: ['end']
           }
         }
       }
@@ -41247,7 +41846,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'O status da resposta',
               text: 'Além dos dados, uma resposta HTTP tem um status que indica como a requisição foi processada.'
             },
-            closing: 'Os códigos de status ajudam o cliente a entender o resultado de uma requisição.',
+            closing: 'Os códigos de status ajudam o cliente a entender o resultado de uma requisição. Nos exercícios, res.status(404) é o jeito que o Express (assunto das próximas lições) usa para definir o status da resposta.',
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> deu certo\n// 201 Created                  -> recurso criado\n// 400 Bad Request               -> requisição malformada\n// 404 Not Found                  -> recurso não existe\n// 500 Internal Server Error       -> erro no servidor',
@@ -41264,7 +41863,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'The response status',
               text: 'Besides the data, an HTTP response has a status that indicates how the request was processed.'
             },
-            closing: 'Status codes help the client understand the result of a request.',
+            closing: 'Status codes help the client understand the result of a request. In the exercises, res.status(404) is how Express (the topic of the next lessons) sets the status of the response.',
             highlight: ['HTTP', 'status'],
             codeLanguage: 'JavaScript',
             code: '// 200 OK                      -> worked fine\n// 201 Created                  -> resource created\n// 400 Bad Request               -> malformed request\n// 404 Not Found                  -> resource does not exist\n// 500 Internal Server Error       -> server error',
@@ -41338,7 +41937,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete o status de recurso não encontrado.',
+            question: 'Complete o status de recurso não encontrado (no Express, res.status define o status da resposta).',
             highlight: [],
             codeLanguage: 'JavaScript',
             code: 'res.status(___)\n  .json({ erro: "x" });',
@@ -41346,7 +41945,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['200', '500', '201']
           },
           en: {
-            question: 'Complete the status for a resource that wasn\'t found.',
+            question: 'Complete the status for a resource that wasn\'t found (in Express, res.status sets the status of the response).',
             highlight: [],
             codeLanguage: 'JavaScript',
             code: 'res.status(___)\n  .json({ error: "x" });',
@@ -41378,19 +41977,19 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual status indica que o recurso não foi encontrado?',
+            question: 'Qual status indica um erro interno do servidor?',
             codeLanguage: 'JavaScript',
-            highlight: ['não foi encontrado'],
+            highlight: ['erro interno'],
             correctOption: 1,
-            options: ['404', '200', '201', '500'],
+            options: ['500', '200', '201', '404'],
             optionsAsCode: true
           },
           en: {
-            question: 'Which status says the resource was not found?',
+            question: 'Which status says there was an internal server error?',
             codeLanguage: 'JavaScript',
-            highlight: ['not found'],
+            highlight: ['internal server error'],
             correctOption: 1,
-            options: ['404', '200', '201', '500'],
+            options: ['500', '200', '201', '404'],
             optionsAsCode: true
           }
         }
@@ -41469,6 +42068,194 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
   },
   {
     name: {
+      pt: 'HTTP com Node.js',
+      en: 'HTTP with Node.js'
+    },
+    activities: [
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Um servidor sem framework',
+              text: 'Dá para criar um servidor só com o que o Node.js oferece.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'Servidores HTTP no Node.js',
+              text: 'O próprio Node.js tem recursos para criar servidores HTTP. Isso permite receber requisições e enviar respostas sem usar um framework. No exemplo, req é a requisição recebida e res é a resposta a enviar: res.end("Olá!") responde e encerra. O listen(3000) deixa o servidor esperando pedidos na porta 3000, a "porta de entrada" do servidor. As próximas lições explicam o HTTP com calma.'
+            },
+            closing: 'É possível criar um servidor diretamente com Node.js, mas aplicações maiores podem se beneficiar de ferramentas que simplificam esse trabalho.',
+            highlight: ['Node.js', 'HTTP', 'framework'],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Olá!");\n  });\n\nserver.listen(3000);',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            introduction: {
+              title: 'A server without a framework',
+              text: 'You can create a server with just what Node.js offers.',
+              persona: 'cody'
+            },
+            explanation: {
+              title: 'HTTP servers in Node.js',
+              text: 'Node.js itself has resources to create HTTP servers. This lets you receive requests and send responses without using a framework. In the example, req is the request received and res is the response to send: res.end("Hello!") replies and ends. listen(3000) leaves the server waiting for requests on port 3000, the server\'s "entrance door". The next lessons explain HTTP in detail.'
+            },
+            closing: 'It\'s possible to create a server directly with Node.js, but larger applications can benefit from tools that simplify that work.',
+            highlight: ['Node.js', 'HTTP', 'framework'],
+            codeLanguage: 'JavaScript',
+            code: 'import {\n  createServer\n} from "node:http";\n\nconst server =\n  createServer((req, res) => {\n    res.end("Hello!");\n  });\n\nserver.listen(3000);',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que createServer, do node:http, cria?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Um servidor HTTP', 'Um banco de dados', 'Uma página HTML', 'Um pacote npm'],
+            pool: 'node-http'
+          },
+          en: {
+            question: 'What does createServer, from node:http, create?',
+            highlight: [],
+            correctOption: 1,
+            options: ['An HTTP server', 'A database', 'An HTML page', 'An npm package'],
+            pool: 'node-http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'O que server.listen(3000) faz?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Faz o servidor escutar na porta 3000', 'Espera 3000 milissegundos', 'Limita a 3000 requisições', 'Cria 3000 rotas'],
+            pool: 'node-http'
+          },
+          en: {
+            question: 'What does server.listen(3000) do?',
+            highlight: [],
+            correctOption: 1,
+            options: ['Makes the server listen on port 3000', 'Waits 3000 milliseconds', 'Limits it to 3000 requests', 'Creates 3000 routes'],
+            pool: 'node-http'
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Verdadeiro ou falso?',
+            aditionalParagraph: 'Dá para criar um servidor HTTP com o Node.js sem nenhum framework.',
+            highlight: [],
+            correctOption: 1,
+            options: ['Verdadeiro', 'Falso'],
+            pool: 'node-http',
+            fixedOrder: true
+          },
+          en: {
+            question: 'True or false?',
+            aditionalParagraph: 'You can build an HTTP server with Node.js without any framework.',
+            highlight: [],
+            correctOption: 1,
+            options: ['True', 'False'],
+            pool: 'node-http',
+            fixedOrder: true
+          }
+        }
+      },
+      {
+        type: 'code_blank',
+        content: {
+          pt: {
+            question: 'Complete o servidor que escuta na porta 3000.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const server = ___(\n  (req, res) => res.end("Oi")\n);\nserver.___(3000);',
+            answers: ['createServer', 'listen'],
+            distractors: ['express', 'start', 'open']
+          },
+          en: {
+            question: 'Complete the server that listens on port 3000.',
+            highlight: [],
+            codeLanguage: 'JavaScript',
+            code: 'const server = ___(\n  (req, res) => res.end("Hi")\n);\nserver.___(3000);',
+            answers: ['createServer', 'listen'],
+            distractors: ['express', 'start', 'open']
+          }
+        }
+      },
+      {
+        type: 'reorder',
+        content: {
+          pt: {
+            question: 'Monte o servidor: createServer responde "Oi" com res.end, e o servidor escuta a porta 3000.',
+            highlight: ['createServer'],
+            codeLanguage: 'JavaScript',
+            lines: ['const server = createServer(', '  (req, res) => res.end("Oi")', ');', 'server.listen(3000);'],
+            distractors: ['server.start(3000);']
+          },
+          en: {
+            question: 'Build the server: createServer answers "Hi" with res.end, and the server listens on port 3000.',
+            highlight: ['createServer'],
+            codeLanguage: 'JavaScript',
+            lines: ['const server = createServer(', '  (req, res) => res.end("Hi")', ');', 'server.listen(3000);'],
+            distractors: ['server.start(3000);']
+          }
+        }
+      },
+      {
+        type: 'option',
+        content: {
+          pt: {
+            question: 'Qual linha faz o servidor receber requisições na porta 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['porta 3000'],
+            correctOption: 1,
+            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
+            optionsAsCode: true
+          },
+          en: {
+            question: 'Which line makes the server take requests on port 3000?',
+            codeLanguage: 'JavaScript',
+            highlight: ['port 3000'],
+            correctOption: 1,
+            options: ['server.listen(3000);', 'server.start(3000);', 'server.open(3000);', 'server.port(3000);'],
+            optionsAsCode: true
+          }
+        }
+      },
+      {
+        type: 'fill_blank',
+        content: {
+          pt: {
+            question: 'Digite o método da resposta que envia "Oi" e encerra.',
+            highlight: ['encerra'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Oi")\n);',
+            answers: ['end']
+          },
+          en: {
+            question: 'Type the response method that sends "Hi" and finishes.',
+            highlight: ['finishes'],
+            codeLanguage: 'JavaScript',
+            code: 'const s = createServer(\n  (req, res) =>\n    res.___("Hi")\n);',
+            answers: ['end']
+          }
+        }
+      }
+    ]
+  },
+  {
+    name: {
       pt: 'Por que Express?',
       en: 'Why Express?'
     },
@@ -41484,7 +42271,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Por que usar um framework',
-              text: 'O Node.js permite criar servidores HTTP diretamente, mas uma aplicação pode acumular rapidamente rotas, validações e outras responsabilidades. Frameworks ajudam a organizar esse trabalho.'
+              text: 'O Node.js permite criar servidores HTTP diretamente, mas uma aplicação pode acumular rapidamente rotas, validações e outras responsabilidades. Frameworks ajudam a organizar esse trabalho. Sem framework, cada rota vira um if comparando o caminho e o método da requisição; com o Express, cada rota vira uma linha: app.get("/users", ...).'
             },
             closing: 'Express é uma ferramenta popular para facilitar a criação de aplicações web e APIs com Node.js.',
             highlight: ['Node.js', 'frameworks', 'Express'],
@@ -41501,7 +42288,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Why use a framework',
-              text: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work.'
+              text: 'Node.js lets you create HTTP servers directly, but an application can quickly accumulate routes, validations and other responsibilities. Frameworks help organize that work. Without a framework, each route becomes an if comparing the path and the method of the request; with Express, each route becomes a single line: app.get("/users", ...).'
             },
             closing: 'Express is a popular tool for making it easier to build web applications and APIs with Node.js.',
             highlight: ['Node.js', 'frameworks', 'Express'],
@@ -41826,18 +42613,18 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o middleware do express que interpreta corpos em JSON.',
-            highlight: ['middleware'],
+            question: 'Digite o nome com que o express é importado (o mesmo nome do pacote).',
+            highlight: ['importado'],
             codeLanguage: 'JavaScript',
-            code: 'app.use(express.___());',
-            answers: ['json']
+            code: 'import ___ from "express";',
+            answers: ['express']
           },
           en: {
-            question: 'Type the express middleware that parses JSON bodies.',
-            highlight: ['middleware'],
+            question: 'Type the name the express package is imported as (the same name as the package).',
+            highlight: ['imported'],
             codeLanguage: 'JavaScript',
-            code: 'app.use(express.___());',
-            answers: ['json']
+            code: 'import ___ from "express";',
+            answers: ['express']
           }
         }
       }
@@ -42281,7 +43068,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'O que é JSON',
               text: 'JSON é um formato muito usado para representar dados em APIs, porque permite estruturar informações de maneira simples.'
             },
-            closing: 'APIs frequentemente utilizam JSON para transportar dados entre cliente e servidor.',
+            closing: 'APIs frequentemente utilizam JSON para transportar dados entre cliente e servidor. Na rede, o JSON viaja como texto, igual ao que você viu com JSON.stringify: {"id":1,"nome":"Ana"}.',
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    nome: "Ana"\n  });\n});',
@@ -42298,7 +43085,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'What JSON is',
               text: 'JSON is a widely used format for representing data in APIs because it lets you structure information in a simple way.'
             },
-            closing: 'APIs frequently use JSON to transport data between client and server.',
+            closing: 'APIs frequently use JSON to transport data between client and server. On the network, JSON travels as text, just like what you saw with JSON.stringify: {"id":1,"name":"Ana"}.',
             highlight: ['JSON'],
             codeLanguage: 'JavaScript',
             code: 'app.get("/user", (req, res) => {\n  res.json({\n    id: 1,\n    name: "Ana"\n  });\n});',
@@ -42433,18 +43220,18 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o método que responde com o texto "Oi".',
+            question: 'Digite um método de res que envia o texto "Oi" como resposta de texto simples (não JSON).',
             highlight: ['texto'],
             codeLanguage: 'JavaScript',
             code: 'res.___("Oi");',
-            answers: ['send']
+            answers: ['send', 'end']
           },
           en: {
-            question: 'Type the method that answers with the text "Hi".',
+            question: 'Type a method of res that sends the text "Hi" as the response (plain text, not JSON).',
             highlight: ['text'],
             codeLanguage: 'JavaScript',
             code: 'res.___("Hi");',
-            answers: ['send']
+            answers: ['send', 'end']
           }
         }
       }
@@ -42678,6 +43465,45 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             highlight: ['Express', 'JSON', 'middleware'],
             codeLanguage: 'JavaScript',
             code: 'app.use(express.json());\n\napp.post("/users", (req, res) => {\n  res.json(req.body);\n});',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Middleware',
+              text: 'Antes de a rota responder, o pedido pode passar por alguns passos no caminho.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Um passo entre o pedido e a rota',
+              text: 'Um middleware é um passo no meio do caminho: o pedido passa por ele antes de chegar à rota. O app.use liga um middleware ao app, e eles rodam na ordem em que foram escritos.\n\nO next() manda o pedido para o próximo passo; sem ele, o pedido ficaria parado ali. O express.json() é um middleware pronto: ele lê o corpo (body) do pedido, quando vem em JSON, e o deixa em req.body.'
+            },
+            closing: 'Por isso o app.use(express.json()) vem antes das rotas: assim, quando a rota roda, o req.body já está pronto.',
+            highlight: ['middleware', 'next', 'body'],
+            codeLanguage: 'JavaScript',
+            code: 'import express from "express";\n\nconst app = express();\n\napp.use((req, res, next) => {\n  console.log("passou aqui");\n  next();\n});\napp.use(express.json());\n\napp.post("/users",\n  (req, res) => {\n    res.json(req.body);\n  }\n);',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            introduction: {
+              title: 'Middleware',
+              text: 'Before the route answers, the request can go through a few steps along the way.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A step between the request and the route',
+              text: 'A middleware is a step in the middle of the path: the request goes through it before reaching the route. app.use plugs a middleware into the app, and they run in the order they were written.\n\nnext() sends the request to the next step; without it, the request would stay stuck there. express.json() is a ready-made middleware: it reads the body of the request, when it comes as JSON, and leaves it in req.body.'
+            },
+            closing: 'That is why app.use(express.json()) comes before the routes: that way, when the route runs, req.body is already ready.',
+            highlight: ['middleware', 'next', 'body'],
+            codeLanguage: 'JavaScript',
+            code: 'import express from "express";\n\nconst app = express();\n\napp.use((req, res, next) => {\n  console.log("passed here");\n  next();\n});\napp.use(express.json());\n\napp.post("/users",\n  (req, res) => {\n    res.json(req.body);\n  }\n);',
             onlyCode: true,
             noTerminal: true
           }
@@ -43035,7 +43861,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Como o Express encontra a rota',
-              text: 'Quando um cliente acessa uma rota, o Express identifica o método e o caminho da requisição e executa o código correspondente.'
+              text: 'Quando um cliente acessa uma rota, o Express identifica o método e o caminho da requisição e executa o código correspondente. Passo a passo: (1) o cliente pede GET /users; (2) o Express acha a rota app.get("/users"); (3) a função da rota roda; (4) res.json(...) devolve a resposta.'
             },
             closing: 'Esse fluxo é a base do funcionamento de muitas APIs utilizadas por aplicações web e mobile.',
             highlight: ['Express', 'rota'],
@@ -43052,7 +43878,7 @@ export const JS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'How Express finds the route',
-              text: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code.'
+              text: 'When a client accesses a route, Express identifies the method and the path of the request and runs the corresponding code. Step by step: (1) the client requests GET /users; (2) Express finds the route app.get("/users"); (3) the route function runs; (4) res.json(...) sends back the response.'
             },
             closing: 'This flow is the foundation of how many APIs used by web and mobile applications work.',
             highlight: ['Express', 'route'],
@@ -43544,9 +44370,9 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é React',
-              text: 'React é uma biblioteca JavaScript para construir interfaces de usuário. Em vez de pensar na página inteira de uma vez, dividimos a interface em partes menores chamadas componentes.'
+              text: 'React é uma biblioteca JavaScript (um conjunto de ferramentas escritas em JavaScript, a linguagem que dá comportamento às páginas) para construir interfaces de usuário (as telas com que a pessoa interage). Em vez de pensar na página inteira de uma vez, dividimos a interface em partes menores chamadas componentes.'
             },
-            closing: 'React utiliza JavaScript para descrever e controlar partes da interface.',
+            closing: 'React utiliza JavaScript para descrever e controlar partes da interface. No exemplo, function App() é uma função (um bloco de código com nome) e return devolve o que vai aparecer na tela: o título "Olá!". Se alguma palavra ficou estranha, a próxima tela dá uma revisão rápida do JavaScript que o React usa.',
             highlight: ['React', 'JavaScript', 'componentes'],
             codeLanguage: 'JSX',
             code: 'function App() {\n  return <h1>Olá!</h1>;\n}',
@@ -43560,12 +44386,100 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What React is',
-              text: 'React is a JavaScript library for building user interfaces. Instead of thinking about a whole page at once, we split the interface into smaller pieces called components.'
+              text: 'React is a JavaScript library (a set of tools written in JavaScript, the language that gives pages their behavior) for building user interfaces (the screens people interact with). Instead of thinking about a whole page at once, we split the interface into smaller pieces called components.'
             },
-            closing: 'React uses JavaScript to describe and control parts of the interface.',
+            closing: 'React uses JavaScript to describe and control parts of the interface. In the example, function App() is a function (a named block of code) and return hands back what will appear on screen: the "Hello!" heading. If any word looks strange, the next screen gives a quick review of the JavaScript React uses.',
             highlight: ['React', 'JavaScript', 'components'],
             codeLanguage: 'JSX',
             code: 'function App() {\n  return <h1>Hello!</h1>;\n}',
+            onlyCode: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Antes de começar: o JavaScript que o React usa',
+              text: 'O React é feito de JavaScript, então algumas palavras dele vão aparecer em todos os exemplos. Veja o essencial, em linguagem simples. Não precisa decorar: este módulo é só uma espiada no React, e tudo volta a fazer mais sentido depois da área JavaScript do app.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'As peças que você vai encontrar',
+              text: 'const cria uma variável: uma caixinha com nome que guarda um valor.\n\nfunction cria uma função: um bloco de código com nome. O return devolve o resultado dela. A função de seta, como (a, b) => a + b, é um jeito mais curto de escrever uma função.\n\nColchetes [ ] formam um array, uma lista de valores. Chaves { } formam um objeto, um grupo de pares nome: valor.\n\nA desestruturação, como const { idade } = pessoa;, tira uma peça de dentro do objeto e a guarda numa variável.\n\nPor fim, o import traz uma ferramenta de outro arquivo, como o useState, que vem do react.'
+            },
+            closing: 'Se alguma coisa ainda parecer estranha, tudo bem. Quando você estudar a área JavaScript, volte ao React: ele vai ficar bem mais fácil de ler.',
+            highlight: ['const', 'function', 'return', 'array', 'objeto', 'desestruturação', 'import'],
+            codeLanguage: 'JavaScript',
+            code: 'import { useState }\n  from "react";\n\nconst nome = "Ana";\n\nfunction dobrar(x) {\n  return x * 2;\n}\n\nconst somar = (a, b) => a + b;\n\nconst cores = ["azul", "rosa"];\n\nconst pessoa = {\n  nome: "Ana",\n  idade: 20\n};\n\nconst { idade } = pessoa;',
+            onlyCode: true,
+            noTerminal: true
+          },
+          en: {
+            introduction: {
+              title: 'Before you start: the JavaScript React uses',
+              text: 'React is made of JavaScript, so some of its words will show up in every example. Here is the essentials, in plain language. You don\'t need to memorize it: this module is just a peek at React, and everything makes more sense again after the JavaScript area of the app.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'The pieces you will meet',
+              text: 'const creates a variable: a little named box that holds a value.\n\nfunction creates a function: a named block of code. The return hands back its result. An arrow function, like (a, b) => a + b, is a shorter way to write a function.\n\nSquare brackets [ ] make an array, a list of values. Curly braces { } make an object, a group of name: value pairs.\n\nDestructuring, like const { age } = person;, takes one piece out of the object and keeps it in a variable.\n\nFinally, import brings in a tool from another file, like useState, which comes from react.'
+            },
+            closing: 'If something still looks strange, that\'s fine. When you study the JavaScript area, come back to React: it will be much easier to read.',
+            highlight: ['const', 'function', 'return', 'array', 'object', 'destructuring', 'import'],
+            codeLanguage: 'JavaScript',
+            code: 'import { useState }\n  from "react";\n\nconst name = "Ana";\n\nfunction double(x) {\n  return x * 2;\n}\n\nconst sum = (a, b) => a + b;\n\nconst colors = ["blue", "pink"];\n\nconst person = {\n  name: "Ana",\n  age: 20\n};\n\nconst { age } = person;',
+            onlyCode: true,
+            noTerminal: true
+          }
+        }
+      },
+      {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'Onde o React entra na página',
+              text: 'Um site feito com React continua sendo uma página HTML. Então, onde o React entra? Em um lugar reservado dentro dela.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Um div para o React preencher',
+              text: 'A página começa quase vazia: o HTML tem um único <div id="root"></div>, um espaço reservado. Quando a página carrega, o React pega esse div e coloca dentro dele o resultado do componente App. No exemplo, o <h1>Olá!</h1> aparece dentro do div.'
+            },
+            closing: 'O script carrega o código do React. A linha que liga o React ao root já vem pronta nos projetos novos; o seu trabalho é escrever os componentes.',
+            highlight: ['React', 'root', 'div'],
+            codeLanguage: 'HTML',
+            code: '<body>\n  <div id="root"></div>\n\n  <script src="app.js"></script>\n</body>',
+            additionalCode: [
+              {
+                codeLanguage: 'JSX',
+                code: 'function App() {\n  return <h1>Olá!</h1>;\n}'
+              }
+            ],
+            onlyCode: true
+          },
+          en: {
+            introduction: {
+              title: 'Where React enters the page',
+              text: 'A site made with React is still an HTML page. So where does React come in? In a reserved spot inside it.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'A div for React to fill',
+              text: 'The page starts almost empty: the HTML has a single <div id="root"></div>, a reserved space. When the page loads, React takes that div and puts the result of the App component inside it. In the example, the <h1>Hello!</h1> shows up inside the div.'
+            },
+            closing: 'The script loads the React code. The line that connects React to the root comes ready in new projects; your job is to write the components.',
+            highlight: ['React', 'root', 'div'],
+            codeLanguage: 'HTML',
+            code: '<body>\n  <div id="root"></div>\n\n  <script src="app.js"></script>\n</body>',
+            additionalCode: [
+              {
+                codeLanguage: 'JSX',
+                code: 'function App() {\n  return <h1>Hello!</h1>;\n}'
+              }
+            ],
             onlyCode: true
           }
         }
@@ -43759,7 +44673,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que é um componente',
-              text: 'Um componente representa uma parte da interface. Ele pode ter sua própria estrutura e ser reutilizado em diferentes partes de uma aplicação.'
+              text: 'Um componente representa uma parte da interface. Ele pode ter sua própria estrutura e ser reutilizado em diferentes partes de uma aplicação. O nome de um componente sempre começa com letra maiúscula (Botao): é assim que o React sabe que <Botao /> não é uma tag HTML comum.'
             },
             closing: 'Componentes permitem dividir interfaces grandes em partes menores.',
             highlight: ['componente', 'componentes'],
@@ -43775,7 +44689,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What a component is',
-              text: 'A component represents a part of the interface. It can have its own structure and be reused in different parts of an application.'
+              text: 'A component represents a part of the interface. It can have its own structure and be reused in different parts of an application. The name of a component always starts with a capital letter (Button): that is how React knows <Button /> is not a regular HTML tag.'
             },
             closing: 'Components let you split large interfaces into smaller pieces.',
             highlight: ['component', 'components'],
@@ -43938,14 +44852,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite como o componente Titulo é usado dentro do App.',
+            question: 'Digite só o nome do componente Titulo (com T maiúsculo e sem acento) para usá-lo dentro do App.',
             highlight: ['componente Titulo'],
             codeLanguage: 'JSX',
             code: 'function App() {\n  return <___ />;\n}',
             answers: ['Titulo']
           },
           en: {
-            question: 'Type how the Title component is used inside App.',
+            question: 'Type just the name of the Title component (with a capital T) to use it inside App.',
             highlight: ['Title component'],
             codeLanguage: 'JSX',
             code: 'function App() {\n  return <___ />;\n}',
@@ -44004,14 +44918,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Atributos que mudam de nome',
-              text: 'Como JSX vive dentro do JavaScript, alguns atributos do HTML mudam de nome para não colidir com palavras reservadas da linguagem.',
+              text: 'Como JSX vive dentro do JavaScript, alguns atributos do HTML mudam de nome, porque o JavaScript já usa palavras como class e for para outras coisas.',
               persona: 'neutral'
             },
             explanation: {
               title: 'className e htmlFor',
               text: 'O caso mais comum é o class do HTML, que no JSX se escreve className. O for de um label vira htmlFor pelo mesmo motivo.'
             },
-            closing: 'Os demais atributos passam a usar camelCase: onclick vira onClick, e tabindex vira tabIndex.',
+            closing: 'Os atributos formados por mais de uma palavra passam a usar camelCase: onclick (on + click) vira onClick, e tabindex (tab + index) vira tabIndex. Já data-* e aria-* mantêm o hífen. No JSX, toda tag precisa ser fechada, por isso o <input /> leva a barra.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
             codeLanguage: 'JSX',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Nome</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
@@ -44020,14 +44934,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           en: {
             introduction: {
               title: 'Attributes that change names',
-              text: 'Because JSX lives inside JavaScript, some HTML attributes change names so they do not clash with reserved words of the language.',
+              text: 'Because JSX lives inside JavaScript, some HTML attributes change names, because JavaScript already uses words like class and for for other things.',
               persona: 'neutral'
             },
             explanation: {
               title: 'className and htmlFor',
               text: 'The most common case is the HTML class, written as className in JSX. The for of a label becomes htmlFor for the same reason.'
             },
-            closing: 'The remaining attributes switch to camelCase: onclick becomes onClick, and tabindex becomes tabIndex.',
+            closing: 'Attributes made of more than one word switch to camelCase: onclick (on + click) becomes onClick, and tabindex (tab + index) becomes tabIndex. data-* and aria-* keep the hyphen. In JSX, every tag must be closed, which is why <input /> has the slash.',
             highlight: ['JSX', 'HTML', 'className', 'htmlFor', 'camelCase'],
             codeLanguage: 'JSX',
             code: 'function Aviso() {\n  return (\n    <div className="aviso">\n      <label htmlFor="nome">Name</label>\n      <input id="nome" tabIndex={0} />\n    </div>\n  );\n}',
@@ -44173,12 +45087,12 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
                 right: 'Faz o papel do for do label'
               },
               {
-                left: '{ }',
-                right: 'Insere uma expressão JavaScript'
+                left: 'onClick',
+                right: 'Faz o papel do onclick do HTML'
               },
               {
-                left: '<></>',
-                right: 'Agrupa sem criar elemento extra'
+                left: 'tabIndex',
+                right: 'Faz o papel do tabindex do HTML'
               }
             ],
             leftAsCode: true
@@ -44196,12 +45110,12 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
                 right: 'Plays the role of for in a label'
               },
               {
-                left: '{ }',
-                right: 'Inserts a JavaScript expression'
+                left: 'onClick',
+                right: 'Plays the role of onclick in HTML'
               },
               {
-                left: '<></>',
-                right: 'Groups without an extra element'
+                left: 'tabIndex',
+                right: 'Plays the role of tabindex in HTML'
               }
             ],
             leftAsCode: true
@@ -44246,7 +45160,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Chaves no JSX',
-              text: 'As chaves {} permitem inserir expressões JavaScript dentro do JSX.'
+              text: 'As chaves {} permitem inserir expressões JavaScript dentro do JSX. No exemplo, const nome = "Ana"; guarda o valor numa variável, e {nome} mostra esse valor na tela.'
             },
             closing: 'Essa integração permite que a interface utilize dados definidos pelo JavaScript.',
             highlight: ['JSX', 'JavaScript'],
@@ -44262,7 +45176,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Curly braces in JSX',
-              text: 'Curly braces {} let you insert JavaScript expressions inside JSX.'
+              text: 'Curly braces {} let you insert JavaScript expressions inside JSX. In the example, const name = "Ana"; stores the value in a variable, and {name} shows that value on screen.'
             },
             closing: 'This integration lets the interface use data defined by JavaScript.',
             highlight: ['JSX', 'JavaScript'],
@@ -44465,9 +45379,9 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que são props',
-              text: 'props são informações fornecidas a um componente por quem o utiliza.'
+              text: 'props são informações fornecidas a um componente por quem o utiliza. No exemplo, nome="Ana" entrega a prop nome ao componente, e { nome } na primeira linha a recebe.'
             },
-            closing: 'props permitem que o mesmo componente trabalhe com diferentes informações.',
+            closing: 'props permitem que o mesmo componente trabalhe com diferentes informações. Elas chegam num objeto: function Saudacao(props) lê props.nome, e { nome } separa a prop direto no parâmetro.',
             highlight: ['props'],
             codeLanguage: 'JSX',
             code: 'function Saudacao({ nome }) {\n  return <h2>Olá, {nome}!</h2>;\n}\n\nfunction App() {\n  return <Saudacao nome="Ana" />;\n}',
@@ -44481,9 +45395,9 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What props are',
-              text: 'props are information provided to a component by whoever uses it.'
+              text: 'props are information provided to a component by whoever uses it. In the example, name="Ana" hands the prop name to the component, and { name } on the first line receives it.'
             },
-            closing: 'props let the same component work with different information.',
+            closing: 'props let the same component work with different information. They arrive in an object: function Greeting(props) reads props.name, and { name } picks the prop out right in the parameter.',
             highlight: ['props'],
             codeLanguage: 'JSX',
             code: 'function Greeting({ name }) {\n  return <h2>Hello, {name}!</h2>;\n}\n\nfunction App() {\n  return <Greeting name="Ana" />;\n}',
@@ -44655,7 +45569,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Reutilizando com props',
-              text: 'Um componente pode ser usado várias vezes, recebendo valores diferentes por meio de props.'
+              text: 'Um componente pode ser usado várias vezes, recebendo valores diferentes por meio de props. O <> ... </> em volta é um fragmento: ele agrupa os dois Usuario sem criar uma tag extra na página, já que um componente devolve um elemento só.'
             },
             closing: 'A estrutura do componente é reutilizada enquanto os dados podem mudar.',
             highlight: ['componente', 'props'],
@@ -44671,7 +45585,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Reusing with props',
-              text: 'A component can be used several times, receiving different values through props.'
+              text: 'A component can be used several times, receiving different values through props. The <> ... </> around them is a fragment: it groups the two User elements without creating an extra tag on the page, since a component returns a single element.'
             },
             closing: 'The structure of the component is reused while the data can change.',
             highlight: ['component', 'props'],
@@ -44778,7 +45692,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Eventos no React',
-              text: 'O React permite associar funções a eventos da interface, como cliques e alterações em campos.'
+              text: 'O React permite associar funções a eventos da interface, como cliques e alterações em campos. Repare que escrevemos onClick={clicar}, sem parênteses: com parênteses (clicar()) a função rodaria assim que a tela aparecesse, e não no clique.'
             },
             closing: 'Eventos conectam as ações do usuário à lógica do componente.',
             highlight: ['eventos', 'React'],
@@ -44794,7 +45708,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Events in React',
-              text: 'React lets you attach functions to interface events, like clicks and field changes.'
+              text: 'React lets you attach functions to interface events, like clicks and field changes. Notice that we wrote onClick={handleClick}, without parentheses: with parentheses (handleClick()) the function would run as soon as the screen appeared, not on click.'
             },
             closing: 'Events connect the user\'s actions to the component\'s logic.',
             highlight: ['events', 'React'],
@@ -44940,9 +45854,9 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Só o que mudou',
-              text: 'Executar de novo não significa refazer a página inteira: o React compara o resultado novo com o anterior e altera no navegador apenas o que de fato mudou.'
+              text: 'Executar de novo não significa refazer a página inteira: o React compara o resultado novo com o anterior e altera no navegador apenas o que de fato mudou. No exemplo, useState(0) cria um estado que começa em 0: total é o valor atual e setTotal é a função que o altera. A próxima lição explica o useState em detalhe.'
             },
-            closing: 'É por isso que a interface acompanha o estado sozinha. Você descreve como a tela deve ser para cada valor, e a re-renderização cuida de manter as duas coisas em sincronia.',
+            closing: 'É por isso que a interface acompanha o estado sozinha. Por isso, nunca mude o estado direto (total = total + 1): use sempre a função de atualização, como setTotal. Você descreve como a tela deve ser para cada valor, e a re-renderização cuida de manter as duas coisas em sincronia.',
             highlight: ['estado', 'React', 're-renderização'],
             codeLanguage: 'JSX',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // A cada clique o estado muda, a função roda de novo\n  // e o React atualiza apenas o texto do parágrafo.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Somar</button>\n    </div>\n  );\n}',
@@ -44956,9 +45870,9 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Only what changed',
-              text: 'Running again does not mean rebuilding the whole page: React compares the new result with the previous one and changes in the browser only what actually differs.'
+              text: 'Running again does not mean rebuilding the whole page: React compares the new result with the previous one and changes in the browser only what actually differs. In the example, useState(0) creates a state that starts at 0: total is the current value and setTotal is the function that changes it. The next lesson explains useState in detail.'
             },
-            closing: 'That is why the interface follows the state on its own. You describe how the screen should look for each value, and re-rendering keeps the two in sync.',
+            closing: 'That is why the interface follows the state on its own. That is also why you should never change the state directly (total = total + 1): always use the update function, like setTotal. You describe how the screen should look for each value, and re-rendering keeps the two in sync.',
             highlight: ['state', 'React', 're-rendering'],
             codeLanguage: 'JSX',
             code: 'function Contador() {\n  const [total, setTotal] = useState(0);\n\n  // On each click the state changes, the function runs again\n  // and React updates only the paragraph text.\n  return (\n    <div>\n      <p>Total: {total}</p>\n      <button onClick={() => setTotal(total + 1)}>Add</button>\n    </div>\n  );\n}',
@@ -45128,10 +46042,10 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               title: 'O que o useState entrega',
               text: 'useState permite criar um valor de estado e uma função responsável por atualizá-lo.'
             },
-            closing: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo.',
+            closing: 'O primeiro valor representa o estado atual. A segunda parte é a função utilizada para atualizá-lo. Por convenção, o nome dela é set + o nome do estado: contador vira setContador.',
             highlight: ['useState', 'estado'],
             codeLanguage: 'JSX',
-            code: 'const [contador, setContador] =\n  useState(0);',
+            code: 'import { useState }\n  from "react";\n\nconst [contador, setContador] =\n  useState(0);',
             onlyCode: true
           },
           en: {
@@ -45144,10 +46058,10 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               title: 'What useState gives you',
               text: 'useState lets you create a state value and a function responsible for updating it.'
             },
-            closing: 'The first value represents the current state. The second part is the function used to update it.',
+            closing: 'The first value represents the current state. The second part is the function used to update it. By convention, its name is set + the state name: count becomes setCount.',
             highlight: ['useState', 'state'],
             codeLanguage: 'JSX',
-            code: 'const [count, setCount] =\n  useState(0);',
+            code: 'import { useState }\n  from "react";\n\nconst [count, setCount] =\n  useState(0);',
             onlyCode: true
           }
         }
@@ -45185,7 +46099,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete a criação do estado.',
+            question: 'Complete a criação do estado n e da função que o atualiza, no padrão set + nome do estado (com inicial maiúscula).',
             highlight: [],
             codeLanguage: 'JSX',
             code: 'const [n, ___] =\n  ___(0);',
@@ -45193,7 +46107,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['useEffect', 'n', 'setState']
           },
           en: {
-            question: 'Complete the state creation.',
+            question: 'Complete the creation of the state n and of the function that updates it, following set + state name (with a capital first letter).',
             highlight: [],
             codeLanguage: 'JSX',
             code: 'const [n, ___] =\n  ___(0);',
@@ -45246,14 +46160,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o valor inicial do estado n: zero.',
+            question: 'Digite, com o algarismo, o valor inicial do estado n: zero.',
             highlight: ['valor inicial'],
             codeLanguage: 'JSX',
             code: 'const [n, setN] =\n  useState(___);',
             answers: ['0']
           },
           en: {
-            question: 'Type the initial value of the state n: zero.',
+            question: 'Type, using the digit, the initial value of the state n: zero.',
             highlight: ['initial value'],
             codeLanguage: 'JSX',
             code: 'const [n, setN] =\n  useState(___);',
@@ -45374,7 +46288,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             question: 'Complete: o título vem por props e o valor é estado.',
             highlight: [],
             codeLanguage: 'JSX',
-            code: 'function Card({ ___ }) {\n  const [valor] =\n    ___(0);\n}',
+            code: 'function Card({ ___ }) {\n  const [valor] =\n    ___(0);\n  return <p>{valor}</p>;\n}',
             answers: ['titulo', 'useState'],
             distractors: ['state', 'props', 'useRef']
           },
@@ -45382,7 +46296,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             question: 'Complete: the title comes from props and the value is state.',
             highlight: [],
             codeLanguage: 'JSX',
-            code: 'function Card({ ___ }) {\n  const [value] =\n    ___(0);\n}',
+            code: 'function Card({ ___ }) {\n  const [value] =\n    ___(0);\n  return <p>{value}</p>;\n}',
             answers: ['title', 'useState'],
             distractors: ['state', 'props', 'useRef']
           }
@@ -45415,7 +46329,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JSX',
             highlight: ['estado'],
             correctOption: 1,
-            options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
+            options: ['function Card() {\n  const [n] = useState(0);\n  return <p>{n}</p>;\n}', 'function Card({ n }) {\n  return <p>{n}</p>;\n}', 'function Card() {\n  const n = 0;\n  return <p>{n}</p>;\n}', 'function Card() {\n  let n = useState;\n  return <p>{n}</p>;\n}'],
             optionsAsCode: true
           },
           en: {
@@ -45423,7 +46337,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JSX',
             highlight: ['state'],
             correctOption: 1,
-            options: ['function Card() {\n  const [n] = useState(0);\n}', 'function Card({ n }) {\n  return n;\n}', 'function Card() {\n  const n = 0;\n}', 'function Card() {\n  let n = useState;\n}'],
+            options: ['function Card() {\n  const [n] = useState(0);\n  return <p>{n}</p>;\n}', 'function Card({ n }) {\n  return <p>{n}</p>;\n}', 'function Card() {\n  const n = 0;\n  return <p>{n}</p>;\n}', 'function Card() {\n  let n = useState;\n  return <p>{n}</p>;\n}'],
             optionsAsCode: true
           }
         }
@@ -45432,14 +46346,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o nome da função que atualiza v, no padrão set + nome do estado.',
+            question: 'Digite o nome da função que atualiza v, no padrão set + nome do estado com inicial maiúscula.',
             highlight: ['set'],
             codeLanguage: 'JSX',
             code: 'function Card({ titulo }) {\n  const [v, ___] =\n    useState(0);\n}',
             answers: ['setV']
           },
           en: {
-            question: 'Type the name of the function that updates v, following set + state name.',
+            question: 'Type the name of the function that updates v, following set + state name, with a capital first letter.',
             highlight: ['set'],
             codeLanguage: 'JSX',
             code: 'function Card({ title }) {\n  const [v, ___] =\n    useState(0);\n}',
@@ -45466,7 +46380,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Eventos em campos de formulário',
-              text: 'Eventos permitem que um componente reaja às alterações que a pessoa faz em um campo de formulário.'
+              text: 'Eventos permitem que um componente reaja às alterações que a pessoa faz em um campo de formulário. A função recebe um objeto event: event.target é o campo, e event.target.value é o texto que a pessoa digitou.'
             },
             closing: 'onChange permite acompanhar alterações realizadas em um campo.',
             highlight: ['onChange'],
@@ -45482,7 +46396,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Events on form fields',
-              text: 'Events let a component react to changes the person makes in a form field.'
+              text: 'Events let a component react to changes the person makes in a form field. The function receives an event object: event.target is the field, and event.target.value is the text the person typed.'
             },
             closing: 'onChange lets you track changes made to a field.',
             highlight: ['onChange'],
@@ -45591,7 +46505,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que são Hooks',
-              text: 'Hooks são funções fornecidas pelo React que permitem usar recursos do React dentro de componentes funcionais.'
+              text: 'Hooks são funções fornecidas pelo React que permitem usar recursos do React dentro de componentes funcionais (os escritos como function). Para usar um Hook, importamos ele do React com import { useState } from "react";.'
             },
             closing: 'useState é um Hook. O React possui outros Hooks para diferentes necessidades.',
             highlight: ['Hooks', 'useState', 'React'],
@@ -45607,7 +46521,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What Hooks are',
-              text: 'Hooks are functions provided by React that let you use React features inside function components.'
+              text: 'Hooks are functions provided by React that let you use React features inside function components (the ones written as function). To use a Hook, we import it from React with import { useState } from "react";.'
             },
             closing: 'useState is a Hook. React has other Hooks for different needs.',
             highlight: ['Hooks', 'useState', 'React'],
@@ -45623,25 +46537,25 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
           pt: {
             introduction: {
               title: 'Outros Hooks',
-              text: 'Além de useState, existem Hooks como useEffect e useRef, que serão apresentados separadamente.',
+              text: 'Além de useState, existem Hooks como useEffect (roda um efeito depois que o componente é desenhado) e useRef (guarda uma referência sem redesenhar a tela). Cada um terá sua lição.',
               persona: 'neutral'
             },
             closing: 'Cada Hook possui uma finalidade específica. Agora vamos conhecer alguns dos mais utilizados.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
             codeLanguage: 'JSX',
-            code: 'useState();',
+            code: 'import {\n  useState,\n  useEffect,\n  useRef\n} from "react";',
             onlyCode: true
           },
           en: {
             introduction: {
               title: 'Other Hooks',
-              text: 'Besides useState, there are Hooks like useEffect and useRef, which will be presented separately.',
+              text: 'Besides useState, there are Hooks like useEffect (runs an effect after the component is drawn) and useRef (keeps a reference without redrawing the screen). Each one will get its own lesson.',
               persona: 'neutral'
             },
             closing: 'Each Hook has a specific purpose. Now let\'s meet some of the most used ones.',
             highlight: ['Hooks', 'useEffect', 'useRef'],
             codeLanguage: 'JSX',
-            code: 'useState();',
+            code: 'import {\n  useState,\n  useEffect,\n  useRef\n} from "react";',
             onlyCode: true
           }
         }
@@ -45815,14 +46729,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o Hook que roda um efeito depois da renderização.',
+            question: 'Digite, respeitando maiúsculas e minúsculas, o Hook que roda um efeito depois da renderização.',
             highlight: ['Hook'],
             codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
             answers: ['useEffect']
           },
           en: {
-            question: 'Type the Hook that runs an effect after rendering.',
+            question: 'Type, respecting uppercase and lowercase, the Hook that runs an effect after rendering.',
             highlight: ['Hook'],
             codeLanguage: 'JSX',
             code: 'import {\n  ___\n} from "react";',
@@ -45884,7 +46798,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               text: 'O array de dependências do useEffect indica os valores que devem ser observados pelo efeito.',
               persona: 'neutral'
             },
-            closing: 'Nesse exemplo, o efeito acompanha mudanças em nome.',
+            closing: 'Nesse exemplo, o efeito acompanha mudanças em nome. Com a lista vazia [], o efeito roda uma única vez, depois da primeira renderização; sem lista nenhuma, ele roda a cada renderização.',
             highlight: ['dependências', 'useEffect'],
             codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(nome);\n}, [nome]);',
@@ -45896,7 +46810,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
               text: 'The dependency array of useEffect indicates the values that should be watched by the effect.',
               persona: 'neutral'
             },
-            closing: 'In this example, the effect follows changes to name.',
+            closing: 'In this example, the effect follows changes to name. With an empty list [], the effect runs only once, after the first render; with no list at all, it runs on every render.',
             highlight: ['dependency', 'useEffect'],
             codeLanguage: 'JSX',
             code: 'useEffect(() => {\n  console.log(name);\n}, [name]);',
@@ -45969,14 +46883,14 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'fill_blank',
         content: {
           pt: {
-            question: 'Digite o Hook que roda o efeito sempre que nome muda.',
+            question: 'Digite, respeitando maiúsculas e minúsculas, o Hook que roda o efeito sempre que nome muda.',
             highlight: ['Hook'],
             codeLanguage: 'JSX',
             code: '___(() => {\n  console.log(nome);\n}, [nome]);',
             answers: ['useEffect']
           },
           en: {
-            question: 'Type the Hook that runs the effect every time name changes.',
+            question: 'Type, respecting uppercase and lowercase, the Hook that runs the effect every time name changes.',
             highlight: ['Hook'],
             codeLanguage: 'JSX',
             code: '___(() => {\n  console.log(name);\n}, [name]);',
@@ -46003,7 +46917,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que o useRef faz',
-              text: 'useRef permite manter uma referência entre renderizações sem provocar uma nova renderização quando o valor muda.'
+              text: 'useRef permite manter uma referência entre renderizações sem provocar uma nova renderização quando o valor muda. O valor guardado fica na propriedade .current (por exemplo, inputRef.current), e mudar esse valor não redesenha a tela.'
             },
             closing: 'Refs podem ser úteis quando precisamos manter uma referência que não controla diretamente a interface.',
             highlight: ['useRef', 'Refs'],
@@ -46019,7 +46933,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What useRef does',
-              text: 'useRef lets you keep a reference between renders without causing a new render when the value changes.'
+              text: 'useRef lets you keep a reference between renders without causing a new render when the value changes. The stored value lives in the .current property (for example, inputRef.current), and changing it does not redraw the screen.'
             },
             closing: 'Refs can be useful when we need to keep a reference that does not directly control the interface.',
             highlight: ['useRef', 'Refs'],
@@ -46130,7 +47044,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Condições no JSX',
-              text: 'Como o JSX usa JavaScript, podemos usar condições para decidir qual conteúdo será exibido.'
+              text: 'Como o JSX usa JavaScript, podemos usar condições para decidir qual conteúdo será exibido. O ? : é o operador ternário (condição ? se verdadeiro : se falso). Para mostrar algo só quando uma condição é verdadeira, também dá para usar &&, como em {erro && <p>Erro!</p>}.'
             },
             closing: 'A renderização condicional permite adaptar a interface de acordo com os dados.',
             highlight: ['renderização condicional', 'JSX'],
@@ -46146,7 +47060,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Conditions in JSX',
-              text: 'Since JSX uses JavaScript, we can use conditions to decide which content will be shown.'
+              text: 'Since JSX uses JavaScript, we can use conditions to decide which content will be shown. The ? : is the ternary operator (condition ? if true : if false). To show something only when a condition is true, you can also use &&, as in {error && <p>Error!</p>}.'
             },
             closing: 'Conditional rendering lets you adapt the interface based on the data.',
             highlight: ['conditional rendering', 'JSX'],
@@ -46165,7 +47079,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JSX',
             code: 'return logado\n  ___ <p>Bem-vindo!</p>\n  ___ <p>Faça login.</p>;',
             answers: ['?', ':'],
-            distractors: ['&&', '||']
+            distractors: ['&&', '??']
           },
           en: {
             question: 'Complete the ternary that picks the message.',
@@ -46173,7 +47087,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             codeLanguage: 'JSX',
             code: 'return loggedIn\n  ___ <p>Welcome!</p>\n  ___ <p>Please log in.</p>;',
             answers: ['?', ':'],
-            distractors: ['&&', '||']
+            distractors: ['&&', '??']
           }
         }
       },
@@ -46255,7 +47169,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Transformando arrays com map',
-              text: 'Arrays podem ser transformados em elementos de interface com métodos JavaScript como map().'
+              text: 'Arrays (listas de valores entre colchetes) podem ser transformados em elementos de interface com métodos JavaScript como map(), que cria um elemento para cada item. Outro método, o filter(), devolve só os itens que passam num teste, como itens.filter(i => i.ativo).'
             },
             closing: 'Essa abordagem permite construir interfaces a partir de conjuntos de dados.',
             highlight: ['map', 'JavaScript'],
@@ -46271,7 +47185,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Turning arrays into elements with map',
-              text: 'Arrays can be turned into interface elements with JavaScript methods like map().'
+              text: 'Arrays (lists of values inside square brackets) can be turned into interface elements with JavaScript methods like map(), which creates one element for each item. Another method, filter(), returns only the items that pass a test, like items.filter(i => i.active).'
             },
             closing: 'This approach lets you build interfaces from sets of data.',
             highlight: ['map', 'JavaScript'],
@@ -46410,7 +47324,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
         type: 'code_blank',
         content: {
           pt: {
-            question: 'Complete com o identificador estável de cada item.',
+            question: 'Complete com o atributo que o React usa para identificar cada item da lista.',
             highlight: [],
             codeLanguage: 'JSX',
             code: 'usuarios.map(u => (\n  <p ___={u.id}>\n    {u.nome}\n  </p>\n))',
@@ -46418,7 +47332,7 @@ export const HTML_BEYOND_LESSONS: LessonSeed[] = [
             distractors: ['id', 'ref', 'index']
           },
           en: {
-            question: 'Complete with each item\'s stable identifier.',
+            question: 'Complete with the attribute React uses to identify each item in the list.',
             highlight: [],
             codeLanguage: 'JSX',
             code: 'users.map(u => (\n  <p ___={u.id}>\n    {u.name}\n  </p>\n))',
@@ -47134,6 +48048,53 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         }
       },
       {
+        type: 'theory',
+        content: {
+          pt: {
+            introduction: {
+              title: 'De onde vêm as classes?',
+              text: 'No Tailwind, você não cria essas classes: elas já vêm prontas. É só escrever o nome no class do HTML.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Prontas, e com uma escala nos números',
+              text: 'O CSS que aparece junto só mostra o que cada classe faz: é a tradução, não é para você escrever.\n\nOs números seguem uma escala. Em p-4, o 4 vale 1rem (cada passo é 0,25rem). Nas cores, como em blue-600, o número é o tom: quanto maior, mais escura a cor. E o px de px-4 não é pixel: é padding no eixo x, nos lados esquerdo e direito.'
+            },
+            closing: 'Então, o que você escreve é só o class no HTML. O CSS ao lado mostra o que o Tailwind faz por baixo.',
+            highlight: ['prontas', 'escala', 'tom', 'tradução'],
+            codeLanguage: 'HTML',
+            code: '<p class="p-4 bg-blue-200">\n  Tom claro\n</p>\n<p class="p-4 bg-blue-600\n  text-white">\n  Tom escuro\n</p>',
+            additionalCode: [
+              {
+                codeLanguage: 'CSS',
+                code: '.p-4 {\n  padding: 1rem;\n}\n.bg-blue-200 {\n  background-color: #bfdbfe;\n}\n.bg-blue-600 {\n  background-color: #2563eb;\n}\n.text-white {\n  color: #ffffff;\n}'
+              }
+            ]
+          },
+          en: {
+            introduction: {
+              title: 'Where do the classes come from?',
+              text: 'In Tailwind, you do not create these classes: they come ready-made. Just write the name in the HTML class.',
+              persona: 'neutral'
+            },
+            explanation: {
+              title: 'Ready-made, with a scale in the numbers',
+              text: 'The CSS shown alongside only shows what each class does: it is the translation, not something for you to write.\n\nThe numbers follow a scale. In p-4, the 4 is worth 1rem (each step is 0.25rem). In colors, like blue-600, the number is the shade: the higher, the darker the color. And the px in px-4 is not pixels: it is padding on the x axis, the left and right sides.'
+            },
+            closing: 'So what you write is just the class in the HTML. The CSS alongside shows what Tailwind does underneath.',
+            highlight: ['ready-made', 'scale', 'shade', 'translation'],
+            codeLanguage: 'HTML',
+            code: '<p class="p-4 bg-blue-200">\n  Light shade\n</p>\n<p class="p-4 bg-blue-600\n  text-white">\n  Dark shade\n</p>',
+            additionalCode: [
+              {
+                codeLanguage: 'CSS',
+                code: '.p-4 {\n  padding: 1rem;\n}\n.bg-blue-200 {\n  background-color: #bfdbfe;\n}\n.bg-blue-600 {\n  background-color: #2563eb;\n}\n.text-white {\n  color: #ffffff;\n}'
+              }
+            ]
+          }
+        }
+      },
+      {
         type: 'option',
         content: {
           pt: {
@@ -47293,7 +48254,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O modelo utility-first',
-              text: 'No modelo utility-first, cada classe representa uma pequena responsabilidade de estilo, como espaçamento, cor, tamanho ou alinhamento.'
+              text: 'No modelo utility-first, cada classe representa uma pequena responsabilidade de estilo, como espaçamento, cor, tamanho ou alinhamento. No exemplo, a classe p-4 do HTML faz o mesmo que o padding: 1rem do CSS.'
             },
             closing: 'Em vez de criar uma classe que representa todo o componente, o Tailwind combina utilitários para construir sua aparência.',
             highlight: ['utility-first', 'Tailwind'],
@@ -47315,7 +48276,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The utility-first model',
-              text: 'In the utility-first model, each class represents a small styling responsibility, like spacing, color, size or alignment.'
+              text: 'In the utility-first model, each class represents a small styling responsibility, like spacing, color, size or alignment. In the example, the p-4 class in the HTML does the same as the padding: 1rem in the CSS.'
             },
             closing: 'Instead of creating a class that represents the whole component, Tailwind combines utilities to build its appearance.',
             highlight: ['utility-first', 'Tailwind'],
@@ -47738,7 +48699,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Classes de espaçamento',
-              text: 'No Tailwind, classes utilitárias podem representar propriedades relacionadas a margin e padding.'
+              text: 'No Tailwind, classes utilitárias podem representar propriedades relacionadas a margin e padding. A primeira letra é o tipo (p = padding, m = margin) e a seguinte indica o lado: t (topo), b (base), l (esquerda), r (direita), x (esquerda e direita) e y (cima e baixo); sem letra de lado, vale para os quatro lados. O número é uma escala: cada unidade vale 0,25rem, então 4 vale 1rem.'
             },
             closing: 'p-4 representa padding e mt-4 representa margin-top — você já conhece essas propriedades do CSS.',
             highlight: ['padding', 'margin-top', 'CSS'],
@@ -47759,7 +48720,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Spacing classes',
-              text: 'In Tailwind, utility classes can represent properties related to margin and padding.'
+              text: 'In Tailwind, utility classes can represent properties related to margin and padding. The first letter is the type (p = padding, m = margin) and the next one is the side: t (top), b (bottom), l (left), r (right), x (left and right) and y (top and bottom); with no side letter, it applies to all four sides. The number is a scale: each unit is 0.25rem, so 4 is 1rem.'
             },
             closing: 'p-4 represents padding and mt-4 represents margin-top — you already know these properties from CSS.',
             highlight: ['padding', 'margin-top', 'CSS'],
@@ -47936,7 +48897,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Cores de fundo e de texto',
               text: 'O Tailwind fornece classes utilitárias para definir cores de elementos e textos.'
             },
-            closing: 'bg-* define a cor de fundo e text-* define a cor do texto — em vez de escrever uma declaração CSS para cada cor, usamos classes utilitárias.',
+            closing: 'bg-* define a cor de fundo e text- seguido de uma cor (como text-white) define a cor do texto (o prefixo text- também serve para tamanho e alinhamento, o que você vê na lição Tipografia) — em vez de escrever uma declaração CSS para cada cor, usamos classes utilitárias.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white">\n  Salvar\n</button>',
@@ -47957,7 +48918,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Background and text colors',
               text: 'Tailwind provides utility classes to set colors for elements and text.'
             },
-            closing: 'bg-* sets the background color and text-* sets the text color — instead of writing a CSS declaration for every color, we use utility classes.',
+            closing: 'bg-* sets the background color and text- followed by a color (like text-white) sets the text color (the text- prefix is also used for size and alignment, which you will see in the Typography lesson) — instead of writing a CSS declaration for every color, we use utility classes.',
             highlight: ['CSS'],
             codeLanguage: 'HTML',
             code: '<button class="bg-blue-600 text-white">\n  Save\n</button>',
@@ -48130,7 +49091,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Controlando o texto',
-              text: 'Assim como no CSS, podemos controlar características como tamanho, peso e alinhamento do texto.'
+              text: 'Assim como no CSS, podemos controlar características como tamanho, peso e alinhamento do texto. Atenção: o prefixo text- tem três usos: text-2xl é o tamanho, text-white é a cor e text-center é o alinhamento.'
             },
             closing: 'Você continua trabalhando com conceitos de tipografia que já conhece do CSS.',
             highlight: ['CSS'],
@@ -48151,7 +49112,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Controlling the text',
-              text: 'Just like in CSS, we can control characteristics like text size, weight and alignment.'
+              text: 'Just like in CSS, we can control characteristics like text size, weight and alignment. Heads-up: the text- prefix has three uses: text-2xl is the size, text-white is the color and text-center is the alignment.'
             },
             closing: 'You keep working with typography concepts you already know from CSS.',
             highlight: ['CSS'],
@@ -48769,7 +49730,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Prefixos de tamanho de tela',
-              text: 'O Tailwind permite aplicar classes diferentes de acordo com o tamanho da tela, usando seus breakpoints.'
+              text: 'O Tailwind permite aplicar classes diferentes de acordo com o tamanho da tela, usando seus breakpoints. O prefixo md: vale a partir de 768px de largura, como um min-width: 768px; sem prefixo, a classe vale em qualquer tela (mobile-first, como você viu).'
             },
             closing: 'text-sm representa o comportamento padrão, e md:text-lg entra em vigor a partir do breakpoint md — o conceito continua sendo responsividade.',
             highlight: ['responsividade'],
@@ -48785,7 +49746,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Screen-size prefixes',
-              text: 'Tailwind lets you apply different classes depending on the screen size, using its breakpoints.'
+              text: 'Tailwind lets you apply different classes depending on the screen size, using its breakpoints. The md: prefix applies from 768px of width up, like a min-width: 768px; with no prefix, the class applies on any screen (mobile-first, as you saw).'
             },
             closing: 'text-sm represents the default behavior, and md:text-lg kicks in from the md breakpoint onward — the concept is still responsiveness.',
             highlight: ['responsiveness'],
@@ -49196,7 +50157,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O modificador dark:',
-              text: 'O Tailwind permite definir estilos específicos para o modo escuro usando o modificador dark:.'
+              text: 'O Tailwind permite definir estilos específicos para o modo escuro usando o modificador dark:. Por padrão, ele segue a preferência de tema do sistema (prefers-color-scheme, vista no módulo anterior).'
             },
             closing: 'O mesmo elemento pode possuir estilos diferentes dependendo do modo de exibição.',
             highlight: ['modo escuro'],
@@ -49212,7 +50173,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'The dark: modifier',
-              text: 'Tailwind lets you define specific styles for dark mode using the dark: modifier.'
+              text: 'Tailwind lets you define specific styles for dark mode using the dark: modifier. By default, it follows the system theme preference (prefers-color-scheme, seen in the previous module).'
             },
             closing: 'The same element can have different styles depending on the display mode.',
             highlight: ['dark mode'],
@@ -49382,12 +50343,12 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Valores próprios',
-              text: 'Projetos reais podem ter cores, espaçamentos, fontes e outros valores próprios. O Tailwind permite adaptar seu sistema às necessidades da aplicação.'
+              text: 'Projetos reais podem ter cores, espaçamentos, fontes e outros valores próprios. O Tailwind permite adaptar seu sistema às necessidades da aplicação. A cor entra em theme.extend.colors: o extend soma a sua cor às cores padrão (bg-blue-600 continua existindo). Escrita direto em theme.colors, ela apagaria todas as cores padrão. (No Tailwind v4, essa configuração fica no próprio CSS, com @theme.)'
             },
-            closing: 'A ideia é utilizar o Tailwind como parte do projeto, e não ficar limitado apenas aos valores padrão.',
+            closing: 'A ideia é utilizar o Tailwind como parte do projeto, e não ficar limitado apenas aos valores padrão. Depois de criar a cor marca, você a usa em classes como bg-marca e text-marca. O código acima é JavaScript, que você vai conhecer na área de JavaScript.',
             highlight: ['Tailwind'],
             codeLanguage: 'JavaScript',
-            code: '// tailwind.config.js (conceitual)\ntheme: {\n  colors: {\n    marca: "#2563eb"\n  }\n}',
+            code: '// tailwind.config.js (conceitual)\ntheme: {\n  extend: {\n    colors: {\n      marca: "#2563eb"\n    }\n  }\n}',
             onlyCode: true
           },
           en: {
@@ -49398,12 +50359,12 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'Custom values',
-              text: 'Real projects can have their own colors, spacing, fonts and other values. Tailwind lets you adapt its system to the needs of the application.'
+              text: 'Real projects can have their own colors, spacing, fonts and other values. Tailwind lets you adapt its system to the needs of the application. The color goes in theme.extend.colors: extend adds your color to the default ones (bg-blue-600 keeps existing). Written straight in theme.colors, it would wipe out all the default colors. (In Tailwind v4, this configuration lives in the CSS itself, with @theme.)'
             },
-            closing: 'The idea is to use Tailwind as part of the project, instead of being limited to just the default values.',
+            closing: 'The idea is to use Tailwind as part of the project, instead of being limited to just the default values. After creating the brand color, you use it in classes like bg-brand and text-brand. The code above is JavaScript, which you will get to know in the JavaScript area.',
             highlight: ['Tailwind'],
             codeLanguage: 'JavaScript',
-            code: '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}',
+            code: '// tailwind.config.js (conceptual)\ntheme: {\n  extend: {\n    colors: {\n      brand: "#2563eb"\n    }\n  }\n}',
             onlyCode: true
           }
         }
@@ -49476,7 +50437,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             question: 'Complete onde ficam as cores próprias do tema.',
             highlight: [],
             codeLanguage: 'JavaScript',
-            code: 'theme: {\n  ___: {\n    marca: "#2563eb"\n  }\n}',
+            code: 'theme: {\n  extend: {\n    ___: {\n      marca: "#2563eb"\n    }\n  }\n}',
             answers: ['colors'],
             distractors: ['color', 'palette', 'styles']
           },
@@ -49484,7 +50445,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             question: 'Complete where the theme\'s own colors go.',
             highlight: [],
             codeLanguage: 'JavaScript',
-            code: 'theme: {\n  ___: {\n    brand: "#2563eb"\n  }\n}',
+            code: 'theme: {\n  extend: {\n    ___: {\n      brand: "#2563eb"\n    }\n  }\n}',
             answers: ['colors'],
             distractors: ['color', 'palette', 'styles']
           }
@@ -49494,17 +50455,17 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'reorder',
         content: {
           pt: {
-            question: 'Monte o tema com a cor marca, valendo "#2563eb", dentro de colors.',
+            question: 'Monte o bloco extend do tema com a cor marca, valendo "#2563eb", dentro de colors.',
             highlight: ['tema'],
             codeLanguage: 'JavaScript',
-            lines: ['theme: {', '  colors: {', '    marca: "#2563eb"', '  }', '}'],
+            lines: ['extend: {', '  colors: {', '    marca: "#2563eb"', '  }', '}'],
             distractors: ['  colours: {']
           },
           en: {
-            question: 'Build the theme with the brand color, set to "#2563eb", inside colors.',
+            question: 'Build the theme\'s extend block with the brand color, set to "#2563eb", inside colors.',
             highlight: ['theme'],
             codeLanguage: 'JavaScript',
-            lines: ['theme: {', '  colors: {', '    brand: "#2563eb"', '  }', '}'],
+            lines: ['extend: {', '  colors: {', '    brand: "#2563eb"', '  }', '}'],
             distractors: ['  colours: {']
           }
         }
@@ -49513,7 +50474,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual trecho cria a cor marca no tema do Tailwind?',
+            question: 'Qual trecho, dentro de extend, cria a cor marca no tema do Tailwind?',
             codeLanguage: 'JavaScript',
             highlight: ['cor marca'],
             correctOption: 1,
@@ -49521,7 +50482,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             optionsAsCode: true
           },
           en: {
-            question: 'Which snippet creates the brand color in the Tailwind theme?',
+            question: 'Which snippet, inside extend, creates the brand color in the Tailwind theme?',
             codeLanguage: 'JavaScript',
             highlight: ['brand color'],
             correctOption: 1,
@@ -49537,14 +50498,14 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             question: 'Digite o nome da cor personalizada do tema, chamada marca.',
             highlight: ['cor personalizada'],
             codeLanguage: 'JavaScript',
-            code: 'theme: {\n  colors: {\n    ___: "#2563eb"\n  }\n}',
+            code: 'theme: {\n  extend: {\n    colors: {\n      ___: "#2563eb"\n    }\n  }\n}',
             answers: ['marca']
           },
           en: {
             question: 'Type the name of the custom theme color, called brand.',
             highlight: ['custom theme color'],
             codeLanguage: 'JavaScript',
-            code: 'theme: {\n  colors: {\n    ___: "#2563eb"\n  }\n}',
+            code: 'theme: {\n  extend: {\n    colors: {\n      ___: "#2563eb"\n    }\n  }\n}',
             answers: ['brand']
           }
         }
@@ -49568,12 +50529,12 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'O que a configuração define',
-              text: 'Ferramentas como o Tailwind precisam saber como o projeto será processado e quais recursos devem ser usados.'
+              text: 'Ferramentas como o Tailwind precisam saber como o projeto será processado e quais recursos devem ser usados. Por isso existe um arquivo de configuração, o tailwind.config.js, escrito em JavaScript; o export default entrega o conteúdo do arquivo para o Tailwind. Esse é o formato da versão 3; na versão 4, a mais recente, a configuração passou para o próprio CSS (diretiva @theme), e o arquivo JS é opcional.'
             },
             closing: 'Configuração permite integrar o Tailwind às necessidades do projeto.',
             highlight: ['Tailwind', 'Configuração'],
             codeLanguage: 'JavaScript',
-            code: '// tailwind.config.js (conceitual)\ntheme: {\n  colors: {\n    marca: "#2563eb"\n  }\n}',
+            code: '// tailwind.config.js (conceitual)\ntheme: {\n  extend: {\n    colors: {\n      marca: "#2563eb"\n    }\n  }\n}',
             onlyCode: true
           },
           en: {
@@ -49584,12 +50545,12 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             },
             explanation: {
               title: 'What the configuration defines',
-              text: 'Tools like Tailwind need to know how the project will be processed and which features should be used.'
+              text: 'Tools like Tailwind need to know how the project will be processed and which features should be used. That is why there is a configuration file, tailwind.config.js, written in JavaScript; the export default hands the content of the file over to Tailwind. This is the version 3 format; in version 4, the latest, the configuration moved into the CSS itself (the @theme directive), and the JS file is optional.'
             },
             closing: 'Configuration lets you integrate Tailwind with the needs of the project.',
             highlight: ['Tailwind', 'Configuration'],
             codeLanguage: 'JavaScript',
-            code: '// tailwind.config.js (conceptual)\ntheme: {\n  colors: {\n    brand: "#2563eb"\n  }\n}',
+            code: '// tailwind.config.js (conceptual)\ntheme: {\n  extend: {\n    colors: {\n      brand: "#2563eb"\n    }\n  }\n}',
             onlyCode: true
           }
         }
@@ -49699,7 +50660,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
         type: 'option',
         content: {
           pt: {
-            question: 'Qual arquivo guarda a configuração do Tailwind?',
+            question: 'Qual arquivo guarda a configuração do Tailwind na versão 3, como no exemplo?',
             codeLanguage: 'JavaScript',
             highlight: ['configuração'],
             correctOption: 1,
@@ -49707,7 +50668,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
             optionsAsCode: true
           },
           en: {
-            question: 'Which file holds the Tailwind configuration?',
+            question: 'Which file holds the Tailwind configuration in version 3, as in the example?',
             codeLanguage: 'JavaScript',
             highlight: ['configuration'],
             correctOption: 1,
@@ -49756,7 +50717,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Classes dentro de componentes',
               text: 'Interfaces reais têm elementos que aparecem várias vezes, como botões, cards e campos. Podemos combinar classes utilitárias dentro de componentes reutilizáveis.'
             },
-            closing: 'Tailwind fornece os estilos. A tecnologia da aplicação pode organizar esses estilos em componentes reutilizáveis.',
+            closing: 'Tailwind fornece os estilos. A tecnologia da aplicação pode organizar esses estilos em componentes reutilizáveis. Em React, isso vira algo como function Botao() com um <button className="rounded-lg"> dentro (no JSX, o class se escreve className).',
             highlight: ['Tailwind', 'componentes'],
             codeLanguage: 'HTML',
             code: '<button class="rounded-lg px-4 py-2 font-medium">\n  Salvar\n</button>',
@@ -49777,7 +50738,7 @@ export const CSS_BEYOND_LESSONS: LessonSeed[] = [
               title: 'Classes inside components',
               text: 'Real interfaces have elements that show up several times, like buttons, cards and fields. We can combine utility classes inside reusable components.'
             },
-            closing: 'Tailwind provides the styles. The application\'s technology can organize those styles into reusable components.',
+            closing: 'Tailwind provides the styles. The application\'s technology can organize those styles into reusable components. In React, this becomes something like function Botao() with a <button className="rounded-lg"> inside (in JSX, class is written className).',
             highlight: ['Tailwind', 'components'],
             codeLanguage: 'HTML',
             code: '<button class="rounded-lg px-4 py-2 font-medium">\n  Save\n</button>',
