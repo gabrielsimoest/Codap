@@ -30,9 +30,10 @@ export function TheorySection({ palette, highlight, title, text }: SectionProps)
 	const bodyLine = useLineHeight(TEXT_SIZE.body);
 	// As palavras destacadas usam `emphasis` (mais clara que o acento, que no fundo
 	// escuro lê mal) no título e no texto — a mesma cor das atividades práticas
-	// (`ActivityQuestion`). No texto descritivo vão em Roboto medium; o título já é bold.
+	// (`ActivityQuestion`). O título é bold; no texto descritivo as palavras também vão
+	// em bold: a mesma cor em traço fino (medium) parece mais escura que a do título.
 	const titleHighlight = { color: palette.emphasis };
-	const bodyHighlight = { color: palette.emphasis, fontFamily: "Roboto", fontWeight: "500" as const };
+	const bodyHighlight = { color: palette.emphasis, fontFamily: "Roboto", fontWeight: "700" as const };
 
 	return (
 		<View style={styles.textColumn}>
